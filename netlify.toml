@@ -1,0 +1,60 @@
+[[redirects]]
+  from = "/home"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/our-service"
+  to = "/services.html"
+  status = 301
+
+[[redirects]]
+  from = "/brand-strategy-identity"
+  to = "/services.html#branding"
+  status = 301
+
+[[redirects]]
+  from = "/system-playbook"
+  to = "/services.html#systems"
+  status = 301
+
+[[redirects]]
+  from = "/marketing-ads"
+  to = "/services.html#marketing"
+  status = 301
+
+[[redirects]]
+  from = "/content-creation"
+  to = "/services.html#content"
+  status = 301
+
+[[redirects]]
+  from = "/website-apps-e-commerce"
+  to = "/services.html#digital"
+  status = 301
+
+[[redirects]]
+  from = "/blog-resources"
+  to = "/resources.html"
+  status = 301
+
+[build]
+  publish = "."
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  for = "/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
