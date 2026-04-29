@@ -13,18 +13,6 @@ document.body.insertAdjacentHTML('afterbegin', `
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="about.html">About</a></li>
-      <li class="nav-dropdown">
-        <a href="services.html">Services</a>
-        <div class="nav-dropdown-menu">
-          <a href="services.html#branding">Brand Strategy &amp; Identity</a>
-          <a href="services.html#systems">System &amp; Playbook</a>
-          <a href="services.html#marketing">Marketing &amp; Ads</a>
-          <a href="services.html#content">Content Creation</a>
-          <a href="services.html#digital">Website, Apps &amp; E-Commerce</a>
-        </div>
-      </li>
-      <li><a href="work.html">Work</a></li>
-      <li><a href="resources.html">Resources</a></li>
     </ul>
     <a href="contact.html" class="nav-cta">Hire Us</a>
     <button class="nav-hamburger" aria-label="Menu">
@@ -35,9 +23,6 @@ document.body.insertAdjacentHTML('afterbegin', `
 <div class="nav-mobile">
   <a href="index.html">Home</a>
   <a href="about.html">About</a>
-  <a href="services.html">Services</a>
-  <a href="work.html">Work</a>
-  <a href="resources.html">Resources</a>
   <a href="contact.html" class="nav-cta">Hire Us</a>
 </div>
 `);
@@ -55,21 +40,8 @@ document.body.insertAdjacentHTML('beforeend', `
       <div class="footer-col">
         <h4>Company</h4>
         <ul>
+          <li><a href="index.html">Home</a></li>
           <li><a href="about.html">About Us</a></li>
-          <li><a href="work.html">Our Work</a></li>
-          <li><a href="resources.html">Blog &amp; Resources</a></li>
-          <li><a href="contact.html#academy">Academy</a></li>
-          <li><a href="contact.html">Career</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Services</h4>
-        <ul>
-          <li><a href="services.html#branding">Brand Strategy</a></li>
-          <li><a href="services.html#systems">System &amp; Playbook</a></li>
-          <li><a href="services.html#marketing">Marketing &amp; Ads</a></li>
-          <li><a href="services.html#content">Content Creation</a></li>
-          <li><a href="services.html#digital">Website &amp; Apps</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -79,16 +51,11 @@ document.body.insertAdjacentHTML('beforeend', `
           <li><a href="mailto:hello@brandmethod.co">hello@brandmethod.co</a></li>
           <li><a href="https://instagram.com/brandmethod" target="_blank">Instagram</a></li>
           <li><a href="https://linkedin.com/company/brandmethod" target="_blank">LinkedIn</a></li>
-          <li><a href="contact.html">Get in Touch</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
       <p>© 2021–2026 BrandMethod Sdn Bhd. All rights reserved.</p>
-      <div class="footer-bottom-links">
-        <a href="privacy.html">Privacy Policy</a>
-        <a href="terms.html">Terms of Service</a>
-      </div>
     </div>
   </div>
 </footer>

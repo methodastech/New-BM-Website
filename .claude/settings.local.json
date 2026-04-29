@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "Bash(grep -iE \"\\\\.\\(jpg|jpeg|png|webp\\)$\")"
+      "Bash(grep -iE \"\\\\.\\(jpg|jpeg|png|webp\\)$\")",
+      "WebFetch(domain:www.brandmethod.co)",
+      "Bash(grep \"[4-9][0-9]px[^;]*$\\\\|6[0-9]px\")"
     ]
   }
 }
