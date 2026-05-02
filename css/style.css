@@ -175,12 +175,15 @@ nav.scrolled {
   font-weight: 400; line-height: 0.9;
   letter-spacing: -0.02em;
   margin-bottom: 40px;
+  max-width: 100%;
+  overflow-wrap: normal;
 }
 .hero h1 em { font-style: italic; color: var(--accent); }
 .hero-sub {
   font-size: 16px; color: #444444;
   max-width: 100%; line-height: 1.8;
   margin-bottom: 48px;
+  overflow-wrap: anywhere;
 }
 .hero-actions { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
 .btn-primary {
@@ -281,6 +284,9 @@ section {
   border-bottom: none;
   padding: 18px 0; overflow: hidden;
   background: var(--accent);
+  max-width: 100%;
+  overflow-x: hidden;
+  overflow-x: clip;
 }
 .ticker-track {
   display: flex; gap: 60px;
@@ -749,6 +755,9 @@ section {
 /* â”€â”€ TESTIMONIALS CAROUSEL â”€â”€ */
 .testimonials-carousel {
   overflow: hidden; margin-top: 60px;
+  max-width: 100%;
+  overflow-x: hidden;
+  overflow-x: clip;
   -webkit-mask: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
   mask: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
 }
@@ -953,6 +962,9 @@ section {
 .cta-band {
   background: #e8e8e8; padding: 80px 20px;
   text-align: center;
+  max-width: 100%;
+  overflow-x: hidden;
+  overflow-x: clip;
 }
 .cta-band h2 {
   font-family: var(--font-display); font-size: clamp(36px, 5vw, 64px);
@@ -974,6 +986,9 @@ section {
   padding: 140px 60px;
   display: flex; align-items: center; justify-content: center;
   overflow: hidden;
+  max-width: 100%;
+  overflow-x: hidden;
+  overflow-x: clip;
 }
 .brand-stamp-logo {
   width: 90%;
@@ -987,6 +1002,9 @@ section {
 footer {
   background: #0a0a0a; border-top: none;
   padding: 80px 20px 40px;
+  max-width: 100%;
+  overflow-x: hidden;
+  overflow-x: clip;
 }
 .footer-inner { max-width: var(--max-w); margin: 0 auto; }
 .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
@@ -1395,6 +1413,19 @@ footer { color: #c8c4bc; }
   .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 768px) {
+  .hero h1 {
+    font-size: clamp(36px, 13vw, 56px);
+    line-height: 0.95;
+    overflow-wrap: anywhere;
+  }
+  .hero-sub br {
+    display: none;
+  }
+  .ticker-track,
+  .clients-track,
+  .testimonials-track {
+    max-width: none;
+  }
   .service-card-grid {
     display: flex !important;
     grid-template-columns: none !important;
