@@ -1,4 +1,5 @@
 // Shared logo SVG (path-based, no font dependency)
+const basePath = window.location.pathname.includes('/blog/') ? '../' : '';
 const logoSVG = (width, height) => `
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 100" width="${width}" height="${height}" aria-label="Brand Method">
     <path fill="#0000ff" fill-rule="evenodd" d="M 0,0 L 25,0 A 47,25 0 0,1 25,50 A 50,25 0 0,1 25,100 L 0,100 Z M 25,8 A 35,17 0 0,1 25,42 Z M 25,57 A 38,17.5 0 0,1 25,92 Z"/>
@@ -9,21 +10,43 @@ const logoSVG = (width, height) => `
 document.body.insertAdjacentHTML('afterbegin', `
 <nav>
   <div class="nav-inner">
-    <a href="index.html" class="nav-logo"><img src="Asset+8@4x.webp" alt="Brand Method" height="48" style="display:block;"></a>
+    <a href="${basePath}index.html" class="nav-logo"><img src="${basePath}Asset+8@4x.webp" alt="Brand Method" height="48" style="display:block;"></a>
     <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="about.html">About</a></li>
+      <li><a href="${basePath}index.html">Home</a></li>
+      <li><a href="${basePath}about.html">About</a></li>
+      <li class="nav-dropdown">
+        <a href="${basePath}services.html" class="nav-dropdown-trigger">Services</a>
+        <div class="nav-dropdown-menu">
+          <a href="${basePath}brand-strategy.html">Brand Strategy &amp; Identity</a>
+          <a href="${basePath}system-playbook.html">System &amp; Playbook</a>
+          <a href="${basePath}marketing-ads.html">Marketing &amp; Ads</a>
+          <a href="${basePath}content-creation.html">Content Creation</a>
+          <a href="${basePath}website-apps.html">Website, Apps &amp; E-Commerce</a>
+        </div>
+      </li>
+      <li><a href="${basePath}resources.html">Resources</a></li>
     </ul>
-    <a href="contact.html" class="nav-cta">Hire Us</a>
+    <a href="${basePath}contact.html" class="nav-cta">Hire Us</a>
     <button class="nav-hamburger" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
   </div>
 </nav>
 <div class="nav-mobile">
-  <a href="index.html">Home</a>
-  <a href="about.html">About</a>
-  <a href="contact.html" class="nav-cta">Hire Us</a>
+  <a href="${basePath}index.html">Home</a>
+  <a href="${basePath}about.html">About</a>
+  <div class="nav-mobile-services">
+    <a href="${basePath}services.html">Services</a>
+    <div class="nav-mobile-sub">
+      <a href="${basePath}brand-strategy.html">Brand Strategy &amp; Identity</a>
+      <a href="${basePath}system-playbook.html">System &amp; Playbook</a>
+      <a href="${basePath}marketing-ads.html">Marketing &amp; Ads</a>
+      <a href="${basePath}content-creation.html">Content Creation</a>
+      <a href="${basePath}website-apps.html">Website, Apps &amp; E-Commerce</a>
+    </div>
+  </div>
+  <a href="${basePath}resources.html">Resources</a>
+  <a href="${basePath}contact.html" class="nav-cta">Hire Us</a>
 </div>
 `);
 
@@ -33,15 +56,17 @@ document.body.insertAdjacentHTML('beforeend', `
   <div class="footer-inner">
     <div class="footer-top">
       <div class="footer-brand">
-        <a href="index.html" style="display:inline-block;margin-bottom:16px;"><img src="Asset+5@4x-8.webp" alt="Brand Method" height="60" style="display:block;"></a>
+        <a href="${basePath}index.html" style="display:inline-block;margin-bottom:16px;"><img src="${basePath}Asset+5@4x-8.webp" alt="Brand Method" height="60" style="display:block;"></a>
         <p>Malaysia's leading branding and marketing agency. We help businesses turn confusion into dominance through strategic branding and scalable systems.</p>
         <p style="margin-top:16px;font-size:13px;color:var(--muted)">Mranti Park, Office 25, Level 1,<br>Taman Teknologi Mranti, Bukit Jalil,<br>57000 Kuala Lumpur</p>
       </div>
       <div class="footer-col">
         <h4>Company</h4>
         <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About Us</a></li>
+          <li><a href="${basePath}index.html">Home</a></li>
+          <li><a href="${basePath}about.html">About Us</a></li>
+          <li><a href="${basePath}services.html">Services</a></li>
+          <li><a href="${basePath}resources.html">Resources</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -60,7 +85,7 @@ document.body.insertAdjacentHTML('beforeend', `
   </div>
 </footer>
 <div class="brand-stamp">
-  <img src="brand-stamp.png" alt="Brand Method" class="brand-stamp-logo">
+  <img src="${basePath}brand-stamp.png" alt="Brand Method" class="brand-stamp-logo">
 </div>
 <a href="https://wa.me/60122826371" class="wa-float" target="_blank" aria-label="WhatsApp">
   <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>

@@ -19,10 +19,21 @@ if (hamburger && mobileMenu) {
 }
 
 // Active nav link
-const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+const currentPage = window.location.pathname.includes('/blog/')
+  ? 'resources.html'
+  : (window.location.pathname.split('/').pop() || 'index.html');
+const servicePages = [
+  'services.html',
+  'brand-strategy.html',
+  'system-playbook.html',
+  'marketing-ads.html',
+  'content-creation.html',
+  'website-apps.html'
+];
+const activePage = servicePages.includes(currentPage) ? 'services.html' : currentPage;
 document.querySelectorAll('.nav-links a, .nav-mobile a').forEach(link => {
-  const href = link.getAttribute('href');
-  if (href === currentPage || (currentPage === '' && href === 'index.html')) {
+  const href = link.getAttribute('href').split('/').pop();
+  if (href === currentPage || href === activePage || (currentPage === '' && href === 'index.html')) {
     link.classList.add('active');
   }
 });
