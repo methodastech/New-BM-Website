@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Work | Brand Method</title>
+<meta name="description" content="Strategy-led creative that works. Explore Brand Method's portfolio across fintech, F&B, health, fashion, and tech industries.">
+<link rel="canonical" href="https://brandmethod.co/work.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Brand Method">
+<meta property="og:title" content="Our Work | Brand Method">
+<meta property="og:description" content="Strategy-led creative that works. Explore Brand Method&#39;s portfolio across fintech, F&amp;B, health, fashion, and tech industries.">
+<meta property="og:url" content="https://brandmethod.co/work.html">
+<meta property="og:image" content="https://brandmethod.co/Image/resources/brandmethod-os-framework.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Our Work | Brand Method">
+<meta name="twitter:description" content="Strategy-led creative that works. Explore Brand Method&#39;s portfolio across fintech, F&amp;B, health, fashion, and tech industries.">
+<meta name="twitter:image" content="https://brandmethod.co/Image/resources/brandmethod-os-framework.png">
+<link rel="stylesheet" href="css/style.css">
+<style>
+.work-search-wrap { max-width:680px; margin:0 auto 72px; }
+.work-search-label { display:block; font-family:var(--font-sans); font-size:10px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); margin-bottom:12px; }
+.work-search {
+  width: 100%;
+  min-height: 58px;
+  padding: 0 20px;
+  border: 1px solid var(--border);
+  background: #ffffff;
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.work-search:focus { border-color:var(--accent); box-shadow:inset 3px 0 0 var(--accent); }
+.work-search::placeholder { color:#999999; }
+.work-grid-full { display:grid; grid-template-columns:repeat(3,1fr); gap:32px; }
+.work-grid-full .work-card {
+  aspect-ratio: auto !important;
+  background: transparent;
+  cursor: pointer;
+  overflow: visible;
+}
+.work-grid-full .work-card-always,
+.work-grid-full .work-card-overlay {
+  display: none;
+}
+.work-grid-full .work-card.has-work-bg::after {
+  display: none;
+}
+.work-grid-full .work-card-bg {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background-size: cover;
+  background-position: center;
+  filter: none;
+  overflow: hidden;
+  isolation: isolate;
+}
+.work-grid-full .work-card-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: inherit;
+  background-size: inherit;
+  background-position: inherit;
+  background-repeat: no-repeat;
+  transform: scale(1);
+  transition: transform 1.8s var(--ease);
+  z-index: 0;
+}
+.work-grid-full .work-card-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.32)),
+    linear-gradient(105deg, transparent 0%, transparent 42%, rgba(255,255,255,0.34) 50%, transparent 58%, transparent 100%);
+  background-size: 100% 100%, 230% 100%;
+  background-position: center, -135% center;
+  opacity: 0;
+  transition: opacity 0.55s ease, background-position 1.15s var(--ease);
+  z-index: 1;
+}
+.work-grid-full .work-card:hover .work-card-bg::before {
+  transform: scale(1.08);
+}
+.work-grid-full .work-card:hover .work-card-bg::after {
+  opacity: 1;
+  background-position: center, 135% center;
+}
+.work-card-body { padding: 18px 0 0; }
+.work-card-body .work-card-cat {
+  color: var(--muted);
+  font-size: 14px;
+  letter-spacing: 0;
+  text-transform: none;
+  margin-bottom: 2px;
+}
+.work-card-body h3 {
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.15;
+  margin-bottom: 4px;
+}
+.work-card-body h3 a {
+  color: inherit;
+}
+.work-card-body h3 a:hover {
+  color: var(--accent);
+}
+.work-card-body p {
+  color: var(--off-white);
+  font-size: 16px;
+  line-height: 1.35;
+  max-width: 100%;
+}
+.work-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+.work-card-tags span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 5px 12px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: #f7f7f7;
+  color: var(--off-white);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+@media(max-width:1024px){ .work-grid-full{grid-template-columns:repeat(2,1fr);} }
+@media(max-width:768px){
+  .work-search-wrap { margin-bottom: 48px; }
+  .work-grid-full{grid-template-columns:1fr; gap:40px;}
+  .work-card-body h3 { font-size: 20px; }
+  .work-card-body p { font-size: 16px; }
+}
+</style>
+</head>
+<body>
+<div class="page-wrap">
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="section-tag reveal">Portfolio</div>
+    <h1 class="reveal reveal-delay-1">Strategy-led creative that <em>works</em></h1>
+    <p class="reveal reveal-delay-2">Every project is built on structured thinking, strong positioning, and disciplined execution.</p>
+  </div>
+</div>
+
+<section>
+  <div class="section-inner">
+    <div class="work-search-wrap reveal">
+      <label class="work-search-label" for="workSearch">Search work</label>
+      <input class="work-search" id="workSearch" type="search" placeholder="Search by project, industry, or keyword..." autocomplete="off">
+    </div>
+
+    <div class="work-grid-full">
+      <div class="work-card has-work-bg reveal" data-cat="health" data-work-image="jb-cocoa.png" data-href="work-jb-cocoa.html" style="aspect-ratio:4/3;">
+        <div class="work-card-bg" style="background-image:url('work-images/jb-cocoa.png');"></div>
+        <div style="width:100%;height:100%;background:linear-gradient(135deg,#162e20,#0d2416);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;">
+          <span style="font-family:var(--font-display);font-size:32px;color:var(--accent);">JB Cocoa</span>
+          <span style="font-size:12px;color:var(--muted);font-family:var(--font-sans);letter-spacing:0.1em;text-transform:uppercase;">Health & Wellness</span>
+        </div>
+        <div class="work-card-always"><div class="work-card-cat">Health & Wellness</div></div>
+        <div class="work-card-overlay">
+          <div class="work-card-cat">Health & Wellness</div>
+          <h3><a href="work-jb-cocoa.html">JB Cocoa</a></h3>
+          <p>Driving mutual success in the cocoa industry.</p>
+        </div>
+        <div class="work-card-body">
+          <div class="work-card-cat">Health & Wellness</div>
+          <h3>JB Cocoa</h3>
+          <p>Drives mutual success and growth in cocoa industry.</p>
+          <div class="work-card-tags"><span>Packaging</span><span>Campaign Visuals</span><span>Product Launch</span></div>
+        </div>
+      </div>
+
+      <div class="work-card has-work-bg reveal reveal-delay-1" data-cat="fintech" data-work-image="rubex-pay.png" data-href="work-rubex-pay.html" style="aspect-ratio:4/3;">
+        <div class="work-card-bg" style="background-image:url('work-images/rubex-pay.png');"></div>
+        <div style="width:100%;height:100%;background:linear-gradient(135deg,#1a1a2e,#12122a);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;">
+          <span style="font-family:var(--font-display);font-size:32px;color:var(--accent);">Rubex Pay</span>
+          <span style="font-size:12px;color:var(--muted);font-family:var(--font-sans);letter-spacing:0.1em;text-transform:uppercase;">Payment Gateway</span>
+        </div>
+        <div class="work-card-always"><div class="work-card-cat">Payment Gateway</div></div>
+        <div class="work-card-overlay">
+          <div class="work-card-cat">Payment Gateway</div>
+          <h3><a href="work-rubex-pay.html">Rubex Pay</a></h3>
+          <p>Where trust meets innovation.</p>
+        </div>
+        <div class="work-card-body">
+          <div class="work-card-cat">Payment Gateway</div>
+          <h3>Rubex Pay</h3>
+          <p>Where trust meets innovation.</p>
+          <div class="work-card-tags"><span>Brand Identity</span><span>Fintech</span><span>Campaign Visuals</span></div>
+        </div>
+      </div>
+
+      <div class="work-card has-work-bg reveal reveal-delay-2" data-cat="fb" data-work-image="sem-and-co.png" data-href="work-sem-and-co-cafe.html" style="aspect-ratio:4/3;">
+        <div class="work-card-bg" style="background-image:url('work-images/sem-and-co.png');"></div>
+        <div style="width:100%;height:100%;background:linear-gradient(135deg,#2e1e10,#1a0e05);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;">
+          <span style="font-family:var(--font-display);font-size:32px;color:var(--accent);">Sem & Co</span>
+          <span style="font-size:12px;color:var(--muted);font-family:var(--font-sans);letter-spacing:0.1em;text-transform:uppercase;">Food & Beverage</span>
+        </div>
+        <div class="work-card-always"><div class="work-card-cat">Food & Beverage</div></div>
+        <div class="work-card-overlay">
+          <div class="work-card-cat">Food & Beverage</div>
+          <h3><a href="work-sem-and-co-cafe.html">Sem & Co Cafe</a></h3>
+          <p>Handcrafted coffee, served with heart.</p>
+        </div>
+        <div class="work-card-body">
+          <div class="work-card-cat">Food & Beverage</div>
+          <h3>Sem & Co Cafe</h3>
+          <p>Handcrafted coffee, served with heart.</p>
+          <div class="work-card-tags"><span>Interior Visuals</span><span>F&B Branding</span><span>Launch Assets</span></div>
+        </div>
+      </div>
+
+      <div class="work-card has-work-bg reveal" data-cat="health" data-work-image="mindtropic.png" data-href="work-mindtropic.html" style="aspect-ratio:4/3;">
+        <div class="work-card-bg" style="background-image:url('work-images/mindtropic.png');"></div>
+        <div style="width:100%;height:100%;background:linear-gradient(135deg,#1e2e1a,#111e0d);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;">
+          <span style="font-family:var(--font-display);font-size:32px;color:var(--accent);">Mindtropic</span>
+          <span style="font-size:12px;color:var(--muted);font-family:var(--font-sans);letter-spacing:0.1em;text-transform:uppercase;">Health & Wellness</span>
+        </div>
+        <div class="work-card-always"><div class="work-card-cat">Health & Wellness</div></div>
+        <div class="work-card-overlay">
+          <div class="work-card-cat">Health & Wellness</div>
+          <h3><a href="work-mindtropic.html">Mindtropic</a></h3>
+          <p>Familiar flavours with modern efficiency.</p>
+        </div>
+        <div class="work-card-body">
+          <div class="work-card-cat">Health & Wellness</div>
+          <h3>Mindtropic</h3>
+          <p>Familiar flavours with modern efficiency.</p>
+          <div class="work-card-tags"><span>Packaging</span><span>Social Content</span><span>Product Launch</span></div>
+        </div>
+      </div>
+
+      <div class="work-card has-work-bg reveal reveal-delay-1" data-cat="tech" data-work-image="firmus.png" data-href="work-firmus.html" style="aspect-ratio:4/3;">
+        <div class="work-card-bg" style="background-image:url('work-images/firmus.png');"></div>
+        <div style="width:100%;height:100%;background:linear-gradient(135deg,#1a2030,#0d1220);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;">
+          <span style="font-family:var(--font-display);font-size:32px;color:var(--accent);">Firmus</span>
+          <span style="font-size:12px;color:var(--muted);font-family:var(--font-sans);letter-spacing:0.1em;text-transform:uppercase;">Tech & Innovation</span>
+        </div>
+        <div class="work-card-always"><div class="work-card-cat">Tech & Innovation</div></div>
+        <div class="work-card-overlay">
+          <div class="work-card-cat">Tech & Innovation</div>
+          <h3><a href="work-firmus.html">Firmus</a></h3>
+          <p>Where trust meets innovation.</p>
+        </div>
+        <div class="work-card-body">
+          <div class="work-card-cat">Tech & Innovation</div>
+          <h3>Firmus</h3>
+          <p>Where trust meets innovation.</p>
+          <div class="work-card-tags"><span>Brand System</span><span>Digital Visuals</span><span>Tech</span></div>
+        </div>
+      </div>
+
+      <div class="work-card has-work-bg reveal reveal-delay-2" data-cat="tech" data-work-image="viewpoint.png" data-href="work-viewpoint.html" style="aspect-ratio:4/3;">
+        <div class="work-card-bg" style="background-image:url('work-images/viewpoint.png');"></div>
+        <div style="width:100%;height:100%;background:linear-gradient(135deg,#202020,#141414);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;">
+          <span style="font-family:var(--font-display);font-size:32px;color:var(--accent);">ViewPoint</span>
+          <span style="font-size:12px;color:var(--muted);font-family:var(--font-sans);letter-spacing:0.1em;text-transform:uppercase;">Tech & Innovation</span>
+        </div>
+        <div class="work-card-always"><div class="work-card-cat">Tech & Innovation</div></div>
+        <div class="work-card-overlay">
+          <div class="work-card-cat">Tech & Innovation</div>
+          <h3><a href="work-viewpoint.html">ViewPoint</a></h3>
+          <p>A curated perspective on innovation and digital systems.</p>
+        </div>
+        <div class="work-card-body">
+          <div class="work-card-cat">Tech & Innovation</div>
+          <h3>ViewPoint</h3>
+          <p>A curated perspective on innovation and digital systems.</p>
+          <div class="work-card-tags"><span>Editorial</span><span>Digital System</span><span>Brand Visuals</span></div>
+        </div>
+      </div>
+
+      <div class="work-card has-work-bg reveal" data-cat="fb" data-work-image="dahmakan.png" data-href="work-dahmakan.html" style="aspect-ratio:4/3;">
+        <div class="work-card-bg" style="background-image:url('work-images/dahmakan.png');"></div>
+        <div style="width:100%;height:100%;background:linear-gradient(135deg,#2a1a10,#180e05);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;">
+          <span style="font-family:var(--font-display);font-size:32px;color:var(--accent);">DahMakan</span>
+          <span style="font-size:12px;color:var(--muted);font-family:var(--font-sans);letter-spacing:0.1em;text-transform:uppercase;">Food & Beverage</span>
+        </div>
+        <div class="work-card-always"><div class="work-card-cat">Food & Beverage</div></div>
+        <div class="work-card-overlay">
+          <div class="work-card-cat">Food & Beverage</div>
+          <h3><a href="work-dahmakan.html">DahMakan</a></h3>
+          <p>Familiar flavours with modern efficiency.</p>
+        </div>
+        <div class="work-card-body">
+          <div class="work-card-cat">Food & Beverage</div>
+          <h3>DahMakan</h3>
+          <p>Familiar flavours with modern efficiency.</p>
+          <div class="work-card-tags"><span>Campaign Visuals</span><span>F&B</span><span>Content</span></div>
+        </div>
+      </div>
+
+      <div class="work-card has-work-bg reveal reveal-delay-1" data-cat="community" data-work-image="ikram.png" data-href="work-ikram-malaysia.html" style="aspect-ratio:4/3;">
+        <div class="work-card-bg" style="background-image:url('work-images/ikram.png');"></div>
+        <div style="width:100%;height:100%;background:linear-gradient(135deg,#1e2818,#111610);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;">
+          <span style="font-family:var(--font-display);font-size:32px;color:var(--accent);">Ikram</span>
+          <span style="font-size:12px;color:var(--muted);font-family:var(--font-sans);letter-spacing:0.1em;text-transform:uppercase;">Community & NGO</span>
+        </div>
+        <div class="work-card-always"><div class="work-card-cat">Community & NGO</div></div>
+        <div class="work-card-overlay">
+          <div class="work-card-cat">Community & NGO</div>
+          <h3><a href="work-ikram-malaysia.html">Ikram Malaysia</a></h3>
+          <p>Building communities through faith, service, and compassion.</p>
+        </div>
+        <div class="work-card-body">
+          <div class="work-card-cat">Community & NGO</div>
+          <h3>Ikram Malaysia</h3>
+          <p>Building communities through faith, service, and compassion.</p>
+          <div class="work-card-tags"><span>Campaign</span><span>Community</span><span>Brand Assets</span></div>
+        </div>
+      </div>
+
+      <div class="work-card has-work-bg reveal reveal-delay-2" data-cat="fb" data-work-image="santa-barbara.png" data-href="work-santa-barbara-polo-cafe.html" style="aspect-ratio:4/3;">
+        <div class="work-card-bg" style="background-image:url('work-images/santa-barbara.png');"></div>
+        <div style="width:100%;height:100%;background:linear-gradient(135deg,#28201a,#1a1410);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;">
+          <span style="font-family:var(--font-display);font-size:26px;color:var(--accent);">Santa Barbara</span>
+          <span style="font-size:12px;color:var(--muted);font-family:var(--font-sans);letter-spacing:0.1em;text-transform:uppercase;">Food & Beverage</span>
+        </div>
+        <div class="work-card-always"><div class="work-card-cat">Food & Beverage</div></div>
+        <div class="work-card-overlay">
+          <div class="work-card-cat">Food & Beverage</div>
+          <h3><a href="work-santa-barbara-polo-cafe.html">Santa Barbara Polo Cafe</a></h3>
+          <p>An oasis for coffee enthusiasts.</p>
+        </div>
+        <div class="work-card-body">
+          <div class="work-card-cat">Food & Beverage</div>
+          <h3>Santa Barbara Polo Cafe</h3>
+          <p>An oasis for coffee enthusiasts.</p>
+          <div class="work-card-tags"><span>Cafe Branding</span><span>Interior Visuals</span><span>Launch Assets</span></div>
+        </div>
+      </div>
+
+      <div class="work-card has-work-bg reveal" data-cat="tech" data-work-image="stuhl.png" data-href="work-stuhl-mobile-dental-chair.html" style="aspect-ratio:4/3;">
+        <div class="work-card-bg" style="background-image:url('work-images/stuhl.png');"></div>
+        <div style="width:100%;height:100%;background:linear-gradient(135deg,#1a2428,#0d1418);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;">
+          <span style="font-family:var(--font-display);font-size:32px;color:var(--accent);">stühl</span>
+          <span style="font-size:12px;color:var(--muted);font-family:var(--font-sans);letter-spacing:0.1em;text-transform:uppercase;">Tech & Innovation</span>
+        </div>
+        <div class="work-card-always"><div class="work-card-cat">Tech & Innovation</div></div>
+        <div class="work-card-overlay">
+          <div class="work-card-cat">Tech & Innovation</div>
+          <h3>stühl: Mobile Dental Chair</h3>
+          <p>A revolution in mobile dental healthcare.</p>
+        </div>
+        <div class="work-card-body">
+          <div class="work-card-cat">Tech & Innovation</div>
+          <h3><a href="work-stuhl-mobile-dental-chair.html">stuhl: Mobile Dental Chair</a></h3>
+          <p>A revolution in mobile dental healthcare.</p>
+          <div class="work-card-tags"><span>Product Launch</span><span>Healthcare</span><span>Tech</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<div class="cta-band">
+  <div class="section-inner">
+    <div class="section-tag reveal">Start the Conversation</div>
+    <h2>Ready to create your <em>success story</em>?</h2>
+    <p>Join 100+ brands that have grown with Brand Method.</p>
+    <a href="contact.html" class="btn-dark">Let's Work Together</a>
+  </div>
+</div>
+
+</div>
+<script src="js/layout.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
