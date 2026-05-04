@@ -184,6 +184,92 @@ if (form) {
   }, { passive: true });
 })();
 
+// Slider arrow controls
+(function () {
+  const sliderConfigs = [
+    { selector: '.approach-list', item: '.approach-item' },
+    { selector: '.testimonials-carousel', item: '.testimonial-card', compact: true, pause: '.testimonials-track' },
+    { selector: '.team-scroll-wrap', item: '.team-member', compact: true, pause: '.team-scroll-track' },
+    { selector: '.service-card-grid', item: '.service-detail-card', compact: true, mobileOnly: true },
+    { selector: '.service-point-list', item: '.service-point', compact: true, mobileOnly: true },
+    { selector: '.work-bento', item: '.work-bento-card', compact: true, mobileOnly: true },
+    { selector: '.standout-grid', item: '.standout-card', compact: true, mobileOnly: true },
+    { selector: '.process-steps-wrap', item: '.process-step', compact: true, mobileOnly: true }
+  ];
+
+  function ensureSliderWrap(target, config) {
+    const existing = target.closest('.approach-slider, .bm-slider');
+    if (existing) return existing;
+
+    const wrap = document.createElement('div');
+    wrap.className = 'bm-slider';
+    if (config.compact) wrap.classList.add('bm-slider--compact');
+    if (config.mobileOnly) wrap.classList.add('bm-slider--mobile-only');
+
+    target.parentNode.insertBefore(wrap, target);
+    wrap.appendChild(target);
+    return wrap;
+  }
+
+  function getScrollAmount(target, config) {
+    const item = target.querySelector(config.item);
+    if (!item) return target.clientWidth;
+
+    const styles = window.getComputedStyle(target);
+    const gap = parseFloat(styles.columnGap || styles.gap) || 0;
+    return item.getBoundingClientRect().width + gap;
+  }
+
+  function setupSlider(target, config) {
+    const wrap = ensureSliderWrap(target, config);
+    if (wrap.querySelector(':scope > .bm-slider-controls')) return;
+
+    const controls = document.createElement('div');
+    controls.className = 'bm-slider-controls';
+    controls.setAttribute('aria-label', 'Slider navigation');
+    controls.innerHTML = [
+      '<button class="bm-slider-arrow bm-slider-arrow--prev" type="button" aria-label="Previous item">&#8592;</button>',
+      '<button class="bm-slider-arrow bm-slider-arrow--next" type="button" aria-label="Next item">&#8594;</button>'
+    ].join('');
+    wrap.insertBefore(controls, target);
+    wrap.classList.add('has-slider-controls');
+
+    const prev = controls.querySelector('.bm-slider-arrow--prev');
+    const next = controls.querySelector('.bm-slider-arrow--next');
+    const pauseTarget = config.pause ? target.querySelector(config.pause) : null;
+
+    function hasActiveControls() {
+      return !config.mobileOnly || window.matchMedia('(max-width: 768px)').matches;
+    }
+
+    function updateButtons() {
+      const maxScroll = target.scrollWidth - target.clientWidth;
+      const canScroll = maxScroll > 4 && hasActiveControls();
+      controls.hidden = !canScroll;
+      wrap.classList.toggle('has-slider-controls', canScroll);
+      prev.disabled = !canScroll || target.scrollLeft <= 2;
+      next.disabled = !canScroll || target.scrollLeft >= maxScroll - 2;
+    }
+
+    function scrollByItem(direction) {
+      if (pauseTarget) {
+        pauseTarget.style.animationPlayState = 'paused';
+      }
+      target.scrollBy({ left: direction * getScrollAmount(target, config), behavior: 'smooth' });
+    }
+
+    prev.addEventListener('click', () => scrollByItem(-1));
+    next.addEventListener('click', () => scrollByItem(1));
+    target.addEventListener('scroll', updateButtons, { passive: true });
+    window.addEventListener('resize', updateButtons);
+    updateButtons();
+  }
+
+  sliderConfigs.forEach(config => {
+    document.querySelectorAll(config.selector).forEach(target => setupSlider(target, config));
+  });
+})();
+
 // Counter animation
 function animateCounters() {
   document.querySelectorAll('.stat-num[data-count], .about-stat-num[data-count]').forEach(el => {
