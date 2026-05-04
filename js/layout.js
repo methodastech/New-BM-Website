@@ -14,6 +14,7 @@ document.body.insertAdjacentHTML('afterbegin', `
     <ul class="nav-links">
       <li><a href="${basePath}index.html">Home</a></li>
       <li><a href="${basePath}about.html">About</a></li>
+      <li><a href="${basePath}work.html">Work</a></li>
       <li class="nav-dropdown">
         <a href="${basePath}services.html" class="nav-dropdown-trigger">Services</a>
         <div class="nav-dropdown-menu">
@@ -35,6 +36,7 @@ document.body.insertAdjacentHTML('afterbegin', `
 <div class="nav-mobile">
   <a href="${basePath}index.html">Home</a>
   <a href="${basePath}about.html">About</a>
+  <a href="${basePath}work.html">Work</a>
   <div class="nav-mobile-services">
     <a href="${basePath}services.html">Services</a>
     <div class="nav-mobile-sub">
@@ -65,6 +67,7 @@ document.body.insertAdjacentHTML('beforeend', `
         <ul>
           <li><a href="${basePath}index.html">Home</a></li>
           <li><a href="${basePath}about.html">About Us</a></li>
+          <li><a href="${basePath}work.html">Work</a></li>
           <li><a href="${basePath}services.html">Services</a></li>
           <li><a href="${basePath}resources.html">Resources</a></li>
         </ul>
