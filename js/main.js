@@ -155,8 +155,55 @@ filterBtns.forEach(btn => {
 // Contact form
 const form = document.querySelector('.contact-form form');
 if (form) {
-  form.addEventListener('submit', (e) => {
-    if (form.getAttribute('action')) return;
+  form.addEventListener('submit', async (e) => {
+    const action = form.getAttribute('action');
+
+    if (action) {
+      e.preventDefault();
+
+      const submitButton = form.querySelector('button[type="submit"]');
+      const message = form.querySelector('.form-inline-message');
+      const originalButtonText = submitButton ? submitButton.textContent : '';
+
+      if (message) {
+        message.className = 'form-inline-message';
+        message.textContent = 'Sending your project brief...';
+      }
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = 'Sending...';
+      }
+
+      try {
+        const response = await fetch(action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { Accept: 'application/json' }
+        });
+
+        if (!response.ok) {
+          throw new Error('Form submission failed');
+        }
+
+        form.reset();
+        if (message) {
+          message.classList.add('is-success');
+          message.textContent = 'Thank you for sharing your project brief. We have received your details and will get back to you soon.';
+        }
+      } catch (error) {
+        if (message) {
+          message.classList.add('is-error');
+          message.textContent = 'Sorry, your message could not be sent right now. Please try again in a moment.';
+        }
+      } finally {
+        if (submitButton) {
+          submitButton.disabled = false;
+          submitButton.textContent = originalButtonText;
+        }
+      }
+
+      return;
+    }
 
     e.preventDefault();
     form.style.display = 'none';
