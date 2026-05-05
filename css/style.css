@@ -162,15 +162,13 @@ nav.scrolled {
 }
 .hero-inner { max-width: var(--max-w); margin: 0 auto; width: 100%; }
 .hero-tag {
-  display: inline-flex; align-items: center; gap: 10px;
+  display: inline-flex; align-items: center; gap: 0;
   font-family: var(--font-sans);
   font-size: 11px; font-weight: 600;
   letter-spacing: 0.15em; text-transform: uppercase;
   color: var(--muted); margin-bottom: 32px;
 }
-.hero-tag::before {
-  content: ''; display: block; width: 32px; height: 1px; background: var(--muted);
-}
+.hero-tag::before { display: none; }
 .hero h1 {
   font-family: var(--font-display);
   font-size: clamp(36px, 5vw, 72px);
@@ -267,9 +265,9 @@ section {
   font-size: 11px; font-weight: 600;
   letter-spacing: 0.15em; text-transform: uppercase;
   color: var(--muted); margin-bottom: 20px;
-  display: flex; align-items: center; gap: 10px;
+  display: flex; align-items: center; gap: 0;
 }
-.section-tag::before { content: ''; display: block; width: 20px; height: 1px; background: var(--muted); }
+.section-tag::before { display: none; }
 .section-title {
   font-family: var(--font-display);
   font-size: clamp(36px, 5vw, 64px);
