@@ -193,6 +193,7 @@ if (form) {
     { selector: '.service-card-grid', item: '.service-detail-card', compact: true, mobileOnly: true },
     { selector: '.service-point-list', item: '.service-point', compact: true, mobileOnly: true },
     { selector: '.work-bento', item: '.work-bento-card', compact: true, mobileOnly: true },
+    { selector: '.why-method-list', item: '.why-method-card', compact: true, mobileOnly: true, wrapperClass: 'bm-slider--why-method' },
     { selector: '.standout-grid', item: '.standout-card', compact: true, mobileOnly: true },
     { selector: '.process-steps-wrap', item: '.process-step', compact: true, mobileOnly: true }
   ];
@@ -205,6 +206,7 @@ if (form) {
     wrap.className = 'bm-slider';
     if (config.compact) wrap.classList.add('bm-slider--compact');
     if (config.mobileOnly) wrap.classList.add('bm-slider--mobile-only');
+    if (config.wrapperClass) wrap.classList.add(config.wrapperClass);
 
     target.parentNode.insertBefore(wrap, target);
     wrap.appendChild(target);
