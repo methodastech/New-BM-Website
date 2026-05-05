@@ -148,10 +148,29 @@ nav.scrolled {
   position: relative; overflow: hidden;
   background: var(--black); color: #0f0f0f;
 }
+.hero-video {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+.hero-video iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: max(100vw, 177.78vh);
+  height: max(56.25vw, 100vh);
+  transform: translate(-50%, -50%);
+  border: 0;
+}
 .hero-bg {
   position: absolute; inset: 0;
-  background: radial-gradient(ellipse 80% 60% at 60% 40%, rgba(0,0,255,0.08) 0%, transparent 70%);
+  background:
+    linear-gradient(90deg, rgba(255,255,255,0.88) 0%, rgba(255,255,255,0.72) 48%, rgba(255,255,255,0.32) 100%),
+    radial-gradient(ellipse 80% 60% at 60% 40%, rgba(0,0,255,0.08) 0%, transparent 70%);
   pointer-events: none;
+  z-index: 1;
 }
 .hero-grid-line {
   position: absolute; inset: 0;
@@ -159,8 +178,9 @@ nav.scrolled {
                     linear-gradient(90deg, rgba(0,0,0,0.05) 1px, transparent 1px);
   background-size: 80px 80px;
   pointer-events: none;
+  z-index: 2;
 }
-.hero-inner { max-width: var(--max-w); margin: 0 auto; width: 100%; }
+.hero-inner { max-width: var(--max-w); margin: 0 auto; width: 100%; position: relative; z-index: 3; }
 .hero-tag {
   display: inline-flex; align-items: center; gap: 0;
   font-family: var(--font-sans);
@@ -1338,7 +1358,7 @@ footer { color: #c8c4bc; }
 .contact-detail-item a, .contact-detail-item span:last-child { font-size: 15px; color: var(--off-white); }
 .contact-form { display: flex; flex-direction: column; gap: 20px; }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.form-group { display: flex; flex-direction: column; gap: 8px; }
+.form-group { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
 .form-group label { font-family: var(--font-sans); font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
 .form-group input, .form-group textarea, .form-group select {
   background: var(--card); border: 1px solid var(--border);

@@ -156,6 +156,8 @@ filterBtns.forEach(btn => {
 const form = document.querySelector('.contact-form form');
 if (form) {
   form.addEventListener('submit', (e) => {
+    if (form.getAttribute('action')) return;
+
     e.preventDefault();
     form.style.display = 'none';
     const success = document.querySelector('.form-success');

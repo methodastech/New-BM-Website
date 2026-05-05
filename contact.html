@@ -62,28 +62,31 @@
               <div class="form-success-mark">OK</div>
               <div>Thank you! We'll be in touch within 24 hours.</div>
             </div>
-            <form>
+            <form action="https://formsubmit.co/methodastech@gmail.com" method="POST">
+              <input type="hidden" name="_subject" value="New project brief from Brand Method website">
+              <input type="hidden" name="_template" value="table">
+              <input type="hidden" name="_captcha" value="false">
               <div class="form-row">
                 <div class="form-group">
                   <label>First Name *</label>
-                  <input type="text" placeholder="Ahmad" required>
+                  <input type="text" name="First Name" placeholder="Ahmad" required>
                 </div>
                 <div class="form-group">
                   <label>Last Name *</label>
-                  <input type="text" placeholder="Razif" required>
+                  <input type="text" name="Last Name" placeholder="Razif" required>
                 </div>
               </div>
               <div class="form-group">
                 <label>Email Address *</label>
-                <input type="email" placeholder="hello@yourcompany.com" required>
+                <input type="email" name="Email Address" placeholder="hello@yourcompany.com" required>
               </div>
               <div class="form-group">
                 <label>Phone / WhatsApp</label>
-                <input type="tel" placeholder="+60 12-345 6789">
+                <input type="tel" name="Phone / WhatsApp" placeholder="+60 12-345 6789">
               </div>
               <div class="form-group">
                 <label>What are you looking for?</label>
-                <select>
+                <select name="Service">
                   <option value="" disabled selected>Select a service</option>
                   <option>Brand Strategy &amp; Identity</option>
                   <option>System &amp; Playbook</option>
@@ -96,7 +99,7 @@
               </div>
               <div class="form-group">
                 <label>Tell us about your project</label>
-                <textarea placeholder="Briefly describe your business, your challenge, and what you want to achieve..."></textarea>
+                <textarea name="Project Details" placeholder="Briefly describe your business, your challenge, and what you want to achieve..."></textarea>
               </div>
               <button type="submit" class="btn-primary contact-submit">Send Message -></button>
             </form>
