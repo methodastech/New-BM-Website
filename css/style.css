@@ -1088,11 +1088,99 @@ section {
   overflow-x: clip;
 }
 .brand-stamp-logo {
-  width: 90%;
-  max-width: 1400px;
-  height: auto;
-  display: block;
-  filter: brightness(0) invert(1);
+  position: relative;
+  width: min(88vw, 980px);
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(86px);
+  filter: blur(16px);
+  transition:
+    opacity 1.25s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.45s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 1.45s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform, filter;
+}
+.brand-stamp-text {
+  font-family: var(--font-sans);
+  font-size: clamp(60px, 8.2vw, 148px);
+  font-weight: 800;
+  line-height: 0.82;
+  letter-spacing: 0.035em;
+  text-align: left;
+}
+.brand-stamp-line {
+  display: flex;
+  align-items: center;
+}
+.brand-stamp-line--top {
+  gap: 0.07em;
+}
+.brand-stamp-line span {
+  display: inline-block;
+}
+.brand-stamp-star {
+  position: static;
+  flex: 0 0 auto;
+  width: 0.72em;
+  height: 0.72em;
+  fill: currentColor;
+  opacity: 0;
+  transform: scale(0.42) rotate(-18deg);
+  transform-origin: center;
+  transition:
+    opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.42s,
+    transform 1.05s cubic-bezier(0.16, 1, 0.3, 1) 0.42s;
+  will-change: opacity, transform;
+}
+.brand-stamp.is-visible .brand-stamp-logo {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+.brand-stamp.is-visible .brand-stamp-star {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+  animation: brand-star-drift 16s ease-in-out 1.65s infinite;
+}
+@keyframes brand-star-drift {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
+  50% { transform: translate3d(0, -8px, 0) scale(1.015) rotate(8deg); }
+}
+@media (max-width: 768px) {
+  .brand-stamp {
+    padding: 110px 24px;
+  }
+  .brand-stamp-logo {
+    width: 100%;
+    max-width: calc(100vw - 48px);
+  }
+  .brand-stamp-text {
+    font-size: clamp(44px, 13.5vw, 78px);
+    letter-spacing: 0.025em;
+  }
+}
+@media (max-width: 480px) {
+  .brand-stamp {
+    padding: 92px 18px;
+  }
+  .brand-stamp-logo {
+    max-width: calc(100vw - 36px);
+  }
+  .brand-stamp-text {
+    font-size: clamp(38px, 11.6vw, 48px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .brand-stamp-logo,
+  .brand-stamp-star {
+    transition: none;
+  }
+  .brand-stamp.is-visible .brand-stamp-star {
+    animation: none;
+  }
 }
 
 /* â”€â”€ FOOTER â”€â”€ */

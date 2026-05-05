@@ -54,6 +54,23 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
 reveals.forEach(el => observer.observe(el));
 
+// Footer brand stamp reveal
+(function () {
+  const stamp = document.querySelector('.brand-stamp');
+  if (!stamp) return;
+
+  const stampObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        stamp.classList.add('is-visible');
+        stampObserver.disconnect();
+      }
+    });
+  }, { threshold: 0.28, rootMargin: '0px 0px -12% 0px' });
+
+  stampObserver.observe(stamp);
+})();
+
 // Work filter
 const filterBtns = document.querySelectorAll('.filter-btn');
 const workCards = document.querySelectorAll('.work-card[data-cat]');
