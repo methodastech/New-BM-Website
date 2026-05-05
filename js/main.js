@@ -359,3 +359,49 @@ if (statsSection) {
   }, { threshold: 0.3 });
   statsObserver.observe(statsSection);
 }
+
+// Homepage hero YouTube background
+(function () {
+  const iframe = document.getElementById('heroVideoPlayer');
+  if (!iframe) return;
+
+  let player = null;
+  let loopTimer = null;
+
+  function keepBackgroundLooping() {
+    if (!player || typeof player.getDuration !== 'function') return;
+
+    clearInterval(loopTimer);
+    loopTimer = setInterval(() => {
+      const duration = player.getDuration();
+      const currentTime = player.getCurrentTime();
+
+      if (duration && currentTime && duration - currentTime < 1.2) {
+        player.seekTo(0, true);
+        player.playVideo();
+      }
+    }, 400);
+  }
+
+  window.onYouTubeIframeAPIReady = function () {
+    player = new YT.Player('heroVideoPlayer', {
+      events: {
+        onReady(event) {
+          event.target.mute();
+          event.target.playVideo();
+          keepBackgroundLooping();
+        },
+        onStateChange(event) {
+          if (event.data === YT.PlayerState.ENDED) {
+            event.target.seekTo(0, true);
+            event.target.playVideo();
+          }
+        }
+      }
+    });
+  };
+
+  const script = document.createElement('script');
+  script.src = 'https://www.youtube.com/iframe_api';
+  document.head.appendChild(script);
+})();
