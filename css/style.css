@@ -1702,6 +1702,20 @@ footer { color: #c8c4bc; }
   line-height: 1.15;
   margin: 44px 0 14px;
 }
+.article-body h3 {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 2.2vw, 32px);
+  font-weight: 400;
+  line-height: 1.2;
+  margin: 34px 0 12px;
+}
+.article-body h4 {
+  font-family: var(--font-display);
+  font-size: clamp(18px, 1.5vw, 22px);
+  font-weight: 400;
+  line-height: 1.35;
+  margin: 28px 0 10px;
+}
 .article-body p,
 .article-body li {
   font-size: 16px;
