@@ -54,6 +54,28 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
 reveals.forEach(el => observer.observe(el));
 
+// Leadership carousel seamless loop distance
+(function () {
+  const track = document.querySelector('.team-scroll-track');
+  if (!track) return;
+
+  function setTeamLoopDistance() {
+    const items = Array.from(track.querySelectorAll('.team-member'));
+    if (items.length < 2 || items.length % 2 !== 0) return;
+
+    const first = items[0];
+    const duplicateFirst = items[items.length / 2];
+    const distance = duplicateFirst.offsetLeft - first.offsetLeft;
+    if (distance <= 0) return;
+
+    track.style.setProperty('--team-loop-distance', `-${distance}px`);
+  }
+
+  setTeamLoopDistance();
+  window.addEventListener('resize', setTeamLoopDistance);
+  window.addEventListener('load', setTeamLoopDistance, { once: true });
+})();
+
 // Footer brand stamp reveal
 (function () {
   const stamp = document.querySelector('.brand-stamp');
@@ -305,6 +327,7 @@ if (form) {
     const prev = controls.querySelector('.bm-slider-arrow--prev');
     const next = controls.querySelector('.bm-slider-arrow--next');
     const pauseTarget = config.pause ? target.querySelector(config.pause) : null;
+    let resumeTimer = null;
 
     function hasActiveControls() {
       return !config.mobileOnly || window.matchMedia('(max-width: 768px)').matches;
@@ -322,6 +345,10 @@ if (form) {
     function scrollByItem(direction) {
       if (pauseTarget) {
         pauseTarget.style.animationPlayState = 'paused';
+        window.clearTimeout(resumeTimer);
+        resumeTimer = window.setTimeout(() => {
+          pauseTarget.style.animationPlayState = '';
+        }, 1800);
       }
       target.scrollBy({ left: direction * getScrollAmount(target, config), behavior: 'smooth' });
     }

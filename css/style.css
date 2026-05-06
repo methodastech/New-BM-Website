@@ -1716,6 +1716,23 @@ footer { color: #c8c4bc; }
   padding-left: 22px;
   margin: 0 0 24px;
 }
+.article-body img {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 34px 0;
+  object-fit: cover;
+  border: 1px solid var(--border);
+}
+.article-body figure {
+  margin: 36px 0;
+}
+.article-body figcaption {
+  margin-top: 10px;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--muted);
+}
 .article-callout {
   margin: 36px 0;
   padding: 26px;
@@ -1848,12 +1865,13 @@ footer { color: #c8c4bc; }
   gap: 24px;
   padding: 8px 0 24px;
   animation: team-scroll 50s linear infinite;
+  --team-loop-distance: -50%;
   width: max-content;
 }
 .team-scroll-track:hover { animation-play-state: paused; }
 @keyframes team-scroll {
   0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  100% { transform: translateX(var(--team-loop-distance)); }
 }
 .team-grid-wrap { margin-top: 64px; display: flex; flex-direction: column; gap: 48px; }
 .team-row { display: flex; gap: 20px; justify-content: center; }
