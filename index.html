@@ -616,5 +616,30 @@
 </div><!-- page-wrap -->
 <script src="js/layout.js"></script>
 <script src="js/main.js"></script>
+<script>
+  (function(){
+    var tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    document.head.appendChild(tag);
+    var heroPlayer;
+    window.onYouTubeIframeAPIReady = function() {
+      heroPlayer = new YT.Player('heroVideoPlayer', {
+        events: {
+          onReady: function(e) { e.target.playVideo(); },
+          onStateChange: function(e) {
+            if (e.data === YT.PlayerState.PAUSED || e.data === YT.PlayerState.ENDED) {
+              heroPlayer.playVideo();
+            }
+          }
+        }
+      });
+    };
+    document.addEventListener('visibilitychange', function() {
+      if (!document.hidden && heroPlayer && heroPlayer.playVideo) {
+        heroPlayer.playVideo();
+      }
+    });
+  })();
+</script>
 </body>
 </html>
