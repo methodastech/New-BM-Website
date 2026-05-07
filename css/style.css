@@ -472,7 +472,7 @@ section {
 .approach-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: 56px;
+  gap: 20px;
   align-items: start;
 }
 .approach-copy {
@@ -1409,6 +1409,45 @@ footer { color: #c8c4bc; }
 .service-package-card .btn-ghost {
   width: 100%;
 }
+.service-brand-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(400px, 0.95fr);
+  gap: 56px;
+  align-items: stretch;
+}
+.service-brand-panel {
+  min-width: 0;
+}
+.service-brand-copy {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.service-brand-copy .btn-primary {
+  align-self: flex-start;
+}
+.service-brand-included {
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.service-brand-image {
+  background: var(--card);
+  height: 100%;
+}
+.service-brand-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: left center;
+  display: block;
+}
+.service-brand-list {
+  padding: 32px 36px 36px;
+  flex: 1;
+}
 .service-point {
   min-width: 0;
 }
@@ -1521,8 +1560,53 @@ footer { color: #c8c4bc; }
   cursor: wait;
 }
 
+.contact-banner {
+  position: relative;
+  width: 100%;
+  height: clamp(320px, 45vw, 560px);
+  overflow: hidden;
+}
+.contact-banner-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+.contact-banner-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.45) 50%, rgba(0,0,0,0.05) 100%);
+}
+.contact-banner-copy {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 clamp(28px, 6vw, 96px);
+  max-width: 50%;
+}
+.contact-banner-quote {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(26px, 3.2vw, 48px);
+  line-height: 1.2;
+  color: #ffffff;
+  margin-bottom: 24px;
+}
+.contact-banner-rule {
+  width: 90%;
+  display: none;
+  height: 1px;
+  background: rgba(255,255,255,0.5);
+}
+
 .contact-hero-section {
-  padding: 120px 20px 110px;
+  padding: 80px 20px 80px;
   background:
     linear-gradient(90deg, rgba(0,0,255,0.055) 0 1px, transparent 1px),
     linear-gradient(0deg, rgba(0,0,255,0.035) 0 1px, transparent 1px),
@@ -2212,6 +2296,16 @@ footer { color: #c8c4bc; }
 
 /* â”€â”€ RESPONSIVE â”€â”€ */
 @media (max-width: 1024px) {
+  .service-brand-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .service-brand-included {
+    order: -1;
+  }
+  .service-brand-list {
+    padding: 28px 32px 32px;
+  }
   .section-inner > div[style*="grid-template-columns:1fr 1fr"],
   .section-inner > div[style*="grid-template-columns: 1fr 1fr"] {
     grid-template-columns: 1fr !important;
@@ -2271,6 +2365,23 @@ footer { color: #c8c4bc; }
   }
 }
 @media (max-width: 768px) {
+  .contact-banner {
+    height: clamp(260px, 80vw, 360px);
+  }
+  .contact-banner-img {
+    object-position: 80% center;
+  }
+  .contact-banner-overlay {
+    background: linear-gradient(to right, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.55) 55%, rgba(0,0,0,0.2) 100%);
+  }
+  .contact-banner-copy {
+    max-width: 85%;
+    padding: 0 24px 36px;
+    justify-content: flex-end;
+  }
+  .contact-banner-quote {
+    font-size: clamp(22px, 6.5vw, 30px);
+  }
   .section-inner > div[style*="grid-template-columns:1fr 1fr"],
   .section-inner > div[style*="grid-template-columns: 1fr 1fr"],
   .section-inner > div[style*="grid-template-columns:repeat(3,1fr)"],
@@ -2338,6 +2449,12 @@ footer { color: #c8c4bc; }
     padding: 0 20px 18px;
     margin-left: -20px;
     margin-right: -20px;
+  }
+  .service-brand-list {
+    padding: 22px 26px 26px;
+  }
+  .service-brand-image img {
+    aspect-ratio: 4 / 3;
   }
   .service-card-grid--spaced {
     gap: 18px !important;
@@ -3101,7 +3218,7 @@ footer { color: #c8c4bc; }
   .approach-grid,
   .experience-grid,
   .about-grid,
-  .contact-grid { gap: 100px; }
+  .contact-grid { gap: 20px; }
   .approach-copy p,
   .experience-text p,
   .about-text p,
@@ -3205,7 +3322,7 @@ footer { color: #c8c4bc; }
   .nav-links a,
   .nav-cta { font-size: 15px; }
 
-  section { padding: 168px 44px; }
+  section { padding: 5em 0; }
   .section-title { font-size: clamp(52px, 4.2vw, 88px); }
   .section-sub { font-size: 19px; max-width: 720px; }
   .section-tag,
@@ -3234,7 +3351,7 @@ footer { color: #c8c4bc; }
   .approach-grid,
   .experience-grid,
   .about-grid,
-  .contact-grid { gap: 120px; }
+  .contact-grid { gap: 20px; }
   .approach-copy p,
   .experience-text p,
   .about-text p,
