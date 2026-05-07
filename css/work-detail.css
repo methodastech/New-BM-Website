@@ -324,3 +324,205 @@
     font-size: clamp(21px, 8vw, 30px);
   }
 }
+
+@media (min-width: 1600px) {
+  .portfolio-detail {
+    max-width: 1280px;
+    padding: 108px 48px 96px;
+  }
+  .portfolio-back {
+    font-size: 13px;
+    margin-bottom: 26px;
+  }
+  .portfolio-detail h1 {
+    font-size: clamp(62px, 5vw, 92px);
+    margin-bottom: 24px;
+  }
+  .portfolio-meta {
+    font-size: 18px;
+    gap: 18px;
+    margin-bottom: 34px;
+  }
+  .portfolio-meta span + span {
+    padding-left: 18px;
+  }
+  .portfolio-hero-img {
+    margin-bottom: 40px;
+  }
+  .portfolio-summary {
+    max-width: 980px;
+  }
+  .portfolio-summary h2,
+  .portfolio-copy h2 {
+    font-size: clamp(40px, 3vw, 56px);
+  }
+  .portfolio-summary p,
+  .portfolio-copy p {
+    font-size: 19px;
+  }
+  .portfolio-tags span {
+    min-height: 32px;
+    padding: 7px 14px;
+    font-size: 12px;
+  }
+  .portfolio-content {
+    margin-top: 48px;
+    gap: 44px;
+  }
+  .portfolio-copy {
+    max-width: 860px;
+  }
+  .portfolio-image img {
+    max-height: 680px;
+  }
+  .portfolio-split,
+  .portfolio-split--reverse {
+    gap: 38px;
+  }
+  .portfolio-gallery {
+    gap: 22px;
+  }
+  .portfolio-detail--editorial {
+    padding: 96px 32px 116px;
+  }
+  .portfolio-editorial-head {
+    max-width: 860px;
+    margin-bottom: 48px;
+  }
+  .portfolio-detail--editorial h1 {
+    font-size: clamp(52px, 4vw, 82px);
+  }
+  .portfolio-detail--editorial .portfolio-content {
+    gap: 24px;
+  }
+  .portfolio-editorial-stack,
+  .portfolio-rubex-grid,
+  .portfolio-editorial-grid-balanced {
+    gap: 32px;
+  }
+  .portfolio-editorial-note {
+    max-width: 760px;
+    font-size: clamp(30px, 2.2vw, 44px);
+  }
+}
+
+@media (min-width: 1920px) {
+  .portfolio-detail {
+    max-width: 1480px;
+    padding: 128px 60px 116px;
+  }
+  .portfolio-detail h1 {
+    font-size: clamp(76px, 4.8vw, 108px);
+  }
+  .portfolio-summary {
+    max-width: 1080px;
+  }
+  .portfolio-summary h2,
+  .portfolio-copy h2 {
+    font-size: clamp(48px, 2.8vw, 66px);
+  }
+  .portfolio-summary p,
+  .portfolio-copy p {
+    font-size: 20px;
+  }
+  .portfolio-content {
+    gap: 54px;
+  }
+  .portfolio-image img {
+    max-height: 780px;
+  }
+  .portfolio-split,
+  .portfolio-split--reverse {
+    gap: 48px;
+  }
+  .portfolio-gallery {
+    gap: 28px;
+  }
+  .portfolio-detail--editorial {
+    padding: 112px 44px 136px;
+  }
+  .portfolio-editorial-head {
+    max-width: 980px;
+    margin-bottom: 58px;
+  }
+  .portfolio-detail--editorial h1 {
+    font-size: clamp(66px, 3.8vw, 98px);
+  }
+  .portfolio-detail--editorial .portfolio-content {
+    gap: 30px;
+  }
+  .portfolio-editorial-stack,
+  .portfolio-rubex-grid,
+  .portfolio-editorial-grid-balanced {
+    gap: 40px;
+  }
+  .portfolio-editorial-note {
+    max-width: 860px;
+    font-size: clamp(38px, 2vw, 54px);
+  }
+}
+
+@media (min-width: 2560px) {
+  .portfolio-detail {
+    max-width: 1760px;
+    padding: 156px 72px 144px;
+  }
+  .portfolio-back {
+    font-size: 14px;
+  }
+  .portfolio-detail h1 {
+    font-size: clamp(92px, 4.4vw, 132px);
+  }
+  .portfolio-meta {
+    font-size: 20px;
+  }
+  .portfolio-summary {
+    max-width: 1240px;
+  }
+  .portfolio-summary h2,
+  .portfolio-copy h2 {
+    font-size: clamp(58px, 2.6vw, 78px);
+  }
+  .portfolio-summary p,
+  .portfolio-copy p {
+    font-size: 22px;
+  }
+  .portfolio-content {
+    gap: 68px;
+  }
+  .portfolio-copy {
+    max-width: 1040px;
+  }
+  .portfolio-image img {
+    max-height: 940px;
+  }
+  .portfolio-split,
+  .portfolio-split--reverse {
+    gap: 62px;
+  }
+  .portfolio-gallery {
+    gap: 36px;
+  }
+  .portfolio-detail--editorial {
+    padding: 136px 56px 168px;
+  }
+  .portfolio-editorial-head {
+    max-width: 1160px;
+    margin-bottom: 72px;
+  }
+  .portfolio-detail--editorial h1 {
+    font-size: clamp(82px, 3.6vw, 120px);
+  }
+  .portfolio-detail--editorial .portfolio-content {
+    gap: 38px;
+  }
+  .portfolio-editorial-stack,
+  .portfolio-rubex-grid,
+  .portfolio-editorial-grid-balanced {
+    gap: 52px;
+  }
+  .portfolio-editorial-note {
+    max-width: 980px;
+    font-size: clamp(48px, 1.9vw, 66px);
+  }
+}

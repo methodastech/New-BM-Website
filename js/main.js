@@ -1,8 +1,29 @@
 // Nav scroll
 const nav = document.querySelector('nav');
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 20);
-});
+const homepageHero = document.querySelector('body.hero-page .hero');
+
+function updateNavState() {
+  if (!nav) return;
+
+  const heroVisible = homepageHero
+    ? window.scrollY < homepageHero.offsetHeight - nav.offsetHeight
+    : false;
+
+  nav.classList.toggle('hero-visible', heroVisible);
+  nav.classList.toggle('scrolled', !heroVisible && window.scrollY > 20);
+  document.body.classList.toggle('float-actions-active', window.scrollY > 120);
+}
+
+updateNavState();
+window.addEventListener('scroll', updateNavState, { passive: true });
+window.addEventListener('resize', updateNavState);
+
+const scrollTopFloat = document.querySelector('.scroll-top-float');
+if (scrollTopFloat) {
+  scrollTopFloat.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}
 
 // Mobile menu
 const hamburger = document.querySelector('.nav-hamburger');
@@ -322,10 +343,16 @@ if (form) {
       '<button class="bm-slider-arrow bm-slider-arrow--next" type="button" aria-label="Next item">&#8594;</button>'
     ].join('');
     wrap.insertBefore(controls, target);
+    const progress = document.createElement('div');
+    progress.className = 'bm-slider-progress';
+    progress.setAttribute('aria-hidden', 'true');
+    progress.innerHTML = '<span></span>';
+    wrap.appendChild(progress);
     wrap.classList.add('has-slider-controls');
 
     const prev = controls.querySelector('.bm-slider-arrow--prev');
     const next = controls.querySelector('.bm-slider-arrow--next');
+    const progressBar = progress.querySelector('span');
     const pauseTarget = config.pause ? target.querySelector(config.pause) : null;
     let resumeTimer = null;
 
@@ -337,9 +364,13 @@ if (form) {
       const maxScroll = target.scrollWidth - target.clientWidth;
       const canScroll = maxScroll > 4 && hasActiveControls();
       controls.hidden = !canScroll;
+      progress.hidden = !canScroll;
       wrap.classList.toggle('has-slider-controls', canScroll);
       prev.disabled = !canScroll || target.scrollLeft <= 2;
       next.disabled = !canScroll || target.scrollLeft >= maxScroll - 2;
+      const ratio = canScroll ? Math.min(Math.max(target.scrollLeft / maxScroll, 0), 1) : 0;
+      const maxProgressTravel = Math.max(progress.clientWidth - progressBar.clientWidth, 0);
+      progressBar.style.transform = `translateX(${(ratio * maxProgressTravel).toFixed(2)}px)`;
     }
 
     function scrollByItem(direction) {
