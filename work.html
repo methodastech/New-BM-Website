@@ -46,6 +46,72 @@
 }
 .work-search:focus { border-color:var(--accent); box-shadow:inset 3px 0 0 var(--accent); }
 .work-search::placeholder { color:#999999; }
+.work-floating-filter {
+  position: fixed;
+  left: 50%;
+  bottom: 28px;
+  z-index: 80;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  width: min(760px, calc(100vw - 40px));
+  padding: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  backdrop-filter: none;
+  opacity: 0;
+  transform: translate(-50%, 18px);
+  pointer-events: none;
+  transition: opacity 0.55s var(--ease), transform 0.55s var(--ease);
+}
+.work-floating-filter.is-visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+  pointer-events: auto;
+}
+.work-floating-filter .filter-btn {
+  border: 0;
+  border-radius: 4px;
+  padding: 7px 10px;
+  color: #1d1d1d;
+  background: #e8e8e8;
+  white-space: nowrap;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.03);
+  transition: background 0.2s var(--ease), color 0.2s var(--ease), transform 0.2s var(--ease);
+}
+.work-floating-filter .filter-btn:hover,
+.work-floating-filter .filter-btn:focus-visible {
+  color: #0f0f0f;
+  background: #dcdcdc;
+  transform: translateY(-1px);
+  outline: none;
+}
+.work-floating-filter .filter-btn.active {
+  color: #ffffff;
+  background: #0f0f0f;
+}
+.work-floating-filter .filter-btn.active::after {
+  content: '×';
+  margin-left: 7px;
+  font-size: 14px;
+  line-height: 1;
+}
+.work-grid-full .work-card {
+  transition: opacity 0.28s var(--ease), transform 0.28s var(--ease);
+}
+.work-grid-full .work-card.is-filter-hidden {
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+}
 .work-grid-full { display:grid; grid-template-columns:repeat(3,1fr); gap:32px; }
 .work-grid-full .work-card {
   aspect-ratio: auto !important;
@@ -157,6 +223,20 @@
   .work-grid-full{grid-template-columns:1fr; gap:40px;}
   .work-card-body h3 { font-size: 20px; }
   .work-card-body p { font-size: 16px; }
+  .work-floating-filter {
+    left: 16px;
+    right: 16px;
+    bottom: 82px;
+    width: auto;
+    max-width: none;
+    overflow-x: auto;
+    justify-content: flex-start;
+    transform: translateY(18px);
+    scrollbar-width: none;
+  }
+  .work-floating-filter::-webkit-scrollbar { display: none; }
+  .work-floating-filter.is-visible { transform: translateY(0); }
+  .work-floating-filter .filter-btn { padding: 7px 10px; font-size: 12px; }
 }
 </style>
 </head>
@@ -173,6 +253,15 @@
     <h1 class="reveal reveal-delay-1">Strategy-led creative that <em>works</em></h1>
     <p class="reveal reveal-delay-2">Every project is built on structured thinking, strong positioning, and disciplined execution.</p>
   </div>
+</div>
+
+<div class="work-floating-filter" id="workFloatingFilter" aria-label="Filter work projects">
+  <button class="filter-btn active" type="button" data-filter="all">All</button>
+  <button class="filter-btn" type="button" data-filter="health">Health &amp; Wellness</button>
+  <button class="filter-btn" type="button" data-filter="fintech">Fintech</button>
+  <button class="filter-btn" type="button" data-filter="fb">Food &amp; Drink</button>
+  <button class="filter-btn" type="button" data-filter="tech">Technology</button>
+  <button class="filter-btn" type="button" data-filter="community">Non-profits</button>
 </div>
 
 <section>
@@ -399,5 +488,64 @@
 </div>
 <script src="js/layout.js"></script>
 <script src="js/main.js"></script>
+<script>
+(() => {
+  const filterBar = document.getElementById('workFloatingFilter');
+  const filterButtons = Array.from(document.querySelectorAll('.work-floating-filter .filter-btn'));
+  const cards = Array.from(document.querySelectorAll('.work-grid-full .work-card[data-cat]'));
+  const search = document.getElementById('workSearch');
+  let activeFilter = 'all';
+
+  if (!filterBar || !cards.length) return;
+
+  function updateFilterBar() {
+    filterBar.classList.toggle('is-visible', window.scrollY > 220);
+  }
+
+  function setCardVisible(card, shouldShow) {
+    if (shouldShow) {
+      card.style.display = '';
+      requestAnimationFrame(() => {
+        card.classList.remove('is-filter-hidden');
+      });
+      return;
+    }
+
+    card.classList.add('is-filter-hidden');
+    window.setTimeout(() => {
+      if (card.classList.contains('is-filter-hidden')) {
+        card.style.display = 'none';
+      }
+    }, 280);
+  }
+
+  function applyWorkFilters() {
+    const query = search ? search.value.trim().toLowerCase() : '';
+
+    cards.forEach(card => {
+      const categoryMatches = activeFilter === 'all' || card.dataset.cat === activeFilter;
+      const searchableText = `${card.dataset.search || ''} ${card.textContent}`.toLowerCase();
+      const searchMatches = !query || searchableText.includes(query);
+      setCardVisible(card, categoryMatches && searchMatches);
+    });
+  }
+
+  filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      activeFilter = button.dataset.filter || 'all';
+      filterButtons.forEach(item => item.classList.toggle('active', item === button));
+      applyWorkFilters();
+    });
+  });
+
+  if (search) {
+    search.addEventListener('input', applyWorkFilters);
+  }
+
+  window.addEventListener('scroll', updateFilterBar, { passive: true });
+  updateFilterBar();
+  applyWorkFilters();
+})();
+</script>
 </body>
 </html>

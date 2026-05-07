@@ -773,6 +773,18 @@ section {
   flex-direction: column;
   min-width: 0;
   background: transparent;
+  color: inherit;
+  cursor: pointer;
+  text-decoration: none;
+  outline: none;
+  transition: transform 0.28s var(--ease);
+}
+.work-bento-card:hover,
+.work-bento-card:focus-visible {
+  transform: translateY(-4px);
+}
+.work-bento-card:focus-visible .work-bento-media {
+  box-shadow: 0 0 0 2px var(--accent);
 }
 .work-bento-featured {
   grid-row: span 2;
@@ -790,7 +802,8 @@ section {
   display: block;
   transition: transform 0.7s var(--ease);
 }
-.work-bento-card:hover img { transform: scale(1.05); }
+.work-bento-card:hover img,
+.work-bento-card:focus-visible img { transform: scale(1.05); }
 .work-bento-info {
   padding: 18px 0 0;
   background: transparent;
@@ -803,6 +816,11 @@ section {
   color: var(--white);
   line-height: 1.2;
   margin: 0 0 10px;
+  transition: color 0.25s var(--ease);
+}
+.work-bento-card:hover .work-bento-info h3,
+.work-bento-card:focus-visible .work-bento-info h3 {
+  color: var(--accent);
 }
 .work-bento-featured .work-bento-info h3 { font-size: 24px; }
 .work-bento-info p {
@@ -2755,6 +2773,49 @@ footer { color: #c8c4bc; }
     padding-right: 0;
     max-width: 100%;
   }
+  .bm-slider > .work-bento {
+    scroll-padding-left: 0;
+  }
+  .bm-slider > .work-bento .work-bento-card,
+  .bm-slider > .work-bento .work-bento-featured {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+  .bm-slider > .standout-grid {
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+    scroll-padding-left: 0;
+  }
+  .bm-slider > .standout-grid .standout-card {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+  .bm-slider > .process-steps-wrap {
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+    scroll-padding-left: 0;
+  }
+  .bm-slider > .process-steps-wrap .process-steps {
+    grid-template-columns: repeat(4, 100%);
+    width: 100%;
+  }
+  .bm-slider > .process-steps-wrap .process-step {
+    width: 100%;
+    max-width: 100%;
+  }
+  .approach-slider > .approach-list {
+    padding-left: 0;
+    padding-right: 0;
+    scroll-padding-left: 0;
+  }
+  .approach-item {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
   .bm-slider--why-method .bm-slider-controls {
     top: 42%;
   }
@@ -2878,6 +2939,47 @@ footer { color: #c8c4bc; }
     margin-left: -18px;
     margin-right: -18px;
   }
+  .work-feature-section {
+    padding: 60px 18px 0;
+  }
+  .work-feature-section .work-bento {
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+    scroll-padding-left: 0;
+  }
+  .work-feature-section .work-bento-card,
+  .work-feature-section .work-bento-featured {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+  .standout-grid {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    scroll-padding-left: 0 !important;
+  }
+  .standout-card {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+  .process-steps-wrap {
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+    scroll-padding-left: 0;
+  }
+  .process-steps {
+    grid-template-columns: repeat(4, 100%);
+    width: 100%;
+  }
+  .process-step {
+    width: 100%;
+    max-width: 100%;
+  }
   .why-method-list {
     width: 100%;
     max-width: 100%;
@@ -2985,14 +3087,16 @@ footer { color: #c8c4bc; }
   .btn-dark,
   .lead-form button { font-size: 13px; padding: 18px 24px; }
 
-  .clients-section { padding: 96px 32px; }
+  .clients-section { padding: 112px 32px; }
+  .clients-heading { margin-bottom: 66px; }
   .clients-heading p,
   .approach-title,
   .experience-title,
   .work-feature-title,
   .cta-band h2 { font-size: clamp(52px, 4.4vw, 78px); }
-  .client-logo { width: 220px; height: 110px; }
-  .client-logo img { width: 160px; height: 62px; }
+  .clients-row { padding: 14px 0; }
+  .client-logo { width: 300px; height: 130px; }
+  .client-logo img { width: 244px; height: 98px; }
 
   .approach-grid,
   .experience-grid,
@@ -3024,8 +3128,8 @@ footer { color: #c8c4bc; }
   .work-grid { gap: 3px; }
   .work-card { min-height: 600px; }
   .work-card-overlay { padding: 42px; }
-  .work-bento { gap: 26px; grid-auto-rows: minmax(310px, auto); }
-  .work-bento-featured { min-height: 640px; }
+  .work-bento { gap: 26px; grid-template-rows: repeat(2, minmax(310px, 1fr)); }
+  .work-bento-featured { min-height: 0; }
 
   .stats-row { margin-top: 96px; }
   .stat-num,
@@ -3121,9 +3225,11 @@ footer { color: #c8c4bc; }
   .experience-title,
   .work-feature-title,
   .cta-band h2 { font-size: clamp(64px, 4.2vw, 92px); }
-  .clients-section { padding: 112px 44px; }
-  .client-logo { width: 255px; height: 128px; }
-  .client-logo img { width: 184px; height: 70px; }
+  .clients-section { padding: 132px 44px; }
+  .clients-heading { margin-bottom: 78px; }
+  .clients-row { padding: 16px 0; }
+  .client-logo { width: 340px; height: 150px; }
+  .client-logo img { width: 280px; height: 112px; }
 
   .approach-grid,
   .experience-grid,
@@ -3155,8 +3261,8 @@ footer { color: #c8c4bc; }
   .service-icon img { width: 84px; height: 84px; }
   .work-card { min-height: 680px; }
   .work-card-overlay { padding: 50px; }
-  .work-bento { gap: 32px; grid-auto-rows: minmax(350px, auto); }
-  .work-bento-featured { min-height: 720px; }
+  .work-bento { gap: 32px; grid-template-rows: repeat(2, minmax(350px, 1fr)); }
+  .work-bento-featured { min-height: 0; }
   .work-bento-featured .work-bento-info h3 { font-size: 34px; }
 
   .stats-row { margin-top: 112px; }
@@ -3234,8 +3340,11 @@ footer { color: #c8c4bc; }
   .experience-title,
   .work-feature-title,
   .cta-band h2 { font-size: clamp(78px, 3.8vw, 112px); }
-  .client-logo { width: 285px; height: 146px; }
-  .client-logo img { width: 210px; height: 80px; }
+  .clients-section { padding: 156px 56px; }
+  .clients-heading { margin-bottom: 92px; }
+  .clients-row { padding: 18px 0; }
+  .client-logo { width: 390px; height: 170px; }
+  .client-logo img { width: 320px; height: 128px; }
 
   .approach-grid,
   .experience-grid,
@@ -3263,8 +3372,8 @@ footer { color: #c8c4bc; }
   .why-method-card h4 { font-size: 40px; }
 
   .work-card { min-height: 780px; }
-  .work-bento { gap: 38px; grid-auto-rows: minmax(400px, auto); }
-  .work-bento-featured { min-height: 820px; }
+  .work-bento { gap: 38px; grid-template-rows: repeat(2, minmax(400px, 1fr)); }
+  .work-bento-featured { min-height: 0; }
   .stat-num,
   .stats-row .stat-num { font-size: 100px; }
 
