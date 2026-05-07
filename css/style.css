@@ -187,6 +187,13 @@ body.hero-page .page-wrap {
   pointer-events: none;
   z-index: 0;
 }
+.hero-video-cover {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: auto;
+  background: transparent;
+}
 .hero-video iframe {
   position: absolute;
   top: 50%;
