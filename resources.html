@@ -30,43 +30,56 @@
 <meta name="twitter:image" content="https://brandmethod.co/Image/blog/creating-a-cohesive-brand-strategy-a-comprehensive-guide-featured.webp">
 <link rel="stylesheet" href="css/style.css">
 <style>
-.blog-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px; margin-top:60px; }
-.blog-search-wrap { max-width:680px; margin:0 auto; }
+.blog-search-wrap { max-width:680px; margin:0 auto 64px; }
 .blog-search-label { display:block; font-family:var(--font-sans); font-size:10px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); margin-bottom:12px; }
-.blog-search { width:100%; min-height:58px; background:#ffffff; border:1px solid var(--border); color:var(--white); font-family:var(--font-body); font-size:16px; padding:0 20px; outline:none; transition:border-color 0.2s, box-shadow 0.2s; }
+.blog-search { width:100%; min-height:58px; background:#ffffff; border:1px solid var(--border); color:#0f0f0f; font-family:var(--font-body); font-size:16px; padding:0 20px; outline:none; transition:border-color 0.2s, box-shadow 0.2s; }
 .blog-search:focus { border-color:var(--accent); box-shadow:inset 3px 0 0 var(--accent); }
 .blog-search::placeholder { color:#999999; }
 .blog-empty { display:none; margin-top:34px; text-align:center; color:var(--muted); font-size:15px; }
-.blog-card { display:flex; flex-direction:column; background:#ffffff; border:1px solid var(--border); color:inherit; overflow:hidden; transition:border-color 0.25s, transform 0.25s, box-shadow 0.25s; }
-.blog-card:hover { border-color:var(--border-hover); transform:translateY(-4px); box-shadow:0 18px 44px rgba(0,0,0,0.08); }
-.blog-card-img { aspect-ratio:16/9; display:flex; align-items:center; justify-content:center; background:var(--card); overflow:hidden; }
-.blog-card-img img { width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.35s ease; }
-.blog-card:hover .blog-card-img img { transform:scale(1.03); }
-.blog-card-body { padding:28px; display:flex; flex-direction:column; flex:1; }
-.blog-cat { font-family:var(--font-sans); font-size:10px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); margin-bottom:12px; }
-.blog-card h3 { font-family:var(--font-display); font-size:24px; font-weight:400; line-height:1.25; margin-bottom:12px; }
-.blog-card p { font-size:14px; color:var(--off-white); line-height:1.8; margin-bottom:20px; }
-.blog-tags { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 22px; }
-.blog-tags span { font-family:var(--font-sans); font-size:10px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:var(--muted); border:1px solid var(--border); padding:6px 9px; }
-.blog-meta { margin-top:auto; font-size:12px; color:var(--muted); display:flex; gap:16px; justify-content:space-between; align-items:center; }
-.blog-read { font-family:var(--font-sans); font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--accent); }
-@media(max-width:1024px){.blog-grid{grid-template-columns:repeat(2,minmax(0,1fr));}}
+.blog-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:42px 28px; }
+.blog-card { display:flex; flex-direction:column; color:inherit; background:transparent; border-top:1px solid rgba(0,0,0,0.18); padding-top:22px; min-width:0; transition:border-color 0.25s var(--ease), transform 0.25s var(--ease); }
+.blog-card:hover { border-color:var(--accent); transform:translateY(-3px); }
+.blog-card-img { aspect-ratio:16/10; display:flex; align-items:center; justify-content:center; background:#f3f3f3; overflow:hidden; margin-bottom:22px; }
+.blog-card-img img { width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.35s var(--ease); }
+.blog-card:hover .blog-card-img img { transform:scale(1.035); }
+.blog-card-body { display:flex; flex-direction:column; flex:1; min-width:0; }
+.blog-cat { font-family:var(--font-sans); font-size:10px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); margin-bottom:12px; }
+.blog-card h3 { font-family:var(--font-display); font-size:clamp(24px,2vw,32px); font-weight:400; line-height:1.14; margin-bottom:12px; color:#0f0f0f; }
+.blog-card p { font-size:14px; color:#555555; line-height:1.75; margin-bottom:20px; }
+.blog-tags { display:none; }
+.blog-meta { margin-top:auto; padding-top:2px; font-size:12px; color:var(--muted); display:flex; gap:16px; justify-content:space-between; align-items:center; border-top:1px solid transparent; }
+.blog-read { font-family:var(--font-sans); font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--accent); white-space:nowrap; }
+.blog-card:first-child { grid-column:1 / -1; display:grid; grid-template-columns:minmax(0,1.18fr) minmax(360px,0.82fr); gap:clamp(34px,5vw,72px); align-items:center; padding:0 0 58px; margin-bottom:18px; border-top:0; border-bottom:1px solid rgba(0,0,0,0.18); transform:none; }
+.blog-card:first-child:hover { transform:none; border-bottom-color:var(--accent); }
+.blog-card:first-child .blog-card-img { aspect-ratio:16/10; margin-bottom:0; }
+.blog-card:first-child .blog-card-body { padding:0; }
+.blog-card:first-child .blog-cat::before { content:'Main Story'; color:var(--accent); margin-right:12px; }
+.blog-card:first-child h3 { font-size:clamp(44px,5.1vw,78px); line-height:0.98; margin-bottom:22px; letter-spacing:0; }
+.blog-card:first-child p { font-size:17px; line-height:1.8; color:#444444; margin-bottom:28px; }
+.blog-card:first-child .blog-meta { font-size:13px; padding-top:18px; border-top:1px solid rgba(0,0,0,0.14); }
+@media(max-width:1024px){
+  .blog-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .blog-card:first-child{grid-template-columns:1fr; gap:28px;}
+  .blog-card:first-child h3{font-size:clamp(38px,7vw,62px);}
+}
 @media(max-width:768px){
-  .blog-grid{grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; margin-top:34px;}
-  .blog-card-body{padding:16px;}
-  .blog-cat{font-size:9px; letter-spacing:0.1em; margin-bottom:9px;}
-  .blog-card h3{font-size:18px; line-height:1.22;}
-  .blog-card p{font-size:12px; line-height:1.55; margin-bottom:14px;}
-  .blog-tags{gap:6px; margin-bottom:16px;}
-  .blog-tags span{font-size:8px; padding:5px 6px;}
-  .blog-meta{display:block; font-size:11px; line-height:1.6;}
+  .blog-search-wrap{margin-bottom:42px;}
+  .blog-grid{grid-template-columns:1fr; gap:34px;}
+  .blog-card{padding-top:18px;}
+  .blog-card-img{aspect-ratio:16/10; margin-bottom:18px;}
+  .blog-cat{font-size:9px; letter-spacing:0.12em; margin-bottom:10px;}
+  .blog-card h3{font-size:clamp(26px,8vw,36px); line-height:1.12;}
+  .blog-card p{font-size:13px; line-height:1.65; margin-bottom:18px;}
+  .blog-meta{display:block; font-size:11px; line-height:1.7;}
   .blog-read{display:block; margin-top:8px;}
+  .blog-card:first-child{padding-bottom:38px; margin-bottom:4px;}
+  .blog-card:first-child .blog-card-img{aspect-ratio:4/3;}
+  .blog-card:first-child h3{font-size:clamp(36px,11vw,48px); line-height:1.02;}
+  .blog-card:first-child p{font-size:14px; line-height:1.7;}
 }
 @media(max-width:380px){
-  .blog-grid{gap:10px;}
-  .blog-card-body{padding:13px;}
-  .blog-card h3{font-size:16px;}
-  .blog-card p{display:none;}
+  .blog-grid{gap:28px;}
+  .blog-card h3{font-size:25px;}
 }
 </style>
 </head>
@@ -241,7 +254,7 @@
         <div class="blog-card-img"><img src="Image/blog/maximize-your-business-with-6-role-of-social-media-marketing-in-business-featured.webp" alt="content marketing modish online business ecommerce 1" decoding="async" loading="lazy"></div>
         <div class="blog-card-body">
           <div class="blog-cat">Branding</div>
-          <h3>MAXIMIZE YOUR BUSINESS WITH 6 Role of Social Media Marketing in Business</h3>
+          <h3>Maximize Your Business with 6 Role of Social Media Marketing in Business</h3>
           <p>Social media marketing has become an integral part of a business’s marketing strategy. With the rise of social media platforms like Facebook, Instagram,...</p>
           <div class="blog-tags"><span>Branding</span><span>Zieel Archive</span></div>
           <div class="blog-meta"><span>Brand Method &middot; 4 min read</span><span class="blog-read">Read article</span></div>
@@ -439,7 +452,7 @@
         <div class="blog-card-img"><img src="Image/blog/10-benefits-of-working-with-a-team-of-experienced-professionals-who-have-a-variety-of-skills-and-expertise.webp" alt="business team having meeting office 1 1" decoding="async" loading="lazy"></div>
         <div class="blog-card-body">
           <div class="blog-cat">Business</div>
-          <h3>10 benefits of working with a team of experienced professionals who have a variety of skills and expertise.</h3>
+          <h3>10 Benefits of Working with a Team of Experienced Professionals Who Have a Variety of Skills and Expertise</h3>
           <p>Working with experienced professionals leads to efficient division of tasks, resulting in increased productivity. Whether you’re a small startup or a...</p>
           <div class="blog-tags"><span>Business</span><span>Zieel Archive</span></div>
           <div class="blog-meta"><span>Brand Method &middot; 4 min read</span><span class="blog-read">Read article</span></div>
@@ -450,7 +463,7 @@
         <div class="blog-card-img"><img src="Image/blog/8-tips-to-create-effective-advertising-campaigns-for-social-media-featured.webp" alt="stock vector online advertising in laptop and mobile gadget 634572878 transformed 1" decoding="async" loading="lazy"></div>
         <div class="blog-card-body">
           <div class="blog-cat">Branding</div>
-          <h3>8 tips to create effective advertising campaigns for social media</h3>
+          <h3>8 Tips to Create Effective Advertising Campaigns for Social Media</h3>
           <p>Setting clear and measurable campaign goals. Advertising campaigns on social media can be an effective way to reach a large audience and promote your...</p>
           <div class="blog-tags"><span>Branding</span><span>Zieel Archive</span></div>
           <div class="blog-meta"><span>Brand Method &middot; 4 min read</span><span class="blog-read">Read article</span></div>
@@ -549,7 +562,7 @@ if (blogSearch && blogCards.length) {
 
     blogCards.forEach(card => {
       const matches = card.textContent.toLowerCase().includes(query);
-      card.style.display = matches ? 'flex' : 'none';
+      card.style.display = matches ? '' : 'none';
       if (matches) visibleCount += 1;
     });
 

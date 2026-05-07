@@ -397,8 +397,23 @@ if (form) {
 })();
 
 // Counter animation
+const aboutStatsMobileQuery = window.matchMedia('(max-width: 768px)');
+
+function setMobileAboutStats() {
+  if (!aboutStatsMobileQuery.matches) return;
+
+  document.querySelectorAll('.about-stats-section .about-stat-num[data-count]').forEach(el => {
+    el.textContent = `${el.dataset.count}${el.dataset.suffix || ''}`;
+  });
+}
+
 function animateCounters() {
   document.querySelectorAll('.stat-num[data-count], .about-stat-num[data-count]').forEach(el => {
+    if (aboutStatsMobileQuery.matches && el.closest('.about-stats-section')) {
+      el.textContent = `${el.dataset.count}${el.dataset.suffix || ''}`;
+      return;
+    }
+
     const target = parseInt(el.dataset.count);
     const suffix = el.dataset.suffix || '';
     let current = 0;
@@ -410,6 +425,9 @@ function animateCounters() {
     }, 25);
   });
 }
+setMobileAboutStats();
+aboutStatsMobileQuery.addEventListener('change', setMobileAboutStats);
+
 const statsSection = document.querySelector('.stats-row, .about-stats-inner');
 if (statsSection) {
   const statsObserver = new IntersectionObserver((entries) => {
