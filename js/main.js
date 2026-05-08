@@ -24,6 +24,24 @@ updateNavState();
 window.addEventListener('scroll', updateNavState, { passive: true });
 window.addEventListener('resize', updateNavState);
 
+// Homepage sticky CTA after client logo section
+(function () {
+  const clientsSection = document.querySelector('.clients-section');
+  const stickyCta = document.querySelector('.sticky-brand-cta');
+  if (!clientsSection || !stickyCta) return;
+
+  function updateStickyBrandCta() {
+    const triggerPoint = clientsSection.offsetTop + clientsSection.offsetHeight - 80;
+    const isVisible = window.scrollY >= triggerPoint;
+    stickyCta.classList.toggle('is-visible', isVisible);
+    document.body.classList.toggle('sticky-brand-cta-active', isVisible);
+  }
+
+  updateStickyBrandCta();
+  window.addEventListener('scroll', updateStickyBrandCta, { passive: true });
+  window.addEventListener('resize', updateStickyBrandCta);
+})();
+
 const scrollTopFloat = document.querySelector('.scroll-top-float');
 if (scrollTopFloat) {
   scrollTopFloat.addEventListener('click', () => {
