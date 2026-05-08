@@ -892,6 +892,7 @@ section {
 }
 .home-services-sub {
   font-size: 14px;
+  font-weight: 500;
   color: #555555;
   line-height: 1.7;
   text-align: left;
@@ -1398,9 +1399,9 @@ footer { color: #c8c4bc; }
 .page-hero h1 {
   font-family: var(--font-display);
   font-size: clamp(48px, 7vw, 96px);
-  font-weight: 700; line-height: 1; letter-spacing: -0.02em;
+  font-weight: 600; line-height: 1; letter-spacing: -0.02em;
 }
-.page-hero h1 em { font-style: normal; font-weight: 700; color: var(--white); }
+.page-hero h1 em { font-style: normal; font-weight: 600; color: var(--white); }
 .page-hero p { font-size: 17px; color: var(--off-white); max-width: 520px; margin-top: 20px; line-height: 1.8; }
 
 /* SERVICE DETAIL PAGES */
