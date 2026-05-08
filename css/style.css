@@ -54,11 +54,14 @@ nav {
   padding: 0 20px;
   background: transparent;
   border-bottom: none;
-  transition: background 0.4s var(--ease), backdrop-filter 0.4s var(--ease);
+  transition: background 0.4s var(--ease), backdrop-filter 0.4s var(--ease), transform 0.35s var(--ease);
 }
 nav.scrolled {
   background: rgba(255,255,255,0.92);
   backdrop-filter: blur(16px);
+}
+nav.nav-hidden {
+  transform: translateY(-110%);
 }
 .nav-inner {
   max-width: var(--max-w);
@@ -194,7 +197,8 @@ body.hero-page .page-wrap {
   pointer-events: auto;
   background: rgba(0,0,0,0.01);
 }
-.hero-video iframe {
+.hero-video iframe,
+.hero-video video {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -202,6 +206,7 @@ body.hero-page .page-wrap {
   height: max(56.25vw, 107vh);
   transform: translate(-50%, -50%);
   border: 0;
+  object-fit: cover;
 }
 .hero-bg {
   position: absolute; inset: 0;
@@ -1416,6 +1421,75 @@ footer { color: #c8c4bc; }
 .service-package-card .btn-ghost {
   width: 100%;
 }
+.brand-included-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  color: var(--accent);
+}
+.brand-included-icon {
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+}
+.brand-included-icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.brand-included-number {
+  font-size: 11px;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.marketing-problem-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: 48px;
+}
+.marketing-problem-card {
+  min-width: 0;
+  background: #e9e9e9;
+  border: 1px solid rgba(0,0,0,0.12);
+  overflow: hidden;
+}
+.marketing-problem-card img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+}
+.marketing-problem-body {
+  padding: 28px 28px 32px;
+  border-top: 3px solid var(--accent);
+}
+.marketing-problem-card h4 {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 700;
+  color: #0f0f0f !important;
+  line-height: 1.35;
+  letter-spacing: 0.05em;
+  margin-bottom: 10px;
+}
+.marketing-problem-card p {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: #28323d;
+  line-height: 1.85;
+}
 .service-brand-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(400px, 0.95fr);
@@ -2112,14 +2186,15 @@ footer { color: #c8c4bc; }
   letter-spacing: -0.02em;
 }
 .about-stat-label {
-  font-family: var(--font-sans);
-  font-size: 11px;
+  font-family: Inter, "Helvetica Neue", Arial, sans-serif;
+  font-size: 12px;
   font-weight: 700;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.035em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.6);
-  margin-top: 10px;
-  margin-bottom: 16px;
+  color: rgba(255,255,255,0.88);
+  line-height: 1.45;
+  margin-top: 22px;
+  margin-bottom: 22px;
 }
 .about-stat-desc {
   font-family: var(--font-body);
@@ -2338,6 +2413,9 @@ footer { color: #c8c4bc; }
   .service-card-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   }
+  .marketing-problem-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
   .why-method-grid {
     grid-template-columns: 1fr !important;
     gap: 48px !important;
@@ -2443,7 +2521,8 @@ footer { color: #c8c4bc; }
   .testimonials-track {
     max-width: none;
   }
-  .service-card-grid {
+  .service-card-grid,
+  .deliverables-grid {
     display: flex !important;
     grid-template-columns: none !important;
     gap: 16px !important;
@@ -2451,11 +2530,46 @@ footer { color: #c8c4bc; }
     overflow-x: auto;
     overflow-y: hidden;
     scroll-snap-type: x mandatory;
-    scroll-padding-left: 20px;
+    scroll-padding-left: 0;
     -webkit-overflow-scrolling: touch;
-    padding: 0 20px 18px;
-    margin-left: -20px;
-    margin-right: -20px;
+    padding: 0 0 18px;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .marketing-problem-grid {
+    display: flex;
+    grid-template-columns: none;
+    gap: 16px;
+    margin-top: 36px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: 0;
+    -webkit-overflow-scrolling: touch;
+    padding: 0 0 18px;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .marketing-problem-grid::-webkit-scrollbar {
+    height: 3px;
+  }
+  .marketing-problem-grid::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0.08);
+  }
+  .marketing-problem-grid::-webkit-scrollbar-thumb {
+    background: var(--accent);
+  }
+  .marketing-problem-card {
+    flex: 0 0 100%;
+    max-width: 100%;
+    scroll-snap-align: center;
+  }
+  .marketing-problem-body {
+    padding: 24px;
+  }
+  .marketing-problem-card h4 {
+    font-size: 13px;
+    margin-bottom: 16px;
   }
   .service-brand-list {
     padding: 22px 26px 26px;
@@ -2467,27 +2581,31 @@ footer { color: #c8c4bc; }
     gap: 18px !important;
   }
   .service-card-grid::-webkit-scrollbar,
+  .deliverables-grid::-webkit-scrollbar,
   .service-point-list::-webkit-scrollbar,
   .work-bento::-webkit-scrollbar,
   .why-method-list::-webkit-scrollbar {
     height: 3px;
   }
   .service-card-grid::-webkit-scrollbar-track,
+  .deliverables-grid::-webkit-scrollbar-track,
   .service-point-list::-webkit-scrollbar-track,
   .work-bento::-webkit-scrollbar-track,
   .why-method-list::-webkit-scrollbar-track {
     background: rgba(0,0,0,0.08);
   }
   .service-card-grid::-webkit-scrollbar-thumb,
+  .deliverables-grid::-webkit-scrollbar-thumb,
   .service-point-list::-webkit-scrollbar-thumb,
   .work-bento::-webkit-scrollbar-thumb,
   .why-method-list::-webkit-scrollbar-thumb {
     background: var(--accent);
   }
   .service-detail-card {
-    flex: 0 0 min(82vw, 360px);
+    flex: 0 0 100%;
+    max-width: 100%;
     padding: 24px !important;
-    scroll-snap-align: start;
+    scroll-snap-align: center;
   }
   .service-detail-card > div[style*="aspect-ratio"] {
     margin: -24px -24px 0;
@@ -2629,10 +2747,12 @@ footer { color: #c8c4bc; }
     transition: transform 0.18s var(--ease);
   }
   .bm-slider > .service-card-grid,
+  .bm-slider > .deliverables-grid,
   .bm-slider > .service-point-list,
   .bm-slider > .work-bento,
   .bm-slider > .why-method-list,
   .bm-slider > .standout-grid,
+  .bm-slider > .marketing-problem-grid,
   .bm-slider > .process-steps-wrap,
   .approach-slider > .approach-list {
     width: 100%;
@@ -2642,10 +2762,12 @@ footer { color: #c8c4bc; }
     scrollbar-width: none;
   }
   .bm-slider > .service-card-grid::-webkit-scrollbar,
+  .bm-slider > .deliverables-grid::-webkit-scrollbar,
   .bm-slider > .service-point-list::-webkit-scrollbar,
   .bm-slider > .work-bento::-webkit-scrollbar,
   .bm-slider > .why-method-list::-webkit-scrollbar,
   .bm-slider > .standout-grid::-webkit-scrollbar,
+  .bm-slider > .marketing-problem-grid::-webkit-scrollbar,
   .bm-slider > .process-steps-wrap::-webkit-scrollbar,
   .approach-slider > .approach-list::-webkit-scrollbar {
     display: none;
@@ -2885,10 +3007,12 @@ footer { color: #c8c4bc; }
   .process-steps { grid-template-columns: repeat(4, 80vw); gap: 16px; width: max-content; }
   .process-step { scroll-snap-align: start; }
   .bm-slider > .service-card-grid,
+  .bm-slider > .deliverables-grid,
   .bm-slider > .service-point-list,
   .bm-slider > .work-bento,
   .bm-slider > .why-method-list,
   .bm-slider > .standout-grid,
+  .bm-slider > .marketing-problem-grid,
   .bm-slider > .process-steps-wrap,
   .approach-slider > .approach-list {
     margin-left: 0;
@@ -2913,6 +3037,22 @@ footer { color: #c8c4bc; }
     scroll-padding-left: 0;
   }
   .bm-slider > .standout-grid .standout-card {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+  .bm-slider > .marketing-problem-grid {
+    scroll-padding-left: 0;
+  }
+  .bm-slider > .service-card-grid,
+  .bm-slider > .deliverables-grid {
+    scroll-padding-left: 0;
+  }
+  .bm-slider > .service-card-grid .service-detail-card,
+  .bm-slider > .deliverables-grid > div {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+  .bm-slider > .marketing-problem-grid .marketing-problem-card {
     flex: 0 0 100%;
     max-width: 100%;
   }
@@ -3053,6 +3193,7 @@ footer { color: #c8c4bc; }
     gap: 42px !important;
   }
   .service-card-grid,
+  .deliverables-grid,
   .service-point-list,
   .work-bento,
   .why-method-list,
@@ -3065,6 +3206,22 @@ footer { color: #c8c4bc; }
   }
   .work-feature-section {
     padding: 60px 18px 0;
+  }
+  .bm-slider > .service-card-grid,
+  .bm-slider > .deliverables-grid,
+  .bm-slider > .marketing-problem-grid {
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+    scroll-padding-left: 0;
+  }
+  .bm-slider > .service-card-grid .service-detail-card,
+  .bm-slider > .deliverables-grid > div,
+  .bm-slider > .marketing-problem-grid .marketing-problem-card {
+    flex-basis: 100%;
+    max-width: 100%;
+    scroll-snap-align: center;
   }
   .work-feature-section .work-bento {
     margin-left: 0;

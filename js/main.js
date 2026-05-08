@@ -1,17 +1,23 @@
 // Nav scroll
 const nav = document.querySelector('nav');
 const homepageHero = document.querySelector('body.hero-page .hero');
+let lastNavScrollY = window.scrollY;
 
 function updateNavState() {
   if (!nav) return;
 
+  const currentY = window.scrollY;
+  const scrollingDown = currentY > lastNavScrollY;
+  const mobileMenuOpen = document.querySelector('.nav-mobile.open');
   const heroVisible = homepageHero
-    ? window.scrollY < homepageHero.offsetHeight - nav.offsetHeight
+    ? currentY < homepageHero.offsetHeight - nav.offsetHeight
     : false;
 
   nav.classList.toggle('hero-visible', heroVisible);
-  nav.classList.toggle('scrolled', !heroVisible && window.scrollY > 20);
-  document.body.classList.toggle('float-actions-active', window.scrollY > 120);
+  nav.classList.toggle('scrolled', !heroVisible && currentY > 20);
+  nav.classList.toggle('nav-hidden', scrollingDown && currentY > nav.offsetHeight + 40 && !mobileMenuOpen);
+  document.body.classList.toggle('float-actions-active', currentY > 120);
+  lastNavScrollY = currentY;
 }
 
 updateNavState();
@@ -300,10 +306,12 @@ if (form) {
     { selector: '.testimonials-carousel', item: '.testimonial-card', compact: true, pause: '.testimonials-track' },
     { selector: '.team-scroll-wrap', item: '.team-member', compact: true, pause: '.team-scroll-track' },
     { selector: '.service-card-grid', item: '.service-detail-card', compact: true, mobileOnly: true },
+    { selector: '.deliverables-grid', item: '.service-detail-card, .reveal', compact: true, mobileOnly: true },
     { selector: '.service-point-list', item: '.service-point', compact: true, mobileOnly: true },
     { selector: '.work-bento', item: '.work-bento-card', compact: true, mobileOnly: true },
     { selector: '.why-method-list', item: '.why-method-card', compact: true, mobileOnly: true, wrapperClass: 'bm-slider--why-method' },
     { selector: '.standout-grid', item: '.standout-card', compact: true, mobileOnly: true },
+    { selector: '.marketing-problem-grid', item: '.marketing-problem-card', compact: true, mobileOnly: true },
     { selector: '.process-steps-wrap', item: '.process-step', compact: true, mobileOnly: true }
   ];
 

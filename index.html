@@ -81,7 +81,9 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-video" aria-hidden="true">
-    <iframe id="heroVideoPlayer" src="https://www.youtube.com/embed/FrXzVpauqsE?autoplay=1&mute=1&controls=0&disablekb=1&fs=0&iv_load_policy=3&rel=0&modestbranding=1&playsinline=1&enablejsapi=1" title="Brand Method Website Banner" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+    <video autoplay muted loop playsinline preload="metadata">
+      <source src="Success Story Compile 1.mp4" type="video/mp4">
+    </video>
     <div class="hero-video-cover"></div>
   </div>
   <div class="hero-bg"></div>
@@ -371,7 +373,7 @@
   <div class="section-inner">
     <div class="home-services-header reveal">
       <div>
-        <div class="section-tag">Services</div>
+        <div class="section-tag">Professional Expertise</div>
         <h2 class="home-services-title">Services</h2>
       </div>
       <p class="home-services-sub">Everything you need to build, scale, and accelerate your brand. <em>All in one place.</em></p>
@@ -553,7 +555,7 @@
         <div class="why-method-list">
           <div class="why-method-card">
             <div class="why-method-media">
-              <img src="Image/team-workflow-laptop-tablet-discussion.jpg" alt="Corporate team collaborating around a laptop and tablet in an office." decoding="async" loading="lazy">
+              <img src="Image/show-board-brand-strategy-workshop.webp" alt="Brand strategy workshop with a team reviewing a presentation board." decoding="async" loading="lazy">
             </div>
             <div class="why-method-body">
               <h4>Simple & Guided</h4>
@@ -562,7 +564,7 @@
           </div>
           <div class="why-method-card">
             <div class="why-method-media">
-              <img src="Image/office-counter-client-meeting-devices.jpg" alt="Business team meeting at an office counter with a laptop and mobile phone." decoding="async" loading="lazy">
+              <img src="Image/creative-team-uiux-design-discussion.webp" alt="Creative team discussing UI and UX design work on a laptop." decoding="async" loading="lazy">
             </div>
             <div class="why-method-body">
               <h4>Fast & Efficient</h4>
@@ -571,7 +573,7 @@
           </div>
           <div class="why-method-card">
             <div class="why-method-media">
-              <img src="Image/desktop-team-collaboration-workspace.jpg" alt="Professionals collaborating at an office desktop during a strategy discussion." decoding="async" loading="lazy">
+              <img src="Image/founder-ai-stage-presentation.webp" alt="Founder presenting AI strategy on stage during a business event." decoding="async" loading="lazy">
             </div>
             <div class="why-method-body">
               <h4>Effective & Impactful</h4>
@@ -636,30 +638,5 @@
 </div><!-- page-wrap -->
 <script src="js/layout.js"></script>
 <script src="js/main.js"></script>
-<script>
-  (function(){
-    var tag = document.createElement('script');
-    tag.src = 'https://www.youtube.com/iframe_api';
-    document.head.appendChild(tag);
-    var heroPlayer;
-    window.onYouTubeIframeAPIReady = function() {
-      heroPlayer = new YT.Player('heroVideoPlayer', {
-        events: {
-          onReady: function(e) { e.target.playVideo(); },
-          onStateChange: function(e) {
-            if (e.data === YT.PlayerState.PAUSED || e.data === YT.PlayerState.ENDED) {
-              heroPlayer.playVideo();
-            }
-          }
-        }
-      });
-    };
-    document.addEventListener('visibilitychange', function() {
-      if (!document.hidden && heroPlayer && heroPlayer.playVideo) {
-        heroPlayer.playVideo();
-      }
-    });
-  })();
-</script>
 </body>
 </html>
