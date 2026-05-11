@@ -49,6 +49,47 @@ if (scrollTopFloat) {
   });
 }
 
+// Article newsletter and share links
+(function () {
+  const shareLinks = document.querySelectorAll('[data-share-platform]');
+  if (shareLinks.length) {
+    const canonical = document.querySelector('link[rel="canonical"]');
+    const pageUrl = encodeURIComponent(canonical ? canonical.href : window.location.href);
+    const pageTitle = encodeURIComponent(document.title.replace(' | Brand Method', ''));
+    const shareTargets = {
+      twitter: `https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`,
+      linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${pageUrl}`,
+      facebook: `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`,
+      whatsapp: `https://api.whatsapp.com/send?text=${pageTitle}%20${pageUrl}`,
+      telegram: `https://t.me/share/url?url=${pageUrl}&text=${pageTitle}`
+    };
+
+    shareLinks.forEach(link => {
+      const platform = link.dataset.sharePlatform;
+      if (shareTargets[platform]) {
+        link.href = shareTargets[platform];
+        link.target = '_blank';
+        link.rel = 'noopener';
+      }
+    });
+  }
+
+  document.querySelectorAll('.article-newsletter-form').forEach(form => {
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      const input = form.querySelector('input[type="email"]');
+      const status = form.parentElement.querySelector('.article-newsletter-status');
+      if (!input || !status || !input.checkValidity()) {
+        input?.reportValidity();
+        return;
+      }
+      status.textContent = 'Thank you. We will keep you posted.';
+      status.classList.add('is-visible');
+      form.reset();
+    });
+  });
+})();
+
 // Mobile menu
 const hamburger = document.querySelector('.nav-hamburger');
 const mobileMenu = document.querySelector('.nav-mobile');
