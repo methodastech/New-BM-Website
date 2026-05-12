@@ -361,13 +361,15 @@ if (form) {
 // Slider arrow controls
 (function () {
   const sliderConfigs = [
-    { selector: '.approach-list', item: '.approach-item' },
+    { selector: '.approach-list', item: '.approach-item', mobileOnly: true },
     { selector: '.testimonials-carousel', item: '.testimonial-card', compact: true, pause: '.testimonials-track' },
     { selector: '.team-scroll-wrap', item: '.team-member', compact: true, pause: '.team-scroll-track' },
     { selector: '.service-card-grid', item: '.service-detail-card', compact: true, mobileOnly: true },
     { selector: '.deliverables-grid', item: '.service-detail-card, .reveal', compact: true, mobileOnly: true },
     { selector: '.service-point-list', item: '.service-point', compact: true, mobileOnly: true },
     { selector: '.work-bento', item: '.work-bento-card', compact: true, mobileOnly: true },
+    { selector: '.how-work-steps', item: '.how-work-step', compact: true, mobileOnly: true },
+    { selector: '.client-experience-grid', item: '.client-experience-card', compact: true, mobileOnly: true },
     { selector: '.why-method-list', item: '.why-method-card', compact: true, mobileOnly: true, wrapperClass: 'bm-slider--why-method' },
     { selector: '.standout-grid', item: '.standout-card', compact: true, mobileOnly: true },
     { selector: '.marketing-problem-grid', item: '.marketing-problem-card', compact: true, mobileOnly: true },
@@ -376,7 +378,12 @@ if (form) {
 
   function ensureSliderWrap(target, config) {
     const existing = target.closest('.approach-slider, .bm-slider');
-    if (existing) return existing;
+    if (existing) {
+      if (config.compact) existing.classList.add('bm-slider--compact');
+      if (config.mobileOnly) existing.classList.add('bm-slider--mobile-only');
+      if (config.wrapperClass) existing.classList.add(config.wrapperClass);
+      return existing;
+    }
 
     const wrap = document.createElement('div');
     wrap.className = 'bm-slider';
