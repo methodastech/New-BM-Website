@@ -507,7 +507,9 @@
   if (!filterBar || !cards.length) return;
 
   function updateFilterBar() {
-    filterBar.classList.toggle('is-visible', window.scrollY > 220);
+    const cta = document.querySelector('.cta-band');
+    const isPast = cta ? (cta.getBoundingClientRect().top < window.innerHeight) : false;
+    filterBar.classList.toggle('is-visible', window.scrollY > 220 && !isPast);
   }
 
   function setCardVisible(card, shouldShow) {
@@ -543,6 +545,10 @@
       activeFilter = button.dataset.filter || 'all';
       filterButtons.forEach(item => item.classList.toggle('active', item === button));
       applyWorkFilters();
+
+      // Fix: Prevent jumping to footer by scrolling to the top of the portfolio
+      const searchTop = document.getElementById('workSearch').getBoundingClientRect().top + window.pageYOffset - 120;
+      window.scrollTo({ top: searchTop, behavior: 'smooth' });
     });
   });
 

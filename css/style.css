@@ -1953,8 +1953,8 @@ section {
 }
 
 .client-experience-title em {
-  color: var(--accent);
-  font-style: italic;
+  color: inherit;
+  font-style: normal;
 }
 
 .client-experience-header p {
