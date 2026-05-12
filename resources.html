@@ -30,56 +30,520 @@
 <meta name="twitter:image" content="https://brandmethod.co/Image/blog/creating-a-cohesive-brand-strategy-a-comprehensive-guide-featured.webp">
 <link rel="stylesheet" href="css/style.css">
 <style>
-.blog-search-wrap { max-width:680px; margin:0 auto 64px; }
-.blog-search-label { display:block; font-family:var(--font-sans); font-size:10px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); margin-bottom:12px; }
-.blog-search { width:100%; min-height:58px; background:#ffffff; border:1px solid var(--border); color:#0f0f0f; font-family:var(--font-body); font-size:16px; padding:0 20px; outline:none; transition:border-color 0.2s, box-shadow 0.2s; }
-.blog-search:focus { border-color:var(--accent); box-shadow:inset 3px 0 0 var(--accent); }
-.blog-search::placeholder { color:#999999; }
-.blog-empty { display:none; margin-top:34px; text-align:center; color:var(--muted); font-size:15px; }
-.blog-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:42px 28px; }
-.blog-card { display:flex; flex-direction:column; color:inherit; background:transparent; border-top:1px solid rgba(0,0,0,0.18); padding-top:22px; min-width:0; transition:border-color 0.25s var(--ease), transform 0.25s var(--ease); }
-.blog-card:hover { border-color:var(--accent); transform:translateY(-3px); }
-.blog-card-img { aspect-ratio:16/10; display:flex; align-items:center; justify-content:center; background:#f3f3f3; overflow:hidden; margin-bottom:22px; }
-.blog-card-img img { width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.35s var(--ease); }
-.blog-card:hover .blog-card-img img { transform:scale(1.035); }
-.blog-card-body { display:flex; flex-direction:column; flex:1; min-width:0; }
-.blog-cat { font-family:var(--font-sans); font-size:10px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); margin-bottom:12px; }
-.blog-card h3 { font-family:var(--font-display); font-size:clamp(24px,2vw,32px); font-weight:400; line-height:1.14; margin-bottom:12px; color:#0f0f0f; }
-.blog-card p { font-size:14px; color:#555555; line-height:1.75; margin-bottom:20px; }
-.blog-tags { display:none; }
-.blog-meta { margin-top:auto; padding-top:2px; font-size:12px; color:var(--muted); display:flex; gap:16px; justify-content:space-between; align-items:center; border-top:1px solid transparent; }
-.blog-read { font-family:var(--font-sans); font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--accent); white-space:nowrap; }
-.blog-card:first-child { grid-column:1 / -1; display:grid; grid-template-columns:minmax(0,1.18fr) minmax(360px,0.82fr); gap:clamp(34px,5vw,72px); align-items:center; padding:0 0 58px; margin-bottom:18px; border-top:0; border-bottom:1px solid rgba(0,0,0,0.18); transform:none; }
-.blog-card:first-child:hover { transform:none; border-bottom-color:var(--accent); }
-.blog-card:first-child .blog-card-img { aspect-ratio:16/10; margin-bottom:0; }
-.blog-card:first-child .blog-card-body { padding:0; }
-.blog-card:first-child .blog-cat::before { content:'Main Story'; color:var(--accent); margin-right:12px; }
-.blog-card:first-child h3 { font-size:clamp(44px,5.1vw,78px); line-height:0.98; margin-bottom:22px; letter-spacing:0; }
-.blog-card:first-child p { font-size:17px; line-height:1.8; color:#444444; margin-bottom:28px; }
-.blog-card:first-child .blog-meta { font-size:13px; padding-top:18px; border-top:1px solid rgba(0,0,0,0.14); }
-@media(max-width:1024px){
-  .blog-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
-  .blog-card:first-child{grid-template-columns:1fr; gap:28px;}
-  .blog-card:first-child h3{font-size:clamp(38px,7vw,62px);}
+.resources-news-page {
+  background: #ffffff;
+  color: #0f0f0f;
 }
-@media(max-width:768px){
-  .blog-search-wrap{margin-bottom:42px;}
-  .blog-grid{grid-template-columns:1fr; gap:34px;}
-  .blog-card{padding-top:18px;}
-  .blog-card-img{aspect-ratio:16/10; margin-bottom:18px;}
-  .blog-cat{font-size:9px; letter-spacing:0.12em; margin-bottom:10px;}
-  .blog-card h3{font-size:clamp(26px,8vw,36px); line-height:1.12;}
-  .blog-card p{font-size:13px; line-height:1.65; margin-bottom:18px;}
-  .blog-meta{display:block; font-size:11px; line-height:1.7;}
-  .blog-read{display:block; margin-top:8px;}
-  .blog-card:first-child{padding-bottom:38px; margin-bottom:4px;}
-  .blog-card:first-child .blog-card-img{aspect-ratio:4/3;}
-  .blog-card:first-child h3{font-size:clamp(36px,11vw,48px); line-height:1.02;}
-  .blog-card:first-child p{font-size:14px; line-height:1.7;}
+
+.resources-masthead {
+  padding-bottom: 18px;
 }
-@media(max-width:380px){
-  .blog-grid{gap:28px;}
-  .blog-card h3{font-size:25px;}
+
+.resources-topbar {
+  display: flex;
+  justify-content: flex-end;
+  width: calc(100% - 40px);
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0;
+}
+
+.blog-search-wrap {
+  width: 100%;
+  margin: 0;
+}
+
+.blog-search-label {
+  display: none;
+}
+
+.blog-search {
+  width: 100%;
+  min-height: 64px;
+  border: 2px solid rgba(0, 0, 0, 0.12);
+  background: #ffffff;
+  color: #0f0f0f;
+  font-family: var(--font-body);
+  font-size: 16px;
+  padding: 0 20px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.blog-search:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(0, 0, 255, 0.08), inset 3px 0 0 var(--accent);
+}
+
+.blog-search::placeholder {
+  color: #999999;
+}
+
+.resources-news-section {
+  padding: 34px 0 80px;
+}
+
+.resources-news-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 34px;
+  align-items: start;
+}
+
+.resources-main-column {
+  min-width: 0;
+}
+
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 40px 28px;
+}
+
+.blog-empty {
+  display: none;
+  margin-top: 34px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.blog-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding-top: 22px;
+  border-top: 1px solid rgba(0, 0, 0, 0.18);
+  color: inherit;
+  transition: border-color 0.25s var(--ease), transform 0.25s var(--ease);
+}
+
+.blog-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-3px);
+}
+
+.blog-card-img {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: #f3f3f3;
+  margin-bottom: 22px;
+}
+
+.blog-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.35s var(--ease);
+}
+
+.blog-card:hover .blog-card-img img {
+  transform: scale(1.035);
+}
+
+.blog-card-body {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+
+.blog-cat {
+  margin-bottom: 12px;
+  color: var(--muted);
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.blog-card h3 {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 2vw, 32px);
+  font-weight: 400;
+  line-height: 1.14;
+  color: #0f0f0f;
+  margin-bottom: 12px;
+}
+
+.blog-card p {
+  display: block;
+  font-size: 14px;
+  color: #555555;
+  line-height: 1.75;
+  margin-bottom: 20px;
+}
+
+.blog-tags {
+  display: none;
+}
+
+.blog-meta {
+  margin-top: auto;
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--muted);
+  font-size: 12px;
+  border-top: 1px solid transparent;
+}
+
+.blog-read {
+  color: var(--accent);
+  font-family: var(--font-sans);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.blog-card:first-child {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.28fr) minmax(300px, 0.78fr);
+  gap: clamp(28px, 4vw, 42px);
+  align-items: center;
+  padding-top: 0;
+  padding-bottom: 58px;
+  border-top: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.18);
+  margin-bottom: 18px;
+}
+
+.blog-card:first-child .blog-card-img {
+  aspect-ratio: 16 / 10;
+  margin-bottom: 0;
+}
+
+.blog-card:first-child .blog-card-body {
+  padding: 0;
+}
+
+.blog-card:first-child h3 {
+  font-size: clamp(30px, 3.9vw, 56px);
+  line-height: 1.06;
+  letter-spacing: 0;
+  margin-bottom: 18px;
+}
+
+.blog-card:first-child p {
+  color: #444444;
+  font-size: 15px;
+  line-height: 1.7;
+  margin-bottom: 22px;
+}
+
+.blog-card:first-child .blog-meta {
+  font-size: 13px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(0, 0, 0, 0.14);
+}
+
+.resources-sidebar {
+  position: sticky;
+  top: 24px;
+  display: grid;
+  gap: 16px;
+}
+
+.resources-sidebar-newsletter,
+.resources-sidebar-list,
+.resources-sidebar-quote,
+.resources-subscribe-card {
+  border: 1px solid var(--border);
+  background: #ffffff;
+  border-radius: 0;
+  box-shadow: 0 18px 46px rgba(0, 0, 0, 0.05);
+}
+
+.resources-sidebar-newsletter,
+.resources-sidebar-quote,
+.resources-subscribe-card {
+  padding: 28px;
+}
+
+.resources-sidebar-newsletter-icon {
+  width: 68px;
+  height: 68px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 20px;
+  background: #ece9ff;
+}
+
+.resources-sidebar-newsletter-icon span {
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: #1b16ff;
+  color: #ffffff;
+  font-size: 20px;
+}
+
+.resources-sidebar-newsletter h2 {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 2vw, 34px);
+  font-weight: 400;
+  line-height: 1.12;
+  color: #0f0f0f;
+  margin-bottom: 12px;
+}
+
+.resources-sidebar-newsletter p {
+  color: var(--off-white);
+  font-size: 15px;
+  line-height: 1.75;
+  margin-bottom: 22px;
+}
+
+.resources-sidebar-newsletter form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  margin-bottom: 16px;
+}
+
+.resources-sidebar-newsletter input {
+  min-width: 0;
+  min-height: 54px;
+  padding: 0 18px;
+  border: 1px solid var(--border);
+  border-right: 0;
+  background: #ffffff;
+  color: #0f0f0f;
+  font-family: var(--font-body);
+  font-size: 14px;
+  border-radius: 0;
+}
+
+.resources-sidebar-newsletter button {
+  min-height: 54px;
+  padding: 0 22px;
+  border: 0;
+  background: #1b16ff;
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  border-radius: 0;
+}
+
+.resources-sidebar-newsletter-note {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.resources-sidebar-newsletter-note span:first-child {
+  color: #1b16ff;
+}
+
+.resources-sidebar-list {
+  padding: 28px;
+}
+
+.resources-sidebar-list h2,
+.resources-sidebar-quote h2,
+.resources-subscribe-card h2 {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 1.7vw, 30px);
+  font-weight: 400;
+  color: #0f0f0f;
+  line-height: 1.2;
+  margin-bottom: 18px;
+}
+
+.resources-sidebar-list a {
+  display: block;
+  padding: 14px 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  color: #0f0f0f;
+}
+
+.resources-sidebar-list a:first-of-type {
+  border-top: 0;
+}
+
+.resources-sidebar-list strong {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+.resources-sidebar-list span {
+  display: none;
+}
+
+.resources-sidebar-quote p,
+.resources-subscribe-card p {
+  color: var(--off-white);
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+.resources-sidebar-quote {
+  background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%);
+}
+
+.resources-sidebar-quote-mark {
+  color: var(--accent);
+  font-family: var(--font-display);
+  font-size: 44px;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.resources-sidebar-quote p {
+  font-family: var(--font-display);
+  font-size: 24px;
+  line-height: 1.32;
+  color: #0f0f0f;
+  margin-bottom: 14px;
+}
+
+.resources-sidebar-quote cite {
+  display: block;
+  color: #333333;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.resources-subscribe-card {
+  margin-top: 40px;
+}
+
+.resources-subscribe-card form {
+  display: flex;
+  gap: 0;
+  max-width: 430px;
+  margin-top: 20px;
+}
+
+.resources-subscribe-card input {
+  flex: 1;
+  min-height: 48px;
+  border: 1px solid var(--border);
+  border-right: 0;
+  background: #ffffff;
+  color: #0f0f0f;
+  padding: 0 16px;
+  font-family: var(--font-body);
+}
+
+.resources-subscribe-card .btn-primary {
+  min-height: 48px;
+}
+
+@media (max-width: 1180px) {
+  .resources-news-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .resources-sidebar {
+    position: static;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1024px) {
+  .resources-topbar {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .blog-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .blog-card:first-child {
+    grid-column: 1 / -1;
+    grid-template-columns: 1fr;
+  }
+
+  .resources-sidebar {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .resources-news-section {
+    padding: 34px 0 56px;
+  }
+
+  .resources-topbar,
+  .resources-news-layout {
+    width: calc(100% - 36px);
+  }
+
+  .blog-search-wrap {
+    width: 100%;
+  }
+
+  .blog-grid {
+    grid-template-columns: 1fr;
+    gap: 26px;
+  }
+
+  .blog-card {
+    padding-top: 22px;
+  }
+
+  .blog-card:first-child {
+    padding-bottom: 30px;
+  }
+
+  .blog-card:first-child h3 {
+    font-size: clamp(36px, 11vw, 48px);
+  }
+
+  .blog-card h3 {
+    font-size: 25px;
+  }
+
+  .blog-meta {
+    display: block;
+    font-size: 11px;
+    line-height: 1.7;
+  }
+
+  .blog-read {
+    display: block;
+    margin-top: 8px;
+  }
+
+  .resources-subscribe-card form {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .resources-sidebar-newsletter form {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .resources-sidebar-newsletter input {
+    border-right: 1px solid var(--border);
+  }
+
+  .resources-subscribe-card input {
+    border-right: 1px solid #cfd5de;
+  }
 }
 </style>
 </head>
@@ -90,20 +554,19 @@
   <!-- End Google Tag Manager (noscript) -->
 <div class="page-wrap">
 
-<div class="page-hero">
-  <div class="page-hero-inner">
-    <div class="section-tag reveal">Insights & Resources</div>
-    <h1 class="reveal reveal-delay-1">Brand building <em>insights</em></h1>
-    <p class="reveal reveal-delay-2">Strategy, marketing, systems, content, and growth frameworks from the Brand Method team.</p>
-  </div>
-</div>
-
-<section>
-  <div class="section-inner">
-    <div class="blog-search-wrap reveal">
-      <label class="blog-search-label" for="blogSearch">Search resources</label>
-      <input class="blog-search" id="blogSearch" type="search" placeholder="Search by topic, category, or keyword..." autocomplete="off">
+<div class="resources-news-page">
+  <section class="resources-masthead">
+    <div class="resources-topbar">
+      <div class="blog-search-wrap reveal">
+        <label class="blog-search-label" for="blogSearch">Search resources</label>
+        <input class="blog-search" id="blogSearch" type="search" placeholder="Search by topic, category, or keyword..." autocomplete="off">
+      </div>
     </div>
+  </section>
+
+  <section class="resources-news-section">
+    <div class="section-inner resources-news-layout">
+      <div class="resources-main-column">
 
     <div class="blog-grid">
       <!-- ZIEEL BLOG TRANSFER START -->
@@ -525,18 +988,58 @@
         </div>
       </a>
             <!-- ZIEEL BLOG TRANSFER END -->
-    </div>
-    <p class="blog-empty" id="blogEmpty">No resources found for that search.</p>
+        </div>
+        <p class="blog-empty" id="blogEmpty">No resources found for that search.</p>
 
-    <div style="text-align:center; margin-top:60px;" class="reveal">
-      <p style="font-size:14px; color:var(--muted); margin-bottom:24px;">More content coming soon. Subscribe to get notified.</p>
-      <form style="display:flex; gap:0; max-width:400px; margin:0 auto;" onsubmit="this.innerHTML='<p style=\'color:var(--accent);font-family:var(--font-display);font-size:18px;\'>Subscribed!</p>';event.preventDefault();">
-        <input type="email" placeholder="your@email.com" required style="flex:1; background:var(--card); border:1px solid var(--border); border-right:none; color:var(--white); font-family:var(--font-body); font-size:14px; padding:12px 16px; outline:none;">
-        <button type="submit" class="btn-primary">Subscribe</button>
-      </form>
+        <div class="resources-subscribe-card reveal">
+          <h2>Get new strategy breakdowns first</h2>
+          <p>Fresh brand, marketing, and growth resources land here regularly. Subscribe if you want the newest frameworks before the next publish wave.</p>
+          <form onsubmit="this.innerHTML='<p style=\'color:#d61c2f;font-family:var(--font-sans);font-size:16px;font-weight:800;\'>Subscribed!</p>';event.preventDefault();">
+            <input type="email" placeholder="your@email.com" required>
+            <button type="submit" class="btn-primary">Subscribe</button>
+          </form>
+        </div>
+      </div>
+
+      <aside class="resources-sidebar">
+        <div class="resources-sidebar-newsletter">
+          <div class="resources-sidebar-newsletter-icon" aria-hidden="true">
+            <span>✉</span>
+          </div>
+          <h2>Subscribe to the Newsletter</h2>
+          <p>Join 1,250+ readers who get actionable insights on business growth, branding, and digital strategy straight to their inbox.</p>
+          <form onsubmit="this.innerHTML='<p style=\'color:#1b16ff;font-family:var(--font-sans);font-size:16px;font-weight:700;\'>Subscribed!</p>';event.preventDefault();">
+            <input type="email" placeholder="Email Address" required>
+            <button type="submit">Subscribe</button>
+          </form>
+          <div class="resources-sidebar-newsletter-note">
+            <span>◌</span>
+            <span>No spam. Unsubscribe anytime.</span>
+          </div>
+        </div>
+
+        <div class="resources-sidebar-list">
+          <h2>Recent articles</h2>
+          <a href="blog/5-common-internet-marketing-mistakes-and-how-to-avoid-them.html">
+            <strong>5 SEO Mistakes Hurting Your Website</strong>
+          </a>
+          <a href="blog/how-to-improve-brand-awareness-a-comprehensive-guide.html">
+            <strong>Why Branding Builds Trust (and Sales)</strong>
+          </a>
+          <a href="blog/2023-digital-marketing-trends-to-take-advantage-of-now.html">
+            <strong>UX Trends to Watch in 2026</strong>
+          </a>
+        </div>
+
+        <div class="resources-sidebar-quote">
+          <div class="resources-sidebar-quote-mark">&ldquo;</div>
+          <p>Strong brands are built through consistency, clarity, and storytelling.</p>
+          <cite>&mdash; Brand Method</cite>
+        </div>
+      </aside>
     </div>
-  </div>
-</section>
+  </section>
+</div>
 
 <div class="cta-band">
   <div class="section-inner">

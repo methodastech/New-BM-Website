@@ -1,7 +1,7 @@
 .portfolio-detail {
   max-width: 1080px;
   margin: 0 auto;
-  padding: 84px 40px 72px;
+  padding: 44px 40px 72px;
 }
 .portfolio-back {
   display: inline-flex;
@@ -169,7 +169,7 @@
 }
 .portfolio-detail--editorial {
   max-width: none;
-  padding: 72px 20px 88px;
+  padding: 40px 20px 88px;
 }
 .portfolio-detail--editorial .portfolio-back {
   margin-bottom: 34px;
@@ -288,7 +288,7 @@
 }
 @media (max-width: 768px) {
   .portfolio-detail {
-    padding: 76px 20px 64px;
+    padding: 40px 20px 64px;
   }
   .portfolio-meta {
     font-size: 14px;
@@ -313,7 +313,7 @@
     grid-template-columns: 1fr;
   }
   .portfolio-detail--editorial {
-    padding: 68px 20px 64px;
+    padding: 36px 20px 64px;
   }
   .portfolio-editorial-head {
     margin-bottom: 28px;
@@ -342,7 +342,7 @@
 @media (min-width: 1600px) {
   .portfolio-detail {
     max-width: 1280px;
-    padding: 108px 48px 96px;
+    padding: 56px 48px 96px;
   }
   .portfolio-detail h1 {
     font-size: clamp(62px, 5vw, 92px);
@@ -393,7 +393,7 @@
     gap: 22px;
   }
   .portfolio-detail--editorial {
-    padding: 96px 32px 116px;
+    padding: 52px 32px 116px;
   }
   .portfolio-editorial-head {
     max-width: 860px;
@@ -419,7 +419,7 @@
 @media (min-width: 1920px) {
   .portfolio-detail {
     max-width: 1480px;
-    padding: 128px 60px 116px;
+    padding: 64px 60px 116px;
   }
   .portfolio-detail h1 {
     font-size: clamp(76px, 4.8vw, 108px);
@@ -449,7 +449,7 @@
     gap: 28px;
   }
   .portfolio-detail--editorial {
-    padding: 112px 44px 136px;
+    padding: 60px 44px 136px;
   }
   .portfolio-editorial-head {
     max-width: 980px;
@@ -475,7 +475,7 @@
 @media (min-width: 2560px) {
   .portfolio-detail {
     max-width: 1760px;
-    padding: 156px 72px 144px;
+    padding: 72px 72px 144px;
   }
   .portfolio-detail h1 {
     font-size: clamp(92px, 4.4vw, 132px);
@@ -511,7 +511,7 @@
     gap: 36px;
   }
   .portfolio-detail--editorial {
-    padding: 136px 56px 168px;
+    padding: 68px 56px 168px;
   }
   .portfolio-editorial-head {
     max-width: 1160px;

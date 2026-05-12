@@ -466,6 +466,9 @@
             </div>
           </a>
         </div>
+        <div class="work-feature-mobile-cta reveal">
+          <a href="work.html" class="btn-primary">See All Work</a>
+        </div>
       </div>
     </section>
 
@@ -569,7 +572,7 @@
       <div class="section-inner">
         <div class="client-experience-header">
           <div class="section-tag reveal">The Experience</div>
-          <h2 class="client-experience-title reveal reveal-delay-1">What working with Brand Method <em>actually feels
+          <h2 class="client-experience-title reveal reveal-delay-1">What working with <span class="no-break">Brand Method</span><br><em>actually feels
               like.</em></h2>
           <p class="reveal reveal-delay-2">This is what our clients tell us consistently. It is not only about the
             deliverables. It is about the experience of working with us.</p>
@@ -578,8 +581,8 @@
         <div class="client-experience-grid">
           <article class="client-experience-card reveal">
             <div class="client-experience-media">
-              <img src="Image/experience-organised-project-collaboration.webp"
-                alt="Professional team collaborating during an organised project discussion." decoding="async"
+              <img src="Image/show-board-brand-strategy-workshop.webp"
+                alt="Brand strategy workshop with a team reviewing a presentation board." decoding="async"
                 loading="lazy">
             </div>
             <div class="client-experience-body">
@@ -591,8 +594,8 @@
 
           <article class="client-experience-card reveal reveal-delay-1">
             <div class="client-experience-media">
-              <img src="Image/experience-fast-team-execution.webp"
-                alt="Focused office team moving quickly through project execution." decoding="async" loading="lazy">
+              <img src="Image/creative-team-uiux-design-discussion.webp"
+                alt="Creative team discussing UI and UX design work on a laptop." decoding="async" loading="lazy">
             </div>
             <div class="client-experience-body">
               <h3>Fast without cutting corners.</h3>
@@ -603,8 +606,8 @@
 
           <article class="client-experience-card reveal reveal-delay-2">
             <div class="client-experience-media">
-              <img src="Image/experience-brand-partnership-team.webp"
-                alt="Professional team reviewing work together as a brand partner." decoding="async" loading="lazy">
+              <img src="Image/founder-ai-stage-presentation.webp"
+                alt="Founder presenting AI strategy on stage during a business event." decoding="async" loading="lazy">
             </div>
             <div class="client-experience-body">
               <h3>We treat your brand like it is ours.</h3>
@@ -638,10 +641,33 @@
           <!-- Right: video -->
           <div class="success-story-video reveal reveal-delay-1">
             <div class="success-story-video-wrap">
-              <iframe src="https://www.youtube.com/embed/0SqF8wkP1Bk?autoplay=1&mute=1&loop=1&playlist=0SqF8wkP1Bk"
-                title="Success Story" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+              <video class="success-story-player" autoplay muted loop playsinline preload="metadata">
+                <source src="Success Story New.mp4" type="video/mp4">
+              </video>
+              <div class="success-story-video-controls">
+                <button class="success-story-control success-story-control--play" type="button"
+                  data-action="toggle-play" aria-label="Pause video">
+                  <svg class="icon-play" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M8 6.5v11l9-5.5-9-5.5z"></path>
+                  </svg>
+                  <svg class="icon-pause" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M8 6h3v12H8zM13 6h3v12h-3z"></path>
+                  </svg>
+                </button>
+                <button class="success-story-control success-story-control--mute" type="button"
+                  data-action="toggle-mute" aria-label="Unmute video">
+                  <svg class="icon-volume-on" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M5 9h4l5-4v14l-5-4H5z"></path>
+                    <path d="M17 9.5a4 4 0 0 1 0 5"></path>
+                    <path d="M19.5 7a7.5 7.5 0 0 1 0 10"></path>
+                  </svg>
+                  <svg class="icon-volume-off" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M5 9h4l5-4v14l-5-4H5z"></path>
+                    <path d="M17 9l4 4"></path>
+                    <path d="M21 9l-4 4"></path>
+                  </svg>
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -804,15 +830,21 @@
       <div class="section-inner">
         <div class="approach-grid">
           <div class="approach-copy">
-            <div class="section-tag reveal">Our Approach</div>
-            <h2 class="approach-title reveal reveal-delay-1">Strategy before <em>expression.</em></h2>
-            <p class="reveal reveal-delay-2">Most agencies start with the brief and end with the deliverable. We start
-              further back, with the business problem, then build forward into a complete operating system for your
-              brand.</p>
-            <p class="reveal reveal-delay-2">This is the Brand Method approach. Not a process checklist, but a way of
-              thinking about brand that we have refined across 16 years and 100+ engagements.</p>
-            <p class="reveal reveal-delay-2">We diagnose before we design, build every element to work together, and
-              give your team the frameworks to grow without managing every output by hand.</p>
+            <div class="approach-intro">
+              <div class="approach-intro-left">
+                <div class="section-tag reveal">Our Approach</div>
+                <h2 class="approach-title reveal reveal-delay-1">Strategy before <em>expression.</em></h2>
+              </div>
+              <div class="approach-intro-right">
+                <p class="reveal reveal-delay-2">Most agencies start with the brief and end with the deliverable. We
+                  start further back, with the business problem, then build forward into a complete operating system for
+                  your brand.</p>
+                <p class="reveal reveal-delay-2">This is the Brand Method approach. Not a process checklist, but a way
+                  of thinking about brand that we have refined across 16 years and 100+ engagements.</p>
+                <p class="reveal reveal-delay-2">We diagnose before we design, build every element to work together,
+                  and give your team the frameworks to grow without managing every output by hand.</p>
+              </div>
+            </div>
           </div>
           <div class="approach-slider">
             <div class="approach-list">
@@ -878,66 +910,6 @@
       </div>
     </section>
 
-    <!-- WHY US (white) -->
-    <section class="why-method-section" style="background:#fff;">
-      <div class="section-inner">
-        <div class="why-method-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center;">
-          <div>
-            <div class="section-tag reveal">Why Brand Method</div>
-            <h2 class="section-title reveal reveal-delay-1">We understand it's tough <em>out there</em></h2>
-            <p class="reveal reveal-delay-2"
-              style="font-size:15px; color:var(--off-white); line-height:1.9; margin-bottom:20px;">You've worked with
-              agencies that promised the world, disappeared when it mattered, or left you cleaning up after them.</p>
-            <p class="reveal reveal-delay-2"
-              style="font-size:15px; color:var(--off-white); line-height:1.9; margin-bottom:40px;">You need a strategic
-              partner. Someone who can guide you, structure your direction, and execute a clear plan built specifically
-              for your business. Not noise, not random creative work.</p>
-          </div>
-          <div class="reveal reveal-delay-1">
-            <div class="why-method-list">
-              <div class="why-method-card">
-                <div class="why-method-media">
-                  <img src="Image/show-board-brand-strategy-workshop.webp"
-                    alt="Brand strategy workshop with a team reviewing a presentation board." decoding="async"
-                    loading="lazy">
-                </div>
-                <div class="why-method-body">
-                  <h4>Simple & Guided</h4>
-                  <p>We manage the entire process: strategy, direction, and execution. You stay in control without
-                    handling the heavy work.</p>
-                </div>
-              </div>
-              <div class="why-method-card">
-                <div class="why-method-media">
-                  <img src="Image/creative-team-uiux-design-discussion.webp"
-                    alt="Creative team discussing UI and UX design work on a laptop." decoding="async" loading="lazy">
-                </div>
-                <div class="why-method-body">
-                  <h4>Fast & Efficient</h4>
-                  <p>No delays, no wasted time. We move quickly, stay responsive, and deliver results at the pace your
-                    brand needs.</p>
-                </div>
-              </div>
-              <div class="why-method-card">
-                <div class="why-method-media">
-                  <img src="Image/founder-ai-stage-presentation.webp"
-                    alt="Founder presenting AI strategy on stage during a business event." decoding="async"
-                    loading="lazy">
-                </div>
-                <div class="why-method-body">
-                  <h4>Effective & Impactful</h4>
-                  <p>Our methods work even when you're not looking. Your brand grows stronger, customers become
-                    advocates.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <div class="divider"></div>
-
     <!-- LEAD FORM -->
     <section class="lead-form-section">
       <div class="lead-form-inner">
@@ -963,8 +935,8 @@
     <div class="cta-band">
       <div class="section-inner">
         <div class="section-tag reveal">Start the Conversation</div>
-        <h2>Your brand should be your strongest business asset. <em><span style="color:var(--accent);">Let's make it
-              one.</span></em></h2>
+        <h2>Your brand should be your strongest business asset.<br><em><span
+              style="color:var(--accent);">Let's make it one.</span></em></h2>
         <p>Whether you're launching, repositioning, or scaling. We'll tell you exactly what needs to happen and how we
           can help.</p>
         <a href="https://wa.me/60122826371" target="_blank" class="btn-dark">Start the Conversation</a>

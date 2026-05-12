@@ -90,6 +90,87 @@ if (scrollTopFloat) {
   });
 })();
 
+// Success story video controls
+(function () {
+  const player = document.querySelector('.success-story-player');
+  const wrap = document.querySelector('.success-story-video-wrap');
+  if (!player || !wrap) return;
+
+  const playButton = wrap.querySelector('[data-action="toggle-play"]');
+  const muteButton = wrap.querySelector('[data-action="toggle-mute"]');
+  let controlsTimer = null;
+
+  function showControlsTemporarily() {
+    wrap.classList.add('is-controls-visible');
+    window.clearTimeout(controlsTimer);
+    controlsTimer = window.setTimeout(() => {
+      wrap.classList.remove('is-controls-visible');
+    }, 1800);
+  }
+
+  function syncVideoButtons() {
+    wrap.classList.toggle('is-paused', player.paused);
+    wrap.classList.toggle('is-muted', player.muted);
+
+    if (playButton) {
+      const isPaused = player.paused;
+      playButton.setAttribute('aria-label', isPaused ? 'Play video' : 'Pause video');
+    }
+
+    if (muteButton) {
+      const isMuted = player.muted;
+      muteButton.setAttribute('aria-label', isMuted ? 'Unmute video' : 'Mute video');
+    }
+  }
+
+  player.muted = true;
+  player.autoplay = true;
+  player.playsInline = true;
+
+  const autoplayPromise = player.play();
+  if (autoplayPromise && typeof autoplayPromise.catch === 'function') {
+    autoplayPromise.catch(() => {
+      syncVideoButtons();
+    });
+  }
+
+  playButton?.addEventListener('click', () => {
+    if (player.paused) {
+      player.play().catch(() => {});
+    } else {
+      player.pause();
+    }
+    showControlsTemporarily();
+    syncVideoButtons();
+  });
+
+  muteButton?.addEventListener('click', () => {
+    player.muted = !player.muted;
+    showControlsTemporarily();
+    syncVideoButtons();
+  });
+
+  wrap.addEventListener('pointerenter', () => {
+    wrap.classList.add('is-controls-visible');
+    window.clearTimeout(controlsTimer);
+  });
+
+  wrap.addEventListener('pointerleave', () => {
+    wrap.classList.remove('is-controls-visible');
+    window.clearTimeout(controlsTimer);
+  });
+
+  wrap.addEventListener('click', event => {
+    if (event.target.closest('.success-story-control')) return;
+    showControlsTemporarily();
+  });
+
+  player.addEventListener('play', syncVideoButtons);
+  player.addEventListener('pause', syncVideoButtons);
+  player.addEventListener('volumechange', syncVideoButtons);
+  syncVideoButtons();
+})();
+
 // Mobile menu
 const hamburger = document.querySelector('.nav-hamburger');
 const mobileMenu = document.querySelector('.nav-mobile');
@@ -361,15 +442,11 @@ if (form) {
 // Slider arrow controls
 (function () {
   const sliderConfigs = [
-    { selector: '.approach-list', item: '.approach-item', mobileOnly: true },
     { selector: '.testimonials-carousel', item: '.testimonial-card', compact: true, pause: '.testimonials-track' },
     { selector: '.team-scroll-wrap', item: '.team-member', compact: true, pause: '.team-scroll-track' },
     { selector: '.service-card-grid', item: '.service-detail-card', compact: true, mobileOnly: true },
     { selector: '.deliverables-grid', item: '.service-detail-card, .reveal', compact: true, mobileOnly: true },
     { selector: '.service-point-list', item: '.service-point', compact: true, mobileOnly: true },
-    { selector: '.work-bento', item: '.work-bento-card', compact: true, mobileOnly: true },
-    { selector: '.how-work-steps', item: '.how-work-step', compact: true, mobileOnly: true },
-    { selector: '.client-experience-grid', item: '.client-experience-card', compact: true, mobileOnly: true },
     { selector: '.why-method-list', item: '.why-method-card', compact: true, mobileOnly: true, wrapperClass: 'bm-slider--why-method' },
     { selector: '.standout-grid', item: '.standout-card', compact: true, mobileOnly: true },
     { selector: '.marketing-problem-grid', item: '.marketing-problem-card', compact: true, mobileOnly: true },

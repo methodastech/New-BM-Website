@@ -34,17 +34,17 @@
 .work-search-label { display:block; font-family:var(--font-sans); font-size:10px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); margin-bottom:12px; }
 .work-search {
   width: 100%;
-  min-height: 58px;
-  padding: 0 20px;
-  border: 1px solid var(--border);
+  min-height: 64px;
+  padding: 0 22px;
+  border: 2px solid rgba(0, 0, 0, 0.12);
   background: #ffffff;
   color: var(--white);
   font-family: var(--font-body);
   font-size: 16px;
   outline: none;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
 }
-.work-search:focus { border-color:var(--accent); box-shadow:inset 3px 0 0 var(--accent); }
+.work-search:focus { border-color:var(--accent); box-shadow:0 0 0 4px rgba(0, 0, 255, 0.08), inset 3px 0 0 var(--accent); }
 .work-search::placeholder { color:#999999; }
 .work-floating-filter {
   position: fixed;
@@ -232,19 +232,8 @@
   .work-card-body h3 { font-size: 20px; }
   .work-card-body p { font-size: 16px; }
   .work-floating-filter {
-    left: 16px;
-    right: 16px;
-    bottom: 82px;
-    width: auto;
-    max-width: none;
-    overflow-x: auto;
-    justify-content: flex-start;
-    transform: translateY(18px);
-    scrollbar-width: none;
+    display: none !important;
   }
-  .work-floating-filter::-webkit-scrollbar { display: none; }
-  .work-floating-filter.is-visible { transform: translateY(0); }
-  .work-floating-filter .filter-btn { padding: 7px 10px; font-size: 12px; }
 }
 </style>
 </head>
@@ -254,14 +243,6 @@
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
 <div class="page-wrap">
-
-<div class="page-hero">
-  <div class="page-hero-inner">
-    <div class="section-tag reveal">Portfolio</div>
-    <h1 class="reveal reveal-delay-1">Strategy-led creative that <em>works</em></h1>
-    <p class="reveal reveal-delay-2">Every project is built on structured thinking, strong positioning, and disciplined execution.</p>
-  </div>
-</div>
 
 <div class="work-floating-filter" id="workFloatingFilter" aria-label="Filter work projects">
   <button class="filter-btn active" type="button" data-filter="all">All</button>
@@ -508,8 +489,9 @@
 
   function updateFilterBar() {
     const cta = document.querySelector('.cta-band');
-    const isPast = cta ? (cta.getBoundingClientRect().top < window.innerHeight) : false;
-    filterBar.classList.toggle('is-visible', window.scrollY > 220 && !isPast);
+    const isMobile = window.matchMedia('(max-width: 768px)').matches;
+    const isPast = cta ? (cta.getBoundingClientRect().top <= 120) : false;
+    filterBar.classList.toggle('is-visible', !isMobile && window.scrollY > 220 && !isPast);
   }
 
   function setCardVisible(card, shouldShow) {
