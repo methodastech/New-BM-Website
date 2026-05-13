@@ -5233,7 +5233,8 @@ footer {
   }
 
   .work-feature-header .section-tag {
-    display: none;
+    display: flex;
+    margin-bottom: 16px;
   }
 
   .work-feature-title {
