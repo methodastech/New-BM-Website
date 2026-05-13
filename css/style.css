@@ -5147,14 +5147,14 @@ footer {
   }
 
   .client-logo {
-    width: 28vw;
-    height: 70px;
-    padding: 0 8px;
+    width: 32vw;
+    height: 82px;
+    padding: 0 10px;
   }
 
   .client-logo img {
-    width: 100px;
-    height: 40px;
+    width: 124px;
+    height: 52px;
   }
 
   .sticky-brand-cta {
