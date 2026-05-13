@@ -841,11 +841,11 @@ body:not(.hero-page):not(.contact-page) .page-wrap > .resources-news-page > .res
   display: block;
   margin-top: 8px;
   font-family: var(--font-sans);
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.78);
+  color: #ffffff;
   white-space: nowrap;
 }
 
@@ -1687,13 +1687,17 @@ body:not(.hero-page):not(.contact-page) .page-wrap > .resources-news-page > .res
 }
 
 .how-work-steps {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  display: flex;
   gap: 18px;
+  align-items: stretch;
 }
 
 .how-work-step {
   min-width: 0;
+  flex: 1 1 0;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
   background: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 0;
@@ -1717,6 +1721,9 @@ body:not(.hero-page):not(.contact-page) .page-wrap > .resources-news-page > .res
 
 .how-work-copy {
   padding: 28px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 .how-work-copy h2,
@@ -1736,12 +1743,20 @@ body:not(.hero-page):not(.contact-page) .page-wrap > .resources-news-page > .res
   font-size: clamp(23px, 1.9vw, 30px);
   line-height: 1.14;
   margin-bottom: 16px;
+  min-height: 2.28em;
 }
 
 .how-work-copy p {
   color: var(--off-white);
   font-size: 15px;
   line-height: 1.8;
+  flex: 1;
+}
+
+@media (min-width: 769px) {
+  .how-work-copy {
+    min-height: 320px;
+  }
 }
 
 .how-work-note {
@@ -2312,6 +2327,37 @@ body:not(.hero-page):not(.contact-page) .page-wrap > .resources-news-page > .res
   color: var(--off-white);
   line-height: 1.8;
   margin-top: 0;
+}
+
+.about-process-section .process-step-body {
+  min-height: 0;
+}
+
+.about-process-section .process-step h3 {
+  min-height: 2.35em;
+  font-size: 24px;
+  line-height: 1.18;
+}
+
+.about-process-section .process-step p {
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.about-process-section .section-title,
+.about-standout-section .section-title {
+  font-size: clamp(36px, 5vw, 64px);
+  line-height: 1.1;
+}
+
+.about-standout-section .standout-card h4 {
+  font-size: 24px !important;
+  line-height: 1.18 !important;
+}
+
+.about-standout-section .standout-card p {
+  font-size: 14px !important;
+  line-height: 1.8 !important;
 }
 
 /* â”€â”€ LEAD FORM â”€â”€ */
@@ -4859,6 +4905,21 @@ footer {
     flex: 0 0 calc(50% - 12px);
   }
 
+  .team-section {
+    padding-top: 56px;
+    padding-bottom: 56px;
+  }
+
+  .team-section .section-inner {
+    padding: 0 20px;
+    margin-bottom: 28px;
+  }
+
+  .team-section .team-scroll-wrap {
+    margin-left: -20px;
+    margin-right: -20px;
+  }
+
   section {
     padding: 80px 20px;
   }
@@ -5585,6 +5646,76 @@ footer {
   .bm-slider>.process-steps-wrap .process-step {
     width: calc((100vw - 52px) / 2);
     max-width: calc((100vw - 52px) / 2);
+  }
+
+  .about-process-section .process-steps-wrap,
+  .about-standout-section .standout-grid,
+  .about-process-section .bm-slider>.process-steps-wrap,
+  .about-standout-section .bm-slider>.standout-grid {
+    scroll-padding-left: 0;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .about-process-section .process-steps-wrap,
+  .about-process-section .bm-slider>.process-steps-wrap {
+    padding-bottom: 18px;
+  }
+
+  .about-process-section .process-steps,
+  .about-process-section .bm-slider>.process-steps-wrap .process-steps {
+    grid-template-columns: repeat(4, min(84vw, 320px));
+    width: max-content;
+  }
+
+  .about-process-section .process-step,
+  .about-process-section .bm-slider>.process-steps-wrap .process-step {
+    width: min(84vw, 320px);
+    max-width: min(84vw, 320px);
+  }
+
+  .about-process-section .process-step-body,
+  .about-process-section .bm-slider>.process-steps-wrap .process-step-body {
+    min-height: 0;
+    padding: 22px 22px 24px;
+  }
+
+  .about-process-section .process-step h3,
+  .about-process-section .bm-slider>.process-steps-wrap .process-step h3 {
+    min-height: 0;
+    margin-bottom: 12px;
+  }
+
+  .about-standout-section .standout-grid,
+  .about-standout-section .bm-slider>.standout-grid {
+    padding-bottom: 18px;
+  }
+
+  .about-standout-section .standout-card,
+  .about-standout-section .bm-slider>.standout-grid .standout-card {
+    flex: 0 0 min(84vw, 320px);
+    max-width: min(84vw, 320px);
+  }
+
+  .about-standout-section .standout-card h4,
+  .about-standout-section .bm-slider>.standout-grid .standout-card h4 {
+    font-size: 24px !important;
+    line-height: 1.18 !important;
+  }
+
+  .about-standout-section .standout-card p,
+  .about-standout-section .bm-slider>.standout-grid .standout-card p {
+    font-size: 14px !important;
+    line-height: 1.8 !important;
+  }
+
+  .about-process-section .process-step.reveal,
+  .about-standout-section .standout-card.reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 
   .approach-slider>.approach-list {
@@ -6382,7 +6513,7 @@ footer {
   }
 
   body {
-    font-size: 18px;
+    font-size: 19px;
   }
 
   nav {
@@ -6399,7 +6530,7 @@ footer {
 
   .nav-links a,
   .nav-cta {
-    font-size: 15px;
+    font-size: 16px;
   }
 
   section {
@@ -6411,14 +6542,14 @@ footer {
   }
 
   .section-sub {
-    font-size: 19px;
+    font-size: 21px;
     max-width: 720px;
   }
 
   .section-tag,
   .hero-tag,
   .ticker-item {
-    font-size: 13px;
+    font-size: 14px;
   }
 
   .hero {
@@ -6430,14 +6561,14 @@ footer {
   }
 
   .hero-sub {
-    font-size: 20px;
+    font-size: 22px;
   }
 
   .btn-primary,
   .btn-ghost,
   .btn-dark,
   .lead-form button {
-    font-size: 14px;
+    font-size: 15px;
     padding: 20px 28px;
   }
 
@@ -6485,7 +6616,23 @@ footer {
   .service-detail-card p,
   .service-detail-card li,
   .why-method-card p {
-    font-size: 17px;
+    font-size: 19px;
+  }
+
+  .service-card p,
+  .work-card p,
+  .work-bento-info p,
+  .contact-step p,
+  .how-work-copy p,
+  .client-experience-body p,
+  .process-step p,
+  .standout-card p,
+  .marketing-problem-card p,
+  .team-role,
+  .team-dept,
+  .footer-brand p,
+  .footer-col ul li a {
+    font-size: 18px;
   }
 
   .process-step-img img {
@@ -6505,7 +6652,14 @@ footer {
   .work-bento-info h3,
   .contact-step h3,
   .why-method-card h4 {
-    font-size: 34px;
+    font-size: 36px;
+  }
+
+  .how-work-copy h3,
+  .process-step h3,
+  .standout-card h4,
+  .team-info h4 {
+    font-size: 32px;
   }
 
   .service-card {
@@ -6570,7 +6724,7 @@ footer {
 
   .lead-form-sub,
   .cta-band p {
-    font-size: 20px;
+    font-size: 22px;
   }
 
   .lead-form input {
@@ -6587,7 +6741,7 @@ footer {
   }
 
   .page-hero p {
-    font-size: 21px;
+    font-size: 23px;
     max-width: 760px;
   }
 
@@ -6611,7 +6765,7 @@ footer {
   }
 
   .contact-lead {
-    font-size: 22px;
+    font-size: 24px;
     max-width: 840px;
   }
 
@@ -6655,7 +6809,7 @@ footer {
 
   .article-body p,
   .article-body li {
-    font-size: 19px;
+    font-size: 21px;
   }
 
   .article-hero-img,
@@ -6698,7 +6852,7 @@ footer {
   }
 
   body {
-    font-size: 19px;
+    font-size: 21px;
   }
 
   nav {
@@ -6722,14 +6876,14 @@ footer {
   }
 
   .section-sub {
-    font-size: 21px;
+    font-size: 24px;
     max-width: 820px;
   }
 
   .section-tag,
   .hero-tag,
   .ticker-item {
-    font-size: 14px;
+    font-size: 15px;
   }
 
   .hero {
@@ -6741,7 +6895,12 @@ footer {
   }
 
   .hero-sub {
-    font-size: 22px;
+    font-size: 24px;
+  }
+
+  .nav-links a,
+  .nav-cta {
+    font-size: 17px;
   }
 
   .clients-heading p,
@@ -6788,7 +6947,23 @@ footer {
   .service-detail-card p,
   .service-detail-card li,
   .why-method-card p {
-    font-size: 18px;
+    font-size: 21px;
+  }
+
+  .service-card p,
+  .work-card p,
+  .work-bento-info p,
+  .contact-step p,
+  .how-work-copy p,
+  .client-experience-body p,
+  .process-step p,
+  .standout-card p,
+  .marketing-problem-card p,
+  .team-role,
+  .team-dept,
+  .footer-brand p,
+  .footer-col ul li a {
+    font-size: 20px;
   }
 
   .process-step-img img {
@@ -6808,7 +6983,14 @@ footer {
   .work-bento-info h3,
   .contact-step h3,
   .why-method-card h4 {
-    font-size: 40px;
+    font-size: 42px;
+  }
+
+  .how-work-copy h3,
+  .process-step h3,
+  .standout-card h4,
+  .team-info h4 {
+    font-size: 36px;
   }
 
   .work-card {
@@ -6849,7 +7031,7 @@ footer {
   }
 
   .page-hero p {
-    font-size: 23px;
+    font-size: 26px;
     max-width: 860px;
   }
 
@@ -6862,14 +7044,14 @@ footer {
   }
 
   .contact-lead {
-    font-size: 24px;
+    font-size: 27px;
     max-width: 920px;
   }
 
   .contact-channel-card strong,
   .contact-detail-item a,
   .contact-detail-item span:last-child {
-    font-size: 19px;
+    font-size: 21px;
   }
 
   .article-wrap {
@@ -6887,7 +7069,7 @@ footer {
 
   .article-body p,
   .article-body li {
-    font-size: 20px;
+    font-size: 23px;
   }
 
   .team-member {

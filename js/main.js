@@ -478,7 +478,11 @@ if (form) {
     if (!item) return target.clientWidth;
 
     const styles = window.getComputedStyle(target);
-    const gap = parseFloat(styles.columnGap || styles.gap) || 0;
+    let gap = parseFloat(styles.columnGap || styles.gap) || 0;
+    if (!gap && item.parentElement && item.parentElement !== target) {
+      const parentStyles = window.getComputedStyle(item.parentElement);
+      gap = parseFloat(parentStyles.columnGap || parentStyles.gap) || 0;
+    }
     return item.getBoundingClientRect().width + gap;
   }
 
