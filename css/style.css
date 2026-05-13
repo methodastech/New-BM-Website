@@ -922,6 +922,10 @@ body:not(.hero-page):not(.contact-page) .page-wrap > .resources-news-page > .res
   font-style: italic;
 }
 
+.approach-title-line {
+  white-space: nowrap;
+}
+
 .approach-copy p {
   font-size: 16px;
   color: var(--off-white);
@@ -1605,17 +1609,17 @@ body:not(.hero-page):not(.contact-page) .page-wrap > .resources-news-page > .res
 }
 
 .home-service-icon {
-  width: 86px;
-  height: 86px;
-  flex: 0 0 86px;
+  width: 104px;
+  height: 104px;
+  flex: 0 0 104px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .home-service-icon img {
-  width: 78px;
-  height: 78px;
+  width: 92px;
+  height: 92px;
   object-fit: contain;
   display: block;
   transition: transform 0.3s var(--ease);
@@ -1675,6 +1679,11 @@ body:not(.hero-page):not(.contact-page) .page-wrap > .resources-news-page > .res
   letter-spacing: -0.02em;
   color: #0f0f0f;
   margin: 0 0 28px;
+  max-width: 13ch;
+}
+
+.how-work-title-line {
+  white-space: nowrap;
 }
 
 .how-work-heading p {
@@ -1803,6 +1812,12 @@ body:not(.hero-page):not(.contact-page) .page-wrap > .resources-news-page > .res
   transform: translateY(-2px);
 }
 
+.how-work-note,
+.how-work-note.reveal,
+.how-work-note.visible {
+  display: none !important;
+}
+
 /* â”€â”€ SUCCESS STORY â”€â”€ */
 .success-story-section {
   padding: 100px 20px;
@@ -1863,7 +1878,7 @@ body:not(.hero-page):not(.contact-page) .page-wrap > .resources-news-page > .res
   flex: 1;
   min-height: 300px;
   background: #1a1a2e;
-  border-radius: 4px;
+  border-radius: 0;
   overflow: hidden;
 }
 
@@ -1943,7 +1958,7 @@ body:not(.hero-page):not(.contact-page) .page-wrap > .resources-news-page > .res
   transform: translate(-50%, -50%);
   width: 74px;
   height: 74px;
-  border-radius: 999px;
+  border-radius: 0;
 }
 
 .success-story-control--mute {
@@ -1951,7 +1966,7 @@ body:not(.hero-page):not(.contact-page) .page-wrap > .resources-news-page > .res
   bottom: 20px;
   width: 48px;
   height: 48px;
-  border-radius: 999px;
+  border-radius: 0;
 }
 
 .success-story-video-wrap.is-paused .success-story-control--play .icon-play,
@@ -2076,7 +2091,7 @@ body:not(.hero-page):not(.contact-page) .page-wrap > .resources-news-page > .res
 .testimonial-card {
   background: #f0f0f0;
   border: 1px solid var(--border);
-  border-radius: 4px;
+  border-radius: 0;
   width: 320px;
   flex-shrink: 0;
   overflow: hidden;
@@ -2174,6 +2189,10 @@ body:not(.hero-page):not(.contact-page) .page-wrap > .resources-news-page > .res
 .client-experience-title em {
   color: inherit;
   font-style: normal;
+}
+
+.client-experience-title-line {
+  white-space: nowrap;
 }
 
 .client-experience-header p {
@@ -4677,14 +4696,14 @@ footer {
   }
 
   .home-service-icon {
-    width: 58px;
-    height: 58px;
-    flex-basis: 58px;
+    width: 72px;
+    height: 72px;
+    flex-basis: 72px;
   }
 
   .home-service-icon img {
-    width: 54px;
-    height: 54px;
+    width: 68px;
+    height: 68px;
   }
 
   .home-service-copy h3 {
@@ -4707,7 +4726,8 @@ footer {
   }
 
   .how-work-title {
-    font-size: clamp(42px, 12vw, 58px);
+    font-size: clamp(26px, 8.4vw, 42px);
+    max-width: none;
   }
 
   .how-work-heading p,
@@ -4948,7 +4968,7 @@ footer {
     font-size: clamp(40px, 11vw, 48px);
     line-height: 1.05;
     letter-spacing: 0;
-    overflow-wrap: anywhere;
+    overflow-wrap: normal;
   }
 
   .approach-copy p {
