@@ -1991,7 +1991,7 @@ body:not(.hero-page):not(.contact-page) .page-wrap > .resources-news-page > .res
   left: 20px;
   background: transparent;
   border: 1.5px solid rgba(255, 255, 255, 0.7);
-  border-radius: 50px;
+  border-radius: 0;
   padding: 8px 18px;
   font-family: var(--font-sans);
   font-size: 11px;
@@ -2011,7 +2011,7 @@ body:not(.hero-page):not(.contact-page) .page-wrap > .resources-news-page > .res
   height: 60px;
   background: rgba(255, 255, 255, 0.15);
   border: 2px solid rgba(255, 255, 255, 0.6);
-  border-radius: 50%;
+  border-radius: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2525,7 +2525,7 @@ body:not(.hero-page):not(.contact-page) .page-wrap > .resources-news-page > .res
 .experience-img {
   width: 100%;
   aspect-ratio: 16 / 10;
-  border-radius: 4px;
+  border-radius: 0;
   overflow: hidden;
   background: var(--card);
   min-height: min(400px, 46vw);
@@ -4599,6 +4599,24 @@ footer {
     gap: 48px;
   }
 
+  .approach-body {
+    align-items: center;
+    text-align: center;
+  }
+
+  .approach-card-header {
+    justify-content: center;
+  }
+
+  .approach-card-meta {
+    align-items: center;
+  }
+
+  .approach-item p {
+    max-width: none;
+    text-align: center;
+  }
+
   .services-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -4704,6 +4722,12 @@ footer {
   .home-service-icon img {
     width: 68px;
     height: 68px;
+  }
+
+  .sticky-brand-cta__button,
+  .work-feature-mobile-cta .btn-primary {
+    justify-content: center;
+    text-align: center;
   }
 
   .home-service-copy h3 {
@@ -6116,6 +6140,26 @@ footer {
     padding: 0 11px;
     font-size: 10px;
     letter-spacing: 0.02em;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 1024px) {
+  .client-logo {
+    width: 26vw;
+    min-width: 172px;
+    height: 100px;
+    padding: 0 14px;
+  }
+
+  .client-logo img {
+    width: 172px;
+    height: 72px;
+  }
+
+  .sticky-brand-cta__button,
+  .work-feature-mobile-cta .btn-primary {
+    justify-content: center;
+    text-align: center;
   }
 }
 
