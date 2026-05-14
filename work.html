@@ -468,7 +468,7 @@
 <div class="cta-band">
   <div class="section-inner">
     <div class="section-tag reveal">Start the Conversation</div>
-    <h2>Ready to create your <em>success story</em>?</h2>
+    <h2>Ready to create your <mark style="color:var(--accent); background:none; padding:0; font-style:italic;">success story?</mark></h2>
     <p>Join 100+ brands that have grown with Brand Method.</p>
     <a href="contact.html" class="btn-dark">Let's Work Together</a>
   </div>
@@ -484,6 +484,7 @@
   const cards = Array.from(document.querySelectorAll('.work-grid-full .work-card[data-cat]'));
   const search = document.getElementById('workSearch');
   let activeFilter = 'all';
+  let hasPageInteraction = false;
 
   if (!filterBar || !cards.length) return;
 
@@ -491,7 +492,7 @@
     const cta = document.querySelector('.cta-band');
     const isMobile = window.matchMedia('(max-width: 768px)').matches;
     const isPast = cta ? (cta.getBoundingClientRect().top <= 120) : false;
-    filterBar.classList.toggle('is-visible', !isMobile && window.scrollY > 220 && !isPast);
+    filterBar.classList.toggle('is-visible', !isMobile && (hasPageInteraction || window.scrollY > 220) && !isPast);
   }
 
   function setCardVisible(card, shouldShow) {
@@ -537,6 +538,11 @@
   if (search) {
     search.addEventListener('input', applyWorkFilters);
   }
+
+  document.addEventListener('click', () => {
+    hasPageInteraction = true;
+    updateFilterBar();
+  }, { passive: true });
 
   window.addEventListener('scroll', updateFilterBar, { passive: true });
   updateFilterBar();

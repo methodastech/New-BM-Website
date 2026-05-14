@@ -40,8 +40,6 @@
 }
 
 .resources-topbar {
-  display: flex;
-  justify-content: flex-end;
   width: calc(100% - 40px);
   max-width: var(--max-w);
   margin: 0 auto;
@@ -49,25 +47,32 @@
 }
 
 .blog-search-wrap {
-  width: 100%;
-  margin: 0;
+  max-width: 680px;
+  margin: 0 auto 40px;
 }
 
 .blog-search-label {
-  display: none;
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 12px;
 }
 
 .blog-search {
   width: 100%;
   min-height: 64px;
+  padding: 0 22px;
   border: 2px solid rgba(0, 0, 0, 0.12);
   background: #ffffff;
   color: #0f0f0f;
   font-family: var(--font-body);
   font-size: 16px;
-  padding: 0 20px;
   outline: none;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
 }
 
 .blog-search:focus {
@@ -1044,7 +1049,7 @@
 <div class="cta-band">
   <div class="section-inner">
     <div class="section-tag reveal">Start Applying Strategy</div>
-    <h2>Ready to put these strategies to <em>work</em>?</h2>
+    <h2>Ready to put these <em style="color:var(--accent);">strategies</em> to <span>work</span>?</h2>
     <p>Let's apply the right framework to your brand.</p>
     <a href="contact.html" class="btn-dark">Talk to the Team</a>
   </div>

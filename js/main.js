@@ -243,6 +243,39 @@ reveals.forEach(el => observer.observe(el));
   window.addEventListener('load', setTeamLoopDistance, { once: true });
 })();
 
+// Founder mobile read more
+(function () {
+  const button = document.querySelector('.founder-read-more');
+  const content = document.querySelector('.founder-more');
+  if (!button || !content) return;
+
+  function syncFounderContent() {
+    const isDesktop = window.innerWidth >= 1025;
+    if (isDesktop) {
+      content.classList.add('is-open');
+      content.style.maxHeight = 'none';
+      button.setAttribute('aria-expanded', 'true');
+      button.textContent = 'Read More';
+      return;
+    }
+
+    const isOpen = content.classList.contains('is-open');
+    content.style.maxHeight = isOpen ? `${content.scrollHeight}px` : '0px';
+    button.setAttribute('aria-expanded', String(isOpen));
+    button.textContent = isOpen ? 'Read Less' : 'Read More';
+  }
+
+  button.addEventListener('click', () => {
+    const isOpen = content.classList.toggle('is-open');
+    content.style.maxHeight = isOpen ? `${content.scrollHeight}px` : '0px';
+    button.setAttribute('aria-expanded', String(isOpen));
+    button.textContent = isOpen ? 'Read Less' : 'Read More';
+  });
+
+  syncFounderContent();
+  window.addEventListener('resize', syncFounderContent);
+})();
+
 // Footer brand stamp reveal
 (function () {
   const stamp = document.querySelector('.brand-stamp');
@@ -309,6 +342,43 @@ if (workSearch && workCards.length) {
     });
   });
 }
+
+// Homepage work hover cursor
+(function () {
+  const workMediaItems = document.querySelectorAll('.work-feature-section .work-bento-media');
+  if (!workMediaItems.length || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+  const cursor = document.createElement('div');
+  const defaultWord = 'Branding';
+
+  cursor.className = 'work-hover-cursor';
+  cursor.textContent = defaultWord;
+  document.body.appendChild(cursor);
+
+  function moveCursor(event) {
+    cursor.style.left = `${event.clientX}px`;
+    cursor.style.top = `${event.clientY}px`;
+  }
+
+  function showCursor(event) {
+    const card = event.currentTarget.closest('.work-bento-card');
+    cursor.textContent = card?.dataset.cursorWord || defaultWord;
+    moveCursor(event);
+    cursor.classList.add('is-visible');
+  }
+
+  function hideCursor() {
+    cursor.classList.remove('is-visible');
+  }
+
+  workMediaItems.forEach(item => {
+    item.addEventListener('mouseenter', showCursor);
+    item.addEventListener('mousemove', moveCursor);
+    item.addEventListener('mouseleave', hideCursor);
+  });
+
+  window.addEventListener('blur', hideCursor);
+})();
 
 workCards.forEach(card => {
   const href = card.dataset.href;

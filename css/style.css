@@ -95,6 +95,7 @@ button {
   color: inherit;
 }
 
+
 /* â”€â”€ NAV â”€â”€ */
 nav {
   position: fixed;
@@ -500,7 +501,14 @@ body.hero-page .page-wrap {
   min-width: 0;
 }
 
+.founder-mobile-image {
+  display: none;
+}
+
 .founder-read-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   font-family: var(--font-sans);
   font-size: 12px;
   font-weight: 700;
@@ -514,6 +522,17 @@ body.hero-page .page-wrap {
   cursor: pointer;
   margin-bottom: 8px;
   transition: opacity 0.2s;
+}
+
+.founder-read-more::after {
+  content: '+';
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.founder-read-more[aria-expanded="true"]::after {
+  content: '-';
 }
 
 .founder-read-more:hover {
@@ -530,6 +549,18 @@ body.hero-page .page-wrap {
 .founder-more.is-open {
   opacity: 1;
   transition: max-height 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.4s ease 0.1s;
+}
+
+@media (min-width: 1025px) {
+  .founder-read-more {
+    display: none;
+  }
+
+  .founder-more {
+    max-height: none;
+    opacity: 1;
+    overflow: visible;
+  }
 }
 
 .btn-ghost {
@@ -1473,6 +1504,44 @@ body:not(.hero-page):not(.contact-page) .page-wrap > .resources-news-page > .res
   background: var(--card);
 }
 
+.work-hover-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 120;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 128px;
+  min-height: 46px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: rgba(15, 15, 15, 0.88);
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate3d(-50%, -50%, 0) scale(0.92);
+  transition: opacity 0.2s var(--ease), transform 0.2s var(--ease);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+  white-space: nowrap;
+}
+
+.work-hover-cursor.is-visible {
+  opacity: 1;
+  transform: translate3d(-50%, -50%, 0) scale(1);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .work-feature-section .work-bento-media {
+    cursor: none;
+  }
+}
+
 .work-bento-card img {
   width: 100%;
   height: 100%;
@@ -1521,30 +1590,32 @@ body:not(.hero-page):not(.contact-page) .page-wrap > .resources-news-page > .res
 .work-tags {
   display: flex;
   flex-wrap: nowrap;
-  gap: 6px;
+  gap: 4px;
   overflow: hidden;
 }
 
 .work-tags span {
   display: inline-flex;
   align-items: center;
-  min-height: 22px;
+  min-height: 20px;
   border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 999px;
   background: rgba(0, 0, 0, 0.035);
   color: var(--muted);
   font-family: var(--font-sans);
-  font-size: 9px;
+  font-size: 8px;
   font-weight: 600;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.03em;
   line-height: 1.2;
   text-transform: uppercase;
   white-space: nowrap;
-  padding: 5px 8px;
+  padding: 4px 7px;
 }
 
 .work-feature-mobile-cta {
-  display: none;
+  display: flex;
+  justify-content: center;
+  padding: 40px 0 0;
 }
 
 @media (max-width: 768px) {
@@ -1958,7 +2029,7 @@ body:not(.hero-page):not(.contact-page) .page-wrap > .resources-news-page > .res
   transform: translate(-50%, -50%);
   width: 74px;
   height: 74px;
-  border-radius: 0;
+  border-radius: 999px;
 }
 
 .success-story-control--mute {
@@ -1966,7 +2037,7 @@ body:not(.hero-page):not(.contact-page) .page-wrap > .resources-news-page > .res
   bottom: 20px;
   width: 48px;
   height: 48px;
-  border-radius: 0;
+  border-radius: 999px;
 }
 
 .success-story-video-wrap.is-paused .success-story-control--play .icon-play,
@@ -4113,9 +4184,9 @@ footer {
 /* â”€â”€ ABOUT â”€â”€ */
 .about-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
   gap: 80px;
-  align-items: center;
+  align-items: start;
 }
 
 .about-text h2 {
@@ -4128,7 +4199,7 @@ footer {
 
 .about-text h2 em {
   font-style: italic;
-  color: var(--white);
+  color: #8c8c8c;
 }
 
 .about-text p {
@@ -4140,6 +4211,9 @@ footer {
 
 .about-image {
   position: relative;
+  width: 100%;
+  max-width: 620px;
+  margin-left: auto;
 }
 
 .about-image img {
@@ -4523,6 +4597,28 @@ footer {
 
   .founder-image-col {
     display: none !important;
+  }
+
+  .founder-mobile-image {
+    display: block;
+    margin: -4px 0 24px;
+  }
+
+  .founder-mobile-image .founder-img-wrap {
+    height: auto;
+  }
+
+  .founder-mobile-image img {
+    width: 100%;
+    height: auto;
+    max-height: 420px;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  .founder-read-more {
+    display: inline-flex;
+    margin: 14px 0 18px;
   }
 
   .service-overview-grid {
@@ -5183,7 +5279,7 @@ footer {
   }
 
   .sticky-brand-cta-active .wa-float {
-    bottom: 164px;
+    bottom: 98px;
     --wa-float-offset: 0;
   }
 
@@ -5215,7 +5311,27 @@ footer {
     transform: none !important;
   }
 
+  .work-bento-card:nth-child(2) {
+    order: 1;
+  }
+
   .work-bento-card:nth-child(3) {
+    order: 2;
+  }
+
+  .work-bento-featured {
+    order: 3;
+  }
+
+  .work-bento-card:nth-child(4) {
+    order: 4;
+  }
+
+  .work-bento-card:nth-child(5) {
+    order: 5;
+  }
+
+  .work-bento-featured {
     grid-column: 1 / -1;
   }
 
@@ -5224,12 +5340,32 @@ footer {
     flex: none;
   }
 
-  .work-bento-card:nth-child(3) .work-bento-media {
+  .work-bento-featured .work-bento-media {
     aspect-ratio: 16 / 9.6;
   }
 
   .work-bento-info {
-    display: none;
+    display: block;
+    padding: 12px 0 0;
+    min-height: auto;
+  }
+
+  .work-feature-section .work-bento-info h3,
+  .work-bento-featured .work-bento-info h3 {
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+
+  .work-feature-section .work-tags {
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .work-feature-section .work-tags span {
+    min-height: 18px;
+    font-size: 7px;
+    letter-spacing: 0.03em;
+    padding: 3px 6px;
   }
 
   .work-feature-header .section-tag {
@@ -5250,7 +5386,7 @@ footer {
   .work-feature-mobile-cta {
     display: flex;
     justify-content: center;
-    padding: 28px 0 0;
+    padding: 28px 0 24px;
   }
 
   .work-feature-mobile-cta .btn-primary {
@@ -6117,7 +6253,7 @@ footer {
   }
 
   .sticky-brand-cta-active .wa-float {
-    bottom: 150px;
+    bottom: 98px;
     --wa-float-offset: 0;
   }
 
