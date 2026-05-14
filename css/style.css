@@ -1701,13 +1701,28 @@ body:not(.hero-page):not(.contact-page) .page-wrap > .resources-news-page > .res
 }
 
 .home-service-copy h3 {
+  display: inline-block;
+  position: relative;
   font-family: var(--font-display);
   font-size: clamp(24px, 2.5vw, 34px);
   font-weight: 700;
   color: #0f0f0f;
   line-height: 1.12;
   margin-bottom: 6px;
-  transition: color 0.25s var(--ease);
+  transition: color 0.25s var(--ease), transform 0.25s var(--ease);
+}
+
+.home-service-copy h3::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -8px;
+  width: 100%;
+  height: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.32s var(--ease);
 }
 
 .home-service-copy p {
@@ -1727,6 +1742,19 @@ body:not(.hero-page):not(.contact-page) .page-wrap > .resources-news-page > .res
 
 .home-service-row:hover h3 {
   color: var(--accent);
+  transform: translateX(8px);
+}
+
+.home-service-row:hover .home-service-copy h3::after,
+.home-service-row:focus-visible .home-service-copy h3::after {
+  transform: scaleX(1);
+}
+
+.home-service-row:hover .home-service-copy .work-tags span,
+.home-service-row:focus-visible .home-service-copy .work-tags span {
+  color: #3b3b3b;
+  border-color: rgba(0, 0, 255, 0.18);
+  background: rgba(0, 0, 255, 0.045);
 }
 
 /* HOMEPAGE HOW WE WORK */
