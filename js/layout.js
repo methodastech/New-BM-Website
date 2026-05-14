@@ -66,7 +66,6 @@ document.body.insertAdjacentHTML('beforeend', `
     <div class="footer-top">
       <div class="footer-brand">
         <a href="${basePath}index.html" style="display:inline-block;margin-bottom:16px;"><img src="${basePath}Asset+5@4x-8.webp" alt="Brand Method" height="60" style="display:block;"></a>
-        <p>Malaysia's leading branding and marketing agency. We help businesses turn confusion into dominance through strategic branding and scalable systems.</p>
         <p style="margin-top:16px;font-size:13px;color:var(--muted)">Mranti Park, Office 25, Level 1,<br>Taman Teknologi Mranti, Bukit Jalil,<br>57000 Kuala Lumpur</p>
       </div>
       <div class="footer-col">

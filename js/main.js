@@ -31,8 +31,10 @@ window.addEventListener('resize', updateNavState);
   if (!clientsSection || !stickyCta) return;
 
   function updateStickyBrandCta() {
+    const footer = document.querySelector('footer');
     const triggerPoint = clientsSection.offsetTop + clientsSection.offsetHeight - 80;
-    const isVisible = window.scrollY >= triggerPoint;
+    const isFooterReached = footer ? footer.getBoundingClientRect().top <= window.innerHeight - 40 : false;
+    const isVisible = window.scrollY >= triggerPoint && !isFooterReached;
     stickyCta.classList.toggle('is-visible', isVisible);
     document.body.classList.toggle('sticky-brand-cta-active', isVisible);
   }
@@ -517,10 +519,13 @@ if (form) {
     { selector: '.service-card-grid', item: '.service-detail-card', compact: true, mobileOnly: true },
     { selector: '.deliverables-grid', item: '.service-detail-card, .reveal', compact: true, mobileOnly: true },
     { selector: '.service-point-list', item: '.service-point', compact: true, mobileOnly: true },
+    { selector: '.how-work-steps', item: '.how-work-step', compact: true, mobileOnly: true },
+    { selector: '.client-experience-grid', item: '.client-experience-card', compact: true, mobileOnly: true },
     { selector: '.why-method-list', item: '.why-method-card', compact: true, mobileOnly: true, wrapperClass: 'bm-slider--why-method' },
     { selector: '.standout-grid', item: '.standout-card', compact: true, mobileOnly: true },
     { selector: '.marketing-problem-grid', item: '.marketing-problem-card', compact: true, mobileOnly: true },
-    { selector: '.process-steps-wrap', item: '.process-step', compact: true, mobileOnly: true }
+    { selector: '.process-steps-wrap', item: '.process-step', compact: true, mobileOnly: true },
+    { selector: '.approach-list', item: '.approach-item', compact: true, mobileOnly: true }
   ];
 
   function ensureSliderWrap(target, config) {
@@ -580,6 +585,11 @@ if (form) {
     const progressBar = progress.querySelector('span');
     const pauseTarget = config.pause ? target.querySelector(config.pause) : null;
     let resumeTimer = null;
+    let isPointerDragging = false;
+    let dragPointerId = null;
+    let dragStartX = 0;
+    let dragStartScrollLeft = 0;
+    let hasDragged = false;
 
     function hasActiveControls() {
       return !config.mobileOnly || window.matchMedia('(max-width: 768px)').matches;
@@ -594,7 +604,11 @@ if (form) {
       prev.disabled = !canScroll || target.scrollLeft <= 2;
       next.disabled = !canScroll || target.scrollLeft >= maxScroll - 2;
       const ratio = canScroll ? Math.min(Math.max(target.scrollLeft / maxScroll, 0), 1) : 0;
-      const maxProgressTravel = Math.max(progress.clientWidth - progressBar.clientWidth, 0);
+      const thumbWidth = canScroll
+        ? Math.max(progress.clientWidth * Math.min(target.clientWidth / target.scrollWidth, 1), 28)
+        : progress.clientWidth;
+      progressBar.style.width = `${thumbWidth.toFixed(2)}px`;
+      const maxProgressTravel = Math.max(progress.clientWidth - thumbWidth, 0);
       progressBar.style.transform = `translateX(${(ratio * maxProgressTravel).toFixed(2)}px)`;
     }
 
@@ -613,6 +627,48 @@ if (form) {
     next.addEventListener('click', () => scrollByItem(1));
     target.addEventListener('scroll', updateButtons, { passive: true });
     window.addEventListener('resize', updateButtons);
+
+    target.addEventListener('pointerdown', event => {
+      if (!config.mobileOnly || !window.matchMedia('(max-width: 768px)').matches) return;
+      if (event.pointerType !== 'mouse') return;
+      if (event.button !== 0) return;
+      if (target.scrollWidth - target.clientWidth <= 4) return;
+
+      isPointerDragging = true;
+      dragPointerId = event.pointerId;
+      dragStartX = event.clientX;
+      dragStartScrollLeft = target.scrollLeft;
+      hasDragged = false;
+      wrap.classList.add('is-dragging');
+      target.setPointerCapture?.(event.pointerId);
+    });
+
+    target.addEventListener('pointermove', event => {
+      if (!isPointerDragging || event.pointerId !== dragPointerId) return;
+
+      const deltaX = event.clientX - dragStartX;
+      if (Math.abs(deltaX) > 3) hasDragged = true;
+      target.scrollLeft = dragStartScrollLeft - deltaX;
+    });
+
+    function endPointerDrag(event) {
+      if (!isPointerDragging || event.pointerId !== dragPointerId) return;
+      isPointerDragging = false;
+      dragPointerId = null;
+      wrap.classList.remove('is-dragging');
+      target.releasePointerCapture?.(event.pointerId);
+    }
+
+    target.addEventListener('pointerup', endPointerDrag);
+    target.addEventListener('pointercancel', endPointerDrag);
+
+    target.addEventListener('click', event => {
+      if (!hasDragged) return;
+      event.preventDefault();
+      event.stopPropagation();
+      hasDragged = false;
+    }, true);
+
     updateButtons();
   }
 
