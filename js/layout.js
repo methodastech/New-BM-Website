@@ -65,9 +65,10 @@ document.body.insertAdjacentHTML('beforeend', `
   <div class="footer-inner">
     <div class="footer-top">
       <div class="footer-brand">
+        <h4>Address</h4>
         <p>Mranti Park, Office 25, Level 1,<br>Taman Teknologi Mranti, Bukit Jalil,<br>57000 Kuala Lumpur</p>
       </div>
-      <div class="footer-col">
+      <div class="footer-col footer-col-services">
         <h4>Our Services</h4>
         <ul>
           <li><a href="${basePath}brand-strategy.html">Brand Strategy &amp; Identity</a></li>
@@ -77,7 +78,7 @@ document.body.insertAdjacentHTML('beforeend', `
           <li><a href="${basePath}website-apps.html">Website, Apps &amp; E-Commerce</a></li>
         </ul>
       </div>
-      <div class="footer-col">
+      <div class="footer-col footer-col-contact">
         <h4>Contact</h4>
         <ul>
           <li><a href="tel:+60122826371">+6012-282 6371</a></li>
@@ -91,7 +92,10 @@ document.body.insertAdjacentHTML('beforeend', `
       <img src="${basePath}brand-stamp.png" alt="Brand Method" class="brand-stamp-logo">
     </div>
     <div class="footer-bottom">
-      <p>© 2021–2026 BrandMethod Sdn Bhd. All rights reserved.</p>
+      <p>© 2021-2026 BrandMethod Sdn Bhd. All rights reserved.</p>
+      <div class="footer-bottom-links">
+        <a href="${basePath}privacy-policy.html">Privacy Policy</a>
+      </div>
     </div>
   </div>
 </footer>
