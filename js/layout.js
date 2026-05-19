@@ -85,6 +85,10 @@ document.body.insertAdjacentHTML('beforeend', `
           <li><a href="mailto:hello@brandmethod.co">hello@brandmethod.co</a></li>
           <li><a href="https://instagram.com/brandmethod" target="_blank" rel="noopener">Instagram</a></li>
           <li><a href="https://linkedin.com/company/brandmethod" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="https://www.facebook.com/brandmethodinternational/" target="_blank" rel="noopener">Facebook</a></li>
+          <li><a href="https://www.tiktok.com/@bazilzieel69" target="_blank" rel="noopener">TikTok</a></li>
+          <li><a href="https://dribbble.com/BazilZieel" target="_blank" rel="noopener">Dribbble</a></li>
+          <li><a href="https://www.behance.net/BazilZieel" target="_blank" rel="noopener">Behance</a></li>
         </ul>
       </div>
     </div>
@@ -96,6 +100,7 @@ document.body.insertAdjacentHTML('beforeend', `
     <div class="footer-bottom">
       <p>© 2021-2026 BrandMethod Sdn Bhd. All rights reserved.</p>
       <div class="footer-bottom-links">
+        <a href="${basePath}terms-of-service.html">Terms of Service</a>
         <a href="${basePath}privacy-policy.html">Privacy Policy</a>
       </div>
     </div>
