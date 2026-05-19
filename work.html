@@ -31,6 +31,9 @@
 <link rel="stylesheet" href="css/style.css">
 <style>
 .work-search-wrap { max-width:680px; margin:0 auto 72px; }
+.work-page-inner {
+  padding-inline: 28px;
+}
 .work-search-label { display:block; font-family:var(--font-sans); font-size:10px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); margin-bottom:12px; }
 .work-search {
   width: 100%;
@@ -46,6 +49,75 @@
 }
 .work-search:focus { border-color:var(--accent); box-shadow:0 0 0 4px rgba(0, 0, 255, 0.08), inset 3px 0 0 var(--accent); }
 .work-search::placeholder { color:#999999; }
+.logo-gallery-banner {
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  align-items: stretch;
+  gap: 0;
+  margin: 0 0 32px;
+  height: 184px;
+  background:
+    linear-gradient(135deg, rgba(247, 247, 252, 0.98), rgba(255, 255, 255, 0.92));
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 14px 34px rgba(12, 19, 48, 0.07);
+  overflow: hidden;
+}
+.logo-gallery-copy {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding: 22px 28px;
+  min-width: 0;
+}
+.logo-gallery-copy-body {
+  min-width: 0;
+}
+.logo-gallery-copy-body h2 {
+  color: #111111;
+  font-family: var(--font-display);
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 1.05;
+  margin-bottom: 10px;
+}
+.logo-gallery-copy-body p {
+  max-width: 240px;
+  color: #4a4f63;
+  font-size: 15px;
+  line-height: 1.5;
+  margin-bottom: 14px;
+}
+.logo-gallery-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--accent);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+.logo-gallery-link:hover {
+  color: #111111;
+}
+.logo-gallery-link span:last-child {
+  transition: transform 0.2s var(--ease);
+}
+.logo-gallery-link:hover span:last-child {
+  transform: translateX(3px);
+}
+.logo-gallery-media {
+  min-height: 0;
+  height: 184px;
+}
+.logo-gallery-media img {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+}
 .work-floating-filter {
   position: fixed;
   left: 50%;
@@ -226,8 +298,46 @@
   text-transform: uppercase;
 }
 @media(max-width:1024px){ .work-grid-full{grid-template-columns:repeat(2,1fr);} }
+@media(max-width:1024px){
+  .work-page-inner {
+    padding-inline: 24px;
+  }
+  .logo-gallery-banner {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+  .logo-gallery-copy {
+    padding: 22px 22px 18px;
+  }
+  .logo-gallery-copy-body p {
+    max-width: 100%;
+  }
+  .logo-gallery-media img {
+    min-height: 190px;
+  }
+}
 @media(max-width:768px){
+  .work-page-inner {
+    padding-inline: 18px;
+  }
   .work-search-wrap { margin-bottom: 48px; }
+  .logo-gallery-banner {
+    margin-bottom: 40px;
+    height: auto;
+  }
+  .logo-gallery-copy {
+    align-items: flex-start;
+    padding: 20px 18px 18px;
+  }
+  .logo-gallery-copy-body h2 {
+    font-size: 24px;
+  }
+  .logo-gallery-copy-body p {
+    font-size: 14px;
+  }
+  .logo-gallery-media img {
+    min-height: 160px;
+  }
   .work-grid-full{grid-template-columns:1fr; gap:40px;}
   .work-card-body h3 { font-size: 20px; }
   .work-card-body p { font-size: 16px; }
@@ -254,11 +364,27 @@
 </div>
 
 <section>
-  <div class="section-inner">
+  <div class="section-inner work-page-inner">
     <div class="work-search-wrap reveal">
       <label class="work-search-label" for="workSearch">Search work</label>
       <input class="work-search" id="workSearch" type="search" placeholder="Search by project, industry, or keyword..." autocomplete="off">
     </div>
+
+    <a class="logo-gallery-banner reveal reveal-delay-1" href="logo-gallery.html">
+      <div class="logo-gallery-copy">
+        <div class="logo-gallery-copy-body">
+          <h2>Logo Gallery</h2>
+          <p>A curated collection of brand marks, symbols, and identity explorations.</p>
+          <span class="logo-gallery-link">
+            <span>View all logo works</span>
+            <span aria-hidden="true">&rarr;</span>
+          </span>
+        </div>
+      </div>
+      <div class="logo-gallery-media">
+        <img src="Image/banner-card.webp" alt="Logo sketching and identity exploration process" loading="lazy" decoding="async">
+      </div>
+    </a>
 
     <div class="work-grid-full">
       <div class="work-card has-work-bg reveal" data-cat="health" data-work-image="jb-cocoa.webp" data-href="work-jb-cocoa.html" style="aspect-ratio:4/3;">

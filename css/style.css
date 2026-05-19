@@ -137,6 +137,14 @@ nav.nav-hidden {
   line-height: 1;
 }
 
+.nav-logo-mark {
+  height: 52px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+  background: transparent;
+}
+
 .nav-logo svg {
   display: block;
 }
@@ -2886,13 +2894,13 @@ footer {
 
 .footer-top {
   display: grid;
-  grid-template-columns: minmax(220px, 0.9fr) minmax(260px, 1fr) minmax(220px, 0.8fr);
+  grid-template-columns: 1.05fr 0.9fr 1.1fr 1fr;
   align-items: start;
-  justify-content: space-between;
-  column-gap: clamp(24px, 4vw, 72px);
+  justify-content: stretch;
+  column-gap: clamp(24px, 2.2vw, 40px);
   row-gap: 32px;
   margin-bottom: 0;
-  max-width: var(--max-w);
+  max-width: min(var(--max-w), 1480px);
   margin-left: auto;
   margin-right: auto;
 }
@@ -2903,7 +2911,6 @@ footer {
 }
 
 .footer-brand {
-  justify-self: start;
   text-align: left;
 }
 
@@ -2925,24 +2932,24 @@ footer {
   margin-bottom: 20px;
 }
 
+.footer-col-menu,
 .footer-col-services {
-  justify-self: center;
   text-align: left;
 }
 
+.footer-col-menu ul,
 .footer-col-services ul {
-  width: fit-content;
-  margin: 0 auto;
+  width: 100%;
+  margin: 0;
 }
 
 .footer-col-contact {
-  justify-self: end;
   text-align: left;
 }
 
 .footer-col-contact ul {
-  width: fit-content;
-  margin-left: auto;
+  width: 100%;
+  margin-left: 0;
 }
 
 .footer-col-contact ul li a {
@@ -4953,9 +4960,10 @@ footer {
   }
 
   .footer-top {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .footer-col-menu,
   .footer-col-contact {
     justify-self: start;
     text-align: left;
@@ -5785,8 +5793,8 @@ footer {
     padding: 0 20px;
   }
 
-  .nav-logo img {
-    height: 34px !important;
+  .nav-logo-mark {
+    height: 38px !important;
     width: auto;
   }
 
@@ -6188,12 +6196,14 @@ footer {
     gap: 40px;
   }
 
+  .footer-col-menu,
   .footer-col-services,
   .footer-col-contact {
     justify-self: start;
     text-align: left;
   }
 
+  .footer-col-menu ul,
   .footer-col-services ul,
   .footer-col-contact ul {
     width: auto;
@@ -6624,8 +6634,8 @@ footer {
     padding: 0 32px;
   }
 
-  .nav-logo img {
-    height: 42px !important;
+  .nav-logo-mark {
+    height: 46px !important;
     width: auto;
   }
 
@@ -7030,8 +7040,8 @@ footer {
     padding: 0 44px;
   }
 
-  .nav-logo img {
-    height: 46px !important;
+  .nav-logo-mark {
+    height: 50px !important;
   }
 
   .nav-inner {
@@ -7368,8 +7378,8 @@ footer {
     padding: 0 56px;
   }
 
-  .nav-logo img {
-    height: 50px !important;
+  .nav-logo-mark {
+    height: 54px !important;
   }
 
   .nav-inner {

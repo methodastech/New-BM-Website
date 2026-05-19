@@ -1,5 +1,6 @@
 // Shared logo SVG (path-based, no font dependency)
-const basePath = window.location.pathname.includes('/blog/') ? '../' : '';
+const nestedSections = ['/blog/', '/logo-page/'];
+const basePath = nestedSections.some((section) => window.location.pathname.includes(section)) ? '../' : '';
 const logoSVG = (width, height) => `
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 100" width="${width}" height="${height}" aria-label="Brand Method">
     <path fill="#0000ff" fill-rule="evenodd" d="M 0,0 L 25,0 A 47,25 0 0,1 25,50 A 50,25 0 0,1 25,100 L 0,100 Z M 25,8 A 35,17 0 0,1 25,42 Z M 25,57 A 38,17.5 0 0,1 25,92 Z"/>
@@ -10,7 +11,11 @@ const logoSVG = (width, height) => `
 document.body.insertAdjacentHTML('afterbegin', `
 <nav>
   <div class="nav-inner">
-    <a href="${basePath}index.html" class="nav-logo"><img src="${basePath}Asset+8@4x.webp" alt="Brand Method" height="48" style="display:block;"></a>
+    <a href="${basePath}index.html" class="nav-logo" aria-label="Brand Method home">
+      <video class="nav-logo-mark" autoplay muted loop playsinline preload="metadata" disablepictureinpicture aria-label="Brand Method animated logo">
+        <source src="${basePath}b-star-transparent.webm?v=20260519a" type="video/webm">
+      </video>
+    </a>
     <ul class="nav-links">
       <li><a href="${basePath}index.html">Home</a></li>
       <li><a href="${basePath}about.html">About</a></li>
@@ -67,6 +72,16 @@ document.body.insertAdjacentHTML('beforeend', `
       <div class="footer-brand">
         <h4>Address</h4>
         <p>Mranti Park, Office 25, Level 1,<br>Taman Teknologi Mranti, Bukit Jalil,<br>57000 Kuala Lumpur</p>
+      </div>
+      <div class="footer-col footer-col-menu">
+        <h4>Menu</h4>
+        <ul>
+          <li><a href="${basePath}index.html">Home</a></li>
+          <li><a href="${basePath}about.html">About</a></li>
+          <li><a href="${basePath}work.html">Work</a></li>
+          <li><a href="${basePath}services.html">Services</a></li>
+          <li><a href="${basePath}resources.html">Resources</a></li>
+        </ul>
       </div>
       <div class="footer-col footer-col-services">
         <h4>Our Services</h4>

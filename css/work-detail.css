@@ -286,6 +286,27 @@
   aspect-ratio: auto;
   object-fit: contain;
 }
+.logo-case-page .portfolio-content {
+  width: 100%;
+  max-width: none !important;
+}
+.logo-case-page .portfolio-image--single {
+  width: 100%;
+}
+.logo-case-page .portfolio-image--single img {
+  width: 100%;
+}
+.logo-case-page .portfolio-editorial-note,
+.logo-case-page .portfolio-editorial-note--right {
+  max-width: 760px;
+  margin: 18px 0 22px;
+}
+.logo-case-page .portfolio-copy {
+  max-width: 760px !important;
+}
+.logo-case-page .portfolio-copy h2 {
+  display: none;
+}
 @media (max-width: 768px) {
   .portfolio-detail {
     padding: 40px 20px 64px;
@@ -336,6 +357,9 @@
     max-width: 100%;
     margin: 14px 0 24px;
     font-size: clamp(21px, 8vw, 30px);
+  }
+  .logo-case-page .portfolio-copy {
+    max-width: 100% !important;
   }
 }
 
