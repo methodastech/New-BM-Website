@@ -81,16 +81,20 @@
   margin-bottom: 10px;
 }
 .logo-gallery-copy-body p {
-  max-width: 240px;
+  max-width: 340px;
   color: #4a4f63;
   font-size: 15px;
-  line-height: 1.5;
-  margin-bottom: 14px;
+  line-height: 1.45;
+  margin-bottom: 22px;
+}
+.logo-gallery-copy-body p br {
+  display: block;
 }
 .logo-gallery-link {
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  margin-top: 4px;
   color: var(--accent);
   font-family: var(--font-sans);
   font-size: 13px;
@@ -312,6 +316,9 @@
   .logo-gallery-copy-body p {
     max-width: 100%;
   }
+  .logo-gallery-copy-body p br {
+    display: none;
+  }
   .logo-gallery-media img {
     min-height: 190px;
   }
@@ -334,6 +341,9 @@
   }
   .logo-gallery-copy-body p {
     font-size: 14px;
+  }
+  .logo-gallery-copy-body p br {
+    display: none;
   }
   .logo-gallery-media img {
     min-height: 160px;
@@ -374,7 +384,7 @@
       <div class="logo-gallery-copy">
         <div class="logo-gallery-copy-body">
           <h2>Logo Gallery</h2>
-          <p>A curated collection of brand marks, symbols, and identity explorations.</p>
+          <p>A curated collection of brand marks, symbols,<br>and identity explorations.</p>
           <span class="logo-gallery-link">
             <span>View all logo works</span>
             <span aria-hidden="true">&rarr;</span>

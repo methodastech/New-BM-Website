@@ -36,6 +36,31 @@
 .logo-gallery-inner {
   padding-inline: 28px;
 }
+.logo-gallery-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 34px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  transition: color 0.2s var(--ease), transform 0.2s var(--ease);
+}
+.logo-gallery-back::before {
+  content: '';
+  width: 18px;
+  height: 10px;
+  background: currentColor;
+  clip-path: polygon(0 50%, 42% 0, 42% 38%, 100% 38%, 100% 62%, 42% 62%, 42% 100%);
+  flex: 0 0 auto;
+}
+.logo-gallery-back:hover {
+  color: var(--accent);
+  transform: translateX(-4px);
+}
 .work-search-wrap {
   max-width: 680px;
   margin: 0 auto 72px;
@@ -109,6 +134,28 @@
   font-size: 22px;
   font-weight: 500;
   line-height: 1.15;
+  margin-bottom: 10px;
+}
+.logo-gallery-card-capsules {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.logo-gallery-card-capsule {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 6px 12px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 999px;
+  background: #f3f3f3;
+  color: #545454;
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  text-transform: uppercase;
 }
 @media (max-width: 900px) {
   .logo-gallery-inner {
@@ -135,6 +182,14 @@
   .logo-gallery-card-body h3 {
     font-size: 20px;
   }
+  .logo-gallery-card-capsules {
+    gap: 6px;
+  }
+  .logo-gallery-card-capsule {
+    min-height: 26px;
+    padding: 6px 10px;
+    font-size: 9px;
+  }
 }
 </style>
 </head>
@@ -147,6 +202,7 @@
   <div class="page-wrap">
     <section class="logo-gallery-page">
       <div class="section-inner logo-gallery-inner">
+        <a class="logo-gallery-back reveal" href="work.html">Back to work</a>
         <div class="work-search-wrap reveal">
           <label class="work-search-label" for="logoGallerySearch">Search work</label>
           <input class="work-search" id="logoGallerySearch" type="search" placeholder="Search by project, industry, or keyword..." autocomplete="off">
@@ -173,10 +229,10 @@
 
           <a class="logo-gallery-card reveal reveal-delay-2" href="logo-page/okazami.html">
             <div class="logo-gallery-card-media">
-              <img src="logo-gallery-images/okazami.webp" alt="Okazami branding logo artwork" loading="lazy" decoding="async">
+              <img src="logo-gallery-images/okazami.webp" alt="Okamizu branding logo artwork" loading="lazy" decoding="async">
             </div>
             <div class="logo-gallery-card-body">
-              <h3>Okazami</h3>
+              <h3>Okamizu</h3>
             </div>
           </a>
 
@@ -404,10 +460,59 @@
   <script src="js/main.js"></script>
   <script>
   (() => {
+    const capsuleMap = {
+      'logo-page/bidshido.html': ['Auction Platform', 'Collectibles Marketplace', 'E-Commerce'],
+      'logo-page/viewpoint.html': ['SaaS', 'RegTech', 'Corporate Software'],
+      'logo-page/okazami.html': ['Japanese F&B', 'Beverage', 'Restaurant Branding'],
+      'logo-page/go-bunny.html': ['F&B', 'Bubble Tea', 'Dessert Brand'],
+      'logo-page/stream-branding.html': ['Media', 'Streaming', 'Digital Platform'],
+      'logo-page/kampung-gold-branding.html': ['Agriculture', 'Food Product', 'FMCG'],
+      'logo-page/spirochi.html': ['Gaming', 'Esports', 'Entertainment'],
+      'logo-page/ib-netx-symbol-scaffolding.html': ['Technology', 'Corporate', 'Digital Infrastructure'],
+      'logo-page/koji.html': ['Beauty', 'Lifestyle', 'Fashion'],
+      'logo-page/charge-n-go.html': ['Automotive', 'EV', 'Mobility'],
+      'logo-page/a-pie-thing.html': ['F&B', 'Bakery', 'Cafe'],
+      'logo-page/ahhh.html': ['Creative Brand', 'Entertainment', 'Lifestyle'],
+      'logo-page/beyond-the-scene-bts.html': ['Media Production', 'Entertainment'],
+      'logo-page/bukit-beruangs-fire-bear.html': ['Community', 'Mascot', 'Sports'],
+      'logo-page/clean-pro.html': ['Cleaning Services', 'Home Services'],
+      'logo-page/cofeology.html': ['Cafe', 'Restaurant', 'Coffee Brand'],
+      'logo-page/fruit-point-branding.html': ['Beverage', 'FMCG', 'Juice Brand'],
+      'logo-page/healthone-branding.html': ['Healthcare', 'Medical'],
+      'logo-page/hidayah-medic.html': ['Healthcare', 'Clinic', 'Medical'],
+      'logo-page/mayflower-brand-identity-revamp.html': ['Travel', 'Tourism', 'Transportation'],
+      'logo-page/pi-industries-brand-identity.html': ['Industrial', 'Engineering', 'Manufacturing'],
+      'logo-page/recovr-branding.html': ['Sports Recovery', 'Healthcare', 'Fitness'],
+      'logo-page/remake-design-build.html': ['Interior Design', 'Renovation', 'Architecture'],
+      'logo-page/rive.html': ['Construction', 'Industrial', 'Engineering'],
+      'logo-page/armels.html': ['Sports Recovery', 'Rehabilitation', 'Fitness'],
+      'logo-page/s-nation-digital-solution.html': ['Technology', 'Digital Agency', 'Software'],
+      'logo-page/spiroball-brand-identity.html': ['Sports', 'Gaming', 'Recreation']
+    };
+
     const search = document.getElementById('logoGallerySearch');
     const cards = Array.from(document.querySelectorAll('.logo-gallery-card'));
 
     if (!search || !cards.length) return;
+
+    cards.forEach((card) => {
+      const categories = capsuleMap[card.getAttribute('href')];
+      const body = card.querySelector('.logo-gallery-card-body');
+
+      if (!categories || !body) return;
+
+      const capsuleRow = document.createElement('div');
+      capsuleRow.className = 'logo-gallery-card-capsules';
+
+      categories.forEach((category) => {
+        const capsule = document.createElement('span');
+        capsule.className = 'logo-gallery-card-capsule';
+        capsule.textContent = category;
+        capsuleRow.appendChild(capsule);
+      });
+
+      body.appendChild(capsuleRow);
+    });
 
     function setCardVisible(card, shouldShow) {
       if (shouldShow) {
@@ -432,7 +537,8 @@
       cards.forEach(card => {
         const title = card.querySelector('h3')?.textContent.toLowerCase() || '';
         const alt = card.querySelector('img')?.alt.toLowerCase() || '';
-        const searchableText = `${title} ${alt}`;
+        const capsules = card.querySelector('.logo-gallery-card-capsules')?.textContent.toLowerCase() || '';
+        const searchableText = `${title} ${alt} ${capsules}`;
         const matches = !query || searchableText.includes(query);
         setCardVisible(card, matches);
       });

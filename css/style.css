@@ -2894,13 +2894,13 @@ footer {
 
 .footer-top {
   display: grid;
-  grid-template-columns: 1.05fr 0.9fr 1.1fr 1fr;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   align-items: start;
   justify-content: stretch;
-  column-gap: clamp(24px, 2.2vw, 40px);
+  column-gap: clamp(24px, 2vw, 36px);
   row-gap: 32px;
   margin-bottom: 0;
-  max-width: min(var(--max-w), 1480px);
+  max-width: var(--max-w);
   margin-left: auto;
   margin-right: auto;
 }
@@ -2934,6 +2934,7 @@ footer {
 
 .footer-col-menu,
 .footer-col-services {
+  justify-self: center;
   text-align: left;
 }
 
@@ -2944,6 +2945,7 @@ footer {
 }
 
 .footer-col-contact {
+  justify-self: end;
   text-align: left;
 }
 
