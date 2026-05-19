@@ -2781,20 +2781,21 @@ body:not(.hero-page):not(.contact-page) .page-wrap > .resources-news-page > .res
 /* â”€â”€ BRAND STAMP â”€â”€ */
 .brand-stamp {
   background: transparent;
-  padding: 72px 0 28px;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-  width: 100%;
-  max-width: 100%;
+  overflow: visible;
+  max-width: none;
+  margin-top: 28px;
 }
 
 .brand-stamp-logo {
-  width: 100%;
-  max-width: 1240px;
+  width: min(100%, 1120px);
   height: auto;
   display: block;
+  object-fit: contain;
+  overflow: visible;
   opacity: 0;
   transform: translateY(86px);
   filter: blur(16px);
@@ -2805,6 +2806,24 @@ body:not(.hero-page):not(.contact-page) .page-wrap > .resources-news-page > .res
   will-change: opacity, transform, filter;
 }
 
+.footer-brand-video-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 80px 48px 48px;
+  overflow: visible;
+}
+
+.footer-brand-video {
+  width: min(100%, 1120px);
+  max-width: 1120px;
+  height: auto;
+  object-fit: contain;
+  overflow: visible;
+  display: block;
+}
+
 .brand-stamp.is-visible .brand-stamp-logo {
   opacity: 1;
   transform: translateY(0);
@@ -2813,21 +2832,32 @@ body:not(.hero-page):not(.contact-page) .page-wrap > .resources-news-page > .res
 
 @media (max-width: 768px) {
   .brand-stamp {
-    padding: 52px 0 18px;
+    margin-top: 20px;
   }
 
-  .brand-stamp-logo {
-    max-width: calc(100vw - 40px);
+  .footer-brand-video-wrap {
+    padding: 56px 24px 36px;
+  }
+
+  .brand-stamp-logo,
+  .footer-brand-video {
+    width: 100%;
+    max-width: 640px;
   }
 }
 
 @media (max-width: 480px) {
   .brand-stamp {
-    padding: 44px 0 12px;
+    margin-top: 16px;
   }
 
-  .brand-stamp-logo {
-    max-width: calc(100vw - 36px);
+  .footer-brand-video-wrap {
+    padding: 48px 18px 28px;
+  }
+
+  .brand-stamp-logo,
+  .footer-brand-video {
+    max-width: 100%;
   }
 }
 
@@ -2843,14 +2873,15 @@ footer {
   border-top: none;
   padding: 68px 20px 28px;
   max-width: 100%;
-  overflow-x: hidden;
-  overflow-x: clip;
+  overflow: visible;
   color: #ffffff;
 }
 
 .footer-inner {
-  max-width: var(--max-w);
+  max-width: none;
+  width: 100%;
   margin: 0 auto;
+  overflow: visible;
 }
 
 .footer-top {
@@ -2861,6 +2892,9 @@ footer {
   column-gap: clamp(24px, 4vw, 72px);
   row-gap: 32px;
   margin-bottom: 0;
+  max-width: var(--max-w);
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .footer-brand,
@@ -2957,6 +2991,8 @@ footer {
   align-items: center;
   flex-wrap: wrap;
   gap: 16px;
+  max-width: var(--max-w);
+  margin: 0 auto;
 }
 
 .footer-bottom p {

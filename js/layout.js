@@ -88,8 +88,10 @@ document.body.insertAdjacentHTML('beforeend', `
         </ul>
       </div>
     </div>
-    <div class="brand-stamp">
-      <img src="${basePath}brand-stamp.png" alt="Brand Method" class="brand-stamp-logo">
+    <div class="brand-stamp footer-brand-video-wrap">
+      <video class="brand-stamp-logo footer-brand-video" autoplay muted loop playsinline preload="metadata" aria-label="Brand Method animated logo">
+        <source src="${basePath}bm-star-transparent.webm?v=20260519b" type="video/webm">
+      </video>
     </div>
     <div class="footer-bottom">
       <p>© 2021-2026 BrandMethod Sdn Bhd. All rights reserved.</p>
