@@ -49,18 +49,39 @@
 }
 .work-search:focus { border-color:var(--accent); box-shadow:0 0 0 4px rgba(0, 0, 255, 0.08), inset 3px 0 0 var(--accent); }
 .work-search::placeholder { color:#999999; }
+.gallery-banner-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin: 0 0 32px;
+}
 .logo-gallery-banner {
   display: grid;
-  grid-template-columns: 280px minmax(0, 1fr);
+  grid-template-columns: 350px minmax(0, 1fr);
   align-items: stretch;
   gap: 0;
-  margin: 0 0 32px;
   height: 184px;
   background:
     linear-gradient(135deg, rgba(247, 247, 252, 0.98), rgba(255, 255, 255, 0.92));
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  box-shadow: 0 14px 34px rgba(12, 19, 48, 0.07);
   overflow: hidden;
+  transition: transform 0.28s var(--ease), box-shadow 0.28s var(--ease);
+}
+.mascot-gallery-banner {
+  display: grid;
+  grid-template-columns: 350px minmax(0, 1fr);
+  align-items: stretch;
+  gap: 0;
+  height: 184px;
+  background: linear-gradient(135deg, #fff0bf 0%, #ffe3a0 56%, #ffd27a 100%);
+  overflow: hidden;
+  transition: transform 0.28s var(--ease), box-shadow 0.28s var(--ease);
+}
+.logo-gallery-banner:hover,
+.logo-gallery-banner:focus-visible,
+.mascot-gallery-banner:hover,
+.mascot-gallery-banner:focus-visible {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 36px rgba(12, 19, 48, 0.12);
 }
 .logo-gallery-copy {
   display: flex;
@@ -81,11 +102,11 @@
   margin-bottom: 10px;
 }
 .logo-gallery-copy-body p {
-  max-width: 340px;
+  max-width: 100%;
   color: #4a4f63;
-  font-size: 15px;
-  line-height: 1.45;
-  margin-bottom: 22px;
+  font-size: 13px;
+  line-height: 1.35;
+  margin-bottom: 18px;
 }
 .logo-gallery-copy-body p br {
   display: block;
@@ -121,6 +142,29 @@
   object-fit: cover;
   object-position: center center;
   display: block;
+  transition: transform 0.7s var(--ease);
+}
+.logo-gallery-banner:hover .logo-gallery-media img,
+.logo-gallery-banner:focus-visible .logo-gallery-media img,
+.mascot-gallery-banner:hover .logo-gallery-media img,
+.mascot-gallery-banner:focus-visible .logo-gallery-media img {
+  transform: scale(1.04);
+}
+.logo-gallery-banner:focus-visible,
+.mascot-gallery-banner:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.mascot-gallery-banner .logo-gallery-copy-body p {
+  max-width: 100%;
+  margin-bottom: 12px;
+}
+.mascot-gallery-banner .logo-gallery-copy-body h2 {
+  margin-bottom: 8px;
+}
+.mascot-gallery-banner .logo-gallery-copy {
+  align-items: flex-start;
+  padding-top: 28px;
 }
 .work-floating-filter {
   position: fixed;
@@ -306,7 +350,11 @@
   .work-page-inner {
     padding-inline: 24px;
   }
-  .logo-gallery-banner {
+  .gallery-banner-grid {
+    grid-template-columns: 1fr;
+  }
+  .logo-gallery-banner,
+  .mascot-gallery-banner {
     grid-template-columns: 1fr;
     height: auto;
   }
@@ -328,8 +376,12 @@
     padding-inline: 18px;
   }
   .work-search-wrap { margin-bottom: 48px; }
-  .logo-gallery-banner {
+  .gallery-banner-grid {
     margin-bottom: 40px;
+    gap: 14px;
+  }
+  .logo-gallery-banner,
+  .mascot-gallery-banner {
     height: auto;
   }
   .logo-gallery-copy {
@@ -380,21 +432,39 @@
       <input class="work-search" id="workSearch" type="search" placeholder="Search by project, industry, or keyword..." autocomplete="off">
     </div>
 
-    <a class="logo-gallery-banner reveal reveal-delay-1" href="logo-gallery.html">
-      <div class="logo-gallery-copy">
-        <div class="logo-gallery-copy-body">
-          <h2>Logo Gallery</h2>
-          <p>A curated collection of brand marks, symbols,<br>and identity explorations.</p>
-          <span class="logo-gallery-link">
-            <span>View all logo works</span>
-            <span aria-hidden="true">&rarr;</span>
-          </span>
+    <div class="gallery-banner-grid">
+      <a class="logo-gallery-banner reveal reveal-delay-1" href="logo-gallery.html">
+        <div class="logo-gallery-copy">
+          <div class="logo-gallery-copy-body">
+            <h2>Logo Gallery</h2>
+            <p>A curated collection of brand marks, symbols,<br>and identity explorations.</p>
+            <span class="logo-gallery-link">
+              <span>View all logo works</span>
+              <span aria-hidden="true">&rarr;</span>
+            </span>
+          </div>
         </div>
-      </div>
-      <div class="logo-gallery-media">
-        <img src="Image/banner-card.webp" alt="Logo sketching and identity exploration process" loading="lazy" decoding="async">
-      </div>
-    </a>
+        <div class="logo-gallery-media">
+          <img src="Image/banner-card.webp" alt="Logo sketching and identity exploration process" loading="lazy" decoding="async">
+        </div>
+      </a>
+
+      <a class="mascot-gallery-banner reveal reveal-delay-2" href="mascot-gallery.html" aria-label="View mascot gallery">
+        <div class="logo-gallery-copy">
+          <div class="logo-gallery-copy-body">
+            <h2>Mascot Gallery</h2>
+            <p>A curated collection of mascot characters,<br>brand personalities, and playful assets.</p>
+            <span class="logo-gallery-link">
+              <span>View all mascot works</span>
+              <span aria-hidden="true">&rarr;</span>
+            </span>
+          </div>
+        </div>
+        <div class="logo-gallery-media">
+          <img src="santa-images/santa-barbara-cafe-mascot-suit-design.webp" alt="Mascot gallery preview artwork" loading="lazy" decoding="async">
+        </div>
+      </a>
+    </div>
 
     <div class="work-grid-full">
       <div class="work-card has-work-bg reveal" data-cat="health" data-work-image="jb-cocoa.webp" data-href="work-jb-cocoa.html" style="aspect-ratio:4/3;">
