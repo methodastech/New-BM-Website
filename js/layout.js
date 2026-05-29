@@ -12,9 +12,7 @@ document.body.insertAdjacentHTML('afterbegin', `
 <nav>
   <div class="nav-inner">
     <a href="${basePath}index.html" class="nav-logo" aria-label="Brand Method home">
-      <video class="nav-logo-mark" autoplay muted loop playsinline preload="metadata" disablepictureinpicture aria-label="Brand Method animated logo">
-        <source src="${basePath}b-star-transparent.webm?v=20260519a" type="video/webm">
-      </video>
+      <img class="nav-logo-mark" src="${basePath}Asset+8@4x.webp" alt="Brand Method logo" decoding="async">
     </a>
     <ul class="nav-links">
       <li><a href="${basePath}index.html">Home</a></li>

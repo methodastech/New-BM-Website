@@ -29,172 +29,495 @@
 <meta name="twitter:description" content="At Brand Method, we offer full-service solutions across brand identity, marketing and advertising, brand guidelines, content creation, and web design.">
 <meta name="twitter:image" content="https://brandmethod.co/Image/resources/brandmethod-os-framework.png">
 <link rel="stylesheet" href="css/style.css">
+<style>
+  body.services-overview-page {
+    background:
+      radial-gradient(circle at top left, rgba(0, 0, 255, 0.08), transparent 32%),
+      linear-gradient(180deg, #fcfcff 0%, #f6f7fb 100%);
+  }
+
+  .services-overview-page .page-wrap {
+    position: relative;
+  }
+
+  .services-overview-page .page-wrap::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 720px;
+    background:
+      radial-gradient(circle at 12% 12%, rgba(0, 0, 255, 0.12), transparent 22%),
+      radial-gradient(circle at 85% 10%, rgba(0, 0, 255, 0.07), transparent 18%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .services-overview-shell {
+    position: relative;
+    z-index: 1;
+    width: min(var(--max-w), calc(100% - 40px));
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding-bottom: 96px;
+  }
+
+  .services-hero {
+    padding: 88px 0 56px;
+  }
+
+  .services-hero .section-tag {
+    margin-bottom: 18px;
+  }
+
+  .services-hero h1 {
+    max-width: 780px;
+    font-family: var(--font-display);
+    font-size: clamp(72px, 10vw, 112px);
+    font-weight: 400;
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    margin-bottom: 24px;
+    color: #050505;
+  }
+
+  .services-hero p {
+    max-width: 760px;
+    font-size: clamp(13px, 1.55vw, 18px);
+    line-height: 1.65;
+    color: rgba(15, 15, 15, 0.72);
+  }
+
+  .services-stack {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px;
+  }
+
+  .service-overview-card {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: stretch;
+    min-height: 0;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(15, 15, 15, 0.08);
+    border-radius: 0;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(21, 27, 55, 0.05);
+  }
+
+  .service-overview-card--hero {
+    grid-column: 1 / -1;
+    grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
+    min-height: 468px;
+  }
+
+  .service-overview-card--compact {
+    min-height: 0;
+  }
+
+  .service-overview-media {
+    position: relative;
+    min-height: 100%;
+    background: #ebeef5;
+  }
+
+  .service-overview-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .service-overview-card--compact .service-overview-media {
+    height: 300px;
+  }
+
+  .service-overview-media--contain {
+    background:
+      radial-gradient(circle at top left, rgba(0, 0, 255, 0.08), transparent 35%),
+      #eef1f8;
+    padding: 0;
+  }
+
+  .service-overview-media--contain img {
+    object-fit: cover;
+    border-radius: 0;
+    background: transparent;
+  }
+
+  .service-overview-media--full-art {
+    background: #ffffff;
+  }
+
+  .service-overview-media--full-art img {
+    object-fit: contain;
+    object-position: center;
+    background: #ffffff;
+  }
+
+  .service-overview-body {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 28px 28px 24px;
+  }
+
+  .service-overview-card--hero .service-overview-body {
+    padding: 24px 20px 22px;
+  }
+
+  .service-overview-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .service-overview-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 0;
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .service-overview-card--hero .service-overview-kicker::before {
+    content: "01";
+    margin-right: 12px;
+  }
+
+  .service-overview-card:not(.service-overview-card--hero) .service-overview-kicker::before {
+    content: "";
+    color: currentColor;
+    margin-right: 12px;
+  }
+
+  .service-overview-icon {
+    flex: 0 0 auto;
+    width: 64px;
+    height: 64px;
+    display: grid;
+    place-items: center;
+    border-radius: 14px;
+    background: #f7f7fb;
+    color: var(--accent);
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+  }
+
+  .service-overview-icon svg {
+    width: 28px;
+    height: 28px;
+    stroke: currentColor;
+  }
+
+  .service-overview-copy h2 {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 3vw, 38px);
+    font-weight: 400;
+    line-height: 1.04;
+    letter-spacing: -0.035em;
+    color: #0c0c0f;
+    margin-bottom: 12px;
+  }
+
+  .service-overview-copy p {
+    font-size: 16px;
+    line-height: 1.8;
+    color: rgba(15, 15, 15, 0.72);
+  }
+
+  .service-overview-card--hero .service-overview-copy h2 {
+    font-size: clamp(44px, 4vw, 58px);
+  }
+
+  .service-overview-card--hero .service-overview-copy p {
+    font-size: 17px;
+  }
+
+  .service-overview-footer {
+    margin-top: auto;
+    padding-top: 22px;
+    border-top: 1px solid rgba(15, 15, 15, 0.08);
+  }
+
+  .service-overview-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    font-family: var(--font-sans);
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: var(--accent);
+  }
+
+  .service-overview-link svg {
+    width: 22px;
+    height: 22px;
+    stroke: currentColor;
+    transition: transform 0.25s var(--ease);
+  }
+
+  .service-overview-card:hover .service-overview-link svg {
+    transform: translateX(4px);
+  }
+
+  @media (max-width: 1100px) {
+    .services-stack {
+      grid-template-columns: 1fr;
+    }
+
+    .service-overview-card,
+    .service-overview-card--hero {
+      grid-template-columns: 1fr;
+      min-height: auto;
+    }
+
+    .service-overview-media {
+      min-height: 380px;
+    }
+
+    .service-overview-body {
+      padding: 36px;
+    }
+
+  }
+
+  @media (min-width: 1600px) {
+    .services-overview-shell {
+      width: min(var(--max-w), calc(100% - 64px));
+    }
+  }
+
+  @media (min-width: 1920px) {
+    .services-overview-shell {
+      width: min(var(--max-w), calc(100% - 88px));
+    }
+  }
+
+  @media (min-width: 2560px) {
+    .services-overview-shell {
+      width: min(var(--max-w), calc(100% - 112px));
+    }
+  }
+
+  @media (max-width: 760px) {
+    .services-overview-shell {
+      width: calc(100% - 40px);
+      padding-bottom: 72px;
+    }
+
+    .services-hero {
+      padding: 44px 0 40px;
+    }
+
+    .services-hero p {
+      font-size: 18px;
+      line-height: 1.8;
+    }
+
+    .service-overview-card {
+      border-radius: 0;
+    }
+
+    .service-overview-body {
+      gap: 22px;
+      padding: 26px 22px 24px;
+    }
+
+    .service-overview-head {
+      flex-direction: column;
+    }
+
+    .service-overview-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+    }
+
+    .service-overview-copy p {
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    .service-overview-media {
+      min-height: 260px;
+    }
+
+    .service-overview-media--contain {
+      padding: 0;
+    }
+
+  }
+</style>
 </head>
-<body>
+<body class="services-overview-page">
   <!-- Google Tag Manager (noscript) -->
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NJ9RQN4S"
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
 <div class="page-wrap">
+  <div class="services-overview-shell">
+    <section class="services-hero">
+      <div class="section-tag reveal">What We Do</div>
+      <h1 class="reveal reveal-delay-1">Services</h1>
+      <p class="reveal reveal-delay-2">Strategy, systems, and execution for brands that want to grow with clarity, consistency, and stronger commercial momentum.</p>
+    </section>
 
-<!-- SERVICE 1: BRANDING -->
-<section id="branding">
-  <div class="section-inner">
-    <div class="service-brand-grid">
-      <div class="service-brand-panel service-brand-copy">
-        <div class="service-index reveal">Service 01</div>
-        <h2 class="section-title reveal">Brand Strategy & <em>Identity</em></h2>
-        <p class="reveal reveal-delay-2" style="font-size:15px; color:var(--off-white); line-height:1.9; margin-bottom:20px;">We help organisations define who they are, what they stand for, and how they present themselves, clearly, consistently, and with intent. Brand strategy and identity are decision systems that align leadership, teams, and execution.</p>
-        <p class="reveal reveal-delay-2" style="font-size:15px; color:var(--off-white); line-height:1.9; margin-bottom:32px;">From brand audits and positioning to messaging frameworks and comprehensive brand books, we bring together strategy, identity, and execution into a single, coherent foundation.</p>
-        <h4 class="reveal reveal-delay-3" style="font-family:var(--font-sans); font-size:11px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent); margin-bottom:16px;">What's Included</h4>
-        <ul class="reveal reveal-delay-3" style="list-style:none; display:flex; flex-direction:column; gap:0; margin-bottom:32px;">
-          <li style="font-size:14px; color:var(--off-white); padding:10px 0; border-bottom:1px solid var(--border); display:flex; gap:12px;"><span style="color:var(--accent);">-></span> Brand Audit & Market Analysis</li>
-          <li style="font-size:14px; color:var(--off-white); padding:10px 0; border-bottom:1px solid var(--border); display:flex; gap:12px;"><span style="color:var(--accent);">-></span> Brand Purpose & Market Role Definition</li>
-          <li style="font-size:14px; color:var(--off-white); padding:10px 0; border-bottom:1px solid var(--border); display:flex; gap:12px;"><span style="color:var(--accent);">-></span> Audience Clarity & Prioritisation</li>
-          <li style="font-size:14px; color:var(--off-white); padding:10px 0; border-bottom:1px solid var(--border); display:flex; gap:12px;"><span style="color:var(--accent);">-></span> Differentiation & Competitive Positioning</li>
-          <li style="font-size:14px; color:var(--off-white); padding:10px 0; border-bottom:1px solid var(--border); display:flex; gap:12px;"><span style="color:var(--accent);">-></span> Messaging & Story Framework</li>
-          <li style="font-size:14px; color:var(--off-white); padding:10px 0; border-bottom:1px solid var(--border); display:flex; gap:12px;"><span style="color:var(--accent);">-></span> Visual Identity System (Logo, Colours, Typography)</li>
-          <li style="font-size:14px; color:var(--off-white); padding:10px 0; border-bottom:1px solid var(--border); display:flex; gap:12px;"><span style="color:var(--accent);">-></span> Brand Book & Guidelines</li>
-          <li style="font-size:14px; color:var(--off-white); padding:10px 0; display:flex; gap:12px;"><span style="color:var(--accent);">-></span> Sales Deck / Pitch Deck</li>
-        </ul>
-        <a href="contact.html" class="btn-primary reveal">Start Your Brand Project</a>
-      </div>
-      <div class="service-brand-panel service-brand-included reveal reveal-delay-1">
-        <div class="service-brand-image">
-          <img src="services/BrandMethod - Brand Strategy.webp" alt="Brand strategy and identity work collage for Viewpoint" decoding="async" loading="lazy">
+    <section class="services-stack" aria-label="Service categories">
+      <article class="service-overview-card service-overview-card--hero" id="branding">
+        <div class="service-overview-media">
+          <img src="services/BrandMethod - Brand Strategy.webp" alt="Brand strategy and identity presentation materials by Brand Method" decoding="async" loading="lazy">
         </div>
-      </div>
+        <div class="service-overview-body">
+          <div class="service-overview-head">
+            <div class="service-overview-kicker">Hero Service</div>
+            <div class="service-overview-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M12 3 4.8 7.2v5.6c0 4.4 3.1 8.5 7.2 9.9 4.1-1.4 7.2-5.5 7.2-9.9V7.2L12 3Z" stroke-width="1.6" stroke-linejoin="round"/>
+                <path d="M8.6 11.7 11 14.1l4.7-4.7" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </div>
+          <div class="service-overview-copy">
+            <h2>Brand Strategy &amp; Identity</h2>
+            <p>Define who you are, how you show up, and build a cohesive brand foundation that holds across every touchpoint, from audit to final guidelines.</p>
+          </div>
+          <div class="service-overview-footer">
+            <a href="brand-strategy.html" class="service-overview-link">Start your brand project
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M5 12h14m-6-6 6 6-6 6" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <article class="service-overview-card service-overview-card--compact" id="systems">
+        <div class="service-overview-media">
+          <img src="services/avisinna-book.webp" alt="Systems and playbook presentation by Brand Method" decoding="async" loading="lazy">
+        </div>
+        <div class="service-overview-body">
+          <div class="service-overview-head">
+            <div class="service-overview-kicker">02</div>
+            <div class="service-overview-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M8 3.8h6.6L19 8.2V20H8V3.8Z" stroke-width="1.6" stroke-linejoin="round"/>
+                <path d="M14.6 3.8v4.4H19M10.5 11.2h6M10.5 14.8h6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </div>
+          <div class="service-overview-copy">
+            <h2>System &amp; Playbook</h2>
+            <p>Documented frameworks and operating guidelines your team can actually follow, built to turn strategy into repeatable, scalable execution.</p>
+          </div>
+          <div class="service-overview-footer">
+            <a href="system-playbook.html" class="service-overview-link">Build your system
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M5 12h14m-6-6 6 6-6 6" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <article class="service-overview-card service-overview-card--compact" id="marketing">
+        <div class="service-overview-media service-overview-media--contain service-overview-media--full-art">
+          <img src="services/BrandMethod - Marketing_ads.gif" alt="Marketing and advertising campaign visual by Brand Method" decoding="async" loading="lazy">
+        </div>
+        <div class="service-overview-body">
+          <div class="service-overview-head">
+            <div class="service-overview-kicker">03</div>
+            <div class="service-overview-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M4 17.2V6.8m5 10.4V9.8m5 7.4V4.8m5 12.4V11.3" stroke-width="1.6" stroke-linecap="round"/>
+                <path d="m4 13.8 5-4 5 1.8 5-5.2" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </div>
+          <div class="service-overview-copy">
+            <h2>Marketing &amp; Ads</h2>
+            <p>Every channel planned, owned, and structured for long-term consistency, not short-term trends. Built around measurable outcomes.</p>
+          </div>
+          <div class="service-overview-footer">
+            <a href="marketing-ads.html" class="service-overview-link">Grow your reach
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M5 12h14m-6-6 6 6-6 6" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <article class="service-overview-card service-overview-card--compact" id="content">
+        <div class="service-overview-media service-overview-media--contain">
+          <img src="services/BrandMethod - Content Creation.gif" alt="Content creation campaign visual by Brand Method" decoding="async" loading="lazy">
+        </div>
+        <div class="service-overview-body">
+          <div class="service-overview-head">
+            <div class="service-overview-kicker">04</div>
+            <div class="service-overview-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M6 6.5h12v11H6z" stroke-width="1.6" stroke-linejoin="round"/>
+                <path d="m10 10.2 4 1.8-4 1.8v-3.6Z" stroke-width="1.6" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </div>
+          <div class="service-overview-copy">
+            <h2>Content Creation</h2>
+            <p>Content integrated with intent, not merely to fill a calendar, but to communicate clearly and drive real business outcomes.</p>
+          </div>
+          <div class="service-overview-footer">
+            <a href="content-creation.html" class="service-overview-link">Create better content
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M5 12h14m-6-6 6 6-6 6" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <article class="service-overview-card service-overview-card--compact" id="digital">
+        <div class="service-overview-media service-overview-media--full-art">
+          <img src="services/BrandMethod - Website_Apps_E-Commerce.webp" alt="Website and digital product interface designs by Brand Method" decoding="async" loading="lazy">
+        </div>
+        <div class="service-overview-body">
+          <div class="service-overview-head">
+            <div class="service-overview-kicker">05</div>
+            <div class="service-overview-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M4 6.5h16v11H4z" stroke-width="1.6" stroke-linejoin="round"/>
+                <path d="M9 19.5h6M12 17.5v2" stroke-width="1.6" stroke-linecap="round"/>
+              </svg>
+            </div>
+          </div>
+          <div class="service-overview-copy">
+            <h2>Commerce</h2>
+            <p>Brand-aligned digital experiences, from CMS and web development to AI integrations and e-commerce. Guided by strategy and real use cases.</p>
+          </div>
+          <div class="service-overview-footer">
+            <a href="website-apps.html" class="service-overview-link">Build your digital product
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M5 12h14m-6-6 6 6-6 6" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </article>
+    </section>
+  </div>
+
+  <div class="cta-band">
+    <div class="section-inner">
+      <div class="section-tag reveal">Start the Conversation</div>
+      <h2>Let's build something <em style="color:var(--accent);">extraordinary</em> together</h2>
+      <p>Trusted by 100+ brands, from startups to established companies.</p>
+      <a href="contact.html" class="btn-dark">Start the Conversation</a>
     </div>
   </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- SERVICE 2: SYSTEMS -->
-<section id="systems" style="background:var(--off-black);">
-  <div class="section-inner">
-    <div class="service-brand-grid">
-      <div class="service-brand-panel service-brand-included reveal">
-        <div class="service-brand-image">
-          <img src="services/avisinna-book.webp" alt="System and Playbook by Brand Method" decoding="async" loading="lazy">
-        </div>
-      </div>
-      <div class="service-brand-panel service-brand-copy">
-        <div class="service-index reveal">Service 02</div>
-        <h2 class="section-title reveal">System & <em>Playbook</em></h2>
-        <p class="reveal reveal-delay-1" style="font-size:15px; color:var(--off-white); line-height:1.9; margin-bottom:20px;">Strong brands don't rely on memory or interpretation, they rely on systems. We transform brand strategy into documented frameworks, rules, and operating guidelines your team can actually follow.</p>
-        <p class="reveal reveal-delay-1" style="font-size:15px; color:var(--off-white); line-height:1.9; margin-bottom:32px;">From AI automation and SOPs to playbooks and funnels, we design internal systems that turn strategy into repeatable, scalable execution.</p>
-        <h4 class="reveal reveal-delay-2" style="font-family:var(--font-sans); font-size:11px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent); margin-bottom:16px;">What's Included</h4>
-        <ul class="reveal reveal-delay-2" style="list-style:none; display:flex; flex-direction:column; gap:0; margin-bottom:32px;">
-          <li style="font-size:14px; color:var(--off-white); padding:10px 0; border-bottom:1px solid var(--border); display:flex; gap:12px;"><span style="color:var(--accent);">-></span> AI Workflow Automation</li>
-          <li style="font-size:14px; color:var(--off-white); padding:10px 0; border-bottom:1px solid var(--border); display:flex; gap:12px;"><span style="color:var(--accent);">-></span> SOP Development & Documentation</li>
-          <li style="font-size:14px; color:var(--off-white); padding:10px 0; border-bottom:1px solid var(--border); display:flex; gap:12px;"><span style="color:var(--accent);">-></span> Brand & Operations Playbook</li>
-          <li style="font-size:14px; color:var(--off-white); padding:10px 0; border-bottom:1px solid var(--border); display:flex; gap:12px;"><span style="color:var(--accent);">-></span> Sales Funnel Architecture</li>
-          <li style="font-size:14px; color:var(--off-white); padding:10px 0; border-bottom:1px solid var(--border); display:flex; gap:12px;"><span style="color:var(--accent);">-></span> CRM Setup & Automation</li>
-          <li style="font-size:14px; color:var(--off-white); padding:10px 0; border-bottom:1px solid var(--border); display:flex; gap:12px;"><span style="color:var(--accent);">-></span> WhatsApp & Email Automation</li>
-          <li style="font-size:14px; color:var(--off-white); padding:10px 0; display:flex; gap:12px;"><span style="color:var(--accent);">-></span> KPI Dashboard & Analytics</li>
-        </ul>
-        <a href="contact.html" class="btn-ghost reveal">Build Your System</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- SERVICE 3: MARKETING -->
-<section id="marketing">
-  <div class="section-inner">
-    <div class="service-brand-grid">
-      <div class="service-brand-panel service-brand-copy">
-        <div class="service-index reveal">Service 03</div>
-        <h2 class="section-title reveal">Marketing & <em>Ads</em></h2>
-        <p class="reveal reveal-delay-1" style="font-size:15px; color:var(--off-white); line-height:1.9; margin-bottom:20px;">We execute marketing with a clear strategy and measurable outcomes. Every channel is planned, tested, and optimised to support business goals, not vanity metrics.</p>
-        <p class="reveal reveal-delay-1" style="font-size:15px; color:var(--off-white); line-height:1.9; margin-bottom:32px;">From SEO and paid media to social, UGC, and CRM, every campaign is built on defined positioning and structured for long-term consistency, not short-term trends.</p>
-        <h4 class="reveal reveal-delay-2" style="font-family:var(--font-sans); font-size:11px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent); margin-bottom:16px;">What's Included</h4>
-        <ul class="reveal reveal-delay-2" style="list-style:none; display:flex; flex-direction:column; gap:0; margin-bottom:32px;">
-          <li style="font-size:14px; color:var(--off-white); padding:10px 0; border-bottom:1px solid var(--border); display:flex; gap:12px;"><span style="color:var(--accent);">-></span> SEO & AIO (AI Optimisation)</li>
-          <li style="font-size:14px; color:var(--off-white); padding:10px 0; border-bottom:1px solid var(--border); display:flex; gap:12px;"><span style="color:var(--accent);">-></span> SEM & Paid Media</li>
-          <li style="font-size:14px; color:var(--off-white); padding:10px 0; border-bottom:1px solid var(--border); display:flex; gap:12px;"><span style="color:var(--accent);">-></span> Social Media Marketing (SSM)</li>
-          <li style="font-size:14px; color:var(--off-white); padding:10px 0; border-bottom:1px solid var(--border); display:flex; gap:12px;"><span style="color:var(--accent);">-></span> UGC Strategy & Production</li>
-          <li style="font-size:14px; color:var(--off-white); padding:10px 0; border-bottom:1px solid var(--border); display:flex; gap:12px;"><span style="color:var(--accent);">-></span> CRM & Email Marketing</li>
-          <li style="font-size:14px; color:var(--off-white); padding:10px 0; display:flex; gap:12px;"><span style="color:var(--accent);">-></span> Community Building & Referral Systems</li>
-        </ul>
-        <a href="contact.html" class="btn-primary reveal">Grow Your Reach</a>
-      </div>
-      <div class="service-brand-panel service-brand-included reveal reveal-delay-1">
-        <div class="service-brand-image service-brand-image--fit" style="background:#eae1d7;">
-          <img src="services/BrandMethod - Marketing_ads.gif" alt="Marketing and Ads by Brand Method" decoding="async" loading="lazy" style="object-fit:contain; object-position:center;">
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- SERVICE 4: CONTENT -->
-<section id="content" style="background:var(--off-black);">
-  <div class="section-inner">
-    <div class="service-brand-grid">
-      <div class="service-brand-panel service-brand-included reveal">
-        <div class="service-brand-image service-brand-image--fit">
-          <img src="services/BrandMethod - Content Creation.gif" alt="Content Creation by Brand Method" decoding="async" loading="lazy">
-        </div>
-      </div>
-      <div class="service-brand-panel service-brand-copy">
-        <div class="service-index reveal">Service 04</div>
-        <h2 class="section-title reveal">Content <em>Creation</em></h2>
-        <p class="reveal reveal-delay-1" style="font-size:15px; color:var(--off-white); line-height:1.9; margin-bottom:20px;">We create content that communicates clearly and connects with the right audience. Every piece is designed with intent, not trends, built to support brand positioning and business goals.</p>
-        <p class="reveal reveal-delay-1" style="font-size:15px; color:var(--off-white); line-height:1.9; margin-bottom:32px;">From viral video and storytelling to social media content, we move you from random output to purposeful communication that builds long-term trust.</p>
-        <h4 class="reveal reveal-delay-2" style="font-family:var(--font-sans); font-size:11px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent); margin-bottom:16px;">What's Included</h4>
-        <ul class="reveal reveal-delay-2" style="list-style:none; display:flex; flex-direction:column; gap:0; margin-bottom:32px;">
-          <li style="font-size:14px; color:var(--off-white); padding:10px 0; border-bottom:1px solid var(--border); display:flex; gap:12px;"><span style="color:var(--accent);">-></span> Short-Form Video (TikTok, Reels, Ads)</li>
-          <li style="font-size:14px; color:var(--off-white); padding:10px 0; border-bottom:1px solid var(--border); display:flex; gap:12px;"><span style="color:var(--accent);">-></span> Brand Film & Visual Storytelling</li>
-          <li style="font-size:14px; color:var(--off-white); padding:10px 0; border-bottom:1px solid var(--border); display:flex; gap:12px;"><span style="color:var(--accent);">-></span> Creative Direction & Campaign Design</li>
-          <li style="font-size:14px; color:var(--off-white); padding:10px 0; border-bottom:1px solid var(--border); display:flex; gap:12px;"><span style="color:var(--accent);">-></span> Graphic Design System</li>
-          <li style="font-size:14px; color:var(--off-white); padding:10px 0; border-bottom:1px solid var(--border); display:flex; gap:12px;"><span style="color:var(--accent);">-></span> Content Calendar & Scripting</li>
-          <li style="font-size:14px; color:var(--off-white); padding:10px 0; display:flex; gap:12px;"><span style="color:var(--accent);">-></span> Content Playbook & Hook Libraries</li>
-        </ul>
-        <a href="contact.html" class="btn-ghost reveal">Create Better Content</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- SERVICE 5: DIGITAL -->
-<section id="digital">
-  <div class="section-inner">
-    <!-- Row 1: copy + image -->
-    <div class="service-brand-grid" style="margin-bottom:56px;">
-      <div class="service-brand-panel service-brand-copy">
-        <div class="service-index reveal">Service 05</div>
-        <h2 class="section-title reveal">Website, Apps & <em>E-Commerce</em></h2>
-        <p class="reveal reveal-delay-1" style="font-size:15px; color:var(--off-white); line-height:1.9; margin-bottom:20px;">We design and build digital experiences that are clear, functional, and aligned with business objectives. Every interface is guided by strategy, user behaviour, and real use cases, not aesthetics alone.</p>
-        <p class="reveal reveal-delay-1" style="font-size:15px; color:var(--off-white); line-height:1.9; margin-bottom:32px;">From UI/UX and web development to AI integration and e-commerce, we build scalable digital systems your business can grow into.</p>
-        <a href="contact.html" class="btn-primary reveal">Build Your Digital Product</a>
-      </div>
-      <div class="service-brand-panel service-brand-included reveal reveal-delay-1">
-        <div class="service-brand-image">
-          <img src="services/BrandMethod - Website_Apps_E-Commerce.webp" alt="Website, Apps and E-Commerce by Brand Method" decoding="async" loading="lazy">
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CTA BAND -->
-<div class="cta-band">
-  <div class="section-inner">
-    <div class="section-tag reveal">Need Direction?</div>
-    <h2>Every strong brand starts with <em style="color:var(--accent);">clarity</em>.</h2>
-    <p>Let's have a conversation and figure out the right fit together.</p>
-    <a href="contact.html" class="btn-dark">GET CONSULTATION</a>
-  </div>
-</div>
-
 </div>
 <script src="js/layout.js"></script>
 <script src="js/main.js"></script>

@@ -223,27 +223,6 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
 reveals.forEach(el => observer.observe(el));
 
-// Leadership carousel seamless loop distance
-(function () {
-  const track = document.querySelector('.team-scroll-track');
-  if (!track) return;
-
-  function setTeamLoopDistance() {
-    const items = Array.from(track.querySelectorAll('.team-member'));
-    if (items.length < 2 || items.length % 2 !== 0) return;
-
-    const first = items[0];
-    const duplicateFirst = items[items.length / 2];
-    const distance = duplicateFirst.offsetLeft - first.offsetLeft;
-    if (distance <= 0) return;
-
-    track.style.setProperty('--team-loop-distance', `-${distance}px`);
-  }
-
-  setTeamLoopDistance();
-  window.addEventListener('resize', setTeamLoopDistance);
-  window.addEventListener('load', setTeamLoopDistance, { once: true });
-})();
 
 // Founder mobile read more
 (function () {
@@ -521,6 +500,9 @@ if (form) {
     { selector: '.service-point-list', item: '.service-point', compact: true, mobileOnly: true },
     { selector: '.how-work-steps', item: '.how-work-step', compact: true, mobileOnly: true },
     { selector: '.client-experience-grid', item: '.client-experience-card', compact: true, mobileOnly: true },
+    { selector: '.brand-problem-grid', item: '.brand-problem-card', compact: true, mobileOnly: true },
+    { selector: '.brand-why-cards', item: '.brand-why-card', compact: true, mobileOnly: true },
+    { selector: '.brand-deliverables-grid', item: '.brand-deliverables-grid > .brand-deliverable-card', compact: true, mobileOnly: true },
     { selector: '.why-method-list', item: '.why-method-card', compact: true, mobileOnly: true, wrapperClass: 'bm-slider--why-method' },
     { selector: '.standout-grid', item: '.standout-card', compact: true, mobileOnly: true },
     { selector: '.marketing-problem-grid', item: '.marketing-problem-card', compact: true, mobileOnly: true },
