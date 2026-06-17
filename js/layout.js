@@ -65,6 +65,8 @@ document.body.insertAdjacentHTML('afterbegin', `
 // Inject footer
 document.body.insertAdjacentHTML('beforeend', `
 <footer>
+  <canvas class="footer-fx" aria-hidden="true"></canvas>
+  <svg class="footer-grain" aria-hidden="true" preserveAspectRatio="none"><filter id="fgrain"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="100%" filter="url(#fgrain)"/></svg>
   <div class="footer-inner">
     <div class="footer-top">
       <div class="footer-brand">
@@ -105,10 +107,14 @@ document.body.insertAdjacentHTML('beforeend', `
         </ul>
       </div>
     </div>
-    <div class="brand-stamp footer-brand-video-wrap">
-      <video class="brand-stamp-logo footer-brand-video" autoplay muted loop playsinline preload="metadata" aria-label="Brand Method animated logo">
-        <source src="${basePath}bm-star-transparent.webm?v=20260519b" type="video/webm">
-      </video>
+    <div class="footer-lockup">
+      <div class="bm-logo">
+        <div class="bm-wrap">
+          <img class="bm-wordmark" id="bmWordmark" alt="Brand Method">
+          <div class="bm-sheen" id="bmSheen"></div>
+          <div class="bm-star" id="bmStar"><canvas id="bmCanvas"></canvas></div>
+        </div>
+      </div>
     </div>
     <div class="footer-bottom">
       <p>© 2021-2026 BrandMethod Sdn Bhd. All rights reserved.</p>
@@ -128,3 +134,17 @@ document.body.insertAdjacentHTML('beforeend', `
   </svg>
 </button>
 `);
+
+// Load footer FX (3D spinning star logo + node-network background) after the footer is in the DOM.
+(function () {
+  function loadScript(src, onload) {
+    var s = document.createElement('script');
+    s.src = src;
+    s.defer = true;
+    if (onload) s.onload = onload;
+    document.body.appendChild(s);
+  }
+  loadScript(basePath + 'js/three.min.js', function () {
+    loadScript(basePath + 'js/footer-fx.js');
+  });
+})();
