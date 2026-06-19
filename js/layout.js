@@ -11,29 +11,59 @@ const logoSVG = (width, height) => `
 document.body.insertAdjacentHTML('afterbegin', `
 <nav>
   <div class="nav-inner">
-    <a href="${basePath}index.html" class="nav-logo" aria-label="Brand Method home">
-      <img class="nav-logo-mark" src="${basePath}Asset+8@4x.webp" alt="Brand Method logo" decoding="async">
-    </a>
-    <ul class="nav-links">
-      <li><a href="${basePath}index.html">Home</a></li>
-      <li><a href="${basePath}about.html">About</a></li>
-      <li><a href="${basePath}work.html">Work</a></li>
-      <li class="nav-dropdown">
-        <a href="${basePath}services.html" class="nav-dropdown-trigger">Services</a>
-        <div class="nav-dropdown-menu">
-          <a href="${basePath}brand-strategy.html">Brand Strategy &amp; Identity</a>
-          <a href="${basePath}system-playbook.html">System &amp; Playbook</a>
-          <a href="${basePath}marketing-ads.html">Marketing &amp; Ads</a>
-          <a href="${basePath}content-creation.html">Content Creation</a>
-          <a href="${basePath}website-apps.html">Website, Apps &amp; E-Commerce</a>
+    <div class="nav-left">
+      <a href="${basePath}index.html" class="nav-logo" aria-label="Brand Method home">
+        <img class="nav-logo-mark" src="${basePath}brand-method-wordmark.png" alt="Brand Method" decoding="async">
+      </a>
+      <span class="nav-tag"><span class="dot"></span>BM / INTERNATIONAL</span>
+    </div>
+    <div class="nav-links">
+      <a href="${basePath}index.html">Home</a>
+      <a href="${basePath}about.html">About</a>
+      <a href="${basePath}work.html">Work</a>
+      <div class="nav-dd">
+        <a href="${basePath}services.html" class="nav-dd-trigger" aria-haspopup="true" aria-expanded="false">Services <svg class="cv" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 4l4 4 4-4"/></svg></a>
+        <div class="nav-dd-panel">
+          <div class="ddp-col">
+            <span class="ddp-head">By service</span>
+            <a class="ddp-all" href="${basePath}services.html">All services overview <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            <a class="ddp-svc" href="${basePath}brand-strategy.html"><span class="ddp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 5h10l3 5-8 11L4 10z"/><path d="M4 10h16" stroke-opacity=".5"/><path d="M9.5 5 8 10l4 11 4-11-1.5-5" stroke-opacity=".4"/></svg></span>Brand Strategy <span class="amp">&amp;</span> Identity</a>
+            <a class="ddp-svc" href="${basePath}system-playbook.html"><span class="ddp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2.4"/><circle cx="5" cy="6" r="1.7"/><circle cx="19" cy="6" r="1.7"/><circle cx="5" cy="18" r="1.7"/><circle cx="19" cy="18" r="1.7"/><path d="M6.3 7.1 10 10.2M17.7 7.1 14 10.2M6.3 16.9 10 13.8M17.7 16.9 14 13.8" stroke-opacity=".55"/></svg></span>System <span class="amp">&amp;</span> Playbook</a>
+            <a class="ddp-svc" href="${basePath}marketing-ads.html"><span class="ddp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16" stroke-opacity=".5"/><path d="M5 16l4-4 3 2 6-7"/><path d="M18 7h-3M18 7v3"/></svg></span>Marketing <span class="amp">&amp;</span> Ads</a>
+            <a class="ddp-svc" href="${basePath}content-creation.html"><span class="ddp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M10 8.4 16 12 10 15.6z" fill="currentColor" stroke="none"/></svg></span>Content Creation</a>
+            <a class="ddp-svc" href="${basePath}website-apps.html"><span class="ddp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="13.5" height="11"/><path d="M3 8.4h13.5" stroke-opacity=".5"/><rect x="14.5" y="11" width="6.5" height="9"/></svg></span>Website, Apps <span class="amp">&amp;</span> E-Commerce</a>
+          </div>
+          <a class="ddp-feature" href="${basePath}services.html">
+            <span class="ddp-feat-vis" aria-hidden="true">
+              <svg class="ddp-ladder" viewBox="0 0 240 116" fill="none" preserveAspectRatio="xMidYMax meet">
+                <line class="ddp-base" x1="22" y1="99" x2="218" y2="99"/>
+                <rect class="ddp-bar b1" x="30" y="69" width="22" height="30"/>
+                <rect class="ddp-bar b2" x="70" y="57" width="22" height="42"/>
+                <rect class="ddp-bar b3" x="110" y="45" width="22" height="54"/>
+                <rect class="ddp-bar b4" x="150" y="33" width="22" height="66"/>
+                <rect class="ddp-bar b5" x="190" y="19" width="22" height="80"/>
+                <path class="ddp-trend" d="M41 69 L81 57 L121 45 L161 33 L201 19"/>
+                <path class="ddp-spark" d="M201 8 C202.4 14.6 204.4 16.6 211 18 C204.4 19.4 202.4 21.4 201 28 C199.6 21.4 197.6 19.4 191 18 C197.6 16.6 199.6 14.6 201 8 Z"/>
+              </svg>
+            </span>
+            <span class="ddp-feat-body">
+              <span class="ddp-head">Go deeper</span>
+              <span class="ddp-feature-title">Details <span class="amp">&amp;</span> Pricing</span>
+              <p>Every phase, every deliverable and exactly what it costs. Fixed prices, money-back guarantee.</p>
+              <span class="ddp-feature-link">View services <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </span>
+          </a>
         </div>
-      </li>
-      <li><a href="${basePath}resources.html">Resources</a></li>
-    </ul>
-    <a href="${basePath}contact.html" class="nav-cta">Hire Us</a>
-    <button class="nav-hamburger" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
+      </div>
+      <a href="${basePath}resources.html">Resources</a>
+    </div>
+    <div class="nav-right">
+      <button class="nav-ss" type="button" aria-label="Super Strategist members area"><span class="nav-ss-t">SS</span><span class="nav-ss-dot"></span></button>
+      <a href="${basePath}contact.html" class="nav-cta">Hire Us</a>
+      <button class="nav-hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </div>
 </nav>
 <div class="nav-mobile">
