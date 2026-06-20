@@ -1,5 +1,5 @@
 // Shared logo SVG (path-based, no font dependency)
-const nestedSections = ['/blog/', '/logo-page/'];
+const nestedSections = ['/blog/', '/logo-page/', '/work/'];
 const basePath = nestedSections.some((section) => window.location.pathname.includes(section)) ? '../' : '';
 const logoSVG = (width, height) => `
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 100" width="${width}" height="${height}" aria-label="Brand Method">

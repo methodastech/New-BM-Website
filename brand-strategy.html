@@ -28,12 +28,10 @@
 <meta name="twitter:title" content="Brand Strategy &amp; Identity | Brand Method">
 <meta name="twitter:description" content="We help organisations define who they are, what they stand for, and how they present themselves clearly, consistently, and with intent.">
 <meta name="twitter:image" content="https://brandmethod.co/Image/resources/brandmethod-os-framework.png">
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/style.css?v=20260620b">
 <style>
   body.brand-strategy-page {
-    background:
-      radial-gradient(circle at top left, rgba(0, 0, 255, 0.06), transparent 26%),
-      linear-gradient(180deg, #fbfbfe 0%, #f6f7fb 30%, #f8f8fc 100%);
+    background: #ffffff;
   }
 
   body.brand-strategy-page .page-wrap {
@@ -42,15 +40,7 @@
   }
 
   body.brand-strategy-page .page-wrap::before {
-    content: "";
-    position: absolute;
-    inset: 0 0 auto 0;
-    height: 840px;
-    background:
-      radial-gradient(circle at 12% 12%, rgba(0, 0, 255, 0.08), transparent 22%),
-      radial-gradient(circle at 85% 16%, rgba(0, 0, 255, 0.05), transparent 18%);
-    pointer-events: none;
-    z-index: 0;
+    display: none;
   }
 
   .brand-strategy-shell {
@@ -187,6 +177,11 @@
     aspect-ratio: 16 / 10;
     object-fit: cover;
     display: block;
+    transition: transform 0.6s var(--ease);
+  }
+
+  .brand-problem-card:hover img {
+    transform: scale(1.06);
   }
 
   .brand-problem-body {
@@ -213,7 +208,7 @@
   }
 
   .brand-why-section {
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.4) 0%, rgba(246, 247, 251, 0.85) 100%);
+    background: transparent;
   }
 
   .brand-why-grid {
@@ -683,7 +678,6 @@
 
     <section>
       <div class="section-inner">
-        <div class="section-tag reveal">The Problem</div>
         <h2 class="section-title reveal reveal-delay-1">Why most brands fail to <em>scale</em></h2>
         <div class="brand-problem-grid">
           <article class="brand-problem-card reveal">
@@ -715,7 +709,6 @@
       <div class="section-inner">
         <div class="brand-why-grid">
           <div class="brand-why-copy reveal">
-            <div class="section-tag">Why Brand Method</div>
             <h2 class="section-title">We define the strategic core of your <em>brand</em></h2>
             <p>We are a brand strategy consultant and identity agency in Malaysia focused on building clarity before expression. Every brand strategy we develop is grounded in your business goals, audience insight, and competitive context so your brand stands for something clear and consistent at every touchpoint.</p>
           </div>
@@ -747,7 +740,6 @@
 
     <section>
       <div class="section-inner">
-        <div class="section-tag reveal">Deliverables</div>
         <h2 class="section-title reveal reveal-delay-1">What's <em>included</em></h2>
         <div class="brand-deliverables-grid">
           <article class="brand-deliverable-card reveal">
@@ -838,7 +830,6 @@
       <div class="section-inner">
         <div class="brand-strategy-split">
           <div class="brand-strategy-copy reveal">
-            <div class="section-tag">Build Your Brand Strategy</div>
             <h2>At Brand Method, <span class="keep-line">brand strategy</span> is not about picking <em>colours</em></h2>
             <p>It is about building the strategic core that everything else is built on. Our team of brand strategists works with founders, marketing teams, and business leaders to define brand purpose, establish clear positioning, and develop a brand identity system that scales.</p>
             <p>Whether you are a Malaysian startup building your brand from scratch or an established business going through a brand refresh, we help you move from unclear and inconsistent to structured, strategic, and impossible to misunderstand.</p>
@@ -858,7 +849,6 @@
             <img src="Image/show-board-brand-strategy-workshop.webp" alt="Brand strategy workshop materials and presentation board" decoding="async" loading="lazy">
           </div>
           <div class="brand-extension-copy">
-            <div class="section-tag">Let's Get Started</div>
             <h2>Brand Method works as an extension of your <em>team</em></h2>
             <p>We help identify and plan your brand strategy in Malaysia so your business can scale faster, build stronger brands, and achieve lasting clarity.</p>
             <p>Trusted by 100+ clients, from startups to established brands, we turn ideas into impactful results with a process that feels collaborative, practical, and commercially grounded.</p>
@@ -870,7 +860,6 @@
 
     <div class="cta-band">
       <div class="section-inner">
-        <div class="section-tag reveal">Start the Conversation</div>
         <h2>Ready to build a brand that <em>dominates</em>?</h2>
         <p>Let's build clarity, direction, and a brand system that scales with your business instead of slowing it down.</p>
         <a href="contact.html" class="btn-dark">Let's Get Started</a>
