@@ -28,10 +28,17 @@
 <meta name="twitter:title" content="Brand Strategy &amp; Identity | Brand Method">
 <meta name="twitter:description" content="We help organisations define who they are, what they stand for, and how they present themselves clearly, consistently, and with intent.">
 <meta name="twitter:image" content="https://brandmethod.co/Image/resources/brandmethod-os-framework.png">
-<link rel="stylesheet" href="css/style.css?v=20260620b">
+<link rel="stylesheet" href="css/style.css?v=20260620d">
 <style>
   body.brand-strategy-page {
     background: #ffffff;
+  }
+
+  /* pink accent for page content (nav is outside .page-wrap, stays blue) */
+  body.brand-strategy-page .page-wrap {
+    --accent: #d63a7e;
+    --accent-dark: #b32e66;
+    --accent-light: #e85c96;
   }
 
   body.brand-strategy-page .page-wrap {
@@ -653,6 +660,83 @@
       padding: 64px 20px;
     }
   }
+
+  /* ===== Pricing band ===== */
+  .pband { --pc: #3a55e8; }
+  .pband-head {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    gap: clamp(14px, 1.6vw, 20px);
+    padding: clamp(20px, 2.3vw, 30px) clamp(22px, 2.6vw, 34px);
+    background: linear-gradient(118deg, color-mix(in srgb, var(--pc) 86%, #0a1024), var(--pc));
+    color: #fff;
+  }
+  .pband-head::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+    background-size: 26px 26px;
+    -webkit-mask-image: radial-gradient(ellipse 70% 120% at 88% 20%, #000, transparent 72%);
+    mask-image: radial-gradient(ellipse 70% 120% at 88% 20%, #000, transparent 72%);
+    pointer-events: none;
+  }
+  .pband-ic {
+    position: relative;
+    z-index: 1;
+    width: 46px;
+    height: 46px;
+    display: grid;
+    place-items: center;
+    background: rgba(255, 255, 255, 0.16);
+    color: #fff;
+    flex-shrink: 0;
+  }
+  .pband-ic svg { width: 25px; height: 25px; display: block; }
+  .pband-tt { position: relative; z-index: 1; flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+  .pband-name { font-family: var(--font-display); font-weight: 500; font-size: clamp(18px, 2vw, 25px); line-height: 1.1; letter-spacing: -0.01em; }
+  .pband-sub { font-family: var(--font-body); font-size: clamp(11.5px, 1.2vw, 13px); color: rgba(255, 255, 255, 0.82); line-height: 1.4; }
+  .pband-tag { position: relative; z-index: 1; font-family: var(--font-mono); font-size: 9.5px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #fff; background: rgba(255, 255, 255, 0.16); padding: 8px 13px; flex-shrink: 0; align-self: center; }
+  .pband .price-grid { margin-top: clamp(20px, 2.4vw, 30px); }
+
+  .price-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .ptier {
+    --tc: var(--pc, var(--accent));
+    position: relative;
+    border: 1px solid var(--border);
+    border-top: 2px solid var(--tc);
+    background: #fff;
+    padding: 24px 20px 22px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 1px 2px rgba(18, 22, 55, 0.04), 0 10px 26px -17px rgba(18, 22, 55, 0.15);
+    transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+  }
+  .ptier:hover { transform: translateY(-4px); box-shadow: 0 18px 38px -24px rgba(18, 22, 55, 0.24); }
+  .ptier-badge { display: none; }
+  .ptier-name { font-family: var(--font-display); font-size: 19px; font-weight: 400; margin-bottom: 2px; color: var(--off-white); }
+  .ptier-tag { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
+  .ptier-meter { display: flex; gap: 4px; margin: 12px 0 4px; }
+  .ptier-meter i { height: 4px; flex: 1; border-radius: 3px; background: color-mix(in srgb, var(--tc) 13%, #ecedf3); transition: background 0.4s var(--ease); }
+  .ptier-meter i.on { background: var(--tc); }
+  .ptier-price { font-family: var(--font-display); font-size: 32px; font-weight: 400; line-height: 1; letter-spacing: -0.01em; color: var(--off-white); margin-top: 10px; }
+  .ptier-price .cur { font-size: 14px; color: var(--tc); margin-right: 3px; letter-spacing: 0.04em; }
+  .ptier-from { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; margin-top: 7px; }
+  .ptier-inc { list-style: none; margin: 14px 0 0; padding: 0; display: flex; flex-direction: column; gap: 9px; flex: 1 1 auto; }
+  .ptier-inc li { display: flex; gap: 9px; align-items: flex-start; font-family: var(--font-body); font-size: 12.5px; color: var(--off-white); line-height: 1.42; }
+  .ptier-inc li svg { width: 14px; height: 14px; flex-shrink: 0; margin-top: 1px; stroke: var(--tc); fill: none; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+  .ptier.pop { border-color: color-mix(in srgb, var(--tc) 48%, var(--border)); box-shadow: 0 26px 56px -30px color-mix(in srgb, var(--tc) 58%, transparent); transform: translateY(-8px); }
+  .ptier.pop:hover { transform: translateY(-12px); }
+  .ptier.pop::after { content: "Recommended"; position: absolute; top: 0; right: 0; font-family: var(--font-mono); font-size: 8px; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase; color: #fff; background: var(--tc); padding: 5px 11px; border-bottom-left-radius: 9px; z-index: 2; }
+  .ptier-cta { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 20px; font-family: var(--font-mono); font-size: 10.5px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; padding: 12px 16px; background: #fff; color: var(--tc); border: 1px solid color-mix(in srgb, var(--tc) 32%, var(--border)); cursor: pointer; text-decoration: none; transition: background 0.3s var(--ease), color 0.3s var(--ease), border-color 0.3s var(--ease); }
+  .ptier-cta svg { width: 14px; height: 14px; transition: transform 0.25s var(--ease); }
+  .ptier:hover .ptier-cta { background: var(--tc); color: #fff; border-color: var(--tc); }
+  .ptier:hover .ptier-cta svg { stroke: #fff; }
+  @media (max-width: 980px) { .price-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 720px) { .pband-tag { display: none; } }
+  @media (max-width: 560px) { .price-grid { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body class="brand-strategy-page">
@@ -662,17 +746,11 @@
   <!-- End Google Tag Manager (noscript) -->
 <div class="page-wrap">
   <div class="brand-strategy-shell">
-    <section class="brand-strategy-hero-section">
+    <section class="svc-page-hero" style="--hc:#d63a7e">
       <div class="section-inner">
-        <div class="brand-strategy-hero">
-          <div class="brand-strategy-hero-copy reveal">
-            <div class="brand-strategy-hero-kicker">Service 01</div>
-            <h1>Brand Strategy &amp; <em>Identity</em></h1>
-          </div>
-          <div class="brand-strategy-hero-text reveal reveal-delay-1">
-            <p>Brand Method is a strategy-led brand consultancy based in Kuala Lumpur, Malaysia. We help brands build a strong strategic foundation before jumping into design, ensuring your brand identity is rooted in clarity, purpose, and positioning from day one.</p>
-          </div>
-        </div>
+        <h1 class="reveal">Brand Strategy <span class="amp">&amp;</span> Identity</h1>
+        <p class="svc-page-lead reveal reveal-delay-1">Positioning, naming, messaging and a complete visual identity that makes you instantly understood and impossible to confuse with anyone else.</p>
+        <a class="svc-enquire reveal reveal-delay-2" href="contact.html">Enquire about this <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </div>
     </section>
 
@@ -701,6 +779,87 @@
               <p>Expansion without clarity amplifies internal misalignment, slows decisions, and causes your brand to lose focus when momentum matters most.</p>
             </div>
           </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-inner">
+        <div class="pband reveal" style="--pc:#d63a7e">
+          <div class="pband-head">
+            <span class="pband-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h10l3 5-8 11L4 9z"/><path d="M4 9h16" stroke-opacity=".6"/><path d="M9.5 4 8 9l4 11 4-11-1.5-5" stroke-opacity=".5"/></svg></span>
+            <span class="pband-tt">
+              <span class="pband-name">Brand</span>
+              <span class="pband-sub">Strategy, identity and the full playbook</span>
+            </span>
+            <span class="pband-tag">Brand OS</span>
+          </div>
+          <div class="price-grid">
+            <div class="ptier">
+              <div class="ptier-name">Brand Foundation</div>
+              <div class="ptier-tag">Slam-dunk start</div>
+              <div class="ptier-meter"><i class="on"></i><i></i><i></i><i></i></div>
+              <div class="ptier-price"><span class="cur">RM</span>7,900</div>
+              <div class="ptier-from">&nbsp;</div>
+              <ul class="ptier-inc">
+                <li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><span>2-hour discovery session: we find what makes you worth choosing</span></li>
+                <li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><span>Positioning that sticks: one clear, ownable statement</span></li>
+                <li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><span>Logo + full visual identity: a complete system, not just a mark</span></li>
+                <li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><span>30-page brand guideline: every rule, consistent forever</span></li>
+                <li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><span>Tone of voice: your content always sounds like you</span></li>
+              </ul>
+              <a class="ptier-cta" href="contact.html">Get started <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            </div>
+            <div class="ptier pop">
+              <span class="ptier-badge">Most popular</span>
+              <div class="ptier-name">Brand Growth System</div>
+              <div class="ptier-tag">Strategy to playbook</div>
+              <div class="ptier-meter"><i class="on"></i><i class="on"></i><i></i><i></i></div>
+              <div class="ptier-price"><span class="cur">RM</span>16,000</div>
+              <div class="ptier-from">&nbsp;</div>
+              <ul class="ptier-inc">
+                <li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><span>Everything in Brand Foundation, plus deeper strategy</span></li>
+                <li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><span>Competitor audit: where you win, where the market's open</span></li>
+                <li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><span>Customer persona: know exactly who you're talking to</span></li>
+                <li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><span>Full messaging: taglines, value props, a pitch that closes</span></li>
+                <li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><span>60-page brand manual: brief any agency or new hire with it</span></li>
+                <li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><span>Ready-to-use templates: your team executes on-brand day one</span></li>
+              </ul>
+              <a class="ptier-cta" href="contact.html">Get started <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            </div>
+            <div class="ptier">
+              <div class="ptier-name">Full Brand Architecture</div>
+              <div class="ptier-tag">The complete build</div>
+              <div class="ptier-meter"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div>
+              <div class="ptier-price"><span class="cur">RM</span>30,000</div>
+              <div class="ptier-from">&nbsp;</div>
+              <ul class="ptier-inc">
+                <li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><span>Everything in Brand Growth System, plus full architecture</span></li>
+                <li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><span>3 strategy workshops: we build the thinking with your team</span></li>
+                <li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><span>Sub-brand architecture: clean structure for every product</span></li>
+                <li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><span>100+ page brand bible: the single source of truth</span></li>
+                <li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><span>12-month rollout roadmap: exactly what to do, and when</span></li>
+                <li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><span>Quarterly reviews for a year: we keep it on track</span></li>
+              </ul>
+              <a class="ptier-cta" href="contact.html">Get started <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            </div>
+            <div class="ptier">
+              <div class="ptier-name">Bespoke Engagement</div>
+              <div class="ptier-tag">Enterprise</div>
+              <div class="ptier-meter"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div>
+              <div class="ptier-price"><span class="cur">RM</span>50,000</div>
+              <div class="ptier-from">From</div>
+              <ul class="ptier-inc">
+                <li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><span>Founder direct on your engagement: not a junior team</span></li>
+                <li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><span>The full BrandMethod methodology: applied end to end</span></li>
+                <li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><span>Multi-brand <span class="amp">&amp;</span> sub-brand systems: built to scale</span></li>
+                <li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><span>Board-level workshops: leadership aligned in the room</span></li>
+                <li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><span>Ongoing brand governance: standards hold as you grow</span></li>
+                <li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><span>Scoped entirely around you: owned entirely by you</span></li>
+              </ul>
+              <a class="ptier-cta" href="contact.html">Get started <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -867,7 +1026,7 @@
     </div>
   </div>
 </div>
-<script src="js/layout.js"></script>
+<script src="js/layout.js?v=2"></script>
 <script src="js/main.js"></script>
 </body>
 </html>
