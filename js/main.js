@@ -744,3 +744,23 @@ if (statsSection) {
   script.src = 'https://www.youtube.com/iframe_api';
   document.head.appendChild(script);
 })();
+
+// Home services accordion (expand/collapse) — ported from v88
+(function () {
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('.svc-acc-banner');
+    if (!b) return;
+    if (e.target.closest('.svc-acc-cta')) return;
+    var item = b.parentElement;
+    var wasOpen = item.classList.contains('open');
+    // Single-open: collapse every other item in this same accordion first.
+    var acc = item.closest('.svc-acc');
+    if (acc) {
+      acc.querySelectorAll('.svc-acc-item.open').forEach(function (el) {
+        el.classList.remove('open');
+      });
+    }
+    // Re-open the clicked one unless it was the one already open (so it can still close).
+    if (!wasOpen) item.classList.add('open');
+  });
+})();

@@ -13,7 +13,7 @@
     })(window, document, 'script', 'dataLayer', 'GTM-NJ9RQN4S');</script>
   <!-- End Google Tag Manager -->
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <link rel="icon" href="favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -76,7 +76,40 @@
   "url": "https://brandmethod.co/"
 }
 </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css?v=20260620d">
+  <style>
+    /* index-only: use Fraunces for display headings (matches the pricing page) */
+    body.hero-page { --font-display: 'Fraunces', Georgia, serif; font-optical-sizing: auto; }
+    /* match brandmethod_site_v62.html: every section heading uses the same
+       Fraunces style (weight 400, same size, em italic + accent) */
+    body.hero-page .section-title,
+    body.hero-page .work-feature-title,
+    body.hero-page .home-services-title,
+    body.hero-page .client-experience-title,
+    body.hero-page .success-story-title,
+    body.hero-page .approach-title,
+    body.hero-page .clients-heading p {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: clamp(34px, 5vw, 62px);
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+    }
+    body.hero-page .section-title em,
+    body.hero-page .work-feature-title em,
+    body.hero-page .home-services-title em,
+    body.hero-page .client-experience-title em,
+    body.hero-page .success-story-title em,
+    body.hero-page .approach-title em,
+    body.hero-page .clients-heading p em {
+      font-style: italic;
+      font-weight: 400;
+      color: var(--accent);
+    }
+  </style>
 </head>
 
 <body class="hero-page">
@@ -134,7 +167,7 @@
     <!-- CLIENTS -->
     <section class="clients-section">
       <div class="clients-heading reveal">
-        <p><em style="color:#8b8b8b; font-style:italic;">Trusted</em> by Market Leaders</p>
+        <p><em style="color:var(--accent); font-style:italic;">Trusted</em> by Market Leaders</p>
       </div>
       <div class="clients-rows">
 
@@ -271,80 +304,51 @@
     <div class="divider"></div>
 
     <!-- HOW WE WORK (grey) -->
-    <section class="how-work-section" style="background:#fff;">
+    <section class="pflow2" id="how" style="background:#fff;">
       <div class="section-inner">
-        <div class="how-work-heading how-work-heading--split reveal">
-          <div class="how-work-heading-left">
-            <h2 class="how-work-title"><span class="how-work-title-line">A Clear Process.</span><br><span class="how-work-title-line">No Surprises.</span></h2>
-          </div>
-          <div class="how-work-heading-right">
-            <p>You shouldn&rsquo;t have to wonder what happens after you say yes. Here&rsquo;s exactly how every Brand Method engagement works.</p>
+        <div class="pflow2-head reveal">
+          <h2 class="section-title">No surprises.</h2>
+          <p class="pflow2-sub">You should not have to wonder what happens after you say yes. Here is exactly how every Brand Method engagement runs, from the first call to a lifetime of support.</p>
+        </div>
+        <div class="flow3">
+          <span class="flow3-arrow a1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
+          <span class="flow3-arrow a2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
+          <div class="flow3-row">
+            <div class="flow3-step reveal">
+              <div class="flow3-media">
+                <img src="Image/how-we-work-discovery-consultation-meeting.webp" alt="Brand strategy workshop presentation during the discovery phase." decoding="async" loading="lazy">
+                <div class="flow3-chip"><span class="flow3-chip-ic"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="17.5" cy="17.5" r="10.5"/><path d="M25.2 25.2 L33 33"/><circle cx="17.5" cy="17.5" r="4.4" opacity=".55"/></svg></span><span class="flow3-chip-n">01</span></div>
+              </div>
+              <div class="flow3-body">
+                <div class="jrn-kick">We listen first</div>
+                <h3 class="jrn-title">Discovery</h3>
+                <p class="jrn-desc">A focused 30-minute conversation to understand your business, your goals and where the real problem is. No pitch, no pressure.</p>
+              </div>
+            </div>
+            <div class="flow3-step reveal reveal-delay-1">
+              <div class="flow3-media">
+                <img src="Image/men-work.png" alt="Business strategy presentation during a team planning session." decoding="async" loading="lazy">
+                <div class="flow3-chip"><span class="flow3-chip-ic"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 5 L33 12 V27 L20 34 L7 27 V12 Z"/><path d="M7 12 L20 19 L33 12 M20 19 V34" opacity=".55"/></svg></span><span class="flow3-chip-n">02</span></div>
+              </div>
+              <div class="flow3-body">
+                <div class="jrn-kick">We do the heavy work</div>
+                <h3 class="jrn-title">Strategy <span class="amp">&amp;</span> Build</h3>
+                <p class="jrn-desc">We develop the strategy, design the system and execute every deliverable. You stay informed at each milestone, never buried in detail.</p>
+              </div>
+            </div>
+            <div class="flow3-step reveal reveal-delay-2">
+              <div class="flow3-media">
+                <img src="Image/how-we-work-handover-documents.webp" alt="Brand handover documents prepared for client delivery." decoding="async" loading="lazy">
+                <div class="flow3-chip"><span class="flow3-chip-ic"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 5 L33 10 V19 C33 27 27.6 32 20 35 C12.4 32 7 27 7 19 V10 Z"/><path d="M14.6 19.4 l3.9 4 7-7.8" opacity=".95"/></svg></span><span class="flow3-chip-n">03</span></div>
+              </div>
+              <div class="flow3-body">
+                <div class="jrn-kick">Yours, and we stay on</div>
+                <h3 class="jrn-title">Handover <span class="amp">&amp;</span> Lifetime Support</h3>
+                <p class="jrn-desc">A complete brand system handed over so your team runs it from day one. Then we stay on as your partner for life, whenever you need us.</p>
+              </div>
+            </div>
           </div>
         </div>
-
-        <div class="how-work-steps">
-          <article class="how-work-step reveal">
-            <div class="hww-step-num">01</div>
-            <div class="hww-connector-row">
-              <span class="hww-dot"></span>
-              <span class="hww-line"></span>
-              <span class="hww-arrowhead">&#8594;</span>
-            </div>
-            <div class="hww-icon-circle">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-            </div>
-            <div class="hww-copy">
-              <h3>Discovery</h3>
-              <p class="hww-subtitle">We Listen First</p>
-              <p>We start with a focused 30-minute conversation to understand your business, your goals, and where the real problem is. No pitch. No pressure. Just an honest look at what actually needs to happen.</p>
-              <div class="hww-divider"></div>
-            </div>
-            <div class="how-work-media">
-              <img src="Image/how-we-work-discovery-consultation-meeting.webp" alt="Brand strategy workshop presentation during the discovery phase." decoding="async" loading="lazy">
-            </div>
-          </article>
-
-          <article class="how-work-step reveal reveal-delay-1">
-            <div class="hww-step-num">02</div>
-            <div class="hww-connector-row">
-              <span class="hww-dot"></span>
-              <span class="hww-line"></span>
-              <span class="hww-arrowhead">&#8594;</span>
-            </div>
-            <div class="hww-icon-circle">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-            </div>
-            <div class="hww-copy">
-              <h3>Strategy &amp; Build</h3>
-              <p class="hww-subtitle">We Do the Heavy Work</p>
-              <p>We develop your brand strategy, design the system, and execute across every deliverable. You stay informed at every milestone without being overwhelmed by the details.</p>
-              <div class="hww-divider"></div>
-            </div>
-            <div class="how-work-media">
-              <img src="Image/men-work.png" alt="Business strategy presentation during a team planning session." decoding="async" loading="lazy">
-            </div>
-          </article>
-
-          <article class="how-work-step reveal reveal-delay-2">
-            <div class="hww-step-num">03</div>
-            <div class="hww-connector-row hww-connector-row--last">
-              <span class="hww-dot"></span>
-            </div>
-            <div class="hww-icon-circle">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
-            </div>
-            <div class="hww-copy">
-              <h3>Handover</h3>
-              <p class="hww-subtitle">You Own Everything</p>
-              <p>You receive a complete brand system with guidelines, playbooks, and assets built for your team to run independently, or with us as an ongoing partner. Nothing stays in our hands.</p>
-              <div class="hww-divider"></div>
-            </div>
-            <div class="how-work-media">
-              <img src="Image/how-we-work-handover-documents.webp" alt="Brand handover documents prepared for client delivery." decoding="async" loading="lazy">
-            </div>
-          </article>
-        </div>
-
       </div>
     </section>
 
@@ -363,8 +367,8 @@
           </div>
           <div>
             <h2
-              style="font-family:var(--font-display); font-size:clamp(40px,5vw,72px); font-weight:300; font-style:normal; line-height:1.1; margin-bottom:28px; color:var(--white);"
-              class="reveal reveal-delay-1">Why Brands <em style="color:#8b8b8b; font-style:italic;">Choose</em> Brand Method</h2>
+              style="font-family:var(--font-display); font-size:clamp(34px,5vw,62px); font-weight:400; font-style:normal; line-height:1.08; letter-spacing:-0.02em; margin-bottom:28px; color:var(--white);"
+              class="reveal reveal-delay-1">Why Brands <em style="color:var(--accent); font-style:italic;">Choose</em> Brand Method</h2>
             <div class="founder-mobile-image reveal reveal-delay-1">
               <div class="founder-img-wrap" style="height:auto;">
                 <img src="founder-on-stage.webp" alt="Bazil Zieel, Founder of Brand Method, speaking on stage"
@@ -417,8 +421,7 @@
     <section class="work-feature-section" id="work-preview" style="background:#fff;">
       <div class="section-inner">
         <div class="work-feature-header reveal">
-          <h2 class="work-feature-title">Work</h2>
-          <p class="work-feature-sub">At the end of the day what really matters are results.</p>
+          <h2 class="work-feature-title">Work that earns its place.</h2>
         </div>
         <div class="work-bento">
           <a class="work-bento-card work-bento-featured reveal" href="work/work-rubex-pay.html"
@@ -506,102 +509,201 @@
     <!-- SERVICES (white) -->
     <section class="home-services-section" style="background:#fff;">
       <div class="section-inner">
-        <div class="home-services-header reveal">
-          <div>
-            <h2 class="home-services-title">Services</h2>
-          </div>
-          <p class="home-services-sub">Everything you need to build, scale, and accelerate your brand. <em>All in one
-              place.</em></p>
+        <div class="hs-head">
+          <div class="reveal"><h2 class="section-title">Services</h2></div>
+          <p class="section-sub reveal">Everything you need to build, scale and accelerate your brand. Open any service to see the why, the process and exactly what you get.</p>
         </div>
-        <div class="home-services-list">
-          <a href="brand-strategy.html" class="home-service-row reveal">
-            <div class="home-service-icon">
-              <img src="Services Branding.webp" alt="Branding service icon" decoding="async" loading="lazy">
-            </div>
-            <div class="home-service-copy">
-              <h3>Brand Strategy &amp; Identity</h3>
-              <div class="work-tags" style="margin-top: 12px; margin-bottom: 12px;">
-                <span>Audit</span>
-                <span>Strategy</span>
-                <span>Messaging</span>
-                <span>Identity</span>
-              </div>
-              <p>Clarity on who you are, who you're for, and why the market chooses you.</p>
-            </div>
-          </a>
-          <a href="system-playbook.html" class="home-service-row reveal reveal-delay-1">
-            <div class="home-service-icon">
-              <img src="Services Systems.webp" alt="Systems service icon" decoding="async" loading="lazy">
-            </div>
-            <div class="home-service-copy">
-              <h3>Systems &amp; Playbook</h3>
-              <div class="work-tags" style="margin-top: 12px; margin-bottom: 12px;">
-                <span>AI Automation</span>
-                <span>SOP</span>
-                <span>Playbook</span>
-                <span>Funnel</span>
-              </div>
-              <p>Your brand running consistently even when you're not in the room.</p>
-            </div>
-          </a>
-          <a href="marketing-ads.html" class="home-service-row reveal reveal-delay-1">
-            <div class="home-service-icon">
-              <img src="Services Marketing &amp; Ad.webp" alt="Marketing and advertising service icon" decoding="async"
-                loading="lazy">
-            </div>
-            <div class="home-service-copy">
-              <h3>Marketing &amp; Ads</h3>
-              <div class="work-tags" style="margin-top: 12px; margin-bottom: 12px;">
-                <span>SEO</span>
-                <span>SEM</span>
-                <span>SSM</span>
-                <span>UGC</span>
-                <span>AIO</span>
-                <span>Community</span>
-              </div>
-              <p>Campaigns that convert not just campaigns that look good.</p>
-            </div>
-          </a>
-          <a href="content-creation.html" class="home-service-row reveal reveal-delay-2">
-            <div class="home-service-icon">
-              <img src="Services Content Creation.webp" alt="Content creation service icon" decoding="async"
-                loading="lazy">
-            </div>
-            <div class="home-service-copy">
-              <h3>Content Creation</h3>
-              <div class="work-tags" style="margin-top: 12px; margin-bottom: 12px;">
-                <span>Viral Video</span>
-                <span>Storytelling</span>
-                <span>Social Media</span>
-              </div>
-              <p>Stories that build authority, demand, and trust on every channel.</p>
-            </div>
-          </a>
-          <a href="website-apps.html" class="home-service-row reveal reveal-delay-2">
-            <div class="home-service-icon">
-              <img src="Services UI UX, Apps,  Ai.webp" alt="UI UX, web, app, and AI service icon" decoding="async"
-                loading="lazy">
-            </div>
-            <div class="home-service-copy">
-              <h3>Website, App &amp; E-Commerce</h3>
-              <div class="work-tags" style="margin-top: 12px; margin-bottom: 12px;">
-                <span>Website</span>
-                <span>App</span>
-                <span>AI Agent</span>
-                <span>E-Commerce</span>
-              </div>
-              <p>Digital presence that works for your brand 24/7 without you touching it.</p>
-            </div>
-          </a>
-        </div>
-      </div>
-    </section>
+<div class="svc-acc home-svc-acc" style="margin-top:clamp(34px,4vw,52px)"><div class="svc-acc-item reveal open" style="--c:#d63a7e"><div class="svc-acc-banner"><span class="hsvc-ico"><svg class="hsvc-ic" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+  <defs>
+    <linearGradient id="h0_face" x1="24" y1="8" x2="24" y2="40" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="currentColor" stop-opacity="0.95"/>
+      <stop offset="0.55" stop-color="currentColor" stop-opacity="0.6"/>
+      <stop offset="1" stop-color="currentColor" stop-opacity="0.32"/>
+    </linearGradient>
+    <linearGradient id="h0_panel" x1="24" y1="10" x2="24" y2="38" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="currentColor" stop-opacity="0.17"/>
+      <stop offset="1" stop-color="currentColor" stop-opacity="0.03"/>
+    </linearGradient>
+    <radialGradient id="h0_bloom" cx="24" cy="22" r="15" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="currentColor" stop-opacity="0.28"/>
+      <stop offset="0.6" stop-color="currentColor" stop-opacity="0.07"/>
+      <stop offset="1" stop-color="currentColor" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="h0_band" x1="11" y1="23" x2="37" y2="23" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="currentColor" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="currentColor" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="currentColor" stop-opacity="0"/>
+    </linearGradient>
+    <clipPath id="h0_gem"><path d="M24 8 L38 23 L24 40 L10 23 Z"/></clipPath>
+  </defs>
+  <ellipse class="hx-bloom" cx="24" cy="22" rx="15" ry="15" fill="url(#h0_bloom)" stroke="none" style="transform-origin:24px 24px"/>
+  <g class="hx-ghost" stroke-width="1.3" stroke-opacity="0.28" transform="translate(1 1)">
+    <path d="M24 8 L38 23 L24 40 L10 23 Z"/>
+    <path d="M24 8 L24 40 M10 23 L38 23" stroke-opacity="0.55"/>
+  </g>
+  <g class="hx-lift" style="transform-origin:24px 24px">
+    <path d="M24 8 L38 23 L24 40 L10 23 Z" fill="url(#h0_panel)" stroke="none"/>
+    <path d="M24 8 L38 23 L24 40 L10 23 Z" stroke="url(#h0_face)" stroke-width="1.6"/>
+    <g class="hx-draw" stroke-width="1.4" stroke-opacity="0.85" stroke-dasharray="120" style="--hx-len:120">
+      <path d="M24 8 L24 40 M10 23 L38 23 M24 8 L17 23 L24 40 L31 23 Z"/>
+    </g>
+    <g clip-path="url(#h0_gem)">
+      <rect class="hx-sweep" x="9" y="20.5" width="30" height="5" fill="url(#h0_band)" stroke="none"/>
+    </g>
+  </g>
+  <circle cx="24" cy="23" r="3" fill="none" stroke-width="1.5" stroke-opacity="0.9"/>
+  <circle class="hx-halo" cx="24" cy="23" r="3" fill="none" stroke-width="1.4" stroke-opacity="0" style="transform-origin:center;transform-box:fill-box"/>
+  <circle class="hx-node" cx="24" cy="23" r="1.7" fill="currentColor" stroke="none" style="transform-origin:center;transform-box:fill-box"/>
+  <circle class="hx-halo" cx="24" cy="8"  r="2" fill="none" stroke-width="1.3" stroke-opacity="0" style="transform-origin:center;transform-box:fill-box"/>
+  <circle class="hx-halo" cx="38" cy="23" r="2" fill="none" stroke-width="1.3" stroke-opacity="0" style="transform-origin:center;transform-box:fill-box"/>
+  <circle class="hx-halo" cx="10" cy="23" r="2" fill="none" stroke-width="1.3" stroke-opacity="0" style="transform-origin:center;transform-box:fill-box"/>
+  <circle class="hx-halo" cx="24" cy="40" r="2" fill="none" stroke-width="1.3" stroke-opacity="0" style="transform-origin:center;transform-box:fill-box"/>
+  <circle class="hx-node" cx="24" cy="8"  r="1.4" fill="currentColor" stroke="none" style="transform-origin:center;transform-box:fill-box"/>
+  <circle class="hx-node" cx="38" cy="23" r="1.4" fill="currentColor" stroke="none" style="transform-origin:center;transform-box:fill-box"/>
+  <circle class="hx-node" cx="10" cy="23" r="1.4" fill="currentColor" stroke="none" style="transform-origin:center;transform-box:fill-box"/>
+  <circle class="hx-node" cx="24" cy="40" r="1.4" fill="currentColor" stroke="none" style="transform-origin:center;transform-box:fill-box"/>
+</svg></span><span class="svc-acc-num">01</span><div class="svc-acc-tt"><div class="svc-acc-name">Brand Strategy <span class="amp">&amp;</span> Identity<span class="svc-acc-tag">Brand OS</span></div><div class="hsvc-tags"><span class="hsvc-tag">Audit</span><span class="hsvc-tag">Strategy</span><span class="hsvc-tag">Messaging</span><span class="hsvc-tag">Identity</span></div></div><svg class="svc-acc-chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div><div class="svc-acc-body"><div class="svc-acc-inner"><div class="hsvc-cols"><div class="hsvc-col"><div class="hsvc-lab">The process</div><ol class="hsvc-proc"><li>Discovery: we find what makes you worth choosing</li><li>Positioning: one clear, ownable statement</li><li>Identity: logo, type and colour as one system</li><li>Playbook: every rule documented so it holds</li></ol></div><div class="hsvc-col"><div class="hsvc-lab">What you get</div><ul class="hsvc-inc"><li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><span>Positioning and messaging that sticks</span></li><li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><span>A complete visual identity, not just a logo</span></li><li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><span>30 to 100 page brand guideline</span></li><li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><span>Tone of voice and ready-to-use templates</span></li></ul></div></div><div class="svc-acc-links" style="margin-top:clamp(22px,2.6vw,30px)"><a class="svc-acc-cta" href="brand-strategy.html">Explore full service &rarr;</a><a class="svc-acc-cta alt" href="pricing.html">See all pricing &rarr;</a></div></div></div></div><div class="svc-acc-item reveal" style="--c:#3a55e8"><div class="svc-acc-banner"><span class="hsvc-ico"><svg class="hsvc-ic" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+  <defs>
+    <linearGradient id="h1_face" x1="24" y1="9" x2="24" y2="39" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="currentColor" stop-opacity="0.95"/>
+      <stop offset="0.55" stop-color="currentColor" stop-opacity="0.6"/>
+      <stop offset="1" stop-color="currentColor" stop-opacity="0.3"/>
+    </linearGradient>
+    <linearGradient id="h1_panel" x1="24" y1="10" x2="24" y2="38" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="currentColor" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="currentColor" stop-opacity="0.03"/>
+    </linearGradient>
+    <radialGradient id="h1_bloom" cx="24" cy="24" r="14" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="currentColor" stop-opacity="0.26"/>
+      <stop offset="0.6" stop-color="currentColor" stop-opacity="0.06"/>
+      <stop offset="1" stop-color="currentColor" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <ellipse class="hx-bloom" cx="24" cy="24" rx="13" ry="13" fill="url(#h1_bloom)" stroke="none" style="transform-origin:24px 24px"/>
+  <g class="hx-orbit" stroke-width="1.3" stroke-opacity="0.4" style="transform-origin:24px 24px">
+    <circle cx="24" cy="24" r="20"/>
+    <path d="M24 4 L24 7 M24 41 L24 44 M4 24 L7 24 M41 24 L44 24" stroke-opacity="0.7"/>
+  </g>
+  <g class="hx-ghost" stroke-width="1.3" stroke-opacity="0.28" transform="translate(1 1)">
+    <path d="M24 11 L37 24 L24 37 L11 24 Z"/>
+    <path d="M24 11 L24 24 M37 24 L24 24 M24 37 L24 24 M11 24 L24 24" stroke-opacity="0.5"/>
+  </g>
+  <g class="hx-lift" style="transform-origin:24px 24px">
+    <path d="M24 11 L37 24 L24 37 L11 24 Z" fill="url(#h1_panel)" stroke="none"/>
+    <path d="M24 11 L37 24 L24 37 L11 24 Z" stroke="url(#h1_face)" stroke-width="1.5"/>
+    <g class="hx-draw" stroke-width="1.4" stroke-opacity="0.8" stroke-dasharray="13" style="--hx-len:13">
+      <line x1="24" y1="11" x2="24" y2="24"/>
+      <line x1="37" y1="24" x2="24" y2="24"/>
+      <line x1="24" y1="37" x2="24" y2="24"/>
+      <line x1="11" y1="24" x2="24" y2="24"/>
+    </g>
+  </g>
+  <circle cx="24" cy="24" r="3" fill="none" stroke-width="1.5" stroke-opacity="0.9"/>
+  <circle class="hx-node" cx="24" cy="24" r="1.7" fill="currentColor" stroke="none" style="transform-origin:center;transform-box:fill-box"/>
+  <circle class="hx-spark hx-s1" cx="24" cy="11" r="1.6" fill="currentColor" stroke="none" style="transform-origin:center;transform-box:fill-box"/>
+  <circle class="hx-spark hx-s2" cx="37" cy="24" r="1.6" fill="currentColor" stroke="none" style="transform-origin:center;transform-box:fill-box"/>
+  <circle class="hx-spark hx-s3" cx="24" cy="37" r="1.6" fill="currentColor" stroke="none" style="transform-origin:center;transform-box:fill-box"/>
+  <circle class="hx-spark hx-s4" cx="11" cy="24" r="1.6" fill="currentColor" stroke="none" style="transform-origin:center;transform-box:fill-box"/>
+  <circle class="hx-halo hx-s1" cx="24" cy="11" r="3.2" fill="none" stroke-width="1.2" stroke-opacity="0" style="transform-origin:center;transform-box:fill-box"/>
+  <circle class="hx-halo hx-s2" cx="37" cy="24" r="3.2" fill="none" stroke-width="1.2" stroke-opacity="0" style="transform-origin:center;transform-box:fill-box"/>
+  <circle class="hx-halo hx-s3" cx="24" cy="37" r="3.2" fill="none" stroke-width="1.2" stroke-opacity="0" style="transform-origin:center;transform-box:fill-box"/>
+  <circle class="hx-halo hx-s4" cx="11" cy="24" r="3.2" fill="none" stroke-width="1.2" stroke-opacity="0" style="transform-origin:center;transform-box:fill-box"/>
+  <circle class="hx-packet" cx="24" cy="11" r="1.5" fill="currentColor" stroke="none" opacity="0"/>
+</svg></span><span class="svc-acc-num">02</span><div class="svc-acc-tt"><div class="svc-acc-name">Systems <span class="amp">&amp;</span> Playbook<span class="svc-acc-tag">Operations</span></div><div class="hsvc-tags"><span class="hsvc-tag">AI Automation</span><span class="hsvc-tag">SOP</span><span class="hsvc-tag">Playbook</span><span class="hsvc-tag">Funnel</span></div></div><svg class="svc-acc-chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div><div class="svc-acc-body"><div class="svc-acc-inner"><div class="hsvc-cols"><div class="hsvc-col"><div class="hsvc-lab">The process</div><ol class="hsvc-proc"><li>Audit: every hour your team wastes, found</li><li>Automate: the busywork moves to live workflows</li><li>Document: SOPs and playbooks anyone can follow</li><li>Handover: your team runs it without us</li></ol></div><div class="hsvc-col"><div class="hsvc-lab">What you get</div><ul class="hsvc-inc"><li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><span>Live automations on tools you own</span></li><li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><span>Custom GPT or Claude project for your business</span></li><li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><span>Internal knowledge base, fully searchable</span></li><li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><span>SOPs, templates and asset libraries</span></li></ul></div></div><div class="svc-acc-links" style="margin-top:clamp(22px,2.6vw,30px)"><a class="svc-acc-cta" href="system-playbook.html">Explore full service &rarr;</a><a class="svc-acc-cta alt" href="pricing.html">See all pricing &rarr;</a></div></div></div></div><div class="svc-acc-item reveal" style="--c:#dca215"><div class="svc-acc-banner"><span class="hsvc-ico"><svg class="hsvc-ic" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+  <defs>
+    <linearGradient id="h2_face" x1="24" y1="9" x2="24" y2="39" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="currentColor" stop-opacity="0.95"/><stop offset="0.55" stop-color="currentColor" stop-opacity="0.6"/><stop offset="1" stop-color="currentColor" stop-opacity="0.3"/></linearGradient>
+    <linearGradient id="h2_bar" x1="24" y1="16" x2="24" y2="36" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="currentColor" stop-opacity="0.16"/><stop offset="1" stop-color="currentColor" stop-opacity="0.03"/></linearGradient>
+    <radialGradient id="h2_bloom" cx="24" cy="25" r="15" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="currentColor" stop-opacity="0.26"/><stop offset="0.6" stop-color="currentColor" stop-opacity="0.06"/><stop offset="1" stop-color="currentColor" stop-opacity="0"/></radialGradient>
+  </defs>
+
+  <ellipse class="hx-bloom" cx="24" cy="25" rx="14" ry="13" fill="url(#h2_bloom)" stroke="none" style="transform-origin:24px 25px"/>
+
+  <!-- back ghost layer -->
+  <g class="hx-ghost" stroke-width="1.3" stroke-opacity="0.28" transform="translate(1 1)">
+    <path d="M11 36 H37"/>
+    <rect x="13" y="28" width="4.4" height="8" rx="1"/>
+    <rect x="21.8" y="23" width="4.4" height="13" rx="1"/>
+    <rect x="30.6" y="26" width="4.4" height="10" rx="1"/>
+  </g>
+
+  <!-- front lift layer -->
+  <g class="hx-lift" style="transform-origin:24px 30px">
+    <path d="M11 36 H37" stroke="url(#h2_face)" stroke-width="1.5"/>
+
+    <g class="hx-mkt-bar1" style="transform-origin:15.2px 36px;transform-box:fill-box">
+      <rect x="13" y="28" width="4.4" height="8" rx="1" fill="url(#h2_bar)" stroke="none"/>
+      <rect x="13" y="28" width="4.4" height="8" rx="1" stroke="url(#h2_face)" stroke-width="1.4"/>
+    </g>
+    <g class="hx-mkt-bar2" style="transform-origin:24px 36px">
+      <rect x="21.8" y="23" width="4.4" height="13" rx="1" fill="url(#h2_bar)" stroke="none"/>
+      <rect x="21.8" y="23" width="4.4" height="13" rx="1" stroke="url(#h2_face)" stroke-width="1.4"/>
+    </g>
+    <g class="hx-mkt-bar3" style="transform-origin:32.8px 36px">
+      <rect x="30.6" y="26" width="4.4" height="10" rx="1" fill="url(#h2_bar)" stroke="none"/>
+      <rect x="30.6" y="26" width="4.4" height="10" rx="1" stroke="url(#h2_face)" stroke-width="1.4"/>
+    </g>
+  </g>
+
+  <!-- rising trend line (draws on) -->
+  <path class="hx-draw" d="M12 31 L20 26 L28 22 L37 14" stroke="currentColor" stroke-width="1.5" stroke-opacity="0.9" pathLength="34" stroke-dasharray="34" style="--hx-len:34"/>
+
+  <!-- up-right arrowhead at tip -->
+  <path class="hx-mkt-arrow" d="M31.5 14 L37 14 L37 19.5" stroke="currentColor" stroke-width="1.5" style="transform-origin:37px 14px"/>
+
+  <!-- glowing tip marker -->
+  <circle class="hx-halo" cx="37" cy="14" r="2.6" fill="none" stroke="currentColor" stroke-width="1.2" stroke-opacity="0.5" style="transform-origin:37px 14px"/>
+  <circle class="hx-node" cx="37" cy="14" r="1.7" fill="currentColor" stroke="none" style="transform-origin:center;transform-box:fill-box"/>
+</svg></span><span class="svc-acc-num">03</span><div class="svc-acc-tt"><div class="svc-acc-name">Marketing <span class="amp">&amp;</span> Ads<span class="svc-acc-tag">Growth</span></div><div class="hsvc-tags"><span class="hsvc-tag">SEO</span><span class="hsvc-tag">SEM</span><span class="hsvc-tag">SSM</span><span class="hsvc-tag">UGC</span><span class="hsvc-tag">AIO</span><span class="hsvc-tag">Community</span></div></div><svg class="svc-acc-chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div><div class="svc-acc-body"><div class="svc-acc-inner"><div class="hsvc-cols"><div class="hsvc-col"><div class="hsvc-lab">The process</div><ol class="hsvc-proc"><li>Audit: find where the budget leaks</li><li>Build: campaigns and creative made to convert</li><li>Optimise: budget chases what works, daily</li><li>Report: clear ROAS, not vanity numbers</li></ol></div><div class="hsvc-col"><div class="hsvc-lab">What you get</div><ul class="hsvc-inc"><li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><span>Full campaign strategy and managed ads</span></li><li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><span>Up to 20+ creatives a month, video included</span></li><li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><span>Landing-page CRO so clicks do not leak</span></li><li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><span>SEO and AI search so you get found</span></li></ul></div></div><div class="svc-acc-links" style="margin-top:clamp(22px,2.6vw,30px)"><a class="svc-acc-cta" href="marketing-ads.html">Explore full service &rarr;</a><a class="svc-acc-cta alt" href="pricing.html">See all pricing &rarr;</a></div></div></div></div><div class="svc-acc-item reveal" style="--c:#7a4ee8"><div class="svc-acc-banner"><span class="hsvc-ico"><svg class="hsvc-ic" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><defs><linearGradient id="h3_bev" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="currentColor" stop-opacity="0.95"/><stop offset="0.55" stop-color="currentColor" stop-opacity="0.6"/><stop offset="1" stop-color="currentColor" stop-opacity="0.3"/></linearGradient><linearGradient id="h3_panel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="currentColor" stop-opacity="0.16"/><stop offset="1" stop-color="currentColor" stop-opacity="0.03"/></linearGradient><radialGradient id="h3_bloom" cx="0.5" cy="0.5" r="0.6"><stop offset="0" stop-color="currentColor" stop-opacity="0.28"/><stop offset="0.6" stop-color="currentColor" stop-opacity="0.06"/><stop offset="1" stop-color="currentColor" stop-opacity="0"/></radialGradient><clipPath id="h3_fr"><rect x="10" y="17" width="27" height="18.5" rx="3.4"/></clipPath></defs><g class="hx-vid-back1" stroke-width="1.4" opacity="0.5"><rect x="15" y="11.5" width="22" height="15" rx="3" fill="url(#h3_panel)" stroke="url(#h3_bev)"/></g><g class="hx-vid-front" stroke-width="1.6"><rect x="10" y="17" width="27" height="18.5" rx="3.4" fill="url(#h3_panel)" stroke="url(#h3_bev)"/><rect class="hx-bloom" x="10" y="17" width="27" height="18.5" rx="3.4" fill="url(#h3_bloom)" stroke="none"/><g clip-path="url(#h3_fr)"><line class="hx-vid-scrub" x1="14" y1="17" x2="14" y2="35.5" stroke="currentColor" stroke-opacity="0.7" stroke-width="1.3"/></g><path class="hx-vid-play" d="M20.5 21.8 L30 26.2 L20.5 30.6 Z" fill="currentColor" fill-opacity="0.92" stroke="url(#h3_bev)" stroke-width="1.4"/></g></svg></span><span class="svc-acc-num">04</span><div class="svc-acc-tt"><div class="svc-acc-name">Content Creation<span class="svc-acc-tag">Studio</span></div><div class="hsvc-tags"><span class="hsvc-tag">Viral Video</span><span class="hsvc-tag">Storytelling</span><span class="hsvc-tag">Social Media</span></div></div><svg class="svc-acc-chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div><div class="svc-acc-body"><div class="svc-acc-inner"><div class="hsvc-cols"><div class="hsvc-col"><div class="hsvc-lab">The process</div><ol class="hsvc-proc"><li>Plan: a calendar where every post has a purpose</li><li>Shoot: a full content bank in a session or two</li><li>Produce: edited, on-brand, ready to publish</li><li>Review: double down on what performs</li></ol></div><div class="hsvc-col"><div class="hsvc-lab">What you get</div><ul class="hsvc-inc"><li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><span>20 to 40+ pieces a month</span></li><li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><span>Photo, short-form video and motion graphics</span></li><li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><span>Community management fully handled</span></li><li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><span>Founder content, ghostwritten in your voice</span></li></ul></div></div><div class="svc-acc-links" style="margin-top:clamp(22px,2.6vw,30px)"><a class="svc-acc-cta" href="content-creation.html">Explore full service &rarr;</a><a class="svc-acc-cta alt" href="pricing.html">See all pricing &rarr;</a></div></div></div></div><div class="svc-acc-item reveal" style="--c:#0fa67a"><div class="svc-acc-banner"><span class="hsvc-ico"><svg class="hsvc-ic" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+  <defs>
+    <linearGradient id="h4_face" x1="24" y1="9" x2="24" y2="39" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="currentColor" stop-opacity="0.95"/><stop offset="0.55" stop-color="currentColor" stop-opacity="0.6"/><stop offset="1" stop-color="currentColor" stop-opacity="0.3"/></linearGradient>
+    <linearGradient id="h4_panel" x1="24" y1="10" x2="24" y2="38" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="currentColor" stop-opacity="0.16"/><stop offset="1" stop-color="currentColor" stop-opacity="0.03"/></linearGradient>
+    <radialGradient id="h4_bloom" cx="24" cy="24" r="14" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="currentColor" stop-opacity="0.26"/><stop offset="0.6" stop-color="currentColor" stop-opacity="0.06"/><stop offset="1" stop-color="currentColor" stop-opacity="0"/></radialGradient>
+  </defs>
+
+  <ellipse class="hx-bloom" cx="24" cy="24" rx="13" ry="13" fill="url(#h4_bloom)" stroke="none" style="transform-origin:24px 24px"/>
+
+  <!-- APP: phone -->
+  <g class="hx-mst-app" style="transform-origin:24px 24px">
+    <g stroke-width="1.3" stroke-opacity="0.28" transform="translate(1 1)"><rect x="16.5" y="10" width="15" height="28" rx="3.2"/></g>
+    <rect x="16.5" y="10" width="15" height="28" rx="3.2" fill="url(#h4_panel)" stroke="none"/>
+    <rect x="16.5" y="10" width="15" height="28" rx="3.2" stroke="url(#h4_face)" stroke-width="1.5"/>
+    <line x1="21.5" y1="13.4" x2="26.5" y2="13.4" stroke="currentColor" stroke-width="1.4" stroke-opacity="0.6"/>
+    <line x1="20" y1="22" x2="28" y2="22" stroke="currentColor" stroke-width="1.4" stroke-opacity="0.55"/>
+    <line x1="20" y1="26" x2="28" y2="26" stroke="currentColor" stroke-width="1.4" stroke-opacity="0.4"/>
+    <circle cx="24" cy="34.2" r="1.5" fill="currentColor" stroke="none"/>
+  </g>
+
+  <!-- WEBSITE: browser window -->
+  <g class="hx-mst-web" style="transform-origin:24px 24px;opacity:0">
+    <g stroke-width="1.3" stroke-opacity="0.28" transform="translate(1 1)"><rect x="9" y="13" width="30" height="22" rx="3"/></g>
+    <rect x="9" y="13" width="30" height="22" rx="3" fill="url(#h4_panel)" stroke="none"/>
+    <rect x="9" y="13" width="30" height="22" rx="3" stroke="url(#h4_face)" stroke-width="1.5"/>
+    <line x1="9" y1="19.5" x2="39" y2="19.5" stroke="currentColor" stroke-width="1.4" stroke-opacity="0.55"/>
+    <circle cx="13" cy="16.3" r="1" fill="currentColor" stroke="none"/>
+    <circle cx="16.5" cy="16.3" r="1" fill="currentColor" stroke="none" opacity="0.7"/>
+    <line x1="13" y1="24.5" x2="35" y2="24.5" stroke="currentColor" stroke-width="1.4" stroke-opacity="0.5"/>
+    <line x1="13" y1="28.5" x2="31" y2="28.5" stroke="currentColor" stroke-width="1.4" stroke-opacity="0.38"/>
+    <line x1="13" y1="32" x2="27" y2="32" stroke="currentColor" stroke-width="1.4" stroke-opacity="0.28"/>
+  </g>
+
+  <!-- GAME: gamepad -->
+  <g class="hx-mst-game" style="transform-origin:24px 24px;opacity:0">
+    <g stroke-width="1.3" stroke-opacity="0.28" transform="translate(1 1)"><path d="M16 17.5 H32 a6 6 0 0 1 6 6 l-1.5 8.5 a4 4 0 0 1 -6.8 2.2 L27 31 H21 l-2.7 3.2 a4 4 0 0 1 -6.8 -2.2 L10 23.5 a6 6 0 0 1 6 -6 Z"/></g>
+    <path d="M16 17.5 H32 a6 6 0 0 1 6 6 l-1.5 8.5 a4 4 0 0 1 -6.8 2.2 L27 31 H21 l-2.7 3.2 a4 4 0 0 1 -6.8 -2.2 L10 23.5 a6 6 0 0 1 6 -6 Z" fill="url(#h4_panel)" stroke="none"/>
+    <path d="M16 17.5 H32 a6 6 0 0 1 6 6 l-1.5 8.5 a4 4 0 0 1 -6.8 2.2 L27 31 H21 l-2.7 3.2 a4 4 0 0 1 -6.8 -2.2 L10 23.5 a6 6 0 0 1 6 -6 Z" stroke="url(#h4_face)" stroke-width="1.5"/>
+    <line x1="16.5" y1="24.5" x2="20.5" y2="24.5" stroke="currentColor" stroke-width="1.4" stroke-opacity="0.6"/>
+    <line x1="18.5" y1="22.5" x2="18.5" y2="26.5" stroke="currentColor" stroke-width="1.4" stroke-opacity="0.6"/>
+    <circle cx="29.5" cy="23" r="1.4" fill="currentColor" stroke="none"/>
+    <circle cx="32.5" cy="26" r="1.4" fill="currentColor" stroke="none" opacity="0.6"/>
+  </g>
+</svg></span><span class="svc-acc-num">05</span><div class="svc-acc-tt"><div class="svc-acc-name">Website, App <span class="amp">&amp;</span> E-Commerce<span class="svc-acc-tag">Build</span></div><div class="hsvc-tags"><span class="hsvc-tag">UX</span><span class="hsvc-tag">UI</span><span class="hsvc-tag">Web</span><span class="hsvc-tag">App</span><span class="hsvc-tag">E-Commerce</span><span class="hsvc-tag">CMS</span></div></div><svg class="svc-acc-chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div><div class="svc-acc-body"><div class="svc-acc-inner"><div class="hsvc-cols"><div class="hsvc-col"><div class="hsvc-lab">The process</div><ol class="hsvc-proc"><li>Map: UX and prototype approved before code</li><li>Design: every page on one design system</li><li>Build: fast, secure and scalable from launch</li><li>Handover: code, domain and content are yours</li></ol></div><div class="hsvc-col"><div class="hsvc-lab">What you get</div><ul class="hsvc-inc"><li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><span>Conversion sites live in as little as 1 week</span></li><li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><span>Custom design system and multi-user CMS</span></li><li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><span>iOS and Android apps, MVP to enterprise</span></li><li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><span>No lock-in: you own everything</span></li></ul></div></div><div class="svc-acc-links" style="margin-top:clamp(22px,2.6vw,30px)"><a class="svc-acc-cta" href="website-apps.html">Explore full service &rarr;</a><a class="svc-acc-cta alt" href="pricing.html">See all pricing &rarr;</a></div></div></div></div></div>
+</div></section>
 
     <!-- CLIENT EXPERIENCE (grey) -->
     <section class="client-experience-section" style="background:#fff;">
       <div class="section-inner">
         <div class="client-experience-header">
-          <h2 class="client-experience-title reveal reveal-delay-1"><span class="client-experience-title-line">What it&rsquo;s like <em style="color:#8b8b8b; font-style:italic;">working</em></span><br><span class="client-experience-title-line">with Brand Method</span></h2>
+          <h2 class="client-experience-title reveal reveal-delay-1"><span class="client-experience-title-line">What it&rsquo;s like <em style="color:var(--accent); font-style:italic;">working</em></span><br><span class="client-experience-title-line">with Brand Method</span></h2>
           <p class="reveal reveal-delay-2">This is what our clients tell us consistently. It is not only about the
             deliverables. It is about the experience of working with us.</p>
         </div>
@@ -653,16 +755,13 @@
         <div class="success-story-grid">
           <!-- Left: text -->
           <div class="success-story-text">
-            <h2 class="success-story-title reveal">Success Story</h2>
-            <p class="success-story-lead reveal reveal-delay-1">Real brands. Measurable outcomes. Built to last.</p>
-            <p class="reveal reveal-delay-2">Brand Method works as an extension of your creative and strategic team
-              helping you scale faster, build stronger brands, and achieve lasting clarity. Trusted by 100+ clients,
-              from startups to established brands, we turn ideas into impactful results.</p>
-            <p class="reveal reveal-delay-2">We partner closely with our clients to build brands rooted in clarity,
-              direction, and long-term value. Across industries and growth stages, we help organizations sharpen their
-              message, strengthen their presence, and move forward with confidence.</p>
-            <p class="reveal reveal-delay-2">We don't just deliver design we build brand systems that scale, convert,
-              and endure.</p>
+            <h2 class="success-story-title reveal">Results clients <em style="color:var(--accent); font-style:italic;">feel</em>.</h2>
+            <p class="success-story-lead reveal reveal-delay-1">Not vanity metrics. Brands that finally look the part, teams that move faster, and founders who stop second-guessing how they show up.</p>
+            <div class="res-points reveal reveal-delay-2">
+              <div class="res-point"><span class="res-point-n">01</span><div><h4 class="res-point-t">Look the part</h4><p class="res-point-d">Brands that finally feel as premium as the work behind them.</p></div></div>
+              <div class="res-point"><span class="res-point-n">02</span><div><h4 class="res-point-t">Move faster</h4><p class="res-point-d">Teams that ship in days, not months, without losing strategic depth.</p></div></div>
+              <div class="res-point"><span class="res-point-n">03</span><div><h4 class="res-point-t">Show up sure</h4><p class="res-point-d">Founders who stop second-guessing how the brand presents.</p></div></div>
+            </div>
           </div>
           <!-- Right: video -->
           <div class="success-story-video reveal reveal-delay-1">

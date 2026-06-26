@@ -83,10 +83,11 @@ document.body.insertAdjacentHTML('afterbegin', `
     </div>
     <div class="nav-mobile-sub" id="nav-mobile-services-sub">
       <a href="${basePath}brand-strategy.html">Brand Strategy &amp; Identity</a>
-      <a href="${basePath}system-playbook.html">System &amp; Playbook</a>
+      <a href="${basePath}system-playbook.html">Systems &amp; Playbook</a>
       <a href="${basePath}marketing-ads.html">Marketing &amp; Ads</a>
       <a href="${basePath}content-creation.html">Content Creation</a>
-      <a href="${basePath}website-apps.html">Website, Apps &amp; E-Commerce</a>
+      <a href="${basePath}website-apps.html">Website, App &amp; E-Commerce</a>
+      <a href="${basePath}pricing.html">Details &amp; Pricing</a>
     </div>
   </div>
   <a href="${basePath}resources.html">Resources</a>

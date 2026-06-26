@@ -9,7 +9,7 @@
   })(window,document,'script','dataLayer','GTM-NJ9RQN4S');</script>
   <!-- End Google Tag Manager -->
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -197,5 +197,35 @@
 </div>
 <script src="js/layout.js?v=2"></script>
 <script src="js/main.js"></script>
+<!-- prefill the enquiry form from ?service= & ?package= (e.g. coming from a pricing "Get started") -->
+<script id="contact-prefill-js">
+(function(){
+  function init(){
+    var p; try{ p=new URLSearchParams(location.search); }catch(e){ return; }
+    var svc=p.get('service'), pkg=p.get('package');
+    if(!svc && !pkg) return;
+    var form=document.querySelector('form[action*="formsubmit"]') || document;
+    var sel=form.querySelector('select[name="Service"]');
+    if(svc && sel){
+      for(var i=0;i<sel.options.length;i++){
+        if(sel.options[i].text.trim()===svc.trim()){ sel.selectedIndex=i; break; }
+      }
+      sel.dispatchEvent(new Event('change',{bubbles:true}));
+    }
+    if(pkg){
+      var ta=form.querySelector('textarea[name="Project Details"]');
+      if(ta && !ta.value.trim()){
+        ta.value='I am interested in the '+pkg+' package. ';
+        ta.dispatchEvent(new Event('input',{bubbles:true}));
+      }
+    }
+    var target = sel || form.querySelector('input,textarea');
+    if(target && target.scrollIntoView){
+      try{ target.scrollIntoView({behavior:'smooth',block:'center'}); }catch(e){ target.scrollIntoView(); }
+    }
+  }
+  if(document.readyState!=='loading')init(); else document.addEventListener('DOMContentLoaded',init);
+})();
+</script>
 </body>
 </html>
