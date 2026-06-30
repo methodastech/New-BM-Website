@@ -30,13 +30,30 @@ window.addEventListener('resize', updateNavState);
   const stickyCta = document.querySelector('.sticky-brand-cta');
   if (!clientsSection || !stickyCta) return;
 
+  let dismissed = false;
+
   function updateStickyBrandCta() {
     const footer = document.querySelector('footer');
     const triggerPoint = clientsSection.offsetTop + clientsSection.offsetHeight - 80;
     const isFooterReached = footer ? footer.getBoundingClientRect().top <= window.innerHeight - 40 : false;
-    const isVisible = window.scrollY >= triggerPoint && !isFooterReached;
+    const isVisible = !dismissed && window.scrollY >= triggerPoint && !isFooterReached;
     stickyCta.classList.toggle('is-visible', isVisible);
     document.body.classList.toggle('sticky-brand-cta-active', isVisible);
+  }
+
+  const closeBtn = stickyCta.querySelector('.sticky-brand-cta__close');
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      dismissed = true;
+      updateStickyBrandCta();
+    });
+  }
+
+  const stickyTopBtn = stickyCta.querySelector('.js-sticky-totop');
+  if (stickyTopBtn) {
+    stickyTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
   }
 
   updateStickyBrandCta();
@@ -136,8 +153,18 @@ if (scrollTopFloat) {
     });
   }
 
+  // Start in "preview": the video loops muted with the caption + a white play
+  // button showing. The first play turns the sound on and reveals the video.
+  wrap.classList.add('is-preview');
+
   playButton?.addEventListener('click', () => {
-    if (player.paused) {
+    if (wrap.classList.contains('is-preview')) {
+      wrap.classList.remove('is-preview');
+      wrap.classList.add('is-playing');
+      player.muted = false;
+      try { player.currentTime = 0; } catch (e) {}
+      player.play().catch(() => {});
+    } else if (player.paused) {
       player.play().catch(() => {});
     } else {
       player.pause();
@@ -164,6 +191,10 @@ if (scrollTopFloat) {
 
   wrap.addEventListener('click', event => {
     if (event.target.closest('.success-story-control')) return;
+    if (wrap.classList.contains('is-preview')) {
+      playButton?.click();
+      return;
+    }
     showControlsTemporarily();
   });
 

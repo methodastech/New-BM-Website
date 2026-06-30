@@ -1206,40 +1206,77 @@ body:not(.hero-page):not(.contact-page) .page-wrap > .resources-news-page > .res
 
 /* â”€â”€ TICKER â”€â”€ */
 .ticker-wrap {
-  border-top: none;
-  border-bottom: none;
-  padding: 18px 0;
+  position: relative;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0;
   overflow: hidden;
-  background: var(--accent);
+  background: linear-gradient(100deg, #070b1c 0%, #101a44 50%, #070b1c 100%);
   max-width: 100%;
   overflow-x: hidden;
   overflow-x: clip;
 }
 
-.ticker-track {
-  display: flex;
-  gap: 60px;
-  white-space: nowrap;
-  animation: ticker 28s linear infinite;
+.ticker-inner {
+  position: relative;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
 }
 
-.ticker-track:hover {
+.ticker-track {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  white-space: nowrap;
+  width: max-content;
+  padding: 14px 0;
+  animation: ticker 36s linear infinite;
+}
+
+/* Pause the marquee while the visitor points at the service tags. */
+.ticker-wrap:hover .ticker-track {
   animation-play-state: paused;
 }
 
 .ticker-item {
-  font-family: var(--font-sans);
+  font-family: var(--font-mono);
   font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #ffffff;
+  color: rgba(255, 255, 255, 0.74);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   flex-shrink: 0;
+  text-decoration: none;
+  padding: 6px 4px;
+  transition: color 0.25s var(--ease);
 }
 
-.ticker-item span {
-  color: rgba(255, 255, 255, 0.5);
-  margin-right: 60px;
+.ticker-item:hover {
+  color: #ffffff;
+}
+
+.ticker-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--c, #ffffff);
+  flex-shrink: 0;
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+
+.ticker-item:hover .ticker-dot {
+  transform: scale(1.35);
+  box-shadow: 0 0 11px 2px color-mix(in srgb, var(--c, #ffffff) 70%, transparent);
+}
+
+.ticker-sep {
+  flex-shrink: 0;
+  margin: 0 24px;
+  color: rgba(255, 255, 255, 0.26);
+  font-size: 11px;
+  user-select: none;
 }
 
 @keyframes ticker {
@@ -1371,8 +1408,8 @@ body:not(.hero-page):not(.contact-page) .page-wrap > .resources-news-page > .res
   grid-template-columns: auto minmax(220px, 1fr) auto;
   align-items: center;
   gap: 28px;
-  min-height: 54px;
-  padding: 9px clamp(18px, 4vw, 48px) calc(9px + env(safe-area-inset-bottom, 0px));
+  min-height: 44px;
+  padding: 5px clamp(18px, 4vw, 48px) calc(5px + env(safe-area-inset-bottom, 0px));
   background: var(--accent);
   color: #ffffff;
   border-top: 1px solid rgba(255, 255, 255, 0.14);
@@ -1404,17 +1441,17 @@ body:not(.hero-page):not(.contact-page) .page-wrap > .resources-news-page > .res
 .sticky-brand-cta__num {
   display: block;
   font-family: var(--font-display);
-  font-size: 22px;
-  font-weight: 600;
+  font-size: 18px;
+  font-weight: 500;
   line-height: 0.95;
   color: #ffffff;
 }
 
 .sticky-brand-cta__label {
   display: block;
-  margin-top: 3px;
+  margin-top: 2px;
   font-family: var(--font-sans);
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -1425,7 +1462,7 @@ body:not(.hero-page):not(.contact-page) .page-wrap > .resources-news-page > .res
 .sticky-brand-cta__message {
   margin: 0;
   font-family: var(--font-sans);
-  font-size: clamp(15px, 1.4vw, 20px);
+  font-size: clamp(14px, 1.25vw, 17px);
   font-weight: 600;
   line-height: 1.2;
   color: #ffffff;
@@ -1435,12 +1472,12 @@ body:not(.hero-page):not(.contact-page) .page-wrap > .resources-news-page > .res
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 38px;
-  padding: 0 22px;
+  min-height: 34px;
+  padding: 0 18px;
   background: #ffffff;
   color: var(--accent);
   font-family: var(--font-sans);
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.04em;
   white-space: nowrap;
@@ -1449,6 +1486,106 @@ body:not(.hero-page):not(.contact-page) .page-wrap > .resources-news-page > .res
 .sticky-brand-cta__button:focus-visible {
   outline: 2px solid rgba(255, 255, 255, 0.8);
   outline-offset: 3px;
+}
+
+.sticky-brand-cta__actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sticky-brand-cta__mini {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  transition: transform 0.25s var(--ease);
+}
+
+.sticky-brand-cta__mini:hover {
+  transform: translateY(-2px);
+}
+
+.sticky-brand-cta__mini--wa {
+  background: #25d366;
+}
+
+.sticky-brand-cta__mini--wa svg {
+  width: 22px;
+  height: 22px;
+  fill: #ffffff;
+}
+
+.sticky-brand-cta__mini--up {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.42);
+}
+
+.sticky-brand-cta__mini--up svg {
+  width: 17px;
+  height: 17px;
+  color: #ffffff;
+}
+
+.sticky-brand-cta__close {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  color: rgba(255, 255, 255, 0.85);
+  transition: background 0.25s, border-color 0.25s, color 0.25s;
+}
+
+.sticky-brand-cta__close:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.6);
+  color: #ffffff;
+}
+
+.sticky-brand-cta__close svg {
+  width: 15px;
+  height: 15px;
+}
+
+@media (max-width: 760px) {
+  .sticky-brand-cta {
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .sticky-brand-cta__stats {
+    display: none;
+  }
+
+  .sticky-brand-cta__message {
+    font-size: 14px;
+  }
+
+  .sticky-brand-cta__mini--up {
+    display: none;
+  }
+
+  .sticky-brand-cta__mini {
+    width: 32px;
+    height: 32px;
+  }
+
+  .sticky-brand-cta__button {
+    padding: 0 16px;
+    font-size: 12px;
+  }
 }
 
 /* â”€â”€ APPROACH â”€â”€ */
@@ -2827,6 +2964,91 @@ body:not(.hero-page):not(.contact-page) .page-wrap > .resources-news-page > .res
 .success-story-video-wrap:focus-within .success-story-video-controls,
 .success-story-video-wrap.is-controls-visible .success-story-video-controls {
   opacity: 1;
+}
+
+/* Caption overlay (v88 style): a bottom-left caption that fades away once the
+   video plays with sound. It never covers the player — clicks pass straight
+   through to the real video controls. */
+.success-story-cover {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background: linear-gradient(to top, rgba(8, 10, 30, 0.6), rgba(8, 10, 30, 0.03) 46%, rgba(8, 10, 30, 0.16));
+  transition: opacity 0.55s var(--ease), visibility 0.55s var(--ease);
+}
+
+.success-story-video-wrap.is-playing .success-story-cover {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.success-story-cover__meta {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: clamp(20px, 2.2vw, 28px);
+}
+
+.success-story-cover__quote {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(16px, 1.8vw, 21px);
+  color: #ffffff;
+  line-height: 1.3;
+  margin-bottom: 8px;
+}
+
+.success-story-cover__sub {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.success-story-cover__sub svg {
+  width: 11px;
+  height: 11px;
+  fill: currentColor;
+}
+
+/* Preview state: show the player's own button as a single white play button
+   (v88 look) over the muted ambient loop, and hide the mute control until the
+   visitor plays with sound. */
+.success-story-video-wrap.is-preview {
+  cursor: pointer;
+}
+
+.success-story-video-wrap.is-preview .success-story-video-controls {
+  opacity: 1;
+}
+
+.success-story-video-wrap.is-preview .success-story-control--mute {
+  display: none;
+}
+
+.success-story-video-wrap.is-preview .success-story-control--play {
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--accent);
+  border-color: rgba(255, 255, 255, 0.9);
+}
+
+.success-story-video-wrap.is-preview .success-story-control--play:hover {
+  background: #ffffff;
+}
+
+.success-story-video-wrap.is-preview .success-story-control--play .icon-play {
+  display: block;
+}
+
+.success-story-video-wrap.is-preview .success-story-control--play .icon-pause {
+  display: none;
 }
 
 .success-story-badge {
@@ -5541,16 +5763,13 @@ footer {
   transform: translateY(0);
 }
 
-.sticky-brand-cta-active .wa-float {
-  bottom: 134px;
-  --wa-float-offset: 0;
-}
-
+/* While the sticky stats bar is open it carries its own WhatsApp + back-to-top
+   buttons, so hide the floating duplicates (matches the v88 design). */
+.sticky-brand-cta-active .wa-float,
 .sticky-brand-cta-active .scroll-top-float {
-  bottom: 66px;
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateY(0);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 @media (max-width: 768px) {

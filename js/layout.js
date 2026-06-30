@@ -150,7 +150,7 @@ document.body.insertAdjacentHTML('beforeend', `
       </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2021-2026 BrandMethod Sdn Bhd. All rights reserved.</p>
+      <p>© 2026 BrandMethod Agency Sdn Bhd (1553794-X). All rights reserved.</p>
       <div class="footer-bottom-links">
         <a href="${basePath}terms-of-service.html">Terms of Service</a>
         <a href="${basePath}privacy-policy.html">Privacy Policy</a>
