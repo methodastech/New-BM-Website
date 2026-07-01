@@ -1417,10 +1417,15 @@
             headers: { Accept: 'application/json' }
           });
           if (!res.ok) throw new Error('Submission failed');
+          /* Guaranteed delivery: open the playbook right away. FormSubmit still emails the
+             lead to you, and its auto-reply to the visitor stays on as a bonus. */
+          var PLAYBOOK_URL = 'methodas_brand_education_standard.html';
           form.outerHTML =
             '<div class="pb-form-success" role="status"><strong>You\'re in.</strong> ' +
-            'Check your inbox &mdash; we\'ve emailed your Brand Growth Playbook link.<br>' +
-            '<small style="color:rgba(15,18,40,.5)">Don\'t see it? Check your spam folder.</small></div>';
+            'Opening your Brand Growth Playbook&hellip;<br>' +
+            '<small style="color:rgba(15,18,40,.5)">A copy is also on its way to your inbox. ' +
+            'Not redirected? <a href="' + PLAYBOOK_URL + '">Open it here</a>.</small></div>';
+          setTimeout(function () { window.location.href = PLAYBOOK_URL; }, 1200);
         } catch (err) {
           btn.disabled = false; btn.innerHTML = original;
           if (msg) { msg.className = 'pb-form-msg is-error'; msg.textContent = 'Sorry, that did not go through. Please try again.'; }
