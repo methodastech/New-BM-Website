@@ -585,15 +585,6 @@
 </div>
 <script src="js/layout.js?v=2"></script>
 <script src="js/main.js"></script>
-<script>
-(function(){
-  document.addEventListener('click',function(e){
-    var b=e.target.closest('.svc-acc-banner'); if(!b) return;
-    if(e.target.closest('.svc-acc-cta')) return;
-    b.parentElement.classList.toggle('open');
-  });
-})();
-</script>
 </body>
 </html>
 

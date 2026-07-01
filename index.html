@@ -1303,16 +1303,30 @@
                 <path d="M18.5 8h-3 M18.5 8v3" stroke-opacity=".7" />
               </svg><span><b>Metrics.</b> Make every ringgit compound.</span></li>
           </ul>
-          <form class="pb-form reveal reveal-delay-3" onsubmit="return false">
-            <input type="text" placeholder="First name" aria-label="First name">
-            <input type="email" placeholder="Email address" aria-label="Email address">
+          <!-- FormSubmit playbook opt-in.
+               1) In the action URL below, replace PLAYBOOK_INBOX@brandmethod.co with the inbox that
+                  should receive playbook leads. A NEW address gets a one-time activation email from
+                  FormSubmit on the first submission — click its link to confirm.
+               2) _autoresponse is the email the VISITOR receives — put your LIVE domain URL in it so
+                  the link works from their inbox (localhost links won't). -->
+          <form class="pb-form reveal reveal-delay-3" id="pbForm"
+                action="https://formsubmit.co/ajax/methodastech@gmail.com" method="POST">
+            <input type="hidden" name="_subject" value="New Brand Growth Playbook request">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_autoresponse" value="Hi! Thanks for requesting The Brand Growth Playbook from Brand Method. Here's your copy: https://brandmethod.co/methodas_brand_education_standard.html - the exact system we use to take a brand from invisible to impossible to ignore, covering positioning, identity, funnel and content in one practical guide. Want the Full edition we use with clients? Just reply to this email and we'll sort you out. - The Brand Method Team">
+            <!-- honeypot: bots fill this, humans never see it -->
+            <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
+            <input type="text" name="name" placeholder="First name" aria-label="First name" required>
+            <input type="email" name="email" placeholder="Email address" aria-label="Email address" required>
             <button type="submit">Send me the playbook <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
                 stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M5 12h14M13 6l6 6-6 6" />
               </svg></button>
+            <p class="pb-form-msg" aria-live="polite"></p>
           </form>
-          <div class="pb-meta reveal reveal-delay-3">Instant download &middot; 48 pages &middot; No spam, unsubscribe
-            anytime.</div>
+          <div class="pb-meta reveal reveal-delay-3">Instant access &middot; 48 pages &middot; We email you the link, no
+            spam.</div>
         </div>
       </div>
     </section>
@@ -1377,6 +1391,41 @@
           book.style.animation = '';
         });
       }
+    })();
+
+    /* Playbook opt-in — FormSubmit submit, autoresponder emails the visitor the link */
+    (function () {
+      var form = document.getElementById('pbForm');
+      if (!form) return;
+      var action = form.getAttribute('action');
+      var msg = form.querySelector('.pb-form-msg');
+      var btn = form.querySelector('button[type="submit"]');
+
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        if (!action || action.indexOf('PLAYBOOK_INBOX') > -1) {
+          if (msg) { msg.className = 'pb-form-msg is-error'; msg.textContent = 'Form not configured yet — set your FormSubmit email in the form action.'; }
+          return;
+        }
+        var original = btn.innerHTML;
+        btn.disabled = true; btn.textContent = 'Sending…';
+        if (msg) { msg.className = 'pb-form-msg'; msg.textContent = ''; }
+        try {
+          var res = await fetch(action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: { Accept: 'application/json' }
+          });
+          if (!res.ok) throw new Error('Submission failed');
+          form.outerHTML =
+            '<div class="pb-form-success" role="status"><strong>You\'re in.</strong> ' +
+            'Check your inbox &mdash; we\'ve emailed your Brand Growth Playbook link.<br>' +
+            '<small style="color:rgba(15,18,40,.5)">Don\'t see it? Check your spam folder.</small></div>';
+        } catch (err) {
+          btn.disabled = false; btn.innerHTML = original;
+          if (msg) { msg.className = 'pb-form-msg is-error'; msg.textContent = 'Sorry, that did not go through. Please try again.'; }
+        }
+      });
     })();
   </script>
 </body>
