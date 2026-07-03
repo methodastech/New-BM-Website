@@ -1,5 +1,5 @@
 // Shared logo SVG (path-based, no font dependency)
-const nestedSections = ['/blog/', '/logo-page/', '/work/'];
+const nestedSections = ['/blog/', '/logo-page/', '/work/', '/services/'];
 const basePath = nestedSections.some((section) => window.location.pathname.includes(section)) ? '../' : '';
 const logoSVG = (width, height) => `
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 100" width="${width}" height="${height}" aria-label="Brand Method">
@@ -27,11 +27,11 @@ document.body.insertAdjacentHTML('afterbegin', `
           <div class="ddp-col">
             <span class="ddp-head">By service</span>
             <a class="ddp-all" href="${basePath}services.html">All services overview <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-            <a class="ddp-svc" href="${basePath}brand-strategy.html" style="--dc:#d63a7e"><span class="ddp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 5h10l3 5-8 11L4 10z"/><path d="M4 10h16" stroke-opacity=".5"/><path d="M9.5 5 8 10l4 11 4-11-1.5-5" stroke-opacity=".4"/></svg></span><span class="ddp-txt"><span class="ddp-nm">Brand Strategy <span class="amp">&amp;</span> Identity</span><span class="ddp-desc">Positioning, naming &amp; a full visual identity</span></span></a>
-            <a class="ddp-svc" href="${basePath}system-playbook.html" style="--dc:#3a55e8"><span class="ddp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2.4"/><circle cx="5" cy="6" r="1.7"/><circle cx="19" cy="6" r="1.7"/><circle cx="5" cy="18" r="1.7"/><circle cx="19" cy="18" r="1.7"/><path d="M6.3 7.1 10 10.2M17.7 7.1 14 10.2M6.3 16.9 10 13.8M17.7 16.9 14 13.8" stroke-opacity=".55"/></svg></span><span class="ddp-txt"><span class="ddp-nm">Systems <span class="amp">&amp;</span> Playbook</span><span class="ddp-desc">Guidelines that keep every touchpoint on-brand</span></span></a>
-            <a class="ddp-svc" href="${basePath}marketing-ads.html" style="--dc:#c8890d"><span class="ddp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16" stroke-opacity=".5"/><path d="M5 16l4-4 3 2 6-7"/><path d="M18 7h-3M18 7v3"/></svg></span><span class="ddp-txt"><span class="ddp-nm">Marketing <span class="amp">&amp;</span> Ads</span><span class="ddp-desc">Campaigns engineered to convert</span></span></a>
-            <a class="ddp-svc" href="${basePath}content-creation.html" style="--dc:#7a4ee8"><span class="ddp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M10 8.4 16 12 10 15.6z" fill="currentColor" stroke="none"/></svg></span><span class="ddp-txt"><span class="ddp-nm">Content Creation</span><span class="ddp-desc">Social, video &amp; creative that performs</span></span></a>
-            <a class="ddp-svc" href="${basePath}website-apps.html" style="--dc:#0fa67a"><span class="ddp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="13.5" height="11"/><path d="M3 8.4h13.5" stroke-opacity=".5"/><rect x="14.5" y="11" width="6.5" height="9" fill="#fff"/><rect x="14.5" y="11" width="6.5" height="9"/></svg></span><span class="ddp-txt"><span class="ddp-nm">Website, App <span class="amp">&amp;</span> E-Commerce</span><span class="ddp-desc">Websites, apps &amp; stores built to sell</span></span></a>
+            <a class="ddp-svc" href="${basePath}services/brand-strategy.html" style="--dc:#d63a7e"><span class="ddp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 5h10l3 5-8 11L4 10z"/><path d="M4 10h16" stroke-opacity=".5"/><path d="M9.5 5 8 10l4 11 4-11-1.5-5" stroke-opacity=".4"/></svg></span><span class="ddp-txt"><span class="ddp-nm">Brand Strategy <span class="amp">&amp;</span> Identity</span><span class="ddp-desc">Positioning, naming &amp; a full visual identity</span></span></a>
+            <a class="ddp-svc" href="${basePath}services/system-playbook.html" style="--dc:#3a55e8"><span class="ddp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2.4"/><circle cx="5" cy="6" r="1.7"/><circle cx="19" cy="6" r="1.7"/><circle cx="5" cy="18" r="1.7"/><circle cx="19" cy="18" r="1.7"/><path d="M6.3 7.1 10 10.2M17.7 7.1 14 10.2M6.3 16.9 10 13.8M17.7 16.9 14 13.8" stroke-opacity=".55"/></svg></span><span class="ddp-txt"><span class="ddp-nm">Systems <span class="amp">&amp;</span> Playbook</span><span class="ddp-desc">Guidelines that keep every touchpoint on-brand</span></span></a>
+            <a class="ddp-svc" href="${basePath}services/marketing-ads.html" style="--dc:#c8890d"><span class="ddp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16" stroke-opacity=".5"/><path d="M5 16l4-4 3 2 6-7"/><path d="M18 7h-3M18 7v3"/></svg></span><span class="ddp-txt"><span class="ddp-nm">Marketing <span class="amp">&amp;</span> Ads</span><span class="ddp-desc">Campaigns engineered to convert</span></span></a>
+            <a class="ddp-svc" href="${basePath}services/content-creation.html" style="--dc:#7a4ee8"><span class="ddp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M10 8.4 16 12 10 15.6z" fill="currentColor" stroke="none"/></svg></span><span class="ddp-txt"><span class="ddp-nm">Content Creation</span><span class="ddp-desc">Social, video &amp; creative that performs</span></span></a>
+            <a class="ddp-svc" href="${basePath}services/website-apps.html" style="--dc:#0fa67a"><span class="ddp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="13.5" height="11"/><path d="M3 8.4h13.5" stroke-opacity=".5"/><rect x="14.5" y="11" width="6.5" height="9" fill="#fff"/><rect x="14.5" y="11" width="6.5" height="9"/></svg></span><span class="ddp-txt"><span class="ddp-nm">Website, App <span class="amp">&amp;</span> E-Commerce</span><span class="ddp-desc">Websites, apps &amp; stores built to sell</span></span></a>
           </div>
           <a class="ddp-feature" href="${basePath}pricing.html">
             <span class="ddp-feat-vis" aria-hidden="true">
@@ -82,11 +82,11 @@ document.body.insertAdjacentHTML('afterbegin', `
       </button>
     </div>
     <div class="nav-mobile-sub" id="nav-mobile-services-sub">
-      <a href="${basePath}brand-strategy.html">Brand Strategy &amp; Identity</a>
-      <a href="${basePath}system-playbook.html">Systems &amp; Playbook</a>
-      <a href="${basePath}marketing-ads.html">Marketing &amp; Ads</a>
-      <a href="${basePath}content-creation.html">Content Creation</a>
-      <a href="${basePath}website-apps.html">Website, App &amp; E-Commerce</a>
+      <a href="${basePath}services/brand-strategy.html">Brand Strategy &amp; Identity</a>
+      <a href="${basePath}services/system-playbook.html">Systems &amp; Playbook</a>
+      <a href="${basePath}services/marketing-ads.html">Marketing &amp; Ads</a>
+      <a href="${basePath}services/content-creation.html">Content Creation</a>
+      <a href="${basePath}services/website-apps.html">Website, App &amp; E-Commerce</a>
       <a href="${basePath}pricing.html">Details &amp; Pricing</a>
     </div>
   </div>
@@ -119,11 +119,11 @@ document.body.insertAdjacentHTML('beforeend', `
       <div class="footer-col footer-col-services">
         <h4>Our Services</h4>
         <ul>
-          <li><a href="${basePath}brand-strategy.html">Brand Strategy &amp; Identity</a></li>
-          <li><a href="${basePath}system-playbook.html">System &amp; Playbook</a></li>
-          <li><a href="${basePath}marketing-ads.html">Marketing &amp; Ads</a></li>
-          <li><a href="${basePath}content-creation.html">Content Creation</a></li>
-          <li><a href="${basePath}website-apps.html">Website, Apps &amp; E-Commerce</a></li>
+          <li><a href="${basePath}services/brand-strategy.html">Brand Strategy &amp; Identity</a></li>
+          <li><a href="${basePath}services/system-playbook.html">System &amp; Playbook</a></li>
+          <li><a href="${basePath}services/marketing-ads.html">Marketing &amp; Ads</a></li>
+          <li><a href="${basePath}services/content-creation.html">Content Creation</a></li>
+          <li><a href="${basePath}services/website-apps.html">Website, Apps &amp; E-Commerce</a></li>
         </ul>
       </div>
       <div class="footer-col footer-col-contact">
