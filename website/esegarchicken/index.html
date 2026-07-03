@@ -1177,6 +1177,118 @@ body.show-shop #shopView{display:block}
     <span>© 2026 e-segar Sdn Bhd · Farm fresh daily · Melaka, Malaysia</span>
     <span class="ft-halal">🕌 <b>JAKIM Halal Certified</b> · Always Segar</span>
   </div></div>
+<div class="bm-footrib" role="img" aria-label="Demo by BrandMethod.co">
+  <canvas id="bmRibCv" width="460" height="110" aria-hidden="true"></canvas>
+  <span class="bm-footrib-fb" hidden>Demo · BrandMethod.co</span>
+</div>
+<style id="bm-footrib-css">
+.bm-footrib{display:flex;justify-content:center;padding:1.6rem 0 .4rem;pointer-events:none}
+.bm-footrib canvas{width:min(460px,88vw);height:auto;display:block}
+.bm-footrib-fb{font-family:var(--mono,monospace);font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:#fff;background:linear-gradient(90deg,#1421B8,#2536F5);padding:.5rem 1.4rem;clip-path:polygon(10px 0,calc(100% - 10px) 0,100% 50%,calc(100% - 10px) 100%,10px 100%,0 50%)}
+.bm-footrib-fb[hidden]{display:none}
+</style>
+<script>
+(function(){
+  var cv=document.getElementById('bmRibCv'),fb=document.querySelector('.bm-footrib-fb');
+  var ctx;try{ctx=cv&&cv.getContext('2d');}catch(e){}
+  if(!ctx){if(cv)cv.style.display='none';if(fb)fb.hidden=false;return;}
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W=460,H=110,dpr=Math.min(window.devicePixelRatio||1,2);
+  cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
+  var X0=40,X1=420,BH=32,BY=40,running=false,looping=false,t=0;
+  /* the signature: utility label, the star, then BRAND METHOD spaced as two words */
+  var SEGS=[
+    {t:'DEMO BY',f:'600 12px Inter,sans-serif',sp:3.6,a:1,dy:0,gap:8},
+    {star:true,w:13,gap:9},
+    {t:'BRAND',f:'600 12px Inter,sans-serif',sp:3.6,a:0.98,dy:0},
+    {t:'METHOD.CO',f:'600 12px Inter,sans-serif',sp:3.6,a:0.98,dy:0}
+  ];
+  var GLYPHS=null;
+  function buildGlyphs(){
+    GLYPHS=[];
+    SEGS.forEach(function(s){
+      if(s.star){GLYPHS.push({star:true,w:s.w});if(s.gap)GLYPHS.push({gap:s.gap});return;}
+      if(!s.t){if(s.gap)GLYPHS.push({gap:s.gap});return;}
+      ctx.font=s.f;
+      for(var i=0;i<s.t.length;i++){
+        var ch=s.t[i];
+        if(ch===' '){GLYPHS.push({gap:6.5});continue;}
+        GLYPHS.push({ch:ch,f:s.f,a:s.a,dy:s.dy||0,w:ctx.measureText(ch).width+s.sp});
+      }
+      if(s.gap)GLYPHS.push({gap:s.gap});
+    });
+  }
+  function wave(x,tt){return 4.0*Math.sin(x*0.0135+tt*0.0011)+2.4*Math.sin(x*0.029-tt*0.00068)+1.2*Math.sin(x*0.055+tt*0.0016);}
+  function slope(x,tt){return (wave(x+2,tt)-wave(x-2,tt))/4;}
+  function lerp(a,b,p){return a+(b-a)*p;}
+  function shade(p){
+    var r=Math.round(lerp(18,86,p)),g=Math.round(lerp(28,116,p)),b=Math.round(lerp(158,255,p));
+    return 'rgb('+r+','+g+','+b+')';
+  }
+  function tail(xEdge,dir,tt){
+    var y=BY+wave(xEdge,tt)*0.7+9;
+    var x2=xEdge-dir*40;
+    ctx.beginPath();
+    ctx.moveTo(xEdge,y);
+    ctx.lineTo(x2,y+7);
+    ctx.lineTo(x2+dir*13,y+7+BH/2);
+    ctx.lineTo(x2,y+7+BH);
+    ctx.lineTo(xEdge,y+BH);
+    ctx.closePath();
+    ctx.fillStyle='#101C96';ctx.fill();
+    ctx.fillStyle='rgba(0,0,0,.22)';ctx.fill();
+  }
+  function draw(tt){
+    if(!GLYPHS)buildGlyphs();
+    ctx.clearRect(0,0,W,H);
+    tail(X0+6,1,tt);tail(X1-6,-1,tt);
+    for(var x=X0;x<=X1;x+=2){
+      var y=BY+wave(x,tt),s=slope(x,tt);
+      var p=Math.max(0,Math.min(1,0.52+s*5.5+0.14*Math.sin(x*0.006-tt*0.00042)));
+      ctx.fillStyle=shade(p);
+      ctx.fillRect(x-1,y,2.4,BH);
+    }
+    ctx.beginPath();
+    for(var x=X0;x<=X1;x+=4){var y=BY+wave(x,tt);(x===X0)?ctx.moveTo(x,y+0.6):ctx.lineTo(x,y+0.6);}
+    ctx.strokeStyle='rgba(255,255,255,.28)';ctx.lineWidth=1.1;ctx.stroke();
+    ctx.beginPath();
+    for(var x=X0;x<=X1;x+=4){var y=BY+wave(x,tt)+BH;(x===X0)?ctx.moveTo(x,y-0.6):ctx.lineTo(x,y-0.6);}
+    ctx.strokeStyle='rgba(0,10,60,.4)';ctx.lineWidth=1.2;ctx.stroke();
+    /* the signature rides the fabric */
+    ctx.textAlign='left';ctx.textBaseline='middle';
+    var total=0;GLYPHS.forEach(function(g){total+=g.w||g.gap||0;});
+    var xs=(X0+X1)/2-total/2;
+    GLYPHS.forEach(function(g){
+      if(g.gap){xs+=g.gap;return;}
+      var cxx=xs+(g.w||0)/2;
+      var y=BY+wave(cxx,tt)+BH/2+0.5,a=Math.atan(slope(cxx,tt));
+      ctx.save();ctx.translate(cxx,y);ctx.rotate(a);
+      if(g.star){
+        ctx.strokeStyle='rgba(255,255,255,.97)';ctx.lineWidth=1.5;ctx.lineCap='round';
+        for(var sp=0;sp<4;sp++){var an=sp*Math.PI/4;
+          ctx.beginPath();ctx.moveTo(-Math.cos(an)*4.6,-Math.sin(an)*4.6);ctx.lineTo(Math.cos(an)*4.6,Math.sin(an)*4.6);ctx.stroke();}
+      } else {
+        ctx.font=g.f;
+        ctx.fillStyle='rgba(2,8,40,.4)';ctx.fillText(g.ch,-((g.w||0)/2)+0.7,(g.dy||0)+1.1);
+        ctx.fillStyle='rgba(255,255,255,'+g.a+')';ctx.fillText(g.ch,-((g.w||0)/2),(g.dy||0));
+      }
+      ctx.restore();
+      xs+=g.w||0;
+    });
+  }
+  function frame(){if(!running){looping=false;return;}looping=true;t+=16;draw(t);requestAnimationFrame(frame);}
+  function boot(){
+    draw(0);
+    if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){GLYPHS=null;draw(t);});
+    if(reduce)return;
+    if(window.IntersectionObserver){
+      new IntersectionObserver(function(es){es.forEach(function(en){running=en.isIntersecting;if(running&&!looping)requestAnimationFrame(frame);});}).observe(cv);
+    }else{running=true;requestAnimationFrame(frame);}
+    document.addEventListener('visibilitychange',function(){if(document.hidden){running=false;}else{var r=cv.getBoundingClientRect();if(r.top<innerHeight&&r.bottom>0){running=true;if(!looping)requestAnimationFrame(frame);}}});
+  }
+  boot();
+})();
+</script>
 </footer>
 
 <!-- WELCOME POPUP -->
