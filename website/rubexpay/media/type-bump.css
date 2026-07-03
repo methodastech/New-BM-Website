@@ -1,0 +1,96 @@
+/* RubexPay — site-wide description type bump (2026-07-02).
+   Raises BODY/DESCRIPTION text only (~8-12%); headings, kickers, HUD ticks and mono
+   micro-labels are intentionally untouched. Loaded after each page's inline styles,
+   so equal-specificity rules here win by order. */
+
+/* shared sections */
+.feat-card p{font-size:1.02rem}
+.why-card p,.wc-body p{font-size:1rem}
+.flow-step p{font-size:1.02rem}
+.it-copy p{font-size:1rem}
+.step-body p{font-size:1.04rem}
+.pillar p{font-size:1.06rem}
+.t-desc{font-size:1.08rem}
+.tension small{font-size:.88rem}
+.panel li{font-size:.92rem}
+
+/* operations console */
+.op-fn{font-size:1.05rem}
+.op-c-fn,.op-c-sys{font-size:1.02rem}
+.op-sys{font-size:1rem}
+.op-area{font-size:clamp(1.06rem,1.35vw,1.24rem)}
+
+/* about */
+.ab-frame-card p{font-size:1.04rem}
+.ab-frame-sub,.ab-op-sub,.ab-origin-body p,.ab-story-r p{font-size:1.08rem}
+.ab-prin-card p{font-size:1.03rem}
+.ab-vmp-cell p{font-size:1.06rem}
+
+/* solutions */
+.sol-mod-list li{font-size:.98rem}
+.sol-trust-body p{font-size:1rem}
+
+/* resources */
+.ros-body p{font-size:1.01rem}
+.ros-card--feat .ros-body p{font-size:1.06rem}
+
+/* contact */
+.channel-val{font-size:1rem}
+
+/* footer legal line */
+.foot-bottom p{font-size:.9rem}
+
+/* the scroll progress bar was removed site-wide — kill it even on stale cached HTML */
+.progress{display:none!important}
+
+/* language switcher flag icons (red-themed) */
+.lang-switch button{display:inline-flex;align-items:center;gap:.45rem}
+.lang-flag{width:20px;height:14px;flex:none;opacity:.9}
+
+/* mobile hero: the visual is its own block between the titles and the description */
+.hero-vis{display:none}
+@media(max-width:760px){
+  .hero-vis{display:block;margin:.7rem 0 1.3rem}
+  /* photo-still heroes (home/solutions/contact): cover + soft edge fade */
+  .hero-vis[style*="hero-home"],.hero-vis[style*="hero-solutions"],.hero-vis[style*="hero-contact"]{
+    height:min(32vh,260px);background-position:center;background-size:cover;background-repeat:no-repeat;
+    -webkit-mask-image:radial-gradient(120% 100% at 50% 50%,#000 62%,transparent 98%);mask-image:radial-gradient(120% 100% at 50% 50%,#000 62%,transparent 98%)}
+}
+
+/* mobile: tighter section rhythm on every page — no desktop cinema heights on phones */
+@media(max-width:760px){
+  .section{padding-block:clamp(2.4rem,7vw,3.6rem)}
+  .cta,.tension,.panel,.platform-stage,.hero{min-height:auto!important}
+  .cta{padding-block:clamp(2.8rem,10vw,4rem)!important}
+  .tension,.platform-stage{padding-block:clamp(2.4rem,8vw,3.4rem)!important}
+  .hero{padding-top:clamp(5.5rem,18vw,7rem)!important;padding-bottom:clamp(2rem,7vw,3rem)!important}
+}
+
+/* boot-loader cube canvas (shared renderer in media/boot-cube.js) */
+#pre .pl-gl{position:absolute;inset:0;width:100%;height:100%;z-index:2}
+#pre .pl-cube.gl-on svg{display:none}
+
+/* TABLET NAV: below 1200px the horizontal nav crams (Resources collided with the language
+   switch, Contact Us wrapped). Switch to the hamburger across the whole tablet zone. */
+.nav-cta{white-space:nowrap}
+@media(min-width:1025px) and (max-width:1200px){
+  .nav-links,.nav-cta{display:none!important}   /* lang toggle stays, matching the phone header */
+  .burger{display:flex!important}
+}
+
+/* GLOBAL: kill horizontal scroll from decorative bleed (hero glow/bg extended past the viewport at
+   tablet widths). overflow-x:clip clips the x-axis WITHOUT making html a scroll container, so
+   vertical scroll and the fixed nav are unaffected. */
+html{overflow-x:clip}
+body{overflow-x:clip}
+
+/* MOBILE FLOW STEPS: the compaction shipped earlier targeted .flow-cube, but this section uses
+   .flow-fig (the big number) + .flow-ico (the SVG cube) — so ~100px of air per step never got
+   removed. Shrink the number/icon boxes to their content so the 3 steps read tight. */
+@media(max-width:760px){
+  .flow-fig{height:auto!important;margin-bottom:.15rem!important}
+  .flow-d{font-size:clamp(2.8rem,13vw,3.6rem)!important}
+  .flow-ico{height:clamp(60px,17vw,86px)!important;margin-top:-.5rem!important}
+  .flow-grid{gap:clamp(1.6rem,6vw,2.4rem)!important}
+  .flow-step{gap:.4rem!important}
+}

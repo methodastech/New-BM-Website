@@ -1,0 +1,1578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>e-segar: Always Segar | Farm-Fresh Halal Chicken, Delivered Daily in Melaka</title>
+<meta name="description" content="Melaka's freshest halal chicken, cut this morning and at your door the same day. JAKIM certified, cold-chain 0 to 4°C. Order before 12pm. WhatsApp +6018-4651045.">
+<meta name="theme-color" content="#0E0F0D">
+<meta property="og:title" content="e-segar: Always Segar | Fresh Halal Chicken, Melaka">
+<meta property="og:description" content="Cut this morning. Doored the same day. JAKIM certified, cold-chain guaranteed.">
+<meta property="og:image" content="assets/img/lifestyle-plated.webp">
+<link rel="icon" type="image/png" href="assets/img/logo-head.png?v=3">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   DESIGN TOKENS   eSegar "Always Segar"  (elevated warm)
+============================================================ */
+:root{
+  --cream:#FFFFFF; --cream-deep:#F6F7F5; --surface:#FFFFFF;
+  --ink:#17181A; --ink-soft:#5E6470; --ink-faint:#9AA0A8;
+  --ember:#E5322D; --ember-deep:#C4231F; --amber:#F7A500;
+  --green:#14A04F; --green-deep:#0E7F3D; --gold:#B8893C;
+  --charcoal:#101113; --charcoal-2:#191B1E; --warm-white:#F5F6F4;
+  --line:rgba(16,18,20,.09); --line-2:rgba(16,18,20,.05);
+  --sh-sm:0 2px 10px rgba(16,18,20,.05);
+  --sh:0 10px 30px rgba(16,18,20,.08);
+  --sh-lg:0 18px 50px rgba(16,18,20,.14);
+  --sh-warm:0 14px 40px rgba(229,50,45,.20);
+  --fd:'Baloo 2','Nunito',sans-serif;
+  --fb:'Nunito','Segoe UI',sans-serif;
+  --mw:1240px;
+  --pad:clamp(20px,5vw,80px);
+  --r-card:18px; --r-btn:12px; --r-pill:999px;
+  --ease:cubic-bezier(.22,1,.36,1);
+  --ease-out:cubic-bezier(.16,1,.3,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{
+  font-family:var(--fb); background:var(--cream); color:var(--ink);
+  line-height:1.65; -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer;font-family:var(--fb);border:none;background:none;color:inherit}
+ul{list-style:none}
+img{display:block;max-width:100%;height:auto}
+::selection{background:var(--ember);color:#fff}
+.wrap{max-width:var(--mw);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+
+h1,h2,h3,.fd{font-family:var(--fd);font-weight:700;line-height:1.08;letter-spacing:-.01em;color:var(--ink)}
+.eyebrow{font:800 12.5px/1 var(--fb);letter-spacing:.16em;text-transform:uppercase;color:var(--green-deep);display:inline-flex;align-items:center;gap:9px}
+.eyebrow.ember{color:var(--ember)}
+.eyebrow.light{color:var(--amber)}
+.sec-h{font-size:clamp(32px,5vw,60px)}
+.sec-h .em{color:var(--ember)}
+.sec-h .gr{color:var(--green-deep)}
+.lead{font:600 clamp(17px,1.7vw,21px)/1.55 var(--fb);color:var(--ink-soft)}
+
+/* ============================================================
+   REVEAL / MOTION
+============================================================ */
+[data-reveal]{opacity:0;transform:translateY(26px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+[data-reveal].in{opacity:1;transform:none}
+[data-reveal][data-d="1"]{transition-delay:.08s}
+[data-reveal][data-d="2"]{transition-delay:.16s}
+[data-reveal][data-d="3"]{transition-delay:.24s}
+[data-reveal][data-d="4"]{transition-delay:.32s}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  [data-reveal]{opacity:1!important;transform:none!important}
+  html{scroll-behavior:auto}
+}
+
+/* ============================================================
+   TOP BAR + NAV
+============================================================ */
+.announce{background:var(--green-deep);color:var(--warm-white);font:700 12px/1 var(--fb);
+  display:flex;align-items:center;justify-content:center;gap:10px;height:32px;padding:0 12px;overflow:hidden}
+.announce span{white-space:nowrap}
+.announce b{color:#fff}
+.announce .cd{font-weight:800;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.25);
+  border-radius:6px;padding:2px 8px;letter-spacing:.05em;font-variant-numeric:tabular-nums}
+.announce .dot{opacity:.4}
+@media(max-width:680px){.announce .hide-s{display:none}}
+
+.nav{position:sticky;top:0;z-index:600;background:rgba(255,255,255,.85);backdrop-filter:blur(18px) saturate(1.4);
+  border-bottom:1px solid transparent;transition:background .3s,border-color .3s,box-shadow .3s}
+.nav.scrolled{background:rgba(255,255,255,.95);border-color:var(--line);box-shadow:0 6px 24px rgba(16,18,20,.05)}
+.nav-in{display:flex;align-items:center;gap:18px;height:72px;transition:height .3s}
+.nav.scrolled .nav-in{height:62px}
+.brand{display:flex;align-items:center;gap:9px;flex-shrink:0}
+.brand-img{height:46px;width:auto;display:block;transition:transform .3s;transform-origin:left center}
+.nav.scrolled .brand-img{transform:scale(.9)}
+footer .brand-img{height:42px;filter:drop-shadow(0 0 8px rgba(255,255,255,.22))}
+.mob .brand-img{filter:drop-shadow(0 0 8px rgba(255,255,255,.22))}
+.nav-links{display:none;gap:4px;margin-left:8px}
+.nav-links a{font:700 14.5px/1 var(--fb);color:var(--ink-soft);padding:9px 13px;border-radius:9px;transition:color .2s,background .2s;position:relative}
+.nav-links a:hover{color:var(--ink);background:rgba(26,23,20,.04)}
+.nav-spacer{margin-left:auto}
+.nav-actions{display:flex;align-items:center;gap:10px}
+.btn-getfresh{display:none;align-items:center;gap:8px;height:44px;padding:0 18px;border-radius:var(--r-btn);
+  background:var(--ember);color:#fff;font:800 14px/1 var(--fb);box-shadow:0 6px 18px rgba(200,54,47,.28);transition:transform .2s,box-shadow .2s,background .2s}
+.btn-getfresh:hover{background:var(--ember-deep);transform:translateY(-1px);box-shadow:0 10px 24px rgba(200,54,47,.36)}
+@media(min-width:980px){.btn-getfresh{display:flex}}
+.icon-btn{width:44px;height:44px;border-radius:11px;display:grid;place-items:center;color:var(--ink);
+  border:1px solid var(--line);background:var(--surface);transition:transform .2s,box-shadow .2s,border-color .2s;position:relative}
+.icon-btn:hover{transform:translateY(-1px);box-shadow:var(--sh-sm);border-color:rgba(26,23,20,.18)}
+.cart-count{position:absolute;top:-6px;right:-6px;min-width:20px;height:20px;padding:0 5px;border-radius:99px;
+  background:var(--ember);color:#fff;font:800 11px/20px var(--fb);text-align:center;box-shadow:0 2px 8px rgba(200,54,47,.5);
+  transform:scale(0);transition:transform .3s var(--ease)}
+.cart-count.show{transform:scale(1)}
+.cart-count.bump{animation:bump .4s var(--ease)}
+@keyframes bump{0%,100%{transform:scale(1)}40%{transform:scale(1.35)}}
+.btn-wa{display:none;align-items:center;gap:8px;height:44px;padding:0 16px;border-radius:var(--r-btn);
+  background:var(--green);color:#fff;font:800 14px/1 var(--fb);box-shadow:0 6px 18px rgba(30,122,77,.25);transition:transform .2s,box-shadow .2s}
+.btn-wa:hover{transform:translateY(-1px);box-shadow:0 10px 24px rgba(30,122,77,.35)}
+.menu-btn{display:grid}
+@media(min-width:980px){.nav-links{display:flex}.btn-wa{display:flex}.menu-btn{display:none}}
+
+/* mobile menu */
+.mob{position:fixed;inset:0;z-index:1000;background:var(--charcoal);color:var(--warm-white);
+  transform:translateX(100%);transition:transform .45s var(--ease);display:flex;flex-direction:column;padding:24px var(--pad)}
+.mob.open{transform:none}
+.mob-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:34px}
+.mob-top .brand-name{color:#fff}
+.mob a{font:600 30px/1.5 var(--fd);color:var(--warm-white);border-bottom:1px solid rgba(255,255,255,.1);padding:14px 0;display:flex;justify-content:space-between;align-items:center}
+.mob a span{color:rgba(255,255,255,.3);font:800 13px/1 var(--fb)}
+.mob-cta{margin-top:auto;display:flex;flex-direction:column;gap:12px;padding-top:20px}
+
+/* ============================================================
+   HERO   cinematic dark
+============================================================ */
+.hero{position:relative;min-height:min(86svh,760px);background:var(--charcoal);color:var(--warm-white);overflow:hidden;display:flex;align-items:center}
+@media(max-width:760px){.hero{min-height:min(94svh,640px)}}
+.hero-photo{position:absolute;inset:0;z-index:1;will-change:transform}
+.hero-photo img{width:100%;height:120%;object-fit:cover;object-position:74% 58%}
+.hero-tint{position:absolute;inset:0;z-index:2;
+  background:linear-gradient(100deg,rgba(14,15,13,.95) 0%,rgba(14,15,13,.78) 40%,rgba(14,15,13,.28) 72%,rgba(14,15,13,.52) 100%)}
+.hero-glow{position:absolute;z-index:1;width:60vw;height:60vw;right:-6vw;bottom:-14vw;border-radius:50%;
+  background:radial-gradient(circle,rgba(232,132,60,.30),transparent 62%);filter:blur(20px);animation:glow 9s ease-in-out infinite}
+@keyframes glow{0%,100%{opacity:.85;transform:scale(1)}50%{opacity:1;transform:scale(1.06)}}
+.hero-grain{position:absolute;inset:0;z-index:6;pointer-events:none;opacity:.5;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E")}
+.hero-in{position:relative;z-index:4;width:100%;max-width:var(--mw);margin:0 auto;padding:84px var(--pad) 78px;will-change:transform}
+.hero-eyebrow{color:var(--amber);opacity:0;animation:rise .7s var(--ease-out) .25s forwards}
+.hero h1{color:#fff;font-size:clamp(46px,9vw,112px);font-weight:700;letter-spacing:-.015em;line-height:.99;margin:16px 0 0;
+  text-shadow:0 8px 50px rgba(0,0,0,.5)}
+.hero h1 .l1,.hero h1 .l2{display:block;overflow:hidden;padding-bottom:.12em;margin-bottom:-.12em}
+.hero h1 .l2{color:var(--amber)}
+.hero h1 span i{display:inline-block;transform:translateY(110%);animation:wordup .9s var(--ease-out) forwards;font-style:inherit}
+.hero h1 .l1 i{animation-delay:.35s}
+.hero h1 .l2 i{animation-delay:.5s}
+@keyframes wordup{to{transform:none}}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.hero-sub{max-width:440px;margin:20px 0 0;font:500 clamp(16px,1.9vw,19px)/1.55 var(--fb);color:rgba(244,241,234,.82);
+  opacity:0;animation:rise .8s var(--ease-out) .8s forwards}
+.hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px;opacity:0;animation:rise .8s var(--ease-out) .95s forwards}
+.btn-ember{display:inline-flex;align-items:center;gap:11px;height:58px;padding:0 30px;border-radius:var(--r-pill);
+  background:var(--ember);color:#fff;font:800 16px/1 var(--fb);box-shadow:var(--sh-warm);transition:transform .25s var(--ease),box-shadow .25s,background .25s}
+.btn-ember:hover{background:var(--ember-deep);transform:translateY(-2px);box-shadow:0 18px 44px rgba(200,54,47,.34)}
+.btn-ghost{display:inline-flex;align-items:center;gap:10px;height:58px;padding:0 26px;border-radius:var(--r-pill);
+  color:#fff;font:800 15px/1 var(--fb);border:1.5px solid rgba(255,255,255,.28);background:rgba(255,255,255,.05);transition:background .25s,border-color .25s,transform .25s}
+.btn-ghost:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.5);transform:translateY(-2px)}
+.hero-cards{display:flex;gap:12px;flex-wrap:wrap;margin-top:36px;opacity:0;animation:rise .9s var(--ease-out) 1.15s forwards}
+.hero-card{display:flex;align-items:center;gap:12px;padding:13px 18px 13px 14px;border-radius:15px;
+  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.13);backdrop-filter:blur(10px);will-change:transform}
+.hero-card .hc-ic{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;flex-shrink:0;
+  background:rgba(232,132,60,.18);color:var(--amber)}
+.hero-card .hc-ic.g{background:rgba(34,197,120,.18);color:#3ddc84}
+.hc-t{font:800 15px/1.1 var(--fb);color:#fff}
+.hc-s{font:600 12px/1.2 var(--fb);color:rgba(244,241,234,.6);margin-top:2px}
+@media(min-width:760px){.hero-photo img{object-position:30% 55%}}
+
+/* ============================================================
+   MARQUEE STRIP
+============================================================ */
+.strip{background:var(--ink);color:var(--warm-white);overflow:hidden;padding:15px 0;border-top:3px solid var(--ember)}
+.strip-track{display:flex;gap:0;white-space:nowrap;width:max-content;animation:marq 32s linear infinite}
+.strip:hover .strip-track{animation-play-state:paused}
+.strip-track span{font:700 17px/1 var(--fd);padding:0 26px;display:inline-flex;align-items:center;gap:26px;color:var(--warm-white)}
+.strip-track span::after{content:"✦";color:var(--amber);font-style:normal;font-size:13px}
+@keyframes marq{to{transform:translateX(-50%)}}
+
+/* ============================================================
+   STATS BAND
+============================================================ */
+.stats{background:var(--cream-deep);border-bottom:1px solid var(--line)}
+.stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line)}
+.stat{background:var(--cream-deep);padding:34px 18px;text-align:center}
+.stat-n{font:600 clamp(34px,5vw,52px)/1 var(--fd);color:var(--ink);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.stat-n .u{color:var(--ember)}
+.stat-l{font:700 12.5px/1.3 var(--fb);text-transform:uppercase;letter-spacing:.07em;color:var(--ink-soft);margin-top:9px}
+@media(min-width:760px){.stats-grid{grid-template-columns:repeat(4,1fr)}}
+
+/* ============================================================
+   SECTION SCAFFOLD
+============================================================ */
+.sec{padding:clamp(64px,10vw,124px) 0}
+.sec.cream{background:var(--cream)}
+.sec.deep{background:var(--cream-deep)}
+.sec-head{max-width:680px}
+.sec-head.center{margin:0 auto;text-align:center}
+.sec-head .lead{margin-top:16px}
+.sec-head .sec-h{margin-top:14px}
+
+/* ============================================================
+   SHOP
+============================================================ */
+.shop-bar{display:flex;flex-direction:column;gap:22px;margin-bottom:38px}
+@media(min-width:860px){.shop-bar{flex-direction:row;align-items:flex-end;justify-content:space-between}}
+.tabs{display:flex;gap:9px;flex-wrap:wrap}
+.tab{display:inline-flex;align-items:center;gap:8px;padding:11px 17px;border-radius:var(--r-pill);
+  background:var(--surface);border:1px solid var(--line);font:800 14px/1 var(--fb);color:var(--ink-soft);
+  transition:all .22s var(--ease)}
+.tab .tc{font:800 11px/1 var(--fb);background:rgba(26,23,20,.07);border-radius:99px;padding:3px 7px;color:var(--ink-soft)}
+.tab:hover{border-color:rgba(26,23,20,.2);color:var(--ink)}
+.tab.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.tab.on .tc{background:rgba(255,255,255,.2);color:#fff}
+
+.pgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+@media(min-width:640px){.pgrid{grid-template-columns:repeat(2,1fr);gap:20px}}
+@media(min-width:980px){.pgrid{grid-template-columns:repeat(4,1fr)}}
+.pcard{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-card);overflow:hidden;
+  display:flex;flex-direction:column;transition:transform .35s var(--ease),box-shadow .35s var(--ease),border-color .35s}
+.pcard:hover{transform:translateY(-6px);box-shadow:var(--sh-lg);border-color:rgba(26,23,20,.14)}
+.pcard.hide{display:none}
+.pcard-media{position:relative;aspect-ratio:1/1;overflow:hidden;background:var(--cream-deep)}
+.pcard-media img{width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease)}
+.pcard:hover .pcard-media img{transform:scale(1.07)}
+.pcard-badge{position:absolute;top:10px;left:10px;z-index:2;font:800 10.5px/1 var(--fb);letter-spacing:.04em;
+  padding:6px 10px;border-radius:99px;color:#fff;text-transform:uppercase;backdrop-filter:blur(4px)}
+.badge-fire{background:rgba(200,54,47,.94)}
+.badge-gold{background:rgba(184,137,60,.95)}
+.badge-green{background:rgba(30,122,77,.94)}
+.pcard-fresh{position:absolute;top:10px;right:10px;z-index:2;display:flex;align-items:center;gap:5px;
+  font:800 10px/1 var(--fb);text-transform:uppercase;letter-spacing:.05em;color:#fff;background:rgba(14,15,13,.42);
+  backdrop-filter:blur(5px);padding:6px 9px;border-radius:99px}
+.pcard-fresh i{width:6px;height:6px;border-radius:50%;background:#3ddc84;box-shadow:0 0 7px #3ddc84;animation:pulse 1.8s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+.pcard-body{padding:15px 15px 16px;display:flex;flex-direction:column;gap:4px;flex:1}
+.pcard-kicker{font:800 10.5px/1 var(--fb);letter-spacing:.1em;text-transform:uppercase;color:var(--green-deep)}
+.pcard-name{font:600 18px/1.12 var(--fd);color:var(--ink);margin-top:3px}
+.pcard-origin{font:600 12.5px/1.4 var(--fb);color:var(--ink-soft)}
+.pcard-foot{margin-top:auto;padding-top:13px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.pcard-price{font:800 21px/1 var(--fb);color:var(--ember);font-variant-numeric:tabular-nums;display:flex;align-items:baseline;gap:5px}
+.pcard-price small{font:700 11px/1 var(--fb);color:var(--ink-faint);text-transform:uppercase}
+.pcard-price del{font:700 12px/1 var(--fb);color:var(--ink-faint)}
+.pcard-add{display:inline-flex;align-items:center;gap:6px;height:38px;padding:0 15px;border-radius:var(--r-pill);
+  background:var(--green);color:#fff;font:800 13px/1 var(--fb);box-shadow:0 5px 14px rgba(30,122,77,.25);
+  transition:transform .2s var(--ease),background .2s}
+.pcard-add:hover{background:var(--green-deep);transform:scale(1.05)}
+.pcard-add.done{background:var(--ink)}
+.shop-foot{margin-top:34px;display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center}
+
+/* ============================================================
+   STORY
+============================================================ */
+.story-grid{display:grid;gap:36px;align-items:center}
+@media(min-width:900px){.story-grid{grid-template-columns:1.05fr 1fr;gap:64px}}
+.story-media{position:relative;border-radius:24px;overflow:hidden;box-shadow:var(--sh-lg);aspect-ratio:4/5}
+.story-media img{width:100%;height:100%;object-fit:cover}
+.story-badge{position:absolute;left:18px;bottom:18px;background:var(--surface);border-radius:14px;padding:14px 18px;box-shadow:var(--sh);display:flex;align-items:center;gap:14px}
+.story-badge .yr{font:600 30px/1 var(--fd);color:var(--ember)}
+.story-badge .yl{font:700 12px/1.3 var(--fb);color:var(--ink-soft);text-transform:uppercase;letter-spacing:.05em}
+.story-quote{font:600 clamp(22px,2.8vw,32px)/1.3 var(--fd);color:var(--ink);margin:18px 0 20px}
+.story-quote .em{color:var(--ember)}
+.story-body{font:500 16.5px/1.7 var(--fb);color:var(--ink-soft);margin-bottom:16px}
+.story-facts{display:flex;gap:26px;margin-top:26px;flex-wrap:wrap}
+.story-facts .sf-n{font:600 30px/1 var(--fd);color:var(--ink)}
+.story-facts .sf-l{font:700 12px/1.2 var(--fb);color:var(--ink-soft);text-transform:uppercase;letter-spacing:.05em;margin-top:5px}
+.sign{margin-top:22px;font:700 21px/1 var(--fd);color:var(--green-deep)}
+
+/* ============================================================
+   PROCESS   sticky scrollytelling
+============================================================ */
+.proc{background:var(--charcoal);color:var(--warm-white)}
+.proc .eyebrow{color:var(--amber)}
+.proc .sec-h{color:#fff}
+.proc .sec-h .em{color:var(--amber)}
+.proc .lead{color:rgba(244,241,234,.7)}
+.proc-grid{display:grid;gap:30px;margin-top:50px}
+@media(min-width:900px){.proc-grid{grid-template-columns:0.92fr 1.08fr;gap:60px;align-items:start}}
+.proc-visual{position:relative;border-radius:22px;overflow:hidden;aspect-ratio:4/5;box-shadow:var(--sh-lg);
+  border:1px solid rgba(255,255,255,.08)}
+@media(min-width:900px){.proc-visual{position:sticky;top:90px}}
+.proc-visual .pv-img{position:absolute;inset:0;opacity:0;transition:opacity .8s var(--ease),transform 1.2s var(--ease)}
+.proc-visual .pv-img img{width:100%;height:100%;object-fit:cover}
+.proc-visual .pv-img.on{opacity:1;transform:scale(1.04)}
+.proc-visual .pv-tint{position:absolute;inset:0;z-index:2;background:linear-gradient(to top,rgba(14,15,13,.6),transparent 45%)}
+.proc-visual .pv-time{position:absolute;left:18px;bottom:16px;z-index:3;font:800 13px/1 var(--fb);letter-spacing:.1em;
+  text-transform:uppercase;color:#fff;background:rgba(200,54,47,.9);padding:8px 13px;border-radius:99px}
+.proc-steps{display:flex;flex-direction:column;gap:14px}
+.proc-step{padding:24px;border-radius:18px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.03);
+  transition:background .4s,border-color .4s,transform .4s;cursor:default}
+.proc-step.active{background:rgba(255,255,255,.07);border-color:rgba(232,132,60,.4)}
+.proc-step-top{display:flex;align-items:center;gap:14px;margin-bottom:9px}
+.proc-num{font:600 18px/1 var(--fd);width:42px;height:42px;border-radius:12px;display:grid;place-items:center;
+  background:rgba(255,255,255,.06);color:rgba(244,241,234,.5);flex-shrink:0;transition:all .4s}
+.proc-step.active .proc-num{background:var(--ember);color:#fff}
+.proc-step h3{color:#fff;font-size:22px}
+.proc-step p{font:500 15px/1.6 var(--fb);color:rgba(244,241,234,.65)}
+.proc-time-tag{display:inline-block;margin-top:11px;font:800 11px/1 var(--fb);letter-spacing:.08em;text-transform:uppercase;
+  color:var(--amber);background:rgba(232,132,60,.12);padding:6px 11px;border-radius:99px}
+
+/* ============================================================
+   WHY   feature cards w/ photos
+============================================================ */
+.why-grid{display:grid;gap:18px;margin-top:50px;grid-template-columns:1fr}
+@media(min-width:640px){.why-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1040px){.why-grid{grid-template-columns:repeat(4,1fr)}}
+.why-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-card);overflow:hidden;
+  transition:transform .35s var(--ease),box-shadow .35s}
+.why-card:hover{transform:translateY(-5px);box-shadow:var(--sh-lg)}
+.why-media{aspect-ratio:16/11;overflow:hidden}
+.why-media img{width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease)}
+.why-card:hover .why-media img{transform:scale(1.06)}
+.why-body{padding:20px}
+.why-ic{width:42px;height:42px;border-radius:11px;display:grid;place-items:center;background:rgba(30,122,77,.1);color:var(--green-deep);margin-bottom:13px}
+.why-card h3{font-size:19px;margin-bottom:7px}
+.why-card p{font:500 14.5px/1.55 var(--fb);color:var(--ink-soft)}
+
+/* ============================================================
+   GUARANTEE
+============================================================ */
+.gtee-grid{display:grid;gap:14px;margin-top:46px;grid-template-columns:1fr}
+@media(min-width:680px){.gtee-grid{grid-template-columns:repeat(2,1fr)}}
+.gtee{display:flex;gap:16px;padding:24px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-card)}
+.gtee .gi{width:48px;height:48px;border-radius:13px;flex-shrink:0;display:grid;place-items:center;background:rgba(200,54,47,.09);color:var(--ember)}
+.gtee.green .gi{background:rgba(30,122,77,.1);color:var(--green-deep)}
+.gtee h3{font-size:18px;margin-bottom:6px}
+.gtee p{font:500 14.5px/1.55 var(--fb);color:var(--ink-soft);margin-bottom:9px}
+.gtee .gp{font:800 12px/1 var(--fb);color:var(--green-deep);display:inline-flex;align-items:center;gap:6px}
+
+/* ============================================================
+   B2B
+============================================================ */
+.b2b-top{display:grid;gap:36px;align-items:center}
+@media(min-width:900px){.b2b-top{grid-template-columns:1fr 1fr;gap:60px}}
+.b2b-media{border-radius:22px;overflow:hidden;box-shadow:var(--sh-lg);aspect-ratio:16/11}
+.b2b-media img{width:100%;height:100%;object-fit:cover}
+.b2b-target{display:inline-flex;flex-direction:column;background:rgba(200,54,47,.06);border:1.5px solid rgba(200,54,47,.16);
+  border-radius:16px;padding:18px 24px;margin:22px 0}
+.b2b-target .t-n{font:600 clamp(32px,4vw,46px)/1 var(--fd);color:var(--ember)}
+.b2b-target .t-l{font:700 11.5px/1 var(--fb);text-transform:uppercase;letter-spacing:.08em;color:var(--ink-soft);margin-top:6px}
+.b2b-cards{display:grid;gap:14px;margin-top:42px;grid-template-columns:1fr}
+@media(min-width:760px){.b2b-cards{grid-template-columns:repeat(3,1fr)}}
+.b2b-card{padding:24px;border-radius:var(--r-card);background:var(--surface);border:1px solid var(--line)}
+.b2b-card.hl{background:rgba(200,54,47,.04);border-color:rgba(200,54,47,.2)}
+.b2b-card .bi{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;background:rgba(30,122,77,.1);color:var(--green-deep);margin-bottom:14px}
+.b2b-card.hl .bi{background:rgba(200,54,47,.1);color:var(--ember)}
+.b2b-card h3{font-size:18px;margin-bottom:8px}
+.b2b-card p{font:500 14px/1.55 var(--fb);color:var(--ink-soft)}
+
+/* ===== WHO + HOW ===== */
+.how-grid{display:grid;gap:14px;margin-top:46px;grid-template-columns:1fr}
+@media(min-width:760px){.how-grid{grid-template-columns:repeat(3,1fr)}}
+.how-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-card);padding:26px;position:relative}
+.how-num{font:600 44px/1 var(--fd);color:rgba(200,54,47,.2);position:absolute;top:18px;right:22px}
+.how-card .hi{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;background:rgba(200,54,47,.08);font-size:20px;margin-bottom:14px}
+.how-card h3{font-size:19px;margin-bottom:7px}
+.how-card p{font:500 14.5px/1.55 var(--fb);color:var(--ink-soft)}
+
+/* ============================================================
+   MOBILE COMPACTION  (<=640px) — tighter rhythm, denser grids,
+   home shop becomes a curated teaser. Premium, not cramped.
+============================================================ */
+@media(max-width:640px){
+  /* section rhythm */
+  .sec{padding:50px 0}
+  .sec-head .lead{margin-top:10px}
+  .sec-head .sec-h{margin-top:10px}
+  .why-grid{margin-top:24px}
+  .proc-grid{margin-top:26px;gap:22px}
+  .gtee-grid{margin-top:24px}
+  .b2b-cards{margin-top:26px}
+  .how-grid{margin-top:24px}
+  .story-facts{margin-top:20px;gap:22px}
+
+  /* hero: shorter, tighter */
+  .hero{min-height:min(82svh,600px)}
+  .hero-in{padding:56px var(--pad) 50px}
+  .hero-sub{margin-top:15px}
+  .hero-cta{margin-top:22px}
+  .hero-cards{margin-top:22px;gap:10px}
+
+  /* stats */
+  .stat{padding:22px 12px}
+
+  /* WHY: 2-up feature cards */
+  .why-grid{grid-template-columns:repeat(2,1fr);gap:12px}
+  .why-body{padding:14px}
+  .why-ic{width:36px;height:36px;margin-bottom:9px}
+  .why-card h3{font-size:15px;margin-bottom:5px}
+  .why-card p{font:500 12.5px/1.5 var(--fb)}
+
+  /* product cards clean at 2-up: no badge collision, stacked price/add */
+  .pcard-body{padding:12px 12px 14px}
+  .pcard-name{font-size:16px}
+  .pcard-fresh{display:none}
+  .pcard-badge{font-size:9.5px;padding:5px 9px}
+  .pcard-foot{flex-direction:column;align-items:stretch;gap:9px;padding-top:12px}
+  .pcard-add{width:100%;justify-content:center;height:38px;padding:0 12px}
+
+  /* process steps tighter, shorter visual */
+  .proc-step{padding:18px}
+  .proc-step h3{font-size:19px}
+  .proc-steps{gap:10px}
+  .proc-visual{aspect-ratio:16/11}
+
+  /* landscape media a bit shorter */
+  .b2b-media{aspect-ratio:16/12}
+  .b2b-target{padding:14px 20px;margin:18px 0}
+  .b2b-card{padding:20px}
+  .b2b-card .bi{margin-bottom:11px}
+  .b2b-cards{gap:12px}
+
+  /* guarantee cards tighter */
+  .gtee{padding:18px;gap:13px}
+
+  /* HOME SHOP = curated teaser on mobile (full catalog on shop page) */
+  #tabs{display:none}
+  #pgrid .pcard:nth-child(n+7){display:none}
+  .shop-bar{margin-bottom:22px;gap:14px}
+  .shop-foot{margin-top:24px}
+}
+
+/* ===== WELCOME POPUP ===== */
+.pop-ov{position:fixed;inset:0;z-index:1400;background:rgba(14,15,13,.55);backdrop-filter:blur(4px);display:grid;place-items:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .3s}
+.pop-ov.open{opacity:1;pointer-events:auto}
+.pop-card{max-width:400px;width:100%;background:var(--surface);border-radius:22px;overflow:hidden;transform:translateY(16px) scale(.98);transition:transform .35s var(--ease);box-shadow:var(--sh-lg)}
+.pop-ov.open .pop-card{transform:none}
+.pop-top{background:var(--charcoal);color:var(--warm-white);padding:30px 26px 26px;text-align:center;position:relative}
+.pop-x{position:absolute;top:12px;right:14px;width:32px;height:32px;border-radius:9px;display:grid;place-items:center;color:rgba(255,255,255,.55);font-size:15px}
+.pop-x:hover{color:#fff}
+.pop-title{font:600 30px/1.1 var(--fd);color:#fff;margin-top:10px}
+.pop-title .em{color:var(--amber)}
+.pop-body{padding:22px 24px 24px}
+.pop-offer{font:700 13px/1.5 var(--fb);color:var(--ink);background:rgba(232,132,60,.1);border:1px solid rgba(232,132,60,.25);border-radius:12px;padding:12px 14px;margin-bottom:14px}
+.pop-in{width:100%;height:48px;border-radius:12px;border:1px solid var(--line);background:var(--cream);padding:0 15px;font:600 14px/1 var(--fb);color:var(--ink);outline:none;margin-bottom:10px}
+.pop-in:focus{border-color:var(--green)}
+.pop-btn{width:100%;height:52px;border-radius:12px;background:var(--green);color:#fff;font:800 15px/1 var(--fb);box-shadow:0 8px 22px rgba(30,122,77,.3);transition:background .2s,transform .2s}
+.pop-btn:hover{background:var(--green-deep);transform:translateY(-1px)}
+.pop-skip{text-align:center;font:600 12.5px/1 var(--fb);color:var(--ink-faint);margin-top:13px;cursor:pointer}
+.pop-skip:hover{color:var(--ink-soft)}
+
+/* ============================================================
+   REVIEWS  marquee
+============================================================ */
+.rev-rows{display:flex;flex-direction:column;gap:16px;margin-top:48px}
+.rev-row{overflow:hidden;-webkit-mask:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.rev-track{display:flex;gap:16px;width:max-content;animation:marq 46s linear infinite}
+.rev-row.r2 .rev-track{animation-duration:60s;animation-direction:reverse}
+.rev-row:hover .rev-track{animation-play-state:paused}
+.rev-card{width:340px;flex-shrink:0;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-card);padding:22px 24px}
+.rev-stars{color:var(--amber);letter-spacing:2px;font-size:14px}
+.rev-txt{font:500 15px/1.6 var(--fb);color:var(--ink);margin:11px 0 16px}
+.rev-auth{display:flex;align-items:center;gap:11px}
+.rev-av{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;color:#fff;font:800 14px/1 var(--fb);flex-shrink:0}
+.rev-nm{font:800 14px/1.2 var(--fb);color:var(--ink)}
+.rev-loc{font:600 12px/1.2 var(--fb);color:var(--ink-soft)}
+
+/* ============================================================
+   FAQ
+============================================================ */
+.faq-list{max-width:820px;margin:44px auto 0;display:flex;flex-direction:column;gap:12px}
+.faq{background:var(--surface);border:1px solid var(--line);border-radius:15px;overflow:hidden;transition:border-color .3s,box-shadow .3s}
+.faq.open{border-color:rgba(30,122,77,.35);box-shadow:var(--sh-sm)}
+.faq-q{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 22px;cursor:pointer;
+  font:700 16.5px/1.4 var(--fb);color:var(--ink)}
+.faq-ic{width:28px;height:28px;flex-shrink:0;border-radius:8px;display:grid;place-items:center;background:rgba(30,122,77,.1);color:var(--green-deep);transition:transform .35s var(--ease),background .3s}
+.faq.open .faq-ic{transform:rotate(135deg);background:var(--green);color:#fff}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s var(--ease)}
+.faq-a-in{padding:0 22px 20px;font:500 15px/1.65 var(--fb);color:var(--ink-soft)}
+
+/* ============================================================
+   CTA  dark close
+============================================================ */
+.cta{position:relative;background:var(--charcoal);color:var(--warm-white);overflow:hidden;text-align:center;padding:clamp(70px,11vw,130px) 0}
+.cta-bg{position:absolute;inset:0;z-index:0;opacity:.32;will-change:transform}
+.cta-bg img{width:100%;height:120%;object-fit:cover}
+.cta::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(to top,rgba(14,15,13,.95),rgba(14,15,13,.7) 50%,rgba(14,15,13,.9))}
+.cta-in{position:relative;z-index:2;max-width:640px;margin:0 auto}
+.cta .eyebrow{color:var(--amber);justify-content:center}
+.cta h2{color:#fff;font-size:clamp(36px,6vw,76px);margin:16px 0 18px}
+.cta h2 .em{color:var(--amber)}
+.cta p{font:500 clamp(16px,1.8vw,19px)/1.6 var(--fb);color:rgba(244,241,234,.78);max-width:560px;margin:0 auto 32px}
+.cta-acts{display:flex;flex-wrap:wrap;gap:14px;justify-content:center}
+.cta-trust{margin-top:26px;font:600 13px/1.5 var(--fb);color:rgba(244,241,234,.5)}
+.cta-trust b{color:var(--warm-white)}
+.cta-brandmark{width:74px;height:74px;margin:0 auto 20px;border-radius:50%;background:var(--charcoal-2);
+  border:1.5px solid rgba(255,255,255,.14);display:grid;place-items:center;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+.cta-brandmark svg{width:46px;height:46px}
+.cta-mascot{position:absolute;right:clamp(8px,2.5vw,48px);bottom:clamp(12px,3vw,36px);width:clamp(132px,14vw,210px);
+  z-index:2;pointer-events:none;filter:drop-shadow(0 14px 28px rgba(0,0,0,.5))}
+@media(max-width:900px){.cta-mascot{display:none}}
+
+/* ============================================================
+   FOOTER
+============================================================ */
+footer{background:var(--ink);color:rgba(244,241,234,.72)}
+.ft-top{padding:64px 0 44px;border-bottom:1px solid rgba(255,255,255,.08)}
+.ft-grid{display:grid;gap:38px;grid-template-columns:1fr}
+@media(min-width:760px){.ft-grid{grid-template-columns:2fr 1fr 1fr 1.4fr}}
+@media(max-width:640px){
+  .ft-top{padding:40px 0 30px}
+  .ft-grid{grid-template-columns:1fr 1fr;gap:24px 22px}
+  .ft-brand{grid-column:1 / -1}
+  .ft-grid > .ft-col:last-child{grid-column:1 / -1}
+}
+.ft-brand .brand-name{color:#fff}
+.ft-tag{font:500 14.5px/1.6 var(--fb);color:rgba(244,241,234,.6);margin:16px 0 18px;max-width:330px}
+.ft-con{display:flex;flex-direction:column;gap:9px;font:600 14px/1.4 var(--fb);color:rgba(244,241,234,.72)}
+.ft-con a:hover{color:#fff}
+.ft-col h4{font:800 12px/1 var(--fb);letter-spacing:.1em;text-transform:uppercase;color:#fff;margin-bottom:16px}
+.ft-col a{display:block;font:500 14.5px/1 var(--fb);color:rgba(244,241,234,.62);padding:7px 0;transition:color .2s}
+.ft-col a:hover{color:var(--amber)}
+.ft-col a.btn-wa{display:flex;width:100%;justify-content:center;align-items:center;gap:8px;
+  height:46px;padding:0 18px;font:800 14px/1 var(--fb);color:#fff;border-radius:var(--r-btn);box-sizing:border-box}
+.ft-col a.btn-wa:hover{color:#fff}
+.ft-bot{padding:22px 0;display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center;
+  font:600 12.5px/1.5 var(--fb);color:rgba(244,241,234,.45)}
+.ft-halal{display:inline-flex;align-items:center;gap:8px;color:rgba(244,241,234,.62)}
+.ft-halal b{color:var(--green);}
+
+/* ============================================================
+   CART DRAWER + OVERLAY + TOAST + QUICK VIEW
+============================================================ */
+.ov{position:fixed;inset:0;z-index:1100;background:rgba(14,15,13,.5);backdrop-filter:blur(3px);opacity:0;pointer-events:none;transition:opacity .35s}
+.ov.open{opacity:1;pointer-events:auto}
+.cart{position:fixed;top:0;right:0;bottom:0;z-index:1200;width:min(420px,100%);background:var(--cream);
+  transform:translateX(100%);transition:transform .42s var(--ease);display:flex;flex-direction:column;box-shadow:var(--sh-lg)}
+.cart.open{transform:none}
+.cart-head{display:flex;align-items:center;justify-content:space-between;padding:22px 22px 16px;border-bottom:1px solid var(--line)}
+.cart-head h3{font-size:22px}
+.cart-head .cx{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;border:1px solid var(--line);background:var(--surface)}
+.cart-items{flex:1;overflow-y:auto;padding:16px 22px;display:flex;flex-direction:column;gap:12px}
+.cart-empty{text-align:center;padding:60px 20px;color:var(--ink-soft)}
+.cart-empty .ce-ic{font-size:42px;margin-bottom:12px;opacity:.5}
+.ci{display:flex;gap:13px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:11px}
+.ci-img{width:58px;height:58px;border-radius:10px;object-fit:cover;flex-shrink:0;background:var(--cream-deep)}
+.ci-info{flex:1;min-width:0}
+.ci-nm{font:700 13.5px/1.25 var(--fb);color:var(--ink)}
+.ci-pr{font:800 14px/1 var(--fb);color:var(--ember);margin-top:4px;font-variant-numeric:tabular-nums}
+.ci-qty{display:flex;align-items:center;gap:9px}
+.qb{width:28px;height:28px;border-radius:8px;border:1px solid var(--line);background:var(--cream);display:grid;place-items:center;font:800 15px/1 var(--fb);color:var(--ink)}
+.qb:hover{border-color:var(--ember);color:var(--ember)}
+.qn{font:800 14px/1 var(--fb);min-width:18px;text-align:center;font-variant-numeric:tabular-nums}
+.ci-rm{font:700 11px/1 var(--fb);color:var(--ink-faint);margin-top:6px}
+.ci-rm:hover{color:var(--ember)}
+.cart-foot{padding:18px 22px 22px;border-top:1px solid var(--line);background:var(--surface)}
+.cart-sum{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
+.cart-sum .s-l{font:700 14px/1 var(--fb);color:var(--ink-soft)}
+.cart-sum .s-v{font:600 28px/1 var(--fd);color:var(--ink);font-variant-numeric:tabular-nums}
+.cart-note{font:600 12px/1.4 var(--fb);color:var(--ink-soft);margin-bottom:14px}
+.cart-wa{width:100%;height:54px;border-radius:var(--r-btn);background:var(--green);color:#fff;font:800 15.5px/1 var(--fb);
+  display:flex;align-items:center;justify-content:center;gap:10px;box-shadow:0 8px 22px rgba(30,122,77,.28);transition:transform .2s,box-shadow .2s}
+.cart-wa:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(30,122,77,.38)}
+.fd-bar{margin-bottom:14px}
+.fd-lbl{font:700 12px/1.4 var(--fb);color:var(--ink-soft);margin-bottom:7px}
+.fd-lbl b{color:var(--green-deep)}
+.fd-track{height:7px;border-radius:99px;background:rgba(26,23,20,.08);overflow:hidden}
+.fd-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--green),#3ddc84);width:0;transition:width .5s var(--ease)}
+.qv-sizes{display:none;grid-template-columns:repeat(auto-fit,minmax(72px,1fr));gap:8px;margin-bottom:16px}
+.qv-sizes.show{display:grid}
+.sz{border:1.5px solid var(--line);border-radius:11px;padding:9px 6px;text-align:center;cursor:pointer;background:var(--surface);transition:border-color .2s,background .2s}
+.sz:hover{border-color:rgba(30,122,77,.4)}
+.sz.on{border-color:var(--green);background:rgba(30,122,77,.07)}
+.sz .n{font:800 12.5px/1 var(--fb);color:var(--ink)}
+.sz .w{font:600 10.5px/1 var(--fb);color:var(--ink-soft);margin-top:3px}
+.sz .p{font:800 12.5px/1 var(--fb);color:var(--ember);margin-top:4px}
+
+.toast{position:fixed;left:50%;bottom:26px;z-index:1500;transform:translateX(-50%) translateY(120px);
+  background:var(--ink);color:#fff;font:700 14px/1.3 var(--fb);padding:14px 22px;border-radius:99px;
+  box-shadow:var(--sh-lg);transition:transform .45s var(--ease);max-width:90vw;text-align:center}
+.toast.show{transform:translateX(-50%) translateY(0)}
+
+.qv{position:fixed;inset:0;z-index:1300;display:grid;place-items:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .3s}
+.qv.open{opacity:1;pointer-events:auto}
+.qv-card{background:var(--surface);border-radius:22px;overflow:hidden;max-width:760px;width:100%;max-height:90vh;overflow-y:auto;
+  display:grid;grid-template-columns:1fr;transform:translateY(20px) scale(.98);transition:transform .4s var(--ease);box-shadow:var(--sh-lg)}
+.qv.open .qv-card{transform:none}
+@media(min-width:680px){.qv-card{grid-template-columns:1fr 1fr}}
+.qv-img{aspect-ratio:1/1;background:var(--cream-deep)}
+.qv-img img{width:100%;height:100%;object-fit:cover}
+.qv-body{padding:26px 26px 28px;position:relative}
+.qv-x{position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:9px;display:grid;place-items:center;background:var(--cream);border:1px solid var(--line)}
+.qv-kicker{font:800 11px/1 var(--fb);letter-spacing:.1em;text-transform:uppercase;color:var(--green-deep)}
+.qv-body h3{font-size:27px;margin:8px 0 10px}
+.qv-st{font:700 13px/1 var(--fb);display:inline-flex;align-items:center;gap:7px;margin-bottom:14px}
+.qv-st i{width:8px;height:8px;border-radius:50%}
+.qv-desc{font:500 15px/1.65 var(--fb);color:var(--ink-soft);margin-bottom:18px}
+.qv-pr{font:600 34px/1 var(--fd);color:var(--ember);margin-bottom:18px;font-variant-numeric:tabular-nums}
+
+/* fab whatsapp */
+.fab{position:fixed;right:18px;bottom:18px;z-index:900;width:56px;height:56px;border-radius:50%;background:var(--green);
+  display:grid;place-items:center;box-shadow:0 10px 26px rgba(30,122,77,.4);transition:transform .3s var(--ease);color:#fff}
+.fab:hover{transform:scale(1.08)}
+.fab::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid var(--green);animation:ring 2.4s ease-out infinite}
+@keyframes ring{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.5);opacity:0}}
+@media(min-width:980px){.fab{display:none}}
+.progbar{position:fixed;top:0;left:0;height:3px;width:0;z-index:1600;background:linear-gradient(90deg,var(--ember),var(--amber));box-shadow:0 0 10px rgba(200,54,47,.5)}
+
+/* ============================================================
+   VIEW TOGGLE  (home page  ↔  dedicated shop page)
+============================================================ */
+#shopView{display:none}
+body.show-shop #homeView{display:none}
+body.show-shop #shopView{display:block}
+
+/* ===== NAV: Shop Fresh dropdown ===== */
+.nav-shop{display:none;align-items:center;gap:4px;margin-left:6px}
+@media(min-width:980px){.nav-shop{display:flex}}
+.shopdrop{position:relative}
+.nav-link{display:inline-flex;align-items:center;gap:7px;height:42px;padding:0 14px;border-radius:10px;font:800 14.5px/1 var(--fb);color:var(--ink-soft);background:none;transition:color .2s,background .2s}
+.nav-link:hover,.shopdrop.open>.nav-link{color:var(--ink);background:rgba(26,23,20,.05)}
+.nav-link .chev{transition:transform .25s}
+.shopdrop.open>.nav-link .chev{transform:rotate(180deg)}
+.dropmenu{position:absolute;top:calc(100% + 12px);left:0;width:316px;background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:var(--sh-lg);padding:8px;opacity:0;visibility:hidden;transform:translateY(-8px);transition:opacity .25s var(--ease),transform .25s var(--ease),visibility .25s;z-index:60}
+.shopdrop.open .dropmenu{opacity:1;visibility:visible;transform:none}
+.dropitem{display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:11px;transition:background .18s;cursor:pointer;width:100%;text-align:left}
+.dropitem:hover{background:var(--cream-deep)}
+.dropitem .di-ic{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;flex-shrink:0;background:rgba(30,122,77,.1);color:var(--green-deep);font-size:18px;overflow:hidden}
+.dropitem .di-ic img{width:100%;height:100%;object-fit:cover}
+.dropitem.feat{background:var(--ember)}
+.dropitem.feat:hover{background:var(--ember-deep)}
+.dropitem.feat .di-ic{background:rgba(255,255,255,.2)}
+.dropitem.feat .di-t,.dropitem.feat .di-s{color:#fff}
+.dropitem.feat .di-s{color:rgba(255,255,255,.78)}
+.di-t{font:800 14px/1.2 var(--fb);color:var(--ink)}
+.di-s{font:600 12px/1.3 var(--fb);color:var(--ink-soft);margin-top:1px}
+.drop-label{font:800 11px/1 var(--fb);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);padding:13px 12px 7px}
+
+/* ===== SHOP PAGE ===== */
+.shophead{background:var(--charcoal);color:var(--warm-white);padding:54px 0 48px;position:relative;overflow:hidden}
+.shophead::after{content:"";position:absolute;right:-10vw;top:-10vw;width:48vw;height:48vw;border-radius:50%;background:radial-gradient(circle,rgba(232,132,60,.18),transparent 62%)}
+.shophead .wrap{position:relative;z-index:2}
+.shophead .eyebrow{color:var(--amber)}
+.shophead h1{color:#fff;font-size:clamp(38px,6vw,66px);margin:14px 0 12px}
+.shophead h1 .em{color:var(--amber)}
+.shophead p{font:500 clamp(15px,1.6vw,18px)/1.55 var(--fb);color:rgba(244,241,234,.74);max-width:540px}
+.shop-trustrow{display:flex;flex-wrap:wrap;gap:9px;margin-top:24px}
+.shop-trustrow span{font:700 12.5px/1 var(--fb);color:rgba(244,241,234,.82);background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.13);padding:9px 13px;border-radius:99px}
+.shoptools{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);padding:13px 0}
+.shoptools-in{display:flex;gap:11px;align-items:center}
+.shop-search{position:relative;flex:1;max-width:440px}
+.shop-search input{width:100%;height:46px;border-radius:12px;border:1px solid var(--line);background:var(--surface);padding:0 16px 0 42px;font:600 14.5px/1 var(--fb);color:var(--ink);outline:none;transition:border-color .2s,box-shadow .2s}
+.shop-search input:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(30,122,77,.12)}
+.shop-search .si{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--ink-soft);pointer-events:none}
+.shop-sort{height:46px;border-radius:12px;border:1px solid var(--line);background:var(--surface);padding:0 14px;font:700 13.5px/1 var(--fb);color:var(--ink);cursor:pointer;outline:none}
+.shoplayout{padding:30px 0 64px}
+.shopcols{display:grid;gap:24px;grid-template-columns:1fr}
+@media(min-width:900px){.shopcols{grid-template-columns:250px 1fr;gap:38px}}
+.shopside-sticky{position:sticky;top:88px}
+.side-h{font:800 12px/1 var(--fb);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:12px}
+.catlist{display:flex;flex-direction:column;gap:4px}
+@media(max-width:899px){.catlist{flex-direction:row;flex-wrap:wrap;gap:8px}.shopside-sticky{position:static}.side-help{display:none}
+.catitem{padding:9px 12px;font-size:13px;gap:7px}.catitem .ci-ct{margin-left:2px}.side-h{margin-bottom:10px}}
+.catitem{display:flex;align-items:center;gap:11px;padding:11px 13px;border-radius:12px;font:800 14px/1 var(--fb);color:var(--ink-soft);border:1px solid var(--line);background:var(--surface);transition:all .2s var(--ease)}
+@media(min-width:900px){.catitem{border-color:transparent;background:none}}
+.catitem .ci-em{font-size:17px}
+.catitem:hover{background:var(--surface);color:var(--ink);border-color:var(--line)}
+.catitem.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.catitem .ci-ct{margin-left:auto;font:800 12px/1 var(--fb);background:rgba(26,23,20,.07);border-radius:99px;padding:3px 8px;color:var(--ink-soft)}
+.catitem.on .ci-ct{background:rgba(255,255,255,.2);color:#fff}
+.side-help{margin-top:20px;padding:22px;border-radius:16px;background:var(--green);color:#fff}
+.side-help .sh-ic{font-size:24px}
+.side-help h4{font:600 19px/1.2 var(--fd);color:#fff;margin:8px 0 6px}
+.side-help p{font:500 13px/1.55 var(--fb);color:rgba(255,255,255,.84);margin-bottom:15px}
+.side-help .sh-b{display:inline-flex;align-items:center;gap:7px;height:42px;padding:0 16px;border-radius:11px;background:#fff;color:var(--green-deep);font:800 13px/1 var(--fb)}
+.shop-results{font:700 14px/1 var(--fb);color:var(--ink-soft);margin-bottom:18px}
+.shop-results strong{color:var(--ink)}
+.shopgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+@media(min-width:640px){.shopgrid{gap:20px}}
+@media(min-width:1080px){.shopgrid{grid-template-columns:repeat(3,1fr)}}
+.no-res{text-align:center;padding:72px 20px;display:none}
+.no-res .nr-ic{font-size:42px;opacity:.4;margin-bottom:12px}
+.no-res h3{font-size:22px;margin-bottom:6px}
+.no-res p{color:var(--ink-soft)}
+</style>
+</head>
+<body>
+<div class="progbar" id="progbar"></div>
+
+<!-- ANNOUNCEMENT -->
+<div class="announce">
+  <span class="hide-s">🚚 <b>Free delivery</b> over RM80</span><span class="dot hide-s">·</span>
+  <span>Order before <b>12pm</b> for same-day</span><span class="dot">·</span>
+  <span>cutoff <b class="cd" id="cd">--:--:--</b></span>
+</div>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a href="#top" class="brand" onclick="showHome()" aria-label="e-segar home">
+      <img class="brand-img" src="assets/img/logo-lockup.png?v=3" alt="e-segar">
+    </a>
+    <div class="nav-shop">
+      <div class="shopdrop" id="shopdrop">
+        <button class="nav-link" onclick="toggleDrop(event)" aria-haspopup="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+          Shop Fresh
+          <svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="dropmenu">
+          <button class="dropitem feat" onclick="showShop('all')"><span class="di-ic">🛒</span><div><div class="di-t">Open full shop</div><div class="di-s">Browse, filter &amp; search all 16 products</div></div></button>
+          <div class="drop-label">Shop by category</div>
+          <button class="dropitem" onclick="showShop('whole')"><span class="di-ic"><img src="assets/img/whole-standard.webp" alt=""></span><div><div class="di-t">Whole Chicken</div><div class="di-s">Standard &amp; Super, from RM16</div></div></button>
+          <button class="dropitem" onclick="showShop('kampung')"><span class="di-ic"><img src="assets/img/kampung-whole.webp" alt=""></span><div><div class="di-t">Ayam Kampung</div><div class="di-s">Free-range village chicken, from RM21</div></div></button>
+          <button class="dropitem" onclick="showShop('cuts')"><span class="di-ic"><img src="assets/img/cut-drumsticks.webp" alt=""></span><div><div class="di-t">Cuts &amp; Portions</div><div class="di-s">Breast, wings, drumsticks, from RM7.50</div></div></button>
+          <button class="dropitem" onclick="showShop('rtc')"><span class="di-ic"><img src="assets/img/rtc-wings.webp" alt=""></span><div><div class="di-t">Ready-to-Cook</div><div class="di-s">Marinated &amp; seasoned, from RM15.90</div></div></button>
+          <div class="drop-label">For business</div>
+          <button class="dropitem" onclick="goSection('b2b')"><span class="di-ic" style="background:rgba(232,132,60,.15);color:var(--amber)">🚐</span><div><div class="di-t">B2B / Wholesale</div><div class="di-s">Restaurants, dealers &amp; bulk orders</div></div></button>
+        </div>
+      </div>
+      <a class="nav-link" href="#story" onclick="goSection('story');return false;">Our Story</a>
+    </div>
+    <div class="nav-spacer"></div>
+    <div class="nav-actions">
+      <a class="btn-wa" href="https://wa.me/60184651045" target="_blank" rel="noopener">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37s-1.04 1.02-1.04 2.48 1.07 2.88 1.22 3.07c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.18-1.41-.08-.13-.27-.2-.57-.35M12.05 21.8h-.01a9.87 9.87 0 01-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 01-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.82 9.82 0 012.89 6.99c0 5.45-4.44 9.88-9.89 9.88M20.46 3.5A11.81 11.81 0 0012.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 005.69 1.45c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.16-3.48-8.41"/></svg>
+        WhatsApp
+      </a>
+      <button class="btn-getfresh" onclick="showShop('all')">🍗 Get It Fresh</button>
+      <button class="icon-btn" onclick="openCart()" aria-label="Open cart">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+      <button class="icon-btn menu-btn" onclick="openMob()" aria-label="Menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mob" id="mob">
+  <div class="mob-top">
+    <img class="brand-img" src="assets/img/logo-lockup.png?v=3" alt="e-segar" style="height:38px">
+    <button class="icon-btn" style="background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.15);color:#fff" onclick="closeMob()" aria-label="Close">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <a href="#!" onclick="showShop('all');return false">Shop Fresh <span>01</span></a>
+  <a href="#!" onclick="goSection('story');return false">Our Story <span>02</span></a>
+  <a href="#!" onclick="goSection('process');return false">Freshness <span>03</span></a>
+  <a href="#!" onclick="goSection('why');return false">Why e-segar <span>04</span></a>
+  <a href="#!" onclick="goSection('b2b');return false">Wholesale <span>05</span></a>
+  <a href="#!" onclick="goSection('faq');return false">FAQ <span>06</span></a>
+  <div class="mob-cta">
+    <a class="btn-ember" style="justify-content:center" href="#!" onclick="showShop('all');return false">Shop Fresh Now</a>
+    <a class="btn-wa" style="display:flex;justify-content:center;height:54px" href="https://wa.me/60184651045" target="_blank" rel="noopener">WhatsApp +6018-4651045</a>
+  </div>
+</div>
+
+<div id="homeView">
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="hero-photo" id="heroPhoto"><img src="assets/img/lifestyle-plated.webp" alt="Golden roast chicken family meal, cooked from fresh eSegar chicken" fetchpriority="high"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-tint"></div>
+  <div class="hero-grain"></div>
+  <div class="hero-in" id="heroIn">
+    <span class="eyebrow hero-eyebrow">Halal Certified · Delivered Fresh Daily · Melaka</span>
+    <h1><span class="l1"><i>Always</i></span><span class="l2"><i>Segar.</i></span></h1>
+    <p class="hero-sub">Fresh halal chicken, cut this morning and at your door the same day. No frozen stock. No shortcuts. Just segar.</p>
+    <div class="hero-cta">
+      <a href="#!" onclick="showShop('all');return false" class="btn-ember" data-magnetic>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l1.5-5.5h15L21 9"/><path d="M4 9v10a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V9"/><path d="M3 9h18"/></svg>
+        See today's fresh cuts
+      </a>
+      <a href="https://wa.me/60184651045" target="_blank" rel="noopener" class="btn-ghost">Order on WhatsApp</a>
+    </div>
+    <div class="hero-cards">
+      <div class="hero-card" data-tilt>
+        <span class="hc-ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+        <div><div class="hc-t">Cut → doored &lt; 6 hrs</div><div class="hc-s">Same-day across Melaka</div></div>
+      </div>
+      <div class="hero-card" data-tilt>
+        <span class="hc-ic g"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></span>
+        <div><div class="hc-t">JAKIM Halal Certified</div><div class="hc-s">Cert no. on every pack</div></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- MARQUEE -->
+<div class="strip" aria-hidden="true">
+  <div class="strip-track">
+    <span>Slaughtered fresh at 6am</span><span>JAKIM Halal Certified</span><span>Cold-chain 0 to 4°C</span><span>Same-day in Melaka</span><span>Never frozen</span><span>500+ happy families</span>
+    <span>Slaughtered fresh at 6am</span><span>JAKIM Halal Certified</span><span>Cold-chain 0 to 4°C</span><span>Same-day in Melaka</span><span>Never frozen</span><span>500+ happy families</span>
+  </div>
+</div>
+
+<!-- STATS -->
+<section class="stats" id="stats">
+  <div class="stats-grid">
+    <div class="stat"><div class="stat-n"><span class="count" data-to="500">0</span><span class="u">+</span></div><div class="stat-l">Happy families</div></div>
+    <div class="stat"><div class="stat-n"><span class="count" data-to="6">0</span><span class="u">hrs</span></div><div class="stat-l">Farm to your door</div></div>
+    <div class="stat"><div class="stat-n"><span class="count" data-to="100">0</span><span class="u">%</span></div><div class="stat-l">JAKIM certified</div></div>
+    <div class="stat"><div class="stat-n"><span class="u">≤</span>4°C</div><div class="stat-l">Cold-chain locked</div></div>
+  </div>
+</section>
+
+<!-- SHOP -->
+<section class="sec cream" id="shop">
+  <div class="wrap">
+    <div class="shop-bar">
+      <div data-reveal>
+        <span class="eyebrow ember">The Fresh Counter</span>
+        <h2 class="sec-h" style="margin-top:14px">Shop <span class="em">segar</span>.</h2>
+        <p class="lead" style="margin-top:12px">Disembelih pagi ini. Packed cold. Pick your cut and order before noon.</p>
+      </div>
+      <div class="tabs" data-reveal data-d="1" id="tabs">
+        <button class="tab on" data-cat="all" onclick="filterCat('all',this)">All <span class="tc">16</span></button>
+        <button class="tab" data-cat="whole" onclick="filterCat('whole',this)">Whole <span class="tc">2</span></button>
+        <button class="tab" data-cat="kampung" onclick="filterCat('kampung',this)">Kampung <span class="tc">4</span></button>
+        <button class="tab" data-cat="cuts" onclick="filterCat('cuts',this)">Cuts <span class="tc">6</span></button>
+        <button class="tab" data-cat="rtc" onclick="filterCat('rtc',this)">Ready-to-Cook <span class="tc">4</span></button>
+      </div>
+    </div>
+    <div class="pgrid" id="pgrid" data-reveal data-d="2"></div>
+    <div class="shop-foot" data-reveal>
+      <p class="lead" style="font-size:15px">Want filters, search and sorting? Open the full shop.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center">
+        <a href="#!" onclick="showShop('all');return false" class="btn-ember" data-magnetic style="background:var(--ink)">Browse the full shop</a>
+        <a href="https://wa.me/60184651045" target="_blank" rel="noopener" class="btn-ember" style="background:var(--green);box-shadow:0 10px 26px rgba(30,122,77,.28)">Ask on WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO -->
+<section class="sec deep" id="who">
+  <div class="wrap">
+    <div class="sec-head center" data-reveal>
+      <span class="eyebrow">Made For You</span>
+      <h2 class="sec-h" style="margin-top:14px">Whoever's <span class="em">cooking</span>.</h2>
+    </div>
+    <div class="b2b-cards">
+      <div class="b2b-card" data-reveal><div class="bi" style="font-size:20px">🏠</div><h3>Home Cooks &amp; Families</h3><p>No more wet market trips. Restaurant-quality fresh chicken at your door before 6pm. Perfect for daily cooking, weekend feasts and meal prep.</p></div>
+      <div class="b2b-card" data-reveal data-d="1"><div class="bi" style="font-size:20px">🍽️</div><h3>Restaurants &amp; Kedai Makan</h3><p>Consistent daily supply with custom cuts and portion sizes. Cold-chain delivery, flexible scheduling. Never run out of certified stock.</p></div>
+      <div class="b2b-card" data-reveal data-d="2"><div class="bi" style="font-size:20px">🚐</div><h3>Dealers &amp; Entrepreneurs</h3><p>Join our dealer network. Refrigerated truck model, RM500 to 800 daily gross target per dealer, bill-to-bill basis.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW TO ORDER -->
+<section class="sec cream" id="how">
+  <div class="wrap">
+    <div class="sec-head center" data-reveal>
+      <span class="eyebrow ember">Senang Je</span>
+      <h2 class="sec-h" style="margin-top:14px">How to <span class="em">order</span>.</h2>
+    </div>
+    <div class="how-grid">
+      <div class="how-card" data-reveal><div class="how-num">01</div><div class="hi">🛒</div><h3>Pick your cuts</h3><p>Browse the shop and add to cart. Whole birds, kampung, cuts or ready-to-cook marinated.</p></div>
+      <div class="how-card" data-reveal data-d="1"><div class="how-num">02</div><div class="hi">💬</div><h3>Confirm on WhatsApp</h3><p>Checkout sends your order to WhatsApp. We confirm your total and delivery slot within minutes.</p></div>
+      <div class="how-card" data-reveal data-d="2"><div class="how-num">03</div><div class="hi">🚚</div><h3>Delivered cold by 6pm</h3><p>Order before 12pm and receive it the same day, insulated and locked at 0 to 4°C.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="sec deep" id="story">
+  <div class="wrap story-grid">
+    <div data-reveal>
+      <div class="story-media">
+        <img src="assets/img/founder.webp?v=4" alt="Encik Azim, founder of e-segar, at the facility">
+        <div class="story-badge"><div class="yr">2019</div><div class="yl">Founded in<br>Melaka</div></div>
+      </div>
+    </div>
+    <div data-reveal data-d="1">
+      <span class="eyebrow">Our Story</span>
+      <div class="story-quote">"Fresh chicken shouldn't be <span class="em">this hard</span> to get."</div>
+      <p class="story-body">e-segar began with a simple frustration. Melaka families and restaurants wanted fresh, certified halal chicken every day, without the early wet-market run. So we built the cold-chain, partnered with JAKIM-certified farms, and started delivering the same day it's cut.</p>
+      <p class="story-body">Every bird is slaughtered at 6am, packed cold by 9am, and at your door by evening. No frozen stock. No shortcuts. Just farm-fresh halal chicken, the way it should be.</p>
+      <div class="story-facts">
+        <div><div class="sf-n">500+</div><div class="sf-l">Customers</div></div>
+        <div><div class="sf-n">6hrs</div><div class="sf-l">Farm to door</div></div>
+        <div><div class="sf-n">100%</div><div class="sf-l">JAKIM cert</div></div>
+      </div>
+      <div class="sign">Encik Azim, Founder</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="sec proc" id="process">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <span class="eyebrow">Farm to Door</span>
+      <h2 class="sec-h" style="margin-top:14px">Same day, <span class="em">every day</span>.</h2>
+      <p class="lead" style="margin-top:14px">We don't cut corners. Follow one bird from the farm to your kitchen, all in a single morning.</p>
+    </div>
+    <div class="proc-grid">
+      <div class="proc-visual" id="procVisual">
+        <div class="pv-img on" data-step="0"><img src="assets/img/process-farm.webp" alt="Free-range farm at sunrise"></div>
+        <div class="pv-img" data-step="1"><img src="assets/img/process-6am.webp" alt="Clean 6am processing"></div>
+        <div class="pv-img" data-step="2"><img src="assets/img/process-coldpack.webp?v=3" alt="Cold-pack with ice"></div>
+        <div class="pv-img" data-step="3"><img src="assets/img/process-delivery.webp?v=3" alt="Same-day delivery"></div>
+        <div class="pv-tint"></div>
+        <div class="pv-time" id="pvTime">6:00 AM</div>
+      </div>
+      <div class="proc-steps" id="procSteps">
+        <div class="proc-step active" data-step="0" data-time="6:00 AM">
+          <div class="proc-step-top"><div class="proc-num">01</div><h3>The Farm</h3></div>
+          <p>Sourced from certified local farms across Melaka. No hormones, raised responsibly, JAKIM-approved at the source.</p>
+          <span class="proc-time-tag">Before sunrise</span>
+        </div>
+        <div class="proc-step" data-step="1" data-time="6:00 AM">
+          <div class="proc-step-top"><div class="proc-num">02</div><h3>6AM, Slaughtered Fresh</h3></div>
+          <p>Processed every morning under JAKIM-supervised halal protocol in a spotless facility. No overnight stock. Ever.</p>
+          <span class="proc-time-tag">6:00 AM</span>
+        </div>
+        <div class="proc-step" data-step="2" data-time="9:00 AM">
+          <div class="proc-step-top"><div class="proc-num">03</div><h3>Cold-Packed by 9AM</h3></div>
+          <p>Each order is packed in insulated bags with ice packs, sealed and labelled, locked at 0 to 4°C and ready to dispatch.</p>
+          <span class="proc-time-tag">9:00 AM</span>
+        </div>
+        <div class="proc-step" data-step="3" data-time="By 6:00 PM">
+          <div class="proc-step-top"><div class="proc-num">04</div><h3>At Your Door</h3></div>
+          <p>Same-day delivery across Melaka, temperature maintained the whole way. You receive it cold, exactly as the fridge.</p>
+          <span class="proc-time-tag">By 6:00 PM</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="sec cream" id="why">
+  <div class="wrap">
+    <div class="sec-head center" data-reveal>
+      <span class="eyebrow">Why eSegar</span>
+      <h2 class="sec-h" style="margin-top:14px">Wet-market trust,<br><span class="gr">modern hygiene</span>.</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-card" data-reveal>
+        <div class="why-media"><img src="assets/img/process-6am.webp" alt="Slaughtered fresh daily"></div>
+        <div class="why-body">
+          <div class="why-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+          <h3>Slaughtered Fresh Daily</h3>
+          <p>Processed every morning, dispatched within 6 hours. Never frozen, always fresh. You taste the difference.</p>
+        </div>
+      </div>
+      <div class="why-card" data-reveal data-d="1">
+        <div class="why-media"><img src="assets/img/why-halal.webp" alt="JAKIM halal certified"></div>
+        <div class="why-body">
+          <div class="why-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div>
+          <h3>JAKIM Halal Certified</h3>
+          <p>Valid JAKIM certification, renewed annually. The cert number is printed on every pack for your assurance.</p>
+        </div>
+      </div>
+      <div class="why-card" data-reveal data-d="2">
+        <div class="why-media"><img src="assets/img/process-coldpack.webp?v=3" alt="Cold chain guaranteed"></div>
+        <div class="why-body">
+          <div class="why-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M2 12h20M5 5l14 14M19 5 5 19"/></svg></div>
+          <h3>Cold-Chain Guaranteed</h3>
+          <p>Refrigerated storage and insulated packaging hold 0 to 4°C from the farm right to your front door.</p>
+        </div>
+      </div>
+      <div class="why-card" data-reveal data-d="3">
+        <div class="why-media"><img src="assets/img/why-support.webp" alt="Live WhatsApp support"></div>
+        <div class="why-body">
+          <div class="why-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+          <h3>Live WhatsApp Support</h3>
+          <p>Real people, 7 days a week. Order queries, delivery updates, custom cuts. Fast, friendly replies.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GUARANTEE -->
+<section class="sec deep">
+  <div class="wrap">
+    <div class="sec-head center" data-reveal>
+      <span class="eyebrow ember">Our Promise</span>
+      <h2 class="sec-h" style="margin-top:14px">Four guarantees, <span class="em">zero excuses</span>.</h2>
+    </div>
+    <div class="gtee-grid">
+      <div class="gtee" data-reveal>
+        <div class="gi"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.5 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.65 4.36A9 9 0 0 0 20.5 15"/></svg></div>
+        <div><h3>Freshness Guarantee</h3><p>If it isn't fresh on arrival, we replace it or refund you in full. Every delivery is sealed with a freshness timestamp.</p><span class="gp">✓ Full replacement or refund</span></div>
+      </div>
+      <div class="gtee green" data-reveal data-d="1">
+        <div class="gi"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <div><h3>Halal Certification</h3><p>Every product carries valid JAKIM certification. The cert number is printed on your packaging. Verifiable, every order.</p><span class="gp">✓ JAKIM cert on every pack</span></div>
+      </div>
+      <div class="gtee" data-reveal data-d="2">
+        <div class="gi"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M2 12h20M5 5l14 14M19 5 5 19"/></svg></div>
+        <div><h3>Cold-Chain Promise</h3><p>Held at 0 to 4°C from slaughter to delivery. If it arrives warm or the seal is broken, we replace it immediately at no cost.</p><span class="gp">✓ Temperature-verified</span></div>
+      </div>
+      <div class="gtee green" data-reveal data-d="3">
+        <div class="gi"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></svg></div>
+        <div><h3>Same-Day Promise</h3><p>Order before 12pm, get it today. If a same-day delivery runs late without notice, you get RM5 credit on your next order.</p><span class="gp">✓ On-time or credit issued</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- B2B -->
+<section class="sec cream" id="b2b">
+  <div class="wrap">
+    <div class="b2b-top">
+      <div data-reveal>
+        <span class="eyebrow ember">B2B &amp; Wholesale</span>
+        <h2 class="sec-h" style="margin-top:14px">Bulk supply,<br><span class="em">daily &amp; reliable</span>.</h2>
+        <p class="lead" style="margin-top:14px">Restaurants, kedai makan, mini markets and dealer-entrepreneurs. Daily cold-chain delivery across Melaka, with custom cuts on request.</p>
+        <div class="b2b-target"><div class="t-n">RM500 to 800</div><div class="t-l">Daily gross target / dealer</div></div>
+        <div><a href="https://wa.me/60184651045?text=Hi%20eSegar%2C%20I%27d%20like%20B2B%20pricing." target="_blank" rel="noopener" class="btn-ember" data-magnetic style="background:var(--green);box-shadow:0 10px 26px rgba(30,122,77,.28)">Jadi rakan niaga · WhatsApp B2B</a></div>
+      </div>
+      <div data-reveal data-d="1"><div class="b2b-media"><img src="assets/img/b2b-van.webp?v=3" alt="eSegar refrigerated delivery van"></div></div>
+    </div>
+    <div class="b2b-cards">
+      <div class="b2b-card" data-reveal>
+        <div class="bi"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg></div>
+        <h3>Restaurants &amp; Kedai Makan</h3>
+        <p>Daily or scheduled bulk supply, cold-chain delivered. Custom cuts and portion sizes to match your kitchen exactly.</p>
+      </div>
+      <div class="b2b-card" data-reveal data-d="1">
+        <div class="bi"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18M16 10a4 4 0 0 1-8 0"/></svg></div>
+        <h3>Mini Markets &amp; Retailers</h3>
+        <p>Retail-ready packs with JAKIM cert labelling, barcode and date stamping. Flexible minimum order quantities.</p>
+      </div>
+      <div class="b2b-card hl" data-reveal data-d="2">
+        <div class="bi"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><path d="M16 8h4l3 3v5h-7zM5.5 18.5a2.5 2.5 0 1 0 0 .01M18.5 18.5a2.5 2.5 0 1 0 0 .01"/></svg></div>
+        <h3>Dealer &amp; Agent Network</h3>
+        <p>Refrigerated-truck model, bill-to-bill basis. Daily gross target RM500 to RM800. Join a growing Melaka network.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="sec deep" id="reviews" style="overflow:hidden">
+  <div class="wrap">
+    <div class="sec-head center" data-reveal>
+      <span class="eyebrow">Loved in Melaka</span>
+      <h2 class="sec-h" style="margin-top:14px">500+ families, <span class="gr">one routine</span>.</h2>
+    </div>
+  </div>
+  <div class="rev-rows">
+    <div class="rev-row"><div class="rev-track" id="revA"></div></div>
+    <div class="rev-row r2"><div class="rev-track" id="revB"></div></div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec cream" id="faq">
+  <div class="wrap">
+    <div class="sec-head center" data-reveal>
+      <span class="eyebrow ember">Good Questions</span>
+      <h2 class="sec-h" style="margin-top:14px">Everything you'd ask.</h2>
+    </div>
+    <div class="faq-list" id="faqList"></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="contact">
+  <div class="cta-bg" id="ctaBg"><img src="assets/img/hero-dark.webp" alt="Fresh whole halal chicken on dark slate"></div>
+  <img src="assets/img/mascot-lockup.png?v=2" class="cta-mascot" onerror="this.style.display='none'" alt="e-segar delivery mascot">
+  <div class="wrap cta-in" data-reveal>
+    <div class="cta-brandmark"><img src="assets/img/logo-head.png?v=3" alt="e-segar mascot" style="width:46px;height:46px"></div>
+    <span class="eyebrow">Order Today's Batch</span>
+    <h2>Ready to eat <span class="em">segar</span>?</h2>
+    <p>Order before 12pm for same-day delivery across Melaka. Tap to shop, or message us on WhatsApp. Fresh chicken at your door tonight.</p>
+    <div class="cta-acts">
+      <a href="#!" onclick="showShop('all');return false" class="btn-ember" data-magnetic>Shop Fresh Now</a>
+      <a href="https://wa.me/60184651045" target="_blank" rel="noopener" class="btn-ghost">WhatsApp +6018-4651045</a>
+    </div>
+    <div class="cta-trust">🕌 <b>JAKIM Certified</b> · Cert no. on every pack &nbsp;·&nbsp; ❄️ Cold-chain 0 to 4°C &nbsp;·&nbsp; ⚡ Same-day Melaka</div>
+  </div>
+</section>
+</div><!-- /homeView -->
+
+<!-- ═══════════ SHOP PAGE ═══════════ -->
+<div id="shopView">
+<section class="shophead">
+  <div class="wrap">
+    <span class="eyebrow">The Fresh Counter · Kedai Segar</span>
+    <h1>Shop <span class="em">segar</span>.</h1>
+    <p>Disembelih pagi ini, packed cold, delivered across Melaka today. Order before 12pm for same-day delivery.</p>
+    <div class="shop-trustrow">
+      <span>🕌 JAKIM Halal</span><span>❄️ Cold-chain 0 to 4°C</span><span>⚡ Same-day before 12pm</span><span>🐔 16 fresh products</span>
+    </div>
+  </div>
+</section>
+<div class="shoptools">
+  <div class="wrap shoptools-in">
+    <div class="shop-search">
+      <span class="si"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></span>
+      <input id="shopSearch" type="text" placeholder="Search chicken, cuts, marinated..." oninput="applyShop()">
+    </div>
+    <select class="shop-sort" id="shopSort" onchange="applyShop()">
+      <option value="featured">Sort: Featured</option>
+      <option value="price-low">Price: Low to High</option>
+      <option value="price-high">Price: High to Low</option>
+      <option value="name">Name: A to Z</option>
+    </select>
+  </div>
+</div>
+<div class="shoplayout">
+  <div class="wrap"><div class="shopcols">
+    <aside><div class="shopside-sticky">
+      <div class="side-h">Categories</div>
+      <div class="catlist" id="catlist">
+        <button class="catitem on" data-cat="all" onclick="setCat('all',this)"><span class="ci-em">🍗</span>All Products<span class="ci-ct">16</span></button>
+        <button class="catitem" data-cat="whole" onclick="setCat('whole',this)"><span class="ci-em">🐔</span>Whole Chicken<span class="ci-ct">2</span></button>
+        <button class="catitem" data-cat="kampung" onclick="setCat('kampung',this)"><span class="ci-em">🌿</span>Ayam Kampung<span class="ci-ct">4</span></button>
+        <button class="catitem" data-cat="cuts" onclick="setCat('cuts',this)"><span class="ci-em">🔪</span>Cuts &amp; Portions<span class="ci-ct">6</span></button>
+        <button class="catitem" data-cat="rtc" onclick="setCat('rtc',this)"><span class="ci-em">🍳</span>Ready-to-Cook<span class="ci-ct">4</span></button>
+      </div>
+      <div class="side-help">
+        <div class="sh-ic">💬</div>
+        <h4>Need help choosing?</h4>
+        <p>Our team replies in minutes on WhatsApp, 7 days a week.</p>
+        <a class="sh-b" href="https://wa.me/60184651045" target="_blank" rel="noopener">Chat with us</a>
+      </div>
+    </div></aside>
+    <div>
+      <div class="shop-results" id="shopResults">Showing <strong>16</strong> products</div>
+      <div class="shopgrid" id="shopgrid"></div>
+      <div class="no-res" id="noRes"><div class="nr-ic">🔍</div><h3>No products found</h3><p>Try a different search or category.</p></div>
+    </div>
+  </div></div>
+</div>
+</div><!-- /shopView -->
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-top"><div class="wrap"><div class="ft-grid">
+    <div class="ft-brand">
+      <div class="brand" style="margin-bottom:0">
+        <img class="brand-img" src="assets/img/logo-lockup.png?v=3" alt="e-segar">
+      </div>
+      <p class="ft-tag">Melaka's trusted source for premium halal fresh chicken. Farm-fresh, cold-chain maintained, delivered the same day it's cut.</p>
+      <div class="ft-con">
+        <span>📍 2184 Jalan Pasar, Melaka</span>
+        <a href="https://wa.me/60184651045" target="_blank" rel="noopener">📞 +6018-4651045</a>
+        <a href="mailto:hello@esegar.my">✉️ hello@esegar.my</a>
+        <span>⏰ Mon to Sat, 7am to 8pm · Sun, 7am to 2pm</span>
+      </div>
+    </div>
+    <div class="ft-col">
+      <h4>Products</h4>
+      <a href="#!" onclick="showShop('whole');return false">Whole Chicken</a>
+      <a href="#!" onclick="showShop('kampung');return false">Ayam Kampung</a>
+      <a href="#!" onclick="showShop('cuts');return false">Cuts &amp; Portions</a>
+      <a href="#!" onclick="showShop('rtc');return false">Ready-to-Cook</a>
+    </div>
+    <div class="ft-col">
+      <h4>Company</h4>
+      <a href="#!" onclick="goSection('story');return false">Our Story</a>
+      <a href="#!" onclick="goSection('process');return false">Freshness</a>
+      <a href="#!" onclick="goSection('why');return false">Why e-segar</a>
+      <a href="#!" onclick="goSection('b2b');return false">Wholesale</a>
+      <a href="#!" onclick="goSection('faq');return false">FAQ</a>
+    </div>
+    <div class="ft-col">
+      <h4>Order Now</h4>
+      <p style="font:500 14px/1.7 var(--fb);color:rgba(244,241,234,.6);margin-bottom:14px">Order before 12pm for same-day delivery. B2B orders via WhatsApp. Serving all of Melaka.</p>
+      <a href="https://wa.me/60184651045" target="_blank" rel="noopener" class="btn-wa">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37s-1.04 1.02-1.04 2.48 1.07 2.88 1.22 3.07c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.18-1.41-.08-.13-.27-.2-.57-.35M12.05 21.8h-.01a9.87 9.87 0 01-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 01-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.82 9.82 0 012.89 6.99c0 5.45-4.44 9.88-9.89 9.88M20.46 3.5A11.81 11.81 0 0012.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 005.69 1.45c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.16-3.48-8.41"/></svg>
+        WhatsApp us
+      </a>
+      <div style="display:flex;gap:8px;margin-top:16px">
+        <input id="nlEmail" type="email" placeholder="Email for weekly deals" style="flex:1;min-width:0;height:44px;border-radius:11px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.06);color:#fff;padding:0 13px;font:600 13px/1 var(--fb);outline:none">
+        <button onclick="nlSub()" style="height:44px;padding:0 16px;border-radius:11px;background:var(--amber);color:var(--ink);font:800 13px/1 var(--fb)">Join</button>
+      </div>
+    </div>
+  </div></div></div>
+  <div class="wrap"><div class="ft-bot">
+    <span>© 2026 e-segar Sdn Bhd · Farm fresh daily · Melaka, Malaysia</span>
+    <span class="ft-halal">🕌 <b>JAKIM Halal Certified</b> · Always Segar</span>
+  </div></div>
+</footer>
+
+<!-- WELCOME POPUP -->
+<div class="pop-ov" id="popOv" onclick="if(event.target===this)closePopup()">
+  <div class="pop-card">
+    <div class="pop-top">
+      <button class="pop-x" onclick="closePopup()" aria-label="Close">✕</button>
+      <div style="font-size:34px;line-height:1">🔥</div>
+      <div class="pop-title">Get <span class="em">10% off</span><br>your first order</div>
+      <p style="font:600 13.5px/1.5 var(--fb);color:rgba(244,241,234,.75);margin-top:10px">Fresh halal chicken, same-day delivered. Join 500+ happy Melaka families.</p>
+    </div>
+    <div class="pop-body">
+      <div class="pop-offer">🎁 Use code <b>SEGAR10</b> on your first order. Valid today only.</div>
+      <input class="pop-in" id="popName" type="text" placeholder="Your name">
+      <input class="pop-in" id="popPhone" type="tel" placeholder="WhatsApp number (e.g. 0184651045)">
+      <button class="pop-btn" onclick="claimDiscount()">🎁 Claim my 10% discount</button>
+      <div class="pop-skip" onclick="closePopup()">No thanks, I'll pay full price</div>
+    </div>
+  </div>
+</div>
+
+<!-- CART -->
+<div class="ov" id="ov" onclick="closeCart()"></div>
+<aside class="cart" id="cart" aria-label="Cart">
+  <div class="cart-head">
+    <h3>Your Cart <span id="cartHeadCount" style="font:800 14px/1 var(--fb);color:var(--ink-soft)"></span></h3>
+    <button class="cx" onclick="closeCart()" aria-label="Close cart"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-foot">
+    <div class="fd-bar">
+      <div class="fd-lbl" id="fdLbl">Add <b>RM80</b> more for free delivery</div>
+      <div class="fd-track"><div class="fd-fill" id="fdFill"></div></div>
+    </div>
+    <div class="cart-sum"><span class="s-l">Subtotal</span><span class="s-v" id="cartSum">RM0</span></div>
+    <div class="cart-note">Final total confirmed on WhatsApp.</div>
+    <button class="cart-wa" onclick="waOrder()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37s-1.04 1.02-1.04 2.48 1.07 2.88 1.22 3.07c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.18-1.41-.08-.13-.27-.2-.57-.35M12.05 21.8h-.01a9.87 9.87 0 01-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 01-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.82 9.82 0 012.89 6.99c0 5.45-4.44 9.88-9.89 9.88M20.46 3.5A11.81 11.81 0 0012.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 005.69 1.45c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.16-3.48-8.41"/></svg>
+      Checkout on WhatsApp
+    </button>
+  </div>
+</aside>
+
+<!-- QUICK VIEW -->
+<div class="qv" id="qv">
+  <div class="qv-card">
+    <div class="qv-img"><img id="qvImg" src="" alt=""></div>
+    <div class="qv-body">
+      <button class="qv-x" onclick="closeQV()" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+      <div class="qv-kicker" id="qvKicker"></div>
+      <h3 id="qvName"></h3>
+      <div class="qv-st" id="qvSt"></div>
+      <p class="qv-desc" id="qvDesc"></p>
+      <div class="qv-sizes" id="qvSizes"></div>
+      <div class="qv-pr" id="qvPr"></div>
+      <button class="btn-ember" id="qvAdd" style="width:100%;justify-content:center;background:var(--green);box-shadow:0 10px 26px rgba(30,122,77,.3)">Add to cart</button>
+    </div>
+  </div>
+</div>
+
+<a class="fab" href="https://wa.me/60184651045" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37s-1.04 1.02-1.04 2.48 1.07 2.88 1.22 3.07c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.18-1.41-.08-.13-.27-.2-.57-.35M12.05 21.8h-.01a9.87 9.87 0 01-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 01-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.82 9.82 0 012.89 6.99c0 5.45-4.44 9.88-9.89 9.88M20.46 3.5A11.81 11.81 0 0012.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 005.69 1.45c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.16-3.48-8.41"/></svg>
+</a>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============ DATA ============ */
+var PRODUCTS = [
+  {id:'std',name:'Standard Chicken',sub:'Whole Bird · from ~1.2kg',cat:'whole',catLabel:'Whole Chicken',price:16,from:true,old:null,img:'whole-standard',stock:'ok',stockN:40,badge:'Best Seller',badgeClass:'badge-fire',desc:'Tender, mild and versatile. Great for everyday cooking, soups and curries. From RM16 (Small ~1.2kg) up to RM29 (XL ~2.2kg). Slaughtered fresh at 6am.'},
+  {id:'sup',name:'Super Chicken',sub:'Whole Bird · meatier · from ~1.8kg',cat:'whole',catLabel:'Whole Chicken',price:26,from:true,old:null,img:'whole-super',stock:'ok',stockN:30,badge:'Premium',badgeClass:'badge-gold',desc:'A larger, meatier breed with more breast and thigh yield. Ideal for big families. From RM26 (Medium ~1.8kg) up to RM37 (XL ~2.6kg).'},
+  {id:'k1',name:'Ayam Kampung Whole',sub:'Free-Range · 1.2kg',cat:'kampung',catLabel:'Free-Range Kampung',price:38,from:false,old:null,img:'kampung-whole',stock:'ok',stockN:15,badge:'Free-Range',badgeClass:'badge-green',desc:'Free-range village chicken. Firmer texture, richer flavour. Best for soups and traditional dishes.'},
+  {id:'k2',name:'Ayam Kampung Half',sub:'Free-Range · 600g',cat:'kampung',catLabel:'Free-Range Kampung',price:21,from:false,old:null,img:'kampung-half',stock:'ok',stockN:22,badge:'Free-Range',badgeClass:'badge-green',desc:'Half a kampung chicken, same rich free-range flavour. The perfect portion for two.'},
+  {id:'k3',name:'Kampung Pieces',sub:'Free-Range · 1kg',cat:'kampung',catLabel:'Free-Range Kampung',price:42,from:false,old:null,img:'kampung-pieces',stock:'low',stockN:8,badge:'Free-Range',badgeClass:'badge-green',desc:'Cut into pieces for curries and soups. Rich free-range flavour, ready to cook.'},
+  {id:'k4',name:'Kampung Cleaned & Dressed',sub:'Free-Range · 1kg',cat:'kampung',catLabel:'Free-Range Kampung',price:45,from:false,old:null,img:'kampung-dressed',stock:'ok',stockN:12,badge:'Free-Range',badgeClass:'badge-green',desc:'Pre-cleaned and dressed, ready to cook straight away. Premium free-range quality.'},
+  {id:'c1',name:'Boneless Breast',sub:'Skinless · 500g',cat:'cuts',catLabel:'Cuts & Portions',price:12.90,from:false,old:14.90,img:'cut-breast',stock:'ok',stockN:50,badge:'Sale',badgeClass:'badge-fire',desc:'Skinless boneless breast fillet. Lean protein, endlessly versatile. Perfect for grilling, stir-fry or air-frying.'},
+  {id:'c2',name:'Chicken Wings',sub:'Whole Wing · 1kg',cat:'cuts',catLabel:'Cuts & Portions',price:16,from:false,old:null,img:'cut-wings',stock:'ok',stockN:35,badge:null,badgeClass:'',desc:'Fresh whole wings. Great for frying, BBQ or buffalo wings. The family favourite.'},
+  {id:'c3',name:'Drumsticks',sub:'1kg',cat:'cuts',catLabel:'Cuts & Portions',price:11.90,from:false,old:13.50,img:'cut-drumsticks',stock:'ok',stockN:40,badge:'Sale',badgeClass:'badge-fire',desc:'Fresh drumsticks, juicy dark meat the kids love. Great value family pack.'},
+  {id:'c4',name:'Thigh Fillet',sub:'Boneless Skin-on · 500g',cat:'cuts',catLabel:'Cuts & Portions',price:12.50,from:false,old:null,img:'cut-thigh',stock:'ok',stockN:30,badge:null,badgeClass:'',desc:'Boneless skin-on thigh fillet, the most flavourful cut. Ideal for rice bowls and grilling.'},
+  {id:'c5',name:'Chicken Liver',sub:'Fresh Daily · 500g',cat:'cuts',catLabel:'Cuts & Portions',price:7.50,from:false,old:null,img:'cut-liver',stock:'ok',stockN:25,badge:null,badgeClass:'',desc:'Fresh chicken liver, rich in iron. Great for sambal, pâté or a quick stir-fry.'},
+  {id:'c6',name:'Chicken Feet',sub:'Cleaned · 1kg',cat:'cuts',catLabel:'Cuts & Portions',price:9,from:false,old:null,img:'cut-feet',stock:'ok',stockN:20,badge:null,badgeClass:'',desc:'Cleaned chicken feet, perfect for soups, dim sum and traditional braises.'},
+  {id:'r1',name:'Marinated Whole Chicken',sub:'Ready-to-Cook · 1.8kg',cat:'rtc',catLabel:'Ready-to-Cook',price:24.90,from:false,old:28,img:'rtc-marinated-whole',stock:'low',stockN:18,badge:'Best Seller',badgeClass:'badge-fire',desc:'Our signature spice blend on a whole chicken. Grill or bake, no prep needed, just cook and serve.'},
+  {id:'r2',name:'Marinated Wings',sub:'Spicy · 500g',cat:'rtc',catLabel:'Ready-to-Cook',price:17.50,from:false,old:19.90,img:'rtc-wings',stock:'ok',stockN:20,badge:'Popular',badgeClass:'badge-fire',desc:'Spicy-sweet marinated wings. Air-fryer or oven ready. A crowd-pleaser for any party.'},
+  {id:'r3',name:'Herb Garlic Drumsticks',sub:'Ready-to-Cook · 1kg',cat:'rtc',catLabel:'Ready-to-Cook',price:15.90,from:false,old:null,img:'rtc-drumsticks',stock:'ok',stockN:25,badge:null,badgeClass:'',desc:'Herb and garlic marinated drumsticks. Oven or grill in 25 minutes, aromatic and juicy.'},
+  {id:'r4',name:'Honey Soy Breast',sub:'New · 500g',cat:'rtc',catLabel:'Ready-to-Cook',price:16.90,from:false,old:null,img:'rtc-honeysoy',stock:'ok',stockN:14,badge:'New',badgeClass:'badge-gold',desc:'Honey-soy glazed boneless breast. Pan-fry in 12 minutes. Sweet-savoury, the kids love it.'}
+];
+var FEAT={std:10,sup:9,c1:9,c3:8,k1:8,r1:8,r2:8,c2:7,r4:7,k2:6,c4:6,r3:6,k3:5,k4:4,c5:3,c6:2};
+PRODUCTS.forEach(function(p){p.feat=FEAT[p.id]||0;});
+var REVIEWS = [
+  {t:"The chicken arrived so fresh you can tell it was cut that morning. Never going back to the wet market.",n:"Aini Nabilah",l:"Melaka",c:"#C8362F"},
+  {t:"Ordered 3kg of wings for a BBQ. Delivered by noon, perfectly cold, halal cert on the pack. 10/10.",n:"Razif Fahroni",l:"Melaka",c:"#1E7A4D"},
+  {t:"Ayam Kampung quality is unmatched. Tried three other suppliers, nothing comes close to this freshness.",n:"Siti Wahidah",l:"Melaka",c:"#B8893C"},
+  {t:"My restaurant orders daily. Consistent freshness, always on time. Custom cuts save us 2 hours of prep.",n:"Huzaifah Zakaria",l:"Restaurant Owner",c:"#A52A23"},
+  {t:"I checked the temperature on arrival, still 3°C. That's professional. My family only buys e-segar now.",n:"Nora Rashid",l:"Melaka",c:"#14723E"},
+  {t:"Marinated wings are insane. 20 minutes in the air fryer and done. A game changer for busy mums.",n:"Farah Aisyah",l:"Melaka",c:"#E8843C"},
+  {t:"As a B2B dealer the support is amazing. Bill-to-bill, flexible timing. The freshness sells itself.",n:"Ahmad Kamal",l:"Dealer, Melaka",c:"#C8362F"},
+  {t:"WhatsApp order confirmed in under 2 minutes, driver was early, wrapped perfectly. This is how delivery should feel.",n:"Zulaikha Hamdan",l:"Melaka",c:"#1E7A4D"}
+];
+var FAQS = [
+  ["What time do I order for same-day delivery?","Order before 12pm (noon) for same-day delivery. We slaughter every morning at 6am and complete all deliveries by 6pm across Melaka."],
+  ["Is the chicken really JAKIM halal certified?","Yes. Every product carries valid JAKIM halal certification, renewed annually. The certificate number is printed on every pack so you can verify it yourself anytime."],
+  ["How is the chicken kept fresh during delivery?","We maintain a full cold-chain at 0 to 4°C from slaughter to delivery, packed in insulated bags with ice packs. The chicken is never frozen, just fresh, cold and sealed."],
+  ["Which areas in Melaka do you deliver to?","We deliver across Melaka and surrounding areas. Free delivery for orders above RM80. WhatsApp us for exact delivery charges to your address."],
+  ["Can I order in bulk for a restaurant or event?","Absolutely. We have B2B packages for restaurants, kedai makan and event catering, with custom cuts and portion sizes. Message us on WhatsApp for bulk pricing."],
+  ["What if the chicken isn't fresh when I receive it?","We guarantee freshness on every delivery. If your order isn't fresh, message us immediately on WhatsApp and we'll replace it or refund you, no questions asked."],
+  ["How do I place an order?","Add items to your cart and checkout via WhatsApp, or message us directly at +6018-4651045. We'll confirm your order, delivery time and total within minutes."]
+];
+
+/* ============ RENDER SHOP ============ */
+function priceStr(p){return 'RM'+(p%1===0?p:p.toFixed(2)).toString();}
+function cardHTML(p){
+  var badge = p.badge?'<span class="pcard-badge '+p.badgeClass+'">'+p.badge+'</span>':'';
+  var old = p.old?' <del>RM'+p.old+'</del>':'';
+  var from = p.from?'<small>from</small>':'';
+  return '<article class="pcard" data-cat="'+p.cat+'" data-id="'+p.id+'">'+
+    '<div class="pcard-media" onclick="openQV(\''+p.id+'\')">'+badge+
+      '<span class="pcard-fresh"><i></i>Fresh today</span>'+
+      '<img src="assets/img/'+p.img+'.webp" alt="'+p.name+'" loading="lazy"></div>'+
+    '<div class="pcard-body">'+
+      '<div class="pcard-kicker">'+p.catLabel+'</div>'+
+      '<h3 class="pcard-name">'+p.name+'</h3>'+
+      '<div class="pcard-origin">'+p.sub+'</div>'+
+      '<div class="pcard-foot">'+
+        '<div class="pcard-price">'+from+priceStr(p.price)+old+'</div>'+
+        '<button class="pcard-add" onclick="addById(\''+p.id+'\',this)" aria-label="Add '+p.name+'">'+
+          '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>Add</button>'+
+      '</div></div></article>';
+}
+document.getElementById('pgrid').innerHTML = PRODUCTS.map(cardHTML).join('');
+function filterCat(cat,btn){
+  document.querySelectorAll('#tabs .tab').forEach(function(t){t.classList.remove('on');});
+  if(btn)btn.classList.add('on');
+  document.querySelectorAll('#pgrid .pcard').forEach(function(c){
+    c.classList.toggle('hide', cat!=='all' && c.getAttribute('data-cat')!==cat);
+  });
+}
+
+/* reviews */
+function revHTML(r){
+  var ini=r.n.split(' ').map(function(x){return x[0];}).slice(0,2).join('');
+  return '<div class="rev-card"><div class="rev-stars">★★★★★</div><p class="rev-txt">'+r.t+'</p>'+
+    '<div class="rev-auth"><div class="rev-av" style="background:'+r.c+'">'+ini+'</div>'+
+    '<div><div class="rev-nm">'+r.n+'</div><div class="rev-loc">'+r.l+'</div></div></div></div>';
+}
+var half=Math.ceil(REVIEWS.length/2);
+var a=REVIEWS.slice(0,half),b=REVIEWS.slice(half);
+document.getElementById('revA').innerHTML=(a.concat(a)).map(revHTML).join('');
+document.getElementById('revB').innerHTML=(b.concat(b)).map(revHTML).join('');
+
+/* faq */
+document.getElementById('faqList').innerHTML=FAQS.map(function(f){
+  return '<div class="faq"><div class="faq-q" onclick="toggleFaq(this)">'+f[0]+
+    '<span class="faq-ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></div>'+
+    '<div class="faq-a"><div class="faq-a-in">'+f[1]+'</div></div></div>';
+}).join('');
+function toggleFaq(q){
+  var item=q.parentElement, a=q.nextElementSibling, open=item.classList.contains('open');
+  document.querySelectorAll('.faq.open').forEach(function(f){f.classList.remove('open');f.querySelector('.faq-a').style.maxHeight=null;});
+  if(!open){item.classList.add('open');a.style.maxHeight=a.scrollHeight+'px';}
+}
+
+/* ============ CART ============ */
+var cart=JSON.parse(localStorage.getItem('eSegar_cart')||'[]');
+function saveCart(){localStorage.setItem('eSegar_cart',JSON.stringify(cart));}
+function cartCount(){return cart.reduce(function(s,i){return s+i.qty;},0);}
+function cartSum(){return cart.reduce(function(s,i){return s+i.price*i.qty;},0);}
+function findProd(id){return PRODUCTS.find(function(p){return p.id===id;});}
+var SIZES={
+  std:[{n:'Small',w:'~1.2kg',p:16},{n:'Medium',w:'~1.5kg',p:20},{n:'Large',w:'~1.8kg',p:24},{n:'XL',w:'~2.2kg',p:29}],
+  sup:[{n:'Medium',w:'~1.8kg',p:26},{n:'Large',w:'~2.2kg',p:31},{n:'XL',w:'~2.6kg',p:37}]
+};
+function addItem(it){
+  var ex=cart.find(function(i){return i.id===it.id;});
+  if(ex)ex.qty++; else cart.push({id:it.id,name:it.name,price:it.price,img:it.img,qty:1});
+  saveCart(); renderCart(); bumpCart();
+  showToast('✓ '+it.name+' added');
+}
+function addById(id,btn){
+  var p=findProd(id); if(!p)return;
+  if(SIZES[id]){openQV(id);return;}
+  addItem({id:p.id,name:p.name,price:p.price,img:p.img});
+  if(btn){btn.classList.add('done');var o=btn.innerHTML;btn.innerHTML='✓ Added';setTimeout(function(){btn.classList.remove('done');btn.innerHTML=o;},1300);}
+}
+function cq(id,d){var i=cart.find(function(x){return x.id===id;});if(!i)return;i.qty=Math.max(1,i.qty+d);saveCart();renderCart();updateCount();}
+function cr(id){cart=cart.filter(function(x){return x.id!==id;});saveCart();renderCart();}
+function bumpCart(){var c=document.getElementById('cartCount');c.classList.add('bump');setTimeout(function(){c.classList.remove('bump');},400);}
+function updateCount(){
+  var n=cartCount(),c=document.getElementById('cartCount');
+  c.textContent=n;c.classList.toggle('show',n>0);
+  document.getElementById('cartHeadCount').textContent=n?'· '+n+' item'+(n>1?'s':''):'';
+}
+function renderCart(){
+  updateCount();
+  var box=document.getElementById('cartItems');
+  if(!cart.length){box.innerHTML='<div class="cart-empty"><div class="ce-ic">🛒</div><div style="font:700 16px/1.4 var(--fb);color:var(--ink)">Your cart is empty</div><p style="margin-top:6px">Add some fresh chicken to get started.</p></div>';}
+  else{
+    box.innerHTML=cart.map(function(i){
+      return '<div class="ci"><img class="ci-img" src="assets/img/'+i.img+'.webp" alt="'+i.name+'">'+
+        '<div class="ci-info"><div class="ci-nm">'+i.name+'</div><div class="ci-pr">RM'+(i.price*i.qty).toFixed(2).replace('.00','')+'</div>'+
+        '<div class="ci-rm" onclick="cr(\''+i.id+'\')">Remove</div></div>'+
+        '<div class="ci-qty"><button class="qb" onclick="cq(\''+i.id+'\',-1)">−</button><span class="qn">'+i.qty+'</span><button class="qb" onclick="cq(\''+i.id+'\',1)">+</button></div></div>';
+    }).join('');
+  }
+  document.getElementById('cartSum').textContent='RM'+cartSum().toFixed(2).replace('.00','');
+  var FD=80,sum=cartSum(),lbl=document.getElementById('fdLbl'),fill=document.getElementById('fdFill');
+  if(lbl&&fill){
+    if(sum>=FD){lbl.innerHTML='🎉 <b>Free delivery unlocked!</b>';fill.style.width='100%';}
+    else{lbl.innerHTML='Add <b>RM'+(FD-sum).toFixed(2).replace('.00','')+'</b> more for free delivery';fill.style.width=Math.min(100,sum/FD*100)+'%';}
+  }
+}
+function openCart(){document.getElementById('ov').classList.add('open');document.getElementById('cart').classList.add('open');document.body.style.overflow='hidden';renderCart();}
+function closeCart(){document.getElementById('ov').classList.remove('open');document.getElementById('cart').classList.remove('open');document.body.style.overflow='';}
+function waOrder(){
+  if(!cart.length){showToast('Your cart is empty');return;}
+  var msg='Hi eSegar! I would like to order:\n\n';
+  cart.forEach(function(i){msg+=i.qty+'× '+i.name+': RM'+(i.price*i.qty).toFixed(2)+'\n';});
+  msg+='\nSubtotal: RM'+cartSum().toFixed(2)+'\n\nPlease confirm availability and delivery time. Thank you!';
+  window.open('https://wa.me/60184651045?text='+encodeURIComponent(msg),'_blank');
+}
+
+/* ============ QUICK VIEW ============ */
+var qvSel=0,qvSizesArr=null,qvProd=null;
+function qvSize(i,el){
+  qvSel=i;
+  document.querySelectorAll('#qvSizes .sz').forEach(function(x){x.classList.remove('on');});
+  el.classList.add('on');
+  qvSetPrice();
+}
+function qvSetPrice(){
+  var p=qvProd; if(!p)return;
+  if(qvSizesArr){document.getElementById('qvPr').innerHTML=priceStr(qvSizesArr[qvSel].p);}
+  else{document.getElementById('qvPr').innerHTML=(p.from?'<span style="font:700 16px/1 var(--fb);color:var(--ink-faint)">from </span>':'')+priceStr(p.price)+(p.old?' <del style="font:700 18px/1 var(--fb);color:var(--ink-faint)">RM'+p.old+'</del>':'');}
+}
+function openQV(id){
+  var p=findProd(id); if(!p)return;
+  qvProd=p; qvSizesArr=SIZES[p.id]||null; qvSel=0;
+  document.getElementById('qvImg').src='assets/img/'+p.img+'.webp';
+  document.getElementById('qvImg').alt=p.name;
+  document.getElementById('qvKicker').textContent=p.catLabel;
+  document.getElementById('qvName').textContent=p.name;
+  document.getElementById('qvDesc').textContent=p.desc;
+  var box=document.getElementById('qvSizes');
+  if(qvSizesArr){
+    box.className='qv-sizes show';
+    box.innerHTML=qvSizesArr.map(function(s,i){
+      return '<div class="sz'+(i===0?' on':'')+'" onclick="qvSize('+i+',this)"><div class="n">'+s.n+'</div><div class="w">'+s.w+'</div><div class="p">RM'+s.p+'</div></div>';
+    }).join('');
+  } else {box.className='qv-sizes';box.innerHTML='';}
+  qvSetPrice();
+  var ok=p.stock==='ok';
+  document.getElementById('qvSt').innerHTML='<i style="background:'+(ok?'var(--green)':'var(--amber)')+'"></i><span style="color:'+(ok?'var(--green-deep)':'#B5651D')+'">'+(ok?'In stock':'Low stock')+', '+p.stockN+' left</span>';
+  document.getElementById('qvAdd').onclick=function(){
+    if(qvSizesArr){var s=qvSizesArr[qvSel];addItem({id:p.id+'-'+s.n,name:p.name+' ('+s.n+', '+s.w+')',price:s.p,img:p.img});}
+    else addItem({id:p.id,name:p.name,price:p.price,img:p.img});
+    closeQV();
+  };
+  document.getElementById('qv').classList.add('open');document.body.style.overflow='hidden';
+}
+function closeQV(){document.getElementById('qv').classList.remove('open');document.body.style.overflow='';}
+document.getElementById('qv').addEventListener('click',function(e){if(e.target===this)closeQV();});
+
+/* ============ MOBILE MENU ============ */
+function openMob(){document.getElementById('mob').classList.add('open');document.body.style.overflow='hidden';}
+function closeMob(){document.getElementById('mob').classList.remove('open');document.body.style.overflow='';}
+
+/* ============ TOAST ============ */
+var toastT;
+function showToast(m){var t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(function(){t.classList.remove('show');},2200);}
+
+/* ============ COUNTDOWN ============ */
+function updateCD(){
+  var now=new Date(),noon=new Date(now);noon.setHours(12,0,0,0);
+  if(now>=noon)noon.setDate(noon.getDate()+1);
+  var d=noon-now,h=Math.floor(d/3.6e6),m=Math.floor(d%3.6e6/6e4),s=Math.floor(d%6e4/1e3),p=function(n){return n<10?'0'+n:n;};
+  document.getElementById('cd').textContent=p(h)+':'+p(m)+':'+p(s);
+}
+updateCD();setInterval(updateCD,1000);
+
+/* ============ REVEAL ============ */
+var ro=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');ro.unobserve(e.target);}});},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('[data-reveal]').forEach(function(el){ro.observe(el);});
+
+/* ============ COUNTERS ============ */
+var co=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){countUp(e.target);co.unobserve(e.target);}});},{threshold:.5});
+document.querySelectorAll('.count').forEach(function(el){co.observe(el);});
+function countUp(el){
+  var to=+el.getAttribute('data-to'),t0=null,dur=1200;
+  function step(ts){if(!t0)t0=ts;var p=Math.min((ts-t0)/dur,1),e=1-Math.pow(1-p,3);el.textContent=Math.round(e*to);if(p<1)requestAnimationFrame(step);}
+  requestAnimationFrame(step);
+}
+
+/* ============ NAV SCROLL + PROGRESS ============ */
+var nav=document.getElementById('nav'),prog=document.getElementById('progbar');
+function onScroll(){
+  var y=window.scrollY;
+  nav.classList.toggle('scrolled',y>40);
+  prog.style.width=Math.min(y/(document.documentElement.scrollHeight-window.innerHeight)*100,100)+'%';
+}
+window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+/* ============ PARALLAX (desktop, motion-safe) ============ */
+var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var heroPhoto=document.getElementById('heroPhoto'),heroIn=document.getElementById('heroIn'),ctaBg=document.getElementById('ctaBg');
+var ticking=false;
+function parallax(){
+  var y=window.scrollY,vh=window.innerHeight;
+  if(heroPhoto&&y<vh*1.2){heroPhoto.style.transform='translate3d(0,'+(y*0.28)+'px,0) scale(1.05)';if(heroIn)heroIn.style.transform='translate3d(0,'+(y*0.12)+'px,0)';}
+  if(ctaBg){var r=ctaBg.parentElement.getBoundingClientRect();if(r.top<vh&&r.bottom>0){ctaBg.style.transform='translate3d(0,'+((r.top-vh)*0.06)+'px,0)';}}
+  ticking=false;
+}
+if(!reduce && window.innerWidth>760){
+  window.addEventListener('scroll',function(){if(!ticking){requestAnimationFrame(parallax);ticking=true;}},{passive:true});
+  parallax();
+  /* hero card tilt + magnetic buttons */
+  var tilts=document.querySelectorAll('[data-tilt]');
+  document.querySelector('.hero').addEventListener('mousemove',function(e){
+    var cx=window.innerWidth/2,cy=window.innerHeight/2,dx=(e.clientX-cx)/cx,dy=(e.clientY-cy)/cy;
+    tilts.forEach(function(el,i){var f=(i+1)*4;el.style.transform='translate3d('+(dx*f)+'px,'+(dy*f)+'px,0)';});
+  });
+  document.querySelectorAll('[data-magnetic]').forEach(function(btn){
+    btn.addEventListener('mousemove',function(e){var r=btn.getBoundingClientRect();var x=e.clientX-r.left-r.width/2,y=e.clientY-r.top-r.height/2;btn.style.transform='translate('+(x*0.25)+'px,'+(y*0.3)+'px)';});
+    btn.addEventListener('mouseleave',function(){btn.style.transform='';});
+  });
+}
+
+/* ============ PROCESS SCROLLYTELLING ============ */
+var steps=document.querySelectorAll('.proc-step'),pvs=document.querySelectorAll('.pv-img'),pvTime=document.getElementById('pvTime');
+function setStep(n){
+  steps.forEach(function(s){s.classList.toggle('active',+s.getAttribute('data-step')===n);});
+  pvs.forEach(function(p){p.classList.toggle('on',+p.getAttribute('data-step')===n);});
+  var act=document.querySelector('.proc-step[data-step="'+n+'"]');if(act)pvTime.textContent=act.getAttribute('data-time');
+}
+var so=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)setStep(+e.target.getAttribute('data-step'));});},{rootMargin:'-45% 0px -45% 0px'});
+steps.forEach(function(s){so.observe(s);});
+
+/* ============ VIEWS: home ↔ dedicated shop page ============ */
+function toggleDrop(e){e.stopPropagation();document.getElementById('shopdrop').classList.toggle('open');}
+document.addEventListener('click',function(e){var d=document.getElementById('shopdrop');if(d&&!d.contains(e.target))d.classList.remove('open');});
+var shopCat='all';
+function setCat(cat,btn){shopCat=cat;document.querySelectorAll('#catlist .catitem').forEach(function(c){c.classList.toggle('on',c===btn);});applyShop();}
+function applyShop(){
+  var qEl=document.getElementById('shopSearch'),sEl=document.getElementById('shopSort');
+  var q=qEl?qEl.value.toLowerCase().trim():'',sort=sEl?sEl.value:'featured';
+  var list=PRODUCTS.filter(function(p){
+    var c=shopCat==='all'||p.cat===shopCat;
+    var m=!q||p.name.toLowerCase().indexOf(q)>-1||p.catLabel.toLowerCase().indexOf(q)>-1||p.desc.toLowerCase().indexOf(q)>-1;
+    return c&&m;
+  });
+  if(sort==='price-low')list.sort(function(a,b){return a.price-b.price;});
+  else if(sort==='price-high')list.sort(function(a,b){return b.price-a.price;});
+  else if(sort==='name')list.sort(function(a,b){return a.name.localeCompare(b.name);});
+  else list.sort(function(a,b){return b.feat-a.feat;});
+  document.getElementById('shopgrid').innerHTML=list.map(cardHTML).join('');
+  document.getElementById('noRes').style.display=list.length?'none':'block';
+  document.getElementById('shopResults').innerHTML='Showing <strong>'+list.length+'</strong> product'+(list.length!==1?'s':'')+(shopCat!=='all'?' in this category':'');
+}
+function showShop(cat){
+  shopCat=cat||'all';
+  document.querySelectorAll('#catlist .catitem').forEach(function(c){c.classList.toggle('on',c.getAttribute('data-cat')===shopCat);});
+  var d=document.getElementById('shopdrop');if(d)d.classList.remove('open');
+  closeMob();document.body.style.overflow='';
+  document.body.classList.add('show-shop');
+  window.scrollTo(0,0);
+  applyShop();
+}
+function showHome(){document.body.classList.remove('show-shop');window.scrollTo(0,0);}
+function goSection(id){
+  var wasShop=document.body.classList.contains('show-shop');
+  if(wasShop)document.body.classList.remove('show-shop');
+  closeMob();document.body.style.overflow='';
+  var el=document.getElementById(id);
+  if(el)setTimeout(function(){el.scrollIntoView({behavior:wasShop?'auto':'smooth'});},wasShop?40:0);
+}
+applyShop();
+
+/* ============ WELCOME POPUP + NEWSLETTER ============ */
+function openPopup(){document.getElementById('popOv').classList.add('open');document.body.style.overflow='hidden';}
+function closePopup(){document.getElementById('popOv').classList.remove('open');document.body.style.overflow='';localStorage.setItem('eSegar_popup',String(Date.now()));}
+function claimDiscount(){
+  var n=document.getElementById('popName').value.trim(),ph=document.getElementById('popPhone').value.trim();
+  if(!n||!ph){showToast('Please enter your name and WhatsApp number');return;}
+  window.open('https://wa.me/60184651045?text='+encodeURIComponent('Hi e-segar! My name is '+n+'. I saw the 10% welcome discount (code SEGAR10). My WhatsApp: '+ph+'. Please confirm!'),'_blank');
+  closePopup();showToast('🎉 Code SEGAR10 sent!');
+}
+(function(){var last=localStorage.getItem('eSegar_popup');if(!last||Date.now()-parseInt(last)>86400000)setTimeout(openPopup,8000);})();
+function nlSub(){
+  var em=document.getElementById('nlEmail');
+  if(!em.value.trim()||em.value.indexOf('@')<0){showToast('Please enter a valid email');return;}
+  em.value='';showToast('🎉 Subscribed! Weekly deals incoming.');
+}
+
+/* ============ ESC closes overlays ============ */
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeCart();closeQV();closeMob();var d=document.getElementById('shopdrop');if(d)d.classList.remove('open');var po=document.getElementById('popOv');if(po.classList.contains('open'))closePopup();}});
+
+/* init */
+updateCount();
+</script>
+</body>
+</html>
