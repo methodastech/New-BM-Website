@@ -1,0 +1,68 @@
+/*!
+ * jQuery Accordion 0.0.1
+ * (c) 2014 Victor Fernandez <victor@vctrfrnndz.com>
+ * MIT Licensed.
+ */
+
+/* Requirements */
+
+[data-accordion] [data-content] {
+    overflow: hidden;
+    max-height: 0;
+}
+
+/* Basic Theme */
+
+[data-accordion] {
+    line-height:20px;
+	padding: 0px 10px;
+}
+
+[data-control], [data-content] > * {
+
+    border-bottom: 1px solid #dddddd;
+    box-shadow: 0 1px 0 #ffffff;
+    padding: 15px 5px;
+}
+
+/*Add code- make article block has link*/
+
+[data-control] a, [data-content] a {
+  
+	display: block;
+	color: #444444;
+}
+
+/*end Add code- make article block has link*/
+
+[data-content] [data-accordion] {
+    border: 0;
+    padding:0;
+}
+
+[data-accordion] [data-control] {
+    position: relative;
+
+padding-right: 45px;
+
+}
+
+[data-accordion] > [data-control]:after {
+    content: "";
+    position: absolute;
+    right: 0px; /*original is 10px*/
+    top: 12px;
+    font-size: 20px;
+    font-weight: 200;
+    color: #444;
+    height: 15px;
+    width: 25px;
+    background: url('../../images/eshop/images/down.png') center center no-repeat;
+    background-size: 50%;
+}
+
+[data-accordion].open > [data-control]:after {
+    -webkit-transform: rotate(-180deg); 
+    -ms-transform: rotate(-180deg); 
+    transform: rotate(-180deg); 
+}

@@ -1,0 +1,23 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "rubexpay",
+      "runtimeExecutable": "sh",
+      "runtimeArgs": ["-c", "python3 -m http.server \"$PORT\""],
+      "autoPort": true
+    },
+    {
+      "name": "iaq-pitch",
+      "runtimeExecutable": "sh",
+      "runtimeArgs": ["-c", "cd '../iaq website' && python3 -m http.server \"$PORT\""],
+      "autoPort": true
+    },
+    {
+      "name": "bm-sales",
+      "runtimeExecutable": "sh",
+      "runtimeArgs": ["-c", "cd '../../Sales page/bm sales page' && python3 -m http.server \"$PORT\""],
+      "autoPort": true
+    }
+  ]
+}

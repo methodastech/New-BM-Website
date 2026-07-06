@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tenthpin MC · Brand &amp; Web Audit · Brand Method</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{--paper:#F5F7FC;--paper2:#FCFDFF;--ink:#101626;--soft:#4A5468;--faint:#8A93A6;--line:#E2E7F1;--line2:#D6DCEA;--blue:#2536F5;--blue-deep:#1421B8;--cyan:#0E7490;--wash:#EEF1FE;--ok:#1A8F5A;--warn:#C9941F;--red:#D7263D;--dark:#0E1424;--maxw:1080px;}
+  *{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+  body{font-family:"Inter",system-ui,sans-serif;background:var(--paper);color:var(--ink);font-size:16px;line-height:1.62;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}.mono{font-family:"JetBrains Mono",monospace}
+  /* ===== SITE HEADER — consistent across all pages (logo + workspace tabs + book button) ===== */
+  header.nav{position:sticky;top:0;z-index:60;background:rgba(245,247,252,.95);border-bottom:1px solid var(--line);-webkit-backdrop-filter:saturate(140%) blur(8px);backdrop-filter:saturate(140%) blur(8px);transition:transform .4s var(--e1)}
+  body.embedded header.nav{display:none}
+  /* IAQ-style proposal topbar: dark strip with proposal mark + numbered tabs, hides on scroll-down */
+  .nav-top{background:#0A101F;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:8px 28px;border-bottom:1px solid #1d2438;overflow:hidden;max-height:56px;transition:max-height .34s var(--e1),opacity .28s var(--e1),padding .34s var(--e1)}
+  body.tbhide header.nav{transform:translateY(-100%)}
+  .tb-mark{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#9FB4FF;white-space:nowrap;flex:none}
+  .tb-mark b{color:#EAF0FB;font-weight:700}
+  .nav-in{max-width:var(--maxw);margin:0 auto;padding:9px 28px 12px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+  .nav-top .wsw{border:1px solid rgba(255,255,255,.24);background:transparent;overflow:auto;max-width:100%}
+  .nav-top .wsw a{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#C7D3EE;padding:7px 12px;border-right:1px solid rgba(255,255,255,.18);white-space:nowrap}
+  .nav-top .wsw a:last-child{border-right:0}
+  .nav-top .wsw a:hover{color:#fff;background:rgba(255,255,255,.09)}
+  .nav-top .wsw a.on{background:#2536F5;color:#fff;font-weight:700}
+  .brand{display:flex;align-items:center;gap:11px;text-decoration:none}.brand>span{display:flex;flex-direction:column}
+  .brand .bt{display:flex;align-items:center;gap:8px}
+  .brand-logo{height:16px;width:auto;display:block}
+  .brand .mc{display:inline-flex;align-items:center;justify-content:center;background:var(--blue);color:#fff;font-family:"Space Grotesk",sans-serif;font-size:16px;font-weight:700;letter-spacing:.02em;padding:5px 9px;border-radius:3px;line-height:1;box-shadow:0 5px 13px -4px rgba(37,54,245,.55)}
+  .brand .bs{font-family:"JetBrains Mono",monospace;font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);margin-top:3px}
+  .navwrap{display:flex;align-items:center;gap:14px}
+  .btn{font-family:"Space Grotesk",sans-serif;font-size:13px;letter-spacing:.015em;text-transform:uppercase;font-weight:600;display:inline-flex;align-items:center;gap:9px;padding:14px 22px;border:1px solid transparent;cursor:pointer;text-decoration:none;transition:background .35s}
+  .btn-primary{background:#93B30A;color:#fff}.btn-primary:hover{background:#7C9808}
+  .btn-primary .ar{display:none}
+  .wsw{display:flex;align-items:center;border:1px solid var(--line2);background:#fff}
+  .wsw a{display:inline-flex;align-items:center;gap:7px;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);text-decoration:none;padding:9px 11px;border-right:1px solid var(--line2);transition:background .3s,color .3s}
+  .wsw a:last-child{border-right:0}
+  .wsw a:hover{color:var(--ink);background:rgba(16,22,38,.04)}
+  .wsw a.on{color:var(--blue-deep);background:rgba(37,54,245,.10)}
+  /* chapter nav (renamed from .nav so it doesn't collide with the site header) */
+  .chapnav{border-bottom:1px solid var(--line);background:rgba(245,247,252,.97);position:sticky;top:116px;z-index:49;overflow-x:auto;transition:top .34s var(--e1)}
+  body.tbhide .chapnav{top:0}
+  .chapnav-in{display:flex;gap:3px;padding:8px 28px;max-width:var(--maxw);margin:0 auto;white-space:nowrap}
+  .chapnav a{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--faint);text-decoration:none;padding:6px 10px;border-radius:8px}.chapnav a:hover{color:var(--ink);background:var(--wash)}.chapnav .ch-no{color:var(--blue-deep);font-weight:700;margin-right:6px}
+  @media(max-width:640px){
+    .nav-top{padding:6px 10px;justify-content:center;gap:0}
+    .tb-mark{display:none}
+    .nav-top .wsw{width:100%}
+    .nav-top .wsw a{flex:1;justify-content:center;text-align:center;padding:8px 4px;font-size:9px}
+    .nav-in{padding:8px 12px 10px}
+    .brand-logo{height:14px}.brand .mc{font-size:13px;padding:4px 7px}.brand .bs{font-size:8px}
+    .btn-primary{padding:9px 13px;font-size:10px;letter-spacing:.015em;gap:6px;white-space:nowrap}
+    .chapnav{position:static;top:auto}.chapnav-in{padding:8px 16px}
+    table{display:block;overflow-x:auto!important;-webkit-overflow-scrolling:touch;white-space:nowrap} /* !important: the base table rule sets overflow:hidden (for radius) later in source */
+    section{padding:26px 0}
+  }
+  .eyebrow{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--blue-deep);display:inline-flex;align-items:center;gap:10px;font-weight:600}.eyebrow::before{content:"";width:28px;height:1px;background:var(--blue);display:inline-block}
+  .hero{padding:50px 0 8px}.hero h1{font-family:"Fraunces",serif;font-weight:500;font-size:clamp(36px,5.6vw,62px);line-height:1.03;letter-spacing:-.02em;margin:18px 0 0}.hero h1 em{font-style:italic;color:var(--blue-deep)}
+  .hero .lede{font-size:clamp(17px,2vw,20px);color:var(--soft);max-width:66ch;margin:20px 0 0}
+  .vrow{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}.vchip{background:var(--paper2);border:1px solid var(--line);border-radius:999px;padding:8px 15px;font-size:13px;color:var(--soft)}
+  .execsum{margin-top:32px;border:1px solid var(--line);border-radius:16px;background:var(--paper2);padding:26px 28px}
+  section{padding:32px 0}
+  .chapdiv{display:flex;align-items:baseline;gap:18px;padding:42px 0 4px;border-top:1px solid var(--line);margin-top:10px}.cd-no{font-family:"Fraunces",serif;font-weight:600;font-size:38px;color:var(--blue-deep);line-height:1}.cd-h{font-family:"Fraunces",serif;font-weight:500;font-size:27px;letter-spacing:-.01em}.cd-sub{font-size:15px;color:var(--soft);margin-top:5px}
+  .secmark{display:flex;align-items:center;gap:13px;margin-top:6px}.secicon{width:34px;height:34px;border-radius:9px;background:var(--dark);display:flex;align-items:center;justify-content:center;color:#9FB4FF;flex:none}.secicon svg{width:17px;height:17px}
+  .sec-no{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--blue-deep);letter-spacing:.1em;text-transform:uppercase;font-weight:600}
+  h2{font-family:"Fraunces",serif;font-weight:500;font-size:clamp(25px,3.6vw,37px);line-height:1.08;letter-spacing:-.015em;margin:13px 0 0;max-width:26ch}
+  h3.sub{font-family:"Fraunces",serif;font-weight:500;font-size:22px;margin:30px 0 0}
+  .sec-intro{font-size:16.5px;color:var(--soft);max-width:72ch;margin:15px 0 0}.sec-intro b,.sec-intro strong{color:var(--ink)}
+  .grid{display:grid;gap:16px;margin-top:22px}.g2{grid-template-columns:repeat(auto-fit,minmax(290px,1fr))}.g3{grid-template-columns:repeat(auto-fit,minmax(225px,1fr))}
+  .card{background:var(--paper2);border:1px solid var(--line);border-radius:14px;padding:20px 21px}.card .tag{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--blue-deep);font-weight:700}.card h3{font-family:"Fraunces",serif;font-weight:500;font-size:19px;margin-top:8px}.card p{font-size:14px;color:var(--soft);margin-top:9px;line-height:1.55}.card p b{color:var(--ink)}
+  .card.dark{background:var(--dark);border-color:#232a40;color:#D6DEF2}.card.dark h3{color:#fff}.card.dark p{color:#AEB9D2}.card.dark .tag{color:#9FB4FF}.card.dark p b{color:#fff}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-top:22px}.stat{border:1px solid var(--line);border-radius:13px;background:var(--paper2);padding:16px 18px}.stat .num{font-family:"Fraunces",serif;font-size:28px;font-weight:500;color:var(--blue-deep);line-height:1.05}.stat .lab{font-size:13px;font-weight:600;margin-top:8px}.stat .s{font-size:12px;color:var(--faint);margin-top:3px}
+  .goals2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-top:22px}.goal{display:flex;gap:13px;align-items:flex-start;border:1px solid var(--line);border-radius:13px;background:var(--paper2);padding:16px 18px}.goal .gi{width:30px;height:30px;border-radius:8px;background:var(--wash);color:var(--blue-deep);display:flex;align-items:center;justify-content:center;flex:none;font-family:"JetBrains Mono",monospace;font-size:12px;font-weight:700}.goal b{font-size:15px}.goal p{font-size:13.5px;color:var(--soft);margin-top:4px}
+  table{width:100%;border-collapse:separate;border-spacing:0;margin-top:18px;font-size:14px;background:var(--paper2);border:1px solid var(--line);border-radius:12px;overflow:hidden}th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}thead th{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#fff;background:var(--dark)}tr:last-child td{border-bottom:none}td.dim{font-weight:600;white-space:nowrap}td.sc{font-family:"JetBrains Mono",monospace;color:var(--blue-deep);font-weight:700;white-space:nowrap}
+  .vtag{font-family:"JetBrains Mono",monospace;font-size:9.5px;text-transform:uppercase;letter-spacing:.04em;padding:3px 8px;border-radius:6px;font-weight:700}.vtag.hi{background:rgba(26,143,90,.14);color:var(--ok)}.vtag.lo{background:rgba(201,148,31,.16);color:#9a6f12}.vtag.bad{background:rgba(215,38,61,.12);color:var(--red)}
+  .diagram{margin-top:18px;border:1px solid var(--line);border-radius:14px;background:var(--paper2);padding:18px}.diagram .cap{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--faint);margin-bottom:10px}.diagram svg{width:100%;height:auto;display:block}
+  .fork-stage{margin:28px 0 8px;border:1px solid #232a40;border-radius:14px;background:var(--dark);padding:30px 22px 22px;position:relative}.fork-stage .fl{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#9FB4FF;position:absolute;top:16px;left:22px}
+  .pin{margin-top:22px;border-left:3px solid var(--blue);background:linear-gradient(90deg,rgba(37,54,245,.06),transparent);padding:15px 19px;border-radius:0 12px 12px 0;font-size:15px}.pin b{color:var(--blue-deep)}.pin.warn{border-left-color:var(--warn);background:linear-gradient(90deg,rgba(201,148,31,.09),transparent)}.pin.warn b{color:#9a6f12}
+  footer{padding:34px 0 70px;color:var(--faint);font-size:12px;font-family:"JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.05em;border-top:1px solid var(--line);margin-top:30px}
+  .ic{stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="nav-top">
+    <span class="tb-mark">Brand Method · <b>Tenthpin MC</b></span>
+    <nav class="wsw" aria-label="Workspace">
+      <a href="audit.html" class="on" title="Brand Audit">01 Brand Audit</a>
+      <a href="framework.html" title="Flow Framework">02 Framework</a>
+      <a href="index.html" title="The Website">03 Website</a>
+    </nav>
+  </div>
+  <div class="nav-in">
+    <a class="brand" href="index.html#top"><span><span class="bt"><img src="assets/logo_tenthpin_pos.svg" alt="Tenthpin" class="brand-logo"><span class="mc">MC</span></span><span class="bs">Management Consultants</span></span></a>
+    <a href="index.html#contact" class="btn btn-primary"><span class="lbl">Book a free assessment</span><span class="ar">→</span></a>
+  </div>
+</header>
+<div class="chapnav"><div class="chapnav-in">
+  <a href="#c1"><span class="ch-no">01</span>Background</a><a href="#c2"><span class="ch-no">02</span>Goal</a><a href="#c3"><span class="ch-no">03</span>Brand Scan</a><a href="#c4"><span class="ch-no">04</span>The Case</a><a href="#c5"><span class="ch-no">05</span>Model</a><a href="#c6"><span class="ch-no">06</span>Markets</a><a href="#c7"><span class="ch-no">07</span>Growth</a><a href="#c8"><span class="ch-no">08</span>Engagement</a><a href="#c9"><span class="ch-no">09</span>Act</a><a href="#c10"><span class="ch-no">10</span>Verdict</a>
+</div></div>
+
+<div class="wrap">
+  <header class="hero">
+    <span class="eyebrow">Brand &amp; Web Audit · Brand Method</span>
+    <h1>Tenthpin MC, <em>Brand &amp; Web Audit</em></h1>
+    <p class="lede">A top-tier SAP partner that is, online, invisible. The delivery is world-class; the corporate brand and the website do not yet exist for the Malaysia and SEA entity. This audit reads exactly where credibility leaks, and what a corporate site and brand system have to do to close it.</p>
+    <div class="vrow"><span class="vchip">SAP Gold Partner</span><span class="vchip">1,500+ / 400+ consultants</span><span class="vchip">No live MC site</span><span class="vchip">AI-in-SAP is the wedge</span></div>
+  </header>
+
+  <!-- VERDICT 60s -->
+  <div class="execsum">
+    <span class="eyebrow">The verdict, in 60 seconds</span>
+    <h2 style="margin-top:12px;max-width:34ch">A world-class delivery firm with no corporate face, losing credibility to better-marketed, lesser partners.</h2>
+    <p class="sec-intro">Tenthpin MC has the substance a CIO wants: SAP Gold Partner, ISO 9001 and 27001, 1,500+ consultants worldwide and 400+ across APAC, and a real differentiator in AI inside the ERP. None of it is visible. <strong>tenthpinmc.com is a domain with no live site</strong>, and the global tenthpin.com has narrowed to Life Sciences, so the industry-and-SAP story this entity sells has nowhere to live. In a market where a multi-million-ringgit S/4HANA decision is judged heavily on credibility, an invisible partner loses to a visible one regardless of who delivers better. The whole job is to make the substance, and the AI wedge, provable on a premium corporate site.</p>
+    <div class="grid g3">
+      <div class="card"><span class="tag">The opportunity</span><h3>An open premium lane</h3><p>"The SAP partner built for industry, driven by AI" is unowned in Malaysia/APAC. Global SIs are generic; local SAP shops look like resellers. Tenthpin can own the premium-yet-industrial corner.</p></div>
+      <div class="card"><span class="tag">The gap</span><h3>The proof is invisible</h3><p>Gold Partner status, ISO, scale, AI-in-ERP and the e-invoice/RISE work are strong signals that sit completely unused, because there is no site, no proof section, no AI story a buyer can point a colleague to.</p></div>
+      <div class="card"><span class="tag">The move</span><h3>Make it provable, premium</h3><p>Build a corporate site that looks as advanced as the work, makes AI-in-SAP a headline act, packages the proof, and gives the SAP buyer one clear path: book a free assessment.</p></div>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="num">~28/100</div><div class="lab">Digital brand health, as is</div><div class="s">no site = near-zero inbound credibility</div></div>
+      <div class="stat"><div class="num">SAP Gold</div><div class="lab">The credential, unused</div><div class="s">+ ISO 9001 / 27001, SF &amp; Cloud qualified</div></div>
+      <div class="stat"><div class="num">AI in SAP</div><div class="lab">The wedge, unshown</div><div class="s">RISE / GROW, e-invoice, IoT, RPA</div></div>
+      <div class="stat"><div class="num">1,500+</div><div class="lab">Consultants, invisible</div><div class="s">400+ APAC, 12 countries</div></div>
+    </div>
+    <div class="pin"><b>Do first:</b> approve the web &amp; brand direction, lock the AI-in-SAP narrative as the headline, gather the proof (logos, certs, named wins where shareable), and get hosting on tenthpinmc.com so launch is not blocked. The full sequence is in 09 · Act.</div>
+  </div>
+
+  <!-- FORK -->
+  <div class="fork-stage"><span class="fl">The fork // how the firm reads to an SAP buyer</span>
+    <svg viewBox="0 0 920 320" role="img" aria-label="The fork" style="margin-top:10px">
+      <text font-family="JetBrains Mono,monospace" x="40" y="150" font-size="12" fill="#7E8AA6" letter-spacing="2">THE TENTHPIN REALITY</text>
+      <text x="40" y="186" font-size="13" fill="#C3CEE6" font-family="Inter">A Gold-Partner SAP firm with deep AI-in-ERP delivery</text>
+      <path d="M40 168 L360 168" stroke="#C3CEE6" stroke-width="3" stroke-linecap="round"/><circle cx="360" cy="168" r="9" fill="#EAF0FB"/>
+      <path d="M360 168 C 540 168, 560 240, 880 258" fill="none" stroke="#3a4566" stroke-width="3" stroke-dasharray="2 9" stroke-linecap="round"/><circle cx="880" cy="258" r="7" fill="#3a4566"/>
+      <text x="556" y="290" font-size="13" fill="#7E8AA6" font-family="Inter">If invisible: "just another SAP reseller"</text><text font-family="JetBrains Mono,monospace" x="556" y="310" font-size="10.5" fill="#5b6685" letter-spacing="1.5">NO SITE · NO PROOF · COMMODITY · DOUBTED</text>
+      <path d="M360 168 C 540 168, 560 86, 880 60" fill="none" stroke="#5B8DEF" stroke-width="4.5" stroke-linecap="round"/><circle cx="880" cy="60" r="9" fill="#7FB0FF"/>
+      <text x="470" y="40" font-size="14" fill="#7FB0FF" font-family="Inter" font-weight="600">If proof + AI led: "the SAP partner built for industry"</text><text font-family="JetBrains Mono,monospace" x="470" y="60" font-size="10.5" fill="#5B8DEF" letter-spacing="1.5">PROOF LED · AI-DRIVEN · PREMIUM · TRUSTED</text>
+    </svg>
+  </div>
+
+  <!-- 01 BACKGROUND -->
+  <div class="chapdiv" id="c1"><span class="cd-no">01</span><div><div class="cd-h">Background</div><div class="cd-sub">Who Tenthpin MC is, and why the Malaysia/SEA entity needs its own face.</div></div></div>
+  <section style="padding-top:14px">
+    <div class="secmark"><span class="secicon"><svg viewBox="0 0 24 24" class="ic"><path d="M3 21h18M5 21V7l7-4 7 4v14"/></svg></span><span class="sec-no">01 · Company &amp; entity context</span></div>
+    <h2>The SEA arm of a global SAP firm, without a home online</h2>
+    <p class="sec-intro">Tenthpin Management Consultants Sdn Bhd (TMC) is the Malaysia and SEA arm, KL and Singapore, of global consultancy Tenthpin (HQ Basel; 1,500+ consultants worldwide, 400+ across Asia, 12 countries). It is an SAP <strong>Gold Partner</strong>, also SAP SuccessFactors and Cloud qualified, ISO 9001 and 27001 certified. It is strong in Automotive, Manufacturing and Life Sciences, and its sharp edge is <strong>AI inside the ERP</strong>: RISE and GROW with S/4HANA, ECC to S/4 transformations, SuccessFactors, CRM, Clinical Trial Supply, government e-invoice. The tagline that fits is <em>Client-Centric, Insight-Driven, SAP-Focused</em>.</p>
+    <div class="grid g3">
+      <div class="card"><span class="tag">The firm</span><h3>Tenthpin MC Sdn Bhd</h3><p>The Malaysia &amp; SEA entity of global Tenthpin. SAP-focused consulting, AI-in-ERP, for industry.</p></div>
+      <div class="card dark"><span class="tag">The scale</span><h3>Global weight, local presence</h3><p><b>1,500+</b> consultants worldwide, <b>400+</b> APAC, 12 countries. HQ Basel; KL + Singapore in SEA.</p></div>
+      <div class="card dark"><span class="tag">The proof</span><h3>The credentials</h3><p><b>SAP Gold Partner</b>, SAP SF + Cloud qualified, <b>ISO 9001 + 27001</b>, long-term client relationships.</p></div>
+    </div>
+    <div class="pin warn"><b>The structural problem:</b> global tenthpin.com now reads as <b>Life Sciences only</b>, with its own products (T/IQS). The broader industry-and-SAP story this MC entity sells, Manufacturing, Automotive, Chemical, has no home. <b>tenthpinmc.com is a registered domain with no hosted site.</b> So a prospect, partner or new hire who looks the entity up finds nothing official.</div>
+    <div class="diagram">
+      <div class="cap">Diagram · what a buyer finds today vs a better-marketed rival</div>
+      <svg viewBox="0 0 920 250" role="img" aria-label="Looking up Tenthpin MC today returns nothing official, while a better-marketed rival shows a full credible presence">
+        <text x="230" y="24" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="11" font-weight="700" fill="#D7263D">A CIO LOOKS UP TENTHPIN MC TODAY</text>
+        <g font-family="Inter,sans-serif" font-size="13">
+          <rect x="40" y="40" width="380" height="40" rx="9" fill="#FCFDFF" stroke="#E2E7F1"/><text x="56" y="58" font-weight="600" fill="#101626">tenthpinmc.com</text><text x="56" y="73" font-size="11" fill="#D7263D">✕ domain only, no live site</text>
+          <rect x="40" y="90" width="380" height="40" rx="9" fill="#FCFDFF" stroke="#E2E7F1"/><text x="56" y="108" font-weight="600" fill="#101626">tenthpin.com (global)</text><text x="56" y="123" font-size="11" fill="#C9941F">~ Life Sciences only, the wrong story</text>
+          <rect x="40" y="140" width="380" height="40" rx="9" fill="#FCFDFF" stroke="#E2E7F1"/><text x="56" y="158" font-weight="600" fill="#101626">LinkedIn</text><text x="56" y="173" font-size="11" fill="#C9941F">~ people, no corporate brand</text>
+        </g>
+        <text x="230" y="208" text-anchor="middle" font-family="Inter,sans-serif" font-size="13" font-weight="600" fill="#D7263D">Nothing official. Credibility leaks before the first call.</text>
+        <line x1="460" y1="34" x2="460" y2="218" stroke="#E2E7F1" stroke-width="1.4"/>
+        <text x="690" y="24" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="11" font-weight="700" fill="#1A8F5A">A BETTER-MARKETED RIVAL HAS</text>
+        <g font-family="Inter,sans-serif" font-size="13">
+          <rect x="500" y="40" width="380" height="40" rx="9" fill="#FCFDFF" stroke="#BFE6CF"/><text x="516" y="58" font-weight="600" fill="#101626">A premium corporate site</text><text x="516" y="73" font-size="11" fill="#1A8F5A">✓ found first, looks the part</text>
+          <rect x="500" y="90" width="380" height="40" rx="9" fill="#FCFDFF" stroke="#BFE6CF"/><text x="516" y="108" font-weight="600" fill="#101626">Case studies &amp; industries</text><text x="516" y="123" font-size="11" fill="#1A8F5A">✓ proof a buyer can forward</text>
+          <rect x="500" y="140" width="380" height="40" rx="9" fill="#FCFDFF" stroke="#BFE6CF"/><text x="516" y="158" font-weight="600" fill="#101626">Certs, partners, a clear CTA</text><text x="516" y="173" font-size="11" fill="#1A8F5A">✓ one path to a conversation</text>
+        </g>
+        <text x="690" y="208" text-anchor="middle" font-family="Inter,sans-serif" font-size="13" font-weight="600" fill="#1A8F5A">Looks the safer choice, even when Tenthpin delivers more.</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- 02 GOAL -->
+  <div class="chapdiv" id="c2"><span class="cd-no">02</span><div><div class="cd-h">Goal</div><div class="cd-sub">What a winning Tenthpin MC brand and site have to do.</div></div></div>
+  <section style="padding-top:14px">
+    <div class="secmark"><span class="secicon"><svg viewBox="0 0 24 24" class="ic"><polygon points="12,2 15,9 22,9 16.5,13.5 18.5,21 12,16.5 5.5,21 7.5,13.5 2,9 9,9"/></svg></span><span class="sec-no">02 · What we are auditing for</span></div>
+    <h2>Six things a winning Tenthpin MC brand has to do</h2>
+    <p class="sec-intro">The standard the audit measures against. Hit them and the entity reads as a premium, AI-driven SAP partner; miss them and it reads as a generic reseller.</p>
+    <div class="goals2">
+      <div class="goal"><span class="gi">1</span><div><b>Exist online, premium</b><p>A live corporate site on tenthpinmc.com that looks as advanced as the work.</p></div></div>
+      <div class="goal"><span class="gi">2</span><div><b>Own "built for industry"</b><p>Manufacturing, Automotive, Life Sciences, Chemical, broad by design, with a path into each.</p></div></div>
+      <div class="goal"><span class="gi">3</span><div><b>Make AI-in-SAP visible &amp; provable</b><p>The wedge a CIO can see, demonstrated, not just claimed.</p></div></div>
+      <div class="goal"><span class="gi">4</span><div><b>Package the proof</b><p>Gold Partner, ISO, scale and named industries felt in seconds.</p></div></div>
+      <div class="goal"><span class="gi">5</span><div><b>A clear path to a conversation</b><p>One repeated call to action: book a free assessment.</p></div></div>
+      <div class="goal"><span class="gi">6</span><div><b>Keep the logo, elevate the rest</b><p>A premium, technical brand system built around the existing mark.</p></div></div>
+    </div>
+    <div class="pin"><b>A winning Tenthpin MC at launch looks like:</b> a premium, AI-driven corporate site that proves a Gold-Partner firm is exactly that, makes the AI-in-SAP story the headline, packages the credentials, and turns a CIO's search into a booked assessment.</div>
+  </section>
+
+  <!-- 03 BRAND SCAN -->
+  <div class="chapdiv" id="c3"><span class="cd-no">03</span><div><div class="cd-h">The Brand Scan</div><div class="cd-sub">Nine lenses, plus architecture, visual, behavioural, peer and touchpoint.</div></div></div>
+  <section style="padding-top:14px">
+    <div class="secmark"><span class="secicon"><svg viewBox="0 0 24 24" class="ic"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg></span><span class="sec-no">03.1 · Brand architecture</span></div>
+    <h2>One entity, endorsed by the global brand</h2>
+    <p class="sec-intro">Tenthpin MC is a single corporate brand, but it sits under global Tenthpin. The architecture only works if the MC site clearly says "part of global Tenthpin" (borrowing the 1,500-consultant credibility) while owning the broader industry-and-SAP positioning the global site has vacated.</p>
+    <div class="grid g2">
+      <div class="card dark"><span class="tag">Endorsement to keep</span><h3>Backed by global Tenthpin</h3><p>The site should signal the global weight, 1,500+ consultants, 12 countries, so a buyer trusts the local team can deliver at scale.</p></div>
+      <div class="card dark"><span class="tag">Position to own</span><h3>The industry &amp; SAP entity</h3><p>Where global reads Life-Sciences-only, MC owns Manufacturing, Automotive, Chemical, Life Sciences, and AI-in-SAP, for APAC.</p></div>
+    </div>
+    <div class="pin warn"><b>Architecture verdict:</b> keep a clear "part of Tenthpin" endorsement for credibility, but give the MC site its own broader, AI-driven industrial positioning. Do not just mirror the global Life-Sciences site, that would erase the entity's reason to exist.</div>
+    <div class="diagram">
+      <div class="cap">Diagram · the brand architecture, global endorses MC</div>
+      <svg viewBox="0 0 920 274" role="img" aria-label="Global Tenthpin endorses Tenthpin MC, which owns the broader industry and SAP positioning the global site vacated">
+        <defs><marker id="tparc" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto"><path d="M0 0l6 3-6 3z" fill="#2536F5"/></marker></defs>
+        <rect x="300" y="20" width="320" height="76" rx="13" fill="#0E1424"/>
+        <text x="460" y="46" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="11" font-weight="700" fill="#9FB4FF" letter-spacing="1.5">GLOBAL TENTHPIN · BASEL</text>
+        <text x="460" y="68" text-anchor="middle" font-family="Inter,sans-serif" font-size="13" fill="#D6DEF2">1,500+ consultants · 12 countries</text>
+        <text x="460" y="87" text-anchor="middle" font-family="Inter,sans-serif" font-size="11.5" fill="#E0A93B">tenthpin.com now reads Life Sciences only</text>
+        <line x1="460" y1="96" x2="460" y2="146" stroke="#2536F5" stroke-width="2.4" marker-end="url(#tparc)"/>
+        <text x="472" y="125" font-family="JetBrains Mono,monospace" font-size="10.5" fill="#1421B8">endorses · lends scale &amp; trust</text>
+        <rect x="248" y="150" width="424" height="80" rx="13" fill="#FCFDFF" stroke="#2536F5" stroke-width="2"/>
+        <text x="460" y="176" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="11" font-weight="700" fill="#1421B8" letter-spacing="1.1">TENTHPIN MC (TMC) · KL + SINGAPORE</text>
+        <text x="460" y="198" text-anchor="middle" font-family="Inter,sans-serif" font-size="13" fill="#101626">400+ APAC · SAP Gold Partner · AI-in-ERP</text>
+        <text x="460" y="217" text-anchor="middle" font-family="Inter,sans-serif" font-size="11.5" fill="#1A8F5A">owns the broader industry + SAP lane the global vacated</text>
+        <g font-family="Inter,sans-serif" font-size="11" fill="#4A5468" text-anchor="middle">
+          <rect x="196" y="246" width="118" height="22" rx="11" fill="#EEF1FE"/><text x="255" y="261">Manufacturing</text>
+          <rect x="324" y="246" width="108" height="22" rx="11" fill="#EEF1FE"/><text x="378" y="261">Automotive</text>
+          <rect x="442" y="246" width="96" height="22" rx="11" fill="#EEF1FE"/><text x="490" y="261">Chemical</text>
+          <rect x="548" y="246" width="120" height="22" rx="11" fill="#EEF1FE"/><text x="608" y="261">Life Sciences</text>
+        </g>
+      </svg>
+    </div>
+
+    <div class="secmark" style="margin-top:46px"><span class="secicon"><svg viewBox="0 0 24 24" class="ic"><rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="13" y="3" width="8" height="8" rx="1.5"/><rect x="3" y="13" width="8" height="8" rx="1.5"/><rect x="13" y="13" width="8" height="8" rx="1.5"/></svg></span><span class="sec-no">03.2 · The nine lenses</span></div>
+    <h3 class="sub">Nine lenses, scored as the entity stands today</h3>
+    <table>
+      <thead><tr><th>Lens</th><th>Score</th><th>Finding</th><th>Read</th></tr></thead>
+      <tbody>
+        <tr><td class="dim">Positioning</td><td class="sc">4/10</td><td>Strong latent position ("SAP partner for industry, AI-driven") but unstated anywhere.</td><td><span class="vtag lo">latent</span></td></tr>
+        <tr><td class="dim">Naming &amp; architecture</td><td class="sc">6/10</td><td>"Tenthpin" is strong; the MC vs global relationship needs a clear endorsement.</td><td><span class="vtag hi">asset</span></td></tr>
+        <tr><td class="dim">Visual identity</td><td class="sc">3/10</td><td>Logo exists and is sound, but no system: no type, colour, motion or components.</td><td><span class="vtag bad">missing</span></td></tr>
+        <tr><td class="dim">Verbal / tone</td><td class="sc">3/10</td><td>A tagline exists; no narrative makes the AI-in-SAP edge legible.</td><td><span class="vtag bad">missing</span></td></tr>
+        <tr><td class="dim">Trust &amp; proof</td><td class="sc">5/10</td><td>Gold Partner, ISO, scale are strong, but packaged for no one.</td><td><span class="vtag lo">unused</span></td></tr>
+        <tr><td class="dim">Demand &amp; audience</td><td class="sc">5/10</td><td>Real demand (S/4HANA migrations, e-invoice mandate, AI wave); no capture.</td><td><span class="vtag lo">uncaptured</span></td></tr>
+        <tr><td class="dim">Funnel &amp; conversion</td><td class="sc">2/10</td><td>No site, no CTA, no path from a CIO's search to a conversation.</td><td><span class="vtag bad">absent</span></td></tr>
+        <tr><td class="dim">Behavioural / presence</td><td class="sc">3/10</td><td>Thin public presence for the MC entity; the firm shows up mainly via people, not brand.</td><td><span class="vtag bad">thin</span></td></tr>
+        <tr><td class="dim">Experience &amp; touchpoints</td><td class="sc">3/10</td><td>The key touchpoint, the corporate site, does not exist; LinkedIn and proposals carry everything.</td><td><span class="vtag bad">gap</span></td></tr>
+      </tbody>
+    </table>
+    <div class="pin"><b>Read:</b> the scores split cleanly, the <b>assets</b> are the name, the credentials and the AI capability; the <b>gaps</b> are entirely brand-and-web execution: no site, no system, no funnel. That is good news, the fix is build, not repair.</div>
+
+    <div class="secmark" style="margin-top:46px"><span class="secicon"><svg viewBox="0 0 24 24" class="ic"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></span><span class="sec-no">03.3 · Visual audit</span></div>
+    <h3 class="sub">Nothing exists yet, so the direction is everything</h3>
+    <p class="sec-intro">There is no website, palette or type system to critique, only the logo, which is sound and should be kept. That is an advantage: the single most important decision is the direction, and the direction has one job, look as advanced as the work.</p>
+    <div class="grid g2">
+      <div class="card"><span class="tag">The trap to avoid</span><h3>The generic SI look</h3><p>Stock photos of handshakes and server rooms, blue corporate gradients, jargon walls. It reads "reseller" and erases the premium AI story.</p></div>
+      <div class="card"><span class="tag">The direction</span><h3>AI-driven, clean, with 3D depth</h3><p>A calm, premium base punctuated by dark, dimensional showpieces where the AI and SAP story lives, layered ERP/AI stacks, node networks, real motion. Engineered, not decorated.</p></div>
+      <div class="card"><span class="tag">Type &amp; colour</span><h3>Technical, confident</h3><p>A modern geometric display plus a clean body face; a confident blue anchor with restrained tech accents. The kept logo stays the constant.</p></div>
+      <div class="card"><span class="tag">The proof layer</span><h3>Badges as design</h3><p>SAP Gold, ISO, partner marks designed into a trust strip, not bolted on as footer clutter.</p></div>
+    </div>
+    <div class="pin warn"><b>Visual verdict:</b> the blank page is the opportunity. Approve an AI-driven, premium direction (see the Web &amp; Brand Direction tab), hold the line against the generic SI look, and design the proof in, not on.</div>
+
+    <div class="secmark" style="margin-top:46px"><span class="secicon"><svg viewBox="0 0 24 24" class="ic"><circle cx="9" cy="7" r="3"/><path d="M2 21v-1a6 6 0 0 1 12 0v1M16 3.5a4 4 0 0 1 0 7M21 21v-1a5 5 0 0 0-4-4.9"/></svg></span><span class="sec-no">03.4 · Peer audit</span></div>
+    <h3 class="sub">How the partners a CIO compares you to present</h3>
+    <table>
+      <thead><tr><th>Peer type</th><th>What they do well</th><th>What Tenthpin MC can take</th></tr></thead>
+      <tbody>
+        <tr><td class="dim">Global SIs (Accenture, Deloitte, Capgemini)</td><td>Heavy proof, industry pages, thought leadership, polished.</td><td>Industry pages + a proof strip, at a fraction of the bloat.</td></tr>
+        <tr><td class="dim">Global Tenthpin (tenthpin.com)</td><td>Premium, modern, product-led, clear positioning.</td><td>The premium bar and the "co-innovator" tone, re-aimed at industry/AI.</td></tr>
+        <tr><td class="dim">Local SAP Gold partners (MY/SG)</td><td>Often present as resellers, generic and dated.</td><td>The whole open lane, out-premium them easily.</td></tr>
+        <tr><td class="dim">Modern AI/tech firms</td><td>3D, motion, a real "wow" hero, AI made visible.</td><td>The AI-in-SAP showpiece that proves the wedge.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="secmark" style="margin-top:46px"><span class="secicon"><svg viewBox="0 0 24 24" class="ic"><path d="M9 18l6-6-6-6"/></svg></span><span class="sec-no">03.5 · Touchpoint audit</span></div>
+    <h3 class="sub">Every place an SAP buyer meets the brand, scored</h3>
+    <table>
+      <thead><tr><th>Touchpoint</th><th>Score</th><th>What is won or lost here</th></tr></thead>
+      <tbody>
+        <tr><td class="dim">Search "SAP partner Malaysia / APAC"</td><td class="sc">2/10</td><td>No site to find or rank; the entity is effectively absent from discovery.</td></tr>
+        <tr><td class="dim">The corporate website</td><td class="sc">0/10</td><td>Does not exist. The single highest-leverage fix.</td></tr>
+        <tr><td class="dim">LinkedIn / people</td><td class="sc">5/10</td><td>The firm shows up through individuals; credible but unscalable and off-brand.</td></tr>
+        <tr><td class="dim">The proposal / pitch</td><td class="sc">6/10</td><td>Strong in the room, but a prospect cannot self-serve credibility beforehand.</td></tr>
+        <tr><td class="dim">The assessment / first call</td><td class="sc">6/10</td><td>Where Tenthpin wins, once it gets there. The site's job is to get more buyers here.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="secmark" style="margin-top:46px"><span class="secicon"><svg viewBox="0 0 24 24" class="ic"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M9 8l1.5 1.5L13 7M9 14l1.5 1.5L13 13"/></svg></span><span class="sec-no">03.6 · Intake &amp; identity direction</span></div>
+    <div class="grid g2">
+      <div class="card"><span class="tag">Intake · have vs need</span><h3>What to gather</h3><p><b>Have:</b> logo, credentials, the global facts. <b>Need:</b> vector logo files, services/industries content, named proof points, domain/hosting access, the AI use-cases to show.</p></div>
+      <div class="card"><span class="tag">Identity direction</span><h3>Keep the logo, build the system</h3><p>The mark stays. Build the type, colour, 3D/motion language and components around it, in the AI-driven premium direction. Detailed in the Web &amp; Brand Direction tab.</p></div>
+    </div>
+  </section>
+
+  <!-- 04 THE CASE -->
+  <div class="chapdiv" id="c4"><span class="cd-no">04</span><div><div class="cd-h">The Case</div><div class="cd-sub">The argument the audit builds to, and why it matters commercially.</div></div></div>
+  <section style="padding-top:14px">
+    <div class="secmark"><span class="secicon"><svg viewBox="0 0 24 24" class="ic"><path d="M12 3v18M5 10l7-7 7 7"/></svg></span><span class="sec-no">04 · The argument</span></div>
+    <h2>Strong delivery, invisible brand, in a trust-led buy</h2>
+    <p class="sec-intro">An S/4HANA transformation is a multi-year, multi-million-ringgit commitment. The buyer, a CIO or transformation lead, de-risks it by choosing a partner that <em>looks</em> as credible as the work. Tenthpin MC has the credibility but shows none of it: no site to research, no AI proof to forward to a colleague, no industry page to send. In that gap, a better-marketed but weaker partner wins on perception alone. The corporate site is not vanity, it is the cheapest way to stop losing deals you should win.</p>
+    <div class="diagram"><div class="cap">Diagram · perception gap — where deals leak</div>
+      <svg viewBox="0 0 820 180" role="img" aria-label="Perception gap"><line x1="120" y1="150" x2="780" y2="150" stroke="#D6DCEA"/>
+        <rect x="180" y="60" width="120" height="90" rx="6" fill="rgba(37,54,245,.28)" stroke="#2536F5"/><text x="240" y="52" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="11" fill="#1421B8">DELIVERY</text>
+        <rect x="520" y="118" width="120" height="32" rx="6" fill="rgba(215,38,61,.18)" stroke="#D7263D"/><text x="580" y="110" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="11" fill="#a11225">PERCEPTION</text>
+        <text x="240" y="170" text-anchor="middle" font-family="Inter" font-size="12" fill="#4A5468">world-class</text><text x="580" y="170" text-anchor="middle" font-family="Inter" font-size="12" fill="#4A5468">near-zero online</text>
+        <path d="M300 105 H 520" stroke="#D7263D" stroke-dasharray="3 4"/><text x="410" y="97" text-anchor="middle" font-family="Inter" font-size="12" fill="#a11225">the gap where deals leak</text></svg></div>
+    <span class="pin"><b>The case in one line:</b> close the perception gap and Tenthpin MC wins more of the deals its delivery already deserves.</span>
+  </section>
+
+  <!-- 05 MODEL -->
+  <div class="chapdiv" id="c5"><span class="cd-no">05</span><div><div class="cd-h">The Model</div><div class="cd-sub">What the business runs on, and where the brand helps it scale.</div></div></div>
+  <section style="padding-top:14px">
+    <div class="secmark"><span class="secicon"><svg viewBox="0 0 24 24" class="ic"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg></span><span class="sec-no">05 · The operating model</span></div>
+    <h2>SAP-led consulting, with AI as the multiplier</h2>
+    <p class="sec-intro">The model runs on SAP transformation work, RISE and GROW with S/4HANA, ECC to S/4 migrations, SuccessFactors, CRM, plus industry solutions (Clinical Trial Supply, government e-invoice). AI-in-ERP (IoT, RPA, self-driving supply chains) is the multiplier that lifts margin and differentiates. The brand's job is to make the AI multiplier legible and to feed the top of the funnel the partner-referral and event model cannot fill alone.</p>
+    <div class="grid g3">
+      <div class="card"><span class="tag">Core revenue</span><h3>S/4HANA transformation</h3><p>RISE / GROW, ECC→S/4, SuccessFactors, CRM. The bread-and-butter.</p></div>
+      <div class="card"><span class="tag">The multiplier</span><h3>AI in the ERP</h3><p>IoT, RPA, self-driving supply chains, e-invoice. Higher margin, the differentiator.</p></div>
+      <div class="card"><span class="tag">The scale engine</span><h3>SAP ecosystem + content</h3><p>Gold-Partner co-sell + thought leadership the site finally makes possible.</p></div>
+    </div>
+  </section>
+
+  <!-- 06 MARKETS -->
+  <div class="chapdiv" id="c6"><span class="cd-no">06</span><div><div class="cd-h">Markets</div><div class="cd-sub">The SAP services demand in Malaysia/APAC, the audience, and where to play.</div></div></div>
+  <section style="padding-top:14px">
+    <div class="secmark"><span class="secicon"><svg viewBox="0 0 24 24" class="ic"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg></span><span class="sec-no">06 · The market read</span></div>
+    <div class="grid g2" style="margin-top:20px">
+      <div class="card"><span class="tag">06.1 · Why now</span><h3>Three tailwinds at once</h3><p>SAP's 2027 ECC deadline is forcing S/4HANA migrations; Malaysia's e-invoicing mandate is driving SAP demand; and the AI-in-ERP wave is reshaping what "transformation" means. <i>(Confirm the exact e-invoice timeline and SAP deadline before quoting them publicly.)</i></p></div>
+      <div class="card"><span class="tag">06.2 · The audience</span><h3>The SAP decision-maker</h3><p>CIOs, IT and transformation leads at manufacturers, automotive groups, life-sciences and chemical firms. They buy on credibility, references and de-risked delivery.</p></div>
+    </div>
+    <h3 class="sub">06.3 · The competitive read — credibility vs the open lane</h3>
+    <div class="diagram"><div class="cap">Diagram · where the partners sit</div>
+      <svg viewBox="0 0 820 300" role="img" aria-label="Competitive quadrant">
+        <rect x="80" y="24" width="320" height="120" fill="rgba(37,54,245,.07)"/><text x="92" y="44" font-family="JetBrains Mono,monospace" font-size="10" fill="#1421B8">[ THE OPEN LANE — premium, industrial, AI-driven ]</text>
+        <line x1="80" y1="24" x2="80" y2="264" stroke="#101626" stroke-width="1.3"/><line x1="80" y1="264" x2="760" y2="264" stroke="#101626" stroke-width="1.3"/>
+        <line x1="420" y1="24" x2="420" y2="264" stroke="#D6DCEA" stroke-dasharray="4 4"/><line x1="80" y1="144" x2="760" y2="144" stroke="#D6DCEA" stroke-dasharray="4 4"/>
+        <text x="420" y="288" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="10" fill="#8A93A6">[ ACCESSIBLE / LOCAL → ]</text>
+        <text x="58" y="144" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="10" fill="#8A93A6" transform="rotate(-90 58 144)">[ PREMIUM / CREDIBILITY → ]</text>
+        <g><circle cx="640" cy="70" r="9" fill="#2536F5"/><text x="556" y="92" font-family="Inter" font-size="12" fill="#101626">Tenthpin MC — to own here</text></g>
+        <g fill="#8A93A6"><circle cx="220" cy="70" r="8"/><circle cx="300" cy="110" r="8"/></g><text x="170" y="58" font-family="Inter" font-size="11" fill="#4A5468">Global SIs (premium, not local/industrial)</text>
+        <g fill="#C9941F"><circle cx="500" cy="210" r="8"/><circle cx="600" cy="220" r="8"/></g><text x="470" y="240" font-family="Inter" font-size="11" fill="#4A5468">Local SAP resellers (accessible, not premium)</text></svg></div>
+    <div class="grid g3" style="margin-top:18px">
+      <div class="card"><span class="tag">06.4 · The wedges</span><h3>e-invoice + AI-in-SAP</h3><p>Two timely doors: the e-invoice mandate (urgent, broad) and AI-in-SAP (differentiated). Lead with these.</p></div>
+      <div class="card"><span class="tag">06.5 · Lead industries</span><h3>Manufacturing &amp; Automotive</h3><p>Where Tenthpin is strong and the global site is silent. Own these first, then Life Sciences &amp; Chemical.</p></div>
+      <div class="card"><span class="tag">06.6 · Barriers</span><h3>Trust &amp; inertia</h3><p>Big SAP deals favour incumbents. The site lowers the trust barrier so the assessment can do the rest.</p></div>
+    </div>
+  </section>
+
+  <!-- 07 GROWTH -->
+  <div class="chapdiv" id="c7"><span class="cd-no">07</span><div><div class="cd-h">Growth</div><div class="cd-sub">How Tenthpin MC wins clients, and what the missing site throttles.</div></div></div>
+  <section style="padding-top:14px">
+    <div class="secmark"><span class="secicon"><svg viewBox="0 0 24 24" class="ic"><path d="M3 17l6-6 4 4 8-8"/><path d="M21 7h-5M21 7v5"/></svg></span><span class="sec-no">07 · The growth engine</span></div>
+    <h2>The funnel is right; the missing site throttles the top of it</h2>
+    <div class="diagram"><div class="cap">Diagram · the growth funnel, and the throttles</div>
+      <svg viewBox="0 0 820 230" role="img" aria-label="Growth funnel"><g font-family="Inter" text-anchor="middle" font-size="13" font-weight="600">
+        <rect x="60" y="20" width="700" height="34" rx="6" fill="rgba(37,54,245,.5)"/><text x="410" y="43" fill="#fff">Awareness — search, SAP ecosystem, events</text>
+        <rect x="150" y="64" width="520" height="34" rx="6" fill="rgba(37,54,245,.4)"/><text x="410" y="87" fill="#fff">Consideration — the site, AI proof, industry pages</text>
+        <rect x="240" y="108" width="340" height="34" rx="6" fill="rgba(14,116,144,.6)"/><text x="410" y="131" fill="#fff">Assessment booked</text>
+        <rect x="310" y="152" width="200" height="34" rx="6" fill="rgba(26,143,90,.75)"/><text x="410" y="175" fill="#fff">Won &amp; retained</text></g>
+        <text x="410" y="212" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="10" fill="#D7263D">THROTTLE: NO SITE = NOTHING TO CONSIDER · AI STORY UNSHOWN = NO DIFFERENTIATION</text></svg></div>
+    <div class="grid g2" style="margin-top:18px">
+      <div class="card"><span class="tag">Go-to-market</span><h3>Site + SAP co-sell + content</h3><p>The site anchors inbound; Gold-Partner co-sell and thought leadership (which need a site to live on) feed it.</p></div>
+      <div class="card"><span class="tag">The headline act</span><h3>AI-in-SAP, demonstrated</h3><p>A dark, dimensional feature page that shows the AI layer on top of S/4HANA with real use cases, the thing a CIO forwards.</p></div>
+    </div>
+  </section>
+
+  <!-- 08 ENGAGEMENT -->
+  <div class="chapdiv" id="c8"><span class="cd-no">08</span><div><div class="cd-h">Engagement</div><div class="cd-sub">The working relationship and the one assumption to watch.</div></div></div>
+  <section style="padding-top:14px">
+    <div class="secmark"><span class="secicon"><svg viewBox="0 0 24 24" class="ic"><circle cx="9" cy="7" r="3"/><path d="M2 21v-1a6 6 0 0 1 12 0v1M16 3.5a4 4 0 0 1 0 7"/></svg></span><span class="sec-no">08 · Engagement &amp; ownership</span></div>
+    <h2>Sound engagement; content and access are the watch-item</h2>
+    <div class="grid g3" style="margin-top:20px">
+      <div class="card"><span class="tag">Single approver</span><h3>Dr. Lin Li</h3><p>Head of APAC, the decision-maker; Foo Sang Lee (Director MY &amp; SG) and Arifee Tee coordinate.</p></div>
+      <div class="card"><span class="tag">The assumption to watch</span><h3>Content &amp; proof in time</h3><p>A consulting firm is busy; the risk is slow content/approvals. We mitigate with a tight intake and drafting on their behalf.</p></div>
+      <div class="card"><span class="tag">Access</span><h3>Domain &amp; hosting</h3><p>Registrar access to point DNS; hosting we set up. Lock early so launch is not blocked.</p></div>
+    </div>
+  </section>
+
+  <!-- 09 ACT -->
+  <div class="chapdiv" id="c9"><span class="cd-no">09</span><div><div class="cd-h">Act</div><div class="cd-sub">What to resolve, in order, by effort and impact.</div></div></div>
+  <section style="padding-top:14px">
+    <div class="secmark"><span class="secicon"><svg viewBox="0 0 24 24" class="ic"><path d="M4 6h16M4 12h10M4 18h7"/></svg></span><span class="sec-no">09 · The action plan</span></div>
+    <h2>What to resolve, and when</h2>
+    <table>
+      <thead><tr><th>Priority</th><th>What to resolve</th><th>Why now</th></tr></thead>
+      <tbody>
+        <tr><td class="sc">First</td><td>Approve the AI-driven web &amp; brand direction</td><td>Everything downstream is built on it; it is the Tuesday decision.</td></tr>
+        <tr><td class="sc">First</td><td>Lock AI-in-SAP as the headline narrative + gather proof</td><td>The wedge and the credibility are the site's reason to win.</td></tr>
+        <tr><td class="sc">Next</td><td>Build &amp; launch the corporate site on tenthpinmc.com</td><td>The single highest-leverage fix; it makes the firm exist online.</td></tr>
+        <tr><td class="sc">Next</td><td>Per-industry + per-service pages (Option B)</td><td>Gives each buyer a path; deepens SEO and credibility.</td></tr>
+        <tr><td class="sc">Then</td><td>Ongoing content + care (Phase 2)</td><td>Keeps the funnel fed and the site current.</td></tr>
+      </tbody>
+    </table>
+    <div class="diagram"><div class="cap">Diagram · effort vs impact</div>
+      <svg viewBox="0 0 820 300" role="img" aria-label="Effort vs impact">
+        <rect x="80" y="24" width="320" height="120" fill="rgba(37,54,245,.08)"/><text x="92" y="44" font-family="JetBrains Mono,monospace" font-size="10" fill="#1421B8">DO FIRST</text>
+        <line x1="80" y1="24" x2="80" y2="264" stroke="#101626" stroke-width="1.3"/><line x1="80" y1="264" x2="760" y2="264" stroke="#101626" stroke-width="1.3"/>
+        <line x1="420" y1="24" x2="420" y2="264" stroke="#D6DCEA" stroke-dasharray="4 4"/><line x1="80" y1="144" x2="760" y2="144" stroke="#D6DCEA" stroke-dasharray="4 4"/>
+        <text x="420" y="288" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="10" fill="#8A93A6">EFFORT →</text><text x="58" y="144" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="10" fill="#8A93A6" transform="rotate(-90 58 144)">IMPACT →</text>
+        <g fill="#2536F5"><circle cx="200" cy="70" r="8"/><circle cx="330" cy="100" r="8"/></g><text x="216" y="66" font-family="Inter" font-size="11.5" fill="#101626">Approve direction</text><text x="346" y="104" font-family="Inter" font-size="11.5" fill="#101626">Homepage + AI page</text>
+        <g fill="#0E7490"><circle cx="560" cy="120" r="8"/></g><text x="500" y="112" font-family="Inter" font-size="11.5" fill="#101626">Per-industry pages</text>
+        <g fill="#8A93A6"><circle cx="560" cy="220" r="8"/></g><text x="500" y="244" font-family="Inter" font-size="11.5" fill="#4A5468">Ongoing content</text></svg></div>
+  </section>
+
+  <!-- 10 VERDICT -->
+  <div class="chapdiv" id="c10"><span class="cd-no">10</span><div><div class="cd-h">Verdict &amp; method</div><div class="cd-sub">The score, the reasoning, and the method.</div></div></div>
+  <section style="padding-top:14px">
+    <div class="secmark"><span class="secicon"><svg viewBox="0 0 24 24" class="ic"><path d="M12 2l2.6 6.6L21 9l-5 4.4L17.6 21 12 17l-5.6 4L8 13.4 3 9l6.4-.4z"/></svg></span><span class="sec-no">10 · Verdict &amp; method</span></div>
+    <h2>The score, and how we got it</h2>
+    <div class="diagram" style="display:flex;gap:26px;align-items:center;flex-wrap:wrap"><div style="flex:0 0 auto">
+      <svg viewBox="0 0 160 160" width="148" height="148" aria-label="Score gauge">
+        <circle cx="80" cy="80" r="64" fill="none" stroke="#E2E7F1" stroke-width="12"/>
+        <circle cx="80" cy="80" r="64" fill="none" stroke="#2536F5" stroke-width="12" stroke-linecap="round" stroke-dasharray="402" stroke-dashoffset="289" transform="rotate(-90 80 80)"/>
+        <text x="80" y="78" text-anchor="middle" font-family="Fraunces,serif" font-size="34" font-weight="600" fill="#101626">28</text>
+        <text x="80" y="100" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="10" fill="#8A93A6">/ 100</text></svg></div>
+      <div style="flex:1;min-width:240px;font-size:14.5px;color:#4A5468"><b style="color:#101626">28/100 digital brand health, as is.</b> The score is low not because the firm is weak, it is strong, but because almost none of that strength is visible online: no site, no system, no funnel. The ceiling is high. Build the corporate site and brand system on the AI-driven direction and the realistic post-launch read is <b style="color:#1421B8">75+</b>. <br><br><b style="color:#101626">Method:</b> the BrandMethod nine-lens audit, the company PDF and brief, the global tenthpin.com read, and the SAP-partner market context. Market timing claims (e-invoice, SAP deadline) are flagged to confirm before public use.</div>
+    </div>
+  </section>
+</div>
+<footer><div class="wrap">Brand Method · Brand &amp; Web Audit for Tenthpin MC · Confidential</div></footer>
+<script>if(window.top!==window.self)document.body.classList.add("embedded");</script>
+<button id="bmBack" type="button" aria-label="Back">← Back</button>
+<style>#bmBack{display:none;position:fixed;top:14px;right:16px;z-index:99999;align-items:center;gap:6px;font:600 12.5px "Inter",system-ui,sans-serif;color:#1E73E8;background:rgba(255,255,255,.97);border:1px solid #D4D5CC;border-radius:30px;padding:8px 14px;cursor:pointer;box-shadow:0 6px 18px -8px rgba(20,33,184,.35)}
+#bmBack:hover{border-color:#1E73E8}
+body.bm-standalone #bmBack{display:none}
+@media print{#bmBack{display:none!important}}</style>
+<script>(function(){if(window.top===window.self){document.body.classList.add('bm-standalone');var b=document.getElementById('bmBack');if(b)b.addEventListener('click',function(){var r=document.referrer;if(r&&r.indexOf(location.origin)===0&&r!==location.href&&r.indexOf('/campaign-')<0&&history.length>1){history.back();}else{location.href='../index.html';}})}})();</script>
+<script>
+/* IAQ-style proposal topbar: hide on scroll-down, reveal on scroll-up / near top */
+(function(){ var lastY=window.scrollY||0, b=document.body;
+  window.addEventListener('scroll',function(){ var y=window.scrollY||0;
+    if(y<90) b.classList.remove('tbhide');
+    else if(y>lastY+4) b.classList.add('tbhide');
+    else if(y<lastY-4) b.classList.remove('tbhide');
+    lastY=y;
+  },{passive:true});
+})();
+</script>
+</body>
+</html>

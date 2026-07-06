@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//Users/zieel/Bazil Claude 3/Websites/**)",
+      "Read(//Users/zieel/Downloads/**)"
+    ]
+  }
+}

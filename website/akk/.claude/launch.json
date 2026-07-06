@@ -1,0 +1,13 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "akk-site",
+      "runtimeExecutable": "C:\\PROGRA~1\\nodejs\\node.exe",
+      "runtimeArgs": [
+        "C:\\Users\\Azwan Mohed Jais\\OneDrive\\Desktop\\Azwan Claude\\Akk Website\\.claude\\static-server.js"
+      ],
+      "port": 3100
+    }
+  ]
+}
