@@ -2603,12 +2603,12 @@ body.loading{overflow:hidden}
 </div>
 <style id="bm-footrib-css">
 .bm-footrib{display:flex;justify-content:center;padding:1.6rem 0 .4rem;pointer-events:none}
-.bm-footrib canvas{width:min(460px,88vw);height:auto;display:block}
+.bm-footrib canvas{width:min(460px,96vw);height:auto;display:block}
 .bm-footrib-fb{font-family:var(--mono,monospace);font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:#fff;background:linear-gradient(90deg,#1421B8,#2536F5);padding:.5rem 1.4rem;clip-path:polygon(10px 0,calc(100% - 10px) 0,100% 50%,calc(100% - 10px) 100%,10px 100%,0 50%)}
 .bm-footrib-fb[hidden]{display:none}
 </style>
 <script>
-(function(){
+window.__bmFootRib=function(){
   var cv=document.getElementById('bmRibCv'),fb=document.querySelector('.bm-footrib-fb');
   var ctx;try{ctx=cv&&cv.getContext('2d');}catch(e){}
   if(!ctx){if(cv)cv.style.display='none';if(fb)fb.hidden=false;return;}
@@ -2707,7 +2707,8 @@ body.loading{overflow:hidden}
     document.addEventListener('visibilitychange',function(){if(document.hidden){running=false;}else{var r=cv.getBoundingClientRect();if(r.top<innerHeight&&r.bottom>0){running=true;if(!looping)requestAnimationFrame(frame);}}});
   }
   boot();
-})();
+};
+window.__bmFootRib();
 </script>
 </footer>
 
@@ -2828,6 +2829,8 @@ const PROJECTS = [
    RENDER
    ============================================================ */
 document.body.innerHTML = document.body.innerHTML.replace(/\{\{IC_([A-Z]+)\}\}/g,(m,k)=>ICONS[k]||'');
+/* the innerHTML swap above rebuilds a blank footer canvas — redraw the demo ribbon on it */
+if(window.__bmFootRib)window.__bmFootRib();
 
 const certCard=c=> c.img
   ? `<article class="cert cert-doc tilt"><div class="cert-thumb"><img src="${c.img}" loading="lazy" alt="${c.name} — AKK Alliance certificate"/><span class="cert-badge">${ICONS.SHIELD} ${c.tag}</span></div><div class="cert-body"><span class="cert-tag">${c.tag}</span><h4>${c.name}</h4><p>${c.desc}</p><div class="doc">${c.doc}</div></div></article>`
