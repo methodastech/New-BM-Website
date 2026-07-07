@@ -2,11 +2,10 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "iaq-website",
-      "runtimeExecutable": "sh",
-      "runtimeArgs": ["-c", "python3 -m http.server ${PORT:-4173}"],
-      "port": 4173,
-      "autoPort": true
+      "name": "iaq-static",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8971", "--directory", "/Users/zieel/Bazil Claude 3/Websites/iaq website"],
+      "port": 8971
     }
   ]
 }

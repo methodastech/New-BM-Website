@@ -630,5 +630,32 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
 window.addEventListener('scroll',function(){if(nav.classList.contains('menu-open')&&Math.abs(window.scrollY-openedY)>90)close();},{passive:true});
 })();
 </script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
+<script>
+/* Buttery lerped scrolling (synced from index.html): Lenis animates the REAL scrollTop every frame,
+   so motion glides between wheel ticks instead of stepping with them. Wheel-only: touch keeps native
+   scrolling. Disabled under reduced motion. */
+(function(){
+  if(!window.Lenis) return;
+  if(window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+  var lenis=new Lenis({lerp:0.11,smoothWheel:true,wheelMultiplier:1.8});
+  document.documentElement.style.scrollBehavior='auto';
+  if(window.gsap){
+    if(window.ScrollTrigger) lenis.on('scroll',ScrollTrigger.update);
+    gsap.ticker.add(function(t){lenis.raf(t*1000);});
+    gsap.ticker.lagSmoothing(0);
+  } else {
+    requestAnimationFrame(function raf(t){ lenis.raf(t); requestAnimationFrame(raf); });
+  }
+  document.addEventListener('click',function(e){
+    var a=e.target.closest&&e.target.closest('a[href^="#"]'); if(!a) return;
+    var id=a.getAttribute('href'); if(!id||id==='#') return;
+    var el=document.querySelector(id); if(!el) return;
+    e.preventDefault(); lenis.scrollTo(el);
+    try{ history.pushState(null,'',id); }catch(_){}
+  });
+  window.__lenis=lenis;
+})();
+</script>
 </body>
 </html>
