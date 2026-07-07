@@ -94,3 +94,17 @@ body{overflow-x:clip}
   .flow-grid{gap:clamp(1.6rem,6vw,2.4rem)!important}
   .flow-step{gap:.4rem!important}
 }
+
+/* loader: the CUBE is the progress meter now (one voxel per ~3.7%) — hide the separate seam bar,
+   but keep its box so the wordmark spacing under the cube is unchanged. */
+#pre .pre-seam{opacity:0!important}
+#pre .pre-seam::before,#pre .pre-seam::after{display:none!important}
+
+/* loader polish (client): bigger cube, crisper (renderer forces >=2x), the RUBEXPAY wordmark sits
+   NEAR the cube (seam bar removed, not just hidden), everything centered. */
+#pre .pl-stage{transform:none}                 /* true vertical center (was nudged up 4%) */
+#pre .pl-cube{width:200px;height:200px}
+#pre .pre-bloom{width:440px;height:440px}
+#pre .pre-seam{display:none!important}          /* remove the progress bar box so the word tucks up close */
+#pre .pre-word{margin-top:22px}
+@media(max-width:600px){#pre .pl-cube{width:160px;height:160px}#pre .pre-bloom{width:320px;height:320px}#pre .pre-word{margin-top:18px}}

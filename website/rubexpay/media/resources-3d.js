@@ -9,7 +9,7 @@ import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js'
   if(!canvas) return;
   const reduce = matchMedia('(prefers-reduced-motion:reduce)').matches;
   const coarse = matchMedia('(pointer:coarse)').matches;
-  if(reduce || coarse || window.innerWidth < 760) return; // poster fallback handles these
+  if(reduce) return; // mobile: keep the 3D as a dark background, but skip bloom on touch (below)
 
   let renderer;
   try { renderer = new THREE.WebGLRenderer({ canvas, antialias:true, powerPreference:'high-performance' }); }
@@ -51,14 +51,14 @@ import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js'
   const group = new THREE.Group(); scene.add(group);
   const panels = [];
   const defs = [
-    { label:'NODE 0xC7', code:'LIVE',     big:'03A', x:-1.1, y: 1.5, z: 1.2, s:1.02 },
-    { label:'NODE 0xB4', code:'SYNC',     big:'02B', x: 2.3, y: 0.5, z:-1.6, s:0.92 },
-    { label:'LEDGER 0x9F', code:'OK',     big:'01C', x:-2.7, y:-1.1, z:-0.4, s:0.84 },
-    { label:'SHIELD 0xA1', code:'ACTIVE', big:'04D', x: 1.2, y:-1.7, z: 2.0, s:0.80 },
-    { label:'CORE 0xD2', code:'NOMINAL',  big:'05E', x: 3.4, y: 2.0, z:-3.2, s:0.68 },
-    { label:'AUDIT 0x77', code:'VERIFIED',big:'06F', x:-3.3, y: 1.9, z:-2.6, s:0.72 }
+    { label:'NODE 0xC7', code:'LIVE',     big:'03A', x:-0.8, y: 1.15, z: 1.1, s:1.16 },
+    { label:'NODE 0xB4', code:'SYNC',     big:'02B', x: 1.7, y: 0.35, z:-1.3, s:1.05 },
+    { label:'LEDGER 0x9F', code:'OK',     big:'01C', x:-2.0, y:-0.9, z:-0.3, s:0.96 },
+    { label:'SHIELD 0xA1', code:'ACTIVE', big:'04D', x: 0.95,y:-1.35,z: 1.7, s:0.92 },
+    { label:'CORE 0xD2', code:'NOMINAL',  big:'05E', x: 2.5, y: 1.5, z:-2.4, s:0.80 },
+    { label:'AUDIT 0x77', code:'VERIFIED',big:'06F', x:-2.5, y: 1.45,z:-2.0, s:0.84 }
   ];
-  const PW = 2.7, PH = 1.69;
+  const PW = 3.0, PH = 1.88;
   defs.forEach((d,i)=>{
     const geo = new THREE.PlaneGeometry(PW*d.s, PH*d.s);
     const mat = new THREE.MeshBasicMaterial({ map:panelTexture(d.label+'  '+d.big, d.code, d.big), transparent:true, opacity:0.94, depthWrite:false, side:THREE.DoubleSide });
@@ -105,6 +105,8 @@ import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js'
   composer.addPass(new RenderPass(scene, camera));
   const bloom = new UnrealBloomPass(new THREE.Vector2(w, h), 1.3, 0.82, 0.08);
   composer.addPass(bloom);
+  const useBloom = !coarse;   // phones: skip the heavy per-frame bloom passes, render the scene directly
+  function present(){ if(useBloom && !window.__rbxScrolling) composer.render(); else renderer.render(scene, camera); }
 
   // ---- interaction ----
   let mx=0, my=0, tmx=0, tmy=0;
@@ -120,7 +122,7 @@ import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js'
   document.documentElement.classList.add('has-3d'); // hides the poster fallback
 
   // paint one frame immediately so the scene shows even before rAF spins up
-  camera.lookAt(0,0,0); updateLinks(); composer.render();
+  camera.lookAt(0,0,0); updateLinks(); present();
 
   const t0 = performance.now();
   function frame(now){
@@ -134,7 +136,7 @@ import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js'
     for(const p of panels){ p.mesh.position.y = p.base.y + Math.sin(t*p.sp + p.phase)*0.2; p.mesh.position.x = p.base.x + Math.cos(t*p.sp*0.7 + p.phase)*0.12; }
     updateLinks();
     particles.rotation.y = t*0.018;
-    composer.render();
+    present();
   }
   requestAnimationFrame(frame);
 })();

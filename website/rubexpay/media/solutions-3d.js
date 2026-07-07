@@ -107,6 +107,11 @@ import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 
   function drawScene(){
     const H = window.innerHeight, W = window.innerWidth;
+    /* clear the WHOLE canvas first: it is position:fixed, so a cube drawn while its slot was
+       on-screen would otherwise ghost/persist over later content (e.g. the footer) once the
+       slot scrolls off and its scissor region is never cleared again. */
+    renderer.setScissorTest(false);
+    renderer.clear();
     renderer.setScissorTest(true);
     slots.forEach((slot,i)=>{
       const r = slot.getBoundingClientRect();

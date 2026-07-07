@@ -56,7 +56,18 @@
     });
   }
   document.addEventListener('click', function(e){
-    var b = e.target.closest && e.target.closest('[data-lang]'); if(!b) return;
+    var b = e.target.closest && e.target.closest('[data-lang]');
+    var sw = e.target.closest && e.target.closest('.lang-switch');
+    /* phone: the header switch collapses to the active lang — first tap opens the dropdown, any other tap closes it */
+    if(window.matchMedia && matchMedia('(max-width:760px)').matches){
+      var open = document.querySelector('.lang-switch.is-open');
+      if(sw && !sw.classList.contains('is-open') && b && b.classList.contains('is-active')){
+        sw.classList.add('is-open');
+        return;
+      }
+      if(open) open.classList.remove('is-open');
+    }
+    if(!b) return;
     e.preventDefault(); apply(b.getAttribute('data-lang') === 'zh' ? 'zh' : 'en');
   });
   window.RBX_applyLang = apply;

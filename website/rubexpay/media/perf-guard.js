@@ -77,3 +77,19 @@
     });
   });
 })();
+
+/* 3) Scroll-light flag ---------------------------------------------------
+   Post-processing bloom is a multi-pass blur that is very expensive per frame.
+   During an active scroll gesture we set window.__rbxScrolling=true so the
+   heavy WebGL heroes can drop bloom for that gesture (scene still renders,
+   just cheaper), which keeps scrolling buttery. Cleared ~160ms after the last
+   scroll event. */
+(function () {
+  var tmr = null;
+  window.__rbxScrolling = false;
+  addEventListener('scroll', function () {
+    window.__rbxScrolling = true;
+    if (tmr) clearTimeout(tmr);
+    tmr = setTimeout(function () { window.__rbxScrolling = false; }, 160);
+  }, { passive: true });
+})();

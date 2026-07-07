@@ -120,10 +120,9 @@ function sprite(){
     core.visible = false; /* the orb is the travelling packet only; it never sits inside a visual */
     const halo = new THREE.Sprite(new THREE.SpriteMaterial({ map:SPR, color:RED, transparent:true, opacity:0.3, blending:THREE.AdditiveBlending, depthWrite:false })); halo.scale.setScalar(1.4); g.add(halo);
     const hit = new THREE.Mesh(new THREE.SphereGeometry(1.4,8,8), new THREE.MeshBasicMaterial({ visible:false })); g.add(hit); // raycast target
-    // pulse ring — emanates when a data packet passes through this node
-    const ring = new THREE.Mesh(new THREE.RingGeometry(0.92,1.05,48), new THREE.MeshBasicMaterial({ color:RED2, transparent:true, opacity:0, side:THREE.DoubleSide, blending:THREE.AdditiveBlending, depthWrite:false }));
-    ring.position.z = 0.12; g.add(ring);
-    g.userData = { spin, mats, core, halo, hit, ring, baseEmis:0.34, i, hot:0, flat, gate, flare:0 };
+    /* pulse ring removed per client — the halo glow alone marks a packet passing through */
+    g.userData = { spin, mats, core, halo, hit, baseEmis:0.34, i, hot:0, flat, gate, flare:0 };
+    g.scale.setScalar(1.62);   // per client: bigger node visuals
     scene.add(g);
     return g;
   }
@@ -131,11 +130,10 @@ function sprite(){
 
   /* --- one continuous flow rail (the "way" that links every stage) + traveling data packets --- */
   const RAIL_A = X[0] - 0.9, RAIL_B = X[X.length-1] + 0.9;
+  /* horizontal connecting rail removed per client — only the travelling data packet marks the path.
+     Geometries are kept (unrendered) so applySpread's setFromPoints references stay valid. */
   const railGeo1 = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(RAIL_A,0,0), new THREE.Vector3(RAIL_B,0,0)]);
-  scene.add(new THREE.Line(railGeo1, new THREE.LineBasicMaterial({ color:REDD, transparent:true, opacity:0.62 })));
-  // faint parallel under-track for a subtle rail/depth read
   const railGeo2 = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(RAIL_A,-0.14,0), new THREE.Vector3(RAIL_B,-0.14,0)]);
-  scene.add(new THREE.Line(railGeo2, new THREE.LineBasicMaterial({ color:0x5a0c14, transparent:true, opacity:0.38 })));
   const packets = [];
   {
     const a = new THREE.Vector3(RAIL_A, 0, 0), b = new THREE.Vector3(RAIL_B, 0, 0), N = 1; // ONE data packet at a time, journeying through every stage
@@ -205,20 +203,14 @@ function sprite(){
   /* --- hover-to-highlight --- */
   const labels = [].slice.call(document.querySelectorAll('.ab-op-lab'));
   /* tie each HTML label to its 3D node: project the node's X to screen so the label sits exactly under its visual */
-  let lastDesktop = null;
+  let labInit = false;
   const lastLeft = [], lastLead = [], relTops = [];
-  let leadDirty = true, chCache = 0;
+  let leadDirty = true, chCache = 0, cvLeft = 0, wrapLeft = 0;
   window.addEventListener('resize', function(){ leadDirty = true; }, { passive:true });
   function alignLabels(){
     if(cvW < 2) return;
-    const desktop = (window.innerWidth > 1024);
-    if(desktop !== lastDesktop){
-      lastDesktop = desktop;
-      if(sec) sec.classList.toggle('lab-abs', desktop);
-      if(!desktop) labels.forEach(function(l){ l.style.left = ''; l.style.removeProperty('--leadH'); });
-      leadDirty = true;
-    }
-    if(!desktop) return;
+    const narrow = (window.innerWidth <= 1024);
+    if(!labInit){ labInit = true; if(sec) sec.classList.add('lab-abs'); }
     camera.updateMatrixWorld();
     const v = new THREE.Vector3();
     /* measure once per layout change: label tops relative to the canvas (scroll-invariant) */
@@ -226,21 +218,36 @@ function sprite(){
       const cr = canvas.getBoundingClientRect();
       if(cr.height > 2){
         chCache = cr.height;
+        /* narrow viewports have no CSS tuck — pull the label row up so it sits right under the node visuals */
+        const wrap = labels[0] && labels[0].parentElement;
+        if(wrap){
+          if(narrow){
+            v.set(0, -2.6, 0).project(camera);   // below the 1.34x node shells AND their glow halo
+            const want = (0.5 - v.y*0.5)*chCache + 14;
+            const cur = wrap.getBoundingClientRect().top - cr.top;
+            const m = parseFloat(getComputedStyle(wrap).marginTop) || 0;
+            if(Math.abs(want - cur) > 1) wrap.style.marginTop = (m + want - cur) + 'px';
+          } else wrap.style.marginTop = '';
+        }
         for(let i=0;i<labels.length;i++) relTops[i] = labels[i].getBoundingClientRect().top - cr.top;
+        /* label left is set in px against the wrap box — the canvas is full-bleed while .wrap is padded,
+           so a % of the wrap would drift off the node visuals */
+        cvLeft = cr.left;
+        wrapLeft = (labels[0] && labels[0].parentElement) ? labels[0].parentElement.getBoundingClientRect().left : 0;
         lastLead.length = 0;
         leadDirty = false;
       }
     }
     for(let i=0;i<labels.length && i<X.length;i++){
       v.set(X[i], 0, 0).project(camera);
-      const left = (v.x*0.5 + 0.5)*100;
-      if(lastLeft[i] === undefined || Math.abs(left - lastLeft[i]) >= 0.05){   // skip sub-pixel style writes
+      const left = cvLeft + (v.x*0.5 + 0.5)*cvW - wrapLeft;
+      if(lastLeft[i] === undefined || Math.abs(left - lastLeft[i]) >= 0.5){   // skip sub-pixel style writes
         lastLeft[i] = left;
-        labels[i].style.left = left.toFixed(2) + '%';
+        labels[i].style.left = left.toFixed(1) + 'px';
       }
-      /* the leader line runs from the label ALL THE WAY UP to the base of its visual */
-      if(chCache > 2){
-        v.set(X[i], -1.45, 0).project(camera);
+      /* the leader line runs from the label ALL THE WAY UP to the base of its visual (stems are desktop-only) */
+      if(!narrow && chCache > 2){
+        v.set(X[i], -1.95, 0).project(camera);   // node bottoms sit lower since the 1.34x scale-up
         const lead = relTops[i] - (0.5 - v.y*0.5)*chCache;
         if(lead > 8 && (lastLead[i] === undefined || Math.abs(lead - lastLead[i]) > 0.5)){
           lastLead[i] = lead;
@@ -311,7 +318,6 @@ function sprite(){
       d.core.scale.setScalar(1 + d.hot*0.4 + d.flare*0.55 + Math.sin(t*2 + ni)*0.08);
       d.halo.material.opacity = 0.1 + d.hot*0.3 + d.flare*0.42 + Math.sin(t*1.2 + ni)*0.03;
       d.halo.scale.setScalar(1.4 + d.hot*0.6 + d.flare*0.8);
-      if(d.ring){ const f = Math.max(d.flare, d.hot*0.7); d.ring.scale.setScalar(1 + f*1.1); d.ring.material.opacity = f*0.3; d.ring.visible = f>0.02; }
     }
     if(embers){
       const a = embers.geometry.attributes.position, sp = embers.userData.spd;
@@ -334,7 +340,7 @@ function sprite(){
     if(!active) return;
     const t = (now - t0)/1000;
     place(t);
-    composer.render();
+    if(window.__rbxScrolling) renderer.render(scene, camera); else composer.render();
   })(performance.now());
   })();
 })();
@@ -375,19 +381,124 @@ function sprite(){
     emissive:RED, emissiveIntensity:0.32, clearcoat:1, clearcoatRoughness:0.2, envMapIntensity:1.3, transparent:true
   });
   const line = (geo) => new THREE.LineSegments(new THREE.EdgesGeometry(geo), new THREE.LineBasicMaterial({ color:RED2 }));
+  /* easing + phase helpers for the choreographed icon animations */
+  const cl=x=>x<0?0:x>1?1:x, ss=x=>{x=cl(x);return x*x*(3-2*x);}, seg=(ph,a,b)=>ss((ph-a)/(b-a));
   /* distinct 3D form per icon name (Three primitives) */
   const BUILD = {
     integrity(g){ const a=new THREE.Mesh(new THREE.TorusGeometry(0.7,0.12,16,44),glass()); g.add(a,line(a.geometry)); const b=new THREE.Mesh(new THREE.TorusGeometry(0.7,0.12,16,44),glass()); b.rotation.x=Math.PI/2; g.add(b); const bl=line(b.geometry); bl.rotation.x=Math.PI/2; g.add(bl); },
     precision(g){ const geo=new THREE.OctahedronGeometry(0.95,0); g.add(new THREE.Mesh(geo,glass()),line(geo)); },
     data(g){ [-0.45,0,0.45].forEach((y,i)=>{ const geo=new THREE.BoxGeometry(1.25-i*0.1,0.26,1.25-i*0.1); const m=new THREE.Mesh(geo,glass()); m.position.y=y; g.add(m); const l=line(geo); l.position.y=y; g.add(l); }); },
     security(g){ const geo=new THREE.BoxGeometry(1.12,1.12,1.12); g.add(new THREE.Mesh(geo,glass()),line(geo)); },
-    accountability(g){ const b=new THREE.BoxGeometry(1.05,1.05,1.05); g.add(new THREE.Mesh(b,glass()),line(b)); // a record/ledger block, verified with a check
-      const curve=new THREE.CatmullRomCurve3([new THREE.Vector3(-0.36,0.04,0.6),new THREE.Vector3(-0.08,-0.3,0.62),new THREE.Vector3(0.46,0.38,0.6)]);
-      const cm=new THREE.Mesh(new THREE.TubeGeometry(curve,14,0.075,8,false), new THREE.MeshStandardMaterial({color:0xffd2d4,emissive:RED2,emissiveIntensity:0.85,metalness:0.3,roughness:0.3})); g.add(cm); },
-    risk(g){ const o=new THREE.OctahedronGeometry(0.6,0); g.add(new THREE.Mesh(o,glass()),line(o)); // threat locked inside scanning rings — caught early
-      const r1=new THREE.Mesh(new THREE.TorusGeometry(0.95,0.045,12,56),glass()); r1.rotation.x=Math.PI/2.3; g.add(r1);
-      const r2=new THREE.Mesh(new THREE.TorusGeometry(1.14,0.03,12,56),glass()); r2.rotation.x=Math.PI/2.7; r2.rotation.z=0.5; g.add(r2); },
-    trust(g){ [-0.32,0.32].forEach(function(x){ const t=new THREE.TorusGeometry(0.6,0.13,16,46); const m=new THREE.Mesh(t,glass()); m.position.x=x; m.rotation.y=0.55; g.add(m); const l=line(t); l.position.x=x; l.rotation.y=0.55; g.add(l); }); }, // two interlinked rings — partnership
+    accountability(g){ /* balance: weights land, the beam settles level, a seal verifies — accountability */
+      const post=new THREE.Mesh(new THREE.CylinderGeometry(0.06,0.1,1.5,14),glass()); post.position.y=-0.12; g.add(post);
+      const base=new THREE.Mesh(new THREE.CylinderGeometry(0.42,0.52,0.13,22),glass()); base.position.y=-0.9; g.add(base);
+      const beam=new THREE.Group(); beam.position.y=0.6; g.add(beam);
+      const bar=new THREE.Mesh(new THREE.BoxGeometry(1.75,0.1,0.1),glass()); beam.add(bar,line(bar.geometry));
+      const wt=[];
+      [-0.82,0.82].forEach(function(x){ const arm=new THREE.Mesh(new THREE.CylinderGeometry(0.012,0.012,0.4,6),glass()); arm.position.set(x,-0.2,0); beam.add(arm);
+        const pan=new THREE.Mesh(new THREE.SphereGeometry(0.2,18,14),glass()); pan.position.set(x,-0.42,0); beam.add(pan);
+        const w=new THREE.Mesh(new THREE.IcosahedronGeometry(0.15,0),new THREE.MeshStandardMaterial({color:0x4a0c16,emissive:RED2,emissiveIntensity:1.1,metalness:0.4,roughness:0.3,transparent:true,opacity:0})); w.position.set(x,-0.42,0); beam.add(w); wt.push(w); });
+      const cap=new THREE.Mesh(new THREE.SphereGeometry(0.13,16,16),new THREE.MeshStandardMaterial({color:0xffd2d4,emissive:RED2,emissiveIntensity:1.0,metalness:0.3,roughness:0.3})); cap.position.y=0.6; g.add(cap);
+      g.userData.noCore=true;
+      g.userData.anim=function(t){
+        g.rotation.y=-0.26+Math.sin(t*0.26)*0.14; g.rotation.x=-0.1;
+        const P=4.8, ph=(t%P)/P;
+        const dl=seg(ph,0.06,0.2), dr=seg(ph,0.32,0.48);
+        const offL=seg(ph,0.78,0.9), offR=seg(ph,0.8,0.92);
+        const lL=dl*(1-offL), lR=dr*(1-offR);
+        const overs=Math.sin((ph-0.48)*30)*0.05*Math.max(0,1-(ph-0.48)*6);
+        beam.rotation.z=(lL-lR)*0.17 + (ph>0.48?overs:0);
+        wt[0].position.y=-0.42+(1-dl)*0.8; wt[0].material.opacity=Math.min(1,dl*1.6)*(1-offL);
+        wt[1].position.y=-0.42+(1-dr)*0.8; wt[1].material.opacity=Math.min(1,dr*1.6)*(1-offR);
+        const fl=Math.max(0,1-Math.abs(ph-0.6)/0.11);
+        cap.material.emissiveIntensity=1.0+fl*3.4; cap.scale.setScalar(1+fl*0.55);
+      }; },
+    risk(g){ /* radar: the sweep detects a threat, a reticle LOCKS the instant it is caught, then neutralizes it */
+      const radar=new THREE.Group(); radar.rotation.x=-0.95; g.add(radar);
+      [0.45,0.8,1.12].forEach(function(rad){ radar.add(new THREE.Mesh(new THREE.TorusGeometry(rad,0.02,8,64),glass())); });
+      const gemR=0.72, angs=[0.6,2.5,4.1,5.6];
+      const gem=new THREE.Mesh(new THREE.OctahedronGeometry(0.17,0),new THREE.MeshStandardMaterial({color:0x4a0c16,emissive:RED2,emissiveIntensity:0.5,metalness:0.4,roughness:0.3,transparent:true,opacity:0})); radar.add(gem);
+      const ret=new THREE.Mesh(new THREE.TorusGeometry(0.27,0.022,8,4),new THREE.MeshBasicMaterial({color:0xffe0e4,transparent:true,opacity:0})); radar.add(ret);
+      const sweep=new THREE.Group(); radar.add(sweep);
+      sweep.add(new THREE.Mesh(new THREE.CircleGeometry(1.12,26,-0.34,0.34),new THREE.MeshBasicMaterial({color:RED,transparent:true,opacity:0.26,side:THREE.DoubleSide,blending:THREE.AdditiveBlending,depthWrite:false})));
+      const lead=new THREE.Mesh(new THREE.BoxGeometry(1.12,0.022,0.022),new THREE.MeshBasicMaterial({color:0xffe0e4})); lead.position.x=0.56; sweep.add(lead);
+      radar.add(new THREE.Mesh(new THREE.SphereGeometry(0.07,12,12),new THREE.MeshBasicMaterial({color:0xffe0e4})));
+      g.userData.noCore=true;
+      g.userData.anim=function(t){
+        g.rotation.y=Math.sin(t*0.18)*0.1;
+        const a=t*1.7; sweep.rotation.z=a;
+        const rev=Math.floor(a/(2*Math.PI)), local=a-rev*2*Math.PI;
+        const gAng=angs[((rev%angs.length)+angs.length)%angs.length];
+        gem.position.set(Math.cos(gAng)*gemR,Math.sin(gAng)*gemR,0.04); ret.position.copy(gem.position);
+        const appear=ss((local-(gAng-1.0))/0.55);
+        const since=local-gAng, caught=since>0?1:0;
+        const flash=caught?Math.max(0,1-since/0.5):0;
+        const neutral=caught?ss((since-0.7)/0.9):0;
+        gem.material.opacity=appear*(1-neutral);
+        gem.material.emissiveIntensity=0.5+flash*3.4;
+        gem.scale.setScalar((1+flash*0.6)*(1-neutral*0.6));
+        const snap=caught?ss(since/0.18)*(1-neutral):0;
+        ret.material.opacity=snap*0.95; ret.scale.setScalar(1.7-0.7*ss(since/0.18)); ret.rotation.z=a*0.5;
+      }; },
+    trust(g){ /* two rings glide together and LOCK; light beads flow through the linked pair — partnership */
+      const A=new THREE.Group(); g.add(A); const ta=new THREE.TorusGeometry(0.5,0.12,16,50); const ma=new THREE.Mesh(ta,glass()); A.add(ma,line(ta));
+      const B=new THREE.Group(); g.add(B); const tb=new THREE.TorusGeometry(0.5,0.12,16,50); const mb=new THREE.Mesh(tb,glass()); B.add(mb,line(tb)); B.rotation.y=Math.PI/2;
+      const bA=new THREE.Mesh(new THREE.SphereGeometry(0.075,12,12),new THREE.MeshBasicMaterial({color:0xffe6e8})); A.add(bA);
+      const bB=new THREE.Mesh(new THREE.SphereGeometry(0.075,12,12),new THREE.MeshBasicMaterial({color:0xffe6e8})); B.add(bB);
+      g.userData.anim=function(t){
+        g.rotation.y=-0.4+Math.sin(t*0.22)*0.18; g.rotation.x=-0.08;
+        const P=5.2, ph=(t%P)/P;
+        const join=seg(ph,0.06,0.32)*(1-seg(ph,0.74,0.96));
+        const gap=0.27+(1-join)*0.5;
+        const clink=Math.max(0,1-Math.abs(ph-0.32)/0.045);
+        A.position.x=-gap; B.position.x=gap;
+        A.scale.setScalar(1+clink*0.1); B.scale.setScalar(1+clink*0.1);
+        A.rotation.z=t*0.45*join; B.rotation.z=-t*0.45*join;
+        const u=t*1.5, v=-t*1.5+1.3;
+        bA.position.set(Math.cos(u)*0.5,Math.sin(u)*0.5,0); bB.position.set(Math.cos(v)*0.5,Math.sin(v)*0.5,0);
+        bA.visible=bB.visible=join>0.25;
+        const pulse=join*(0.45+0.4*Math.sin(t*2.4));
+        ma.material.emissiveIntensity=0.32+pulse; mb.material.emissiveIntensity=0.32+pulse;
+        if(g.userData.core){ g.userData.core.visible=join>0.3; g.userData.core.scale.setScalar(0.5+join*0.6+clink*0.5); }
+      }; },
+    converge(g){ /* CONFLUENCE: three light-streams flow in on curved paths + merge into one crystal core (tech/regulation/trust -> one) */
+      const cGeo=new THREE.IcosahedronGeometry(0.42,0);
+      const mat=glass(); mat.envMapIntensity=1.7; mat.clearcoatRoughness=0.12; mat.roughness=0.13;
+      const core=new THREE.Mesh(cGeo,mat); g.add(core);
+      const kernel=new THREE.Mesh(new THREE.SphereGeometry(0.14,16,16),new THREE.MeshBasicMaterial({color:0xffe0e4})); g.add(kernel);
+      const halo=new THREE.Sprite(new THREE.SpriteMaterial({map:SPR,color:0xffe0e4,transparent:true,opacity:0.3,blending:THREE.AdditiveBlending,depthWrite:false})); halo.scale.setScalar(2.0); g.add(halo);
+      const WINDOWS=[[0.06,0.34],[0.16,0.46],[0.26,0.58]]; const streams=[];
+      for(let i=0;i<3;i++){ const endAng=i*2.0944; const pts=[];
+        for(let k=0;k<=4;k++){ const u=k/4, r=1.42*(1-u), a=endAng+u*1.3*Math.PI; pts.push(new THREE.Vector3(Math.cos(a)*r*1.1,Math.sin(a)*r*0.8,Math.sin(a*1.3)*r*0.42)); }
+        const curve=new THREE.CatmullRomCurve3(pts);
+        const tube=new THREE.Mesh(new THREE.TubeGeometry(curve,64,0.025,6,false),new THREE.MeshBasicMaterial({color:RED2,transparent:true,opacity:0,blending:THREE.AdditiveBlending,depthWrite:false})); g.add(tube);
+        const head=new THREE.Sprite(new THREE.SpriteMaterial({map:SPR,color:0xffe0e4,transparent:true,opacity:0,blending:THREE.AdditiveBlending,depthWrite:false})); head.scale.setScalar(0.30); g.add(head);
+        streams.push({curve:curve,tube:tube,head:head,win:WINDOWS[i]}); }
+      const shock=new THREE.Mesh(new THREE.TorusGeometry(1,0.02,8,48),new THREE.MeshBasicMaterial({color:0xffe0e4,transparent:true,opacity:0,blending:THREE.AdditiveBlending,depthWrite:false})); shock.rotation.x=-0.32; g.add(shock);
+      const spark=new THREE.Sprite(new THREE.SpriteMaterial({map:SPR,color:0xffe0e4,transparent:true,opacity:0,blending:THREE.AdditiveBlending,depthWrite:false})); spark.scale.setScalar(0.16); g.add(spark);
+      g.userData.noCore=true;
+      /* static seed: three streams half-arrived into a glowing crystal (reduced-motion + first-frame) */
+      streams.forEach(function(s){ s.head.position.copy(s.curve.getPointAt(0.55)); s.head.material.opacity=0.6; s.tube.material.opacity=0.3; });
+      core.material.emissiveIntensity=0.7; core.scale.setScalar(1.02); kernel.scale.setScalar(1.1); halo.material.opacity=0.55; halo.scale.setScalar(2.4); g.rotation.x=-0.12;
+      g.userData.anim=function(t){
+        const P=6.4, ph=(t%P)/P;
+        g.rotation.y=t*0.12; g.rotation.x=-0.12+Math.sin(t*0.22)*0.05;
+        let L=0;
+        for(let i=0;i<3;i++){ const s=streams[i]; let f=ss(seg(ph,s.win[0],s.win[1])); f=f*f*(3-2*f); f*=(1-seg(ph,0.82,1.0));
+          const p=cl(0.12+f*0.88); s.head.position.copy(s.curve.getPointAt(p));
+          const near=ss((p-0.82)/0.18);
+          s.head.material.opacity=f*0.9*(1-near*0.55); s.head.scale.setScalar(0.30+near*0.14);
+          s.tube.material.opacity=0.08+f*0.42; L+=f; }
+        L/=3;
+        let bump=0; const land=[0.30,0.42,0.53]; for(let i=0;i<3;i++) bump+=Math.max(0,1-Math.abs(ph-land[i])/0.05); bump=ss(bump);
+        core.material.emissiveIntensity=0.32+L*0.95+bump*0.35; core.scale.setScalar(0.92+L*0.14+bump*0.04);
+        kernel.scale.setScalar(0.6+L*0.9+bump*0.3);
+        halo.material.opacity=0.3+L*0.55; halo.scale.setScalar(2.0+L*0.7);
+        const m=cl((ph-0.50)/0.12);
+        if(m>0&&m<1){ shock.visible=true; shock.scale.setScalar(0.25+ss(m)*1.15); shock.material.opacity=(1-m)*0.7; } else { shock.visible=false; shock.material.opacity=0; }
+        const hold=seg(ph,0.60,0.66)*(1-seg(ph,0.80,0.86)); const sweep=(ph-0.60)/0.22;
+        spark.position.set(Math.cos(sweep*Math.PI)*0.42,0.2-sweep*0.3,0.44); spark.material.opacity=hold*0.8;
+      }; },
     vision(g){ const s=new THREE.Mesh(new THREE.SphereGeometry(0.6,28,20),glass()); g.add(s,line(new THREE.IcosahedronGeometry(0.6,1))); [[1.15,0],[-0.5,0.7]].forEach(function(rr){ const r=new THREE.Mesh(new THREE.TorusGeometry(1.02,0.045,12,56),glass()); r.rotation.x=rr[0]; r.rotation.y=rr[1]; g.add(r); }); g.add(new THREE.Mesh(new THREE.SphereGeometry(0.17,16,16), new THREE.MeshBasicMaterial({color:0xffd2d4}))); }, // globe + dual orbit + focal core — outlook
     mission(g){ [0.96,0.6].forEach(function(rad){ const t=new THREE.TorusGeometry(rad,0.08,14,50); g.add(new THREE.Mesh(t,glass()),line(t)); }); const o=new THREE.OctahedronGeometry(0.28,0); g.add(new THREE.Mesh(o,glass()),line(o)); g.add(new THREE.Mesh(new THREE.SphereGeometry(0.12,14,14), new THREE.MeshBasicMaterial({color:0xffd2d4}))); }, // bullseye target + center hit — purpose
     promise(g){ const geo=new THREE.OctahedronGeometry(0.95,0); g.add(new THREE.Mesh(geo,glass()),line(geo)); g.add(new THREE.Mesh(new THREE.SphereGeometry(0.2,16,16), new THREE.MeshBasicMaterial({color:0xffd2d4}))); } // brilliant gem + glowing core — commitment
@@ -396,8 +507,9 @@ function sprite(){
     const g = new THREE.Group();
     (BUILD[name]||BUILD.precision)(g);
     const core = new THREE.Mesh(new THREE.SphereGeometry(0.2, 18, 18), new THREE.MeshBasicMaterial({ color:0xffd2d4 })); g.add(core);
+    if(g.userData.noCore) core.visible=false;
     const halo = new THREE.Sprite(new THREE.SpriteMaterial({ map:SPR, color:RED, transparent:true, opacity:0.8, blending:THREE.AdditiveBlending, depthWrite:false })); halo.scale.setScalar(2.4); g.add(halo);
-    g.userData = { core, halo };
+    g.userData.core = core; g.userData.halo = halo;
     return g;
   }
   /* one group per UNIQUE icon name, reused across slots (only one visible per scissor render) */
@@ -426,7 +538,7 @@ function sprite(){
     });
     renderer.setScissorTest(false);
   }
-  all.forEach(function(g,i){ g.rotation.y = 0.5 + i*0.3; g.rotation.x = -0.2; });
+  all.forEach(function(g,i){ g.rotation.y = 0.5 + i*0.3; g.rotation.x = -0.2; if(g.userData.anim) g.userData.anim(1.4); });
   function redraw(){ if(active) drawAll(); }
   drawAll();
   window.addEventListener('resize', redraw, { passive:true });
@@ -443,8 +555,9 @@ function sprite(){
     if(document.hidden) return;
     const t = (now - t0)/1000;
     all.forEach(function(g,i){
-      g.rotation.y = t*(0.4 + i*0.05); g.rotation.x = -0.2 + Math.sin(t*0.4 + i)*0.12;
-      if(g.userData.core) g.userData.core.scale.setScalar(1 + Math.sin(t*1.6 + i)*0.14);
+      if(g.userData.anim){ g.userData.anim(t); }
+      else { g.rotation.y = t*(0.4 + i*0.05); g.rotation.x = -0.2 + Math.sin(t*0.4 + i)*0.12; }
+      if(g.userData.core && g.userData.core.visible) g.userData.core.scale.setScalar(1 + Math.sin(t*1.6 + i)*0.14);
       if(g.userData.halo) g.userData.halo.material.opacity = 0.72 + Math.sin(t*1.3 + i)*0.15;
     });
     drawAll();

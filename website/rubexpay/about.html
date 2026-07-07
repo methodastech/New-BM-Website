@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-<script src="media/perf-guard.js"></script>
+<script src="media/perf-guard.js?v=2"></script>
 <meta charset="utf-8" />
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
 <meta http-equiv="Pragma" content="no-cache" />
@@ -52,9 +52,7 @@ h1,h2,h3{font-family:var(--disp);font-weight:600;line-height:1;letter-spacing:.0
 .outline{color:transparent;-webkit-text-stroke:1.3px rgba(244,244,246,.55)}
 
 /* ============================== GRAIN + CURSOR + PROGRESS ============================== */
-.grain{position:fixed;inset:-50%;z-index:9000;pointer-events:none;opacity:.05;mix-blend-mode:overlay;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  animation:grain 7s steps(6) infinite}
+.grain{display:none}
 @keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-4%,3%)}40%{transform:translate(3%,-4%)}60%{transform:translate(-3%,2%)}80%{transform:translate(4%,4%)}100%{transform:translate(0,0)}}
 .cursor{position:fixed;top:0;left:0;width:34px;height:34px;border:1.4px solid rgba(244,244,246,.5);border-radius:50%;
   transform:translate(-50%,-50%);z-index:9500;pointer-events:none;mix-blend-mode:difference;
@@ -76,59 +74,40 @@ h1,h2,h3{font-family:var(--disp);font-weight:600;line-height:1;letter-spacing:.0
 a:focus-visible,button:focus-visible,.brand:focus-visible,.nav-cta:focus-visible,.btn:focus-visible,.burger:focus-visible{outline:2px solid var(--red-2);outline-offset:3px;border-radius:2px}
 
 /* ============================== PRELOADER ============================== */
-#pre{position:fixed;inset:0;z-index:9700;background:#050507;overflow:hidden;display:flex;align-items:center;justify-content:center;transition:opacity .7s var(--ease),transform 1s cubic-bezier(.76,0,.24,1)}
-#pre .pl-grid{position:absolute;inset:-2px;background:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px) 0 0/100% 46px,linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px) 0 0/46px 100%;animation:plGrid 7s linear infinite;opacity:.45}
-@keyframes plGrid{to{background-position:0 46px,46px 0}}
-#pre .pl-scan{position:absolute;left:0;right:0;height:40%;top:-40%;background:linear-gradient(180deg,transparent,rgba(216,12,36,.05) 64%,rgba(255,41,66,.12));animation:plScan 3.4s var(--ease) infinite;pointer-events:none;z-index:1}
-@keyframes plScan{0%{top:-40%}100%{top:104%}}
-#pre::after{content:"";position:absolute;inset:0;background:radial-gradient(150% 115% at 50% 50%,transparent 56%,#050507 96%);pointer-events:none;z-index:1}
-#pre .pl-hud{position:absolute;width:26px;height:26px;border:1px solid rgba(255,41,66,.45);z-index:4}
-#pre .pl-hud.tl{top:22px;left:22px;border-right:0;border-bottom:0}
-#pre .pl-hud.tr{top:22px;right:22px;border-left:0;border-bottom:0}
-#pre .pl-hud.bl{bottom:22px;left:22px;border-right:0;border-top:0}
-#pre .pl-hud.br{bottom:22px;right:22px;border-left:0;border-top:0}
-#pre .pl-cap{position:absolute;top:25px;font-family:var(--mono);font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);z-index:4}
-#pre .pl-cap.l{left:60px}
-#pre .pl-cap.r{right:60px}
-#pre .pl-stage{position:relative;z-index:3;display:flex;flex-direction:column;align-items:center}
-#pre .pl-frame{position:relative;width:clamp(176px,22vw,248px);aspect-ratio:1;display:grid;place-items:center}
-#pre .pl-frame::before{content:"";position:absolute;inset:20% 50% 20% 50%;border-left:1px solid rgba(255,41,66,.25)}
-#pre .pl-brk{position:absolute;width:26px;height:26px;border:1.7px solid var(--red-2);animation:plBrk 2.2s var(--ease) infinite;z-index:2}
-#pre .pl-brk.tl{top:0;left:0;border-right:0;border-bottom:0}
-#pre .pl-brk.tr{top:0;right:0;border-left:0;border-bottom:0}
-#pre .pl-brk.bl{bottom:0;left:0;border-right:0;border-top:0}
-#pre .pl-brk.br{bottom:0;right:0;border-left:0;border-top:0}
-@keyframes plBrk{0%,100%{opacity:.35}50%{opacity:1}}
-#pre .pl-cube{position:relative;width:58%;height:58%;display:grid;place-items:center;z-index:2}
-#pre .pl-cube svg{width:100%;height:100%;overflow:visible}
+#pre{position:fixed;inset:0;z-index:9700;background:#050507;overflow:hidden;display:flex;align-items:center;justify-content:center;transition:opacity .55s cubic-bezier(.7,0,.2,1),transform .55s cubic-bezier(.7,0,.2,1),filter .55s cubic-bezier(.7,0,.2,1)}
+#pre .pl-stage{position:relative;z-index:3;display:flex;flex-direction:column;align-items:center;transform:translateY(-4%)}
+#pre .pl-cube{position:relative;width:150px;height:150px;display:grid;place-items:center;z-index:2}
+#pre .pre-bloom{position:absolute;left:50%;top:50%;width:340px;height:340px;transform:translate(-50%,-50%);z-index:0;pointer-events:none;opacity:0;background:radial-gradient(circle,rgba(216,12,36,.075),transparent 60%);transition:opacity .55s ease}
+#pre .pl-gl{position:absolute;inset:0;width:100%;height:100%;z-index:2}
+#pre .pl-cube svg{position:relative;z-index:2;width:100%;height:100%;overflow:visible}
+#pre .pl-cube.gl-on svg{display:none}
 #pre .pl-hex{fill:none;stroke:var(--red);stroke-width:2.4;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;vector-effect:non-scaling-stroke;filter:drop-shadow(0 0 10px var(--red-glow))}
 #pre .pl-cl{fill:none;stroke:var(--red-2);stroke-width:1.6;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;vector-effect:non-scaling-stroke}
-#pre .pl-name{margin-top:1.6rem;font-family:var(--disp);font-weight:800;font-size:clamp(1rem,2.3vw,1.4rem);letter-spacing:.5em;text-indent:.5em;color:var(--text);opacity:0;transform:translateY(8px);z-index:2}
-#pre .pl-meter{margin-top:1.15rem;display:flex;align-items:center;gap:1.1rem;z-index:2}
-#pre .pl-count{font-family:var(--disp);font-weight:800;font-size:clamp(1.5rem,3.6vw,2.2rem);line-height:1;color:var(--text);display:flex;align-items:baseline;gap:.12em}
-#pre .pl-count i{font-style:normal;font-size:.42em;color:var(--red-2);font-family:var(--mono)}
-#pre .pl-count .pl-num{min-width:3ch;text-align:right;font-variant-numeric:tabular-nums}
-#pre .pl-bar{position:relative;width:min(42vw,290px);height:18px;background:repeating-linear-gradient(90deg,rgba(255,255,255,.13) 0 2px,transparent 2px 8px)}
-#pre .pl-bar i{position:absolute;left:0;top:0;height:100%;width:0;background:repeating-linear-gradient(90deg,var(--red-2) 0 2px,transparent 2px 8px);filter:drop-shadow(0 0 5px var(--red-glow));transition:width .12s linear}
-#pre .pl-bar i::after{content:"";position:absolute;right:0;top:-3px;bottom:-3px;width:2px;background:#fff;box-shadow:0 0 10px var(--red-2),0 0 20px var(--red-glow)}
-#pre .pl-log{position:absolute;left:var(--gut);bottom:9%;list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.45rem;font-family:var(--mono);font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);z-index:4}
-#pre .pl-log li{opacity:0;transform:translateX(-7px)}
-#pre .pl-log li::before{content:"›  ";color:var(--red-2)}
-#pre .pl-log b{color:var(--red-2);font-weight:400}
-#pre .pl-status{position:absolute;right:var(--gut);bottom:9%;font-family:var(--mono);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);z-index:4}
-#pre .pl-cur{color:var(--red-2);animation:plBlink 1s step-end infinite}
-@keyframes plBlink{50%{opacity:0}}
+#pre .pre-seam{position:relative;margin-top:52px;width:230px;height:3px;opacity:.92;
+  background:repeating-linear-gradient(90deg,rgba(255,90,104,.14) 0 5px,transparent 5px 11px)}
+#pre .pre-seam::before{content:"";position:absolute;left:0;top:0;bottom:0;width:var(--fill,0%);
+  background:repeating-linear-gradient(90deg,var(--red-2) 0 5px,transparent 5px 11px);
+  filter:drop-shadow(0 0 6px var(--red-glow));transition:width .09s linear}
+#pre .pre-seam::after{content:"";position:absolute;inset:-1px 0;opacity:0;background:linear-gradient(90deg,transparent 40%,rgba(255,240,240,.9) 50%,transparent 60%);transition:opacity .16s ease}
+#pre .pre-seam.sealed::after{opacity:1}
+#pre .pre-word{margin-top:24px;font-family:var(--disp);font-weight:800;font-size:clamp(15px,2.2vw,19px);letter-spacing:.62em;text-indent:.62em;color:var(--text);opacity:0;filter:blur(6px);transition:opacity .4s cubic-bezier(.16,1,.3,1),letter-spacing .5s cubic-bezier(.16,1,.3,1),filter .4s cubic-bezier(.16,1,.3,1)}
+#pre .pre-word.in{opacity:.92;filter:blur(0);letter-spacing:.42em;text-indent:.42em}
+#pre.no-blur .pre-word{filter:none;transition:opacity .4s cubic-bezier(.16,1,.3,1),letter-spacing .5s cubic-bezier(.16,1,.3,1)}
+#pre .pre-tag{margin-top:15px;font-family:var(--mono);font-size:9px;letter-spacing:.34em;text-transform:uppercase;color:#6b6b73;opacity:0;transition:opacity .3s ease}
+#pre .pre-tag.in{opacity:1}
+#pre .pre-tag .dcd-g{color:var(--red-2)}
 html:not(.anim) #pre .pl-hex,html:not(.anim) #pre .pl-cl{stroke-dashoffset:0}
-html:not(.anim) #pre .pl-name,html:not(.anim) #pre .pl-log li{opacity:1;transform:none}
-@media(prefers-reduced-motion:reduce){#pre .pl-grid,#pre .pl-scan,#pre .pl-brk{animation:none}#pre .pl-hex,#pre .pl-cl{stroke-dashoffset:0}#pre .pl-name,#pre .pl-log li{opacity:1;transform:none}}
-@media(max-width:600px){#pre .pl-cap,#pre .pl-log,#pre .pl-status{display:none}#pre .pl-frame{width:58vw}#pre .pl-meter{flex-direction:column;gap:.7rem}#pre .pl-bar{width:64vw}}
-.pre-done #pre{opacity:0;transform:scale(1.04);pointer-events:none}
-.pre-done #pre .pl-stage{transform:scale(1.1);opacity:0;transition:transform .7s var(--ease),opacity .5s var(--ease)}
+html:not(.anim) #pre .pre-word,html:not(.anim) #pre .pre-tag{opacity:.92;filter:none;letter-spacing:.42em}
+html:not(.anim) #pre .pre-seam::before{width:100%}
+@media(prefers-reduced-motion:reduce){#pre .pl-hex,#pre .pl-cl{stroke-dashoffset:0}#pre .pre-seam::before{width:100%;transition:none}#pre .pre-word{opacity:.92;filter:none;letter-spacing:.42em;transition:none}#pre .pre-tag{opacity:1;transition:none}#pre .pre-bloom{opacity:0}.pre-done #pre{transform:none;filter:none;transition:opacity .3s}}
+@media(max-width:600px){#pre .pl-cube{width:112px;height:112px}#pre .pre-seam{width:168px;margin-top:42px}#pre .pre-word{margin-top:20px}#pre .pre-bloom{width:260px;height:260px}}
+.pre-done #pre{opacity:0;transform:scale(1.035);filter:blur(4px);pointer-events:none}
+.pre-done #pre .pl-cube{transition-delay:-40ms}
 /* ============================== NAV ============================== */
 .nav{position:fixed;top:0;left:0;width:100%;z-index:8600;display:flex;align-items:center;justify-content:space-between;
-  padding:1.35rem var(--gut);transition:transform .5s var(--ease),background .5s,backdrop-filter .5s,border-color .5s;
+  padding:1.35rem var(--gut);transition:transform .5s var(--ease),background .5s,border-color .5s;
   border-bottom:1px solid transparent}
-.nav.scrolled{background:rgba(7,7,9,.62);backdrop-filter:blur(16px);border-color:var(--line-2)}
+.nav.scrolled{background:rgba(7,7,9,.92);border-color:var(--line-2)}
 .nav.hide{transform:translateY(-105%)}
 .brand{display:flex;align-items:center;gap:.7rem;font-family:var(--disp);font-weight:800;letter-spacing:.04em;font-size:1.18rem}
 .brand .mk{width:24px;height:24px;flex:none}
@@ -912,7 +891,7 @@ html.anim .tc-sub-dot{background:var(--red);box-shadow:0 0 6px var(--red-glow)}
 .cta p{color:var(--text)!important;text-shadow:0 1px 14px rgba(0,0,0,.5)}
 
 .dcd-g{color:var(--red-2)}@media(prefers-reduced-motion:reduce){.dcd-g{color:inherit}}</style>
-<style id="lang-css">.nav-links{margin-left:clamp(1.6rem,4vw,3rem)}.lang-switch{display:inline-flex;align-items:center;gap:.45rem;margin-left:auto;margin-right:1.2rem;font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;z-index:5}.lang-switch button{background:none;border:0;cursor:pointer;color:var(--muted);padding:.25rem .15rem;font:inherit;letter-spacing:inherit;line-height:1;transition:color .28s var(--ease),text-shadow .28s}.lang-switch button:hover{color:var(--text)}.lang-switch button.is-active{color:var(--red-2);text-shadow:0 0 14px var(--red-glow)}.lang-sep{color:var(--line)}html[lang="zh-CN"] body{font-family:var(--body),"PingFang SC","Microsoft YaHei","Hiragino Sans GB",sans-serif}@media(max-width:980px){.lang-switch{margin-left:auto;margin-right:.9rem}}</style>
+<style id="lang-css">.nav-links{margin-left:clamp(1.6rem,4vw,3rem)}.lang-switch{display:inline-flex;align-items:center;gap:.45rem;margin-left:auto;margin-right:1.2rem;font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;z-index:5}.lang-switch button{background:none;border:0;cursor:pointer;color:var(--muted);padding:.25rem .15rem;font:inherit;letter-spacing:inherit;line-height:1;transition:color .28s var(--ease),text-shadow .28s}.lang-switch button:hover{color:var(--text)}.lang-switch button.is-active{color:var(--red-2);text-shadow:0 0 14px var(--red-glow)}.lang-sep{color:var(--line)}html[lang="zh-CN"] body{font-family:var(--body),"PingFang SC","Microsoft YaHei","Hiragino Sans GB",sans-serif}@media(max-width:980px){.lang-switch{margin-left:auto;margin-right:.9rem}}@media(max-width:760px){.brand-logo{height:30px}.lang-switch{position:relative;gap:0;margin-right:.8rem}.lang-switch .lang-flag,.lang-switch .lang-sep{display:none}.lang-switch button{white-space:nowrap;padding:.6rem .35rem}.lang-switch button:not(.is-active){display:none}.lang-switch button.is-active{display:inline-flex;align-items:center;gap:.35rem}.lang-switch button.is-active::after{content:"";width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:5px solid currentColor;opacity:.75;transition:transform .25s var(--ease)}.lang-switch.is-open button.is-active::after{transform:rotate(180deg)}.lang-switch.is-open button:not(.is-active){display:flex;position:absolute;top:calc(100% + 8px);right:0;min-width:104px;justify-content:center;background:#0c0c11;border:1px solid var(--line);padding:.7rem .9rem;box-shadow:0 16px 38px rgba(0,0,0,.55);z-index:320}}@media(hover:none){.cursor,.cursor-dot{display:none!important}}</style>
 <style id="mnav-css">.mnav{position:fixed;inset:0;z-index:200;display:flex;justify-content:flex-end;opacity:0;pointer-events:none;background:rgba(5,5,8,.62);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);transition:opacity .38s var(--ease)}.mnav.is-open{opacity:1;pointer-events:auto}.mnav[hidden]{display:none}.mnav-panel{position:relative;width:min(85%,370px);height:100%;background:linear-gradient(190deg,#0d0d12,#070709 70%);border-left:1px solid var(--line);box-shadow:-34px 0 90px rgba(0,0,0,.62);display:flex;flex-direction:column;padding:clamp(5.2rem,15vw,7rem) clamp(1.7rem,6vw,2.5rem) 2.2rem;transform:translateX(101%);transition:transform .44s var(--ease)}.mnav.is-open .mnav-panel{transform:none}.mnav-links{display:flex;flex-direction:column}.mnav-links a{font-family:var(--disp);font-weight:600;font-size:clamp(1.45rem,6.2vw,2rem);letter-spacing:.005em;color:var(--text);padding:.62rem 0;border-bottom:1px solid var(--line);transition:color .25s var(--ease),padding-left .25s var(--ease)}.mnav-links a:hover,.mnav-links a:focus-visible,.mnav-links a[aria-current]{color:#ff3a48;padding-left:.45rem}.mnav-cta{margin-top:1.5rem;display:inline-flex;align-items:center;justify-content:center;padding:.95rem 1.4rem;border:1px solid var(--red);color:#fff;font-family:var(--mono);font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;clip-path:polygon(9px 0,100% 0,100% calc(100% - 9px),calc(100% - 9px) 100%,0 100%,0 9px);transition:background .25s,color .25s}.mnav-cta:hover{background:var(--red);color:#fff}.mnav-lang{margin-top:1.7rem;display:flex;align-items:center;gap:.55rem;font-family:var(--mono);font-size:.82rem;letter-spacing:.12em}.mnav-lang button{background:none;border:0;cursor:pointer;color:var(--muted);padding:.3rem .2rem;font:inherit;letter-spacing:inherit;transition:color .25s}.mnav-lang button:hover{color:var(--text)}.mnav-lang button.is-active{color:var(--red-2)}.mnav-lang .lang-sep{color:var(--line)}html.mnav-open{overflow:hidden}.burger{position:relative;z-index:210}.burger span{transition:transform .3s var(--ease),opacity .25s}.burger.is-active span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}.burger.is-active span:nth-child(2){opacity:0}.burger.is-active span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}@media(min-width:1201px){.mnav{display:none!important}}</style>
 <style id="about-css">
 #hero h1{font-size:clamp(2.4rem,5vw,5rem);line-height:.96}
@@ -935,8 +914,8 @@ html.anim .tc-sub-dot{background:var(--red);box-shadow:0 0 6px var(--red-glow)}
 .ab-story-h{font-family:var(--disp);font-weight:700;font-size:clamp(1.2rem,1.9vw,1.55rem);margin:0 0 1rem;letter-spacing:.01em}
 .ab-story-r p{color:#c4c4ce;font-size:1.02rem;line-height:1.72;max-width:54ch}
 .ab-origin{padding-block:clamp(3rem,7vw,5rem)}
-.ab-origin-grid{display:grid;grid-template-columns:auto 1fr;gap:clamp(1.6rem,4vw,3.4rem)}
-.ab-origin-mark{display:flex;flex-direction:column;align-items:center;gap:.9rem;padding-top:.5rem}
+.ab-origin-grid{display:grid;grid-template-columns:1fr;gap:clamp(1.6rem,4vw,3.4rem)}
+.ab-origin-mark{display:none;flex-direction:column;align-items:center;gap:.9rem;padding-top:.5rem}
 .ab-origin-yr{font-family:var(--mono);font-size:.66rem;letter-spacing:.24em;color:var(--red-2);writing-mode:vertical-rl;transform:rotate(180deg);white-space:nowrap}
 .ab-origin-line{flex:1;width:1px;min-height:60px;background:linear-gradient(var(--red),rgba(216,12,36,.05))}
 .ab-origin-dot{width:7px;height:7px;border-radius:50%;background:var(--red-2);box-shadow:0 0 10px var(--red-glow)}
@@ -945,8 +924,7 @@ html.anim .tc-sub-dot{background:var(--red);box-shadow:0 0 6px var(--red-glow)}
 .ab-origin-now{color:#e7e7ec!important}
 .ab-origin-now b{color:var(--red-2)}
 /* explanatory diagrams (story convergence + compliance stack) */
-.ab-dia{position:relative;margin-top:clamp(2.4rem,5vw,3.8rem);padding:clamp(1.4rem,3vw,2.4rem);border:1px solid var(--line);background:radial-gradient(120% 140% at 50% 0,rgba(216,12,36,.05),transparent 60%),linear-gradient(180deg,rgba(255,255,255,.015),transparent);clip-path:polygon(0 0,calc(100% - 18px) 0,100% 18px,100% 100%,0 100%)}
-.ab-dia::after{content:"";position:absolute;top:10px;right:24px;width:14px;height:14px;border-top:1px solid var(--red);border-right:1px solid var(--red);opacity:.5;pointer-events:none}
+.ab-dia{position:relative;margin-top:clamp(2.4rem,5vw,3.8rem);padding:clamp(1.4rem,3vw,2.4rem);border:1px solid var(--line);background:radial-gradient(120% 140% at 50% 0,rgba(216,12,36,.05),transparent 60%),linear-gradient(180deg,rgba(255,255,255,.015),transparent);}
 .ab-dia svg{width:100%;height:auto;display:block;overflow:visible}
 .dia-cap{font-family:var(--mono);font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--faint);margin-bottom:1.1rem;display:flex;align-items:center;gap:.6rem}
 .dia-cap::before{content:"";width:7px;height:7px;background:var(--red);border-radius:50%;box-shadow:0 0 12px var(--red-glow);flex:none}
@@ -964,7 +942,7 @@ html.anim .tc-sub-dot{background:var(--red);box-shadow:0 0 6px var(--red-glow)}
 @media(max-width:1024px){
 .ab-dia>svg{display:none}
 .ab-diam{display:flex;flex-direction:column;gap:.55rem}
-.dia-m-box{display:flex;align-items:center;gap:1rem;padding:1rem 1.1rem;border:1px solid rgba(255,42,66,.4);clip-path:polygon(0 0,100% 0,100% calc(100% - 13px),calc(100% - 13px) 100%,0 100%);background:linear-gradient(150deg,rgba(216,12,36,.12),rgba(7,7,9,.45))}
+.dia-m-box{display:flex;align-items:center;gap:1rem;padding:1rem 1.1rem;border:1px solid rgba(255,42,66,.4);background:linear-gradient(150deg,rgba(216,12,36,.12),rgba(7,7,9,.45))}
 .dia-m-hub{border-color:var(--red-2);background:linear-gradient(150deg,rgba(255,42,66,.3),rgba(106,12,22,.2))}
 .dia-m-ico{flex:none;width:46px;height:46px;display:grid;place-items:center;color:#ff6b76;filter:drop-shadow(0 0 10px rgba(216,12,36,.5))}
 .ab-diam .dia-m-ico svg{width:38px;height:38px;overflow:visible}
@@ -1054,11 +1032,14 @@ html.has-ab-ico [data-ico]{border:0;background:none;box-shadow:none}
 @media(min-width:1025px){
   .ab-op{justify-content:flex-start;gap:1.2rem}
   .ab-op-head{order:1}
-  #ab-op-canvas{position:relative;inset:auto;order:2;width:100%;flex:none;height:clamp(260px,30vh,340px)}
-  /* labels tuck up into the scene band so the leader stems stay short and clearly connected */
-  .ab-op-labels{order:3;min-height:3.6em;position:relative;z-index:2;margin-top:-7.5rem}
+  #ab-op-canvas{position:relative;inset:auto;order:2;width:100%;flex:none;height:clamp(320px,36vh,420px)}
+  /* labels tuck up under the nodes (leader stems auto-size to reach them); a bit more air than before */
+  .ab-op-labels{order:3;min-height:3.6em;position:relative;z-index:2;margin-top:-5rem}
+  /* every title reserves 2 lines so the SUB-labels (ACCEPT/AUTHORIZE/...) all sit on one baseline */
+  .ab-op.lab-abs .ab-op-lab b{line-height:1.2;min-height:2.5em;display:flex;align-items:flex-end;justify-content:center}
 }
-@media(max-width:1024px){.ab-op{justify-content:flex-start;min-height:auto;gap:1.4rem;padding-block:clamp(3rem,9vw,4.5rem)}#ab-op-canvas{position:relative;inset:auto;order:2;width:100%;height:clamp(300px,46vh,400px)}.ab-op-veil{display:none}.ab-op-head{order:1}.ab-op-labels{order:3;display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;justify-items:center}.ab-op-lab{flex:none;min-width:0;max-width:none}.ab-op-lab::before,.ab-op-lab::after{display:none}}
+@media(max-width:1024px){.ab-op{justify-content:flex-start;min-height:auto;gap:1.4rem;padding-block:clamp(3rem,9vw,4.5rem)}#ab-op-canvas{position:relative;inset:auto;order:2;width:100%;height:clamp(300px,46vh,400px)}.ab-op-veil{display:none}.ab-op-head{order:1}.ab-op-labels{order:3;display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;justify-items:center}.ab-op-lab{flex:none;min-width:0;max-width:none}.ab-op-lab::before,.ab-op-lab::after{display:none}.ab-op.lab-abs .ab-op-lab{max-width:120px;padding:.3rem 0 0}.ab-op.lab-abs .ab-op-lab b{line-height:1.22;min-height:2.44em}.ab-op-lab b{font-size:.85rem;margin-bottom:.25rem}.ab-op-lab span{font-size:.6rem}}
+@media(max-width:760px){#ab-op-canvas{height:clamp(200px,56vw,260px)}.ab-op.lab-abs .ab-op-labels{height:6rem}.ab-op.lab-abs .ab-op-lab{max-width:19vw}.ab-op-lab b{font-size:.72rem;margin-bottom:.25rem}.ab-op-lab span{font-size:.56rem;letter-spacing:.12em}}
 </style>
 </head>
 <body>
@@ -1069,38 +1050,21 @@ html.has-ab-ico [data-ico]{border:0;background:none;box-shadow:none}
   <span class="hud-tag l">SYS.RBX // ABOUT</span>
   <span class="hud-tag r">MISSION · COMPLIANCE · INFRASTRUCTURE</span>
 </div>
-<div class="cursor" aria-hidden="true"></div>
-<div class="cursor-dot" aria-hidden="true"></div>
 
 <!-- PRELOADER -->
 <div id="pre" aria-hidden="true">
-  <div class="pl-grid"></div>
-  <div class="pl-scan"></div>
-  <span class="pl-hud tl"></span><span class="pl-hud tr"></span><span class="pl-hud bl"></span><span class="pl-hud br"></span>
-  <span class="pl-cap l">RBX // SECURE BOOT</span>
-  <span class="pl-cap r">NODE 0xC7 · PCI DSS L1</span>
   <div class="pl-stage">
-    <div class="pl-frame">
-      <span class="pl-brk tl"></span><span class="pl-brk tr"></span><span class="pl-brk bl"></span><span class="pl-brk br"></span>
-      <div class="pl-cube"><canvas class="pl-gl" aria-hidden="true"></canvas><svg viewBox="0 0 100 100" aria-hidden="true"><path class="pl-hex" pathLength="1" d="M50 5 L89 27.5 L89 72.5 L50 95 L11 72.5 L11 27.5 Z"/><path class="pl-cl" pathLength="1" d="M50 50 L50 5 M50 50 L11 72.5 M50 50 L89 72.5"/></svg></div>
-    </div>
-    <div class="pl-name">RUBEXPAY</div>
-    <div class="pl-meter"><span class="pl-count"><span class="pl-num">0</span><i>%</i></span><span class="pl-bar"><i></i></span></div>
+    <div class="pl-cube"><div class="pre-bloom" aria-hidden="true"></div><canvas class="pl-gl" aria-hidden="true"></canvas><svg viewBox="0 0 100 100" aria-hidden="true"><path class="pl-hex" pathLength="1" d="M50 5 L89 27.5 L89 72.5 L50 95 L11 72.5 L11 27.5 Z"/><path class="pl-cl" pathLength="1" d="M50 50 L50 5 M50 50 L11 72.5 M50 50 L89 72.5"/></svg></div>
+    <div class="pre-seam" aria-hidden="true"></div>
+    <div class="pre-word">RUBEXPAY</div>
+    <div class="pre-tag" data-final="SECURED">SECURE BOOT</div>
   </div>
-  <ul class="pl-log">
-    <li>SECURE CORE <b>ONLINE</b></li>
-    <li>LEDGER SYNC <b>OK</b></li>
-    <li>FRAUD SHIELD <b>ACTIVE</b></li>
-    <li>PCI DSS L1 <b>VERIFIED</b></li>
-    <li>SYSTEMS <b>NOMINAL</b></li>
-  </ul>
-  <div class="pl-status">ESTABLISHING ENCRYPTED CHANNEL<b class="pl-cur">_</b></div>
 </div>
-<script src="media/boot-cube.js?v=4"></script>
+<script src="media/boot-cube.js?v=10"></script>
 
 <!-- NAV -->
 <header class="nav" id="nav">
-  <a class="brand" href="#top" data-hover aria-label="RubexPay home">
+  <a class="brand" href="index.html" data-hover aria-label="RubexPay home">
     <img decoding="async" src="media/logo.webp" alt="RubexPay" class="brand-logo">
   </a>
   <nav class="nav-links" aria-label="Primary">
@@ -1160,19 +1124,19 @@ html.has-ab-ico [data-ico]{border:0;background:none;box-shadow:none}
     <div class="sec-head"><h2 data-reveal>What We Stand For</h2></div>
     <div class="ab-prin-grid">
       <article class="ab-prin-card" data-reveal data-anim="up">
-        <div class="ab-prin-ico" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M32 13V52"/><path d="M22 52h20"/><circle cx="32" cy="10.5" r="2.5" fill="currentColor" stroke="none"/><g class="prin-beam"><path d="M14 18H50"/><path d="M14 18 8 32a8 8 0 0 0 12 0Z"/><path d="M50 18 44 32a8 8 0 0 0 12 0Z"/></g></svg></div>
+        <div class="ab-prin-ico" data-ico="accountability" aria-hidden="true"><svg style="display:none" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M32 13V52"/><path d="M22 52h20"/><circle cx="32" cy="10.5" r="2.5" fill="currentColor" stroke="none"/><g class="prin-beam"><path d="M14 18H50"/><path d="M14 18 8 32a8 8 0 0 0 12 0Z"/><path d="M50 18 44 32a8 8 0 0 0 12 0Z"/></g></svg></div>
         <span class="ab-prin-n">01</span>
         <h3>Accountability First</h3>
         <p>Technology matters only when accountability and ethical standards exist.</p>
       </article>
       <article class="ab-prin-card" data-reveal data-anim="up">
-        <div class="ab-prin-ico" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="32" r="22"/><circle cx="32" cy="32" r="13"/><circle cx="32" cy="32" r="3.4" fill="currentColor" stroke="none"/><path d="M32 6v8M32 50v8M6 32h8M50 32h8"/><g class="prin-sweep" style="transform-origin:32px 32px"><path d="M32 32 32 11"/></g><circle cx="44" cy="22" r="3.4" fill="currentColor" stroke="none"/></svg></div>
+        <div class="ab-prin-ico" data-ico="risk" aria-hidden="true"><svg style="display:none" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="32" r="22"/><circle cx="32" cy="32" r="13"/><circle cx="32" cy="32" r="3.4" fill="currentColor" stroke="none"/><path d="M32 6v8M32 50v8M6 32h8M50 32h8"/><g class="prin-sweep" style="transform-origin:32px 32px"><path d="M32 32 32 11"/></g><circle cx="44" cy="22" r="3.4" fill="currentColor" stroke="none"/></svg></div>
         <span class="ab-prin-n">02</span>
         <h3>Risk Caught Early</h3>
         <p>AI-driven fraud prevention stops risk before losses happen.</p>
       </article>
       <article class="ab-prin-card" data-reveal data-anim="up">
-        <div class="ab-prin-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"><path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25H21"/><path d="m21 3 1 11h-2"/><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"/><path d="M3 4h8"/></svg></div>
+        <div class="ab-prin-ico" data-ico="trust" aria-hidden="true"><svg style="display:none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"><path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25H21"/><path d="m21 3 1 11h-2"/><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"/><path d="M3 4h8"/></svg></div>
         <span class="ab-prin-n">03</span>
         <h3>Trust-Led Partnership</h3>
         <p>Responsible technology delivers impact through ethics and compliance.</p>
@@ -1218,7 +1182,7 @@ html.has-ab-ico [data-ico]{border:0;background:none;box-shadow:none}
         <g transform="translate(736,140)" stroke="#ff8088" stroke-width="1.6" fill="none" stroke-linejoin="round"><path d="M0 -8 12 -2 0 4 -12 -2Z"/><path d="M-12 2 0 8 12 2"/></g>
         <text class="dia-t" x="760" y="135" font-size="14">ONE PLATFORM</text><text class="dia-red" x="760" y="153" font-size="8.5">Precise · Compliant</text>
       </svg>
-      <div class="ab-diam" aria-hidden="true"><div class="dia-m-box"><span class="dia-m-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8a8 8 0 0 1 13-3"/><path d="M16 2v4h-4"/><path d="M21 16a8 8 0 0 1-13 3"/><path d="M8 22v-4h4"/></svg></span><div><span class="dia-m-k">01</span><b>Payment Orchestration</b></div></div><div class="dia-m-box"><span class="dia-m-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12C5 6 19 6 22 12 19 18 5 18 2 12Z"/><circle cx="12" cy="12" r="3.2"/></svg></span><div><span class="dia-m-k">02</span><b>Data Transparency</b></div></div><div class="dia-m-box"><span class="dia-m-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 20 5v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V5Z"/><path d="M8.5 12 11 14.5 16 9"/></svg></span><div><span class="dia-m-k">03</span><b>Regulatory Assurance</b></div></div><div class="dia-m-arrow" aria-hidden="true">&#8595;</div><div class="dia-m-box dia-m-hub"><span class="dia-m-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 21 7v10l-9 5-9-5V7Z"/><path d="M12 2v20M3 7l9 5 9-5"/></svg></span><div><b>RUBEXPAY</b><span>Intelligence Layer</span></div></div><div class="dia-m-arrow" aria-hidden="true">&#8595;</div><div class="dia-m-box"><span class="dia-m-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 22 8 12 13 2 8Z"/><path d="M2 13 12 18 22 13"/></svg></span><div><b>ONE PLATFORM</b><span>Precise &middot; Compliant</span></div></div></div>
+      <div class="ab-diam" aria-hidden="true"><div class="dia-m-box"><span class="dia-m-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8a8 8 0 0 1 13-3"/><path d="M16 2v4h-4"/><path d="M21 16a8 8 0 0 1-13 3"/><path d="M8 22v-4h4"/></svg></span><div><span class="dia-m-k">01</span><b>Payment Orchestration</b></div></div><div class="dia-m-box"><span class="dia-m-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12C5 6 19 6 22 12 19 18 5 18 2 12Z"/><circle cx="12" cy="12" r="3.2"/></svg></span><div><span class="dia-m-k">02</span><b>Data Transparency</b></div></div><div class="dia-m-box"><span class="dia-m-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 20 5v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V5Z"/><path d="M8.5 12 11 14.5 16 9"/></svg></span><div><span class="dia-m-k">03</span><b>Regulatory Assurance</b></div></div><div class="dia-m-arrow" aria-hidden="true"><svg viewBox="0 0 26 30" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 3l9 7 9-7" opacity=".3"/><path d="M4 12l9 7 9-7" opacity=".6"/><path d="M4 21l9 7 9-7"/></svg></div><div class="dia-m-box dia-m-hub"><span class="dia-m-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 21 7v10l-9 5-9-5V7Z"/><path d="M12 2v20M3 7l9 5 9-5"/></svg></span><div><b>RUBEXPAY</b><span>Intelligence Layer</span></div></div><div class="dia-m-arrow" aria-hidden="true"><svg viewBox="0 0 26 30" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 3l9 7 9-7" opacity=".3"/><path d="M4 12l9 7 9-7" opacity=".6"/><path d="M4 21l9 7 9-7"/></svg></div><div class="dia-m-box"><span class="dia-m-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 22 8 12 13 2 8Z"/><path d="M2 13 12 18 22 13"/></svg></span><div><b>ONE PLATFORM</b><span>Precise &middot; Compliant</span></div></div></div>
     </div>
   </section>
 
@@ -1234,8 +1198,8 @@ html.has-ab-ico [data-ico]{border:0;background:none;box-shadow:none}
     </div>
     <div class="ab-dia" data-reveal>
       <p class="dia-cap">Compliance-first by design</p>
-      <svg viewBox="0 0 920 300" role="img" aria-label="Financial, legal and engineering disciplines unified by compliance-first governance, producing security, scalability and accountability"><defs><linearGradient id="gbx" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d80c24" stop-opacity=".14"/><stop offset="1" stop-color="#5a0c14" stop-opacity=".04"/></linearGradient><linearGradient id="ghub" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff2942" stop-opacity=".38"/><stop offset="1" stop-color="#6a0c16" stop-opacity=".16"/></linearGradient><filter id="gglow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><path class="dia-line" d="M145 120V64"/><path class="dia-line" d="M460 120V64"/><path class="dia-line" d="M775 120V64"/><path class="dia-flow" d="M145 120V64"/><path class="dia-flow" d="M460 120V64"/><path class="dia-flow" d="M775 120V64"/><path class="dia-line" d="M145 228V178"/><path class="dia-line" d="M460 228V178"/><path class="dia-line" d="M775 228V178"/><path class="dia-flow" d="M145 228V178"/><path class="dia-flow" d="M460 228V178"/><path class="dia-flow" d="M775 228V178"/><path d="M10 14H280V48L266 62H10Z" fill="url(#gbx)" stroke="rgba(255,42,66,.4)"/><g transform="translate(38,38)" stroke="#ff6b76" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="-7" y="-1" width="14" height="11" rx="2"/><path d="M-4 -1V-4a4 4 0 0 1 8 0v3"/><circle cx="0" cy="4.5" r="1.3" fill="#ff6b76" stroke="none"/></g><text class="dia-t" x="60" y="43" font-size="14">Security</text><path d="M325 14H595V48L581 62H325Z" fill="url(#gbx)" stroke="rgba(255,42,66,.4)"/><g transform="translate(353,38)" stroke="#ff6b76" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M-8 8H8"/><path d="M-6 8V3"/><path d="M0 8V-1"/><path d="M6 8V-6"/></g><text class="dia-t" x="375" y="43" font-size="14">Scalability</text><path d="M640 14H910V48L896 62H640Z" fill="url(#gbx)" stroke="rgba(255,42,66,.4)"/><g transform="translate(668,38)" stroke="#ff6b76" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="0" cy="0" r="8.6"/><path d="M-4 0 -1 3 5 -4.5"/></g><text class="dia-t" x="690" y="43" font-size="14">Accountability</text><path d="M10 120H910V164L896 178H10Z" fill="url(#ghub)" stroke="#ff2942" stroke-width="1.6" filter="url(#gglow)"/><g transform="translate(60,149) scale(1.25)" stroke="#ff6b76" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M0 -11 9.5 -8V-1C9.5 6 5 9.5 0 11.5 -5 9.5 -9.5 6 -9.5 -1V-8Z"/><path d="M-4.5 -1 -1 2.5 5.5 -5"/></g><text class="dia-t" x="466" y="146" font-size="16" text-anchor="middle">COMPLIANCE-FIRST GOVERNANCE</text><text class="dia-m" x="466" y="165" font-size="9.5" text-anchor="middle">Enforced across every product, process and decision</text><path d="M10 228H280V270L266 284H10Z" fill="url(#gbx)" stroke="rgba(255,42,66,.4)"/><g transform="translate(38,256)" stroke="#ff6b76" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="0" cy="-5.5" rx="8" ry="3"/><path d="M-8 -5.5V5.5a8 3 0 0 0 16 0V-5.5"/><path d="M-8 0a8 3 0 0 0 16 0"/></g><text class="dia-red" x="60" y="251" font-size="9">01</text><text class="dia-t" x="60" y="269" font-size="13">Financial Expertise</text><path d="M325 228H595V270L581 284H325Z" fill="url(#gbx)" stroke="rgba(255,42,66,.4)"/><g transform="translate(353,256)" stroke="#ff6b76" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M0 -10V8"/><circle cx="0" cy="-10.5" r="1.5" fill="#ff6b76" stroke="none"/><path d="M-9 -6H9"/><path d="M-9 -6 -12.5 1a3.5 3.5 0 0 0 7 0Z"/><path d="M9 -6 5.5 1a3.5 3.5 0 0 0 7 0Z"/><path d="M-5 8H5"/></g><text class="dia-red" x="375" y="251" font-size="9">02</text><text class="dia-t" x="375" y="269" font-size="13">Legal Discipline</text><path d="M640 228H910V270L896 284H640Z" fill="url(#gbx)" stroke="rgba(255,42,66,.4)"/><g transform="translate(668,256)" stroke="#ff6b76" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="0" cy="0" r="4.4"/><path d="M0 -9V-6.4M0 9V6.4M-9 0H-6.4M9 0H6.4M-6.4 -6.4 -4.5 -4.5M6.4 -6.4 4.5 -4.5M-6.4 6.4 -4.5 4.5M6.4 6.4 4.5 4.5"/></g><text class="dia-red" x="690" y="251" font-size="9">03</text><text class="dia-t" x="690" y="269" font-size="13">Engineering Precision</text></svg>
-      <div class="ab-diam" aria-hidden="true"><div class="dia-m-box"><span class="dia-m-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="7" rx="8" ry="3"/><path d="M4 7v10a8 3 0 0 0 16 0V7"/><path d="M4 12a8 3 0 0 0 16 0"/></svg></span><div><span class="dia-m-k">01</span><b>Financial Expertise</b></div></div><div class="dia-m-box"><span class="dia-m-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v16M6 7h12M6 7 3 13a3 3 0 0 0 6 0ZM18 7l-3 6a3 3 0 0 0 6 0ZM9 20h6"/></svg></span><div><span class="dia-m-k">02</span><b>Legal Discipline</b></div></div><div class="dia-m-box"><span class="dia-m-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.5 5.5 7.6 7.6M16.4 7.6 18.5 5.5M5.5 18.5 7.6 16.4M16.4 16.4 18.5 18.5"/></svg></span><div><span class="dia-m-k">03</span><b>Engineering Precision</b></div></div><div class="dia-m-arrow" aria-hidden="true">&#8595;</div><div class="dia-m-box dia-m-hub"><span class="dia-m-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 20 5v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V5Z"/><path d="M8.5 12 11 14.5 16 9"/></svg></span><div><b>Compliance-First Governance</b><span>Enforced across every product, process &amp; decision</span></div></div><div class="dia-m-arrow" aria-hidden="true">&#8595;</div><div class="dia-m-box"><span class="dia-m-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span><div><b>Security</b></div></div><div class="dia-m-box"><span class="dia-m-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21h16"/><path d="M7 21v-6M12 21v-11M17 21v-9"/></svg></span><div><b>Scalability</b></div></div><div class="dia-m-box"><span class="dia-m-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.5 11 15.5 16 9"/></svg></span><div><b>Accountability</b></div></div></div>
+      <svg viewBox="0 0 920 272" role="img" aria-label="Three disciplines feed one compliance-first governance layer, which guarantees security, scalability and accountability"><defs><linearGradient id="gbx" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d80c24" stop-opacity=".14"/><stop offset="1" stop-color="#5a0c14" stop-opacity=".04"/></linearGradient><linearGradient id="ghub" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff2942" stop-opacity=".38"/><stop offset="1" stop-color="#6a0c16" stop-opacity=".16"/></linearGradient><filter id="gglow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><text class="dia-m" x="460" y="10" font-size="9.5" text-anchor="middle">THE THREE DISCIPLINES WE ARE BUILT ON</text><rect x="10" y="20" width="270" height="52" fill="url(#gbx)" stroke="rgba(255,42,66,.4)"/><g transform="translate(38,46)" stroke="#ff6b76" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="0" cy="-5.5" rx="8" ry="3"/><path d="M-8 -5.5V5.5a8 3 0 0 0 16 0V-5.5"/><path d="M-8 0a8 3 0 0 0 16 0"/></g><text class="dia-red" x="60" y="39" font-size="9">01</text><text class="dia-t" x="60" y="57" font-size="13">Financial Expertise</text><rect x="325" y="20" width="270" height="52" fill="url(#gbx)" stroke="rgba(255,42,66,.4)"/><g transform="translate(353,46)" stroke="#ff6b76" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M0 -10V8"/><circle cx="0" cy="-10.5" r="1.5" fill="#ff6b76" stroke="none"/><path d="M-9 -6H9"/><path d="M-9 -6 -12.5 1a3.5 3.5 0 0 0 7 0Z"/><path d="M9 -6 5.5 1a3.5 3.5 0 0 0 7 0Z"/><path d="M-5 8H5"/></g><text class="dia-red" x="375" y="39" font-size="9">02</text><text class="dia-t" x="375" y="57" font-size="13">Legal Discipline</text><rect x="640" y="20" width="270" height="52" fill="url(#gbx)" stroke="rgba(255,42,66,.4)"/><g transform="translate(668,46)" stroke="#ff6b76" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="0" cy="0" r="4.4"/><path d="M0 -9V-6.4M0 9V6.4M-9 0H-6.4M9 0H6.4M-6.4 -6.4 -4.5 -4.5M6.4 -6.4 4.5 -4.5M-6.4 6.4 -4.5 4.5M6.4 6.4 4.5 4.5"/></g><text class="dia-red" x="690" y="39" font-size="9">03</text><text class="dia-t" x="690" y="57" font-size="13">Engineering Precision</text><path class="dia-line" d="M145 72V106"/><path class="dia-line" d="M460 72V106"/><path class="dia-line" d="M775 72V106"/><path class="dia-flow" d="M145 72V106"/><path class="dia-flow" d="M460 72V106"/><path class="dia-flow" d="M775 72V106"/><path d="M140 106h10L145 114Z" fill="rgba(255,90,100,.75)"/><path d="M455 106h10L460 114Z" fill="rgba(255,90,100,.75)"/><path d="M770 106h10L775 114Z" fill="rgba(255,90,100,.75)"/><rect x="10" y="114" width="900" height="56" fill="url(#ghub)" stroke="#ff2942" stroke-width="1.6" filter="url(#gglow)"/><g transform="translate(60,142) scale(1.25)" stroke="#ff6b76" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M0 -11 9.5 -8V-1C9.5 6 5 9.5 0 11.5 -5 9.5 -9.5 6 -9.5 -1V-8Z"/><path d="M-4.5 -1 -1 2.5 5.5 -5"/></g><text class="dia-t" x="466" y="139" font-size="16" text-anchor="middle">COMPLIANCE-FIRST GOVERNANCE</text><text class="dia-m" x="466" y="158" font-size="9.5" text-anchor="middle">All three disciplines enforced across every product, process and decision</text><path class="dia-line" d="M145 170V204"/><path class="dia-line" d="M460 170V204"/><path class="dia-line" d="M775 170V204"/><path class="dia-flow" d="M145 170V204"/><path class="dia-flow" d="M460 170V204"/><path class="dia-flow" d="M775 170V204"/><path d="M140 204h10L145 212Z" fill="rgba(255,90,100,.75)"/><path d="M455 204h10L460 212Z" fill="rgba(255,90,100,.75)"/><path d="M770 204h10L775 212Z" fill="rgba(255,90,100,.75)"/><rect x="10" y="212" width="270" height="52" fill="url(#gbx)" stroke="rgba(255,42,66,.4)"/><g transform="translate(38,238)" stroke="#ff6b76" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="-7" y="-1" width="14" height="11" rx="2"/><path d="M-4 -1V-4a4 4 0 0 1 8 0v3"/><circle cx="0" cy="4.5" r="1.3" fill="#ff6b76" stroke="none"/></g><text class="dia-m" x="60" y="231" font-size="8.5">OUTCOME</text><text class="dia-t" x="60" y="249" font-size="13">Security</text><rect x="325" y="212" width="270" height="52" fill="url(#gbx)" stroke="rgba(255,42,66,.4)"/><g transform="translate(353,238)" stroke="#ff6b76" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M-8 8H8"/><path d="M-6 8V3"/><path d="M0 8V-1"/><path d="M6 8V-6"/></g><text class="dia-m" x="375" y="231" font-size="8.5">OUTCOME</text><text class="dia-t" x="375" y="249" font-size="13">Scalability</text><rect x="640" y="212" width="270" height="52" fill="url(#gbx)" stroke="rgba(255,42,66,.4)"/><g transform="translate(668,238)" stroke="#ff6b76" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="0" cy="0" r="8.6"/><path d="M-4 0 -1 3 5 -4.5"/></g><text class="dia-m" x="690" y="231" font-size="8.5">OUTCOME</text><text class="dia-t" x="690" y="249" font-size="13">Accountability</text></svg>
+      <div class="ab-diam" aria-hidden="true"><div class="dia-m-box"><span class="dia-m-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="7" rx="8" ry="3"/><path d="M4 7v10a8 3 0 0 0 16 0V7"/><path d="M4 12a8 3 0 0 0 16 0"/></svg></span><div><span class="dia-m-k">01</span><b>Financial Expertise</b></div></div><div class="dia-m-box"><span class="dia-m-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v16M6 7h12M6 7 3 13a3 3 0 0 0 6 0ZM18 7l-3 6a3 3 0 0 0 6 0ZM9 20h6"/></svg></span><div><span class="dia-m-k">02</span><b>Legal Discipline</b></div></div><div class="dia-m-box"><span class="dia-m-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.5 5.5 7.6 7.6M16.4 7.6 18.5 5.5M5.5 18.5 7.6 16.4M16.4 16.4 18.5 18.5"/></svg></span><div><span class="dia-m-k">03</span><b>Engineering Precision</b></div></div><div class="dia-m-arrow" aria-hidden="true"><svg viewBox="0 0 26 30" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 3l9 7 9-7" opacity=".3"/><path d="M4 12l9 7 9-7" opacity=".6"/><path d="M4 21l9 7 9-7"/></svg></div><div class="dia-m-box dia-m-hub"><span class="dia-m-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 20 5v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V5Z"/><path d="M8.5 12 11 14.5 16 9"/></svg></span><div><b>Compliance-First Governance</b><span>Enforced across every product, process &amp; decision</span></div></div><div class="dia-m-arrow" aria-hidden="true"><svg viewBox="0 0 26 30" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 3l9 7 9-7" opacity=".3"/><path d="M4 12l9 7 9-7" opacity=".6"/><path d="M4 21l9 7 9-7"/></svg></div><div class="dia-m-box"><span class="dia-m-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span><div><b>Security</b></div></div><div class="dia-m-box"><span class="dia-m-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21h16"/><path d="M7 21v-6M12 21v-11M17 21v-9"/></svg></span><div><b>Scalability</b></div></div><div class="dia-m-box"><span class="dia-m-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.5 11 15.5 16 9"/></svg></span><div><b>Accountability</b></div></div></div>
     </div>
   </section>
 
@@ -1392,7 +1356,7 @@ html.has-ab-ico [data-ico]{border:0;background:none;box-shadow:none}
 </div>
 <style id="bm-footrib-css">
 .bm-footrib{display:flex;justify-content:center;padding:1.6rem 0 .4rem;pointer-events:none}
-.bm-footrib canvas{width:min(460px,96vw);height:auto;display:block}
+.bm-footrib canvas{width:min(460px,88vw);height:auto;display:block}
 .bm-footrib-fb{font-family:var(--mono,monospace);font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:#fff;background:linear-gradient(90deg,#1421B8,#2536F5);padding:.5rem 1.4rem;clip-path:polygon(10px 0,calc(100% - 10px) 0,100% 50%,calc(100% - 10px) 100%,10px 100%,0 50%)}
 .bm-footrib-fb[hidden]{display:none}
 </style>
@@ -1511,54 +1475,67 @@ html.has-ab-ico [data-ico]{border:0;background:none;box-shadow:none}
 
   /* ---------- Preloader (sci-fi boot HUD) ---------- */
   var pre = document.getElementById('pre');
-  try{ if(sessionStorage.getItem('rbx-booted') && pre){ pre.style.display='none'; pre=null; document.body.classList.add('pre-done'); } sessionStorage.setItem('rbx-booted','1'); }catch(e){}
-  var plNum = pre && pre.querySelector('.pl-num');
-  var plBar = pre && pre.querySelector('.pl-bar i');
-  var plLog = pre ? pre.querySelectorAll('.pl-log li') : [];
+  /* NO session skip: the loader shows per navigation but is READINESS-GATED — it only lingers while
+     THIS page's banner (hero video / visual) is still loading, and dismisses the moment it is ready. */
+  var heroReady=false;
+  (function(){
+    var hv=document.querySelector('#hero video.hero-video');
+    function ok(){ if(heroReady) return true; var d=(document.readyState!=='loading'); var v=(!hv||hv.readyState>=3||hv.error); if(d&&v){ heroReady=true; return true; } return false; }
+    if(ok()) return;
+    if(hv){ hv.addEventListener('canplay',ok,{once:true}); hv.addEventListener('loadeddata',ok,{once:true}); }
+    window.addEventListener('load',ok,{once:true});
+    var iv=setInterval(function(){ if(ok()) clearInterval(iv); },120);
+  })();
+  var seam = pre && pre.querySelector('.pre-seam');
+  var word = pre && pre.querySelector('.pre-word');
+  var tag  = pre && pre.querySelector('.pre-tag');
+  var cube = pre && pre.querySelector('.pl-cube');
+  var bloom= pre && pre.querySelector('.pre-bloom');
   var preFin=false;
   function finishPre(){
     if(preFin) return; preFin=true;
     window.__rbxBootP=1;
     document.body.classList.add('pre-done');
-    setTimeout(function(){ if(pre) pre.style.display='none'; }, 1100);
+    setTimeout(function(){ if(pre) pre.style.display='none'; }, 550);
   }
-  if(reduce || !plNum){ if(plBar)plBar.style.width='100%'; if(plNum)plNum.textContent='100'; finishPre(); }
-  else{
-    var _hx=pre.querySelector('.pl-hex'), _cl=pre.querySelector('.pl-cl'), _nm=pre.querySelector('.pl-name');
-    if(window.gsap){
-      window.gsap.timeline()
-        .to(_hx,{strokeDashoffset:0,duration:.8,ease:'power2.inOut'})
-        .to(_cl,{strokeDashoffset:0,duration:.55,ease:'power2.out'},'-=.35')
-        .to(_nm,{opacity:1,y:0,duration:.5,ease:'power3.out'},'-=.25');
-    } else { if(_hx)_hx.style.strokeDashoffset=0; if(_cl)_cl.style.strokeDashoffset=0; if(_nm){_nm.style.opacity=1;_nm.style.transform='none';} }
-    var shown=[0,0,0,0,0], thr=[.1,.32,.54,.76,.94];
-    function showLog(i){ if(plLog[i]&&!shown[i]){ shown[i]=1; if(window.gsap) window.gsap.to(plLog[i],{opacity:1,x:0,duration:.35,ease:'power2.out'}); else { plLog[i].style.opacity=1; plLog[i].style.transform='none'; } } }
-    var dur=1500, t0=performance.now();
+  /* one word, one time: ASSEMBLING look -> SECURED. decode.js is scroll-only, so a tiny local scrambler. */
+  function runDecode(el){
+    if(!el) return; var fin=el.getAttribute('data-final')||el.textContent, len=fin.length,
+      gl='ABCDEFGHJKLMNPQRSTUVWXYZ0123#><', st=performance.now(), DUR=200;
+    (function d(now){ var k=Math.min(1,(now-st)/DUR), lock=Math.floor(k*len), out='';
+      for(var i=0;i<len;i++){ out += (i<lock) ? fin[i] : '<span class="dcd-g">'+gl[(Math.random()*gl.length)|0]+'</span>'; }
+      el.innerHTML=out; if(k<1) requestAnimationFrame(d); else el.textContent=fin;
+    })(st);
+  }
+  if(reduce || !seam){
+    if(seam) seam.style.setProperty('--fill','100%');
+    if(word) word.classList.add('in'); if(tag) tag.classList.add('in');
+    finishPre();
+  } else {
+    if(window.matchMedia && matchMedia('(pointer:coarse)').matches) pre.classList.add('no-blur');
+    var wordIn=false, sealed=false, heartFired=false, pdUI=0;
+    function igniteHeart(){ if(heartFired) return; heartFired=true; if(bloom) bloom.style.opacity=1; runDecode(tag); }
+    document.addEventListener('rbx-heart', igniteHeart, {once:true});
+    var t0=performance.now(), MIN=420, CAP=5000;
     (function tick(now){
-      var p=Math.min((now-t0)/dur,1), v=Math.floor(p*100);
-      window.__rbxBootP=p; /* the cube assembles itself with this */
-      plNum.textContent=v; if(plBar) plBar.style.width=(p*100)+'%';
-      for(var i=0;i<thr.length;i++){ if(p>=thr[i]) showLog(i); }
-      if(p<1) requestAnimationFrame(tick); else setTimeout(finishPre,320);
+      var elp=now-t0;
+      /* ramp climbs to 0.9 fast, then HOLDS there until the banner is actually ready, then completes */
+      var target = heroReady ? 1 : Math.min(0.9, elp/650);
+      window.__rbxBootP=target;
+      pdUI+=(target-pdUI)*0.16; if(pdUI>0.995)pdUI=1;
+      if(seam){ var __b=20, __f=(Math.round(pdUI*__b)/__b*100).toFixed(1); seam.style.setProperty('--fill',__f+'%'); }
+      if(!wordIn && pdUI>=0.4){ wordIn=true; if(word) word.classList.add('in'); setTimeout(function(){ if(tag) tag.classList.add('in'); }, 130); }
+      if(pdUI>=0.7) igniteHeart();
+      if(!sealed && heroReady && elp>=MIN && pdUI>=0.9){ sealed=true;
+        pdUI=1; window.__rbxBootP=1; if(seam){ seam.style.setProperty('--fill','100%'); seam.classList.add('sealed'); }
+        if(cube && cube.animate){ try{ cube.animate([{transform:'translateY(0)'},{transform:'translateY(-2px)'},{transform:'translateY(0)'}],{duration:150,easing:'ease-out'}); }catch(e){} }
+        setTimeout(finishPre, 120);
+      }
+      if(!sealed) requestAnimationFrame(tick);
     })(t0);
-    setTimeout(finishPre, 3200); /* hard fallback if rAF is throttled in a background tab */
+    setTimeout(finishPre, CAP); /* hard cap — never strand the page even if the banner never signals ready */
   }
-  /* ---------- Custom cursor (desktop only) ---------- */
-  if(!coarse && !reduce){
-    var cur=document.querySelector('.cursor'), dot=document.querySelector('.cursor-dot');
-    var cx=innerWidth/2, cy=innerHeight/2, dx=cx, dy=cy;
-    window.addEventListener('mousemove',function(e){
-      cx=e.clientX; cy=e.clientY; cur.style.opacity=1; dot.style.opacity=1;
-      dot.style.transform='translate('+cx+'px,'+cy+'px) translate(-50%,-50%)';
-    });
-    (function loop(){ dx+=(cx-dx)*.18; dy+=(cy-dy)*.18;
-      cur.style.transform='translate('+dx+'px,'+dy+'px) translate(-50%,-50%)';
-      requestAnimationFrame(loop); })();
-    document.querySelectorAll('[data-hover]').forEach(function(el){
-      el.addEventListener('mouseenter',function(){cur.classList.add('hot');});
-      el.addEventListener('mouseleave',function(){cur.classList.remove('hot');});
-    });
-  }
+  /* ---------- Custom cursor REMOVED (perf: constant rAF loop; matches index) ---------- */
 
   /* ---------- Hero particle network ---------- */
   (function(){
@@ -1650,7 +1627,7 @@ html.has-ab-ico [data-ico]{border:0;background:none;box-shadow:none}
     var ease='expo.out';
 
     /* hero headline + reveals (after preloader) */
-    var heroTl=gsap.timeline({delay:reduce?0:.75});
+    var heroTl=gsap.timeline({delay:reduce?0:.15});
     heroTl.fromTo('#hero [data-split] .ln i',{yPercent:110,xPercent:coarse?0:8,autoAlpha:0},{yPercent:0,xPercent:0,autoAlpha:1,duration:1.15,stagger:.07,ease:'power4.out'})
           .to('#hero [data-reveal]',{opacity:1,y:0,duration:.9,stagger:.12,ease:ease},'-=.7');
 
@@ -2085,11 +2062,13 @@ import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js'
 <script src="media/decode.js?v=4"></script>
 <script src="media/i18n-cn.js?v=15"></script>
 <script src="media/i18n-cn-extra.js?v=1"></script>
-<script src="media/i18n.js?v=14"></script>
+<script src="media/i18n.js?v=15"></script>
 <script src="media/mobile-nav.js?v=12"></script>
-<script type="module" src="media/about-3d.js?v=29"></script>
-<link rel="stylesheet" href="media/type-bump.css?v=11">
-<style id="feedback-css">/* framework icons: each one performs its own job, no generic floating */
+<script type="module" src="media/about-3d.js?v=44"></script>
+<link rel="stylesheet" href="media/type-bump.css?v=13">
+<style id="feedback-css">/* client: remove the weird radial circle behind the hero cube */
+.hex-aura{display:none!important}
+/* framework icons: each one performs its own job, no generic floating */
 .ab-frame-img.ab-frame-ico{animation:none}
 .fi-check{stroke-dasharray:1;stroke-dashoffset:1;animation:fiCheck 3.8s cubic-bezier(.22,1,.36,1) infinite}
 @keyframes fiCheck{0%{stroke-dashoffset:1;opacity:1}26%{stroke-dashoffset:0}62%{stroke-dashoffset:0;opacity:1}76%{opacity:0}82%{stroke-dashoffset:1;opacity:0}100%{stroke-dashoffset:1;opacity:1}}
@@ -2132,6 +2111,59 @@ import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js'
 .ab-prin-card{display:flex;flex-direction:column;align-items:center;text-align:center;padding:.4rem .8rem}
 .ab-prin-card .ab-prin-ico{margin:0 0 clamp(.9rem,1.6vw,1.3rem);grid-column:auto;grid-row:auto;align-self:center}
 .ab-prin-card p{margin-inline:auto;max-width:36ch;text-shadow:none}
+/* phone: principles read as rows — BIG icon on the LEFT, title + copy stacked on the right */
+@media(max-width:760px){
+.ab-prin-card{display:grid;grid-template-columns:128px 1fr;column-gap:1.05rem;align-items:center;text-align:left;padding:.4rem 0}
+.ab-prin-card .ab-prin-ico{grid-column:1;grid-row:1/span 3;width:128px!important;height:128px!important;margin:0;align-self:center}
+.ab-prin-n,.ab-prin-card h3,.ab-prin-card p{grid-column:2}
+.ab-prin-n{display:none}
+.ab-prin-card h3{margin:0 0 .25rem;font-size:1.1rem;line-height:1.14}
+.ab-prin-card p{margin-inline:0;max-width:none;font-size:.9rem;line-height:1.5}
+}
+
+/* phone: the hand-cube hero visual anchors bottom and dissolves into the background (no floating cut wrist) */
+@media(max-width:760px){
+.hero-vis[style*="about-hero"]{height:min(46vh,390px);background-position:center bottom;
+  -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 6%,#000 52%,rgba(0,0,0,.42) 76%,transparent 90%),radial-gradient(128% 120% at 50% 42%,#000 54%,transparent 96%);
+  -webkit-mask-composite:source-in;
+  mask-image:linear-gradient(180deg,transparent 0,#000 6%,#000 52%,rgba(0,0,0,.42) 76%,transparent 90%),radial-gradient(128% 120% at 50% 42%,#000 54%,transparent 96%);
+  mask-composite:intersect}
+}
+
+/* stacked diagrams: a signal pings down the chain (opacity-only — compositor-cheap) */
+.dia-m-arrow{animation:diaArrowFlow 1.8s ease-in-out infinite}
+@keyframes diaArrowFlow{0%,100%{transform:translateY(-2px);opacity:.5}50%{transform:translateY(3px);opacity:1}}
+.dia-m-box{position:relative}
+.dia-m-box::after{content:"";position:absolute;inset:-1px;pointer-events:none;border:1px solid rgba(255,90,100,.85);box-shadow:0 0 18px rgba(255,42,66,.3),inset 0 0 14px rgba(255,42,66,.12);opacity:0;animation:diaBoxPing 6.4s ease-in-out infinite}
+.ab-diam>.dia-m-box:nth-child(1)::after{animation-delay:.1s}
+.ab-diam>.dia-m-box:nth-child(2)::after{animation-delay:.65s}
+.ab-diam>.dia-m-box:nth-child(3)::after{animation-delay:1.2s}
+.ab-diam>.dia-m-box:nth-child(5)::after{animation-delay:1.9s}
+.ab-diam>.dia-m-box:nth-child(7)::after{animation-delay:2.7s}
+.ab-diam>.dia-m-box:nth-child(8)::after{animation-delay:3.25s}
+.ab-diam>.dia-m-box:nth-child(9)::after{animation-delay:3.8s}
+@keyframes diaBoxPing{0%,14%,100%{opacity:0}6%{opacity:1}}
+@media(prefers-reduced-motion:reduce){.dia-m-arrow{animation:none}.dia-m-box::after{animation:none}}
+
+/* story: orchestration emblem — two orbits around the core cube */
+.ab-story-vis{margin-top:clamp(1.4rem,3vw,2.2rem);width:min(380px,92%);aspect-ratio:1.3;margin-inline:auto}
+@media(min-width:761px){.ab-story-vis{margin-inline:0}}
+
+/* diagram arrows: larger sci-fi chevron cascade */
+.dia-m-arrow{display:flex;justify-content:center;color:var(--red-2)}
+.dia-m-arrow svg{width:26px;height:30px;filter:drop-shadow(0 0 9px rgba(255,42,66,.55))}
+
+/* phone: vision/mission/promise — icon left, copy uses the FULL width (no side padding, no big number) so cells are short */
+@media(max-width:760px){
+.ab-vmp-cell{display:grid!important;grid-template-columns:72px 1fr;column-gap:.85rem;align-items:center;padding:1rem 0!important}
+.ab-vmp-cell .ab-vmp-ico{grid-column:1;grid-row:1/span 3;width:72px;height:72px;margin:0;align-self:center}
+.ab-vmp-k,.ab-vmp-cell h3,.ab-vmp-cell p{grid-column:2}
+.ab-vmp-rn{display:none}
+.ab-vmp-k{margin:0 0 .18rem}
+.ab-vmp-cell h3{margin-bottom:.35rem;font-size:1.22rem}
+.ab-vmp-cell p{font-size:.9rem;line-height:1.48}
+}
+
 /* standardized vertical rhythm between sections */
 .ab-prin,.ab-story,.ab-origin,.ab-frame,.ab-vmp,.ab-op{padding-block:clamp(2.75rem,6vw,4.25rem)}
 /* pipeline labels: connected by the leader line, no hover jump */
@@ -2144,6 +2176,22 @@ import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js'
 /* no boxes behind icons or HUD text */
 [data-ico]{border:0;background:none}
 .reg-ledger{background:none;border:0;backdrop-filter:none;-webkit-backdrop-filter:none;padding:.2rem 0;text-shadow:0 1px 8px rgba(0,0,0,.85)}
+
+/* client 2026-07-07: "What We Stand For" -> shared-renderer 3D icons (accountability/risk/trust), blended + alive */
+.ab-prin-ico{width:clamp(120px,14vw,168px);height:clamp(120px,14vw,168px)}
+.ab-prin-ico svg{display:none}
+/* remove weird round lighting: About hero glow + story-emblem orbit rings + traveling nodes */
+.hero-glow{display:none!important}
+/* hero hand-cube: lightly alive */
+.hero-vis[style*="about-hero"]{animation:abHeroFloat 6s ease-in-out infinite}
+@keyframes abHeroFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+@media(prefers-reduced-motion:reduce){.hero-vis[style*="about-hero"]{animation:none}}
+/* client 2026-07-07: remove footer divider lines */
+footer{border-top:0!important}
+.foot-divider{background:none!important;height:0!important;border:0!important}.foot-divider i{display:none!important}
+.foot-bottom{border-top:0!important}
+/* footer seamless: top edge = page black (no separate-section box); warmth only deep down */
+.site-foot{background:linear-gradient(180deg,transparent 0,transparent 26%,#0a0305 100%)!important}
 </style>
 </body>
 </html>
