@@ -1,0 +1,84 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>html,body{margin:0;height:100%;background:#15102a;overflow:hidden}canvas{display:block}</style>
+<script type="importmap">{"imports":{"three":"https://unpkg.com/three@0.169.0/build/three.module.js","three/addons/":"https://unpkg.com/three@0.169.0/examples/jsm/"}}</script>
+</head><body>
+<script type="module">
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+const W = window.innerWidth||960, H = window.innerHeight||960;
+const renderer = new THREE.WebGLRenderer({ antialias:true, alpha:true, preserveDrawingBuffer:true });
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+renderer.setSize(W,H);
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.NeutralToneMapping;
+renderer.toneMappingExposure = 1.0;
+document.body.appendChild(renderer.domElement);
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(30, W/H, 0.01, 100);
+window.__r = renderer; window.__cam = camera;
+const pmrem = new THREE.PMREMGenerator(renderer);
+scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+const key = new THREE.DirectionalLight(0xffffff, 1.1); key.position.set(3,5,4); scene.add(key);
+scene.add(new THREE.AmbientLight(0xffffff, 0.25));
+const controls = new OrbitControls(camera, renderer.domElement); controls.enableDamping=true;
+
+// --- tunables (adjust live via window.__tune) ---
+window.__p = { bandTop:0.255, bandBot:0.92, uoff:0.25, umul:-1, blue:'#1f3cd0', cap:'#172159', capH:0.245, rough:0.28, cc:1.0, env:1.2 };
+
+let model, mat, skinTex, labelImg;
+const TL = new THREE.TextureLoader();
+
+function buildSkin(){
+  const P=window.__p, S=2048, c=document.createElement('canvas'); c.width=c.height=S; const g=c.getContext('2d');
+  g.fillStyle=P.blue; g.fillRect(0,0,S,S);
+  if(labelImg){ const top=P.bandTop*S, bot=P.bandBot*S; g.drawImage(labelImg, 0, top, S, bot-top); }
+  if(P.cap){ g.fillStyle=P.cap; g.fillRect(0,0,S, (P.capH||0.24)*S); }   // darker navy cap (two-tone)
+  const t=new THREE.CanvasTexture(c); t.colorSpace=THREE.SRGBColorSpace; t.wrapS=THREE.RepeatWrapping; t.anisotropy=8; return t;
+}
+function applyUVs(){
+  const P=window.__p;
+  model.traverse(o=>{ if(o.isMesh){
+    const geo=o.geometry; geo.computeBoundingBox(); const bb=geo.boundingBox, yMin=bb.min.y, yMax=bb.max.y, h=yMax-yMin||1;
+    const pos=geo.attributes.position, uv=new Float32Array(pos.count*2);
+    for(let i=0;i<pos.count;i++){ const x=pos.getX(i), y=pos.getY(i), z=pos.getZ(i);
+      let u=(P.umul||1)*Math.atan2(z,x)/(2*Math.PI)+0.5+P.uoff; u-=Math.floor(u);
+      uv[i*2]=u; uv[i*2+1]=(y-yMin)/h; }
+    geo.setAttribute('uv', new THREE.BufferAttribute(uv,2));
+  }});
+}
+window.__rebuild = ()=>{   // re-skin + re-uv after tuning, then it renders next frame
+  const P=window.__p; skinTex=buildSkin();
+  if(mat){ mat.map=skinTex; mat.color.set('#ffffff'); mat.roughness=P.rough; mat.clearcoat=P.cc; mat.envMapIntensity=P.env; mat.needsUpdate=true; }
+  applyUVs();
+};
+
+TL.load('assets/label-mindtropic.png', t=>{ labelImg=t.image;
+  new GLTFLoader().load('assets/bottle-mt.glb', (gltf)=>{
+    model=gltf.scene;
+    skinTex=buildSkin();
+    mat=new THREE.MeshPhysicalMaterial({ map:skinTex, color:0xffffff, metalness:0.0, roughness:window.__p.rough, clearcoat:window.__p.cc, clearcoatRoughness:0.06, envMapIntensity:window.__p.env });
+    model.traverse(o=>{ if(o.isMesh) o.material=mat; });
+    applyUVs();
+    const box=new THREE.Box3().setFromObject(model), size=box.getSize(new THREE.Vector3()), ctr=box.getCenter(new THREE.Vector3());
+    model.position.sub(ctr); const md=Math.max(size.x,size.y,size.z)||1; model.scale.setScalar(2.0/md);
+    scene.add(model);
+    camera.position.set(0,0.2,4.2); camera.lookAt(0,0,0); controls.target.set(0,0,0); controls.update();
+    window.__ready=true;
+  }, undefined, e=>{ window.__err='glb:'+(e&&e.message||e); });
+}, undefined, e=>{ window.__err='label:'+(e&&e.message||e); });
+
+(function loop(){ requestAnimationFrame(loop); controls.update(); renderer.render(scene,camera); })();
+
+window.__shot=(opt={})=>{ if(model){ if(opt.ry!==undefined)model.rotation.y=opt.ry; if(opt.rx!==undefined)model.rotation.x=opt.rx; }
+  renderer.render(scene,camera);
+  const src=renderer.domElement, ph=opt.px||820, sc=ph/src.height, c=document.createElement('canvas');
+  c.width=Math.round(src.width*sc); c.height=ph; const g=c.getContext('2d');
+  g.fillStyle='#15102a'; g.fillRect(0,0,c.width,c.height); g.drawImage(src,0,0,c.width,c.height);
+  return c.toDataURL('image/jpeg', opt.q||0.92);
+};
+</script>
+</body></html>

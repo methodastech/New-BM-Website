@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="module" src="https://unpkg.com/@google/model-viewer@3.5.0/dist/model-viewer.min.js"></script>
+<style>
+  html,body{margin:0;height:100%;background:#EFEAF5}
+  model-viewer{width:100vw;height:100vh;--poster-color:transparent}
+</style></head>
+<body>
+<model-viewer id="mv" src="assets/mindtropic.glb" camera-controls disable-zoom
+  shadow-intensity="0.9" exposure="1.05" environment-image="neutral"
+  camera-orbit="0deg 85deg auto" field-of-view="30deg" interaction-prompt="none"></model-viewer>
+<script>
+  const mv=document.getElementById('mv');
+  window.__angle=(az)=>{ mv.cameraOrbit = az+'deg 85deg auto'; mv.jumpCameraToGoal(); return mv.cameraOrbit; };
+  window.__loaded=()=>mv.loaded;
+</script>
+</body></html>

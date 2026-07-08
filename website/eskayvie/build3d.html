@@ -1,0 +1,251 @@
+<!doctype html><html><head><meta charset="utf-8">
+<title>build3d</title>
+<style>html,body{margin:0;height:100%;background:#241a3a;overflow:hidden}canvas{display:block}</style>
+<script type="importmap">{"imports":{"three":"https://unpkg.com/three@0.169.0/build/three.module.js","three/addons/":"https://unpkg.com/three@0.169.0/examples/jsm/"}}</script>
+</head><body>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+const W=innerWidth||960,H=innerHeight||960;
+const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true,preserveDrawingBuffer:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio,2)); renderer.setSize(W,H);
+renderer.outputColorSpace=THREE.SRGBColorSpace; renderer.toneMapping=THREE.NeutralToneMapping; renderer.toneMappingExposure=1.12;
+document.body.appendChild(renderer.domElement);
+const scene=new THREE.Scene();
+const camera=new THREE.PerspectiveCamera(19,W/H,0.1,100);   // longer lens = flatter, more product-shot, less CG perspective
+
+// studio IBL + lights
+const pmrem=new THREE.PMREMGenerator(renderer); pmrem.compileEquirectangularShader();
+const envC=(()=>{const w=1024,h=512,c=document.createElement('canvas');c.width=w;c.height=h;const g=c.getContext('2d');
+  const bg=g.createLinearGradient(0,0,0,h);bg.addColorStop(0,'#c2c7d0');bg.addColorStop(.34,'#969cab');bg.addColorStop(.62,'#646b7a');bg.addColorStop(1,'#343844');g.fillStyle=bg;g.fillRect(0,0,w,h);   // brighter surround so metal reads light & reflective
+  const sb=(cx,ww,t,b,p)=>{const x0=cx-ww/2,lg=g.createLinearGradient(x0,0,x0+ww,0);lg.addColorStop(0,'rgba(255,255,255,0)');lg.addColorStop(.5,`rgba(255,255,255,${p})`);lg.addColorStop(1,'rgba(255,255,255,0)');g.fillStyle=lg;g.fillRect(x0,t,ww,b-t);};
+  sb(w*0.24,w*0.20,h*0.03,h*0.84,0.82);sb(w*0.54,w*0.08,h*0.02,h*0.54,0.5);sb(w*0.80,w*0.22,h*0.03,h*0.86,0.80);return c;})();   // brighter softboxes = bright brushed-metal reflections on the silver
+const gt=new THREE.CanvasTexture(envC);gt.mapping=THREE.EquirectangularReflectionMapping;gt.colorSpace=THREE.SRGBColorSpace;
+const envRT=pmrem.fromEquirectangular(gt);scene.environment=envRT.texture;gt.dispose();pmrem.dispose();
+// softer, more EVEN studio rig (audit: real product is soft-satin, evenly lit, no hard terminator)
+scene.add(new THREE.AmbientLight(0xffffff,0.34));
+const key=new THREE.DirectionalLight(0xffffff,1.05);key.position.set(7,5,6);scene.add(key);
+const fill=new THREE.DirectionalLight(0xdbe4ff,0.80);fill.position.set(-7,2,5);scene.add(fill);   // lift the shadow side
+const fillR=new THREE.DirectionalLight(0xeaf0ff,0.55);fillR.position.set(6,1.5,5);scene.add(fillR); // even wraparound on the other side
+const rim=new THREE.DirectionalLight(0xffffff,0.8);rim.position.set(3.5,5,-7);scene.add(rim);
+scene.add(new THREE.HemisphereLight(0xffffff,0xc6cad2,0.72));
+const arc=(cx,cy,r,a0,a1,n)=>{const o=[];for(let i=0;i<=n;i++){const a=a0+(a1-a0)*i/n;o.push(new THREE.Vector2(cx+Math.cos(a)*r,cy+Math.sin(a)*r));}return o;};
+
+// ===== PROPORTIONS measured from cut-mindtropic.png: aspect H/W=1.77, constant-radius cylinder, cap=top 25% =====
+const R=1.0, ASPECT=1.62, TOTAL=ASPECT*2*R, capH=0.25*TOTAL, bodyH=TOTAL-capH;   // stouter (audit: real ~1.6-1.76, mine read 1.91 too slender)
+const yB=-TOTAL/2, ySeam=yB+bodyH, yTop=yB+TOTAL;
+const neckR=0.88, yNeckTop=ySeam+0.46;           // WIDE mouth (near body width) + short coarse-thread collar, like the real jar
+
+const cobaltBody=0x0e21a4, cobaltCap=0x2b44c3;   // measured from photo: body deep, cap brighter (two-tone)
+const plastic=(col,r,e)=>new THREE.MeshPhysicalMaterial({color:new THREE.Color(col),metalness:0,roughness:r,clearcoat:1,clearcoatRoughness:0.05,ior:1.5,envMapIntensity:e,dithering:true});
+
+// ---- BODY: rounded base -> cylinder -> shoulder taper to neck ----
+const er=0.03;                                   // flat base with only a tiny corner radius (audit: real base is flat, not a rounded barrel)
+let bp=[new THREE.Vector2(0,yB)];
+bp=bp.concat(arc(R-er,yB+er,er,-Math.PI/2,0,8));
+bp.push(new THREE.Vector2(R,ySeam-0.02));
+bp.push(new THREE.Vector2(R-0.04,ySeam+0.04));   // small shoulder taper toward the neck
+bp.push(new THREE.Vector2(neckR,ySeam+0.06));
+const bodyMat=plastic(cobaltBody,0.32,1.28);
+const bodyGeo=new THREE.LatheGeometry(bp,220);
+// cylindrical UV reprojection: v linear in Y so the wrapped label is NOT stretched vertically
+const LBL={uoff:0.24,topY:0.80};
+bodyGeo.computeBoundingBox();
+const _bb=bodyGeo.boundingBox,_y0=_bb.min.y,_y1=_bb.max.y,_hb=_y1-_y0;
+(()=>{ const pos=bodyGeo.attributes.position,uv=new Float32Array(pos.count*2);
+  for(let i=0;i<pos.count;i++){const x=pos.getX(i),y=pos.getY(i),z=pos.getZ(i);
+    let u=-Math.atan2(z,x)/(2*Math.PI)+0.5+LBL.uoff; u-=Math.floor(u);
+    uv[i*2]=u; uv[i*2+1]=(y-_y0)/_hb;}
+  bodyGeo.setAttribute('uv',new THREE.BufferAttribute(uv,2)); })();
+scene.add(new THREE.Mesh(bodyGeo,bodyMat));
+// ---- LABEL: real artwork, aspect-locked; recoloured to the real TWO-TONE (deep-cobalt top + brushed-SILVER lower panel) ----
+const labelImg=new Image();
+labelImg.onload=()=>{ const iw=labelImg.width,ih=labelImg.height, circ=2*Math.PI*R;
+  const Wc=iw, Hc=Math.round(Wc*_hb/circ);
+  const DC=[14,33,164], SILVER=[216,216,213];                   // deep cobalt body, LIGHT NEUTRAL silver panel (light albedo + low metalness keeps it bright & neutral, not dark/blue)
+  const t=document.createElement('canvas');t.width=iw;t.height=ih;const tg=t.getContext('2d');tg.drawImage(labelImg,0,0);
+  const cdat=tg.getImageData(0,0,iw,ih),d=cdat.data;
+  const mC=document.createElement('canvas');mC.width=iw;mC.height=ih;const mctx=mC.getContext('2d');
+  const mdat=mctx.createImageData(iw,ih),md=mdat.data;
+  const panelY=Math.round(ih*0.515);                            // artwork's lower half = the nutrition panel (= the SILVER band on the real bottle)
+  for(let i=0;i<d.length;i+=4){ const y=((i>>2)/iw)|0; const r=d[i],g2=d[i+1],b=d[i+2];
+    const lum=0.299*r+0.587*g2+0.114*b; let rough,metal;
+    if(y<panelY){ let a=(lum-105)/127; a=a<0.1?0:a>1?1:a;       // top band: white print over deep cobalt
+      d[i]=DC[0]+(255-DC[0])*a; d[i+1]=DC[1]+(255-DC[1])*a; d[i+2]=DC[2]+(255-DC[2])*a;
+      rough=0.46; metal=0;                                      // satin plastic
+    } else { let w=(lum-150)/85; w=w<0?0:w>1?1:w;               // panel: white bg -> REFLECTIVE brushed silver, blue print kept
+      d[i]=r+(SILVER[0]-r)*w; d[i+1]=g2+(SILVER[1]-g2)*w; d[i+2]=b+(SILVER[2]-b)*w;
+      rough=0.30+(1-w)*0.26; metal=w*0.72; }                    // silver bg = low-rough reflective metal; ink = matte non-metal
+    md[i]=0; md[i+1]=(rough*255)|0; md[i+2]=(metal*255)|0; md[i+3]=255; }   // G=roughnessMap, B=metalnessMap
+  tg.putImageData(cdat,0,0); mctx.putImageData(mdat,0,0);
+  const drawH=Math.round(Wc*ih/iw), vTop=(LBL.topY-_y0)/_hb, topPx=Math.round((1-vTop)*Hc);
+  const c=document.createElement('canvas');c.width=Wc;c.height=Hc;const g=c.getContext('2d');
+  g.fillStyle=`rgb(${DC[0]},${DC[1]},${DC[2]})`; g.fillRect(0,0,Wc,Hc); g.drawImage(t,0,topPx,Wc,drawH);
+  const mc=document.createElement('canvas');mc.width=Wc;mc.height=Hc;const mg=mc.getContext('2d');
+  mg.fillStyle='rgb(0,117,0)'; mg.fillRect(0,0,Wc,Hc); mg.drawImage(mC,0,topPx,Wc,drawH);   // default = satin cobalt (rough .46, metal 0); band overrides
+  const maxA=renderer.capabilities.getMaxAnisotropy();
+  const tex=new THREE.CanvasTexture(c); tex.colorSpace=THREE.SRGBColorSpace; tex.wrapS=THREE.RepeatWrapping; tex.anisotropy=maxA; tex.minFilter=THREE.LinearMipmapLinearFilter;
+  const mtex=new THREE.CanvasTexture(mc); mtex.colorSpace=THREE.NoColorSpace; mtex.wrapS=THREE.RepeatWrapping; mtex.anisotropy=maxA;
+  bodyMat.map=tex; bodyMat.metalnessMap=mtex; bodyMat.roughnessMap=mtex; bodyMat.metalness=1.0; bodyMat.roughness=1.0;   // maps drive it: cobalt satin plastic, silver REFLECTIVE metal
+  bodyMat.envMapIntensity=1.3; bodyMat.clearcoat=0.6; bodyMat.clearcoatRoughness=0.20;            // brighter reflections so the silver metal catches light like the photo
+  bodyMat.color.set('#ffffff'); bodyMat.needsUpdate=true; window.__skin=true;
+};
+labelImg.src='assets/label-mindtropic.png';
+
+// ---- NECK + helical screw THREAD + dark MOUTH (hidden under the cap; revealed when it screws up) ----
+const neckMat=plastic(cobaltBody,0.30,1.4);
+const neck=new THREE.Mesh(new THREE.CylinderGeometry(neckR,neckR*1.02,(yNeckTop-ySeam),96,1,true),neckMat);
+neck.position.y=(ySeam+yNeckTop)/2; scene.add(neck);
+const turns=2.0,segs=420,hR=neckR+0.025,pts=[];                       // just TWO threads, spaced further apart (like the real bottle)
+for(let i=0;i<=segs;i++){const f=i/segs,a=f*Math.PI*2*turns;pts.push(new THREE.Vector3(Math.cos(a)*hR,ySeam+0.12+f*(yNeckTop-ySeam-0.22),Math.sin(a)*hR));}
+const thread=new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts),segs,0.05,20,false),plastic(0x162a9e,0.34,1.3));   // BOLD wide thread
+scene.add(thread);
+const darkMat=new THREE.MeshStandardMaterial({color:0x0a1430,roughness:0.92,metalness:0,side:THREE.BackSide});
+const bore=new THREE.Mesh(new THREE.CylinderGeometry(neckR-0.04,neckR-0.04,(yNeckTop-ySeam),64,1,true),darkMat); bore.position.y=(ySeam+yNeckTop)/2; scene.add(bore);
+const floor=new THREE.Mesh(new THREE.CircleGeometry(neckR-0.04,64),new THREE.MeshStandardMaterial({color:0x0a1430,roughness:0.92,metalness:0})); floor.rotation.x=-Math.PI/2; floor.position.y=ySeam+0.12; scene.add(floor);
+
+// ---- CAP (brighter cobalt, hollow screw cap): skirt + rounded edge + flat top ----
+const capG=new THREE.Group(); scene.add(capG);
+const CR=R*1.012,fil=0.085;           // slight overhang lip + a soft (not bullnose) rounded top edge, matching the real cap closeup
+let cp=[new THREE.Vector2(CR,ySeam)];
+cp.push(new THREE.Vector2(CR,yTop-fil));
+cp=cp.concat(arc(CR-fil,yTop-fil,fil,0,Math.PI/2,8));
+cp.push(new THREE.Vector2(0,yTop));
+const capMat=plastic(cobaltCap,0.30,1.05); capMat.clearcoat=0.7; capMat.clearcoatRoughness=0.16;   // soft satin cap, matches body finish
+capG.add(new THREE.Mesh(new THREE.LatheGeometry(cp,160),capMat));
+const under=new THREE.Mesh(new THREE.CircleGeometry(CR-0.01,64),new THREE.MeshStandardMaterial({color:0x0a1430,roughness:0.92,metalness:0,side:THREE.DoubleSide}));
+under.rotation.x=Math.PI/2; under.position.y=ySeam+0.01; capG.add(under);     // not hollow-looking when lifted
+
+// ---- CAP-TOP MARK: ONE edge ring + "eskayvie" curved along it + centre gate pip (matches the real cap) ----
+const ctS=1024, cc=document.createElement('canvas'); cc.width=cc.height=ctS; const cg=cc.getContext('2d');
+cg.fillStyle='#808080'; cg.fillRect(0,0,ctS,ctS);                              // bump mid-gray = flat
+const cx=ctS/2, cy=ctS/2;
+cg.beginPath();cg.arc(cx,cy,ctS*0.43,0,7);cg.lineWidth=ctS*0.013;cg.strokeStyle='#5a5a5a';cg.stroke();            // single debossed ring groove near the edge
+cg.beginPath();cg.arc(cx,cy,ctS*0.421,0,7);cg.lineWidth=ctS*0.004;cg.strokeStyle='#9c9c9c';cg.stroke();           // its tiny raised inner lip
+cg.fillStyle='#565656'; cg.font=`italic 600 ${Math.round(ctS*0.082)}px Georgia, "Times New Roman", serif`;
+cg.textAlign='center'; cg.textBaseline='middle';
+const word='eskayvie', rt=ctS*0.355, a0=Math.PI*1.34, a1=Math.PI*0.66;          // curve along the left arc: upper-left -> lower-left
+for(let k=0;k<word.length;k++){ const f=word.length>1?k/(word.length-1):0; const ang=a0+(a1-a0)*f;
+  const x=cx+Math.cos(ang)*rt, y=cy+Math.sin(ang)*rt;
+  cg.save(); cg.translate(x,y); cg.rotate(ang-Math.PI/2); cg.fillText(word[k],0,0); cg.restore(); }   // tops point inward (reads "eskayvie" along the arc)
+const rg=cg.createRadialGradient(cx,cy,0,cx,cy,ctS*0.04);                        // centre injection gate: small raised pip
+rg.addColorStop(0,'#6a6a6a');rg.addColorStop(0.3,'#aeaeae');rg.addColorStop(0.7,'#8e8e8e');rg.addColorStop(1,'#808080');
+cg.fillStyle=rg;cg.beginPath();cg.arc(cx,cy,ctS*0.04,0,7);cg.fill();
+cg.fillStyle='#454545';cg.beginPath();cg.arc(cx,cy,ctS*0.007,0,7);cg.fill();                            // centre pip
+const ctBump=new THREE.CanvasTexture(cc); ctBump.colorSpace=THREE.NoColorSpace; ctBump.anisotropy=8;
+// faint colour overlay so the engraving reads from any angle
+const colorC=document.createElement('canvas'); colorC.width=colorC.height=ctS; const colg=colorC.getContext('2d');
+const cap8=`#${cobaltCap.toString(16).padStart(6,'0')}`; colg.fillStyle=cap8; colg.fillRect(0,0,ctS,ctS);
+colg.globalCompositeOperation='overlay'; colg.globalAlpha=0.5; colg.drawImage(cc,0,0); colg.globalAlpha=1; colg.globalCompositeOperation='source-over';
+const ctCol=new THREE.CanvasTexture(colorC); ctCol.colorSpace=THREE.SRGBColorSpace; ctCol.anisotropy=8;
+const topMat=plastic(0xffffff,0.62,0.65); topMat.clearcoat=0.15; topMat.clearcoatRoughness=0.5; topMat.map=ctCol; topMat.bumpMap=ctBump; topMat.bumpScale=1.5;   // MATTE cap top like the real lid
+const topDisc=new THREE.Mesh(new THREE.CircleGeometry(CR-fil-0.006,128),topMat);
+topDisc.rotation.x=-Math.PI/2; topDisc.position.y=yTop+0.004; capG.add(topDisc);
+// thin dark parting-line groove where the cap meets the body (premium screw-cap seam)
+const seamRing=new THREE.Mesh(new THREE.CylinderGeometry(CR-0.008,CR-0.008,0.02,120,1,true),new THREE.MeshStandardMaterial({color:0x070a22,roughness:0.95,metalness:0}));
+seamRing.position.y=ySeam-0.004; scene.add(seamRing);
+// re-pivot the cap GROUP to its own centre so it tumbles naturally when popped off
+const capPivotY=(ySeam+yTop)/2;
+capG.children.forEach(c=>{ c.position.y -= capPivotY; });
+const capClosed=new THREE.Vector3(0,capPivotY,0); capG.position.copy(capClosed);
+
+// ===== PILLS: premium berry chewable tablets + soft contact shadows =====
+const pillG=new THREE.Group(); scene.add(pillG);
+const purple=['#9b62a0','#a672a8','#8f5896','#aa6f9e','#9466a0','#a86f9c'];   // real Mindtropic tablets are dusty PURPLE/mauve
+function tabletGeo(r,h,e,seg){ let p=[new THREE.Vector2(0,h),new THREE.Vector2(r-e,h)];   // flat round chewable: flat faces + rounded rim
+  p=p.concat(arc(r-e,h-e,e,Math.PI/2,0,7)); p=p.concat(arc(r-e,-(h-e),e,0,-Math.PI/2,7));
+  p.push(new THREE.Vector2(0,-h)); return new THREE.LatheGeometry(p,seg); }
+// one soft round shadow sprite, reused by the bottle + every pill
+const softShadow=(()=>{const s=128,c=document.createElement('canvas');c.width=c.height=s;const g=c.getContext('2d');
+  const gr=g.createRadialGradient(s/2,s/2,0,s/2,s/2,s/2);gr.addColorStop(0,'rgba(0,0,0,0.5)');gr.addColorStop(0.55,'rgba(0,0,0,0.2)');gr.addColorStop(1,'rgba(0,0,0,0)');
+  g.fillStyle=gr;g.fillRect(0,0,s,s);return new THREE.CanvasTexture(c);})();
+const floorY=yB+0.02;
+const NP=18, pills=[];
+for(let i=0;i<NP;i++){ const sz=0.92+Math.random()*0.5, rad=0.21*sz, th=0.105*sz;   // bigger + THICKER chewable tablets
+  const geo=tabletGeo(rad,th,0.05*sz,32);
+  const m=new THREE.MeshPhysicalMaterial({color:new THREE.Color(purple[i%purple.length]),metalness:0,roughness:0.85,clearcoat:0.12,clearcoatRoughness:0.55,envMapIntensity:0.8,dithering:true});  // matte chalky chewable
+  const mesh=new THREE.Mesh(geo,m); mesh.visible=false; pillG.add(mesh);
+  const sh=new THREE.Mesh(new THREE.PlaneGeometry(rad*3.0,rad*3.0),new THREE.MeshBasicMaterial({map:softShadow,transparent:true,depthWrite:false,opacity:0}));
+  sh.rotation.x=-Math.PI/2; sh.visible=false; pillG.add(sh);
+  pills.push({mesh,sh,rad,th,p:new THREE.Vector3(),v:new THREE.Vector3(),av:new THREE.Vector3(),live:false,landed:false,exited:false}); }
+let poured=false;
+// soft contact shadow grounding the bottle itself
+const bottleShadow=new THREE.Mesh(new THREE.PlaneGeometry(R*3.3,R*2.7),new THREE.MeshBasicMaterial({map:softShadow,transparent:true,depthWrite:false,opacity:0.85}));
+bottleShadow.rotation.x=-Math.PI/2; bottleShadow.position.set(0,yB+0.004,0.05); scene.add(bottleShadow);
+function pourPills(){ poured=true;
+  for(let i=0;i<NP;i++){ const q=pills[i]; q.live=true; q.landed=false; q.exited=false; q.mesh.visible=true; q.sh.visible=false;
+    const a=Math.random()*Math.PI*2, rad=Math.random()*0.40;
+    q.p.set(Math.cos(a)*rad, yB+0.55+Math.random()*0.7, Math.sin(a)*rad);                 // start INSIDE the bottle
+    q.v.set((Math.random()-0.5)*1.2, 2.4+Math.random()*1.1, 0.45+Math.random()*0.95);     // SHOOT up out the mouth + fan toward the viewer (so they land in front, visible)
+    q.av.set((Math.random()-0.5)*10,(Math.random()-0.5)*10,(Math.random()-0.5)*10);
+    q.mesh.position.copy(q.p); q.mesh.rotation.set(Math.random()*6,Math.random()*6,Math.random()*6); } }
+function resetPills(){ poured=false; for(const q of pills){ q.live=false; q.mesh.visible=false; q.sh.visible=false; } }
+function updatePills(dt){ if(!poured) return; const g=5.2, RB=R+0.12;
+  for(const q of pills){ if(!q.live) continue;
+    q.v.y-=g*dt; q.p.addScaledVector(q.v,dt);
+    if(!q.exited && q.p.y>yNeckTop+0.05) q.exited=true;                 // has cleared the mouth
+    const rr=Math.hypot(q.p.x,q.p.z);
+    if(q.exited && q.p.y>floorY+0.28 && rr<RB){ const nx=(q.p.x/(rr||1)); q.p.x=nx*RB; if(q.p.z<0.05){q.p.z=0.05;q.v.z+=0.4;} }   // once out, keep it clear of the body
+    const rest=floorY+q.th;
+    if(q.p.y<rest){ q.p.y=rest; q.v.y*=-0.4; q.v.x*=0.72; q.v.z*=0.72; q.av.multiplyScalar(0.5); if(Math.abs(q.v.y)<0.12){q.v.y=0; q.landed=true;} }
+    q.mesh.position.copy(q.p);
+    if(q.landed){ const nx=Math.round(q.mesh.rotation.x/Math.PI)*Math.PI, nz=Math.round(q.mesh.rotation.z/Math.PI)*Math.PI;   // settle FLAT (disc lies face-up)
+      q.mesh.rotation.x+=(nx-q.mesh.rotation.x)*0.18; q.mesh.rotation.z+=(nz-q.mesh.rotation.z)*0.18; }
+    else { q.mesh.rotation.x+=q.av.x*dt; q.mesh.rotation.y+=q.av.y*dt; q.mesh.rotation.z+=q.av.z*dt; }
+    const hgt=Math.max(0,q.p.y-rest); q.sh.position.set(q.p.x,floorY+0.002,q.p.z); q.sh.visible=q.exited;   // no shadow while it's still inside the bottle
+    q.sh.material.opacity=q.exited?Math.max(0,0.5-hgt*0.4):0; const sc=1+hgt*0.6; q.sh.scale.set(sc,sc,sc); } }
+
+// ===== CAP pops OFF to the ground, then screws back on =====
+const capGroundY=yB+capH*0.5;                                 // rests on the ground beside the bottle
+let capMode='closed';                                         // closed | flying | grounded | returning
+const capV=new THREE.Vector3(), capAV=new THREE.Vector3();
+const capShadow=new THREE.Mesh(new THREE.PlaneGeometry(CR*2.6,CR*2.6),new THREE.MeshBasicMaterial({map:softShadow,transparent:true,depthWrite:false,opacity:0}));
+capShadow.rotation.x=-Math.PI/2; capShadow.position.y=yB+0.006; capShadow.visible=false; scene.add(capShadow);
+function popCap(){ if(capMode==='flying'||capMode==='grounded') return; capMode='flying'; capShadow.visible=true;
+  capV.set(0.6+Math.random()*0.6, 1.7+Math.random()*0.4, 1.1+Math.random()*0.5);          // pop up + drop to front-right
+  capAV.set((Math.random()-0.5)*5, 7+Math.random()*3, (Math.random()-0.5)*5); }           // quick unscrew spin
+function returnCap(){ if(capMode==='closed') return; capMode='returning'; }
+function updateCap(dt){
+  if(capMode==='flying'){ const g=5.0; capV.y-=g*dt; capG.position.addScaledVector(capV,dt);
+    capG.rotation.x+=capAV.x*dt; capG.rotation.y+=capAV.y*dt; capG.rotation.z+=capAV.z*dt;
+    if(capG.position.y<=capGroundY){ capG.position.y=capGroundY; capV.y*=-0.3; capV.x*=0.55; capV.z*=0.55; capAV.multiplyScalar(0.5);
+      if(Math.abs(capV.y)<0.12){ capV.y=0; capMode='grounded'; } }
+    const hgt=Math.max(0,capG.position.y-capGroundY); capShadow.position.set(capG.position.x,yB+0.006,capG.position.z);
+    capShadow.material.opacity=Math.max(0,0.5-hgt*0.28); const s=1+hgt*0.4; capShadow.scale.set(s,s,s);
+  } else if(capMode==='grounded'){ capG.position.y=capGroundY;
+    capG.rotation.x+=(Math.PI-capG.rotation.x)*0.10;                                       // settle opening-up
+    capShadow.position.set(capG.position.x,yB+0.006,capG.position.z); capShadow.material.opacity=0.48;
+  } else if(capMode==='returning'){ capG.position.lerp(capClosed,0.16);
+    capG.rotation.x+=(0-capG.rotation.x)*0.18; capG.rotation.y+=(0-capG.rotation.y)*0.18; capG.rotation.z+=(0-capG.rotation.z)*0.18;
+    capShadow.material.opacity*=0.78;
+    if(capG.position.distanceTo(capClosed)<0.025){ capG.position.copy(capClosed); capG.rotation.set(0,0,0); capMode='closed'; capShadow.visible=false; } }
+}
+
+// frame
+const ctr=new THREE.Vector3(0,0,0);
+camera.position.set(0,1.05,TOTAL*4.75); camera.lookAt(ctr);   // zoomed out so the full bottle + spill stay in frame (not cut)
+const controls=new OrbitControls(camera,renderer.domElement); controls.target.copy(ctr); controls.enableDamping=true; controls.update();
+
+// tap toggles: pop the cap off + shoot the tablets, or put it back; auto-demo loops it in the sandbox
+let auto=true, autoT=0;
+function toggleCap(){ if(capMode==='closed'){ popCap(); } else { returnCap(); resetPills(); } }
+renderer.domElement.addEventListener('pointerdown',()=>{ auto=false; toggleCap(); });
+(function loop(){ requestAnimationFrame(loop);
+  if(auto){ autoT+=1/60; if(autoT>3.6){ autoT=0; toggleCap(); } }
+  updateCap(1/60);
+  if(capMode==='flying' && !poured) pourPills();                      // tablets shoot the instant the cap pops
+  updatePills(1/60);
+  controls.update(); renderer.render(scene,camera);
+})();
+
+window.__ready=true;
+window.__open=(v)=>{ auto=false; if(v>0.5){ popCap(); } else { returnCap(); resetPills(); } };
+window.__shot=(opt={})=>{ if(opt.ry!==undefined){scene.rotation.y=opt.ry;} if(opt.rx!==undefined){scene.rotation.x=opt.rx;} if(opt.open!==undefined){window.__open(opt.open);}
+  if(opt.settle){ for(let i=0;i<opt.settle;i++){ updateCap(1/60); if(capMode==='flying' && !poured) pourPills(); updatePills(1/60); } } renderer.render(scene,camera);
+  const src=renderer.domElement,ph=opt.px||820,sc=ph/src.height,c=document.createElement('canvas');c.width=Math.round(src.width*sc);c.height=ph;
+  const g=c.getContext('2d');g.fillStyle='#241a3a';g.fillRect(0,0,c.width,c.height);g.drawImage(src,0,0,c.width,c.height);
+  scene.rotation.y=0; scene.rotation.x=0; return c.toDataURL('image/jpeg',opt.q||0.92); };
+window.__info={TOTAL,capH,bodyH,R,ASPECT,yB,ySeam,yTop,yNeckTop};
+</script>
+</body></html>
