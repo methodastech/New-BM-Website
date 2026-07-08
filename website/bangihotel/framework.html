@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><link rel="icon" type="image/png" href="assets/favicon.png"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bangi Group · Website Framework · Brand Method</title>
+<meta name="description" content="Website framework and build plan for the Bangi Group estate, prepared by Brand Method.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F1E6;--paper2:#FBF7EE;--ink:#161D10;--soft:#4C5340;--faint:#8A9078;--line:#E3DCC9;--line2:#D6CDB6;
+    --gold:#B27409;--gold-deep:#8F5D06;--gold-muted:#B0A06C;--wash:#F1E9D6;
+    --ok:#3E7A2E;--warn:#B5860F;--red:#B23A2A;
+    --dark:#10170B;--forest:#1C2A14;--bmnav:#0A101F;--maxw:1080px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+  body{font-family:"Inter",system-ui,sans-serif;background:var(--paper);color:var(--ink);font-size:16px;line-height:1.62;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}.mono{font-family:"JetBrains Mono",monospace}
+  .topbar{background:var(--bmnav);color:#EAF0FB;position:sticky;top:0;z-index:50;border-bottom:1px solid #232a40}
+  body.embedded .topbar{display:none}
+  .topbar-in{display:flex;align-items:center;justify-content:space-between;padding:12px 28px;max-width:var(--maxw);margin:0 auto;gap:12px;flex-wrap:wrap}
+  .brandmark{font-family:"JetBrains Mono",monospace;font-weight:700;letter-spacing:.08em;font-size:13.5px;text-transform:uppercase}
+  .wsw{display:flex;align-items:center;border:1px solid rgba(255,255,255,.24);overflow:auto;max-width:100%;margin-left:auto}
+  .wsw a{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#C7D3EE;text-decoration:none;padding:7px 12px;border-right:1px solid rgba(255,255,255,.18);white-space:nowrap;transition:background .25s,color .25s}
+  .wsw a:last-child{border-right:0}
+  .wsw a:hover{background:rgba(255,255,255,.09);color:#fff}
+  .wsw a.on{background:#2536F5;color:#fff;font-weight:700}
+  .nav{border-bottom:1px solid var(--line);background:rgba(246,241,230,.97);position:sticky;top:48px;z-index:49;overflow-x:auto;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+  .nav-in{display:flex;gap:3px;padding:8px 28px;max-width:var(--maxw);margin:0 auto;white-space:nowrap}
+  .nav a{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--faint);text-decoration:none;padding:6px 10px;border-radius:8px;transition:color .2s,background .2s}
+  .nav a:hover,.nav a.here{color:var(--ink);background:var(--wash)}.nav .ch-no{color:var(--gold-deep);font-weight:700;margin-right:6px}
+  .eyebrow{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-deep);display:inline-flex;align-items:center;gap:10px;font-weight:600}
+  .hero{padding:50px 0 8px}.hero h1{font-family:"Fraunces",serif;font-weight:400;font-size:clamp(36px,5.6vw,64px);line-height:1.02;letter-spacing:-.02em;margin:18px 0 0}.hero h1 em{font-style:italic;color:var(--gold-deep)}
+  .hero .lede{font-size:clamp(17px,2vw,20px);color:var(--soft);max-width:66ch;margin:20px 0 0}
+  section{padding:32px 0}
+  .chapdiv{display:flex;align-items:baseline;gap:18px;padding:42px 0 4px;border-top:1px solid var(--line);margin-top:10px;scroll-margin-top:96px}.cd-no{font-family:"Fraunces",serif;font-weight:600;font-size:40px;color:var(--gold);line-height:1}.cd-h{font-family:"Fraunces",serif;font-weight:500;font-size:28px;letter-spacing:-.01em}.cd-sub{font-size:15px;color:var(--soft);margin-top:5px}
+  h2{font-family:"Fraunces",serif;font-weight:500;font-size:clamp(24px,3.4vw,34px);line-height:1.1;letter-spacing:-.015em;margin:8px 0 0;max-width:28ch}
+  h3.sub{font-family:"Fraunces",serif;font-weight:500;font-size:22px;margin:30px 0 0}
+  p.body{font-size:16px;color:var(--soft);max-width:74ch;margin:15px 0 0}p.body b{color:var(--ink)}p.body em{color:var(--gold-deep);font-style:normal;font-weight:600}
+  .grid{display:grid;gap:16px;margin-top:22px}.g2{grid-template-columns:repeat(auto-fit,minmax(290px,1fr))}.g3{grid-template-columns:repeat(auto-fit,minmax(225px,1fr))}
+  .card{background:var(--paper2);border:1px solid var(--line);border-radius:14px;padding:20px 21px}.card .tag{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--gold-deep);font-weight:700}.card h3{font-family:"Fraunces",serif;font-weight:500;font-size:19px;margin-top:8px}.card p{font-size:14px;color:var(--soft);margin-top:9px;line-height:1.55}.card p b{color:var(--ink)}
+  .card.dark{background:var(--dark);border-color:var(--forest);color:#D9DBC6}.card.dark h3{color:#fff}.card.dark p{color:#C2C6AE}.card.dark .tag{color:#E7B85C}.card.dark p b{color:#fff}
+  /* persona path cards */
+  .persona{border:1px solid var(--line);border-radius:14px;background:var(--paper2);padding:22px 22px;position:relative;overflow:hidden}
+  .persona::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--gold)}
+  .persona .who{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-deep);font-weight:700}
+  .persona h3{font-family:"Fraunces",serif;font-weight:500;font-size:21px;margin-top:6px}
+  .persona .path{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;align-items:center}
+  .persona .step{font-size:12.5px;background:var(--wash);border:1px solid var(--line);border-radius:8px;padding:6px 11px;color:var(--soft)}
+  .persona .step b{color:var(--ink)}
+  .persona .arr{color:var(--gold);font-weight:700}
+  .persona p{font-size:14px;color:var(--soft);margin-top:14px;line-height:1.55}.persona p b{color:var(--ink)}
+  /* sitemap tree */
+  .tree{font-family:"JetBrains Mono",monospace;font-size:13px;line-height:2;color:var(--soft);background:var(--dark);border-radius:14px;padding:24px 26px;margin-top:22px;overflow-x:auto}
+  .tree .root{color:#E7B85C;font-weight:700}
+  .tree .node{color:#D9DBC6}
+  .tree .built{color:#8FAF4B}
+  .tree .later{color:#8A9078}
+  .tree .tag{font-size:9px;letter-spacing:.06em;text-transform:uppercase;padding:1px 6px;border-radius:5px;margin-left:8px;vertical-align:1px}
+  .tree .tag.b{background:rgba(143,175,75,.18);color:#8FAF4B}
+  .tree .tag.l{background:rgba(176,160,108,.16);color:#B0A06C}
+  /* blueprint rows */
+  .bp{border-top:1px solid var(--line);margin-top:22px}
+  .bprow{display:grid;grid-template-columns:38px 1fr;gap:16px;padding:20px 4px;border-bottom:1px solid var(--line);align-items:start}
+  .bprow .bn{font-family:"Fraunces",serif;font-weight:600;font-size:22px;color:var(--gold);line-height:1}
+  .bprow h4{font-family:"Fraunces",serif;font-weight:500;font-size:19px}
+  .bprow .schem{margin-top:10px;border:1px dashed var(--line2);border-radius:10px;background:var(--wash);height:56px;display:flex;align-items:center;padding:0 14px;gap:10px;color:var(--faint);font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase}
+  .bprow .schem .blk{height:26px;border-radius:6px;background:var(--line2);flex:0 0 auto}
+  .bprow .meta{display:grid;gap:5px;margin-top:12px}
+  .bprow .meta div{font-size:13.5px;color:var(--soft)}
+  .bprow .meta .k{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--gold-deep);font-weight:700;margin-right:8px}
+  .bprow .why{font-style:italic;color:var(--ink)}
+  /* timeline */
+  .timeline{display:grid;grid-template-columns:repeat(8,1fr);gap:6px;margin-top:22px}
+  .wk{border:1px solid var(--line);border-radius:10px;background:var(--paper2);padding:12px 10px;min-height:120px;position:relative}
+  .wk.go{border-color:var(--gold);background:var(--wash)}
+  .wk .wn{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.05em;color:var(--gold-deep);font-weight:700}
+  .wk b{display:block;font-size:13px;margin-top:8px;line-height:1.3}
+  .wk p{font-size:11px;color:var(--soft);margin-top:6px;line-height:1.4}
+  .wk .star{position:absolute;top:8px;right:9px;color:var(--gold)}
+  @media(max-width:860px){.timeline{grid-template-columns:repeat(4,1fr)}}
+  @media(max-width:520px){.timeline{grid-template-columns:repeat(2,1fr)}}
+  table{width:100%;border-collapse:separate;border-spacing:0;margin-top:18px;font-size:14px;background:var(--paper2);border:1px solid var(--line);border-radius:12px;overflow:hidden}th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}thead th{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#F2F1E3;background:var(--dark)}tr:last-child td{border-bottom:none}td.dim{font-weight:600;white-space:nowrap}td.sc{font-family:"JetBrains Mono",monospace;color:var(--gold-deep);font-weight:700;white-space:nowrap}
+  .tbl-scroll{overflow-x:auto;margin-top:18px}.tbl-scroll table{margin-top:0}
+  .vtag{font-family:"JetBrains Mono",monospace;font-size:9.5px;text-transform:uppercase;letter-spacing:.04em;padding:3px 8px;border-radius:6px;font-weight:700;white-space:nowrap}.vtag.hi{background:rgba(62,122,46,.15);color:var(--ok)}.vtag.lo{background:rgba(181,134,15,.16);color:#8a6209}.vtag.bad{background:rgba(178,58,42,.12);color:var(--red)}
+  .diagram{margin-top:18px;border:1px solid var(--line);border-radius:14px;background:var(--paper2);padding:18px}.diagram .cap{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--faint);margin-bottom:10px}.diagram svg{width:100%;height:auto;display:block}
+  .pin{margin-top:22px;border-left:3px solid var(--gold);background:linear-gradient(90deg,rgba(178,116,9,.07),transparent);padding:15px 19px;border-radius:0 12px 12px 0;font-size:15px;display:block}.pin b{color:var(--gold-deep)}
+  .pin .proof{display:block;margin-top:6px;font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.03em;text-transform:uppercase;color:var(--ok)}.pin .proof a{color:var(--ok);font-weight:700}
+  footer{padding:34px 0 70px;color:var(--faint);font-size:12px;font-family:"JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.05em;border-top:1px solid var(--line);margin-top:30px}
+  @media(max-width:640px){.wrap{padding:0 18px}.topbar-in{padding:10px 18px}.nav-in{padding:8px 18px}.hero{padding:34px 0 4px}}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="topbar-in"><span class="brandmark">BM</span><nav class="wsw"><a href="audit.html">01 Audit</a><a href="framework.html" class="on">02 Framework</a><a href="index.html">03 Website</a></nav></div></div>
+<div class="nav"><div class="nav-in">
+  <a href="#c1"><span class="ch-no">01</span>The Flow</a><a href="#c2"><span class="ch-no">02</span>Sitemap</a><a href="#c3"><span class="ch-no">03</span>Homepage</a><a href="#c4"><span class="ch-no">04</span>The Spine</a><a href="#c5"><span class="ch-no">05</span>3D &amp; Motion</a><a href="#c6"><span class="ch-no">06</span>The Build</a><a href="#c7"><span class="ch-no">07</span>Timeline</a><a href="#c8"><span class="ch-no">08</span>Inputs</a>
+</div></div>
+
+<div class="wrap">
+  <header class="hero">
+    <span class="eyebrow">Bangi Group · The plan</span>
+    <h1>The Website <em>Framework</em></h1>
+    <p class="lede">The audit named what leaks. This is the plan that fixes it: the guest journeys, the sitemap, the homepage band by band, the one booking and capture spine, the motion contract, the build and the eight-week timeline. Every band here is already running in tab 03.</p>
+    <div class="pin"><b>The through-line.</b> One estate, one front door, one booking spine. Optimisation, not rebrand: keep the tree, the gold, the estate greens and the photography, fix the machine underneath.
+    <span class="proof">The whole plan runs live in tab 03 · <a href="index.html#top">index.html</a></span></div>
+  </header>
+  <!-- ===== 01 THE FLOW ===== -->
+  <div class="chapdiv" id="c1"><span class="cd-no">01</span><div><div class="cd-h">The Flow</div><div class="cd-sub">Three guests, three journeys, one front door.</div></div></div>
+  <section style="padding-top:14px">
+    <h2>Design the paths, not the pages</h2>
+    <p class="body">The estate serves three guests with different intents. Each has a path, and each path today hits a leak the audit named. The framework designs each one to end in a booking or a captured enquiry, on the estate&rsquo;s own surfaces.</p>
+    <div class="grid" style="margin-top:22px">
+      <div class="persona">
+        <span class="who">Persona 01 · the leisure guest</span>
+        <h3>Books a stay, direct, with fees shown before payment</h3>
+        <div class="path"><span class="step">Google</span><span class="arr">&rarr;</span><span class="step"><b>homepage</b></span><span class="arr">&rarr;</span><span class="step">one SwiftBook engine</span><span class="arr">&rarr;</span><span class="step">deposit &amp; parking disclosed</span><span class="arr">&rarr;</span><span class="step"><b>direct booking</b></span></div>
+        <p>Today she is split across two SwiftBook IDs and meets two fees at check-in. In the framework the deposit and parking sit in a Know Before You Book panel at rate and confirm, so she pays informed, on one engine, and the review complaints never happen.</p>
+      </div>
+      <div class="persona">
+        <span class="who">Persona 02 · the event planner</span>
+        <h3>Fills 1 of 28 function rooms through a captured enquiry</h3>
+        <div class="path"><span class="step">searches MICE venue</span><span class="arr">&rarr;</span><span class="step"><b>Meet</b></span><span class="arr">&rarr;</span><span class="step">28 venues, capacities</span><span class="arr">&rarr;</span><span class="step">enquiry form</span><span class="arr">&rarr;</span><span class="step"><b>captured lead</b></span></div>
+        <p>Today the events desk is a phone number and a wait. In the framework Meet opens a two-track panel, leisure and wedding on one side, conference and MICE on the other, and the enquiry lands in one pipeline the team owns, not a call queue.</p>
+      </div>
+      <div class="persona">
+        <span class="who">Persona 03 · the group explorer</span>
+        <h3>Discovers the estate and cross-sells himself</h3>
+        <div class="path"><span class="step">arrives for golf</span><span class="arr">&rarr;</span><span class="step"><b>the hub</b></span><span class="arr">&rarr;</span><span class="step">farm · LaVista · dining</span><span class="arr">&rarr;</span><span class="step">Stay &amp; Play bundle</span><span class="arr">&rarr;</span><span class="step"><b>a longer visit</b></span></div>
+        <p>Today the hub reaches 3 of 7 destinations and the farm has no booking engine, so Traveloka sells the hotel-plus-farm staycation the group never offers direct. In the framework all seven destinations are first-class and the cross-sell rail offers the bundle on the owned estate.</p>
+      </div>
+    </div>
+    <h3 class="sub">The five-seconds, thirty-seconds, two-minutes rule</h3>
+    <p class="body">Every path is measured against one credibility rule. In <b>five seconds</b> the guest must know what the estate is and that it is trustworthy: one clear front door, the reputation visible. In <b>thirty seconds</b> they must find their intent: Stay, Meet, Play, Farm or Offers, one label each. In <b>two minutes</b> they must be able to act: book a room, enquire on an event, check a tee time, all reachable in one click from anywhere on the page.</p>
+    <div class="pin"><b>Pin.</b> Three guests, three paths, each ending in a booking or a captured enquiry on the estate&rsquo;s own surface, not an OTA&rsquo;s.
+    <span class="proof">Working proof · all three paths run in tab 03 · <a href="index.html#estate">#estate</a>, <a href="contact.html">contact.html</a>, <a href="group.html">group.html</a></span></div>
+  </section>
+
+  <!-- ===== 02 SITEMAP ===== -->
+  <div class="chapdiv" id="c2"><span class="cd-no">02</span><div><div class="cd-h">Sitemap</div><div class="cd-sub">One hub, seven destinations, one hotel site.</div></div></div>
+  <section style="padding-top:14px">
+    <h2>The estate, mapped to one tree</h2>
+    <p class="body">The corporate hub becomes the root, reaching all seven destinations, not three. The hotel site organises by guest intent, not org chart. Nodes marked <span class="mono" style="color:var(--ok)">built</span> are demonstrated in this prototype; nodes marked <span class="mono" style="color:var(--gold-muted)">engagement</span> ship in the real build.</p>
+    <div class="tree">
+      <div class="root">bangigroup.com &middot; the hub<span class="tag b">built · group.html</span></div>
+      <div class="node">&nbsp;&nbsp;├─ Bangi Resort Hotel<span class="tag b">built</span></div>
+      <div class="node">&nbsp;&nbsp;├─ Bangi Golf Resort<span class="tag b">built</span></div>
+      <div class="node">&nbsp;&nbsp;├─ Bangi Farm Resort<span class="tag b">built</span></div>
+      <div class="node">&nbsp;&nbsp;├─ LaVista Arena<span class="tag b">built · now surfaced &amp; priced</span></div>
+      <div class="node">&nbsp;&nbsp;├─ BRDC · development<span class="tag b">built</span></div>
+      <div class="node">&nbsp;&nbsp;├─ BGR Foodservice<span class="tag b">built</span></div>
+      <div class="later">&nbsp;&nbsp;└─ BGR Food Talk<span class="tag l">returning state, no dead link</span></div>
+      <div style="height:10px"></div>
+      <div class="root">Bangi Resort Hotel &middot; by intent</div>
+      <div class="node">&nbsp;&nbsp;├─ Home<span class="tag b">built · index.html</span></div>
+      <div class="node">&nbsp;&nbsp;├─ Offers<span class="tag b">built · offers.html</span></div>
+      <div class="node">&nbsp;&nbsp;├─ Stay &middot; 256 rooms<span class="tag l">engagement</span></div>
+      <div class="node">&nbsp;&nbsp;├─ Meet &amp; Celebrate &middot; 28 venues<span class="tag l">engagement</span></div>
+      <div class="node">&nbsp;&nbsp;├─ Play &middot; golf &amp; LaVista<span class="tag l">engagement</span></div>
+      <div class="node">&nbsp;&nbsp;├─ Taste &middot; dining<span class="tag l">engagement</span></div>
+      <div class="node">&nbsp;&nbsp;├─ Explore &middot; the farm<span class="tag l">engagement</span></div>
+      <div class="node">&nbsp;&nbsp;└─ Contact &amp; enquiry<span class="tag b">built · contact.html</span></div>
+    </div>
+    <div class="pin"><b>Pin.</b> The prototype builds the four pages that prove the audit&rsquo;s fixes: home, offers, the hub, contact. The intent pages ship in the engagement on the same spine.
+    <span class="proof">Working proof · the four prototype pages cross-link correctly in tab 03 · <a href="index.html#top">index</a> · <a href="offers.html">offers</a> · <a href="group.html">group</a> · <a href="contact.html">contact</a></span></div>
+  </section>
+
+  <!-- ===== 03 HOMEPAGE ===== -->
+  <div class="chapdiv" id="c3"><span class="cd-no">03</span><div><div class="cd-h">Homepage</div><div class="cd-sub">The band-by-band blueprint, the estate as an almanac.</div></div></div>
+  <section style="padding-top:14px">
+    <h2>An estate almanac, read from dawn to dusk</h2>
+    <p class="body">The design direction is <em>the estate almanac</em>: a warm, printed-journal reading of the 600 acres on ivory paper, poetic photo-and-fact chapters routed through clear, confident wayfinding. The signature is a <b>dawn-to-dusk chapter</b> that reads its light off a colour-temperature clock, closing on the estate-lake at dusk, whose lone tree rhymes with the gold tree wordmark. It looks nothing like a tech dashboard, and it delivers hard facts in a column that never moves. Type is Fraunces for display and numerals, General Sans for body and wayfinding. Gold is ink and hairline only, never a fill larger than a button.</p>
+    <div class="bp">
+      <div class="bprow"><span class="bn">01</span><div><h4>Loader</h4><div class="schem"><span class="blk" style="width:20%"></span><span class="blk" style="width:8%"></span>gold particles &rarr; songket diamond &rarr; tree wordmark</div><div class="meta"><div><span class="k">Layout</span>full-screen, percent readout, click-skip</div><div><span class="k">Motion</span>particle settle under 1.5s, reduced-motion fades</div><div class="why"><span class="k">Why</span>the estate names itself before the guest scrolls</div></div></div></div>
+      <div class="bprow"><span class="bn">02</span><div><h4>Hero</h4><div class="schem"><span class="blk" style="width:100%;height:40px"></span></div><div class="meta"><div><span class="k">Layout</span>still dusk-pool photo, tree wordmark and one Fraunces line lower-left, one gold Check dates button, rate line</div><div><span class="k">Motion</span>slow 1.0 to 1.06 ken-burns, transform only</div><div class="why"><span class="k">Why</span>confidence through stillness, the LCP image carries the first impression</div></div></div></div>
+      <div class="bprow"><span class="bn">03</span><div><h4>Two-door split</h4><div class="schem"><span class="blk" style="width:46%"></span><span class="blk" style="width:46%"></span></div><div class="meta"><div><span class="k">Layout</span>Come for the day vs Stay the night, open to all, no membership needed</div><div><span class="k">Motion</span>clip-path reveal on entry</div><div class="why"><span class="k">Why</span>answers the day-visitor versus overnight question in one screen</div></div></div></div>
+      <div class="bprow"><span class="bn">04</span><div><h4>The estate plan</h4><div class="schem"><span class="blk" style="width:70%;height:40px"></span></div><div class="meta"><div><span class="k">Layout</span>numbered hotspots 01 Hotel to 07 Arrival over the fairway-skyline and lake photos, each a fact-chip anchor</div><div><span class="k">Motion</span>hover reveals a fact-chip, 0.2 to 0.4 depth parallax, native scroll</div><div class="why"><span class="k">Why</span>the land becomes the navigation, clarity made spatial</div></div></div></div>
+      <div class="bprow"><span class="bn">05</span><div><h4>Route tiles</h4><div class="schem"><span class="blk" style="width:30%"></span><span class="blk" style="width:30%"></span><span class="blk" style="width:30%"></span></div><div class="meta"><div><span class="k">Layout</span>five labelled photo tiles, Stay, Meet, Play, Farm, Group, one line each</div><div><span class="k">Motion</span>image scale 1.04 and underline draw on hover</div><div class="why"><span class="k">Why</span>a MICE planner and a golfer each find their door in one glance</div></div></div></div>
+      <div class="bprow"><span class="bn">06</span><div><h4>The Almanac · 600 acres, dawn to dusk</h4><div class="schem"><span class="blk" style="width:100%;height:40px;background:linear-gradient(90deg,#EFE7D6,#E7B85C,#B27409,#1C2A14)"></span></div><div class="meta"><div><span class="k">Layout</span>five sticky-stack chapters, Dawn, Fairways, The Larder, Gatherings, Dusk, each a photo plus real numbers in a still column</div><div><span class="k">Motion</span>one master ScrollTrigger walks a colour-temperature var, photos cross-fade on scrub, body copy never moves, the one pinned band on the site</div><div class="why"><span class="k">Why</span>the showpiece, an adventure through the land that delivers facts above all</div></div></div></div>
+      <div class="bprow"><span class="bn">07</span><div><h4>Count-up stats</h4><div class="schem"><span class="blk" style="width:22%"></span><span class="blk" style="width:22%"></span><span class="blk" style="width:22%"></span><span class="blk" style="width:22%"></span></div><div class="meta"><div><span class="k">Layout</span>256 rooms, 28 venues, 600 acres, 7 experiences on forest ground, gold Fraunces numerals</div><div><span class="k">Motion</span>count-up once, the real number is in the HTML first</div><div class="why"><span class="k">Why</span>the numbers are the record, set with gravitas</div></div></div></div>
+      <div class="bprow"><span class="bn">08</span><div><h4>Bundle rail &amp; offers</h4><div class="schem"><span class="blk" style="width:31%"></span><span class="blk" style="width:31%"></span><span class="blk" style="width:31%"></span></div><div class="meta"><div><span class="k">Layout</span>Stay &amp; Play, Farm Day, Meet &amp; Reward cross-sell cards, then two real current offers with dual pricing</div><div><span class="k">Motion</span>reveal on scroll, gentle parallax band</div><div class="why"><span class="k">Why</span>the cross-sell the group&rsquo;s own sites never offer, made direct</div></div></div></div>
+      <div class="bprow"><span class="bn">09</span><div><h4>Member capture</h4><div class="schem"><span class="blk" style="width:60%"></span></div><div class="meta"><div><span class="k">Layout</span>inline email band, unlock the member rate, no popups anywhere</div><div><span class="k">Motion</span>instant unlock on submit, pricing updates in place</div><div class="why"><span class="k">Why</span>first-party audience, the channel the estate controls</div></div></div></div>
+      <div class="bprow"><span class="bn">10</span><div><h4>Contact &amp; footer diorama</h4><div class="schem"><span class="blk" style="width:100%;height:40px;background:#1C2A14"></span></div><div class="meta"><div><span class="k">Layout</span>contact cards, then a small dusk 3D estate diorama band, footer with the full seven-destination wayfinding, then the ribbon</div><div><span class="k">Motion</span>pointer-parallax diorama, waving ribbon, both reduced-motion guarded</div><div class="why"><span class="k">Why</span>the day ends at dusk, the estate signs off, Brand Method credits the demo</div></div></div></div>
+    </div>
+    <div class="pin"><b>Pin.</b> Ten bands, one arc, dawn to dusk. Motion carries the light, the facts sit still and legible.
+    <span class="proof">Working proof · the full band assembly is live in tab 03 · <a href="index.html#top">index.html</a></span></div>
+  </section>
+
+  <!-- ===== 04 THE SPINE ===== -->
+  <div class="chapdiv" id="c4"><span class="cd-no">04</span><div><div class="cd-h">The Spine</div><div class="cd-sub">One booking and capture spine feeding the whole estate.</div></div></div>
+  <section style="padding-top:14px">
+    <h2>One spine, five surfaces</h2>
+    <p class="body">The audit&rsquo;s deepest leak is a fragmented spine: two SwiftBook IDs, no email list, golf-only measurement. The framework replaces it with a single spine, one booking identity, one enquiry pipeline, one newsletter list, one analytics view with conversion events, feeding every surface on the estate.</p>
+    <div class="diagram">
+      <div class="cap">The spine · one identity feeding hotel, golf, farm, arena and the hub</div>
+      <svg viewBox="0 0 900 280" role="img" aria-label="One booking and capture spine feeding hotel, golf, farm, arena and the group hub">
+        <rect x="330" y="20" width="240" height="52" rx="10" fill="#10170B"/>
+        <text x="450" y="42" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="11" fill="#E7B85C" font-weight="700">THE SPINE</text>
+        <text x="450" y="60" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#C2C6AE">one SwiftBook ID · one list · one GA4</text>
+        <g stroke="#B27409" stroke-width="2" fill="none">
+          <path d="M450 72 C 450 110, 130 110, 130 150"/>
+          <path d="M450 72 C 450 110, 290 110, 290 150"/>
+          <path d="M450 72 L 450 150"/>
+          <path d="M450 72 C 450 110, 610 110, 610 150"/>
+          <path d="M450 72 C 450 110, 770 110, 770 150"/>
+        </g>
+        <g font-family="JetBrains Mono,monospace" font-size="10" text-anchor="middle" font-weight="700">
+          <g><rect x="82" y="150" width="96" height="44" rx="9" fill="#F1E9D6" stroke="#D6CDB6"/><text x="130" y="172" fill="#4C5340">HOTEL</text><text x="130" y="186" fill="#8A9078" font-weight="400">rooms</text></g>
+          <g><rect x="242" y="150" width="96" height="44" rx="9" fill="#F1E9D6" stroke="#D6CDB6"/><text x="290" y="172" fill="#4C5340">GOLF</text><text x="290" y="186" fill="#8A9078" font-weight="400">tee times</text></g>
+          <g><rect x="402" y="150" width="96" height="44" rx="9" fill="#F1E9D6" stroke="#D6CDB6"/><text x="450" y="172" fill="#4C5340">FARM</text><text x="450" y="186" fill="#8A9078" font-weight="400">tours</text></g>
+          <g><rect x="562" y="150" width="96" height="44" rx="9" fill="#F1E9D6" stroke="#D6CDB6"/><text x="610" y="172" fill="#4C5340">LAVISTA</text><text x="610" y="186" fill="#8A9078" font-weight="400">courts</text></g>
+          <g><rect x="722" y="150" width="96" height="44" rx="9" fill="#F1E9D6" stroke="#D6CDB6"/><text x="770" y="172" fill="#4C5340">HUB</text><text x="770" y="186" fill="#8A9078" font-weight="400">enquiry</text></g>
+        </g>
+        <text x="450" y="240" text-anchor="middle" font-family="Inter,sans-serif" font-size="13" fill="#4C5340">Every surface books, captures and reports through the same spine.</text>
+      </svg>
+    </div>
+    <div class="grid g2">
+      <div class="card"><span class="tag">Booking</span><h3>One SwiftBook identity</h3><p>One canonical property ID everywhere, retiring the parallel ID and the dead FastBooking widget. The four-route sheet resolves Room, Golf, LaVista and Function to the right path. <b>Canonical ID to confirm with Sam at discovery.</b></p></div>
+      <div class="card"><span class="tag">Capture</span><h3>One list</h3><p>A single email capture on every page, feeding one newsletter list with a welcome flow. Golf rates, festival dates, seasonal offers, member pricing, about once a month.</p></div>
+      <div class="card"><span class="tag">Enquiry</span><h3>One pipeline</h3><p>Every event and MICE enquiry lands in one pipeline the team owns, not scattered inboxes or a call queue.</p></div>
+      <div class="card"><span class="tag">Measurement</span><h3>One GA4</h3><p>Group-wide GA4 and Pixel with conversion events on booking, enquiry and capture, so direct-versus-OTA behaviour is finally visible across the estate.</p></div>
+    </div>
+    <div class="pin"><b>Pin.</b> One spine ends the fragmentation the audit measured, the two IDs, the missing list, the golf-only tracking, in a single stroke.
+    <span class="proof">Working proof · the single-engine booking flow and the one-list capture run in tab 03 · <a href="offers.html#booking">offers.html#booking</a> and <a href="index.html#member">#member</a></span></div>
+  </section>
+  <!-- ===== 05 3D & MOTION ===== -->
+  <div class="chapdiv" id="c5"><span class="cd-no">05</span><div><div class="cd-h">3D &amp; Motion</div><div class="cd-sub">Four moments, and a performance contract.</div></div></div>
+  <section style="padding-top:14px">
+    <h2>Motion with a budget</h2>
+    <p class="body">Motion is restraint, not spectacle. There are four moments, and one hard contract they all sit inside. Everything is transform and opacity only, body copy never moves, there is one pinned band on the homepage, and the full page is complete and readable under <span class="mono">prefers-reduced-motion</span>.</p>
+    <div class="grid g2">
+      <div class="card"><span class="tag">Moment 01</span><h3>The loader</h3><p>Gold particles settle into a songket diamond then the tree wordmark, under 1.5 seconds, click to skip, released on dismiss. Reduced-motion gets a quick fade.</p></div>
+      <div class="card"><span class="tag">Moment 02</span><h3>The hero</h3><p>A still dusk-pool photo as the LCP image with a slow ken-burns, transform only. No video, none exists, so the still carries the first impression at full quality.</p></div>
+      <div class="card"><span class="tag">Moment 03</span><h3>The dawn-to-dusk almanac</h3><p>The one pinned band. A master scroll trigger walks a colour-temperature clock from dawn through golden hour to dusk while five photo chapters cross-fade and the facts sit still. Skippable by any menu anchor.</p></div>
+      <div class="card"><span class="tag">Moment 04</span><h3>The footer diorama</h3><p>A small dusk estate diorama with pointer parallax, contained in its own band above the footer, never a full-section canvas behind text.</p></div>
+    </div>
+    <h3 class="sub">The performance contract</h3>
+    <div class="tbl-scroll"><table>
+      <thead><tr><th>Metric</th><th>Current site</th><th>New budget</th></tr></thead>
+      <tbody>
+        <tr><td class="dim">Homepage image weight</td><td>~2.9 MB, no WebP</td><td class="sc">&lt; 1 MB per page, WebP/AVIF</td></tr>
+        <tr><td class="dim">LCP hero</td><td>414 to 944 KB JPEG/PNG, no preload</td><td class="sc">WebP <span class="mono">&lt;img fetchpriority=high&gt;</span>, LCP &lt; 2.5s</td></tr>
+        <tr><td class="dim">Pinch zoom</td><td>blocked, <span class="mono">user-scalable=0</span></td><td class="sc">enabled, WCAG 1.4.4 pass</td></tr>
+        <tr><td class="dim">Heading structure</td><td>3 H1s hotel, 2 H1s golf</td><td class="sc">one H1 per page</td></tr>
+        <tr><td class="dim">Dead-plugin load</td><td>WooCommerce 5.4.1 site-wide</td><td class="sc">removed, static prototype</td></tr>
+        <tr><td class="dim">Reduced motion</td><td>not honoured</td><td class="sc">complete, static, nothing missing</td></tr>
+      </tbody>
+    </table></div>
+    <div class="pin"><b>Pin.</b> The demo does not just look better than the current site, it embarrasses it on the numbers: every page under 1 MB, WebP heroes, zoom enabled, motion that respects the guest.
+    <span class="proof">Working proof · tab 03 meets every row of this contract · <a href="index.html#top">index.html</a></span></div>
+  </section>
+
+  <!-- ===== 06 THE BUILD ===== -->
+  <div class="chapdiv" id="c6"><span class="cd-no">06</span><div><div class="cd-h">The Build</div><div class="cd-sub">Platform, roles, and the posture that keeps it clean.</div></div></div>
+  <section style="padding-top:14px">
+    <h2>Keep what works, remove what leaks</h2>
+    <p class="body">The prototype in tab 03 is static HTML for speed and portability. The real engagement <b>keeps WordPress</b>, which the team already runs and edits, so nothing about the platform is a rebuild. The work is optimisation on top of it.</p>
+    <div class="grid g3">
+      <div class="card"><span class="tag">Platform</span><h3>WordPress, kept</h3><p>The prototype is static; production stays on the WordPress the team knows. No migration, no retraining on a new system, no rebrand.</p></div>
+      <div class="card"><span class="tag">Governance</span><h3>CMS roles &amp; training</h3><p>The team has no self-edit access today, so stale copy stays live. The build adds roles, a short training pass and a content owner, so the estate stays current.</p></div>
+      <div class="card"><span class="tag">Hygiene</span><h3>The relic removed</h3><p>WooCommerce 5.4.1 and its site-wide load come off. Divi, Slider Revolution and WP core are patched, generator strings suppressed.</p></div>
+    </div>
+    <div class="pin warn" style="border-left-color:var(--warn);background:linear-gradient(90deg,rgba(181,134,15,.09),transparent)"><b style="color:#8a6209">Security posture.</b> Exposed old-version strings on Divi 4.9.6 and a mid-2021 WooCommerce are a known attack surface. Patching the stack and removing the dead plugin is a security fix, not only a speed one, and it happens in week seven alongside tracking and CMS.</div>
+  </section>
+
+  <!-- ===== 07 TIMELINE ===== -->
+  <div class="chapdiv" id="c7"><span class="cd-no">07</span><div><div class="cd-h">Timeline</div><div class="cd-sub">Eight weeks to go-live, then care.</div></div></div>
+  <section style="padding-top:14px">
+    <h2>W1 to W8, then ongoing</h2>
+    <div class="timeline">
+      <div class="wk"><span class="wn">W1</span><b>Discovery</b><p>Access, canonical SwiftBook ID, GBP, traffic, photo library</p></div>
+      <div class="wk"><span class="wn">W2</span><b>Audit close-out</b><p>Confirm findings live, lock the priority order</p></div>
+      <div class="wk"><span class="wn">W3</span><b>Centralise</b><p>One engine, disclose fees, seven-destination hub</p></div>
+      <div class="wk"><span class="wn">W4</span><b>SEO</b><p>Schema, canonical naming, GBP lock, images to WebP</p></div>
+      <div class="wk"><span class="wn">W5</span><b>Journey</b><p>The almanac homepage, the intent pages, the booking flow</p></div>
+      <div class="wk"><span class="wn">W6</span><b>Capture</b><p>One list, welcome flow, member rate, cross-sell rail</p></div>
+      <div class="wk"><span class="wn">W7</span><b>Track &amp; CMS</b><p>Group GA4 and Pixel, remove the relic, patch the stack, CMS roles</p></div>
+      <div class="wk go"><span class="star" aria-hidden="true">&#9733;</span><span class="wn">W8</span><b>Go-live</b><p>Launch, then Care from here on</p></div>
+    </div>
+    <p class="body">Commercials are indicative, before 8% SST. Route 01 from <b>RM12,000</b> one-off (RM12,960 with SST), on a <b>50/50 deposit and go-live split</b>. Route 02 Care from <b>RM2,500 a month</b> from week eight. There is a review at the end of each phase, a weekly follow-up, and a WhatsApp check-in every two to three days, so nothing goes quiet.</p>
+    <div class="pin"><b>Pin.</b> Eight weeks, a review per phase, and a cadence that keeps you informed the whole way. Care begins the day it goes live.
+    <span class="proof">The whole eight-week output is previewable now · <a href="index.html#top">tab 03</a></span></div>
+  </section>
+
+  <!-- ===== 08 INPUTS ===== -->
+  <div class="chapdiv" id="c8"><span class="cd-no">08</span><div><div class="cd-h">Inputs</div><div class="cd-sub">The discovery questionnaire, everything week one needs.</div></div></div>
+  <section style="padding-top:14px">
+    <h2>What we need to start</h2>
+    <p class="body">One clean handover in discovery, and week one runs without waiting. Each input below unblocks a specific fix the audit named.</p>
+    <div class="tbl-scroll"><table>
+      <thead><tr><th>Input</th><th>Why it is needed</th><th>Unblocks</th></tr></thead>
+      <tbody>
+        <tr><td class="dim">Site &amp; hosting access</td><td>To edit WordPress, remove the relic, patch the stack</td><td>Hygiene, speed</td></tr>
+        <tr><td class="dim">Canonical SwiftBook ID</td><td>To pick one of the two parallel property IDs as the single engine</td><td>The whole booking spine</td></tr>
+        <tr><td class="dim">Google Business Profile access</td><td>To consolidate the entity and lock the brand SERP</td><td>Discovery, findability</td></tr>
+        <tr><td class="dim">Traffic exports</td><td>To baseline direct-versus-OTA and set conversion targets</td><td>Measurement</td></tr>
+        <tr><td class="dim">Driving range status</td><td>The &ldquo;coming end Jan 2026&rdquo; line is still live in July, is it open?</td><td>Current, accurate copy</td></tr>
+        <tr><td class="dim">Food Talk intent</td><td>Restore the suspended domain, or retire it cleanly?</td><td>The hub&rsquo;s returning state</td></tr>
+        <tr><td class="dim">Photo library</td><td>Higher-resolution originals to grade into the almanac</td><td>The homepage and inner pages</td></tr>
+      </tbody>
+    </table></div>
+    <div class="pin"><b>Approve, and week one starts.</b> Everything above is a short handover, not a project. The plan is ready, the proof is running, the estate is waiting.
+    <span class="proof">See the whole plan already running · <a href="index.html#top">tab 03 · index.html</a></span></div>
+  </section>
+
+  <footer>Brand Method · Website Framework for Bangi Group · Confidential · Prepared 7 July 2026<div class="ribbon" role="img" aria-label="Demo by BrandMethod.co"><canvas id="ribCv" width="460" height="110" aria-hidden="true"></canvas><span class="ribbon-fb" hidden>Demo &middot; BrandMethod.co</span></div></footer>
+</div>
+
+<button id="bmBack" type="button" aria-label="Back">&larr; Back</button>
+<style>#bmBack{display:none;position:fixed;top:14px;right:16px;z-index:99999;align-items:center;gap:6px;font:600 12.5px "Inter",system-ui,sans-serif;color:#8F5D06;background:rgba(251,247,238,.97);border:1px solid var(--line2);border-radius:30px;padding:8px 14px;cursor:pointer;box-shadow:0 6px 18px -8px rgba(80,60,10,.35)}
+#bmBack:hover{border-color:#B27409}
+body.bm-standalone #bmBack{display:none}
+@media print{#bmBack{display:none!important}}</style>
+<script>
+if(window.top!==window.self)document.body.classList.add('embedded');
+(function(){if(window.top===window.self){document.body.classList.add('bm-standalone');var b=document.getElementById('bmBack');if(b)b.addEventListener('click',function(){var r=document.referrer;if(r&&r.indexOf(location.origin)===0&&r!==location.href&&history.length>1){history.back();}else{location.href='index.html';}})}})();
+(function(){
+  var links=[].slice.call(document.querySelectorAll('.nav a'));
+  var secs=links.map(function(a){return document.querySelector(a.getAttribute('href'));});
+  function onScroll(){var y=window.scrollY+120,best=0;for(var i=0;i<secs.length;i++){if(secs[i]&&secs[i].offsetTop<=y)best=i;}links.forEach(function(a,i){a.classList.toggle('here',i===best);});}
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+})();
+</script>
+<style>
+.ribbon{display:flex;justify-content:center;padding:22px 0 0;pointer-events:none}
+.ribbon canvas{width:min(420px,80vw);height:auto;display:block}
+.ribbon-fb{font-family:"JetBrains Mono",monospace;font-size:.6rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:#fff;background:linear-gradient(90deg,#1421B8,#2536F5);padding:.5rem 1.4rem;clip-path:polygon(10px 0,calc(100% - 10px) 0,100% 50%,calc(100% - 10px) 100%,10px 100%,0 50%)}
+.ribbon-fb[hidden]{display:none}
+</style>
+<script>
+/* waving DEMO BY BRAND METHOD.CO ribbon (signature sign-off) */
+(function(){
+  var cv=document.getElementById('ribCv'),fb=document.querySelector('.ribbon-fb'),ctx;
+  try{ctx=cv&&cv.getContext('2d');}catch(e){}
+  if(!ctx){if(cv)cv.style.display='none';if(fb)fb.hidden=false;return;}
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var W=460,H=110,dpr=Math.min(devicePixelRatio||1,2),X0=40,X1=420,BH=32,BY=40,running=false,looping=false,t=0;
+  cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
+  var FONT='600 12px Inter,system-ui,sans-serif';
+  var SEGS=[{t:'DEMO BY',sp:3.6,gap:8},{star:true,w:13,gap:9},{t:'BRAND',sp:3.6},{t:'METHOD.CO',sp:3.6}],G=null;
+  function build(){G=[];SEGS.forEach(function(s){if(s.star){G.push({star:true,w:s.w});if(s.gap)G.push({gap:s.gap});return;}ctx.font=FONT;for(var i=0;i<s.t.length;i++){var ch=s.t[i];if(ch===' '){G.push({gap:6.5});continue;}G.push({ch:ch,w:ctx.measureText(ch).width+s.sp});}if(s.gap)G.push({gap:s.gap});});}
+  function wave(x,tt){return 4*Math.sin(x*0.0135+tt*0.0011)+2.4*Math.sin(x*0.029-tt*0.00068)+1.2*Math.sin(x*0.055+tt*0.0016);}
+  function slope(x,tt){return (wave(x+2,tt)-wave(x-2,tt))/4;}
+  function shade(p){var r=Math.round(18+68*p),g=Math.round(28+88*p),b=Math.round(158+97*p);return 'rgb('+r+','+g+','+b+')';}
+  function tail(xe,dir,tt){var y=BY+wave(xe,tt)*0.7+9,x2=xe-dir*40;ctx.beginPath();ctx.moveTo(xe,y);ctx.lineTo(x2,y+7);ctx.lineTo(x2+dir*13,y+7+BH/2);ctx.lineTo(x2,y+7+BH);ctx.lineTo(xe,y+BH);ctx.closePath();ctx.fillStyle='#101C96';ctx.fill();ctx.fillStyle='rgba(0,0,0,.22)';ctx.fill();}
+  function draw(tt){if(!G)build();ctx.clearRect(0,0,W,H);tail(X0+6,1,tt);tail(X1-6,-1,tt);
+    for(var x=X0;x<=X1;x+=2){var y=BY+wave(x,tt),s=slope(x,tt),p=Math.max(0,Math.min(1,0.52+s*5.5+0.14*Math.sin(x*0.006-tt*0.00042)));ctx.fillStyle=shade(p);ctx.fillRect(x-1,y,2.4,BH);}
+    ctx.textAlign='left';ctx.textBaseline='middle';var total=0;G.forEach(function(g){total+=g.w||g.gap||0;});var xs=(X0+X1)/2-total/2;
+    G.forEach(function(g){if(g.gap){xs+=g.gap;return;}var cx=xs+(g.w||0)/2,y=BY+wave(cx,tt)+BH/2+0.5,a=Math.atan(slope(cx,tt));ctx.save();ctx.translate(cx,y);ctx.rotate(a);
+      if(g.star){ctx.strokeStyle='rgba(255,255,255,.97)';ctx.lineWidth=1.5;ctx.lineCap='round';for(var sp=0;sp<4;sp++){var an=sp*Math.PI/4;ctx.beginPath();ctx.moveTo(-Math.cos(an)*4.6,-Math.sin(an)*4.6);ctx.lineTo(Math.cos(an)*4.6,Math.sin(an)*4.6);ctx.stroke();}}
+      else{ctx.font=FONT;ctx.fillStyle='rgba(2,8,40,.4)';ctx.fillText(g.ch,-((g.w||0)/2)+0.7,1.1);ctx.fillStyle='#fff';ctx.fillText(g.ch,-((g.w||0)/2),0);}
+      ctx.restore();xs+=g.w||0;});}
+  function frame(){if(!running){looping=false;return;}looping=true;t+=16;draw(t);requestAnimationFrame(frame);}
+  draw(0);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){G=null;draw(t);});
+  if(reduce)return;
+  if(window.IntersectionObserver){new IntersectionObserver(function(es){es.forEach(function(en){running=en.isIntersecting;if(running&&!looping)requestAnimationFrame(frame);});}).observe(cv);}else{running=true;requestAnimationFrame(frame);}
+})();
+</script>
+
+</body>
+</html>

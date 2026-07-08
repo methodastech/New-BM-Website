@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><link rel="icon" type="image/png" href="assets/favicon.png"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bangi Group · Website &amp; Digital Audit · Brand Method</title>
+<meta name="description" content="Website and digital audit of the Bangi Group estate, prepared by Brand Method. Confidential.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F1E6;--paper2:#FBF7EE;--ink:#161D10;--soft:#4C5340;--faint:#8A9078;--line:#E3DCC9;--line2:#D6CDB6;
+    --gold:#B27409;--gold-deep:#8F5D06;--gold-muted:#B0A06C;--wash:#F1E9D6;
+    --ok:#3E7A2E;--warn:#B5860F;--red:#B23A2A;
+    --dark:#10170B;--forest:#1C2A14;--bmnav:#0A101F;--maxw:1080px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+  body{font-family:"Inter",system-ui,sans-serif;background:var(--paper);color:var(--ink);font-size:16px;line-height:1.62;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}.mono{font-family:"JetBrains Mono",monospace}
+  /* BM chrome contract: identical navy topbar + blue active pill on every page */
+  .topbar{background:var(--bmnav);color:#EAF0FB;position:sticky;top:0;z-index:50;border-bottom:1px solid #232a40}
+  body.embedded .topbar{display:none}
+  .topbar-in{display:flex;align-items:center;justify-content:space-between;padding:12px 28px;max-width:var(--maxw);margin:0 auto;gap:12px;flex-wrap:wrap}
+  .brandmark{font-family:"JetBrains Mono",monospace;font-weight:700;letter-spacing:.08em;font-size:13.5px;text-transform:uppercase}
+  .wsw{display:flex;align-items:center;border:1px solid rgba(255,255,255,.24);overflow:auto;max-width:100%;margin-left:auto}
+  .wsw a{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#C7D3EE;text-decoration:none;padding:7px 12px;border-right:1px solid rgba(255,255,255,.18);white-space:nowrap;transition:background .25s,color .25s}
+  .wsw a:last-child{border-right:0}
+  .wsw a:hover{background:rgba(255,255,255,.09);color:#fff}
+  .wsw a.on{background:#2536F5;color:#fff;font-weight:700}
+  .nav{border-bottom:1px solid var(--line);background:rgba(246,241,230,.97);position:sticky;top:48px;z-index:49;overflow-x:auto;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+  .nav-in{display:flex;gap:3px;padding:8px 28px;max-width:var(--maxw);margin:0 auto;white-space:nowrap}
+  .nav a{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--faint);text-decoration:none;padding:6px 10px;border-radius:8px;transition:color .2s,background .2s}
+  .nav a:hover,.nav a.here{color:var(--ink);background:var(--wash)}.nav .ch-no{color:var(--gold-deep);font-weight:700;margin-right:6px}
+  .eyebrow{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-deep);display:inline-flex;align-items:center;gap:10px;font-weight:600}
+  .hero{padding:50px 0 8px}.hero h1{font-family:"Fraunces",serif;font-weight:400;font-size:clamp(36px,5.6vw,64px);line-height:1.02;letter-spacing:-.02em;margin:18px 0 0;font-optical-sizing:auto}.hero h1 em{font-style:italic;color:var(--gold-deep)}
+  .hero .lede{font-size:clamp(17px,2vw,20px);color:var(--soft);max-width:66ch;margin:20px 0 0}
+  .vrow{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}.vchip{background:var(--paper2);border:1px solid var(--line);border-radius:999px;padding:8px 15px;font-size:13px;color:var(--soft)}.vchip b{color:var(--gold-deep);font-weight:700}
+  .execsum{margin-top:32px;border:1px solid var(--line);border-radius:16px;background:var(--paper2);padding:26px 28px}
+  .execsum .vl{font-family:"Fraunces",serif;font-weight:500;font-size:clamp(20px,2.6vw,26px);line-height:1.18;letter-spacing:-.01em}.execsum .vl em{font-style:italic;color:var(--gold-deep)}
+  .execsum .egrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:20px}
+  .execsum .eg h4{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-deep);font-weight:700}
+  .execsum .eg p{font-size:14.5px;color:var(--soft);margin-top:7px;line-height:1.55}.execsum .eg p b{color:var(--ink)}
+  section{padding:32px 0}
+  .chapdiv{display:flex;align-items:baseline;gap:18px;padding:42px 0 4px;border-top:1px solid var(--line);margin-top:10px;scroll-margin-top:96px}.cd-no{font-family:"Fraunces",serif;font-weight:600;font-size:40px;color:var(--gold);line-height:1}.cd-h{font-family:"Fraunces",serif;font-weight:500;font-size:28px;letter-spacing:-.01em}.cd-sub{font-size:15px;color:var(--soft);margin-top:5px}
+  h2{font-family:"Fraunces",serif;font-weight:500;font-size:clamp(24px,3.4vw,34px);line-height:1.1;letter-spacing:-.015em;margin:8px 0 0;max-width:28ch}
+  h3.sub{font-family:"Fraunces",serif;font-weight:500;font-size:22px;margin:30px 0 0}
+  .sec-intro{font-size:16.5px;color:var(--soft);max-width:74ch;margin:15px 0 0}.sec-intro b,.sec-intro strong{color:var(--ink)}.sec-intro em{color:var(--gold-deep);font-style:normal;font-weight:600}
+  p.body{font-size:16px;color:var(--soft);max-width:74ch;margin:15px 0 0}p.body b{color:var(--ink)}p.body em{color:var(--gold-deep);font-style:normal;font-weight:600}
+  .grid{display:grid;gap:16px;margin-top:22px}.g2{grid-template-columns:repeat(auto-fit,minmax(290px,1fr))}.g3{grid-template-columns:repeat(auto-fit,minmax(225px,1fr))}
+  .card{background:var(--paper2);border:1px solid var(--line);border-radius:14px;padding:20px 21px}.card .tag{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--gold-deep);font-weight:700}.card h3{font-family:"Fraunces",serif;font-weight:500;font-size:19px;margin-top:8px}.card p{font-size:14px;color:var(--soft);margin-top:9px;line-height:1.55}.card p b{color:var(--ink)}
+  .card.dark{background:var(--dark);border-color:var(--forest);color:#D9DBC6}.card.dark h3{color:#fff}.card.dark p{color:#C2C6AE}.card.dark .tag{color:#E7B85C}.card.dark p b{color:#fff}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-top:22px}.stat{border:1px solid var(--line);border-radius:13px;background:var(--paper2);padding:16px 18px}.stat .num{font-family:"Fraunces",serif;font-size:30px;font-weight:500;color:var(--gold-deep);line-height:1.05}.stat .lab{font-size:13px;font-weight:600;margin-top:8px}.stat .s{font-size:12px;color:var(--faint);margin-top:3px}
+  .goals2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-top:22px}.goal{display:flex;gap:13px;align-items:flex-start;border:1px solid var(--line);border-radius:13px;background:var(--paper2);padding:16px 18px}.goal .gi{width:30px;height:30px;border-radius:8px;background:var(--wash);color:var(--gold-deep);display:flex;align-items:center;justify-content:center;flex:none;font-family:"JetBrains Mono",monospace;font-size:12px;font-weight:700}.goal b{font-size:15px}.goal p{font-size:13.5px;color:var(--soft);margin-top:4px}.goal .vtag{margin-top:8px;display:inline-block}
+  table{width:100%;border-collapse:separate;border-spacing:0;margin-top:18px;font-size:14px;background:var(--paper2);border:1px solid var(--line);border-radius:12px;overflow:hidden}th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}thead th{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#F2F1E3;background:var(--dark)}tr:last-child td{border-bottom:none}td.dim{font-weight:600;white-space:nowrap}td.sc{font-family:"JetBrains Mono",monospace;color:var(--gold-deep);font-weight:700;white-space:nowrap}
+  .tbl-scroll{overflow-x:auto;margin-top:18px}.tbl-scroll table{margin-top:0}
+  .vtag{font-family:"JetBrains Mono",monospace;font-size:9.5px;text-transform:uppercase;letter-spacing:.04em;padding:3px 8px;border-radius:6px;font-weight:700;white-space:nowrap}.vtag.hi{background:rgba(62,122,46,.15);color:var(--ok)}.vtag.lo{background:rgba(181,134,15,.16);color:#8a6209}.vtag.bad{background:rgba(178,58,42,.12);color:var(--red)}
+  .diagram{margin-top:18px;border:1px solid var(--line);border-radius:14px;background:var(--paper2);padding:18px}.diagram .cap{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--faint);margin-bottom:10px}.diagram svg{width:100%;height:auto;display:block}
+  .fork-stage{margin:28px 0 8px;border:1px solid var(--forest);border-radius:14px;background:var(--dark);padding:30px 22px 22px;position:relative}.fork-stage .fl{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#E7B85C;position:absolute;top:16px;left:22px}
+  .pin{margin-top:22px;border-left:3px solid var(--gold);background:linear-gradient(90deg,rgba(178,116,9,.07),transparent);padding:15px 19px;border-radius:0 12px 12px 0;font-size:15px;display:block}.pin b{color:var(--gold-deep)}
+  .pin .proof{display:block;margin-top:6px;font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.03em;text-transform:uppercase;color:var(--ok)}.pin .proof a{color:var(--ok);font-weight:700}
+  .pin.warn{border-left-color:var(--warn);background:linear-gradient(90deg,rgba(181,134,15,.09),transparent)}.pin.warn b{color:#8a6209}
+  .quote{font-family:"Fraunces",serif;font-style:italic;font-size:17px;color:var(--soft);border-left:3px solid var(--line2);padding:6px 0 6px 18px;margin-top:16px}.quote b{font-style:normal;color:var(--ink)}
+  footer{padding:34px 0 70px;color:var(--faint);font-size:12px;font-family:"JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.05em;border-top:1px solid var(--line);margin-top:30px}
+  .ic{stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+  @media(max-width:640px){.wrap{padding:0 18px}.topbar-in{padding:10px 18px}.nav-in{padding:8px 18px}.hero{padding:34px 0 4px}}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="topbar-in"><span class="brandmark">BM</span><nav class="wsw"><a href="audit.html" class="on">01 Audit</a><a href="framework.html">02 Framework</a><a href="index.html">03 Website</a></nav></div></div>
+<div class="nav"><div class="nav-in">
+  <a href="#c1"><span class="ch-no">01</span>Background</a><a href="#c2"><span class="ch-no">02</span>Goal</a><a href="#c3"><span class="ch-no">03</span>Website Scan</a><a href="#c4"><span class="ch-no">04</span>The Case</a><a href="#c5"><span class="ch-no">05</span>Model</a><a href="#c6"><span class="ch-no">06</span>Markets</a><a href="#c7"><span class="ch-no">07</span>Growth</a><a href="#c8"><span class="ch-no">08</span>Engagement</a><a href="#c9"><span class="ch-no">09</span>Act</a><a href="#c10"><span class="ch-no">10</span>Verdict</a>
+</div></div>
+
+<div class="wrap">
+  <header class="hero">
+    <span class="eyebrow">Bangi Group · Confidential</span>
+    <h1>Website &amp; <em>Digital Audit</em></h1>
+    <p class="lede">Seven destinations, three live sites, and a booking path that leaks. The reputation is already earned. This is a forensic reading of where the web estate spends it, and what optimisation, not a rebrand, recovers.</p>
+    <div class="vrow">
+      <span class="vchip">A dead <b>2021 booking link</b> on a revenue page</span>
+      <span class="vchip"><b>2.9 MB</b> of homepage images, no WebP</span>
+      <span class="vchip">bgrfoodtalks.com <b>suspended</b></span>
+      <span class="vchip"><b>3 of 7</b> destinations linked from the hub</span>
+    </div>
+    <div class="execsum">
+      <div class="vl">The reputation is real. <em>The website leaks it.</em></div>
+      <div class="egrid">
+        <div class="eg"><h4>The opportunity</h4><p>Bangi is <b>#1 of 9</b> hotels in Bandar Baru Bangi, <b>4.1/5</b> from 709 TripAdvisor reviews with a Travellers&rsquo; Choice badge, <b>8.7/10</b> from 4,459 KAYAK reviews. Selangor is Malaysia&rsquo;s most-visited state, 34.5M domestic visitors in 2024 (DOSM), and Visit Malaysia 2026 is live with RM700M+ in federal funding.</p></div>
+        <div class="eg"><h4>The gap</h4><p>Two parallel SwiftBook property IDs split the booking funnel, a dead FastBooking widget hardcoded to 29 Jun 2021 sits live on the offers page, two fees stay hidden until check-in, the hub reaches only 3 of 7 destinations, there is no email capture anywhere, and measurement lives on golf only.</p></div>
+        <div class="eg"><h4>The move</h4><p>Route 01 Website Optimisation &amp; Centralisation, from <b>RM12,000</b> one-off before 8% SST, 50/50 deposit and go-live. Consolidate to one SwiftBook engine, disclose fees before payment, strip the WooCommerce relic, ship WebP heroes, wire all seven destinations into one hub, capture email, deploy group-wide analytics. Optimisation, not rebrand.</p></div>
+      </div>
+      <div class="stats" style="margin-top:20px">
+        <div class="stat"><div class="num">709</div><div class="lab">TripAdvisor reviews</div><div class="s">4.1/5 · #1 of 9 local</div></div>
+        <div class="stat"><div class="num">4,459</div><div class="lab">KAYAK reviews</div><div class="s">8.7/10</div></div>
+        <div class="stat"><div class="num">256 · 28</div><div class="lab">Rooms · function rooms</div><div class="s">a real events engine</div></div>
+        <div class="stat"><div class="num">3 of 7</div><div class="lab">Destinations linked</div><div class="s">from the corporate hub</div></div>
+      </div>
+      <div class="pin"><b>Do first:</b> delete the dead FastBooking widget and consolidate every booking CTA onto one SwiftBook property ID, add the Know Before You Book fee panel, and give the suspended Foodtalks domain a controlled returning state. Available as Route 03 Quick-Fix from RM1,900 before SST, or inside Route 01.
+      <span class="proof">Working proof, already built in tab 03 · <a href="offers.html#booking">offers.html#booking</a> · <a href="offers.html#transparency">#transparency</a></span></div>
+    </div>
+  </header>
+  <!-- ===== 01 BACKGROUND ===== -->
+  <div class="chapdiv" id="c1"><span class="cd-no">01</span><div><div class="cd-h">Background</div><div class="cd-sub">The estate, and the reputation it has already earned.</div></div></div>
+  <section style="padding-top:14px">
+    <h2>Not a startup that needs a story</h2>
+    <p class="body">Bangi Group is a <b>600-acre resort estate</b> in Bandar Baru Bangi, sitting inside the single most-visited state in Malaysia, and it has already won the reputation most operators spend a decade chasing. The hotel holds <b>4.1 out of 5</b> on TripAdvisor across 709 reviews, ranked <b>number one of nine</b> in Bandar Baru Bangi with a Travellers&rsquo; Choice badge. On KAYAK it holds <b>8.7 out of 10</b> across 4,459 reviews, listing from RM174 a night. It carries <b>two ASEAN Records</b> from 2025, including the first durian friendly hotel and resort on record, held since 2018. The property runs 256 rooms and 28 function rooms, a genuine conference and events engine, not a boutique.</p>
+    <p class="body">The estate spans <b>seven live destinations</b> under one name. Bangi Resort Hotel is the booking anchor, actively maintained, with pages edited into June 2026. Bangi Golf Resort was revamped roughly two years ago. Bangi Farm Resort is MyGAP certified with 15,000 to 16,000 Facebook followers. LaVista Arena hosts pickleball and badminton. BGR Foodservice and BGR Food Talk sit on the catering side, the latter FSSC 22000 certified in 2024. BRDC, the landowning arm, repositioned to manage the estate and offered 26.66 acres inside the resort at roughly RM90M (NST, Aug 2022). This is a substantial, cared-for group. The team ships content. What it has never been given is the performance and hygiene layer underneath it.</p>
+    <div class="diagram">
+      <div class="cap">The estate · one umbrella, seven destinations, three reachable from the hub</div>
+      <svg viewBox="0 0 900 260" role="img" aria-label="Estate map: one Bangi Group umbrella over seven destinations, three linked from the hub and four dead-ended">
+        <line x1="450" y1="44" x2="130" y2="150" stroke="#3E7A2E" stroke-width="2"/>
+        <line x1="450" y1="44" x2="290" y2="150" stroke="#3E7A2E" stroke-width="2"/>
+        <line x1="450" y1="44" x2="450" y2="150" stroke="#3E7A2E" stroke-width="2"/>
+        <line x1="450" y1="44" x2="610" y2="150" stroke="#D6CDB6" stroke-width="1.5" stroke-dasharray="4 5"/>
+        <line x1="450" y1="44" x2="770" y2="150" stroke="#D6CDB6" stroke-width="1.5" stroke-dasharray="4 5"/>
+        <line x1="450" y1="44" x2="210" y2="214" stroke="#D6CDB6" stroke-width="1.5" stroke-dasharray="4 5"/>
+        <line x1="450" y1="44" x2="690" y2="214" stroke="#D6CDB6" stroke-width="1.5" stroke-dasharray="4 5"/>
+        <rect x="372" y="22" width="156" height="40" rx="8" fill="#10170B"/>
+        <text x="450" y="47" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="12" fill="#E7B85C" font-weight="700">BANGI GROUP</text>
+        <g font-family="JetBrains Mono,monospace" font-size="10" text-anchor="middle">
+          <g><circle cx="130" cy="150" r="7" fill="#B27409"/><text x="130" y="180" fill="#4C5340" font-weight="700">HOTEL</text><text x="130" y="194" fill="#3E7A2E">linked</text></g>
+          <g><circle cx="290" cy="150" r="7" fill="#B27409"/><text x="290" y="180" fill="#4C5340" font-weight="700">GOLF</text><text x="290" y="194" fill="#3E7A2E">linked</text></g>
+          <g><circle cx="450" cy="150" r="7" fill="#B27409"/><text x="450" y="180" fill="#4C5340" font-weight="700">FARM</text><text x="450" y="194" fill="#3E7A2E">linked</text></g>
+          <g><circle cx="610" cy="150" r="7" fill="none" stroke="#B0A06C" stroke-width="1.5"/><text x="610" y="180" fill="#8A9078" font-weight="700">LAVISTA</text><text x="610" y="194" fill="#B23A2A">dark</text></g>
+          <g><circle cx="770" cy="150" r="7" fill="none" stroke="#B0A06C" stroke-width="1.5"/><text x="770" y="180" fill="#8A9078" font-weight="700">FOODSERVICE</text><text x="770" y="194" fill="#B23A2A">dark</text></g>
+          <g><circle cx="210" cy="214" r="7" fill="none" stroke="#B0A06C" stroke-width="1.5"/><text x="210" y="244" fill="#8A9078" font-weight="700">FOOD TALK</text><text x="210" y="258" fill="#B23A2A">suspended</text></g>
+          <g><circle cx="690" cy="214" r="7" fill="none" stroke="#B0A06C" stroke-width="1.5"/><text x="690" y="244" fill="#8A9078" font-weight="700">BRDC</text><text x="690" y="258" fill="#B23A2A">dark</text></g>
+        </g>
+      </svg>
+    </div>
+    <p class="body">The honest reading is not that the estate is broken. It is that the reputation is real, and the web estate <em>leaks it</em> at the exact point where trust should convert into a booking.</p>
+    <div class="pin"><b>Pin.</b> The reputation is real. The website leaks it. That single sentence is the whole audit, and everything after it is evidence.
+    <span class="proof">Working proof · the corrected single front door is built in tab 03 · <a href="index.html#estate">index.html#estate</a></span></div>
+  </section>
+
+  <!-- ===== 02 GOAL ===== -->
+  <div class="chapdiv" id="c2"><span class="cd-no">02</span><div><div class="cd-h">Goal</div><div class="cd-sub">The six jobs the web estate must do.</div></div></div>
+  <section style="padding-top:14px">
+    <h2>Six jobs, measured against each</h2>
+    <p class="body">Before scoring anything, fix what the estate is for. A group web estate has six jobs, and Bangi&rsquo;s is measured against each.</p>
+    <div class="goals2">
+      <div class="goal"><span class="gi">1</span><div><b>Be found</b><p>Own the brand search so the official site, not a reseller, wins the click.</p><span class="vtag lo">partial</span></div></div>
+      <div class="goal"><span class="gi">2</span><div><b>Tell the truth</b><p>Present one coherent group, not seven scattered domains, three linked and four dark.</p><span class="vtag lo">partial</span></div></div>
+      <div class="goal"><span class="gi">3</span><div><b>Convert</b><p>Take a guest from first click to paid booking on one engine, no dead end.</p><span class="vtag bad">failing</span></div></div>
+      <div class="goal"><span class="gi">4</span><div><b>Capture</b><p>Hold first-party audience through email, so demand can be remarketed, not rented back.</p><span class="vtag bad">failing</span></div></div>
+      <div class="goal"><span class="gi">5</span><div><b>Cross-sell</b><p>Turn adjacent demand, farm tours, golf, pickleball, durian, into direct-bookable product.</p><span class="vtag bad">failing</span></div></div>
+      <div class="goal"><span class="gi">6</span><div><b>Be measured</b><p>Run one analytics view across the group, so direct versus OTA is visible and defensible.</p><span class="vtag bad">failing</span></div></div>
+    </div>
+    <p class="body">Against those six jobs the failures are not cosmetic. The booking funnel is split across two SwiftBook property IDs. A dead FastBooking widget hardcoded to 29 Jun 2021 still sits live on the offers page. There is no email capture on any group site. The farm has no booking engine while Traveloka sells a hotel-plus-farm staycation the group never offers direct. Measurement lives on the golf site only. Each maps to a job the estate is failing, and each is fixable under optimisation, not rebuild.</p>
+    <div class="pin"><b>Pin.</b> Six jobs, and the estate is not passing any of them cleanly. The good news: every failure resolves under Route 01 optimisation, not a rebrand.
+    <span class="proof">Working proof · all six jobs run end to end in tab 03 · <a href="index.html#estate">#estate</a> through <a href="index.html#member">#member</a></span></div>
+  </section>
+
+  <!-- ===== 03 WEBSITE SCAN ===== -->
+  <div class="chapdiv" id="c3"><span class="cd-no">03</span><div><div class="cd-h">The Website Scan</div><div class="cd-sub">Measured evidence, four lenses, verbatim faults, estate gaps and the peer line.</div></div></div>
+  <section style="padding-top:14px">
+    <p class="body">This is the forensic core. Findings below were re-fetched live on <b>7 July 2026</b> and reconciled against the 2 July scan, so this is the hardest evidence in the deck.</p>
+
+    <h3 class="sub" id="c3-1">03.1 · Measured, both flagships</h3>
+    <div class="tbl-scroll"><table>
+      <thead><tr><th>What we measured</th><th>Finding</th><th>Severity</th></tr></thead>
+      <tbody>
+        <tr><td class="dim">Homepage image weight</td><td>Hotel homepage carries roughly <b>2.9 MB</b> of imagery, heroes 414 to 580 KB, zero WebP anywhere</td><td><span class="vtag bad">high</span></td></tr>
+        <tr><td class="dim">Golf image containers</td><td>Two photographs served as oversized PNG, <b>944 KB</b> and <b>700 KB</b>, where a JPEG of the same shot is a fraction of the size</td><td><span class="vtag bad">high</span></td></tr>
+        <tr><td class="dim">Next-gen formats</td><td>No WebP or AVIF anywhere; every image is legacy JPEG or PNG</td><td><span class="vtag bad">high</span></td></tr>
+        <tr><td class="dim">Dead-plugin relic</td><td><b>WooCommerce 5.4.1</b> from mid-2021 loads site-wide on both flagships with no store attached</td><td><span class="vtag bad">high</span></td></tr>
+        <tr><td class="dim">Stack versions</td><td>Hotel WP 6.6.5, golf WP 6.7.5, Divi 4.9.6 both, Slider Revolution 6.7.20 both, versions exposed in generator meta</td><td><span class="vtag lo">medium</span></td></tr>
+        <tr><td class="dim">Pinch-zoom</td><td>Both ship <span class="mono">user-scalable=0</span>, disabling pinch-zoom, a WCAG 1.4.4 failure with zero design cost to fix</td><td><span class="vtag lo">medium</span></td></tr>
+        <tr><td class="dim">Heading structure</td><td>Hotel homepage carries <b>three H1s</b>, two identical duplicates; golf homepage carries <b>two H1s</b></td><td><span class="vtag lo">medium</span></td></tr>
+      </tbody>
+    </table></div>
+    <div class="pin"><b>Pin, 03.1.</b> The hero set re-encoded to WebP at display size is the single biggest speed win on the estate.
+    <span class="proof">Working proof · optimised WebP heroes and one clean H1 per page in tab 03 · <a href="index.html#routes">#experiences</a></span></div>
+
+    <h3 class="sub" id="c3-2">03.2 · Lens scorecard</h3>
+    <div class="tbl-scroll"><table>
+      <thead><tr><th>Lens</th><th>Finding</th><th>Rating</th></tr></thead>
+      <tbody>
+        <tr><td class="dim">Speed &amp; Core Web Vitals</td><td>Heavy heroes load through Slider Revolution with no next-gen format and no preload; Cloudflare present but the HTML is not edge-cached, a real LCP risk</td><td><span class="vtag bad">weak</span></td></tr>
+        <tr><td class="dim">Code hygiene</td><td>A dead-plugin relic and exposed old-version strings on Divi 4.9.6 are a known attack surface</td><td><span class="vtag lo">at risk</span></td></tr>
+        <tr><td class="dim">Mobile &amp; accessibility</td><td>Pinch-zoom blocked on both flagships</td><td><span class="vtag bad">weak</span></td></tr>
+        <tr><td class="dim">SEO structure</td><td>Duplicate and stacked H1s dilute the heading signal</td><td><span class="vtag lo">at risk</span></td></tr>
+        <tr><td class="dim">Foundations</td><td>HTTPS and Cloudflare on both, Yoast active on both, pages edited into June 2026</td><td><span class="vtag hi">banked</span></td></tr>
+      </tbody>
+    </table></div>
+    <div class="pin"><b>Pin, 03.2.</b> Fix the engine, do not tear it down. The foundations are sound.
+    <span class="proof">Working proof · tab 03 loads without the WooCommerce relic and with pinch-zoom restored · <a href="index.html#top">#top</a></span></div>
+
+    <h3 class="sub" id="c3-3">03.3 · Journey faults, verbatim</h3>
+    <div class="quote">Golf booking terms, live and word for word: <b>full payment required to confirm, all payments non-refundable, bookings only up to 7 days in advance</b>, run through an unbranded QiSoft portal that forces account registration first. A stacked conversion wall on an off-brand host.</div>
+    <div class="quote">Review-theme complaints across TripAdvisor, Booking.com and Traveloka: <b>1 to 2 hour check-in queues</b> at peak, an <b>RM250 deposit never shown at booking</b>, and <b>RM30 a day parking</b> after free parking was stated.</div>
+    <p class="body">On the hotel side, a dead <b>FastBooking widget</b>, its arrival hardcoded to 29 June 2021, still sits live on the offers page beside a working SwiftBook link, and <b>two SwiftBook property IDs</b> run in parallel across the hotel, splitting the funnel and its reporting.</p>
+    <div class="pin"><b>Pin, 03.3.</b> Every quoted fault is disarmed before payment.
+    <span class="proof">Working proof · the Know Before You Book panel discloses the RM250 deposit and RM30 parking at rate and confirm · <a href="offers.html#transparency">offers.html#transparency</a></span></div>
+
+    <h3 class="sub" id="c3-4">03.4 · Estate gaps</h3>
+    <div class="tbl-scroll"><table>
+      <thead><tr><th>Entity</th><th>State</th><th>Defect</th></tr></thead>
+      <tbody>
+        <tr><td class="dim">Corporate hub</td><td>Live</td><td>Links only 3 of 6 divisions in copy, LaVista not mentioned at all, so 3 of 7 reachable; zero social links; zero email capture</td></tr>
+        <tr><td class="dim">bgrfoodtalks.com</td><td>Suspended</td><td>Account Suspended while the hub still presents Food Talk as a pillar</td></tr>
+        <tr><td class="dim">bgrmeal-pro.com</td><td>Stale</td><td>Live but newest content dates to 2020</td></tr>
+        <tr><td class="dim">bgrrest.com</td><td>Live</td><td>Still live, un-redirected</td></tr>
+        <tr><td class="dim">LaVista Arena</td><td>Invisible</td><td>No pricing shown, third-party booking only, absent from the golf site, 87 Instagram followers</td></tr>
+        <tr><td class="dim">The farm</td><td>Live</td><td>No booking engine at all, while Traveloka sells a hotel-plus-farm staycation the group never offers direct</td></tr>
+      </tbody>
+    </table></div>
+    <div class="pin"><b>Pin, 03.4.</b> Three of seven becomes seven of seven.
+    <span class="proof">Working proof · all seven destinations are first-class in tab 03 · <a href="group.html">group.html</a> · Food Talk shown in a controlled returning state · <a href="group.html#foodtalk">#foodtalk</a></span></div>
+
+    <h3 class="sub" id="c3-5">03.5 · Peer line</h3>
+    <div class="tbl-scroll"><table>
+      <thead><tr><th>Operator</th><th>Own booking?</th><th>Cross-links?</th><th>Verdict</th></tr></thead>
+      <tbody>
+        <tr><td class="dim">Palm Garden</td><td>Own tee booking</td><td>Cross-links IOI hotels</td><td><span class="vtag hi">leader</span></td></tr>
+        <tr><td class="dim">Glenmarie</td><td>booking.glenmariegolf.my</td><td>Own subdomain</td><td><span class="vtag hi">leader</span></td></tr>
+        <tr><td class="dim">Saujana</td><td>TravelClick</td><td>Integrated</td><td><span class="vtag hi">leader</span></td></tr>
+        <tr style="background:rgba(178,116,9,.06)"><td class="dim">Bangi</td><td>Unbranded QiSoft hand-off</td><td>3 of 7 from hub</td><td><span class="vtag bad">below peers</span></td></tr>
+        <tr><td class="dim">saasgcc.com</td><td>Phone only</td><td>None</td><td><span class="vtag lo">laggard</span></td></tr>
+      </tbody>
+    </table></div>
+    <div class="pin"><b>Pin, 03.5.</b> Bangi books like the laggard and reputations like the leaders. Close the gap and it books like what it already is.
+    <span class="proof">Working proof · a branded single-engine booking flow in tab 03 · <a href="offers.html#booking">offers.html#booking</a></span></div>
+  </section>
+
+  <!-- ===== 04 THE CASE ===== -->
+  <div class="chapdiv" id="c4"><span class="cd-no">04</span><div><div class="cd-h">The Case</div><div class="cd-sub">The perception gap between a trusted brand and a leaking front door.</div></div></div>
+  <section style="padding-top:14px">
+    <h2>The brand is fine. The plumbing leaks.</h2>
+    <p class="body">Here is the argument the whole audit turns on, drawn as one gap. On the reputation side: 4.1 on TripAdvisor across 709 reviews, number one of nine locally, Travellers&rsquo; Choice, 8.7 on KAYAK across 4,459 reviews, two ASEAN Records. That trust is not fragile. On the estate side: a dead FastBooking link hardcoded to 2021, two parallel SwiftBook property IDs splitting the funnel, a suspended Food Talk domain sitting behind a live pillar, lookalike resellers ranking beside the official site, and Booking.com selling the hotel under a legacy <span class="mono">bangi-putrajaya</span> slug.</p>
+    <div class="diagram">
+      <div class="cap">The perception gap · trust earned versus trust lost at conversion</div>
+      <svg viewBox="0 0 900 300" role="img" aria-label="Perception gap: a tall reputation bar on the left versus a leaking estate bar on the right, with a gap band between them">
+        <text x="150" y="40" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="11" fill="#3E7A2E" font-weight="700">REPUTATION · EARNED</text>
+        <rect x="70" y="60" width="160" height="200" rx="10" fill="#1C2A14"/>
+        <g font-family="Inter,sans-serif" font-size="12" fill="#E9E4CE" text-anchor="middle">
+          <text x="150" y="92">4.1/5 · 709 reviews</text><text x="150" y="120">8.7/10 · 4,459 reviews</text>
+          <text x="150" y="148">#1 of 9 local</text><text x="150" y="176">Travellers&rsquo; Choice</text>
+          <text x="150" y="204">2&times; ASEAN Records</text><text x="150" y="238" fill="#E7B85C" font-weight="700">TRUST HIGH</text>
+        </g>
+        <text x="750" y="40" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="11" fill="#B23A2A" font-weight="700">ESTATE · LEAKING</text>
+        <rect x="670" y="150" width="160" height="110" rx="10" fill="#F1E9D6" stroke="#B23A2A" stroke-width="1.5"/>
+        <g font-family="Inter,sans-serif" font-size="11.5" fill="#4C5340" text-anchor="middle">
+          <text x="750" y="178">dead 2021 link</text><text x="750" y="200">two SwiftBook IDs</text>
+          <text x="750" y="222">suspended pillar</text><text x="750" y="246" fill="#B23A2A" font-weight="700">CONVERTS LOW</text>
+        </g>
+        <line x1="230" y1="160" x2="670" y2="205" stroke="#B0A06C" stroke-width="1.5" stroke-dasharray="5 6"/>
+        <rect x="370" y="120" width="160" height="34" rx="17" fill="#B27409"/>
+        <text x="450" y="142" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="11" fill="#fff" font-weight="700">THE LEAK</text>
+      </svg>
+    </div>
+    <p class="body">A guest who trusts the reviews arrives at a front door that fragments their booking across two engines, hides two fees until check-in, and, on the golf side, hands them to an unbranded portal demanding non-refundable full prepayment inside a 7-day window. The reputation is doing its job. The estate is <em>quietly undoing it</em> at the point of conversion. Even the brand-name search, which the official site does win at number one, is crowded above the fold by third-party sellers and a lookalike, <span class="mono">bangiresorthotel.com-malaysia.com</span>, so the official site captures a minority of its own brand click share.</p>
+    <div class="pin"><b>Pin.</b> The brand has earned trust its own front door is spending. Close the gap and the reviews start paying rent.
+    <span class="proof">Working proof · the corrected, coherent front door that honours the reputation is live in tab 03 · <a href="index.html#estate">#story</a> and <a href="offers.html#booking">offers.html#booking</a></span></div>
+  </section>
+  <!-- ===== 05 MODEL ===== -->
+  <div class="chapdiv" id="c5"><span class="cd-no">05</span><div><div class="cd-h">The Model</div><div class="cd-sub">Convert your own demand, or keep renting it back from the OTAs.</div></div></div>
+  <section style="padding-top:14px">
+    <h2>Convert, or keep renting</h2>
+    <p class="body">The commercial model is a single choice, stated plainly. Bangi can convert the demand it already generates, or keep renting that demand back from OTAs one commission at a time. Today the estate is structured to rent.</p>
+    <p class="body">National hotel occupancy sits at <b>54.3%</b> with ADR <b>RM330</b> in Q1 2025 (MAH). OTA commission runs <b>15 to 30%</b>, so at RM330 ADR every OTA night leaks roughly <b>RM50 to RM66</b> in commission. That is the meter running on demand the group could sell direct. The estate makes it worse by fragmenting the direct path across two SwiftBook property IDs, so even guests who try to book direct are split across two records with inconsistent rates and split reporting.</p>
+    <div class="diagram">
+      <div class="cap">Two paths for the same demand</div>
+      <svg viewBox="0 0 900 210" role="img" aria-label="Two paths: convert direct and recover RM50 to RM66 per night, versus rent from OTAs and leak RM50 to RM66 per night">
+        <rect x="40" y="40" width="360" height="130" rx="12" fill="#1C2A14"/>
+        <text x="60" y="72" font-family="JetBrains Mono,monospace" font-size="11" fill="#E7B85C" font-weight="700">PATH A · CONVERT DIRECT</text>
+        <text x="60" y="104" font-family="Inter,sans-serif" font-size="14" fill="#E9E4CE">One SwiftBook engine, fees disclosed,</text>
+        <text x="60" y="126" font-family="Inter,sans-serif" font-size="14" fill="#E9E4CE">email captured, one analytics view.</text>
+        <text x="60" y="154" font-family="Fraunces,serif" font-size="17" fill="#8FAF4B" font-weight="600">recover RM50 to RM66 / night</text>
+        <rect x="500" y="40" width="360" height="130" rx="12" fill="#F1E9D6" stroke="#B23A2A" stroke-width="1.5"/>
+        <text x="520" y="72" font-family="JetBrains Mono,monospace" font-size="11" fill="#B23A2A" font-weight="700">PATH B · RENT FROM OTAs</text>
+        <text x="520" y="104" font-family="Inter,sans-serif" font-size="14" fill="#4C5340">Split funnel, hidden fees, no capture,</text>
+        <text x="520" y="126" font-family="Inter,sans-serif" font-size="14" fill="#4C5340">golf-only measurement.</text>
+        <text x="520" y="154" font-family="Fraunces,serif" font-size="17" fill="#B23A2A" font-weight="600">leak RM50 to RM66 / night</text>
+        <text x="450" y="112" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="20" fill="#B0A06C">or</text>
+      </svg>
+    </div>
+    <p class="body">The payback is not speculative. Route 01 is from <b>RM12,000</b> one-off before 8% SST (RM12,960 with SST), on a 50/50 deposit and go-live split. Against a RM50 to RM66 recovery per shifted night, the fee pays back in roughly <b>180 to 240 recovered direct room nights</b>. On 256 rooms that is a fraction of one month&rsquo;s recovered OTA-to-direct movement, comfortably inside a year. In a flat-rate market, every recovered commission point is margin defence, not upside only.</p>
+    <div class="pin"><b>Pin.</b> At RM50 to RM66 a night, the RM12,000 fee before SST clears in roughly 180 to 240 direct nights.
+    <span class="proof">Working proof · the single canonical SwiftBook engine that makes those nights recoverable is wired live in tab 03 · <a href="offers.html#booking">offers.html#booking</a></span></div>
+  </section>
+
+  <!-- ===== 06 MARKETS ===== -->
+  <div class="chapdiv" id="c6"><span class="cd-no">06</span><div><div class="cd-h">Markets</div><div class="cd-sub">The demand wave is funded, domestic and already at the door.</div></div></div>
+  <section style="padding-top:14px">
+    <h2>A funded tailwind, in the best state</h2>
+    <p class="body">The timing is a tailwind, and it is funded. Malaysia domestic tourism hit <b>260.1M visitors</b> in 2024 with <b>RM106.7B</b> in spend (DOSM). Selangor was the single most-visited state at <b>34.5M visitors</b> (DOSM). Bangi sits inside that number-one state. Visit Malaysia 2026 is live, backed by <b>over RM700M</b> in federal funding, national marketing about to drive search traffic toward exactly the properties Bangi competes with. Fixing the estate is readiness for a demand wave the group is not paying to create.</p>
+    <div class="stats">
+      <div class="stat"><div class="num">260.1M</div><div class="lab">Domestic visitors 2024</div><div class="s">DOSM</div></div>
+      <div class="stat"><div class="num">34.5M</div><div class="lab">Selangor, #1 state</div><div class="s">DOSM</div></div>
+      <div class="stat"><div class="num">RM700M+</div><div class="lab">Visit Malaysia 2026</div><div class="s">federal funding</div></div>
+      <div class="stat"><div class="num">400+</div><div class="lab">Pickleball courts</div><div class="s">Malaysia first in Asia by Reclub users, The Star 9 Aug 2025</div></div>
+    </div>
+    <p class="body">The adjacent markets are just as live. Pickleball has grown to <b>400-plus courts nationwide</b>, with Malaysia first in Asia by Reclub users (The Star, 9 Aug 2025). LaVista Arena rides that surge with no pricing shown, invisible from the golf site, booked through third parties, 87 Instagram followers. The <b>World Durian Championship returns 11 July 2026</b>, organised by Bangi Farm Resort as the group&rsquo;s own festival, reinforcing the 2018 first-durian-friendly-hotel record. The demand is the estate&rsquo;s own, and it has no bookable surface.</p>
+    <div class="pin"><b>Pin.</b> National marketing is about to send search traffic at a front door that leaks. Fix the estate before the wave lands.
+    <span class="proof">Working proof · the owned durian and pickleball demand is given real bookable surfaces in tab 03 · <a href="index.html#routes">#experiences</a> and <a href="index.html#offers">#offers</a></span></div>
+  </section>
+
+  <!-- ===== 07 GROWTH ===== -->
+  <div class="chapdiv" id="c7"><span class="cd-no">07</span><div><div class="cd-h">Growth</div><div class="cd-sub">The funnel, and the throttle points that choke it.</div></div></div>
+  <section style="padding-top:14px">
+    <h2>Awareness is healthy. The throttle is below it.</h2>
+    <p class="body">Map the funnel and the throttle points name themselves. Awareness is healthy: strong reviews, ASEAN Records, 15,000 to 16,000 farm followers, a funded national campaign feeding the top. The choke is everything below, on the owned estate.</p>
+    <div class="diagram">
+      <div class="cap">The funnel · where the estate throttles its own demand</div>
+      <svg viewBox="0 0 900 300" role="img" aria-label="Funnel narrowing through awareness, discovery, conversion, capture and retention, with throttle markers on discovery, conversion, capture and measurement">
+        <polygon points="60,40 840,40 720,90 180,90" fill="#3E7A2E" opacity="0.85"/>
+        <polygon points="180,100 720,100 640,150 260,150" fill="#6F8F33" opacity="0.85"/>
+        <polygon points="260,160 640,160 560,210 340,210" fill="#B27409" opacity="0.9"/>
+        <polygon points="340,220 560,220 500,265 400,265" fill="#8F5D06"/>
+        <g font-family="JetBrains Mono,monospace" font-size="11" fill="#fff" text-anchor="middle" font-weight="700">
+          <text x="450" y="70">AWARENESS · HEALTHY</text><text x="450" y="128">DISCOVERY</text><text x="450" y="189">CONVERSION</text><text x="450" y="248">CAPTURE</text>
+        </g>
+        <g font-family="Inter,sans-serif" font-size="11.5" fill="#B23A2A" text-anchor="start">
+          <text x="600" y="128">&#9664; resellers + lookalike crowd the SERP</text>
+          <text x="600" y="189">&#9664; two IDs, dead link, prepay wall, hidden fees</text>
+          <text x="600" y="248">&#9664; zero email capture</text>
+        </g>
+      </svg>
+    </div>
+    <p class="body"><b>Discovery throttle:</b> the official site ranks number one for its own name but shares page one with third-party resellers plus a lookalike, <span class="mono">bangiresorthotel.com-malaysia.com</span>, which self-identifies as not an official website. <b>Consideration throttle:</b> a hub reaching only 3 of 7 destinations, a suspended Food Talk domain, a stale meal-pro site. <b>Conversion throttle:</b> two SwiftBook IDs, a dead 2021 widget, an unbranded QiSoft golf portal with a non-refundable 7-day prepay wall, and two fees hidden until check-in. <b>Capture throttle:</b> zero email capture anywhere. <b>Measurement throttle:</b> GA4 and Meta Pixel on golf only, so the group cannot even see where the funnel leaks.</p>
+    <div class="pin"><b>Pin.</b> Awareness is not the problem. The throttle is convert, capture and measure.
+    <span class="proof">Working proof · one engine, one email capture and a unified tag plan in tab 03 · <a href="offers.html#booking">offers.html#booking</a>, <a href="index.html#member">#member</a>, <a href="contact.html">contact.html</a></span></div>
+  </section>
+
+  <!-- ===== 08 ENGAGEMENT ===== -->
+  <div class="chapdiv" id="c8"><span class="cd-no">08</span><div><div class="cd-h">Engagement</div><div class="cd-sub">The discovery inputs the estate is not feeding.</div></div></div>
+  <section style="padding-top:14px">
+    <h2>Three inputs, none fed well</h2>
+    <p class="body">Engagement is downstream of inputs the estate currently starves. Three inputs decide how the brand shows up and holds an audience, and Bangi feeds none of them well.</p>
+    <div class="tbl-scroll"><table>
+      <thead><tr><th>Input</th><th>Current state</th><th>The fix</th></tr></thead>
+      <tbody>
+        <tr><td class="dim">First-party audience</td><td>No email or newsletter capture on any group site; the farm&rsquo;s 15,000 to 16,000 Facebook followers are never surfaced on the hub</td><td>One email capture feeding a single list, farm audience surfaced</td></tr>
+        <tr><td class="dim">Structured discovery</td><td>No consolidated entity, which is why a lookalike and the legacy <span class="mono">bangi-putrajaya</span> slug fragment the brand across resellers</td><td>Organization and Hotel schema, canonical brand naming, a Google Business Profile lock</td></tr>
+        <tr><td class="dim">Governance</td><td>Stale content is live proof the team cannot self-edit; a golf driving-range &ldquo;coming end of Jan 2026&rdquo; line is still published in July; no CMS self-edit access, client-reported 29 Jun 2026</td><td>A CMS the team owns, with roles and training</td></tr>
+      </tbody>
+    </table></div>
+    <p class="body">These are not engagement campaigns. They are the plumbing that makes engagement possible: capture the audience, consolidate the entity, and give the team the keys to keep it current.</p>
+    <div class="pin"><b>Pin.</b> No list, no schema, no keys. Give the estate all three and engagement has something to stand on.
+    <span class="proof">Working proof · an email capture band, consolidated naming and current facilities copy in tab 03 · <a href="index.html#member">#member</a> and <a href="index.html#routes">#experiences</a></span></div>
+  </section>
+
+  <!-- ===== 09 ACT ===== -->
+  <div class="chapdiv" id="c9"><span class="cd-no">09</span><div><div class="cd-h">Act</div><div class="cd-sub">The priority order, what to fix first and what it costs.</div></div></div>
+  <section style="padding-top:14px">
+    <h2>The order of operations</h2>
+    <p class="body">The fixes rank cleanly by severity and speed, and none require a rebrand, which matters given the last pitch was killed over generic material.</p>
+    <div class="tbl-scroll"><table>
+      <thead><tr><th>Priority</th><th>Fix</th><th>Route</th><th>Proof in tab 03</th></tr></thead>
+      <tbody>
+        <tr><td class="dim">Do first</td><td>Delete the dead FastBooking widget, consolidate every CTA onto one SwiftBook ID, disclose the RM250 deposit and RM30 parking before payment, give Food Talk a controlled returning state</td><td class="sc">03 or 01</td><td><a href="offers.html#booking">#booking</a> · <a href="offers.html#transparency">#transparency</a></td></tr>
+        <tr><td class="dim">Do next</td><td>Strip the WooCommerce 5.4.1 relic, convert imagery to WebP and preload the LCP hero, remove <span class="mono">user-scalable=0</span>, collapse the duplicate H1s</td><td class="sc">01</td><td><a href="index.html#top">#top</a></td></tr>
+        <tr><td class="dim">Then</td><td>Wire all 7 destinations into the hub, add social links and one group email capture, cross-sell the hotel-plus-farm staycation direct, surface LaVista pricing and a golf membership page</td><td class="sc">01</td><td><a href="group.html">group.html</a> · <a href="index.html#member">#member</a></td></tr>
+        <tr><td class="dim">Then</td><td>Organization and Hotel schema, canonical brand naming, Google Business Profile lock, group-wide GA4 and Pixel</td><td class="sc">01 / 02</td><td><a href="framework.html#c4">framework · the spine</a></td></tr>
+      </tbody>
+    </table></div>
+    <div class="grid g3">
+      <div class="card"><span class="tag">Route 01 · recommended</span><h3>Optimisation &amp; Centralisation</h3><p>From <b>RM12,000</b> one-off (RM12,960 with SST), 50/50 deposit and go-live, W1 Discovery to W8 go-live. All before 8% SST.</p></div>
+      <div class="card"><span class="tag">Route 02 · pair</span><h3>Care &amp; Optimisation</h3><p>From <b>RM2,500 a month</b>, ongoing. Review each phase, weekly follow-up, WhatsApp every two to three days.</p></div>
+      <div class="card"><span class="tag">Route 03 · fallback</span><h3>Quick-Fix Patch</h3><p>From <b>RM1,900</b> for the critical booking-path items alone. All before 8% SST.</p></div>
+    </div>
+    <p class="body" style="margin-top:20px">Approver is <b>Sam Yap</b> (samyap@bangiresorthotel.com, +60 16-311 7003). Hazel Thompson, the external marketing consultant, approves marketing and branding and killed the last pitch over generic material, so this stays optimisation-framed and evidence-led throughout.</p>
+    <div class="pin"><b>Pin.</b> Start with the three critical booking-path fixes under Route 03 from RM1,900 before SST, or take the whole engine under Route 01 from RM12,000 before SST.
+    <span class="proof">Working proof · every Do-First item is demonstrated working in tab 03 · <a href="offers.html#booking">offers.html#booking</a> and <a href="index.html#estate">#estate</a></span></div>
+  </section>
+
+  <!-- ===== 10 VERDICT ===== -->
+  <div class="chapdiv" id="c10"><span class="cd-no">10</span><div><div class="cd-h">Verdict &amp; method</div><div class="cd-sub">An honest score, and the short distance to a good one.</div></div></div>
+  <section style="padding-top:14px">
+    <div class="grid g2" style="align-items:center">
+      <div class="diagram" style="background:var(--dark);border-color:var(--forest)">
+        <div class="cap" style="color:#8A9078">Indicative score · a subjective read, not a certified metric</div>
+        <svg viewBox="0 0 260 200" role="img" aria-label="Score gauge reading in the low-to-mid fifties out of one hundred">
+          <circle cx="130" cy="120" r="80" fill="none" stroke="#243218" stroke-width="18"/>
+          <circle cx="130" cy="120" r="80" fill="none" stroke="#B27409" stroke-width="18" stroke-linecap="round"
+            stroke-dasharray="264 503" transform="rotate(135 130 120)"/>
+          <text x="130" y="112" text-anchor="middle" font-family="Fraunces,serif" font-size="46" font-weight="600" fill="#E7B85C">50s</text>
+          <text x="130" y="140" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="10" fill="#8A9078" letter-spacing="1">LOW TO MID · OF 100</text>
+        </svg>
+      </div>
+      <div>
+        <h2 style="margin-top:0">An honest low-to-mid 50s</h2>
+        <p class="body">Not a failing estate, and deliberately not flattered. A cared-for, actively maintained property with genuine reputation and substance, dragged down by fixable defects concentrated at the point of conversion.</p>
+        <div class="grid g2" style="margin-top:18px">
+          <div class="card"><span class="tag" style="color:var(--ok)">Banked</span><p style="margin-top:8px"><b>HTTPS + Cloudflare</b> both flagships · Yoast active · GA4 + Pixel on golf · Quicktext chatbot · pages edited into June 2026 · <b>#1</b> organic for its own name</p></div>
+          <div class="card"><span class="tag" style="color:var(--red)">Holding it down</span><p style="margin-top:8px"><b>22 verified defects</b> · split booking funnel · dead 2021 widget live · suspended pillar domain · unbranded prepay-wall golf portal · no email capture · golf-only measurement · 3 of 7 hub reach</p></div>
+        </div>
+      </div>
+    </div>
+    <p class="body">The distance from low-50s to a strong score is short, because the work is optimisation, not reconstruction. One booking engine, transparent fees, a clean stack, WebP heroes, a coherent seven-destination hub, one email list, group-wide measurement, consolidated schema. Every one of those is already demonstrated working in tab 03.</p>
+    <p class="body" style="font-size:14px;color:var(--faint);margin-top:24px"><b style="color:var(--soft)">Method.</b> Findings drawn from a scan of the live Bangi web estate on 2 July 2026, re-verified live on 7 July 2026: bangiresorthotel.com, bangigolfresort.com, bangigroup.com, bangifarmresort.com and the LaVista and offers pages. Reputation figures from TripAdvisor and KAYAK. Market figures from DOSM (domestic tourism 2024, Selangor), MAH (occupancy and ADR, Q1 2025), Visit Malaysia 2026 federal funding, and The Star (pickleball, 9 Aug 2025; World Durian Championship coverage). Commercials indicative, before 8% SST, confirmed after discovery. The score is a subjective assessment, offered as guidance, not a certified metric.</p>
+    <div class="pin"><b>Pin.</b> Low-to-mid 50s today, and the reason it is not higher is the same reason it is fixable: the leaks are plumbing, not brand. The reputation is real. The website leaks it. Route 01 closes the gap.
+    <span class="proof">Working proof · the whole corrected estate is live end to end in tab 03 · <a href="index.html#top">#top</a> through <a href="index.html#contact">#contact</a></span></div>
+  </section>
+
+  <footer>Brand Method · Website &amp; Digital Audit for Bangi Group · Confidential · Prepared 7 July 2026<div class="ribbon" role="img" aria-label="Demo by BrandMethod.co"><canvas id="ribCv" width="460" height="110" aria-hidden="true"></canvas><span class="ribbon-fb" hidden>Demo &middot; BrandMethod.co</span></div></footer>
+</div>
+
+<button id="bmBack" type="button" aria-label="Back">&larr; Back</button>
+<style>#bmBack{display:none;position:fixed;top:14px;right:16px;z-index:99999;align-items:center;gap:6px;font:600 12.5px "Inter",system-ui,sans-serif;color:#8F5D06;background:rgba(251,247,238,.97);border:1px solid var(--line2);border-radius:30px;padding:8px 14px;cursor:pointer;box-shadow:0 6px 18px -8px rgba(80,60,10,.35)}
+#bmBack:hover{border-color:#B27409}
+body.bm-standalone #bmBack{display:none}
+@media print{#bmBack{display:none!important}}</style>
+<script>
+if(window.top!==window.self)document.body.classList.add('embedded');
+(function(){if(window.top===window.self){document.body.classList.add('bm-standalone');var b=document.getElementById('bmBack');if(b)b.addEventListener('click',function(){var r=document.referrer;if(r&&r.indexOf(location.origin)===0&&r!==location.href&&history.length>1){history.back();}else{location.href='index.html';}})}})();
+/* chapter nav active state on scroll */
+(function(){
+  var links=[].slice.call(document.querySelectorAll('.nav a'));
+  var ids=links.map(function(a){return a.getAttribute('href');});
+  var secs=ids.map(function(id){return document.querySelector(id);});
+  function onScroll(){
+    var y=window.scrollY+120, best=0;
+    for(var i=0;i<secs.length;i++){ if(secs[i]&&secs[i].offsetTop<=y) best=i; }
+    links.forEach(function(a,i){a.classList.toggle('here',i===best);});
+  }
+  window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+})();
+</script>
+<style>
+.ribbon{display:flex;justify-content:center;padding:22px 0 0;pointer-events:none}
+.ribbon canvas{width:min(420px,80vw);height:auto;display:block}
+.ribbon-fb{font-family:"JetBrains Mono",monospace;font-size:.6rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:#fff;background:linear-gradient(90deg,#1421B8,#2536F5);padding:.5rem 1.4rem;clip-path:polygon(10px 0,calc(100% - 10px) 0,100% 50%,calc(100% - 10px) 100%,10px 100%,0 50%)}
+.ribbon-fb[hidden]{display:none}
+</style>
+<script>
+/* waving DEMO BY BRAND METHOD.CO ribbon (signature sign-off) */
+(function(){
+  var cv=document.getElementById('ribCv'),fb=document.querySelector('.ribbon-fb'),ctx;
+  try{ctx=cv&&cv.getContext('2d');}catch(e){}
+  if(!ctx){if(cv)cv.style.display='none';if(fb)fb.hidden=false;return;}
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var W=460,H=110,dpr=Math.min(devicePixelRatio||1,2),X0=40,X1=420,BH=32,BY=40,running=false,looping=false,t=0;
+  cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
+  var FONT='600 12px Inter,system-ui,sans-serif';
+  var SEGS=[{t:'DEMO BY',sp:3.6,gap:8},{star:true,w:13,gap:9},{t:'BRAND',sp:3.6},{t:'METHOD.CO',sp:3.6}],G=null;
+  function build(){G=[];SEGS.forEach(function(s){if(s.star){G.push({star:true,w:s.w});if(s.gap)G.push({gap:s.gap});return;}ctx.font=FONT;for(var i=0;i<s.t.length;i++){var ch=s.t[i];if(ch===' '){G.push({gap:6.5});continue;}G.push({ch:ch,w:ctx.measureText(ch).width+s.sp});}if(s.gap)G.push({gap:s.gap});});}
+  function wave(x,tt){return 4*Math.sin(x*0.0135+tt*0.0011)+2.4*Math.sin(x*0.029-tt*0.00068)+1.2*Math.sin(x*0.055+tt*0.0016);}
+  function slope(x,tt){return (wave(x+2,tt)-wave(x-2,tt))/4;}
+  function shade(p){var r=Math.round(18+68*p),g=Math.round(28+88*p),b=Math.round(158+97*p);return 'rgb('+r+','+g+','+b+')';}
+  function tail(xe,dir,tt){var y=BY+wave(xe,tt)*0.7+9,x2=xe-dir*40;ctx.beginPath();ctx.moveTo(xe,y);ctx.lineTo(x2,y+7);ctx.lineTo(x2+dir*13,y+7+BH/2);ctx.lineTo(x2,y+7+BH);ctx.lineTo(xe,y+BH);ctx.closePath();ctx.fillStyle='#101C96';ctx.fill();ctx.fillStyle='rgba(0,0,0,.22)';ctx.fill();}
+  function draw(tt){if(!G)build();ctx.clearRect(0,0,W,H);tail(X0+6,1,tt);tail(X1-6,-1,tt);
+    for(var x=X0;x<=X1;x+=2){var y=BY+wave(x,tt),s=slope(x,tt),p=Math.max(0,Math.min(1,0.52+s*5.5+0.14*Math.sin(x*0.006-tt*0.00042)));ctx.fillStyle=shade(p);ctx.fillRect(x-1,y,2.4,BH);}
+    ctx.textAlign='left';ctx.textBaseline='middle';var total=0;G.forEach(function(g){total+=g.w||g.gap||0;});var xs=(X0+X1)/2-total/2;
+    G.forEach(function(g){if(g.gap){xs+=g.gap;return;}var cx=xs+(g.w||0)/2,y=BY+wave(cx,tt)+BH/2+0.5,a=Math.atan(slope(cx,tt));ctx.save();ctx.translate(cx,y);ctx.rotate(a);
+      if(g.star){ctx.strokeStyle='rgba(255,255,255,.97)';ctx.lineWidth=1.5;ctx.lineCap='round';for(var sp=0;sp<4;sp++){var an=sp*Math.PI/4;ctx.beginPath();ctx.moveTo(-Math.cos(an)*4.6,-Math.sin(an)*4.6);ctx.lineTo(Math.cos(an)*4.6,Math.sin(an)*4.6);ctx.stroke();}}
+      else{ctx.font=FONT;ctx.fillStyle='rgba(2,8,40,.4)';ctx.fillText(g.ch,-((g.w||0)/2)+0.7,1.1);ctx.fillStyle='#fff';ctx.fillText(g.ch,-((g.w||0)/2),0);}
+      ctx.restore();xs+=g.w||0;});}
+  function frame(){if(!running){looping=false;return;}looping=true;t+=16;draw(t);requestAnimationFrame(frame);}
+  draw(0);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){G=null;draw(t);});
+  if(reduce)return;
+  if(window.IntersectionObserver){new IntersectionObserver(function(es){es.forEach(function(en){running=en.isIntersecting;if(running&&!looping)requestAnimationFrame(frame);});}).observe(cv);}else{running=true;requestAnimationFrame(frame);}
+})();
+</script>
+
+</body>
+</html>

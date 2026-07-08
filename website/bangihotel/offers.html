@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><link rel="icon" type="image/png" href="assets/favicon.png"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Offers · Bangi Resort Hotel · Brand Method</title>
+<meta name="description" content="Current offers at Bangi Resort Hotel, direct, with every fee shown before payment. Concept by Brand Method.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="assets/estate-dusk.webp" fetchpriority="high">
+<style>
+:root{
+  --paper:#F6F1E6;--paper2:#EFE7D6;--card:#FBF7EE;--ink:#161D10;--soft:#4C5340;--faint:#8A9078;
+  --gold:#B27409;--gold-deep:#8F5D06;--gold-muted:#B0A06C;--line:#E3DCC9;--line2:#D6CDB6;
+  --green:#10170B;--forest:#1C2A14;--leaf:#6F8F33;--wash:#F1E9D6;--cream:#F2EFE2;--cream-soft:#C6C9B2;--ok:#3E7A2E;
+  --serif:"Fraunces",Georgia,serif;--sans:"General Sans","Inter",system-ui,sans-serif;
+  --maxw:1200px;--gut:clamp(20px,4.4vw,64px);--e1:cubic-bezier(.22,1,.36,1);--e2:cubic-bezier(.16,1,.3,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--paper);color:var(--ink);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;display:block}a{color:inherit}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--gut)}
+h1,h2,h3,.serif{font-family:var(--serif);font-weight:400;letter-spacing:-.015em;line-height:1.05;font-optical-sizing:auto}
+em{font-style:italic;color:var(--gold-deep)}
+.eyebrow{font-family:var(--sans);font-weight:500;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-deep);display:inline-flex;align-items:center;gap:9px}
+.eyebrow::before{content:"";width:22px;height:1px;background:var(--gold-muted)}
+.lede{font-size:clamp(17px,2vw,20px);color:var(--soft);line-height:1.55;max-width:60ch}
+.sec{padding:clamp(48px,7vh,90px) 0}
+.btn{font-family:var(--sans);font-weight:600;font-size:13px;letter-spacing:.04em;background:var(--gold);color:#fff;border:0;cursor:pointer;padding:14px 22px;display:inline-flex;align-items:center;gap:10px;text-decoration:none;transition:background .25s}
+.btn:hover{background:var(--gold-deep)}
+.btn.arr::after{content:"\2192";transition:transform .3s var(--e1)}
+.btn.arr:hover::after{transform:translateX(4px)}
+.btn.ghost{background:none;color:var(--gold-deep);border:1px solid var(--line2)}
+.btn.ghost:hover{background:rgba(178,116,9,.06);border-color:var(--gold)}
+.btn:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+/* chrome */
+.hdr{position:sticky;top:0;z-index:120;transition:transform .34s var(--e1)}
+.hdr.hide{transform:translateY(-100%)}
+.topbar{background:#0A101F;color:#EAF0FB;border-bottom:1px solid #232a40}
+body.embedded .topbar{display:none}
+.topbar-in{display:flex;align-items:center;justify-content:space-between;padding:9px var(--gut);max-width:var(--maxw);margin:0 auto;gap:12px}
+.brandmark{font-family:var(--sans);font-weight:600;letter-spacing:.14em;font-size:13px;text-transform:uppercase}
+.wsw{display:flex;align-items:center;border:1px solid rgba(255,255,255,.24);overflow:auto}
+.wsw a{font-family:var(--sans);font-weight:500;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#C7D3EE;text-decoration:none;padding:7px 12px;border-right:1px solid rgba(255,255,255,.18);white-space:nowrap;transition:background .25s,color .25s}
+.wsw a:last-child{border-right:0}.wsw a:hover{background:rgba(255,255,255,.09);color:#fff}.wsw a.on{background:#2536F5;color:#fff;font-weight:600}
+#bmBack{display:none;position:fixed;top:12px;right:16px;z-index:99998;align-items:center;gap:6px;font-family:var(--sans);font-weight:600;font-size:12.5px;color:#8F5D06;background:rgba(251,247,238,.97);border:1px solid var(--line2);border-radius:30px;padding:8px 14px;cursor:pointer}
+body.bm-standalone #bmBack{display:none}@media print{#bmBack{display:none!important}}
+/* nav (solid on inner pages) */
+.nav{background:rgba(246,241,230,.92);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);border-bottom:1px solid var(--line)}
+.nav-in{display:flex;align-items:center;gap:20px;max-width:var(--maxw);margin:0 auto;padding:14px var(--gut)}
+.wordmark{display:flex;align-items:center;text-decoration:none;flex:none}
+.wordmark img{height:40px;width:auto}
+.nav-links{display:flex;align-items:center;gap:2px;margin-left:auto}
+.nav-links a{position:relative;font-weight:500;font-size:14.5px;color:var(--soft);text-decoration:none;padding:8px 13px;transition:color .2s}
+.nav-links a::after{content:"";position:absolute;left:13px;right:100%;bottom:4px;height:1.5px;background:var(--gold);transition:right .35s var(--e2)}
+.nav-links a:hover::after,.nav-links a.here::after{right:13px}.nav-links a:hover,.nav-links a.here{color:var(--gold)}
+.nav .checkbtn{margin-left:14px}
+.nav-burger{display:none;width:46px;height:46px;align-items:center;justify-content:center;background:none;border:0;cursor:pointer;margin-left:auto;color:var(--ink)}
+.nav-burger svg{width:26px;height:26px}
+.drawer{display:none}
+@media(max-width:940px){.nav-links,.nav .checkbtn{display:none}.nav-burger{display:inline-flex}
+  .drawer{display:block;position:fixed;top:var(--hdrh,96px);left:0;right:0;z-index:105;background:var(--green);padding:14px var(--gut) 22px;transform:translateY(-130%);transition:transform .45s var(--e1)}
+  body.menu-open .drawer{transform:none}
+  .drawer a{display:flex;align-items:baseline;gap:14px;padding:15px 2px;font-family:var(--serif);font-size:22px;color:var(--cream);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.08)}
+  .drawer a .n{font-family:var(--sans);font-weight:500;font-size:11px;letter-spacing:.14em;color:#D89A2B}
+  .drawer .dcheck{margin-top:16px;border-bottom:0;justify-content:center;background:var(--gold);color:#fff;font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:15px}}
+/* headband hero */
+.headband{position:relative;min-height:56vh;display:flex;align-items:flex-end;overflow:hidden;color:var(--cream);margin-top:-58px}
+.headband img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.headband::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(13,20,8,.5) 0%,rgba(13,20,8,.2) 40%,rgba(13,20,8,.85) 100%)}
+.headband-in{position:relative;z-index:2;max-width:var(--maxw);margin:0 auto;padding:0 var(--gut) clamp(36px,6vh,64px);width:100%}
+.headband .eyebrow{color:#E7B85C}.headband .eyebrow::before{background:#E7B85C}
+.headband h1{font-size:clamp(38px,6vw,72px);font-weight:400;margin-top:16px;max-width:16ch}
+.headband h1 em{color:#E7B85C}
+.headband p{margin-top:16px;font-size:clamp(15px,1.9vw,19px);color:rgba(242,239,226,.86);max-width:52ch}
+.headband .credit{position:absolute;right:var(--gut);bottom:12px;z-index:2;font-family:var(--sans);font-weight:500;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(242,239,226,.45)}
+.shead .eyebrow{margin-bottom:14px}
+.shead h2{font-size:clamp(28px,4vw,46px);font-weight:400;max-width:22ch}.shead h2 em{color:var(--gold-deep)}
+.shead .lede{margin-top:16px}
+/* offer cards */
+.trust{display:inline-flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.trust span{font-family:var(--sans);font-weight:500;font-size:12px;color:var(--soft);background:var(--card);border:1px solid var(--line);padding:8px 13px}
+.trust span b{color:var(--gold-deep)}
+.ocards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:30px}
+.ocard{border:1px solid var(--line);background:var(--card);overflow:hidden;display:flex;flex-direction:column}
+.ocard-img{aspect-ratio:16/9;overflow:hidden}.ocard-img img{width:100%;height:100%;object-fit:cover;transition:transform .9s var(--e1)}
+.ocard:hover .ocard-img img{transform:scale(1.04)}
+.ocard-b{padding:24px 24px 26px;display:flex;flex-direction:column;flex:1}
+.ocard .k{font-family:var(--sans);font-weight:500;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+.ocard h3{font-size:26px;font-weight:400;margin-top:8px}
+.ocard p{font-size:14.5px;color:var(--soft);margin-top:10px;line-height:1.55;flex:1}
+.ocard .price{display:flex;align-items:baseline;gap:10px;margin-top:16px}
+.ocard .price b{font-family:var(--serif);font-size:26px;color:var(--gold-deep);font-weight:500}
+.ocard .price span{font-size:13px;color:var(--faint)}
+.ocard .mem{display:none;font-family:var(--sans);font-weight:600;font-size:12px;color:var(--leaf);margin-top:6px}
+html.member .ocard .mem{display:block}
+.ocard .btn{margin-top:18px;align-self:flex-start}
+@media(max-width:760px){.ocards{grid-template-columns:1fr}}
+/* transparency panel (signature) */
+.transpanel{border:1px solid var(--gold-muted);background:linear-gradient(180deg,var(--wash),var(--card));padding:clamp(26px,4vw,44px)}
+.transpanel .eyebrow{color:var(--gold-deep)}
+.transpanel h2{font-size:clamp(26px,3.6vw,40px);font-weight:400;margin-top:14px}
+.tp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:26px}
+.tp{border-left:2px solid var(--gold);padding:4px 0 4px 16px}
+.tp b{font-family:var(--serif);font-size:22px;font-weight:500;color:var(--ink)}
+.tp span{display:block;font-size:14px;color:var(--soft);margin-top:6px;line-height:1.5}
+@media(max-width:720px){.tp-grid{grid-template-columns:1fr}}
+/* perks strip */
+.perks{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2px;margin-top:14px;border:1px solid var(--line)}
+.perk{padding:20px 22px;background:var(--card);border-right:1px solid var(--line)}
+.perk:last-child{border-right:0}
+.perk b{font-family:var(--serif);font-size:18px;font-weight:400;display:block}
+.perk span{font-size:13.5px;color:var(--soft);margin-top:6px;display:block;line-height:1.5}
+@media(max-width:720px){.perk{border-right:0;border-bottom:1px solid var(--line)}.perk:last-child{border-bottom:0}}
+/* capture */
+.capbox{border:1px solid var(--line);background:var(--card);padding:clamp(28px,4vw,50px);display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(24px,4vw,54px);align-items:center}
+.cap-form{display:flex;margin-top:6px}
+.cap-form input{flex:1;font-family:var(--sans);font-size:15px;color:var(--ink);background:var(--paper);border:1px solid var(--line2);border-right:0;padding:14px 15px;min-width:0}
+.cap-form input:focus{outline:2px solid var(--gold);outline-offset:0}
+.cap-note{font-family:var(--sans);font-weight:500;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);margin-top:12px}
+.cap-done{display:none;border:1px solid rgba(111,143,51,.4);background:rgba(111,143,51,.08);padding:16px 18px;font-size:14.5px;color:var(--leaf);line-height:1.5}
+.cap-done b{display:block;font-family:var(--sans);font-weight:600;font-size:11px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px}
+html.member .cap-form,html.member .cap-note{display:none}html.member .cap-done{display:block}
+@media(max-width:760px){.capbox{grid-template-columns:1fr;gap:20px}}
+/* footer */
+.footer{position:relative;background:var(--green);color:var(--cream);padding:clamp(40px,6vh,72px) 0 30px}
+.f-in{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:30px;max-width:var(--maxw);margin:0 auto;padding:0 var(--gut)}
+.f-in .wm img{height:26px;filter:brightness(0) invert(1) sepia(1) saturate(5) hue-rotate(5deg) brightness(1.1);opacity:.9}
+.f-in p{font-size:13.5px;color:var(--cream-soft);margin-top:14px;line-height:1.6;max-width:38ch}
+.footer h4{font-family:var(--sans);font-weight:600;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--cream-soft);margin-bottom:12px}
+.footer a{color:var(--cream-soft);text-decoration:none;display:block;padding:4px 0;font-size:13.5px;transition:color .2s}
+.footer a:hover{color:#E7B85C}
+.f-base{max-width:var(--maxw);margin:34px auto 0;padding:18px var(--gut) 0;border-top:1px solid var(--forest);display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-family:var(--sans);font-weight:500;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
+@media(max-width:820px){.f-in{grid-template-columns:1fr 1fr}.f-in .wm{grid-column:1/-1}}
+.ribbon-strip{background:var(--green);padding:0 0 clamp(44px,7vh,80px);text-align:center}
+.ribbon{display:flex;justify-content:center;padding:clamp(110px,20vh,240px) 0 .4rem;pointer-events:none}
+.ribbon canvas{width:min(460px,86vw);height:auto}
+.ribbon-fb{font-family:var(--sans);font-size:.6rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:#fff;background:linear-gradient(90deg,#1421B8,#2536F5);padding:.5rem 1.4rem;clip-path:polygon(10px 0,calc(100% - 10px) 0,100% 50%,calc(100% - 10px) 100%,10px 100%,0 50%)}
+.ribbon-fb[hidden]{display:none}
+/* booking sheet + flow (shared spine) */
+.sheet{position:fixed;inset:0;z-index:99990;background:rgba(10,14,6,.55);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);opacity:0;pointer-events:none;transition:opacity .35s ease;display:flex;align-items:flex-end;justify-content:center}
+.sheet.open{opacity:1;pointer-events:auto}
+.sheet-card{width:min(560px,100%);background:var(--card);border-top:3px solid var(--gold);transform:translateY(30px);transition:transform .45s var(--e2);max-height:92vh;overflow:auto}
+.sheet.open .sheet-card{transform:none}
+@media(min-width:640px){.sheet{align-items:center}.sheet-card{border-top:0;border-left:3px solid var(--gold)}}
+.sheet-head{display:flex;justify-content:space-between;align-items:center;padding:20px 24px 0}.sheet-head .eyebrow{margin:0}
+.xbtn{font-family:var(--sans);font-weight:600;font-size:11px;letter-spacing:.08em;text-transform:uppercase;background:none;border:1px solid var(--line2);padding:8px 12px;cursor:pointer;color:var(--soft)}
+.xbtn:hover{border-color:var(--gold);color:var(--gold-deep)}
+.routes{padding:18px 24px 8px;display:grid;gap:8px}
+.route{display:grid;grid-template-columns:38px 1fr 20px;gap:14px;align-items:center;padding:15px 16px;border:1px solid var(--line);background:var(--paper);cursor:pointer;text-decoration:none;color:var(--ink);transition:border-color .25s,background .25s}
+.route:hover{border-color:var(--gold);background:var(--wash)}.route .ri{color:var(--gold-deep);display:flex}.route .ri svg{width:24px;height:24px}
+.route b{font-family:var(--serif);font-size:18px;font-weight:400}.route span{display:block;font-size:12.5px;color:var(--soft);margin-top:1px}.route .ra{color:var(--gold-muted)}
+.sheet-note{padding:6px 24px 22px;font-family:var(--sans);font-weight:500;font-size:11px;letter-spacing:.03em;color:var(--faint);line-height:1.6}
+.flow-steps{display:flex;gap:6px;padding:16px 24px 0}
+.flow-steps span{flex:1;font-family:var(--sans);font-weight:500;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);padding:8px 0 7px;border-top:2px solid var(--line);transition:color .3s,border-color .3s}
+.flow-steps span.on{color:var(--gold-deep);border-color:var(--gold);font-weight:600}
+.flow-body{padding:18px 24px 24px}
+.ff{display:flex;flex-direction:column;gap:6px}.ff label{font-family:var(--sans);font-weight:500;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+.ff input,.ff select{font-family:var(--sans);font-size:15px;color:var(--ink);background:var(--paper);border:1px solid var(--line2);padding:12px;width:100%}
+.ff input:focus,.ff select:focus{outline:2px solid var(--gold);outline-offset:0}
+.ffgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.rmopt{display:grid;grid-template-columns:74px 1fr auto;gap:12px;align-items:center;border:1px solid var(--line);padding:10px;cursor:pointer;background:var(--paper);transition:border-color .3s,background .3s}
+.rmopt+.rmopt{margin-top:8px}.rmopt:hover{border-color:var(--gold-muted)}.rmopt.sel{border-color:var(--gold);background:var(--wash);box-shadow:inset 2px 0 0 var(--gold)}
+.rmopt img{width:74px;height:56px;object-fit:cover}.rmopt b{font-family:var(--serif);font-size:16px;font-weight:400;display:block}.rmopt .rs{font-size:12px;color:var(--soft)}
+.rmopt .pr{text-align:right;white-space:nowrap}.rmopt .pr b{font-size:15px;color:var(--gold-deep)}.rmopt .pr small{display:block;font-size:11px;color:var(--faint)}
+.rmopt .pr .m{display:none;font-family:var(--sans);font-weight:600;font-size:10px;color:var(--leaf);margin-top:2px}html.member .rmopt .pr .m{display:block}
+.knowbox{margin-top:14px;border:1px solid rgba(178,116,9,.35);background:rgba(178,116,9,.06);padding:13px 15px}
+.knowbox .kk{font-family:var(--sans);font-weight:600;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-deep)}
+.knowbox ul{list-style:none;margin-top:8px;display:grid;gap:5px}
+.knowbox li{font-size:13px;color:var(--soft);padding-left:15px;position:relative;line-height:1.5}.knowbox li::before{content:"";position:absolute;left:0;top:8px;width:5px;height:5px;background:var(--gold)}
+.sumrow{display:flex;justify-content:space-between;gap:10px;font-size:14px;color:var(--soft);padding:8px 0;border-bottom:1px solid var(--line)}.sumrow b{color:var(--ink)}.sumrow.tot b{color:var(--gold-deep);font-size:17px;font-family:var(--serif);font-weight:500}
+.flow-foot{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:16px;flex-wrap:wrap}
+.flow-note{font-family:var(--sans);font-weight:500;font-size:10px;letter-spacing:.04em;color:var(--faint);line-height:1.7}
+.paybtns{display:grid;gap:8px;margin-top:14px}
+.paybtn{display:flex;align-items:center;justify-content:center;gap:8px;font-family:var(--sans);font-size:14px;font-weight:600;padding:13px;border:1px solid var(--line2);background:var(--paper);cursor:pointer;transition:border-color .25s}
+.paybtn:hover{border-color:var(--ink)}.paybtn.dark{background:var(--ink);color:#fff;border-color:var(--ink)}
+.flow-done{text-align:center;padding:24px 8px}.flow-done .big{font-family:var(--serif);font-size:26px;font-weight:400;margin-top:10px}
+[data-reveal]{opacity:0;transform:translateY(22px);transition:opacity .8s var(--e1),transform .8s var(--e1)}
+[data-reveal].in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.001ms!important}[data-reveal]{opacity:1!important;transform:none!important}}
+
+/* ============ premium polish pass (ported from index) ============ */
+:root{--focus:#B27409;--focus-dark:#E7B85C;--sh-1:0 1px 2px rgba(40,30,10,.05);--sh-2:0 10px 26px -13px rgba(40,30,10,.2)}
+.headband h1{font-variation-settings:"opsz" 112,"wght" 400;letter-spacing:-.02em}
+.shead h2{font-variation-settings:"opsz" 62,"wght" 400;letter-spacing:-.02em}
+.ocard h3,.offer h3,.front-b h2,.eventcard h3,.bundle h3{font-variation-settings:"opsz" 40,"wght" 400}
+.ocard .price b,.offer .price b,.ccard b,.route b,.rmopt b,.tp b,.perk b,.hrow b{font-variation-settings:"opsz" 26,"wght" 400;letter-spacing:0}
+h1,h2,h3,.transpanel h2{text-wrap:balance}
+.lede,p.body,.headband p,.ocard p,.offer p,.front-b .pos,.eventcard p,.perk span{text-wrap:pretty}
+.eyebrow{font-size:11px;letter-spacing:.18em;line-height:1}
+.eyebrow::before{width:18px}
+.ocard .price b,.offer .price b,.sumrow.tot b{font-variant-numeric:tabular-nums lining-nums;font-feature-settings:"tnum" 1}
+.ocard:hover,.leg:hover,.offer:hover{box-shadow:var(--sh-2)}
+.route:focus-visible,.rmopt:focus-visible,.paybtn:focus-visible,.xbtn:focus-visible,.leg:focus-visible,.pill:focus-visible,.field input:focus-visible,.field textarea:focus-visible,.cap-form input:focus-visible,.social-links a:focus-visible,.flink:focus-visible,.maplink:focus-visible,.ocard .btn:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.ccard:focus-visible{outline:2px solid var(--focus-dark);outline-offset:3px}
+body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;mix-blend-mode:multiply;opacity:.032;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E")}
+@media(prefers-reduced-motion:reduce){body::before{opacity:.024}}
+</style>
+</head>
+<body>
+<div class="hdr" id="hdr">
+<div class="topbar"><div class="topbar-in"><span class="brandmark">BM</span><nav class="wsw"><a href="audit.html">01 Audit</a><a href="framework.html">02 Framework</a><a href="index.html" class="on">03 Website</a></nav></div></div>
+<nav class="nav" id="nav"><div class="nav-in">
+  <a class="wordmark" href="index.html" aria-label="Bangi Resort Hotel, home"><img src="assets/brh-logo.png" alt="Bangi Resort Hotel"></a>
+  <div class="nav-links"><a href="index.html">Home</a><a href="index.html#stay">Stay</a><a href="index.html#meet">Meet</a><a href="index.html#play">Play</a><a href="index.html#farm">Farm</a><a href="offers.html" class="here">Offers</a></div>
+  <button class="btn checkbtn" type="button" data-book>Check dates</button>
+  <button class="nav-burger" id="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="drawer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+</div></nav>
+</div>
+<button id="bmBack" type="button" aria-label="Back">&larr; Back</button>
+<div class="drawer" id="drawer">
+  <a href="index.html"><span class="n">00</span>Home</a><a href="index.html#stay"><span class="n">01</span>Stay</a><a href="index.html#meet"><span class="n">02</span>Meet</a><a href="index.html#play"><span class="n">03</span>Play</a><a href="index.html#farm"><span class="n">04</span>Farm</a><a href="offers.html"><span class="n">05</span>Offers</a><a href="group.html"><span class="n">06</span>The Bangi Group</a><a href="contact.html"><span class="n">07</span>Contact</a><a class="dcheck" href="#" data-book>Check dates &amp; rates</a>
+</div>
+
+<header class="headband" id="top">
+  <img src="assets/estate-dusk.webp" alt="The estate lake at dusk" fetchpriority="high">
+  <div class="headband-in">
+    <span class="eyebrow">Book direct</span>
+    <h1>Offers, with <em>nothing hidden</em></h1>
+    <p>Every rate here is direct, and every fee shows before you pay. No dead links, no second engine, no surprise at the counter.</p>
+  </div>
+  <span class="credit">Photo &middot; bangiresorthotel.com</span>
+</header>
+
+<!-- best-rate-direct strip -->
+<section class="sec wrap" style="padding-bottom:0">
+  <div class="shead" data-reveal><span class="eyebrow">Why book direct</span><h2>The best rate is the one straight from us</h2></div>
+  <div class="perks" data-reveal>
+    <div class="perk"><b>Best rate, direct</b><span>No OTA commission inflating the price you see.</span></div>
+    <div class="perk"><b>Flexible cancellation</b><span>Terms shown before you pay, not after.</span></div>
+    <div class="perk"><b>Member pricing</b><span>Unlock a lower rate with one email, below.</span></div>
+    <div class="perk"><b>One booking engine</b><span>The same trusted path for every offer on this page.</span></div>
+  </div>
+  <div class="trust" data-reveal><span><b>4.1/5</b> &middot; 709 TripAdvisor reviews</span><span><b>#1 of 9</b> in Bandar Baru Bangi</span><span>Travellers&rsquo; Choice</span></div>
+</section>
+
+<!-- offer cards -->
+<section class="sec wrap" id="offers" style="padding-bottom:0">
+  <div class="ocards">
+    <div class="ocard" id="durian" data-reveal>
+      <div class="ocard-img"><img src="assets/durians.webp" alt="Championship durians" loading="lazy" decoding="async"></div>
+      <div class="ocard-b">
+        <span class="k">2D1N &middot; 03 to 05 July 2026</span>
+        <h3>Durian Escape Staycation</h3>
+        <p>Two pax with breakfast, lunch and an all-you-can-eat durian buffet at Funtasia. Championship-grade durians, ASEAN Records recognised.</p>
+        <div class="price"><b>from RM729</b><span>nett &middot; Grand Deluxe &middot; RM779 nett Heritage</span></div>
+        <div class="mem">Member rate applies at checkout</div>
+        <button class="btn arr" type="button" data-book>Book this offer</button>
+      </div>
+    </div>
+    <div class="ocard" id="rooms" data-reveal>
+      <div class="ocard-img"><img src="assets/pool-lawn.webp" alt="The pool and lawn" loading="lazy" decoding="async"></div>
+      <div class="ocard-b">
+        <span class="k">Accommodation &middot; year round</span>
+        <h3>Room Promotion, direct</h3>
+        <p>Scenic rooms overlooking the 27-hole course, the farm and the city lights of Bangi, each with the Go Green amenity option.</p>
+        <div class="price"><b>from RM380</b><span>/ night &middot; RM410 incl. tax</span></div>
+        <div class="mem">Member rate applies at checkout</div>
+        <button class="btn arr" type="button" data-book>Check dates</button>
+      </div>
+    </div>
+  </div>
+  <p class="cap-note" style="margin-top:14px">Durian Escape rates from the live 2026 flyer &middot; room rate indicative for this prototype, live rates load from the single SwiftBook engine.</p>
+</section>
+
+<!-- the transparency panel (always visible signature fix) -->
+<section class="sec wrap" id="transparency">
+  <div class="transpanel" data-reveal>
+    <span class="eyebrow">Know before you book</span>
+    <h2>The three things the old site hid</h2>
+    <p class="lede" style="margin-top:14px">The reviews flagged all three. Here they are, up front, and they show again at the moment you confirm.</p>
+    <div class="tp-grid">
+      <div class="tp"><b>RM250 deposit</b><span>A refundable security deposit taken at check-in, returned when you leave.</span></div>
+      <div class="tp"><b>RM30 / day parking</b><span>Stated here, not discovered at the counter after &ldquo;free parking&rdquo;.</span></div>
+      <div class="tp"><b>SST included</b><span>The price you see already includes tax. No line added at the end.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- one booking path -->
+<section class="sec wrap" id="booking" style="padding-top:0">
+  <div class="capbox" data-reveal style="grid-template-columns:1fr;text-align:center;padding-top:clamp(32px,5vw,52px);padding-bottom:clamp(32px,5vw,52px)">
+    <div>
+      <span class="eyebrow" style="justify-content:center">One path, no dead ends</span>
+      <h2 class="serif" style="font-size:clamp(26px,3.6vw,40px);margin-top:14px">One booking engine for the whole estate</h2>
+      <p class="lede" style="margin:14px auto 0;text-align:center">Rooms, tee times, courts and events, all through one branded path. The dead 2021 link and the second engine are gone.</p>
+      <div style="margin-top:22px"><button class="btn arr" type="button" data-book>Book direct</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- capture -->
+<section class="sec wrap" id="member" style="padding-top:0">
+  <div class="capbox" data-reveal>
+    <div>
+      <span class="eyebrow">Member rate</span>
+      <h2 class="serif" style="font-size:clamp(26px,3.6vw,40px);margin-top:14px">Unlock the member rate</h2>
+      <p class="lede" style="margin-top:12px">One email. Golf rates, festival dates and seasonal offers, about once a month, and member pricing on every stay.</p>
+    </div>
+    <div>
+      <form class="cap-form" id="capForm" autocomplete="off"><input type="email" required placeholder="you@email.com" aria-label="Email address"><button class="btn" type="submit" style="padding-left:20px;padding-right:20px">Unlock</button></form>
+      <div class="cap-done" role="status"><b>Member rate unlocked</b>Member pricing now shows on every offer and in the booking flow.</div>
+      <p class="cap-note">No popups, ever &middot; the demo unlocks pricing instantly on submit</p>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="f-in">
+    <div class="wm"><img src="assets/brh-logo.png" alt="Bangi Resort Hotel"><p>Six hundred acres on the peak of Bandar Baru Bangi: hotel, golf, farm, arena and the group behind them, one front door.</p></div>
+    <div><h4>The estate</h4><a href="index.html#stay">Stay</a><a href="index.html#meet">Meet &amp; Celebrate</a><a href="index.html#play">Play</a><a href="index.html#farm">Explore the farm</a><a href="offers.html">Offers</a></div>
+    <div><h4>The group</h4><a href="group.html#hotel">Bangi Resort Hotel</a><a href="group.html#golf">Bangi Golf Resort</a><a href="group.html#farm">Bangi Farm Resort</a><a href="group.html#lavista">LaVista Arena</a><a href="group.html#foodtalk">BGR Food Talk</a></div>
+    <div><h4>Visit</h4><a href="contact.html">Contact &amp; enquiry</a><a href="#" data-book>Book direct</a><a href="https://www.bangiresorthotel.com/hotel-general-info/" target="_blank" rel="noopener">Hotel policies</a></div>
+  </div>
+  <div class="f-base"><span>&copy; 2026 Bangi Group</span><span>Offers concept &middot; Brand Method</span></div>
+  <div class="ribbon-strip"><div class="ribbon" role="img" aria-label="Demo by BrandMethod.co"><canvas id="ribCv" width="460" height="110" aria-hidden="true"></canvas><span class="ribbon-fb" hidden>Demo &middot; BrandMethod.co</span></div></div>
+</footer>
+
+<div class="sheet" id="sheet" aria-hidden="true" role="dialog" aria-label="Book direct"><div class="sheet-card"><div class="sheet-head"><span class="eyebrow" id="sheetK">Book direct</span><button class="xbtn" id="sheetX" type="button">Close &#10005;</button></div><div id="sheetBody"></div></div></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
+<script>
+var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches;
+document.documentElement.classList.add('js');
+(function(){ if(!window.Lenis||reduce) return; var lenis=new Lenis({lerp:0.10,smoothWheel:true,wheelMultiplier:1.1,touchMultiplier:1.5,syncTouch:true}); document.documentElement.style.scrollBehavior='auto';
+  if(window.gsap){ if(window.ScrollTrigger) lenis.on('scroll',ScrollTrigger.update); gsap.ticker.add(function(t){lenis.raf(t*1000);}); gsap.ticker.lagSmoothing(0);} else { requestAnimationFrame(function raf(t){lenis.raf(t);requestAnimationFrame(raf);}); }
+  document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href^="#"]');if(!a)return;var id=a.getAttribute('href');if(!id||id==='#')return;var el=document.querySelector(id);if(!el)return;e.preventDefault();lenis.scrollTo(el,{offset:-70});try{history.pushState(null,'',id);}catch(_){}document.body.classList.remove('menu-open');});
+  window.__lenis=lenis; })();
+if(window.top!==window.self)document.body.classList.add('embedded');
+(function(){if(window.top===window.self){document.body.classList.add('bm-standalone');var b=document.getElementById('bmBack');if(b)b.addEventListener('click',function(){var r=document.referrer;if(r&&r.indexOf(location.origin)===0&&r!==location.href&&history.length>1){history.back();}else{location.href='index.html';}})}})();
+/* nav hide on scroll down */
+(function(){var hdr=document.getElementById('hdr'),nav=document.getElementById('nav'),lastY=0;function sh(){document.documentElement.style.setProperty('--hdrh',hdr.offsetHeight+'px');}sh();addEventListener('resize',sh);addEventListener('load',sh);window.addEventListener('scroll',function(){var y=window.scrollY;if(y<80){hdr.classList.remove('hide');}else if(y>lastY+6){hdr.classList.add('hide');document.body.classList.remove('menu-open');}else if(y<lastY-6){hdr.classList.remove('hide');}lastY=y;},{passive:true});})();
+/* burger */
+(function(){var b=document.getElementById('burger');if(!b)return;var _dr=document.getElementById('drawer');b.addEventListener('click',function(){var o=document.body.classList.toggle('menu-open');b.setAttribute('aria-expanded',o?'true':'false');if(o&&_dr){var _h=document.getElementById('hdr')||document.getElementById('nav');_dr.style.top=Math.round(_h.getBoundingClientRect().bottom)+'px';}});document.querySelectorAll('#drawer a').forEach(function(a){a.addEventListener('click',function(){document.body.classList.remove('menu-open');});});document.addEventListener('keydown',function(e){if(e.key==='Escape')document.body.classList.remove('menu-open');});})();
+/* reveals */
+(function(){if(reduce)return;var items=[].slice.call(document.querySelectorAll('[data-reveal]'));function reveal(){var vh=window.innerHeight||800;for(var i=items.length-1;i>=0;i--){if(items[i].getBoundingClientRect().top<vh*0.9){items[i].classList.add('in');items.splice(i,1);}}return items.length;}var ticking=false;function onScroll(){if(ticking)return;ticking=true;requestAnimationFrame(function(){reveal();ticking=false;});}addEventListener('scroll',onScroll,{passive:true});addEventListener('resize',onScroll);if(window.__lenis&&window.__lenis.on)try{window.__lenis.on('scroll',onScroll);}catch(e){}addEventListener('load',reveal);reveal();var n=0,iv=setInterval(function(){if(reveal()===0||++n>26){clearInterval(iv);}},260);})();
+/* booking spine: four-route sheet -> 3-step flow · canonical SwiftBook ID to confirm with Sam: 563MjYKxTGIrXwVOlsqaJQTaHLxzGMPvcB2NTk= (retires the parallel 803...) */
+(function(){
+  var sheet=document.getElementById('sheet'),body=document.getElementById('sheetBody'),kEl=document.getElementById('sheetK'),xb=document.getElementById('sheetX');
+  var fmt=function(d){return d.toISOString().slice(0,10);};var t=new Date();t.setDate(t.getDate()+14);var o=new Date();o.setDate(o.getDate()+15);
+  var state={inD:fmt(t),outD:fmt(o),guests:'2 adults',room:1};
+  var ROOMS=[{n:'Deluxe King',s:'City-lights side',base:380,img:'assets/room-towel.webp'},{n:'Grand Deluxe',s:'Course side, the Durian Escape room',base:480,img:'assets/room-premier.webp'},{n:'Premier Family',s:'Two beds, farm side',base:560,img:'assets/room-detail.webp'}];
+  function rm(v){return 'RM'+v.toLocaleString('en-US');}function incl(v){return Math.round(v*1.08);}function nights(){var a=new Date(state.inD),b=new Date(state.outD),n=Math.round((b-a)/864e5);return n>0?n:1;}
+  function know(){return '<div class="knowbox"><span class="kk">Know before you book</span><ul><li>RM250 refundable security deposit at check-in</li><li>Parking RM30 per day</li><li>Prices include SST</li></ul></div>';}
+  var ICON={room:'<path d="M3 18v-6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6"/><path d="M3 18h18M6 10V7a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v3"/>',golf:'<circle cx="12" cy="12" r="9"/><path d="M12 3a15 15 0 0 1 0 18M3.6 8h16.8M3.6 16h16.8"/>',court:'<rect x="3" y="5" width="18" height="14" rx="1"/><path d="M12 5v14M3 12h18"/>',event:'<path d="M12 3l9 5-9 5-9-5z"/><path d="M5 10.5V16c0 1.5 3 3 7 3s7-1.5 7-3v-5.5"/>'};
+  function routes(){kEl.textContent='Book direct · SwiftBook';body.innerHTML='<div class="routes">'+
+    '<a class="route" href="#" data-route="room"><span class="ri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">'+ICON.room+'</svg></span><span><b>A room</b><span>256 rooms &middot; from RM380, taxes shown before payment</span></span><span class="ra">&rarr;</span></a>'+
+    '<a class="route" href="index.html#play"><span class="ri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">'+ICON.golf+'</svg></span><span><b>A tee time</b><span>27 holes &middot; from RM145 weekday, one branded engine</span></span><span class="ra">&rarr;</span></a>'+
+    '<a class="route" href="group.html#lavista"><span class="ri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">'+ICON.court+'</svg></span><span><b>A LaVista court</b><span>pickleball &amp; badminton, pricing surfaced</span></span><span class="ra">&rarr;</span></a>'+
+    '<a class="route" href="contact.html"><span class="ri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">'+ICON.event+'</svg></span><span><b>A function or event</b><span>28 venues &middot; captured enquiry, not a call queue</span></span><span class="ra">&rarr;</span></a>'+
+    '</div><p class="sheet-note">One booking spine for the whole estate. Rooms run inline below, the rest deep-link to their surface.</p>';
+    body.querySelector('[data-route="room"]').addEventListener('click',function(e){e.preventDefault();step(0);});}
+  var STEPS=['Dates','Room','Confirm'];function stepsBar(i){return '<div class="flow-steps">'+STEPS.map(function(s,k){return '<span class="'+(k<=i?'on':'')+'">'+(k+1)+' &middot; '+s+'</span>';}).join('')+'</div>';}
+  function step(i){kEl.textContent='A room · SwiftBook';
+    if(i===0){body.innerHTML=stepsBar(0)+'<div class="flow-body"><div class="ffgrid"><div class="ff"><label>Check in</label><input type="date" id="mIn" value="'+state.inD+'"></div><div class="ff"><label>Check out</label><input type="date" id="mOut" value="'+state.outD+'"></div></div><div class="ff" style="margin-top:10px"><label>Guests</label><select id="mGx"><option>1 adult</option><option'+(state.guests==='2 adults'?' selected':'')+'>2 adults</option><option>2 adults, 1 child</option><option>2 adults, 2 children</option><option>Family, 4+</option></select></div><div class="flow-foot"><span class="flow-note">One engine &middot; no account needed</span><button class="btn arr" id="n1" type="button">Choose a room</button></div></div>';
+      document.getElementById('n1').addEventListener('click',function(){state.inD=document.getElementById('mIn').value||state.inD;state.outD=document.getElementById('mOut').value||state.outD;state.guests=document.getElementById('mGx').value;step(1);});}
+    else if(i===1){var rows=ROOMS.map(function(r,k){var m=Math.round(r.base*0.9);return '<div class="rmopt'+(state.room===k?' sel':'')+'" data-k="'+k+'" role="button" tabindex="0"><img src="'+r.img+'" alt=""><div><b>'+r.n+'</b><span class="rs">'+r.s+'</span></div><div class="pr"><b>from '+rm(r.base)+'</b><small>'+rm(incl(r.base))+' incl. tax / night</small><span class="m">Member '+rm(incl(m))+' incl. tax</span></div></div>';}).join('');
+      body.innerHTML=stepsBar(1)+'<div class="flow-body">'+rows+know()+'<div class="flow-foot"><button class="btn ghost" id="b1" type="button">Back</button><button class="btn arr" id="n2" type="button">Review</button></div></div>';
+      body.querySelectorAll('.rmopt').forEach(function(el){function pick(){state.room=+el.dataset.k;body.querySelectorAll('.rmopt').forEach(function(x){x.classList.toggle('sel',+x.dataset.k===state.room);});}el.addEventListener('click',pick);el.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();pick();}});});
+      document.getElementById('b1').addEventListener('click',routes);document.getElementById('n2').addEventListener('click',function(){step(2);});}
+    else{var r=ROOMS[state.room],n=nights(),member=document.documentElement.classList.contains('member'),per=member?Math.round(r.base*0.9):r.base,tot=incl(per)*n;
+      body.innerHTML=stepsBar(2)+'<div class="flow-body"><div class="sumrow"><span>Dates</span><b>'+state.inD+' &rarr; '+state.outD+' &middot; '+n+' night'+(n>1?'s':'')+'</b></div><div class="sumrow"><span>Guests</span><b>'+state.guests+'</b></div><div class="sumrow"><span>Room</span><b>'+r.n+(member?' &middot; member rate':'')+'</b></div><div class="sumrow tot"><span>Total, SST included</span><b>'+rm(tot)+'</b></div>'+know()+'<div class="paybtns"><button class="paybtn dark" type="button" data-pay>&#63743; Pay &middot; wallet</button><button class="paybtn" type="button" data-pay>FPX online banking</button><button class="paybtn" type="button" data-pay>Credit or debit card</button></div><div class="flow-foot"><button class="btn ghost" id="b2" type="button">Back</button><span class="flow-note">Concept prototype, no payment is processed<br>Production connects one SwiftBook ID, confirmed with Sam</span></div></div>';
+      document.getElementById('b2').addEventListener('click',function(){step(1);});
+      body.querySelectorAll('[data-pay]').forEach(function(b){b.addEventListener('click',function(){body.innerHTML='<div class="flow-done"><span class="eyebrow" style="justify-content:center">Simulated, no charge made</span><div class="big">This is where the booking completes.</div><p class="lede" style="margin:10px auto 0;text-align:center;font-size:14px">Same look from first click to paid, deposit and parking disclosed before payment, one engine behind it.</p><div style="margin-top:18px"><button class="btn" id="dn" type="button">Close</button></div></div>';document.getElementById('dn').addEventListener('click',close);});});}
+  }
+  sheet.setAttribute('aria-modal','true');var _lastTrig=null;function _foc(){return [].slice.call(sheet.querySelectorAll('a[href],button:not(:disabled),input:not([disabled]),select:not([disabled]),[tabindex]:not([tabindex="-1"])')).filter(function(el){return el.offsetParent!==null;});}function open(){_lastTrig=document.activeElement;routes();sheet.classList.add('open');sheet.setAttribute('aria-hidden','false');document.documentElement.style.overflow='hidden';if(window.__lenis)try{window.__lenis.stop();}catch(e){}xb.focus();}
+  function close(){sheet.classList.remove('open');sheet.setAttribute('aria-hidden','true');document.documentElement.style.overflow='';if(window.__lenis)try{window.__lenis.start();}catch(e){}if(_lastTrig&&_lastTrig.focus)try{_lastTrig.focus();}catch(e){}}
+  document.querySelectorAll('[data-book]').forEach(function(b){b.addEventListener('click',function(e){e.preventDefault();open();});});
+  xb.addEventListener('click',close);sheet.addEventListener('click',function(e){if(e.target===sheet)close();});document.addEventListener('keydown',function(e){if(!sheet.classList.contains('open'))return;if(e.key==='Escape'){close();return;}if(e.key==='Tab'){var f=_foc();if(!f.length)return;var fi=f[0],la=f[f.length-1];if(e.shiftKey&&document.activeElement===fi){e.preventDefault();la.focus();}else if(!e.shiftKey&&document.activeElement===la){e.preventDefault();fi.focus();}}});
+  try{if(localStorage.getItem('brh-member'))document.documentElement.classList.add('member');}catch(e){}
+  var cf=document.getElementById('capForm');if(cf)cf.addEventListener('submit',function(e){e.preventDefault();document.documentElement.classList.add('member');try{localStorage.setItem('brh-member','1');}catch(err){}});
+})();
+/* ribbon */
+(function(){var cv=document.getElementById('ribCv'),fb=document.querySelector('.ribbon-fb'),ctx;try{ctx=cv&&cv.getContext('2d');}catch(e){}if(!ctx){if(cv)cv.style.display='none';if(fb)fb.hidden=false;return;}
+  var W=460,H=110,dpr=Math.min(devicePixelRatio||1,2),X0=40,X1=420,BH=32,BY=40,running=false,looping=false,t=0;cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
+  var SEGS=[{t:'DEMO BY',sp:3.6,gap:8},{star:true,w:13,gap:9},{t:'BRAND',sp:3.6},{t:'METHOD.CO',sp:3.6}],G=null;
+  function build(){G=[];SEGS.forEach(function(s){if(s.star){G.push({star:true,w:s.w});if(s.gap)G.push({gap:s.gap});return;}ctx.font='600 12px "General Sans",sans-serif';for(var i=0;i<s.t.length;i++){var ch=s.t[i];if(ch===' '){G.push({gap:6.5});continue;}G.push({ch:ch,w:ctx.measureText(ch).width+s.sp});}if(s.gap)G.push({gap:s.gap});});}
+  function wave(x,tt){return 4*Math.sin(x*0.0135+tt*0.0011)+2.4*Math.sin(x*0.029-tt*0.00068)+1.2*Math.sin(x*0.055+tt*0.0016);}
+  function slope(x,tt){return (wave(x+2,tt)-wave(x-2,tt))/4;}function shade(p){return 'rgb('+Math.round(18+68*p)+','+Math.round(28+88*p)+','+Math.round(158+97*p)+')';}
+  function tail(xe,dir,tt){var y=BY+wave(xe,tt)*0.7+9,x2=xe-dir*40;ctx.beginPath();ctx.moveTo(xe,y);ctx.lineTo(x2,y+7);ctx.lineTo(x2+dir*13,y+7+BH/2);ctx.lineTo(x2,y+7+BH);ctx.lineTo(xe,y+BH);ctx.closePath();ctx.fillStyle='#101C96';ctx.fill();ctx.fillStyle='rgba(0,0,0,.22)';ctx.fill();}
+  function draw(tt){if(!G)build();ctx.clearRect(0,0,W,H);tail(X0+6,1,tt);tail(X1-6,-1,tt);for(var x=X0;x<=X1;x+=2){var y=BY+wave(x,tt),s=slope(x,tt),p=Math.max(0,Math.min(1,0.52+s*5.5+0.14*Math.sin(x*0.006-tt*0.00042)));ctx.fillStyle=shade(p);ctx.fillRect(x-1,y,2.4,BH);}
+    ctx.textAlign='left';ctx.textBaseline='middle';var total=0;G.forEach(function(g){total+=g.w||g.gap||0;});var xs=(X0+X1)/2-total/2;
+    G.forEach(function(g){if(g.gap){xs+=g.gap;return;}var cx=xs+(g.w||0)/2,y=BY+wave(cx,tt)+BH/2+0.5,a=Math.atan(slope(cx,tt));ctx.save();ctx.translate(cx,y);ctx.rotate(a);
+      if(g.star){ctx.strokeStyle='rgba(255,255,255,.97)';ctx.lineWidth=1.5;ctx.lineCap='round';for(var sp=0;sp<4;sp++){var an=sp*Math.PI/4;ctx.beginPath();ctx.moveTo(-Math.cos(an)*4.6,-Math.sin(an)*4.6);ctx.lineTo(Math.cos(an)*4.6,Math.sin(an)*4.6);ctx.stroke();}}else{ctx.font='600 12px "General Sans",sans-serif';ctx.fillStyle='rgba(2,8,40,.4)';ctx.fillText(g.ch,-((g.w||0)/2)+0.7,1.1);ctx.fillStyle='#fff';ctx.fillText(g.ch,-((g.w||0)/2),0);}ctx.restore();xs+=g.w||0;});}
+  function frame(){if(!running){looping=false;return;}looping=true;t+=16;draw(t);requestAnimationFrame(frame);}draw(0);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){G=null;draw(t);});if(reduce)return;
+  if(window.IntersectionObserver){new IntersectionObserver(function(es){es.forEach(function(en){running=en.isIntersecting;if(running&&!looping)requestAnimationFrame(frame);});}).observe(cv);}else{running=true;requestAnimationFrame(frame);}})();
+</script>
+</body>
+</html>

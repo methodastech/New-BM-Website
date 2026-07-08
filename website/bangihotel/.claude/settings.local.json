@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find \"/Users/zieel/Bazil Claude 3/Websites/bangi hotel demo\" -type f | head -100 && echo \"---\" && ls \"/Users/zieel/Bazil Claude 3/Websites/\")"
+    ]
+  }
+}

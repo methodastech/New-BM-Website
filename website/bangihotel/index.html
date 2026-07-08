@@ -1,0 +1,1820 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><link rel="icon" type="image/png" href="assets/favicon.png"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bangi Resort Hotel · Homepage Concept · Brand Method</title>
+<meta name="description" content="Escape to 600 acres, 20 minutes from Putrajaya, open to all. One estate with everything: 256 rooms, a 27-hole championship course, a working farm and 28 event spaces, booked direct in one place.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="assets/hero-pool.webp" imagesrcset="assets/hero-pool-m.webp 760w, assets/hero-pool.webp 1350w" imagesizes="100vw" fetchpriority="high">
+<style>
+:root{
+  --paper:#F6F1E6; --paper2:#EFE7D6; --card:#FBF7EE; --ink:#161D10; --soft:#4C5340; --faint:#8A9078;
+  --gold:#B27409; --gold-deep:#8F5D06; --gold-muted:#B0A06C; --line:#E3DCC9; --line2:#D6CDB6;
+  --green:#10170B; --forest:#1C2A14; --leaf:#6F8F33; --wash:#F1E9D6;
+  --cream:#F2EFE2; --cream-soft:#C6C9B2;
+  --serif:"Fraunces",Georgia,serif; --sans:"General Sans","Inter",system-ui,sans-serif;
+  --maxw:1200px; --gut:clamp(20px,4.4vw,64px);
+  --e1:cubic-bezier(.22,1,.36,1); --e2:cubic-bezier(.16,1,.3,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--paper);color:var(--ink);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--gut)}
+h1,h2,h3,.serif{font-family:var(--serif);font-weight:400;letter-spacing:-.015em;line-height:1.05;font-optical-sizing:auto}
+em{font-style:italic;color:var(--gold-deep)}
+.eyebrow{font-family:var(--sans);font-weight:500;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-deep);display:inline-flex;align-items:center;gap:9px}
+.eyebrow::before{content:"";width:22px;height:1px;background:var(--gold-muted)}
+.lede{font-size:clamp(17px,2vw,20px);color:var(--soft);line-height:1.55;max-width:60ch}
+.credit{font-family:var(--sans);font-weight:500;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+.sec{padding:clamp(56px,9vh,120px) 0}
+/* the one gold action per view */
+.btn{font-family:var(--sans);font-weight:600;font-size:13px;letter-spacing:.04em;background:var(--gold);color:#fff;border:0;cursor:pointer;padding:14px 22px;display:inline-flex;align-items:center;gap:10px;text-decoration:none;transition:background .25s}
+.btn:hover{background:var(--gold-deep)}
+.btn.arr::after{content:"\2192";transition:transform .3s var(--e1)}
+.btn.arr:hover::after{transform:translateX(4px)}
+.btn.ghost{background:none;color:var(--gold-deep);border:1px solid var(--line2)}
+.btn.ghost:hover{background:rgba(178,116,9,.06);border-color:var(--gold)}
+.btn.cream{background:rgba(242,239,226,.12);color:var(--cream);border:1px solid rgba(242,239,226,.34)}
+.btn.cream:hover{background:rgba(242,239,226,.2)}
+.btn:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+
+/* ============ loader ============ */
+/* landonorris-style: gold particles grow the tree, then zoom THROUGH it into the hero */
+#loader{position:fixed;inset:0;z-index:99999;background:radial-gradient(72% 72% at 50% 43%,#1F2E12 0%,#111907 60%,#0B1206 100%);display:flex;align-items:center;justify-content:center;transform-origin:50% 43%;transition:transform 1.05s cubic-bezier(.66,0,.84,.32),opacity .85s ease .12s,filter 1.05s ease;will-change:transform,opacity,filter}
+#loader.zoom{transform:scale(11);opacity:0;filter:blur(14px);pointer-events:none}
+#loader canvas{position:absolute;inset:0;width:100%;height:100%}
+.ld-ui{position:absolute;left:0;right:0;bottom:14%;z-index:2;display:flex;justify-content:center;pointer-events:none}
+.ld-pct{font-family:var(--sans);font-weight:500;font-size:11px;letter-spacing:.3em;color:#CB9E40;opacity:.9;transition:opacity .35s ease}
+#loader.zoom .ld-pct{opacity:0}
+html.loading{overflow:hidden}
+@media(prefers-reduced-motion:reduce){#loader{transition:opacity .4s ease}#loader.zoom{transform:none;filter:none}}
+
+/* ============ BM chrome ============ */
+/* topbar + nav share ONE sticky wrapper so nothing can drift between them */
+.hdr{position:sticky;top:0;z-index:120;transition:transform .4s var(--e1)}
+.hdr.hide{transform:translateY(-100%)}
+.topbar{background:#0A101F;color:#EAF0FB;border-bottom:1px solid #232a40}
+body.embedded .topbar{display:none}
+.topbar-in{display:flex;align-items:center;justify-content:space-between;padding:9px var(--gut);max-width:var(--maxw);margin:0 auto;gap:12px}
+.brandmark{font-family:var(--sans);font-weight:600;letter-spacing:.14em;font-size:13px;text-transform:uppercase}
+.wsw{display:flex;align-items:center;border:1px solid rgba(255,255,255,.24);overflow:auto;max-width:100%}
+.wsw a{font-family:var(--sans);font-weight:500;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#C7D3EE;text-decoration:none;padding:7px 12px;border-right:1px solid rgba(255,255,255,.18);white-space:nowrap;transition:background .25s,color .25s}
+.wsw a:last-child{border-right:0}
+.wsw a:hover{background:rgba(255,255,255,.09);color:#fff}
+.wsw a.on{background:#2536F5;color:#fff;font-weight:600}
+#bmBack{display:none;position:fixed;top:12px;right:16px;z-index:99998;align-items:center;gap:6px;font-family:var(--sans);font-weight:600;font-size:12.5px;color:#8F5D06;background:rgba(251,247,238,.97);border:1px solid var(--line2);border-radius:30px;padding:8px 14px;cursor:pointer;box-shadow:0 6px 18px -8px rgba(80,60,10,.35)}
+body.bm-standalone #bmBack{display:none}
+@media print{#bmBack{display:none!important}}
+
+/* ============ nav ============ */
+.nav{background:transparent;transition:background .4s var(--e1),box-shadow .4s,border-color .4s;border-bottom:1px solid transparent}
+.nav.solid{background:rgba(247,242,231,.975);border-bottom-color:var(--line)}
+.nav-in{display:flex;align-items:center;gap:20px;max-width:var(--maxw);margin:0 auto;padding:13px var(--gut)}
+.wordmark{display:flex;align-items:center;text-decoration:none;flex:none}
+/* 3D stacked tree wordmark */
+.logo3d{height:54px;perspective:640px;perspective-origin:50% 45%}
+.logo3d-in{position:relative;height:100%;transform-style:preserve-3d;animation:logoSway 8s var(--e1) infinite;will-change:transform}
+.logo3d img{height:54px;width:auto;display:block}
+.logo3d .lface{position:relative;z-index:1}
+.logo3d .ldep{position:absolute;top:0;left:0;filter:brightness(.4) saturate(.85)}
+@keyframes logoSway{0%,100%{transform:rotateY(-6deg)}50%{transform:rotateY(6deg)}}
+@media(prefers-reduced-motion:reduce){.logo3d-in{animation:none}}
+.nav.solid .logo3d{filter:brightness(.72) saturate(1.18)}
+.nav.solid .logo3d .ldep{opacity:0}
+.nav:not(.solid) .logo3d{filter:brightness(1.03) drop-shadow(0 1px 2px rgba(8,12,5,.6)) drop-shadow(0 3px 13px rgba(8,12,5,.6))}
+.nav-links{display:flex;align-items:center;gap:2px;margin-left:auto}
+.nav-links a{position:relative;font-weight:500;font-size:14.5px;color:var(--soft);text-decoration:none;padding:8px 13px;transition:color .2s}
+.nav:not(.solid) .nav-links a{color:#F6F1E6;font-weight:600;text-shadow:0 1px 3px rgba(8,12,5,.72),0 2px 16px rgba(8,12,5,.55)}
+.nav:not(.solid) .brand-fallback{color:var(--cream)}
+.nav-links a::after{content:"";position:absolute;left:13px;right:100%;bottom:4px;height:1.5px;background:var(--gold);transition:right .35s var(--e2)}
+.nav-links a:hover::after,.nav-links a.here::after{right:13px}
+.nav-links a:hover,.nav:not(.solid) .nav-links a:hover{color:var(--gold)}
+.nav-links .lockpg{position:relative;display:inline-flex;align-items:center;gap:5px;font-weight:500;font-size:14.5px;color:var(--faint);padding:8px 13px;cursor:not-allowed;opacity:.55;user-select:none;white-space:nowrap}
+.nav-links .lockpg::after{content:"";width:11px;height:11px;flex:none;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5zm3 8H9V7a3 3 0 0 1 6 0z'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5zm3 8H9V7a3 3 0 0 1 6 0z'/%3E%3C/svg%3E") center/contain no-repeat}
+.nav:not(.solid) .nav-links .lockpg{color:rgba(242,239,226,.5);text-shadow:0 1px 8px rgba(8,12,5,.5)}
+.nav-links .lockpg::before{content:"Soon";position:absolute;left:50%;bottom:calc(100% + 5px);transform:translateX(-50%) translateY(4px);background:var(--ink);color:var(--cream);font-family:var(--sans);font-weight:600;font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:3px 7px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;white-space:nowrap;z-index:6}
+.nav-links .lockpg:hover::before{opacity:1;transform:translateX(-50%) translateY(0)}
+.nav .checkbtn{margin-left:14px}
+.nav:not(.solid) .checkbtn{background:rgba(242,239,226,.14);border:1px solid rgba(242,239,226,.4);color:var(--cream)}
+.nav:not(.solid) .checkbtn:hover{background:var(--gold);border-color:var(--gold);color:#fff}
+.nav-burger{display:none;width:46px;height:46px;align-items:center;justify-content:center;background:none;border:0;cursor:pointer;padding:0;margin-left:auto;color:var(--ink)}
+.nav:not(.solid) .nav-burger{color:var(--cream)}
+.nav-burger svg{width:26px;height:26px}
+.drawer{display:none}
+@media(max-width:940px){
+  .nav-links,.nav .checkbtn{display:none}
+  .nav-burger{display:inline-flex}
+  .drawer{display:block;position:fixed;top:var(--hdrh,96px);left:0;right:0;z-index:105;background:var(--green);padding:14px var(--gut) 22px;transform:translateY(-130%);transition:transform .45s var(--e1);border-bottom:1px solid var(--forest)}
+  body.menu-open .drawer{transform:none}
+  .drawer a{display:flex;align-items:baseline;gap:14px;padding:15px 2px;font-family:var(--serif);font-size:22px;color:var(--cream);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.08)}
+  .drawer a .n{font-family:var(--sans);font-weight:500;font-size:11px;letter-spacing:.14em;color:#D89A2B}
+  .drawer-lock{display:flex;align-items:baseline;gap:14px;padding:15px 2px;font-family:var(--serif);font-size:22px;color:rgba(242,239,226,.42);border-bottom:1px solid rgba(255,255,255,.08);cursor:not-allowed}
+  .drawer-lock .n{font-family:var(--sans);font-weight:500;font-size:11px;letter-spacing:.14em;color:rgba(216,154,43,.5)}
+  .drawer-lock em{margin-left:auto;align-self:center;font-style:normal;font-family:var(--sans);font-weight:600;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--cream-soft);border:1px solid rgba(242,239,226,.24);padding:3px 7px}
+  .drawer .dcheck{margin-top:16px;border-bottom:0;justify-content:center;background:var(--gold);color:#fff;font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:15px}
+}
+@media(max-width:600px){.logo3d,.logo3d img{height:46px}}
+
+</style>
+<style>
+/* ============ hero ============ */
+.hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:center;overflow:hidden;color:var(--cream);margin-top:calc(-1 * var(--navh,78px))}
+.hero-img{position:absolute;inset:0;z-index:0;overflow:hidden;background:var(--green)}
+.hero-img img{width:100%;height:100%;object-fit:cover;object-position:center 58%}
+/* living hero: premium 6s video loop over the real pool + warm light bloom on top */
+.hero-video{position:absolute;inset:0;z-index:1;width:100%;height:100%;object-fit:cover;object-position:center 58%;opacity:0;transition:opacity 1.1s ease}
+.hero-video.on{opacity:1}
+.hero-glow{position:absolute;inset:0;z-index:2;pointer-events:none;background:radial-gradient(115% 78% at 79% 10%,rgba(255,216,155,.2),rgba(255,190,120,.05) 34%,transparent 60%)}
+@media(prefers-reduced-motion:reduce){.hero-glow{animation:none}.hero-video{display:none}}
+@media(max-width:760px){.hero-video{display:none}}
+/* no top darkening (removed the green band); keep the lower scrim for headline legibility */
+.hero-scrim{position:absolute;inset:0;z-index:1;background:radial-gradient(120% 92% at 50% 52%,rgba(11,17,6,.58) 0%,rgba(11,17,6,.32) 38%,rgba(11,17,6,.06) 66%,rgba(11,17,6,0) 80%),linear-gradient(180deg,rgba(11,17,6,.22) 0%,rgba(11,17,6,0) 26%,rgba(11,17,6,.2) 70%,rgba(11,17,6,.52) 100%)}
+.hero-in{position:relative;z-index:2;max-width:var(--maxw);margin:0 auto;padding:clamp(90px,14vh,150px) var(--gut) clamp(70px,10vh,110px);width:100%;text-align:center;display:flex;flex-direction:column;align-items:center}
+.hero h1{font-size:clamp(38px,7vw,88px);font-weight:400;letter-spacing:-.02em;line-height:1.1;max-width:17ch;margin:0 auto;text-shadow:0 2px 5px rgba(8,12,5,.55),0 4px 34px rgba(8,12,5,.5)}
+.hero h1 em{color:#E7B85C}
+.hero .sub{margin:20px auto 0;font-size:clamp(15px,1.9vw,19px);color:rgba(246,241,230,.98);max-width:50ch;line-height:1.5;text-shadow:0 1px 3px rgba(8,12,5,.62),0 2px 22px rgba(8,12,5,.5)}
+.hero-act{margin-top:32px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:center}
+.hero-rate{font-family:var(--sans);font-weight:500;font-size:12.5px;letter-spacing:.02em;color:rgba(242,239,226,.7)}
+.hero-rate b{color:#E7B85C;font-weight:600}
+.hero-scroll{position:absolute;left:50%;bottom:20px;transform:translateX(-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:6px;font-family:var(--sans);font-weight:500;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:rgba(242,239,226,.6)}
+.hero-scroll svg{width:15px;height:15px;animation:bob 2s var(--e1) infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+.hero .credit{position:absolute;right:var(--gut);bottom:14px;z-index:2;color:rgba(242,239,226,.45)}
+@media(prefers-reduced-motion:reduce){.hero-scroll svg{animation:none}}
+/* phone: shorter hero, tighter padding so it fills the screen without gating the page */
+@media(max-width:760px){
+  .hero{min-height:84svh}
+  .hero-in{padding:clamp(54px,8vh,84px) var(--gut) clamp(72px,10vh,96px)}
+  .hero h1{font-size:clamp(34px,8.4vw,54px)}
+  .hero .sub{margin-top:16px}
+  .hero-act{margin-top:26px}
+}
+
+/* line-rise reveal for headings */
+.rise{display:block;overflow:hidden;padding-bottom:.16em;margin-bottom:-.16em}
+.rise>span{display:block;transform:translateY(120%);transition:transform 1s var(--e2)}
+html.loaded .hero .rise>span,.rise.in>span{transform:none}
+.hero .rise:nth-child(2)>span{transition-delay:.08s}
+.hero .rise:nth-child(3)>span{transition-delay:.16s}
+@media(prefers-reduced-motion:reduce){.rise>span{transform:none!important}}
+
+/* section heading block */
+.shead .eyebrow{margin-bottom:16px}
+.shead h2{font-size:clamp(30px,4.6vw,54px);font-weight:400;letter-spacing:-.02em;max-width:20ch}
+.shead h2 em{color:var(--gold-deep)}
+.shead .lede{margin-top:18px}
+.dark .shead h2,.dark h2,.dark h3{color:var(--cream)}
+.dark .shead h2 em{color:#E7B85C}
+
+/* framed photo, Kerry-Hill margin + gold hairline */
+.framed{position:relative;padding:10px;background:var(--card);border:1px solid var(--line)}
+.framed::after{content:"";position:absolute;inset:10px;border:1px solid var(--gold-muted);opacity:.5;pointer-events:none}
+.framed img{width:100%;height:100%;object-fit:cover;display:block}
+.reveal-img{overflow:hidden}
+.reveal-img img{transform:scale(1.08);transition:transform 1.4s var(--e1)}
+.reveal-clip{clip-path:inset(0 0 100% 0);transition:clip-path 1.1s var(--e1)}
+.reveal-clip.in{clip-path:inset(0 0 0 0)}
+.reveal-clip.in img,.in>.reveal-img img{transform:scale(1)}
+
+/* ============ two-door split ============ */
+.doors{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);border-radius:0;overflow:hidden}
+.door{position:relative;min-height:340px;display:flex;flex-direction:column;justify-content:flex-end;padding:clamp(24px,3.5vw,40px);text-decoration:none;color:var(--cream);overflow:hidden;isolation:isolate}
+.door img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform 1s var(--e1)}
+.door::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(13,20,8,.15),rgba(13,20,8,.82))}
+.door:hover img{transform:scale(1.05)}
+.door img.flip{transform:scaleX(-1)}
+.door:hover img.flip{transform:scaleX(-1) scale(1.05)}
+.door .k{font-family:var(--sans);font-weight:500;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#E7B85C}
+.door h3{font-size:clamp(24px,3vw,34px);font-weight:400;margin-top:8px;color:var(--cream)}
+.door p{font-size:14.5px;color:rgba(242,239,226,.82);margin-top:8px;max-width:34ch}
+.door .go{margin-top:16px;font-family:var(--sans);font-weight:600;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#E7B85C;display:inline-flex;align-items:center;gap:8px}
+.door .go::after{content:"\2192";transition:transform .3s var(--e1)}
+.door:hover .go::after{transform:translateX(4px)}
+.door.open-all{grid-column:1/-1;min-height:0;background:var(--forest);color:var(--cream-soft);text-align:center;justify-content:center;align-items:center;padding:16px;font-size:13px;letter-spacing:.04em}
+.door.open-all b{color:#E7B85C}
+@media(max-width:720px){.doors{grid-template-columns:1fr}.door{min-height:260px}}
+
+/* ============ estate plan (graft 2) ============ */
+.plan{position:relative}
+/* bespoke interactive estate map */
+.emap{position:relative;border:1px solid var(--line2);background:var(--card);padding:clamp(8px,1vw,12px);box-shadow:0 34px 66px -44px rgba(60,45,10,.5)}
+.emap-stage{position:relative;aspect-ratio:16/9;overflow:hidden;background:#2c3a1e;outline:1px solid rgba(178,116,9,.3);outline-offset:-1px}
+.emap-media{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.emap-vid{opacity:0;transition:opacity .8s ease;z-index:1}
+.emap-vid.on{opacity:1}
+.emap-tag{position:absolute;left:14px;top:13px;z-index:3;font-family:var(--sans);font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-deep);background:rgba(251,247,238,.82);padding:5px 9px;border:1px solid var(--line2)}
+.emap-hint{position:absolute;right:14px;bottom:12px;z-index:3;font-family:var(--sans);font-size:10px;letter-spacing:.04em;color:var(--soft);background:rgba(251,247,238,.82);padding:5px 9px;border:1px solid var(--line);display:flex;align-items:center;gap:5px}
+.emap-hint b{color:var(--gold-deep);font-weight:600}
+.epin{position:absolute;transform:translate(-50%,-50%);z-index:4;width:32px;height:32px;border-radius:50%;padding:0;border:2px solid #fff;background:var(--gold);color:#fff;font-family:var(--sans);font-weight:600;font-size:13px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 11px -2px rgba(40,28,4,.5);transition:transform .3s var(--e2),box-shadow .3s;-webkit-tap-highlight-color:transparent}
+.epin::before{content:"";position:absolute;inset:0;border-radius:50%;box-shadow:0 0 0 0 rgba(178,116,9,.5);animation:epinPulse 2.8s ease-out infinite}
+@keyframes epinPulse{0%{box-shadow:0 0 0 0 rgba(178,116,9,.45)}70%,100%{box-shadow:0 0 0 15px rgba(178,116,9,0)}}
+.epin:hover,.epin:focus-visible,.epin.act{transform:translate(-50%,-50%) scale(1.16);box-shadow:0 7px 18px -2px rgba(40,28,4,.55),0 0 0 7px rgba(178,116,9,.28);outline:none;z-index:7}
+.epin:hover::before,.epin:focus-visible::before,.epin.act::before{animation:none}
+@media(prefers-reduced-motion:reduce){.epin::before{animation:none}}
+.epin svg{width:17px;height:17px;display:block;pointer-events:none}
+.ecard{position:absolute;z-index:9;width:240px;background:var(--card);border:1px solid var(--line2);box-shadow:0 26px 54px -22px rgba(40,28,4,.6);opacity:0;transform:translateY(8px) scale(.98);transition:opacity .26s var(--e1),transform .26s var(--e2);pointer-events:none;left:0;top:0}
+.ecard.show{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
+.ecard-img{position:relative;aspect-ratio:16/9;overflow:hidden;background:var(--green)}
+.ecard-img img{width:100%;height:100%;object-fit:cover;display:block}
+.ecard-img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(16,23,11,0) 55%,rgba(16,23,11,.4));pointer-events:none}
+.ecard-n{position:absolute;top:9px;left:9px;z-index:2;width:25px;height:25px;border-radius:50%;background:var(--gold);color:#fff;font-family:var(--sans);font-weight:600;font-size:12px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 7px rgba(0,0,0,.35)}
+.ecard-n svg{width:14px;height:14px;display:block}
+.ecard-body{padding:12px 15px 15px}
+.ecard-k{font-family:var(--sans);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--gold-deep);font-weight:600}
+.ecard h4{font-family:var(--serif);font-size:20px;font-weight:400;color:var(--ink);margin:4px 0 6px;line-height:1.05}
+.ecard p{font-size:12.5px;color:var(--soft);line-height:1.5;margin:0}
+.ecard-stat{color:var(--gold-deep);font-weight:600}
+.ecard-go{display:inline-flex;align-items:center;gap:6px;margin-top:11px;font-family:var(--sans);font-weight:600;font-size:12px;letter-spacing:.02em;color:var(--gold-deep);text-decoration:none}
+.ecard-go:hover{gap:9px}
+@media(max-width:760px){.epin{width:27px;height:27px;font-size:11px}.epin svg{width:14px;height:14px}.ecard{width:190px}}
+/* the legend / mobile list */
+.plan-legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2px;margin-top:2px}
+.leg{display:flex;gap:13px;align-items:flex-start;padding:16px 18px;background:var(--card);border:1px solid var(--line);text-decoration:none;transition:background .3s,border-color .3s}
+.leg:hover{background:var(--wash);border-color:var(--gold-muted)}
+.leg .ln{color:var(--gold);line-height:1;flex:none;width:26px}
+.leg .ln svg{width:21px;height:21px;display:block;margin-top:1px}
+.leg b{font-size:15px;color:var(--ink)}
+.leg p{font-size:12.5px;color:var(--soft);margin-top:3px;line-height:1.45}
+.leg .f{color:var(--gold-deep);font-weight:600}
+@media(max-width:760px){.plan-fig{aspect-ratio:16/11}.hot{display:none}}
+
+/* ============ route tiles ============ */
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.tile{position:relative;aspect-ratio:4/5;overflow:hidden;text-decoration:none;color:var(--cream);display:flex;flex-direction:column;justify-content:flex-end;padding:20px;isolation:isolate;border:1px solid var(--line)}
+.tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform .9s var(--e1)}
+/* hover image-swap (landonorris-style): the second photo crossfades in from a slight scale */
+.tile .tile-sw{opacity:0;transform:scale(1.09);transition:opacity .55s var(--e1),transform 1.1s var(--e1)}
+.tile:hover .tile-sw,.tile:focus-visible .tile-sw{opacity:1;transform:scale(1.03)}
+.tile:hover .tile-base,.tile:focus-visible .tile-base{transform:scale(1.06)}
+.tile::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(13,20,8,.1),rgba(13,20,8,.8))}
+@media(prefers-reduced-motion:reduce){.tile .tile-sw{transition:opacity .2s linear;transform:none}.tile:hover .tile-sw,.tile:focus-visible .tile-sw{transform:none}}
+.tile .k{font-family:var(--sans);font-weight:500;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#E7B85C}
+.tile h3{font-size:22px;font-weight:400;margin-top:5px;color:var(--cream)}
+.tile h3::after{content:"";display:block;width:0;height:1.5px;background:#E7B85C;margin-top:7px;transition:width .4s var(--e2)}
+.tile:hover h3::after{width:38px}
+.tile p{font-size:13px;color:rgba(242,239,226,.8);margin-top:6px}
+@media(max-width:640px){.tiles{grid-template-columns:1fr 1fr;gap:8px}.tile{aspect-ratio:3/4;padding:14px}.tile h3{font-size:17px}.tile p{display:none}}
+
+/* ============ the almanac · the day dial: hover an hour, the estate relights ============ */
+.almanac{position:relative}
+#almanac{height:auto}
+.alm-stage{position:relative;height:clamp(580px,92vh,920px);overflow:hidden;background:var(--green)}
+.alm-slide{position:absolute;inset:0;opacity:0;transition:opacity 1.1s var(--e1);display:flex;align-items:flex-end}
+.alm-slide.on{opacity:1}
+.alm-sky{position:absolute;inset:0;z-index:0}
+.alm-bg{position:absolute;inset:0;z-index:1}
+.alm-bg img{width:100%;height:100%;object-fit:cover}
+.alm-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(13,20,8,.8) 0%,rgba(13,20,8,.42) 44%,rgba(13,20,8,.1) 72%,transparent 100%),linear-gradient(180deg,transparent 40%,rgba(13,20,8,.62) 100%)}
+.alm-inner{position:relative;z-index:2;max-width:var(--maxw);margin:0 auto;padding:0 var(--gut) clamp(40px,7vh,76px);width:100%}
+.alm-cap{max-width:34ch;color:var(--cream)}
+.alm-cap .hour{font-family:var(--sans);font-weight:500;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#E7B85C}
+.alm-cap h3{font-size:clamp(30px,5vw,58px);font-weight:400;margin-top:12px;color:var(--cream);line-height:1.0}
+.alm-cap .txt{font-size:15.5px;color:rgba(242,239,226,.88);margin-top:14px;line-height:1.55}
+.alm-facts{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.alm-facts span{font-family:var(--sans);font-weight:500;font-size:12px;letter-spacing:.02em;color:var(--cream);background:rgba(242,239,226,.1);border:1px solid rgba(242,239,226,.24);padding:7px 12px}
+.alm-facts span b{color:#E7B85C;font-weight:600}
+/* the sun that rides the arc and turns to a moon */
+.alm-sun{position:absolute;z-index:1;left:6%;top:86%;width:clamp(44px,5vw,66px);aspect-ratio:1;border-radius:50%;pointer-events:none;transform:translate(-50%,-50%);
+  transition:left 1.7s var(--e1),top 1.7s var(--e1),opacity 1.1s ease,background 1.1s ease,box-shadow 1.1s ease,width 1.1s ease}
+.almanac[data-phase="0"] .alm-sun{opacity:.95;background:radial-gradient(circle at 44% 42%,#FFE0B0 0%,#F0A45C 52%,rgba(240,164,92,0) 71%);box-shadow:0 0 90px 26px rgba(240,164,92,.32)}
+.almanac[data-phase="1"] .alm-sun{opacity:.95;background:radial-gradient(circle at 44% 42%,#FFF2CE 0%,#F2C572 52%,rgba(242,197,114,0) 71%);box-shadow:0 0 100px 30px rgba(242,197,114,.28)}
+.almanac[data-phase="2"] .alm-sun{opacity:.95;background:radial-gradient(circle at 46% 44%,#FFFBEA 0%,#F5D98F 50%,rgba(245,217,143,0) 70%);box-shadow:0 0 110px 34px rgba(245,217,143,.32)}
+.almanac[data-phase="3"] .alm-sun{opacity:.95;background:radial-gradient(circle at 44% 42%,#FFD9A6 0%,#E08B3E 52%,rgba(224,139,62,0) 71%);box-shadow:0 0 100px 30px rgba(224,139,62,.32)}
+.almanac[data-phase="4"] .alm-sun{opacity:.95;background:radial-gradient(circle,#F2EAD6 0% 62%,rgba(242,234,214,0) 70%);box-shadow:inset -12px 7px 0 0 rgba(23,32,58,.96),0 0 55px 14px rgba(242,234,214,.16)}
+/* stars, faint before dawn, full at dusk */
+.alm-stars{position:absolute;left:0;top:0;width:100%;height:62%;z-index:2;pointer-events:none;opacity:0;transition:opacity 1.4s ease;fill:#F4EAD2}
+.almanac[data-phase="0"] .alm-stars{opacity:.28}
+.almanac[data-phase="4"] .alm-stars{opacity:.9}
+.alm-stars circle{animation:almTwk 3.6s ease-in-out infinite}
+@keyframes almTwk{50%{opacity:.3}}
+/* fireflies over the water at dusk */
+.alm-ffs{position:absolute;left:8%;right:8%;bottom:22%;height:32%;z-index:3;pointer-events:none;opacity:0;transition:opacity 1.3s ease}
+.almanac[data-phase="4"] .alm-ffs{opacity:1}
+.alm-ffs i{position:absolute;width:4px;height:4px;border-radius:50%;background:#E7B85C;filter:blur(.4px);box-shadow:0 0 9px 2px rgba(231,184,92,.5);animation:almFfy 7s ease-in-out infinite}
+.alm-ffs i:nth-child(1){left:8%;top:64%;animation-duration:6.2s}
+.alm-ffs i:nth-child(2){left:22%;top:38%;animation-delay:1.1s;animation-duration:7.6s}
+.alm-ffs i:nth-child(3){left:35%;top:72%;animation-delay:2.3s}
+.alm-ffs i:nth-child(4){left:51%;top:30%;animation-delay:.6s;animation-duration:8.4s}
+.alm-ffs i:nth-child(5){left:63%;top:60%;animation-delay:3.1s;animation-duration:6.8s}
+.alm-ffs i:nth-child(6){left:76%;top:44%;animation-delay:1.8s}
+.alm-ffs i:nth-child(7){left:88%;top:68%;animation-delay:2.7s;animation-duration:7.2s}
+@keyframes almFfy{0%,100%{transform:translate(0,0);opacity:.1}22%{opacity:.95}50%{transform:translate(24px,-30px);opacity:.4}74%{opacity:.9}}
+/* supportive activity cards: bottom-right over the pool, swap with the hour */
+.alm-acts{position:absolute;right:var(--gut);bottom:clamp(40px,7vh,76px);z-index:4;display:grid;pointer-events:none}
+.acts-group{grid-area:1/1;display:flex;flex-direction:column;gap:12px;align-items:flex-end}
+.acts-lead{align-self:flex-end;font-family:var(--sans);font-weight:600;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:rgba(242,239,226,.72);opacity:0;transform:translateY(14px);transition:opacity .7s var(--e1),transform .7s var(--e1)}
+.act-card{position:relative;width:clamp(264px,27vw,360px);aspect-ratio:16/10;overflow:hidden;border:1px solid rgba(231,184,92,.32);box-shadow:0 26px 58px -22px rgba(0,0,0,.76);background:var(--green);opacity:0;transform:translateY(18px);transition:opacity .8s var(--e1),transform .8s var(--e1)}
+.act-card img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.02)}
+.act-card::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,20,8,.06) 24%,rgba(13,20,8,.44) 60%,rgba(13,20,8,.88))}
+.act-cap{position:absolute;left:18px;right:18px;bottom:16px;z-index:2}
+.act-k{display:block;font-family:var(--sans);font-weight:600;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#E7B85C}
+.act-t{display:block;font-family:var(--sans);font-weight:500;font-size:18px;color:var(--cream);margin-top:4px;line-height:1.22}
+.acts-group .act-card:nth-of-type(2){margin-right:clamp(22px,3.2vw,52px)}
+.acts-group.on .acts-lead{opacity:1;transform:none;transition-delay:.05s}
+.acts-group.on .act-card{opacity:1;transform:none}
+.acts-group.on .act-card:nth-of-type(2){transition-delay:.12s}
+/* the day arc: the sun's path across the top, five hours on the curve */
+.alm-arc{--dic:44px;position:absolute;left:0;top:clamp(18px,3.4vh,40px);width:100%;height:clamp(150px,23vh,220px);z-index:5}
+.alm-arc .arc-svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+.alm-arc .arc-track{fill:none;stroke:rgba(242,239,226,.26);stroke-width:1;stroke-dasharray:1 5;stroke-linecap:round}
+.alm-arc .arc-prog{fill:none;stroke:rgba(231,184,92,.85);stroke-width:1.2;stroke-linecap:round;stroke-dasharray:100;stroke-dashoffset:100;transition:stroke-dashoffset 1.7s var(--e1)}
+.dial-stop{position:absolute;z-index:2;transform:translate(-50%,-50%);background:none;border:0;padding:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.dial-ic{position:relative;width:var(--dic);height:var(--dic);border-radius:50%;border:1px solid rgba(242,239,226,.42);display:flex;align-items:center;justify-content:center;color:#E7B85C;background:rgba(13,20,8,.46);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);transition:background .4s,border-color .4s,color .4s,transform .45s var(--e2)}
+.dial-ic svg.dial-i{width:19px;height:19px}
+.dial-stop:hover .dial-ic{transform:scale(1.1);border-color:#E7B85C}
+.dial-stop:focus-visible{outline:none}
+.dial-stop:focus-visible .dial-ic{outline:2px solid var(--focus-dark);outline-offset:3px}
+.dial-stop.on .dial-ic{background:var(--gold);border-color:var(--gold);color:#fff}
+.dial-ring{position:absolute;inset:-6px;width:calc(100% + 12px);height:calc(100% + 12px);transform:rotate(-90deg);opacity:0;pointer-events:none}
+.dial-stop.on .dial-ring{opacity:1}
+.dial-ring circle{fill:none;stroke:#E7B85C;stroke-width:1.7;stroke-linecap:round;stroke-dasharray:170;stroke-dashoffset:170}
+.dial-stop.on .dial-ring circle{animation:almRun var(--alm-dur,6s) linear forwards}
+.almanac.paused .dial-ring circle{animation-play-state:paused}
+@keyframes almRun{to{stroke-dashoffset:0}}
+.dial-t{position:absolute;left:50%;top:calc(100% + 7px);transform:translateX(-50%);font-family:var(--sans);font-weight:600;font-size:10px;letter-spacing:.14em;color:rgba(242,239,226,.72);text-transform:uppercase;transition:color .3s;white-space:nowrap}
+.dial-stop.on .dial-t,.dial-stop:hover .dial-t{color:#E7B85C}
+/* static / reduced-motion: stacked full slides, the whole day present */
+.almanac.static .alm-stage{height:auto;overflow:visible}
+.almanac.static .alm-slide{position:relative;opacity:1;min-height:92vh;padding:clamp(40px,7vh,80px) 0}
+.almanac.static .alm-stars,.almanac.static .alm-ffs,.almanac.static .alm-arc,.almanac.static .alm-acts{display:none}
+@media(prefers-reduced-motion:reduce){
+  .alm-stage{height:auto;overflow:visible}
+  .alm-slide{position:relative;opacity:1;min-height:90vh;padding:56px 0}
+  .alm-stars,.alm-ffs,.alm-arc,.alm-acts{display:none}
+}
+@media(max-width:760px){
+  .alm-stage{height:74svh;min-height:582px}
+  .alm-bg::after{background:linear-gradient(180deg,rgba(13,20,8,.42) 0%,rgba(13,20,8,.3) 40%,rgba(13,20,8,.85) 100%)}
+  .alm-cap{max-width:100%}
+  .alm-inner{padding-bottom:22px}
+  .alm-cap h3{font-size:clamp(26px,6.6vw,38px)}
+  .alm-cap .txt{font-size:13.5px;line-height:1.4;margin-top:9px}
+  .alm-facts{margin-top:13px;gap:6px}
+  .alm-facts span{padding:6px 9px;font-size:10.5px}
+  .alm-arc{--dic:36px;height:130px;top:14px}
+  /* activity cards: a horizontal pair in the mid band, below the arc, above the caption */
+  .alm-acts{left:0;right:0;top:clamp(180px,23vh,206px);bottom:auto;padding:0 var(--gut)}
+  .acts-group{flex-direction:row;flex-wrap:wrap;gap:9px;align-items:stretch}
+  .acts-lead{flex-basis:100%;align-self:flex-start;margin-bottom:-1px;font-size:10px}
+  .act-card{width:auto;flex:1 1 0;aspect-ratio:3/2;box-shadow:0 16px 34px -18px rgba(0,0,0,.7)}
+  .acts-group .act-card:nth-of-type(2){margin-right:0}
+  .act-cap{left:11px;right:11px;bottom:10px}
+  .act-k{font-size:9px}
+  .act-t{font-size:13px;margin-top:2px}
+  .dial-ic svg.dial-i{width:15px;height:15px}
+  .dial-t{font-size:8.5px;letter-spacing:.06em}
+  .alm-sun{width:clamp(36px,9vw,48px)}
+}
+
+/* ============ stats band ============ */
+.dark{background:var(--green);color:var(--cream)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(16px,3vw,40px);margin-top:12px;position:relative;z-index:1}
+.stat .num{font-family:var(--serif);font-weight:500;font-size:clamp(40px,6vw,76px);color:#E7B85C;line-height:1;letter-spacing:-.02em}
+.stat .lab{font-family:var(--sans);font-weight:500;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--cream-soft);margin-top:12px}
+.stat .stat-ic{width:46px;height:46px;border:1px solid rgba(231,184,92,.34);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#E7B85C;margin-bottom:16px;background:rgba(231,184,92,.05)}
+.stat .stat-ic svg{width:22px;height:22px}
+@media(max-width:720px){.stat .stat-ic{width:38px;height:38px;margin-bottom:11px}.stat .stat-ic svg{width:18px;height:18px}}
+.stats-field{position:absolute;inset:0;z-index:-1;width:100%;height:100%;pointer-events:none}
+@media(max-width:720px){.stats{grid-template-columns:1fr 1fr;gap:26px 20px}}
+/* ============ estate land-contour texture (the "better for Bangi" ambient background) ============ */
+/* z-index:-1 inside an isolated section: sits behind all content automatically, no per-element z-index */
+#stats,.reel,.close{position:relative;isolation:isolate}
+.contours{position:absolute;inset:-14% -22%;z-index:-1;background:url(assets/contours.svg) center/cover no-repeat;pointer-events:none;opacity:.9;will-change:transform;
+  -webkit-mask-image:radial-gradient(125% 105% at 50% 38%,#000 52%,transparent 100%);mask-image:radial-gradient(125% 105% at 50% 38%,#000 52%,transparent 100%)}
+@media(prefers-reduced-motion:reduce){.contours{inset:0}}
+
+/* ============ estate reel: horizontal parallax slide of estate moments ============ */
+.reel{position:relative;overflow:hidden;padding:clamp(60px,10vh,130px) 0}
+.reel-head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap;margin-bottom:clamp(30px,5vh,52px);position:relative;z-index:1}
+.reel-head .shead h2{color:var(--cream)}
+.reel-quote{font-family:var(--serif);font-style:italic;font-size:clamp(18px,2.3vw,28px);line-height:1.25;color:var(--cream);max-width:22ch;text-align:right;margin-left:auto}
+.reel-quote b{font-style:normal;color:#E7B85C;font-weight:500}
+.reel-track{display:flex;gap:clamp(16px,2.6vw,40px);padding:0 var(--gut);width:max-content;position:relative;z-index:1;will-change:transform}
+.reel-item{flex:0 0 auto;width:clamp(220px,25vw,340px)}
+.reel-item:nth-child(even){margin-top:clamp(28px,6vw,84px)}
+.reel-fig{position:relative;padding:9px;background:rgba(28,42,20,.55);border:1px solid rgba(231,184,92,.22);overflow:hidden}
+.reel-fig::after{content:"";position:absolute;inset:9px;border:1px solid rgba(231,184,92,.35);pointer-events:none;z-index:2}
+.reel-fig img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block;transition:transform 1.1s var(--e1)}
+.reel-item:hover .reel-fig img{transform:scale(1.05)}
+.reel-cap{margin-top:14px}
+.reel-cap b{font-family:var(--serif);font-weight:400;font-size:clamp(17px,1.6vw,21px);color:var(--cream);display:block;letter-spacing:-.01em}
+.reel-cap span{font-family:var(--sans);font-weight:500;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--cream-soft);margin-top:5px;display:block}
+@media(max-width:640px){.reel-item{width:74vw}.reel-quote{text-align:left;margin-left:0}}
+@media(prefers-reduced-motion:reduce){.reel{overflow-x:auto;-webkit-overflow-scrolling:touch}.reel-track{transform:none!important}}
+
+/* ============ bundle rail + offers ============ */
+.bundles{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.bundle{border:1px solid var(--line);background:var(--card);padding:24px 22px;display:flex;flex-direction:column;transition:border-color .3s,transform .4s var(--e1)}
+.bundle:hover{border-color:var(--gold-muted);transform:translateY(-4px)}
+.bundle .k{font-family:var(--sans);font-weight:500;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-deep)}
+.bundle h3{font-size:24px;font-weight:400;margin-top:10px}
+.bundle p{font-size:14px;color:var(--soft);margin-top:9px;line-height:1.5;flex:1}
+.bundle .go{margin-top:16px;font-family:var(--sans);font-weight:600;font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--gold-deep)}
+@media(max-width:820px){.bundles{grid-template-columns:1fr}}
+.offers{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+.offer{position:relative;border:1px solid var(--line);background:var(--card);text-decoration:none;display:flex;flex-direction:column;overflow:hidden;transition:border-color .3s,transform .4s var(--e1)}
+.offer:hover{border-color:var(--gold-muted);transform:translateY(-4px)}
+.offer-img{aspect-ratio:16/9;overflow:hidden}
+.offer-img img{width:100%;height:100%;object-fit:cover;transition:transform .9s var(--e1)}
+.offer:hover .offer-img img{transform:scale(1.05)}
+.offer-b{padding:20px 22px}
+.offer .k{font-family:var(--sans);font-weight:500;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.offer h3{font-size:22px;font-weight:400;margin-top:6px}
+.offer p{font-size:13.5px;color:var(--soft);margin-top:8px;line-height:1.5}
+.offer .price{display:flex;align-items:baseline;gap:9px;margin-top:12px}
+.offer .price b{font-family:var(--serif);font-size:22px;color:var(--gold-deep);font-weight:500}
+.offer .price span{font-size:12.5px;color:var(--faint)}
+.offer .mem{display:none;font-family:var(--sans);font-weight:600;font-size:11px;letter-spacing:.04em;color:var(--leaf);margin-top:6px}
+html.member .offer .mem{display:block}
+@media(max-width:720px){.offers{grid-template-columns:1fr}}
+
+/* ============ news ============ */
+.news a{position:relative;display:grid;grid-template-columns:130px 1fr 28px;gap:22px;align-items:center;padding:22px 4px;border-bottom:1px solid var(--line);text-decoration:none;transition:padding-left .35s var(--e1)}
+.news a:first-child{border-top:1px solid var(--line)}
+.news a:hover{padding-left:12px}
+.news .d{font-family:var(--sans);font-weight:500;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint)}
+.news .t{font-family:var(--serif);font-size:clamp(17px,2vw,21px);font-weight:400;line-height:1.25}
+.news .go{color:var(--gold-deep)}
+.news a:hover .d{color:var(--gold-deep)}
+@media(max-width:640px){.news a{grid-template-columns:1fr 28px;gap:5px 14px}.news .d{grid-column:1/-1}}
+
+/* ============ member capture ============ */
+.capbox{border:1px solid var(--line);background:var(--card);padding:clamp(28px,4vw,50px);display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(24px,4vw,54px);align-items:center}
+.cap-form{display:flex;margin-top:6px}
+.cap-form input{flex:1;font-family:var(--sans);font-size:15px;color:var(--ink);background:var(--paper);border:1px solid var(--line2);border-right:0;padding:14px 15px;min-width:0}
+.cap-form input:focus{outline:2px solid var(--gold);outline-offset:0}
+.cap-note{font-family:var(--sans);font-weight:500;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);margin-top:12px}
+.cap-done{display:none;border:1px solid rgba(111,143,51,.4);background:rgba(111,143,51,.08);padding:16px 18px;font-size:14.5px;color:var(--leaf);line-height:1.5}
+.cap-done b{display:block;font-family:var(--sans);font-weight:600;font-size:11px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px}
+html.member .cap-form,html.member .cap-note{display:none}
+html.member .cap-done{display:block}
+@media(max-width:760px){.capbox{grid-template-columns:1fr;gap:20px}}
+
+/* ============ contact + footer ============ */
+.close{position:relative;overflow:hidden;background:var(--green);color:var(--cream)}
+.close-in{position:relative;z-index:1;padding-top:clamp(56px,9vh,110px)}
+.contact-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(24px,4vw,60px);align-items:start}
+.ccards{display:grid;gap:10px}
+.ccard{border:1px solid var(--forest);background:rgba(28,42,20,.5);padding:16px 18px;text-decoration:none;display:flex;flex-direction:column;gap:4px;transition:border-color .3s,transform .4s var(--e1)}
+.ccard:hover{border-color:rgba(231,184,92,.5);transform:translateY(-3px)}
+.ccard .k{font-family:var(--sans);font-weight:500;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--cream-soft)}
+.ccard b{font-family:var(--serif);font-weight:400;font-size:18px;color:var(--cream)}
+.ccard span{font-size:13px;color:var(--cream-soft)}
+.diorama{position:relative;height:clamp(300px,42vh,480px);margin-top:clamp(40px,6vh,72px);overflow:hidden;background:radial-gradient(60% 80% at 50% 70%,#243414 0%,#141C0E 50%,#0D1408 82%)}
+.diorama canvas{position:absolute;inset:0;width:100%;height:100%}
+.diorama .dio-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.dio-scrim{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,var(--green) 0%,rgba(16,23,11,0) 26%,rgba(16,23,11,0) 68%,var(--green) 98%)}
+.footer{position:relative;z-index:1;background:var(--green);padding:clamp(36px,5vh,60px) 0 30px}
+.f-in{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:30px;max-width:var(--maxw);margin:0 auto;padding:0 var(--gut)}
+.f-in .wm img{height:26px;filter:brightness(0) invert(1) sepia(1) saturate(5) hue-rotate(5deg) brightness(1.1);opacity:.9}
+.f-in p{font-size:13.5px;color:var(--cream-soft);margin-top:14px;line-height:1.6;max-width:38ch}
+.footer h4{font-family:var(--sans);font-weight:600;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--cream-soft);margin-bottom:12px}
+.footer a{color:var(--cream-soft);text-decoration:none;display:block;padding:4px 0;font-size:13.5px;transition:color .2s}
+.footer a:hover{color:#E7B85C}
+.f-base{max-width:var(--maxw);margin:34px auto 0;padding:18px var(--gut) 0;border-top:1px solid var(--forest);display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-family:var(--sans);font-weight:500;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
+@media(max-width:820px){.contact-grid{grid-template-columns:1fr;gap:20px}.f-in{grid-template-columns:1fr 1fr}.f-in .wm{grid-column:1/-1}}
+
+/* ============ booking sheet (four routes) + mock flow ============ */
+.sheet{position:fixed;inset:0;z-index:99990;background:rgba(10,14,6,.5);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:opacity .3s ease;display:flex;align-items:flex-end;justify-content:center}
+.sheet.open{opacity:1;pointer-events:auto}
+.sheet-card{position:relative;width:min(560px,100%);background:var(--card);border-top:3px solid var(--gold);transform:translateY(30px);transition:transform .42s var(--e2);max-height:92vh;overflow:auto}
+.sheet.open .sheet-card{transform:none}
+@media(min-width:640px){
+  .sheet{align-items:flex-start;justify-content:flex-end;padding:calc(var(--navh,78px) + 12px) clamp(16px,3vw,34px) 24px}
+  .sheet-card{width:min(544px,100%);border-top:3px solid var(--gold);border-left:1px solid var(--line2);border-right:1px solid var(--line2);border-bottom:1px solid var(--line2);box-shadow:0 44px 100px -34px rgba(28,20,4,.62);transform:translateY(-16px) scale(.985);transform-origin:top right;max-height:calc(100vh - var(--navh,78px) - 44px)}
+  .sheet.open .sheet-card{transform:none}
+}
+/* quick-start: the premium dropdown entry */
+.qs{padding:16px 24px 2px}
+.qs-rec{display:grid;grid-template-columns:100px 1fr 22px;gap:14px;align-items:center;width:100%;border:1px solid var(--gold-muted);background:linear-gradient(180deg,var(--wash),var(--card));padding:10px;cursor:pointer;transition:border-color .25s,box-shadow .25s;position:relative;text-align:left}
+.qs-rec:hover,.qs-rec:focus-visible{border-color:var(--gold);box-shadow:0 12px 30px -16px rgba(120,84,10,.55);outline:none}
+.qs-rec-img{position:relative;width:100px;height:74px;overflow:hidden;flex:none}
+.qs-rec-img img{width:100%;height:100%;object-fit:cover;display:block}
+.qs-badge{position:absolute;left:0;top:0;background:var(--gold);color:#fff;font-family:var(--sans);font-weight:600;font-size:9px;letter-spacing:.05em;text-transform:uppercase;padding:3px 7px}
+.qs-rec-b{min-width:0}
+.qs-k{display:block;font-family:var(--sans);font-weight:600;font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--gold-deep);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.qs-rec-b b{font-family:var(--serif);font-size:18px;font-weight:400;display:block;margin:2px 0 4px;color:var(--ink)}
+.qs-pr{font-family:var(--sans);font-weight:600;font-size:14px;color:var(--gold-deep)}
+.qs-pr small{font-weight:500;font-size:11px;color:var(--faint)}
+.qs-rec-go{color:var(--gold);font-size:20px;align-self:center;transition:transform .25s}
+.qs-rec:hover .qs-rec-go{transform:translateX(3px)}
+.qs-dates{margin-top:14px}
+.qs-presets{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
+.qs-chip{font-family:var(--sans);font-weight:500;font-size:12px;color:var(--soft);background:var(--paper);border:1px solid var(--line2);padding:7px 12px;cursor:pointer;transition:border-color .2s,color .2s,background .2s}
+.qs-chip:hover,.qs-chip:focus-visible{border-color:var(--gold);color:var(--gold-deep);background:var(--wash);outline:none}
+.qs-go{width:100%;justify-content:center;margin-top:14px;padding:15px}
+.qs-go span{transition:transform .25s}
+.qs-go:hover span{transform:translateX(4px)}
+.qs-trust{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:13px;font-family:var(--sans);font-size:11px;color:var(--soft)}
+.qs-trust span{white-space:nowrap}
+.qs-trust b{color:var(--leaf);font-weight:700}
+.rt-head{padding:14px 24px 0;font-family:var(--sans);font-weight:600;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.sheet-head{display:flex;justify-content:space-between;align-items:center;padding:20px 24px 0}
+.sheet-head .eyebrow{margin:0}
+.xbtn{font-family:var(--sans);font-weight:600;font-size:11px;letter-spacing:.08em;text-transform:uppercase;background:none;border:1px solid var(--line2);padding:8px 12px;cursor:pointer;color:var(--soft)}
+.xbtn:hover{border-color:var(--gold);color:var(--gold-deep)}
+.routes{padding:18px 24px 8px;display:grid;gap:8px}
+.route{display:grid;grid-template-columns:38px 1fr 20px;gap:14px;align-items:center;padding:15px 16px;border:1px solid var(--line);background:var(--paper);cursor:pointer;text-decoration:none;color:var(--ink);transition:border-color .25s,background .25s}
+.route:hover{border-color:var(--gold);background:var(--wash)}
+.route .ri{color:var(--gold-deep);display:flex}.route .ri svg{width:24px;height:24px}
+.route b{font-family:var(--serif);font-size:18px;font-weight:400}
+.route span{display:block;font-size:12.5px;color:var(--soft);margin-top:1px}
+.route .ra{color:var(--gold-muted)}
+.sheet-note{padding:6px 24px 22px;font-family:var(--sans);font-weight:500;font-size:11px;letter-spacing:.03em;color:var(--faint);line-height:1.6}
+/* mock flow inside sheet */
+.flow-steps{display:flex;gap:6px;padding:16px 24px 0}
+.flow-steps span{flex:1;font-family:var(--sans);font-weight:500;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);padding:8px 0 7px;border-top:2px solid var(--line);transition:color .3s,border-color .3s}
+.flow-steps span.on{color:var(--gold-deep);border-color:var(--gold);font-weight:600}
+.flow-body{padding:18px 24px 24px}
+.ff{display:flex;flex-direction:column;gap:6px}
+.ff label{font-family:var(--sans);font-weight:500;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+.ff input,.ff select{font-family:var(--sans);font-size:15px;color:var(--ink);background:var(--paper);border:1px solid var(--line2);padding:12px;width:100%}
+.ff input:focus,.ff select:focus{outline:2px solid var(--gold);outline-offset:0}
+.ffgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.rmopt{display:grid;grid-template-columns:74px 1fr auto;gap:12px;align-items:center;border:1px solid var(--line);padding:10px;cursor:pointer;background:var(--paper);transition:border-color .3s,background .3s}
+.rmopt+.rmopt{margin-top:8px}
+.rmopt:hover{border-color:var(--gold-muted)}
+.rmopt.sel{border-color:var(--gold);background:var(--wash);box-shadow:inset 2px 0 0 var(--gold)}
+.rmopt img{width:74px;height:56px;object-fit:cover}
+.rmopt b{font-family:var(--serif);font-size:16px;font-weight:400;display:block}
+.rmopt .rs{font-size:12px;color:var(--soft)}
+.rmopt .pr{text-align:right;white-space:nowrap}
+.rmopt .pr b{font-size:15px;color:var(--gold-deep)}
+.rmopt .pr small{display:block;font-size:11px;color:var(--faint)}
+.rmopt .pr .m{display:none;font-family:var(--sans);font-weight:600;font-size:10px;letter-spacing:.03em;color:var(--leaf);margin-top:2px}
+html.member .rmopt .pr .m{display:block}
+.knowbox{margin-top:14px;border:1px solid rgba(178,116,9,.35);background:rgba(178,116,9,.06);padding:13px 15px}
+.knowbox .kk{font-family:var(--sans);font-weight:600;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-deep)}
+.knowbox ul{list-style:none;margin-top:8px;display:grid;gap:5px}
+.knowbox li{font-size:13px;color:var(--soft);padding-left:15px;position:relative;line-height:1.5}
+.knowbox li::before{content:"";position:absolute;left:0;top:8px;width:5px;height:5px;background:var(--gold)}
+.sumrow{display:flex;justify-content:space-between;gap:10px;font-size:14px;color:var(--soft);padding:8px 0;border-bottom:1px solid var(--line)}
+.sumrow b{color:var(--ink)}.sumrow.tot b{color:var(--gold-deep);font-size:17px;font-family:var(--serif);font-weight:500}
+.flow-foot{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:16px;flex-wrap:wrap}
+.flow-note{font-family:var(--sans);font-weight:500;font-size:10px;letter-spacing:.04em;color:var(--faint);line-height:1.7}
+.paybtns{display:grid;gap:8px;margin-top:14px}
+.paybtn{display:flex;align-items:center;justify-content:center;gap:8px;font-family:var(--sans);font-size:14px;font-weight:600;padding:13px;border:1px solid var(--line2);background:var(--paper);cursor:pointer;transition:border-color .25s}
+.paybtn:hover{border-color:var(--ink)}.paybtn.dark{background:var(--ink);color:#fff;border-color:var(--ink)}
+.flow-done{text-align:center;padding:24px 8px}
+.flow-done .big{font-family:var(--serif);font-size:26px;font-weight:400;margin-top:10px}
+/* --- upgraded flow: numbered steps, live price, validation, animated success --- */
+.flow-steps{gap:0;padding:20px 24px 6px}
+.flow-steps span{flex:1;position:relative;border-top:0;display:flex;flex-direction:column;align-items:center;gap:7px;font-size:9.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--faint);padding:0}
+.flow-steps span i{font-style:normal;position:relative;z-index:1;width:27px;height:27px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;background:var(--paper2);color:var(--faint);border:1px solid var(--line2);transition:background .3s,color .3s,border-color .3s}
+.flow-steps span::before{content:"";position:absolute;top:13px;right:50%;width:100%;height:1.5px;background:var(--line2);z-index:0}
+.flow-steps span:first-child::before{display:none}
+.flow-steps span.on i{background:var(--gold);color:#fff;border-color:var(--gold)}
+.flow-steps span.on{color:var(--gold-deep);font-weight:600}
+.flow-steps span.done i{background:var(--green);color:var(--cream);border-color:var(--green)}
+.flow-steps span.done::before,.flow-steps span.on::before{background:var(--gold-muted)}
+.bk-live{margin:2px 0 14px}
+.bk-chip{display:flex;justify-content:space-between;align-items:center;gap:12px;background:linear-gradient(105deg,var(--green),var(--forest));color:var(--cream);padding:13px 16px}
+.bk-chip b{font-weight:600}
+.bk-chip small{display:block;font-size:11px;color:rgba(242,239,226,.62);margin-top:3px;font-weight:400;letter-spacing:.01em}
+.bk-chip-l{font-size:13.5px}
+.bk-chip-r{text-align:right;white-space:nowrap}.bk-chip-r b{font-family:var(--serif);font-size:21px;font-weight:500;color:#E7B85C}
+.rmopt{position:relative}
+.rmopt .rmtick{position:absolute;top:8px;right:8px;width:22px;height:22px;border-radius:50%;background:var(--gold);color:#fff;display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(.5);transition:opacity .25s,transform .25s var(--e2)}
+.rmopt .rmtick svg{width:13px;height:13px}
+.rmopt.sel .rmtick{opacity:1;transform:none}
+.ff textarea{font-family:var(--sans);font-size:15px;color:var(--ink);background:var(--paper);border:1px solid var(--line2);padding:12px;width:100%;resize:vertical;line-height:1.45}
+.ff textarea:focus{outline:2px solid var(--gold);outline-offset:0}
+.ff .opt{text-transform:none;letter-spacing:0;color:var(--faint);font-weight:400;font-size:10px}
+.ff-err{display:none;font-family:var(--sans);font-size:11px;color:#B4331F;margin-top:1px}
+.ff.err input,.ff.err textarea{border-color:#C9503A;background:rgba(201,80,58,.05)}
+.ff.err .ff-err{display:block}
+.ff.ok input{border-color:rgba(111,143,51,.6)}
+.bk-consent{display:flex;align-items:flex-start;gap:9px;margin-top:15px;font-size:12.5px;color:var(--soft);line-height:1.45;cursor:pointer}
+.bk-consent input{margin-top:2px;accent-color:var(--gold-deep);width:15px;height:15px;flex:none}
+.bk-sum{margin-top:2px}
+.bk-success{padding:18px 8px 8px;text-align:center}
+.bk-check{width:62px;height:62px;margin:0 auto 12px}
+.bk-check svg{width:100%;height:100%}
+.bk-check circle{stroke:var(--gold);stroke-width:2.5;fill:none;stroke-dasharray:145;stroke-dashoffset:145;animation:bkCircle .6s var(--e2) forwards}
+.bk-check path{stroke:var(--gold);stroke-width:3.2;fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:40;stroke-dashoffset:40;animation:bkCheck .38s .48s var(--e2) forwards}
+@keyframes bkCircle{to{stroke-dashoffset:0}}
+@keyframes bkCheck{to{stroke-dashoffset:0}}
+.bk-big{font-family:var(--serif);font-size:clamp(22px,4vw,27px);font-weight:400;margin-top:6px}
+.bk-sent{font-size:14px;color:var(--soft);margin-top:6px}
+.bk-sent b{color:var(--ink)}
+.bk-refcard{display:flex;flex-direction:column;gap:3px;margin:16px auto 0;max-width:250px;background:var(--wash);border:1px dashed var(--gold-muted);padding:13px}
+.bk-refcard span{font-family:var(--sans);font-weight:600;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+.bk-refcard b{font-family:var(--sans);font-size:23px;font-weight:600;letter-spacing:.14em;color:var(--gold-deep)}
+.bk-sum-lite{max-width:330px;margin:16px auto 0;text-align:left}
+@media(prefers-reduced-motion:reduce){.bk-check circle,.bk-check path{animation:none;stroke-dashoffset:0}}
+
+/* ============ sticky booking bar ============ */
+.bookbar{position:fixed;left:0;right:0;bottom:0;z-index:70;background:var(--green);border-top:1px solid var(--forest);transform:translateY(110%);transition:transform .4s var(--e1);padding-bottom:env(safe-area-inset-bottom)}
+.bookbar.on{transform:none}
+.bookbar-in{max-width:var(--maxw);margin:0 auto;padding:10px var(--gut);display:flex;gap:12px;align-items:center}
+.bookbar .bb-t{font-family:var(--serif);font-size:17px;color:var(--cream);margin-right:auto}
+.bookbar .bb-t span{font-family:var(--sans);font-weight:500;font-size:11px;letter-spacing:.04em;color:var(--cream-soft);display:block}
+@media(max-width:640px){.bookbar .bb-t span{display:none}.bookbar .bb-t{font-size:15px}.bookbar .btn{flex:1;justify-content:center;min-height:48px}}
+
+/* ============ ribbon ============ */
+/* animated hairline pattern that flows from the copyright row down to the demo ribbon */
+.ribbon-strip{background:var(--green);padding:0 0 clamp(40px,6vh,64px);text-align:center}
+.ribbon{display:flex;justify-content:center;padding:clamp(34px,5.5vh,60px) 0 .4rem;pointer-events:none}
+.ribbon canvas{width:min(460px,86vw);height:auto}
+.ribbon-fb{font-family:var(--sans);font-size:.6rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:#fff;background:linear-gradient(90deg,#1421B8,#2536F5);padding:.5rem 1.4rem;clip-path:polygon(10px 0,calc(100% - 10px) 0,100% 50%,calc(100% - 10px) 100%,10px 100%,0 50%)}
+.ribbon-fb[hidden]{display:none}
+
+/* reveal defaults */
+[data-reveal]{opacity:0;transform:translateY(22px);transition:opacity .8s var(--e1),transform .8s var(--e1)}
+[data-reveal].in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.001ms!important}
+  [data-reveal]{opacity:1!important;transform:none!important}
+  .reveal-clip{clip-path:none!important}
+  .reveal-img img{transform:none!important}
+}
+</style>
+<style>
+/* ============ premium polish pass (award-grade refinements, reviewed + guarded) ============ */
+:root{--focus:#B27409;--focus-dark:#E7B85C;--sh-1:0 1px 2px rgba(40,30,10,.05);--sh-2:0 10px 26px -13px rgba(40,30,10,.2)}
+/* #2 optical-size ladder + #10 tracking ladder: display cut tightens, text cut relaxes */
+.hero h1{font-variation-settings:"opsz" 110,"wght" 400;letter-spacing:-.025em}
+.hero h1 em{font-variation-settings:"opsz" 110,"wght" 400}
+.shead h2{font-variation-settings:"opsz" 62,"wght" 400;letter-spacing:-.02em}
+.alm-cap h3{font-variation-settings:"opsz" 110,"wght" 400;line-height:1.05}
+.headband h1{font-variation-settings:"opsz" 112,"wght" 400}
+.stat .num{font-variation-settings:"opsz" 120,"wght" 480;letter-spacing:-.03em;font-variant-numeric:tabular-nums lining-nums;font-feature-settings:"tnum" 1,"lnum" 1}
+.news .t,.offer .price b,.ccard b,.route b,.rmopt b,.bundle h3,.offer h3,.door h3,.tile h3,.reel-cap b{font-variation-settings:"opsz" 28,"wght" 400}
+.news .t,.ccard b,.route b,.offer .price b,.rmopt b{letter-spacing:0}
+/* #4 line-balancing: even the display lines, protect body last lines */
+h2,h3,.door h3,.tile h3,.reel-cap b,.news .t,.bundle h3,.offer h3,.headband h1{text-wrap:balance}
+.lede,.hero .sub,.alm-cap .txt,p.body,.bundle p,.offer p,.door p,.reel-quote{text-wrap:pretty}
+/* #17 eyebrow to caption weight */
+.eyebrow{font-size:11px;letter-spacing:.18em;line-height:1}
+.eyebrow::before{height:1px;width:18px}
+/* #16 almanac captions widened + relaxed (the emotional core) */
+.alm-cap{max-width:38ch}
+.alm-cap .txt{line-height:1.5;letter-spacing:.005em}
+/* #9 tabular figures on the live total */
+.sumrow.tot b{font-variant-numeric:tabular-nums lining-nums;font-feature-settings:"tnum" 1}
+/* #13 warm ink-tinted elevation on interactive cards (fixes the weightless lift) */
+.bundle,.offer{box-shadow:var(--sh-1)}
+.bundle:hover,.offer:hover{box-shadow:var(--sh-2)}
+/* #11 clean route-tile columns, no 4+1 orphan */
+@media(min-width:1000px){.tiles{grid-template-columns:repeat(5,1fr)}}
+@media(min-width:641px) and (max-width:999px){.tiles{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:640px){.tiles .tile:last-child{grid-column:1/-1;aspect-ratio:16/9}}
+/* #22 ledger lines compose the four stat numerals */
+.stats{border-top:1px solid rgba(242,239,226,.16);padding-top:clamp(22px,3.2vw,40px)}
+.stat:not(:first-child){border-left:1px solid rgba(242,239,226,.12);padding-left:clamp(16px,3vw,40px)}
+@media(max-width:720px){.stat:not(:first-child){border-left:0;padding-left:0}}
+/* #7 focus-visible rings on every interactive surface, all gold hairlines (gold-as-ink safe) */
+.route:focus-visible,.rmopt:focus-visible,.paybtn:focus-visible,.xbtn:focus-visible,.leg:focus-visible,.cap-form input:focus-visible,.bookbar .btn:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.tile:focus-visible,.door:focus-visible,.ccard:focus-visible,.alm-skip:focus-visible,.reel-item a:focus-visible{outline:2px solid var(--focus-dark);outline-offset:3px}
+.hot-btn:focus-visible{outline:none}
+.hot-btn:focus-visible .hot-dot{box-shadow:0 0 0 3px var(--paper),0 0 0 5px var(--gold)}
+/* #12 Kerry-Hill framed plate on the estate map (ivory margin + gold hairline, hotspots untouched) */
+.map-frame{padding:clamp(8px,1vw,12px);background:var(--card);border:1px solid var(--line)}
+.map-frame .plan-fig{outline:1px solid rgba(178,116,9,.42);outline-offset:0}
+/* #6 sub-4% paper grain: gives the ivory its tooth, one fixed multiply layer */
+body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.022;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E")}
+@media(prefers-reduced-motion:reduce){body::before{opacity:.024}}
+</style>
+<style>
+/* ---- custom cursor + picture hover (ulrychkristian-style) ---- */
+@media(hover:hover) and (pointer:fine){
+  html.cursor-on,html.cursor-on a,html.cursor-on button,html.cursor-on .epin,html.cursor-on [role="button"],html.cursor-on label,html.cursor-on summary{cursor:none}
+  html.cursor-on input,html.cursor-on textarea,html.cursor-on select{cursor:auto}
+  .cur{position:fixed;top:0;left:0;z-index:100000;pointer-events:none;transform:translate(-50%,-50%);will-change:transform}
+  .cur-ring{width:32px;height:32px;border:1.5px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(231,184,92,0);transition:width .3s var(--e2),height .3s var(--e2),background .3s,border-color .3s,opacity .3s}
+  .cur-label{font-family:var(--sans);font-weight:600;font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink);opacity:0;transform:scale(.6);transition:opacity .25s,transform .3s var(--e2);white-space:nowrap}
+  .cur-dot{position:fixed;top:0;left:0;z-index:100001;pointer-events:none;width:6px;height:6px;border-radius:50%;background:var(--gold);transform:translate(-50%,-50%);transition:opacity .25s}
+  html.cur-link .cur-ring{width:50px;height:50px}
+  html.cur-link .cur-dot{opacity:0}
+  html.cur-view .cur-ring{width:84px;height:84px;background:var(--gold);border-color:var(--gold)}
+  html.cur-view .cur-dot{opacity:0}
+  html.cur-view .cur-label{opacity:1;transform:scale(1)}
+  html.cur-hidden .cur-ring,html.cur-hidden .cur-dot{opacity:0}
+  html.loading .cur,html.loading .cur-dot{opacity:0!important}
+  .hovpic{overflow:hidden}
+  .hovpic>img,.hovpic .reel-fig>img{transition:transform .85s var(--e1)}
+  .hovpic:hover>img{transform:scale(1.055)}
+}
+</style>
+</head>
+<body>
+<div id="loader" aria-hidden="true">
+  <canvas id="loaderCv"></canvas>
+  <div class="ld-ui">
+    <div class="ld-pct" id="ldPct">0%</div>
+  </div>
+</div>
+
+<!-- one sticky header stack: topbar + nav move as a unit so no gap can open between them -->
+<div class="hdr" id="hdr">
+  <div class="topbar" id="topbar"><div class="topbar-in">
+    <span class="brandmark">BM</span>
+    <nav class="wsw"><a href="audit.html">01 Audit</a><a href="framework.html">02 Framework</a><a href="index.html" class="on">03 Website</a></nav>
+  </div></div>
+  <nav class="nav" id="nav"><div class="nav-in">
+    <a class="wordmark" href="index.html" aria-label="Bangi Resort Hotel, home"><span class="logo3d"><span class="logo3d-in"><img class="ldep" src="assets/brh-logo-gold.png" alt="" aria-hidden="true" style="transform:translateZ(-7px)"><img class="ldep" src="assets/brh-logo-gold.png" alt="" aria-hidden="true" style="transform:translateZ(-5px)"><img class="ldep" src="assets/brh-logo-gold.png" alt="" aria-hidden="true" style="transform:translateZ(-3px)"><img class="ldep" src="assets/brh-logo-gold.png" alt="" aria-hidden="true" style="transform:translateZ(-1.5px)"><img class="lface" src="assets/brh-logo-gold.png" alt="Bangi Resort Hotel"></span></span></a>
+    <div class="nav-links">
+      <a href="#top" class="here">Home</a><a href="#stay">Stay</a><a href="#meet">Meet</a><a href="#play">Play</a><a href="#farm">Farm</a><a href="offers.html">Offers</a>
+    </div>
+    <button class="btn checkbtn" type="button" data-book>Check dates</button>
+    <button class="nav-burger" id="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="drawer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  </div></nav>
+</div>
+<button id="bmBack" type="button" aria-label="Back">&larr; Back</button>
+<div class="drawer" id="drawer">
+  <a href="#top"><span class="n">00</span>Home</a>
+  <a href="#stay"><span class="n">01</span>Stay</a>
+  <a href="#meet"><span class="n">02</span>Meet &amp; Celebrate</a>
+  <a href="#play"><span class="n">03</span>Play</a>
+  <a href="#farm"><span class="n">04</span>Farm</a>
+  <a href="offers.html"><span class="n">05</span>Offers</a>
+  <a href="group.html"><span class="n">06</span>The Bangi Group</a>
+  <a href="contact.html"><span class="n">07</span>Contact</a>
+  <a class="dcheck" href="#" data-book>Check dates &amp; rates</a>
+</div>
+
+<!-- ===== HERO ===== -->
+<header class="hero" id="top">
+  <div class="hero-img" aria-hidden="true">
+    <picture>
+      <source media="(max-width:760px)" srcset="assets/hero-pool-m.webp?v=9">
+      <img src="assets/hero-pool.webp?v=9" alt="" fetchpriority="high" width="1350" height="700" decoding="async">
+    </picture>
+    <video class="hero-video" id="heroVid" muted loop playsinline preload="none" poster="assets/hero-pool.webp?v=9" aria-hidden="true"></video>
+    <div class="hero-glow" aria-hidden="true"></div>
+  </div>
+  <div class="hero-scrim" aria-hidden="true"></div>
+  <div class="hero-in">
+    <h1 aria-label="Escape to 600 acres, 20 minutes from Putrajaya, open to all.">
+      <span class="rise"><span>Escape to 600 acres,</span></span>
+      <span class="rise"><span>20 minutes from Putrajaya,</span></span>
+      <span class="rise"><span><em>open to all.</em></span></span>
+    </h1>
+    <p class="sub">One estate with everything: 256 rooms, a 27-hole championship course, a working farm and 28 event spaces. Book it all in one place, direct, and stay a night or the whole weekend.</p>
+    <div class="hero-act">
+      <button class="btn arr" type="button" data-book>Check dates</button>
+      <span class="hero-rate"><b>from RM380</b> / night &middot; taxes shown before payment &middot; book direct</span>
+    </div>
+  </div>
+  <a class="hero-scroll" href="#estate" aria-label="Scroll to the estate">Scroll<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
+  <span class="credit">Photo &middot; bangiresorthotel.com</span>
+</header>
+
+<!-- ===== TWO-DOOR SPLIT ===== -->
+<section class="sec wrap" id="welcome" style="padding-bottom:0">
+  <div class="shead" data-reveal>
+    <span class="eyebrow">Come as you are</span>
+    <h2>Two ways onto the estate</h2>
+  </div>
+  <div class="doors" style="margin-top:34px" data-reveal>
+    <a class="door" href="#play">
+      <img class="flip" src="assets/golf-buggy.webp" alt="A buggy on the fairway at Bangi Golf Resort" loading="lazy" decoding="async">
+      <span class="k">For the day</span>
+      <h3>Come for the day</h3>
+      <p>A round on the 27-hole course, pickleball at LaVista, a farm tour, lunch overlooking the greens.</p>
+      <span class="go">See day visits</span>
+    </a>
+    <a class="door" href="#stay">
+      <img src="assets/room-premier.webp" alt="A premier room at Bangi Resort Hotel" style="object-position:center 30%" loading="lazy" decoding="async">
+      <span class="k">Overnight</span>
+      <h3>Stay the night</h3>
+      <p>256 rooms and suites over the course, the farm and the city lights, with breakfast and the estate at your door.</p>
+      <span class="go">See rooms &amp; rates</span>
+    </a>
+    <div class="door open-all"><span>Open to all, <b>no membership needed</b> &middot; the whole estate, one front door</span></div>
+  </div>
+</section>
+
+<!-- ===== ESTATE PLAN (graft 2) ===== -->
+<section class="sec wrap" id="estate">
+  <div class="shead" data-reveal>
+    <span class="eyebrow">The 600 acres</span>
+    <h2>One estate, <em>seven places</em> to be</h2>
+    <p class="lede">A hotel, a championship course, a working farm and an indoor arena share the same land. Point at the plan to read each one, or take them in order from dawn to dusk below.</p>
+  </div>
+  <div class="plan" style="margin-top:30px" data-reveal>
+    <svg style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true" focusable="false">
+      <defs>
+        <symbol id="i-hotel" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3.5 20.5h17"/>
+          <path d="M6.5 20.5V10a5.5 5.5 0 0 1 11 0v10.5"/>
+          <path d="M10.2 10.4v1.7M13.8 10.4v1.7M10.2 13.6v1.7M13.8 13.6v1.7"/>
+          <path d="M10.5 20.5v-2.4a1.5 1.5 0 0 1 3 0v2.4"/>
+        </symbol>
+        <symbol id="i-golf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 16.4V3.4"/>
+          <path d="M12 3.4l5.6 2.1-5.6 2.1"/>
+          <ellipse cx="12" cy="18.7" rx="6.2" ry="2.3"/>
+        </symbol>
+        <symbol id="i-farm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6.4 13.1L4.1 11.8 6.7 11.4 7.5 9.9 6.3 7.5 8.7 8.7 10.2 7.9 10.6 5.3 11.9 7.6 12.1 7.6 13.4 5.3 13.8 7.9 15.3 8.7 17.7 7.5 16.5 9.9 17.3 11.4 19.9 11.8 17.6 13.1A5.6 6 0 1 1 6.4 13.1Z"/>
+          <path d="M12 7.6V4.6"/>
+        </symbol>
+        <symbol id="i-arena" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <ellipse cx="9.6" cy="8.8" rx="4.2" ry="5.2" transform="rotate(-40 9.6 8.8)"/>
+          <path d="M12.9 12.8l4.4 5.2"/>
+          <circle cx="18.4" cy="5.6" r="1.6"/>
+        </symbol>
+        <symbol id="i-lake" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="7.4" r="3"/>
+          <path d="M3.6 14.7c1.7-1.7 3.9-1.7 5.6 0s3.9 1.7 5.6 0 3.9-1.7 5.6 0"/>
+          <path d="M3.6 18.7c1.7-1.7 3.9-1.7 5.6 0s3.9 1.7 5.6 0 3.9-1.7 5.6 0"/>
+        </symbol>
+        <symbol id="i-hall" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4.6 9.6L12 4.8l7.4 4.8"/>
+          <path d="M6 12.2h12"/>
+          <path d="M7.4 12.2v5.6M12 12.2v5.6M16.6 12.2v5.6"/>
+          <path d="M5 20.6h14"/>
+        </symbol>
+        <symbol id="i-arrive" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 21c-4.4-3.7-6.6-7.1-6.6-10.2a6.6 6.6 0 0 1 13.2 0C18.6 13.9 16.4 17.3 12 21z"/>
+          <circle cx="12" cy="10.6" r="2.1"/>
+        </symbol>
+        <symbol id="i-tree" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M8.2 9.4a3.9 3.9 0 0 1 7.6 0c1.9.4 3.2 1.8 3.2 3.5 0 2-1.6 3.6-3.8 3.6H8.8c-2.2 0-3.8-1.6-3.8-3.6 0-1.7 1.3-3.1 3.2-3.5z"/>
+          <path d="M12 16.5v4M8.2 20.5h7.6"/>
+        </symbol>
+        <symbol id="i-compass" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="8.2"/>
+          <path d="M15.3 8.7l-1.8 4.8-4.8 1.8 1.8-4.8z"/>
+        </symbol>
+      </defs>
+    </svg>
+    <div class="emap" role="group" aria-label="Interactive plan of the Bangi estate">
+    <div class="emap-stage" id="emapStage">
+      <img class="emap-media emap-poster" src="assets/estate-aerial.webp" alt="Aerial view of the Bangi estate" loading="lazy" decoding="async">
+      <video class="emap-media emap-vid" id="emapVid" muted loop playsinline preload="none" poster="assets/estate-aerial.webp" aria-hidden="true"></video>
+      <span class="emap-tag">Bangi estate · 600 acres</span>
+      <button class="epin" type="button" data-poi="0" style="left:23%;top:19%;animation-delay:0s" aria-label="Hotel, 256 rooms"><svg aria-hidden="true"><use href="#i-hotel"/></svg></button>
+      <button class="epin" type="button" data-poi="1" style="left:62%;top:26%;animation-delay:.35s" aria-label="Golf, 27 holes"><svg aria-hidden="true"><use href="#i-golf"/></svg></button>
+      <button class="epin" type="button" data-poi="2" style="left:82%;top:43%;animation-delay:.7s" aria-label="Farm, MyGAP certified"><svg aria-hidden="true"><use href="#i-farm"/></svg></button>
+      <button class="epin" type="button" data-poi="3" style="left:15%;top:40%;animation-delay:1.05s" aria-label="LaVista arena"><svg aria-hidden="true"><use href="#i-arena"/></svg></button>
+      <button class="epin" type="button" data-poi="4" style="left:44%;top:49%;animation-delay:1.4s" aria-label="The lake"><svg aria-hidden="true"><use href="#i-lake"/></svg></button>
+      <button class="epin" type="button" data-poi="5" style="left:31%;top:30%;animation-delay:1.75s" aria-label="Ballroom and venues"><svg aria-hidden="true"><use href="#i-hall"/></svg></button>
+      <button class="epin" type="button" data-poi="6" style="left:11%;top:79%;animation-delay:2.1s" aria-label="Arrival, 20 minutes from Putrajaya"><svg aria-hidden="true"><use href="#i-arrive"/></svg></button>
+      <div class="ecard" id="ecard" role="dialog" aria-live="polite"></div>
+      <span class="emap-hint"><b id="emapHintB">Hover</b> a pin to explore</span>
+    </div>
+    </div>
+    <div class="plan-legend" style="margin-top:14px">
+      <a class="leg" href="#stay"><span class="ln"><svg aria-hidden="true"><use href="#i-hotel"/></svg></span><span><b>Hotel</b><p><span class="f">256 rooms</span>, 28 function rooms, the estate&rsquo;s front door</p></span></a>
+      <a class="leg" href="#play"><span class="ln"><svg aria-hidden="true"><use href="#i-golf"/></svg></span><span><b>Golf</b><p><span class="f">27-hole</span> championship course, 2026 rates live</p></span></a>
+      <a class="leg" href="#farm"><span class="ln"><svg aria-hidden="true"><use href="#i-farm"/></svg></span><span><b>Farm</b><p><span class="f">MyGAP</span> certified, home of the World Durian Championship</p></span></a>
+      <a class="leg" href="#play"><span class="ln"><svg aria-hidden="true"><use href="#i-arena"/></svg></span><span><b>LaVista</b><p><span class="f">Pickleball</span> and badminton, the indoor arena</p></span></a>
+      <a class="leg" href="#almanac"><span class="ln"><svg aria-hidden="true"><use href="#i-lake"/></svg></span><span><b>The lake</b><p>The estate&rsquo;s green heart, its dusk plate</p></span></a>
+      <a class="leg" href="#meet"><span class="ln"><svg aria-hidden="true"><use href="#i-hall"/></svg></span><span><b>Ballroom</b><p><span class="f">28 venues</span>, weddings and conferences under one roof</p></span></a>
+      <a class="leg" href="contact.html"><span class="ln"><svg aria-hidden="true"><use href="#i-arrive"/></svg></span><span><b>Arrival</b><p><span class="f">20 minutes</span> from Putrajaya, off Persiaran Bandar</p></span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ROUTE TILES ===== -->
+<section class="sec wrap" id="routes" style="padding-top:0">
+  <div class="shead" data-reveal style="margin-bottom:28px">
+    <span class="eyebrow">Find your door</span>
+    <h2>Five ways in</h2>
+  </div>
+  <div class="tiles" data-reveal>
+    <a class="tile" id="stay" href="#stay-detail"><img class="tile-base" src="assets/room-towel.webp" alt="Guest room at Bangi Resort Hotel" loading="lazy" decoding="async"><img class="tile-sw" src="assets/room-detail.webp" alt="" aria-hidden="true" loading="lazy" decoding="async"><span class="k">01</span><h3>Stay</h3><p>256 rooms and suites</p></a>
+    <a class="tile" id="meet" href="#meet-detail"><img class="tile-base" src="assets/ballroom-wedding.webp" alt="Ballroom wedding" loading="lazy" decoding="async"><img class="tile-sw" src="assets/banquet-table.webp" alt="" aria-hidden="true" loading="lazy" decoding="async"><span class="k">02</span><h3>Meet</h3><p>28 function rooms</p></a>
+    <a class="tile" id="play" href="#play-detail"><img class="tile-base" src="assets/golf-skyline.webp" alt="Fairway with the KL skyline" loading="lazy" decoding="async"><img class="tile-sw" src="assets/golf-clubhouse.webp" alt="" aria-hidden="true" loading="lazy" decoding="async"><span class="k">03</span><h3>Play</h3><p>27 holes &middot; LaVista</p></a>
+    <a class="tile" id="farm" href="#farm-detail"><img class="tile-base" src="assets/farm-fig-tree.webp" alt="Figs at the farm" loading="lazy" decoding="async"><img class="tile-sw" src="assets/durians.webp" alt="" aria-hidden="true" loading="lazy" decoding="async"><span class="k">04</span><h3>Farm</h3><p>MyGAP certified</p></a>
+    <a class="tile" href="group.html"><img class="tile-base" src="assets/estate-dusk.webp" alt="The estate lake at dusk" loading="lazy" decoding="async"><img class="tile-sw" src="assets/pool-lawn.webp" alt="" aria-hidden="true" loading="lazy" decoding="async"><span class="k">05</span><h3>Group</h3><p>Seven fronts</p></a>
+  </div>
+</section>
+
+<!-- ===== THE ALMANAC · dawn to dusk (the one pinned band, skippable) ===== -->
+<section class="almanac dark" id="almanac" data-phase="0" aria-label="The estate from dawn to dusk">
+  <div class="alm-stage">
+    <div class="alm-slide on" data-slide="0">
+      <div class="alm-sky" style="background:linear-gradient(180deg,#26304A 0%,#5B5A6E 46%,#C98F6B 100%)"></div>
+      <div class="alm-bg"><img src="assets/alm-dawn.webp" alt="The hotel reflected in its pool at dawn" loading="eager" decoding="async"></div>
+      <div class="alm-inner"><div class="alm-cap">
+        <span class="hour">06:40 &middot; Dawn</span><h3>The gates open</h3>
+        <p class="txt">Twenty minutes from Putrajaya and Cyberjaya, the estate wakes on the peak of Bandar Baru Bangi. Check in, and the whole 600 acres is your front garden.</p>
+        <div class="alm-facts"><span><b>256</b> rooms &amp; suites</span><span><b>20 min</b> from Putrajaya</span><span>open to all</span></div>
+      </div></div>
+    </div>
+    <div class="alm-slide" data-slide="1">
+      <div class="alm-sky" style="background:linear-gradient(180deg,#3E6C9A 0%,#8FB4CF 55%,#DCE4E0 100%)"></div>
+      <div class="alm-bg"><img src="assets/alm-morning.webp" alt="The hotel reflected in its pool in fresh morning light" loading="lazy" decoding="async"></div>
+      <div class="alm-inner"><div class="alm-cap">
+        <span class="hour">10:15 &middot; Morning</span><h3>Onto the fairways</h3>
+        <p class="txt">The 27-hole championship course runs along the ridge, the KL skyline beyond it. Weekday eighteen from RM145, weekend from RM205, with tax, an RM40 food voucher and a shared buggy included.</p>
+        <div class="alm-facts"><span><b>27</b> holes</span><span>from <b>RM145</b> weekday</span><span>LaVista courts nearby</span></div>
+      </div></div>
+    </div>
+    <div class="alm-slide" data-slide="2">
+      <div class="alm-sky" style="background:linear-gradient(180deg,#4A83B4 0%,#9DB8CC 55%,#EDE6D2 100%)"></div>
+      <div class="alm-bg"><img src="assets/alm-noon.webp" alt="The hotel reflected in its pool under the midday sun" loading="lazy" decoding="async"></div>
+      <div class="alm-inner"><div class="alm-cap">
+        <span class="hour">13:30 &middot; Midday</span><h3>Into the larder</h3>
+        <p class="txt">A working farm on the estate, MyGAP certified, figs under glass and durian in season. It is the home of the World Durian Championship, returning 11 July 2026.</p>
+        <div class="alm-facts"><span><b>MyGAP</b> certified</span><span>World Durian Championship</span><span>farm tours</span></div>
+      </div></div>
+    </div>
+    <div class="alm-slide" data-slide="3">
+      <div class="alm-sky" style="background:linear-gradient(180deg,#4E4A6E 0%,#C98A3C 62%,#F2C572 100%)"></div>
+      <div class="alm-bg"><img src="assets/alm-golden.webp" alt="The hotel glowing gold at golden hour, mirrored in the pool" loading="lazy" decoding="async"></div>
+      <div class="alm-inner"><div class="alm-cap">
+        <span class="hour">17:00 &middot; Golden hour</span><h3>The gathering</h3>
+        <p class="txt">Twenty-eight function rooms, from a boardroom to the grand ballroom, hold weddings on the green and conferences under one roof. One events desk answers for all of it.</p>
+        <div class="alm-facts"><span><b>28</b> function rooms</span><span>weddings &amp; MICE</span><span>one events desk</span></div>
+      </div></div>
+    </div>
+    <div class="alm-slide" data-slide="4">
+      <div class="alm-sky" style="background:linear-gradient(180deg,#17203A 0%,#3A2E46 55%,#7A3E2A 100%)"></div>
+      <div class="alm-bg"><img src="assets/alm-night.webp" alt="The hotel at night, windows lit and the pool glowing" loading="lazy" decoding="async"></div>
+      <div class="alm-inner"><div class="alm-cap">
+        <span class="hour">19:20 &middot; Dusk</span><h3>One front door</h3>
+        <p class="txt">The windows come on one by one and the pool turns to lit glass. Stay, event, tee time or farm visit, all booked in one place, direct.</p>
+        <div class="alm-facts"><span><b>600</b> acres</span><span><b>7</b> experiences</span><span>book direct</span></div>
+      </div></div>
+    </div>
+    <svg class="alm-stars" viewBox="0 0 100 60" preserveAspectRatio="none" aria-hidden="true"></svg>
+    <div class="alm-ffs" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="alm-acts" aria-hidden="true">
+      <div class="acts-group on" data-ph="0"><span class="acts-lead">At this hour</span>
+        <div class="act-card"><img src="assets/room-premier.webp" alt="" loading="lazy" decoding="async"><span class="act-cap"><span class="act-k">Stay</span><span class="act-t">256 rooms &amp; suites</span></span></div>
+        <div class="act-card"><img src="assets/pool-lawn.webp" alt="" loading="lazy" decoding="async"><span class="act-cap"><span class="act-k">First light</span><span class="act-t">A swim before breakfast</span></span></div>
+      </div>
+      <div class="acts-group" data-ph="1"><span class="acts-lead">At this hour</span>
+        <div class="act-card"><img src="assets/golf-skyline.webp" alt="" loading="lazy" decoding="async"><span class="act-cap"><span class="act-k">Golf</span><span class="act-t">27-hole championship course</span></span></div>
+        <div class="act-card"><img src="assets/lavista-court.webp" alt="" loading="lazy" decoding="async"><span class="act-cap"><span class="act-k">LaVista</span><span class="act-t">Pickleball &amp; badminton</span></span></div>
+      </div>
+      <div class="acts-group" data-ph="2"><span class="acts-lead">At this hour</span>
+        <div class="act-card"><img src="assets/farm-figs.webp" alt="" loading="lazy" decoding="async"><span class="act-cap"><span class="act-k">The farm</span><span class="act-t">Figs under glass</span></span></div>
+        <div class="act-card"><img src="assets/durians.webp" alt="" loading="lazy" decoding="async"><span class="act-cap"><span class="act-k">In season</span><span class="act-t">The durian orchard</span></span></div>
+      </div>
+      <div class="acts-group" data-ph="3"><span class="acts-lead">At this hour</span>
+        <div class="act-card"><img src="assets/ballroom-wedding.webp" alt="" loading="lazy" decoding="async"><span class="act-cap"><span class="act-k">Celebrate</span><span class="act-t">Weddings on the green</span></span></div>
+        <div class="act-card"><img src="assets/conference-hall.webp" alt="" loading="lazy" decoding="async"><span class="act-cap"><span class="act-k">Meet</span><span class="act-t">28 function rooms</span></span></div>
+      </div>
+      <div class="acts-group" data-ph="4"><span class="acts-lead">At this hour</span>
+        <div class="act-card"><img src="assets/dining-tables.webp" alt="" loading="lazy" decoding="async"><span class="act-cap"><span class="act-k">Dine</span><span class="act-t">Dinner as the lights come on</span></span></div>
+        <div class="act-card"><img src="assets/estate-dusk.webp" alt="" loading="lazy" decoding="async"><span class="act-cap"><span class="act-k">Wind down</span><span class="act-t">The lake at dusk</span></span></div>
+      </div>
+    </div>
+    <div class="alm-arc" role="group" aria-label="Choose an hour of the day">
+      <svg class="arc-svg" aria-hidden="true"><path class="arc-track" d=""/><path class="arc-prog" d="" pathLength="100"/></svg>
+      <div class="alm-sun" aria-hidden="true"></div>
+      <button class="dial-stop on" type="button" data-ph="0" aria-pressed="true" aria-label="06:40, dawn, the gates open"><span class="dial-ic"><svg class="dial-ring" viewBox="0 0 58 58" aria-hidden="true"><circle cx="29" cy="29" r="27"/></svg><svg class="dial-i" aria-hidden="true"><use href="#i-hotel"/></svg></span><span class="dial-t">06:40</span></button>
+      <button class="dial-stop" type="button" data-ph="1" aria-pressed="false" aria-label="10:15, morning, onto the fairways"><span class="dial-ic"><svg class="dial-ring" viewBox="0 0 58 58" aria-hidden="true"><circle cx="29" cy="29" r="27"/></svg><svg class="dial-i" aria-hidden="true"><use href="#i-golf"/></svg></span><span class="dial-t">10:15</span></button>
+      <button class="dial-stop" type="button" data-ph="2" aria-pressed="false" aria-label="13:30, midday, into the larder"><span class="dial-ic"><svg class="dial-ring" viewBox="0 0 58 58" aria-hidden="true"><circle cx="29" cy="29" r="27"/></svg><svg class="dial-i" aria-hidden="true"><use href="#i-farm"/></svg></span><span class="dial-t">13:30</span></button>
+      <button class="dial-stop" type="button" data-ph="3" aria-pressed="false" aria-label="17:00, golden hour, the gathering"><span class="dial-ic"><svg class="dial-ring" viewBox="0 0 58 58" aria-hidden="true"><circle cx="29" cy="29" r="27"/></svg><svg class="dial-i" aria-hidden="true"><use href="#i-hall"/></svg></span><span class="dial-t">17:00</span></button>
+      <button class="dial-stop" type="button" data-ph="4" aria-pressed="false" aria-label="19:20, dusk, one front door"><span class="dial-ic"><svg class="dial-ring" viewBox="0 0 58 58" aria-hidden="true"><circle cx="29" cy="29" r="27"/></svg><svg class="dial-i" aria-hidden="true"><use href="#i-lake"/></svg></span><span class="dial-t">19:20</span></button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STATS ===== -->
+<section class="sec dark" id="stats" style="padding-top:clamp(48px,7vh,90px)">
+  <div class="contours" aria-hidden="true"></div>
+  <canvas class="stats-field" id="statsField" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="shead" data-reveal style="margin-bottom:8px"><span class="eyebrow">The record</span><h2>The estate, in numbers</h2></div>
+    <div class="stats">
+      <div class="stat" data-reveal><div class="stat-ic"><svg aria-hidden="true"><use href="#i-hotel"/></svg></div><div class="num"><span data-count="256">0</span></div><div class="lab">Rooms &amp; suites</div></div>
+      <div class="stat" data-reveal><div class="stat-ic"><svg aria-hidden="true"><use href="#i-hall"/></svg></div><div class="num"><span data-count="28">0</span></div><div class="lab">Function rooms</div></div>
+      <div class="stat" data-reveal><div class="stat-ic"><svg aria-hidden="true"><use href="#i-tree"/></svg></div><div class="num"><span data-count="600">0</span></div><div class="lab">Acres, one estate</div></div>
+      <div class="stat" data-reveal><div class="stat-ic"><svg aria-hidden="true"><use href="#i-compass"/></svg></div><div class="num"><span data-count="7">0</span></div><div class="lab">Experiences</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ESTATE REEL: horizontal parallax slide of estate moments (drifts left on scroll) ===== -->
+<section class="reel dark" id="reel" aria-label="Moments across the estate">
+  <div class="contours" aria-hidden="true"></div>
+  <div class="wrap reel-head" data-reveal>
+    <div class="shead"><span class="eyebrow">A day, in frames</span><h2>Moments across the estate</h2></div>
+    <p class="reel-quote">Six hundred acres, and a <b>different light</b> in every hour.</p>
+  </div>
+  <div class="reel-track" id="reelTrack">
+    <figure class="reel-item"><div class="reel-fig"><img src="assets/golf-skyline.webp" alt="The first tee at dawn" loading="lazy" decoding="async"></div><figcaption class="reel-cap"><b>The first tee</b><span>06:40 &middot; dawn</span></figcaption></figure>
+    <figure class="reel-item"><div class="reel-fig"><img src="assets/pool-lawn.webp" alt="The pool at mid-morning" loading="lazy" decoding="async"></div><figcaption class="reel-cap"><b>The pool</b><span>09:20 &middot; morning</span></figcaption></figure>
+    <figure class="reel-item"><div class="reel-fig"><img src="assets/farm-fig-tree.webp" alt="The farm at midday" loading="lazy" decoding="async"></div><figcaption class="reel-cap"><b>The larder</b><span>13:30 &middot; midday</span></figcaption></figure>
+    <figure class="reel-item"><div class="reel-fig"><img src="assets/lavista-court.webp" alt="LaVista arena, afternoon" loading="lazy" decoding="async"></div><figcaption class="reel-cap"><b>LaVista</b><span>15:00 &middot; match point</span></figcaption></figure>
+    <figure class="reel-item"><div class="reel-fig"><img src="assets/ballroom-wedding.webp" alt="The ballroom at golden hour" loading="lazy" decoding="async"></div><figcaption class="reel-cap"><b>The ballroom</b><span>17:00 &middot; golden hour</span></figcaption></figure>
+    <figure class="reel-item"><div class="reel-fig"><img src="assets/dining-local.webp" alt="Dining, evening" loading="lazy" decoding="async"></div><figcaption class="reel-cap"><b>The table</b><span>19:00 &middot; evening</span></figcaption></figure>
+    <figure class="reel-item"><div class="reel-fig"><img src="assets/estate-dusk.webp" alt="The lake at dusk" loading="lazy" decoding="async"></div><figcaption class="reel-cap"><b>The lake</b><span>19:20 &middot; dusk</span></figcaption></figure>
+  </div>
+</section>
+
+<!-- ===== EXPERIENCE DETAIL ANCHORS (for tiles) live inside bundles band ===== -->
+<!-- ===== BUNDLES + OFFERS ===== -->
+<section class="sec wrap" id="offers">
+  <div class="shead" data-reveal><span class="eyebrow">Stay longer, do more</span><h2>Bundles the OTAs don&rsquo;t sell</h2><p class="lede">The estate&rsquo;s own pairings, direct: a round with your room, a farm day with lunch, an event with a reward. Booked in one place, at the best rate.</p></div>
+  <div class="bundles" style="margin-top:30px" data-reveal>
+    <div class="bundle" id="stay-detail"><span class="k">Stay &amp; Play</span><h3>Room &amp; a round</h3><p>A night in a course-view room and eighteen holes the next morning, buggy and food voucher included.</p><span class="go">Enquire direct &rarr;</span></div>
+    <div class="bundle" id="farm-detail"><span class="k">Farm Day</span><h3>Stay &amp; farm tour</h3><p>The hotel-plus-farm staycation Traveloka already sells, offered here direct, with the durian buffet in season.</p><span class="go">Enquire direct &rarr;</span></div>
+    <div class="bundle" id="meet-detail"><span class="k">Meet &amp; Reward</span><h3>Conference &amp; unwind</h3><p>A function room, catering and rooms for the team, with the course and LaVista to close the day.</p><span class="go">Enquire direct &rarr;</span></div>
+  </div>
+  <div class="shead" data-reveal style="margin-top:56px"><span class="eyebrow">On now</span><h2>Two offers, nothing hidden</h2></div>
+  <div class="offers" data-reveal>
+    <a class="offer" href="offers.html#durian" id="play-detail"><div class="offer-img"><img src="assets/durians.webp" alt="Championship durians" loading="lazy" decoding="async"></div><div class="offer-b"><span class="k">2D1N &middot; 03 to 05 July 2026</span><h3>Durian Escape Staycation</h3><p>Two pax with breakfast, lunch and an all-you-can-eat durian buffet at Funtasia.</p><div class="price"><b>from RM729</b><span>nett &middot; Grand Deluxe</span></div><div class="mem">Member rate applies at checkout</div></div></a>
+    <a class="offer" href="offers.html#rooms"><div class="offer-img"><img src="assets/pool-lawn.webp" alt="The pool and lawn"loading="lazy" decoding="async"></div><div class="offer-b"><span class="k">Accommodation &middot; year round</span><h3>Room Promotion, direct</h3><p>Scenic rooms over the course, the farm and the city lights, with the Go Green option.</p><div class="price"><b>from RM380</b><span>/ night &middot; RM410 incl. tax</span></div><div class="mem">Member rate applies at checkout</div></div></a>
+  </div>
+  <p class="cap-note" style="margin-top:14px">Durian Escape rates from the live flyer &middot; room rate indicative for this prototype, live rates load from SwiftBook. <a href="offers.html" style="color:var(--gold-deep);font-weight:600">View all offers &rarr;</a></p>
+</section>
+
+<!-- ===== NEWS ===== -->
+<section class="sec wrap" id="news" style="padding-top:0">
+  <div class="shead" data-reveal><span class="eyebrow">From the estate</span><h2>Dated, sourced, current</h2></div>
+  <div class="news" style="margin-top:26px" data-reveal>
+    <a href="https://www.thestar.com.my/news/nation/2025/07/12/musang-king-reigns-supreme-at-world-durian-championship" target="_blank" rel="noopener"><span class="d">11 Jul 2026</span><span class="t">The World Durian Championship returns to the estate, The Star covered the 2025 edition</span><span class="go">&rarr;</span></a>
+    <a href="https://www.bangiresorthotel.com/media/" target="_blank" rel="noopener"><span class="d">2025</span><span class="t">Two ASEAN Records titles, including first durian friendly hotel and resort since 2018</span><span class="go">&rarr;</span></a>
+    <a href="https://www.malaysia.travel/" target="_blank" rel="noopener"><span class="d">2026</span><span class="t">Visit Malaysia 2026 is live, with RM700M+ in federal funding behind the demand</span><span class="go">&rarr;</span></a>
+  </div>
+</section>
+
+<!-- ===== MEMBER CAPTURE ===== -->
+<section class="sec wrap" id="member">
+  <div class="capbox" data-reveal>
+    <div>
+      <span class="eyebrow">Member rate</span>
+      <h2 class="serif" style="font-size:clamp(28px,4vw,44px);margin-top:14px">Unlock the member rate</h2>
+      <p class="lede" style="margin-top:12px">One email. Golf rates, festival dates and seasonal offers, about once a month, and member pricing on every stay.</p>
+    </div>
+    <div>
+      <form class="cap-form" id="capForm" autocomplete="off">
+        <input type="email" required placeholder="you@email.com" aria-label="Email address">
+        <button class="btn" type="submit" style="padding-left:20px;padding-right:20px">Unlock</button>
+      </form>
+      <div class="cap-done" role="status"><b>Member rate unlocked</b>Member pricing now shows on offers and in the booking flow. In production this writes to one list with a welcome email.</div>
+      <p class="cap-note">No popups, ever &middot; the demo unlocks pricing instantly on submit</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT + FOOTER DIORAMA ===== -->
+<section class="close" id="contact">
+  <div class="contours" aria-hidden="true" style="opacity:.7"></div>
+  <div class="close-in wrap">
+    <div class="contact-grid">
+      <div data-reveal>
+        <span class="eyebrow">One front door</span>
+        <h2 class="serif" style="font-size:clamp(30px,4.6vw,52px);margin-top:14px;color:var(--cream)">Plan a stay, an event,<br>a round or a harvest</h2>
+        <p class="lede" style="margin-top:16px;color:var(--cream-soft)">One desk answers for the whole estate. Same-day reply on event enquiries.</p>
+        <div style="margin-top:22px"><a class="btn" href="contact.html">Start an enquiry</a></div>
+      </div>
+      <div class="ccards" data-reveal>
+        <a class="ccard" href="tel:+60382102222"><span class="k">Telephone</span><b>+603 8210 2222</b></a>
+        <a class="ccard" href="mailto:info@bangiresorthotel.com"><span class="k">Email</span><b>info@bangiresorthotel.com</b></a>
+        <a class="ccard" href="https://wa.me/60163117003" target="_blank" rel="noopener"><span class="k">WhatsApp</span><b>+60 16-311 7003</b></a>
+        <div class="ccard" style="cursor:default"><span class="k">The estate</span><b style="font-size:15px;font-family:var(--sans);font-weight:500;line-height:1.4">Off Persiaran Bandar, 43650 Bandar Baru Bangi, Selangor</b></div>
+      </div>
+    </div>
+  </div>
+  <div class="diorama" aria-hidden="true"><video class="dio-vid" id="dioVid" muted loop playsinline preload="none" poster="assets/pickleball-poster.jpg"></video><div class="dio-scrim"></div></div>
+  <div class="footer">
+    <div class="f-in">
+      <div class="wm"><img src="assets/brh-logo.png" alt="Bangi Resort Hotel"><p>Six hundred acres on the peak of Bandar Baru Bangi: hotel, golf, farm, arena and the group behind them, one front door.</p></div>
+      <div><h4>The estate</h4><a href="#stay">Stay</a><a href="#meet">Meet &amp; Celebrate</a><a href="#play">Play</a><a href="#farm">Explore the farm</a><a href="offers.html">Offers</a></div>
+      <div><h4>The group</h4><a href="group.html#hotel">Bangi Resort Hotel</a><a href="group.html#golf">Bangi Golf Resort</a><a href="group.html#farm">Bangi Farm Resort</a><a href="group.html#lavista">LaVista Arena</a><a href="group.html#foodservice">BGR Foodservice</a><a href="group.html#foodtalk">BGR Food Talk</a></div>
+      <div><h4>Visit</h4><a href="contact.html">Contact &amp; enquiry</a><a href="#" data-book>Book direct</a><a href="https://www.bangiresorthotel.com/hotel-general-info/" target="_blank" rel="noopener">Hotel policies</a><a href="https://www.bangiresorthotel.com/privacy/" target="_blank" rel="noopener">Privacy</a></div>
+    </div>
+    <div class="f-base"><span>&copy; 2026 Bangi Group</span><span>Homepage concept &middot; Brand Method</span></div>
+    <div class="ribbon-strip">
+      <div class="ribbon" role="img" aria-label="Demo by BrandMethod.co"><canvas id="ribCv" width="460" height="110" aria-hidden="true"></canvas><span class="ribbon-fb" hidden>Demo &middot; BrandMethod.co</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== sticky booking bar ===== -->
+<div class="bookbar" id="bookbar" aria-hidden="true"><div class="bookbar-in">
+  <span class="bb-t">Bangi Resort Hotel<span>Book direct &middot; taxes shown before payment</span></span>
+  <button class="btn arr" type="button" data-book>Check dates</button>
+</div></div>
+
+<!-- ===== booking sheet (four routes) + mock flow ===== -->
+<div class="sheet" id="sheet" aria-hidden="true" role="dialog" aria-label="Book direct">
+  <div class="sheet-card">
+    <div class="sheet-head"><span class="eyebrow" id="sheetK">Book direct</span><button class="xbtn" id="sheetX" type="button">Close &#10005;</button></div>
+    <div id="sheetBody"></div>
+  </div>
+</div>
+<script>
+if('scrollRestoration' in history){ try{ history.scrollRestoration='manual'; }catch(e){} }
+var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches;
+/* ---- loader: a 3D point-cloud Bangi tree (WebGL) grows from the base, gold on dark, then zooms through ---- */
+(function(){
+  var el=document.getElementById('loader'); if(!el) return;
+  document.documentElement.classList.add('loading');
+  var t0=performance.now(), MIN=2600, CAP=5600, done=false, raf=null, zoomed=false;
+  var pct=document.getElementById('ldPct');
+  var loaded=false; window.addEventListener('load',function(){loaded=true;});
+  function setP(pd){ if(pct) pct.textContent=Math.round(pd*100)+'%'; }
+  function elapsed(){ return performance.now()-t0; }
+  function dismiss(){
+    if(zoomed) return; zoomed=true;
+    if(raf) cancelAnimationFrame(raf); done=true;
+    el.classList.add('zoom');
+    document.documentElement.classList.remove('loading');
+    document.documentElement.classList.add('loaded');
+    setTimeout(function(){ try{ if(window.ScrollTrigger) ScrollTrigger.refresh(); }catch(e){} },90);
+    setTimeout(function(){ if(el.parentNode) el.parentNode.removeChild(el); },1250);
+  }
+  setTimeout(dismiss, CAP); el.addEventListener('click', dismiss);
+  function maybeFinish(pd){ if(pd>=1&&loaded) setTimeout(dismiss, Math.max(360, MIN-elapsed())); }
+  function smooth(x,a,b){ var t=Math.min(1,Math.max(0,(x-a)/(b-a))); return t*t*(3-2*t); }
+
+  /* sample the real Bangi tree mark (exact logo) into point targets */
+  var cv=document.getElementById('loaderCv'), SAMP=190, TREE=null, booted=false;
+  var im=new Image();
+  im.onload=function(){ try{
+    var oc=document.createElement('canvas'); oc.width=oc.height=SAMP; var o=oc.getContext('2d');
+    var sc=Math.min(SAMP/im.width,SAMP/im.height)*0.94, dw=im.width*sc, dh=im.height*sc;
+    o.drawImage(im,(SAMP-dw)/2,(SAMP-dh)/2,dw,dh);
+    var d=o.getImageData(0,0,SAMP,SAMP).data, raw=[];
+    for(var y=0;y<SAMP;y++)for(var x=0;x<SAMP;x++){ if(d[(y*SAMP+x)*4+3]>120) raw.push([x,y]); }
+    TREE=raw; boot();
+  }catch(e){ TREE=[]; boot(); } };
+  im.onerror=function(){ TREE=[]; boot(); };
+  im.src='assets/brh-tree.png';
+
+  function boot(){ if(booted) return; booted=true;
+    if(reduce || !TREE || !TREE.length){ start2D(); return; }
+    var URLS=['https://cdn.jsdelivr.net/npm/three@0.184.0/build/three.module.min.js','https://unpkg.com/three@0.184.0/build/three.module.min.js','https://esm.sh/three@0.184.0'];
+    (function tryLoad(i){ if(i>=URLS.length){ start2D(); return; }
+      import(URLS[i]).then(function(T){ try{ build3D(T); }catch(e){ start2D(); } }).catch(function(){ tryLoad(i+1); });
+    })(0);
+  }
+
+  /* ---------- premium 3D: volumetric gold point-cloud of the logo tree ---------- */
+  function build3D(T){
+    try{ if(T.ColorManagement) T.ColorManagement.enabled=false; }catch(e){}
+    var renderer=new T.WebGLRenderer({canvas:cv,antialias:true,alpha:true,powerPreference:'high-performance'});
+    renderer.setClearColor(0x000000,0); var DPR=Math.min(devicePixelRatio||1,2); renderer.setPixelRatio(DPR);
+    var scene=new T.Scene(), camera=new T.PerspectiveCamera(34,1,1,3000);
+    camera.position.set(0,6,470); camera.lookAt(0,6,0);
+    function size(){ if(done)return; var w=innerWidth,h=innerHeight; renderer.setSize(w,h,false); camera.aspect=w/h; camera.updateProjectionMatrix(); }
+    size(); addEventListener('resize',size);
+    var N=Math.min(7800,TREE.length), S=200, baseY=-S*0.47;
+    var pos=new Float32Array(N*3), tgt=new Float32Array(N*3), del=new Float32Array(N), siz=new Float32Array(N), brt=new Float32Array(N);
+    for(var i=0;i<N;i++){
+      var pt=TREE[(Math.random()*TREE.length)|0], nx=pt[0]/SAMP-0.5, ny=pt[1]/SAMP;      /* ny 0=canopy top, 1=trunk bottom */
+      var canopy=1.0-smooth(ny,0.5,0.74), zr=(Math.random()-0.5);
+      tgt[i*3]=nx*S; tgt[i*3+1]=(0.5-ny)*S; tgt[i*3+2]=zr*S*(0.10+0.34*canopy);           /* canopy is a 3D volume, trunk thin */
+      pos[i*3]=(Math.random()-0.5)*S*0.045; pos[i*3+1]=baseY; pos[i*3+2]=(Math.random()-0.5)*S*0.045;
+      del[i]=(1.0-ny)*0.55;                                                                /* trunk first, canopy last */
+      siz[i]=(1.0+Math.random()*2.0)*(0.75+0.5*canopy);
+      brt[i]=(ny<0.6?(0.6+Math.random()*0.4):(0.12+Math.random()*0.28));
+    }
+    var g=new T.BufferGeometry();
+    g.setAttribute('position',new T.BufferAttribute(pos,3));
+    g.setAttribute('aTarget',new T.BufferAttribute(tgt,3));
+    g.setAttribute('aDelay',new T.BufferAttribute(del,1));
+    g.setAttribute('aSize',new T.BufferAttribute(siz,1));
+    g.setAttribute('aBright',new T.BufferAttribute(brt,1));
+    var mat=new T.ShaderMaterial({ transparent:true, depthTest:false, depthWrite:false, blending:T.NormalBlending,
+      uniforms:{ uProgress:{value:0}, uTime:{value:0}, uDpr:{value:DPR} },
+      vertexShader:'attribute vec3 aTarget;attribute float aDelay;attribute float aSize;attribute float aBright;uniform float uProgress;uniform float uTime;uniform float uDpr;varying float vB;varying float vD;void main(){float e=clamp((uProgress-aDelay)/0.55,0.0,1.0);e=e*e*(3.0-2.0*e);vec3 p=mix(position,aTarget,e);p.x+=sin(uTime*0.6+aDelay*12.0)*(1.0-e)*5.0;p.y+=cos(uTime*0.5+aDelay*9.0)*(1.0-e)*3.0;vec4 mv=modelViewMatrix*vec4(p,1.0);vD=-mv.z;gl_PointSize=aSize*uDpr*(450.0/max(1.0,-mv.z))*(0.4+0.6*e);gl_Position=projectionMatrix*mv;vB=aBright*e;}',
+      fragmentShader:'precision mediump float;varying float vB;varying float vD;void main(){vec2 c=gl_PointCoord-vec2(0.5);float d=length(c);float a=smoothstep(0.5,0.12,d);if(a<0.01)discard;vec3 gold=mix(vec3(0.60,0.39,0.03),vec3(0.96,0.77,0.41),vB);float df=clamp(1.2-(vD-395.0)/340.0,0.45,1.1);gl_FragColor=vec4(gold*df,a*(0.45+0.55*vB)*df);}'
+    });
+    var pts=new T.Points(g,mat); scene.add(pts);
+    var pd=0,last=0;
+    function frame(){ if(done) return; raf=requestAnimationFrame(frame);
+      var tt=performance.now()-t0, t=tt/1000, dt=Math.min(.05,Math.max(.001,t-last)); last=t;
+      var target=loaded?1:Math.min(.9,tt/2600); pd+=(target-pd)*(1-Math.exp(-dt/0.26)); if(pd>0.9992)pd=1;
+      mat.uniforms.uProgress.value=pd; mat.uniforms.uTime.value=t;
+      pts.rotation.y=Math.sin(t*0.34)*0.4; pts.rotation.x=Math.sin(t*0.2)*0.05;    /* gentle, subtle 3D sway */
+      renderer.render(scene,camera); setP(pd); maybeFinish(pd);
+    }
+    raf=requestAnimationFrame(frame);
+  }
+
+  /* ---------- 2D fallback (no WebGL / reduced-motion) ---------- */
+  function start2D(){
+    var c=cv, ctx=null; try{ ctx=c.getContext('2d'); }catch(e){}
+    if(!ctx){ var nc=document.createElement('canvas'); nc.id='loaderCv'; if(c.parentNode)c.parentNode.replaceChild(nc,c); c=nc; try{ ctx=c.getContext('2d'); }catch(e){} }
+    if(!ctx){ setTimeout(dismiss, Math.max(0,MIN-elapsed())); return; }
+    var W=0,H=0,dpr=Math.min(devicePixelRatio||1,2), N=reduce?150:1400, P=[];
+    for(var i=0;i<N;i++) P.push({sx:0,sy:0,tx:0,ty:0,delay:0,bright:Math.random()<0.5,rad:0.7+Math.random()*1.6,ph:Math.random()*6.28,sw:(Math.random()-0.5),ready:false});
+    function assign(){ if(!TREE||!TREE.length||!W)return; var s=Math.min(540,W*0.72,H*0.78),ox=W/2,oy=H*0.42,by=oy+s*0.47;
+      for(var i=0;i<N;i++){ var pt=TREE[(Math.random()*TREE.length)|0],ny=pt[1]/SAMP; P[i].tx=ox+((pt[0]/SAMP)-0.5)*s; P[i].ty=oy+(ny-0.5)*s; P[i].sx=ox+P[i].sw*s*0.05; P[i].sy=by; P[i].delay=(1-ny)*0.5; P[i].bright=ny<0.6&&Math.random()<0.72; P[i].ready=true; } }
+    function fit(){ W=innerWidth;H=innerHeight;c.width=W*dpr;c.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);assign(); }
+    fit(); addEventListener('resize',fit);
+    if(reduce){ var iv=setInterval(function(){ if(TREE&&W){ clearInterval(iv); ctx.clearRect(0,0,W,H); var s=Math.min(340,W*0.6,H*0.62),ox=W/2,oy=H*0.43; for(var i=0;i<TREE.length;i++){var pt=TREE[i];ctx.beginPath();ctx.arc(ox+((pt[0]/SAMP)-0.5)*s,oy+((pt[1]/SAMP)-0.5)*s,1.4,0,6.2832);ctx.fillStyle='rgba(210,158,58,0.9)';ctx.fill();} setP(1); } },40); setTimeout(dismiss,900); return; }
+    var pd=0,last=0;
+    function frame(){ if(done)return; raf=requestAnimationFrame(frame); var tt=performance.now()-t0,dt=Math.min(.05,Math.max(.001,(tt-last)/1000));last=tt; var target=loaded?1:Math.min(.9,tt/2600); pd+=(target-pd)*(1-Math.exp(-dt/0.26)); if(pd>0.9992)pd=1;
+      ctx.clearRect(0,0,W,H); var s=Math.min(540,W*0.72,H*0.78),ox=W/2,oy=H*0.42;
+      var gl=ctx.createRadialGradient(ox,oy-s*0.04,4,ox,oy-s*0.04,s*0.66); gl.addColorStop(0,'rgba(214,162,60,'+(0.22*pd)+')'); gl.addColorStop(1,'rgba(190,120,20,0)'); ctx.fillStyle=gl; ctx.fillRect(0,0,W,H);
+      for(var i=0;i<N;i++){ var p=P[i]; var e=(pd-p.delay)/0.5;e=e<0?0:e>1?1:e;var es=e*e*(3-2*e); var x=p.sx+(p.tx-p.sx)*es; var arc=Math.sin(es*Math.PI)*s*0.05; var y=p.sy+(p.ty-p.sy)*es-arc+Math.sin(tt*0.0011+p.ph)*(1-es)*2.4; var fl=es>0.7?Math.sin((es-0.7)/0.3*Math.PI):0; var rr=p.rad*(0.5+es*0.75+fl*0.9); var col=p.bright?'238,188,98':'184,122,16'; ctx.beginPath();ctx.arc(x,y,rr,0,6.2832); ctx.fillStyle='rgba('+col+','+(0.22+es*0.68+fl*0.32)+')'; ctx.fill(); }
+      setP(pd); maybeFinish(pd);
+    }
+    raf=requestAnimationFrame(frame);
+  }
+})();
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
+<script>
+document.documentElement.classList.add('js');
+/* ---- Lenis buttery scroll (site-wide) ---- */
+(function(){
+  if(!window.Lenis || reduce) return;
+  var lenis=new Lenis({lerp:0.12,smoothWheel:true,wheelMultiplier:1.7,touchMultiplier:2.0,syncTouch:false});
+  document.documentElement.style.scrollBehavior='auto';
+  if(window.gsap){ if(window.ScrollTrigger) lenis.on('scroll',ScrollTrigger.update); gsap.ticker.add(function(t){lenis.raf(t*1000);}); gsap.ticker.lagSmoothing(0); }
+  else { requestAnimationFrame(function raf(t){ lenis.raf(t); requestAnimationFrame(raf); }); }
+  document.addEventListener('click',function(e){
+    var a=e.target.closest&&e.target.closest('a[href^="#"]'); if(!a) return;
+    var id=a.getAttribute('href'); if(!id||id==='#') return;
+    var el=document.querySelector(id); if(!el) return;
+    e.preventDefault(); lenis.scrollTo(el,{offset:-60}); try{ history.pushState(null,'',id); }catch(_){}
+    document.body.classList.remove('menu-open');
+  });
+  window.__lenis=lenis;
+})();
+
+/* ---- embedded mode + bmBack ---- */
+if(window.top!==window.self)document.body.classList.add('embedded');
+(function(){if(window.top===window.self){document.body.classList.add('bm-standalone');var b=document.getElementById('bmBack');if(b)b.addEventListener('click',function(){var r=document.referrer;if(r&&r.indexOf(location.origin)===0&&r!==location.href&&history.length>1){history.back();}else{location.href='index.html';}})}})();
+
+/* ---- header: solidify nav + hide the whole stack on scroll down + bookbar ---- */
+(function(){
+  var hdr=document.getElementById('hdr'), nav=document.getElementById('nav'), bar=document.getElementById('bookbar');
+  var hero=document.getElementById('top'), lastY=window.scrollY||0;
+  function setNavH(){
+    document.documentElement.style.setProperty('--navh', nav.offsetHeight+'px');
+    document.documentElement.style.setProperty('--hdrh', hdr.offsetHeight+'px');
+  }
+  setNavH(); addEventListener('resize',setNavH);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){ setNavH(); try{ if(window.ScrollTrigger) ScrollTrigger.refresh(); }catch(e){} });
+  addEventListener('load',function(){ setNavH(); try{ if(window.ScrollTrigger) ScrollTrigger.refresh(); }catch(e){} });
+  function onScroll(){
+    var y=window.scrollY;
+    /* solid once you scroll past the hero; stays solid while scrolling back up until you reach the very top */
+    var heroBottom=(hero?hero.offsetHeight:window.innerHeight)-nav.offsetHeight-4;
+    var isSolid=nav.classList.contains('solid');
+    if(!isSolid && y>heroBottom) isSolid=true;
+    else if(isSolid && y<40) isSolid=false;
+    nav.classList.toggle('solid', isSolid);
+    if(y<80){ hdr.classList.remove('hide'); }
+    else if(y>lastY+6){ hdr.classList.add('hide'); document.body.classList.remove('menu-open'); }
+    else if(y<lastY-6){ hdr.classList.remove('hide'); }
+    /* booking bar after hero */
+    if(bar&&hero){ var show=y>hero.offsetHeight-140 && !document.getElementById('sheet').classList.contains('open'); bar.classList.toggle('on',show); bar.setAttribute('aria-hidden',show?'false':'true'); }
+    lastY=y;
+  }
+  window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+})();
+
+/* ---- hero loop: light restore — plays only while the hero is on-screen, pauses when scrolled past ---- */
+(function(){
+  var vid=document.getElementById('heroVid'); if(!vid) return;
+  var hero=document.getElementById('top'); if(!hero) return;
+  if(window.matchMedia){
+    if(matchMedia('(prefers-reduced-motion:reduce)').matches) return;   /* keep the static poster */
+    if(matchMedia('(max-width:760px)').matches) return;                 /* mobile: poster only, save data */
+  }
+  vid.addEventListener('playing',function(){ vid.classList.add('on'); });
+  vid.addEventListener('error',function(){ vid.style.display='none'; });   /* fall back to the static poster */
+  function start(){ if(!vid.src){ try{ vid.src='assets/hero-pool.mp4?v=9'; vid.load(); }catch(x){} } var p=vid.play(); if(p&&p.catch)p.catch(function(){}); }
+  start();   /* hero sits at the top — begin loading + playing immediately */
+  try{
+    var io=new IntersectionObserver(function(es){ es.forEach(function(e){
+      if(e.isIntersecting) start();                       /* back on-screen: resume */
+      else { try{ vid.pause(); }catch(x){} }              /* scrolled past: pause to stay light */
+    }); },{threshold:0.05});
+    io.observe(hero);
+  }catch(e){}
+})();
+
+/* ---- burger drawer ---- */
+(function(){
+  var b=document.getElementById('burger'); if(!b) return;
+  var drawer=document.getElementById('drawer');
+  b.addEventListener('click',function(){ var open=document.body.classList.toggle('menu-open'); b.setAttribute('aria-expanded',open?'true':'false'); if(open&&drawer){ var h=document.getElementById('hdr'); drawer.style.top=Math.round((h||document.getElementById('nav')).getBoundingClientRect().bottom)+'px'; } });
+  document.querySelectorAll('#drawer a').forEach(function(a){a.addEventListener('click',function(){document.body.classList.remove('menu-open');b.setAttribute('aria-expanded','false');});});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')document.body.classList.remove('menu-open');});
+})();
+
+/* ---- estate map: shared photo-reveal card, hover + tap + keyboard ---- */
+(function(){
+  var stage=document.getElementById('emapStage'); if(!stage)return;
+  /* aerial loop: load + play only while the map is on-screen (free until scrolled to), pause off-screen */
+  (function(){
+    var vid=document.getElementById('emapVid'); if(!vid) return;
+    if(window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches) return; /* keep the static aerial */
+    var started=false;
+    try{
+      var io=new IntersectionObserver(function(es){ es.forEach(function(e){
+        if(e.isIntersecting){ if(!started){ started=true; try{ vid.src='assets/estate-aerial.mp4'; vid.load(); }catch(x){} } var p=vid.play(); if(p&&p.catch)p.catch(function(){}); }
+        else { try{ vid.pause(); }catch(x){} }
+      }); },{threshold:0.15});
+      io.observe(stage);
+    }catch(e){}
+    vid.addEventListener('playing',function(){ vid.classList.add('on'); });
+    vid.addEventListener('error',function(){ vid.style.display='none'; });   /* fall back to the static aerial poster */
+  })();
+  var card=document.getElementById('ecard'), hintB=document.getElementById('emapHintB');
+  var pins=[].slice.call(stage.querySelectorAll('.epin'));
+  var POIS=[
+    {ic:'hotel',k:'Stay',title:'The Hotel',stat:'256 rooms',line:'and suites, 28 function rooms — the estate’s front door.',img:'assets/room-premier.webp',href:'#stay',cta:'See rooms'},
+    {ic:'golf',k:'Play',title:'The Golf',stat:'27 holes',line:'championship course with the KL skyline beyond, 2026 rates live.',img:'assets/golf-skyline.webp',href:'group.html#golf',cta:'Tee times'},
+    {ic:'farm',k:'Grow',title:'The Farm',stat:'MyGAP',line:'certified working farm, home of the World Durian Championship.',img:'assets/durians.webp',href:'#farm',cta:'Visit the farm'},
+    {ic:'arena',k:'Play',title:'LaVista Arena',stat:'Pickleball',line:'and badminton under one indoor roof, pricing surfaced.',img:'assets/lavista-court.webp',href:'group.html#lavista',cta:'Book a court'},
+    {ic:'lake',k:'Wind down',title:'The Lake',stat:'Green heart',line:'the estate’s dusk plate, a slow loop through the middle.',img:'assets/estate-lake.webp',href:'#almanac',cta:'Dawn to dusk'},
+    {ic:'hall',k:'Meet',title:'The Ballroom',stat:'28 venues',line:'weddings and conferences under one roof, one booking spine.',img:'assets/ballroom-wedding.webp',href:'#meet',cta:'See venues'},
+    {ic:'arrive',k:'Arrive',title:'Arrival',stat:'20 min',line:'from Putrajaya, off Persiaran Bandar — open to all.',img:'assets/estate-dusk.webp',href:'contact.html',cta:'Directions'}
+  ];
+  var hoverCap=window.matchMedia&&window.matchMedia('(hover:hover)').matches;
+  if(!hoverCap&&hintB)hintB.textContent='Tap';
+  var activeIdx=-1, hideT=null;
+  function fill(p){
+    card.innerHTML='<div class="ecard-img"><img src="'+p.img+'" alt=""><span class="ecard-n"><svg aria-hidden="true"><use href="#i-'+p.ic+'"/></svg></span></div>'+
+      '<div class="ecard-body"><span class="ecard-k">'+p.k+'</span><h4>'+p.title+'</h4>'+
+      '<p><span class="ecard-stat">'+p.stat+'</span> '+p.line+'</p>'+
+      '<a class="ecard-go" href="'+p.href+'">'+p.cta+' →</a></div>';
+  }
+  function place(pin){
+    var sw=stage.clientWidth, sh=stage.clientHeight;
+    var px=parseFloat(pin.style.left)/100*sw, py=parseFloat(pin.style.top)/100*sh;
+    var cw=card.offsetWidth, ch=card.offsetHeight, gap=18;
+    var left=px-cw/2, top=py-ch-gap;
+    if(top<8)top=py+gap;
+    left=Math.max(8,Math.min(left,sw-cw-8));
+    top=Math.max(8,Math.min(top,sh-ch-8));
+    card.style.left=Math.round(left)+'px'; card.style.top=Math.round(top)+'px';
+  }
+  function show(idx){
+    if(hideT){clearTimeout(hideT);hideT=null;}
+    var p=POIS[idx], pin=pins[idx]; if(!p||!pin)return;
+    if(activeIdx!==idx)fill(p);
+    activeIdx=idx;
+    pins.forEach(function(x,i){x.classList.toggle('act',i===idx);});
+    card.classList.add('show');
+    place(pin);
+    requestAnimationFrame(function(){place(pin);});
+  }
+  function clear(){card.classList.remove('show');pins.forEach(function(x){x.classList.remove('act');});activeIdx=-1;}
+  function hide(){hideT=setTimeout(clear,140);}
+  pins.forEach(function(pin,idx){
+    pin.addEventListener('mouseenter',function(){if(hoverCap)show(idx);});
+    pin.addEventListener('mouseleave',function(){if(hoverCap)hide();});
+    pin.addEventListener('focus',function(){show(idx);});
+    pin.addEventListener('blur',function(){hide();});
+    pin.addEventListener('click',function(e){e.preventDefault();show(idx);});
+  });
+  card.addEventListener('mouseenter',function(){if(hideT){clearTimeout(hideT);hideT=null;}});
+  card.addEventListener('mouseleave',function(){if(hoverCap)hide();});
+  stage.addEventListener('click',function(e){if(e.target===stage||(e.target.closest&&e.target.closest('.emap-svg'))){clear();}});
+  document.addEventListener('click',function(e){if(!stage.contains(e.target))clear();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')clear();});
+  var legs=[].slice.call(document.querySelectorAll('.plan-legend .leg'));
+  legs.forEach(function(leg,i){leg.addEventListener('mouseenter',function(){if(pins[i])pins[i].classList.add('act');});leg.addEventListener('mouseleave',function(){if(pins[i])pins[i].classList.remove('act');});});
+  window.addEventListener('resize',function(){if(activeIdx>=0)place(pins[activeIdx]);});
+})();
+/* ---- the booking spine: four-route sheet -> 3-step mock flow, one engine ----
+   canonical SwiftBook property ID to CONFIRM with Sam: 563MjYKxTGIrXwVOlsqaJQTaHLxzGMPvcB2NTk=
+   (the live site runs a second ID in parallel, 803MjY5A9rGW7dUR496z2ThOCqn70c0QBrFe5gSeK3rgQQ2NTk= ,
+    which this concept retires: ONE engine everywhere) ---- */
+(function(){
+  var sheet=document.getElementById('sheet'), body=document.getElementById('sheetBody'),
+      kEl=document.getElementById('sheetK'), xb=document.getElementById('sheetX');
+  var fmt=function(d){return d.toISOString().slice(0,10);};
+  var t=new Date(); t.setDate(t.getDate()+14); var o=new Date(); o.setDate(o.getDate()+15);
+  var state={inD:fmt(t),outD:fmt(o),guests:'2 adults',room:1,guest:{name:'',email:'',phone:'',arrival:'Not sure yet',requests:'',consent:true}};
+  var ROOMS=[
+    {n:'Deluxe King',s:'City-lights side',base:380,img:'assets/room-towel.webp'},
+    {n:'Grand Deluxe',s:'Course side, the Durian Escape room',base:480,img:'assets/room-premier.webp'},
+    {n:'Premier Family',s:'Two beds, farm side',base:560,img:'assets/room-detail.webp'}
+  ];
+  function rm(v){return 'RM'+v.toLocaleString('en-US');}
+  function incl(v){return Math.round(v*1.08);}
+  function nights(){var a=new Date(state.inD),b=new Date(state.outD),n=Math.round((b-a)/864e5);return n>0?n:1;}
+  function know(){return '<div class="knowbox"><span class="kk">Know before you book</span><ul><li>RM250 refundable security deposit at check-in</li><li>Parking RM30 per day</li><li>Prices include SST</li></ul></div>';}
+  var ICON={room:'<path d="M3 18v-6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6"/><path d="M3 18h18M6 10V7a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v3"/>',
+    golf:'<circle cx="12" cy="12" r="9"/><path d="M12 3a15 15 0 0 1 0 18M3.6 8h16.8M3.6 16h16.8"/>',
+    court:'<rect x="3" y="5" width="18" height="14" rx="1"/><path d="M12 5v14M3 12h18"/>',
+    event:'<path d="M12 3l9 5-9 5-9-5z"/><path d="M5 10.5V16c0 1.5 3 3 7 3s7-1.5 7-3v-5.5"/>'};
+  function quickStart(){
+    var rec=ROOMS[1];
+    return '<div class="qs">'+
+      '<button class="qs-rec" id="qsRec" type="button" aria-label="Book the recommended room, '+esc(rec.n)+'">'+
+        '<span class="qs-rec-img"><img src="'+rec.img+'" alt=""><span class="qs-badge">Most booked</span></span>'+
+        '<span class="qs-rec-b"><span class="qs-k">Recommended &middot; '+esc(rec.s)+'</span><b>'+esc(rec.n)+'</b>'+
+          '<span class="qs-pr">from '+rm(rec.base)+' <small>&middot; '+rm(incl(rec.base))+' incl. tax/night</small></span></span>'+
+        '<span class="qs-rec-go" aria-hidden="true">&rarr;</span>'+
+      '</button>'+
+      '<div class="qs-dates">'+
+        '<div class="ffgrid"><div class="ff"><label>Check in</label><input type="date" id="qsIn" value="'+state.inD+'"></div><div class="ff"><label>Check out</label><input type="date" id="qsOut" value="'+state.outD+'"></div></div>'+
+        '<div class="ff" style="margin-top:10px"><label>Guests</label><select id="qsGx"><option>1 adult</option><option'+(state.guests==='2 adults'?' selected':'')+'>2 adults</option><option>2 adults, 1 child</option><option>2 adults, 2 children</option><option>Family, 4+</option></select></div>'+
+        '<div class="qs-presets"><button type="button" class="qs-chip" data-preset="weekend">This weekend</button><button type="button" class="qs-chip" data-preset="nextweek">Next week</button><button type="button" class="qs-chip" data-preset="tonight">Tonight &middot; 1 night</button></div>'+
+        '<button class="btn arr qs-go" id="qsGo" type="button">See room availability</button>'+
+        '<div class="qs-trust"><span><b>&check;</b> Best rate, direct</span><span><b>&check;</b> Taxes shown before payment</span><span><b>&check;</b> No account needed</span></div>'+
+      '</div>'+
+    '</div>';
+  }
+  function syncQs(){var i=document.getElementById('qsIn'),o=document.getElementById('qsOut'),g=document.getElementById('qsGx');if(i&&i.value)state.inD=i.value;if(o&&o.value)state.outD=o.value;if(g)state.guests=g.value;}
+  function qsPreset(p){
+    var base=new Date();base.setHours(0,0,0,0);
+    function f(d){return d.toISOString().slice(0,10);}
+    var a,b;
+    if(p==='tonight'){a=new Date(base);b=new Date(base);b.setDate(b.getDate()+1);}
+    else if(p==='weekend'){var wd=base.getDay();var toFri=(5-wd+7)%7;a=new Date(base);a.setDate(a.getDate()+toFri);b=new Date(a);b.setDate(b.getDate()+2);}
+    else{var wd2=base.getDay();var toMon=((8-wd2)%7)||7;a=new Date(base);a.setDate(a.getDate()+toMon);b=new Date(a);b.setDate(b.getDate()+3);}
+    state.inD=f(a);state.outD=f(b);
+    var i=document.getElementById('qsIn'),o=document.getElementById('qsOut');if(i)i.value=state.inD;if(o)o.value=state.outD;
+  }
+  function wireQuickStart(){
+    var recEl=document.getElementById('qsRec');
+    if(recEl)recEl.addEventListener('click',function(){syncQs();state.room=1;step(1);});
+    var go=document.getElementById('qsGo');
+    if(go)go.addEventListener('click',function(){syncQs();step(1);});
+    body.querySelectorAll('.qs-chip').forEach(function(ch){ch.addEventListener('click',function(){qsPreset(ch.dataset.preset);});});
+  }
+  function routes(){
+    kEl.textContent='Book direct · SwiftBook';
+    body.innerHTML=quickStart()+'<div class="rt-head">Or reach another part of the estate</div><div class="routes">'+
+      '<a class="route" href="group.html#golf"><span class="ri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">'+ICON.golf+'</svg></span><span><b>A tee time</b><span>27 holes &middot; from RM145 weekday, one branded engine</span></span><span class="ra">&rarr;</span></a>'+
+      '<a class="route" href="group.html#lavista"><span class="ri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">'+ICON.court+'</svg></span><span><b>A LaVista court</b><span>pickleball &amp; badminton, pricing surfaced</span></span><span class="ra">&rarr;</span></a>'+
+      '<a class="route" href="contact.html"><span class="ri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">'+ICON.event+'</svg></span><span><b>A function or event</b><span>28 venues &middot; captured enquiry, not a call queue</span></span><span class="ra">&rarr;</span></a>'+
+      '</div><p class="sheet-note">One booking spine for the whole estate: rooms on the SwiftBook engine above, the rest deep-link to their surface.</p>';
+    wireQuickStart();
+  }
+  function esc(s){return (s==null?'':''+s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function calc(){var r=ROOMS[state.room],n=nights(),member=document.documentElement.classList.contains('member');var per=member?Math.round(r.base*0.9):r.base;return {r:r,n:n,member:member,per:per,perTax:incl(per),room:incl(per)*n};}
+  function liveChip(){var c=calc();return '<div class="bk-chip"><span class="bk-chip-l"><b>'+state.inD+'</b> &rarr; <b>'+state.outD+'</b><small>'+c.n+' night'+(c.n>1?'s':'')+' &middot; '+esc(state.guests)+' &middot; '+esc(c.r.n)+'</small></span><span class="bk-chip-r"><b>'+rm(c.room)+'</b><small>SST included</small></span></div>';}
+  var ARR=['Not sure yet','Before 12pm','12pm - 3pm','3pm - 6pm','6pm - 9pm','After 9pm'];
+  var STEPS=['Dates','Room','Details','Confirm'];
+  function stepsBar(i){return '<div class="flow-steps">'+STEPS.map(function(s,k){return '<span class="'+(k<i?'done':(k===i?'on':''))+'"><i>'+(k<i?'&#10003;':(k+1))+'</i>'+s+'</span>';}).join('')+'</div>';}
+  function step(i){
+    kEl.textContent='A room · SwiftBook';
+    if(i===0){
+      body.innerHTML=stepsBar(0)+'<div class="flow-body"><div class="ffgrid"><div class="ff"><label>Check in</label><input type="date" id="mIn" value="'+state.inD+'"></div><div class="ff"><label>Check out</label><input type="date" id="mOut" value="'+state.outD+'"></div></div><div class="ff" style="margin-top:12px"><label>Guests</label><select id="mGx"><option>1 adult</option><option'+(state.guests==='2 adults'?' selected':'')+'>2 adults</option><option>2 adults, 1 child</option><option>2 adults, 2 children</option><option>Family, 4+</option></select></div><div class="flow-foot"><span class="flow-note">One engine &middot; no account needed</span><button class="btn arr" id="n1" type="button">Choose a room</button></div></div>';
+      document.getElementById('n1').addEventListener('click',function(){state.inD=document.getElementById('mIn').value||state.inD;state.outD=document.getElementById('mOut').value||state.outD;state.guests=document.getElementById('mGx').value;step(1);});
+      if(window.__bkmFocus)window.__bkmFocus('#mIn'); if(window.__bkmAnnounce)window.__bkmAnnounce('Step 1 of 4, choose your dates');
+    } else if(i===1){
+      var rows=ROOMS.map(function(r,k){var m=Math.round(r.base*0.9);return '<div class="rmopt'+(state.room===k?' sel':'')+'" data-k="'+k+'" role="button" tabindex="0" aria-pressed="'+(state.room===k?'true':'false')+'"><img src="'+r.img+'" alt=""><div><b>'+r.n+'</b><span class="rs">'+r.s+'</span></div><div class="pr"><b>from '+rm(r.base)+'</b><small>'+rm(incl(r.base))+' incl. tax / night</small><span class="m">Member '+rm(incl(m))+' incl. tax</span></div><span class="rmtick" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span></div>';}).join('');
+      body.innerHTML=stepsBar(1)+'<div class="flow-body">'+rows+'<div class="bk-live" id="bkLive">'+liveChip()+'</div><div class="flow-foot"><button class="btn ghost" id="b1" type="button">Back</button><button class="btn arr" id="n2" type="button">Add your details</button></div></div>';
+      body.querySelectorAll('.rmopt').forEach(function(el){function pick(){state.room=+el.dataset.k;body.querySelectorAll('.rmopt').forEach(function(x){var s=+x.dataset.k===state.room;x.classList.toggle('sel',s);x.setAttribute('aria-pressed',s?'true':'false');});var lc=document.getElementById('bkLive');if(lc)lc.innerHTML=liveChip();}el.addEventListener('click',pick);el.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();pick();}});});
+      document.getElementById('b1').addEventListener('click',function(){routes();});
+      document.getElementById('n2').addEventListener('click',function(){step(2);});
+      if(window.__bkmFocus)window.__bkmFocus('.rmopt.sel'); if(window.__bkmAnnounce)window.__bkmAnnounce('Step 2 of 4, choose a room');
+    } else if(i===2){
+      var g=state.guest;
+      body.innerHTML=stepsBar(2)+'<div class="flow-body"><div class="bk-live">'+liveChip()+'</div>'+
+        '<div class="ff bk-f"><label>Full name</label><input id="gName" type="text" autocomplete="name" placeholder="As on your ID" value="'+esc(g.name)+'"><span class="ff-err">Please enter your name</span></div>'+
+        '<div class="ffgrid" style="margin-top:12px"><div class="ff bk-f"><label>Email</label><input id="gEmail" type="email" autocomplete="email" inputmode="email" placeholder="you@email.com" value="'+esc(g.email)+'"><span class="ff-err">Enter a valid email</span></div><div class="ff bk-f"><label>Mobile</label><input id="gPhone" type="tel" autocomplete="tel" inputmode="tel" placeholder="01_ ___ ____" value="'+esc(g.phone)+'"><span class="ff-err">Enter your mobile number</span></div></div>'+
+        '<div class="ff" style="margin-top:12px"><label>Estimated arrival</label><select id="gArr">'+ARR.map(function(a){return '<option'+(g.arrival===a?' selected':'')+'>'+a+'</option>';}).join('')+'</select></div>'+
+        '<div class="ff" style="margin-top:12px"><label>Special requests <span class="opt">optional</span></label><textarea id="gReq" rows="2" placeholder="Late check-out, connecting rooms, dietary notes">'+esc(g.requests)+'</textarea></div>'+
+        '<label class="bk-consent"><input type="checkbox" id="gConsent"'+(g.consent!==false?' checked':'')+'><span>Email me my confirmation and the best available direct rate. No spam.</span></label>'+
+        '<div class="flow-foot"><button class="btn ghost" id="bD" type="button">Back</button><button class="btn arr" id="nD" type="button">Review booking</button></div></div>';
+      var nameEl=document.getElementById('gName'),emailEl=document.getElementById('gEmail'),phoneEl=document.getElementById('gPhone');
+      function setErr(el,ok){var f=el.closest('.ff');f.classList.toggle('err',!ok);f.classList.toggle('ok',ok&&el.value.trim().length>0);}
+      function validate(focusFirst){
+        var okName=nameEl.value.trim().length>=2;
+        var okEmail=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value.trim());
+        var okPhone=phoneEl.value.replace(/[^0-9]/g,'').length>=7;
+        setErr(nameEl,okName);setErr(emailEl,okEmail);setErr(phoneEl,okPhone);
+        if(focusFirst){var bad=!okName?nameEl:(!okEmail?emailEl:(!okPhone?phoneEl:null));if(bad)try{bad.focus();}catch(e){}}
+        return okName&&okEmail&&okPhone;
+      }
+      function saveDetails(){g.name=nameEl.value.trim();g.email=emailEl.value.trim();g.phone=phoneEl.value.trim();g.arrival=document.getElementById('gArr').value;g.requests=document.getElementById('gReq').value.trim();g.consent=document.getElementById('gConsent').checked;}
+      [nameEl,emailEl,phoneEl].forEach(function(el){el.addEventListener('blur',function(){if(el.value.trim())validate(false);});el.addEventListener('input',function(){if(el.closest('.ff').classList.contains('err'))validate(false);});});
+      document.getElementById('bD').addEventListener('click',function(){saveDetails();step(1);});
+      document.getElementById('nD').addEventListener('click',function(){if(validate(true)){saveDetails();step(3);}else if(window.__bkmAnnounce)window.__bkmAnnounce('Please complete the highlighted fields');});
+      if(window.__bkmFocus)window.__bkmFocus('#gName'); if(window.__bkmAnnounce)window.__bkmAnnounce('Step 3 of 4, your details');
+    } else {
+      var c=calc(),g=state.guest;
+      body.innerHTML=stepsBar(3)+'<div class="flow-body"><div class="bk-sum">'+
+        '<div class="sumrow"><span>Guest</span><b>'+esc(g.name)+'</b></div>'+
+        '<div class="sumrow"><span>Contact</span><b>'+esc(g.email)+'<br>'+esc(g.phone)+'</b></div>'+
+        '<div class="sumrow"><span>Dates</span><b>'+state.inD+' &rarr; '+state.outD+' &middot; '+c.n+' night'+(c.n>1?'s':'')+'</b></div>'+
+        '<div class="sumrow"><span>Guests</span><b>'+esc(state.guests)+'</b></div>'+
+        '<div class="sumrow"><span>Room</span><b>'+esc(c.r.n)+(c.member?' &middot; member rate':'')+'</b></div>'+
+        (g.requests?'<div class="sumrow"><span>Requests</span><b>'+esc(g.requests)+'</b></div>':'')+
+        '<div class="sumrow"><span>'+esc(c.r.n)+', '+rm(c.perTax)+' &times; '+c.n+'</span><b>'+rm(c.room)+'</b></div>'+
+        '<div class="sumrow tot"><span>Total, SST included</span><b>'+rm(c.room)+'</b></div></div>'+know()+
+        '<div class="paybtns"><button class="paybtn dark" type="button" data-pay="Wallet">&#63743;&nbsp; Pay &middot; wallet</button><button class="paybtn" type="button" data-pay="FPX online banking">FPX online banking</button><button class="paybtn" type="button" data-pay="Card">Credit or debit card</button></div>'+
+        '<div class="flow-foot"><button class="btn ghost" id="b2" type="button">Back</button><span class="flow-note">Concept prototype, no payment is processed<br>Production connects one SwiftBook ID, confirmed with Sam</span></div></div>';
+      document.getElementById('b2').addEventListener('click',function(){step(2);});
+      body.querySelectorAll('[data-pay]').forEach(function(b){b.addEventListener('click',function(){confirmBooking(b.getAttribute('data-pay'));});});
+      if(window.__bkmFocus)window.__bkmFocus('.paybtn'); if(window.__bkmAnnounce)window.__bkmAnnounce('Step 4 of 4, review and pay');
+    }
+  }
+  function ref(){var s='BRH-',chars='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';for(var i=0;i<6;i++){s+=chars.charAt(Math.floor(Math.random()*chars.length));}return s;}
+  function confirmBooking(method){
+    var c=calc(),g=state.guest,r=ref();
+    var rec={ref:r,name:g.name,email:g.email,phone:g.phone,checkin:state.inD,checkout:state.outD,nights:c.n,guests:state.guests,room:c.r.n,total:c.room,method:method,arrival:g.arrival,requests:g.requests,consent:g.consent,ts:new Date().toISOString()};
+    try{var arr=JSON.parse(localStorage.getItem('bangi_bookings')||'[]');arr.push(rec);localStorage.setItem('bangi_bookings',JSON.stringify(arr));}catch(e){}
+    kEl.textContent='Booking confirmed';
+    var first=(g.name.split(' ')[0]||'there');
+    body.innerHTML='<div class="bk-success"><div class="bk-check"><svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="23"/><path d="M14 27l8 8 16-16"/></svg></div>'+
+      '<span class="eyebrow" style="justify-content:center">Simulated &middot; no charge made</span>'+
+      '<h3 class="bk-big">You&rsquo;re all set, '+esc(first)+'.</h3>'+
+      '<p class="bk-sent">A confirmation is on its way to <b>'+esc(g.email)+'</b>.</p>'+
+      '<div class="bk-refcard"><span>Booking reference</span><b>'+r+'</b></div>'+
+      '<div class="bk-sum bk-sum-lite"><div class="sumrow"><span>'+esc(c.r.n)+'</span><b>'+state.inD+' &rarr; '+state.outD+'</b></div><div class="sumrow tot"><span>Paid via '+esc(method)+'</span><b>'+rm(c.room)+'</b></div></div>'+
+      '<p class="flow-note" style="text-align:center;margin-top:14px">Same look from first click to paid, deposit and parking disclosed before payment, one SwiftBook engine behind it. That is the whole fix.</p>'+
+      '<div style="margin-top:16px;text-align:center"><button class="btn" id="dn" type="button">Done</button></div></div>';
+    document.getElementById('dn').addEventListener('click',close);
+    if(window.__bkmFocus)window.__bkmFocus('#dn'); if(window.__bkmAnnounce)window.__bkmAnnounce('Booking confirmed, reference '+r);
+  }
+  /* #8: proper modal, focus trap + return focus + step focus + live announce + bookbar sync */
+  var lastTrigger=null, bar=document.getElementById('bookbar');
+  sheet.setAttribute('aria-modal','true');
+  var announcer=document.createElement('div');
+  announcer.setAttribute('aria-live','polite'); announcer.className='sr-only';
+  announcer.style.cssText='position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap';
+  sheet.appendChild(announcer);
+  window.__bkmAnnounce=function(msg){ announcer.textContent=msg; };
+  window.__bkmFocus=function(sel){ requestAnimationFrame(function(){ var el=body.querySelector(sel); if(el) try{ el.focus({preventScroll:true}); }catch(e){ el.focus(); } }); };
+  function focusables(){ return [].slice.call(sheet.querySelectorAll('a[href],button:not(:disabled),input:not([disabled]),select:not([disabled]),[tabindex]:not([tabindex="-1"])')).filter(function(el){ return el.offsetParent!==null; }); }
+  function open(){ lastTrigger=document.activeElement; routes(); sheet.classList.add('open'); sheet.setAttribute('aria-hidden','false'); document.documentElement.style.overflow='hidden'; if(window.__lenis)try{window.__lenis.stop();}catch(e){} if(bar){bar.classList.remove('on');bar.setAttribute('aria-hidden','true');} xb.focus(); }
+  function close(){ sheet.classList.remove('open'); sheet.setAttribute('aria-hidden','true'); document.documentElement.style.overflow=''; if(window.__lenis)try{window.__lenis.start();}catch(e){} if(lastTrigger&&lastTrigger.focus)try{lastTrigger.focus();}catch(e){} try{ window.dispatchEvent(new Event('scroll')); }catch(e){} }
+  document.querySelectorAll('[data-book]').forEach(function(b){b.addEventListener('click',function(e){e.preventDefault();open();});});
+  xb.addEventListener('click',close);
+  sheet.addEventListener('click',function(e){if(e.target===sheet)close();});
+  document.addEventListener('keydown',function(e){
+    if(!sheet.classList.contains('open')) return;
+    if(e.key==='Escape'){ close(); return; }
+    if(e.key==='Tab'){ var f=focusables(); if(!f.length) return; var first=f[0], last=f[f.length-1];
+      if(e.shiftKey && document.activeElement===first){ e.preventDefault(); last.focus(); }
+      else if(!e.shiftKey && document.activeElement===last){ e.preventDefault(); first.focus(); } }
+  });
+  /* member unlock */
+  try{ if(localStorage.getItem('brh-member')) document.documentElement.classList.add('member'); }catch(e){}
+  var cf=document.getElementById('capForm');
+  if(cf) cf.addEventListener('submit',function(e){e.preventDefault();document.documentElement.classList.add('member');try{localStorage.setItem('brh-member','1');}catch(err){}});
+})();
+
+/* ---- reveals, count-ups, clip reveals ----
+   Scroll-position driven (getBoundingClientRect), NOT IntersectionObserver: IO proved flaky
+   under Lenis/programmatic scroll and stranded below-fold content hidden. This can never
+   strand: it reveals anything at or above the fold on scroll, resize, load and a short poll. */
+(function(){
+  if(reduce){ document.querySelectorAll('[data-count]').forEach(function(el){el.textContent=(+el.dataset.count).toLocaleString('en-US');}); return; }
+  var items=[].slice.call(document.querySelectorAll('[data-reveal],.reveal-clip'));
+  var counts=[].slice.call(document.querySelectorAll('[data-count]'));
+  function countUp(el){ var end=+el.dataset.count,t0=null; function tick(ts){if(!t0)t0=ts;var p=Math.min(1,(ts-t0)/1500);p=1-Math.pow(1-p,3);el.textContent=Math.round(end*p).toLocaleString('en-US');if(p<1)requestAnimationFrame(tick);} requestAnimationFrame(tick); }
+  function reveal(){ var vh=window.innerHeight||800;
+    for(var i=items.length-1;i>=0;i--){ var r=items[i].getBoundingClientRect();
+      if(r.top < vh*0.9){ items[i].classList.add('in'); items.splice(i,1); } }
+    for(var j=counts.length-1;j>=0;j--){ var r2=counts[j].getBoundingClientRect();
+      if(r2.top < vh*0.85){ countUp(counts[j]); counts.splice(j,1); } }
+    return items.length+counts.length; }
+  var ticking=false;
+  function onScroll(){ if(ticking) return; ticking=true; requestAnimationFrame(function(){ reveal(); ticking=false; }); }
+  addEventListener('scroll', onScroll, {passive:true});
+  addEventListener('resize', onScroll);
+  if(window.__lenis&&window.__lenis.on) try{ window.__lenis.on('scroll', onScroll); }catch(e){}
+  addEventListener('load', reveal);
+  reveal();
+  /* safety poll: catches the loader dismiss, font swap, and programmatic anchor jumps */
+  var n=0, iv=setInterval(function(){ if(reveal()===0 || ++n>26){ clearInterval(iv); } }, 260);
+})();
+
+/* ---- the almanac: the day arc. Hover or tap an hour on the sun's path and the
+        hotel relights; left alone, the day plays itself, one hour per ring. ---- */
+(function(){
+  var sec=document.getElementById('almanac'); if(!sec) return;
+  var slides=[].slice.call(sec.querySelectorAll('.alm-slide'));
+  var stops=[].slice.call(sec.querySelectorAll('.dial-stop'));
+  if(reduce){ sec.classList.add('static'); return; }
+  var DUR=6000; sec.style.setProperty('--alm-dur',(DUR/1000)+'s');
+  var hoverCap=window.matchMedia&&matchMedia('(hover:hover)').matches;
+  var cur=0,timer=null,paused=false,vis=false;
+  /* the sun's path: a shallow quadratic arc across the top of the stage */
+  var arc=sec.querySelector('.alm-arc'), sun=arc.querySelector('.alm-sun'),
+      track=arc.querySelector('.arc-track'), prog=arc.querySelector('.arc-prog');
+  var actsGroups=[].slice.call(sec.querySelectorAll('.acts-group'));
+  var T=[0,0.25,0.5,0.75,1], pts=[], lenPct=[];
+  function bez(t,w,h){ var x0=0.05*w,y0=0.84*h,x1=0.5*w,y1=-0.62*h,x2=0.95*w,y2=0.84*h,u=1-t;
+    return [u*u*x0+2*u*t*x1+t*t*x2, u*u*y0+2*u*t*y1+t*t*y2]; }
+  function layout(){ var w=arc.clientWidth,h=arc.clientHeight; if(!w||!h) return;
+    var d='M'+bez(0,w,h)[0].toFixed(1)+' '+bez(0,w,h)[1].toFixed(1);
+    var L=[0],p0=bez(0,w,h);
+    for(var s=1;s<=100;s++){ var p=bez(s/100,w,h); d+=' L'+p[0].toFixed(1)+' '+p[1].toFixed(1);
+      L.push(L[s-1]+Math.hypot(p[0]-p0[0],p[1]-p0[1])); p0=p; }
+    track.setAttribute('d',d); prog.setAttribute('d',d);
+    pts=T.map(function(t){ return bez(t,w,h); });
+    lenPct=T.map(function(t){ return L[Math.round(t*100)]/L[100]*100; });
+    stops.forEach(function(b,k){ b.style.left=pts[k][0]+'px'; b.style.top=pts[k][1]+'px'; });
+    place(); }
+  function place(){ if(!pts.length) return;
+    sun.style.left=pts[cur][0]+'px'; sun.style.top=pts[cur][1]+'px';
+    prog.style.strokeDashoffset=(100-lenPct[cur]).toFixed(2); }
+  layout(); window.addEventListener('resize',layout);
+  /* seed the night sky: a fixed constellation, twinkle offsets staggered */
+  (function(){ var svg=sec.querySelector('.alm-stars'); if(!svg) return; var f='';
+    for(var i=0;i<26;i++){ var x=(i*37.3+11)%100, y=((i*23.7+5)%53), r=(0.16+((i*13)%9)/26).toFixed(2), d=((i%7)*0.55).toFixed(2);
+      f+='<circle cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="'+r+'" style="animation-delay:'+d+'s"/>'; }
+    svg.innerHTML=f; })();
+  function ringRestart(){ var c=sec.querySelector('.dial-stop.on .dial-ring circle'); if(!c) return;
+    c.style.animation='none'; void c.getBoundingClientRect(); c.style.animation=''; }
+  function schedule(){ if(timer){clearTimeout(timer); timer=null;}
+    if(paused||!vis) return;
+    timer=setTimeout(function(){ go(cur+1); },DUR); }
+  function go(i){ i=((i%slides.length)+slides.length)%slides.length; cur=i;
+    sec.setAttribute('data-phase',String(i));
+    slides.forEach(function(s,k){ s.classList.toggle('on',k===i); });
+    stops.forEach(function(b,k){ var on=k===i; b.classList.toggle('on',on); b.setAttribute('aria-pressed',on?'true':'false'); });
+    actsGroups.forEach(function(g){ g.classList.toggle('on',+g.getAttribute('data-ph')===i); });
+    place(); ringRestart(); schedule(); }
+  function pause(){ if(paused) return; paused=true; sec.classList.add('paused'); if(timer){clearTimeout(timer); timer=null;} }
+  function resume(){ if(!paused) return; paused=false; sec.classList.remove('paused'); ringRestart(); schedule(); }
+  stops.forEach(function(b,k){
+    b.addEventListener('click',function(){ go(k); });
+    if(hoverCap) b.addEventListener('mouseenter',function(){ go(k); });
+    b.addEventListener('focus',function(){ go(k); });
+  });
+  /* hovering the scene holds the hour, like resting a hand on the clock */
+  if(hoverCap){
+    var stage=sec.querySelector('.alm-stage');
+    stage.addEventListener('pointerenter',pause);
+    stage.addEventListener('pointerleave',resume);
+  }
+  sec.addEventListener('keydown',function(e){
+    if(e.key==='ArrowRight'){ e.preventDefault(); go(cur+1); stops[cur].focus(); }
+    else if(e.key==='ArrowLeft'){ e.preventDefault(); go(cur-1); stops[cur].focus(); }
+  });
+  try{
+    new IntersectionObserver(function(es){ var v=es[0].isIntersecting;
+      if(v&&!vis){ vis=true; sec.querySelectorAll('.alm-bg img,.alm-acts img').forEach(function(im){ im.loading='eager'; }); ringRestart(); schedule(); }
+      else if(!v&&vis){ vis=false; if(timer){clearTimeout(timer); timer=null;} }
+    },{threshold:0.35}).observe(sec);
+  }catch(e){ vis=true; schedule(); }
+})();
+
+/* ---- stats band: a gold dot field that drifts, and parts around the pointer ---- */
+(function(){
+  var sec=document.getElementById('stats'), c=document.getElementById('statsField'); if(!sec||!c) return;
+  var ctx=c.getContext('2d'); if(!ctx) return;
+  var W=0,H=0,DPR=1,parts=[],raf=null,vis=false,t=0,mx=-1e4,my=-1e4;
+  function rand(a,b){ return a+Math.random()*(b-a); }
+  function build(){ parts.length=0;
+    var n=Math.round(Math.min(230,Math.max(90,(W*H)/(11500*DPR))));
+    for(var i=0;i<n;i++){ var x=Math.random()*W,y=Math.random()*H;
+      parts.push({hx:x,hy:y,x:x,y:y,vx:0,vy:0,r:rand(.7,2.1)*DPR,a:rand(.09,.36),ph:rand(0,6.2832),sp:rand(.0005,.0014),dx:rand(-.05,.05)*DPR,dy:rand(-.04,.04)*DPR}); } }
+  function resize(){ DPR=Math.min(devicePixelRatio||1,2); var r=sec.getBoundingClientRect();
+    W=Math.round(r.width*DPR); H=Math.round(r.height*DPR); c.width=W; c.height=H; build(); draw(); }
+  function draw(){ ctx.clearRect(0,0,W,H); var R=140*DPR;
+    for(var i=0;i<parts.length;i++){ var p=parts[i];
+      if(!reduce){
+        p.hx+=p.dx; p.hy+=p.dy;
+        if(p.hx<-14)p.hx=W+14; else if(p.hx>W+14)p.hx=-14;
+        if(p.hy<-14)p.hy=H+14; else if(p.hy>H+14)p.hy=-14;
+        var ddx=p.x-mx,ddy=p.y-my,d2=ddx*ddx+ddy*ddy;
+        if(d2<R*R){ var d=Math.sqrt(d2)||1,f=(1-d/R)*2.2*DPR; p.vx+=ddx/d*f; p.vy+=ddy/d*f; }
+        p.vx+=(p.hx-p.x)*.016; p.vy+=(p.hy-p.y)*.016; p.vx*=.88; p.vy*=.88; p.x+=p.vx; p.y+=p.vy;
+      }
+      var tw=.72+.28*Math.sin(t*p.sp+p.ph), al=p.a*tw; if(al<.005) continue;
+      ctx.beginPath(); ctx.fillStyle='rgba(231,184,92,'+al.toFixed(3)+')'; ctx.arc(p.x,p.y,p.r,0,6.2832); ctx.fill(); } }
+  function frame(){ t+=16; draw(); raf=vis?requestAnimationFrame(frame):null; }
+  function start(){ if(!raf&&vis&&!reduce) raf=requestAnimationFrame(frame); }
+  resize(); window.addEventListener('resize',resize);
+  if(!reduce){
+    sec.addEventListener('pointermove',function(e){ var r=sec.getBoundingClientRect(); mx=(e.clientX-r.left)*DPR; my=(e.clientY-r.top)*DPR; },{passive:true});
+    sec.addEventListener('pointerleave',function(){ mx=-1e4; my=-1e4; });
+    try{ new IntersectionObserver(function(es){ vis=es[0].isIntersecting; if(vis)start(); }).observe(sec); }
+    catch(e){ vis=true; start(); }
+  }
+})();
+
+/* ---- hero headline rise on load ---- */
+(function(){ if(reduce)return; function go(){document.documentElement.classList.add('loaded');} var l=document.getElementById('loader'); if(!l){go();} window.addEventListener('load',go); setTimeout(go,2400); })();
+
+/* ---- gentle parallax on framed photos (desktop) ---- */
+(function(){
+  if(reduce||!window.gsap||!window.ScrollTrigger) return;
+  if(window.matchMedia && !matchMedia('(min-width:761px)').matches) return;
+  /* parallax scrubs removed for lighter scrolling: they recomputed a transform every scroll
+     frame (the hero one taxed the banner directly). The static images read fine without it. */
+})();
+
+/* ---- living hero: premium 6s video loop (desktop, motion-safe); static people poster elsewhere ---- */
+(function(){
+  var v=document.getElementById('heroVideo'); if(!v) return;
+  var red = (typeof reduce!=='undefined' && reduce) || matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var small = matchMedia('(max-width:760px)').matches;
+  var saveData = navigator.connection && navigator.connection.saveData;
+  if(red || small || saveData) return;                    // keep the static people poster
+  var hero=document.querySelector('.hero'), started=false;
+  function begin(){
+    if(started) return; started=true;
+    try{ v.src='assets/hero-pool.mp4?v=9'; v.load(); }catch(e){}
+    var p=v.play(); if(p&&p.catch) p.catch(function(){});   // autoplay blocked: poster stays
+  }
+  v.addEventListener('playing',function(){ v.classList.add('on'); });
+  function kick(){ setTimeout(begin,120); }                 // start early (behind the loader) so it is playing when the loader clears
+  if(document.readyState!=='loading') kick(); else addEventListener('DOMContentLoaded',kick);
+  addEventListener('load',begin);                           // and a guaranteed fallback on full load
+  document.addEventListener('visibilitychange',function(){ if(!document.hidden){ var p=v.play&&v.play(); if(p&&p.catch)p.catch(function(){}); } });
+  try{
+    var io=new IntersectionObserver(function(es){ es.forEach(function(e){
+      if(e.isIntersecting){ if(started){ var p=v.play(); if(p&&p.catch)p.catch(function(){}); } }
+      else { try{ v.pause(); }catch(x){} }
+    }); },{threshold:0.05});
+    io.observe(hero);
+  }catch(e){}
+})();
+
+/* ---- estate reel: horizontal parallax slide + land-contour drift (all widths) ---- */
+(function(){
+  if(reduce||!window.gsap||!window.ScrollTrigger) return;
+  gsap.registerPlugin(ScrollTrigger);
+  var track=document.getElementById('reelTrack'), reel=document.getElementById('reel');
+  if(track&&reel){
+    var over=function(){ return Math.max(0, track.scrollWidth - window.innerWidth); };
+    gsap.fromTo(track,
+      {x:function(){ return Math.min(over()*0.12, 90); }},
+      {x:function(){ return -Math.min(over()*0.6, window.innerWidth*1.5); }, ease:'none',
+       scrollTrigger:{trigger:reel,start:'top bottom',end:'bottom top',scrub:0.6,invalidateOnRefresh:true}});
+  }
+  /* the land contours drift slowly, a touch faster than the page: depth without motion sickness */
+  gsap.utils.toArray('.contours').forEach(function(c){
+    var sec=c.parentElement;
+    gsap.fromTo(c,{yPercent:-7,xPercent:-2},{yPercent:7,xPercent:2,ease:'none',
+      scrollTrigger:{trigger:sec,start:'top bottom',end:'bottom top',scrub:1.1,invalidateOnRefresh:true}});
+  });
+})();
+</script>
+
+<!-- ribbon + footer diorama -->
+<script>
+/* waving DEMO BY BRAND METHOD.CO ribbon */
+(function(){
+  var cv=document.getElementById('ribCv'),fb=document.querySelector('.ribbon-fb'),ctx;
+  try{ctx=cv&&cv.getContext('2d');}catch(e){}
+  if(!ctx){if(cv)cv.style.display='none';if(fb)fb.hidden=false;return;}
+  var W=460,H=110,dpr=Math.min(devicePixelRatio||1,2),X0=40,X1=420,BH=32,BY=40,running=false,looping=false,t=0;
+  cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
+  var SEGS=[{t:'DEMO BY',sp:3.6,gap:8},{star:true,w:13,gap:9},{t:'BRAND',sp:3.6},{t:'METHOD.CO',sp:3.6}],G=null;
+  function build(){G=[];SEGS.forEach(function(s){if(s.star){G.push({star:true,w:s.w});if(s.gap)G.push({gap:s.gap});return;}ctx.font='600 12px "General Sans",sans-serif';for(var i=0;i<s.t.length;i++){var ch=s.t[i];if(ch===' '){G.push({gap:6.5});continue;}G.push({ch:ch,w:ctx.measureText(ch).width+s.sp});}if(s.gap)G.push({gap:s.gap});});}
+  function wave(x,tt){return 4*Math.sin(x*0.0135+tt*0.0011)+2.4*Math.sin(x*0.029-tt*0.00068)+1.2*Math.sin(x*0.055+tt*0.0016);}
+  function slope(x,tt){return (wave(x+2,tt)-wave(x-2,tt))/4;}
+  function shade(p){var r=Math.round(18+68*p),g=Math.round(28+88*p),b=Math.round(158+97*p);return 'rgb('+r+','+g+','+b+')';}
+  function tail(xe,dir,tt){var y=BY+wave(xe,tt)*0.7+9,x2=xe-dir*40;ctx.beginPath();ctx.moveTo(xe,y);ctx.lineTo(x2,y+7);ctx.lineTo(x2+dir*13,y+7+BH/2);ctx.lineTo(x2,y+7+BH);ctx.lineTo(xe,y+BH);ctx.closePath();ctx.fillStyle='#101C96';ctx.fill();ctx.fillStyle='rgba(0,0,0,.22)';ctx.fill();}
+  function draw(tt){if(!G)build();ctx.clearRect(0,0,W,H);tail(X0+6,1,tt);tail(X1-6,-1,tt);
+    for(var x=X0;x<=X1;x+=2){var y=BY+wave(x,tt),s=slope(x,tt),p=Math.max(0,Math.min(1,0.52+s*5.5+0.14*Math.sin(x*0.006-tt*0.00042)));ctx.fillStyle=shade(p);ctx.fillRect(x-1,y,2.4,BH);}
+    ctx.textAlign='left';ctx.textBaseline='middle';var total=0;G.forEach(function(g){total+=g.w||g.gap||0;});var xs=(X0+X1)/2-total/2;
+    G.forEach(function(g){if(g.gap){xs+=g.gap;return;}var cx=xs+(g.w||0)/2,y=BY+wave(cx,tt)+BH/2+0.5,a=Math.atan(slope(cx,tt));ctx.save();ctx.translate(cx,y);ctx.rotate(a);
+      if(g.star){ctx.strokeStyle='rgba(255,255,255,.97)';ctx.lineWidth=1.5;ctx.lineCap='round';for(var sp=0;sp<4;sp++){var an=sp*Math.PI/4;ctx.beginPath();ctx.moveTo(-Math.cos(an)*4.6,-Math.sin(an)*4.6);ctx.lineTo(Math.cos(an)*4.6,Math.sin(an)*4.6);ctx.stroke();}}
+      else{ctx.font='600 12px "General Sans",sans-serif';ctx.fillStyle='rgba(2,8,40,.4)';ctx.fillText(g.ch,-((g.w||0)/2)+0.7,1.1);ctx.fillStyle='#fff';ctx.fillText(g.ch,-((g.w||0)/2),0);}
+      ctx.restore();xs+=g.w||0;});}
+  function frame(){if(!running){looping=false;return;}looping=true;t+=16;draw(t);requestAnimationFrame(frame);}
+  draw(0);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){G=null;draw(t);});
+  if(reduce)return;
+  if(window.IntersectionObserver){new IntersectionObserver(function(es){es.forEach(function(en){running=en.isIntersecting;if(running&&!looping)requestAnimationFrame(frame);});}).observe(cv);}else{running=true;requestAnimationFrame(frame);}
+})();
+
+/* footer pickleball loop: lazy-load, play only while on-screen, subtle pointer parallax */
+(function(){
+  var host=document.querySelector('.diorama'), vid=document.getElementById('dioVid'); if(!host||!vid) return;
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches;
+  if(reduce) return; /* poster frame stays, no autoplay */
+  var started=false;
+  function start(){ if(started) return; started=true; try{ vid.src='assets/pickleball.mp4'; vid.load(); }catch(e){} }
+  try{
+    var io=new IntersectionObserver(function(es){ es.forEach(function(e){
+      if(e.isIntersecting){ start(); var p=vid.play(); if(p&&p.catch)p.catch(function(){}); }
+      else { try{ vid.pause(); }catch(x){} }
+    }); },{threshold:0.2});
+    io.observe(host);
+  }catch(e){ start(); var p=vid.play&&vid.play(); if(p&&p.catch)p.catch(function(){}); }
+  vid.addEventListener('error',function(){ vid.style.display='none'; }); /* poster shows through on failure */
+  /* subtle depth: the frame eases toward the pointer, over-scanned so no edge shows */
+  if(window.matchMedia&&matchMedia('(hover:hover) and (pointer:fine)').matches){
+    var tx=0,ty=0,cx=0,cy=0,raf=null;
+    vid.style.transform='scale(1.06)';
+    function loop(){ cx+=(tx-cx)*0.06; cy+=(ty-cy)*0.06; vid.style.transform='scale(1.06) translate('+cx.toFixed(2)+'%,'+cy.toFixed(2)+'%)'; if(Math.abs(tx-cx)>0.01||Math.abs(ty-cy)>0.01){raf=requestAnimationFrame(loop);}else{raf=null;} }
+    host.addEventListener('pointermove',function(ev){ var r=host.getBoundingClientRect(); tx=((ev.clientX-r.left)/r.width-0.5)*-2.2; ty=((ev.clientY-r.top)/r.height-0.5)*-1.4; if(!raf)raf=requestAnimationFrame(loop); },{passive:true});
+    host.addEventListener('pointerleave',function(){ tx=0; ty=0; if(!raf)raf=requestAnimationFrame(loop); });
+  }
+})();
+</script>
+<script>
+/* custom cursor + picture hover (ulrychkristian-style) */
+(function(){
+  if(!window.matchMedia||!matchMedia('(hover:hover) and (pointer:fine)').matches)return;
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  var ring=document.createElement('div');ring.className='cur';ring.innerHTML='<div class="cur-ring"><span class="cur-label">View</span></div>';
+  var dot=document.createElement('div');dot.className='cur-dot';
+  document.body.appendChild(ring);document.body.appendChild(dot);
+  var label=ring.querySelector('.cur-label'),root=document.documentElement;
+  root.classList.add('cursor-on');
+  var mx=innerWidth/2,my=innerHeight/2,rx=mx,ry=my,curRaf=null;
+  function loop(){rx+=(mx-rx)*0.2;ry+=(my-ry)*0.2;ring.style.transform='translate('+rx+'px,'+ry+'px) translate(-50%,-50%)';if(Math.abs(mx-rx)>0.3||Math.abs(my-ry)>0.3){curRaf=requestAnimationFrame(loop);}else{curRaf=null;}}
+  addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;dot.style.transform='translate('+mx+'px,'+my+'px) translate(-50%,-50%)';if(!curRaf)curRaf=requestAnimationFrame(loop);},{passive:true});
+  var views=[['.door','Enter'],['.tile','View'],['.offer-img','See offer'],['.reel-fig','View'],['.qs-rec-img','Book']];
+  function viewInfo(t){if(!t.closest)return null;for(var i=0;i<views.length;i++){if(t.closest(views[i][0]))return views[i][1];}return null;}
+  var linkSel='a,button,input,select,textarea,label,[role="button"],.epin,summary';
+  addEventListener('mouseover',function(e){var t=e.target,v=viewInfo(t);if(v){root.classList.add('cur-view');root.classList.remove('cur-link');label.textContent=v;}else if(t.closest&&t.closest(linkSel)){root.classList.add('cur-link');root.classList.remove('cur-view');}else{root.classList.remove('cur-view','cur-link');}});
+  document.addEventListener('mouseleave',function(){root.classList.add('cur-hidden');});
+  document.addEventListener('mouseenter',function(){root.classList.remove('cur-hidden');});
+  ['.offer-img','.reel-fig'].forEach(function(s){document.querySelectorAll(s).forEach(function(el){el.classList.add('hovpic');});});
+})();
+</script>
+</body>
+</html>
