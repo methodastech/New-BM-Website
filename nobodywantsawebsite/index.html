@@ -212,6 +212,7 @@
 #sales-overlay .sp-head{max-width:660px;margin-bottom:34px;}
 #sales-overlay .sp-head.center{margin-left:auto;margin-right:auto;text-align:center;}
 #sales-overlay .sp-head p{font-size:16.5px;color:var(--ink-soft);margin:0;}
+#sales-overlay .sp-head.sp-head-w2{max-width:840px;}
 #sales-overlay .sp-dark{background:radial-gradient(700px 460px at 80% 0%, rgba(37,54,245,.22), transparent 60%), linear-gradient(165deg,#0f1330 0%,#0a0c22 60%,#070512 100%);color:#fff;}
 #sales-overlay .sp-dark h2{color:#fff;}
 #sales-overlay .sp-dark .sp-eyebrow{color:#9aa3ff;}
@@ -1428,8 +1429,12 @@
     return {name:'Growth that compounds itself',desc:'',base:b,flat:true,anim:anim,reset:function(){st.ang=0;st.vel=0.0003;st.push=1100;st.active=0;st.nt=0;},st:st,NODES:NODES,R:R};}
   function init(THREE){
     if(THREE.ColorManagement)THREE.ColorManagement.enabled=false;
-    var renderer=new THREE.WebGLRenderer({canvas:canvas,antialias:true,alpha:true,powerPreference:'high-performance'});
+    var renderer=new THREE.WebGLRenderer({canvas:canvas,antialias:true,alpha:true});
     renderer.setClearColor(0x000000,0);var PR=Math.min(window.devicePixelRatio||1,2);renderer.setPixelRatio(PR);
+    /* If the browser drops this canvas's GPU context (driver hiccup, GPU switch, memory pressure),
+       recover automatically instead of leaving the hero permanently blank. */
+    canvas.addEventListener('webglcontextlost',function(e){ e.preventDefault(); if(typeof raf!=='undefined'&&raf){ cancelAnimationFrame(raf); raf=null; } },false);
+    canvas.addEventListener('webglcontextrestored',function(){ setTimeout(function(){ try{ load(0); }catch(_){} },80); },false);
     var scene=new THREE.Scene(),camera=new THREE.PerspectiveCamera(50,1,0.1,100);camera.position.z=5.45;
     function buildBars(){var b=mkArr(),k=0,i,j,o;
       var yb=-1.35,bw=0.30,xs=[-1.75,-0.9,-0.05,0.8,1.65],hts=[0.55,0.95,1.45,1.95,2.55];
@@ -1502,7 +1507,7 @@
     </div>
 
     <section class="sp-dark sp-fear"><canvas class="sp-fear-cv" aria-hidden="true"></canvas><div class="sp-wrap">
-      <div class="sp-head center"><span class="sp-eyebrow">Sound familiar?</span><h2>Right now, your site is quietly losing you money.</h2><p>Someone who wanted exactly what you sell landed on your site today. They read two lines, could not tell what to do next, and left. You never saw them, and you never will. That is the leak, and it runs every hour you keep paying for the traffic that feeds it.</p></div>
+      <div class="sp-head center"><span class="sp-eyebrow">Sound familiar?</span><h2>Right now, your site is quietly losing you money.</h2><p>Someone who wanted exactly what you sell landed on your site today. They read two lines, could not tell what to do next, and left. You never saw them, and you never will. That is the leak, and it runs every hour you pay for the traffic that feeds it.</p></div>
       <div class="sp-leakviz" role="img" aria-label="A top-down road. Paid traffic drives in from the left as blue cars. At a break in the road most cars veer off and are lost, shown with minus RM labels. Only some cars reach the right end as enquiries, marked plus RM.">
         <svg viewBox="0 0 640 192" xmlns="http://www.w3.org/2000/svg" focusable="false">
           <defs>
@@ -1611,7 +1616,7 @@
     <div class="sp-cta-row"><span class="sp-cta-lead">See exactly where yours is leaking.</span><button class="sp-btn sp-btn-primary sp-scroll" data-target="sp-book" type="button">Book your free 30-minute call <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
 
     <section class="sp-soft"><div class="sp-wrap">
-      <div class="sp-head center"><span class="sp-eyebrow">How it works</span><h2>Three steps to close the leak.</h2><p>You see where the money leaks on the first call, then we build the thing that catches it. No retainer to start, no six-month build, and each step ends in something you can measure.</p></div>
+      <div class="sp-head center sp-head-w2"><span class="sp-eyebrow">How it works</span><h2>Three steps to close the leak.</h2><p>You see where the money leaks on the first call, then we build the thing that catches it. No retainer to start, no six-month build, and each step ends in something you can measure.</p></div>
       <div class="sp-proc" id="spProc">
         <div class="sp-proc-track">
           <canvas class="sp-proc-cv" aria-hidden="true"></canvas>
@@ -3441,15 +3446,29 @@
           <h2>Book the call. We will show you the leak.</h2>
           <p>Pick a day and time that works. A focused 30-minute call. We map where leads slip through, put a number on what it costs you, and show you the fix. No deck, no pitch, no obligation.</p>
           <ul class="sp-bpts"><li>No pitch, no pressure</li><li>A senior person, not a junior</li><li>One clear next step to leave with</li></ul>
-          <p class="sp-bwa">Prefer to type? WhatsApp us: +60 12-282 6371</p>
+          <p class="sp-bwa">Prefer to type? WhatsApp us: +60 16-256 3030</p>
         </div>
         <div class="sp-bright">
           <div class="sp-bstep">1 &middot; Pick a day</div>
           <div class="sp-daterow" id="spDateRow"></div>
           <div class="sp-bstep">2 &middot; Pick a time</div>
           <div class="sp-timegrid" id="spTimeGrid"></div>
+          <div class="sp-bstep">3 &middot; Your details</div>
+          <div class="sp-bfields" style="display:grid;gap:10px;margin-bottom:20px;">
+            <input class="sp-lead-in" id="spBkName" type="text" placeholder="Name *" aria-label="Your name" required autocomplete="name">
+            <input class="sp-lead-in" id="spBkEmail" type="email" placeholder="Email *" aria-label="Email address" required autocomplete="email">
+            <input class="sp-lead-in" id="spBkPhone" type="tel" placeholder="Phone *" aria-label="Phone number" required autocomplete="tel" pattern="[0-9+\(\)\- ]{7,}">
+            <select class="sp-lead-in sp-lead-sel" id="spBkIntent" aria-label="What are you interested in" required>
+              <option value="" selected disabled>What are you interested in? *</option>
+              <option>A website</option>
+              <option>A web app</option>
+              <option>A game</option>
+              <option>Brand + website</option>
+              <option>Something else</option>
+            </select>
+          </div>
           <button class="sp-btn sp-btn-wa" id="spBookBtn" type="button">Select a day &amp; time <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-          <p class="sp-bhint">Confirms over WhatsApp. We lock it into the calendar and send a reminder.</p>
+          <p class="sp-bhint">We’ll email you to confirm the time and send a reminder.</p>
           <!-- To use a full scheduler (Calendly / Cal.com / Google Appointments), paste its embed here and hide the picker above. -->
         </div>
       </div>
@@ -4129,7 +4148,7 @@
         <div class="sp-lead-row">
           <input class="sp-lead-in" id="spLeadName" type="text" name="name" placeholder="Name *" aria-label="Your name" required autocomplete="name">
           <input class="sp-lead-in" id="spLeadEmail" type="email" name="email" placeholder="Email *" aria-label="Email address" required autocomplete="email">
-          <input class="sp-lead-in" id="spLeadPhone" type="tel" name="phone" placeholder="Phone *" aria-label="Phone number" required autocomplete="tel" pattern="[0-9+()\- ]{7,}">
+          <input class="sp-lead-in" id="spLeadPhone" type="tel" name="phone" placeholder="Phone *" aria-label="Phone number" required autocomplete="tel" pattern="[0-9+\(\)\- ]{7,}">
           <select class="sp-lead-in sp-lead-sel" id="spLeadIntent" name="interest" aria-label="What are you interested in" required>
             <option value="" selected disabled>What are you interested in? *</option>
             <option>A website</option>
@@ -4141,7 +4160,7 @@
         </div>
         <div class="sp-lead-actions">
           <button class="sp-btn sp-btn-lime" type="submit">Book my free call</button>
-          <a class="sp-btn sp-btn-waghost" href="https://wa.me/60122826371?text=Hi%20Brand%20Method%2C%20I%27d%20like%20the%20free%2030-minute%20call." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.5 1.3 5L2 22l5.1-1.3c1.5.8 3.1 1.3 4.9 1.3 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.6 0-3.2-.4-4.5-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.6-6.1c-.25-.13-1.47-.73-1.7-.81-.23-.08-.39-.13-.56.12-.17.25-.64.81-.79.98-.14.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.24-.74-.66-1.24-1.48-1.39-1.73-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.44.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.12-.56-1.36-.77-1.86-.2-.48-.41-.42-.56-.42h-.48c-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.08s.9 2.42 1.02 2.59c.12.17 1.76 2.68 4.25 3.76.59.26 1.06.41 1.42.52.6.19 1.14.16 1.57.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.08.15-1.19-.06-.1-.23-.17-.48-.29z"/></svg>WhatsApp us</a>
+          <a class="sp-btn sp-btn-waghost" href="https://wa.me/60162563030?text=Hi%20Brand%20Method%2C%20I%27d%20like%20the%20free%2030-minute%20call." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.5 1.3 5L2 22l5.1-1.3c1.5.8 3.1 1.3 4.9 1.3 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.6 0-3.2-.4-4.5-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.6-6.1c-.25-.13-1.47-.73-1.7-.81-.23-.08-.39-.13-.56.12-.17.25-.64.81-.79.98-.14.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.24-.74-.66-1.24-1.48-1.39-1.73-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.44.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.12-.56-1.36-.77-1.86-.2-.48-.41-.42-.56-.42h-.48c-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.08s.9 2.42 1.02 2.59c.12.17 1.76 2.68 4.25 3.76.59.26 1.06.41 1.42.52.6.19 1.14.16 1.57.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.08.15-1.19-.06-.1-.23-.17-.48-.29z"/></svg>WhatsApp us</a>
         </div>
         <p class="sp-lead-note" id="spLeadNote">Takes 20 seconds. We confirm everything over WhatsApp.</p>
       </form>
@@ -4179,7 +4198,7 @@
   [nm,em,ph].forEach(function(el){ if(el) el.addEventListener('input',function(){ mark(el,false); }); });
   if(it) it.addEventListener('change',function(){ mark(it,false); it.classList.add('sp-filled'); });
   function openWa(msg){
-    var url='https://wa.me/60122826371?text='+encodeURIComponent(msg);
+    var url='https://wa.me/60162563030?text='+encodeURIComponent(msg);
     if(note) note.textContent='Opening WhatsApp to confirm\u2026';
     var w=null; try{ w=window.open(url,'_blank','noopener'); }catch(_){ }
     if(!w) location.href=url;
@@ -4190,11 +4209,26 @@
       +(ph.value?'\nPhone: '+ph.value.trim():'')
       +(it.value?'\nInterested in: '+it.value:'');
   }
+  /* Email the lead to us via FormSubmit so it's captured even if they never finish WhatsApp. */
+  function emailLead(){
+    try{
+      var fd=new FormData();
+      fd.append('Name', nm.value.trim());
+      fd.append('Email', em.value.trim());
+      fd.append('Phone', ph.value.trim());
+      fd.append('Interested in', it.value);
+      fd.append('_subject','New free-call booking \u2014 sales page');
+      fd.append('_template','table');
+      fd.append('_captcha','false');
+      fetch('https://formsubmit.co/ajax/bazil@brandmethod.co',{method:'POST',body:fd,headers:{Accept:'application/json'}}).catch(function(){});
+    }catch(_){}
+  }
   f.addEventListener('submit',function(e){
     e.preventDefault();
     var badE=!em.value||em.validity.typeMismatch, badP=!ph.value||ph.validity.patternMismatch, badI=!it.value;
     mark(em,badE); mark(ph,badP); mark(it,badI);
     if(badE||badP||badI){ if(note) note.textContent='Add a valid email, phone and what you\u2019re interested in.'; (badE?em:badP?ph:it).focus(); return; }
+    emailLead();
     openWa('Hi Brand Method, I\u2019d like the free 30-minute call.'+details());
   });
   if(wa) wa.addEventListener('click',function(e){
@@ -4212,7 +4246,7 @@
    email: e.g. 'hello@brandmethod.co'
    Empty value = that button stays hidden. Book a call always works (scrolls to booking). */
 (function(){
-  var C={whatsapp:'60122826371',email:''};
+  var C={whatsapp:'60162563030',email:''};
   var wa=document.getElementById('bmFootWa'),em=document.getElementById('bmFootMail');
   if(wa){ if(C.whatsapp){wa.href='https://wa.me/'+C.whatsapp;} else {wa.style.display='none';} }
   if(em){ if(C.email){em.href='mailto:'+C.email;} else {em.style.display='none';} }
@@ -4510,7 +4544,7 @@
   } else { rvEls.forEach(function(el){ el.classList.add('in'); }); }
 
   /* booking picker */
-  var WA='60122826371';
+  var WA='60162563030';
   var dows=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'], mons=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   var selDate=null, selTime=null;
   var dateRow=document.getElementById('spDateRow'), timeGrid=document.getElementById('spTimeGrid'), btn=document.getElementById('spBookBtn');
@@ -4529,7 +4563,32 @@
     timeGrid.appendChild(s);
   });
   function upd(){ if(selDate&&selTime){ btn.classList.add('on'); btn.firstChild.textContent='Book '+selDate+' at '+selTime+'  '; } else { btn.classList.remove('on'); btn.firstChild.textContent='Pick a '+(selDate?'time':'day')+'  '; } }
-  btn.addEventListener('click',function(){ if(!(selDate&&selTime)) return; var msg='Hi Brand Method! I\u2019d like to book a free 30-minute strategy call on '+selDate+' at '+selTime+'. (Sent from the sales page.)'; window.open('https://wa.me/'+WA+'?text='+encodeURIComponent(msg),'_blank'); });
+  var bkName=document.getElementById('spBkName'),bkEmail=document.getElementById('spBkEmail'),bkPhone=document.getElementById('spBkPhone'),bkIntent=document.getElementById('spBkIntent');
+  var bhint=btn.parentNode.querySelector('.sp-bhint');
+  function bkMark(el,bad){ if(el) el.classList[bad?'add':'remove']('sp-lead-err'); }
+  [bkName,bkEmail,bkPhone].forEach(function(el){ if(el) el.addEventListener('input',function(){ bkMark(el,false); }); });
+  if(bkIntent) bkIntent.addEventListener('change',function(){ bkMark(bkIntent,false); });
+  /* email the booking to us via FormSubmit \u2014 this is the actual submit action */
+  function bkEmailLead(){ var fd=new FormData();
+    fd.append('Name',bkName.value.trim()); fd.append('Email',bkEmail.value.trim()); fd.append('Phone',bkPhone.value.trim());
+    fd.append('Interested in',bkIntent.value); fd.append('Preferred slot',(selDate||'')+' at '+(selTime||''));
+    fd.append('_subject','New call booking \u2014 sales page'); fd.append('_template','table'); fd.append('_captcha','false');
+    return fetch('https://formsubmit.co/ajax/bazil@brandmethod.co',{method:'POST',body:fd,headers:{Accept:'application/json'}}); }
+  var bkSent=false;
+  btn.addEventListener('click',function(){
+    if(bkSent) return;
+    if(!(selDate&&selTime)){ if(bhint) bhint.textContent='Pick a day and time first.'; return; }
+    var badN=!bkName.value.trim(), badE=!bkEmail.value||bkEmail.validity.typeMismatch, badP=!bkPhone.value||bkPhone.validity.patternMismatch, badI=!bkIntent.value;
+    bkMark(bkName,badN); bkMark(bkEmail,badE); bkMark(bkPhone,badP); bkMark(bkIntent,badI);
+    if(badN||badE||badP||badI){ if(bhint) bhint.textContent='Add your name, email, phone and what you\u2019re interested in.'; (badN?bkName:badE?bkEmail:badP?bkPhone:bkIntent).focus(); return; }
+    btn.disabled=true; btn.firstChild.textContent='Sending\u2026  '; if(bhint) bhint.textContent='Sending your booking\u2026';
+    bkEmailLead().then(function(){
+      bkSent=true; btn.firstChild.textContent='Booked \u2713  ';
+      if(bhint) bhint.textContent='Thanks '+bkName.value.trim()+'! We\u2019ve got your request for '+selDate+' at '+selTime+' and will email you to confirm.';
+    }).catch(function(){
+      btn.disabled=false; btn.firstChild.textContent='Book '+selDate+' at '+selTime+'  ';
+      if(bhint) bhint.textContent='Could not send just now \u2014 please try again, or WhatsApp us.';
+    }); });
 })();
 </script>
 <script>(function(){var f=document.querySelector('.sp-fear');if(!f)return;f.classList.add('fearReady');var done=function(){f.classList.add('fearIn');};if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){for(var i=0;i<es.length;i++){if(es[i].isIntersecting){done();io.disconnect();break;}}},{threshold:.12});io.observe(f);}else{done();}})();</script>
@@ -5820,14 +5879,14 @@
   var URLS=['./assets/three.module.min.js','https://cdn.jsdelivr.net/npm/three@0.184.0/build/three.module.min.js','https://unpkg.com/three@0.184.0/build/three.module.min.js','https://esm.sh/three@0.184.0'];
   function init(THREE){
     if(THREE.ColorManagement) THREE.ColorManagement.enabled=false;
-    var renderer; try{ renderer=new THREE.WebGLRenderer({canvas:cv,alpha:true,antialias:true,powerPreference:'high-performance'}); }catch(e){ return; }
+    var renderer; try{ renderer=new THREE.WebGLRenderer({canvas:cv,alpha:true,antialias:true}); }catch(e){ return; }
     renderer.setClearColor(0x000000,0);
     renderer.shadowMap.enabled=true; renderer.shadowMap.type=THREE.PCFShadowMap;
     renderer.localClippingEnabled=true;
     var camera=new THREE.PerspectiveCamera(34,2.45,0.1,100); camera.position.set(0,0,8.2);
     var OBJ_Z=0; /* in portrait the play plane sits behind the pedestal so items don't clip through it */
     var NARROW=window.innerWidth<=700;
-    var DPR=Math.min(window.devicePixelRatio||1,(window.innerWidth>900?1.5:1.75));
+    var DPR=Math.min(window.devicePixelRatio||1,(window.innerWidth>900?1.25:1.5));
     function size(){ var r=cv.getBoundingClientRect(); var w=Math.max(2,Math.round(r.width)), h=Math.max(2,Math.round(r.height));
       renderer.setPixelRatio(DPR); renderer.setSize(w,h,false); camera.aspect=w/h; camera.updateProjectionMatrix(); OBJ_Z=(camera.aspect<0.95)?-0.95:0; }
     size();
@@ -5835,8 +5894,8 @@
     scene.add(new THREE.AmbientLight(0xffffff,0.22));
     scene.add(new THREE.HemisphereLight(0xdfe6ff,0x0d1330,0.55));
     var key=new THREE.DirectionalLight(0xffffff,2.0); key.position.set(3.5,5,5.5);
-    key.castShadow=true; key.shadow.mapSize.set(NARROW?512:1024,NARROW?512:1024); key.shadow.camera.near=1; key.shadow.camera.far=24;
-    key.shadow.camera.left=-9; key.shadow.camera.right=9; key.shadow.camera.top=7; key.shadow.camera.bottom=-4; key.shadow.radius=5;
+    key.castShadow=true; key.shadow.mapSize.set(512,512); key.shadow.camera.near=1; key.shadow.camera.far=24;
+    key.shadow.camera.left=-9; key.shadow.camera.right=9; key.shadow.camera.top=7; key.shadow.camera.bottom=-4; key.shadow.radius=3;
     scene.add(key);
     var fill=new THREE.DirectionalLight(0xb9c4ff,0.5); fill.position.set(-4,-2,3); scene.add(fill);
     var rim=new THREE.DirectionalLight(0x8f99ff,0.85); rim.position.set(-3.5,2.5,-4); scene.add(rim);
@@ -6765,7 +6824,7 @@ function ambUnduck(secs){ var c=ac(); if(!c) return; var now=c.currentTime;
           var src9=cc.material, cl9=mCache[src9.uuid];
           if(!cl9){ cl9=src9.clone(); cl9.clippingPlanes=[plane]; cl9.clipShadows=true; mCache[src9.uuid]=cl9; mats.push(cl9); }
           cc.material=cl9; } });
-        if(piece.children[0]&&piece.children[0].isMesh) piece.children[0].castShadow=true;
+        /* cut halves are airborne <2s — skip shadow casting to keep the slice frame smooth */
         grp.add(piece);
         var cap=new THREE.Mesh(capGeo,new THREE.MeshStandardMaterial({map:capTex(o.type==='gold'),roughness:0.55,metalness:0.35,side:THREE.DoubleSide}));
         mats.push(cap.material);
