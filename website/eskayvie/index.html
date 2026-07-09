@@ -493,7 +493,7 @@ video.cap-brain{background:transparent;-webkit-mask-image:radial-gradient(closes
 .dark .lead{color:rgba(255,255,255,.7)}
 .dark .neural{top:-15%;right:-8%;width:45%;opacity:.25}
 #opportunity{overflow-x:clip}
-.tiers{display:flex;gap:1.1rem;margin-top:1rem;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding-top:2rem;padding-bottom:2rem;scrollbar-width:none;   /* vertical padding so the hover lift/tilt isn't clipped by the scroll rail (overflow-x:auto forces overflow-y to clip) */
+.tiers{display:flex;gap:1.1rem;margin-top:1rem;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;touch-action:pan-x;padding-top:2rem;padding-bottom:2rem;scrollbar-width:none;   /* touch-action:pan-x -> horizontal swipe scrolls the cards, vertical swipe scrolls the page (fixes swipe hijacking page scroll on phones) */   /* vertical padding so the hover lift/tilt isn't clipped by the scroll rail (overflow-x:auto forces overflow-y to clip) */
   margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);                          /* the rail runs edge to edge of the screen */
   --railpad:max(var(--pad),calc((100vw - var(--maxw))/2 + var(--pad)));               /* same viewport-based inset for padding AND snap, so card one aligns with the wrap exactly */
   padding-left:var(--railpad);padding-right:var(--railpad);scroll-padding-left:var(--railpad)}
@@ -1029,7 +1029,7 @@ body{scroll-padding-bottom:96px}
 .closecta::before{content:none}   /* removed the hard gold hairline that cut the top — section is a free canvas now */
 .cta-vidwrap{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none;-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 7%,#000 92%,transparent 100%);mask-image:linear-gradient(180deg,transparent 0,#000 7%,#000 92%,transparent 100%)}   /* soft top+bottom fade: the visual melts into the section instead of a boxed cut */
 .cta-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:60% 50%}   /* sharp quality loop (Higgsfield) with its own flowing light; object-x 60% slides the family group left toward centre */
-@media(max-width:600px){.cta-video{object-position:48% 46%}}   /* phone portrait: centre the main hugging pair instead of drifting right */
+@media(max-width:600px){.cta-video{object-position:52.5% 46%}}   /* phone portrait: 52.5% lands the hug pair (source centroid 51.8%) dead-centre — verified against live 375px container, overflowX 966px */
 @keyframes ctaKen{from{transform:scale(1.05)}to{transform:scale(1.13) translate(-1.6%,-1.1%)}}
 .cta-video-scrim{position:absolute;inset:0;z-index:0;pointer-events:none;background:
   linear-gradient(rgba(31,19,64,.14), rgba(31,19,64,.14)),
@@ -1242,7 +1242,7 @@ body{scroll-padding-bottom:96px}
   mix-blend-mode:soft-light}
 /* ===== studied-actives carousel: premium swipe cards with 3D tilt ===== */
 .ing-carousel{margin-top:clamp(2.5rem,5vw,4rem);position:relative}
-.ing-track{display:flex;gap:clamp(1rem,2vw,1.6rem);overflow-x:auto;scroll-snap-type:x mandatory;padding:1.2rem .3rem 1.6rem;margin:0 -.3rem;scrollbar-width:none;-webkit-overflow-scrolling:touch;perspective:1400px;cursor:grab}
+.ing-track{display:flex;gap:clamp(1rem,2vw,1.6rem);overflow-x:auto;scroll-snap-type:x mandatory;padding:1.2rem .3rem 1.6rem;margin:0 -.3rem;scrollbar-width:none;-webkit-overflow-scrolling:touch;touch-action:pan-x;perspective:1400px;cursor:grab}
 .ing-track::-webkit-scrollbar{display:none}
 .ing-track.dragging{cursor:grabbing;scroll-snap-type:none}
 .ing-track:focus-visible{outline:2px solid var(--violet);outline-offset:4px;border-radius:var(--r-lg)}
