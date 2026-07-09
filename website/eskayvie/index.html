@@ -149,7 +149,7 @@ header.scrolled{border-color:var(--hair)}
 .menu-toggle span{width:22px;height:2px;background:var(--ink);display:block;transition:.3s}
 
 /* ---------- hero ---------- */
-.hero{position:relative;min-height:clamp(560px,74vh,820px);display:flex;align-items:center;padding-top:clamp(3.5rem,8vw,6rem);padding-bottom:clamp(3rem,7vw,4.5rem);overflow:hidden;isolation:isolate}
+.hero{position:relative;min-height:clamp(600px,82vh,920px);display:flex;align-items:center;padding-top:clamp(3.5rem,8vw,6rem);padding-bottom:clamp(3rem,7vw,4.5rem);overflow:hidden;isolation:isolate}
 /* ---- live lifestyle banner: product on the table in front, family cooking behind ---- */
 .hero-bg{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
 .hb-parallax{position:absolute;inset:0}  /* fully static banner: no parallax overhang, no forced layer (scroll stays light) */
@@ -411,7 +411,19 @@ header.scrolled{border-color:var(--hair)}
 .fm-dots{display:flex;gap:.4rem;flex:0 0 auto}
 .fm-dots i{width:7px;height:7px;border-radius:50%;background:rgba(91,63,160,.2);transition:background .3s,transform .3s}
 .fm-dots i.on{background:var(--nc,var(--violet));transform:scale(1.25)}
-.cap-brain{width:min(320px,64%);height:auto;display:block;margin:0 auto .6rem;mix-blend-mode:multiply}   /* white-studio shot melts into the section background */
+.cap-visual{text-align:center}
+.cap-brainwrap{position:relative;display:flex;justify-content:center;align-items:center;isolation:isolate;margin:0 auto .3rem}
+.cap-brainwrap::before{content:"";position:absolute;inset:-10% -4% 2%;z-index:-1;pointer-events:none;background:radial-gradient(50% 46% at 50% 45%,rgba(123,95,192,.30) 0%,rgba(123,95,192,0) 62%),radial-gradient(34% 30% at 55% 41%,rgba(235,176,42,.20) 0%,rgba(235,176,42,0) 60%);filter:blur(5px);animation:brainAura 6.5s ease-in-out infinite}
+.cap-brain{width:min(440px,88%);height:auto;display:block;mix-blend-mode:multiply;will-change:transform}   /* white-studio shot melts into the section background */
+img.cap-brain{animation:brainFloat 7s ease-in-out infinite}   /* still image floats; the video already has its float baked in */
+video.cap-brain{background:transparent;-webkit-mask-image:radial-gradient(closest-side,#000 82%,transparent 99%);mask-image:radial-gradient(closest-side,#000 82%,transparent 99%)}   /* soft-fade the frame edge so H.264's near-white never reads as a box */
+@keyframes brainFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-13px)}}
+@keyframes brainAura{0%,100%{opacity:.5;transform:scale(.97)}50%{opacity:1;transform:scale(1.07)}}
+.cap-count{display:inline-block}
+.cap-count .cc-val{display:inline-block}
+.cap-count .cc-val.cc-bump{animation:ccBump .55s var(--ease-out)}
+@keyframes ccBump{0%,100%{transform:translateY(0);color:var(--violet)}35%{transform:translateY(-4px);color:#6A4CB4}}
+@media(prefers-reduced-motion:reduce){.cap-brain,.cap-brainwrap::before{animation:none}}
 .facts-row{cursor:pointer;transition:background .3s,padding-left .3s}
 .facts-row.lit{background:linear-gradient(90deg,rgba(91,63,160,.1),rgba(91,63,160,0) 70%);padding-left:.8rem;border-bottom-color:rgba(91,63,160,.35)}
 .fmap.off .fm-node,.fmap.off .fm-hub-core,.fmap.off .fm-hub-ring,.fmap.off .fm-line{animation-play-state:paused}
@@ -423,27 +435,29 @@ header.scrolled{border-color:var(--hair)}
 .neg-ico svg{width:18px;height:18px;display:block}
 
 /* ---------- big stat band ---------- */
-.band{background:var(--canvas)}
-.statrow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1.5rem;text-align:center}
-.statrow .s{display:flex;flex-direction:column;align-items:center}
-.stat-ico{width:52px;height:52px;flex:0 0 52px;margin-bottom:.85rem;border-radius:16px;display:flex;align-items:center;justify-content:center;background:linear-gradient(155deg,#EFE9FB,#E2D8F6);box-shadow:0 5px 16px rgba(26,20,38,.08),inset 0 0 0 1px rgba(91,63,160,.10)}
-.stat-ico svg{width:26px;height:26px;display:block}
-.statrow .s .stat-num{font-size:clamp(2.6rem,5.5vw,4rem);color:var(--violet)}
-.statrow .s .cap{font-size:.82rem;color:var(--ink-soft);margin-top:.5rem;text-transform:uppercase;letter-spacing:.08em}
+.band{background:var(--canvas);padding:clamp(2.75rem,6vw,5.5rem) 0}
+/* stat row: NO tile — bare icon beside the number; the GLYPH itself animates (a gold↔violet shimmer sweeps through the line-art) + a gentle in-place breathe */
+.statrow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(1rem,3vw,2rem);text-align:center}
+.statrow .s{display:flex;flex-direction:column;align-items:center;text-align:center}
+.stat-top{display:flex;align-items:center;justify-content:center;gap:clamp(.5rem,1vw,.85rem)}
+.stat-ico{width:clamp(46px,4.9vw,62px);aspect-ratio:1;flex:none;display:grid;place-items:center}
+.stat-ico svg{width:100%;height:100%;display:block;overflow:visible;filter:drop-shadow(0 4px 9px rgba(91,63,160,.24))}   /* each icon carries its own detailed colours + SMIL animation */
+.statrow .s:hover .stat-ico svg{filter:drop-shadow(0 6px 15px rgba(91,63,160,.42))}
+.statrow .s .stat-num{font-size:clamp(2.5rem,5vw,3.6rem);line-height:1}
+.statrow .s .stat-cap{font-size:.78rem;color:var(--ink-soft);margin-top:.7rem;text-transform:uppercase;letter-spacing:.1em;font-weight:600;line-height:1.35}
 
 /* ---------- timeline ---------- */
 .tl{position:relative;margin-top:3rem}
 .tl-curve svg{width:100%;height:auto;display:block}
 .tl-curve{position:relative;margin-bottom:-4px;padding-top:2.4rem}   /* headroom so the on-curve week markers never clip */
-.tl-mark{position:absolute;transform:translate(-50%,calc(-100% - 9px));display:inline-flex;align-items:center;gap:.34rem;white-space:nowrap;
-  font-family:var(--sans);font-weight:600;font-size:.72rem;letter-spacing:.01em;color:var(--ink);
-  padding:.26rem .62rem .26rem .3rem;border-radius:999px;background:#fff;box-shadow:0 7px 18px -7px rgba(60,40,110,.32),inset 0 0 0 1px rgba(91,63,160,.14)}
-.tl-mark .ci{width:19px;height:19px;border-radius:50%;display:grid;place-items:center;flex:none}
-.tl-mark .ci svg{width:12px;height:12px;display:block}
-.tl-mark.m1 .ci{background:rgba(91,63,160,.12)}
-.tl-mark.m2 .ci{background:rgba(62,99,196,.12)}
-.tl-mark.m3 .ci{background:rgba(47,143,78,.12)}
-@media(max-width:600px){.tl-curve{padding-top:2rem}.tl-mark{font-size:.66rem;padding:.22rem .5rem .22rem .26rem}.tl-mark .ci{width:17px;height:17px}}
+.tl-mark{position:absolute;transform:translate(-50%,calc(-100% - 10px));display:inline-flex;align-items:center;gap:.44rem;white-space:nowrap;
+  font-family:var(--sans);font-weight:700;font-size:.9rem;letter-spacing:.005em;
+  padding:.36rem .85rem;border-radius:999px;background:#fff;box-shadow:0 9px 22px -8px rgba(60,40,110,.4),inset 0 0 0 1px rgba(91,63,160,.1)}
+.tl-mark::before{content:"";width:9px;height:9px;border-radius:50%;flex:none;box-shadow:0 0 0 3px rgba(0,0,0,.035)}   /* phase dot instead of a repeated icon */
+.tl-mark.m1{color:var(--violet)} .tl-mark.m1::before{background:var(--violet)}
+.tl-mark.m2{color:#3E63C4} .tl-mark.m2::before{background:#3E63C4}
+.tl-mark.m3{color:var(--green)} .tl-mark.m3::before{background:var(--green)}
+@media(max-width:600px){.tl-curve{padding-top:2.2rem}.tl-mark{font-size:.82rem;padding:.32rem .72rem}}
 .tl-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2rem}
 .tl-step .w{font-family:var(--serif);font-size:1.6rem;color:var(--violet)}
 .tl-step p{font-size:.92rem;color:var(--ink-soft);margin-top:.4rem}
@@ -479,7 +493,7 @@ header.scrolled{border-color:var(--hair)}
 .dark .lead{color:rgba(255,255,255,.7)}
 .dark .neural{top:-15%;right:-8%;width:45%;opacity:.25}
 #opportunity{overflow-x:clip}
-.tiers{display:flex;gap:1.1rem;margin-top:3rem;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding-bottom:.6rem;scrollbar-width:none;
+.tiers{display:flex;gap:1.1rem;margin-top:1rem;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding-top:2rem;padding-bottom:2rem;scrollbar-width:none;   /* vertical padding so the hover lift/tilt isn't clipped by the scroll rail (overflow-x:auto forces overflow-y to clip) */
   margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);                          /* the rail runs edge to edge of the screen */
   --railpad:max(var(--pad),calc((100vw - var(--maxw))/2 + var(--pad)));               /* same viewport-based inset for padding AND snap, so card one aligns with the wrap exactly */
   padding-left:var(--railpad);padding-right:var(--railpad);scroll-padding-left:var(--railpad)}
@@ -495,8 +509,9 @@ header.scrolled{border-color:var(--hair)}
 .tier h3{font-size:1.3rem;margin:.8rem 0 .6rem}
 .tier p{font-size:.9rem;color:rgba(255,255,255,.66)}
 .tier .entry{margin-top:1.2rem;font-family:var(--sans);font-weight:600;font-size:1.05rem}
-.tier-photo{width:100%;height:180px;overflow:hidden;background:#1a1338;border-bottom:1px solid rgba(255,255,255,.08)}
-.tier-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 42%;display:block}
+.tier-photo{position:relative;width:100%;height:180px;overflow:hidden;background:#1a1338;border-bottom:1px solid rgba(255,255,255,.08)}
+.tier-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(23,18,33,0) 52%,rgba(23,18,33,.5));pointer-events:none}
+.tier-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 42%;display:block;transition:transform .6s var(--ease-out)}
 .tier-body{padding:1.5rem 1.8rem 1.9rem}
 
 /* ---------- email ---------- */
@@ -542,9 +557,8 @@ footer{background:var(--dark);color:rgba(255,255,255,.62);padding:clamp(3.5rem,7
   .ing-row .ing-media{order:0;max-height:420px}
   .range-row,.range-row.flip .media{grid-template-columns:1fr;order:0}
   .range-row .copy{order:2}
-  .statrow{grid-template-columns:repeat(2,minmax(0,1fr));gap:2.5rem 1rem}
-  .stat-ico{width:44px;height:44px;flex:0 0 44px;margin-bottom:.65rem}
-  .stat-ico svg{width:22px;height:22px}
+  .statrow{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:clamp(2rem,7vw,2.8rem);column-gap:1rem}
+  .stat-ico{width:clamp(58px,16vw,74px);margin-bottom:.85rem}
   .tl-steps{grid-template-columns:1fr}
   .foot-grid{grid-template-columns:1fr 1fr}
   .cat-grid{grid-template-columns:1fr 1fr}
@@ -754,8 +768,13 @@ header.scrolled{background:rgba(255,255,255,.82);border-color:rgba(230,228,236,.
 
 /* dark module: frosted-glass tiers, gold reappears where it glows */
 .dark{background:radial-gradient(140% 90% at 80% 0%,#241A38 0%,#171221 48%),#171221}
-.tier{background:linear-gradient(165deg,rgba(255,255,255,.07),rgba(255,255,255,.025)),linear-gradient(0deg,rgba(28,22,52,.5),rgba(28,22,52,.5));border:1px solid rgba(255,255,255,.1);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 20px 50px -30px rgba(0,0,0,.8);transition:transform .35s var(--ease-out),box-shadow .35s,border-color .35s}
-.tier:hover{transform:translateY(-5px);border-color:rgba(246,197,68,.45);box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 0 0 1px rgba(246,197,68,.2),0 30px 70px -34px rgba(110,79,204,.6),0 0 60px -20px rgba(110,79,204,.5)}
+.tier{position:relative;background:linear-gradient(165deg,rgba(255,255,255,.07),rgba(255,255,255,.025)),linear-gradient(0deg,rgba(28,22,52,.5),rgba(28,22,52,.5));border:1px solid rgba(255,255,255,.1);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 20px 50px -30px rgba(0,0,0,.8);transform:perspective(1100px) rotateX(var(--trx,0deg)) rotateY(var(--try,0deg)) translateY(var(--tty,0px));transform-origin:center;transition:transform .55s var(--ease-out),box-shadow .4s,border-color .4s;will-change:transform}
+.tier.tilt{--tty:-10px;transition:box-shadow .4s,border-color .4s}   /* follow cursor 1:1 while hovering, smooth ease-back on leave */
+.tier:hover{border-color:rgba(246,197,68,.5);box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 0 0 1px rgba(246,197,68,.24),0 44px 84px -34px rgba(110,79,204,.72),0 0 72px -18px rgba(110,79,204,.55)}
+.tier-glare{position:absolute;inset:0;z-index:4;pointer-events:none;border-radius:inherit;opacity:0;transition:opacity .35s var(--ease-out);background:radial-gradient(240px circle at var(--gx,50%) var(--gy,50%),rgba(255,255,255,.17),rgba(255,255,255,0) 60%)}
+.tier.tilt .tier-glare{opacity:1}
+.tier:hover .tier-photo img{transform:scale(1.07)}
+@media(prefers-reduced-motion:reduce){.tier{transform:none!important}}
 .tier .k{color:var(--gold-2)}
 .dark .eyebrow{color:var(--gold-2)}
 
@@ -1007,20 +1026,32 @@ body{scroll-padding-bottom:96px}
     radial-gradient(120% 130% at 50% -10%, #4A2E92 0%, #3A2470 42%, #2A1A55 72%, #1F1340 100%);
   padding-block:clamp(2.4rem,6vw,4rem)}   /* title rides high, rest of the copy anchored low (via .cta-inner flex + .cta-sub margin-top:auto), so the loved-ones' faces show through the middle of the video */
 @media(max-width:880px){.closecta{min-height:clamp(620px,92vh,820px);padding-top:clamp(2.2rem,7vw,3.2rem);padding-bottom:clamp(2.2rem,6vw,3.2rem)}}
-.closecta::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;z-index:2;pointer-events:none;
-  background:linear-gradient(90deg,rgba(246,197,68,0),rgba(246,197,68,.35),rgba(246,197,68,0))}
-.cta-vidwrap{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none}
-.cta-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%}   /* opaque: no per-frame alpha blend; the scrim's tint does the dimming */
+.closecta::before{content:none}   /* removed the hard gold hairline that cut the top — section is a free canvas now */
+.cta-vidwrap{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none;-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 7%,#000 92%,transparent 100%);mask-image:linear-gradient(180deg,transparent 0,#000 7%,#000 92%,transparent 100%)}   /* soft top+bottom fade: the visual melts into the section instead of a boxed cut */
+.cta-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:60% 50%}   /* sharp quality loop (Higgsfield) with its own flowing light; object-x 60% slides the family group left toward centre */
+@media(max-width:600px){.cta-video{object-position:48% 46%}}   /* phone portrait: centre the main hugging pair instead of drifting right */
+@keyframes ctaKen{from{transform:scale(1.05)}to{transform:scale(1.13) translate(-1.6%,-1.1%)}}
 .cta-video-scrim{position:absolute;inset:0;z-index:0;pointer-events:none;background:
   linear-gradient(rgba(31,19,64,.14), rgba(31,19,64,.14)),
   radial-gradient(92% 82% at 50% 42%, rgba(31,19,64,0) 0%, rgba(31,19,64,.18) 58%, rgba(31,19,64,.62) 100%),
   linear-gradient(180deg, rgba(31,19,64,.30) 0%, rgba(31,19,64,0) 24%, rgba(31,19,64,0) 60%, rgba(31,19,64,.66) 100%)}
-@media(prefers-reduced-motion:reduce){.cta-video{display:none}}
+@media(prefers-reduced-motion:reduce){.cta-video{animation:none}}
 .cta-aurora{position:absolute;inset:-20% -10%;z-index:0;pointer-events:none;opacity:.7}   /* static pre-soft glows: no blur filter, no drift animation */
 .cta-aurora .au{position:absolute;border-radius:50%}
 .au-1{width:46%;aspect-ratio:1;left:6%;top:8%;background:radial-gradient(circle at 50% 50%,rgba(123,95,192,.55),rgba(123,95,192,0) 70%)}
 .au-2{width:40%;aspect-ratio:1;right:4%;top:18%;background:radial-gradient(circle at 50% 50%,rgba(47,143,78,.34),rgba(47,143,78,0) 70%)}
 .au-3{width:52%;aspect-ratio:1;left:24%;bottom:-18%;background:radial-gradient(circle at 50% 50%,rgba(246,197,68,.22),rgba(246,197,68,0) 68%)}
+/* flowing ethereal light: big soft glows drift across the sharp still (screen blend) — richer motion than the old static aurora */
+.cta-flow{position:absolute;inset:-18%;z-index:0;pointer-events:none;mix-blend-mode:screen;-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 20%,#000 84%,transparent 100%);mask-image:linear-gradient(180deg,transparent 0,#000 20%,#000 84%,transparent 100%)}   /* light drifts and fades out softly, never hard-cut by the box */
+.cta-flow span{position:absolute;border-radius:50%;filter:blur(58px);will-change:transform}
+.cta-flow span:nth-child(1){width:54%;aspect-ratio:1.5;left:-8%;top:6%;background:radial-gradient(circle,rgba(150,120,240,.75),rgba(150,120,240,0) 62%);animation:ctaFlow1 19s ease-in-out infinite alternate}
+.cta-flow span:nth-child(2){width:48%;aspect-ratio:1.4;right:-6%;top:22%;background:radial-gradient(circle,rgba(96,140,255,.62),rgba(96,140,255,0) 62%);animation:ctaFlow2 25s ease-in-out infinite alternate}
+.cta-flow span:nth-child(3){width:62%;aspect-ratio:1.3;left:18%;bottom:-16%;background:radial-gradient(circle,rgba(190,160,255,.42),rgba(190,160,255,0) 66%);animation:ctaFlow3 31s ease-in-out infinite alternate}
+@keyframes ctaFlow1{from{transform:translate(0,0) scale(1)}to{transform:translate(38%,15%) scale(1.16)}}
+@keyframes ctaFlow2{from{transform:translate(0,0) scale(1)}to{transform:translate(-34%,-17%) scale(1.22)}}
+@keyframes ctaFlow3{from{transform:translate(0,0) scale(1)}to{transform:translate(22%,-11%) scale(1.12)}}
+@media(prefers-reduced-motion:reduce){.cta-flow span{animation:none}}
+.closecta.anim-off .cta-video,.closecta.anim-off .cta-flow span{animation-play-state:paused}   /* pause the drift + blur/blend compositing while the section is off-screen (keeps scroll light) */
 .cta-leaves{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
 .cta-leaves .lf{position:absolute;width:20px;height:20px;color:rgba(154,222,178,.22);will-change:transform,opacity;opacity:0;filter:drop-shadow(0 2px 6px rgba(0,0,0,.18))}
 .lf-1{left:16%;animation:ctaLeaf 17s linear infinite}
@@ -1085,7 +1116,7 @@ body{scroll-padding-bottom:96px}
 .ftr-aurora{position:absolute;border-radius:50%;opacity:.5}   /* pre-soft radial gradients: no blur filter to rasterize */
 .ftr-aurora--v{top:-22%;left:-8%;width:46vmax;height:46vmax;background:radial-gradient(circle,rgba(123,95,192,.85),rgba(123,95,192,0) 66%);animation:ftrDriftA 26s var(--ease-out) infinite alternate}
 .ftr-aurora--g{bottom:-30%;right:-6%;width:40vmax;height:40vmax;background:radial-gradient(circle,rgba(52,163,92,.62),rgba(52,163,92,0) 66%);animation:ftrDriftB 32s var(--ease-out) infinite alternate}
-.ftr-aurora--gold{top:18%;right:24%;width:24vmax;height:24vmax;opacity:.28;background:radial-gradient(circle,rgba(246,197,68,.6),rgba(246,197,68,0) 64%);animation:ftrDriftC 38s var(--ease-out) infinite alternate}
+.ftr-aurora--gold{top:4%;right:10%;width:40vmax;height:40vmax;opacity:.16;background:radial-gradient(circle,rgba(246,197,68,.5) 0%,rgba(246,197,68,.22) 32%,rgba(246,197,68,.07) 55%,rgba(246,197,68,0) 76%);animation:ftrDriftC 38s var(--ease-out) infinite alternate}   /* bigger, dimmer, long soft tail so the warm light melts into the dark instead of reading as a disc */
 /* 3D "cloth of life" particle wave */
 .ftr-cloth{position:absolute;inset:0;z-index:0;width:100%;height:100%;pointer-events:none;opacity:.6;
   -webkit-mask-image:linear-gradient(to bottom,transparent 0,transparent 12%,rgba(0,0,0,.4) 32%,#000 62%,#000 100%);
@@ -1238,6 +1269,12 @@ body{scroll-padding-bottom:96px}
 .ing-arrow:hover{border-color:var(--violet);color:var(--violet);transform:translateY(-2px)}
 .ing-arrow:active{transform:translateY(0) scale(.94)}
 @media(hover:none){.ing-hint svg{display:inline}.ing-arrows{display:none}}
+/* desktop: all 3 actives fit — show them as a static 3-up grid, no swipe/arrows (carousel only kicks in on narrow screens) */
+@media(min-width:881px){
+  .ing-track{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));overflow:visible;scroll-snap-type:none;cursor:default;margin:0;padding:1.2rem .2rem 1.6rem}
+  .ing-card{flex:none;width:auto;scroll-snap-align:none}
+  .ing-nav{display:none}
+}
 @media(prefers-reduced-motion:reduce){.ing-card,.ing-cmedia img{transition:none}.ing-card.dx-tilt{transform:none!important}}
 /* footer brand sign-off: real Eskayvie logo, big, with breathing room */
 .ftr-signoff{margin:clamp(2.2rem,4.6vw,3.8rem) 0;padding:0;border-top:0;display:flex;flex-direction:column;align-items:center;gap:clamp(1.3rem,2.8vw,2.1rem);text-align:center}
@@ -1471,7 +1508,7 @@ body{scroll-padding-bottom:96px}
   .v3d-jrbg{position:absolute;inset:0;z-index:0;pointer-events:none;opacity:0;transition:opacity .8s var(--ease-out);background:radial-gradient(120% 90% at 50% 52%, #2A64B5 0%, #1B4587 58%, #163A72 100%)}
   .view3d.jr .v3d-jrbg{opacity:1}
   /* FREE the 3D at ALL sizes: the canvas fills the WHOLE section and floats OVER the heading, so tablets can leap up and cover the title UNCUT. The heading sits BEHIND the transparent canvas and is pointer-events:none so drags reach the canvas (it has no links). */
-  #view3d{min-height:clamp(660px,90vh,980px);overflow:hidden}
+  #view3d{min-height:clamp(800px,108vh,1080px);overflow:hidden}   /* fuller section so the copy and the bottle aren't cramped on laptop-height screens (owner wanted more spacing under the copy); capped so tall screens don't open too big a gap */
   #view3d .view3d-head{position:relative;z-index:1;pointer-events:none}
   #view3d .view3d-stage{position:absolute;inset:0;width:100%;height:auto;margin:0;z-index:3}
   #view3d .stage-hint{z-index:5}
@@ -1536,11 +1573,15 @@ body{scroll-padding-bottom:96px}
     var img=document.getElementById('owlImg');
     var FALL_MS=2700, CLIMB_MS=1680, riseT;               // fall ~2.66s (pushed; cap floats then drifts off); climb v24 = 1.57s (tail hand-lift slowed to 110ms/frame) then swap to loop
     // ---- cute owl voice: climb / wave / fall. Unlocked on the first user gesture (web-autoplay-safe) so it never blares on load ----
-    var SFX={}, sfxOn=false;
-    ['climb','wave','fall'].forEach(function(k){ var a=new Audio('assets/owl-'+k+'.mp3?v=22'); a.preload='auto'; a.volume=(k==='fall'?0.5:0.4); SFX[k]=a; });
-    function sfxUnlock(){ if(sfxOn) return; sfxOn=true; Object.keys(SFX).forEach(function(k){ var a=SFX[k]; try{ a.play().then(function(){ a.pause(); a.currentTime=0; }).catch(function(){}); }catch(e){} }); }
-    ['pointerdown','keydown','touchstart'].forEach(function(ev){ addEventListener(ev, sfxUnlock, {once:true, passive:true}); });
-    function playSfx(k){ if(!sfxOn||!SFX[k]) return; try{ SFX[k].currentTime=0; SFX[k].play().catch(function(){}); }catch(e){} }
+    var SFX={}, sfxOn=false, VOL={climb:0.85,wave:0.85,fall:0.7};
+    ['climb','wave','fall'].forEach(function(k){ var a=new Audio('assets/owl-'+k+'.mp3?v=22'); a.preload='auto'; a.volume=VOL[k]; SFX[k]=a; });
+    // unlock audio SILENTLY on the first gesture (volume 0 prime of climb/wave only) — NO blip, NO greeting, so a click never triggers a stray/double owl sound. His voice plays only on his own actions: climb, wave, and fall (when you click him).
+    function sfxUnlock(){
+      if(sfxOn) return; sfxOn=true;
+      ['climb','wave'].forEach(function(k){ var a=SFX[k]; try{ a.volume=0; a.play().then(function(){ a.pause(); a.currentTime=0; a.volume=VOL[k]; }).catch(function(){ a.volume=VOL[k]; }); }catch(e){ a.volume=VOL[k]; } });
+    }
+    ['pointerdown','mousedown','pointerup','touchstart','touchend','keydown','click'].forEach(function(ev){ addEventListener(ev, sfxUnlock, {passive:true}); });
+    function playSfx(k){ if(!SFX[k]||!sfxOn) return; try{ SFX[k].volume=VOL[k]; SFX[k].currentTime=0; SFX[k].play().catch(function(){}); }catch(e){} }
     var rising=false;
     var CLIMB_URL='assets/owl-climb.webp?v=24', WAVE_URL='assets/owl-peek.webp?v=31', FALL_URL='assets/owl-fall.webp?v=23';
     [CLIMB_URL,WAVE_URL,FALL_URL].forEach(function(u){ var p=new Image(); p.src=u; });   // warm the cache so a re-play never re-downloads (that reload was the flicker)
@@ -1600,11 +1641,13 @@ body{scroll-padding-bottom:96px}
     });
     peek.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); peek.click(); } });
     function visible(){ var r=sec.getBoundingClientRect(); return r.top<innerHeight*.75 && r.bottom>innerHeight*.25; }
+    // he climbs out only once you've scrolled about HALFWAY into his space (the section's mid-point has risen into the upper half of the screen), not the instant the section peeks in
+    function deepEnough(){ var r=sec.getBoundingClientRect(); return (r.top+r.height*0.5) < innerHeight*0.6 && r.bottom > innerHeight*0.25; }
     if('IntersectionObserver' in window){
-      new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting) setTimeout(rise,700); }); },{threshold:.35}).observe(sec);
+      new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting && deepEnough()) setTimeout(rise,300); }); },{threshold:.35}).observe(sec);
     }
-    var st; addEventListener('scroll',function(){ clearTimeout(st); st=setTimeout(function(){ if(visible()) rise(); },350); },{passive:true});
-    if(visible()) setTimeout(rise,1200);
+    var st; addEventListener('scroll',function(){ clearTimeout(st); st=setTimeout(function(){ if(deepEnough()) rise(); },300); },{passive:true});
+    if(deepEnough()) setTimeout(rise,1000);
   })();
   </script>
 </section>
@@ -1727,10 +1770,10 @@ body{scroll-padding-bottom:96px}
 <section class="band">
   <div class="wrap">
     <div class="statrow">
-      <div class="s reveal"><span class="stat-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#5B3FA0" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="8.5" cy="8.3" r="3"/><path d="M2.6 19c0-3 2.4-5.3 5.4-5.3s5.4 2.3 5.4 5.3"/><circle cx="16.2" cy="9.4" r="2.3"/><path d="M14.6 13.6c2.6.4 4.6 2.5 4.6 5"/></svg></span><div class="stat-num" data-count="100000" data-suffix="+">100,000+</div><div class="cap">Families served</div></div>
-      <div class="s reveal d1"><span class="stat-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#5B3FA0" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6.5-5.7-6.5-10.6A6.5 6.5 0 0 1 18.5 10.4C18.5 15.3 12 21 12 21z"/><circle cx="12" cy="10.2" r="2.4"/></svg></span><div class="stat-num" data-count="2009" data-plain="1">2009</div><div class="cap">Founded in Malaysia</div></div>
-      <div class="s reveal d2"><span class="stat-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#5B3FA0" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.2"/><path d="M3.8 12h16.4"/><path d="M12 3.8c2.4 2.3 3.8 5.1 3.8 8.2s-1.4 5.9-3.8 8.2c-2.4-2.3-3.8-5.1-3.8-8.2S9.6 6.1 12 3.8z"/></svg></span><div class="stat-num" data-count="4" data-suffix="">4</div><div class="cap">Markets across SEA</div></div>
-      <div class="s reveal d3"><span class="stat-ico" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#5B3FA0" d="M11 3.2c-1.5-.7-3.4-.4-4.5.8-.6.6-.9 1.4-.9 2.2-1 .3-1.8 1.1-2 2.2-.2 1 .1 2 .8 2.7-.5.8-.6 1.8-.2 2.7.4.9 1.2 1.5 2.1 1.7.1 1.2 1 2.2 2.2 2.5 1 .2 2-.1 2.7-.8V3.7c-.6-.3-1.3-.4-2-.5z"/><path fill="#7B5FC0" d="M13 3.2c1.5-.7 3.4-.4 4.5.8.6.6.9 1.4.9 2.2 1 .3 1.8 1.1 2 2.2.2 1-.1 2-.8 2.7.5.8.6 1.8.2 2.7-.4.9-1.2 1.5-2.1 1.7-.1 1.2-1 2.2-2.2 2.5-1 .2-2-.1-2.7-.8V3.7c.6-.3 1.3-.4 2-.5z"/></svg></span><div class="stat-num" data-count="6" data-suffix="">6</div><div class="cap">Named brain actives</div></div>
+      <div class="s reveal"><div class="stat-top"><span class="stat-ico" aria-hidden="true"><svg viewBox="0 0 40 40" fill="none"><g transform="translate(20,8.5)"><g><path d="M0 3.4C-1.7 1 -5 1.7 -5 -0.9 -5 -2.5 -3 -3.4 -1.5 -2.6 -0.8 -2.2 -0.3 -1.5 0 -1 0.3 -1.5 0.8 -2.2 1.5 -2.6 3 -3.4 5 -2.5 5 -0.9 5 1.7 1.7 1 0 3.4Z" fill="#F6C544"/><animateTransform attributeName="transform" type="scale" values="1;1.35;1;1.18;1" keyTimes="0;0.18;0.36;0.5;1" dur="1.5s" repeatCount="indefinite"/></g></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -1.2;0 0" dur="2.6s" repeatCount="indefinite"/><circle cx="12.5" cy="18" r="4.2" fill="#7B5FC0"/><path d="M5 32c0-4.6 3.3-7.2 7.5-7.2S20 27.4 20 32Z" fill="#7B5FC0"/></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -1.2;0 0" begin="1.3s" dur="2.6s" repeatCount="indefinite"/><circle cx="27.5" cy="18" r="4.2" fill="#5B3FA0"/><path d="M20 32c0-4.6 3.3-7.2 7.5-7.2S35 27.4 35 32Z" fill="#5B3FA0"/></g></svg></span><div class="stat-num" data-count="100" data-suffix="k+">100k+</div></div><div class="stat-cap">Families served</div></div>
+      <div class="s reveal d1"><div class="stat-top"><span class="stat-ico" aria-hidden="true"><svg viewBox="0 0 40 40"><defs><clipPath id="mflagClip"><rect x="5" y="9" width="30" height="22" rx="3"/></clipPath></defs><g clip-path="url(#mflagClip)"><animateTransform attributeName="transform" type="rotate" values="0 20 20;1.8 20 20;0 20 20;-1.8 20 20;0 20 20" dur="5s" repeatCount="indefinite"/><rect x="5" y="9" width="30" height="22" fill="#fff"/><rect x="5" y="9" width="30" height="3.14" fill="#CC0001"/><rect x="5" y="15.3" width="30" height="3.14" fill="#CC0001"/><rect x="5" y="21.6" width="30" height="3.14" fill="#CC0001"/><rect x="5" y="27.9" width="30" height="3.14" fill="#CC0001"/><rect x="5" y="9" width="16" height="12.6" fill="#010066"/><circle cx="11.6" cy="15.3" r="3.7" fill="#FFCC00"/><circle cx="13.2" cy="14.6" r="3.1" fill="#010066"/><path d="M16.3 12.1l.63 1.53 1.65.12-1.27 1.06.42 1.6-1.43-.9-1.43.9.42-1.6-1.27-1.06 1.65-.12z" fill="#FFCC00"/></g><rect x="5" y="9" width="30" height="22" rx="3" fill="none" stroke="rgba(91,63,160,.18)" stroke-width="1"/></svg></span><div class="stat-num" data-count="2009" data-plain="1">2009</div></div><div class="stat-cap">Founded in Malaysia</div></div>
+      <div class="s reveal d2"><div class="stat-top"><span class="stat-ico" aria-hidden="true"><svg viewBox="0 0 40 40" fill="none"><defs><clipPath id="mglobeClip"><circle cx="20" cy="20" r="14"/></clipPath></defs><circle cx="20" cy="20" r="14" fill="#F3EEFC" stroke="#5B3FA0" stroke-width="2"/><g clip-path="url(#mglobeClip)"><g stroke="#7B5FC0" stroke-width="1.4" fill="none"><animateTransform attributeName="transform" type="translate" values="0 0;-8 0;-8 0" keyTimes="0;0.42;1" dur="6.5s" repeatCount="indefinite"/><ellipse cx="4" cy="20" rx="5" ry="14"/><ellipse cx="12" cy="20" rx="5" ry="14"/><ellipse cx="20" cy="20" rx="5" ry="14"/><ellipse cx="28" cy="20" rx="5" ry="14"/><ellipse cx="36" cy="20" rx="5" ry="14"/></g></g><line x1="6.5" y1="20" x2="33.5" y2="20" stroke="#5B3FA0" stroke-width="1.7"/></svg></span><div class="stat-num" data-count="4" data-suffix="">4</div></div><div class="stat-cap">Markets across SEA</div></div>
+      <div class="s reveal d3"><div class="stat-top"><span class="stat-ico" aria-hidden="true"><svg viewBox="0 0 40 40"><path fill="#5B3FA0" d="M18.3 5.3c-2.5-1.2-5.7-.7-7.5 1.3-1 1-1.5 2.3-1.5 3.7-1.7.5-3 1.8-3.3 3.7-.3 1.7.2 3.3 1.3 4.5-.8 1.3-1 3-.3 4.5.7 1.5 2 2.5 3.5 2.8.2 2 1.7 3.7 3.7 4.2 1.7.3 3.3-.2 4.5-1.3V6.2c-1-.5-2.2-.7-3.3-.9z"/><path fill="#7B5FC0" d="M21.7 5.3c2.5-1.2 5.7-.7 7.5 1.3 1 1 1.5 2.3 1.5 3.7 1.7.5 3 1.8 3.3 3.7.3 1.7-.2 3.3-1.3 4.5.8 1.3 1 3 .3 4.5-.7 1.5-2 2.5-3.5 2.8-.2 2-1.7 3.7-3.7 4.2-1.7.3-3.3-.2-4.5-1.3V6.2c1-.5 2.2-.7 3.3-.9z"/><path stroke="#F6C544" stroke-width="1" fill="none" opacity=".5" d="M20 9v22M14 13c1.6.5 3 1.7 3.3 3.3M26 15c-1.6.5-3 1.7-3.3 3.3M15 24c1.8.2 3.3 1.4 4 3"/><g><circle cx="14" cy="13" r="1.7" fill="#F6C544"><animate attributeName="opacity" values=".15;1;.15" keyTimes="0;0.12;0.5" dur="2.6s" begin="0s" repeatCount="indefinite"/><animate attributeName="r" values="1.2;2.2;1.2" keyTimes="0;0.12;0.5" dur="2.6s" begin="0s" repeatCount="indefinite"/></circle><circle cx="26" cy="15" r="1.7" fill="#FFCC44"><animate attributeName="opacity" values=".15;1;.15" keyTimes="0;0.12;0.5" dur="2.6s" begin="0.5s" repeatCount="indefinite"/><animate attributeName="r" values="1.2;2.2;1.2" keyTimes="0;0.12;0.5" dur="2.6s" begin="0.5s" repeatCount="indefinite"/></circle><circle cx="20" cy="22" r="1.7" fill="#F6C544"><animate attributeName="opacity" values=".15;1;.15" keyTimes="0;0.12;0.5" dur="2.6s" begin="1s" repeatCount="indefinite"/><animate attributeName="r" values="1.2;2.2;1.2" keyTimes="0;0.12;0.5" dur="2.6s" begin="1s" repeatCount="indefinite"/></circle><circle cx="15" cy="24" r="1.7" fill="#FFCC44"><animate attributeName="opacity" values=".15;1;.15" keyTimes="0;0.12;0.5" dur="2.6s" begin="1.5s" repeatCount="indefinite"/><animate attributeName="r" values="1.2;2.2;1.2" keyTimes="0;0.12;0.5" dur="2.6s" begin="1.5s" repeatCount="indefinite"/></circle></g></svg></span><div class="stat-num" data-count="6" data-suffix="">6</div></div><div class="stat-cap">Named brain actives</div></div>
     </div>
   </div>
 </section>
@@ -1758,9 +1801,9 @@ body{scroll-padding-bottom:96px}
             <circle cx="830" cy="76" r="7" stroke="#2F8F4E"/>
           </g>
         </svg>
-        <span class="tl-mark m1" style="left:6%;top:87.5%"><span class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="#5B3FA0" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M8.5 12h7"/></svg></span>Week 1</span>
-        <span class="tl-mark m2" style="left:34.6%;top:71%"><span class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="#3E63C4" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 16.5l6-6 4 4L20.5 7"/><path d="M15 7h5.5v5.5"/></svg></span>Week 4</span>
-        <span class="tl-mark m3" style="left:69.2%;top:38%"><span class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="#2F8F4E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M9 12.2l2 2 4-4.2"/></svg></span>Week 12</span>
+        <span class="tl-mark m1" style="left:6%;top:87.5%">Week 1</span>
+        <span class="tl-mark m2" style="left:34.6%;top:71%">Week 4</span>
+        <span class="tl-mark m3" style="left:69.2%;top:38%">Week 12</span>
       </div>
       <div class="tl-steps">
         <div class="tl-step"><span class="tl-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#5B3FA0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M8.5 12h7"/></svg></span><div class="w">Week 1</div><p>A daily ritual begins. One chewable, mixed berries, no water.</p></div>
@@ -1847,16 +1890,16 @@ body{scroll-padding-bottom:96px}
       <p class="lead">Eskayvie Nexus is the next step. Start as a customer, grow at your own pace, with training and mentors behind you.</p>
     </div>
     <div class="tiers">
-      <div class="tier reveal"><div class="tier-photo"><img src="assets/nexus-rally.jpg" alt="Thousands of Eskayvie Nexus members at a national gathering" loading="lazy" width="576" height="384"></div><div class="tier-body">
+      <div class="tier"><div class="tier-photo"><img src="assets/nexus-rally.jpg" alt="Thousands of Eskayvie Nexus members at a national gathering" loading="lazy" width="576" height="384"></div><div class="tier-body">
         <div class="tier-kick"><span class="tier-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3.5 3.5h7.2l9.8 9.8-7.2 7.2-9.8-9.8V3.5z"/><circle cx="8" cy="8" r="1.5"/></svg></span><span class="k">Start here</span></div>
         <h3>Preferred Customer</h3><p>Member pricing and birthday rewards. The simplest way in.</p><div class="entry">From RM20</div></div></div>
-      <div class="tier reveal d1"><div class="tier-photo"><img src="assets/nexus-bootcamp.jpg" alt="Eskayvie Nexus Leadership Bootcamp training session" loading="lazy" width="960" height="540"></div><div class="tier-body">
+      <div class="tier"><div class="tier-photo"><img src="assets/nexus-bootcamp.jpg" alt="Eskayvie Nexus Leadership Bootcamp training session" loading="lazy" width="960" height="540"></div><div class="tier-body">
         <div class="tier-kick"><span class="tier-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21v-8.5"/><path d="M12 12.5C12 8.6 15 6 19.5 6c0 3.9-3 6.5-7.5 6.5z"/><path d="M12 12.5C12 9.7 9.8 8 6.5 8c0 2.8 2.2 4.5 5.5 4.5z"/></svg></span><span class="k">Grow</span></div>
         <h3>Nexus Apprentice</h3><p>Your first step as an agent, with the Apprentice Kit and your own Nexus web portal.</p><div class="entry">From RM70</div></div></div>
-      <div class="tier reveal d2"><div class="tier-photo"><img src="assets/nexus-award.jpg" alt="An Eskayvie Nexus agent receiving an award on stage" loading="lazy" width="1024" height="683"></div><div class="tier-body">
+      <div class="tier"><div class="tier-photo"><img src="assets/nexus-award.jpg" alt="An Eskayvie Nexus agent receiving an award on stage" loading="lazy" width="1024" height="683"></div><div class="tier-body">
         <div class="tier-kick"><span class="tier-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4.5 17.5h15l1.2-9-5 3L12 5.6 8.3 11.5l-5-3 1.2 9z"/><path d="M6 20.5h12"/></svg></span><span class="k">Lead</span></div>
         <h3>Agent</h3><p>Build a team and earn 10% to 40% commission across seven levels as your sales grow.</p><div class="entry">Membership kit</div></div></div>
-      <div class="tier reveal d3"><div class="tier-photo"><img src="assets/nexus-team.jpg" alt="The Eskayvie Nexus agent family posing together" loading="lazy" width="960" height="540"></div><div class="tier-body">
+      <div class="tier"><div class="tier-photo"><img src="assets/nexus-team.jpg" alt="The Eskayvie Nexus agent family posing together" loading="lazy" width="960" height="540"></div><div class="tier-body">
         <div class="tier-kick"><span class="tier-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="9" cy="8.2" r="3"/><path d="M3.8 19.5c0-3 2.3-5 5.2-5s5.2 2 5.2 5"/><circle cx="17" cy="9.4" r="2.3"/><path d="M16.2 15.1c2.4.1 4 1.8 4 4.4"/></svg></span><span class="k">Together</span></div>
         <h3>The Nexus family</h3><p>Agents across the region, trained and growing side by side.</p><div class="entry">100,000+ families served</div></div></div>
     </div>
@@ -1877,10 +1920,15 @@ body{scroll-padding-bottom:96px}
       </form>
       <p class="cap-note" id="capMsg" role="status" aria-live="polite">By subscribing you agree to our Privacy Policy. Unsubscribe anytime.</p>
     </div>
-    <div class="reveal d1" style="text-align:center">
-      <img class="cap-brain" src="assets/brain-glass.jpg?v=3" alt="A translucent violet glass brain with glowing golden neural filaments" loading="lazy" decoding="async" width="880" height="880">
-      <span class="stat-num" style="font-size:clamp(3rem,9vw,6rem);color:var(--violet)">100,000<span style="color:var(--green)">+</span></span>
-      <p style="margin:.6rem auto 0;color:var(--ink-soft)">families already on the journey</p>
+    <div class="reveal d1 cap-visual">
+      <div class="cap-brainwrap">
+        <video class="cap-brain" autoplay muted loop playsinline preload="auto" poster="assets/brain-glass-poster.jpg?v=1" width="760" height="760" aria-label="A translucent violet glass brain with glowing golden neural filaments, gently pulsing with light">
+          <source src="assets/brain-glass-loop.mp4?v=1" type="video/mp4">
+          <img class="cap-brain" src="assets/brain-glass.jpg?v=3" alt="A translucent violet glass brain with glowing golden neural filaments">
+        </video>
+      </div>
+      <span class="stat-num cap-count" style="font-size:clamp(3.2rem,9.5vw,6.4rem);color:var(--violet)"><span class="cc-val">100,000</span><span class="cc-plus" style="color:var(--green)">+</span></span>
+      <p style="margin:.5rem auto 0;color:var(--ink-soft)">families already on the journey</p>
     </div>
   </div>
 </section>
@@ -2292,9 +2340,7 @@ body{scroll-padding-bottom:96px}
 <!-- ===== CLOSING CTA ===== -->
 <section class="closecta dx-bg-keep" id="begin" aria-labelledby="begin-h" data-no-orb>
   <div class="cta-vidwrap dx-bg-keep" aria-hidden="true">
-    <video class="cta-video" data-lazy muted loop playsinline preload="none" poster="assets/hero-still3.webp">
-      <source src="assets/cta-family-loop-lite.mp4" type="video/mp4">
-    </video>
+    <video class="cta-video" data-lazy muted loop playsinline preload="none" poster="assets/cta-family-sharp-poster.jpg?v=1"><source src="assets/cta-family-sharp.mp4?v=2" type="video/mp4"></video>
   </div>
   <div class="cta-video-scrim dx-bg-keep" aria-hidden="true"></div>
   <div class="cta-aurora dx-bg-keep" aria-hidden="true">
@@ -2328,18 +2374,21 @@ body{scroll-padding-bottom:96px}
   <style id="ftr-owl-css">
   .ftr{position:relative}
   .ftr-owl-lane{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:40}
-  .ftr-owl{position:absolute;bottom:17%;left:0;width:clamp(84px,9.5vw,132px);height:auto;display:block;opacity:.97;will-change:transform;filter:drop-shadow(0 16px 26px rgba(0,0,0,.42));animation:ftrOwlFly 26s linear infinite}
-  @keyframes ftrOwlFly{
-    0%{transform:translate(-34vw,0)}
-    25%{transform:translate(8vw,-30px)}
-    50%{transform:translate(45vw,6px)}
-    75%{transform:translate(84vw,-22px)}
-    100%{transform:translate(130vw,0)}
+  .ftr-owl{position:absolute;bottom:17%;left:0;width:clamp(84px,9.5vw,132px);height:auto;display:block;opacity:.97;will-change:transform;filter:drop-shadow(0 16px 26px rgba(0,0,0,.42));animation:ftrOwlFly 22s ease-in-out infinite}
+  @keyframes ftrOwlFly{   /* fly across (bob+tilt), exit right, then REST off-screen ~10s before coming out again */
+    0%{transform:translate(-20vw,8px) rotate(-4deg)}
+    9%{transform:translate(6vw,-20px) rotate(3deg)}
+    18%{transform:translate(24vw,10px) rotate(-3deg)}
+    27%{transform:translate(42vw,-18px) rotate(3deg)}
+    37%{transform:translate(60vw,8px) rotate(-3deg)}
+    46%{transform:translate(79vw,-20px) rotate(3deg)}
+    55%{transform:translate(125vw,4px) rotate(-4deg)}
+    100%{transform:translate(125vw,4px) rotate(-4deg)}
   }
   @media(max-width:640px){.ftr-owl{width:78px;bottom:12%}}
   @media(prefers-reduced-motion:reduce){.ftr-owl-lane{display:none}}
   </style>
-  <div class="ftr-owl-lane" aria-hidden="true"><img class="ftr-owl" src="assets/owl-fly.webp?v=23" alt="" loading="lazy" decoding="async"></div>
+  <div class="ftr-owl-lane" aria-hidden="true"><img class="ftr-owl" src="assets/owl-fly.webp?v=25" alt="" loading="lazy" decoding="async"></div>
   <div class="ftr-fx" aria-hidden="true">
     <span class="ftr-aurora ftr-aurora--v"></span>
     <span class="ftr-aurora ftr-aurora--g"></span>
@@ -2711,6 +2760,29 @@ function countUp(el){
 const sio=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){countUp(e.target);sio.unobserve(e.target);}})},{threshold:.6});
 document.querySelectorAll('[data-count]').forEach(el=>sio.observe(el));
 
+// newsletter "families" counter: eases up on scroll-in, then a slow living tick so the community reads as still growing
+(function(){
+  const el=document.querySelector('.cap-count .cc-val'); if(!el) return;
+  const BASE=100000, fmt=n=>n.toLocaleString('en-US'); let live=0, started=false;
+  function liveTick(){
+    setTimeout(function loop(){
+      if(live>=80) return;                       // soft cap: stays anchored to the 100,000+ claim, never drifts into slot-machine territory
+      live++; el.textContent=fmt(BASE+live);
+      el.classList.remove('cc-bump'); void el.offsetWidth; el.classList.add('cc-bump');
+      setTimeout(loop, 10000+Math.random()*12000);   // slow, barely-there living tick (10-22s)
+    }, 10000+Math.random()*12000);
+  }
+  function run(){
+    if(started) return; started=true;
+    if(REDUCE){ el.textContent=fmt(BASE); return; }   // no motion for reduced-motion users
+    const dur=1800, t0=performance.now();
+    (function up(now){ const p=Math.min((now-t0)/dur,1), e=1-Math.pow(1-p,3);
+      el.textContent=fmt(Math.floor(e*BASE)); p<1?requestAnimationFrame(up):liveTick(); })(performance.now());
+  }
+  const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){run();io.disconnect();}})},{threshold:.5});
+  io.observe(el);
+})();
+
 // timeline: static momentum curve now (the old scroll-fill line is gone)
 
 // The hero 3D bottle (real label wrapped on a glossy cylinder) is rendered by the
@@ -2809,6 +2881,9 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
   mount.appendChild(renderer.domElement);
   // WebGL is up: hide the static product photo so the loading state is JUST the light spinner on the dark stage (no naked bottle, no photo)
   { const fb0=mount.querySelector('.stage-fallback'); if(fb0) fb0.style.display='none'; }
+  // NAKED-BOTTLE GUARD: the canvas stays opacity 0 until the ACTIVE (Mindtropic) bottle's label is painted AND a real frame has been drawn with it.
+  let mtSkinned=false, revealed3d=false;
+  function maybeReveal(){ if(mtSkinned && !revealed3d && renderer && renderer.domElement){ revealed3d=true; renderer.domElement.style.opacity='1'; } }
 
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(19, 1, 0.1, 100);   // longer lens = flatter, product-shot look
@@ -2986,9 +3061,11 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
           const lum=0.299*r+0.587*g2+0.114*b; let rough,metal;
           if(y<panelY){ let a=(lum-105)/127; a=a<0.1?0:a>1?1:a;
             d[i]=DC[0]+(255-DC[0])*a; d[i+1]=DC[1]+(255-DC[1])*a; d[i+2]=DC[2]+(255-DC[2])*a; rough=0.46; metal=0;
-          } else { const mx=Math.max(r,g2,b),mn=Math.min(r,g2,b),sat=mx-mn;
-            if(lum>150 && sat<36){ d[i]=SILVER[0]; d[i+1]=SILVER[1]; d[i+2]=SILVER[2]; rough=0.52; metal=0.30; }   // whole neutral panel -> ONE flat lighter silver (no white streaks/lines)
-            else { rough=0.5; metal=0; } }                                                                          // dark blue text stays matte + readable
+          } else {                                              // lower panel: SMOOTH blend to flat silver (no hard threshold = no albedo speckle); metal/rough UNIFORM = no metallic grain
+            const sat=Math.max(r,g2,b)-Math.min(r,g2,b);
+            let w=(lum-125)/105; w=w<0?0:w>1?1:w; w*=Math.max(0,1-sat/55);   // light + neutral pixels -> silver; coloured/dark ink kept
+            d[i]=r+(SILVER[0]-r)*w; d[i+1]=g2+(SILVER[1]-g2)*w; d[i+2]=b+(SILVER[2]-b)*w;
+            rough=0.5; metal=0.15; }
           md[i]=0; md[i+1]=(rough*255)|0; md[i+2]=(metal*255)|0; md[i+3]=255; }
         tg.putImageData(cdat,0,0); mctx.putImageData(mdat,0,0);
         const c=document.createElement('canvas');c.width=Wc;c.height=Hc;const g=c.getContext('2d');
@@ -3010,9 +3087,11 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
         for(let i=0;i<d.length;i+=4){ const y=((i>>2)/iw)|0; const r=d[i],g2=d[i+1],b=d[i+2];
           const lum=0.299*r+0.587*g2+0.114*b; let rough,metal;
           if(y<panelY){ rough=0.44; metal=0; }                // keep the colourful kids artwork untouched
-          else { const mx=Math.max(r,g2,b),mn=Math.min(r,g2,b),sat=mx-mn;   // bottom panel
-            if(lum>150 && sat<36){ d[i]=SILVER[0]; d[i+1]=SILVER[1]; d[i+2]=SILVER[2]; rough=0.52; metal=0.30; }   // whole white -> ONE flat lighter silver
-            else { rough=0.5; metal=0; } }                                                                          // dark text + the owl keep their colours
+          else {                                              // bottom panel: SMOOTH blend to silver, UNIFORM metal (no speckle grain); the owl + dark text keep their colours
+            const sat=Math.max(r,g2,b)-Math.min(r,g2,b);
+            let w=(lum-125)/105; w=w<0?0:w>1?1:w; w*=Math.max(0,1-sat/55);
+            d[i]=r+(SILVER[0]-r)*w; d[i+1]=g2+(SILVER[1]-g2)*w; d[i+2]=b+(SILVER[2]-b)*w;
+            rough=0.5; metal=0.15; }
           md[i]=0; md[i+1]=(rough*255)|0; md[i+2]=(metal*255)|0; md[i+3]=255; }
         tg.putImageData(cdat,0,0); mctx.putImageData(mdat,0,0);
         const base=`#${opts.bodyCol.toString(16).padStart(6,'0')}`;
@@ -3028,12 +3107,9 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
       }
       const fb=mount.querySelector('.stage-fallback'); if(fb) fb.style.display='none';
       const sl=mount.querySelector('.stage-loader'); if(sl){ sl.classList.add('done'); setTimeout(function(){ sl.style.display='none'; },600); }
-      // reveal the finished bottle ONLY after a real textured frame has drawn — so the naked cylinder never flashes; the spinner cross-fades into the bottle
-      if(!window.__reveal3d){ window.__reveal3d=true;
-        var reveal3d=function(){ if(renderer&&renderer.domElement) renderer.domElement.style.opacity='1'; };
-        requestAnimationFrame(function(){ requestAnimationFrame(reveal3d); });   // ideal path: after 2 rAFs a textured frame is on screen
-        setTimeout(reveal3d, 350);   // backstop: rAF stalls when the section skin loaded while off-screen — the label is applied by now so this is still textured
-      }
+      // the render loop reveals the canvas only once THIS (Mindtropic) bottle is textured — never on whichever bottle loads first
+      if(opts.recolor){ mtSkinned=true;
+        setTimeout(function(){ if(!revealed3d){ try{ renderer.render(scene,camera); }catch(_){} maybeReveal(); } }, 800); }   // backstop if the loop is off-screen: draw a textured frame, then reveal
       skinCount++; window.__skin=true;
     };
     labelImg.src=opts.labelSrc;
@@ -3298,7 +3374,7 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
   const controls=new OrbitControls(camera,renderer.domElement);
   controls.target.set(0,0.06,0);   // bottles ride high in the tight frame; floor + foreground stay inside the bottom edge
   controls.enableDamping=true; controls.dampingFactor=0.08;
-  controls.enablePan=false; controls.enableZoom=true; controls.zoomSpeed=0.9;   // scroll / pinch to zoom into the packaging
+  controls.enablePan=false; controls.enableZoom=false;   // NO scroll/pinch zoom: it trapped the page scroll and ballooned the bottle; drag-to-spin + tap-to-open is the whole interaction
   controls.rotateSpeed=0.85;
   controls.minPolarAngle=Math.PI*0.32; controls.maxPolarAngle=Math.PI*0.60;
   controls.autoRotate=false;   // no auto-turn: the product stays facing front (labels to camera); drag still spins it
@@ -3313,7 +3389,7 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
     // tall canvas fills the section now: a big bottle seated LOW (title stays visible above it, through the transparent canvas) so the cap + tablets can leap UP and cover the title, uncut
     const fw = narrow ? 3.7 : FRAME_W;
     const fh = narrow ? FRAME_H : 6.7;                  // wide/full-bleed desktop: a taller frame => smaller bottle; leaping tablets (peak ~y3.6) still clear the title without being cut at the canvas top
-    controls.target.set(0, narrow ? 0.60 : 0.85, 0);   // higher target => bottle sits LOWER. desktop 0.85 tucks under the copy; phone 0.60 lifts it a touch from 0.70 to feel intentional while keeping balanced clearance above (copy) and below (owl)
+    controls.target.set(0, narrow ? 0.60 : 0.9, 0);   // desktop 0.9 with the taller section = a clear gap under the copy; phone 0.60 balanced above/below
     const fovV=THREE.MathUtils.degToRad(camera.fov);
     const distV=(fh/2)/Math.tan(fovV/2);
     const distW=(fw/2)/(Math.tan(fovV/2)*camera.aspect);
@@ -3331,8 +3407,7 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
   // ===== interaction: drag spins both, TAP the bottle you click to pop/seal it =====
   const el=renderer.domElement;
   // a plain mouse wheel should SCROLL the page, not zoom. Block it before OrbitControls sees it.
-  // PINCH still zooms: touch pinch (via touch-action:pan-y) and trackpad pinch (ctrl+wheel) are let through.
-  mount.addEventListener('wheel', function(e){ if(!e.ctrlKey) e.stopPropagation(); }, {capture:true, passive:true});
+  // wheel is left ALONE now (zoom is off) so scrolling over the bottle scrolls the PAGE normally.
   const raycaster=new THREE.Raycaster();
   const allPick=bottles.reduce((a,b)=>a.concat(b.pick),[]);
   function pickBottle(cx,cy){
@@ -3378,6 +3453,7 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
       mt.grp.rotation.y=Math.sin(t*0.42)*0.055;
       jr.grp.rotation.y=Math.sin(t*0.42+2.1)*0.055; }
     controls.update(); renderer.render(scene,camera);
+    maybeReveal();   // the frame we just drew has the textured Mindtropic bottle — safe to fade the canvas in now
   }
   function start(){ if(running) return; running=true; last=performance.now(); frame(); }
   function stop(){ running=false; cancelAnimationFrame(rafId); }
@@ -3739,6 +3815,25 @@ import * as THREE from 'three';
 <script>/* pause the testimonial marquee while it is offscreen (frees the compositor on the rest of the scroll) */
 (function(){ var m=document.querySelector('.tm-marquee'); if(!m||!('IntersectionObserver' in window)) return;
   new IntersectionObserver(function(es){ m.classList.toggle('tm-off', !es[0].isIntersecting); },{rootMargin:'140px'}).observe(m);
+})();</script>
+<script>/* opportunity cards: cursor-driven 3D tilt + glare (pointer devices only) */
+(function(){
+  var cards=document.querySelectorAll('#opportunity .tier'); if(!cards.length) return;
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var fine=window.matchMedia&&matchMedia('(hover:hover) and (pointer:fine)').matches;
+  cards.forEach(function(c){
+    var gl=document.createElement('span'); gl.className='tier-glare'; c.appendChild(gl);
+    if(reduce||!fine) return;
+    var raf=0,rx=0,ry=0,gx=50,gy=50;
+    function apply(){ raf=0; c.style.setProperty('--trx',rx.toFixed(2)+'deg'); c.style.setProperty('--try',ry.toFixed(2)+'deg'); c.style.setProperty('--gx',gx.toFixed(1)+'%'); c.style.setProperty('--gy',gy.toFixed(1)+'%'); }
+    c.addEventListener('pointerenter',function(){ c.classList.add('tilt'); });
+    c.addEventListener('pointermove',function(e){ var r=c.getBoundingClientRect(); var px=(e.clientX-r.left)/r.width, py=(e.clientY-r.top)/r.height; ry=(px-0.5)*9; rx=(0.5-py)*9; gx=px*100; gy=py*100; if(!raf) raf=requestAnimationFrame(apply); },{passive:true});
+    c.addEventListener('pointerleave',function(){ c.classList.remove('tilt'); if(raf){cancelAnimationFrame(raf);raf=0;} c.style.setProperty('--trx','0deg'); c.style.setProperty('--try','0deg'); });
+  });
+})();</script>
+<script>/* pause the closing-CTA drift/blur animation while it is off-screen (keeps scroll light) */
+(function(){ var s=document.querySelector('.closecta'); if(!s||!('IntersectionObserver' in window)) return;
+  new IntersectionObserver(function(es){ s.classList.toggle('anim-off', !es[0].isIntersecting); },{rootMargin:'120px'}).observe(s);
 })();</script>
 </body>
 </html>
