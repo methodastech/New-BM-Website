@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Brand Method · The RM1 Billion Giveback · static graphic</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --bright:#2536F5; --bright-deep:#1421B8; --glow:#7c86ff; --gold:#F2C863; --nav0:#0b1150; --nav1:#0a0e3e; --nav2:#070a2c; }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{height:100%;background:#05061c;overflow:hidden;-webkit-font-smoothing:antialiased;}
+  body{min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:11px;padding:8px 8px 0;font-family:"Inter",system-ui,sans-serif;}
+
+  .stage{ --arw:9; --arh:16;
+    position:relative;aspect-ratio:var(--arw)/var(--arh);
+    width:min(100vw, calc((100svh - 84px) * var(--arw) / var(--arh)));
+    height:auto; max-height:calc(100svh - 84px);
+    overflow:hidden;isolation:isolate;border-radius:14px;box-shadow:0 30px 80px -30px rgba(0,0,0,.8);
+    display:flex;flex-direction:column;
+    background:
+      radial-gradient(120% 60% at 50% 6%, rgba(60,84,255,.36), transparent 55%),
+      radial-gradient(90% 55% at 82% 82%, rgba(242,200,99,.12), transparent 60%),
+      linear-gradient(178deg,var(--nav0) 0%,var(--nav1) 46%,var(--nav2) 100%); }
+  .stage.ar-45{--arw:4;--arh:5;} .stage.ar-11{--arw:1;--arh:1;}
+  .grid{position:absolute;inset:0;z-index:0;pointer-events:none;
+    background-image:radial-gradient(rgba(160,178,255,.15) 1px,transparent 1.4px);background-size:26px 26px;
+    -webkit-mask-image:radial-gradient(120% 80% at 50% 40%,#000 32%,transparent 84%);mask-image:radial-gradient(120% 80% at 50% 40%,#000 32%,transparent 84%);opacity:.6;}
+  /* big brand-star graphic, gold→blue, glowing, sits behind the type on the right */
+  .starfx{position:absolute;z-index:0;pointer-events:none;width:78%;top:26%;right:-24%;opacity:.16;filter:drop-shadow(0 0 60px rgba(242,200,99,.5));}
+  .starfx polygon{fill:url(#sg);}
+  .vig{position:absolute;inset:0;z-index:1;pointer-events:none;box-shadow:inset 0 0 130px 30px rgba(4,6,22,.62);}
+
+  .wrap{position:relative;z-index:2;display:flex;flex-direction:column;height:100%;padding:6.2% 7% 6.4%;text-align:center;}
+
+  .top{display:flex;align-items:flex-start;justify-content:space-between;}
+  .lock{position:relative;display:inline-block;}
+  .lock-wm{height:clamp(19px,4.8vw,27px);width:auto;display:block;filter:brightness(0) invert(1);opacity:.98;}
+  .lock-star{position:absolute;left:77.54%;top:-15.62%;width:23.81%;height:auto;fill:#fff;transform-origin:50% 50%;filter:drop-shadow(0 3px 10px rgba(40,60,180,.35));}
+  .mile{font-family:"JetBrains Mono",monospace;font-size:clamp(8.5px,2.5vw,11px);font-weight:700;letter-spacing:.12em;color:var(--gold);
+    background:rgba(242,200,99,.12);border:1px solid rgba(242,200,99,.4);border-radius:999px;padding:6px 11px;white-space:nowrap;}
+
+  .core{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2.6%;}
+  .kick{font-family:"JetBrains Mono",monospace;font-size:clamp(9px,2.7vw,12px);font-weight:700;letter-spacing:.26em;color:var(--glow);}
+  .big{font-family:"Fraunces",serif;font-weight:600;color:#fff;line-height:.82;font-size:clamp(104px,32vw,182px);letter-spacing:-.03em;
+    text-shadow:0 6px 40px rgba(37,54,245,.55),0 2px 8px rgba(0,0,0,.45);}
+  .sub{font-family:"Fraunces",serif;font-weight:500;font-size:clamp(19px,5.4vw,30px);color:#eaf0ff;line-height:1.1;text-shadow:0 2px 14px rgba(0,0,0,.5);}
+  .rule{width:44px;height:2px;background:rgba(242,200,99,.7);margin:1.4% auto;}
+  .offers{display:flex;flex-direction:column;gap:8px;align-items:center;}
+  .offer{display:flex;align-items:center;gap:9px;font-family:"Inter";font-size:clamp(13px,3.7vw,16px);color:#eef1ff;}
+  .offer .pill{font-family:"JetBrains Mono",monospace;font-size:clamp(8px,2.3vw,9.5px);font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+    background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:4px 9px;color:#fff;}
+  .offer .pill.free{background:#1fab54;border-color:transparent;}
+  .offer b{font-weight:700;color:#fff;}
+  .cats{font-family:"JetBrains Mono",monospace;font-weight:600;font-size:clamp(9.5px,2.9vw,13px);letter-spacing:.05em;color:#dbe2ff;
+    display:flex;gap:2.4%;justify-content:center;align-items:center;margin-top:1.4%;}
+  .cats span{white-space:nowrap;} .cats i{opacity:.5;font-style:normal;}
+
+  .foot{display:flex;flex-direction:column;align-items:center;gap:3.4%;}
+  .pill-cta{display:inline-flex;align-items:center;gap:9px;background:#fff;color:var(--bright-deep);font-weight:700;
+    font-size:clamp(15px,4.4vw,20px);border-radius:999px;padding:clamp(13px,3.6vw,17px) clamp(24px,7vw,38px);box-shadow:0 18px 44px -14px rgba(0,0,0,.7);}
+  .pill-cta svg{width:1.15em;height:1.15em;fill:var(--bright);}
+  .trust{font-family:"JetBrains Mono",monospace;font-size:clamp(8px,2.4vw,10.5px);font-weight:600;letter-spacing:.1em;color:rgba(219,226,255,.72);
+    display:flex;gap:9px;justify-content:center;flex-wrap:wrap;} .trust i{opacity:.45;font-style:normal;}
+
+  .stage.ar-11 .big,.stage.ar-45 .big{font-size:clamp(84px,24vw,150px);}
+  .stage.ar-11 .cats,.stage.ar-11 .offers .offer:nth-child(2){}
+
+  .controls{display:flex;align-items:center;gap:7px;flex-wrap:wrap;justify-content:center;font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.04em;color:#aab4e6;height:60px;}
+  .controls .grp{display:inline-flex;gap:4px;background:rgba(255,255,255,.05);border:1px solid rgba(160,178,255,.18);border-radius:999px;padding:4px;}
+  .ctrl-ar,.ctrl-var{cursor:pointer;border:none;background:transparent;color:#aeb8ea;font:inherit;padding:7px 13px;border-radius:999px;transition:background .18s,color .18s;}
+  .ctrl-ar.act{background:var(--bright);color:#fff;}
+  .ctrl-ar:hover:not(.act),.ctrl-var:hover{background:rgba(37,54,245,.16);color:#fff;}
+  .ctrl-var{background:rgba(242,200,99,.12);border:1px solid rgba(242,200,99,.38);color:var(--gold);text-decoration:none;display:inline-flex;align-items:center;gap:6px;}
+  .ctrl-var.back{background:rgba(160,178,255,.1);border-color:rgba(160,178,255,.28);color:#aeb8ea;}
+  .ctrl-var.back:hover{background:rgba(160,178,255,.2);color:#fff;}
+  .ctrl-pager{display:inline-flex;align-items:center;gap:8px;}
+  .ctrl-nav{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:rgba(37,54,245,.92);color:#fff;text-decoration:none;font-size:22px;line-height:1;transition:background .18s,transform .18s;}
+  .ctrl-nav:hover{background:#1a27c9;transform:translateY(-1px);}
+  .ctrl-pos{font-family:"JetBrains Mono",monospace;font-size:10px;color:#8791c0;letter-spacing:.1em;min-width:46px;text-align:center;}
+  .rec-note{font-size:9.5px;letter-spacing:.08em;color:#5b6499;text-transform:uppercase;}
+  body.embed{padding:0;gap:0;}
+  body.embed .controls{display:none;}
+  body.embed .stage{max-height:100svh;width:min(100vw, 100svh * var(--arw)/var(--arh));border-radius:0;box-shadow:none;}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute"><defs><linearGradient id="sg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F2C863"/><stop offset="1" stop-color="#4a5cff"/></linearGradient></defs></svg>
+<div class="stage ar-11" id="stage">
+  <div class="grid"></div>
+  <svg class="starfx" viewBox="0 0 100 100" aria-hidden="true"><polygon points="50.0,2.0 56.2,26.8 74.0,8.4 67.0,33.0 91.6,26.0 73.2,43.8 98.0,50.0 73.2,56.2 91.6,74.0 67.0,67.0 74.0,91.6 56.2,73.2 50.0,98.0 43.8,73.2 26.0,91.6 33.0,67.0 8.4,74.0 26.8,56.2 2.0,50.0 26.8,43.8 8.4,26.0 33.0,33.0 26.0,8.4 43.8,26.8"/></svg>
+  <div class="vig"></div>
+  <div class="wrap">
+    <div class="top">
+      <span class="lock">
+        <img class="lock-wm" src="bm-logo.png" alt="Brand Method">
+        <svg class="lock-star" viewBox="0 0 100 100" aria-hidden="true"><polygon points="50.0,2.0 56.2,26.8 74.0,8.4 67.0,33.0 91.6,26.0 73.2,43.8 98.0,50.0 73.2,56.2 91.6,74.0 67.0,67.0 74.0,91.6 56.2,73.2 50.0,98.0 43.8,73.2 26.0,91.6 33.0,67.0 8.4,74.0 26.8,56.2 2.0,50.0 26.8,43.8 8.4,26.0 33.0,33.0 26.0,8.4 43.8,26.8"/></svg>
+      </span>
+      <span class="mile">RM1 BILLION 🎉</span>
+    </div>
+
+    <div class="core">
+      <div class="kick">THE RM1 BILLION GIVEBACK</div>
+      <div class="big">50%</div>
+      <div class="sub">off every tech project</div>
+      <div class="rule"></div>
+      <div class="offers">
+        <div class="offer"><span class="pill free">🎁 VIP</span> Past clients get a <b>free revamp</b></div>
+        <div class="offer"><span class="pill">NOW</span> Everyone else: <b>50% off</b></div>
+      </div>
+      <div class="cats"><span>🌐 WEB</span><i>·</i><span>📱 APPS</span><i>·</i><span>🖥 PORTALS</span><i>·</i><span>🎮 GAMES</span></div>
+    </div>
+
+    <div class="foot">
+      <span class="pill-cta"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.5 1.3 5L2 22l5.1-1.3c1.5.8 3.1 1.3 4.9 1.3 5.5 0 10-4.5 10-10S17.5 2 12 2z"/></svg>Message us to claim yours</span>
+      <div class="trust"><span>16 YRS</span><i>·</i><span>100+ BRANDS</span><i>·</i><span>MONEY-BACK</span><i>·</i><span>MRANTI</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="controls">
+  <a class="ctrl-var back" href="bm-ads-library.html">◂ Library</a>
+  <div class="ctrl-pager">
+    <a class="ctrl-nav" href="bm-promo-milestone.html" aria-label="Previous ad">‹</a>
+    <span class="ctrl-pos">Ad 3 / 3</span>
+    <a class="ctrl-nav" href="bm-promo-giveback.html" aria-label="Next ad">›</a>
+  </div>
+  <span class="rec-note">Square · static graphic · screenshot the frame</span>
+</div>
+<script>if(/[?&]embed/.test(location.search))document.body.classList.add('embed');</script>
+</body>
+</html>
