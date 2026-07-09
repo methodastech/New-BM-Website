@@ -989,23 +989,6 @@
         #sales-overlay .sp-nav-switch a{padding:8px 13px;}
       }
     </style>
-    <nav class="sp-topnav">
-      <a class="sp-nav-logo" href="Brand-Method-Sales-Page.html" aria-label="Brand Method home">
-        <span class="bm-mark"><img decoding="async" class="bm-mark-wm" src="bm-logo.png" alt="Brand Method"><svg class="bm-mark-star" viewBox="0 0 100 100" aria-hidden="true"><polygon points="50,1 53.6,36.8 74.5,7.6 60,40 92.4,25.5 63.2,46.8 99,50 63.2,53.2 92.4,74.5 60,60 74.5,92.4 53.6,63.2 50,99 46.4,63.2 25.5,92.4 40,60 7.6,74.5 36.8,53.2 1,50 36.8,46.8 7.6,25.5 40,40 25.5,7.6 46.4,36.8"/></svg></span>
-      </a>
-      <div class="sp-nav-switch">
-        <a class="off" href="Brand-Method-Brand.html">Branding SP</a>
-        <a class="on" href="Brand-Method-Sales-Page.html">Website SP</a>
-        <a class="off" href="Brand-Method-Campaign.html">Promotion</a>
-        <a class="off" href="bm-ads-library.html" target="_blank" rel="noopener">Ads</a>
-      </div>
-      <div class="sp-nav-right">
-        <a class="sp-nav-link sp-scroll" data-target="sp-work">Work</a>
-        <a class="sp-nav-link sp-scroll" data-target="sp-pricing">Pricing</a>
-        <button class="sp-nav-cta sp-scroll" data-target="sp-book" type="button">Book a call</button>
-      </div>
-    </nav>
-
     <header class="sp-hero" id="spStage">
 <style>
       /* DESKTOP: left-right (text left, big visual right) */
@@ -1123,7 +1106,7 @@
   var cvs=[].slice.call(document.querySelectorAll('.sp-badge-cv')); if(!cvs.length) return;
   var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
   var DPR=Math.min(window.devicePixelRatio||1,2);
-  var URLS=['https://cdn.jsdelivr.net/npm/three@0.184.0/build/three.module.min.js','https://unpkg.com/three@0.184.0/build/three.module.min.js','https://esm.sh/three@0.184.0'];
+  var URLS=['./assets/three.module.min.js','https://cdn.jsdelivr.net/npm/three@0.184.0/build/three.module.min.js','https://unpkg.com/three@0.184.0/build/three.module.min.js','https://esm.sh/three@0.184.0'];
   function sizeCvs(){ cvs.forEach(function(cv){ var w=cv.clientWidth||42,h=cv.clientHeight||42; cv.width=Math.round(w*DPR); cv.height=Math.round(h*DPR); }); }
   sizeCvs();
   function flat(){ cvs.forEach(function(cv){ var x=cv.getContext('2d'); if(!x)return; x.clearRect(0,0,cv.width,cv.height); x.fillStyle='#2536F5'; x.beginPath(); x.arc(cv.width/2,cv.height/2,cv.width*0.3,0,6.2832); x.fill(); }); }
@@ -1307,7 +1290,7 @@
   var descEl=document.getElementById('hudDesc');
   var tlEl=document.querySelector('.hud-tl');
   var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
-  var URLS=['https://cdn.jsdelivr.net/npm/three@0.184.0/build/three.module.min.js','https://unpkg.com/three@0.184.0/build/three.module.min.js','https://esm.sh/three@0.184.0'];
+  var URLS=['./assets/three.module.min.js','https://cdn.jsdelivr.net/npm/three@0.184.0/build/three.module.min.js','https://unpkg.com/three@0.184.0/build/three.module.min.js','https://esm.sh/three@0.184.0'];
   var N=6000;
   function mkArr(){return new Float32Array(N*3);}
   function ease(x){x=x<0?0:x>1?1:x;return x*x*(3-2*x);}
@@ -1689,7 +1672,7 @@
   var cvs=[].slice.call(document.querySelectorAll('.sp-mech3d')); if(!cvs.length) return;
   var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
   var DPR=Math.min(window.devicePixelRatio||1,2);
-  var URLS=['https://cdn.jsdelivr.net/npm/three@0.184.0/build/three.module.min.js','https://unpkg.com/three@0.184.0/build/three.module.min.js','https://esm.sh/three@0.184.0'];
+  var URLS=['./assets/three.module.min.js','https://cdn.jsdelivr.net/npm/three@0.184.0/build/three.module.min.js','https://unpkg.com/three@0.184.0/build/three.module.min.js','https://esm.sh/three@0.184.0'];
   function sizeCvs(){ cvs.forEach(function(cv){ var w=cv.clientWidth; if(!w||w>120)w=58; cv.width=Math.round(w*DPR); cv.height=Math.round(w*DPR); }); }
   sizeCvs();
   function flat(){ cvs.forEach(function(cv){ var x=cv.getContext('2d'); if(!x)return; x.clearRect(0,0,cv.width,cv.height); x.fillStyle='#15a356'; x.beginPath(); x.arc(cv.width/2,cv.height/2,cv.width*0.3,0,6.2832); x.fill(); }); }
@@ -5814,7 +5797,7 @@
     window.addEventListener('resize',function(){ size3(); if(reduce) draw3(1,1); });
     if('IntersectionObserver' in window){ try{ new IntersectionObserver(function(es){ es[0].isIntersecting?start3():stop3(); },{threshold:.15}).observe(cv); }catch(e){ start3(); } } else { start3(); }
   }
-  var R3URLS=['https://cdn.jsdelivr.net/npm/three@0.184.0/build/three.module.min.js','https://unpkg.com/three@0.184.0/build/three.module.min.js','https://esm.sh/three@0.184.0'];
+  var R3URLS=['./assets/three.module.min.js','https://cdn.jsdelivr.net/npm/three@0.184.0/build/three.module.min.js','https://unpkg.com/three@0.184.0/build/three.module.min.js','https://esm.sh/three@0.184.0'];
   function r3load(i){ if(i>=R3URLS.length){ init2D(); return; } import(R3URLS[i]).then(function(m){ try{ init3D(m); }catch(e){ init2D(); } }).catch(function(){ r3load(i+1); }); }
   function bootGate(el,go){ var done=false, io=null;
     function fire(){ if(done) return; done=true; if(io) io.disconnect(); window.removeEventListener('scroll',check); go(); }
@@ -5834,7 +5817,7 @@
   var cv=document.getElementById('spGuarGl'); if(!cv) return;
   var medal=document.getElementById('spGuarMedal'); if(!medal) return;
   var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
-  var URLS=['https://cdn.jsdelivr.net/npm/three@0.184.0/build/three.module.min.js','https://unpkg.com/three@0.184.0/build/three.module.min.js','https://esm.sh/three@0.184.0'];
+  var URLS=['./assets/three.module.min.js','https://cdn.jsdelivr.net/npm/three@0.184.0/build/three.module.min.js','https://unpkg.com/three@0.184.0/build/three.module.min.js','https://esm.sh/three@0.184.0'];
   function init(THREE){
     if(THREE.ColorManagement) THREE.ColorManagement.enabled=false;
     var renderer; try{ renderer=new THREE.WebGLRenderer({canvas:cv,alpha:true,antialias:true,powerPreference:'high-performance'}); }catch(e){ return; }
