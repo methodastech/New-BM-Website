@@ -1,0 +1,249 @@
+:root {
+  --main-color: #583492;
+  --main-hover-color:rgb(70, 25, 82);
+  --secondary-color: #e2bd71;
+  --secondary-hover-color: #dbab56;
+  --main-gradient-color: ;
+  --main-gradient-hover-color:;
+  --light-gray-color:#ebecee;
+  --text-gray-color: #6C757D;
+  --dark-gray-color:;
+  --text-red-color: #dc3545;
+  --light-bg-color: #F1EDFC;
+}
+
+.w-60{
+	width: 50% !important;
+}
+
+.bv-color{
+	background-color : #6ea8fe !important;
+}
+
+.cv-color{
+	background-color : #75b798 !important;
+}
+
+.pv-color{
+	background-color : #ffda6a !important;
+}
+
+.purple-btn button{
+  background-color: #F1EDFC;
+  fill: #735E96;
+  color: #735E96;
+  border-style: solid;
+  border-width: 2px 2px 2px 2px;
+  padding: 6px 12px;
+  border-radius: 3px;
+  width: fit-content;
+  text-align: center;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.purple-btn button:hover{
+  background-color: var(--main-color);
+  color: #fff;
+  border-color: var(--main-color);
+  border-style: solid;
+  border-width: 2px 2px 2px 2px;
+  border-radius: 3px;
+}
+
+/**Jia Hie added new code start**/
+.prod .quantity .addon-plus-minus .qtyAddonButton {
+  height: 60px;
+  line-height: 60px;
+}
+
+.prod .quantity .addon-plus-minus input {
+  height: 60px;
+}
+
+.addon-plus-minus {
+    display: flex;
+	border: 1px solid #dee2e6;
+}
+
+.addon-plus-minus input {
+  border: 0 none;
+  color: #636363;
+  display: block;
+  float: left;
+  font-family: lato;
+  font-size: 18px;
+  height: 40px;
+  text-align: center;
+  width: 50%;
+  background: transparent;	
+}
+.addon-btn input.disable {
+	opacity: .2!important;
+	cursor: not-allowed;
+}
+
+.addon-plus-minus .qtyAddonButton {
+  /*background: #fff none repeat scroll 0 0;*/
+  color: #636363;
+  cursor: pointer;
+  float: left;
+  font-family: lato;
+  font-size: 18px;
+  font-weight: 700;
+  height:40px;
+  line-height: 40px;
+  text-align: center;
+  width: 25%;
+}
+.addon-plus-minus .dec {
+	font-size: 18px;
+}
+.addon-plus-minus .inc {
+    font-size: 18px;
+}
+
+.addon-plus-minus-box{
+	border: none;
+    background: transparent;
+	font-weight: bold;
+    display: inline-block;
+	text-align: center;
+    line-height: 26px;
+    margin: 0 5px;
+    -webkit-transition: all 0.3s ease 0s;
+    -o-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s;  
+}
+
+
+.input-group-addon {
+background-color: #fff;
+border: 1px solid #E5E6E7;
+border-radius: 1px;
+color: inherit;
+font-size: 14px;
+font-weight: 400;
+line-height: 1;
+padding: 6px 12px;
+text-align: center;
+}
+
+.addon-item{
+	border: 1px solid #efefef;
+	position: relative;
+	padding: 0px 10px;
+	margin-top: 10px;
+}
+
+.alert-error-danger {
+    color: #842029;
+    background-color: #f8d7da;
+    border-color: #f5c2c7;
+}
+.alert-message-tag {
+    position: relative;
+    padding: 1rem 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+}
+
+.btn-width{
+	width:180px !important;
+}
+
+.overwrite-margin{
+	margin:0 !important;
+}
+
+.overwrite-image{
+	width: 40% !important;
+	height: 100%;
+}
+
+#locationModal .modal-content {
+	border-radius: 15px;
+}
+#locationModal .modal-header {
+	height: 70px; 
+	width: 100%; 
+}
+#locationModal .modal-title {
+	color: #fff;
+} /*082023 j*/
+#locationModal .modal-body {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+/*	height: 120px;*/
+}
+#locationModal .modal-body a > div {
+	padding: 10px;
+	width: 100%;
+}
+#locationModal .modal-body a > div img {
+	margin-right: 10px;
+}/*082023 j*/
+#locationModal .modal-body a:hover > div {
+	background: #f8f8f7;
+}/*082023 j*/
+#locationModal .modal-footer {
+	justify-content:center;
+}
+#locationModal .language-flag {
+	width: 20px;
+}
+
+
+/** Jia Hie added new code end**/
+
+/*Wei Lun added new code start*/
+
+.add-wishlist button i{
+    color:var(--text-gray-color) !important;
+}
+
+.order-info h6{
+    color: #000;
+    padding-bottom: 15px;
+    height: fit-content;
+}
+
+.button.btn-delete-add {
+    background-color: white;
+	box-shadow: none;
+	outline: none;
+	border: 1px solid orangered;
+	border-radius: 0;
+	color: orangered;
+	padding: 10px 15px;
+}
+/*Wei Lun added new code end*/
+
+/* Default styles for the break span */
+.break {
+  display: none; /* Initially hide the break */
+}
+
+/* Media query for specific resolution where the break should appear */
+@media (max-width: 768px) {
+  .break {
+    display: block; /* Show the break as a block element */
+    white-space: pre; /* Preserve white spaces, including line breaks */
+  }
+}
+
+.push-bottom{
+	position: absolute;
+	bottom : 0;
+	margin-bottom: 0;
+}
+
+@media (min-width: 768px) {
+    .d-sm{
+    	display:block !important;
+    }
+}
+
+/** Jia Hie added new code end**/
