@@ -4092,7 +4092,7 @@
           <button class="sp-btn sp-btn-lime" type="submit">Book my free call</button>
           <a class="sp-btn sp-btn-waghost" href="https://wa.me/60162563030?text=Hi%20Brand%20Method%2C%20I%27d%20like%20the%20free%2030-minute%20call." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.5 1.3 5L2 22l5.1-1.3c1.5.8 3.1 1.3 4.9 1.3 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.6 0-3.2-.4-4.5-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.6-6.1c-.25-.13-1.47-.73-1.7-.81-.23-.08-.39-.13-.56.12-.17.25-.64.81-.79.98-.14.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.24-.74-.66-1.24-1.48-1.39-1.73-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.44.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.12-.56-1.36-.77-1.86-.2-.48-.41-.42-.56-.42h-.48c-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.08s.9 2.42 1.02 2.59c.12.17 1.76 2.68 4.25 3.76.59.26 1.06.41 1.42.52.6.19 1.14.16 1.57.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.08.15-1.19-.06-.1-.23-.17-.48-.29z"/></svg>WhatsApp us</a>
         </div>
-        <p class="sp-lead-note" id="spLeadNote">Takes 20 seconds. We confirm everything over WhatsApp.</p>
+        <p class="sp-lead-note" id="spLeadNote">Takes 20 seconds. We’ll email you back fast, or use WhatsApp if you prefer.</p>
       </form>
       </div>
       <div class="sp-foot-cta-row"><span>No pitch</span><i aria-hidden="true"></i><span>The plan is yours to keep</span><i aria-hidden="true"></i><span>Fixed price, no surprises</span></div>
@@ -4126,7 +4126,7 @@
      (and still fall back to WhatsApp if the email service is unreachable).
      This is the ONLY place you need to change to go live.
      ===================================================================== -->
-<script>window.BM_WEB3FORMS_KEY="1fb4acd5-6edc-4583-a0e2-d95e8be7b8fe";</script>
+<script>window.BM_WEB3FORMS_KEY="3680decd-bace-4762-97d2-fec36fd3acc3";</script>
 <script>
 /* quick lead form: BOTH buttons require details. Book = email+phone+interest; WhatsApp = name+email+interest. Everything lands in a prefilled wa.me message. */
 (function(){
@@ -4148,29 +4148,37 @@
       +(ph.value?'\nPhone: '+ph.value.trim():'')
       +(it.value?'\nInterested in: '+it.value:'');
   }
-  /* Email the lead to us via Web3Forms so it's captured even if they never finish WhatsApp.
-     No key set yet \u2192 skip silently (the WhatsApp step still captures the lead). */
+  /* Email the lead to us via Web3Forms. Returns a promise: resolves on success, rejects otherwise. */
   function emailLead(){
-    var KEY=(window.BM_WEB3FORMS_KEY||'').trim(); if(!KEY) return;
-    try{
-      var fd=new FormData();
-      fd.append('access_key', KEY);
-      fd.append('subject','New free-call lead \u2014 sales page');
-      fd.append('from_name','Brand Method sales page');
-      fd.append('Name', nm.value.trim());
-      fd.append('Email', em.value.trim());
-      fd.append('Phone', ph.value.trim());
-      fd.append('Interested in', it.value);
-      fetch('https://api.web3forms.com/submit',{method:'POST',body:fd,headers:{Accept:'application/json'}}).catch(function(){});
-    }catch(_){}
+    var KEY=(window.BM_WEB3FORMS_KEY||'').trim(); if(!KEY) return Promise.reject(new Error('no key'));
+    var fd=new FormData();
+    fd.append('access_key', KEY);
+    fd.append('subject','New free-call lead \u2014 sales page');
+    fd.append('from_name','Brand Method sales page');
+    fd.append('Name', nm.value.trim());
+    fd.append('Email', em.value.trim());
+    fd.append('Phone', ph.value.trim());
+    fd.append('Interested in', it.value);
+    return fetch('https://api.web3forms.com/submit',{method:'POST',body:fd,headers:{Accept:'application/json'}})
+      .then(function(r){return r.json();}).then(function(j){ if(!j||!j.success) throw new Error('failed'); return j; });
   }
+  var fBtn=f.querySelector('button[type=submit]'), fSent=false;
   f.addEventListener('submit',function(e){
     e.preventDefault();
-    var badE=!em.value||em.validity.typeMismatch, badP=!ph.value||ph.validity.patternMismatch, badI=!it.value;
-    mark(em,badE); mark(ph,badP); mark(it,badI);
-    if(badE||badP||badI){ if(note) note.textContent='Add a valid email, phone and what you\u2019re interested in.'; (badE?em:badP?ph:it).focus(); return; }
-    emailLead();
-    openWa('Hi Brand Method, I\u2019d like the free 30-minute call.'+details());
+    if(fSent) return;
+    var badN=!nm.value.trim(), badE=!em.value||em.validity.typeMismatch, badP=!ph.value||ph.validity.patternMismatch, badI=!it.value;
+    mark(nm,badN); mark(em,badE); mark(ph,badP); mark(it,badI);
+    if(badN||badE||badP||badI){ if(note) note.textContent='Add your name, a valid email, phone and what you\u2019re interested in.'; (badN?nm:badE?em:badP?ph:it).focus(); return; }
+    var KEY=(window.BM_WEB3FORMS_KEY||'').trim();
+    if(!KEY){ openWa('Hi Brand Method, I\u2019d like the free 30-minute call.'+details()); return; }
+    if(fBtn) fBtn.disabled=true; if(note) note.textContent='Sending\u2026';
+    emailLead().then(function(){
+      fSent=true; if(fBtn) fBtn.textContent='Sent \u2713';
+      if(note) note.textContent='Thanks '+nm.value.trim()+'! We\u2019ve got your details and will be in touch shortly.';
+    }).catch(function(){
+      if(fBtn) fBtn.disabled=false; if(note) note.textContent='Opening WhatsApp to confirm instead\u2026';
+      openWa('Hi Brand Method, I\u2019d like the free 30-minute call.'+details());
+    });
   });
   if(wa) wa.addEventListener('click',function(e){
     e.preventDefault();
