@@ -1,0 +1,762 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brand Method · The US$1 Billion Giveback · Campaign, Scripts &amp; Plan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.js"></script>
+<style>
+:root{
+  --bright:#2536F5; --bright-deep:#1421B8; --bright-glow:#7C86FF;
+  --ink:#15161A; --ink-soft:#54565d; --ink-faint:#8a8c93;
+  --paper:#ffffff; --wash:#F4F6FF; --line:rgba(37,54,245,.14); --line-soft:rgba(37,54,245,.07);
+  --green:#1fab54; --green-deep:#178043; --gold:#C9A03B;
+  --s1:8px; --s2:14px; --s3:22px; --s4:34px; --s5:52px; --s6:76px; --s7:104px;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"Inter",system-ui,-apple-system,sans-serif;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px;}
+.mono{font-family:"JetBrains Mono",ui-monospace,monospace;}
+h1,h2,h3,h4{font-family:"Fraunces",Georgia,serif;font-weight:400;line-height:1.08;letter-spacing:-.012em;margin:0;color:var(--ink);}
+em{font-style:italic;color:var(--bright);}
+p{margin:0 0 14px;}
+a{color:var(--bright);}
+.eyebrow{display:inline-block;font-family:"JetBrains Mono",monospace;font-size:12.5px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--bright);margin-bottom:14px;}
+
+/* ---------- top nav ---------- */
+.topbar{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.86);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);}
+.topbar-in{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:14px;padding:12px 24px;}
+.topbar-in .pageswitch{grid-column:2;justify-self:center;}
+.topbar-in .navdd{grid-column:3;justify-self:end;}
+.brandlock{display:flex;align-items:center;gap:9px;font-family:"Fraunces",serif;font-weight:600;font-size:17px;letter-spacing:-.01em;flex:0 0 auto;}
+.brandlock .star{width:20px;height:20px;fill:var(--bright);animation:spin 9s linear infinite;transform-origin:50% 50%;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.navlinks{display:flex;gap:4px;flex-wrap:wrap;margin-left:auto;}
+.navlinks a{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none;padding:7px 10px;border-radius:8px;transition:background .2s,color .2s;}
+.navlinks a:hover{background:var(--wash);color:var(--bright);}
+.pageswitch{display:inline-flex;align-items:center;gap:4px;background:rgba(37,54,245,.06);border:1px solid rgba(37,54,245,.18);border-radius:999px;padding:4px;font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.03em;flex:0 0 auto;}
+.pageswitch a{border-radius:999px;padding:9px 16px;text-decoration:none;color:var(--bright);white-space:nowrap;transition:background .18s,color .18s;}
+.pageswitch a.on{background:var(--bright);color:#fff;}
+.pageswitch a:hover:not(.on){background:rgba(37,54,245,.10);}
+.navdd{position:relative;}
+.navdd-btn{display:inline-flex;align-items:center;gap:7px;font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.03em;color:var(--bright);background:rgba(37,54,245,.06);border:1px solid rgba(37,54,245,.18);border-radius:999px;padding:8px 14px;cursor:pointer;white-space:nowrap;transition:background .18s,border-color .18s;}
+.navdd-btn:hover{background:rgba(37,54,245,.11);border-color:rgba(37,54,245,.32);}
+.navdd-btn svg{width:11px;height:11px;transition:transform .2s;}
+.navdd.open .navdd-btn svg{transform:rotate(180deg);}
+.navdd-menu{position:absolute;top:calc(100% + 8px);right:0;min-width:186px;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 20px 46px -20px rgba(20,28,84,.4);padding:6px;opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity .18s,transform .18s,visibility .18s;z-index:70;}
+.navdd.open .navdd-menu{opacity:1;visibility:visible;transform:none;}
+.navdd-menu a{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 13px;border-radius:8px;font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.02em;color:var(--ink-soft);text-decoration:none;transition:background .15s,color .15s;}
+.navdd-menu a:hover{background:rgba(37,54,245,.07);color:var(--bright);}
+.navdd-menu a.is-current{color:var(--bright);font-weight:700;}
+.navdd-menu a.is-current::after{content:"";width:7px;height:7px;border-radius:50%;background:var(--bright);flex:0 0 auto;}
+@media(max-width:440px){.pageswitch{gap:2px;padding:3px;font-size:10px;letter-spacing:0;}.pageswitch a{padding:7px 8px;}}
+@media(max-width:820px){.navlinks{display:none;}.topbar-in{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;}.topbar-in .navdd{justify-self:auto;}.pageswitch{margin:0;}.pageswitch a{padding:8px 12px;}}
+
+/* ---------- hero ---------- */
+.hero{padding:var(--s6) 0 var(--s5);position:relative;overflow:hidden;}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(120% 90% at 82% -10%,rgba(37,54,245,.10),transparent 52%);pointer-events:none;}
+.hero-in{position:relative;}
+.hero h1{font-size:clamp(38px,6vw,72px);line-height:1.0;}
+.hero-lead{font-size:clamp(17px,2.1vw,21px);color:var(--ink-soft);max-width:60ch;margin-top:20px;}
+.hero-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px;}
+.chip{font-family:"JetBrains Mono",monospace;font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--bright-deep);background:rgba(37,54,245,.07);border:1px solid var(--line);border-radius:999px;padding:8px 14px;}
+.chip.g{color:var(--green-deep);background:rgba(31,171,84,.09);border-color:rgba(31,171,84,.28);}
+
+/* ---------- sections ---------- */
+section{padding:var(--s6) 0;border-top:1px solid var(--line-soft);}
+.sec-head{max-width:64ch;margin-bottom:var(--s4);}
+.sec-head h2{font-size:clamp(28px,3.6vw,42px);}
+.sec-head p{margin-top:14px;color:var(--ink-soft);font-size:19px;}
+.kicker{font-family:"JetBrains Mono",monospace;font-size:13.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--bright);display:block;margin-bottom:12px;}
+
+/* cards + grids */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+@media(max-width:760px){.grid2,.grid3{grid-template-columns:1fr;}}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px;box-shadow:0 20px 50px -36px rgba(20,33,184,.30);}
+.card h3{font-size:21px;margin-bottom:8px;}
+.card .num{font-family:"Fraunces",serif;font-weight:500;font-size:32px;color:var(--bright);line-height:1;}
+.card.tint{background:linear-gradient(165deg,#fff,#F5F7FF);}
+.card.dark{background:radial-gradient(150% 120% at 12% -20%,rgba(255,255,255,.14),transparent 46%),linear-gradient(160deg,#2536F5,#1421B8 58%,#0d1580);color:#fff;border-color:rgba(255,255,255,.14);box-shadow:0 30px 66px -34px rgba(13,20,98,.7);}
+.card.dark h3,.card.dark .num{color:#fff;}
+.card.dark p{color:rgba(255,255,255,.86);}
+
+/* offer ladder */
+.offer{display:flex;gap:16px;align-items:flex-start;padding:22px;border:1px solid var(--line);border-radius:14px;background:#fff;}
+.offer .badge{flex:0 0 auto;width:52px;height:52px;border-radius:13px;display:grid;place-items:center;font-family:"JetBrains Mono",monospace;font-weight:700;font-size:13px;letter-spacing:.06em;color:#fff;background:linear-gradient(150deg,#2536F5,#5b67ff);}
+.offer.free .badge{background:linear-gradient(150deg,var(--green),#22c265);}
+.offer h3{font-size:19px;margin-bottom:5px;}
+.offer p{margin:0;color:var(--ink-soft);font-size:16px;}
+.offer .price{font-family:"Fraunces",serif;color:var(--bright);font-size:15px;font-style:italic;}
+
+/* whatsapp script blocks */
+.wa{background:#0b141a;border-radius:16px;padding:6px;box-shadow:0 30px 70px -40px rgba(0,0,0,.6);}
+.wa-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 14px 8px;}
+.wa-who{display:flex;align-items:center;gap:9px;color:#e9edef;font-size:13px;font-weight:600;}
+.wa-who .dot{width:34px;height:34px;border-radius:50%;background:linear-gradient(150deg,#25d366,#128c7e);display:grid;place-items:center;flex:0 0 auto;}
+.wa-who .dot svg{width:19px;height:19px;fill:#fff;}
+.wa-who small{display:block;color:#8696a0;font-weight:400;font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;margin-top:1px;}
+.copybtn{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#0b141a;background:#25d366;border:none;border-radius:8px;padding:8px 12px;cursor:pointer;font-weight:700;transition:transform .15s,background .2s;}
+.copybtn:hover{transform:translateY(-1px);background:#22c35d;}
+.copybtn.done{background:#128c7e;color:#fff;}
+.wa-bubble{background:#005c4b;color:#e9edef;border-radius:10px;border-top-right-radius:3px;padding:12px 14px 10px;margin:0 8px 10px;font-size:15.5px;line-height:1.5;white-space:pre-wrap;position:relative;}
+.wa-bubble b{color:#fff;font-weight:700;}
+.wa-bubble i{color:#a7d7cf;font-style:italic;}
+.wa-bubble .tick{display:block;text-align:right;color:#8696a0;font-size:10px;margin-top:6px;font-family:"JetBrains Mono",monospace;}
+.note{font-size:15px;color:var(--ink-faint);margin-top:12px;}
+.note b{color:var(--ink-soft);}
+
+/* ---------- poster (3 options, each scales to its own width via cqi) ---------- */
+.poster-gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;position:relative;left:50%;transform:translateX(-50%);width:min(1680px,94vw);}
+@media(max-width:960px){.poster-gallery{grid-template-columns:1fr 1fr;width:min(820px,94vw);}}
+@media(max-width:560px){.poster-gallery{grid-template-columns:1fr;width:min(420px,92vw);}}
+.poster-opt{margin:0;}
+.poster-opt figcaption{margin-top:12px;font-size:15px;color:var(--ink-soft);line-height:1.5;}
+.poster-save{margin-top:12px;display:inline-flex;align-items:center;gap:7px;font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:var(--bright);border:none;border-radius:9px;padding:9px 15px;cursor:pointer;transition:transform .15s,background .2s,opacity .2s;}
+.poster-save:hover{transform:translateY(-1px);background:var(--bright-deep);}
+.poster-save:disabled{opacity:.6;cursor:default;transform:none;}
+.poster-save.gif{margin-left:8px;background:var(--ink);}
+.poster-save.gif:hover{background:#000;}
+.poster-save svg{width:13px;height:13px;fill:none;stroke:#fff;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;}
+.opt-name{display:block;font-family:"JetBrains Mono",monospace;font-size:14px;letter-spacing:.1em;text-transform:uppercase;color:var(--bright);margin-bottom:5px;}
+.poster{container-type:inline-size;aspect-ratio:1/1;width:100%;border-radius:16px;overflow:hidden;position:relative;color:#fff;background:radial-gradient(130% 90% at 50% -8%,#2f3ef4 0%,#1a24c4 46%,#0a0f8a 100%);box-shadow:0 34px 74px -44px rgba(13,20,98,.75);display:flex;flex-direction:column;justify-content:space-between;padding:clamp(14px,5.4%,26px);}
+.poster::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.16) 1px,transparent 1.3px);background-size:15px 15px;-webkit-mask-image:radial-gradient(120% 80% at 50% 0%,#000 26%,transparent 76%);mask-image:radial-gradient(120% 80% at 50% 0%,#000 26%,transparent 76%);opacity:.5;}
+.poster canvas.poster-bg3d{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;}
+.poster>*{position:relative;z-index:1;}
+.poster-top{display:flex;align-items:center;justify-content:space-between;gap:6px;}
+.poster-lock{display:inline-block;}
+.poster-lock .bm-wm{height:clamp(30px,8.5cqi,76px);width:auto;display:block;}
+.poster:not(.p-clean) .poster-lock{color:#fff;}
+.poster-mile{font-family:"JetBrains Mono",monospace;font-size:clamp(12px,4.6cqi,44px);letter-spacing:.1em;text-transform:uppercase;color:#bcc6ff;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.28);border-radius:999px;padding:4px 8px;white-space:nowrap;}
+.poster-core{text-align:center;}
+.poster-kick{font-family:"JetBrains Mono",monospace;font-size:clamp(13px,4.4cqi,48px);letter-spacing:.09em;text-transform:uppercase;color:#c3ccff;margin-bottom:clamp(6px,2.4cqi,12px);}
+.poster-big{font-family:"Fraunces",serif;font-weight:600;font-size:clamp(46px,30cqi,116px);line-height:.84;letter-spacing:-.02em;}
+.poster-big small{display:block;font-size:.36em;letter-spacing:.01em;font-weight:500;margin-top:.18em;color:#dfe4ff;}
+.poster-cats{font-family:"JetBrains Mono",monospace;font-size:clamp(11.5px,3.5cqi,26px);letter-spacing:.08em;text-transform:uppercase;color:#fff;margin-top:clamp(9px,3.4cqi,16px);opacity:.94;}
+.poster-offers{display:flex;flex-direction:column;gap:clamp(4px,1.8cqi,7px);margin-top:clamp(10px,4cqi,20px);}
+.poster-offer{display:flex;align-items:center;gap:7px;justify-content:center;font-size:clamp(14px,5cqi,50px);line-height:1.25;}
+.poster-offer b{font-weight:700;}
+.poster-offer .pill{font-family:"JetBrains Mono",monospace;font-size:clamp(11px,3.6cqi,30px);letter-spacing:.06em;text-transform:uppercase;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:3px 7px;flex:0 0 auto;}
+.poster-offer .pill.free{background:var(--green);border-color:transparent;color:#fff;}
+.poster-foot{display:flex;flex-direction:column;gap:clamp(5px,2.2cqi,10px);}
+.poster-trust{display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(3px,1.6cqi,8px);font-family:"JetBrains Mono",monospace;font-size:clamp(9.5px,3cqi,25px);letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.72);}
+.poster-trust span{white-space:nowrap;}
+.poster-cta{text-align:center;background:#fff;color:var(--bright-deep);font-weight:700;font-size:clamp(14px,5.3cqi,54px);border-radius:10px;padding:clamp(8px,3cqi,13px);letter-spacing:.01em;}
+/* Option 2 · milestone hero (navy + gold) */
+.poster.p-mile{background:radial-gradient(120% 90% at 50% -10%,#28338f 0%,#141a6e 46%,#080b48 100%);}
+.poster-mnum{font-family:"Fraunces",serif;font-weight:600;font-size:clamp(40px,24cqi,86px);line-height:.86;letter-spacing:-.01em;color:#F2C863;}
+.poster-mnum span{display:block;font-size:.42em;letter-spacing:.12em;text-transform:uppercase;color:#F2C863;margin-top:.06em;}
+.poster-msub{font-family:"JetBrains Mono",monospace;font-size:clamp(11px,3.9cqi,40px);letter-spacing:.12em;text-transform:uppercase;color:#c3ccff;margin-top:clamp(6px,2.4cqi,10px);}
+.poster-mrule{width:38px;height:2px;background:rgba(242,200,99,.75);margin:clamp(10px,3.6cqi,18px) auto;}
+.poster-mgive b{font-family:"Fraunces",serif;font-weight:500;font-size:clamp(17px,6.2cqi,56px);color:#fff;display:block;line-height:1.15;}
+.poster-mgive span{display:block;margin-top:clamp(5px,2cqi,9px);font-size:clamp(13px,4.4cqi,42px);color:#dfe4ff;}
+/* Option 3 · clean light (editorial) */
+.poster.p-clean{background:linear-gradient(180deg,#ffffff,#F2F5FF);color:var(--ink);border:1px solid var(--line);box-shadow:0 26px 62px -44px rgba(20,33,184,.4);}
+.poster.p-clean::before{background-image:radial-gradient(rgba(37,54,245,.13) 1px,transparent 1.3px);}
+.poster.p-clean .poster-lock{color:var(--bright);}
+.poster.p-clean .poster-lock .star{fill:var(--bright);}
+.poster.p-clean .poster-mile{color:var(--bright-deep);background:rgba(37,54,245,.06);border-color:var(--line);}
+.poster.p-clean .poster-kick{color:var(--bright);}
+.poster.p-clean .poster-big{color:var(--ink);}
+.poster.p-clean .poster-big small{color:var(--ink-soft);}
+.poster.p-clean .poster-cats{color:var(--bright-deep);opacity:1;}
+.poster.p-clean .poster-offer{color:var(--ink);}
+.poster.p-clean .poster-offer .pill{color:var(--bright-deep);background:rgba(37,54,245,.08);border-color:var(--line);}
+.poster.p-clean .poster-offer .pill.free{background:var(--green);color:#fff;border-color:transparent;}
+.poster.p-clean .poster-trust{color:var(--ink-faint);}
+.poster.p-clean .poster-cta{background:var(--bright);color:#fff;}
+.spec{font-size:16px;}
+.spec li{margin-bottom:9px;color:var(--ink-soft);}
+.spec b{color:var(--ink);}
+
+/* ---------- video script ---------- */
+.script-table{width:100%;border-collapse:collapse;font-size:14px;}
+.script-table th{text-align:left;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);padding:0 12px 10px;border-bottom:1px solid var(--line);}
+.script-table td{padding:14px 12px;border-bottom:1px solid var(--line-soft);vertical-align:top;color:var(--ink-soft);}
+.script-table td.t{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--bright);white-space:nowrap;font-weight:600;}
+.script-table td.say{color:var(--ink);font-size:14.5px;}
+.script-table td.say b{color:var(--bright-deep);}
+.script-table td.cue{font-size:13px;}
+.tablescroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:12px;}
+@media(max-width:700px){.script-table{min-width:640px;}}
+.spoken{background:var(--wash);border:1px solid var(--line);border-radius:14px;padding:24px 26px;font-family:"Fraunces",Georgia,serif;font-size:19px;line-height:1.6;color:var(--ink);}
+.spoken p{margin:0 0 12px;}
+.spoken .cue{display:block;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--bright);margin:18px 0 4px;}
+
+/* diagram */
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;align-items:stretch;}
+.flow-sr{grid-template-columns:repeat(3,1fr);}
+@media(max-width:760px){.flow{grid-template-columns:1fr 1fr;}.flow-sr{grid-template-columns:1fr 1fr;}}
+.flow-step{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 14px;position:relative;}
+.flow-step .n{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.1em;color:var(--bright);display:block;margin-bottom:8px;}
+.flow-step h3{font-size:15px;font-family:"Inter",sans-serif;font-weight:700;letter-spacing:0;margin-bottom:4px;}
+.flow-step p{font-size:12.5px;color:var(--ink-soft);margin:0;}
+.flow-step.end{background:linear-gradient(160deg,#2536F5,#1421B8);color:#fff;border-color:transparent;}
+.flow-step.end h3{color:#fff;}.flow-step.end p{color:rgba(255,255,255,.85);}.flow-step.end .n{color:#bcc6ff;}
+
+/* checklist */
+.check{list-style:none;margin:0;padding:0;}
+.check li{display:flex;gap:12px;align-items:flex-start;padding:13px 0;border-top:1px solid var(--line-soft);font-size:15px;}
+.check li:first-child{border-top:none;}
+.check .box{flex:0 0 auto;width:20px;height:20px;border:2px solid var(--bright);border-radius:6px;margin-top:1px;}
+.check b{color:var(--ink);}
+.check span{color:var(--ink-soft);}
+
+.callout{background:linear-gradient(100deg,rgba(37,54,245,.06),rgba(37,54,245,.015));border:1px solid var(--line);border-left:3px solid var(--bright);border-radius:0 12px 12px 0;padding:18px 22px;margin:20px 0;font-size:15px;color:var(--ink-soft);}
+.callout b{color:var(--ink);}
+.psy{font-size:13.5px;color:var(--ink-faint);border-top:1px dashed var(--line);margin-top:16px;padding-top:14px;}
+.psy b{color:var(--bright-deep);font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;display:block;margin-bottom:5px;}
+
+footer{border-top:1px solid var(--line);padding:44px 0 60px;text-align:center;color:var(--ink-faint);font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.08em;}
+.stars-def{position:absolute;width:0;height:0;}
+</style>
+</head>
+<body>
+<svg class="stars-def" aria-hidden="true"><defs><linearGradient id="bmStarG" x1="5" y1="5" x2="27" y2="27" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#c6cbff"/><stop offset="1" stop-color="#7d84ff"/></linearGradient><linearGradient id="bmStarGd" x1="5" y1="5" x2="27" y2="27" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#4a57f2"/><stop offset="1" stop-color="#1b25c9"/></linearGradient><radialGradient id="bmPipG" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#f2f3ff"/><stop offset="1" stop-color="#9aa1ff"/></radialGradient><g id="bmStar8"><path d="M16,16 L16.72,12.88 L16,4 L15.28,12.88 Z" fill="url(#bmStarG)"/><path d="M16,16 L18.71,14.30 L24.49,7.51 L17.70,13.29 Z" fill="url(#bmStarG)"/><path d="M16,16 L19.12,16.72 L28,16 L19.12,15.28 Z" fill="url(#bmStarG)"/><path d="M16,16 L17.70,18.71 L24.49,24.49 L18.71,17.70 Z" fill="url(#bmStarG)"/><path d="M16,16 L15.28,19.12 L16,28 L16.72,19.12 Z" fill="url(#bmStarG)"/><path d="M16,16 L13.29,17.70 L7.51,24.49 L14.30,18.71 Z" fill="url(#bmStarG)"/><path d="M16,16 L12.88,15.28 L4,16 L12.88,16.72 Z" fill="url(#bmStarG)"/><path d="M16,16 L14.30,13.29 L7.51,7.51 L13.29,14.30 Z" fill="url(#bmStarG)"/><circle cx="16" cy="16" r="2.1" fill="url(#bmPipG)"/></g><g id="bmStar8d"><path d="M16,16 L16.72,12.88 L16,4 L15.28,12.88 Z" fill="url(#bmStarGd)"/><path d="M16,16 L18.71,14.30 L24.49,7.51 L17.70,13.29 Z" fill="url(#bmStarGd)"/><path d="M16,16 L19.12,16.72 L28,16 L19.12,15.28 Z" fill="url(#bmStarGd)"/><path d="M16,16 L17.70,18.71 L24.49,24.49 L18.71,17.70 Z" fill="url(#bmStarGd)"/><path d="M16,16 L15.28,19.12 L16,28 L16.72,19.12 Z" fill="url(#bmStarGd)"/><path d="M16,16 L13.29,17.70 L7.51,24.49 L14.30,18.71 Z" fill="url(#bmStarGd)"/><path d="M16,16 L12.88,15.28 L4,16 L12.88,16.72 Z" fill="url(#bmStarGd)"/><path d="M16,16 L14.30,13.29 L7.51,7.51 L13.29,14.30 Z" fill="url(#bmStarGd)"/><circle cx="16" cy="16" r="2.1" fill="url(#bmPipG)"/></g><g id="bmstar"><polygon points="50.0,2.0 56.2,26.8 74.0,8.4 67.0,33.0 91.6,26.0 73.2,43.8 98.0,50.0 73.2,56.2 91.6,74.0 67.0,67.0 74.0,91.6 56.2,73.2 50.0,98.0 43.8,73.2 26.0,91.6 33.0,67.0 8.4,74.0 26.8,56.2 2.0,50.0 26.8,43.8 8.4,26.0 33.0,33.0 26.0,8.4 43.8,26.8"/></g></defs></svg>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <div class="pageswitch">
+      <a class="on" href="Brand-Method-Campaign.html">Promotion</a>
+      <a href="index.html">Outreach</a>
+      <a href="Brand-Method-Comms.html">Comms</a>
+    </div>
+    <div class="navdd">
+      <button class="navdd-btn" type="button" aria-haspopup="true" aria-expanded="false">Website SP <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+      <div class="navdd-menu" role="menu">
+        <a role="menuitem" href="Brand-Method-Brand.html">Branding SP</a>
+      </div>
+    </div>
+  </div>
+</div>
+<script>(function(){var dd=document.querySelector('.navdd');if(!dd)return;var btn=dd.querySelector('.navdd-btn');btn.addEventListener('click',function(e){e.stopPropagation();var o=dd.classList.toggle('open');btn.setAttribute('aria-expanded',o?'true':'false');});document.addEventListener('click',function(e){if(!dd.contains(e.target)){dd.classList.remove('open');btn.setAttribute('aria-expanded','false');}});document.addEventListener('keydown',function(e){if(e.key==='Escape'){dd.classList.remove('open');btn.setAttribute('aria-expanded','false');}});})();</script>
+
+<header class="hero"><div class="wrap hero-in">
+  <span class="eyebrow">Internal campaign brief · team only</span>
+  <h1>The US$1&nbsp;Billion <em>Giveback.</em></h1>
+  <p class="hero-lead">The businesses we have built have crossed <b>US$1 billion in combined sales</b>. Sixteen years, 100+ brands, and clients that scale into the hundreds of millions a year. To mark it, every tech project goes 50% off, and our best clients get a build for free. This page is the whole play: the story, the WhatsApp scripts, the poster, Nuramina's video, the showreel plan, and the rollout. Built so anyone on the team can run it without asking.</p>
+  <div class="hero-meta">
+    <span class="chip g">50% off · all tech projects</span>
+    <span class="chip g">VIP clients · free website revamp</span>
+    <span class="chip">Websites · Apps · Portals · Games</span>
+    <span class="chip">Limited time</span>
+  </div>
+</div></header>
+
+<!-- ============ STRATEGY ============ -->
+<section id="strategy"><div class="wrap">
+  <div class="sec-head">
+    <span class="kicker">01 · The story we tell</span>
+    <h2>Not cheap. <em>Efficient.</em></h2>
+    <p>This is the one idea the whole campaign rests on. Everyone on the team says it the same way, because it is the honest reason we can price world-class work this low.</p>
+  </div>
+
+  <div class="grid3">
+    <div class="card tint">
+      <div class="num">01</div>
+      <h3>Why we can do this</h3>
+      <p>Big agencies are slow and expensive because people do the heavy lifting. Our new system, structure and AI formatting do that lifting instead. Same craft, a fraction of the time. We pass the saving straight to the client.</p>
+    </div>
+    <div class="card tint">
+      <div class="num">02</div>
+      <h3>What every build gets</h3>
+      <p>A full audit of where you leak customers. A framework and structure that actually converts. Then high-level design: real animation, interaction, brand scripts that sell, and a premium look that lifts awareness. International quality, local price.</p>
+    </div>
+    <div class="card tint">
+      <div class="num">03</div>
+      <h3>Why now</h3>
+      <p>US$1 billion in combined client sales is a real milestone, and a real reason to give back. It earns the discount honestly, rewards the clients who got us here, and opens the door to the next hundred brands.</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <b>The line, memorised:</b> &ldquo;We are not cheap, we are efficient. Our system and AI do the work big agencies bill you months of people-hours for. Same international standard, built in days, and right now, at half the price.&rdquo;
+  </div>
+
+  <p class="psy"><b>Why this works · psychology</b>
+  The giveback frames a discount as <b>reciprocity</b>, not desperation: we succeeded, so we share, which raises perceived value instead of lowering it. Naming the real mechanism (system + AI) kills the &ldquo;cheap = low quality&rdquo; objection before it forms. The milestone adds proof and a clock: it happened once, the offer ends, act now.</p>
+</div></section>
+
+<!-- ============ OFFERS ============ -->
+<section id="offers"><div class="wrap">
+  <div class="sec-head">
+    <span class="kicker">02 · The offer ladder</span>
+    <h2>Three doors, one giveback.</h2>
+    <p>Same milestone, matched to who they are. Never send the wrong door to the wrong person, that is the only rule.</p>
+  </div>
+  <div class="grid3">
+    <div class="offer free">
+      <div class="badge">VIP</div>
+      <div>
+        <h3>🎁 Past &amp; VIP clients</h3>
+        <p class="price">A free website revamp.</p>
+        <p>New design, new structure, built to convert. Our thank-you to the clients who built us. Reply keyword: <b>REVAMP</b>.</p>
+      </div>
+    </div>
+    <div class="offer">
+      <div class="badge">50%</div>
+      <div>
+        <h3>🔥 Current / ongoing clients</h3>
+        <p class="price">50% off, both ways.</p>
+        <p>Half off the remaining scope of your live project, and half off any new tech project (web, app, portal, game). Reply keyword: <b>50</b>.</p>
+      </div>
+    </div>
+    <div class="offer">
+      <div class="badge">NEW</div>
+      <div>
+        <h3>🚀 New clients</h3>
+        <p class="price">50% off any tech project.</p>
+        <p>Fixed price, delivery date in writing, 100% money-back if we miss it. Starts with a free 30-minute call. Reply keyword: <b>TECH</b>.</p>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- ============ WHATSAPP ============ -->
+<section id="whatsapp"><div class="wrap">
+  <div class="sec-head">
+    <span class="kicker">03 · WhatsApp broadcast scripts</span>
+    <h2>Copy, paste, send.</h2>
+    <p>Three ready-to-send messages, one per door. Formatted for WhatsApp (single asterisks bold, underscores italic). Tap copy, paste into a broadcast or a one-to-one chat, send with the poster below.</p>
+  </div>
+
+  <div class="grid2" style="align-items:start;">
+
+    <div class="wa">
+      <div class="wa-head">
+        <div class="wa-who"><span class="dot"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.5 1.3 5L2 22l5.1-1.3c1.5.8 3.1 1.3 4.9 1.3 5.5 0 10-4.5 10-10S17.5 2 12 2z"/></svg></span><span>Past &amp; VIP clients<small>Door 1 · already done for you</small></span></div>
+        <button class="copybtn" data-copy="va1">Copy</button>
+      </div>
+      <div class="wa-bubble" id="va1">Hi [name], quick one from us.
+
+Over 16 years, the 100+ brands we have helped build have just crossed <b>US$1 billion in combined client sales</b>. That belongs to the clients who trusted the work, you included.
+
+So instead of an offer, we did the work first: we have <b>already rebuilt your site</b>, done and ready to go live. It is yours, free, no catch.
+
+It is your site, so tell us anything to change. We can deploy it, or hand it to your tech team. Say the word and we will send the preview over.<span class="tick">11:32 ✓✓</span></div>
+    </div>
+
+    <div class="wa">
+      <div class="wa-head">
+        <div class="wa-who"><span class="dot"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.5 1.3 5L2 22l5.1-1.3c1.5.8 3.1 1.3 4.9 1.3 5.5 0 10-4.5 10-10S17.5 2 12 2z"/></svg></span><span>Current / ongoing clients<small>Door 2 · 50% both ways</small></span></div>
+        <button class="copybtn" data-copy="va2">Copy</button>
+      </div>
+      <div class="wa-bubble" id="va2">Hi [name], sharing this with you directly.
+
+Over 16 years, the 100+ brands we have helped build just crossed <b>US$1 billion in combined client sales</b>, and you are building with us right now.
+
+To mark it, we want to give you <b>50% off</b>: the rest of your current project, and anything new you start with us, web, app, portal or game.
+
+We can do this because our system and AI now carry what big agencies bill months of manpower for. Same standard, full treatment, nothing stripped out. Want us to apply it? Just tell us.<span class="tick">11:32 ✓✓</span></div>
+    </div>
+
+    <div class="wa">
+      <div class="wa-head">
+        <div class="wa-who"><span class="dot"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.5 1.3 5L2 22l5.1-1.3c1.5.8 3.1 1.3 4.9 1.3 5.5 0 10-4.5 10-10S17.5 2 12 2z"/></svg></span><span>New clients / prospects<small>Door 3 · 50% off tech</small></span></div>
+        <button class="copybtn" data-copy="va3">Copy</button>
+      </div>
+      <div class="wa-bubble" id="va3">Hi [name], quick one from the team at Brand Method. We took a proper look at [the one thing we noticed on your site], and it is exactly what we would fix first.
+
+To mark 16 years and <b>US$1 billion in combined client sales</b> across the brands we have built, every tech project we take on is <b>50% off</b> for a short window: web, apps, portals, games.
+
+Fixed price, delivery date in writing, full money back if we miss it. Our system and AI carry what big agencies bill months for, so the craft holds and you keep the saving.
+
+Open to a free 30 minute call where we show you exactly what we would build?<span class="tick">11:32 ✓✓</span></div>
+    </div>
+
+    <div class="wa">
+      <div class="wa-head">
+        <div class="wa-who"><span class="dot"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.5 1.3 5L2 22l5.1-1.3c1.5.8 3.1 1.3 4.9 1.3 5.5 0 10-4.5 10-10S17.5 2 12 2z"/></svg></span><span>WhatsApp Status / one-liner<small>For the poster caption</small></span></div>
+        <button class="copybtn" data-copy="va4">Copy</button>
+      </div>
+      <div class="wa-bubble" id="va4">🎉 US$1 billion in combined client sales, done. To celebrate: <b>50% off every tech project</b>, 🎁 and a free revamp for our VIPs. Websites, apps, portals, games, built by our team at MRANTI. Fixed price, money-back guarantee. Limited time. 💬 Message us to claim yours.<span class="tick">11:32 ✓✓</span></div>
+    </div>
+
+  </div>
+
+  <p class="note"><b>Send order:</b> poster first (image), then the matching script under it. <b>Never</b> paste pricing numbers or the portfolio link in the first message. For Doors 2 and 3 their reply opens the call, and the call unlocks the scope and price. <b>Door 1 is different:</b> their revamp is already built, so nothing to claim, you are simply handing it over. <b>Segment before you send:</b> Door 1 to the past-client list only, Door 2 to live-project chats, Door 3 to prospects.</p>
+</div></section>
+
+<!-- ============ POSTER ============ -->
+<section id="poster"><div class="wrap">
+  <div class="sec-head">
+    <span class="kicker">04 · The poster</span>
+    <h2>One image, sent first.</h2>
+    <p>Square 1:1, built for WhatsApp broadcast and Status. This is a live, on-brand mockup: screenshot it, or export at 1080&times;1080. Edit the text right in this file if a number changes.</p>
+  </div>
+
+  <div class="poster-gallery">
+
+    <figure class="poster-opt">
+      <div class="poster p-number">
+        <canvas class="poster-bg3d" data-theme="blue" aria-hidden="true"></canvas>
+        <div class="poster-top">
+          <span class="poster-lock"><img class="bm-wm" src="bm-logo-full-white.png" alt="Brand Method"></span>
+          <span class="poster-mile">US$1 Billion 🎉</span>
+        </div>
+        <div class="poster-core">
+          <div class="poster-kick">To celebrate, we're giving back</div>
+          <div class="poster-big">50%<small>off every tech project</small></div>
+          <div class="poster-offers">
+            <div class="poster-offer"><span class="pill free">🎁 VIP</span> <span>Past clients: <b>a free revamp</b></span></div>
+            <div class="poster-offer"><span class="pill">NOW</span> <span>Everyone else: <b>50% off</b></span></div>
+          </div>
+        </div>
+        <div class="poster-foot">
+          <div class="poster-cta">💬 Message us to claim yours</div>
+        </div>
+      </div>
+      <button class="poster-save" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>Save as image</button><button class="poster-save gif" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>Save as GIF</button>
+      <figcaption><span class="opt-name">Option 1 · The Number</span> Punchy. The discount is the hero. The safe all-rounder for any broadcast.</figcaption>
+    </figure>
+
+    <figure class="poster-opt">
+      <div class="poster p-mile">
+        <canvas class="poster-bg3d" data-theme="navy" aria-hidden="true"></canvas>
+        <div class="poster-top">
+          <span class="poster-lock"><img class="bm-wm" src="bm-logo-full-white.png" alt="Brand Method"></span>
+          <span class="poster-mile">The giveback 🎉</span>
+        </div>
+        <div class="poster-core">
+          <div class="poster-kick">We just crossed</div>
+          <div class="poster-mnum">US$1<span>Billion</span></div>
+          <div class="poster-msub">in combined client sales</div>
+          <div class="poster-mrule"></div>
+          <div class="poster-mgive"><b>So every tech project is 50% off</b><span>🎁 and VIP clients get a free revamp</span></div>
+        </div>
+        <div class="poster-foot">
+          <div class="poster-cta">💬 Message us to claim yours</div>
+        </div>
+      </div>
+      <button class="poster-save" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>Save as image</button><button class="poster-save gif" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>Save as GIF</button>
+      <figcaption><span class="opt-name">Option 2 · The Milestone</span> Leads with the billion. Warm and celebratory. Best for past clients and WhatsApp Status.</figcaption>
+    </figure>
+
+    <figure class="poster-opt">
+      <div class="poster p-clean">
+        <canvas class="poster-bg3d" data-theme="light" aria-hidden="true"></canvas>
+        <div class="poster-top">
+          <span class="poster-lock"><img class="bm-wm" src="bm-logo-full.png" alt="Brand Method"></span>
+          <span class="poster-mile">US$1 Billion 🎉</span>
+        </div>
+        <div class="poster-core">
+          <div class="poster-kick">The US$1 billion giveback</div>
+          <div class="poster-big">50%<small>off, everything tech</small></div>
+          <div class="poster-offers">
+            <div class="poster-offer"><span class="pill free">🎁 VIP</span> <span>Past clients: <b>a free revamp</b></span></div>
+            <div class="poster-offer"><span class="pill">NOW</span> <span>Everyone else: <b>50% off</b></span></div>
+          </div>
+        </div>
+        <div class="poster-foot">
+          <div class="poster-cta">💬 Message us to claim yours</div>
+        </div>
+      </div>
+      <button class="poster-save" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>Save as image</button><button class="poster-save gif" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>Save as GIF</button>
+      <figcaption><span class="opt-name">Option 3 · The Clean Cut</span> Light and editorial, feels luxe. Best for premium prospects and the website.</figcaption>
+    </figure>
+
+  </div>
+
+  <div class="card" style="margin-top:28px;">
+    <h3 style="font-size:20px;margin-bottom:12px;">How to use them</h3>
+    <ol class="spec" style="margin:0;">
+      <li><b>Pick one per audience.</b> Option 2 (Milestone) to past clients, Option 1 (Number) to a broad prospect blast, Option 3 (Clean) to premium leads and on the site. Or A/B test them.</li>
+      <li><b>Send the image first,</b> then the matching WhatsApp script from section 03 underneath.</li>
+      <li><b>Screenshot or export</b> at 1080&times;1080 (1:1). Each is built to read at a glance, thumb-stopping in a chat list.</li>
+      <li><b>One variable to swap:</b> if the headline number changes, edit only the big figure and the two offer lines. Everything else is fixed brand furniture.</li>
+      <li><b>Locked to brand:</b> blue #2536F5, gold for the milestone, Fraunces for the big type, JetBrains Mono for labels. Do not restyle.</li>
+    </ol>
+    <p class="psy" style="margin-top:14px;"><b>Why three, not one</b>
+    Different buyers price differently. A percentage is the fastest promise the eye can read, so Option 1 converts cold lists. A US$1 billion milestone is social proof that makes the gift feel earned, not desperate, so Option 2 warms past clients. A clean white cut signals premium to buyers who distrust loud discounts, so Option 3 suits high-ticket prospects. Same offer, three psychologies.</p>
+  </div>
+</div></section>
+
+<!-- ============ VIDEO ============ -->
+<section id="video"><div class="wrap">
+  <div class="sec-head">
+    <span class="kicker">05 · Nuramina's video</span>
+    <h2>The repositioning film.</h2>
+    <p>This video does one strategic job: move us from &ldquo;they make websites&rdquo; to <b>a technology branding and product-creation company</b>. It should pull website, portal, app, game and digital-product work, and it shows, never just tells, by cutting our showreel underneath her words. Primary cut 9:16 for WhatsApp Status and Reels, plus a 16:9 for the site. Runtime 60 to 75 seconds.</p>
+  </div>
+
+  <div class="callout">
+    <b>Host:</b> Nuramina Afham, Chief Customer &amp; Revenue Officer. <b>Location:</b> our office, MRANTI Technology Park, Bukit Jalil. <b>Look:</b> blue blazer, white shirt, plain premium backdrop, real team working softly behind. <b>Feel:</b> calm and certain, founder to founder, a small real smile. She talks to one person, not a camera.
+  </div>
+
+  <h3 style="font-size:22px;margin:34px 0 14px;">The script, as she says it</h3>
+  <div class="spoken">
+    <span class="cue">Hook · 0:00 to 0:07 · tight, direct to lens, no intro</span>
+    <p>Most businesses think they need more marketing. What they actually need is a product people want to use.</p>
+    <span class="cue">Position · 0:07 to 0:22 · showreel starts under her</span>
+    <p>We are Brand Method. We do not just design a brand and leave. We build the thing the brand lives in. Your website. Your app. Your portal. Your game. The whole digital product, built to convert.</p>
+    <span class="cue">Why us · 0:22 to 0:44 · audit → framework → design → ads b-roll</span>
+    <p>Sixteen years and over a hundred brands taught us how people decide, and how to move them. So we audit where you lose customers, build the structure that fixes it, and wrap it in design, animation and brand copy that actually sells. Then we keep it running. Security, maintenance, and ads that pull their weight.</p>
+    <span class="cue">Proof · 0:44 to 0:58 · logos + live builds montage</span>
+    <p>Tourism Malaysia. Eskayvie. Ultima Markets. Real brands, real products, shipped from our team here at MRANTI. The same system, at a fraction of the agency price, because ours does the heavy lifting.</p>
+    <span class="cue">Close · 0:58 to 1:10 · warm, leaning in, end card</span>
+    <p>If you want a digital product that earns its keep, not just a brochure that sits there, let's talk. Book the free thirty-minute call. We will show you exactly what we would build for you. The link is right here.</p>
+  </div>
+
+  <h3 style="font-size:22px;margin:38px 0 14px;">Beat by beat, with showreel cues</h3>
+  <div class="tablescroll">
+  <table class="script-table">
+    <thead><tr><th>Time</th><th>She says (caption, burned in)</th><th>On screen / showreel cue</th><th>SFX / music</th></tr></thead>
+    <tbody>
+      <tr><td class="t">0:00 to 0:07</td><td class="say"><b>&ldquo;they need a product people want to use&rdquo;</b></td><td class="cue">Hard cut in. Tight on Nuramina, MRANTI office soft behind. No logo, no title yet.</td><td class="cue">Room tone only. Music holds.</td></tr>
+      <tr><td class="t">0:07 to 0:22</td><td class="say">website &middot; app &middot; portal &middot; game, &ldquo;<b>built to convert</b>&rdquo;</td><td class="cue">Showreel opens: 4 fast cuts, one per word, of a live site, an app screen, a portal dashboard, a game. Her lower-third name tag appears once.</td><td class="cue">Music lifts. One soft whoosh per cut.</td></tr>
+      <tr><td class="t">0:22 to 0:44</td><td class="say">&ldquo;audit &middot; structure &middot; design that sells &middot; keep it running&rdquo;</td><td class="cue">Four proof beats: an audit screen, the framework diagram animating, a premium site scrolling with motion, an ads dashboard trending up.</td><td class="cue">Steady build. Numbers tick on the ads shot.</td></tr>
+      <tr><td class="t">0:44 to 0:58</td><td class="say">&ldquo;Tourism Malaysia &middot; Eskayvie &middot; Ultima Markets&rdquo;</td><td class="cue">Client logos snap in, then the live builds behind them. Close on the MRANTI sign / team at work for the &ldquo;here&rdquo;.</td><td class="cue">Music peak, then pull back under her.</td></tr>
+      <tr><td class="t">0:58 to 1:10</td><td class="say">&ldquo;book the free thirty-minute call &middot; the link is right here&rdquo;</td><td class="cue">Back to her, warm. Cut to end card: animated star + &ldquo;Book the free call&rdquo; + brandmethod.co + WhatsApp.</td><td class="cue">Music resolves. Button tap SFX.</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="grid2" style="margin-top:34px;">
+    <div class="card">
+      <h3>Make it human</h3>
+      <p>Short sentences, one breath each. Cut any take where she sounds like she is reading. The hook is the whole game, shoot it 5 or 6 times. Captions always on, people watch muted. Keep the numbers concrete: sixteen years, a hundred brands, thirty minutes, money-back.</p>
+    </div>
+    <div class="card">
+      <h3>Production</h3>
+      <p>9:16, 1080&times;1920 primary. Face and text out of the top 12% and bottom 18% (safe for caption and CTA). Brand blue #2536F5, white, ink. Fraunces for big words, JetBrains Mono for numbers. Lower-third first time on cam: &ldquo;Nuramina Afham · CCRO&rdquo;. Match grade to the showreel so the two feel like one piece.</p>
+    </div>
+  </div>
+
+  <p class="psy"><b>Why this script converts</b>
+  It opens on a <b>reframe</b> (marketing vs product) that makes the viewer feel understood, then widens the category so we are not compared to a web shop. Proof is shown, not claimed, which beats adjectives. &ldquo;Earns its keep, not a brochure&rdquo; is a <b>loss frame</b>: a passive site is money already leaking. The close asks for one small, free, specific next step, the easiest yes.</p>
+</div></section>
+
+<!-- ============ SHOWREEL ============ -->
+<section id="showreel"><div class="wrap">
+  <div class="sec-head">
+    <span class="kicker">06 · The showreel &amp; where it lives</span>
+    <h2>Proof, on a loop.</h2>
+    <p>The video needs real work cut underneath it, and that same work deserves a permanent home. Build one 30 to 40 second reel, use it three ways.</p>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h3>What the reel is</h3>
+      <p>A tight montage of our best builds, grouped so the range is obvious: <b>Brand</b>, <b>Websites</b>, <b>Apps</b>, <b>Portals</b>, <b>Games</b>. 6 to 8 seconds per band, real screens moving, no stock. Opens on the animated star, closes on the call-to-action card. Silent-safe, captioned, exports clean at 9:16 and 16:9.</p>
+    </div>
+    <div class="card">
+      <h3>Where it lives (three uses)</h3>
+      <p><b>1. As the video B-roll</b>, cut under Nuramina's words (section 05). <b>2. A standalone showreel page</b>, <span class="mono" style="font-size:13px;">Brand-Method-Showreel.html</span>, that loops the reel over a grid of live, openable builds. <b>3. Embedded</b> in the &ldquo;work&rdquo; section of both sales pages and linked from the video end card and WhatsApp bio.</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <b>Fastest path:</b> the sales page already runs live, openable demos (AKK, Eskayvie, RubexPay, Tenthpin and more). The showreel page reuses those exact iframes plus the reel on top, so it is a half-day build, not a new shoot. Link it from the video, the WhatsApp broadcast (&ldquo;see the work: [link]&rdquo; only after they reply), and the nav of both sales pages.
+  </div>
+
+  <div class="flow flow-sr" style="margin-top:8px;">
+    <div class="flow-step"><span class="n">Band 1</span><h3>Brand</h3><p>Identity, systems, decks. Eskayvie, DDealz.</p></div>
+    <div class="flow-step"><span class="n">Band 2</span><h3>Websites</h3><p>Live, converting sites. AKK, Tenthpin, RubexPay.</p></div>
+    <div class="flow-step"><span class="n">Band 3</span><h3>Apps</h3><p>Product UX people open daily.</p></div>
+    <div class="flow-step"><span class="n">Band 4</span><h3>Portals</h3><p>Dashboards, logins, live data.</p></div>
+    <div class="flow-step"><span class="n">Band 5</span><h3>Games</h3><p>Interactive, playable, memorable.</p></div>
+    <div class="flow-step end"><span class="n">Outro</span><h3>Book the call</h3><p>Star + CTA + brandmethod.co.</p></div>
+  </div>
+</div></section>
+
+<!-- ============ FLOW ============ -->
+<section id="flow"><div class="wrap">
+  <div class="sec-head">
+    <span class="kicker">07 · The campaign flow</span>
+    <h2>Land cheap, expand wide, keep them.</h2>
+    <p>How one 50%-off yes becomes a long client. This is the money logic behind the giveback, read left to right.</p>
+  </div>
+  <div class="flow">
+    <div class="flow-step"><span class="n">Step 1</span><h3>Reach out</h3><p>Poster + script on WhatsApp. One clear offer, one keyword reply.</p></div>
+    <div class="flow-step"><span class="n">Step 2</span><h3>Free call</h3><p>30 minutes. We audit, name the gap, show what we would build.</p></div>
+    <div class="flow-step"><span class="n">Step 3</span><h3>Land</h3><p>50% off the first project. Fixed price, date in writing, guaranteed.</p></div>
+    <div class="flow-step"><span class="n">Step 4</span><h3>Expand</h3><p>Same client grows: site → app → portal → game.</p></div>
+    <div class="flow-step end"><span class="n">Step 5</span><h3>Keep</h3><p>Care plan and ads retainer. One-off becomes monthly revenue.</p></div>
+  </div>
+  <p class="psy"><b>The economics</b>
+  The discount is a customer-acquisition cost, not a loss. A cheap or free first build wins trust fast, and because our system makes delivery cheap to produce, the margin survives. The real return is step 4 and 5: the second, third and fourth project at full price, plus recurring care and ads. We buy the relationship once and earn on it for years.</p>
+</div></section>
+
+<!-- ============ ROLLOUT ============ -->
+<section id="rollout"><div class="wrap">
+  <div class="sec-head">
+    <span class="kicker">08 · Team rollout</span>
+    <h2>Run it this week.</h2>
+    <p>Do these in order. Nothing here needs a meeting.</p>
+  </div>
+  <ul class="check">
+    <li><span class="box"></span><span><b>Segment the lists.</b> Split contacts into three: past/VIP clients, live-project clients, prospects. Wrong door to wrong person is the only way to break this.</span></li>
+    <li><span class="box"></span><span><b>Export the poster</b> at 1080&times;1080 from section 04. One image, brand-locked.</span></li>
+    <li><span class="box"></span><span><b>Send door by door.</b> Poster first, then the matching script from section 03. Broadcast lists, or one-to-one for VIPs (more personal, higher reply).</span></li>
+    <li><span class="box"></span><span><b>Man the keywords.</b> REVAMP, 50, TECH. Every reply gets a same-day answer and a booked call. Speed is the close.</span></li>
+    <li><span class="box"></span><span><b>Shoot Nuramina's video</b> (section 05) at MRANTI. 5 to 6 hook takes. Cut the showreel underneath.</span></li>
+    <li><span class="box"></span><span><b>Build the showreel page</b> from the existing live demos, link it everywhere once clients ask to see work.</span></li>
+    <li><span class="box"></span><span><b>Hold the line.</b> No prices or portfolio in first contact. The call unlocks scope and price. Fixed price, date in writing, money-back, every time.</span></li>
+  </ul>
+</div></section>
+
+<footer>
+  Brand Method · Internal campaign brief · The US$1 Billion Giveback · brandmethod.co · MRANTI Technology Park, Bukit Jalil
+</footer>
+
+<script>
+(function(){
+  document.querySelectorAll('.copybtn').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var el=document.getElementById(btn.getAttribute('data-copy'));
+      if(!el)return;
+      var text=el.cloneNode(true);
+      var tick=text.querySelector('.tick'); if(tick)tick.remove();
+      /* convert <b>/<i> back to WhatsApp markers */
+      var html=text.innerHTML;
+      html=html.replace(/<b>/g,'*').replace(/<\/b>/g,'*').replace(/<i>/g,'_').replace(/<\/i>/g,'_');
+      var tmp=document.createElement('div'); tmp.innerHTML=html;
+      var plain=(tmp.textContent||tmp.innerText||'').replace(/\n{3,}/g,'\n\n').trim();
+      var done=function(){ btn.textContent='Copied'; btn.classList.add('done'); setTimeout(function(){ btn.textContent='Copy'; btn.classList.remove('done'); },1600); };
+      if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(plain).then(done,function(){ fallback(plain); done(); }); }
+      else { fallback(plain); done(); }
+    });
+  });
+  function fallback(t){ var ta=document.createElement('textarea'); ta.value=t; ta.style.position='fixed'; ta.style.opacity='0'; document.body.appendChild(ta); ta.select(); try{document.execCommand('copy');}catch(e){} document.body.removeChild(ta); }
+})();
+</script>
+<script>
+/* Poster 3D ambient visual: rotating point-sphere + orbiting rings, 6s loop, self-contained */
+(function(){
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var THEMES = {
+    blue:  { c:'255,255,255', ring:'199,207,255', glow:'124,134,255', a:1.0  },
+    navy:  { c:'214,223,255', ring:'242,200,99',  glow:'90,110,210',  a:1.05 },
+    light: { c:'37,54,245',   ring:'50,66,230',   glow:'90,110,240',  a:0.60 }
+  };
+  function fib(n){var p=[],gr=Math.PI*(3-Math.sqrt(5)),i,y,r,t;for(i=0;i<n;i++){y=1-(i/(n-1))*2;r=Math.sqrt(Math.max(0,1-y*y));t=gr*i;p.push([Math.cos(t)*r,y,Math.sin(t)*r]);}return p;}
+  function ring(n){var p=[],i,a;for(i=0;i<n;i++){a=i/n*Math.PI*2;p.push([Math.cos(a),0,Math.sin(a)]);}return p;}
+  var SPH=fib(reduce?130:185), RING=ring(reduce?80:128);
+
+  document.querySelectorAll('canvas.poster-bg3d').forEach(function(cv){
+    var ctx=cv.getContext('2d'), th=THEMES[cv.getAttribute('data-theme')]||THEMES.blue;
+    var W=0,H=0,dpr=1,run=false,raf=0,t0=null;
+    function size(){dpr=Math.min(window.devicePixelRatio||1,1.6);var r=cv.getBoundingClientRect();W=r.width;H=r.height;cv.width=Math.max(1,Math.round(W*dpr));cv.height=Math.max(1,Math.round(H*dpr));}
+    if('ResizeObserver' in window){new ResizeObserver(size).observe(cv);} else {window.addEventListener('resize',size);}
+    size();
+
+    function paintAt(tt){
+      var ang=(tt/6)*Math.PI*2, ca=Math.cos(ang), sa=Math.sin(ang);
+      var tilt=0.5+0.12*Math.sin(ang), ct=Math.cos(tilt), st=Math.sin(tilt);
+      var cx=W*0.5, cy=H*0.43, R=Math.min(W,H)*0.52*(1+0.02*Math.sin(ang)), persp=2.6, i,p,ty,tz,s,px,py,d,al,rad;
+      ctx.setTransform(dpr,0,0,dpr,0,0); ctx.clearRect(0,0,W,H);
+
+      var g=ctx.createRadialGradient(cx,cy,0,cx,cy,R*1.35);
+      g.addColorStop(0,'rgba('+th.glow+','+(0.09*th.a)+')'); g.addColorStop(1,'rgba('+th.glow+',0)');
+      ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+
+      var pr=[];
+      for(i=0;i<SPH.length;i++){p=SPH[i];var rx=p[0]*ca+p[2]*sa,rz=-p[0]*sa+p[2]*ca;ty=p[1]*ct-rz*st;tz=p[1]*st+rz*ct;pr.push([rx,ty,tz]);}
+      pr.sort(function(a,b){return a[2]-b[2];});
+      for(i=0;i<pr.length;i++){p=pr[i];s=persp/(persp-p[2]*0.85);px=cx+p[0]*R*s;py=cy+p[1]*R*s;d=(p[2]+1)/2;al=(0.025+d*0.14)*th.a;rad=(0.35+d*1.1)*s;ctx.fillStyle='rgba('+th.c+','+al+')';ctx.beginPath();ctx.arc(px,py,rad,0,6.2832);ctx.fill();}
+
+      drawRing(ang,      0.95, 1.16, tt);
+      drawRing(-ang,-0.32, 0.80, tt);
+
+      function drawRing(a2,tx,scale,tt){
+        var c2=Math.cos(a2),s2=Math.sin(a2),cxx=Math.cos(tx),sxx=Math.sin(tx),j,q,q0,q2v,q1,qy,qz,ss,started=false;
+        ctx.beginPath(); ctx.lineWidth=1;
+        for(j=0;j<=RING.length;j++){q=RING[j%RING.length];q0=q[0]*c2+q[2]*s2;q2v=-q[0]*s2+q[2]*c2;q1=q[1];qy=q1*cxx-q2v*sxx;qz=q1*sxx+q2v*cxx;ss=persp/(persp-qz*0.85);var qx=cx+q0*R*scale*ss,qpy=cy+qy*R*scale*ss;if(!started){ctx.moveTo(qx,qpy);started=true;}else ctx.lineTo(qx,qpy);}
+        ctx.strokeStyle='rgba('+th.ring+','+(0.12*th.a)+')'; ctx.shadowColor='rgba('+th.ring+','+(0.55*th.a)+')'; ctx.shadowBlur=5; ctx.stroke(); ctx.shadowBlur=0;
+        var np=RING[0];
+        var n0=np[0]*c2+np[2]*s2,n2=-np[0]*s2+np[2]*c2,n1=np[1],ny=n1*cxx-n2*sxx,nz=n1*sxx+n2*cxx,nss=persp/(persp-nz*0.85);
+        ctx.fillStyle='rgba('+th.ring+','+(0.5*th.a)+')'; ctx.shadowColor='rgba('+th.ring+','+(0.75*th.a)+')'; ctx.shadowBlur=7; ctx.beginPath(); ctx.arc(cx+n0*R*scale*nss,cy+ny*R*scale*nss,1.9*nss,0,6.2832); ctx.fill(); ctx.shadowBlur=0;
+      }
+    }
+    cv.__paintAt=paintAt;
+    function frame(ts){ if(t0==null) t0=ts; paintAt((ts-t0)/1000); if(run) raf=requestAnimationFrame(frame); }
+    cv.__pause=function(){ run=false; if(raf) cancelAnimationFrame(raf); };
+    cv.__resume=function(){ if(!run){ run=true; t0=null; raf=requestAnimationFrame(frame); } };
+
+    if(reduce){ requestAnimationFrame(function(ts){t0=ts-2100;frame(ts);}); }
+    else {
+      var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){if(!run){run=true;t0=null;raf=requestAnimationFrame(frame);}}else{run=false;if(raf)cancelAnimationFrame(raf);}});},{threshold:0.02});
+      io.observe(cv);
+    }
+  });
+})();
+</script>
+<script>
+/* Save a poster as a crisp PNG (~1080 wide) via html2canvas */
+(function(){
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('.poster-save'); if(!b) return;
+    if(typeof html2canvas==='undefined'){ return; }
+    var fig=b.closest('.poster-opt'); var poster=fig.querySelector('.poster'); if(!poster) return;
+    var label=b.innerHTML; b.disabled=true; b.textContent='Rendering...';
+    var scale=Math.max(1.5, Math.min(3, 1080/poster.offsetWidth));
+    html2canvas(poster,{scale:scale,backgroundColor:null,useCORS:true,logging:false,scrollX:0,scrollY:-window.scrollY}).then(function(cv){
+      cv.toBlob(function(blob){
+        var nm=fig.querySelector('.opt-name'); nm=nm?nm.textContent.trim().replace(/[^a-z0-9]+/gi,'-').toLowerCase():'poster';
+        var a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='brandmethod-'+nm+'.png';
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
+        setTimeout(function(){URL.revokeObjectURL(a.href);},3000);
+        b.disabled=false; b.innerHTML=label;
+      },'image/png');
+    }).catch(function(err){ b.textContent='Try again'; setTimeout(function(){b.innerHTML=label;b.disabled=false;},1600); });
+  });
+})();
+</script>
+<script>
+/* Save a poster as a perfectly-looping 6s GIF (deterministic frames + gif.js) */
+(function(){
+  var workerUrl=null;
+  function getWorker(){ if(workerUrl) return Promise.resolve(workerUrl);
+    return fetch('https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.worker.js').then(function(r){if(!r.ok)throw new Error('w'+r.status);return r.text();}).then(function(t){ workerUrl=URL.createObjectURL(new Blob([t],{type:'text/javascript'})); return workerUrl; }); }
+  var ov=null;
+  function prog(txt){ if(!ov){ ov=document.createElement('div'); ov.style.cssText='position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:99999;background:#15161A;color:#fff;font-family:"JetBrains Mono",monospace;font-size:13px;letter-spacing:.04em;padding:12px 20px;border-radius:12px;box-shadow:0 16px 44px rgba(0,0,0,.32);white-space:nowrap;'; document.body.appendChild(ov);} ov.textContent=txt; }
+  function endProg(ms){ if(ov){ var o=ov; ov=null; setTimeout(function(){o.remove();}, ms||0); } }
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('.poster-save.gif'); if(!b) return;
+    if(typeof GIF==='undefined'||typeof html2canvas==='undefined'){ prog('Still loading, tap again in a second'); endProg(1800); return; }
+    var fig=b.closest('.poster-opt'); var poster=fig.querySelector('.poster'); if(!poster) return;
+    var label=b.innerHTML; b.disabled=true;
+    var DUR=6, FPS=7, N=DUR*FPS, GIFW=480, scale=GIFW/poster.offsetWidth;
+    var orb=poster.querySelector('.poster-bg3d'), star=poster.querySelector('.bm-mark'), radius=poster.style.borderRadius;
+    if(orb&&orb.__pause) orb.__pause();
+    if(star) star.style.animation='none';
+    poster.style.borderRadius='0';
+    function restore(){ if(orb&&orb.__resume) orb.__resume(); if(star){ star.style.transform=''; star.style.animation=''; } poster.style.borderRadius=radius; b.disabled=false; b.innerHTML=label; }
+    prog('Rendering GIF 0%');
+    getWorker().then(function(wurl){
+      var gif=null, i=0;
+      function finish(){
+        gif.on('progress',function(pp){ prog('Encoding '+Math.round(50+pp*50)+'%'); });
+        gif.on('finished',function(blob){
+          restore();
+          var nm=fig.querySelector('.opt-name'); nm=nm?nm.textContent.trim().replace(/[^a-z0-9]+/gi,'-').toLowerCase():'poster';
+          var a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='brandmethod-'+nm+'.gif';
+          document.body.appendChild(a); a.click(); document.body.removeChild(a);
+          setTimeout(function(){URL.revokeObjectURL(a.href);},5000);
+          prog('Saved GIF, '+Math.round(blob.size/1024)+' KB'); endProg(2400);
+        });
+        gif.render();
+      }
+      function step(){
+        if(i>=N){ finish(); return; }
+        var t=i/N*DUR;
+        if(orb&&orb.__paintAt) orb.__paintAt(t);
+        if(star) star.style.transform='rotate('+(t/DUR*360)+'deg)';
+        html2canvas(poster,{scale:scale,backgroundColor:null,useCORS:true,logging:false}).then(function(cv){
+          if(!gif) gif=new GIF({workers:2,quality:5,workerScript:wurl,width:cv.width,height:cv.height});
+          gif.addFrame(cv,{delay:Math.round(1000/FPS),copy:true});
+          i++; prog('Rendering GIF '+Math.round(i/N*50)+'%'); step();
+        }).catch(function(){ restore(); prog('GIF render failed, please try again'); endProg(2600); });
+      }
+      step();
+    }).catch(function(){ restore(); prog('Could not load the GIF encoder, check your connection'); endProg(3000); });
+  });
+})();
+</script>
+</body>
+</html>

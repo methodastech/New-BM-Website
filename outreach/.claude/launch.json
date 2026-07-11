@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "python-static",
+      "runtimeExecutable": "sh",
+      "runtimeArgs": ["-c", "exec python3 -m http.server $PORT"],
+      "autoPort": true
+    },
+    {
+      "name": "npx-serve",
+      "runtimeExecutable": "sh",
+      "runtimeArgs": ["-c", "exec npx serve ."],
+      "autoPort": true
+    }
+  ]
+}

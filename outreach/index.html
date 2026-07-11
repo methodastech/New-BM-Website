@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Outreach · One flow, start to booked · Brand Method</title>
+<link rel="icon" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FFFFFF; --paper-2:#F6F7F8;
+    --ink:#15161A; --ink-soft:#54565d; --ink-faint:#8a8c86;
+    --line:rgba(37,54,245,0.12); --line-soft:rgba(37,54,245,0.07);
+    --bright:#2536F5; --bright-deep:#1421B8; --bright-wash:#EDF0FF;
+    --dim:#9A9C94; --wash:rgba(37,54,245,.06); --green:#15924f; --r:14px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Inter",system-ui,sans-serif;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  a{color:inherit;}
+
+  /* ---------- TOP NAV ---------- */
+  #sales-overlay .sp-topnav{position:sticky;top:0;z-index:60;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:18px;padding:13px 30px;background:rgba(255,255,255,.82);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);}
+  #sales-overlay .sp-nav-logo{display:flex;grid-column:1;justify-self:start;align-items:center;text-decoration:none;}
+  #sales-overlay .bm-mark{position:relative;display:inline-flex;align-items:center;}
+  #sales-overlay .bm-mark-wm{height:26px;width:auto;display:block;}
+  #sales-overlay .sp-nav-switch{display:inline-flex;align-items:center;grid-column:2;justify-self:center;gap:4px;background:rgba(37,54,245,.06);border:1px solid rgba(37,54,245,.18);border-radius:999px;padding:4px;font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.03em;}
+  #sales-overlay .sp-nav-switch a{border-radius:999px;padding:9px 18px;text-decoration:none;transition:background .18s,color .18s;}
+  #sales-overlay .sp-nav-switch a.on{background:var(--bright);color:#fff;}
+  #sales-overlay .sp-nav-switch a.off{background:transparent;color:var(--bright);}
+  #sales-overlay .sp-nav-right{justify-self:end;grid-column:3;display:flex;align-items:center;gap:22px;}
+  #sales-overlay .sp-nav-dd{position:relative;}
+  #sales-overlay .sp-nav-ddbtn{display:inline-flex;align-items:center;gap:7px;font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.03em;color:var(--bright);background:rgba(37,54,245,.06);border:1px solid rgba(37,54,245,.18);border-radius:999px;padding:8px 14px;cursor:pointer;white-space:nowrap;transition:background .18s,border-color .18s;}
+  #sales-overlay .sp-nav-ddbtn:hover{background:rgba(37,54,245,.11);border-color:rgba(37,54,245,.32);}
+  #sales-overlay .sp-nav-ddbtn svg{width:11px;height:11px;transition:transform .2s;}
+  #sales-overlay .sp-nav-dd.open .sp-nav-ddbtn svg{transform:rotate(180deg);}
+  #sales-overlay .sp-nav-ddmenu{position:absolute;top:calc(100% + 8px);right:0;min-width:186px;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 20px 46px -20px rgba(20,28,84,.4);padding:6px;opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity .18s,transform .18s,visibility .18s;z-index:70;}
+  #sales-overlay .sp-nav-dd.open .sp-nav-ddmenu{opacity:1;visibility:visible;transform:none;}
+  #sales-overlay .sp-nav-ddmenu a{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 13px;border-radius:8px;font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.02em;color:var(--ink-soft);text-decoration:none;transition:background .15s,color .15s;}
+  #sales-overlay .sp-nav-ddmenu a:hover{background:rgba(37,54,245,.07);color:var(--bright);}
+  #sales-overlay .sp-nav-ddmenu a.is-current{color:var(--bright);font-weight:700;}
+  #sales-overlay .sp-nav-ddmenu a.is-current::after{content:"";width:7px;height:7px;border-radius:50%;background:var(--bright);flex:0 0 auto;}
+  @media(max-width:820px){
+    #sales-overlay .sp-topnav{display:flex;flex-wrap:wrap;gap:10px;padding:11px 16px;}
+    #sales-overlay .sp-nav-right{margin-left:auto;}
+    #sales-overlay .sp-nav-switch{order:3;flex:1 0 100%;justify-content:center;}
+    #sales-overlay .sp-nav-switch a{padding:8px 13px;}
+  }
+  @media(max-width:440px){#sales-overlay .sp-nav-switch{gap:2px;padding:3px;font-size:10px;letter-spacing:0;}#sales-overlay .sp-nav-switch a{padding:7px 9px;}}
+
+  /* ---------- PAGE ---------- */
+  .ow-wrap{max-width:1240px;margin:0 auto;padding:0 clamp(24px,3.4vw,44px);}
+  .ow-hero{padding:clamp(42px,5vw,66px) 0 clamp(22px,3vw,30px);}
+  .ow-kick{font-family:"JetBrains Mono",monospace;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--bright);display:inline-flex;align-items:center;gap:11px;margin:0 0 18px;}
+  .ow-kick::before{content:"";width:34px;height:2px;background:var(--bright);border-radius:2px;}
+  .ow-h1{font-family:"Fraunces",serif;font-weight:600;font-size:clamp(38px,6vw,66px);line-height:1.02;letter-spacing:-.015em;margin:0 0 18px;max-width:15ch;}
+  .ow-h1 em{font-style:italic;color:var(--bright);}
+  .ow-lead{font-size:clamp(16px,1.7vw,19px);color:var(--ink-soft);max-width:62ch;margin:0;}
+
+  /* ---------- INTERACTIVE OUTREACH MAP (ported from BM SS Portal) ---------- */
+  #sales-overlay .otrx-ctx{display:flex;flex-wrap:wrap;gap:9px 16px;margin:0 0 18px;padding:11px 16px;border:1px solid var(--line);border-radius:var(--r);background:var(--paper-2);font-size:13.5px;color:var(--ink);}
+  #sales-overlay .otrx-ctx span{display:inline-flex;gap:8px;align-items:baseline;padding:4px 12px;background:#fff;border:1px solid var(--line);border-radius:10px;}
+  #sales-overlay .otrx-ctx b{font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);font-weight:700;}
+  #sales-overlay .otrx-bar{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-bottom:10px;}
+  #sales-overlay .otrx-zoom{display:flex;gap:6px;}
+  #sales-overlay .otrx-zoom button{height:34px;min-width:34px;border:1px solid var(--line);background:var(--paper-2);border-radius:9px;cursor:pointer;font-size:16px;color:var(--ink);display:flex;align-items:center;justify-content:center;transition:all .15s;padding:0 9px;font-family:"JetBrains Mono",monospace;}
+  #sales-overlay .otrx-zoom button:hover{border-color:var(--bright);color:var(--bright-deep);}
+  #sales-overlay .otrx-reset{font-size:11px;text-transform:uppercase;letter-spacing:.04em;}
+  #sales-overlay .otrx-prog{flex:1;min-width:170px;display:flex;align-items:center;gap:10px;}
+  #sales-overlay .otrx-prog-track{flex:1;height:7px;border-radius:5px;background:rgba(0,0,0,.07);overflow:hidden;}
+  #sales-overlay .otrx-prog-fill{height:100%;width:0;background:#1A8F5A;border-radius:5px;transition:width .3s;}
+  #sales-overlay .otrx-pct{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--dim);white-space:nowrap;}
+  #sales-overlay .otrx-dock{display:flex;gap:0;border:1px solid var(--line);border-radius:9px;overflow:hidden;}
+  #sales-overlay .otrx-dock button{display:inline-flex;align-items:center;gap:6px;border:0;background:var(--paper-2);color:var(--ink-soft);font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;padding:9px 12px;cursor:pointer;transition:all .15s;}
+  #sales-overlay .otrx-dock button+button{border-left:1px solid var(--line);}
+  #sales-overlay .otrx-dock button.on{background:var(--bright);color:#fff;}
+  #sales-overlay .otrx-stage{position:relative;border:1px solid var(--line);border-radius:var(--r);background:#fff;overflow:hidden;width:100%;aspect-ratio:1520/560;min-height:240px;max-height:900px;resize:vertical;touch-action:none;}
+  #sales-overlay .otrx-stage::after{content:"";position:absolute;right:4px;bottom:4px;width:14px;height:14px;pointer-events:none;z-index:3;background:linear-gradient(135deg,transparent 0 44%,var(--bright) 44% 56%,transparent 56% 70%,var(--bright) 70% 82%,transparent 82%);opacity:.45;}
+  @media(max-width:760px){#sales-overlay .otrx-stage{aspect-ratio:auto;height:400px;}}
+  #sales-overlay .otrx-svg{width:100%;height:100%;cursor:grab;display:block;}
+  #sales-overlay .otrx-hint{position:absolute;right:12px;bottom:10px;font-family:"JetBrains Mono",monospace;font-size:10px;color:var(--ink-faint);background:rgba(246,247,248,.85);padding:4px 8px;border-radius:6px;pointer-events:none;}
+  #sales-overlay .otrx-split{display:flex;flex-direction:column;gap:16px;align-items:stretch;}
+  #sales-overlay .otrx-map-col{min-width:0;}
+  #sales-overlay .otrx-split.dock-right{flex-direction:row;align-items:flex-start;}
+  #sales-overlay .otrx-split.dock-right .otrx-map-col{flex:1 1 60%;}
+  #sales-overlay .otrx-split.dock-right #otrxPanel{flex:1 1 40%;max-width:440px;position:sticky;top:84px;align-self:flex-start;max-height:80vh;overflow:auto;margin-top:0;}
+  @media(max-width:900px){#sales-overlay .otrx-split.dock-right{flex-direction:column;}#sales-overlay .otrx-split.dock-right #otrxPanel{position:static;max-width:none;width:100%;max-height:none;}}
+  #sales-overlay .otrx-node{cursor:pointer;}
+  #sales-overlay .otrx-node .nbox{transition:filter .15s,stroke .15s;}
+  #sales-overlay .otrx-node:hover .nbox{filter:brightness(.97);}
+  #sales-overlay .otrx-node.active .nbox{stroke:#2536F5;stroke-width:3;}
+  #sales-overlay .otrx-node .ndone{opacity:0;transition:opacity .2s;}
+  #sales-overlay .otrx-node.done .ndone{opacity:1;}
+  #sales-overlay .node-ch{pointer-events:none;}
+  #sales-overlay .otrx-legend2{display:flex;flex-wrap:wrap;gap:14px;margin-top:12px;font-size:12.5px;color:var(--dim);}
+  #sales-overlay .otrx-legend2 i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:5px;vertical-align:middle;}
+  #sales-overlay .otrx-panel{border:1px solid var(--line);border-radius:var(--r);background:#fff;overflow:auto;resize:vertical;min-height:200px;}
+  #sales-overlay .otrx-panel-empty{padding:22px;text-align:center;color:var(--dim);font-size:14px;}
+  #sales-overlay .otrx-panel-body{padding:18px 20px;animation:opIn .24s ease;}
+  @keyframes opIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+  #sales-overlay .otrx-panel-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;}
+  #sales-overlay .otrx-p-eyebrow{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--bright);font-weight:700;}
+  #sales-overlay .otrx-p-title{font-family:"Fraunces",serif;font-size:22px;margin:5px 0 0;color:var(--ink);font-weight:600;}
+  #sales-overlay .otrx-p-close{border:1px solid var(--line);background:var(--paper-2);border-radius:8px;width:32px;height:32px;cursor:pointer;font-size:18px;color:var(--ink-soft);line-height:1;flex:0 0 auto;}
+  #sales-overlay .otrx-p-close:hover{border-color:var(--bright);color:var(--bright-deep);}
+  #sales-overlay .otrx-p-meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:12px 0 14px;}
+  #sales-overlay .otrx-p-meta .t{font-family:"JetBrains Mono",monospace;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--dim);}
+  #sales-overlay .otrx-p-msg{border:1px solid var(--line);border-radius:12px;overflow:hidden;}
+  #sales-overlay .otrx-p-msg-h{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:9px 13px;background:var(--bright-wash);border-bottom:1px solid var(--line);}
+  #sales-overlay .otrx-p-msg-h b{font-size:13px;}
+  #sales-overlay .otrx-p-copy{font-family:"JetBrains Mono",monospace;font-size:10px;text-transform:uppercase;letter-spacing:.05em;border:1px solid var(--line);background:#fff;color:var(--ink-soft);border-radius:7px;padding:5px 10px;cursor:pointer;transition:all .15s;}
+  #sales-overlay .otrx-p-copy:hover{border-color:var(--bright);color:var(--bright-deep);}
+  #sales-overlay .otrx-p-copy.done{background:#1A8F5A;color:#fff;border-color:#1A8F5A;}
+  #sales-overlay .otrx-p-msg-b{padding:13px 15px;font-size:14px;line-height:1.6;color:var(--ink-soft);}
+  #sales-overlay .otrx-p-note{font-size:14px;color:var(--ink-soft);line-height:1.6;margin:14px 0 0;}
+  #sales-overlay .otrx-p-attach{margin-top:13px;}
+  #sales-overlay .otrx-p-nav{display:flex;gap:10px;align-items:center;margin-top:18px;}
+  #sales-overlay .otrx-p-btn{border:1px solid var(--line);background:var(--paper-2);color:var(--ink-soft);border-radius:9px;padding:9px 16px;font-size:13px;cursor:pointer;transition:all .15s;}
+  #sales-overlay .otrx-p-btn:hover{border-color:var(--bright);color:var(--bright-deep);}
+  #sales-overlay .otrx-p-done{margin-left:auto;border:1px solid #1A8F5A;background:#fff;color:#1A8F5A;border-radius:9px;padding:9px 16px;font-size:13px;font-weight:600;cursor:pointer;transition:all .15s;}
+  #sales-overlay .otrx-p-done.on{background:#1A8F5A;color:#fff;}
+  /* message + chip components */
+  #sales-overlay .ch-chip{display:inline-flex;align-items:center;gap:6px;font-family:"JetBrains Mono",monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:.04em;font-weight:700;padding:5px 10px;border-radius:30px;}
+  #sales-overlay .ch-wa{background:rgba(31,168,85,.13);color:#177d41;}
+  #sales-overlay .ch-dm{background:rgba(122,63,242,.13);color:#5a2bc0;}
+  #sales-overlay .ch-email{background:rgba(59,91,219,.13);color:#2c45b3;}
+  #sales-overlay .ch-call{background:rgba(86,102,102,.15);color:#3f4d4d;}
+  #sales-overlay .ch-list,#sales-overlay .ch-pick{background:rgba(138,138,128,.15);color:#5f5f56;}
+  #sales-overlay .wa-thread{background:#e7e0d8;border-radius:12px;padding:12px;background-image:radial-gradient(rgba(0,0,0,.03) .5px,transparent .6px);background-size:14px 14px;}
+  #sales-overlay .wa-bubble{background:#d9fdd3;color:#1a1d1a;border-radius:10px 10px 4px 10px;padding:11px 13px;font-size:14px;line-height:1.55;max-width:90%;margin-left:auto;box-shadow:0 1px 1px rgba(0,0,0,.07);}
+  #sales-overlay .wa-bubble.dm{background:#eae3fb;}
+  #sales-overlay .msg-block{margin-bottom:16px;}
+  #sales-overlay .msg-variant{border:1px solid var(--line);border-radius:12px;padding:12px 13px 2px;margin-bottom:14px;background:rgba(37,54,245,.025);}
+  #sales-overlay .msg-vlabel{display:flex;align-items:center;justify-content:space-between;gap:8px;font-family:"JetBrains Mono",monospace;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--bright);margin-bottom:9px;}
+  #sales-overlay .mv-copy{font-family:"JetBrains Mono",monospace;font-size:9.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--bright);background:rgba(37,54,245,.08);border:1px solid var(--line);border-radius:7px;padding:5px 9px;cursor:pointer;flex:0 0 auto;}
+  #sales-overlay .mv-copy:hover{background:rgba(37,54,245,.15);}
+  #sales-overlay .mv-copy.done{background:var(--bright);color:#fff;border-color:transparent;}
+  #sales-overlay .att-note{margin-top:9px;font-size:12.5px;line-height:1.5;color:#6b6d75;}
+  #sales-overlay .msg-block:last-child{margin-bottom:0;}
+  #sales-overlay .msg-chan{display:inline-flex;align-items:center;gap:6px;font-family:"JetBrains Mono",monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin:0 0 7px;}
+  #sales-overlay .em-card{border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-top:10px;background:#fff;}
+  #sales-overlay .em-row{display:flex;gap:10px;padding:9px 13px;border-bottom:1px solid var(--line);font-size:13px;}
+  #sales-overlay .em-k{font-family:"JetBrains Mono",monospace;font-size:10px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-faint);min-width:54px;}
+  #sales-overlay .em-v{color:var(--ink);}
+  #sales-overlay .em-b{padding:12px 14px;font-size:14px;line-height:1.55;color:var(--ink-soft);}
+  #sales-overlay .note-box{background:var(--paper-2);border:1px solid var(--line);border-radius:10px;padding:13px 15px;font-size:14px;line-height:1.6;color:var(--ink-soft);}
+  #sales-overlay .att-row{display:flex;flex-wrap:wrap;gap:8px;}
+  #sales-overlay .att-chip{display:inline-flex;align-items:center;gap:7px;font-family:"JetBrains Mono",monospace;font-size:10px;text-transform:uppercase;letter-spacing:.03em;color:var(--ink-soft);background:#fff;border:1px solid var(--line);border-radius:8px;padding:6px 10px;}
+  #sales-overlay .att-none{color:var(--dim);background:rgba(0,0,0,.03);}
+  /* playbook cards */
+  .ow-play-head{padding:clamp(34px,5vw,54px) 0 18px;}
+  .ow-play-eye{font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--bright);margin:0 0 8px;}
+  .ow-play-head h2{font-family:"Fraunces",serif;font-weight:600;font-size:clamp(26px,3.2vw,36px);line-height:1.08;margin:0;letter-spacing:-.01em;}
+  #sales-overlay .play{display:grid;gap:14px;padding-bottom:20px;}
+  #sales-overlay .play2{border:1px solid var(--line);border-radius:var(--r);background:var(--paper-2);overflow:hidden;border-left:3px solid #BDBBB1;}
+  #sales-overlay .play2.t-reply{border-left-color:#2536F5;}
+  #sales-overlay .play2.t-follow{border-left-color:#CDA86B;}
+  #sales-overlay .play2.t-done{border-left-color:#1A8F5A;}
+  #sales-overlay .play2-h{display:flex;align-items:center;gap:11px;padding:13px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;}
+  #sales-overlay .play2-chk{width:24px;height:24px;border-radius:7px;border:1.5px solid var(--line);background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;flex:0 0 auto;}
+  #sales-overlay .play2-chk svg{width:14px;height:14px;fill:none;stroke:#BDBBB1;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;}
+  #sales-overlay .play2-chk.on{background:#1A8F5A;border-color:#1A8F5A;}
+  #sales-overlay .play2-chk.on svg{stroke:#fff;}
+  #sales-overlay .play2-day{font-family:"JetBrains Mono",monospace;font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#2536F5;}
+  #sales-overlay .play2.t-follow .play2-day{color:#a9852f;}
+  #sales-overlay .play2.t-done .play2-day{color:#1A8F5A;}
+  #sales-overlay .play2-title{font-family:"Fraunces",serif;font-size:17px;font-weight:600;color:var(--ink);}
+  #sales-overlay .play2.on .play2-title{color:var(--dim);text-decoration:line-through;text-decoration-color:var(--ink-faint);}
+  #sales-overlay .play2-ch{margin-left:auto;}
+  #sales-overlay .play2-b{padding:14px 16px;display:grid;gap:12px;}
+  #sales-overlay .play2-mh{display:flex;align-items:center;justify-content:space-between;gap:8px;}
+  #sales-overlay .play2-lbl{font-family:"JetBrains Mono",monospace;font-size:10px;text-transform:uppercase;letter-spacing:.05em;color:var(--dim);}
+  #sales-overlay .play2-copy{font-family:"JetBrains Mono",monospace;font-size:10px;text-transform:uppercase;letter-spacing:.05em;border:1px solid var(--line);background:#fff;color:var(--ink-soft);border-radius:7px;padding:5px 10px;cursor:pointer;}
+  #sales-overlay .play2-copy.done{background:#1A8F5A;color:#fff;border-color:#1A8F5A;}
+  .ow-foot{border-top:1px solid var(--line);padding:34px 0 60px;text-align:center;}
+  .ow-foot p{font-size:14px;color:var(--ink-faint);margin:0 0 18px;font-family:"JetBrains Mono",monospace;letter-spacing:.04em;}
+  .ow-foot-cta{display:inline-flex;align-items:center;gap:9px;background:var(--bright);color:#fff;text-decoration:none;font-family:"JetBrains Mono",monospace;font-size:13px;letter-spacing:.02em;padding:14px 24px;border-radius:10px;transition:background .18s,transform .18s;}
+  .ow-foot-cta:hover{background:var(--bright-deep);transform:translateY(-2px);}
+</style>
+</head>
+<body>
+<div id="sales-overlay">
+
+  <nav class="sp-topnav">
+    <a class="sp-nav-logo" href="index.html" aria-label="Brand Method home">
+      <span class="bm-mark"><img decoding="async" class="bm-mark-wm" src="bm-logo.png" alt="Brand Method"></span>
+    </a>
+    <div class="sp-nav-switch">
+      <a class="off" href="Brand-Method-Campaign.html">Promotion</a>
+      <a class="on" href="index.html">Outreach</a>
+      <a class="off" href="Brand-Method-Comms.html">Comms</a>
+    </div>
+    <div class="sp-nav-right">
+      <div class="sp-nav-dd">
+        <button class="sp-nav-ddbtn" type="button" aria-haspopup="true" aria-expanded="false">Website SP <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="sp-nav-ddmenu" role="menu">
+          <a role="menuitem" href="Brand-Method-Brand.html">Branding SP</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="ow-wrap">
+    <header class="ow-hero">
+      <p class="ow-kick">Website SP · Outreach</p>
+      <h1 class="ow-h1">One flow, start to <em>booked.</em></h1>
+      <p class="ow-lead">Reach out, see if they reply, then book the call or follow up until they do. Tap any step on the map to open the exact message to send, the channel, the timing, and what to attach. Mark each one done as you go.</p>
+    </header>
+
+    <div class="otrx-ctx">
+      <span><b>For</b> the RM1,900 website build</span>
+      <span><b>Goal</b> a free 15 to 30 minute strategy call, audit walked through live</span>
+      <span><b>Path</b> sales page, then WhatsApp to confirm</span>
+    </div>
+
+    <div class="otrx-bar">
+      <div class="otrx-zoom"><button data-zoom="out" type="button" aria-label="Zoom out">&minus;</button><button data-zoom="in" type="button" aria-label="Zoom in">+</button><button class="otrx-reset" data-zoom="reset" type="button">Reset</button></div>
+      <div class="otrx-prog"><span class="otrx-pct" id="otrxPct">0 of 12 done</span><div class="otrx-prog-track"><div class="otrx-prog-fill" id="otrxFill"></div></div></div>
+      <div class="otrx-dock" id="otrxDock"><button type="button" data-dock="bottom" class="on" title="Details below the map"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="9" rx="1.5"/><rect x="3" y="15" width="18" height="6" rx="1.5"/></svg>Below</button><button type="button" data-dock="right" title="Details beside the map"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="11" height="18" rx="1.5"/><rect x="16" y="3" width="5" height="18" rx="1.5"/></svg>Right</button></div>
+    </div>
+
+    <div class="otrx-split" id="otrxSplit">
+      <div class="otrx-map-col">
+        <div class="otrx-stage">
+          <svg id="otrxSvg" class="otrx-svg" viewBox="10 96 1500 552" role="img" aria-label="Interactive outreach journey. Tap any node to open its message.">
+            <defs>
+              <marker id="oxN" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#BDBBB1"/></marker>
+              <marker id="oxB" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#2536F5"/></marker>
+              <marker id="oxV" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#1A8F5A"/></marker>
+              <marker id="oxG" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#CDA86B"/></marker>
+            </defs>
+            <g id="otrxView"><path d="M190 336 H220" stroke="#BDBBB1" stroke-width="2" fill="none" marker-end="url(#oxN)"/><path d="M380 336 H432" stroke="#BDBBB1" stroke-width="2" fill="none" marker-end="url(#oxN)"/><path d="M490 278 V165 H620" stroke="#2536F5" stroke-width="2" fill="none" marker-end="url(#oxB)"/><text x="505" y="152" font-family="'JetBrains Mono',monospace" font-size="11" fill="#1A8F5A" font-weight="700">YES</text><path d="M800 165 H840" stroke="#2536F5" stroke-width="2" fill="none" marker-end="url(#oxB)"/><path d="M1000 165 H1040" stroke="#2536F5" stroke-width="2" fill="none" marker-end="url(#oxB)"/><path d="M1230 165 H1278" stroke="#2536F5" stroke-width="2" fill="none" marker-end="url(#oxB)"/><path d="M1330 217 V270 H1235 V300" stroke="#1A8F5A" stroke-width="2" fill="none" marker-end="url(#oxV)"/><text x="1248" y="258" font-family="'JetBrains Mono',monospace" font-size="11" fill="#1A8F5A" font-weight="700">YES</text><path d="M1382 165 H1430 V300" stroke="#CDA86B" stroke-width="2" fill="none" marker-end="url(#oxG)"/><text x="1392" y="210" font-family="'JetBrains Mono',monospace" font-size="11" fill="#B98A3E" font-weight="700">NO</text><path d="M548 336 H584 V376 H620" stroke="#CDA86B" stroke-width="2" fill="none" marker-end="url(#oxG)"/><text x="551" y="326" font-family="'JetBrains Mono',monospace" font-size="11" fill="#B98A3E" font-weight="700">OBJECTION</text><path d="M710 342 V202" stroke="#CDA86B" stroke-width="2" fill="none" stroke-dasharray="5 4" marker-end="url(#oxG)"/><path d="M490 394 V592 H400" stroke="#CDA86B" stroke-width="2" fill="none" marker-end="url(#oxG)"/><text x="500" y="476" font-family="'JetBrains Mono',monospace" font-size="11" fill="#B98A3E" font-weight="700">NO</text><path d="M550 592 H580" stroke="#CDA86B" stroke-width="2" fill="none" marker-end="url(#oxG)"/><path d="M730 592 H760" stroke="#CDA86B" stroke-width="2" fill="none" marker-end="url(#oxG)"/><path d="M910 592 H940" stroke="#CDA86B" stroke-width="2" fill="none" marker-end="url(#oxG)"/><polygon class="nbox" points="490,278 548,336 490,394 432,336" fill="#EDF0FF" stroke="#2536F5" stroke-width="1.5"/><text x="490" y="332" text-anchor="middle" font-family="'Fraunces',serif" font-size="14" fill="#15161A" font-weight="600">They</text><text x="490" y="349" text-anchor="middle" font-family="'Fraunces',serif" font-size="14" fill="#15161A" font-weight="600">reply?</text><polygon class="nbox" points="1330,113 1382,165 1330,217 1278,165" fill="#EDF0FF" stroke="#2536F5" stroke-width="1.5"/><text x="1330" y="161" text-anchor="middle" font-family="'Fraunces',serif" font-size="13" fill="#15161A" font-weight="600">Showed</text><text x="1330" y="177" text-anchor="middle" font-family="'Fraunces',serif" font-size="13" fill="#15161A" font-weight="600">up?</text><g class="otrx-node" data-node="0" tabindex="0"><rect class="nbox" x="30" y="302" width="160" height="68" rx="13" fill="#FFFFFF" stroke="#E3E2D9" stroke-width="1.5"/><text x="46" y="326" font-family="'JetBrains Mono',monospace" font-size="11" fill="#2536F5" font-weight="700">STEP 1</text><text x="46" y="348" font-family="'Fraunces',serif" font-size="16" fill="#15161A" font-weight="600">Reach out</text><text x="46" y="364" font-family="'Inter',sans-serif" font-size="11" fill="#8B8A80">pick the channel</text><g class="ndone" transform="translate(176,316)"><circle r="9" fill="#1A8F5A"/><path d="M-4 0 l3 3 l5 -6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g></g><g class="otrx-node" data-node="1" tabindex="0"><rect class="nbox" x="220" y="302" width="160" height="68" rx="13" fill="#FFFFFF" stroke="#E3E2D9" stroke-width="1.5"/><text x="236" y="326" font-family="'JetBrains Mono',monospace" font-size="11" fill="#2536F5" font-weight="700">DAY 0</text><text x="236" y="348" font-family="'Fraunces',serif" font-size="16" fill="#15161A" font-weight="600">First touch</text><text x="236" y="364" font-family="'Inter',sans-serif" font-size="11" fill="#8B8A80">send the opener</text><g class="ndone" transform="translate(366,316)"><circle r="9" fill="#1A8F5A"/><path d="M-4 0 l3 3 l5 -6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g></g><g class="otrx-node" data-node="2" tabindex="0"><rect class="nbox" x="620" y="130" width="180" height="70" rx="13" fill="#EDF0FF" stroke="#2536F5" stroke-width="1.5"/><text x="636" y="154" font-family="'JetBrains Mono',monospace" font-size="11" fill="#2536F5" font-weight="700">INTERESTED</text><text x="636" y="176" font-family="'Fraunces',serif" font-size="16" fill="#15161A" font-weight="600">Warm the reply</text><g class="ndone" transform="translate(786,144)"><circle r="9" fill="#1A8F5A"/><path d="M-4 0 l3 3 l5 -6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g></g><g class="otrx-node" data-node="3" tabindex="0"><rect class="nbox" x="840" y="130" width="160" height="70" rx="13" fill="#EDF0FF" stroke="#2536F5" stroke-width="1.5"/><text x="856" y="154" font-family="'JetBrains Mono',monospace" font-size="11" fill="#2536F5" font-weight="700">BOOK</text><text x="856" y="176" font-family="'Fraunces',serif" font-size="16" fill="#15161A" font-weight="600">Book the call</text><g class="ndone" transform="translate(986,144)"><circle r="9" fill="#1A8F5A"/><path d="M-4 0 l3 3 l5 -6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g></g><g class="otrx-node" data-node="4" tabindex="0"><rect class="nbox" x="1040" y="130" width="190" height="70" rx="13" fill="#E7F5EE" stroke="#1A8F5A" stroke-width="1.5"/><text x="1056" y="154" font-family="'JetBrains Mono',monospace" font-size="11" fill="#1A8F5A" font-weight="700">DONE</text><text x="1056" y="176" font-family="'Fraunces',serif" font-size="16" fill="#15161A" font-weight="600">Confirm on WhatsApp</text><g class="ndone" transform="translate(1216,144)"><circle r="9" fill="#1A8F5A"/><path d="M-4 0 l3 3 l5 -6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g></g><g class="otrx-node" data-node="5" tabindex="0"><rect class="nbox" x="1150" y="300" width="170" height="66" rx="13" fill="#E7F5EE" stroke="#1A8F5A" stroke-width="1.5"/><text x="1166" y="324" font-family="'JetBrains Mono',monospace" font-size="11" fill="#1A8F5A" font-weight="700">WON</text><text x="1166" y="346" font-family="'Fraunces',serif" font-size="16" fill="#15161A" font-weight="600">Run the call</text><g class="ndone" transform="translate(1306,314)"><circle r="9" fill="#1A8F5A"/><path d="M-4 0 l3 3 l5 -6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g></g><g class="otrx-node" data-node="6" tabindex="0"><rect class="nbox" x="1350" y="300" width="160" height="66" rx="13" fill="#FFF7EA" stroke="#CDA86B" stroke-width="1.5"/><text x="1366" y="324" font-family="'JetBrains Mono',monospace" font-size="11" fill="#B98A3E" font-weight="700">NO-SHOW</text><text x="1366" y="346" font-family="'Fraunces',serif" font-size="16" fill="#15161A" font-weight="600">Rebook cleanly</text><g class="ndone" transform="translate(1496,314)"><circle r="9" fill="#1A8F5A"/><path d="M-4 0 l3 3 l5 -6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g></g><g class="otrx-node" data-node="7" tabindex="0"><rect class="nbox" x="620" y="342" width="180" height="68" rx="13" fill="#FFF7EA" stroke="#CDA86B" stroke-width="1.5"/><text x="636" y="366" font-family="'JetBrains Mono',monospace" font-size="11" fill="#B98A3E" font-weight="700">OBJECTION</text><text x="636" y="388" font-family="'Fraunces',serif" font-size="16" fill="#15161A" font-weight="600">Handle the no</text><g class="ndone" transform="translate(786,356)"><circle r="9" fill="#1A8F5A"/><path d="M-4 0 l3 3 l5 -6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g></g><g class="otrx-node" data-node="8" tabindex="0"><rect class="nbox" x="400" y="560" width="150" height="64" rx="13" fill="#FFFFFF" stroke="#E3E2D9" stroke-width="1.5"/><text x="416" y="584" font-family="'JetBrains Mono',monospace" font-size="11" fill="#B98A3E" font-weight="700">DAY 2</text><text x="416" y="606" font-family="'Fraunces',serif" font-size="16" fill="#15161A" font-weight="600">Nudge</text><g class="ndone" transform="translate(536,574)"><circle r="9" fill="#1A8F5A"/><path d="M-4 0 l3 3 l5 -6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g></g><g class="otrx-node" data-node="9" tabindex="0"><rect class="nbox" x="580" y="560" width="150" height="64" rx="13" fill="#FFFFFF" stroke="#E3E2D9" stroke-width="1.5"/><text x="596" y="584" font-family="'JetBrains Mono',monospace" font-size="11" fill="#B98A3E" font-weight="700">DAY 5</text><text x="596" y="606" font-family="'Fraunces',serif" font-size="16" fill="#15161A" font-weight="600">Proof</text><g class="ndone" transform="translate(716,574)"><circle r="9" fill="#1A8F5A"/><path d="M-4 0 l3 3 l5 -6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g></g><g class="otrx-node" data-node="10" tabindex="0"><rect class="nbox" x="760" y="560" width="150" height="64" rx="13" fill="#FFFFFF" stroke="#E3E2D9" stroke-width="1.5"/><text x="776" y="584" font-family="'JetBrains Mono',monospace" font-size="11" fill="#B98A3E" font-weight="700">DAY 9</text><text x="776" y="606" font-family="'Fraunces',serif" font-size="16" fill="#15161A" font-weight="600">Clean close</text><g class="ndone" transform="translate(896,574)"><circle r="9" fill="#1A8F5A"/><path d="M-4 0 l3 3 l5 -6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g></g><g class="otrx-node" data-node="11" tabindex="0"><rect class="nbox" x="940" y="560" width="160" height="64" rx="13" fill="#F2F1EA" stroke="#DEDDD3" stroke-width="1.5"/><text x="956" y="584" font-family="'JetBrains Mono',monospace" font-size="11" fill="#B98A3E" font-weight="700">PARK</text><text x="956" y="606" font-family="'Fraunces',serif" font-size="16" fill="#56554E" font-weight="600">Recycle ~90 days</text><g class="ndone" transform="translate(1086,574)"><circle r="9" fill="#1A8F5A"/><path d="M-4 0 l3 3 l5 -6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g></g></g>
+          </svg>
+          <span class="otrx-hint">Drag to pan &middot; zoom with + / &minus; &middot; tap a node</span>
+        </div>
+        <div class="otrx-legend2">
+          <span><i style="background:#2536F5;"></i>Reply path</span>
+          <span><i style="background:#CDA86B;"></i>Follow-up and objections</span>
+          <span><i style="background:#1A8F5A;"></i>Booked and won</span>
+          <span style="color:var(--ink-soft);">Tap any node to open its message in the panel.</span>
+        </div>
+      </div>
+      <div class="otrx-panel" id="otrxPanel">
+        <div class="otrx-panel-empty" id="otrxPanelEmpty">Tap any node on the map and its full instruction opens right here: the channel, the day, the message to copy, and what to attach.</div>
+        <div class="otrx-panel-body" id="otrxPanelBody" style="display:none;">
+          <div class="otrx-panel-top"><div><span class="otrx-p-eyebrow" id="opEyebrow"></span><h3 class="otrx-p-title" id="opTitle"></h3></div><button class="otrx-p-close" id="opClose" type="button" aria-label="Close">&times;</button></div>
+          <div class="otrx-p-meta" id="opMeta"></div>
+          <div class="otrx-p-msg" id="opMsgWrap" style="display:none;"><div class="otrx-p-msg-h"><b id="opMsgLabel">Message</b><button class="otrx-p-copy" id="opCopy" type="button">Copy</button></div><div class="otrx-p-msg-b" id="opMsg"></div></div>
+          <p class="otrx-p-note" id="opNote" style="display:none;"></p>
+          <div class="otrx-p-attach" id="opAttach" style="display:none;"></div>
+          <div class="otrx-p-nav"><button class="otrx-p-btn" id="opPrev" type="button">&larr; Previous</button><button class="otrx-p-done" id="opDone" type="button">Mark done</button><button class="otrx-p-btn" id="opNext" type="button">Next &rarr;</button></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ow-play-head">
+      <p class="ow-play-eye">The playbook</p>
+      <h2>Every step, the exact message to send.</h2>
+    </div>
+    <div class="play" id="otrxPlay"></div>
+
+    <footer class="ow-foot">
+      <p>Reach out · Reply or follow up · Book the call</p>
+      <a class="ow-foot-cta" href="Brand-Method-Comms.html">See the message templates <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </footer>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  /* nav dropdown */
+  var dd=document.querySelector('.sp-nav-dd');
+  if(dd){var db=dd.querySelector('.sp-nav-ddbtn');
+    db.addEventListener('click',function(e){e.stopPropagation();var o=dd.classList.toggle('open');db.setAttribute('aria-expanded',o?'true':'false');});
+    document.addEventListener('click',function(e){if(!dd.contains(e.target)){dd.classList.remove('open');db.setAttribute('aria-expanded','false');}});
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'){dd.classList.remove('open');db.setAttribute('aria-expanded','false');}});
+  }
+})();
+
+(function(){
+  var ov=document.getElementById('sales-overlay'); if(!ov) return;
+  var NS='http://www.w3.org/2000/svg';
+  var svg=ov.querySelector('#otrxSvg'); var view=ov.querySelector('#otrxView');
+  function load(k,d){try{var v=localStorage.getItem(k);return v===null?d:JSON.parse(v);}catch(e){return d;}}
+  function save(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
+  function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+  function br(s){return esc(s).replace(/\n/g,'<br>');}
+
+  var CHAN={
+    pick:{label:'Pick channel',color:'#8a8a80',cls:'ch-pick',d:'M9 18l6-6-6-6'},
+    wa:{label:'WhatsApp',color:'#1FA855',cls:'ch-wa',fill:true,d:'M12 3C6.9 3 2.7 6.9 2.7 11.6c0 1.7.5 3.3 1.5 4.7L3 21l4.9-1.3c1.3.7 2.8 1.1 4.1 1.1 5.1 0 9.3-3.9 9.3-8.6S17.1 3 12 3z'},
+    waemail:{label:'WhatsApp + email',color:'#1FA855',cls:'ch-wa',fill:true,d:'M12 3C6.9 3 2.7 6.9 2.7 11.6c0 1.7.5 3.3 1.5 4.7L3 21l4.9-1.3c1.3.7 2.8 1.1 4.1 1.1 5.1 0 9.3-3.9 9.3-8.6S17.1 3 12 3z'},
+    dm:{label:'DM',color:'#7A3FF2',cls:'ch-dm',d:'M22 2L11 13 M22 2l-7 20-4-9-9-4z'},
+    email:{label:'Email',color:'#3B5BDB',cls:'ch-email',d:'M3 5h18v14H3z M3 6l9 7 9-7'},
+    call:{label:'Video or call',color:'#566',cls:'ch-call',d:'M23 7l-7 5 7 5V7z M1 5h15v14H1z'},
+    list:{label:'Monthly list',color:'#8a8a80',cls:'ch-list',d:'M8 6h13 M8 12h13 M8 18h13 M3 6h.01 M3 12h.01 M3 18h.01'}
+  };
+  var ATY={
+    video:{color:'#3B5BDB',d:'M23 7l-7 5 7 5V7z M1 5h15v14H1z'},
+    image:{color:'#1A8F5A',d:'M3 3h18v18H3z M8.5 10a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z M21 15l-5-5L5 21'},
+    doc:{color:'#B06A1E',d:'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6'},
+    link:{color:'#2536F5',d:'M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1 M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1'},
+    calendar:{color:'#7A3FF2',d:'M3 4h18v18H3z M16 2v4 M8 2v4 M3 10h18'}
+  };
+  function ic(d,color,fill){ return '<svg viewBox="0 0 24 24" width="14" height="14" fill="'+(fill?color:'none')+'" stroke="'+(fill?'none':color)+'" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="'+d+'"/></svg>'; }
+  function chanChip(type,label){ var c=CHAN[type]||CHAN.pick; return '<span class="ch-chip '+c.cls+'">'+ic(c.d,c.color,c.fill)+esc(label||c.label)+'</span>'; }
+  function emailCard(d){ return '<div class="em-card"><div class="em-row"><span class="em-k">Subject</span><span class="em-v">'+esc(d.emailSubject||d.title)+'</span></div><div class="em-b">'+br(d.emailBody||d.msg)+'</div></div>'; }
+  function chanLabel(key){ var c=CHAN[key]||CHAN.wa; return '<div class="msg-chan">'+ic(c.d,c.color,c.fill)+'<span style="color:'+c.color+'">'+esc(c.label)+'</span></div>'; }
+  function styledMsg(d){ if(d.variants&&d.variants.length){ return d.variants.map(function(v){ var vd={chType:d.chType,msg:v.msg,emailSubject:v.emailSubject,emailBody:v.emailBody,title:d.title}; return '<div class="msg-variant"><div class="msg-vlabel">'+esc(v.vlabel)+'<button class="mv-copy" type="button" data-copy="'+encodeURIComponent(v.msg)+'">Copy</button></div>'+styledMsgOne(vd)+'</div>'; }).join(''); } return styledMsgOne(d); }
+  function styledMsgOne(d){ if(!d.msg) return ''; var t=d.chType;
+    if(t==='email') return '<div class="msg-block">'+chanLabel('email')+emailCard(d)+'</div>';
+    var waKey=(t==='dm'?'dm':'wa');
+    var s='<div class="msg-block">'+chanLabel(waKey)+'<div class="wa-thread"><div class="wa-bubble'+(t==='dm'?' dm':'')+'">'+br(d.msg)+'</div></div></div>';
+    if(d.emailSubject) s+='<div class="msg-block">'+chanLabel('email')+emailCard(d)+'</div>';
+    return s; }
+  function attRow(d){ if(!d.attach||!d.attach.length) return '<span class="att-chip att-none">No attachment</span>'; return '<div class="att-row">'+d.attach.map(function(a){ var ty=ATY[a.t]||ATY.link; return '<span class="att-chip">'+ic(ty.d,ty.color,false)+esc(a.l)+'</span>'; }).join('')+'</div>'; }
+  var CHK='<svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 6"/></svg>';
+
+  var DATA={
+    0:{eb:'Step 1',title:'Reach out',track:'prep',chType:'pick',chLabel:'Pick the channel',time:'Tue to Thu',note:'WhatsApp if you have a number or a referral, a personal DM or email if not. Always one person, one to one, never a blast. Nothing to send yet, this step is simply choosing the right door in.',attachNote:'Nothing to attach, this step is only picking the channel.',attach:[]},
+    1:{eb:'Day 0',title:'First touch',track:'prep',chType:'waemail',chLabel:'WhatsApp + email',time:'12 to 2pm or 9 to 11pm',label:'The audit hook',msg:"Hi [name], [you] here from Brand Method. We took a quick look at [business]'s website and spotted a few things quietly costing you enquiries and softening the brand. We are also marking a milestone: the businesses we have helped build just crossed US$1 billion in combined sales, so every website, app or store we build is 50% off for a limited time. This is what we are offering: https://brandmethod.co/nobodywantsawebsite/Brand-Method-Sales-Page.html. Open to a free 15 to 30 minute strategy call where we walk you through the full audit and how we would fix it?",note:'Pick the version that matches what you find: a site that needs work, no site at all, or a store that converts below its looks. One person at a time, never a blast.',emailSubject:'A few things on your website worth a look',emailBody:"Hi [name], [you] here from Brand Method. We took a quick look at [business]'s website and spotted a few things quietly costing you enquiries and softening the brand. To mark a milestone, the businesses we have helped build just crossed US$1 billion in combined sales, so every website, app or store we build is 50% off for a limited time. This is what we are offering: https://brandmethod.co/nobodywantsawebsite/Brand-Method-Sales-Page.html. If it is useful, we would love to walk you through the full audit and how we would fix it on a free 15 to 30 minute strategy call. Just reply and we will set a time.",variants:[{vlabel:'They have a website',msg:"Hi [name], [you] here from Brand Method. We took a quick look at [business]'s website and spotted a few things quietly costing you enquiries and softening the brand. We are also marking a milestone: the businesses we have helped build just crossed US$1 billion in combined sales, so every website, app or store we build is 50% off for a limited time. This is what we are offering: https://brandmethod.co/nobodywantsawebsite/Brand-Method-Sales-Page.html. Open to a free 15 to 30 minute strategy call where we walk you through the full audit and how we would fix it?",emailSubject:'A few things on your website worth a look',emailBody:"Hi [name], [you] here from Brand Method. We took a quick look at [business]'s website and spotted a few things quietly costing you enquiries and softening the brand. To mark a milestone, the businesses we have helped build just crossed US$1 billion in combined sales, so every website, app or store we build is 50% off for a limited time. This is what we are offering: https://brandmethod.co/nobodywantsawebsite/Brand-Method-Sales-Page.html. If it is useful, we would love to walk you through the full audit and how we would fix it on a free 15 to 30 minute strategy call. Just reply and we will set a time."},{vlabel:'No website yet',msg:"Hi [name], [you] here from Brand Method. We went looking for [business] online and could not find a proper website, so the enquiries and trust you should be winning are quietly drifting to competitors who have one. We have just crossed US$1 billion in combined client sales, and to mark it every website, app or store we build is 50% off for a limited time. This is what we are offering: https://brandmethod.co/nobodywantsawebsite/Brand-Method-Sales-Page.html. Open to a free 15 to 30 minute strategy call where we map out a simple plan to get [business] found?",emailSubject:'[business] is hard to find online',emailBody:"Hi [name], [you] here from Brand Method. We went looking for [business] online and could not find a proper website. That gap costs more than it looks: when people cannot find you, the enquiries and trust you have earned quietly move to competitors who show up with a proper site. We have just crossed US$1 billion in combined client sales, and to mark it every website, app or store we build is 50% off for a limited time. This is what we are offering: https://brandmethod.co/nobodywantsawebsite/Brand-Method-Sales-Page.html. If you are open to it, we would map out a simple plan to get [business] found on a free 15 to 30 minute strategy call, and you decide from there."},{vlabel:'E-commerce, lift conversion',msg:"Hi [name], [you] here from Brand Method. We took a quick look at [business]'s store and it already looks the part, but the buying flow between first visit and checkout looks like it is quietly leaking sales you have paid to attract. We are also marking a milestone: the businesses we have helped build just crossed US$1 billion in combined sales, so every website, app or store we build is 50% off for a limited time. This is what we are offering: https://brandmethod.co/nobodywantsawebsite/Brand-Method-Sales-Page.html. Open to a free 15 to 30 minute strategy call where we walk you through the full conversion audit and where buyers drop off?",emailSubject:'Where your store is quietly losing buyers',emailBody:"Hi [name], [you] here from Brand Method. We spent a little time in [business]'s store and it already looks the part, the product and the design clearly land. The gap sits in the buying flow: between first visit and checkout, small friction points look like they are quietly leaking sales you have already paid to attract. We are also marking a milestone, the businesses we have helped build just crossed US$1 billion in combined sales, so every website, app or store we build is 50% off for a limited time. This is what we are offering: https://brandmethod.co/nobodywantsawebsite/Brand-Method-Sales-Page.html. If you are open to it, we would walk you through the full conversion audit and exactly where buyers drop off on a free 15 to 30 minute strategy call."}],attachNote:'Keep the first touch personal, text and the link only. The link already carries the giveback, so no image here.',attach:[]},
+    2:{eb:'Interested',title:'Warm the reply',track:'reply',chType:'waemail',chLabel:'WhatsApp + email',time:'Same hour',label:'Reinforce, steer to the call',msg:"Great, [name]. The main thing we would fix first is [the finding], and it is exactly what our RM1,900 build sorts: live in about a week, fully money back if it is not right for you. The rest is easiest to walk you through live. Shall we find a time?",note:'They already have the link and the offer from the first touch, so do not resend them. Reinforce the one finding and the build, then steer to the call.',emailSubject:'The one thing we would fix first',emailBody:"Great, [name]. The main thing we would fix first is [the finding], and it is exactly what our RM1,900 build sorts, live in about a week and fully money back if it is not right for you. The rest is easiest to walk you through on a short call, where we go through the full audit and how we would fix it. Shall we set a time?",attachNote:'They are warm now, so share the proof: the giveback poster as the offer, plus a before and after of a similar business.',attach:[{l:'Giveback poster',t:'image',k:'poster'},{l:'Before and after demo (C)',t:'video',k:'asset_c'}]},
+    3:{eb:'Book',title:'Book the call',track:'reply',chType:'waemail',chLabel:'WhatsApp + email',time:'Same chat',label:'Two times, get a yes',msg:"We have [Tue 3pm] or [Thu 11am] open for a free 15 to 30 minute strategy call, no obligation either way. Which suits you better? On the call we walk you through the full audit and exactly how we would fix it.",note:'Offer two fixed times, not an open ask. The booking link is the backup, the two times get the yes.',emailSubject:'Two times for a free strategy call',emailBody:"We have [Tue 3pm] or [Thu 11am] open for a free 15 to 30 minute strategy call, no obligation either way. Which suits you better? On the call we walk you through the full audit and exactly how we would fix it.",attachNote:'Attach the booking link as a backup. The two named times get the yes.',attach:[{l:'Booking link',t:'calendar',k:'link_booking'}]},
+    4:{eb:'Done',title:'Confirm on WhatsApp',track:'done',chType:'waemail',chLabel:'WhatsApp + email',time:'Reminders auto 1 day and 2 hours before',label:'The confirmation',msg:"You're all set, [name], [day] at [time]. [specialist], our [role], will be on the call to walk you through the audit and exactly how we would fix it. So we come prepared, could you send your site link and a quick line on what you want the site to do before we meet? The calendar invite and a reminder are on the way. Looking forward to it.",note:'This is the handoff. Name the specialist who will actually be on the call so they know they are meeting a real expert, not just a sales account. The prep questions and links mean the specialist walks in ready to show a plan and close, not gather basics.',emailSubject:'Your Brand Method call is confirmed',emailBody:"Hi [name], you are confirmed for [day] at [time], and the calendar invite is attached. [specialist], our [role], will be on the call to walk you through the audit and exactly how we would fix it. To make the most of the time, could you reply with your site link, any other links you want us to look at, and a line or two on what you want the site to do? That way we come ready to show you the plan, not just talk about it. Looking forward to speaking then. [you], Brand Method.",attachNote:'Attach the calendar invite, and watch for their site link and prep answers coming back before the call.',attach:[{l:'Calendar invite',t:'calendar',k:'link_booking'}]},
+    5:{eb:'Won',title:'Run the call',track:'done',chType:'call',chLabel:'Video or call',time:'On the day',note:'They showed up, so lead with value. Walk them through the audit findings first, then make the RM1,900 offer with the guarantee. Aim to close on the call, or agree a clear next step before you hang up.',attachNote:'Nothing to attach, this is the live call.',attach:[]},
+    6:{eb:'No-show',title:'Rebook cleanly',track:'follow',chType:'waemail',chLabel:'WhatsApp + email',time:'Within the hour',label:'The easy rebook',msg:"No worries at all, [name], these things happen. The offer still stands and your slot's easy to move. Shall we pop you back in for [day] or [day]?",note:'Reach out within the hour of a no-show. Once they pick a time this loops back to Confirm.',emailSubject:'Easy to move your slot',emailBody:"No worries at all [name], these things happen. The offer still stands and your slot is easy to move. Shall we pop you back in for [day] or [day]?",attachNote:'No attachment, keep the rebook light and quick.',attach:[]},
+    7:{eb:'Objection',title:'Handle the no',track:'follow',chType:'waemail',chLabel:'WhatsApp + email',time:'Same chat',label:'Answer the real objection',msg:"Too expensive: it's RM1,900 once and fully money back, set against the enquiries slipping away each month, it tends to pay for itself quickly.\nNot right now: completely understandable, the offer holds for a bit and the strategy call is open whenever you are.\nNot sure it works: here's a [similar business] we did the exact same fix for, a 90 second before and after [link].",note:'Answer the real objection in one line, then steer back to the strategy call. Do not argue, do not discount.',emailSubject:'On the price, and the proof',emailBody:"A couple of quick answers [name]. On cost, it is RM1,900 once and fully money back, set against the enquiries slipping away each month, it tends to pay for itself quickly. If now is not the time, the offer holds for a bit and the strategy call is open whenever you are. Here is a [similar business] we did the same fix for, a 90 second before and after [link].",attachNote:'Attach proof matched to the objection: a case reel and the portfolio.',attach:[{l:'Proof or case reel (E)',t:'video',k:'asset_e'},{l:'Portfolio link',t:'link',k:'link_portfolio'}]},
+    8:{eb:'Day 2',title:'Nudge',track:'follow',chType:'waemail',chLabel:'WhatsApp + email',time:'Peak window',label:'The value drop',msg:"Hi [name], no rush on this at all. Just leaving you the one thing we would fix first on [business]'s site: [one fix]. Worth doing whether we work together or not.",note:'Send in the peak window, 12 to 2pm or 9 to 11pm. Give value, ask for nothing.',emailSubject:'The one thing to fix first',emailBody:"Hi [name], no rush at all. Just leaving you the one thing we would fix first on [business]'s site: [one fix]. Worth doing whether we work together or not.",attachNote:'Attach the quick win graphic that shows the one fix.',attach:[{l:'Quick win graphic (D)',t:'image',k:'asset_d'}]},
+    9:{eb:'Day 5',title:'Proof',track:'follow',chType:'waemail',chLabel:'WhatsApp + email',time:'',label:'The proof',msg:"Quick one, [name], we just took a [similar business] from a dead site to real booking enquiries in week one, the same fix you'd be getting. Here's the 90 second before and after [link]. Open to a quick chat?",note:'Proof beats promises. One relevant before and after, then a soft ask.',emailSubject:'A 90 second before and after',emailBody:"Quick one [name]. We just took a [similar business] from a dead site to real booking enquiries in week one, the same fix you would be getting. Here is the 90 second before and after [link]. Open to a quick chat?",attachNote:'Attach the before and after demo, the proof does the talking.',attach:[{l:'Before and after demo (C)',t:'video',k:'asset_c'},{l:'Case reel (E)',t:'video',k:'asset_e'}]},
+    10:{eb:'Day 9',title:'Clean close',track:'follow',chType:'waemail',chLabel:'WhatsApp + email',time:'',label:'The soft breakup',msg:"Last note from us, [name], we won't keep cluttering your WhatsApp. If the timing isn't right, no problem at all, the strategy call is still open whenever you want it. And if it ever becomes a priority, you know exactly where to find us.",note:'The last touch. Keep the door open, remind them the strategy call is still open, then stop.',emailSubject:'Last note from us',emailBody:"Last note from us [name]. We will not keep filling your inbox. If the timing is not right, no problem at all, the strategy call is still open whenever you want it. And if it ever becomes a priority, you know exactly where to find us.",attachNote:'Nothing to attach, this is a clean sign off.',attach:[]},
+    11:{eb:'After Day 9',title:'Park, recycle in 90 days',track:'prep',chType:'email',chLabel:'Email',time:'',label:'The monthly value drop',msg:"[One useful tip or resource this month]. No ask at all, just thought it might be handy for [business]. [you], Brand Method.",note:'One useful thing a month, no ask. This is where most parked deals quietly come back.',emailSubject:'[One useful tip or resource this month]',emailBody:"[One useful tip or resource this month]. No ask at all, just thought it might be handy for [business]. [you], Brand Method.",attachNote:'Attach the one useful resource for the month, no pitch.',attach:[{l:'Monthly value drop (F)',t:'link',k:'asset_f'}]}
+  };
+  var ORDER=[0,1,2,3,4,5,6,7,8,9,10,11]; var TOTAL=ORDER.length;
+
+  /* node channel icons */
+  var nodes=svg?[].slice.call(svg.querySelectorAll('.otrx-node')):[];
+  nodes.forEach(function(g){
+    var id=g.getAttribute('data-node'); var d=DATA[id]; if(!d) return;
+    var r=g.querySelector('rect.nbox'); if(!r) return;
+    var rx=+r.getAttribute('x'), ry=+r.getAttribute('y'), rw=+r.getAttribute('width'), rh=+r.getAttribute('height');
+    var c=CHAN[d.chType]||CHAN.pick;
+    var cx=rx+rw-21, cy=ry+rh-19;
+    var bg=document.createElementNS(NS,'circle'); bg.setAttribute('cx',cx); bg.setAttribute('cy',cy); bg.setAttribute('r',14); bg.setAttribute('fill','#fff'); bg.setAttribute('stroke',c.color); bg.setAttribute('stroke-width','1.4'); bg.setAttribute('class','node-ch'); g.appendChild(bg);
+    var gi=document.createElementNS(NS,'g'); gi.setAttribute('class','node-ch'); gi.setAttribute('transform','translate('+(cx-9)+','+(cy-9)+') scale(0.75)');
+    var p=document.createElementNS(NS,'path'); p.setAttribute('d',c.d);
+    if(c.fill){ p.setAttribute('fill',c.color); p.setAttribute('stroke','none'); } else { p.setAttribute('fill','none'); p.setAttribute('stroke',c.color); p.setAttribute('stroke-width','2'); p.setAttribute('stroke-linecap','round'); p.setAttribute('stroke-linejoin','round'); }
+    gi.appendChild(p); g.appendChild(gi);
+  });
+
+  /* zoom + pan */
+  if(svg&&view){
+    var s=1,tx=0,ty=0,MIN=0.5,MAX=3.4;
+    function apply(){ view.setAttribute('transform','translate('+tx+','+ty+') scale('+s+')'); }
+    function zoomAt(cx,cy,ds){ var ns=Math.min(MAX,Math.max(MIN,s*ds)); var pt=svg.createSVGPoint(); pt.x=cx; pt.y=cy; var ctm=view.getScreenCTM(); if(!ctm){s=ns;apply();return;} var p=pt.matrixTransform(ctm.inverse()); tx=tx-(p.x*(ns-s)); ty=ty-(p.y*(ns-s)); s=ns; apply(); }
+    ov.querySelectorAll('[data-zoom]').forEach(function(b){ b.addEventListener('click',function(){ var r=svg.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2; var z=b.getAttribute('data-zoom'); if(z==='in')zoomAt(cx,cy,1.25); else if(z==='out')zoomAt(cx,cy,1/1.25); else {s=1;tx=0;ty=0;apply();} }); });
+    var drag=false,lx=0,ly=0; svg.addEventListener('pointerdown',function(e){ if(e.target.closest('.otrx-node')) return; drag=true; lx=e.clientX; ly=e.clientY; try{svg.setPointerCapture(e.pointerId);}catch(_){ } svg.style.cursor='grabbing'; });
+    svg.addEventListener('pointermove',function(e){ if(!drag) return; tx+=(e.clientX-lx); ty+=(e.clientY-ly); lx=e.clientX; ly=e.clientY; apply(); });
+    function endDrag(){ drag=false; svg.style.cursor='grab'; } svg.addEventListener('pointerup',endDrag); svg.addEventListener('pointerleave',endDrag);
+    apply();
+  }
+
+  /* done state + progress */
+  var KEY='bm_sp_outreach_done_v1';
+  var done=load(KEY,{}); if(typeof done!=='object'||!done) done={};
+  var fill=ov.querySelector('#otrxFill'), pct=ov.querySelector('#otrxPct');
+  var current=null, opDone=ov.querySelector('#opDone');
+  function refresh(){
+    var n=0; ORDER.forEach(function(id){ if(done[id]) n++; });
+    if(fill) fill.style.width=(n/TOTAL*100)+'%';
+    if(pct) pct.textContent=n+' of '+TOTAL+' done';
+    nodes.forEach(function(nd){ var id=nd.getAttribute('data-node'); nd.classList.toggle('done', !!done[id]); });
+    ORDER.forEach(function(id){ var card=ov.querySelector('.play2[data-i="'+id+'"]'); if(card){ card.classList.toggle('on',!!done[id]); var c=card.querySelector('.play2-chk'); if(c)c.classList.toggle('on',!!done[id]); } });
+    if(current!==null&&opDone){ opDone.classList.toggle('on',!!done[current]); opDone.textContent=done[current]?'Done':'Mark done'; }
+  }
+  function setDone(id,val){ if(val) done[id]=1; else delete done[id]; save(KEY,done); refresh(); }
+
+  /* copy */
+  function copy(txt,btn){ var ok=function(){ btn.classList.add('done'); btn.textContent='Copied'; setTimeout(function(){btn.classList.remove('done'); btn.textContent='Copy';},1300); }; if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(txt).then(ok,ok);} else { try{ var t=document.createElement('textarea'); t.value=txt; document.body.appendChild(t); t.select(); document.execCommand('copy'); document.body.removeChild(t); ok(); }catch(e){} } }
+
+  /* panel */
+  var panelBody=ov.querySelector('#otrxPanelBody'), panelEmpty=ov.querySelector('#otrxPanelEmpty');
+  var opEyebrow=ov.querySelector('#opEyebrow'), opTitle=ov.querySelector('#opTitle'), opMeta=ov.querySelector('#opMeta');
+  var opMsgWrap=ov.querySelector('#opMsgWrap'), opMsgLabel=ov.querySelector('#opMsgLabel'), opMsg=ov.querySelector('#opMsg'), opCopy=ov.querySelector('#opCopy');
+  var opNote=ov.querySelector('#opNote'), opAttach=ov.querySelector('#opAttach');
+  function openPanel(id){
+    var d=DATA[id]; if(!d) return; current=id;
+    nodes.forEach(function(n){ n.classList.toggle('active', n.getAttribute('data-node')==String(id)); });
+    if(panelEmpty) panelEmpty.style.display='none';
+    if(panelBody){ panelBody.style.display='none'; void panelBody.offsetWidth; panelBody.style.display='block'; }
+    opEyebrow.textContent=d.eb; opTitle.textContent=d.title;
+    opMeta.innerHTML=chanChip(d.chType,d.chLabel)+(d.time?'<span class="t">'+esc(d.time)+'</span>':'');
+    if(d.msg){ opMsgWrap.style.display='block'; opMsgLabel.textContent=d.label||'Message'; opMsg.innerHTML=styledMsg(d); if(opCopy) opCopy.style.display=(d.variants?'none':''); } else { opMsgWrap.style.display='none'; }
+    if(d.note){ opNote.style.display='block'; opNote.textContent=d.note; } else { opNote.style.display='none'; }
+    opAttach.style.display='block'; opAttach.innerHTML='<div class="play2-lbl" style="margin-bottom:7px;">Attach</div>'+attRow(d)+(d.attachNote?'<div class="att-note">'+esc(d.attachNote)+'</div>':'');
+    if(opDone){ opDone.classList.toggle('on', !!done[id]); opDone.textContent=done[id]?'Done':'Mark done'; }
+  }
+  function closePanel(){ current=null; if(panelBody)panelBody.style.display='none'; if(panelEmpty)panelEmpty.style.display='block'; nodes.forEach(function(n){n.classList.remove('active');}); }
+  nodes.forEach(function(n){ n.addEventListener('click',function(){ openPanel(+n.getAttribute('data-node')); }); n.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openPanel(+n.getAttribute('data-node')); } }); });
+  ov.querySelector('#opClose').addEventListener('click',closePanel);
+  ov.querySelector('#opPrev').addEventListener('click',function(){ if(current===null)return; var i=ORDER.indexOf(current); if(i>0) openPanel(ORDER[i-1]); });
+  ov.querySelector('#opNext').addEventListener('click',function(){ if(current===null)return; var i=ORDER.indexOf(current); if(i<ORDER.length-1) openPanel(ORDER[i+1]); });
+  opCopy.addEventListener('click',function(){ if(current!==null) copy(DATA[current].msg||'',opCopy); });
+  ov.addEventListener('click',function(e){ var b=e.target.closest('.mv-copy'); if(!b) return; e.preventDefault(); copy(decodeURIComponent(b.getAttribute('data-copy')||''), b); });
+  if(opDone) opDone.addEventListener('click',function(){ if(current!==null) setDone(current, !done[current]); });
+
+  /* playbook list from DATA */
+  var play=ov.querySelector('#otrxPlay');
+  if(play){
+    play.innerHTML='';
+    ORDER.forEach(function(id){
+      var d=DATA[id];
+      var card=document.createElement('div'); card.className='play2 t-'+d.track; card.setAttribute('data-i',id);
+      var body='';
+      if(d.msg){ body+='<div><div class="play2-mh"><span class="play2-lbl">'+esc(d.label||'Message')+'</span><button class="play2-copy" type="button"'+(d.variants?' style="display:none"':'')+'>Copy</button></div>'+styledMsg(d)+'</div>'; }
+      else if(d.note){ body+='<div class="note-box">'+esc(d.note)+'</div>'; }
+      body+='<div><div class="play2-lbl" style="margin-bottom:7px;">Attach</div>'+attRow(d)+(d.attachNote?'<div class="att-note">'+esc(d.attachNote)+'</div>':'')+'</div>';
+      card.innerHTML='<div class="play2-h"><button class="play2-chk" type="button" aria-label="Mark done">'+CHK+'</button><span class="play2-day">'+esc(d.eb)+'</span><span class="play2-title">'+esc(d.title)+'</span><span class="play2-ch">'+chanChip(d.chType,d.chLabel)+'</span></div><div class="play2-b">'+body+'</div>';
+      card.querySelector('.play2-chk').addEventListener('click',function(){ setDone(id, !done[id]); });
+      var cp=card.querySelector('.play2-copy'); if(cp) cp.addEventListener('click',function(){ copy(d.msg||'',cp); });
+      play.appendChild(card);
+    });
+  }
+  refresh();
+
+  /* dock toggle (below / right) */
+  var split=ov.querySelector('#otrxSplit'), dock=ov.querySelector('#otrxDock');
+  function setDock(d){ if(split) split.classList.toggle('dock-right', d==='right'); if(dock) dock.querySelectorAll('button').forEach(function(b){ b.classList.toggle('on', b.getAttribute('data-dock')===d); }); save('bm_sp_outreach_dock',d); }
+  if(dock){ dock.querySelectorAll('button').forEach(function(b){ b.addEventListener('click',function(){ setDock(b.getAttribute('data-dock')); }); });
+    var savedDock=load('bm_sp_outreach_dock','bottom'); if(savedDock==='right') setDock('right'); }
+})();
+</script>
+</body>
+</html>
