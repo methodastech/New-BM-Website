@@ -2003,6 +2003,59 @@
     </div></section>
 
 
+    <!-- ===== Showreel section (See the work, not the pitch) ===== -->
+    <section class="sp-reel-sec" id="sp-reel-sec"><div class="sp-wrap">
+      <div class="sp-head center sp-head-w2">
+        <h2>See the work, <em>not the pitch.</em></h2>
+        <p>A quick reel of what we&rsquo;ve shipped. Sound on.</p>
+      </div>
+      <style>
+      .sp-reel{max-width:720px;margin:0 auto;}
+      /* To go live: paste a YouTube embed URL (https://www.youtube.com/embed/ID) or an .mp4 path
+         into data-reel-src on .sp-reel-stage below. Empty = placeholder poster only. */
+      .sp-reel-stage{position:relative;display:block;width:100%;aspect-ratio:16/9;border:0;padding:0;cursor:pointer;border-radius:18px;overflow:hidden;background:linear-gradient(180deg,rgba(10,16,60,.28),rgba(10,16,60,.5)),url("assets/showreel03-poster.jpg") center/cover no-repeat;box-shadow:0 40px 80px -40px rgba(20,30,120,.6),0 2px 0 rgba(255,255,255,.08) inset;transition:transform .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s;}
+      .sp-reel-stage:hover{transform:translateY(-4px);box-shadow:0 54px 100px -44px rgba(37,54,245,.62);}
+      .sp-reel-stage:focus-visible{outline:3px solid var(--bright-glow);outline-offset:3px;}
+      .sp-reel-grid{position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.16) 1px,transparent 1.5px);background-size:22px 22px;opacity:.5;-webkit-mask-image:radial-gradient(120% 92% at 50% 40%,#000 40%,transparent 86%);mask-image:radial-gradient(120% 92% at 50% 40%,#000 40%,transparent 86%);}
+      .sp-reel-tag{position:absolute;top:16px;left:16px;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.82);border:1px solid rgba(255,255,255,.3);border-radius:30px;padding:5px 11px;}
+      .sp-reel-time{position:absolute;top:16px;right:16px;font-family:"JetBrains Mono",monospace;font-size:11px;color:rgba(255,255,255,.92);background:rgba(0,0,0,.3);border-radius:6px;padding:4px 8px;}
+      .sp-reel-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:74px;height:74px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 30px -8px rgba(0,0,0,.45);transition:transform .25s;}
+      .sp-reel-play::before{content:"";position:absolute;inset:-10px;border-radius:50%;border:2px solid rgba(255,255,255,.5);animation:spReelPulse 2.6s ease-out infinite;}
+      .sp-reel-stage:hover .sp-reel-play{transform:translate(-50%,-50%) scale(1.06);}
+      .sp-reel-play svg{width:26px;height:26px;margin-left:4px;fill:var(--bright);}
+      .sp-reel-bar{position:absolute;left:18px;right:18px;bottom:16px;height:4px;background:rgba(255,255,255,.22);border-radius:3px;overflow:hidden;}
+      .sp-reel-bar i{display:block;height:100%;width:38%;background:#fff;border-radius:3px;}
+      .sp-reel-video{width:100%;aspect-ratio:16/9;border:0;border-radius:18px;display:block;background:#000;box-shadow:0 40px 80px -40px rgba(20,30,120,.6);}
+      @keyframes spReelPulse{0%{transform:scale(.85);opacity:.8}70%{opacity:0}100%{transform:scale(1.25);opacity:0}}
+      @media(max-width:640px){.sp-reel-play{width:60px;height:60px}.sp-reel-play svg{width:22px;height:22px}}
+      @media(prefers-reduced-motion:reduce){.sp-reel-play::before{animation:none}}
+      </style>
+      <div class="sp-reel" id="sp-reel">
+        <button class="sp-reel-stage" type="button" data-reel-src="assets/showreel03.webm" data-reel-mp4="assets/showreel03.mp4" aria-label="Play the showreel">
+          <span class="sp-reel-tag">Showreel</span>
+          <span class="sp-reel-time">0:42</span>
+          <span class="sp-reel-play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.2v13.6a1 1 0 0 0 1.53.85l10.7-6.8a1 1 0 0 0 0-1.7L9.53 4.35A1 1 0 0 0 8 5.2z"/></svg></span>
+          <span class="sp-reel-bar" aria-hidden="true"><i></i></span>
+        </button>
+      </div>
+      <script>
+      (function(){
+        var stage=document.querySelector('#sp-reel .sp-reel-stage');
+        if(!stage)return;
+        stage.addEventListener('click',function(){
+          var src=stage.getAttribute('data-reel-src');
+          if(!src)return; /* placeholder until a reel URL is added */
+          var wrap=stage.parentNode,isYT=/youtu/.test(src),el;
+          if(isYT){el=document.createElement('iframe');el.src=src+(src.indexOf('?')<0?'?':'&')+'autoplay=1';el.setAttribute('allow','autoplay; fullscreen; encrypted-media');el.setAttribute('allowfullscreen','');}
+          else{el=document.createElement('video');el.controls=true;el.autoplay=true;el.playsInline=true;el.poster='assets/showreel03-poster.jpg';var mp4=stage.getAttribute('data-reel-mp4');el.innerHTML='<source src="'+src+'" type="video/webm">'+(mp4?'<source src="'+mp4+'" type="video/mp4">':'');}
+          el.className='sp-reel-video';
+          wrap.innerHTML='';wrap.appendChild(el);
+        });
+      })();
+      </script>
+    </div></section>
+
+
     <section class="sp-soft" id="sp-work"><div class="sp-wrap">
       <div class="sp-head center"><span class="wkx-count">6 live builds</span><span class="sp-eyebrow">Proof / live work</span><h2>Real builds you can open, and <em>what changed once they went live.</em></h2><p>Every tile is a working build, not a mockup. Open any one and the full thing loads in a new tab. The ones we shipped for clients carry the outcome they earned.</p></div>
       <style>
