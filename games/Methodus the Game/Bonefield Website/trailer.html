@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ESSENCE — gameplay teaser</title>
+<link rel="icon" type="image/svg+xml" href="bonefield-mark.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Grenze+Gotisch:wght@500;700;900&family=UnifrakturCook:wght@700&family=EB+Garamond:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --gold:#c9a24a; --gold2:#e6cd8e; --goldB:#f3e2ac; --bronze:#5a4a2a;
+    --vit:#9c2f3b; --sta:#3a7d5a; --ess:#3a5a9c; --acid:#bfe34a;
+    --ink:#ece3d0; --mute:#8a7c63; --ember:#c9572a;
+    --safe:5vh;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;background:#000;font-family:'EB Garamond',serif;color:var(--ink);overflow:hidden}
+  .stage{position:relative;width:100vw;height:100vh;background:#000}
+  video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#000;transition:opacity .45s ease}
+  #vB{opacity:0}
+  .veil{position:absolute;inset:0;background:#000;pointer-events:none;transition:opacity .7s ease;opacity:1;z-index:40}
+  /* ---- HUD root ---- */
+  .hud{position:absolute;inset:0;pointer-events:none;z-index:10;opacity:0;transition:opacity .8s}
+  .hud.on{opacity:1}
+  /* persistent corners dim during the climax peak */
+  .corners{transition:opacity .45s ease}
+  .hud.peak .corners{opacity:.4}
+  /* legibility scrims so the HUD reads on bright scenes */
+  .scrim{position:absolute;pointer-events:none}
+  .scrim.st{top:0;left:0;right:0;height:24vh;background:linear-gradient(180deg,rgba(0,0,0,.42),transparent)}
+  .scrim.sb{bottom:0;left:0;right:0;height:32vh;background:linear-gradient(0deg,rgba(0,0,0,.5),transparent)}
+  .scrim.sr{top:14%;bottom:14%;right:0;width:20vw;background:linear-gradient(270deg,rgba(0,0,0,.42),transparent)}
+  .scrim.sl{top:30%;bottom:18%;left:0;width:20vw;background:linear-gradient(90deg,rgba(0,0,0,.4),transparent);opacity:0;transition:opacity .45s}
+  .scrim.sl.on{opacity:1}
+
+  /* ===== TOP-LEFT: resources + spirit loadout ===== */
+  .res{position:absolute;top:var(--safe);left:5vw;width:190px;font-family:'Grenze Gotisch',serif}
+  .res .lab{font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:#cdbd96;margin:7px 0 2px}
+  .bar{position:relative;height:7px;border:1px solid rgba(201,162,74,.5);border-radius:4px;overflow:hidden;background:rgba(0,0,0,.4)}
+  .bar i{position:absolute;inset:0;display:block;transform-origin:left;transition:width .6s ease}
+  .bar.vit i{width:100%;background:linear-gradient(90deg,#7a2330,#9c2f3b)}
+  .bar.sta i{width:100%;background:linear-gradient(90deg,#2c5d44,#3a7d5a)}
+  .bar.ess i{width:80%;background:linear-gradient(90deg,#2c4477,#3a5a9c);box-shadow:0 0 8px rgba(58,90,156,.6) inset}
+  .bar .seal{position:absolute;left:-5px;top:50%;width:11px;height:11px;transform:translateY(-50%);border-radius:50%;background:radial-gradient(circle at 50% 35%,#3a2a14,#160d05);border:1px solid #b8923f;box-shadow:0 0 0 1px #100b05}
+  .pulse{animation:pulse 1.4s ease}
+  @keyframes pulse{0%,100%{filter:none}50%{filter:brightness(1.5)}}
+  .runes{display:flex;gap:6px;margin-top:11px}
+  .rune{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    background:radial-gradient(circle at 50% 32%,#2a2012,#120c05);border:1px solid #7c5d2b;box-shadow:inset 0 1px 2px rgba(255,236,190,.18);font-size:12px;opacity:.55;transition:.3s}
+  .rune.lit{opacity:1;border-color:var(--gold2);box-shadow:0 0 8px rgba(201,162,74,.5),inset 0 1px 2px rgba(255,236,190,.25)}
+  .rune.water{color:#6fb6e6} .rune.poison{color:#9fdc4a} .rune.fire{color:#f0935a} .rune.death{color:#c9b3e6}
+
+  /* ===== TOP-RIGHT: bounty medallion ===== */
+  .bounty{position:absolute;top:calc(var(--safe) - 8px);right:5vw;text-align:center;width:84px}
+  .bounty .ring{position:relative;width:74px;height:74px;margin:0 auto;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    background:radial-gradient(circle at 50% 34%,#3a2a14,#160d05 82%);
+    box-shadow:inset 0 3px 6px rgba(255,238,200,.22),inset 0 -5px 10px rgba(0,0,0,.6),0 0 0 3px #100b05,0 0 0 5px #b8923f,0 0 0 8px #100b05}
+  .bounty .glyph{font-family:'UnifrakturCook',serif;font-size:40px;line-height:1;color:var(--gold2);text-shadow:0 2px 6px #000;transition:.25s}
+  .bounty.bump .glyph{animation:bump .5s ease}
+  @keyframes bump{0%{transform:scale(1)}40%{transform:scale(1.18);filter:drop-shadow(0 0 12px rgba(243,226,172,.9))}100%{transform:scale(1)}}
+  .bounty .cap{font-family:'Grenze Gotisch',serif;font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:var(--mute);margin-top:5px}
+
+  /* ===== RIGHT EDGE: charge tier ladder ===== */
+  .ladder{position:absolute;right:5vw;top:50%;transform:translateY(-50%);display:flex;flex-direction:column-reverse;gap:7px;opacity:0;transition:opacity .45s;text-align:right}
+  .ladder.on{opacity:1}
+  .rung{display:flex;align-items:center;gap:8px;justify-content:flex-end}
+  .rung b{font-family:'Grenze Gotisch',serif;font-weight:900;font-size:13px;width:20px;text-align:center;color:var(--bronze);letter-spacing:.02em;transition:.25s}
+  .rung i{width:50px;height:8px;border:1px solid rgba(201,162,74,.5);border-radius:3px;background:rgba(0,0,0,.4);transition:.25s}
+  .rung.lit b{color:var(--goldB);text-shadow:0 0 10px rgba(201,162,74,.85)}
+  .rung.lit i{background:linear-gradient(90deg,#caa24a,#f3e2ac);box-shadow:0 0 10px rgba(201,162,74,.7)}
+  .rung.locked{opacity:.38}
+  .ladder.flare .rung.lit i{animation:flare .5s ease}
+  @keyframes flare{50%{box-shadow:0 0 22px rgba(243,226,172,1);filter:brightness(1.6)}}
+  .powlbl{position:absolute;right:5vw;top:calc(50% + 116px);font-family:'Grenze Gotisch',serif;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold2);opacity:0;transition:.4s;text-align:right;text-shadow:0 1px 4px #000}
+  .powlbl.on{opacity:1}
+
+  /* ===== LEFT EDGE: the Forge combine panel ===== */
+  .forge{position:absolute;left:5vw;top:50%;transform:translateY(-50%);width:236px;border:1px solid rgba(201,162,74,.5);border-radius:12px;
+    background:linear-gradient(180deg,rgba(26,18,10,.72),rgba(14,9,5,.72));backdrop-filter:blur(2px);padding:13px 15px;opacity:0;transition:.45s;
+    box-shadow:0 10px 30px rgba(0,0,0,.5)}
+  .forge.on{opacity:1}
+  .forge h4{margin:0 0 10px;font-family:'Grenze Gotisch',serif;font-weight:900;letter-spacing:.14em;text-transform:uppercase;font-size:11px;color:var(--gold)}
+  .forge .slot{display:flex;align-items:center;gap:9px;font-family:'Grenze Gotisch',serif;font-weight:500;font-size:13px;color:#6a5a3a;margin:6px 0;transition:.3s}
+  .forge .slot .ico{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;
+    background:radial-gradient(circle at 50% 32%,#241a0e,#100a04);border:1px solid #4a3a1e;transition:.3s}
+  .forge .slot.on{color:var(--goldB);text-shadow:0 0 8px rgba(201,162,74,.5)}
+  .forge .slot.on .ico{border-color:var(--gold2);box-shadow:0 0 8px rgba(201,162,74,.5)}
+  .forge .res{position:static;width:auto;top:auto;left:auto;margin-top:10px;border-top:1px dashed rgba(201,162,74,.45);padding-top:9px;font-family:'Grenze Gotisch',serif;font-weight:700;font-size:14px;color:var(--acid);opacity:0;transition:.4s;text-shadow:0 0 10px rgba(191,227,74,.5)}
+  .forge .res.on{opacity:1}
+
+  /* ===== CENTER: reticle + lead line + hit seal ===== */
+  .reticle{position:absolute;left:50%;top:48%;width:18px;height:18px;transform:translate(-50%,-50%) scale(1.3);border:1.5px solid rgba(230,205,142,.5);border-radius:50%;box-shadow:0 0 8px rgba(0,0,0,.6);opacity:0;transition:.4s}
+  .reticle.on{opacity:1}
+  .reticle.aim{transform:translate(-50%,-50%) scale(1);border-color:rgba(230,205,142,.95)}
+  .lead{position:absolute;left:50%;top:42%;width:2px;height:0;background:linear-gradient(180deg,rgba(243,226,172,0),rgba(243,226,172,.7));transform:translateX(-50%);transition:height .35s ease,opacity .3s;opacity:0;transform-origin:top}
+  .lead.on{height:11vh;opacity:.85}
+  .hitseal{position:absolute;left:50%;top:34%;width:54px;height:54px;transform:translate(-50%,-50%) scale(.4);opacity:0;border-radius:50%;
+    border:2px solid var(--gold2);box-shadow:0 0 16px rgba(243,226,172,.8),inset 0 0 12px rgba(201,87,41,.6);
+    background:radial-gradient(circle,rgba(201,87,41,.35),transparent 70%)}
+  .hitseal.fire{animation:hit .6s ease}
+  @keyframes hit{0%{opacity:0;transform:translate(-50%,-50%) scale(.4)}30%{opacity:1;transform:translate(-50%,-50%) scale(1.05)}100%{opacity:0;transform:translate(-50%,-50%) scale(1.3)}}
+
+  /* ===== BOTTOM: incantation + caption ===== */
+  .incant{position:absolute;left:50%;bottom:26%;transform:translateX(-50%);font-family:'Grenze Gotisch',serif;font-weight:700;
+    font-size:clamp(18px,2.5vw,30px);color:var(--goldB);text-align:center;max-width:80%;opacity:0;transition:opacity .35s;z-index:12;
+    text-shadow:0 2px 10px #000,0 0 18px rgba(201,162,74,.55)}
+  .incant.on{opacity:1}
+  .incant .w{display:inline-block;white-space:pre}
+  .incant .w.burn{animation:burn .7s forwards ease-in}
+  @keyframes burn{0%{color:var(--goldB);text-shadow:0 2px 10px #000,0 0 8px rgba(201,162,74,.6)}
+    45%{color:#fff6d8;text-shadow:0 0 14px var(--ember),0 0 26px #ff7a2e}
+    100%{opacity:0;transform:translateY(-18px) scale(1.15);filter:blur(3px);color:#fff}}
+  .embers{position:absolute;left:50%;bottom:30%;width:2px;height:2px;transform:translateX(-50%);z-index:11;pointer-events:none}
+  .ep{position:absolute;width:7px;height:7px;border-radius:50%;background:radial-gradient(circle,#f3e2ac,#c9572a 70%,transparent);mix-blend-mode:screen;opacity:0}
+  .ep.go{animation:ember 800ms ease-out forwards}
+  @keyframes ember{0%{opacity:1;transform:translate(0,0) scale(1)}100%{opacity:0;transform:translate(var(--dx),-160px) scale(.3)}}
+  .flash{position:absolute;inset:0;background:radial-gradient(circle at 50% 42%,rgba(243,226,172,.5),transparent 55%);opacity:0;z-index:11;pointer-events:none}
+  .flash.go{animation:flash .5s ease}
+  @keyframes flash{0%{opacity:0}25%{opacity:1}100%{opacity:0}}
+  .cap{position:absolute;left:50%;bottom:8%;transform:translateX(-50%);font-style:italic;font-size:clamp(16px,2.1vw,22px);color:var(--ink);
+    text-shadow:0 2px 8px #000;opacity:0;transition:opacity .5s;z-index:12;text-align:center;max-width:84%}
+  .cap.on{opacity:1}
+
+  /* rank-up stamp */
+  .stamp{position:absolute;left:50%;bottom:38%;transform:translate(-50%,10px);font-family:'UnifrakturCook',serif;font-size:26px;color:var(--gold2);
+    opacity:0;z-index:13;text-shadow:0 2px 10px #000,0 0 18px rgba(201,162,74,.6);white-space:nowrap}
+  .stamp.go{animation:stamp 1.4s ease}
+  @keyframes stamp{0%{opacity:0;transform:translate(-50%,16px) scale(.9)}18%{opacity:1;transform:translate(-50%,0) scale(1)}80%{opacity:1}100%{opacity:0}}
+
+  /* control hint */
+  .hint{position:absolute;bottom:var(--safe);right:5vw;font-family:'Grenze Gotisch',serif;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);opacity:0;transition:.4s}
+  .hint.on{opacity:1}
+
+  /* start + end */
+  .start,.endcard{position:absolute;inset:0;z-index:50;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(720px 440px at 50% 45%,#1a130a,#000 76%)}
+  .endcard{display:none}.endcard.on{display:flex}
+  .start{cursor:pointer}
+  .backlink{position:absolute;top:18px;left:18px;z-index:3;font-family:'Grenze Gotisch',serif;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--gold2);border:1px solid #a9813f;border-radius:30px;padding:7px 14px;text-decoration:none;opacity:.82;transition:.2s}
+  .backlink:hover{opacity:1;background:rgba(201,162,74,.12)}
+  .start:focus-visible{outline:2px solid var(--gold2);outline-offset:-8px}
+  a:focus-visible{outline:2px solid var(--gold2);outline-offset:2px;border-radius:30px}
+  /* shrink the cinematic HUD side-panels so they don't crowd the center on phones */
+  @media(max-width:480px){
+    .forge{transform:translateY(-50%) scale(.76);transform-origin:left center}
+    .ladder{transform:translateY(-50%) scale(.84);transform-origin:right center}
+    .res{transform:scale(.84);transform-origin:left top}
+  }
+  h1{font-family:'UnifrakturCook',serif;margin:0;background:linear-gradient(180deg,#f3e2ac,#caa24a 55%,#7c5d2b);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .start h1{font-size:clamp(50px,9vw,104px)}.endcard h1{font-size:clamp(56px,10vw,120px)}
+  .play{margin-top:16px;font-family:'Grenze Gotisch',serif;letter-spacing:.2em;text-transform:uppercase;font-size:13px;color:var(--gold2);border:1px solid #a9813f;border-radius:30px;padding:11px 24px}
+  .note{margin-top:14px;font-style:italic;color:var(--mute);font-size:13px}
+  .tag{margin-top:10px;font-family:'Grenze Gotisch',serif;letter-spacing:.36em;text-transform:uppercase;font-size:13px;color:#c19a4e}
+</style>
+</head>
+<body>
+<div class="stage">
+  <video id="vA" playsinline aria-label="Bonefield concept gameplay teaser"></video>
+  <video id="vB" playsinline aria-label="Bonefield concept gameplay teaser"></video>
+  <div class="veil" id="veil"></div>
+
+  <div class="hud" id="hud">
+    <div class="scrim st"></div>
+    <div class="scrim sb"></div>
+    <div class="scrim sr"></div>
+    <div class="scrim sl" id="scriml"></div>
+    <div class="corners" id="corners">
+      <!-- top-left resources -->
+      <div class="res">
+        <div class="lab">Vitality</div><div class="bar vit"><span class="seal"></span><i></i></div>
+        <div class="lab">Stamina</div><div class="bar sta"><span class="seal"></span><i></i></div>
+        <div class="lab">Essence</div><div class="bar ess"><span class="seal"></span><i id="essi"></i></div>
+        <div class="runes" id="runes">
+          <div class="rune water" data-r="water">❉</div>
+          <div class="rune poison" data-r="poison">☣</div>
+          <div class="rune fire" data-r="fire">✦</div>
+          <div class="rune death" data-r="death">✠</div>
+        </div>
+      </div>
+      <!-- top-right bounty -->
+      <div class="bounty" id="bounty"><div class="ring"><span class="glyph" id="bglyph">D</span></div><div class="cap">Bounty</div></div>
+      <!-- control hint -->
+      <div class="hint" id="hint">E cast · hold L charge · R parry</div>
+    </div>
+
+    <!-- right edge: charge ladder -->
+    <div class="ladder" id="ladder">
+      <div class="rung locked" data-r="L"><b>L</b><i></i></div>
+      <div class="rung locked" data-r="S"><b>S</b><i></i></div>
+      <div class="rung locked" data-r="A"><b>A</b><i></i></div>
+      <div class="rung" data-r="B"><b>B</b><i></i></div>
+      <div class="rung" data-r="C"><b>C</b><i></i></div>
+      <div class="rung" data-r="D"><b>D</b><i></i></div>
+    </div>
+    <div class="powlbl" id="powlbl">Fire power · tier —</div>
+
+    <!-- left edge: the Forge -->
+    <div class="forge" id="forge">
+      <h4>The Forge</h4>
+      <div class="slot" data-s="w1"><span class="ico" style="color:#6fb6e6">❉</span>Water</div>
+      <div class="slot" data-s="w2"><span class="ico" style="color:#6fb6e6">❉</span>Water</div>
+      <div class="slot" data-s="p"><span class="ico" style="color:#9fdc4a">☣</span>Poison</div>
+      <div class="slot" data-s="f"><span class="ico" style="color:#f0935a">✦</span>Fire · combust</div>
+      <div class="slot" data-s="a"><span class="ico" style="color:#e6cd8e">➶</span>Shape · arrow</div>
+      <div class="res" id="forgeres">→ Exploding Arrow</div>
+    </div>
+
+    <!-- center -->
+    <div class="lead" id="lead"></div>
+    <div class="reticle" id="reticle"></div>
+    <div class="hitseal" id="hitseal"></div>
+
+    <!-- bottom language -->
+    <div class="incant" id="incant"></div>
+    <div class="embers" id="embers"></div>
+    <div class="cap" id="cap"></div>
+    <div class="stamp" id="stamp"></div>
+    <div class="flash" id="flash"></div>
+  </div>
+
+  <div class="start" id="start" role="button" tabindex="0" aria-label="Play the teaser"><a class="backlink" href="index.html" target="_top" onclick="event.stopPropagation()">← bonefield.game</a><h1>Bonefield</h1><div class="play">▶ Play the teaser</div><div class="note">~30s · concept gameplay · sound on</div></div>
+  <div class="endcard" id="end"><a class="backlink" href="index.html" target="_top">← bonefield.game</a><h1>Bonefield</h1><div class="tag">❖ &nbsp; Speak · Combine · Unleash &nbsp; ❖</div></div>
+
+  <div id="vobank" style="display:none">
+    <audio id="vo1" src="vo1.m4a?v=1" preload="auto"></audio>
+    <audio id="vo2" src="vo2.m4a?v=1" preload="auto"></audio>
+    <audio id="vo3" src="vo3.m4a?v=1" preload="auto"></audio>
+    <audio id="vo4" src="vo4.m4a?v=1" preload="auto"></audio>
+    <audio id="vo5" src="vo5.m4a?v=1" preload="auto"></audio>
+    <audio id="vo6" src="vo6.m4a?v=1" preload="auto"></audio>
+    <audio id="vo7" src="vo7.m4a?v=1" preload="auto"></audio>
+    <audio id="vo8" src="vo8.m4a?v=1" preload="auto"></audio>
+    <audio id="vo9" src="vo9.m4a?v=1" preload="auto"></audio>
+    <audio id="vo10" src="vo10.m4a?v=1" preload="auto"></audio>
+  </div>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+const vA=$('vA'),vB=$('vB'),veil=$('veil'),hud=$('hud'),corners=$('corners');
+const ladder=$('ladder'),powlbl=$('powlbl'),forge=$('forge'),forgeres=$('forgeres');
+const reticle=$('reticle'),lead=$('lead'),hitseal=$('hitseal');
+const incant=$('incant'),embers=$('embers'),cap=$('cap'),stamp=$('stamp'),flash=$('flash');
+const bounty=$('bounty'),bglyph=$('bglyph'),essi=$('essi'),hint=$('hint'),runes=$('runes');
+
+// ---- helpers ----
+function setText(el,s){el.textContent=s;el.classList.toggle('on',!!s);}
+function incantSay(s){ // render per-letter for the burn effect
+  incant.innerHTML=''; if(!s){incant.classList.remove('on');return;}
+  for(const ch of s){const w=document.createElement('span');w.className='w';w.textContent=ch;incant.appendChild(w);}
+  incant.classList.add('on');
+}
+function ignite(){ // burn the current incantation letters + embers + flash
+  const ws=[...incant.querySelectorAll('.w')];
+  ws.forEach((w,i)=>setTimeout(()=>w.classList.add('burn'),i*30));
+  // embers
+  for(let i=0;i<12;i++){const e=document.createElement('div');e.className='ep';
+    e.style.left=(Math.random()*220-110)+'px';e.style.setProperty('--dx',(Math.random()*120-60)+'px');
+    embers.appendChild(e);setTimeout(()=>e.classList.add('go'),i*22);setTimeout(()=>e.remove(),1100+i*22);}
+  flash.classList.remove('go');void flash.offsetWidth;flash.classList.add('go');
+  setTimeout(()=>incant.classList.remove('on'),760);
+}
+function caption(s){setText(cap,s);}
+function ess(p){essi.style.width=p+'%';}
+function pulseBars(){document.querySelectorAll('.bar i').forEach(i=>{i.classList.remove('pulse');void i.offsetWidth;i.classList.add('pulse');});}
+function bountyTo(r){bglyph.textContent=r;bounty.classList.remove('bump');void bounty.offsetWidth;bounty.classList.add('bump');}
+function rankStamp(s){stamp.textContent=s;stamp.classList.remove('go');void stamp.offsetWidth;stamp.classList.add('go');}
+function showLadder(on){ladder.classList.toggle('on',on);powlbl.classList.toggle('on',on);if(!on)document.querySelectorAll('.ladder .rung').forEach(r=>r.classList.remove('lit'));}
+function rung(k){const o=['D','C','B','A','S','L'],u=o.indexOf(k);o.forEach((x,i)=>{const el=document.querySelector('.ladder .rung[data-r="'+x+'"]');if(el)el.classList.toggle('lit',i<=u);});}
+function pow(s){powlbl.textContent=s;}
+function ladderFlare(){ladder.classList.add('flare');setTimeout(()=>ladder.classList.remove('flare'),520);}
+function showForge(on){forge.classList.toggle('on',on);$('scriml').classList.toggle('on',on);if(!on){document.querySelectorAll('.forge .slot').forEach(s=>s.classList.remove('on'));forgeres.classList.remove('on');}}
+function slot(k){const el=document.querySelector('.forge .slot[data-s="'+k+'"]');if(el)el.classList.add('on');}
+function forgeResult(on){forgeres.classList.toggle('on',on);}
+function rune(k){const el=runes.querySelector('.rune[data-r="'+k+'"]');if(el)el.classList.add('lit');}
+function reticleState(s){reticle.classList.toggle('on',s!=='off');reticle.classList.toggle('aim',s==='aim');}
+function leadOn(on){lead.classList.toggle('on',on);}
+function hit(){hitseal.classList.remove('fire');void hitseal.offsetWidth;hitseal.classList.add('fire');}
+function peak(on){hud.classList.toggle('peak',on);}
+function vo(id){const a=$(id);if(!a)return;try{a.pause();a.currentTime=0;a.volume=1;a.play().catch(()=>{});}catch(e){}}
+let VOL=0.32; // footage audio ducked low so the casting voice sits on top
+// smooth the footage audio bed across the shot cut (the two clips can have different beds)
+function audioXfade(out,inn,target,ms){
+  const steps=18,dt=ms/steps;let i=0;const o0=out.volume||0;
+  const t=setInterval(()=>{i++;const k=i/steps;
+    out.volume=Math.max(0,o0*(1-k));inn.volume=Math.min(target,target*k);
+    if(i>=steps){clearInterval(t);out.volume=0;inn.volume=target;}},dt);
+}
+
+// ===== CUE SHEET — timed to the measured seedance footage (both shots 15.0s) =====
+// One voice: the player narrates AND casts. The spell fires on the outcome word.
+// SHOT 1 events: walk-in 0-8s · orb kindles ~8s · full charge in hand 9-10s ·
+//   release "Fireball!" ~10.8s · orb travels 11-13s · downrange detonation 13.8-14.8s.
+// SHOT 2 events: aftermath continues 0-2s · acid/poison brew cast ~3-4s · "Explosion!"
+//   burst ~7s · fire-blade melee advance 9-15s.
+const CLIPS=[
+ { src:'shot1-seedance.mp4?v=1', cues:[
+   {t:0.3, f:()=>{hint.classList.add('on');reticleState('faint');ess(80);bountyTo('D');incantSay('');caption('');}},
+   {t:3.5, f:()=>{reticleState('aim');incantSay('Spirits of fire... hear me.');vo('vo3');showLadder(true);rung('D');pow('Fire power · tier D');pulseBars();}},
+   {t:6.0, f:()=>{incantSay('Bring ruin to all who defy me. Burn them all to ash.');vo('vo4');rune('fire');}},
+   {t:7.6, f:()=>{rung('C');pow('Fire power · tier C');pulseBars();}},
+   {t:9.0, f:()=>{rung('B');pow('Fire power · tier B');pulseBars();}},
+   {t:10.0,f:()=>{peak(true);hint.classList.remove('on');}},
+   {t:10.8,f:()=>{incantSay('Fireball!');vo('vo5');}},
+   {t:11.1,f:()=>{ignite();ladderFlare();hit();ess(50);showLadder(false);}},
+   {t:11.8,f:()=>{peak(false);}},
+   {t:13.8,f:()=>{hit();flash.classList.remove('go');void flash.offsetWidth;flash.classList.add('go');bountyTo('C');rankStamp('Bounty raised · C');}},
+   {t:14.3,f:()=>{incantSay('');reticleState('off');}},
+ ]},
+ { src:'shot2-seedance.mp4?v=1', cues:[
+   {t:0.3, f:()=>{caption('');incantSay('');showForge(true);reticleState('off');}},
+   {t:2.5, f:()=>{incantSay('Water, water, poison... fire.');vo('vo7');slot('w1');rune('water');}},
+   {t:3.2, f:()=>{slot('w2');}},
+   {t:4.0, f:()=>{slot('p');rune('poison');}},
+   {t:5.0, f:()=>{slot('f');rune('fire');}},
+   {t:5.6, f:()=>{slot('a');forgeResult(true);}},
+   {t:6.6, f:()=>{incantSay('Explosion!');vo('vo9');}},
+   {t:7.0, f:()=>{ignite();hit();showForge(false);ess(28);peak(true);}},
+   {t:7.8, f:()=>{peak(false);bountyTo('B');rankStamp('Bounty raised · B');}},
+   {t:9.0, f:()=>{incantSay('');}},
+   {t:9.6, f:()=>{caption('Blade or word. Your call.');}},
+   {t:13.6,f:()=>{caption('');}},
+ ]},
+];
+
+// ===== engine =====
+let A=true;
+function active(){return A?vA:vB;}
+function startClip(n){
+  const c=CLIPS[n];c._fired=0;c._next=false;
+  const v=active();v.src=c.src;v.muted=false;v.volume=VOL;v.currentTime=0;v.play().catch(()=>{});
+  v.style.opacity='1';(A?vB:vA).style.opacity='0';
+  setTimeout(()=>{veil.style.opacity='0';hud.classList.add('on');},80);
+  bind(v,c,n);
+}
+function bind(v,c,n){
+  v.ontimeupdate=()=>{
+    const L=c.cues;for(let k=c._fired;k<L.length;k++){if(v.currentTime>=L[k].t){try{L[k].f();}catch(e){}c._fired=k+1;}else break;}
+    if(v.duration&&v.currentTime>=v.duration-0.55&&!c._next){
+      c._next=true;
+      if(n<CLIPS.length-1){const nv=(A?vB:vA);A=!A;const nc=CLIPS[n+1];nc._fired=0;nc._next=false;
+        nv.src=nc.src;nv.currentTime=0;nv.muted=false;nv.volume=0;nv.play().catch(()=>{});nv.style.opacity='1';v.style.opacity='0';
+        audioXfade(v,nv,VOL,500);
+        bind(nv,nc,n+1);}
+      else{veil.style.opacity='1';setTimeout(()=>{hud.classList.remove('on');$('end').classList.add('on');},480);}
+    }
+  };
+}
+function beginTeaser(){$('start').style.display='none';startClip(0);}
+$('start').addEventListener('click',beginTeaser);
+$('start').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();beginTeaser();}});
+// allow the landing page to embed + auto-start the teaser (poster click = user gesture upstream)
+if(new URLSearchParams(location.search).has('autoplay')){
+  $('start').style.display='none';
+  try{startClip(0);}catch(e){$('start').style.display='flex';}
+  const av=active();av&&av.play&&av.play().catch(()=>{$('start').style.display='flex';});
+}
+</script>
+</body>
+</html>

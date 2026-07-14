@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Essence · Investor Brief</title>
+<link rel="icon" href="bonefield-sigil.svg" type="image/svg+xml">
+<meta name="description" content="Essence investor brief: cast spells with your voice. A roguelite in a category nobody owns, de-risked by a free web demo, with two markets on one engine.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Grenze+Gotisch:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============ TOKENS (shared with index.html) ============ */
+:root{
+  --ink-0:#0b0908; --ink-1:#131009; --ink-2:#1a1610; --ink-3:#241d12;
+  --line:rgba(203,164,82,.16); --line-strong:rgba(203,164,82,.42);
+  --gold:#c9a24a; --gold-hi:#ecd192; --gold-deep:#8a6a2a;
+  --bone:#f0e7d1; --text:#cfc6b2; --dim:#9c9280;
+  --maxw:1180px; --pad:clamp(20px,4vw,48px);
+  --ff-disp:"Cinzel",serif; --ff-body:"EB Garamond",Georgia,serif; --ff-black:"Grenze Gotisch",serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{
+  background:var(--ink-0); color:var(--text);
+  font-family:var(--ff-body); font-size:1.22rem; line-height:1.75;
+  -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+::selection{background:var(--gold); color:var(--ink-0)}
+img{max-width:100%; display:block}
+a{color:var(--gold-hi); text-decoration:none}
+a:hover{color:var(--bone)}
+:focus-visible{outline:2px solid var(--gold); outline-offset:3px}
+strong,b{color:var(--bone); font-weight:600}
+em,i{color:var(--bone)}
+
+/* subtle vignette atmosphere over the whole page */
+body::before{
+  content:""; position:fixed; inset:0; z-index:-1; pointer-events:none;
+  background:radial-gradient(120% 90% at 50% 0%, rgba(201,162,74,.05), transparent 55%),
+             radial-gradient(140% 100% at 50% 100%, rgba(0,0,0,.5), transparent 60%);
+}
+/* no stacking context on main: lets the divider's mix-blend-mode reach the page background */
+
+/* ============ NAV ============ */
+nav#top{
+  position:fixed; top:0; left:0; right:0; z-index:50;
+  background:rgba(11,9,8,.86); backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.nav-in{max-width:var(--maxw); margin:0 auto; padding:0 var(--pad);
+  display:flex; align-items:center; gap:28px; height:76px}
+.brand{display:flex; align-items:center; gap:12px}
+.brand img{width:36px; height:36px; opacity:.9}
+.brand b{font-family:var(--ff-black); font-weight:700; font-size:1.8rem; letter-spacing:.02em;
+  background:linear-gradient(to bottom, #f7efd9 30%, #e3c684 62%, #b08a40 100%);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  filter:drop-shadow(0 1px 6px rgba(0,0,0,.6))}
+.brand small{font-family:var(--ff-disp); font-size:.68rem; font-weight:600; letter-spacing:.24em;
+  text-transform:uppercase; color:var(--dim); margin-left:2px; white-space:nowrap}
+.nav-links{display:flex; gap:4px; margin-left:auto; overflow-x:auto; scrollbar-width:none}
+.nav-links::-webkit-scrollbar{display:none}
+.nav-links a{
+  font-family:var(--ff-disp); font-size:.78rem; font-weight:600; letter-spacing:.11em;
+  text-transform:uppercase; color:var(--dim); padding:10px 9px; white-space:nowrap;
+  border-bottom:2px solid transparent; transition:color .25s;
+}
+.nav-links a:hover{color:var(--bone)}
+@media (max-width:900px){
+  .nav-in{flex-wrap:wrap; height:auto; padding-top:10px; row-gap:0}
+  .brand b{font-size:1.5rem}
+  .nav-links{margin-left:0; width:100%; padding-bottom:6px;
+    -webkit-mask-image:linear-gradient(to right, #000 90%, transparent);
+    mask-image:linear-gradient(to right, #000 90%, transparent)}
+}
+
+/* ============ BUTTONS ============ */
+.cta-row{display:flex; flex-wrap:wrap; gap:14px; justify-content:center; align-items:center}
+.btn{
+  display:inline-flex; align-items:center; gap:10px;
+  font-family:var(--ff-disp); font-weight:700; font-size:.92rem; letter-spacing:.12em;
+  text-transform:uppercase; padding:17px 30px; border-radius:3px;
+  transition:transform .2s ease, box-shadow .25s ease, background .25s ease, border-color .25s;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn.solid{
+  background:linear-gradient(to bottom, #e8cd8b, #c9a24a 55%, #9d7a30);
+  color:#171207; box-shadow:0 0 0 1px rgba(236,209,146,.55) inset, 0 10px 30px rgba(201,162,74,.22)}
+.btn.solid:hover{box-shadow:0 0 0 1px rgba(236,209,146,.8) inset, 0 14px 40px rgba(201,162,74,.4); color:#171207}
+.btn.ghost{border:1px solid var(--line-strong); color:var(--bone); background:rgba(11,9,8,.35)}
+.btn.ghost:hover{border-color:var(--gold-hi); color:var(--gold-hi); background:rgba(201,162,74,.08)}
+
+/* ============ PAGE HERO ============ */
+.page-hero{position:relative; text-align:center; max-width:var(--maxw); margin:0 auto;
+  padding:clamp(150px,22vh,210px) var(--pad) clamp(48px,7vh,72px)}
+.page-hero::before{content:""; position:absolute; top:0; bottom:0; left:50%; width:100vw;
+  transform:translateX(-50%); z-index:-1; pointer-events:none;
+  background:url(web/ui/embers.jpg) center/cover no-repeat; opacity:.45;
+  -webkit-mask-image:linear-gradient(to bottom, transparent, #000 30%, #000 70%, transparent);
+  mask-image:linear-gradient(to bottom, transparent, #000 30%, #000 70%, transparent)}
+.page-title{font-family:var(--ff-black); font-weight:700; line-height:.95;
+  font-size:clamp(3.8rem,10vw,7rem); margin:10px 0 6px;
+  background:linear-gradient(to bottom, #f7efd9 30%, #e3c684 62%, #a6813a 100%);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  filter:drop-shadow(0 4px 26px rgba(0,0,0,.65))}
+.page-tag{font-size:clamp(1.35rem,2.4vw,1.7rem); font-style:italic; color:var(--bone)}
+.page-lede{max-width:680px; margin:16px auto 0; font-size:clamp(1.2rem,2vw,1.32rem); color:var(--text)}
+.page-hero .cta-row{margin-top:34px}
+
+/* ============ SECTION SHELL ============ */
+.chap{max-width:var(--maxw); margin:0 auto; padding:clamp(64px,9vh,110px) var(--pad); scroll-margin-top:96px; position:relative}
+#money::before{content:""; position:absolute; top:0; bottom:0; left:50%; width:100vw;
+  transform:translateX(-50%); z-index:-1; pointer-events:none;
+  background:url(web/ui/embers.jpg) center/cover no-repeat; opacity:.4;
+  -webkit-mask-image:linear-gradient(to bottom, transparent, #000 14%, #000 86%, transparent);
+  mask-image:linear-gradient(to bottom, transparent, #000 14%, #000 86%, transparent)}
+.chap-head{text-align:center; max-width:820px; margin:0 auto clamp(36px,5vh,56px)}
+.kicker{font-family:var(--ff-disp); font-size:.85rem; font-weight:600; letter-spacing:.42em;
+  text-transform:uppercase; color:var(--gold); margin-bottom:14px}
+h2{font-family:var(--ff-disp); font-weight:700; font-size:clamp(2.1rem,4.6vw,3.1rem);
+  letter-spacing:.03em; color:var(--bone); line-height:1.12; margin-bottom:18px}
+.lead{font-size:clamp(1.24rem,2.1vw,1.42rem); font-style:italic; color:var(--text)}
+h4,.callout h3,.tl-item h3{font-family:var(--ff-disp); font-weight:600; font-size:1.18rem; color:var(--bone);
+  letter-spacing:.03em; margin-bottom:8px}
+.mini-head{text-align:center; font-family:var(--ff-disp); font-weight:600;
+  font-size:clamp(1.3rem,2.2vw,1.6rem); color:var(--gold-hi); letter-spacing:.04em; margin:56px 0 24px}
+
+.divider{display:block; height:74px; max-width:520px; margin:0 auto;
+  background:url(web/ui/ornament.png) center/contain no-repeat;
+  mix-blend-mode:screen; opacity:.85}
+
+/* ============ COMPONENTS (shared with index.html) ============ */
+.grid{display:grid; gap:22px; margin-bottom:34px}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+@media (max-width:980px){.g3{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:620px){.g2,.g3{grid-template-columns:1fr}}
+
+.card{background:#0d0a08 url(web/ui/panel.jpg) center/cover; border:1px solid rgba(0,0,0,.8); border-radius:4px;
+  padding:26px 28px; transition:box-shadow .3s, transform .3s;
+  box-shadow:inset 0 1px 0 rgba(236,209,146,.09), inset 0 0 0 1px rgba(236,209,146,.04), 0 14px 34px rgba(0,0,0,.5)}
+.card:hover{transform:translateY(-3px);
+  box-shadow:inset 0 1px 0 rgba(236,209,146,.16), inset 0 0 0 1px rgba(236,209,146,.08), 0 20px 44px rgba(0,0,0,.6)}
+.card-lab{display:flex; align-items:center; gap:9px; font-family:var(--ff-disp);
+  font-size:.78rem; font-weight:700; letter-spacing:.22em; text-transform:uppercase;
+  color:var(--gold); margin-bottom:14px}
+.card p{font-size:1.08rem; line-height:1.65}
+.card p.card-lab{font-size:.78rem}
+.card .cyc{font-family:var(--ff-disp); font-size:.92rem; color:var(--text); margin:0 0 10px; line-height:1.7}
+.card .cyc b{color:var(--gold-hi); font-weight:700}
+
+.tbl-wrap{overflow-x:auto; margin-bottom:34px; border:1px solid var(--line); border-radius:4px}
+.tbl{width:100%; border-collapse:collapse; background:var(--ink-1); min-width:560px}
+.tbl th{font-family:var(--ff-disp); font-size:.8rem; font-weight:700; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--gold); text-align:left;
+  padding:15px 20px; background:var(--ink-3); border-bottom:1px solid var(--line-strong)}
+.tbl td{padding:14px 20px; font-size:1.08rem; border-bottom:1px solid rgba(236,209,146,.07); vertical-align:top}
+.tbl tr:last-child td{border-bottom:none}
+.tbl td:first-child{color:var(--bone); font-weight:600}
+
+.stat-row{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:22px;
+  margin-bottom:34px; text-align:center}
+.stat{padding:26px 20px; background:#0d0a08 url(web/ui/panel.jpg) center/cover; border:1px solid rgba(0,0,0,.8); border-radius:4px;
+  box-shadow:inset 0 1px 0 rgba(236,209,146,.09), 0 14px 34px rgba(0,0,0,.5)}
+.stat-n{font-family:var(--ff-disp); font-weight:700; font-size:clamp(2.2rem,4vw,3rem); color:var(--gold-hi); line-height:1}
+.stat-d{font-size:1.02rem; line-height:1.55; color:var(--text); margin-top:12px}
+
+.timeline{list-style:none; max-width:760px; margin:0 auto 34px; position:relative; padding-left:34px}
+.timeline::before{content:""; position:absolute; left:7px; top:6px; bottom:6px; width:1px;
+  background:linear-gradient(to bottom, var(--gold), var(--line))}
+.tl-item{position:relative; padding-bottom:38px}
+.tl-item:last-child{padding-bottom:0}
+.tl-item::before{content:""; position:absolute; left:-32px; top:8px; width:11px; height:11px;
+  border-radius:50%; background:var(--ink-0); border:2px solid var(--gold)}
+.tl-when{font-family:var(--ff-disp); font-size:.8rem; font-weight:700; letter-spacing:.26em;
+  text-transform:uppercase; color:var(--gold); margin-bottom:6px}
+.tl-item p{font-size:1.1rem}
+
+.quote{max-width:740px; margin:0 auto 34px; padding-left:28px; border-left:2px solid var(--gold)}
+.quote p{font-size:clamp(1.4rem,2.6vw,1.7rem); font-style:italic; color:var(--bone); line-height:1.5}
+
+.callout{background:#0d0a08 url(web/ui/panel.jpg) center/cover; border:1px solid rgba(0,0,0,.8); border-left:3px solid var(--gold);
+  border-radius:4px; padding:26px 30px; margin-bottom:34px;
+  box-shadow:inset 0 1px 0 rgba(236,209,146,.09), 0 14px 34px rgba(0,0,0,.5)}
+.callout h4,.callout h3{color:var(--gold-hi)}
+.callout ul{list-style:none; margin-top:12px}
+.callout li{padding:7px 0 7px 22px; position:relative; font-size:1.08rem}
+.callout li::before{content:"✦"; position:absolute; left:0; color:var(--gold); font-size:.8rem; top:12px}
+
+/* ============ PAGE-SPECIFIC ============ */
+/* the wedge equation */
+.wedge{display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:14px;
+  max-width:920px; margin:0 auto}
+.wpill{font-family:var(--ff-disp); font-weight:600; font-size:1rem; letter-spacing:.05em;
+  border:1px solid var(--line-strong); border-radius:4px; padding:15px 24px;
+  background:#0d0a08 url(web/ui/panel.jpg) center/cover; color:var(--bone);
+  box-shadow:inset 0 1px 0 rgba(236,209,146,.09), 0 14px 34px rgba(0,0,0,.5)}
+.wop{font-family:var(--ff-disp); color:var(--gold); font-size:1.5rem; font-weight:700}
+.wout{font-family:var(--ff-disp); font-weight:700; font-size:1rem; letter-spacing:.05em;
+  border:1px solid var(--gold); border-radius:4px; padding:15px 26px; color:var(--gold-hi);
+  background:rgba(201,162,74,.1);
+  box-shadow:inset 0 1px 0 rgba(236,209,146,.14), 0 14px 34px rgba(0,0,0,.5), 0 0 30px rgba(201,162,74,.12)}
+
+/* market funnel bars */
+.mkt{max-width:760px; margin:0 auto; display:flex; flex-direction:column; gap:12px; align-items:center}
+.mbar{border:1px solid var(--line); border-radius:4px; padding:16px 20px; text-align:center;
+  background:#0d0a08 url(web/ui/panel.jpg) center/cover;
+  box-shadow:inset 0 1px 0 rgba(236,209,146,.09), 0 14px 34px rgba(0,0,0,.5)}
+.mbar b{font-family:var(--ff-disp); font-weight:700; color:var(--bone); letter-spacing:.03em; font-size:1.05rem}
+.mbar span{display:block; color:var(--dim); font-size:1rem; font-style:italic; margin-top:4px}
+.m1{width:100%} .m2{width:76%; border-color:var(--line-strong)} .m3{width:52%; border-color:var(--gold)}
+.mnote{text-align:center; font-style:italic; color:var(--dim); font-size:1.05rem; margin-top:18px}
+
+/* revenue scenarios */
+.scn{display:grid; grid-template-columns:repeat(3,1fr); gap:22px; align-items:end; margin-bottom:10px}
+@media (max-width:680px){.scn{grid-template-columns:1fr}}
+.sc{text-align:center; padding:26px 20px;
+  background:#0d0a08 url(web/ui/panel.jpg) center/cover; border:1px solid rgba(0,0,0,.8); border-radius:4px;
+  box-shadow:inset 0 1px 0 rgba(236,209,146,.09), 0 14px 34px rgba(0,0,0,.5)}
+.sc .lab{font-family:var(--ff-disp); font-size:.78rem; font-weight:700; letter-spacing:.22em;
+  text-transform:uppercase; color:var(--gold)}
+.sc .units{color:var(--dim); font-size:1rem; margin-top:10px}
+.sc .rev{font-family:var(--ff-disp); font-weight:700; font-size:clamp(2rem,3.6vw,2.6rem); color:var(--gold-hi); margin-top:4px; line-height:1.1}
+.sc.base{border-color:var(--gold); box-shadow:inset 0 1px 0 rgba(236,209,146,.14), 0 14px 34px rgba(0,0,0,.5), 0 0 34px rgba(201,162,74,.1)}
+.sc.up{border-color:var(--line-strong)}
+
+/* use of funds bar */
+.funds{display:flex; height:52px; border:1px solid var(--line-strong); border-radius:4px; overflow:hidden;
+  max-width:820px; margin:0 auto; font-family:var(--ff-disp); font-weight:700; font-size:.82rem; letter-spacing:.04em}
+.funds div{display:flex; align-items:center; justify-content:center; gap:6px; color:#171207; white-space:nowrap; overflow:hidden}
+.funds div i{font-style:normal; font-weight:500; color:inherit}
+.fdev{background:#2f7d6c; flex:45} .fart{background:#caa24a; flex:20}
+.faud{background:#3c6f9c; flex:15; color:var(--gold-hi)} .fmkt{background:#9c2f3b; flex:15; color:var(--gold-hi)}
+.fbuf{background:#5f6672; flex:5; color:var(--gold-hi); font-size:.7rem}
+.faud i,.fmkt i,.fbuf i{color:inherit}
+.fkey{display:flex; gap:14px; flex-wrap:wrap; justify-content:center; margin-top:14px;
+  font-family:var(--ff-disp); font-size:.75rem; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--dim)}
+.fkey span{display:inline-flex; align-items:center; gap:6px}
+.fkey i{width:11px; height:11px; border-radius:2px; display:inline-block; font-style:normal}
+@media (max-width:560px){.funds div i{display:none}.fbuf b{display:none}.fkey{display:flex}}
+@media (min-width:561px){.fkey{display:none}}
+
+.disc{text-align:center; color:var(--dim); font-size:1.02rem; font-style:italic; margin-top:16px}
+
+/* closing */
+.close-line{max-width:760px; margin:0 auto 30px; font-style:italic; color:var(--bone); text-align:center;
+  font-size:clamp(1.3rem,2.3vw,1.6rem); line-height:1.55}
+
+/* ============ FOOTER ============ */
+footer{border-top:1px solid var(--line); margin-top:60px}
+.foot-in{max-width:var(--maxw); margin:0 auto; padding:56px var(--pad) 42px;
+  display:flex; flex-direction:column; gap:26px; align-items:center; text-align:center}
+.foot-in .brand img{width:44px; height:44px}
+.sitemap{display:flex; flex-wrap:wrap; gap:8px 22px; justify-content:center;
+  font-family:var(--ff-disp); font-size:.78rem; font-weight:600; letter-spacing:.16em; text-transform:uppercase}
+.sitemap a{color:var(--dim)}
+.sitemap a:hover{color:var(--gold-hi)}
+.sitemap a[aria-current="page"]{color:var(--gold-hi); border-bottom:1px solid var(--gold); padding-bottom:2px}
+.foot-note{font-size:1rem; color:var(--dim); font-style:italic; max-width:760px}
+</style>
+</head>
+<body>
+
+<nav id="top" aria-label="Sections">
+  <div class="nav-in">
+    <a class="brand" href="index.html"><img src="bonefield-sigil.svg" alt=""><b>Essence</b><small>Investor brief</small></a>
+    <div class="nav-links">
+      <a href="#wedge">Wedge</a>
+      <a href="#market">Market</a>
+      <a href="#plan">Plan</a>
+      <a href="#money">Money</a>
+      <a href="#proof">Proof</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+<header class="page-hero">
+  <p class="kicker">Investor brief · seed stage · working title</p>
+  <h1 class="page-title">Essence</h1>
+  <p class="page-tag">&ldquo;Cast spells with your voice.&rdquo;</p>
+  <p class="page-lede">A Vampire-Survivors-meets-Sekiro action-roguelite where you cast spells by speaking the incantation aloud. One sentence everyone understands, and nobody else owns.</p>
+  <div class="cta-row">
+    <a class="btn solid" href="trailer.html" target="_blank" rel="noopener"><span aria-hidden="true">▶</span> Watch the teaser</a>
+    <a class="btn ghost" href="v3-summit.html" target="_blank" rel="noopener">Play the story build</a>
+    <a class="btn ghost" href="multiplayer.html" target="_blank" rel="noopener">Multiplayer co&#8209;op</a>
+    <a class="btn ghost" href="index.html#case">Full design bible</a>
+  </div>
+</header>
+
+<div class="divider" role="presentation"></div>
+
+<section class="chap" id="wedge">
+  <header class="chap-head">
+    <p class="kicker">The Wedge</p>
+    <h2>A category nobody owns</h2>
+    <p class="lead">Three hooks most games would kill for, stacked into one sentence you can say in a breath.</p>
+  </header>
+  <div class="wedge">
+    <span class="wpill">Cast with your voice</span><span class="wop">+</span>
+    <span class="wpill">Invent your own spells</span><span class="wop">+</span>
+    <span class="wpill">Share what you discover</span><span class="wop">=</span>
+    <span class="wout">an unowned space</span>
+  </div>
+</section>
+
+<section class="chap" id="loops">
+  <header class="chap-head">
+    <p class="kicker">Growth</p>
+    <h2>Three loops that compound</h2>
+    <p class="lead">Most games have one growth loop. Essence has three, and each one feeds the next.</p>
+  </header>
+  <div class="grid g3">
+    <div class="card">
+      <p class="card-lab">Virality</p>
+      <h4>Clip it</h4>
+      <div class="cyc"><b>Play</b> → clip a moment → <b>others watch</b> → wishlist → play</div>
+      <p>Backfires and 2-minute apocalypses film themselves. The hook is inherently shareable.</p>
+    </div>
+    <div class="card">
+      <p class="card-lab">Creativity</p>
+      <h4>Forge it</h4>
+      <div class="cyc"><b>Craft</b> a spell → discover something → <b>share the recipe</b> → others try it</div>
+      <p>Content the players make for free, like Minecraft builds. A low-content retention engine.</p>
+    </div>
+    <div class="card">
+      <p class="card-lab">Mastery</p>
+      <h4>Master it</h4>
+      <div class="cyc"><b>Speak</b> → get it cleaner → <b>hit harder</b> → feel yourself improve</div>
+      <p>The skill is real and yours, so it keeps pulling you back. Pronunciation is the progression.</p>
+    </div>
+  </div>
+</section>
+
+<section class="chap" id="market">
+  <header class="chap-head">
+    <p class="kicker">Market</p>
+    <h2>The market, sized</h2>
+    <p class="lead">A huge top, a focused wedge, and a modest, winnable first slice. We only need a sliver to succeed.</p>
+  </header>
+  <div class="mkt">
+    <div class="mbar m1"><b>Action &amp; roguelite players on PC</b><span>the total market · tens of millions</span></div>
+    <div class="mbar m2"><b>Drawn to voice &amp; streamer-driven play</b><span>who we speak to · low millions</span></div>
+    <div class="mbar m3"><b>Realistic reach, year one</b><span>to win · tens of thousands</span></div>
+  </div>
+  <p class="mnote">≈ 12,000 sales is a strong year: a rounding error of the top.</p>
+</section>
+
+<section class="chap" id="editions">
+  <header class="chap-head">
+    <p class="kicker">Editions</p>
+    <h2>Two markets, one engine</h2>
+    <p class="lead">Build the speak-to-cast tech once; dress it twice. Revenue is not a single bet.</p>
+  </header>
+  <div class="grid g2">
+    <div class="card">
+      <p class="card-lab">Adult flagship</p>
+      <h4>Essence</h4>
+      <p>Dark action-roguelite: gore, fear, the long descent. Premium ~$15–19 on Steam + web. The brand and the main revenue.</p>
+    </div>
+    <div class="card">
+      <p class="card-lab">Kids / edu</p>
+      <h4>Wordlight</h4>
+      <p>Bright, gentle, zero gore. A young apprentice learns real words by speaking spells. Freemium + school/district licenses + parent subscription, a steadier, less hit-driven stream.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider" role="presentation"></div>
+
+<section class="chap" id="plan">
+  <header class="chap-head">
+    <p class="kicker">Roadmap</p>
+    <h2>The plan: 12 months, five milestones</h2>
+    <p class="lead">Each step is small, and each one earns the right to the next.</p>
+  </header>
+  <ol class="timeline">
+    <li class="tl-item"><p class="tl-when">Step 1 · 0–1 mo</p><h3>Build one beautiful slice</h3><p>One gorgeous layer with the full loop: casting, melee, dismemberment, fear, a few spells. The 60 seconds that sells everything.</p></li>
+    <li class="tl-item"><p class="tl-when">Step 2 · 1–2 mo</p><h3>Put a free demo online</h3><p>Instant-play in a browser. Cut a voice-led trailer, open a Steam page, start collecting wishlists.</p></li>
+    <li class="tl-item"><p class="tl-when">Step 3 · 2–5 mo</p><h3>Add content, grow a crowd</h3><p>More layers, spells, enemies. Daily clips, a Discord, pronunciation challenges so players bring players.</p></li>
+    <li class="tl-item"><p class="tl-when">Step 4 · 5–8 mo</p><h3>Sell on Steam (Early Access)</h3><p>The first real money. Price low, improve with player data, ride the &ldquo;just one more run&rdquo; pull.</p></li>
+    <li class="tl-item"><p class="tl-when">Step 5 · 8–12 mo</p><h3>Full 1.0, then keep feeding it</h3><p>Soundtrack, optional cosmetics, regular content drops (new depths) to keep players coming back.</p></li>
+  </ol>
+</section>
+
+<section class="chap" id="money">
+  <header class="chap-head">
+    <p class="kicker">Economics</p>
+    <h2>The math, plainly</h2>
+    <p class="lead">Spend almost nothing to prove the hook, and let proof unlock the next rung.</p>
+  </header>
+
+  <div class="stat-row">
+    <div class="stat"><p class="stat-n">≈ $0</p><p class="stat-d">to put a free, instant-play demo in front of players today (single-file web build)</p></div>
+    <div class="stat"><p class="stat-n">1 clip</p><p class="stat-d">one casting clip that travels can move thousands of wishlists overnight</p></div>
+    <div class="stat"><p class="stat-n">2 markets</p><p class="stat-d">the same engine sells an adult game and a kids/edu product</p></div>
+  </div>
+
+  <h3 class="mini-head">Illustrative year-one revenue · Steam, premium</h3>
+  <div class="scn">
+    <div class="sc"><p class="lab">Conservative</p><p class="units">3,000 units</p><p class="rev">≈ $23k</p></div>
+    <div class="sc base"><p class="lab">Base</p><p class="units">12,000 units</p><p class="rev">≈ $92k</p></div>
+    <div class="sc up"><p class="lab">Breakout</p><p class="units">60,000+ units</p><p class="rev">≈ $460k+</p></div>
+  </div>
+  <p class="disc">Net after Steam's 30%, before tax · illustrative, not audited. One viral clip can lift the whole curve.</p>
+
+  <h3 class="mini-head">If we raise: where it goes</h3>
+  <div class="funds">
+    <div class="fdev"><b>45%</b><i>Dev</i></div><div class="fart"><b>20%</b><i>Art</i></div><div class="faud"><b>15%</b><i>Audio</i></div><div class="fmkt"><b>15%</b><i>Mktg</i></div><div class="fbuf"><b>5%</b></div>
+  </div>
+  <div class="fkey">
+    <span><i style="background:#2f7d6c"></i>Dev 45%</span>
+    <span><i style="background:#caa24a"></i>Art 20%</span>
+    <span><i style="background:#3c6f9c"></i>Audio 15%</span>
+    <span><i style="background:#9c2f3b"></i>Mktg 15%</span>
+    <span><i style="background:#5f6672"></i>Buffer 5%</span>
+  </div>
+  <p class="disc">Lean by design · most of any raise buys focused dev time, not overhead.</p>
+
+  <div class="chap-head" style="margin-top:64px; margin-bottom:28px">
+    <h2>The funding ladder</h2>
+    <p class="lead">Only take on money once people have shown they want it. Debt before proof is the most common indie mistake.</p>
+  </div>
+  <ol class="timeline">
+    <li class="tl-item"><p class="tl-when">Step 0 · Bootstrap</p><h3>Build the slice</h3><p>With what we already have. Cost: time plus near-free tools. Risk: none. Nobody funds a game they cannot play.</p></li>
+    <li class="tl-item"><p class="tl-when">Step 1 · Prove it</p><h3>Ship the free demo</h3><p>The one question that unlocks money: do casting clips get shared, and do wishlists climb?</p></li>
+    <li class="tl-item"><p class="tl-when">Step 2 · Preferred</p><h3>Kickstarter</h3><p>Launch with a polished demo, a trailer, and a following. Funds 6–12 months; backers become your launch-day audience. Best trade of risk and ownership.</p></li>
+    <li class="tl-item"><p class="tl-when">Step 3 · Self-sustaining</p><h3>Early Access → 1.0</h3><p>Steam sales repay any debt and fund the full launch. From here the game pays for itself.</p></li>
+  </ol>
+</section>
+
+<section class="chap" id="proof">
+  <header class="chap-head">
+    <p class="kicker">Evidence</p>
+    <h2>Proof from games that already won</h2>
+    <p class="lead">Not a bet on an untested idea. Each piece is a proven winner somewhere else; we are first to combine them.</p>
+  </header>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>What already worked</th><th>Rough signal</th><th>What it proves for Essence</th></tr></thead>
+      <tbody>
+        <tr><td>Vampire Survivors</td><td>Tiny team · &gt;1M copies · low price</td><td>Roguelite reach needs a hook, not a big budget</td></tr>
+        <tr><td>Hades</td><td>Premium roguelite · &ldquo;overwhelmingly positive&rdquo;</td><td>People pay real money for a roguelite that feels great</td></tr>
+        <tr><td>Minecraft / Infinite Craft</td><td>Combine-parts play · years of retention</td><td>The Forge is a durable, low-content retention engine</td></tr>
+        <tr><td>&ldquo;I built this&rdquo; sharing</td><td>Custom creations spread free on social</td><td>Discovered spells become free, endless marketing</td></tr>
+        <tr><td>Voice / chaos games on stream</td><td>Speaking on camera is funny and clippable</td><td>Voice casting is built-in streamer fuel</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="disc">Figures are public ballparks for illustration, not audited.</p>
+</section>
+
+<section class="chap" id="derisk">
+  <header class="chap-head">
+    <p class="kicker">Risk</p>
+    <h2>De-risked by design</h2>
+  </header>
+  <aside class="callout">
+    <ul>
+      <li><strong>We test before we spend.</strong> The free demo proves demand before any real money goes in. Borrow only after the proof.</li>
+      <li><strong>The hook has a fallback.</strong> If voice fails on a player's setup, Shape (drawing the sigil) casts the same spells. The game still works.</li>
+      <li><strong>Two products, one engine.</strong> Build the speak-to-cast tech once; the adult game and the kids/edu edition both run on it.</li>
+      <li><strong>Tiny, cheap tech.</strong> A single-file WebGL build means low cost, instant play, and no install friction for that first impression.</li>
+    </ul>
+  </aside>
+
+  <div class="chap-head" style="margin-top:64px; margin-bottom:28px">
+    <h2>Where the proof stands today</h2>
+  </div>
+  <div class="grid g2">
+    <div class="card">
+      <p class="card-lab" style="color:var(--gold-hi)">✓ Proven so far</p>
+      <p>The moment-to-moment response and reaction land: the combat juice, the voice casting, and the Forge that gels spoken spirits into crafted spells all work and feel good in the build. The core fantasy is real, not a mock-up.</p>
+    </div>
+    <div class="card">
+      <p class="card-lab">→ Still to prove</p>
+      <p>Market pull: a casting clip that spreads and a wishlist count that climbs. That is exactly what the free demo is for. We invest into demand once the demo shows it, not ahead of it.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider" role="presentation"></div>
+
+<section class="chap" id="close">
+  <p class="close-line">The game already feels great to play. The next milestone is showing that people who see it want it, and the plan is built to find that out cheaply, fast, and in public.</p>
+  <div class="cta-row">
+    <a class="btn solid" href="trailer.html" target="_blank" rel="noopener"><span aria-hidden="true">▶</span> Watch the teaser</a>
+    <a class="btn ghost" href="v3-summit.html" target="_blank" rel="noopener">Play the story build</a>
+    <a class="btn ghost" href="index.html">Read the full bible</a>
+    <a class="btn ghost" href="press.html" target="_blank" rel="noopener">Press kit</a>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="foot-in">
+    <nav class="sitemap" aria-label="Site">
+      <a href="index.html">Home</a>
+      <a href="trailer.html" target="_blank" rel="noopener">Teaser</a>
+      <a href="press.html">Press</a>
+      <a href="bonefield-investors.html" aria-current="page">Investors</a>
+      <a href="v3-summit.html" target="_blank" rel="noopener">Play the story</a>
+      <a href="multiplayer.html" target="_blank" rel="noopener">Multiplayer</a>
+    </nav>
+    <a class="brand" href="index.html"><img src="bonefield-sigil.svg" alt=""><b>Essence</b></a>
+    <p class="foot-note">Investor brief · working title, subject to change · all figures illustrative and not audited · concept build · in the theme of magic, knights, and the long descent.</p>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll('a[target="_blank"]').forEach(function(a){
+  if(a.getAttribute('aria-label')) return;
+  a.setAttribute('aria-label', (a.textContent||'Link').trim() + ' (opens in a new tab)');
+});
+</script>
+
+</body>
+</html>

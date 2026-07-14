@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Anatomical Skeleton — Walk & Run</title>
+<style>
+  :root{
+    --bg0:#0b0e13; --bg1:#161b24; --ink:#e9ecf2; --muted:#9aa3b2;
+    --accent:#5fd0c5; --accent2:#f0c987; --panel:rgba(18,22,30,.82); --line:rgba(255,255,255,.08);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;overflow:hidden;background:radial-gradient(1200px 800px at 60% -10%,#1c2330,#0b0e13 60%);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  #app{position:fixed;inset:0}
+  canvas{display:block}
+  .panel{position:fixed;top:14px;left:14px;width:264px;background:var(--panel);backdrop-filter:blur(12px);
+    border:1px solid var(--line);border-radius:14px;padding:14px 14px 12px;box-shadow:0 12px 40px rgba(0,0,0,.45)}
+  .title{font-size:13px;font-weight:650;letter-spacing:.2px}
+  .sub{font-size:11px;color:var(--muted);margin-top:2px}
+  .seg{display:flex;gap:6px;margin-top:12px}
+  .seg button{flex:1;padding:8px 0;border-radius:9px;border:1px solid var(--line);color:var(--ink);
+    font-size:12px;font-weight:600;cursor:pointer;background:#1a2230;transition:.15s}
+  .seg button:hover{border-color:rgba(95,208,197,.5)}
+  .seg button.active{background:linear-gradient(180deg,#27e0cf22,#27e0cf10);border-color:var(--accent);color:#bff6ef}
+  .row{margin-top:12px}
+  .row label{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:6px}
+  .row label b{color:var(--ink);font-variant-numeric:tabular-nums}
+  input[type=range]{width:100%;-webkit-appearance:none;height:4px;border-radius:4px;background:#2a3340;outline:none}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;height:15px;border-radius:50%;
+    background:var(--accent);cursor:pointer;border:2px solid #0b0e13;box-shadow:0 0 0 1px var(--accent)}
+  .checks{display:flex;flex-wrap:wrap;gap:10px 14px;margin-top:12px}
+  .chk{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted);cursor:pointer;user-select:none}
+  .chk input{accent-color:var(--accent)}
+  .hint{margin-top:11px;font-size:10.5px;color:var(--muted);line-height:1.45;border-top:1px solid var(--line);padding-top:9px}
+  .gait{position:fixed;bottom:14px;left:14px;background:var(--panel);border:1px solid var(--line);border-radius:11px;
+    padding:8px 12px;font-size:11px;color:var(--muted);backdrop-filter:blur(12px)}
+  .gait b{color:var(--accent2);font-variant-numeric:tabular-nums}
+  .loading{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--muted);
+    background:#0b0e13;z-index:5}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div class="loading" id="loading">Loading skeleton…</div>
+
+<div class="panel">
+  <div class="title">Anatomical Skeleton</div>
+  <div class="sub">Procedural biomechanical gait</div>
+  <div class="seg" id="modes">
+    <button data-mode="idle">Idle</button>
+    <button data-mode="walk" class="active">Walk</button>
+    <button data-mode="run">Run</button>
+  </div>
+  <div class="row">
+    <label>Speed <b id="spd">1.4 m/s</b></label>
+    <input id="speed" type="range" min="0" max="6.5" step="0.05" value="1.4">
+  </div>
+  <div class="checks">
+    <label class="chk"><input type="checkbox" id="cShadow" checked> Shadows</label>
+    <label class="chk"><input type="checkbox" id="cGround" checked> Ground</label>
+    <label class="chk"><input type="checkbox" id="cTraj"> Foot paths</label>
+    <label class="chk"><input type="checkbox" id="cPause"> Pause</label>
+  </div>
+  <div class="hint">Drag to orbit · scroll to zoom · the figure runs on the spot while the ground scrolls, so planted feet never slide.</div>
+</div>
+
+<div class="gait" id="gait">gait: <b id="gName">walk</b> · cadence <b id="gCad">—</b> · stride <b id="gStride">—</b></div>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+<script>
+/* ============================================================================
+   Anatomical skeleton with a procedural walk / run gait.
+   - Legs solved with analytic 2-bone IK so planted feet stay fixed to the
+     scrolling ground (no foot skate).
+   - Pelvis: vertical bob, lateral sway, transverse twist, frontal list.
+   - Spine counter-rotates the pelvis; arms swing opposite the legs.
+   - Heel-to-toe foot roll; forward lean and flight phase scale with speed.
+   ========================================================================== */
+const THREEr = THREE;
+const { Vector3, Quaternion, Euler, Color, MathUtils } = THREEr;
+
+// ---- math helpers ----------------------------------------------------------
+const clamp = (x,a,b)=>Math.min(b,Math.max(a,x));
+const lerp  = (a,b,t)=>a+(b-a)*t;
+const smooth= (e0,e1,x)=>{const t=clamp((x-e0)/(e1-e0),0,1);return t*t*(3-2*t);};
+const smoother=(e0,e1,x)=>{const t=clamp((x-e0)/(e1-e0),0,1);return t*t*t*(t*(t*6-15)+10);};
+const TAU = Math.PI*2;
+const Y_UP = new Vector3(0,1,0);
+
+// ---- skeleton dimensions (metres, ~1.8 m adult) ----------------------------
+const D = {
+  pelvisHalf: 0.10,        // half-distance between hip joints
+  pelvisTop:  0.075,       // hip line -> base of lumbar spine
+  femur: 0.455, tibia: 0.425, ankleY: 0.085,
+  footBack: 0.06, footFwd: 0.185, footW: 0.045,
+  shoulderY: 0.435, shoulderZ: 0.175,
+  upperArm: 0.30, foreArm: 0.255, hand: 0.16,
+  neckBase: 0.47, headCtr: 0.62, headR: 0.094,
+  ribTop: 0.40, ribBot: 0.135
+};
+const STAND_HIP_Y = 0.935;   // standing hip-joint height
+
+// ---- renderer / scene ------------------------------------------------------
+const app = document.getElementById('app');
+const renderer = new THREEr.WebGLRenderer({antialias:true});
+renderer.setSize(innerWidth, innerHeight);
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREEr.PCFSoftShadowMap;
+renderer.outputColorSpace = THREEr.SRGBColorSpace;
+app.appendChild(renderer.domElement);
+
+const scene = new THREEr.Scene();
+scene.background = new Color(0x0b0e13);
+scene.fog = new THREEr.Fog(0x0b0e13, 7, 20);
+
+const camera = new THREEr.PerspectiveCamera(42, innerWidth/innerHeight, 0.1, 100);
+
+// ---- lighting --------------------------------------------------------------
+scene.add(new THREEr.HemisphereLight(0x9fb6cc, 0x14181f, 0.85));
+const key = new THREEr.DirectionalLight(0xfff2e0, 1.7);
+key.position.set(2.6, 4.2, 2.4);
+key.castShadow = true;
+key.shadow.mapSize.set(2048,2048);
+key.shadow.camera.near = 0.5; key.shadow.camera.far = 14;
+key.shadow.camera.left=-3; key.shadow.camera.right=3; key.shadow.camera.top=3; key.shadow.camera.bottom=-3;
+key.shadow.bias = -0.0004; key.shadow.radius = 4;
+scene.add(key);
+const rim = new THREEr.DirectionalLight(0x5fd0c5, 0.5); rim.position.set(-3,2.5,-3); scene.add(rim);
+const fill = new THREEr.DirectionalLight(0xa9c2ff, 0.35); fill.position.set(-2,1.5,3); scene.add(fill);
+
+// ---- ground ----------------------------------------------------------------
+const groundGrp = new THREEr.Group(); scene.add(groundGrp);
+const floor = new THREEr.Mesh(
+  new THREEr.PlaneGeometry(60,60),
+  new THREEr.MeshStandardMaterial({color:0x10151d, roughness:0.95, metalness:0.0})
+);
+floor.rotation.x = -Math.PI/2; floor.receiveShadow = true; groundGrp.add(floor);
+
+const gridGrp = new THREEr.Group(); groundGrp.add(gridGrp);
+const grid = new THREEr.GridHelper(60, 60, 0x2a3a44, 0x1c2730);
+grid.material.transparent = true; grid.material.opacity = 0.55;
+gridGrp.add(grid);
+
+// ---- materials -------------------------------------------------------------
+const boneMat  = new THREEr.MeshStandardMaterial({color:0xe9e3d2, roughness:0.55, metalness:0.02});
+const jointMat = new THREEr.MeshStandardMaterial({color:0xcfc7b2, roughness:0.7,  metalness:0.0});
+const darkMat  = new THREEr.MeshStandardMaterial({color:0x2a2620, roughness:0.9});
+const trajMat  = new THREEr.LineBasicMaterial({color:0x5fd0c5, transparent:true, opacity:0.5});
+
+// ---- geometry builders -----------------------------------------------------
+// A tapered bone aligned along +Y, proximal end at the group origin.
+function bone(len, rTop, rBot, joint=true){
+  const g = new THREEr.Group();
+  const shaft = new THREEr.Mesh(new THREEr.CylinderGeometry(rTop, rBot, len, 14), boneMat);
+  shaft.position.y = len/2; shaft.castShadow = true; g.add(shaft);
+  if(joint){
+    const j = new THREEr.Mesh(new THREEr.SphereGeometry(Math.max(rTop,rBot)*1.45, 16,12), jointMat);
+    j.castShadow = true; g.add(j);
+  }
+  g.userData.len = len;
+  return g;
+}
+function sphere(r, mat=boneMat){ const m=new THREEr.Mesh(new THREEr.SphereGeometry(r,16,12),mat); m.castShadow=true; return m; }
+function box(w,h,d, mat=boneMat){ const m=new THREEr.Mesh(new THREEr.BoxGeometry(w,h,d),mat); m.castShadow=true; return m; }
+
+// ---- root ------------------------------------------------------------------
+const root = new THREEr.Group(); scene.add(root);
+
+// ===== PELVIS ===============================================================
+// Origin sits on the hip-joint line; mesh + torso rise above it.
+const pelvis = new THREEr.Group(); root.add(pelvis);
+(function buildPelvis(){
+  const ring = new THREEr.Mesh(new THREEr.TorusGeometry(0.105,0.026,12,24,Math.PI*1.25), boneMat);
+  ring.rotation.x = Math.PI/2; ring.rotation.z = Math.PI*0.37; ring.position.y = 0.01; ring.castShadow=true;
+  pelvis.add(ring);
+  for(const s of [-1,1]){
+    const ilium = box(0.05,0.16,0.12);
+    ilium.position.set(0.0, 0.06, s*0.085);
+    ilium.rotation.x = s*0.32; ilium.rotation.z = -0.15;
+    pelvis.add(ilium);
+    const hipBall = sphere(0.04, jointMat); hipBall.position.set(0,0,s*D.pelvisHalf); pelvis.add(hipBall);
+  }
+  const sacrum = box(0.05,0.1,0.07); sacrum.position.set(-0.03,0.04,0); pelvis.add(sacrum);
+})();
+
+// hip anchors (used to read world hip positions for IK)
+const hipAnchor = { L:new THREEr.Object3D(), R:new THREEr.Object3D() };
+hipAnchor.L.position.set(0,0, D.pelvisHalf); hipAnchor.R.position.set(0,0,-D.pelvisHalf);
+pelvis.add(hipAnchor.L, hipAnchor.R);
+
+// ===== TORSO (spine, ribcage, arms, neck, head) =============================
+const torso = new THREEr.Group(); torso.position.y = D.pelvisTop; pelvis.add(torso);
+
+// spine: stacked vertebrae from lumbar to cervical
+(function buildSpine(){
+  const n=17, top=D.neckBase;
+  for(let i=0;i<n;i++){
+    const t=i/(n-1), y=lerp(0,top,t);
+    const r=lerp(0.026,0.018,t);
+    const v=new THREEr.Mesh(new THREEr.CylinderGeometry(r,r,0.022,10), boneMat);
+    v.position.y=y; v.castShadow=true; torso.add(v);
+    const sp=box(0.02,0.018,0.012); // spinous process pointing back (-X)
+    sp.position.set(-r-0.012,y,0); torso.add(sp);
+  }
+})();
+
+// ribcage: paired arcs wrapping spine to a sternum
+(function buildRibs(){
+  const sternum = box(0.018,0.16,0.03); sternum.position.set(0.085,(D.ribTop+D.ribBot)/2,0); torso.add(sternum);
+  const rows=9;
+  for(let i=0;i<rows;i++){
+    const t=i/(rows-1);
+    const y=lerp(D.ribTop,D.ribBot,t);
+    const rad=lerp(0.075,0.135,Math.sin(t*Math.PI)*0.5+t*0.5); // widest mid-chest
+    const flat=0.78;
+    for(const s of [-1,1]){
+      const rib=new THREEr.Mesh(new THREEr.TorusGeometry(rad,0.006,8,20,Math.PI*0.95), boneMat);
+      rib.castShadow=true;
+      rib.rotation.y = Math.PI/2;
+      rib.rotation.x = s*Math.PI/2;
+      rib.position.set(-0.01,y,0);
+      rib.scale.set(1,flat,1);
+      rib.rotation.z = -0.25; // sweep down toward front
+      torso.add(rib);
+    }
+  }
+})();
+
+// neck + skull
+const head = new THREEr.Group(); head.position.y = D.headCtr; torso.add(head);
+(function buildHead(){
+  for(let i=0;i<5;i++){ const v=new THREEr.Mesh(new THREEr.CylinderGeometry(0.016,0.016,0.018,10),boneMat);
+    v.position.y = lerp(D.neckBase, D.headCtr-D.headR, i/4) - D.headCtr; v.castShadow=true; head.add(v); }
+  const cranium = sphere(D.headR); cranium.scale.set(0.96,1.12,1.04); cranium.position.y=0.0; head.add(cranium);
+  const face = box(0.085,0.09,0.105); face.position.set(0.055,-0.03,0); face.scale.set(1,1,1); head.add(face);
+  const jaw = box(0.06,0.045,0.10); jaw.position.set(0.05,-0.075,0); jaw.rotation.z=0.06; head.add(jaw);
+  for(const s of [-1,1]){ const eye=sphere(0.022,darkMat); eye.scale.set(0.7,0.85,0.9); eye.position.set(0.078,-0.01,s*0.04); head.add(eye); }
+  const nose=new THREEr.Mesh(new THREEr.ConeGeometry(0.016,0.03,4),darkMat); nose.rotation.z=-Math.PI/2; nose.position.set(0.1,-0.04,0); head.add(nose);
+})();
+
+// clavicles + shoulders
+const shoulder = {};
+for(const s of [{k:'L',sign:1},{k:'R',sign:-1}]){
+  const clav = bone(D.shoulderZ, 0.012,0.012,false);
+  clav.position.set(0.0, D.shoulderY, 0);
+  clav.quaternion.setFromUnitVectors(Y_UP, new Vector3(0.15, -0.1, s.sign).normalize());
+  torso.add(clav);
+  const j = sphere(0.03, jointMat); j.position.set(0.0, D.shoulderY-0.02, s.sign*D.shoulderZ); torso.add(j);
+  const sh = new THREEr.Object3D(); sh.position.copy(j.position); torso.add(sh);
+  shoulder[s.k]=sh;
+}
+
+// ---- arms (FK), hung from the shoulders -----------------------------------
+const arms = {};
+for(const s of ['L','R']){
+  const up = bone(D.upperArm, 0.018,0.014);
+  shoulder[s].add(up);
+  const fo = bone(D.foreArm, 0.013,0.011);
+  fo.position.y = D.upperArm;     // elbow
+  up.add(fo);
+  const handG = new THREEr.Group(); handG.position.y = D.foreArm; fo.add(handG);
+  const palm = box(0.055,0.07,0.02); palm.position.y=0.035; handG.add(palm);
+  for(let f=0; f<4; f++){
+    const fg = box(0.01,0.05,0.01); fg.position.set(0, 0.095, (f-1.5)*0.013); handG.add(fg);
+  }
+  const thumb = box(0.012,0.035,0.012); thumb.position.set(0,0.05,0.03); thumb.rotation.z=0.5; handG.add(thumb);
+  arms[s] = {up, fo, hand:handG};
+}
+
+// ---- legs: bone groups live on the root, driven by IK each frame -----------
+function buildFoot(){
+  const g = new THREEr.Group();                 // origin at ankle; foot points +X
+  const heel = box(D.footBack*1.6,0.05,D.footW*1.6); heel.position.set(-D.footBack*0.5,-D.ankleY+0.025,0); g.add(heel);
+  const mid  = box(D.footFwd,0.04,D.footW*1.5);  mid.position.set(D.footFwd*0.5,-D.ankleY+0.02,0); g.add(mid);
+  for(let t=0;t<4;t++){ const toe=box(0.035,0.018,0.012); toe.position.set(D.footFwd+0.015,-D.ankleY+0.012,(t-1.5)*0.012); g.add(toe); }
+  g.traverse(o=>{if(o.isMesh)o.castShadow=true;});
+  return g;
+}
+const legs = {};
+for(const s of ['L','R']){
+  const femur = bone(D.femur,0.022,0.017); root.add(femur);
+  const tibia = bone(D.tibia,0.017,0.013); root.add(tibia);
+  const foot  = buildFoot(); root.add(foot);
+  legs[s] = {femur,tibia,foot, side:(s==='L'?1:-1)};
+}
+
+// foot-path visualisers
+const trajLines = {};
+for(const s of ['L','R']){
+  const geo = new THREEr.BufferGeometry();
+  geo.setAttribute('position', new THREEr.BufferAttribute(new Float32Array(60*3),3));
+  const ln = new THREEr.Line(geo, trajMat); ln.visible=false; root.add(ln); trajLines[s]=ln;
+}
+
+// ---- analytic 2-bone IK ----------------------------------------------------
+const _u=new Vector3(), _f=new Vector3(), _knee=new Vector3(), _q=new Quaternion();
+function solveLeg(leg, hip, target, pole){
+  const a=D.femur, b=D.tibia;
+  _u.copy(target).sub(hip);
+  let d=_u.length(); d=clamp(d, Math.abs(a-b)+1e-3, a+b-1e-3); _u.normalize();
+  // forward (pole) component perpendicular to the hip->ankle line
+  _f.copy(pole).addScaledVector(_u, -pole.dot(_u));
+  if(_f.lengthSq()<1e-6) _f.set(1,0,0).addScaledVector(_u,-_u.x).normalize(); else _f.normalize();
+  const cT = clamp((a*a + d*d - b*b)/(2*a*d), -1, 1);
+  const sT = Math.sqrt(1-cT*cT);
+  _knee.copy(hip).addScaledVector(_u, a*cT).addScaledVector(_f, a*sT);
+  // femur: hip -> knee
+  leg.femur.position.copy(hip);
+  leg.femur.quaternion.setFromUnitVectors(Y_UP, _u.copy(_knee).sub(hip).normalize());
+  // tibia: knee -> ankle
+  leg.tibia.position.copy(_knee);
+  leg.tibia.quaternion.setFromUnitVectors(Y_UP, _u.copy(target).sub(_knee).normalize());
+  return _knee;
+}
+
+// ---- camera orbit ----------------------------------------------------------
+const orbit = {az: 0.62, el: 0.16, r: 3.6, tx:0, ty:0.92, tz:0};
+function applyCamera(){
+  const ce=Math.cos(orbit.el), se=Math.sin(orbit.el);
+  camera.position.set(
+    orbit.tx + orbit.r*ce*Math.sin(orbit.az),
+    orbit.ty + orbit.r*se,
+    orbit.tz + orbit.r*ce*Math.cos(orbit.az));
+  camera.lookAt(orbit.tx,orbit.ty,orbit.tz);
+}
+let drag=false,px=0,py=0;
+renderer.domElement.addEventListener('pointerdown',e=>{drag=true;px=e.clientX;py=e.clientY;});
+addEventListener('pointermove',e=>{ if(!drag)return; orbit.az -= (e.clientX-px)*0.006; orbit.el=clamp(orbit.el+(e.clientY-py)*0.006,-0.3,1.35); px=e.clientX;py=e.clientY; });
+addEventListener('pointerup',()=>drag=false);
+renderer.domElement.addEventListener('wheel',e=>{ orbit.r=clamp(orbit.r+e.deltaY*0.0016,1.6,9); e.preventDefault(); },{passive:false});
+
+// ---- gait parameters from speed -------------------------------------------
+function gaitParams(v){
+  const run = smooth(2.4, 3.6, v);            // 0 = walk, 1 = run blend
+  const cps = v<0.05 ? 0.28 : (0.52 + 0.205*v);   // gait cycles / second
+  const T   = 1/cps;
+  const stride = v*T;                          // metres advanced per cycle
+  const duty = v<0.05 ? 0.9 : clamp(0.63 - 0.052*v, 0.30, 0.63); // stance fraction
+  const lift = 0.035 + 0.022*v + 0.02*run;     // foot ground clearance
+  const lean = clamp(0.03 + 0.032*v, 0, 0.40); // forward torso lean
+  const armSw= (0.16 + 0.085*v) * smooth(0,0.5,v);
+  const elbow= 0.25 + 0.13*v + 0.4*run;
+  const twist= (0.04 + 0.018*v) * smooth(0,0.5,v);
+  const list = (0.04 + 0.01*v) * smooth(0,0.5,v);
+  const sway = (0.012 + 0.004*v) * smooth(0,0.5,v);
+  const bob  = (0.012 + 0.012*v) * smooth(0,0.4,v);
+  return {v,run,cps,T,stride,duty,lift,lean,armSw,elbow,twist,list,sway,bob,
+          Lf: 0.5*duty*stride};
+}
+
+// per-leg foot position in the body frame (x forward, y up, z lateral)
+function footTrack(phase, P){
+  const {duty,Lf,lift,run} = P;
+  let fx, fy, contact;
+  if(phase < duty){                            // stance: planted, slides backward
+    const s = phase/duty;
+    fx = Lf*(1-2*s);
+    // ankle rises slightly toward toe-off
+    fy = D.ankleY + smooth(0.72,1.0,s)*0.05*(0.6+run);
+    contact = true;
+  } else {                                      // swing: arc forward & up
+    const s = (phase-duty)/(1-duty);
+    const e = smoother(0,1,s);
+    fx = -Lf + 2*Lf*e + Math.sin(s*Math.PI)*Lf*0.18; // small overshoot
+    fy = D.ankleY + Math.sin(s*Math.PI)*lift;
+    contact = false;
+  }
+  return {fx, fy, contact};
+}
+function footPitch(phase, P){
+  if(phase < P.duty){
+    const s = phase/P.duty;
+    // heel-strike toe-up -> flat -> toe-off plantarflex (heel up)
+    return lerp(0.22, 0, smooth(0,0.18,s)) - smooth(0.6,1.0,s)*0.6;
+  } else {
+    const s=(phase-P.duty)/(1-P.duty);
+    return 0.18*Math.sin(s*Math.PI)*0.6 + 0.12;   // dorsiflex to clear ground
+  }
+}
+
+// ---- UI --------------------------------------------------------------------
+const ui = {
+  speed: document.getElementById('speed'),
+  spd: document.getElementById('spd'),
+  modes: document.getElementById('modes'),
+  cShadow: document.getElementById('cShadow'),
+  cGround: document.getElementById('cGround'),
+  cTraj: document.getElementById('cTraj'),
+  cPause: document.getElementById('cPause'),
+  gName: document.getElementById('gName'),
+  gCad: document.getElementById('gCad'),
+  gStride: document.getElementById('gStride'),
+};
+let speed = parseFloat(ui.speed.value);
+function setSpeed(v, fromSlider){ speed=v; if(!fromSlider) ui.speed.value=v; ui.spd.textContent=v.toFixed(2)+' m/s';
+  [...ui.modes.children].forEach(b=>b.classList.toggle('active', b.dataset.mode===modeOf(v))); }
+function modeOf(v){ return v<0.15?'idle': v<2.6?'walk':'run'; }
+ui.speed.addEventListener('input', ()=>setSpeed(parseFloat(ui.speed.value), true));
+ui.modes.addEventListener('click', e=>{ const b=e.target.closest('button'); if(!b)return;
+  setSpeed(b.dataset.mode==='idle'?0 : b.dataset.mode==='walk'?1.4:4.6); });
+ui.cShadow.addEventListener('change',()=>{renderer.shadowMap.enabled=ui.cShadow.checked; scene.traverse(o=>{if(o.material)o.material.needsUpdate=true;});});
+ui.cGround.addEventListener('change',()=>groundGrp.visible=ui.cGround.checked);
+ui.cTraj.addEventListener('change',()=>{trajLines.L.visible=trajLines.R.visible=ui.cTraj.checked;});
+setSpeed(speed,false);
+
+// ---- animation -------------------------------------------------------------
+const clock = new THREEr.Clock();
+let phase=0, scroll=0, vSmooth=0;
+const tmpHip=new Vector3(), tmpTgt=new Vector3(), pole=new Vector3(1,0,0);
+
+function updateTraj(P){
+  for(const s of ['L','R']){
+    const ln=trajLines[s]; if(!ln.visible)continue;
+    const off = s==='L'?0:0.5, pos=ln.geometry.attributes.position.array, z=legs[s].side*D.pelvisHalf;
+    for(let i=0;i<60;i++){ const ph=(i/59+off)%1; const ft=footTrack(ph,P);
+      pos[i*3]=ft.fx; pos[i*3+1]=ft.fy-D.ankleY; pos[i*3+2]=z; }
+    ln.geometry.attributes.position.needsUpdate=true;
+  }
+}
+
+function frame(){
+  requestAnimationFrame(frame);
+  let dt = Math.min(clock.getDelta(), 0.05);
+  if(ui.cPause.checked) dt=0;
+
+  vSmooth = lerp(vSmooth, speed, 1-Math.exp(-dt*6));   // ease speed changes
+  const P = gaitParams(vSmooth);
+
+  phase = (phase + P.cps*dt) % 1;
+  scroll += vSmooth*dt;
+
+  // scroll the ground to convey forward travel (feet stay planted on it)
+  gridGrp.position.x = -(scroll % 1);
+
+  // ---- pelvis pose (bob, sway, twist, list) ----
+  const bobPh = TAU*2*phase;                  // two oscillations per cycle
+  const runMix = P.run;
+  const bobWalk = -Math.cos(bobPh);           // low at double-support
+  const bobRun  =  Math.cos(bobPh);           // low at mid-stance
+  const vert = lerp(bobWalk,bobRun,runMix)*P.bob;
+  // gentle flight pop when running
+  const flight = runMix*0.025*Math.max(0, Math.sin(bobPh)) ;
+  const breathe = vSmooth<0.2 ? Math.sin(clock.elapsedTime*1.6)*0.006 : 0;
+
+  pelvis.position.set(0, STAND_HIP_Y + vert + flight + breathe, P.sway*Math.sin(TAU*phase));
+  pelvis.rotation.y = P.twist*Math.sin(TAU*phase);                 // transverse
+  pelvis.rotation.x = P.list*Math.sin(TAU*phase + Math.PI/2);      // frontal list
+  pelvis.rotation.z = 0;
+  pelvis.updateMatrixWorld(true);
+
+  // ---- torso: forward lean + counter-twist ----
+  torso.rotation.z = -P.lean;                 // lean into the direction of travel
+  torso.rotation.y = -P.twist*1.4*Math.sin(TAU*phase);
+  torso.rotation.x = 0;
+  // head stabilisation (counter pelvis/torso a little)
+  head.rotation.y = P.twist*0.8*Math.sin(TAU*phase);
+  head.rotation.z = P.lean*0.55;
+
+  // breathing ribcage
+  torso.scale.z = 1 + (vSmooth<0.2 ? Math.sin(clock.elapsedTime*1.6)*0.02 : Math.sin(bobPh)*0.01);
+
+  pelvis.updateMatrixWorld(true);
+
+  // ---- legs via IK ----
+  for(const s of ['L','R']){
+    const leg=legs[s], off = s==='L'?0:0.5;
+    const ph=(phase+off)%1;
+    const ft=footTrack(ph,P);
+    // hip world position
+    hipAnchor[s].getWorldPosition(tmpHip);
+    // ankle target (body frame; root is at origin, so body frame == world)
+    tmpTgt.set(ft.fx, ft.fy, leg.side*D.pelvisHalf*0.92);
+    solveLeg(leg, tmpHip, tmpTgt, pole);
+    // foot orientation: forward + heel/toe roll
+    leg.foot.position.copy(tmpTgt);
+    leg.foot.quaternion.setFromEuler(new Euler(0,0, footPitch(ph,P)));
+  }
+
+  // ---- arms (opposite the legs) ----
+  for(const s of ['L','R']){
+    const off = s==='L'?0:0.5;
+    const legPh=(phase+off)%1;
+    const swing = -P.armSw*Math.cos(TAU*legPh);          // arm back when same-side leg forward
+    arms[s].up.rotation.z = Math.PI + swing;
+    arms[s].up.rotation.x = (s==='L'?1:-1)*0.06;          // slight abduction
+    const flexBias = 0.5+0.5*Math.cos(TAU*legPh);         // flex more on forward swing
+    arms[s].fo.rotation.z = -(P.elbow*(0.5+0.5*flexBias));
+  }
+
+  if(ui.cTraj.checked) updateTraj(P);
+
+  // readout
+  ui.gName.textContent = modeOf(vSmooth);
+  ui.gCad.textContent = (P.cps*120).toFixed(0)+' spm';
+  ui.gStride.textContent = P.stride.toFixed(2)+' m';
+
+  applyCamera();
+  renderer.render(scene,camera);
+}
+
+addEventListener('resize',()=>{ camera.aspect=innerWidth/innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth,innerHeight); });
+
+document.getElementById('loading').style.display='none';
+applyCamera();
+frame();
+</script>
+</body>
+</html>

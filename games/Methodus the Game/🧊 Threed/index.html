@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>METHODUS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --lime:#c8f02a; --orange:#ff5a1f; --cyan:#39d7e6; --magenta:#e0447c;
+    --ink:#06080d; --ink2:#0f141d; --steel:#27303d; --bone:#e9e7dd; --dim:#7e8794;
+    --mono:'Space Mono',ui-monospace,monospace; --disp:'Chakra Petch',var(--mono);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:100%;height:100%;overflow:hidden;background:var(--ink);color:var(--bone);
+    font-family:var(--mono);-webkit-user-select:none;user-select:none;cursor:none}
+  #game{position:fixed;inset:0;width:100%;height:100%;display:block}
+  #fxLayer{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:5}
+  .dmg{position:absolute;left:0;top:0;font-family:var(--disp);font-weight:700;font-size:15px;
+    text-shadow:0 2px 0 rgba(0,0,0,.7),0 0 8px rgba(0,0,0,.6);white-space:nowrap;will-change:transform,opacity}
+  .dmg.big{font-size:23px}
+
+  #hud{position:fixed;inset:0;pointer-events:none;z-index:10;font-family:var(--disp)}
+  .panel{position:absolute;background:linear-gradient(180deg,rgba(15,20,29,.92),rgba(6,8,13,.92));
+    border:2px solid #000;box-shadow:inset 0 0 0 1px rgba(233,231,221,.07),0 6px 22px rgba(0,0,0,.5)}
+  .stripe{background-image:repeating-linear-gradient(45deg,#000 0 7px,var(--orange) 7px 14px);height:6px}
+
+  #statBlock{top:14px;left:14px;width:300px}
+  #statBlock .inner{padding:11px 13px 12px}
+  .barlab{display:flex;justify-content:space-between;align-items:baseline;font-size:10px;letter-spacing:.18em;color:var(--dim);margin:0 0 3px}
+  .barlab b{color:var(--bone)}
+  .bar{height:15px;background:#000;border:1px solid rgba(255,255,255,.1);position:relative;overflow:hidden}
+  .bar i{position:absolute;inset:0;width:100%;transform-origin:left;transition:transform .16s ease-out}
+  .bar.base i{background:linear-gradient(90deg,var(--orange),#ffb061)}
+  .bar.hull i{background:linear-gradient(90deg,#39d7e6,#7ef0ff)}
+  .bar.xp{height:7px} .bar.xp i{background:linear-gradient(90deg,#9fb2ff,var(--lime))}
+  .statrow{display:flex;gap:8px;margin-top:9px}
+  .chip{flex:1;background:#000;border:1px solid rgba(255,255,255,.1);padding:5px 7px;text-align:center}
+  .chip .k{font-size:8px;letter-spacing:.16em;color:var(--dim)}
+  .chip .v{font-size:16px;font-weight:700;color:var(--lime);font-family:var(--disp);line-height:1.1}
+  .chip.lvl .v{color:var(--orange)} .chip.wave .v{color:var(--cyan)}
+
+  #weaponHud{top:14px;right:14px;width:200px}
+  #weaponHud .inner{padding:10px 12px}
+  .whead{font-size:9px;letter-spacing:.2em;color:var(--dim);margin-bottom:6px}
+  .wname{font-family:var(--disp);font-weight:700;font-size:18px;color:var(--lime)}
+  .wtag{font-size:9px;letter-spacing:.12em;color:var(--dim);margin-top:2px}
+  .modline{margin-top:8px;display:flex;flex-wrap:wrap;gap:4px}
+  .mpip{font-size:8px;letter-spacing:.06em;padding:2px 5px;border:1px solid rgba(255,255,255,.14);color:var(--cyan)}
+
+  #bossbar{position:absolute;top:16px;left:50%;transform:translateX(-50%);width:min(560px,72vw);display:none}
+  #bossbar.on{display:block}
+  .bosshead{display:flex;justify-content:space-between;font-size:11px;letter-spacing:.2em;color:var(--magenta);margin-bottom:4px;text-shadow:0 0 8px rgba(224,68,124,.6)}
+  .bossbar-track{height:13px;background:#000;border:2px solid #000;box-shadow:inset 0 0 0 1px rgba(224,68,124,.5)}
+  .bossbar-track i{display:block;height:100%;width:100%;transform-origin:left;background:linear-gradient(90deg,#8a1538,var(--magenta));transition:transform .12s}
+
+  #banner{position:absolute;top:22%;left:50%;transform:translate(-50%,-20px);text-align:center;opacity:0;transition:opacity .3s,transform .3s}
+  #banner.show{opacity:1;transform:translate(-50%,0)}
+  #banner b{display:block;font-size:38px;font-weight:700;letter-spacing:.04em;color:var(--lime);text-shadow:0 3px 0 #000,0 0 24px rgba(200,240,42,.5)}
+  #banner span{font-size:13px;letter-spacing:.28em;color:var(--bone);opacity:.85}
+  #hint{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);font-size:10px;letter-spacing:.16em;color:var(--dim);text-align:center}
+  #hint b{color:var(--lime)}
+
+  .overlay{position:fixed;inset:0;z-index:30;display:none;align-items:center;justify-content:center;
+    background:radial-gradient(circle at 50% 40%,rgba(6,8,13,.82),rgba(3,4,7,.97));backdrop-filter:blur(3px);cursor:default}
+  .overlay.on{display:flex}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.4em;color:var(--orange);text-transform:uppercase}
+  #title .box{text-align:center;max-width:660px;padding:30px}
+  #title h1{font-family:var(--disp);font-size:clamp(56px,12vw,128px);font-weight:700;line-height:.92;color:var(--bone);text-shadow:6px 6px 0 var(--orange),12px 12px 0 #000}
+  #title .sub{margin:14px 0 6px;font-size:13px;letter-spacing:.22em;color:var(--lime)}
+  #title .desc{margin:18px auto 26px;max-width:500px;font-size:13px;line-height:1.7;color:var(--dim)}
+  .btn{font-family:var(--disp);font-weight:700;font-size:18px;letter-spacing:.14em;padding:14px 40px;background:var(--lime);color:#06080d;border:2px solid #000;cursor:pointer;box-shadow:5px 5px 0 #000;transition:transform .1s,box-shadow .1s;text-transform:uppercase}
+  .btn:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 #000}
+  .btn:active{transform:translate(2px,2px);box-shadow:2px 2px 0 #000}
+  .controls{display:flex;gap:16px;justify-content:center;margin-top:24px;font-size:11px;letter-spacing:.08em;color:var(--dim);flex-wrap:wrap}
+  .controls kbd{font-family:var(--mono);background:#000;border:1px solid var(--steel);border-bottom-width:3px;padding:3px 8px;color:var(--bone);margin-right:4px}
+
+  #cards .box{text-align:center;width:min(880px,94vw)}
+  #cards .lvtag{font-family:var(--disp);font-size:30px;font-weight:700;color:var(--lime);margin-bottom:2px}
+  #cards .lvsub{font-size:11px;letter-spacing:.3em;color:var(--dim);margin-bottom:22px}
+  .cardrow{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+  .card{width:250px;min-height:200px;background:linear-gradient(180deg,var(--ink2),#070a10);border:2px solid #000;box-shadow:6px 6px 0 #000;cursor:pointer;text-align:left;position:relative;overflow:hidden;transition:transform .12s,box-shadow .12s;display:flex;flex-direction:column}
+  .card:hover{transform:translate(-3px,-3px);box-shadow:9px 9px 0 #000}
+  .card .ribbon{height:6px;background-image:repeating-linear-gradient(45deg,#000 0 6px,var(--ac) 6px 12px)}
+  .card .cbody{padding:16px;display:flex;flex-direction:column;flex:1}
+  .card .carch{font-size:9px;letter-spacing:.22em;color:var(--ac);margin-bottom:10px}
+  .card .ctitle{font-family:var(--disp);font-size:21px;font-weight:700;line-height:1.05;margin-bottom:10px;color:var(--bone)}
+  .card .cdesc{font-size:12px;line-height:1.55;color:var(--dim);flex:1}
+  .card .cnum{position:absolute;top:8px;right:11px;font-family:var(--disp);font-size:13px;color:var(--steel)}
+
+  #over .box{text-align:center;max-width:560px;padding:30px}
+  #over h2{font-family:var(--disp);font-size:clamp(40px,9vw,88px);font-weight:700}
+  #over.win h2{color:var(--lime);text-shadow:5px 5px 0 #000} #over.lose h2{color:var(--orange);text-shadow:5px 5px 0 #000}
+  #over .stats{display:flex;gap:24px;justify-content:center;margin:22px 0 28px}
+  #over .st{font-size:12px;letter-spacing:.16em;color:var(--dim)} #over .st b{display:block;font-family:var(--disp);font-size:32px;color:var(--bone);margin-top:3px}
+
+  .mutebtn{position:fixed;bottom:12px;right:14px;z-index:11;pointer-events:auto;background:#000;border:1px solid var(--steel);color:var(--dim);font-family:var(--mono);font-size:10px;padding:6px 10px;cursor:pointer}
+  #loading{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;background:var(--ink);font-family:var(--disp);letter-spacing:.3em;color:var(--lime);font-size:14px}
+</style>
+</head>
+<body>
+<canvas id="game"></canvas>
+<div id="fxLayer"></div>
+
+<div id="hud">
+  <div id="statBlock" class="panel">
+    <div class="stripe"></div>
+    <div class="inner">
+      <div class="barlab"><span>SATELLITE INTEGRITY</span><b id="baseTxt">1000/1000</b></div>
+      <div class="bar base"><i id="baseBar"></i></div>
+      <div class="barlab" style="margin-top:8px"><span>HULL</span><b id="hullTxt">100/100</b></div>
+      <div class="bar hull"><i id="hullBar"></i></div>
+      <div class="barlab" style="margin-top:8px"><span>XP · LVL <b id="lvlNum">1</b></span><span id="xpTxt"></span></div>
+      <div class="bar xp"><i id="xpBar"></i></div>
+      <div class="statrow">
+        <div class="chip"><div class="k">ESSENCE</div><div class="v" id="essV">0</div></div>
+        <div class="chip lvl"><div class="k">LEVEL</div><div class="v" id="lvlV">1</div></div>
+        <div class="chip wave"><div class="k">WAVE</div><div class="v" id="waveV">1</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="weaponHud" class="panel">
+    <div class="stripe"></div>
+    <div class="inner">
+      <div class="whead">PRIMARY</div>
+      <div class="wname" id="wName">PULSE CANNON</div>
+      <div class="wtag" id="wTag">standard issue</div>
+      <div class="modline" id="modline"></div>
+    </div>
+  </div>
+
+  <div id="bossbar">
+    <div class="bosshead"><span id="bossName">BOSS</span><span id="bossTag"></span></div>
+    <div class="bossbar-track"><i id="bossBar"></i></div>
+  </div>
+
+  <div id="banner"><b id="banT">WAVE 1</b><span id="banS">DEFEND THE SATELLITE</span></div>
+  <div id="hint"><b>WASD</b> thrust · <b>MOUSE</b> aim &amp; fire · <b>SHIFT</b> air-brake · <b>SPACE</b> boost</div>
+</div>
+
+<button class="mutebtn" id="muteBtn">♪ SOUND ON</button>
+
+<div class="overlay on" id="title">
+  <div class="box">
+    <div class="eyebrow">ORBITAL DEFENSE</div>
+    <h1>METHODUS</h1>
+    <div class="sub">HOLD THE SATELLITE · OUTFLY THE SWARM</div>
+    <p class="desc">Pilot a strike craft around a floating satellite as raider ships burn in to tear it apart.
+      Thrust, drift, and brake with real momentum. Vaporize raiders, drink their essence, and level up
+      into a build that holds the line. Survive to the first warlord.</p>
+    <button class="btn" id="startBtn">LAUNCH</button>
+    <div class="controls">
+      <span><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd>thrust</span>
+      <span><kbd>MOUSE</kbd>aim &amp; fire</span>
+      <span><kbd>SHIFT</kbd>brake</span>
+      <span><kbd>SPACE</kbd>boost</span>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="cards">
+  <div class="box">
+    <div class="lvtag" id="cardsLv">LEVEL 2</div>
+    <div class="lvsub">CHOOSE ONE UPGRADE</div>
+    <div class="cardrow" id="cardRow"></div>
+  </div>
+</div>
+
+<div class="overlay" id="over">
+  <div class="box">
+    <div class="eyebrow" id="overEyebrow">RUN ENDED</div>
+    <h2 id="overTitle">SATELLITE LOST</h2>
+    <div class="stats">
+      <div class="st">WAVES<b id="overWaves">0</b></div>
+      <div class="st">KILLS<b id="overKills">0</b></div>
+      <div class="st">LEVEL<b id="overLvl">1</b></div>
+    </div>
+    <button class="btn" id="retryBtn">RELAUNCH</button>
+  </div>
+</div>
+
+<div id="loading">SPINNING UP REACTOR…</div>
+
+<script type="importmap">
+{ "imports": {
+  "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+}}
+</script>
+<script type="module" src="./main.js"></script>
+</body>
+</html>

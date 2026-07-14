@@ -1,0 +1,14 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>grab</title></head>
+<body style="margin:0;background:#000">
+<video id="v" src="continuous-hook.mp4?v=1" muted playsinline preload="auto" style="width:100%;display:block"></video>
+<canvas id="c" width="960" height="540" style="display:none"></canvas>
+<script>
+window.__b64=null; window.__status='init';
+const v=document.getElementById('v'), c=document.getElementById('c');
+function grab(tag){ if(window.__b64) return; try{ c.getContext('2d').drawImage(v,0,0,960,540); window.__b64=c.toDataURL('image/jpeg',0.74).split(',')[1]; window.__status=tag; }catch(e){ window.__status='err:'+e; } }
+v.addEventListener('loadeddata',()=>{ window.__status='playing'; v.play().catch(e=>{window.__status='playerr:'+e;}); });
+v.addEventListener('timeupdate',()=>{ if(v.duration && v.currentTime>=v.duration-0.45){ v.pause(); grab('timeupdate@'+v.currentTime.toFixed(1)); } });
+v.addEventListener('ended',()=>{ grab('ended'); });
+</script>
+</body></html>

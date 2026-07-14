@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd \"/Users/zieel/Bazil Claude 3/Games/Methodus the Game/Essence3D\" && echo \"=== current dir ===\" && ls -la && echo \"\" && echo \"=== parent dir ===\" && ls -la .. && echo \"\" && echo \"=== config file search \\(current + parent, depth-limited\\) ===\" && find . -maxdepth 2 \\\\\\( -name \"package.json\" -o -name \"vite.config.*\" -o -name \"webpack.config.*\" -o -name \"*.csproj\" -o -name \"Procfile\" -o -name \"manage.py\" -o -name \"next.config.*\" -o -name \"server.js\" -o -name \"server.py\" -o -name \"app.py\" -o -name \"Makefile\" \\\\\\) -not -path \"*/node_modules/*\" 2>/dev/null)"
+    ]
+  }
+}

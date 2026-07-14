@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "bonefield",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8877"],
+      "port": 8877
+    },
+    {
+      "name": "bonefield-website",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8878", "-d", "../Bonefield Website"],
+      "port": 8878
+    }
+  ]
+}

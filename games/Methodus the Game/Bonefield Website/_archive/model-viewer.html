@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Humanoid Candidate Viewer</title>
+<style>
+  html,body{margin:0;height:100%;background:#141a16;overflow:hidden;font-family:"Courier New",monospace;color:#cfe0d0;}
+  #labels{position:fixed;left:0;right:0;bottom:10px;display:flex;justify-content:space-around;font-size:15px;text-shadow:0 1px 2px #000;pointer-events:none;}
+  #err{position:fixed;left:10px;top:10px;color:#ff7a5a;font-size:12px;white-space:pre-wrap;max-width:60vw;}
+</style>
+</head>
+<body>
+<div id="labels"></div>
+<div id="err"></div>
+<script>window.CANDIDATES=[];window.regMat=function(){};window.onerror=function(m,s,l){document.getElementById('err').textContent+=m+' @'+(s||'').split('/').pop()+':'+l+'\n';};</script>
+<script type="module">
+import * as THREE from 'https://unpkg.com/three@0.160.0/build/three.module.js';
+window.THREE=THREE;
+const load=src=>new Promise((res,rej)=>{const s=document.createElement('script');s.src=src;s.onload=res;s.onerror=()=>{document.getElementById('err').textContent+='failed to load '+src+'\n';res();};document.body.appendChild(s);});
+await load('cand1.js'); await load('cand2.js'); await load('cand3.js');
+
+const scene=new THREE.Scene(); scene.background=new THREE.Color(0x8fc4e6); scene.fog=new THREE.Fog(0x8fc4e6,18,40);
+const camera=new THREE.PerspectiveCamera(46,innerWidth/innerHeight,0.1,100); camera.position.set(0,1.45,5.6); camera.lookAt(0,0.95,0);
+window.setCam=(y,z,ly)=>{camera.position.set(0,y,z);camera.lookAt(0,ly!=null?ly:0.95,0);};
+const renderer=new THREE.WebGLRenderer({antialias:true,preserveDrawingBuffer:true}); renderer.setSize(innerWidth,innerHeight); renderer.shadowMap.enabled=true; renderer.shadowMap.type=THREE.PCFSoftShadowMap; document.body.appendChild(renderer.domElement);
+scene.add(new THREE.HemisphereLight(0xbfe0ff,0x4a6b3c,0.55));
+const sun=new THREE.DirectionalLight(0xffe2a8,1.6); sun.position.set(6,8,5); sun.castShadow=true; sun.shadow.mapSize.set(1024,1024); scene.add(sun);
+const ground=new THREE.Mesh(new THREE.CylinderGeometry(30,30,0.1,40),new THREE.MeshStandardMaterial({color:0x4f9e3a,roughness:1})); ground.position.y=-0.05; ground.receiveShadow=true; scene.add(ground);
+
+// neutral canvas face (same spirit as the game's emotion faces)
+function canvasFace(){const c=document.createElement('canvas');c.width=c.height=96;const x=c.getContext('2d');x.lineCap='round';const ink='#1c140e';x.strokeStyle=ink;x.lineWidth=5;
+  x.beginPath();x.moveTo(25,33);x.lineTo(41,33);x.moveTo(55,33);x.lineTo(71,33);x.stroke();
+  x.fillStyle='#f4efe6';x.beginPath();x.ellipse(33,46,7.6,6.2,0,0,6.28);x.fill();x.beginPath();x.ellipse(63,46,7.6,6.2,0,0,6.28);x.fill();
+  x.fillStyle='#5a3a1e';x.beginPath();x.arc(33,46,4,0,6.28);x.fill();x.beginPath();x.arc(63,46,4,0,6.28);x.fill();
+  x.fillStyle='#140c05';x.beginPath();x.arc(33,46,2,0,6.28);x.fill();x.beginPath();x.arc(63,46,2,0,6.28);x.fill();
+  x.strokeStyle='#9a5040';x.lineWidth=4;x.beginPath();x.moveTo(38,70);x.quadraticCurveTo(48,72.4,58,70);x.stroke();
+  const t=new THREE.CanvasTexture(c);return t;}
+// player face: AI texture with radial alpha fade so it melts into the skin
+function maskedFace(){return new Promise(res=>{const img=new Image();img.onload=()=>{const c=document.createElement('canvas');c.width=c.height=256;const x=c.getContext('2d');
+  x.drawImage(img,0,0,256,256); x.globalCompositeOperation='destination-out';
+  const g=x.createRadialGradient(128,128,88,128,128,128); g.addColorStop(0,'rgba(0,0,0,0)'); g.addColorStop(1,'rgba(0,0,0,1)');
+  x.fillStyle=g; x.fillRect(0,0,256,256);
+  const t=new THREE.CanvasTexture(c); t.colorSpace=THREE.SRGBColorSpace; res(t);};
+  img.onerror=()=>res(canvasFace()); img.src='tex-face.png';});}
+const faceTex=await maskedFace(), npcFace=canvasFace();
+
+const mk=(geo,mat,x,y,z,cast)=>{const m=new THREE.Mesh(geo,mat);m.position.set(x||0,y||0,z||0);if(cast)m.castShadow=true;return m;};
+function mats(cloth,cloak){return{skin:new THREE.MeshStandardMaterial({color:0xd9a67e,roughness:0.52}),cloth:new THREE.MeshStandardMaterial({color:cloth,roughness:0.85}),dark:new THREE.MeshStandardMaterial({color:0x202a38,roughness:0.85}),leather:new THREE.MeshStandardMaterial({color:0x4a3322,roughness:0.9}),hair:new THREE.MeshStandardMaterial({color:0x2a1d12,roughness:0.95}),trim:new THREE.MeshStandardMaterial({color:0x6b5836,metalness:0.35,roughness:0.5}),cloak:cloak?new THREE.MeshStandardMaterial({color:0x2a3a52,roughness:0.92,side:THREE.DoubleSide}):undefined};}
+
+const rows=[],labels=document.getElementById('labels');
+window.CANDIDATES.forEach((cand,i)=>{ try{
+  const cx=(i-(window.CANDIDATES.length-1)/2)*2.3;
+  const g1=new THREE.Group(); g1.scale.setScalar(0.687); g1.position.set(cx-0.55,0,0); scene.add(g1);
+  const r1=cand.make({mats:mats(0x35506a,true),mk,weapon:'sword',gender:'m',isPlayer:true,spineY:1.55,faceMap:faceTex}); g1.add(r1.hip);
+  r1.armR.sh.rotation.x=-0.55; r1.armR.el.rotation.x=-0.7; if(r1.sword)r1.sword.rotation.x=1.15; r1.armL.sh.rotation.x=0.2;
+  const g2=new THREE.Group(); g2.scale.setScalar(0.687); g2.position.set(cx+0.55,0,0); scene.add(g2);
+  const r2=cand.make({mats:mats(0x8a93a8,false),mk,weapon:'bow',gender:'f',isPlayer:false,spineY:1.55,faceMap:npcFace}); g2.add(r2.hip);
+  rows.push({g1,g2,r1,r2});
+  const d=document.createElement('div'); d.textContent=cand.name; labels.appendChild(d);
+}catch(e){document.getElementById('err').textContent+=cand.name+': '+e.message+'\n';}});
+
+let t=0; window.yaw=null; window.walk=true;
+function anim(){ t+=0.016;
+  for(const r of rows){ const w=window.walk?t*4.2:0,sw=window.walk?0.55:0;
+    const ry=(window.yaw!=null)?window.yaw:Math.sin(t*0.4)*2.4;
+    r.g1.rotation.y=ry; r.g2.rotation.y=ry;
+    r.r2.legR.hip.rotation.x=Math.sin(w)*sw; r.r2.legL.hip.rotation.x=-Math.sin(w)*sw;
+    r.r2.legR.knee.rotation.x=Math.max(0,-Math.sin(w))*sw*1.1; r.r2.legL.knee.rotation.x=Math.max(0,Math.sin(w))*sw*1.1;
+    r.r2.armL.sh.rotation.x=Math.sin(w)*sw*0.6; r.r2.armR.sh.rotation.x=Math.sin(w+Math.PI)*sw*0.6; }
+  renderer.render(scene,camera); requestAnimationFrame(anim);} anim();
+addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);});
+</script>
+</body>
+</html>

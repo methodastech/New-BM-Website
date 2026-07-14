@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Game Library</title>
+<style>
+  :root {
+    --bg: #0d0b14;
+    --panel: #161227;
+    --panel2: #1e1838;
+    --gold: #caa75a;
+    --ink: #ece8f5;
+    --muted: #9a92b0;
+    --accent: #b48cff;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; min-height: 100%;
+    background:
+      radial-gradient(1100px 700px at 50% -10%, #241a44 0%, rgba(36,26,68,0) 60%),
+      var(--bg);
+    color: var(--ink);
+    font-family: "Georgia", "Palatino Linotype", serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 64px 24px 80px; }
+  header { text-align: center; margin-bottom: 44px; }
+  h1 {
+    font-family: "Luminari", "Papyrus", "Georgia", serif;
+    font-size: clamp(34px, 6vw, 56px); letter-spacing: 1px;
+    margin: 0 0 10px;
+    color: var(--accent);
+    text-shadow: 0 0 28px rgba(123,63,242,0.55);
+  }
+  header p { color: var(--gold); font-style: italic; margin: 0; font-size: 16px; }
+  .grid {
+    display: grid; gap: 18px;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  }
+  a.card {
+    display: block; text-decoration: none; color: inherit;
+    background: linear-gradient(180deg, var(--panel2), var(--panel));
+    border: 1px solid rgba(202,167,90,0.28);
+    border-radius: 14px; padding: 22px 20px;
+    transition: transform .14s ease, border-color .14s ease, box-shadow .14s ease;
+    position: relative; overflow: hidden;
+  }
+  a.card::after {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(220px 120px at 100% 0%, rgba(180,140,255,0.10), transparent 70%);
+    pointer-events: none;
+  }
+  a.card:hover {
+    transform: translateY(-4px);
+    border-color: var(--gold);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 0 1px rgba(202,167,90,0.25) inset;
+  }
+  .emoji { font-size: 40px; line-height: 1; margin-bottom: 12px; font-family: "Apple Color Emoji", sans-serif; }
+  .name {
+    font-family: "Luminari", "Papyrus", "Georgia", serif;
+    font-size: 20px; letter-spacing: .5px; margin-bottom: 4px;
+  }
+  .tag { color: var(--muted); font-size: 13px; font-style: italic; }
+  .play {
+    margin-top: 14px; display: inline-block;
+    color: var(--gold); font-size: 12px; letter-spacing: 2px;
+    text-transform: uppercase; font-family: "Georgia", serif;
+  }
+  footer { text-align: center; color: var(--muted); font-size: 12px; margin-top: 48px; font-style: italic; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Game Library</h1>
+    <p>local dev launcher &middot; pick a world</p>
+  </header>
+  <div class="grid" id="grid"></div>
+  <footer>served from this folder on localhost:8766</footer>
+</div>
+
+<script>
+  // Each game lives in its own folder; the dev server serves <folder>/index.html.
+  // To add a game later, drop a folder with an index.html and add a line here.
+  // NOTE: this launcher is served from Games/Methodus the Game/, but the dev server is rooted at Games/,
+  // so a card can reach a sibling folder with ../  (e.g. the space game below).
+  const GAMES = [
+    { dir: "💀 Bonefield Arena", emoji: "💀", name: "ESSENCE · Arena of Bones", tag: "voice-cast action · ALPHA 0.1 · ACTIVE BUILD" },
+    { href: "Bonefield Website/index.html", emoji: "🕯️", name: "Essence · Website", tag: "press kit, world & investors" },
+    { href: "Bonefield Website/codex.html", emoji: "📜", name: "Essence · Codex", tag: "spec ⇄ build design codex" },
+    { href: "../methodas space game/Brand Defense Grid.html", emoji: "🛸", name: "FREEDOM", tag: "space defense arcade" },
+    { dir: "🐰 Burrowkeep",     emoji: "🐰", name: "Field",            tag: "action roguelite (active)" },
+    { dir: "⚔️ Bonefield",      emoji: "⚔️", name: "Bonefield",        tag: "knight summoner roguelite" },
+    { dir: "🔁 Loop Hero",      emoji: "🔁", name: "Loop Hero",        tag: "looping deck crawler" },
+    { dir: "🚀 Starship Outlaw", emoji: "🚀", name: "Starship Outlaw",  tag: "mobile space arcade" },
+    { dir: "🧱 Methodus 2D",    emoji: "🧱", name: "Methodus 2D",      tag: "2D build" },
+    { dir: "🛡️ Methodus 3D",    emoji: "🛡️", name: "Methodus 3D",      tag: "3D build" },
+    { dir: "🪐 Space 3D",       emoji: "🪐", name: "Space 3D",         tag: "3D space" },
+    { dir: "🛰️ Space Draft",    emoji: "🛰️", name: "Space Draft",      tag: "prototype" },
+    { dir: "🧊 Threed",         emoji: "🧊", name: "Threed",           tag: "three.js sandbox" },
+  ];
+  const grid = document.getElementById("grid");
+  for (const g of GAMES) {
+    const a = document.createElement("a");
+    a.className = "card";
+    a.href = g.href ? g.href.split("/").map(encodeURIComponent).join("/") : encodeURIComponent(g.dir) + "/";   // explicit file, else <folder>/index.html
+    a.innerHTML =
+      '<div class="emoji">' + g.emoji + '</div>' +
+      '<div class="name">' + g.name + '</div>' +
+      '<div class="tag">' + g.tag + '</div>' +
+      '<div class="play">▶ play</div>';
+    grid.appendChild(a);
+  }
+</script>
+</body>
+</html>

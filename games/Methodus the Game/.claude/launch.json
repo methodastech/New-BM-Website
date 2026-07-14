@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "methodus",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["server.js"],
+      "port": 8766,
+      "autoPort": false
+    }
+  ]
+}

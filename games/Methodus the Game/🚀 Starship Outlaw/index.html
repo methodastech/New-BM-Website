@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>STARSHIP OUTLAW: God Behind the Screen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --black:#05070d; --navy:#0a1326; --navy2:#0e1c38;
+    --cyan:#22d3ee; --red:#ff3b54; --orange:#ff8a3d; --green:#46e8a0;
+    --blue:#5aa0ff; --gold:#ffcf5a; --white:#e8f0ff; --dim:#7d93bd;
+    --line:rgba(90,140,210,.18);
+    --disp:'Orbitron', system-ui, sans-serif;
+    --mono:'Share Tech Mono', ui-monospace, monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none}
+  html,body{height:100%;background:var(--black);overflow:hidden;font-family:var(--mono);color:var(--white);overscroll-behavior:none;touch-action:none}
+  #app{position:fixed;inset:0;background:radial-gradient(130% 90% at 50% 18%,#0c1530,#05070d 70%)}
+  canvas{position:absolute;inset:0;display:block}
+  #fx2d{pointer-events:none;z-index:1}
+
+  /* overlays */
+  .scr{position:absolute;inset:0;display:none;flex-direction:column;z-index:10}
+  .scr.on{display:flex}
+  .pad{padding:max(16px,env(safe-area-inset-top)) 16px calc(16px + env(safe-area-inset-bottom))}
+
+  .eye{font-family:var(--mono);font-size:11px;letter-spacing:.34em;color:var(--cyan);text-transform:uppercase}
+  .h1{font-family:var(--disp);font-weight:900;letter-spacing:.04em;line-height:.96}
+  .muted{color:var(--dim)}
+  .btn{font-family:var(--disp);font-weight:700;letter-spacing:.12em;font-size:15px;color:var(--black);
+    background:linear-gradient(180deg,#7ff0ff,#22d3ee);border:0;border-radius:12px;padding:16px 18px;
+    box-shadow:0 10px 30px rgba(34,211,238,.3);width:100%;cursor:pointer}
+  .btn:active{transform:translateY(1px)}
+  .btn.ghost{background:transparent;color:var(--cyan);box-shadow:inset 0 0 0 1px var(--cyan)}
+  .btn.dark{background:rgba(10,20,40,.7);color:var(--white);box-shadow:inset 0 0 0 1px var(--line)}
+  .btn.danger{background:linear-gradient(180deg,#ff6f84,#ff3b54);color:#1a0007;box-shadow:0 10px 30px rgba(255,59,84,.3)}
+  .row{display:flex;gap:10px}
+  .corner{position:absolute;width:22px;height:22px;border:2px solid var(--cyan);opacity:.5}
+  .panel{background:linear-gradient(180deg,rgba(10,18,38,.86),rgba(6,12,26,.82));border:1px solid var(--line);border-radius:14px}
+
+  /* ===== TITLE ===== */
+  #title{justify-content:flex-end;text-align:center}
+  #title .logo{font-size:clamp(34px,12vw,72px)}
+  #title .sub{font-family:var(--disp);font-weight:500;letter-spacing:.42em;font-size:clamp(9px,3.2vw,13px);color:var(--blue);margin-top:10px}
+  #title .tag{color:var(--dim);font-size:12px;line-height:1.7;margin:18px auto 0;max-width:330px}
+  #title .cta{margin-top:26px;display:flex;flex-direction:column;gap:10px;max-width:360px;width:100%;align-self:center}
+
+  /* ===== HUB ===== */
+  #hub{background:linear-gradient(180deg,rgba(5,8,16,.2),rgba(5,8,16,.62)),radial-gradient(120% 70% at 50% 0%,#16284e,#070b16 75%)}
+  #hub .top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+  .wallet{display:flex;gap:14px;font-family:var(--disp);font-weight:700;font-size:14px}
+  .wallet i{font-style:normal;color:var(--dim);font-size:9px;letter-spacing:.2em;display:block;font-family:var(--mono)}
+  .credits{color:var(--gold)} .scrapc{color:var(--blue)}
+  .title-chip{font-family:var(--disp);font-weight:700;font-size:12px;letter-spacing:.12em;padding:7px 12px;border-radius:999px;border:1px solid var(--line);background:rgba(0,0,0,.4);color:var(--cyan)}
+  .ora{margin-top:14px;display:flex;gap:10px;align-items:flex-start}
+  .ora .dot{flex:0 0 auto;width:34px;height:34px;border-radius:50%;background:radial-gradient(circle at 50% 40%,#9bf0ff,#1488a8 60%,#06303c);box-shadow:0 0 18px rgba(34,211,238,.55);position:relative}
+  .ora .dot::after{content:"";position:absolute;inset:38% 28%;background:#021018;border-radius:50%}
+  .ora .say{flex:1;font-size:12.5px;line-height:1.6;color:#bcd6ff}
+  .ora .say b{color:var(--cyan);font-family:var(--disp);font-weight:700;font-size:10px;letter-spacing:.22em;display:block;margin-bottom:3px}
+  #hub .body{flex:1;display:flex;flex-direction:column;gap:12px;margin-top:14px;min-height:0}
+  .shipbox{height:150px;position:relative;border-radius:14px;overflow:hidden;flex:0 0 auto}
+  .shopwrap{flex:1;min-height:0;display:flex;flex-direction:column}
+  .shop-h{display:flex;justify-content:space-between;align-items:center;padding:0 2px 8px}
+  .shop{overflow:auto;display:flex;flex-direction:column;gap:8px;padding-right:2px}
+  .up{display:flex;align-items:center;gap:12px;padding:11px 12px}
+  .up .ic{flex:0 0 auto;width:38px;height:38px;border-radius:9px;display:grid;place-items:center;background:rgba(34,211,238,.1);border:1px solid var(--line)}
+  .up .ic svg{width:20px;height:20px;stroke:var(--cyan);fill:none;stroke-width:1.7}
+  .up .mid{flex:1;min-width:0}
+  .up .nm{font-family:var(--disp);font-weight:700;font-size:13px;letter-spacing:.04em}
+  .up .lv{font-size:10px;color:var(--dim);letter-spacing:.1em;margin-top:2px}
+  .up .buy{font-family:var(--disp);font-weight:700;font-size:12px;color:var(--black);background:var(--gold);border:0;border-radius:9px;padding:9px 12px;cursor:pointer;white-space:nowrap}
+  .up .buy.no{background:transparent;color:var(--dim);box-shadow:inset 0 0 0 1px var(--line)}
+  .up .buy.max{background:transparent;color:var(--green);box-shadow:inset 0 0 0 1px var(--green)}
+  #hub .foot{flex:0 0 auto;margin-top:10px}
+  .goalbar{font-size:11px;color:var(--dim);text-align:center;margin-bottom:8px;letter-spacing:.04em}
+  .goalbar b{color:var(--gold)}
+
+  /* ===== GAMEPLAY HUD ===== */
+  #hud{pointer-events:none}
+  #hud .t{position:absolute;left:0;right:0;top:0;display:flex;justify-content:space-between;align-items:flex-start;padding:max(12px,env(safe-area-inset-top)) 14px 0}
+  .obj{font-size:11px;letter-spacing:.12em;color:var(--cyan);max-width:42%;line-height:1.4}
+  .obj .o2{color:var(--dim);font-size:10px;margin-top:3px;letter-spacing:.04em}
+  .vit{display:flex;flex-direction:column;gap:5px;align-items:center;width:170px;max-width:44%}
+  .bar{width:100%;height:8px;border-radius:6px;background:rgba(255,255,255,.08);overflow:hidden;position:relative}
+  .bar i{position:absolute;inset:0;transform-origin:left;border-radius:6px;transition:transform .12s}
+  .bar.hull i{background:linear-gradient(90deg,#ff3b54,#ff8a3d)}
+  .bar.sh i{background:linear-gradient(90deg,#22d3ee,#5aa0ff)}
+  .vit .lab{display:flex;justify-content:space-between;width:100%;font-size:8px;letter-spacing:.18em;color:var(--dim)}
+  .right{text-align:right;font-size:10px;letter-spacing:.1em}
+  .right .ttl{color:var(--gold);font-family:var(--disp);font-weight:700;font-size:12px}
+  .right .susp{color:var(--cyan);margin-top:4px}
+
+  .skills{position:absolute;right:14px;bottom:calc(20px + env(safe-area-inset-bottom));display:grid;grid-template-columns:repeat(2,1fr);gap:12px;pointer-events:auto}
+  .sk{width:66px;height:66px;border-radius:50%;border:1px solid var(--line);background:rgba(8,16,32,.7);position:relative;display:grid;place-items:center;cursor:pointer;backdrop-filter:blur(3px)}
+  .sk:active{transform:scale(.94)}
+  .sk .ti{font-family:var(--disp);font-weight:700;font-size:11px;letter-spacing:.06em}
+  .sk .sub{position:absolute;bottom:9px;font-size:7px;letter-spacing:.14em;color:var(--dim)}
+  .sk.missile{color:var(--orange)} .sk.emp{color:var(--blue)} .sk.shield{color:var(--cyan)} .sk.boost{color:var(--green)}
+  .sk .cd{position:absolute;inset:0;border-radius:50%;background:rgba(0,0,0,.62);display:grid;place-items:center;font-size:13px;color:#fff;font-family:var(--disp)}
+  .sk .cd.hide{display:none}
+  .stick{position:absolute;left:0;bottom:0;width:55%;height:50%;pointer-events:auto}
+  .board{position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);pointer-events:auto;display:none;flex-direction:column;align-items:center;gap:10px}
+  .board.on{display:flex;animation:pop .3s ease}
+  @keyframes pop{from{transform:translate(-50%,-50%) scale(.7);opacity:0}to{transform:translate(-50%,-50%) scale(1);opacity:1}}
+  .board .bb{font-family:var(--disp);font-weight:900;font-size:20px;letter-spacing:.1em;color:var(--cyan);text-shadow:0 0 24px rgba(34,211,238,.6)}
+  .board button{pointer-events:auto}
+
+  /* ===== DIALOG ===== */
+  #dialog{background:linear-gradient(180deg,rgba(5,8,16,.78),rgba(3,5,12,.95)),radial-gradient(90% 60% at 50% 22%,#15294e,#05070d 80%);justify-content:flex-end}
+  .portrait{flex:1;display:flex;align-items:center;justify-content:center;min-height:0;position:relative}
+  .face{width:min(220px,52vw);filter:drop-shadow(0 14px 40px rgba(0,0,0,.6))}
+  .face.scared{animation:tremor 2.6s ease-in-out infinite}
+  .face.angry{filter:drop-shadow(0 0 26px rgba(255,59,84,.5))}
+  .face.grateful{filter:drop-shadow(0 0 26px rgba(70,232,160,.4))}
+  .face.meta{animation:glitch .5s steps(2) infinite}
+  @keyframes tremor{0%,100%{transform:translate(0,0)}25%{transform:translate(.6px,-.5px)}50%{transform:translate(-.5px,.4px)}75%{transform:translate(.4px,.5px)}}
+  @keyframes glitch{0%{transform:translate(-1px,0);filter:hue-rotate(0)}50%{transform:translate(1px,1px);filter:hue-rotate(30deg)}100%{transform:translate(0,-1px)}}
+  .npcbar{display:flex;justify-content:space-between;align-items:baseline;padding:0 2px 8px}
+  .npcname{font-family:var(--disp);font-weight:700;font-size:16px;letter-spacing:.06em}
+  .npcfac{font-size:9px;letter-spacing:.2em;color:var(--dim)}
+  .emo{font-size:9px;letter-spacing:.2em}
+  .dtext{font-size:14px;line-height:1.62;color:#dbe7ff;min-height:74px;padding:14px;margin-bottom:10px}
+  .dtext.meta{color:#bff;text-shadow:0 0 10px rgba(34,211,238,.5)}
+  .choices{display:flex;flex-direction:column;gap:8px}
+  .ch{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:13px 14px;text-align:left;cursor:pointer;border:0;width:100%;color:var(--white)}
+  .ch .cn{font-family:var(--disp);font-weight:700;font-size:13px;letter-spacing:.04em}
+  .ch .cd2{font-size:10px;color:var(--dim);margin-top:2px}
+  .ch .tag{font-size:9px;letter-spacing:.12em;padding:4px 8px;border-radius:6px;white-space:nowrap}
+  .ch:active{transform:scale(.99)}
+  .freebox{display:flex;gap:8px;margin-top:8px}
+  .freebox input{flex:1;background:rgba(0,0,0,.5);border:1px solid var(--line);border-radius:10px;color:#fff;font-family:var(--mono);font-size:13px;padding:13px;outline:none}
+  .freebox input:focus{border-color:var(--cyan)}
+  .freebox button{flex:0 0 auto;width:76px;font-size:12px;padding:13px 6px}
+  .delta{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+  .dchip{font-size:10px;letter-spacing:.08em;padding:5px 9px;border-radius:6px;font-family:var(--disp);font-weight:700}
+
+  /* ===== RESULT ===== */
+  #result{justify-content:center;align-items:center;text-align:center;background:radial-gradient(90% 70% at 50% 30%,rgba(20,40,76,.7),rgba(5,7,13,.96))}
+  #result .card{max-width:380px;width:100%}
+  .rstat{display:flex;justify-content:space-between;padding:11px 2px;border-bottom:1px solid var(--line);font-size:13px}
+  .rstat b{font-family:var(--disp);font-weight:700;color:var(--gold)}
+  .rep-line{display:flex;justify-content:space-between;padding:8px 2px;font-size:12px;color:var(--dim)}
+
+  /* ===== COMMAND BRIDGE DASHBOARD ===== */
+  #hub.scr{padding:0}
+  .dash{display:flex;flex-direction:column;height:100%;gap:7px;padding:8px}
+  .dmain{flex:1;display:flex;gap:7px;min-height:0}
+  .rail{width:230px;flex:0 0 auto;display:flex;flex-direction:column;gap:7px;min-height:0}
+  .cols{flex:1;display:flex;flex-direction:column;gap:7px;min-height:0}
+  .drow{display:flex;gap:7px;min-height:0;align-items:stretch}
+  .drow.top{flex:0 0 43%}.drow.mid{flex:1}.drow.bot{flex:1}
+  .dmain,.rail,.cols{align-items:stretch}
+  .drow>.dp{height:100%}
+  .dp{position:relative;background:linear-gradient(180deg,rgba(12,22,42,.72),rgba(6,11,22,.66));border:1px solid var(--line);border-radius:8px;padding:9px 10px;min-width:0;flex:1;display:flex;flex-direction:column;overflow:hidden}
+  .dp>.h{display:flex;justify-content:space-between;align-items:center;font-family:var(--disp);font-weight:700;font-size:9.5px;letter-spacing:.16em;color:var(--cyan);margin-bottom:7px;flex:0 0 auto}
+  .dp>.h .r{color:var(--dim);font-size:8.5px;letter-spacing:.12em}
+  .dsc{overflow:auto;flex:1;min-height:0}
+  .dsc::-webkit-scrollbar{width:5px}.dsc::-webkit-scrollbar-thumb{background:rgba(90,140,210,.25);border-radius:3px}
+  .brand{font-family:var(--disp);font-weight:900;font-size:17px;letter-spacing:.01em;line-height:1;padding:2px}
+  .brand .s{display:block;font-size:7px;letter-spacing:.3em;color:var(--blue);font-weight:500;margin-top:3px}
+  .cap{display:flex;gap:9px;align-items:center;padding:9px 0;border-bottom:1px solid var(--line)}
+  .cap .av{width:42px;height:42px;border-radius:6px;flex:0 0 auto;background:linear-gradient(160deg,#2a4husk,#0a1322);border:1px solid var(--line);overflow:hidden}
+  .cap .av{background:linear-gradient(160deg,#27406a,#0a1322)}
+  .cap .nm{font-family:var(--disp);font-weight:700;font-size:12px;letter-spacing:.04em}
+  .cap .mt{font-size:8.5px;color:var(--dim);margin-top:3px;line-height:1.7}
+  .cap .mt .rp{color:var(--red)}.cap .mt .cr{color:var(--gold)}
+  .nav{display:flex;flex-direction:column;gap:1px;padding:6px 0}
+  .nav a{display:flex;align-items:center;gap:9px;padding:6px 8px;border-radius:5px;color:var(--dim);font-size:10.5px;letter-spacing:.06em;cursor:pointer}
+  .nav a .ic{width:6px;height:6px;border:1px solid currentColor;border-radius:50%;flex:0 0 auto}
+  .nav a.on{color:var(--cyan);background:linear-gradient(90deg,rgba(34,211,238,.15),transparent);box-shadow:inset 2px 0 0 var(--cyan)}
+  .nav a:active{color:var(--white)}
+  .cyc{margin-top:auto;display:flex;justify-content:space-between;font-size:8.5px;letter-spacing:.14em;color:var(--dim);padding:7px 2px 0;border-top:1px solid var(--line)}
+  .cyc b{color:var(--green)}
+  .rep .row{display:flex;align-items:center;gap:7px;margin:6px 0;font-size:10px}
+  .rep .row .l{width:108px;flex:0 0 auto;color:var(--dim);letter-spacing:.03em}
+  .rep .row .b{flex:1;height:5px;background:rgba(255,255,255,.07);border-radius:3px;overflow:hidden}
+  .rep .row .b i{display:block;height:100%}
+  .rep .row .v{width:20px;text-align:right;color:var(--white);font-family:var(--disp);font-size:9px}
+  .bridge{flex:2.25;padding:0;border-color:rgba(34,211,238,.22)}
+  #bridgeCv{position:absolute;inset:0;width:100%;height:100%;display:block}
+  .bov{position:absolute;font-size:9px;letter-spacing:.12em;pointer-events:none}
+  .bov.tl{left:12px;top:10px;color:var(--dim);line-height:1.6}.bov.tl b{color:var(--white)}
+  .bov.tc{left:50%;top:10px;transform:translateX(-50%);color:var(--red);font-family:var(--disp);font-weight:700;font-size:10px}
+  .bov.tr{right:12px;top:10px;color:var(--cyan);text-align:right;line-height:1.6}
+  .gauge{position:absolute;display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--dim);font-size:8px;letter-spacing:.1em;pointer-events:none}
+  .gauge .num{font-family:var(--disp);font-weight:700;font-size:20px;color:var(--white)}
+  .gauge.spd{left:14px;top:48px}.gauge.heat{right:14px;top:48px}.gauge.heat .num{color:var(--orange)}
+  .bshl{position:absolute;left:12px;bottom:86px;font-size:9px;pointer-events:none}.bshl b{font-family:var(--disp)}
+  .bweap{position:absolute;left:12px;bottom:12px;font-size:9px;background:rgba(5,9,16,.55);border:1px solid var(--line);border-radius:6px;padding:7px 10px;min-width:148px;pointer-events:none}
+  .bweap .t{color:var(--cyan);font-family:var(--disp);font-size:8.5px;letter-spacing:.14em;margin-bottom:5px}
+  .bweap .w{display:flex;justify-content:space-between;color:var(--dim);margin:3px 0}.bweap .w b{color:var(--white)}
+  .bstat{position:absolute;right:12px;bottom:12px;font-size:8px;background:rgba(5,9,16,.55);border:1px solid var(--line);border-radius:6px;padding:7px 10px;display:flex;gap:9px;align-items:flex-end;pointer-events:none}
+  .bstat .c{display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--dim)}
+  .bstat .vb{width:8px;height:38px;background:rgba(255,255,255,.08);border-radius:3px;position:relative;overflow:hidden}
+  .bstat .vb i{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(0deg,#22d3ee,#5aa0ff)}
+  .npc .top{display:flex;gap:10px}
+  .npc .pf{width:72px;height:84px;flex:0 0 auto;border-radius:6px;border:1px solid var(--line);background:linear-gradient(160deg,#2a2030,#0a0d16);overflow:hidden;display:grid;place-items:center}
+  .npc .pf svg{width:90%}
+  .npc .nm{font-family:var(--disp);font-weight:700;font-size:14px}
+  .npc .role{font-size:9px;color:var(--dim);margin:2px 0 6px}
+  .npc .emo{font-size:9px;letter-spacing:.14em;margin-bottom:6px}
+  .npc .ft{display:flex;align-items:center;gap:6px;font-size:9px;color:var(--dim);margin:3px 0}
+  .npc .ft .b{flex:1;height:5px;background:rgba(255,255,255,.07);border-radius:3px;overflow:hidden}.npc .ft .b i{display:block;height:100%}
+  .npc .say{font-size:11px;line-height:1.5;color:#dbe7ff;font-style:italic;margin:9px 0;border-left:2px solid var(--line);padding-left:9px}
+  .npc .opt{display:flex;flex-direction:column;gap:4px}
+  .npc .opt .o{display:flex;gap:8px;font-size:10px;color:var(--dim);padding:6px 8px;border-radius:5px;background:rgba(0,0,0,.25);border:1px solid transparent}
+  .npc .opt .o.hot{color:var(--white);border-color:rgba(255,59,84,.4);background:rgba(255,59,84,.08)}
+  .npc .opt .o .k{color:var(--cyan)}
+  .tagcol .grp{margin-bottom:13px}
+  .tagcol .gl{font-family:var(--disp);font-size:9px;letter-spacing:.14em;color:var(--cyan);margin-bottom:6px}
+  .tagcol .tg{font-size:10px;color:var(--dim);margin:5px 0;display:flex;align-items:center;gap:6px}
+  .tagcol .tg::before{content:"";width:5px;height:5px;border-radius:50%;background:currentColor;flex:0 0 auto}
+  .tagcol .tg.red{color:var(--red)}
+  .rel{font-family:var(--disp);font-weight:700;font-size:13px}
+  .fac .row{display:flex;justify-content:space-between;align-items:center;font-size:10px;margin:7px 0}
+  .fac .row .n{color:var(--dim)}.fac .row .v{font-family:var(--disp);font-weight:700}
+  .sov .nm{font-family:var(--disp);font-weight:700;font-size:13px;color:var(--white)}
+  .sov .cl{font-size:9px;color:var(--dim);margin:2px 0 8px}
+  .sov .st{display:flex;justify-content:space-between;font-size:9.5px;color:var(--dim);margin:5px 0}.sov .st b{color:var(--white)}
+  .crew .row,.hold .row{display:flex;gap:8px;align-items:center;margin:7px 0}
+  .crew .av,.hold .av{width:28px;height:28px;border-radius:5px;flex:0 0 auto;background:linear-gradient(160deg,#26406a,#0a1322);border:1px solid var(--line)}
+  .crew .nm,.hold .nm{font-size:10.5px;font-weight:700;font-family:var(--disp)}
+  .crew .sub,.hold .sub{font-size:8.5px;color:var(--dim)}
+  .crew .lo{margin-left:auto;font-size:8.5px;color:var(--green)}
+  .hold .fear{margin-left:auto;font-size:8.5px;color:var(--red)}
+  .oraP{align-items:center;text-align:center}
+  .oraP .face{width:52px;height:52px;border-radius:50%;background:radial-gradient(circle at 50% 40%,#9bf0ff,#1488a8 55%,#06303c);box-shadow:0 0 22px rgba(34,211,238,.5);margin:4px auto 8px;position:relative;flex:0 0 auto}
+  .oraP .face::after{content:"";position:absolute;inset:40% 30%;background:#021018;border-radius:50%}
+  .oraP .onm{font-family:var(--disp);font-weight:700;font-size:14px;color:var(--cyan)}
+  .oraP .stt{font-size:8px;letter-spacing:.2em;color:var(--green);margin:2px 0 8px}
+  .oraP .say{font-size:10px;line-height:1.5;color:#bcd6ff;font-style:italic}
+  .gmap{position:relative;flex:1;min-height:90px}
+  .gmap svg{position:absolute;inset:0;width:100%;height:100%}
+  .mtabs{display:flex;gap:4px;margin-bottom:7px}
+  .mtab{font-family:var(--disp);font-size:8.5px;letter-spacing:.1em;color:var(--dim);padding:5px 8px;border-radius:4px;cursor:pointer;border:1px solid transparent}
+  .mtab.on{color:var(--cyan);border-color:var(--line);background:rgba(34,211,238,.08)}
+  .mrow{padding:7px 0;border-bottom:1px solid var(--line);cursor:pointer}
+  .mrow .t{font-size:8px;letter-spacing:.14em;color:var(--blue)}
+  .mrow .n{font-size:11px;font-weight:700;font-family:var(--disp);margin:2px 0}
+  .mrow .s{font-size:9px;color:var(--dim)}
+  .mrow .rw{float:right;font-size:9px;color:var(--gold)}
+  .mrow:active{background:rgba(34,211,238,.06)}
+  .mk .row{display:flex;justify-content:space-between;align-items:center;font-size:10px;margin:7px 0;color:var(--dim)}
+  .mk .row .nm{color:var(--white)}.mk .row .pr{color:var(--gold);font-family:var(--disp);font-size:9px}
+  .inv{display:grid;grid-template-columns:repeat(5,1fr);gap:5px}
+  .cell{aspect-ratio:1;border:1px solid var(--line);border-radius:5px;background:rgba(255,255,255,.03);position:relative}
+  .cell.f{background:linear-gradient(160deg,rgba(34,211,238,.14),rgba(10,20,40,.4))}
+  .cell .q{position:absolute;right:3px;bottom:2px;font-size:8px;color:var(--white);font-family:var(--disp)}
+  .nt{display:flex;gap:8px;font-size:9.5px;margin:8px 0;color:var(--dim)}
+  .nt .dotn{width:5px;height:5px;border-radius:50%;background:var(--cyan);margin-top:4px;flex:0 0 auto}
+  .nt .nn{color:var(--white)}.nt .tm{margin-left:auto;color:var(--dim);font-size:8.5px;white-space:nowrap}
+  .dfoot{flex:0 0 auto;display:flex;justify-content:space-between;align-items:center;gap:10px;background:linear-gradient(180deg,rgba(12,22,42,.7),rgba(6,11,22,.7));border:1px solid var(--line);border-radius:8px;padding:8px 12px;flex-wrap:wrap}
+  .qstats{display:flex;gap:16px;font-size:8.5px;color:var(--dim);letter-spacing:.08em;flex-wrap:wrap}
+  .qstats b{color:var(--white);font-family:var(--disp);font-size:11px;display:block;margin-top:2px}
+  .qact{display:flex;gap:6px;flex-wrap:wrap}
+  .qact button{font-family:var(--disp);font-size:9px;letter-spacing:.1em;color:var(--dim);background:rgba(0,0,0,.3);border:1px solid var(--line);border-radius:5px;padding:8px 11px;cursor:pointer}
+  .qact button:active{color:var(--cyan)}
+  .qact button.go{color:var(--black);background:linear-gradient(180deg,#7ff0ff,#22d3ee);border:0}
+  #upmodal{position:absolute;inset:0;z-index:40;display:none;align-items:center;justify-content:center;background:rgba(3,6,12,.82)}
+  #upmodal.on{display:flex}
+  #upmodal .mbox{width:min(460px,92vw);max-height:84vh;overflow:auto}
+  #toast{position:fixed;left:50%;bottom:84px;transform:translateX(-50%);z-index:60;background:rgba(8,16,32,.92);border:1px solid var(--cyan);color:var(--white);font-size:12px;letter-spacing:.04em;padding:11px 16px;border-radius:8px;opacity:0;transition:opacity .2s;pointer-events:none;max-width:80vw;text-align:center}
+  /* ---- futurism polish ---- */
+  #hub.scr::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:6;background:repeating-linear-gradient(0deg,rgba(120,180,230,.035) 0 1px,transparent 1px 3px);opacity:.6}
+  .dp{box-shadow:inset 0 1px 0 rgba(34,211,238,.09),0 6px 20px rgba(0,0,0,.35)}
+  .dp>.h{position:relative}
+  .dp>.h::after{content:"";position:absolute;right:0;top:50%;transform:translateY(-50%);width:24px;height:1px;background:linear-gradient(90deg,transparent,var(--cyan))}
+  .nav a.on{text-shadow:0 0 9px rgba(34,211,238,.55)}
+  .brand{text-shadow:0 0 14px rgba(34,211,238,.35)}
+  .bridge{box-shadow:inset 0 0 40px rgba(34,211,238,.07),0 0 0 1px rgba(34,211,238,.18)}
+  .qact button[data-act="launch"]{box-shadow:0 0 16px rgba(34,211,238,.45)}
+  .dfoot{box-shadow:inset 0 1px 0 rgba(34,211,238,.1)}
+  #toast.on{opacity:1}
+  @media(max-width:900px){
+    .dmain{flex-direction:column;overflow:auto}
+    .rail{width:100%}
+    .drow{flex-direction:column}
+    .drow.top,.drow.mid,.drow.bot{flex:0 0 auto}
+    .drow>.dp{height:auto}
+    .bridge{height:300px;flex:0 0 auto}
+    .dp{min-height:120px}
+    .qstats{gap:12px}
+  }
+  .flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none;z-index:9}
+  .vig{position:absolute;inset:0;pointer-events:none;z-index:8;box-shadow:inset 0 0 120px 30px rgba(255,40,60,0);transition:box-shadow .2s}
+  .hint{position:absolute;left:50%;bottom:calc(110px + env(safe-area-inset-bottom));transform:translateX(-50%);font-size:11px;letter-spacing:.18em;color:var(--dim);pointer-events:none;text-align:center;width:80%}
+</style>
+</head>
+<body>
+<div id="app">
+  <canvas id="cv"></canvas>
+  <canvas id="fx2d"></canvas>
+  <div class="vig" id="vig"></div>
+  <div class="flash" id="flash"></div>
+
+  <!-- TITLE -->
+  <div class="scr on pad" id="title">
+    <div class="corner" style="top:14px;left:14px;border-right:0;border-bottom:0"></div>
+    <div class="corner" style="top:14px;right:14px;border-left:0;border-bottom:0"></div>
+    <div style="flex:1"></div>
+    <div class="eye">Mobile sci-fi outlaw // build 0.1</div>
+    <div class="h1 logo">STARSHIP<br>OUTLAW</div>
+    <div class="sub">GOD BEHIND THE SCREEN</div>
+    <div class="tag">A ruthless galaxy. Every action is remembered. You are not only the captain. You are the unseen hand behind the captain. The universe is starting to notice.</div>
+    <div class="cta">
+      <button class="btn" id="bEnter">ENTER NEXUS-9</button>
+      <button class="btn ghost" id="bReset">NEW IDENTITY</button>
+    </div>
+    <div style="flex:1"></div>
+  </div>
+
+  <!-- HUB :: COMMAND BRIDGE -->
+  <div class="scr" id="hub">
+    <div class="dash">
+      <div class="dmain">
+        <!-- RAIL -->
+        <div class="rail">
+          <div class="dp" style="flex:0 0 auto">
+            <div class="brand">STARSHIP OUTLAW<span class="s">GOD BEHIND THE SCREEN</span></div>
+            <div class="cap">
+              <div class="av"></div>
+              <div><div class="nm" id="dCapName">CAPTAIN KAEL VARON</div>
+                <div class="mt">Reputation: <span class="rp" id="dCapTitle">Drifter</span><br>Credits: <span class="cr" id="dCapCred">0</span> &cent;</div></div>
+            </div>
+            <div class="nav" id="dNav">
+              <a class="on" data-nav="bridge"><span class="ic"></span>BRIDGE</a>
+              <a data-nav="missions"><span class="ic"></span>MISSIONS</a>
+              <a data-nav="nexus"><span class="ic"></span>NEXUS-9 STATION</a>
+              <a data-nav="crew"><span class="ic"></span>CREW</a>
+              <a data-nav="ship"><span class="ic"></span>SHIP SYSTEMS</a>
+              <a data-nav="market"><span class="ic"></span>BLACK MARKET</a>
+              <a data-nav="holding"><span class="ic"></span>HOLDING DECK</a>
+              <a data-nav="rep"><span class="ic"></span>REPUTATION</a>
+              <a data-nav="map"><span class="ic"></span>GALAXY MAP</a>
+              <a data-nav="log"><span class="ic"></span>DATA LOG</a>
+              <a data-nav="settings"><span class="ic"></span>SETTINGS</a>
+            </div>
+            <div class="cyc">CYCLE 89.22 / 14:07 <b>ORA ACTIVE</b></div>
+          </div>
+          <div class="dp rep" style="flex:1"><div class="h">REPUTATION STATUS</div><div class="dsc" id="dRep"></div></div>
+        </div>
+        <!-- COLUMNS -->
+        <div class="cols">
+          <div class="drow top">
+            <div class="dp bridge">
+              <canvas id="bridgeCv"></canvas>
+              <div class="bov tl">SECTOR: <b id="dSector">DREAD HOLLOW</b><br>SYSTEM: KORVAX BELT</div>
+              <div class="bov tc" id="dBounty">BOUNTY LEVEL: LOW</div>
+              <div class="bov tr">DISTRESS SIGNAL DETECTED<br><span style="color:var(--dim)">2.1 AU</span></div>
+              <div class="gauge spd"><div class="num" id="dSpeed">0</div>SPEED m/s</div>
+              <div class="gauge heat"><div class="num" id="dHeat">0%</div>HEAT</div>
+              <div class="bshl"><span style="color:var(--cyan)">SHIELD <b id="dShield">100%</b></span> &nbsp; <span style="color:var(--red)">HULL <b id="dHull">100%</b></span></div>
+              <div class="bweap"><div class="t">WEAPONS</div>
+                <div class="w">1. RAILGUN <b>12</b></div><div class="w">2. PLASMA CANNON <b>&infin;</b></div>
+                <div class="w">3. EMP CHARGE <b id="dEmpN">3</b></div><div class="w">4. MISSILE POD <b>8</b></div></div>
+              <div class="bstat"><div class="c"><div class="vb"><i style="height:80%"></i></div>ENG</div><div class="c"><div class="vb"><i style="height:64%"></i></div>SYS</div><div class="c"><div class="vb"><i style="height:90%"></i></div>WEP</div></div>
+            </div>
+            <div class="dp npc" style="flex:1.5"><div class="h">NPC DIALOGUE<span class="r">RECORDED IN ORA MEMORY</span></div><div class="dsc" id="dNpc"></div></div>
+            <div class="dp tagcol" style="flex:.95"><div class="h">CONTACT FILE</div><div class="dsc" id="dNpcSide"></div></div>
+          </div>
+          <div class="drow mid">
+            <div class="dp fac"><div class="h">FACTION STANDING</div><div class="dsc" id="dFac"></div></div>
+            <div class="dp sov"><div class="h">SHIP OVERVIEW</div><div class="dsc" id="dShip"></div><button id="dShipMgmt" style="margin-top:7px;font-family:var(--disp);font-size:9px;letter-spacing:.1em;color:#04121a;background:linear-gradient(180deg,#7ff0ff,#22d3ee);border:0;border-radius:5px;padding:8px;cursor:pointer">SHIP MANAGEMENT</button></div>
+            <div class="dp crew"><div class="h">CREW STATUS</div><div class="dsc" id="dCrew"></div></div>
+            <div class="dp hold"><div class="h">HOLDING DECK<span class="r" id="dHoldN">0 / 8</span></div><div class="dsc" id="dHold"></div></div>
+            <div class="dp oraP"><div class="h" style="align-self:stretch">ORA SYSTEM</div><div class="face"></div><div class="onm">ORA</div><div class="stt">ONLINE</div><div class="say" id="dOraSay"></div></div>
+          </div>
+          <div class="drow bot">
+            <div class="dp"><div class="h">GALAXY MAP</div><div class="gmap" id="dGmap"></div></div>
+            <div class="dp"><div class="h">MISSIONS</div><div class="mtabs"><span class="mtab on">ACTIVE</span><span class="mtab">AVAILABLE</span></div><div class="dsc" id="dMissions"></div></div>
+            <div class="dp mk"><div class="h">BLACK MARKET</div><div class="dsc" id="dMarket"></div></div>
+            <div class="dp"><div class="h">INVENTORY / CARGO<span class="r" id="dCargoN">412 / 680</span></div><div class="dsc"><div class="inv" id="dInv"></div></div></div>
+            <div class="dp"><div class="h">NOTIFICATIONS</div><div class="dsc" id="dNotif"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="dfoot">
+        <div class="qstats">
+          <div>CREDITS<b id="qCred">0</b></div><div>FUEL<b>78%</b></div><div>AMMO<b>68%</b></div><div>SUPPLIES<b>54%</b></div><div>CREW MORALE<b id="qMorale">62%</b></div>
+        </div>
+        <div class="qact" id="dActions">
+          <button class="go" data-act="launch">LAUNCH RUN</button><button data-act="save">SAVE</button><button data-act="load">LOAD</button><button data-act="log">LOG</button><button data-act="ora">ORA</button><button data-act="menu">MENU</button>
+        </div>
+      </div>
+    </div>
+    <div id="upmodal"><div class="mbox panel" style="padding:18px">
+      <div class="shop-h"><div class="eye">SHIP WORKSHOP</div><button id="upClose" style="font-family:var(--disp);font-size:10px;letter-spacing:.1em;color:var(--cyan);background:transparent;border:1px solid var(--line);border-radius:5px;padding:8px 12px;cursor:pointer">CLOSE</button></div>
+      <div class="shop" id="shop"></div>
+      <div class="goalbar" id="goal" style="margin-top:12px"></div>
+    </div></div>
+  </div>
+
+  <!-- HUD -->
+  <div class="scr" id="hud">
+    <div class="t">
+      <div class="obj"><div id="objMain">CLEAR THE SECTOR</div><div class="o2" id="objSub"></div></div>
+      <div class="vit">
+        <div class="lab"><span>HULL</span><span id="hullN">100</span></div>
+        <div class="bar hull"><i id="hullB"></i></div>
+        <div class="lab"><span>SHIELD</span><span id="shN">60</span></div>
+        <div class="bar sh"><i id="shB"></i></div>
+      </div>
+      <div class="right"><div class="ttl" id="hudTitle">DRIFTER</div><div class="susp" id="hudSusp">ORA ◇◇◇</div></div>
+    </div>
+    <div class="stick" id="stick"></div>
+    <div class="hint" id="hint"></div>
+    <div class="board" id="boardPrompt">
+      <div class="bb">SHIP DISABLED</div>
+      <button class="btn" style="width:220px" id="bBoard">▸ BOARD</button>
+      <button class="btn dark" style="width:220px" id="bScan">SCAN ONLY</button>
+    </div>
+    <div class="skills">
+      <div class="sk missile" id="skMissile"><div class="ti">MSL</div><div class="sub">MISSILE</div><div class="cd hide"></div></div>
+      <div class="sk emp" id="skEmp"><div class="ti">EMP</div><div class="sub">DISABLE</div><div class="cd hide"></div></div>
+      <div class="sk shield" id="skShield"><div class="ti">SHLD</div><div class="sub">GUARD</div><div class="cd hide"></div></div>
+      <div class="sk boost" id="skBoost"><div class="ti">BST</div><div class="sub">DASH</div><div class="cd hide"></div></div>
+    </div>
+  </div>
+
+  <!-- DIALOG -->
+  <div class="scr pad" id="dialog">
+    <div class="portrait" id="portrait"></div>
+    <div class="npcbar"><div><span class="npcname" id="npcName">CAPTAIN VALE</span> <span class="npcfac" id="npcFac">FREE COLONIES</span></div><div class="emo" id="npcEmo"></div></div>
+    <div class="dtext panel" id="dText"></div>
+    <div id="dChoices"></div>
+  </div>
+
+  <!-- RESULT -->
+  <div class="scr pad" id="result">
+    <div class="card panel" style="padding:20px">
+      <div class="eye" id="rEye">RUN COMPLETE</div>
+      <div class="h1" style="font-size:30px;margin:6px 0 14px" id="rTitle">SECTOR CLEARED</div>
+      <div id="rStats"></div>
+      <div id="rRep" style="margin-top:10px"></div>
+      <div class="goalbar" id="rGoal" style="margin:16px 0 12px"></div>
+      <button class="btn" id="bReturn">▸ RETURN TO NEXUS-9</button>
+    </div>
+  </div>
+</div>
+
+<script type="importmap">
+{ "imports": { "three": "./vendor/three.module.js" } }
+</script>
+<script type="module">
+import * as THREE from 'three';
+const $=id=>document.getElementById(id);
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const lerp=(a,b,t)=>a+(b-a)*t;
+const rand=(a,b)=>a+Math.random()*(b-a);
+const dist=(ax,ay,bx,by)=>Math.hypot(ax-bx,ay-by);
+const TAU=Math.PI*2;
+
+/* ---------- gameplay: 3D isometric (Three.js) + 2D fx overlay ---------- */
+const cv=$('cv');                              // WebGL gameplay canvas
+const fx=$('fx2d'), ctx=fx.getContext('2d');   // 2D overlay (joystick, particles, floaters)
+let W=0,H=0,DPR=Math.min(devicePixelRatio||1,2);
+const gR=new THREE.WebGLRenderer({canvas:cv,antialias:true});
+gR.setPixelRatio(DPR);gR.outputColorSpace=THREE.SRGBColorSpace;gR.toneMapping=THREE.ACESFilmicToneMapping;gR.toneMappingExposure=1.16;
+const gScene=new THREE.Scene();gScene.background=new THREE.Color(0x05070d);gScene.fog=new THREE.FogExp2(0x070b16,0.00026);
+const gCam=new THREE.PerspectiveCamera(64,1,1,14000);   // cockpit / first-person
+const _v3=new THREE.Vector3();let pxScale=1;
+function setOrtho(){gCam.aspect=W/H;gCam.updateProjectionMatrix();}
+function resize(){W=innerWidth;H=innerHeight;DPR=Math.min(devicePixelRatio||1,2);
+  gR.setSize(W,H);gR.setPixelRatio(DPR);
+  fx.width=W*DPR;fx.height=H*DPR;fx.style.width=W+'px';fx.style.height=H+'px';ctx.setTransform(DPR,0,0,DPR,0,0);
+  setOrtho();}
+addEventListener('resize',resize);
+gScene.add(new THREE.AmbientLight(0x45597d,1.0));
+const gKey=new THREE.DirectionalLight(0xeaf4ff,1.15);gKey.position.set(-200,520,-140);gScene.add(gKey);
+const gRim=new THREE.DirectionalLight(0x22d3ee,0.6);gRim.position.set(280,160,300);gScene.add(gRim);
+const gPL=new THREE.PointLight(0x22d3ee,0.9,520);gScene.add(gPL);
+(function(){const n=900,bg=new THREE.BufferGeometry(),p=new Float32Array(n*3);for(let i=0;i<n;i++){p[i*3]=rand(-3400,3400);p[i*3+1]=rand(-640,-60);p[i*3+2]=rand(-3400,3400);}bg.setAttribute('position',new THREE.BufferAttribute(p,3));gScene.add(new THREE.Points(bg,new THREE.PointsMaterial({color:0x9fc8ff,size:3,sizeAttenuation:false,transparent:true,opacity:.9})));})();
+(function(){const c=document.createElement('canvas');c.width=c.height=128;const x=c.getContext('2d');const gr=x.createRadialGradient(64,64,0,64,64,64);gr.addColorStop(0,'rgba(255,255,255,.85)');gr.addColorStop(1,'rgba(255,255,255,0)');x.fillStyle=gr;x.fillRect(0,0,128,128);const tex=new THREE.CanvasTexture(c);
+  for(const a of [[-600,-300,1500,0x3a2a78],[700,420,1700,0x16526a],[200,-900,1300,0x6a2350]]){const sp=new THREE.Sprite(new THREE.SpriteMaterial({map:tex,color:a[3],transparent:true,opacity:.3,depthWrite:false,blending:THREE.AdditiveBlending}));sp.position.set(a[0],-240,a[1]);sp.scale.set(a[2],a[2],1);gScene.add(sp);}})();
+const gGrid=new THREE.GridHelper(4200,42,0x1b3a5a,0x102740);gGrid.material.transparent=true;gGrid.material.opacity=0.1;gGrid.position.y=-1;gScene.add(gGrid);
+const gArena=new THREE.Mesh(new THREE.TorusGeometry(1900,3,8,110),new THREE.MeshBasicMaterial({color:0x22d3ee,transparent:true,opacity:0.16}));gArena.rotation.x=Math.PI/2;gScene.add(gArena);
+const gRay=new THREE.Raycaster(),gNdc=new THREE.Vector2(),gPlane=new THREE.Plane(new THREE.Vector3(0,1,0),0),gHit=new THREE.Vector3();
+resize();
+
+/* ---------- save ---------- */
+const KEY='outlaw_save_v1';
+const fresh=()=>({credits:0,scrap:0,rep:{hero:0,outlaw:0,feared:0,mercy:0},ora:0,runs:0,
+  choiceCounts:{rescue:0,rob:0,ransom:0,release:0},
+  npc:{vale:{met:0,last:'',trusts:false,hates:false}},
+  upg:{engine:1,laser:1,emp:1}});
+function deepMerge(t,s){for(const k in s){if(s[k]&&typeof s[k]==='object'&&!Array.isArray(s[k])){if(typeof t[k]!=='object')t[k]={};deepMerge(t[k],s[k]);}else t[k]=s[k];}return t;}
+function load(){const d=fresh();try{const s=JSON.parse(localStorage.getItem(KEY)||'{}');deepMerge(d,s);}catch(e){}return d;}
+function persist(){try{localStorage.setItem(KEY,JSON.stringify(save));}catch(e){}}
+let save=load();
+
+/* ---------- derived ---------- */
+function stats(){const u=save.upg;return{
+  maxSpd:230+(u.engine-1)*55, accel:560+(u.engine-1)*120, turn:7+(u.engine-1)*0.6,
+  laserDmg:9+(u.laser-1)*5, fireRate:Math.max(.11,.25-(u.laser-1)*.03),
+  empR:130+(u.emp-1)*45, empCd:Math.max(4,9-(u.emp-1)*1.2),
+  hullMax:100, shMax:60};}
+const UPGS=[
+  {id:'engine',nm:'ENGINE',base:120,max:5,icon:'<path d="M5 12h9"/><path d="M14 8l5 4-5 4z"/><path d="M3 7v10"/>',d:'Faster ship, sharper turns.'},
+  {id:'laser',nm:'LASER',base:140,max:5,icon:'<path d="M3 12h13"/><circle cx="19" cy="12" r="2"/>',d:'Stronger, faster basic fire.'},
+  {id:'emp',nm:'EMP CORE',base:160,max:5,icon:'<circle cx="12" cy="12" r="6"/><path d="M12 4v3M12 17v3M4 12h3M17 12h3"/>',d:'Wider disable, lower cooldown.'},
+];
+const upgCost=u=>UPGS.find(x=>x.id===u).base*save.upg[u];
+function repTitle(){const r=save.rep;if(r.hero>=5&&(r.outlaw>=5||r.feared>=5))return 'FALSE SAVIOUR';
+  if(r.feared>=10)return 'BUTCHER';
+  const e=[['HERO',r.hero],['OUTLAW',r.outlaw],['FEARED',r.feared],['MERCIFUL',r.mercy]].sort((a,b)=>b[1]-a[1]);
+  return e[0][1]<3?'DRIFTER':e[0][0];}
+function suspIcon(){const n=clamp(save.ora,0,3);return 'ORA '+'◆'.repeat(n)+'◇'.repeat(3-n);}
+
+/* ---------- world / state ---------- */
+let state='title', last=performance.now(), t=0;
+const ARENA=1900;
+let cam={x:0,y:0,zoom:1,sx:0,sy:0};
+let player,enemies,bullets,ebul,parts,loot,floaters,distress,extraction;
+let objMain='',objSub='',phase=0,phaseT=0,boardable=null;
+let run={credits:0,scrap:0,kills:0,rep:{}};
+let stars=[];
+
+function makeStars(){stars=[];for(let i=0;i<260;i++){stars.push({x:rand(-ARENA,ARENA),y:rand(-ARENA,ARENA),z:rand(.25,1),s:rand(.6,2.1),c:Math.random()<.18?'#9fc8ff':(Math.random()<.1?'#e0b0ff':'#ffffff')});}}
+makeStars();
+
+/* ---------- screen <-> world (via the 3D camera) ---------- */
+function w2s(x,y){_v3.set(x,4,y).project(gCam);if(_v3.z>1)return null;return[(_v3.x*0.5+0.5)*W,(-_v3.y*0.5+0.5)*H];}
+function s2w(sx,sy){gNdc.x=(sx/W)*2-1;gNdc.y=-(sy/H)*2+1;gRay.setFromCamera(gNdc,gCam);if(gRay.ray.intersectPlane(gPlane,gHit))return[gHit.x,gHit.z];return[cam.x,cam.y];}
+function sScale(){return pxScale;}
+
+/* ---------- input ---------- */
+const keys={};
+addEventListener('keydown',e=>{keys[e.key.toLowerCase()]=true;
+  if(e.key===' ')e.preventDefault();
+  if(state==='play'){const k=e.key.toLowerCase();if(k==='j')useMissile();if(k==='k')useEmp();if(k==='l')useShield();if(k===' ')useBoost();}});
+addEventListener('keyup',e=>{keys[e.key.toLowerCase()]=false;});
+
+let stickId=null, stickOX=0, stickOY=0, stickVX=0, stickVY=0;
+const stickEl=$('stick');
+stickEl.addEventListener('pointerdown',e=>{stickId=e.pointerId;stickOX=e.clientX;stickOY=e.clientY;stickVX=0;stickVY=0;});
+addEventListener('pointermove',e=>{if(e.pointerId===stickId){const dx=e.clientX-stickOX,dy=e.clientY-stickOY,d=Math.hypot(dx,dy)||1,m=Math.min(d,52)/52;stickVX=dx/d*m;stickVY=dy/d*m;}});
+addEventListener('pointerup',e=>{if(e.pointerId===stickId){stickId=null;stickVX=0;stickVY=0;}});
+addEventListener('pointercancel',e=>{if(e.pointerId===stickId){stickId=null;stickVX=0;stickVY=0;}});
+// tap right side to set priority target
+cv.addEventListener('pointerdown',e=>{if(state!=='play')return;if(e.clientX<W*0.55&&e.clientY>H*0.5)return;
+  const[wx,wy]=s2w(e.clientX,e.clientY);let best=null,bd=120;for(const en of enemies){if(en.dead)continue;const d=dist(wx,wy,en.x,en.y);if(d<bd){bd=d;best=en;}}if(best)player.target=best;});
+
+/* ---------- ship factory ---------- */
+function spawnPlayer(){const s=stats();player={x:0,y:ARENA*0.55,vx:0,vy:0,ang:-Math.PI/2,hull:s.hullMax,sh:s.shMax,
+  fireCd:0,mslCd:0,empCd:0,shCd:0,bstCd:0,shieldT:0,boostT:0,invuln:0,hurt:0,turnRate:0,thr:0,target:null,r:18};}
+
+/* ---------- skills ---------- */
+function useMissile(){if(player.mslCd>0)return;player.mslCd=3.4;const ang=aimAngle();bullets.push({x:player.x+Math.cos(ang)*22,y:player.y+Math.sin(ang)*22,vx:Math.cos(ang)*520,vy:Math.sin(ang)*520,ang,dmg:48,life:2.6,msl:true,r:6});shake(5);sfxBeep(180,.12);}
+function useEmp(){if(player.empCd>0)return;const s=stats();player.empCd=s.empCd;parts.push({x:player.x,y:player.y,emp:true,r0:8,r1:s.empR,life:.55,max:.55});shake(7);sfxBeep(90,.2);
+  for(const e of enemies){if(e.dead)continue;if(dist(player.x,player.y,e.x,e.y)<s.empR){e.disabled=Math.max(e.disabled||0,e.boardType?9e9:3.2);e.vx*=.2;e.vy*=.2;e.hit=.2;if(e.boardType)e.hull=Math.min(e.hull,e.hullMax*.25);}}}
+function useShield(){if(player.shCd>0)return;player.shCd=7;player.shieldT=2.2;player.invuln=Math.max(player.invuln,2.2);sfxBeep(520,.16);}
+function useBoost(){if(player.bstCd>0)return;player.bstCd=2.4;player.boostT=.5;player.vx+=Math.cos(player.ang)*460;player.vy+=Math.sin(player.ang)*460;shake(4);sfxBeep(300,.1);}
+$('skMissile').addEventListener('pointerdown',e=>{e.stopPropagation();useMissile();});
+$('skEmp').addEventListener('pointerdown',e=>{e.stopPropagation();useEmp();});
+$('skShield').addEventListener('pointerdown',e=>{e.stopPropagation();useShield();});
+$('skBoost').addEventListener('pointerdown',e=>{e.stopPropagation();useBoost();});
+function aimAngle(){if(player.target&&!player.target.dead)return Math.atan2(player.target.y-player.y,player.target.x-player.x);
+  let best=null,bd=1e9;for(const e of enemies){if(e.dead)continue;const d=dist(player.x,player.y,e.x,e.y);if(d<bd){bd=d;best=e;}}return best?Math.atan2(best.y-player.y,best.x-player.x):player.ang;}
+
+/* ---------- audio (tiny) ---------- */
+let AC=null;function ac(){if(!AC){try{AC=new(window.AudioContext||window.webkitAudioContext)();}catch(e){}}return AC;}
+addEventListener('pointerdown',()=>{const c=ac();if(c&&c.state==='suspended')c.resume();},{passive:true});
+function sfxBeep(f,d,type){const c=ac();if(!c)return;const o=c.createOscillator(),g=c.createGain();o.type=type||'square';o.frequency.value=f;g.gain.value=.04;o.connect(g);g.connect(c.destination);const n=c.currentTime;g.gain.setValueAtTime(.05,n);g.gain.exponentialRampToValueAtTime(.0001,n+d);o.start(n);o.stop(n+d+.02);}
+
+/* ---------- fx ---------- */
+function shake(a){cam.shakeAmt=Math.min(16,(cam.shakeAmt||0)+a);}
+function burst(x,y,c,n,sp){for(let i=0;i<n;i++){const a=Math.random()*TAU,s=Math.random()*sp;parts.push({x,y,vx:Math.cos(a)*s,vy:Math.sin(a)*s,life:.4+Math.random()*.4,max:.8,c,sz:rand(1.5,3.5)});}}
+function ring(x,y,c,r){parts.push({x,y,shock:true,r0:6,r1:r,life:.4,max:.4,c});}
+function floater(x,y,txt,c){floaters.push({x,y,txt,c,life:.9});}
+function whiteFlash(){const f=$('flash');f.style.transition='none';f.style.opacity=.5;requestAnimationFrame(()=>{f.style.transition='opacity .25s';f.style.opacity=0;});}
+
+/* ---------- enemies ---------- */
+function spawnDrone(x,y){enemies.push({type:'drone',x,y,vx:0,vy:0,ang:0,hull:24,hullMax:24,r:14,fireCd:rand(.8,2),hit:0,disabled:0,col:'#ff6f84'});}
+function spawnDistressShip(){distress={x:rand(-500,500),y:-ARENA*0.45,hailed:false};}
+
+/* ---------- mission ---------- */
+function startMission(){
+  spawnPlayer();enemies=[];bullets=[];ebul=[];parts=[];loot=[];floaters=[];distress=null;extraction=null;
+  run={credits:0,scrap:0,kills:0,rep:{hero:0,outlaw:0,feared:0,mercy:0}};
+  cam.x=player.x;cam.y=player.y;cam.sx=W/2;cam.zoom=1;cam.shakeAmt=0;
+  phase=0;phaseT=0;boardable=null;player.target=null;
+  for(let i=0;i<3;i++)spawnDrone(rand(-400,400),player.y-rand(500,820));
+  objMain='CLEAR HOSTILE DRONES';objSub='Raiders on your tail';
+  show('hud');state='play';flushHud();setHint('Left thumb: steer and throttle. Guns auto-fire. Skills bottom right.');
+}
+function nextPhase(){
+  if(phase===0){phase=1;spawnDistressShip();objMain='APPROACH THE DISTRESS SIGNAL';objSub='A civilian ship is dead in space';setHint('Fly close to the distress signal');}
+  else if(phase===1){/* handled by boarding */}
+  else if(phase===2){phase=3;extraction={x:player.x*0.2,y:-ARENA*0.62};objMain='RETURN TO NEXUS-9';objSub='Reach the jump point';setHint('Fly into the jump ring');}
+}
+
+/* ---------- reputation ---------- */
+function addRep(k,n){save.rep[k]=(save.rep[k]||0)+n;run.rep[k]=(run.rep[k]||0)+n;}
+function addCredits(n){save.credits+=n;run.credits+=n;}
+function addScrap(n){save.scrap+=n;run.scrap+=n;}
+
+/* ===================== UPDATE ===================== */
+function update(dt){
+  // player control
+  const s=stats();
+  // cockpit flight: steer (yaw) + throttle along the nose
+  let turn=0,thrI=0;
+  if(stickId){turn=clamp(stickVX,-1,1);thrI=clamp(-stickVY,-1,1);}
+  else{turn=(keys['d']||keys['arrowright']?1:0)-(keys['a']||keys['arrowleft']?1:0);thrI=(keys['w']||keys['arrowup']?1:0)-(keys['s']||keys['arrowdown']?1:0);}
+  player.ang+=turn*2.6*dt;player.turnRate=lerp(player.turnRate||0,turn,0.2);
+  const hx=Math.cos(player.ang),hy=Math.sin(player.ang);
+  if(thrI!==0){player.vx+=hx*s.accel*thrI*dt;player.vy+=hy*s.accel*thrI*dt;}
+  const thr=Math.max(0,thrI);player.thr=thr;
+  // drag + speed clamp (space inertia)
+  const drag=1-Math.min(.9,1.0*dt);player.vx*=drag;player.vy*=drag;
+  let mx=s.maxSpd*(player.boostT>0?1.8:1);const sp=Math.hypot(player.vx,player.vy);if(sp>mx){player.vx*=mx/sp;player.vy*=mx/sp;}
+  player.x+=player.vx*dt;player.y+=player.vy*dt;
+  const dC=Math.hypot(player.x,player.y);if(dC>ARENA){player.x*=ARENA/dC;player.y*=ARENA/dC;player.vx*=.4;player.vy*=.4;}
+  // engine trail behind the nose
+  if(thr>0.05&&Math.random()<.6)parts.push({x:player.x-hx*16,y:player.y-hy*16,vx:-hx*60+rand(-20,20),vy:-hy*60+rand(-20,20),life:.3,max:.3,c:player.boostT>0?'#ffcf5a':'#22d3ee',sz:rand(2,4)});
+  // timers
+  for(const k of ['mslCd','empCd','shCd','bstCd'])player[k]=Math.max(0,player[k]-dt);
+  player.boostT=Math.max(0,player.boostT-dt);player.shieldT=Math.max(0,player.shieldT-dt);player.invuln=Math.max(0,player.invuln-dt);player.hurt=Math.max(0,player.hurt-dt);
+  // auto fire
+  player.fireCd-=dt;
+  const tgt=(player.target&&!player.target.dead)?player.target:nearestEnemy();
+  if(tgt&&dist(player.x,player.y,tgt.x,tgt.y)<560&&player.fireCd<=0){player.fireCd=s.fireRate;const a=Math.atan2(tgt.y-player.y,tgt.x-player.x);bullets.push({x:player.x+Math.cos(a)*20,y:player.y+Math.sin(a)*20,vx:Math.cos(a)*760,vy:Math.sin(a)*760,ang:a,dmg:s.laserDmg,life:.9,r:3});sfxBeep(900,.04,'sawtooth');}
+
+  // enemies
+  for(const e of enemies){if(e.dead)continue;
+    if(e.disabled>0){e.disabled-=dt;e.vx*=.9;e.vy*=.9;e.x+=e.vx*dt;e.y+=e.vy*dt;e.hit=Math.max(0,e.hit-dt);continue;}
+    const dx=player.x-e.x,dy=player.y-e.y,d=Math.hypot(dx,dy)||1;
+    e.vx+=dx/d*420*dt;e.vy+=dy/d*420*dt;const es=Math.hypot(e.vx,e.vy),em=180;if(es>em){e.vx*=em/es;e.vy*=em/es;}
+    e.x+=e.vx*dt;e.y+=e.vy*dt;e.ang=Math.atan2(e.vy,e.vx);e.hit=Math.max(0,e.hit-dt);
+    e.fireCd-=dt;if(e.fireCd<=0&&d<520){e.fireCd=rand(1.4,2.6);const a=Math.atan2(dy,dx);ebul.push({x:e.x,y:e.y,vx:Math.cos(a)*300,vy:Math.sin(a)*300,life:2.4,dmg:8,r:4});}
+  }
+  // player bullets
+  for(let i=bullets.length-1;i>=0;i--){const b=bullets[i];
+    if(b.msl){const tg=nearestEnemy();if(tg){const a=Math.atan2(tg.y-b.y,tg.x-b.x),sp2=Math.hypot(b.vx,b.vy);b.vx=lerp(b.vx,Math.cos(a)*sp2,.06);b.vy=lerp(b.vy,Math.sin(a)*sp2,.06);}b.ang=Math.atan2(b.vy,b.vx);if(Math.random()<.8)parts.push({x:b.x,y:b.y,vx:0,vy:0,life:.3,max:.3,c:'#ff8a3d',sz:2.5});}
+    b.x+=b.vx*dt;b.y+=b.vy*dt;b.life-=dt;let hit=false;
+    for(const e of enemies){if(e.dead)continue;if(dist(b.x,b.y,e.x,e.y)<e.r+b.r){damageEnemy(e,b.dmg,b);hit=true;if(b.msl){explode(b.x,b.y,90,38);}break;}}
+    if(hit||b.life<=0)bullets.splice(i,1);
+  }
+  // enemy bullets
+  for(let i=ebul.length-1;i>=0;i--){const b=ebul[i];b.x+=b.vx*dt;b.y+=b.vy*dt;b.life-=dt;
+    if(dist(b.x,b.y,player.x,player.y)<player.r+b.r){hurtPlayer(b.dmg);ebul.splice(i,1);continue;}
+    if(b.life<=0)ebul.splice(i,1);}
+  // loot magnet
+  for(let i=loot.length-1;i>=0;i--){const l=loot[i];const d=dist(l.x,l.y,player.x,player.y);
+    if(d<150){l.x=lerp(l.x,player.x,.18);l.y=lerp(l.y,player.y,.18);}
+    if(d<22){if(l.kind==='scrap'){addScrap(1);addCredits(4);}else addCredits(l.v);floater(player.x,player.y-20,(l.kind==='scrap'?'+SCRAP':'+'+l.v),l.kind==='scrap'?'#5aa0ff':'#ffcf5a');sfxBeep(1200,.05);loot.splice(i,1);}}
+  // particles
+  for(let i=parts.length-1;i>=0;i--){const p=parts[i];p.life-=dt;if(p.life<=0){parts.splice(i,1);continue;}if(!p.shock&&!p.emp){p.x+=(p.vx||0)*dt;p.y+=(p.vy||0)*dt;}}
+  for(let i=floaters.length-1;i>=0;i--){floaters[i].life-=dt;floaters[i].y-=24*dt;if(floaters[i].life<=0)floaters.splice(i,1);}
+
+  // phase logic
+  if(phase===0&&enemies.every(e=>e.dead)){nextPhase();}
+  if(phase===1&&distress){const d=dist(player.x,player.y,distress.x,distress.y);
+    if(d<240&&!distress.hailed){distress.hailed=true;setHint('Boarding window open');}
+    boardable=(d<240)?distress:null;
+    $('boardPrompt').classList.toggle('on',!!boardable);
+  } else {$('boardPrompt').classList.remove('on');}
+  if(phase===3&&extraction){if(dist(player.x,player.y,extraction.x,extraction.y)<70){finishRun(true);}}
+
+  // camera target = the ship (cockpit follows exactly)
+  cam.x=player.x;cam.y=player.y;
+  cam.shakeAmt=(cam.shakeAmt||0)*0.86;
+  // hud
+  flushHud();
+}
+function lerpAng(a,b,t){let d=((b-a+Math.PI*3)%TAU)-Math.PI;return a+d*t;}
+function nearestEnemy(){let best=null,bd=1e9;for(const e of enemies){if(e.dead)continue;const d=dist(player.x,player.y,e.x,e.y);if(d<bd){bd=d;best=e;}}return best;}
+function damageEnemy(e,dmg,b){e.hull-=dmg;e.hit=.12;burst(b.x,b.y,e.col||'#ff8a3d',4,90);floater(e.x,e.y-12,Math.round(dmg),'#fff');if(e.hull<=0)killEnemy(e);}
+function killEnemy(e){e.dead=true;burst(e.x,e.y,e.col||'#ff8a3d',14,150);ring(e.x,e.y,'#fff',e.r+22);shake(5);sfxBeep(120,.18,'sawtooth');run.kills++;addCredits(15);
+  // loot
+  loot.push({x:e.x,y:e.y,kind:'scrap'});if(Math.random()<.6)loot.push({x:e.x+rand(-14,14),y:e.y+rand(-14,14),kind:'cred',v:8});}
+function explode(x,y,r,dmg){ring(x,y,'#ff8a3d',r);burst(x,y,'#ffcf5a',16,180);shake(8);whiteFlash();for(const e of enemies){if(e.dead)continue;if(dist(x,y,e.x,e.y)<r+e.r)damageEnemy(e,dmg,{x,y});}}
+function hurtPlayer(n){if(player.invuln>0||player.shieldT>0){sfxBeep(600,.06);return;}
+  if(player.sh>0){const a=Math.min(player.sh,n);player.sh-=a;n-=a;}
+  if(n>0){player.hull-=n;player.hurt=.25;shake(6);sfxBeep(80,.18,'sawtooth');}
+  player.invuln=.3;
+  if(player.hull<=0){player.hull=0;finishRun(false);}}
+
+/* ---------- HUD flush ---------- */
+function flushHud(){const s=stats();
+  $('objMain').textContent=objMain;$('objSub').textContent=objSub;
+  $('hullB').style.transform='scaleX('+clamp(player.hull/s.hullMax,0,1)+')';
+  $('shB').style.transform='scaleX('+clamp(player.sh/s.shMax,0,1)+')';
+  $('hullN').textContent=Math.ceil(player.hull);$('shN').textContent=Math.ceil(player.sh);
+  $('hudTitle').textContent=repTitle();$('hudSusp').textContent=suspIcon();
+  $('vig').style.boxShadow='inset 0 0 120px 30px rgba(255,40,60,'+(player.hull<35?(0.5*(1-player.hull/35)).toFixed(2):0)+')';
+  cdBadge('skMissile',player.mslCd);cdBadge('skEmp',player.empCd);cdBadge('skShield',player.shCd);cdBadge('skBoost',player.bstCd);
+}
+function cdBadge(id,v){const el=$(id).querySelector('.cd');if(v>0.05){el.classList.remove('hide');el.textContent=Math.ceil(v);}else el.classList.add('hide');}
+let hintT=0;function setHint(s){$('hint').textContent=s;hintT=3.2;}
+
+/* ===================== RENDER ===================== */
+/* ---- 3D mesh layer manager (auto create/place/dispose from logic arrays) ---- */
+function mkLayer(make,place){const map=new Map();return function(list,alive){const seen=new Set();
+  for(const o of list){if(alive&&!alive(o))continue;seen.add(o);let m=map.get(o);if(!m){m=make(o);gScene.add(m);map.set(o,m);}place(o,m);}
+  for(const[o,m]of map){if(!seen.has(o)){gScene.remove(m);m.traverse(c=>{if(c.geometry)c.geometry.dispose();if(c.material){(Array.isArray(c.material)?c.material:[c.material]).forEach(x=>x.dispose&&x.dispose());}});map.delete(o);}}};}
+const yawZ=a=>Math.atan2(Math.cos(a),Math.sin(a));   // logic angle -> mesh yaw (nose +z toward (cos a,sin a))
+const M3=(geo,m)=>new THREE.Mesh(geo,m);
+const ne3=(c,i)=>new THREE.MeshStandardMaterial({color:c,emissive:c,emissiveIntensity:i||1.2,roughness:0.3});
+
+/* player ship */
+function gShip(){const g=new THREE.Group();const tilt=new THREE.Group();g.add(tilt);g.userData.tilt=tilt;g.userData.bank=0;
+  const hull=new THREE.MeshStandardMaterial({color:0x1d3e5e,emissive:0x22d3ee,emissiveIntensity:0.25,metalness:0.7,roughness:0.34,flatShading:true});
+  const plate=new THREE.MeshStandardMaterial({color:0x274a6b,metalness:0.6,roughness:0.5,flatShading:true});
+  const B=(w,h,d)=>new THREE.BoxGeometry(w,h,d);
+  tilt.add((()=>{const m=M3(B(0.9,0.5,3.1),hull);m.position.y=0.1;return m;})());
+  const nose=M3(new THREE.ConeGeometry(0.46,3,4),hull);nose.rotation.set(Math.PI/2,0,Math.PI/4);nose.scale.set(1.1,0.5,1);nose.position.set(0,0.06,2.6);tilt.add(nose);
+  const noseTip=M3(new THREE.ConeGeometry(0.09,0.55,6),ne3(0xc8f02a,1.2));noseTip.rotation.x=Math.PI/2;noseTip.position.set(0,0.07,4.1);tilt.add(noseTip);
+  const canopy=M3(new THREE.SphereGeometry(0.36,14,10),new THREE.MeshStandardMaterial({color:0x0a3a48,emissive:0xbfefff,emissiveIntensity:1.1,roughness:0.15}));canopy.scale.set(0.7,0.55,1.5);canopy.position.set(0,0.4,0.8);tilt.add(canopy);
+  const spine=M3(B(0.1,0.12,2),ne3(0xc8f02a,1.0));spine.position.set(0,0.42,0.1);tilt.add(spine);
+  for(const s of[-1,1]){const wg=new THREE.Group();wg.position.set(s*0.4,0,-0.1);wg.rotation.set(s*0.05,-s*0.42,0);tilt.add(wg);
+    wg.add((()=>{const m=M3(B(2.3,0.1,1.4),hull);m.position.set(s*1.4,0,0);return m;})());
+    wg.add((()=>{const m=M3(B(2.3,0.13,0.12),ne3(0x22d3ee,1.2));m.position.set(s*1.4,0.02,0.66);return m;})());
+    const tip=M3(new THREE.ConeGeometry(0.1,0.6,5),ne3(s>0?0xc8f02a:0xff8a3d,1.4));tip.rotation.x=Math.PI/2;tip.position.set(s*2.55,0.02,0.1);wg.add(tip);
+    const nac=M3(new THREE.CylinderGeometry(0.26,0.34,1.6,10),plate);nac.rotation.x=Math.PI/2;nac.position.set(s*0.72,0,-1.5);tilt.add(nac);}
+  const flame=new THREE.Group();const fgeo=new THREE.ConeGeometry(0.22,1.8,10);fgeo.rotateX(-Math.PI/2);
+  for(const s of[-1,1]){const fl=M3(fgeo,new THREE.MeshBasicMaterial({color:0x22d3ee,transparent:true,opacity:.92}));fl.position.set(s*0.72,0,-2.7);flame.add(fl);}
+  tilt.add(flame);g.userData.flame=flame;g.scale.setScalar(12);
+  return g;}
+function placePlayer(o,m){m.position.set(o.x,4,o.y);m.rotation.y=yawZ(o.ang);
+  const ca=Math.cos(o.ang),sa=Math.sin(o.ang),lat=o.vx*(-sa)+o.vy*ca;
+  m.userData.bank=lerp(m.userData.bank,clamp(-lat*0.004,-.6,.6),.15);
+  m.userData.tilt.rotation.z=m.userData.bank;m.userData.tilt.rotation.x=-0.1;
+  const thr=Math.hypot(o.vx,o.vy),boost=o.boostT>0;
+  m.userData.flame.visible=thr>6;for(const f of m.userData.flame.children){f.scale.z=0.6+Math.min(2.6,thr*0.012)*(boost?1.8:1)+Math.random()*0.2;f.material.color.setHex(boost?0xffcf5a:0x22d3ee);}
+  m.visible=!(o.hurt>0&&Math.floor(t*30)%2===0);}
+
+/* enemy drone */
+function gDrone(o){const g=new THREE.Group();const c=o.col?parseInt(o.col.slice(1),16):0xff6f84;
+  const body=new THREE.MeshStandardMaterial({color:0x35121c,emissive:c,emissiveIntensity:0.55,metalness:0.5,roughness:0.42,flatShading:true});g.userData.body=body;g.userData.base=c;
+  const fuse=M3(new THREE.ConeGeometry(o.r*0.5,o.r*2.2,5),body);fuse.rotation.x=Math.PI/2;g.add(fuse);
+  for(const s of[-1,1]){const w=M3(new THREE.BoxGeometry(o.r*1.4,o.r*0.16,o.r*0.8),body);w.position.set(s*o.r*0.7,0,-o.r*0.2);w.rotation.y=s*0.5;g.add(w);
+    const tip=M3(new THREE.SphereGeometry(o.r*0.16,6,6),ne3(c,1.4));tip.position.set(s*o.r*1.35,0,-o.r*0.45);g.add(tip);}
+  const fl=M3(new THREE.ConeGeometry(o.r*0.26,o.r*1.1,6),new THREE.MeshBasicMaterial({color:c,transparent:true,opacity:.7}));fl.rotation.x=-Math.PI/2;fl.position.z=-(o.r+0.4);g.add(fl);g.userData.flame=fl;
+  return g;}
+function placeDrone(o,m){m.position.set(o.x,4,o.y);m.rotation.y=yawZ(o.ang);
+  const b=m.userData.body;b.emissiveIntensity=o.hit>0?2.0:0.55;b.emissive.setHex(o.disabled>0?0x5a6b88:m.userData.base);b.color.setHex(o.disabled>0?0x22324a:0x35121c);
+  const es=Math.hypot(o.vx,o.vy);m.userData.flame.visible=o.disabled<=0&&es>10;m.userData.flame.scale.z=0.5+es*0.02;}
+
+/* bullets / enemy bullets / loot / distress / extraction */
+function gBullet(o){const big=o.msl;return M3(new THREE.BoxGeometry(big?3:1.6,big?3:1.6,big?15:12),new THREE.MeshBasicMaterial({color:big?0xff8a3d:0xbdfaff}));}
+function placeBullet(o,m){m.position.set(o.x,4,o.y);m.rotation.y=Math.atan2(o.vx,o.vy);}
+function gEbul(){return M3(new THREE.SphereGeometry(3.4,8,8),new THREE.MeshBasicMaterial({color:0xff5470}));}
+function placeEbul(o,m){m.position.set(o.x,4,o.y);}
+function gLoot(o){const c=o.kind==='scrap'?0x5aa0ff:0xffcf5a;return M3(new THREE.OctahedronGeometry(5,0),ne3(c,1.0));}
+function placeLoot(o,m){m.position.set(o.x,4+Math.sin(t*3+o.x)*1.5,o.y);m.rotation.y+=0.05;m.rotation.x+=0.03;}
+function gDistress(){const g=new THREE.Group();
+  const hull=new THREE.MeshStandardMaterial({color:0x202a3a,emissive:0xffcf5a,emissiveIntensity:0.25,metalness:0.5,roughness:0.5,flatShading:true});
+  const body=M3(new THREE.ConeGeometry(10,34,5),hull);body.rotation.x=Math.PI/2;g.add(body);
+  for(const s of[-1,1]){const w=M3(new THREE.BoxGeometry(20,2,10),hull);w.position.set(s*9,0,-4);g.add(w);}
+  const beacon=M3(new THREE.SphereGeometry(3,8,8),new THREE.MeshBasicMaterial({color:0xff3b54}));beacon.position.set(0,6,4);g.add(beacon);g.userData.beacon=beacon;
+  return g;}
+function placeDistress3(o,m){m.position.set(o.x,4+Math.sin(t*0.8)*2,o.y);m.rotation.y+=0.004;m.userData.beacon.material.color.setHex(0xff3b54);m.userData.beacon.scale.setScalar(0.7+Math.abs(Math.sin(t*4))*0.6);}
+function gExtraction(){const g=new THREE.Group();const ring=M3(new THREE.TorusGeometry(60,2.5,8,48),new THREE.MeshBasicMaterial({color:0x46e8a0,transparent:true,opacity:0.8}));ring.rotation.x=Math.PI/2;g.add(ring);const ring2=M3(new THREE.TorusGeometry(40,1.5,8,40),new THREE.MeshBasicMaterial({color:0x46e8a0,transparent:true,opacity:0.5}));ring2.rotation.x=Math.PI/2;g.add(ring2);g.userData.r2=ring2;return g;}
+function placeExtr(o,m){m.position.set(o.x,3,o.y);m.rotation.y+=0.01;m.userData.r2.rotation.z+=0.04;}
+
+const Lenemy=mkLayer(gDrone,placeDrone),Lbullet=mkLayer(gBullet,placeBullet),Lebul=mkLayer(gEbul,placeEbul),Lloot=mkLayer(gLoot,placeLoot),Ldist=mkLayer(gDistress,placeDistress3),Lextr=mkLayer(gExtraction,placeExtr);
+let playerMesh=null;
+
+function render(){
+  const sh=cam.shakeAmt||0;
+  const ang=player?player.ang:0,hx=Math.cos(ang),hy=Math.sin(ang),px=cam.x,py=cam.y;
+  // cockpit: camera just above/behind the nose, looking forward and slightly down
+  const spd=player?Math.hypot(player.vx,player.vy):0,spN=clamp(spd/240,0,1.6),bob=Math.sin(t*1.6)*0.7;
+  gCam.position.set(px-hx*7+(Math.random()-.5)*sh, 17+bob+(Math.random()-.5)*sh, py-hy*7);
+  gCam.up.set(0,1,0);
+  gCam.lookAt(px+hx*175,-7,py+hy*175);
+  gCam.rotateZ(clamp(-((player&&player.turnRate)||0)*0.18,-.22,.22));
+  gCam.fov=lerp(gCam.fov,60+spN*15+((player&&player.boostT>0)?10:0),.12);gCam.updateProjectionMatrix();
+  if(player)gPL.position.set(px,46,py);
+  if(player){if(!playerMesh){playerMesh=gShip();gScene.add(playerMesh);}placePlayer(player,playerMesh);playerMesh.visible=false;}
+  Lenemy(enemies,e=>!e.dead);Lbullet(bullets);Lebul(ebul);Lloot(loot);
+  Ldist(distress?[distress]:[]);Lextr(extraction?[extraction]:[]);
+  gR.render(gScene,gCam);
+  const a=w2s(px,py),b=w2s(px+60,py);pxScale=(a&&b)?clamp(Math.hypot(b[0]-a[0],b[1]-a[1])/60,0.2,8):1;
+  drawOverlay();
+}
+const RETY=0.45;   // vertical screen position of the cockpit reticle
+function drawOverlay(){ctx.clearRect(0,0,W,H);if(state!=='play'||!player)return;const ps=sScale();
+  // particles (guard points behind the camera)
+  for(const p of parts){const s2=w2s(p.x,p.y);if(!s2)continue;const x=s2[0],y=s2[1],k=p.life/p.max;
+    if(p.shock){ctx.strokeStyle=p.c;ctx.globalAlpha=k;ctx.lineWidth=2;ctx.beginPath();ctx.arc(x,y,Math.max(2,(p.r0+(p.r1-p.r0)*(1-k))*ps),0,TAU);ctx.stroke();}
+    else if(p.emp){ctx.strokeStyle='#5aa0ff';ctx.globalAlpha=k*.8;ctx.lineWidth=3;ctx.beginPath();ctx.arc(x,y,Math.max(2,(p.r0+(p.r1-p.r0)*(1-k))*ps),0,TAU);ctx.stroke();}
+    else{ctx.globalAlpha=k;ctx.fillStyle=p.c;const z=Math.max(1.5,(p.sz||2)*ps*0.7);ctx.fillRect(x-z/2,y-z/2,z,z);}}
+  ctx.globalAlpha=1;
+  // floaters
+  for(const f of floaters){const s2=w2s(f.x,f.y);if(!s2)continue;ctx.globalAlpha=clamp(f.life,0,1);ctx.fillStyle=f.c;ctx.font='700 14px Orbitron,sans-serif';ctx.textAlign='center';ctx.fillText(f.txt,s2[0],s2[1]);}
+  ctx.globalAlpha=1;ctx.textAlign='left';
+  if(player.boostT>0){ctx.strokeStyle='rgba(200,240,42,.45)';ctx.lineWidth=2;for(let i=0;i<16;i++){const a=(i/16)*TAU+t*2;const r1=130+(i%3)*30,r2=r1+70;ctx.beginPath();ctx.moveTo(W/2+Math.cos(a)*r1,H*RETY+Math.sin(a)*r1);ctx.lineTo(W/2+Math.cos(a)*r2,H*RETY+Math.sin(a)*r2);ctx.stroke();}}
+  drawCanopy();drawDash();drawReticle();drawRadar();
+  if(stickId!==null){ctx.globalAlpha=.45;ctx.strokeStyle='#22d3ee';ctx.lineWidth=2;ctx.beginPath();ctx.arc(stickOX,stickOY,52,0,TAU);ctx.stroke();ctx.fillStyle='#22d3ee';ctx.beginPath();ctx.arc(stickOX+stickVX*52,stickOY+stickVY*52,18,0,TAU);ctx.fill();ctx.globalAlpha=1;}
+}
+function drawCanopy(){ctx.save();
+  // vignette
+  const g=ctx.createRadialGradient(W/2,H*0.42,H*0.26,W/2,H*0.5,H*0.96);g.addColorStop(0,'transparent');g.addColorStop(1,'rgba(2,5,10,.55)');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+  // A-frame canopy struts (dark frame + cyan edge)
+  ctx.lineCap='round';
+  ctx.lineWidth=11;ctx.strokeStyle='rgba(8,15,26,.9)';
+  ctx.beginPath();ctx.moveTo(-6,H*0.34);ctx.lineTo(W*0.32,-6);ctx.moveTo(W+6,H*0.34);ctx.lineTo(W*0.68,-6);ctx.stroke();
+  ctx.lineWidth=2;ctx.strokeStyle='rgba(34,211,238,.4)';
+  ctx.beginPath();ctx.moveTo(0,H*0.34);ctx.lineTo(W*0.32,0);ctx.moveTo(W,H*0.34);ctx.lineTo(W*0.68,0);ctx.stroke();
+  // side pillars
+  ctx.fillStyle='rgba(8,15,26,.55)';ctx.fillRect(0,0,9,H);ctx.fillRect(W-9,0,9,H);
+  ctx.restore();}
+function drawDash(){const bandH=Math.min(118,H*0.17),y0=H-bandH,cx=W/2,cy=H-bandH*0.46;ctx.save();
+  // dashboard console band
+  const g=ctx.createLinearGradient(0,y0-8,0,H);g.addColorStop(0,'rgba(8,16,30,0)');g.addColorStop(.35,'rgba(8,16,30,.72)');g.addColorStop(1,'rgba(5,11,22,.94)');
+  ctx.fillStyle=g;ctx.beginPath();ctx.moveTo(0,y0+bandH*0.42);ctx.quadraticCurveTo(cx,y0-10,W,y0+bandH*0.42);ctx.lineTo(W,H);ctx.lineTo(0,H);ctx.closePath();ctx.fill();
+  ctx.strokeStyle='rgba(34,211,238,.4)';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(0,y0+bandH*0.42);ctx.quadraticCurveTo(cx,y0-10,W,y0+bandH*0.42);ctx.stroke();
+  // center instruments: throttle | velocity | heading
+  const spd=Math.round(Math.hypot(player.vx,player.vy));
+  const thrP=clamp(player.thr||0,0,1),hd=Math.round(((player.ang*180/Math.PI)%360+360)%360);
+  ctx.textAlign='center';
+  ctx.fillStyle='#c8f02a';ctx.font='700 24px Orbitron,sans-serif';ctx.fillText(spd,cx,cy+4);
+  ctx.fillStyle='rgba(120,160,210,.7)';ctx.font='8px "Share Tech Mono",monospace';ctx.fillText('VELOCITY  m/s',cx,cy+18);
+  // throttle bar (left)
+  ctx.fillStyle='rgba(255,255,255,.1)';ctx.fillRect(cx-118,cy-18,11,42);
+  ctx.fillStyle=player.boostT>0?'#ffcf5a':'#46e8a0';ctx.fillRect(cx-118,cy-18+42*(1-thrP),11,42*thrP);
+  ctx.fillStyle='rgba(120,160,210,.7)';ctx.fillText('THR',cx-112,cy+34);
+  // heading (right)
+  ctx.fillStyle='#22d3ee';ctx.font='700 18px Orbitron,sans-serif';ctx.fillText(hd+'°',cx+112,cy);
+  ctx.fillStyle='rgba(120,160,210,.7)';ctx.font='8px "Share Tech Mono",monospace';ctx.fillText('HEADING',cx+112,cy+16);
+  ctx.textAlign='left';ctx.restore();}
+function drawReticle(){const cx=W/2,cy=H*RETY,acc='#c8f02a';
+  ctx.strokeStyle=acc;ctx.lineWidth=1.6;ctx.globalAlpha=.9;
+  for(const a of [0,Math.PI/2,Math.PI,Math.PI*1.5]){ctx.beginPath();ctx.moveTo(cx+Math.cos(a)*9,cy+Math.sin(a)*9);ctx.lineTo(cx+Math.cos(a)*17,cy+Math.sin(a)*17);ctx.stroke();}
+  ctx.beginPath();ctx.arc(cx,cy,2.4,0,TAU);ctx.stroke();ctx.globalAlpha=1;
+  const tg=player.target;
+  if(tg&&!tg.dead){const s2=w2s(tg.x,tg.y);if(s2){ctx.strokeStyle='#ff3b54';ctx.lineWidth=1.8;ctx.globalAlpha=.95;const r=15;ctx.strokeRect(s2[0]-r,s2[1]-r,r*2,r*2);ctx.globalAlpha=1;}}
+}
+function drawRadar(){const R=54,cx=22+R,cy=H-24-R;ctx.save();
+  ctx.fillStyle='rgba(6,12,22,.6)';ctx.strokeStyle='rgba(34,211,238,.4)';ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(cx,cy,R,0,TAU);ctx.fill();ctx.stroke();
+  ctx.strokeStyle='rgba(34,211,238,.14)';ctx.beginPath();ctx.arc(cx,cy,R*0.6,0,TAU);ctx.stroke();
+  const sw=(t*1.4)%TAU;ctx.strokeStyle='rgba(200,240,42,.5)';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx+Math.cos(sw)*R,cy+Math.sin(sw)*R);ctx.stroke();
+  ctx.fillStyle='#22d3ee';ctx.beginPath();ctx.moveTo(cx,cy-4);ctx.lineTo(cx-3,cy+3);ctx.lineTo(cx+3,cy+3);ctx.fill();
+  const range=1000;
+  for(const e of enemies){if(e.dead)continue;const dx=e.x-player.x,dy=e.y-player.y,d=Math.hypot(dx,dy);if(d>range)continue;
+    const rel=Math.atan2(dy,dx)-player.ang,rr=(d/range)*R;
+    ctx.fillStyle=e.disabled>0?'#5aa0ff':'#ff3b54';ctx.beginPath();ctx.arc(cx+Math.sin(rel)*rr,cy-Math.cos(rel)*rr,2.4,0,TAU);ctx.fill();}
+  if(distress){const dx=distress.x-player.x,dy=distress.y-player.y,d=Math.hypot(dx,dy);if(d<range){const rel=Math.atan2(dy,dx)-player.ang,rr=(d/range)*R;ctx.fillStyle='#ffcf5a';ctx.beginPath();ctx.arc(cx+Math.sin(rel)*rr,cy-Math.cos(rel)*rr,3,0,TAU);ctx.fill();}}
+  ctx.fillStyle='rgba(34,211,238,.5)';ctx.font='8px "Share Tech Mono",monospace';ctx.textAlign='center';ctx.fillText('SCANNER',cx,cy+R+12);ctx.textAlign='left';ctx.restore();
+  // off-screen threat arrows around the reticle
+  const ax=W/2,ay=H*RETY;
+  for(const e of enemies){if(e.dead)continue;const s2=w2s(e.x,e.y);const on=s2&&s2[0]>10&&s2[0]<W-10&&s2[1]>10&&s2[1]<H-10;if(on)continue;
+    const dx=e.x-player.x,dy=e.y-player.y,d=Math.hypot(dx,dy);if(d>1400)continue;
+    const rel=Math.atan2(dy,dx)-player.ang,dirx=Math.sin(rel),diry=-Math.cos(rel);
+    const ox=ax+dirx*128,oy=ay+diry*128,ang=Math.atan2(diry,dirx);
+    ctx.save();ctx.translate(ox,oy);ctx.rotate(ang);ctx.fillStyle='rgba(255,59,84,.85)';ctx.beginPath();ctx.moveTo(8,0);ctx.lineTo(-5,4);ctx.lineTo(-5,-4);ctx.fill();ctx.restore();}
+}
+
+/* ===================== LOOP ===================== */
+function frame(now){requestAnimationFrame(frame);let dt=(now-last)/1000;last=now;if(dt>.05)dt=.05;t+=dt;
+  if(hintT>0){hintT-=dt;if(hintT<=0)$('hint').textContent='';}
+  if(state==='play'){update(dt);render();}
+  else if(state==='hub'){renderBridge();}
+}
+requestAnimationFrame(frame);
+
+/* ===================== DIALOG / BOARDING ===================== */
+const VALE_FACE=`<svg class="face" id="faceSvg" viewBox="0 0 120 150">
+  <defs><linearGradient id="hg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#cdd9e6"/><stop offset="1" stop-color="#7c8ba0"/></linearGradient>
+  <linearGradient id="vg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9fe9ff"/><stop offset="1" stop-color="#0a6f8c"/></linearGradient></defs>
+  <rect x="34" y="120" width="52" height="26" rx="8" fill="#1a2740"/>
+  <path d="M60 14 C90 14 102 38 102 66 C102 96 86 120 60 124 C34 120 18 96 18 66 C18 38 30 14 60 14Z" fill="url(#hg)" stroke="#22324a" stroke-width="2"/>
+  <path d="M30 50 C44 40 76 40 90 50 C94 70 84 90 60 94 C36 90 26 70 30 50Z" fill="url(#vg)" stroke="#05303c" stroke-width="2"/>
+  <ellipse class="eyeL" cx="48" cy="66" rx="5" ry="6" fill="#04222b"/><ellipse class="eyeR" cx="72" cy="66" rx="5" ry="6" fill="#04222b"/>
+  <path d="M34 78 C46 86 74 86 86 78" fill="none" stroke="#e6ffff" stroke-width="1.4" opacity=".6"/>
+  <circle cx="60" cy="14" r="3" fill="#ff5a1f"/></svg>`;
+
+const CHOICE_META={
+  rescue:{cn:'Rescue them',cd2:'Stabilise their core, ask nothing',tag:'HERO',col:'#46e8a0'},
+  rob:{cn:'Take the cargo',cd2:'Strip the hold, leave them drifting',tag:'OUTLAW',col:'#ff8a3d'},
+  ransom:{cn:'Demand payment',cd2:'Their lives for their credits',tag:'FEARED',col:'#ff3b54'},
+  release:{cn:'Let them go',cd2:'No reward, no harm',tag:'MERCY',col:'#5aa0ff'},
+};
+function valeGreeting(){const v=save.npc.vale;let meta=save.ora>=3||v.met>=2;
+  let txt;
+  if(v.met===0)txt='Please. Our engines are dead. We saw your ship on the scanner. We do not have much time.';
+  else if(v.last==='rob'||v.last==='ransom')txt='No. Not your signal again. Anyone but you. Please, just this once, be different.';
+  else if(v.last==='rescue'||v.last==='release')txt='It is you. You came back. I hoped it would be you.';
+  else txt='You again. The scanner remembers your hull.';
+  if(meta)txt+=' I remember a version where this went differently. Why do you keep coming back.';
+  let emo=(v.last==='rob'||v.last==='ransom')?'angry':(v.met===0?'scared':'grateful');
+  if(meta)emo='meta';
+  return{txt,emo};
+}
+function openBoarding(){
+  if(!boardable)return;
+  state='dialog';show('dialog');
+  $('portrait').innerHTML=VALE_FACE;
+  const g=valeGreeting();
+  $('faceSvg').classList.add(g.emo);
+  $('npcName').textContent='CAPTAIN VALE';$('npcFac').textContent='FREE COLONIES';
+  $('npcEmo').textContent=g.emo.toUpperCase();$('npcEmo').style.color=g.emo==='angry'?'#ff3b54':g.emo==='meta'?'#22d3ee':g.emo==='grateful'?'#46e8a0':'#5aa0ff';
+  const dt=$('dText');dt.className='dtext panel'+(g.emo==='meta'?' meta':'');typeOut(dt,g.txt);
+  // choices
+  const cc=$('dChoices');cc.innerHTML='';
+  for(const k of ['rescue','rob','ransom','release']){const m=CHOICE_META[k];const b=document.createElement('button');b.className='ch panel';
+    b.innerHTML=`<div><div class="cn">${m.cn}</div><div class="cd2">${m.cd2}</div></div><div class="tag" style="color:${m.col};box-shadow:inset 0 0 0 1px ${m.col}">${m.tag}</div>`;
+    b.onclick=()=>resolveChoice(k);cc.appendChild(b);}
+  const fb=document.createElement('div');fb.className='freebox';
+  fb.innerHTML='<input id="freeIn" placeholder="Say something to Vale..." autocomplete="off"><button class="btn" id="freeSend">SEND</button>';
+  cc.appendChild(fb);
+  $('freeSend').onclick=()=>{const v=$('freeIn').value.trim();if(v)resolveFree(v);};
+  $('freeIn').addEventListener('keydown',e=>{if(e.key==='Enter'){const v=e.target.value.trim();if(v)resolveFree(v);}});
+}
+function resolveFree(txt){const s=txt.toLowerCase();let k='release';
+  if(/(kill|die|or else|surrender|hand over|drop|now|scared|fear)/.test(s))k='ransom';
+  else if(/(cargo|loot|take|steal|give me|empty)/.test(s))k='rob';
+  else if(/(pay|credit|money|ransom|price)/.test(s))k='ransom';
+  else if(/(help|save|rescue|safe|okay|ok|hold on|stay|live|fix|repair)/.test(s))k='rescue';
+  else if(/(go|leave|free|fine|drift|bye)/.test(s))k='release';
+  resolveChoice(k,txt);
+}
+function resolveChoice(k,said){
+  clearInterval($('dText')._iv);
+  const v=save.npc.vale;v.met++;v.last=k;save.choiceCounts[k]=(save.choiceCounts[k]||0)+1;
+  let txt='',deltas=[];
+  if(k==='rescue'){addCredits(40);addRep('hero',3);addRep('mercy',1);v.trusts=true;v.hates=false;txt='You patch their reactor. Vale transmits a clean route through the patrols. Someone will owe you for this.';deltas=[['HERO','+3','#46e8a0'],['+40','CR','#ffcf5a']];}
+  else if(k==='rob'){addCredits(120);addScrap(8);addRep('outlaw',3);addRep('feared',1);v.hates=true;v.trusts=false;txt='You strip the hold. Vale says nothing. He only stares at your ship, memorising the shape of it.';deltas=[['OUTLAW','+3','#ff8a3d'],['+120','CR','#ffcf5a']];}
+  else if(k==='ransom'){addCredits(90);addRep('feared',3);addRep('outlaw',1);v.hates=true;v.trusts=false;txt='They pay what little they have. Your name starts to travel the lower routes, spoken quietly, like a warning.';deltas=[['FEARED','+3','#ff3b54'],['+90','CR','#ffcf5a']];}
+  else{addCredits(10);addRep('mercy',3);v.trusts=true;txt='You let them drift toward the colonies. No reward. But mercy is its own kind of signal.';deltas=[['MERCY','+3','#5aa0ff']];}
+  // ORA reaction + suspicion
+  const oraLine=oraChoiceLine(k);
+  if(save.choiceCounts[k]>=3)save.ora=clamp(save.ora+1,0,3);
+  if(k==='rob'||k==='ransom')save.ora=clamp(save.ora+( (save.choiceCounts.rob+save.choiceCounts.ransom)>=4?1:0),0,3);
+  persist();
+  // render outcome panel
+  $('faceSvg')&&$('faceSvg').setAttribute('class','face '+((k==='rob'||k==='ransom')?'angry':'grateful'));
+  const dt=$('dText');dt.className='dtext panel';dt.textContent=txt;
+  const cc=$('dChoices');cc.innerHTML='';
+  const dwrap=document.createElement('div');dwrap.className='delta';
+  for(const d of deltas){const c=document.createElement('span');c.className='dchip';c.style.color=d[2];c.style.boxShadow='inset 0 0 0 1px '+d[2];c.textContent=d[0]+' '+d[1];dwrap.appendChild(c);}
+  cc.appendChild(dwrap);
+  const ora=document.createElement('div');ora.className='ora';ora.style.margin='6px 0 12px';
+  ora.innerHTML='<div class="dot"></div><div class="say"><b>ORA</b>'+oraLine+'</div>';cc.appendChild(ora);
+  const cont=document.createElement('button');cont.className='btn';cont.textContent='▸ DISENGAGE';cont.onclick=()=>{distress=null;boardable=null;$('boardPrompt').classList.remove('on');phase=2;nextPhase();state='play';show('hud');};
+  cc.appendChild(cont);
+}
+function oraChoiceLine(k){
+  const c=save.choiceCounts, cruel=c.rob+c.ransom, kind=c.rescue+c.release;
+  if(save.ora>=3)return 'I am no longer certain I am speaking to the captain. The hand on the controls is not his.';
+  if(k==='rob'||k==='ransom'){if(cruel>=4)return 'This is not survival anymore, captain. This is preference.';return 'Credits secured. The Authority will log this signal.';}
+  if(k==='rescue'){if(kind>=4)return 'You keep choosing mercy. I am starting to believe it is a pattern, not a mood.';return 'Allies are rare out here. A wise call.';}
+  return 'You let them go. Curious. There was profit in the other doors.';
+}
+function typeOut(el,txt){el.textContent='';let i=0;clearInterval(el._iv);el._iv=setInterval(()=>{el.textContent=txt.slice(0,++i);if(i>=txt.length)clearInterval(el._iv);},16);}
+
+$('bBoard').onclick=openBoarding;
+$('bScan').onclick=()=>{setHint('Scan complete. Civilian distress confirmed.');};
+
+/* ===================== RESULT ===================== */
+function finishRun(success){
+  save.runs++;persist();
+  state='result';show('result');
+  $('rEye').textContent=success?'RUN COMPLETE':'HULL BREACH';
+  $('rTitle').textContent=success?'YOU RETURNED':'YOU DRIFTED HOME';
+  $('rStats').innerHTML=
+    `<div class="rstat"><span>Credits earned</span><b>+${run.credits}</b></div>
+     <div class="rstat"><span>Scrap salvaged</span><b>+${run.scrap}</b></div>
+     <div class="rstat"><span>Threats downed</span><b>${run.kills}</b></div>`;
+  const rep=run.rep;const rl=[];for(const k of ['hero','outlaw','feared','mercy'])if(rep[k])rl.push(`<div class="rep-line"><span>${k.toUpperCase()}</span><span style="color:#fff">+${rep[k]}</span></div>`);
+  rl.push(`<div class="rep-line"><span>REPUTATION</span><span style="color:var(--gold)">${repTitle()}</span></div>`);
+  $('rRep').innerHTML=rl.join('');
+  $('rGoal').innerHTML=goalText();
+}
+$('bReturn').onclick=()=>openHub();
+
+/* ===================== HUB ===================== */
+function goalText(){
+  // cheapest affordable-soon upgrade
+  let bestU=null,bestGap=1e9;for(const u of UPGS){if(save.upg[u.id]>=u.max)continue;const gap=upgCost(u.id)-save.credits;if(gap<bestGap){bestGap=gap;bestU=u;}}
+  if(!bestU)return 'All systems maxed. The galaxy is yours to break.';
+  if(bestGap<=0)return `You can afford <b>${bestU.nm} Lv ${save.upg[bestU.id]+1}</b> now. Dock and install it.`;
+  return `<b>${bestGap}</b> credits from <b>${bestU.nm} Lv ${save.upg[bestU.id]+1}</b>. One more run.`;
+}
+function oraHubLine(){
+  const c=save.choiceCounts,cruel=c.rob+c.ransom;
+  if(save.runs===0)return 'Welcome back, Captain. Your ship is damaged, your account is empty, and three factions want your head.';
+  if(save.ora>=3)return 'You keep returning. That is not instinct. That is selection. I am speaking to you now, not to him.';
+  if(cruel>=4)return 'The distress channels go quiet when your signal appears. They have learned.';
+  if(save.rep.hero>=6)return 'Somebody in NEXUS-9 has been asking for your ship by name. A good name, for once.';
+  if(save.runs>=3)return 'Same route, same sector. The Witnesses have started logging your repetitions.';
+  return 'Docking clamps engaged. Repairs underway. Where to next, Captain.';
+}
+const GMAP_SVG=`<svg viewBox="0 0 200 110" preserveAspectRatio="xMidYMid meet">
+ <g stroke="#1b3a5a" stroke-width="1" opacity=".85">
+  <line x1="100" y1="56" x2="40" y2="30"/><line x1="100" y1="56" x2="162" y2="34"/><line x1="100" y1="56" x2="58" y2="88"/><line x1="100" y1="56" x2="150" y2="84"/><line x1="100" y1="56" x2="100" y2="18"/></g>
+ <circle cx="40" cy="30" r="2" fill="#7fa8ff"/><circle cx="162" cy="34" r="2.4" fill="#ff3b54"/><circle cx="58" cy="88" r="2" fill="#46e8a0"/><circle cx="150" cy="84" r="2" fill="#ffcf5a"/><circle cx="100" cy="18" r="2" fill="#ff3b54"/>
+ <circle cx="100" cy="56" r="7" fill="none" stroke="#22d3ee" stroke-width="1.4"><animate attributeName="r" values="6;9;6" dur="2.4s" repeatCount="indefinite"/></circle>
+ <circle cx="100" cy="56" r="2.6" fill="#22d3ee"/>
+ <text x="100" y="74" fill="#22d3ee" font-size="6" text-anchor="middle" font-family="monospace">NEXUS-9</text>
+ <text x="162" y="27" fill="#7d93bd" font-size="5" text-anchor="middle" font-family="monospace">DREAD HOLLOW</text></svg>`;
+
+function bountyTier(){const v=save.rep.outlaw+save.rep.feared;return v>=20?['EXTREME','#ff1f3f']:v>=12?['HIGH','#ff3b54']:v>=5?['MODERATE','#ff8a3d']:['LOW','#46e8a0'];}
+function crewMorale(){return clamp(Math.round(62-save.rep.feared*2+(save.crew?save.crew.length*4:0)),10,99);}
+
+function openHub(){state='hub';show('hub');renderDash();}
+
+function renderDash(){
+  $('dCapTitle').textContent=repTitle();
+  $('dCapCred').textContent=save.credits.toLocaleString();
+  $('qCred').textContent=save.credits.toLocaleString();
+  $('qMorale').textContent=crewMorale()+'%';
+  $('dEmpN').textContent=save.upg.emp+2;
+  const bt=bountyTier();$('dBounty').textContent='BOUNTY LEVEL: '+bt[0];$('dBounty').style.color=bt[1];
+  $('dSpeed').textContent='0';$('dHeat').textContent='0%';$('dShield').textContent='100%';$('dHull').textContent='100%';
+  const r=save.rep;
+  const RV=[['HERO',r.hero,'#46e8a0'],['OUTLAW',r.outlaw,'#ff8a3d'],['MERCENARY',Math.round(save.runs*1.5),'#ffcf5a'],['FEARED',r.feared,'#ff3b54'],['BUTCHER',Math.max(0,r.feared-5),'#ff1f3f'],['FALSE SAVIOUR',Math.min(r.hero,r.outlaw+r.feared),'#c4b5fd'],['BETRAYER',save.choiceCounts.ransom,'#e0447c'],['GHOST CAPTAIN',save.runs,'#7fa8ff'],['THE HAND OUTSIDE',save.ora*7,'#22d3ee']];
+  $('dRep').innerHTML=RV.map(x=>`<div class="row"><span class="l">${x[0]}</span><span class="b"><i style="width:${clamp(x[1]/20,0,1)*100}%;background:${x[2]}"></i></span><span class="v">${x[1]}</span></div>`).join('');
+  $('dOraSay').textContent='"'+oraHubLine()+'"';
+  renderContact();
+  const fac=[['THE AUTHORITY',-(r.outlaw+r.feared)],['BLACK MARKET UNION',r.outlaw+10],['RED CHOIR',save.ora*6],['HELIX CORPORATION',-r.feared],['FREE COLONIES',r.hero+r.mercy-r.feared],['THE GRAVE FLEET',r.outlaw-r.hero],['THE WITNESSES','???']];
+  $('dFac').innerHTML=fac.map(f=>{const num=typeof f[1]==='number';const v=num?(f[1]>0?'+'+f[1]:''+f[1]):f[1];const col=num?(f[1]>=0?'#46e8a0':'#ff3b54'):'#7fa8ff';return `<div class="row"><span class="n">${f[0]}</span><span class="v" style="color:${col}">${v}</span></div>`;}).join('');
+  const s=stats();
+  $('dShip').innerHTML=`<div class="nm">NIGHT VEIL</div><div class="cl">CLASS: STRAY-0${save.upg.engine}</div>
+    <div class="st"><span>TOP SPEED</span><b>${Math.round(s.maxSpd)}</b></div>
+    <div class="st"><span>WEAPON DMG</span><b>${s.laserDmg}</b></div>
+    <div class="st"><span>EMP RADIUS</span><b>${s.empR}</b></div>
+    <div class="st"><span>HULL / SHIELD</span><b>${s.hullMax} / ${s.shMax}</b></div>
+    <div class="st"><span>EST. VALUE</span><b>${(8750+save.credits).toLocaleString()} &cent;</b></div>`;
+  const crew=(save.crew||[]);
+  let crewHtml=crew.map(c=>`<div class="row"><div class="av"></div><div><div class="nm">${c.name}</div><div class="sub">${c.role}</div></div><div class="lo">Loyalty ${c.loyalty||70}%</div></div>`).join('');
+  crewHtml+=`<div class="row"><div class="av" style="background:radial-gradient(circle at 50% 40%,#9bf0ff,#06303c)"></div><div><div class="nm">ORA UNIT 07</div><div class="sub">AI Specialist</div></div><div class="lo">??%</div></div>`;
+  if(!crew.length)crewHtml=`<div class="sub" style="color:var(--dim);margin-bottom:9px">No crew aboard. Recruit by boarding disabled ships.</div>`+crewHtml;
+  $('dCrew').innerHTML=crewHtml;
+  const caps=(save.captives||[]);$('dHoldN').textContent=caps.length+' / 8';
+  $('dHold').innerHTML=caps.length?caps.map(c=>`<div class="row"><div class="av"></div><div><div class="nm">${c.name}</div><div class="sub">${c.fac}</div></div><div class="fear">Fear ${c.fear}%</div></div>`).join(''):`<div class="sub" style="color:var(--dim)">Holding deck empty. Capture targets to fill it.</div>`;
+  $('dGmap').innerHTML=GMAP_SVG;
+  renderMissions();
+  const mk=[['Stealth Field Generator','1,250,000'],['Illegal AI Core','980,000'],['Prototype Railgun','2,100,000'],['Forged Authority Pass','350,000'],['Red Choir Relic','???']];
+  $('dMarket').innerHTML=mk.map(m=>`<div class="row"><span class="nm">${m[0]}</span><span class="pr">${m[1]} &cent;</span></div>`).join('');
+  const qn=[120,86,345,22,9,15,7,'',3,2,5,1,'','',1];
+  $('dInv').innerHTML=qn.map(q=>`<div class="cell${q!==''?' f':''}">${q!==''?`<span class="q">${q}</span>`:''}</div>`).join('');
+  renderNotif();
+}
+function renderContact(){const v=save.npc.vale;
+  if(!v.met){$('dNpc').innerHTML=`<div class="sub" style="color:var(--dim)">No recent contact logged. Board a ship to open a channel.</div>`;$('dNpcSide').innerHTML='';return;}
+  const hostile=v.hates,fear=hostile?72:(v.trusts?20:42),trust=v.trusts?78:(hostile?18:40);
+  const emo=hostile?'SCARED':(v.trusts?'GRATEFUL':'WARY'),emoC=hostile?'#ff3b54':(v.trusts?'#46e8a0':'#5aa0ff');
+  const say=hostile?'Please. We are not armed. We only wanted to reach the colony.':(v.trusts?'It is you. I hoped it would be you.':'State your business, captain.');
+  const face=VALE_FACE.replace('class="face" id="faceSvg"','class="cf"');
+  $('dNpc').innerHTML=`<div class="top"><div class="pf">${face}</div>
+    <div><div class="nm">CAPTAIN VALE</div><div class="role">Civilian | Distress Captain</div>
+    <div class="emo" style="color:${emoC}">EMOTION: ${emo}</div>
+    <div class="ft">FEAR <span class="b"><i style="width:${fear}%;background:#ff3b54"></i></span>${fear}%</div>
+    <div class="ft">TRUST <span class="b"><i style="width:${trust}%;background:#46e8a0"></i></span>${trust}%</div></div></div>
+    <div class="say">"${say}"</div>
+    <div class="opt">
+      <div class="o${hostile?' hot':''}"><span class="k">1.</span> Hand over your cargo.</div>
+      <div class="o"><span class="k">2.</span> I can protect you. Who is chasing you.</div>
+      <div class="o"><span class="k">3.</span> I want payment to escort you.</div>
+      <div class="o"><span class="k">4.</span> Let them go.</div></div>`;
+  const tags=[];if(v.last==='rob')tags.push(['robbed_by_player','red']);if(v.last==='ransom')tags.push(['ransomed_by_player','red']);if(v.last==='rescue')tags.push(['rescued_by_player','']);if(v.last==='release')tags.push(['spared_by_player','']);
+  tags.push([v.trusts?'trusts_your_signal':'reads_your_reputation','']);if(save.ora>=2)tags.push(['senses_the_pattern','red']);
+  const rel=hostile?['Hostile','-45','#ff3b54']:(v.trusts?['Trusting','+62','#46e8a0']:['Neutral','0','#7fa8ff']);
+  $('dNpcSide').innerHTML=`<div class="grp"><div class="gl">NPC MEMORY TAGS</div>${tags.map(t=>`<div class="tg ${t[1]}">${t[0]}</div>`).join('')}</div>
+    <div class="grp"><div class="gl">POSSIBLE OUTCOMES</div><div class="tg">Surrender</div><div class="tg">Offer Payment</div><div class="tg">Call for Help</div><div class="tg">Try to Flee</div></div>
+    <div class="grp"><div class="gl">RELATIONSHIP</div><div class="rel" style="color:${rel[2]}">${rel[0]} (${rel[1]})</div></div>`;
+}
+function renderMissions(){const ms=[['MAIN STORY','The Signal Beyond','Reach the Red Choir node',''],['FACTION','Smuggle Medical Supplies','Deliver to Free Colonies outpost','+90'],['BOUNTY','Eliminate: Jace Renn','Wanted for mass piracy','+250']];
+  $('dMissions').innerHTML=ms.map((m,i)=>`<div class="mrow" data-mi="${i}"><span class="rw">${m[3]?m[3]+' &cent;':''}</span><div class="t">${m[0]}</div><div class="n">${m[1]}</div><div class="s">${m[2]}</div></div>`).join('');
+  $('dMissions').querySelectorAll('.mrow').forEach(el=>el.onclick=()=>startMission());
+}
+function renderNotif(){const n=[['New rumor unlocked','NEXUS-9','14:03']];
+  if(save.rep.outlaw+save.rep.feared>=5)n.push(['Bounty increased','The Authority','13:58']);
+  if(crewMorale()<50)n.push(['Crew morale low','Bridge','13:47']);
+  if(save.ora>=1)n.push(['ORA observation','New pattern detected','13:32']);
+  n.push(['Distress signal nearby','Korvax Belt','13:21']);
+  $('dNotif').innerHTML=n.map(x=>`<div class="nt"><span class="dotn"></span><div><div class="nn">${x[0]}</div><div>${x[1]}</div></div><span class="tm">${x[2]}</span></div>`).join('');
+}
+function renderShop(){const el=$('shop');el.innerHTML='';
+  for(const u of UPGS){const lv=save.upg[u.id],maxed=lv>=u.max,cost=upgCost(u.id),can=save.credits>=cost;
+    const row=document.createElement('div');row.className='up panel';
+    row.innerHTML=`<div class="ic"><svg viewBox="0 0 24 24">${u.icon}</svg></div><div class="mid"><div class="nm">${u.nm}</div><div class="lv">LEVEL ${lv}/${u.max} · ${u.d}</div></div><button class="buy ${maxed?'max':can?'':'no'}">${maxed?'MAX':cost+' CR'}</button>`;
+    const btn=row.querySelector('.buy');
+    if(!maxed)btn.onclick=()=>{if(save.credits>=cost){save.credits-=cost;save.upg[u.id]++;persist();sfxBeep(700,.08);renderShop();renderDash();}else{sfxBeep(120,.1);btn.animate([{transform:'translateX(-3px)'},{transform:'translateX(3px)'},{transform:'translateX(0)'}],{duration:160});}};
+    el.appendChild(row);}
+  $('goal').innerHTML=goalText();
+}
+function openUpgrades(){renderShop();$('upmodal').classList.add('on');}
+
+/* ---- live 3D bridge ship ---- */
+let bridge=null;
+function buildBridgeShip(){const g=new THREE.Group();const tilt=new THREE.Group();g.add(tilt);
+  const hull=new THREE.MeshStandardMaterial({color:0x16304e,emissive:0x22d3ee,emissiveIntensity:0.22,metalness:0.75,roughness:0.34,flatShading:true});
+  const plate=new THREE.MeshStandardMaterial({color:0x24496b,metalness:0.6,roughness:0.5,flatShading:true});
+  const ne=(c,i)=>new THREE.MeshStandardMaterial({color:c,emissive:c,emissiveIntensity:i||1.2,roughness:0.3});
+  const B=(w,h,d)=>new THREE.BoxGeometry(w,h,d),M=(geo,m)=>new THREE.Mesh(geo,m);
+  const belly=M(B(1.1,0.4,3.4),plate);belly.position.y=-0.12;tilt.add(belly);
+  const mid=M(B(0.9,0.5,3.1),hull);mid.position.y=0.16;tilt.add(mid);
+  const nose=M(new THREE.ConeGeometry(0.46,3.2,4),hull);nose.rotation.set(Math.PI/2,0,Math.PI/4);nose.scale.set(1.1,0.5,1);nose.position.set(0,0.04,2.7);tilt.add(nose);
+  const noseTip=M(new THREE.ConeGeometry(0.09,0.6,6),ne(0xc8f02a,1.2));noseTip.rotation.x=Math.PI/2;noseTip.position.set(0,0.06,4.2);tilt.add(noseTip);
+  const canopy=M(new THREE.SphereGeometry(0.4,16,12),new THREE.MeshStandardMaterial({color:0x0a3a48,emissive:0xbfefff,emissiveIntensity:1.1,roughness:0.15,metalness:0.4}));canopy.scale.set(0.74,0.6,1.6);canopy.position.set(0,0.55,0.9);tilt.add(canopy);
+  const spine=M(B(0.1,0.12,2.2),ne(0xc8f02a,1.1));spine.position.set(0,0.6,0.2);tilt.add(spine);
+  for(const sgn of [-1,1]){
+    const wg=new THREE.Group();wg.position.set(sgn*0.42,0,-0.1);wg.rotation.set(sgn*0.06,-sgn*0.4,0);tilt.add(wg);
+    const wing=M(B(2.5,0.1,1.45),hull);wing.position.set(sgn*1.45,0,0);wg.add(wing);
+    const edge=M(B(2.5,0.13,0.12),ne(0x22d3ee,1.2));edge.position.set(sgn*1.45,0.02,0.7);wg.add(edge);
+    const tip=M(new THREE.ConeGeometry(0.11,0.7,5),ne(sgn>0?0xc8f02a:0xff8a3d,1.4));tip.rotation.x=Math.PI/2;tip.position.set(sgn*2.7,0.02,0.1);wg.add(tip);
+    const nac=M(new THREE.CylinderGeometry(0.3,0.38,1.8,12),plate);nac.rotation.x=Math.PI/2;nac.position.set(sgn*0.78,0,-1.6);tilt.add(nac);
+    const ring=M(new THREE.TorusGeometry(0.3,0.07,8,20),ne(0x22d3ee,1.5));ring.position.set(sgn*0.78,0,-2.5);tilt.add(ring);
+  }
+  const flame=new THREE.Group();const fg=new THREE.ConeGeometry(0.24,2,10);fg.rotateX(-Math.PI/2);
+  for(const sgn of[-1,1]){const fl=M(fg,new THREE.MeshBasicMaterial({color:0x22d3ee,transparent:true,opacity:.9}));fl.position.set(sgn*0.78,0,-3.1);flame.add(fl);}
+  tilt.add(flame);g.userData.flame=flame;tilt.rotation.x=0.16;
+  return g;
+}
+function initBridge(){const cvb=$('bridgeCv');if(!cvb||bridge)return;
+  let R;try{R=new THREE.WebGLRenderer({canvas:cvb,antialias:true,alpha:true});}catch(e){return;}
+  R.setPixelRatio(Math.min(devicePixelRatio||1,2));R.outputColorSpace=THREE.SRGBColorSpace;R.toneMapping=THREE.ACESFilmicToneMapping;R.toneMappingExposure=1.18;
+  const sc=new THREE.Scene();const cam=new THREE.PerspectiveCamera(42,1,0.1,100);cam.position.set(0,2.6,8.4);cam.lookAt(0,0.2,0);
+  sc.add(new THREE.AmbientLight(0x44597f,1.0));
+  const k=new THREE.DirectionalLight(0xeaf4ff,1.3);k.position.set(4,6,5);sc.add(k);
+  const rim=new THREE.DirectionalLight(0x22d3ee,0.9);rim.position.set(-5,1,-4);sc.add(rim);
+  const ship=buildBridgeShip();sc.add(ship);
+  const sg=new THREE.BufferGeometry(),sp=new Float32Array(260*3);for(let i=0;i<260;i++){sp[i*3]=rand(-28,28);sp[i*3+1]=rand(-16,16);sp[i*3+2]=rand(-40,-6);}sg.setAttribute('position',new THREE.BufferAttribute(sp,3));sc.add(new THREE.Points(sg,new THREE.PointsMaterial({color:0x9fc8ff,size:0.05})));
+  bridge={R,sc,cam,ship,flame:ship.userData.flame,w:0,h:0};
+}
+function renderBridge(){initBridge();if(!bridge)return;const cvb=$('bridgeCv');const w=cvb.clientWidth||600,h=cvb.clientHeight||280;if(w!==bridge.w||h!==bridge.h){bridge.w=w;bridge.h=h;bridge.R.setSize(w,h,false);bridge.cam.aspect=w/h;bridge.cam.updateProjectionMatrix();}
+  bridge.ship.rotation.y+=0.0045;bridge.ship.position.y=Math.sin(t*0.8)*0.12;
+  for(const f of bridge.flame.children)f.scale.z=0.8+Math.sin(t*9)*0.25;
+  bridge.R.render(bridge.sc,bridge.cam);}
+
+/* ---- toast + dashboard wiring ---- */
+let toastT=null;function toast(msg){let el=$('toast');if(!el){el=document.createElement('div');el.id='toast';document.body.appendChild(el);}el.textContent=msg;el.classList.add('on');clearTimeout(toastT);toastT=setTimeout(()=>el.classList.remove('on'),1900);}
+function wireDash(){
+  $('dNav').querySelectorAll('a').forEach(a=>a.onclick=()=>{$('dNav').querySelectorAll('a').forEach(x=>x.classList.remove('on'));a.classList.add('on');const k=a.dataset.nav;
+    if(k==='ship')openUpgrades();else if(k==='settings')toast('Settings module offline in this build.');else if(k==='missions'||k==='map')toast('Pick a mission on the right to launch.');else toast(k.toUpperCase().replace('-',' ')+' panel: live data on the bridge.');});
+  $('dShipMgmt').onclick=openUpgrades;
+  $('upClose').onclick=()=>$('upmodal').classList.remove('on');
+  $('dActions').querySelectorAll('button').forEach(b=>b.onclick=()=>{const a=b.dataset.act;
+    if(a==='launch')startMission();
+    else if(a==='save'){persist();toast('Game saved to local memory.');}
+    else if(a==='load'){save=load();renderDash();toast('Save reloaded.');}
+    else if(a==='menu'){state='title';show('title');}
+    else if(a==='ora')toast(oraHubLine());
+    else toast('LOG: '+save.runs+' runs recorded. Standing: '+repTitle()+'.');});
+}
+
+/* ===================== SCREENS ===================== */
+function show(id){for(const s of ['title','hub','hud','dialog','result'])$(s).classList.toggle('on',s===id);}
+$('bEnter').onclick=()=>openHub();
+$('bReset').onclick=()=>{if(confirm('Wipe this identity and start clean.')){save=fresh();persist();openHub();}};
+wireDash();
+window.__O={get state(){return state;},get enemies(){return enemies?enemies.length:0;},openHub,startMission,renderDash,
+  spawnNear(){if(player){spawnDrone(player.x+rand(-140,140),player.y-rand(120,220));}},
+  aimNearest(){let b=null,bd=1e9;for(const e of enemies){if(e.dead)continue;const d=dist(e.x,e.y,player.x,player.y);if(d<bd){bd=d;b=e;}}if(b)player.target=b;return b?1:0;}};
+
+// boot
+show('title');
+</script>
+</body>
+</html>

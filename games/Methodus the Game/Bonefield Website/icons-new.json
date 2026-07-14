@@ -1,0 +1,242 @@
+[
+ {
+  "id": "i-sun",
+  "inner": "<circle cx=\"12\" cy=\"12\" r=\"3.6\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"12\" cy=\"12\" r=\"3.6\"/><path d=\"M12 7.4 Q12.9 5.7 11.9 3.7 Q11 5.7 12 7.4Z\" fill=\"currentColor\" stroke=\"none\"/><path d=\"M15.25 8.75 Q17.1 8.1 18.55 6.55 Q16.55 7 15.95 8.05\" fill=\"currentColor\" stroke=\"none\"/><path d=\"M16.6 12 Q18.3 11.1 20.3 12.1 Q18.3 13 16.6 12Z\" fill=\"currentColor\" stroke=\"none\"/><path d=\"M15.25 15.25 Q15.95 17.1 17.45 18.55 Q17 16.55 15.95 15.95\" fill=\"currentColor\" stroke=\"none\"/><path d=\"M12 16.6 Q11.1 18.3 12.1 20.3 Q13 18.3 12 16.6Z\" fill=\"currentColor\" stroke=\"none\"/><path d=\"M8.75 15.25 Q8.05 17.1 6.55 18.55 Q7 16.55 8.05 15.95\" fill=\"currentColor\" stroke=\"none\"/><path d=\"M7.4 12 Q5.7 11.1 3.7 12.1 Q5.7 13 7.4 12Z\" fill=\"currentColor\" stroke=\"none\"/><path d=\"M8.75 8.75 Q8.05 6.9 6.55 5.45 Q7 7.45 8.05 8.05\" fill=\"currentColor\" stroke=\"none\"/>",
+  "note": "Solid filled sun disc with eight curling flame-tongue rays (4 straight teardrops, 4 swept hooks) for a woodcut Ascension sigil that reads instantly at small size."
+ },
+ {
+  "id": "i-chart",
+  "inner": "<rect x=\"4.2\" y=\"14.5\" width=\"2.6\" height=\"4\" rx=\"0.5\" fill=\"currentColor\" stroke=\"none\"/><rect x=\"8.7\" y=\"11.5\" width=\"2.6\" height=\"7\" rx=\"0.5\" fill=\"currentColor\" stroke=\"none\"/><rect x=\"13.2\" y=\"8\" width=\"2.6\" height=\"10.5\" rx=\"0.5\" fill=\"currentColor\" stroke=\"none\"/><path d=\"M5.2 12.5 L9.7 9.5 L14.2 7 L19 4.5\"/><path d=\"M15.6 4.4 L19.2 4.4 L19.2 8\"/>",
+  "note": "Three solid filled bars step upward left-to-right; a clean confident arrow climbs across their tops and points up-right out of the field, reading instantly as growth."
+ },
+ {
+  "id": "i-flame",
+  "inner": "<path d=\"M12 3.2c2.4 2.6 4.9 5 4.9 9.3a4.9 4.9 0 0 1-9.8 0c0-2 0.9-3.6 2.1-5.1 0.5 1.1 1.3 1.8 2.2 2.1 0.2-2.4-0.5-4.3-1.4-6.3z\" fill=\"none\" stroke=\"currentColor\"/><path d=\"M12 9.6c1.4 1.5 2.4 2.9 2.4 4.9a2.4 2.4 0 0 1-4.8 0c0-1.2 0.6-2.2 1.4-3.1 0.3 0.6 0.7 1 1.2 1.2 0.1-1.2-0.1-2-0.2-3z\" fill=\"currentColor\" stroke=\"none\"/>",
+  "note": "Bold outer flame tongue with a hooked back-curl encloses a solid teardrop inner core for a confident woodcut sigil read."
+ },
+ {
+  "id": "i-sword",
+  "inner": "<path d=\"M12 3.5 L13.6 8 L13.2 14 L10.8 14 L10.4 8 Z\" fill=\"currentColor\" stroke=\"none\"/><path d=\"M6.5 14.6 H17.5\"/><path d=\"M12 14.6 V18.4\"/><circle cx=\"12\" cy=\"19.6\" r=\"1.5\" fill=\"currentColor\" stroke=\"none\"/>",
+  "note": "Filled tapered-leaf blade as the solid focal, with a bold crossguard, short grip and filled pommel for a clean heraldic woodcut read."
+ },
+ {
+  "id": "i-skull",
+  "inner": "<path d=\"M12 4.2c-3.6 0-6.2 2.5-6.2 6 0 2.1 1 3.7 2.3 4.8.4.3.6.7.6 1.2v1.3c0 .6.5 1.1 1.1 1.1h4.4c.6 0 1.1-.5 1.1-1.1v-1.3c0-.5.2-.9.6-1.2 1.3-1.1 2.3-2.7 2.3-4.8 0-3.5-2.6-6-6.2-6Z\" fill=\"currentColor\" stroke=\"currentColor\"/><circle cx=\"9.3\" cy=\"10.2\" r=\"1.7\" fill=\"#000\" stroke=\"none\"/><circle cx=\"14.7\" cy=\"10.2\" r=\"1.7\" fill=\"#000\" stroke=\"none\"/><path d=\"M12 12.4l-.9 1.6h1.8L12 12.4Z\" fill=\"#000\" stroke=\"none\"/><path d=\"M9.7 18.6v1.4M12 18.6v1.4M14.3 18.6v1.4\" stroke=\"#000\"/>",
+  "note": "Solid filled cranium silhouette with knocked-out dark eye sockets, nasal triangle, and jaw-teeth gaps so the gold glyph reads as a skull at a glance."
+ },
+ {
+  "id": "i-spark",
+  "inner": "<path d=\"M12 3.4c.55 4.2 1.9 5.55 6.1 6.1c-4.2.55-5.55 1.9-6.1 6.1c-.55-4.2-1.9-5.55-6.1-6.1c4.2-.55 5.55-1.9 6.1-6.1z\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"0.9\"/><circle cx=\"17.4\" cy=\"6.6\" r=\"1.05\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"6.4\" cy=\"16.9\" r=\"0.85\" fill=\"currentColor\" stroke=\"none\"/>",
+  "note": "Solid concave-curved four-point sparkle as the filled focal, with two filled accent sparks on the diagonal for a grimoire-sigil shimmer."
+ },
+ {
+  "id": "i-descent",
+  "inner": "<path d=\"M4.5 7.5 12 4.5 19.5 7.5 12 19 4.5 7.5 Z\" /><path d=\"M9.1 9.7 12 13.2 14.9 9.7 12 16.6 Z\" fill=\"currentColor\" stroke=\"none\" />",
+  "note": "A solid V-pit funnel cradles one bold filled downward arrowhead plunging in: a single heavy focal mass, no parallel rules."
+ },
+ {
+  "id": "i-book",
+  "inner": "<path d=\"M12 7.2C10.2 5.7 7.7 5.3 5.4 5.7C5 5.8 4.7 6.1 4.7 6.5V16.2C4.7 16.7 5.1 17 5.6 16.9C7.8 16.6 10.2 17 12 18.4C13.8 17 16.2 16.6 18.4 16.9C18.9 17 19.3 16.7 19.3 16.2V6.5C19.3 6.1 19 5.8 18.6 5.7C16.3 5.3 13.8 5.7 12 7.2Z\" fill=\"currentColor\" stroke=\"currentColor\"/><path d=\"M12 7.2V18.4\" stroke=\"currentColor\"/><path d=\"M14.2 5.6V11.2L15.7 9.9L17.2 11.2V5.7\" fill=\"currentColor\" stroke=\"currentColor\"/>",
+  "note": "Filled open-book silhouette with a strong center spine; a small filled ribbon bookmark notched at the bottom is the focal that distinguishes it from a plain book."
+ },
+ {
+  "id": "i-mic",
+  "inner": "<path d=\"M12 4.2c-1.55 0-2.8 1.26-2.8 2.8v3.6c0 1.55 1.25 2.8 2.8 2.8s2.8-1.25 2.8-2.8V7c0-1.54-1.25-2.8-2.8-2.8Z\" fill=\"currentColor\" stroke=\"none\"/><path d=\"M7.4 10.2v.5a4.6 4.6 0 0 0 9.2 0v-.5\"/><path d=\"M12 15.3v3M9.2 18.3h5.6\"/>",
+  "note": "Filled capsule mic head reads as the solid focal; a clean cradle arc plus stem and base bar give the classic standing-mic silhouette."
+ },
+ {
+  "id": "i-cap",
+  "inner": "<path d=\"M12 5 L20 9 L12 13 L4 9 Z\" fill=\"currentColor\" stroke=\"currentColor\"/><path d=\"M6.5 10.6 V14 C6.5 15.4 9 16.5 12 16.5 C15 16.5 17.5 15.4 17.5 14 V10.6\"/><path d=\"M20 9 V14.5\"/><circle cx=\"20\" cy=\"16.2\" r=\"1.5\" fill=\"currentColor\" stroke=\"none\"/>",
+  "note": "Filled mortarboard board as the bold focal, clean U-shaped cap base below, and a tassel cord ending in a solid knot for instant \"graduation\" read."
+ },
+ {
+  "id": "bf-duelist",
+  "inner": "<path d=\"M12 3.6 L13.5 6.8 L13.5 14.6 L10.5 14.6 L10.5 6.8 Z\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"1\" stroke-linejoin=\"round\" /><path d=\"M8 14.8 L16 14.8\" /><path d=\"M12 14.8 L12 19\" /><path d=\"M10.3 19.2 L13.7 19.2\" /><circle cx=\"12\" cy=\"10\" r=\"2.7\" fill=\"currentColor\" stroke=\"none\" /><path d=\"M6.9 10 L8.6 10 M15.4 10 L17.1 10\" stroke-width=\"1.5\" /><path d=\"M16 6 L17 5 M8 6 L7 5\" stroke-width=\"1.4\" />",
+  "note": "Solid filled tapered blade dominates the silhouette; a large filled rune orb crosses it as the bright focal accent, flanked by spoken-word spark rays so it reads as spellsword, not cross."
+ },
+ {
+  "id": "bf-glutton",
+  "inner": "<path d=\"M16.5 6.2A7.2 7.2 0 1 0 16.5 17.8L11.2 14 13 12.6 11.2 11.2 13 9.8 11.2 8.4Z\"/><circle cx=\"17.6\" cy=\"12\" r=\"2.1\" fill=\"currentColor\" stroke=\"none\"/>",
+  "note": "Crescent maw with a sawtooth-fang gullet bites a solid filled essence orb: predation as learning, in one bold woodcut sigil."
+ },
+ {
+  "id": "bf-abyss",
+  "inner": "<path d=\"M3.5 8.4C3.5 5.6 7.3 3.3 12 3.3s8.5 2.3 8.5 5.1c0 2.4-2.7 4.4-6.7 5\"/><path d=\"M6.4 8.9C6.4 6.7 9 5 12 5s5.5 1.7 5.5 3.7c0 1.7-1.8 3.1-4.4 3.6\"/><path d=\"M8.9 9.9c0-1.5 1.4-2.7 3.1-2.7s3.1 1.1 3.1 2.4c0 1.2-1.2 2.2-2.9 2.6\"/><path d=\"M11.3 10.9c.5-.7 1.7-.8 2.2.1.4.8-.1 1.8-1.3 2.3\"/><circle cx=\"12\" cy=\"15.9\" r=\"2.4\" fill=\"currentColor\" stroke=\"none\"/>",
+  "note": "Four nested arcs spiral inward and downward, each tighter than the last, funneling into a bold solid core dot so the narrowing descent reads as a clean vortex."
+ },
+ {
+  "id": "bf-mask",
+  "inner": "<path d=\"M12 4.2c3.6 0 5.4 2 5.4 6.4 0 4.6-2.6 8.8-5.4 9.2-2.8-.4-5.4-4.6-5.4-9.2C6.6 6.2 8.4 4.2 12 4.2Z\"/><path d=\"M12 4.2v15.6\"/><path d=\"M9 10.5h.01\"/><path d=\"M14.3 4.6c.8-1 2-1.4 2.9-.7\"/><path d=\"M14.6 10.2 16 10l-.3 1.6\"/><path d=\"M14.4 14.2c.9.3 1.7.2 2.4-.3\"/><circle cx=\"9\" cy=\"10.5\" r=\"1.15\" fill=\"currentColor\" stroke=\"none\"/>",
+  "note": "A single mask silhouette split by a center seam: left side smooth with a calm filled eye; right side gets a swept horn, a fanged eye-glint, and a snarling mouth curve to mark the monster half."
+ },
+ {
+  "id": "bf-dread",
+  "inner": "<path d=\"M3.4 12C5.6 8.4 8.6 6.6 12 6.6C15.4 6.6 18.4 8.4 20.6 12C18.4 15.6 15.4 17.4 12 17.4C8.6 17.4 5.6 15.6 3.4 12Z\"/><circle cx=\"12\" cy=\"12\" r=\"3.4\" fill=\"currentColor\" stroke=\"none\"/><path d=\"M12 3.6V5.4M5.6 5.6L6.9 6.9M18.4 5.6L17.1 6.9M12 20.4V18.6M5.6 18.4L6.9 17.1M18.4 18.4L17.1 17.1\"/>",
+  "note": "A wide almond eye with a solid filled pupil, ringed by eight short radiating dread-rays for visceral, staring horror."
+ },
+ {
+  "id": "bf-voice",
+  "inner": "<path d=\"M11.5 7.2c-2 0-3.6 1.6-3.6 3.6 0 .9.3 1.7.9 2.3v2.4l2.2-1.3c2 0 3.6-1.6 3.6-3.4 0-2-1.6-3.6-3.1-3.6z\" fill=\"currentColor\" stroke=\"none\"/><path d=\"M11.5 7.2c-2 0-3.6 1.6-3.6 3.6 0 .9.3 1.7.9 2.3v2.4l2.2-1.3c2 0 3.6-1.6 3.6-3.4 0-2-1.6-3.6-3.1-3.6z\"/><path d=\"M15.6 7.7c1.2 1 1.9 2.4 1.9 3.9s-.7 2.9-1.9 3.9\"/><path d=\"M17.9 5.6c1.7 1.4 2.7 3.4 2.7 5.6s-1 4.2-2.7 5.6\"/>",
+  "note": "Solid grimoire speech-glyph: a filled profile mouth/lips silhouette emits two clean concentric sound-wave arcs radiating right, reading instantly as voice-mastery."
+ },
+ {
+  "id": "bf-origin",
+  "inner": "<path d=\"M12 4.2C12 4.2 6.2 11 6.2 15.1A5.8 5.8 0 0 0 17.8 15.1C17.8 11 12 4.2 12 4.2Z\"/><path d=\"M12 18C12 18 9.7 15.9 9.7 13.9C9.7 12.2 12 10.7 12 10.7C12 10.7 14.3 12.2 14.3 13.9C14.3 15.9 12 18 12 18Z\" fill=\"currentColor\" stroke=\"none\"/>",
+  "note": "A bold symmetric teardrop of grief cradling a solid filled almond soul-seed at its heart: the spark of life born from sorrow."
+ },
+ {
+  "id": "bf-nature",
+  "inner": "<path d=\"M5.4 15.2c-.8-1.2-1-2.4-1-3.6C4.4 7.9 7.7 5.2 12 5.2s7.6 2.7 7.6 6.4c0 1.2-.2 2.4-1 3.6-.6.9-.2 1.7.5 2.3.7.7.2 1.7-.8 1.6-1-.1-1.5-.7-2.3-.7s-1.2.6-2 .6h-3.4c-.8 0-1.3-.6-2-.6s-1.3.6-2.3.7c-1 .1-1.5-.9-.8-1.6.7-.6 1.1-1.4.5-2.3z\" fill=\"currentColor\" stroke=\"none\"/><ellipse cx=\"9.9\" cy=\"11.4\" rx=\"1.25\" ry=\"1.6\" fill=\"#1a1206\"/><ellipse cx=\"14.1\" cy=\"11.4\" rx=\"1.25\" ry=\"1.6\" fill=\"#1a1206\"/>",
+  "note": "hand-refined"
+ },
+ {
+  "id": "bf-truth",
+  "inner": "<circle cx=\"12\" cy=\"11.5\" r=\"8\" opacity=\"0.4\"/><path d=\"M12 4.2c-2.6 0-4.4 1.7-4.7 4.1-0.6 0.2-1 0.8-1 1.5 0 0.5 0.2 0.9 0.6 1.2L5.4 19.4c-0.1 0.7 0.4 1.4 1.2 1.4h10.8c0.8 0 1.3-0.7 1.2-1.4L17.1 11c0.4-0.3 0.6-0.7 0.6-1.2 0-0.7-0.4-1.3-1-1.5C16.4 5.9 14.6 4.2 12 4.2Z\" fill=\"currentColor\" stroke=\"none\"/>",
+  "note": "Filled hooded cloak silhouette (void where the face should be) wrapped in a faint translucent dread-aura ring."
+ },
+ {
+  "id": "bf-shape",
+  "inner": "<path d=\"M12 5.1 18.6 17 5.4 17Z\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\"/><circle cx=\"12\" cy=\"5.1\" r=\"1.7\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"18.6\" cy=\"17\" r=\"1.7\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"5.4\" cy=\"17\" r=\"1.7\" fill=\"currentColor\" stroke=\"none\"/>",
+  "note": "hand-refined"
+ },
+ {
+  "id": "bf-incant",
+  "inner": "<path d=\"M12 18.5c-1.6-1.1-3.4-1.6-5.4-1.6-.4 0-.6-.3-.6-.6V8.7c0-.4.3-.7.7-.6 1.9.1 3.7.6 5.3 1.6V18.5z\"/><path d=\"M12 18.5c1.6-1.1 3.4-1.6 5.4-1.6.4 0 .6-.3.6-.6V8.7c0-.4-.3-.7-.7-.6-1.9.1-3.7.6-5.3 1.6V18.5z\"/><path d=\"M12 9.7c0-2.3 1.1-4.2 2.6-5.2-.3 1 .1 2 .9 2.6-1 .7-1.6 1.6-1.6 2.9 0 1.1.6 1.9 1.5 2.3-1.2.1-2.3-.9-2.6-2.2-.3 1.3-1.4 2.3-2.6 2.2.9-.4 1.5-1.2 1.5-2.3 0-1.3-.6-2.2-1.6-2.9.8-.6 1.2-1.6.9-2.6C10.9 5.5 12 7.4 12 9.7z\" fill=\"currentColor\" stroke=\"none\"/>",
+  "note": "Open two-page book as the base outline with a bold filled flame rising from its center spine, reading instantly as the spoken word igniting from the pages."
+ },
+ {
+  "id": "bf-gesture",
+  "inner": "<g fill=\"currentColor\" stroke=\"none\"><path d=\"M8 12.5h8v2.2a4 4 0 0 1-8 0z\"/><rect x=\"8\" y=\"7.6\" width=\"1.7\" height=\"5.4\" rx=\".85\"/><rect x=\"10.1\" y=\"6.5\" width=\"1.7\" height=\"6.5\" rx=\".85\"/><rect x=\"12.2\" y=\"6.7\" width=\"1.7\" height=\"6.3\" rx=\".85\"/><rect x=\"14.3\" y=\"8.1\" width=\"1.7\" height=\"4.9\" rx=\".85\"/></g><path d=\"M8.1 13.5c-1-.7-2.3-.2-2.5.9\" fill=\"none\" stroke=\"currentColor\"/><path d=\"M17 4.3l.5 1.55 1.55.5-1.55.5L17 8.9l-.5-1.55L14.95 6.85l1.55-.5z\" fill=\"currentColor\" stroke=\"none\"/>",
+  "note": "hand-refined"
+ },
+ {
+  "id": "bf-craft",
+  "inner": "<path d=\"M5.4 15.2h13.2l-1.7 2.1H7.1z\"/><path d=\"M8.7 15.2c1.1-2.3 5.5-2.3 6.6 0\"/><path d=\"M7.8 19.6h8.4M9.2 17.3v2.3M14.8 17.3v2.3\"/><rect x=\"14.3\" y=\"3.2\" width=\"4.6\" height=\"2.9\" rx=\"0.5\" transform=\"rotate(28 16.6 4.65)\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"1\"/><path d=\"M14.7 6.1 12 10.4\"/><path d=\"M11.7 8.6 12.6 5.9l.9 2.7 2.7.9-2.7.9-.9 2.7-.9-2.7-2.7-.9z\" fill=\"currentColor\" stroke=\"none\"/><path d=\"M8.4 6.7 7.4 5.4M7.3 8.6 5.7 8.3M8 11 6.4 11.4\" stroke-width=\"1.4\"/>",
+  "note": "Hammer striking the anvil with a bold filled four-point spark at the impact point: distinct asymmetric silhouette that won't collide with the static anvil-plus-flame bf-forge."
+ },
+ {
+  "id": "bf-tongue",
+  "inner": "<path d=\"M5 6.4h14a1.6 1.6 0 0 1 1.6 1.6v5.9a1.6 1.6 0 0 1-1.6 1.6h-6.5l-3.7 3.1v-3.1H5a1.6 1.6 0 0 1-1.6-1.6V8a1.6 1.6 0 0 1 1.6-1.6z\" fill=\"none\" stroke=\"currentColor\"/><g fill=\"currentColor\" stroke=\"none\"><rect x=\"6.7\" y=\"9.2\" width=\"6\" height=\"1.5\" rx=\".75\"/><rect x=\"6.7\" y=\"11.9\" width=\"8.6\" height=\"1.5\" rx=\".75\"/></g>",
+  "note": "hand-refined"
+ },
+ {
+  "id": "bf-usp",
+  "inner": "<path d=\"M8 6 L8 19\" /><path d=\"M8 6.4 L17.5 9.2 L8 12 Z\" fill=\"currentColor\" stroke=\"none\" /><path d=\"M8 6.4 L17.5 9.2 L8 12 Z\" /><path d=\"M5 19 L11 19\" /><path d=\"M8 16.5 L6 19 M8 16.5 L10 19\" />",
+  "note": "Solid filled pennant on a tall pole driven into a small peak: the filled triangle is the bold focal, the V-notch base reads as a planted summit."
+ },
+ {
+  "id": "bf-market",
+  "inner": "<circle cx=\"12\" cy=\"12\" r=\"8.4\"/><circle cx=\"12\" cy=\"12\" r=\"5.4\"/><circle cx=\"12\" cy=\"12\" r=\"2.4\" fill=\"currentColor\" stroke=\"none\"/>",
+  "note": "Three concentric rings radiating from a bold filled center dot, reading instantly as reach/audience like a target sigil."
+ },
+ {
+  "id": "bf-loop",
+  "inner": "<path d=\"M17.2 7.1A6.5 6.5 0 0 0 6.2 9.9\"/><path d=\"M6.8 16.9A6.5 6.5 0 0 0 17.8 14.1\"/><path d=\"M17.2 7.1 14.7 6.5M17.2 7.1 16.4 9.5\"/><path d=\"M6.8 16.9 9.3 17.5M6.8 16.9 7.6 14.5\"/><path d=\"M12 8.7 14.4 12 12 15.3 9.6 12Z\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"1\"/>",
+  "note": "Two bold arcs broken into a chasing-arrow loop (ouroboros) ringing a solid filled diamond gem core, the endless cycle that fixes the eye at its center."
+ },
+ {
+  "id": "bf-forge",
+  "inner": "<path d=\"M7 17.5h10l-1.3 2H8.3z\" fill=\"currentColor\" stroke=\"none\"/><path d=\"M6.5 17.5h11M8.3 19.5h7.4\"/><path d=\"M9 14.2 6 11.5l3-1.4M15 14.2l3-2.7-3-1.4\" stroke-linecap=\"round\"/><path d=\"M12 4.3c1.9 1.5 2.9 3.3 2.9 5.1A2.9 2.9 0 0 1 12 12.3a2.9 2.9 0 0 1-2.9-2.9c0-1.8 1-3.6 2.9-5.1z\" fill=\"currentColor\" stroke=\"none\"/>",
+  "note": "A solid filled flame rises from a bold anvil base, flanked by two small spark-arms feeding upward into the fused single flame."
+ },
+ {
+  "id": "bf-teacher",
+  "inner": "<circle cx=\"12\" cy=\"9\" r=\"2.7\" fill=\"currentColor\" stroke=\"none\"/><path d=\"M12 4.6V3.4M8.1 5.9 7.2 5M15.9 5.9 16.8 5M6.6 9H5.3M18.7 9H17.4\"/><path d=\"M12 13.2c-1.9-1.5-4.1-1.5-6-0.9v6.4c1.9-0.6 4.1-0.6 6 0.9 1.9-1.5 4.1-1.5 6-0.9v-6.4c-1.9-0.6-4.1-0.6-6 0.9Z\"/><path d=\"M12 13.2v6.9\"/>",
+  "note": "Filled sun disc with short heraldic rays crests an open book; the central spine plus mirrored covers give the quiet-teacher silhouette one bold focal and a clean symmetric outline."
+ },
+ {
+  "id": "bf-coin",
+  "inner": "<path d=\"M12 3.6a8.4 8.4 0 1 1 0 16.8 8.4 8.4 0 0 1 0-16.8zm0 1.9a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zm0 1.1l1.62 3.29 3.63.53-2.63 2.56.62 3.62L12 16.89l-3.26 1.71.62-3.62-2.63-2.56 3.63-.53z\" fill=\"currentColor\" stroke=\"none\" fill-rule=\"evenodd\"/>",
+  "note": "One evenodd path: solid gold coin with the rim ring and central star knocked out as dark negative space, so the stamp reads boldly and the silhouette is distinct from sun/market."
+ },
+ {
+  "id": "bf-note",
+  "inner": "<path d=\"M9 16.5V7l8-1.6V13\" /><circle cx=\"6.5\" cy=\"16.5\" r=\"2.5\" fill=\"currentColor\" stroke=\"none\" /><circle cx=\"14.5\" cy=\"13\" r=\"2.5\" fill=\"currentColor\" stroke=\"none\" /><path d=\"M9 7l8-1.6\" />",
+  "note": "Two filled note-heads joined by a bold beamed stem read instantly as a music sigil, with the solid heads giving heraldic weight."
+ },
+ {
+  "id": "bf-depths",
+  "inner": "<path d=\"M6 7.5C8.4 6 15.6 6 18 7.5\" /><path d=\"M6.6 11.4C8.6 10 15.4 10 17.4 11.4\" /><path d=\"M7.4 15.2C9 14 15 14 16.6 15.2\" /><path d=\"M12 14.2V19.4\" /><path d=\"M9.4 17.2L12 20L14.6 17.2Z\" fill=\"currentColor\" stroke=\"none\" />",
+  "note": "Three nested descending arcs (narrowing as they sink) over a solid filled arrowhead, reading instantly as \"new depths below.\""
+ },
+ {
+  "id": "bf-fireball",
+  "inner": "<circle cx=\"12\" cy=\"13.5\" r=\"4.3\" fill=\"currentColor\" stroke=\"none\"/><path d=\"M12 4.2c2.4 2.3 1 4.6 2.6 6.3 1.2-.4 1.7-1.6 1.5-2.9 1.9 1.8 2.9 4 2.9 6.4a7 7 0 1 1-14 0c0-2.6 1.4-4.6 3.4-6.3-.2 1.4.3 2.5 1.4 3C9.9 9.7 9.2 7 12 4.2Z\"/>",
+  "note": "Solid currentColor orb as the focal blaze, wrapped in one confident teardrop flame curl with inner licks for a grimoire fireball sigil."
+ },
+ {
+  "id": "bf-spears",
+  "inner": "<g fill=\"currentColor\" stroke=\"none\"><path d=\"M12 3.6l1.35 3.5h-2.7z\"/><path d=\"M5 5.2l3.6 1.35-1.9 2z\"/><path d=\"M19 5.2l-3.6 1.35 1.9 2z\"/><circle cx=\"12\" cy=\"15.4\" r=\"2.5\"/></g><g fill=\"none\" stroke=\"currentColor\"><path d=\"M12 7.3v5.3\"/><path d=\"M7.6 9.2l3 4.1\"/><path d=\"M16.4 9.2l-3 4.1\"/></g>",
+  "note": "hand-refined"
+ },
+ {
+  "id": "bf-soul",
+  "inner": "<path d=\"M5.4 5.2 C6.6 3.9 8.6 4 9.4 5.5 C9.9 6.4 9.7 7.5 9 8.2 C10.4 8.6 11.6 9.4 12.5 10.5 C11 10.2 9.7 10.5 8.7 11.3 C9.5 10.1 9.2 8.7 8.1 8 C9.3 7.5 9 5.9 7.8 5.7 C6.9 5.5 6 6 5.4 5.2 Z\" fill=\"currentColor\" stroke=\"none\"/><path d=\"M12.5 10.5 C14.4 9.6 16.7 10.2 17.8 12 C19 14 18.4 16.6 16.5 17.9 C14.3 19.3 11.3 18.6 9.9 16.4 C8.4 13.9 9.2 10.6 11.8 9.2 C14.7 7.6 18.5 8.6 20 11.6\"/>",
+  "note": "Solid filled comet-wisp with a tapering tail streams diagonally into a tight 2-turn open vortex, so the soul-drain direction is unmistakable."
+ },
+ {
+  "id": "bf-steam",
+  "inner": "<path d=\"M8 19a3.2 3.2 0 0 0 6.4 0c0-2.4-3.2-5.6-3.2-5.6S8 16.6 8 19Z\" fill=\"currentColor\" stroke=\"none\"/><path d=\"M8 19a3.2 3.2 0 0 0 6.4 0c0-2.4-3.2-5.6-3.2-5.6S8 16.6 8 19Z\"/><path d=\"M19.4 18.8c0-1.9-1.7-3-1.7-4.6 0-1.3 1.1-2.1 1.1-2.1s-2.6.5-2.6 3.2c0 1.7 1.4 2.4 1.4 3.9a1.9 1.9 0 0 1-1.5 1.9\" fill=\"currentColor\" stroke=\"none\"/><path d=\"M11.2 10.3c.8-1.1 1.2-2 1.2-3.5\"/><path d=\"M16 14.5c1.2-1 1.8-2.2 1.8-3.8\"/>",
+  "note": "Filled water-drop and filled flame tongue sit side by side at the base, with two clean curl strokes rising as merged vapor above."
+ },
+ {
+  "id": "bf-thunder",
+  "inner": "<path d=\"M13.3 3.6 6.4 13.1c-.3.4 0 .9.5.9h3.4l-1.5 6.4c-.1.5.5.8.9.4l7.4-9.6c.3-.4 0-.9-.5-.9h-3.6l1.6-6.7c.1-.5-.5-.8-.8-.4Z\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"1.1\" stroke-linejoin=\"round\"/><path d=\"M9.8 11.2h4.6\" stroke=\"currentColor\" stroke-width=\"0\" fill=\"none\"/>",
+  "note": "One solid filled bolt with a clean angular kink and a wide upper-to-narrow-lower silhouette for instant heraldic read; the slight outer stroke fattens the glyph so it stays bold at 22px."
+ },
+ {
+  "id": "bf-fireworks",
+  "inner": "<circle cx=\"12\" cy=\"12\" r=\"2.5\" fill=\"currentColor\" stroke=\"none\"/><path d=\"M12 8.5V4.5M12 15.5V19.5M8.5 12H4.5M15.5 12H19.5M9.5 9.5L6.7 6.7M14.5 9.5L17.3 6.7M9.5 14.5L6.7 17.3M14.5 14.5L17.3 17.3\"/><circle cx=\"12\" cy=\"4.5\" r=\"0.9\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"12\" cy=\"19.5\" r=\"0.9\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"4.5\" cy=\"12\" r=\"0.9\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"19.5\" cy=\"12\" r=\"0.9\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"6.7\" cy=\"6.7\" r=\"0.9\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"17.3\" cy=\"6.7\" r=\"0.9\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"6.7\" cy=\"17.3\" r=\"0.9\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"17.3\" cy=\"17.3\" r=\"0.9\" fill=\"currentColor\" stroke=\"none\"/>",
+  "note": "Solid central burst-core anchors eight symmetric spark-trails capped with filled dots for an instant fireworks read."
+ },
+ {
+  "id": "bf-scald",
+  "inner": "<path d=\"M5 11h14\" /><path d=\"M6 11l1.4 6.2a2 2 0 0 0 1.95 1.55h5.3a2 2 0 0 0 1.95-1.55L18 11\" /><path d=\"M9 11c0-1.4-1-2.1-1-3.3 0-1.1 1-1.6 1-2.7M12 11c0-1.6-1.1-2.3-1.1-3.6 0-1.2 1.1-1.8 1.1-3M15 11c0-1.4-1-2.1-1-3.3 0-1.1 1-1.6 1-2.7\" /><circle cx=\"9\" cy=\"4.6\" r=\"0.95\" fill=\"currentColor\" stroke=\"none\" /><circle cx=\"15\" cy=\"4.6\" r=\"0.95\" fill=\"currentColor\" stroke=\"none\" /><circle cx=\"12\" cy=\"3.7\" r=\"1.15\" fill=\"currentColor\" stroke=\"none\" />",
+  "note": "Heavy-rimmed cauldron with a strong horizontal brim, three wavy steam coils rising, and three solid filled bubbles as the focal cluster signalling boiling scald."
+ },
+ {
+  "id": "bf-rift",
+  "inner": "<path d=\"M10.6 3.6 L7.4 7.2 L9.8 10 L7 12.8 L9.4 15.4 L6.8 18.2 L10 20.4\" /><path d=\"M13.4 3.6 L16.6 7.2 L14.2 10 L17 12.8 L14.6 15.4 L17.2 18.2 L14 20.4\" /><path d=\"M11.4 6.4 L13 9.6 L11.2 12 L13 14.6 L11.2 17.6 L12 18.6 L13 17.6 L11.8 14.6 L13.4 12 L11.6 9.6 L12.6 6.4 Z\" fill=\"currentColor\" stroke=\"none\" />",
+  "note": "Two jagged edges pulled wide apart frame a bold filled lightning-bolt sliver of light, reading as a glowing crack splitting space open rather than a thin diamond divider."
+ },
+ {
+  "id": "bf-balance",
+  "inner": "<path d=\"M12 4.4v12.2\" /><path d=\"M8.4 18.4h7.2\" /><path d=\"M5 7h14\" /><circle cx=\"12\" cy=\"4.4\" r=\"1\" fill=\"currentColor\" stroke=\"none\" /><path d=\"M5 7l-2.2 4.3a3 3 0 0 0 4.4 0L5 7M19 7l-2.2 4.3a3 3 0 0 0 4.4 0L19 7\" /><path d=\"M5.6 9.9h0.9l1.2 1.4-0.7 0.6-1.4-1.6z\" fill=\"currentColor\" stroke=\"none\" /><circle cx=\"19\" cy=\"10.6\" r=\"1.5\" fill=\"currentColor\" stroke=\"none\" />",
+  "note": "Beam scale with a knurled finial atop the pillar; left pan holds a filled blade shard, right pan a solid spark orb, balancing edge against ember."
+ },
+ {
+  "id": "bf-spellblade",
+  "inner": "<path d=\"M12 8.5 L12 19.5\" /><path d=\"M8.5 17 L15.5 17\" /><path d=\"M12 19.5 L10.5 21 M12 19.5 L13.5 21\" /><path fill=\"currentColor\" stroke=\"none\" d=\"M12 3 L13.05 6.3 L16.2 4.9 L14.5 7.85 L17.6 9.1 L14.2 9.55 L15 12.9 L12 10.9 L9 12.9 L9.8 9.55 L6.4 9.1 L9.5 7.85 L7.8 4.9 L10.95 6.3 Z\" />",
+  "note": "Upright blade with crossguard and pommel reads as a sword; a solid eight-point starburst at the tip gives the filled focal spark, evoking a grimoire sigil."
+ },
+ {
+  "id": "bf-cog",
+  "inner": "<path d=\"M12 3.4l1.7 1.05 1.95-.45.95 1.75 1.95.5.05 2 1.55 1.25-.55 1.95 1.05 1.7-1.05 1.7.55 1.95-1.55 1.25-.05 2-1.95.5-.95 1.75-1.95-.45L12 20.6l-1.7-1.05-1.95.45-.95-1.75-1.95-.5-.05-2L3.85 14l.55-1.95L3.35 10.35l1.05-1.7-.55-1.95 1.55-1.25.05-2 1.95-.5.95-1.75 1.95.45z\" fill=\"none\"/><circle cx=\"12\" cy=\"12\" r=\"3.9\" fill=\"none\"/><circle cx=\"12\" cy=\"12\" r=\"1.9\" fill=\"currentColor\" stroke=\"none\"/>",
+  "note": "A 12-tooth heraldic cog ring with a clean inner bearing and a solid filled hub as the focal point."
+ },
+ {
+  "id": "bf-banner",
+  "inner": "<path d=\"M7 4.5V20\" stroke=\"currentColor\"/><circle cx=\"7\" cy=\"4.2\" r=\"0.85\" fill=\"currentColor\" stroke=\"none\"/><path d=\"M7 5.2H18.5L16 9L18.5 12.8H7Z\" fill=\"currentColor\" stroke=\"currentColor\"/><path d=\"M11.6 6.6L12.7 8.4L11.6 10.2L10.5 8.4Z\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"/>",
+  "note": "Solid swallowtail pennant flying off a finial-topped pole, with a small open lozenge charge to read as heraldry."
+ },
+ {
+  "id": "bf-face-calm",
+  "inner": "<circle cx=\"12\" cy=\"12\" r=\"8.4\" fill=\"none\"/><circle cx=\"9\" cy=\"10.6\" r=\"1\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"15\" cy=\"10.6\" r=\"1\" fill=\"currentColor\" stroke=\"none\"/><path d=\"M9 15h6\" fill=\"none\"/>",
+  "note": "Stage 1 calm: bold round face ring, two solid filled dot eyes, one flat level mouth, the most serene of the 4-stage fear set."
+ },
+ {
+  "id": "bf-face-anxious",
+  "inner": "<circle cx=\"12\" cy=\"12\" r=\"8.2\"/><path d=\"M7.3 9.2 L10.3 10.1\"/><path d=\"M16.7 9.2 L13.7 10.1\"/><circle cx=\"9.5\" cy=\"12.4\" r=\"1.15\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"14.5\" cy=\"12.4\" r=\"1.15\" fill=\"currentColor\" stroke=\"none\"/><path d=\"M9.4 16 Q10.4 15.1 11.4 16 T13.4 16 Q14 15.6 14.6 16\" fill=\"none\"/>",
+  "note": "Round head with up-slanted inner brows and filled dot eyes; a small triple-wave mouth signals nervous worry, distinct from the calm/scared siblings."
+ },
+ {
+  "id": "bf-face-afraid",
+  "inner": "<circle cx=\"12\" cy=\"12\" r=\"8.5\"/><circle cx=\"8.7\" cy=\"10.3\" r=\"1.9\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"15.3\" cy=\"10.3\" r=\"1.9\" fill=\"currentColor\" stroke=\"none\"/><ellipse cx=\"12\" cy=\"15.8\" rx=\"1.6\" ry=\"2.1\" fill=\"currentColor\" stroke=\"none\"/><path d=\"M18.4 14.2c1.1 1.3 1.1 2.9 0 3.6-1.1.6-2.3-.5-2.3-1.8 0-1.1 1.2-2.7 1.2-2.7z\" fill=\"currentColor\" stroke=\"none\"/>",
+  "note": "Round face with two filled wide eyes, a vertical filled oval gasping mouth, and a solid teardrop sweat bead at the temple for the afraid read."
+ },
+ {
+  "id": "bf-face-terror",
+  "inner": "<circle cx=\"12\" cy=\"11.5\" r=\"7\"/><path d=\"M12 3.6V4.7M6.9 5.6l0.85 0.85M17.1 5.6l-0.85 0.85M3.7 11.5h1.1M20.3 11.5h-1.1\"/><circle cx=\"9.2\" cy=\"9.4\" r=\"1.7\" fill=\"currentColor\" stroke=\"none\"/><circle cx=\"14.8\" cy=\"9.4\" r=\"1.7\" fill=\"currentColor\" stroke=\"none\"/><ellipse cx=\"12\" cy=\"14.3\" rx=\"2.1\" ry=\"2.9\" fill=\"currentColor\" stroke=\"none\"/>",
+  "note": "Round face with two huge filled pupils and a tall filled screaming oval mouth, ringed by short radiating shock ticks for peak-terror."
+ }
+]

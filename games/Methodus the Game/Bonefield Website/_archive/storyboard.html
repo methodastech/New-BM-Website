@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BONEFIELD — gameplay teaser storyboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Grenze+Gotisch:wght@500;700;900&family=UnifrakturCook:wght@700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{--gold:#c9a24a;--gold2:#e6cd8e;--ink:#ece3d0;--ink2:#bcae93;--mute:#8a7c63;--line:rgba(201,162,74,.26)}
+  *{box-sizing:border-box}
+  body{margin:0;background:radial-gradient(1100px 700px at 50% -8%,#1a130a,#0b0805 60%,#070504);color:var(--ink);
+    font-family:'EB Garamond',serif;line-height:1.6}
+  .wrap{max-width:1000px;margin:0 auto;padding:48px 24px 80px}
+  header.top{text-align:center;margin-bottom:8px}
+  .kick{font-family:'Grenze Gotisch',serif;letter-spacing:.4em;text-transform:uppercase;font-size:11px;color:var(--gold)}
+  h1{font-family:'UnifrakturCook','Cinzel Decorative',serif;font-weight:700;font-size:clamp(40px,7vw,72px);margin:6px 0 4px;
+    background:linear-gradient(180deg,#f3e2ac,#caa24a 55%,#7c5d2b);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .sub{font-style:italic;color:var(--ink2)}
+  .meta{font-family:'Grenze Gotisch',serif;letter-spacing:.12em;text-transform:uppercase;font-size:11px;color:var(--mute);margin-top:10px}
+  .panel{display:grid;grid-template-columns:1.35fr 1fr;gap:20px;align-items:stretch;margin:26px 0;padding:14px;
+    background:linear-gradient(180deg,rgba(30,22,12,.6),rgba(16,11,6,.6));border:1px solid var(--line);border-radius:14px}
+  @media(max-width:720px){.panel{grid-template-columns:1fr}}
+  .shot{position:relative;border:2px solid var(--gold);border-radius:10px;overflow:hidden;box-shadow:0 14px 34px rgba(0,0,0,.5);aspect-ratio:16/9;background:#0a0805}
+  .shot img{width:100%;height:100%;object-fit:cover;display:block}
+  .shot .num{position:absolute;top:10px;left:12px;font-family:'UnifrakturCook',serif;font-size:26px;color:var(--gold2);text-shadow:0 2px 6px #000}
+  .shot .tc{position:absolute;bottom:10px;right:12px;font-family:'Grenze Gotisch',serif;font-size:11px;letter-spacing:.12em;color:var(--gold2);background:rgba(8,5,2,.6);border:1px solid var(--line);border-radius:20px;padding:3px 10px}
+  .info{padding:6px 6px 4px}
+  .info h2{font-family:'Grenze Gotisch',serif;font-weight:900;font-size:21px;color:var(--gold2);margin:2px 0 6px}
+  .info .what{font-size:15.5px;color:var(--ink);margin:0 0 10px}
+  .info .row{font-size:13.5px;color:var(--ink2);margin:5px 0;border-top:1px dashed var(--line);padding-top:6px}
+  .info .row b{font-family:'Grenze Gotisch',serif;color:var(--gold);letter-spacing:.04em;font-size:12px;text-transform:uppercase;display:block;margin-bottom:1px}
+  .voice{color:#f0dca0;font-style:italic}
+  .cap{color:var(--gold2);font-style:italic}
+  /* end card */
+  .endcard{margin-top:34px;text-align:center;border:2px solid var(--gold);border-radius:14px;padding:46px 20px;
+    background:radial-gradient(700px 400px at 50% 40%,#1a130a,#0b0805 70%);box-shadow:0 18px 44px rgba(0,0,0,.55)}
+  .seal{width:96px;height:96px;margin:0 auto 16px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    background:radial-gradient(circle at 50% 34%,#3a2a14,#160d05 82%);border:2px solid #ecd79c;
+    box-shadow:inset 0 3px 6px rgba(255,238,200,.22),inset 0 -5px 10px rgba(0,0,0,.6),0 0 0 4px #100b05,0 0 0 6px #b8923f,0 0 0 9px #100b05,0 0 0 10px #7c5d2b}
+  .seal svg{width:54px;height:54px;color:#ecd79c}
+  .endcard h1{margin:0}
+  .endcard .tag{font-family:'Grenze Gotisch',serif;letter-spacing:.34em;text-transform:uppercase;font-size:13px;color:#c19a4e;margin-top:8px}
+  .note{text-align:center;color:var(--mute);font-size:12.5px;font-style:italic;margin-top:30px;max-width:760px;margin-left:auto;margin-right:auto}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute"><defs>
+  <symbol id="slime" viewBox="0 0 64 52" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M9 42 C6 24 17 11 32 11 C47 11 58 24 55 42 C55 46 50 47 45 45 C40 43 36 47 32 47 C28 47 24 43 19 45 C14 47 9 46 9 42 Z"/>
+    <circle cx="25" cy="30" r="2.6" fill="currentColor" stroke="none"/><circle cx="39" cy="30" r="2.6" fill="currentColor" stroke="none"/>
+    <path d="M19 21 C22 18 26 18 28 20" opacity=".8"/>
+  </symbol>
+</defs></svg>
+<div class="wrap">
+  <header class="top">
+    <div class="kick">Gameplay teaser · storyboard v1</div>
+    <h1>Bonefield</h1>
+    <div class="sub">~46s · third-person gameplay-cam · camera behind you the whole time</div>
+    <div class="meta">Two lessons: collect power (tiers) · combine spirits (the Forge)</div>
+  </header>
+
+  <div class="panel">
+    <div class="shot"><span class="num">1</span><img src="gp1-walk.png?v=1" alt=""><span class="tc">0:00–0:09</span></div>
+    <div class="info"><h2>Cold open + approach</h2><p class="what">Fade up from black, the camera pulls out from behind your hood to the bright meadow. You casually stroll toward adventurers playing below.</p>
+      <div class="row"><b>HUD</b>bars + minimap + cursor fade in</div>
+      <div class="row cap">"In this world, you can be anything."</div></div>
+  </div>
+
+  <div class="panel">
+    <div class="shot"><span class="num">2</span><img src="gp2-cast.png?v=1" alt=""><span class="tc">0:09–0:13</span></div>
+    <div class="info"><h2>The words</h2><p class="what">Press E, raise a hand, an ember kindles. The instant you speak, a nearby face turns from a smile to terror.</p>
+      <div class="row"><b>Voice</b><span class="voice">"Spirits of fire, hear me…"</span></div>
+      <div class="row cap">"They only fear what you say."</div></div>
+  </div>
+
+  <div class="panel">
+    <div class="shot"><span class="num">3</span><img src="gp3-charge.png?v=1" alt=""><span class="tc">0:13–0:20</span></div>
+    <div class="info"><h2>Collect power</h2><p class="what">Hold to build pressure, the tier ladder climbs D → C → B (A·S·Legendary stay locked). The orb roars in your hand.</p>
+      <div class="row"><b>Voice</b><span class="voice">"…kindle, and grow… bring ruin to all who defy me, and burn…"</span></div>
+      <div class="row cap">"Hold to build power. Spells have tiers."</div></div>
+  </div>
+
+  <div class="panel">
+    <div class="shot"><span class="num">4</span><img src="gp4-fireball.png?v=1" alt=""><span class="tc">0:20–0:24</span></div>
+    <div class="info"><h2>"Fireball!"</h2><p class="what">On the word, the fireball launches downhill and detonates in the cluster, an AoE blast tears across the field.</p>
+      <div class="row"><b>Voice</b><span class="voice">"Fireball!"</span></div>
+      <div class="row cap">"One word ends the day."</div></div>
+  </div>
+
+  <div class="panel">
+    <div class="shot"><span class="num">5</span><img src="gp5-parry.png?v=1" alt=""><span class="tc">0:24–0:31</span></div>
+    <div class="info"><h2>Steel + flame spears</h2><p class="what">A guard charges, you parry and riposte (you can fight too). Then a quick "Flame spears!", a homing volley curves after the runners.</p>
+      <div class="row"><b>Input</b>R parry → sword · then E → flame spears (homing)</div>
+      <div class="row cap">"Blade when they reach you. Word when they run."</div></div>
+  </div>
+
+  <div class="panel">
+    <div class="shot"><span class="num">6</span><img src="gp6-arrow.png?v=1" alt=""><span class="tc">0:31–0:41</span></div>
+    <div class="info"><h2>Combine: the exploding arrow</h2><p class="what">Stack spirits in the Forge: Water ×2 + Poison brews Scald, then Fire combusts it, then you shape it as an arrow that flies straight and detonates.</p>
+      <div class="row"><b>Voice</b><span class="voice">"Water… water… poison… now, fire… as an arrow… Explosion!"</span></div>
+      <div class="row cap">"Stack spirits → a spell that didn't exist."</div></div>
+  </div>
+
+  <div class="panel">
+    <div class="shot"><span class="num">7</span><img src="gp7-guards.png?v=1" alt=""><span class="tc">0:41–0:46</span></div>
+    <div class="info"><h2>Free play vs the guards</h2><p class="what">The keep guards close in. You weave sword, dash, and snap-cast spells, fluid mastery, "do anything."</p>
+      <div class="row"><b>Input</b>sword · Shift dash · snap-cast fire</div>
+      <div class="row cap">"Blade or word. Your call."</div></div>
+  </div>
+
+  <div class="endcard">
+    <h1>Bonefield</h1>
+    <div class="tag">&#10070; &nbsp; Speak · Combine · Unleash &nbsp; &#10070;</div>
+    <div class="meta" style="margin-top:8px">0:46–0:50 · button</div>
+  </div>
+
+  <p class="note">Each panel is one beat of the ~46s teaser. Next: animate each frame into a 3–5s gameplay clip (camera follows you), composite the HUD + chant text + captions, and stitch.</p>
+</div>
+</body>
+</html>

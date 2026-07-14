@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>METHODUS · Loop Hero pass (archived)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --lime:#bcd83f; --orange:#e0601f; --cyan:#5fc7d6; --magenta:#c0476f;
+    --ink:#0b0d10; --ink2:#14171c; --steel:#2b313a; --bone:#cfc9b8; --dim:#7c8088;
+    --mono:'Space Mono',ui-monospace,monospace; --disp:'Chakra Petch',var(--mono); }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:100%;height:100%;overflow:hidden;background:#070809;color:var(--bone);
+    font-family:var(--mono);-webkit-user-select:none;user-select:none;cursor:crosshair}
+  #game{position:fixed;inset:0;width:100%;height:100%;display:block;image-rendering:pixelated;image-rendering:crisp-edges}
+  #grade{position:fixed;inset:0;pointer-events:none;z-index:4;background:radial-gradient(130% 110% at 50% 46%,transparent 46%,rgba(0,0,0,.62) 100%)}
+  #hud{position:fixed;inset:0;pointer-events:none;z-index:10;font-family:var(--disp)}
+  #brand{position:absolute;top:14px;left:16px;font-weight:700;letter-spacing:.2em;font-size:14px;color:var(--bone);text-shadow:2px 2px 0 #000}
+  #brand small{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.3em;color:var(--orange);margin-top:2px}
+  #wpn{position:absolute;top:14px;right:16px;text-align:right;text-shadow:2px 2px 0 #000}
+  #wpn .k{font-size:9px;letter-spacing:.26em;color:var(--dim)} #wpn .v{font-family:var(--disp);font-weight:700;font-size:16px;color:var(--lime)}
+  #hint{position:absolute;bottom:13px;left:50%;transform:translateX(-50%);font-size:11px;letter-spacing:.14em;color:var(--dim);text-shadow:1px 1px 0 #000}
+  #hint b{color:var(--lime)}
+  .overlay{position:fixed;inset:0;z-index:30;display:none;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 42%,rgba(11,13,16,.82),rgba(6,7,9,.97));cursor:default}
+  .overlay.on{display:flex}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.4em;color:var(--orange);text-transform:uppercase}
+  #title .box{text-align:center;max-width:640px;padding:30px}
+  #title h1{font-family:var(--disp);font-size:clamp(54px,12vw,120px);font-weight:700;line-height:.92;color:var(--bone);text-shadow:5px 5px 0 var(--orange),10px 10px 0 #000}
+  #title .sub{margin:14px 0 6px;font-size:13px;letter-spacing:.22em;color:var(--lime)}
+  #title .desc{margin:18px auto 26px;max-width:480px;font-size:13px;line-height:1.7;color:var(--dim)}
+  .btn{font-family:var(--disp);font-weight:700;font-size:18px;letter-spacing:.14em;padding:14px 40px;background:var(--lime);color:#0b0d10;border:2px solid #000;cursor:pointer;box-shadow:5px 5px 0 #000;text-transform:uppercase}
+  .controls{display:flex;gap:18px;justify-content:center;margin-top:24px;font-size:11px;letter-spacing:.1em;color:var(--dim);flex-wrap:wrap}
+  .controls kbd{font-family:var(--mono);background:#000;border:1px solid var(--steel);border-bottom-width:3px;padding:3px 8px;color:var(--bone);margin-right:4px}
+  .mutebtn{position:fixed;bottom:12px;right:14px;z-index:11;pointer-events:auto;background:#000;border:1px solid var(--steel);color:var(--dim);font-family:var(--mono);font-size:10px;padding:6px 10px;cursor:pointer}
+</style>
+</head>
+<body>
+<canvas id="game"></canvas>
+<div id="grade"></div>
+<div id="hud">
+  <div id="brand">METHODUS<small>LOOP HERO PASS · ARCHIVED</small></div>
+  <div id="wpn"><div class="k">WEAPON</div><div class="v" id="wpnName">PULSE RIFLE</div></div>
+  <div id="hint"><b>WASD</b> move · <b>MOUSE</b> aim · <b>CLICK / HOLD</b> to fire</div>
+</div>
+<button class="mutebtn" id="muteBtn">♪ SOUND ON</button>
+<div class="overlay on" id="title">
+  <div class="box">
+    <div class="eyebrow">ARCHIVED ART PASS</div>
+    <h1>METHODUS</h1>
+    <div class="sub">LOOP HERO STYLE · PIXEL GRASSLAND</div>
+    <p class="desc">Saved pixel-art pass. The live game now uses the space-defense concept.</p>
+    <button class="btn" id="startBtn">DEPLOY</button>
+    <div class="controls"><span><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd>move</span><span><kbd>MOUSE</kbd>aim</span><span><kbd>CLICK</kbd>fire</span></div>
+  </div>
+</div>
+<script type="module" src="./main.js"></script>
+</body>
+</html>

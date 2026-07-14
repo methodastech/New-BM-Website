@@ -1,0 +1,3336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>BONEFIELD</title>
+<style>
+  html, body {
+    margin: 0; padding: 0; height: 100%;
+    background: #0b0b12; overflow: hidden;
+    font-family: "Courier New", monospace;
+    color: #e8e8f0; -webkit-user-select: none; user-select: none;
+  }
+  #game { display: block; image-rendering: pixelated; image-rendering: crisp-edges; }
+  #wrap { position: relative; width: 100%; height: 100%; }
+</style>
+</head>
+<body>
+<div id="wrap">
+  <canvas id="game"></canvas>
+</div>
+
+<script>
+"use strict";
+
+/* =====================================================================
+   BONEFIELD : Phase 1 MVP : top down summoner roguelite
+   Single file. No libraries. No storage. Everything tunable lives in
+   CONFIG. Every sprite lives in an editable array. Retune by editing
+   data, not logic.
+   ===================================================================== */
+
+/* =====================================================================
+   1. CONFIG : every tunable number, grouped by section
+   ===================================================================== */
+const CONFIG = {
+  art: {
+    PIXEL: 4,            // pixel scale for all sprites
+    bgGrid: 64,          // background grid cell size
+    entityScale: 4,      // pixel scale for all characters — matches the world decor pixel size
+    unitScale: 4,        // hero + skeletons use the same scale so every character's pixel matches
+    zoom: 0.6,           // camera zoom (smaller = see more of the map; Loop-Hero-like ratio)
+    worldMult: 2.0,      // battlefield size as a multiple of the viewport
+  },
+
+  player: {
+    maxHp: 100,
+    speed: 150,          // px per second
+    manaMax: 100,
+    manaStart: 60,
+    manaRegen: 8,        // per second
+    defendManaMult: 3,   // mana regen multiplier while defending
+    defendSpeedMult: 0,  // movement while defending (0 = rooted)
+    defendReduction: 0.6,// fraction of incoming damage blocked while defending
+    dashSpeed: 520,      // px/s burst during a dodge dash
+    dashTime: 0.16,      // dash duration (s)
+    dashIframe: 0.26,    // invulnerability window for the dash (s)
+    dashCd: 0.6,         // dash cooldown (s)
+  },
+
+  summon: {
+    cost: 20,            // mana per skeleton
+    maxSkeletons: 6,
+    skeletonHp: 30,
+    skeletonDamage: 8,
+    skeletonAttackCd: 0.6,   // seconds between attacks
+    skeletonAttackRange: 34,
+    skeletonDetectRange: 220,
+    skeletonSpeed: 130,
+    skeletonFollowDist: 60,  // hover distance around player when idle
+  },
+
+  enemy: {
+    speed: 55,               // base move speed (multiplied per type + by threat)
+    attackCd: 0.8,           // seconds between melee hits
+    attackRange: 32,         // melee reach (tuned to the scale-4 body size)
+    contactPush: 40,         // separation so they do not perfectly stack / overlap
+  },
+
+  essence: {
+    perKill: 1,
+    pickupRadius: 60,
+    orbLife: 6,              // seconds before an orb decays
+    magnetSpeed: 240,        // orb fly speed once within pickup radius
+  },
+
+  leveling: {
+    baseNeeded: 5,           // essence for level 1 to 2
+    growth: 1.35,            // multiplier per level
+  },
+
+  // THREAT-DRIVEN DIFFICULTY : everything escalates with a single "threat"
+  // value that rises over time (scaled by the chosen difficulty). Early game
+  // is an easy power-fantasy; pressure climbs steeply the longer you live.
+  difficulty: {
+    threatPerSec: 1 / 20,    // +1 threat roughly every 20s (x difficulty mult)
+    hpBase: 15, hpPerThreat: 0.6,      // enemy hp  = hpBase  * (1 + threat*hpPerThreat) * typeHpMul
+    dmgBase: 6, dmgPerThreat: 0.3,     // enemy dmg = dmgBase * (1 + threat*dmgPerThreat) * typeDmgMul
+    speedPerThreat: 0.02,              // gentle speed creep
+    spawnBase: 1.5, spawnMin: 0.22, spawnPerThreat: 0.13, // interval = max(min, base - threat*per)
+    burstBase: 1, burstPerThreat: 0.5, // enemies per spawn tick
+    eliteBase: 0, elitePerThreat: 0.028, eliteMax: 0.42,  // chance an enemy is an elite
+    eliteHpMul: 4.5, eliteDmgMul: 1.8, eliteScale: 1.55, eliteEssence: 6, eliteItemChance: 0.25,
+    maxEnemies: 300,         // hard cap for performance
+    diffNames: { 1: "NORMAL", 1.45: "HARD", 1.95: "NIGHTMARE" },
+  },
+
+  loop: {
+    duration: 38,            // seconds per loop before the ritual interlude
+    prisonerChancePerKill: 0.22, // chance a kill yields a living prisoner
+    devourXpFrac: 0.5,       // experience gained per devoured prisoner (x essenceNeeded)
+    devourHeal: 22,          // health restored per devoured prisoner
+    releaseMana: 30,         // mana refunded per released prisoner
+  },
+
+  cards: {
+    baseChoices: 3,          // cards offered on level up
+    favorPerExtra: 4,        // every N favor with your top patron adds a choice
+    maxChoices: 5,           // hard cap on card choices
+  },
+
+  structures: {
+    baseRadius: 70,          // town footprint near map center
+    cemeteryInterval: 4.5,   // seconds between auto skeleton spawns
+    cemeteryHp: 120,
+    altarHp: 120,
+    altarRadius: 130,        // mana aura radius
+    altarManaBonus: 10,      // extra mana regen per second while near
+  },
+
+  spells: {
+    lightning: {
+      cooldown: 1.6,
+      damage: 22,
+      range: 320,
+      cdPerLevel: 0.15,      // cooldown reduced per extra level
+      dmgPerLevel: 10,       // damage added per extra level
+    },
+    frost: {
+      cooldown: 2.2,
+      radius: 120,
+      slow: 0.5,             // speed multiplier applied to hit enemies
+      slowDuration: 2,
+      radiusPerLevel: 30,
+      damage: 6,
+    },
+    // LEFT CLICK manual zap : the player's basic ranged attack.
+    zap: {
+      cost: 4,               // mana per cast (right click magic)
+      damage: 15,
+      range: 300,            // strike radius from the player
+      cooldown: 0.16,        // seconds between casts (caps spam)
+    },
+  },
+
+  // LEFT CLICK sword swing : free melee, an arc in front of the knight.
+  sword: {
+    damage: 26,
+    range: 64,               // reach of the swing
+    arc: 1.7,                // radians of the cone (~100 degrees)
+    cooldown: 0.32,
+    knockback: 18,
+  },
+
+  boss: {
+    firstAt: 55,             // seconds until the first boss appears
+    interval: 110,           // seconds between bosses after the first
+    hp: 900,
+    hpPerBoss: 350,          // extra hp for each later boss
+    speed: 46,
+    touchDamage: 14,         // contact damage while charging
+    swingDamage: 26,
+    swingRange: 90,
+    chargeSpeed: 360,
+    chargeDamage: 22,
+    axeDamage: 20,
+    axeSpeed: 300,
+    scale: 5,                // pixel scale for the boss sprite
+    allyStun: 9,             // seconds an undying ally lies stunned before reviving
+    essenceReward: 30,       // essence granted if you slay instead of bind
+  },
+
+  juice: {
+    screenShakeMax: 14,
+    screenShakeDecay: 40,
+    hitStopMs: 45,           // freeze on impactful kills
+    particleCount: 8,
+    floaterLife: 0.8,
+    flashTime: 0.12,
+    sound: false,            // START MUTED — M (or the menu button) turns all sound on
+  },
+
+  // Original looping soundtrack, dark/hypnotic mood (Loop Hero-inspired, not copied).
+  music: {
+    on: false,               // music off until sound is enabled (start muted)
+    volume: 0.22,            // master music volume (0-1)
+    tempo: 84,               // beats per minute
+  },
+};
+
+/* =====================================================================
+   2. PIXEL ART : sprites as char arrays + palette. Edit any array to
+   redraw. A dot or space is an empty pixel.
+   ===================================================================== */
+const PALETTE = {
+  ".": null,
+  w: "#f3f3ff", // bone white
+  W: "#c8c8d8", // bone shadow
+  b: "#1b1b24", // near black
+  "0": "#ded8c0", // skeleton: warm bone (our palette)
+  "2": "#4f8fd0", // hero: steel-blue base
+  "3": "#2f5680", // hero: blue shadow
+  "5": "#4f93d8", // hero: steel blue (distinct from the bone skeletons)
+  "4": "#9a6a3f", // soldier: leather brown
+  "6": "#d9772e", // rusher: burnt orange
+  "8": "#8257bf", // hexer: violet
+  "a": "#b4432f", // brute: brick red
+  p: "#7b3ff2", // necromancer purple
+  P: "#5320b0", // purple shadow
+  s: "#e8b98a", // skin
+  S: "#b5895f", // skin shadow
+  r: "#cc3a3a", // red shirt / blood
+  R: "#8f2a2a", // dark red shadow
+  g: "#37e0a0", // essence green
+  G: "#1f9c6e", // essence shadow
+  y: "#ffe14d", // lightning
+  c: "#7fd4ff", // frost cyan
+  k: "#3a3a48", // stone gray
+  K: "#26262f", // stone shadow
+  o: "#d9c27a", // altar bone gold
+  i: "#aeb4c2", // steel
+  I: "#6f7686", // steel shadow
+  f: "#6a4a2a", // leather brown
+  d: "#22143f", // deep purple (robe dark)
+  L: "#a06bff", // light purple highlight
+  E: "#8effc0", // necromancer eye glow
+  j: "#4a3520", // dark leather
+  n: "#7a2222", // deep red / sash
+  v: "#5bb44a", // foliage mid (bright fantasy)
+  V: "#3a7e2e", // foliage dark
+  m: "#8fd267", // foliage light
+  t: "#7a5230", // trunk
+  T: "#4f3318", // trunk dark
+  l: "#a8db5a", // grass light
+  F: "#e58fc0", // flower pink
+  h: "#fff4e0", // flower white / bone highlight
+  u: "#e8e0cb", // stone light (ruins / fountain)
+  U: "#c7bd9c", // stone mid
+  z: "#9b9275", // stone shadow
+  q: "#cfe6f2", // water light
+  Q: "#6fa8d8", // water mid
+  x: "#4d86bd", // water deep
+  C: "#c9a0e0", // lilac flower
+  N: "#3f72b0", // knight tabard blue
+  B: "#284c79", // knight tabard blue shadow
+  A: "#f2d24a", // bright gold trim
+  H: "#7a4a28", // minotaur fur mid
+  J: "#553219", // minotaur fur dark
+  M: "#9c6336", // minotaur fur light
+};
+
+/* Entities are FRAME ARRAYS (idle, step). drawSprite picks a frame for a
+   simple two-step walk; bob + lunge are applied at draw time. Rows must be
+   equal width. */
+// Player: warrior silhouette in steel blue (char "5"), distinct from the bone skeletons.
+// Three states: IDLE (breathing), WALK, ATK (weapon raised). 13x14.
+const PLAYER_IDLE = [[
+  "......555....",
+  ".....55555...",
+  ".....5.5.5...",
+  ".....55555...",
+  "......555....",
+  "....5555555..",
+  "....555555555",
+  "55.5.55555555",
+  "..55.55555555",
+  ".....55555...",
+  ".....5...5...",
+  ".....5...5...",
+  ".....5...5...",
+  "....55...55..",
+],[
+  ".............",
+  "......555....",
+  ".....55555...",
+  ".....5.5.5...",
+  ".....55555...",
+  "......555....",
+  "....5555555..",
+  "55.5.55555555",
+  "..55.55555555",
+  ".....55555...",
+  ".....5...5...",
+  ".....5...5...",
+  ".....5...5...",
+  "....55...55..",
+]];
+const PLAYER_WALK = [[
+  "......555....",
+  ".....55555...",
+  ".....5.5.5...",
+  ".....55555...",
+  "......555....",
+  "....5555555..",
+  "....555555555",
+  "55.5.55555555",
+  "..55.55555555",
+  ".....55555...",
+  ".....5...5...",
+  ".....5...5...",
+  ".....5...5...",
+  "....55...55..",
+],[
+  ".............",
+  ".......555...",
+  "......55555..",
+  "......5.5.5..",
+  "......55555..",
+  "5...5555555..",
+  ".5.5.555555..",
+  "..5..55555555",
+  ".....55555555",
+  "...5.55555555",
+  "....5....5...",
+  "....5....5...",
+  "....5....5...",
+  ".........55..",
+]];
+const PLAYER_ATK = [[
+  "......555..55",
+  ".....55555.55",
+  ".....5.5.5555",
+  "......555.5..",
+  "....55555....",
+  "....5555555..",
+  "....555555555",
+  "55.5.55555555",
+  "..55.55555555",
+  ".....55555...",
+  ".....5...5...",
+  ".....5...5...",
+  ".....5...5...",
+  "....55...55..",
+]];
+
+// Skeleton: bone silhouette (char "0", same colour as the hero). IDLE (breathing) / WALK / ATK.
+const SKELE_IDLE = [[
+  ".....000...",
+  "....00000..",
+  "....0.0.0..",
+  ".....0.0...",
+  ".....000...",
+  "0...0000000",
+  ".0.0.000000",
+  "..0...0.000",
+  ".....0000..",
+  ".....0.0...",
+  ".....0.0...",
+  ".....0.0...",
+  ".....0.0...",
+  "....00.00..",
+],[
+  "...........",
+  ".....000...",
+  "....00000..",
+  "....0.0.0..",
+  ".....0.0...",
+  ".....000...",
+  "0...0000000",
+  "..0...0.000",
+  ".....0000..",
+  ".....0.0...",
+  ".....0.0...",
+  ".....0.0...",
+  ".....0.0...",
+  "....00.00..",
+]];
+const SKELE_ATK = [[
+  ".....000.000",
+  ".....0000000",
+  ".....0.0.0..",
+  ".....0.0....",
+  ".....000....",
+  "0...000000..",
+  ".0.0.0000...",
+  "..0...0.0...",
+  ".....0000...",
+  ".....0.0....",
+  ".....0.0....",
+  ".....0.0....",
+  ".....0.0....",
+  "....00.00...",
+]];
+const SKELE_FR = [[
+  ".....000...",
+  "....00000..",
+  "....0.0.0..",
+  ".....0.0...",
+  ".....000...",
+  "0...0000000",
+  ".0.0.000000",
+  "..0...0.000",
+  ".....0000..",
+  ".....0.0...",
+  ".....0.0...",
+  ".....0.0...",
+  ".....0.0...",
+  "....00.00..",
+],[
+  "...........",
+  ".....000...",
+  "....00000..",
+  "....0.0.0..",
+  "0....0.0...",
+  "0....000...",
+  ".0.00000000",
+  ".00..000000",
+  ".....000000",
+  "....00.00..",
+  ".....0.0...",
+  ".....0.0...",
+  ".....0.0...",
+  "....00.00..",
+]];
+
+// Enemy variants (unique silhouettes, one colour each) : 0 = soldier (grey, spear), 1 = hexer (purple, robed).
+const ENEMY_FR = [[[
+  "....444....4.",
+  "...44444...4.",
+  "...4.4.4...4.",
+  "...44444...4.",
+  "....444....4.",
+  "..4444444.44.",
+  ".444444444.4.",
+  ".44.44444..4.",
+  "...4444444...",
+  "...4444444...",
+  "...44...44...",
+  "...44...44...",
+  "...44...44...",
+  "..444...444..",
+],[
+  "....444....4.",
+  "...44444...4.",
+  "...4.4.4...4.",
+  "...44444...4.",
+  "....444....4.",
+  "..4444444.44.",
+  ".444444444.4.",
+  ".44.44444..4.",
+  "...4444444...",
+  "...4444444...",
+  "..44...44....",
+  "..44...44....",
+  ".44.....44...",
+  ".44.....44...",
+]],[[
+  "...888.....8.",
+  "..88888....8.",
+  ".8888888...8.",
+  "..88888...88.",
+  "..8.8.8..88..",
+  "..888888.8...",
+  "..8888888....",
+  ".888888888...",
+  ".888888888...",
+  "88888888888..",
+  "88888888888..",
+  ".8888888888..",
+  "..88888888...",
+  "...888888....",
+],[
+  "...888.....8.",
+  "..88888....8.",
+  ".8888888...8.",
+  "..88888...88.",
+  "..8.8.8..88..",
+  "..888888.8...",
+  "..8888888....",
+  ".888888888...",
+  ".888888888...",
+  "88888888888..",
+  "88888888888..",
+  "..8888888888.",
+  "...88888888..",
+  "..888888.....",
+]]];
+
+// Rusher: fast feral runner, one-colour orange silhouette, hunched lunging stance (13x14).
+const SPR_RUSHER = [[
+  "........666..",
+  ".......66666.",
+  ".......6.66..",
+  ".......6666..",
+  ".....666666..",
+  "...6666666...",
+  ".6666666.....",
+  "66666666.....",
+  "...66666.....",
+  "...666.......",
+  "..66.6.......",
+  ".6...66......",
+  "6.....6......",
+  ".......6.....",
+],[
+  "........666..",
+  ".......66666.",
+  ".......6.66..",
+  ".......6666..",
+  ".....666666..",
+  "...6666666...",
+  ".6666666.....",
+  "66666666.....",
+  "...66666.....",
+  "...666.......",
+  "...6.66......",
+  "..6...6......",
+  ".6.....66....",
+  "6........6...",
+]];
+// Brute: huge bulky ogre, one-colour dark-red silhouette, broad arms (13x14). Renders larger via scale 1.5.
+const SPR_BRUTE = [[
+  "....aaaaa....",
+  "...aaaaaaa...",
+  "...aa.a.aa...",
+  "...aaaaaaa...",
+  "..aaaaaaaaa..",
+  ".aaaaaaaaaaa.",
+  "aaaaaaaaaaaaa",
+  "aaa.aaaaa.aaa",
+  "aaa.aaaaa.aaa",
+  "..aaaaaaaaa..",
+  "..aaaaaaaaa..",
+  "...aa...aa...",
+  "...aa...aa...",
+  "..aaa...aaa..",
+],[
+  "....aaaaa....",
+  "...aaaaaaa...",
+  "...aa.a.aa...",
+  "...aaaaaaa...",
+  "..aaaaaaaaa..",
+  ".aaaaaaaaaaa.",
+  "aaaaaaaaaaaaa",
+  "aaa.aaaaa.aaa",
+  "aaa.aaaaa.aaa",
+  "..aaaaaaaaa..",
+  "..aaaaaaaaa..",
+  "..aa.....aa..",
+  "..aa.....aa..",
+  ".aaa.....aaa.",
+]];
+// Enemy IDLE (breathing) + ATK (lunge/thrust) states. WALK = ENEMY_FR[0]/[1] / SPR_RUSHER above.
+const SOL_IDLE = [[
+  "....444....4.",
+  "...44444...4.",
+  "...4.4.4...4.",
+  "...44444...4.",
+  "....444....4.",
+  "..4444444.44.",
+  ".444444444.4.",
+  ".44.44444..4.",
+  "...4444444...",
+  "...4444444...",
+  "...44...44...",
+  "...44...44...",
+  "...44...44...",
+  "..444...444..",
+],[
+  ".............",
+  "....444....4.",
+  "...44444...4.",
+  "...4.4.4...4.",
+  "...44444...4.",
+  "....444....4.",
+  "..4444444.44.",
+  ".44.44444..4.",
+  "...4444444...",
+  "...4444444...",
+  "...44...44...",
+  "...44...44...",
+  "...44...44...",
+  "..444...444..",
+]];
+const SOL_ATK = [[
+  "....444....4.",
+  "...44444..44.",
+  "...4.4.4.444.",
+  "...44444.4...",
+  "....444.44...",
+  "..44444444...",
+  ".4444444444..",
+  ".44.4444444..",
+  "...4444444...",
+  "...4444444...",
+  "...44...44...",
+  "...44...44...",
+  "...44...44...",
+  "..444...444..",
+]];
+const RUS_IDLE = [[
+  "........666..",
+  ".......66666.",
+  ".......6.66..",
+  ".......6666..",
+  ".....666666..",
+  "...6666666...",
+  ".6666666.....",
+  "66666666.....",
+  "...66666.....",
+  "...666.......",
+  "..66.6.......",
+  ".6...66......",
+  "6.....6......",
+  ".......6.....",
+],[
+  ".............",
+  "........666..",
+  ".......66666.",
+  ".......6.66..",
+  ".......6666..",
+  ".....666666..",
+  "...6666666...",
+  "66666666.....",
+  "...66666.....",
+  "...666.......",
+  "..66.6.......",
+  ".6...66......",
+  "6.....6......",
+  ".......6.....",
+]];
+const RUS_ATK = [[
+  "..........666",
+  "........66666",
+  "........6.66.",
+  "........6666.",
+  "......6666666",
+  "....66666666.",
+  "..666666666..",
+  ".66666666....",
+  "...66666.....",
+  "...666.......",
+  "..66.6.......",
+  ".6...66......",
+  "6.....6......",
+  ".......6.....",
+]];
+const HEX_IDLE = [[
+  "...888.....8.",
+  "..88888....8.",
+  ".8888888...8.",
+  "..88888...88.",
+  "..8.8.8..88..",
+  "..888888.8...",
+  "..8888888....",
+  ".888888888...",
+  ".888888888...",
+  "88888888888..",
+  "88888888888..",
+  ".8888888888..",
+  "..88888888...",
+  "...888888....",
+],[
+  ".............",
+  "...888.....8.",
+  "..88888....8.",
+  ".8888888...8.",
+  "..88888...88.",
+  "..8.8.8..88..",
+  "..888888.8...",
+  ".888888888...",
+  ".888888888...",
+  "88888888888..",
+  "88888888888..",
+  ".8888888888..",
+  "..88888888...",
+  "...888888....",
+]];
+const HEX_ATK = [[
+  "...888...888.",
+  "..88888.8888.",
+  ".8888888888..",
+  "..888888.8...",
+  "..8.8.8..8...",
+  "..8888888....",
+  "..8888888....",
+  ".888888888...",
+  ".888888888...",
+  "88888888888..",
+  "88888888888..",
+  ".8888888888..",
+  "..88888888...",
+  "...888888....",
+]];
+// per-type sprite frames (soldier/hexer reuse the militia/cultist art)
+const ENEMY_SPR = { soldier: 0, cultist: 1, rusher: SPR_RUSHER, brute: SPR_BRUTE };
+
+// Minotaur boss: horned bull head, muscular fur body, red eyes. 13 wide x 15 tall.
+const SPR_MINOTAUR = [
+  ".w.........w.",
+  ".ww.HHHHH.ww.",
+  "..wHHHHHHHw..",
+  "..HHrHHHrHH..",
+  "..HHHsssHHH..",
+  "..MHHsssHHM..",
+  "...HHHHHHH...",
+  ".MHHHHHHHHHM.",
+  "MHHHHHHHHHHHM",
+  "MHHHJJJJJHHHM",
+  ".HHHJJJJJHHH.",
+  "..HHH...HHH..",
+  "..HHJ...JHH..",
+  "..HH.....HH..",
+  "..MM.....MM..",
+];
+// Throwing axe: twin steel blades on a wooden haft. 7 wide x 7 tall.
+const SPR_AXE = [
+  "ii...ii",
+  "iII.IIi",
+  ".iItIi.",
+  "...t...",
+  "...t...",
+  "..ttt..",
+  "...t...",
+];
+// Sword blade, points up (-y). Drawn rotating through the swing arc.
+const SPR_SWORD = [
+  ".w.",
+  ".w.",
+  ".w.",
+  ".w.",
+  "iwi",
+  "AAA",
+  ".f.",
+  ".f.",
+  ".A.",
+];
+
+const SPR_ORB = [
+  "..gg..",
+  ".gLGg.",
+  "gLwGGg",
+  "gGGGGg",
+  ".gGGg.",
+  "..gg..",
+];
+
+const SPR_CEMETERY = [
+  "..kkkk..",
+  ".kkkkkk.",
+  ".kKwwKk.",
+  ".kkwwkk.",
+  ".kKKKKk.",
+  ".kkkkkk.",
+  ".KKKKKK.",
+  "kkkkkkkk",
+];
+
+const SPR_ALTAR = [
+  "..oo..",
+  "..oo..",
+  ".oooo.",
+  ".owwo.",
+  ".oooo.",
+  ".oWWo.",
+  ".oooo.",
+  "oooooo",
+];
+
+/* =====================================================================
+   2c. ENVIRONMENT DECOR : trees, grass, flowers, rocks, graves, bones.
+   Baked once to an offscreen canvas (see buildBackground).
+   ===================================================================== */
+const SPR_TREE = [
+  "....vvvvvv....",
+  "..vvmvvvmvvv..",
+  ".vvvvvvvvvvvv.",
+  "vvmvvVvvvmvvvv",
+  "vvvvvVVvvvvvvv",
+  ".vvvvvvvvvvvv.",
+  "..vvvVvvvvvv..",
+  "...vvvvvvvv...",
+  "......tT......",
+  "......tT......",
+  ".....tTTt.....",
+  ".....tTTt.....",
+];
+const SPR_PINE = [
+  ".....VV.....",
+  "....vvvv....",
+  "...vVvvVv...",
+  "..vvvvvvvv..",
+  "....vvvv....",
+  "...vVvvVv...",
+  "..vvvvvvvv..",
+  ".vvvvvvvvvv.",
+  "...vVvvVv...",
+  "..vvvvvvvv..",
+  ".vvvvvvvvvv.",
+  "vvvvvVVvvvvv",
+  ".....tT.....",
+  ".....tT.....",
+  "....tTTt....",
+];
+const SPR_BUSH = [
+  "..vvvv..",
+  ".vmvvmv.",
+  "vvvvvvvv",
+  "vVvvvvVv",
+  ".vvvvvv.",
+  "..vvvv..",
+];
+const SPR_GRASS = [
+  "l.l.l.",
+  ".lvlv.",
+  "lvlvlv",
+  ".vvvv.",
+];
+const SPR_FLOWER = [
+  ".F.",
+  "FyF",
+  ".v.",
+];
+const SPR_FLOWER2 = [
+  ".h.",
+  "hyh",
+  ".v.",
+];
+const SPR_ROCK = [
+  ".kKk..",
+  "kkkkK.",
+  "KkkkkK",
+  ".KKKK.",
+];
+const SPR_GRAVE = [
+  "..kk..",
+  ".kkkk.",
+  ".kwwk.",
+  ".kkkk.",
+  ".kwwk.",
+  ".kkkk.",
+  ".KKKK.",
+  "kkkkkk",
+];
+const SPR_BONES = [
+  ".w..w.",
+  "wWwwWw",
+  ".w..w.",
+];
+const SPR_FLOWER3 = [
+  ".C.",
+  "CyC",
+  ".v.",
+];
+// broken stone pillar / tower (pale sandstone, like the reference ruins)
+const SPR_RUIN = [
+  ".uUUUz..",
+  "uUUUUUz.",
+  "uUzzUUz.",
+  "uUUUUUz.",
+  "uUzzUUz.",
+  "uUUUUUz.",
+  "uUzzUUz.",
+  "uUUUUUz.",
+  "uUzzUUz.",
+  "uUUUUUz.",
+  "uUUUUUz.",
+  "zUUUUzz.",
+  "zzUUzzz.",
+  ".zzzz...",
+];
+// broken low wall chunk
+const SPR_WALL = [
+  "uUUz.uUUUz..",
+  "uUUUzUUzUUz.",
+  "uUzUUUUUzUz.",
+  "uUUUzUUUUUz.",
+  "zUUUUzUUzzz.",
+  "zzzzzzzzzz..",
+];
+
+/* =====================================================================
+   2b. PIXEL ICONS : 8x8 glyphs for cards + HUD. Easy to read at a glance.
+   ===================================================================== */
+const ICONS = {
+  skull: ["..wwww..",".wwwwww.","wwbwwbww","wwwwwwww","wwbbbbww",".wwwwww.","..w..w..","........"],
+  skele: ["..wWWw..",".wb..bw.",".wWWWWw.","..wwww..",".w.ww.w.",".w.ww.w.","..w..w..","........"],
+  tomb:  ["..kkkk..",".kkkkkk.",".kKwwKk.",".kkwwkk.",".kKKKKk.",".kkkkkk.","KKKKKKKK","........"],
+  altar: ["...oo...","...oo...","..oooo..","..owwo..","..oooo..","...oo...","..oooo..","........"],
+  bolt:  ["...yy...","..yy....",".yyyy...","...yyy..","..yy....",".yyy....","..y.....","........"],
+  frost: ["...c....","c..c..c.",".c.c.c..","..cccc..",".c.c.c..","c..c..c.","...c....","........"],
+  orb:   ["..gGGg..",".gGGGGg.","gGwwGGGg","gGGGGGGg","gGGGGGGg",".gGGGGg.","..gGGg..","........"],
+  scythe:["...wwww.","..ww..w.",".ww...f.",".w...f..","....f...","...f....","...f....","...f...."],
+  boot:  ["..ff....","..ff....","..ff....","..ffff..","..fffff.","ffffffff",".fffff..","........"],
+  mana:  ["...p....","..ppp...",".pPpPp..","pPpppPp.",".pPpPp..","..ppp...","...p....","........"],
+  shield:[".iiiiii.","iIiiiiIi","iIiiiiIi","iIiiiiIi",".iIiiIi.","..iIIi..","...ii...","........"],
+  heart: [".rr.rr..","rRRrRRr.","rRRRRRRr","rRRRRRRr",".rRRRRr.","..rRRr..","...rr...","........"],
+  spark: ["...y....",".y.y.y..","..yyy...","yy.y.yy.","..yyy...",".y.y.y..","...y....","........"],
+  captive:["..ss....",".sSSs...",".sbbs...","..ff....",".jffj...","fjffjf..",".f..f...",".f..f..."],
+  chalice:["yYYYYYy.","yrrrrYy.",".yrrYy..","..yYy...","..yYy...","..yYy...",".yYYYy..","yYYYYYy."],
+  flame: ["...y....","..yy....","..yyy...",".yyYy...",".yYYyy..","yYrrYy..","yrrrrY..",".yrrYy.."],
+  leaf:  ["...m....","..mvm...",".mvVvm..","mvVgVvm.",".mvVvm..","..mvm...","...t....","...t...."],
+  sword: ["......w.",".....ww.","....ww..","..Aww...","..AA....",".fA.....","ff......","f......."],
+  chest: [".NNNNNN.","NBNNNNBN","NNNAANN.","NBNAANBN","NBNNNNBN","NBNNNNBN",".NNNNNN.","........"],
+};
+// card id -> icon
+const CARD_ICON = {
+  hardenedBones: "skull", graveLegion: "skele", swiftRites: "spark",
+  cemetery: "tomb", boneAltar: "altar", stormCaller: "bolt", frostPulse: "frost",
+  soulHarvest: "orb", greaterReaping: "scythe", quickStep: "boot",
+  deepWell: "mana", ironWill: "shield", vitality: "heart",
+};
+
+/* =====================================================================
+   2d. PIXEL FONT : a 5x7 bitmap typeface so ALL UI text is true pixel art.
+   ptext() renders it with grid-aligned rects (no anti-aliasing).
+   ===================================================================== */
+const GLYPHS = {
+  "A": [".###.","#...#","#...#","#####","#...#","#...#","#...#"],
+  "B": ["####.","#...#","#...#","####.","#...#","#...#","####."],
+  "C": [".####","#....","#....","#....","#....","#....",".####"],
+  "D": ["####.","#...#","#...#","#...#","#...#","#...#","####."],
+  "E": ["#####","#....","#....","####.","#....","#....","#####"],
+  "F": ["#####","#....","#....","####.","#....","#....","#...."],
+  "G": [".####","#....","#....","#..##","#...#","#...#",".####"],
+  "H": ["#...#","#...#","#...#","#####","#...#","#...#","#...#"],
+  "I": ["#####","..#..","..#..","..#..","..#..","..#..","#####"],
+  "J": ["..###","...#.","...#.","...#.","#..#.","#..#.",".##.."],
+  "K": ["#...#","#..#.","#.#..","##...","#.#..","#..#.","#...#"],
+  "L": ["#....","#....","#....","#....","#....","#....","#####"],
+  "M": ["#...#","##.##","#.#.#","#...#","#...#","#...#","#...#"],
+  "N": ["#...#","##..#","#.#.#","#..##","#...#","#...#","#...#"],
+  "O": [".###.","#...#","#...#","#...#","#...#","#...#",".###."],
+  "P": ["####.","#...#","#...#","####.","#....","#....","#...."],
+  "Q": [".###.","#...#","#...#","#...#","#.#.#","#..#.",".##.#"],
+  "R": ["####.","#...#","#...#","####.","#.#..","#..#.","#...#"],
+  "S": [".####","#....","#....",".###.","....#","....#","####."],
+  "T": ["#####","..#..","..#..","..#..","..#..","..#..","..#.."],
+  "U": ["#...#","#...#","#...#","#...#","#...#","#...#",".###."],
+  "V": ["#...#","#...#","#...#","#...#","#...#",".#.#.","..#.."],
+  "W": ["#...#","#...#","#...#","#.#.#","#.#.#","##.##","#...#"],
+  "X": ["#...#","#...#",".#.#.","..#..",".#.#.","#...#","#...#"],
+  "Y": ["#...#","#...#",".#.#.","..#..","..#..","..#..","..#.."],
+  "Z": ["#####","....#","...#.","..#..",".#...","#....","#####"],
+  "0": [".###.","#..##","#.#.#","#.#.#","##..#","#...#",".###."],
+  "1": ["..#..",".##..","..#..","..#..","..#..","..#..",".###."],
+  "2": [".###.","#...#","....#","...#.","..#..",".#...","#####"],
+  "3": ["#####","...#.","..#..","...#.","....#","#...#",".###."],
+  "4": ["...#.","..##.",".#.#.","#..#.","#####","...#.","...#."],
+  "5": ["#####","#....","####.","....#","....#","#...#",".###."],
+  "6": [".###.","#....","#....","####.","#...#","#...#",".###."],
+  "7": ["#####","....#","...#.","..#..",".#...",".#...",".#..."],
+  "8": [".###.","#...#","#...#",".###.","#...#","#...#",".###."],
+  "9": [".###.","#...#","#...#",".####","....#","....#",".###."],
+  " ": [".....",".....",".....",".....",".....",".....","....."],
+  ".": [".....",".....",".....",".....",".....",".##..",".##.."],
+  ",": [".....",".....",".....",".....",".##..",".##..","#...."],
+  ":": [".....",".##..",".##..",".....",".##..",".##..","....."],
+  "!": ["..#..","..#..","..#..","..#..","..#..",".....","..#.."],
+  "?": [".###.","#...#","....#","...#.","..#..",".....","..#.."],
+  "-": [".....",".....",".....","#####",".....",".....","....."],
+  "+": [".....","..#..","..#..","#####","..#..","..#..","....."],
+  "/": ["....#","....#","...#.","..#..",".#...","#....","#...."],
+  "%": ["##..#","##.#.","..#..",".#...","#.##.","..##.","....."],
+  "(": ["..##.",".#...",".#...",".#...",".#...",".#...","..##."],
+  ")": [".##..","...#.","...#.","...#.","...#.","...#.",".##.."],
+  "'": ["..#..","..#..","..#..",".....",".....",".....","....."],
+  "x": ["#...#",".#.#.","..#..",".#.#.","#...#",".....","....."], // multiply dot variant
+};
+const PXW = 5, PXH = 7;
+function ptextWidth(str, scale) { return String(str).length * (PXW + 1) * scale - scale; }
+// Draw pixel text. (x,y) is the TOP-LEFT unless align centres/right-aligns x.
+function ptext(str, x, y, scale, color, align) {
+  scale = scale || 2; color = color || "#fff";
+  str = String(str);
+  const adv = (PXW + 1) * scale, w = str.length * adv - scale;
+  let sx = x;
+  if (align === "center") sx = x - w / 2; else if (align === "right") sx = x - w;
+  ctx.fillStyle = color;
+  const ty = Math.round(y);
+  for (let i = 0; i < str.length; i++) {
+    let ch = str[i];
+    const g = GLYPHS[ch] || GLYPHS[ch.toUpperCase()];
+    if (!g) continue;
+    const gx = Math.round(sx + i * adv);
+    for (let r = 0; r < PXH; r++) { const row = g[r]; for (let c = 0; c < PXW; c++) if (row[c] === "#") ctx.fillRect(gx + c * scale, ty + r * scale, scale, scale); }
+  }
+  return w;
+}
+// word-wrap pixel text inside maxW; returns the y after the last line
+function ptextWrap(text, x, y, maxW, scale, color) {
+  const words = String(text).split(" ");
+  const lh = (PXH + 2) * scale; let line = "", yy = y;
+  for (const wd of words) {
+    const test = line ? line + " " + wd : wd;
+    if (ptextWidth(test, scale) > maxW && line) { ptext(line, x, yy, scale, color, "left"); yy += lh; line = wd; }
+    else line = test;
+  }
+  if (line) ptext(line, x, yy, scale, color, "left");
+  return yy + lh;
+}
+
+/* =====================================================================
+   3. CANVAS + INPUT
+   ===================================================================== */
+const canvas = document.getElementById("game");
+const ctx = canvas.getContext("2d");
+let VIEW = { w: 0, h: 0 };       // the canvas / screen
+let WORLD = { w: 0, h: 0 };      // the battlefield, larger than the screen
+let cam = { x: 0, y: 0 };        // camera centre in world coordinates
+let bgCanvas = null;             // baked offscreen environment (built in buildBackground)
+
+function resize() {
+  VIEW.w = canvas.width = window.innerWidth;
+  VIEW.h = canvas.height = window.innerHeight;
+  WORLD.w = Math.round(VIEW.w * CONFIG.art.worldMult);
+  WORLD.h = Math.round(VIEW.h * CONFIG.art.worldMult);
+  ctx.imageSmoothingEnabled = false;
+  bgCanvas = null;               // rebuild the baked environment at the new size
+}
+window.addEventListener("resize", resize);
+resize();
+
+// convert a screen point (canvas pixels) into world coordinates
+function screenToWorld(sx, sy) {
+  const z = CONFIG.art.zoom;
+  return { x: cam.x + (sx - VIEW.w / 2) / z, y: cam.y + (sy - VIEW.h / 2) / z };
+}
+function updateCamera() {
+  const z = CONFIG.art.zoom;
+  const halfW = (VIEW.w / 2) / z, halfH = (VIEW.h / 2) / z;
+  cam.x = WORLD.w <= halfW * 2 ? WORLD.w / 2 : clamp(state.player.x, halfW, WORLD.w - halfW);
+  cam.y = WORLD.h <= halfH * 2 ? WORLD.h / 2 : clamp(state.player.y, halfH, WORLD.h - halfH);
+}
+
+const keys = {};
+window.addEventListener("keydown", (e) => {
+  ensureAudio();
+  if (["ArrowUp","ArrowDown","ArrowLeft","ArrowRight"," "].includes(e.key)) e.preventDefault();
+  const k = e.key.toLowerCase();
+  if (!e.repeat) {
+    if (k === "m") {
+      toggleMusic();
+    } else if (state.mode === "start") {
+      // G grimoire, B bestiary from the title; any other key begins
+      if (k === "g") openCodex(); else if (k === "b") openBestiary(); else startRun();
+    } else if (state.mode === "dead") {
+      startRun();
+    } else if (k === "escape") {
+      // ESC: close an open panel, otherwise toggle the pause menu
+      if (state.mode === "codex") closeCodex();
+      else if (state.mode === "bestiary") closeBestiary();
+      else if (state.mode === "equip") closeEquip();
+      else if (state.mode === "paused") resumeGame();
+      else pauseGame();
+    } else if (k === "p") {
+      // P: toggle pause
+      if (state.mode === "playing") pauseGame();
+      else if (state.mode === "paused") resumeGame();
+    } else if (k === "g") {
+      // G: toggle the grimoire mid-run
+      if (state.mode === "codex") closeCodex();
+      else if (state.mode === "playing" || state.mode === "paused") openCodex();
+    } else if (k === "i") {
+      // I: toggle the equipment screen
+      openEquip();
+    } else if (k === "b") {
+      // B: toggle the bestiary
+      if (state.mode === "bestiary") closeBestiary();
+      else if (state.mode === "playing" || state.mode === "paused") openBestiary();
+    } else if (k === " " || k === "e") {
+      trySummon();
+    } else if (k === "shift") {
+      startDash();
+    }
+  }
+  keys[k] = true;
+});
+window.addEventListener("keyup", (e) => { keys[e.key.toLowerCase()] = false; });
+
+// MOUSE : left click = sword swing, right click = cast magic. (SPACE summons.)
+canvas.addEventListener("contextmenu", (e) => e.preventDefault());
+canvas.addEventListener("mousedown", (e) => {
+  e.preventDefault();
+  const r = canvas.getBoundingClientRect();
+  onPointer(e.clientX - r.left, e.clientY - r.top, e.button);
+});
+canvas.addEventListener("touchstart", (e) => {
+  if (e.touches.length) {
+    const r = canvas.getBoundingClientRect();
+    onPointer(e.touches[0].clientX - r.left, e.touches[0].clientY - r.top, 0);
+  }
+}, { passive: true });
+
+function hitButton(x, y) {
+  for (const b of state.uiButtons) {
+    if (x >= b.x && x <= b.x + b.w && y >= b.y && y <= b.y + b.h) return b;
+  }
+  return null;
+}
+
+// button: 0 = left (zap / select / UI), 2 = right (summon)
+function onPointer(x, y, button) {
+  ensureAudio();
+  // left-click on a registered UI button works in any mode
+  if (button === 0) {
+    const b = hitButton(x, y);
+    if (b) { b.action(); return; }
+  }
+  if (state.mode === "codex") { closeCodex(); return; }
+  if (state.mode === "bestiary") { closeBestiary(); return; }
+  if (state.mode === "ritual" || state.mode === "paused" || state.mode === "recruit" || state.mode === "equip") return; // buttons only
+  if (state.mode === "start" || state.mode === "dead") { startRun(); return; }
+  if (state.mode === "levelup") {
+    if (button !== 0) return;
+    for (const c of state.cardRects) {
+      if (x >= c.x && x <= c.x + c.w && y >= c.y && y <= c.y + c.h) {
+        applyCard(c.card);
+        state.mode = "playing";
+        beep(660, 0.08, "square");
+        break;
+      }
+    }
+    return;
+  }
+  if (state.mode === "playing") {
+    const w = screenToWorld(x, y);
+    if (button === 2) tryZap(w.x, w.y);   // right click: magic
+    else trySwing(w.x, w.y);              // left click: sword
+  }
+}
+
+/* =====================================================================
+   4. AUDIO : tiny synthesized beeps
+   ===================================================================== */
+let actx = null;
+function ensureAudio() {
+  if (!actx && CONFIG.juice.sound) {
+    try { actx = new (window.AudioContext || window.webkitAudioContext)(); }
+    catch (e) { actx = null; }
+  }
+  if (actx && actx.state === "suspended") actx.resume();
+  musicInit();
+}
+function beep(freq, dur, type) {
+  if (!actx || !CONFIG.juice.sound) return;
+  const o = actx.createOscillator();
+  const g = actx.createGain();
+  o.type = type || "sine";
+  o.frequency.value = freq;
+  g.gain.value = 0.06;
+  g.gain.exponentialRampToValueAtTime(0.0001, actx.currentTime + dur);
+  o.connect(g); g.connect(actx.destination);
+  o.start(); o.stop(actx.currentTime + dur);
+}
+
+/* =====================================================================
+   4b. MUSIC : an original, looping dark-fantasy soundtrack synthesised in
+   real time (A-minor progression Am-F-C-G, bass + pad + arp + drums).
+   Mood inspired by hypnotic roguelite loops; melodies are original.
+   ===================================================================== */
+const MUSIC = { gain: null, step: 0, nextTime: 0, intensity: 0, target: 0.3, boss: false };
+// one chord per bar: bass root (MIDI), triad for pad + arpeggio (MIDI)
+const PROG = [
+  { bass: 33, triad: [57, 60, 64] }, // Am
+  { bass: 29, triad: [53, 57, 60] }, // F
+  { bass: 36, triad: [60, 64, 67] }, // C
+  { bass: 31, triad: [55, 59, 62] }, // G
+];
+const LEAD = [0, 0, 0, 0, 64, 0, 67, 0, 0, 69, 0, 67, 64, 0, 0, 0]; // 0 = rest
+function mtof(n) { return 440 * Math.pow(2, (n - 69) / 12); }
+function musicInit() {
+  if (!actx || MUSIC.gain) return;
+  MUSIC.gain = actx.createGain();
+  MUSIC.gain.gain.value = CONFIG.music.on ? CONFIG.music.volume : 0.0001;
+  MUSIC.gain.connect(actx.destination);
+}
+function mvoice(freq, t, dur, type, gain, lpf, atk) {
+  const o = actx.createOscillator(), g = actx.createGain();
+  o.type = type; o.frequency.value = freq;
+  let node = o;
+  if (lpf) { const f = actx.createBiquadFilter(); f.type = "lowpass"; f.frequency.value = lpf; o.connect(f); node = f; }
+  g.gain.setValueAtTime(0.0001, t);
+  g.gain.exponentialRampToValueAtTime(gain, t + (atk || 0.01));
+  g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+  node.connect(g); g.connect(MUSIC.gain);
+  o.start(t); o.stop(t + dur + 0.05);
+}
+function mkick(t) {
+  const o = actx.createOscillator(), g = actx.createGain();
+  o.type = "sine"; o.frequency.setValueAtTime(140, t); o.frequency.exponentialRampToValueAtTime(45, t + 0.12);
+  g.gain.setValueAtTime(0.9, t); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.18);
+  o.connect(g); g.connect(MUSIC.gain); o.start(t); o.stop(t + 0.2);
+}
+function mhat(t) {
+  const len = Math.floor(actx.sampleRate * 0.05);
+  const buf = actx.createBuffer(1, len, actx.sampleRate), d = buf.getChannelData(0);
+  for (let i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
+  const b = actx.createBufferSource(); b.buffer = buf;
+  const f = actx.createBiquadFilter(); f.type = "highpass"; f.frequency.value = 7000;
+  const g = actx.createGain(); g.gain.setValueAtTime(0.16, t); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.04);
+  b.connect(f); f.connect(g); g.connect(MUSIC.gain); b.start(t); b.stop(t + 0.06);
+}
+function musicScheduleStep(step, t, dt) {
+  const bar = (step >> 4) & 3, s = step & 15, ch = PROG[bar], it = MUSIC.intensity;
+  if (s === 0) { // pad chord + bass downbeat
+    for (const n of ch.triad) mvoice(mtof(n), t, dt * 15.5, "sawtooth", 0.022 + 0.018 * it, 850, 0.5);
+    mvoice(mtof(ch.bass), t, dt * 7, "triangle", 0.2, 380, 0.01);
+  }
+  if (s === 8) mvoice(mtof(ch.bass + 7), t, dt * 7, "triangle", 0.16, 380, 0.01);
+  if (it > 0.45) { // arpeggio + drums when the field is active
+    if (s % 2 === 0) mvoice(mtof(ch.triad[(s / 2) % 3] + 12), t, dt * 1.7, "triangle", 0.05 * it, 2200, 0.004);
+    if (s % 4 === 0) mkick(t);
+    if (s % 4 === 2) mhat(t);
+  }
+  if (it > 0.65 && (bar === 1 || bar === 3)) { // sparse lead on alternating bars
+    const ln = LEAD[s];
+    if (ln) mvoice(mtof(ln + 12), t, dt * 2.4, "square", 0.045, 2800, 0.004);
+  }
+  if (MUSIC.boss) { // boss fight: menacing sub-bass drone + driving drums
+    if (s === 0) mvoice(mtof(ch.bass - 12), t, dt * 16, "sawtooth", 0.12, 180, 0.2);
+    if (s % 2 === 0) mkick(t);
+    if (s % 8 === 4) mvoice(mtof(ch.bass - 5), t, dt * 4, "square", 0.06, 300, 0.02);
+  }
+}
+function musicTick() {
+  if (!actx || !MUSIC.gain) return;
+  MUSIC.intensity += (MUSIC.target - MUSIC.intensity) * 0.04;
+  const dt = (60 / CONFIG.music.tempo) / 4; // 16th-note duration
+  if (MUSIC.nextTime < actx.currentTime) MUSIC.nextTime = actx.currentTime + 0.06;
+  while (MUSIC.nextTime < actx.currentTime + 0.12) {
+    musicScheduleStep(MUSIC.step, MUSIC.nextTime, dt);
+    MUSIC.nextTime += dt;
+    MUSIC.step = (MUSIC.step + 1) % 64; // 4 bars x 16 steps
+  }
+}
+function toggleMusic() {           // master sound toggle: music + SFX together
+  const on = !CONFIG.juice.sound;
+  CONFIG.juice.sound = on;
+  CONFIG.music.on = on;
+  if (on) ensureAudio();           // lazily start the audio context on first enable
+  if (MUSIC.gain && actx) {
+    const v = CONFIG.music.on ? CONFIG.music.volume : 0.0001;
+    MUSIC.gain.gain.exponentialRampToValueAtTime(Math.max(0.0001, v), actx.currentTime + 0.2);
+  }
+  if (CONFIG.juice.sound) beep(660, 0.07, "sine"); // confirm chirp only when turning on
+}
+
+/* =====================================================================
+   5. STATE
+   ===================================================================== */
+let state = null;
+
+function freshState() {
+  return {
+    mode: "start",        // start | playing | levelup | dead | codex | ritual
+    prevMode: "start",    // where to return after codex
+    time: 0,
+    kills: 0,
+    level: 1,
+    essence: 0,
+    essenceNeeded: CONFIG.leveling.baseNeeded,
+
+    favor: { mortarr: 0, vael: 0, sylvanis: 0, ankhara: 0 }, // patron favor
+    boons: {},            // granted boon flags (deity:threshold)
+    announce: null,       // transient banner { text, color, life }
+
+    prisoners: 0,
+    loopNum: 1,
+    loopTimer: CONFIG.loop.duration,
+    ritualMsg: "",
+
+    player: null,
+    skeletons: [],
+    enemies: [],
+    orbs: [],
+    structures: [],
+    particles: [],
+    floaters: [],
+    bolts: [],            // transient lightning visuals
+    rings: [],            // transient frost visuals
+    slashes: [],          // transient sword arc visuals
+    axes: [],             // boss axe projectiles
+
+    boss: null,           // active boss (enemy or recruited ally)
+    bossNum: 0,           // how many bosses have appeared
+    nextBossAt: CONFIG.boss.firstAt,
+
+    shots: [],            // enemy ranged projectiles
+    score: 0,
+    diffMult: 1,          // difficulty multiplier (set in startRun)
+    threatLevel: 1,       // current integer threat tier (for milestone banners)
+    typeSeen: {},         // enemy types that have been announced
+
+    equipment: { weapon: null, armor: null }, // equipped item ids by slot
+    inventory: [],        // unequipped owned item ids
+
+    spawnTimer: 0,
+    cardLevels: {},       // id -> times picked
+    cardChoices: [],
+    cardRects: [],
+    uiButtons: [],        // clickable HUD/overlay rects, rebuilt each frame
+
+    shake: 0,
+    hitStop: 0,
+
+    spells: {
+      lightning: { owned: false, level: 0, timer: 0 },
+      frost: { owned: false, level: 0, timer: 0 },
+    },
+  };
+}
+
+function freshPlayer() {
+  const p = CONFIG.player, s = CONFIG.summon, e = CONFIG.essence;
+  return {
+    x: 0, y: 0,
+    hp: p.maxHp, maxHp: p.maxHp,
+    speed: p.speed,
+    mana: p.manaStart, maxMana: p.manaMax, manaRegen: p.manaRegen,
+    defending: false,
+    defendReduction: p.defendReduction,
+    summonCost: s.cost,
+    maxSkeletons: s.maxSkeletons,
+    skeletonDamage: s.skeletonDamage,
+    pickupRadius: e.pickupRadius,
+    essencePerKill: e.perKill,
+    spellPower: 1,           // multiplies lightning + zap damage (Vael's gift)
+    spellCdMult: 1,          // multiplies spell cooldowns (lower = faster)
+    orbLifeMult: 1,          // multiplies how long essence orbs linger
+    flash: 0,
+    facing: 1,
+    zapCd: 0,
+    swingCd: 0,              // sword cooldown
+    swingT: 0,               // sword swing animation timer
+    swingAngle: 0,           // direction of the current swing
+    _iframe: 0,              // brief invulnerability (boss hits + dodge dash)
+    dashT: 0, dashCd: 0, dvx: 0, dvy: 0, // dodge dash state
+    swordDamageBonus: 0,     // from equipped weapon
+    swordRangeBonus: 0,      // from equipped weapon
+    armorReduction: 0,       // from equipped clothing (fraction blocked)
+  };
+}
+
+function startRun(diffMult) {
+  state = freshState();
+  state.diffMult = diffMult || 1;
+  state.player = freshPlayer();
+  state.player.x = WORLD.w / 2;
+  state.player.y = WORLD.h / 2;
+  cam.x = state.player.x; cam.y = state.player.y;
+  // starting loadout + a couple of items to try in the equipment screen
+  state.equipment = { weapon: null, armor: null };
+  state.inventory = ["ironSword", "clothTunic", "steelSword", "leatherArmor"];
+  equipItem("ironSword"); equipItem("clothTunic");
+  state.mode = "playing";
+  bgCanvas = null;            // fresh environment layout each run
+  beep(523, 0.1, "triangle");
+}
+
+/* =====================================================================
+   6. HELPERS
+   ===================================================================== */
+function dist(ax, ay, bx, by) { return Math.hypot(ax - bx, ay - by); }
+function clamp(v, lo, hi) { return v < lo ? lo : v > hi ? hi : v; }
+function rand(a, b) { return a + Math.random() * (b - a); }
+function baseCenter() { return { x: WORLD.w / 2, y: WORLD.h / 2 }; }
+
+function spawnParticles(x, y, color, n) {
+  n = n || CONFIG.juice.particleCount;
+  for (let i = 0; i < n; i++) {
+    const a = Math.random() * Math.PI * 2;
+    const sp = rand(40, 160);
+    state.particles.push({
+      x, y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp,
+      life: rand(0.25, 0.6), maxLife: 0.6, color, size: rand(2, 4),
+    });
+  }
+}
+function floater(x, y, text, color) {
+  state.floaters.push({ x, y, text, color: color || "#fff", life: CONFIG.juice.floaterLife });
+}
+function addShake(mag) { state.shake = Math.min(CONFIG.juice.screenShakeMax, state.shake + mag); }
+
+/* =====================================================================
+   7. SUMMONING
+   ===================================================================== */
+function trySummon() {
+  if (!state || state.mode !== "playing") return;
+  const p = state.player;
+  if (p.mana < p.summonCost) { beep(160, 0.06, "sawtooth"); return; }
+  if (state.skeletons.length >= p.maxSkeletons) { beep(160, 0.06, "sawtooth"); return; }
+  p.mana -= p.summonCost;
+  spawnSkeleton(p.x + rand(-20, 20), p.y + rand(-20, 20));
+  beep(420, 0.07, "square");
+}
+
+// RIGHT CLICK : cast magic at the enemy (or boss) nearest the cursor.
+function tryZap(tx, ty) {
+  if (!state || state.mode !== "playing") return;
+  const p = state.player, z = CONFIG.spells.zap;
+  if (p.zapCd > 0) return;
+  if (p.mana < z.cost) { beep(150, 0.05, "sawtooth"); return; }
+  // candidates: enemies (and the boss) within range, pick nearest to the click
+  let target = null, targetBoss = false, bestToClick = Infinity;
+  for (const e of state.enemies) {
+    if (dist(p.x, p.y, e.x, e.y) > z.range) continue;
+    const d = dist(tx, ty, e.x, e.y);
+    if (d < bestToClick) { bestToClick = d; target = e; targetBoss = false; }
+  }
+  const b = state.boss;
+  if (b && !b.ally && dist(p.x, p.y, b.x, b.y) < z.range + 50) {
+    const d = dist(tx, ty, b.x, b.y);
+    if (d < bestToClick) { bestToClick = d; target = b; targetBoss = true; }
+  }
+  p.zapCd = z.cooldown;
+  p.mana -= z.cost;
+  if (tx !== p.x) p.facing = tx > p.x ? 1 : -1;
+  if (target) {
+    state.bolts.push({ x1: p.x, y1: p.y - 12, x2: target.x, y2: target.y, life: 0.12 });
+    if (targetBoss) damageBoss(z.damage * p.spellPower, p.x, p.y);
+    else damageEnemy(target, z.damage * p.spellPower, p.x, p.y);
+    spawnParticles(target.x, target.y, "#ffe14d", 5);
+    addShake(2); beep(840, 0.05, "square");
+  } else {
+    // no target: cosmetic arc toward the click so the action still feels responsive
+    const a = Math.atan2(ty - p.y, tx - p.x);
+    state.bolts.push({ x1: p.x, y1: p.y - 12, x2: p.x + Math.cos(a) * z.range, y2: p.y + Math.sin(a) * z.range, life: 0.09 });
+    beep(620, 0.04, "square");
+  }
+}
+
+// LEFT CLICK : a free sword swing, an arc toward the cursor.
+function trySwing(tx, ty) {
+  if (!state || state.mode !== "playing") return;
+  const p = state.player, sw = CONFIG.sword;
+  if (p.swingCd > 0) return;
+  const ang = Math.atan2(ty - p.y, tx - p.x);
+  const reach = sw.range + p.swordRangeBonus;
+  const dmg = sw.damage + p.swordDamageBonus;
+  p.swingCd = sw.cooldown; p.swingT = 0.18; p.swingAngle = ang;
+  p.facing = Math.cos(ang) >= 0 ? 1 : -1;
+  state.slashes.push({ x: p.x, y: p.y, angle: ang, life: 0.18, range: reach });
+  beep(300, 0.05, "square");
+  let hit = false;
+  const inArc = (ox, oy, extra) => {
+    if (dist(p.x, p.y, ox, oy) > reach + extra) return false;
+    let da = Math.atan2(oy - p.y, ox - p.x) - ang;
+    da = Math.atan2(Math.sin(da), Math.cos(da));
+    return Math.abs(da) <= sw.arc / 2;
+  };
+  for (let i = state.enemies.length - 1; i >= 0; i--) {
+    const e = state.enemies[i];
+    if (!inArc(e.x, e.y, 12)) continue;
+    e.x += Math.cos(ang) * sw.knockback; e.y += Math.sin(ang) * sw.knockback;
+    damageEnemy(e, dmg, p.x, p.y); hit = true;
+  }
+  const b = state.boss;
+  if (b && !b.ally && inArc(b.x, b.y, 40)) { damageBoss(dmg, p.x, p.y); hit = true; }
+  if (hit) addShake(3);
+}
+
+// damage the active boss (no effect on a recruited ally)
+function damageBoss(amount, fx, fy) {
+  const b = state.boss;
+  if (!b || b.ally) return;
+  b.hp -= amount; b.flash = CONFIG.juice.flashTime;
+  floater(b.x, b.y - b.r - 6, Math.round(amount), "#ffd24a");
+  spawnParticles(b.x + rand(-18, 18), b.y + rand(-18, 18), "#cc3a3a", 4);
+  if (b.hp <= 0) defeatBoss();
+}
+
+function spawnSkeleton(x, y) {
+  if (state.skeletons.length >= state.player.maxSkeletons) return;
+  state.skeletons.push({
+    x, y, hp: CONFIG.summon.skeletonHp, maxHp: CONFIG.summon.skeletonHp,
+    attackTimer: 0, flash: 0,
+    phase: rand(0, 6.28), facing: 1, moving: false, lunge: 0, lx: 0, ly: 0, spawnT: 0.3,
+  });
+  spawnParticles(x, y, "#f3f3ff", 6);
+}
+
+/* =====================================================================
+   8. WAVE SPAWNING : enemies from the four edges
+   ===================================================================== */
+// Enemy archetypes. Stats are multipliers on the threat-scaled base, so every
+// type stays relevant as difficulty climbs. minThreat gates when each appears.
+const ENEMY_TYPES = [
+  { id: "soldier", name: "Soldier", spr: ENEMY_FR[0], idle: SOL_IDLE, atk: SOL_ATK, scale: 1.0,  behavior: "chase",
+    hpMul: 1.0, speedMul: 1.0, dmgMul: 1.0, essence: 1, score: 10, weight: 10, minThreat: 0,
+    blurb: "Town militia. Marches straight at you and hacks. The backbone of every wave." },
+  { id: "rusher",  name: "Rusher",  spr: SPR_RUSHER, idle: RUS_IDLE, atk: RUS_ATK, scale: 0.9, behavior: "rush",
+    hpMul: 0.55, speedMul: 1.8, dmgMul: 0.8, essence: 1, score: 12, weight: 8, minThreat: 1.4,
+    blurb: "Feral and fast. Ignores your skeletons and lunges past them to claw at you directly." },
+  { id: "hexer",   name: "Hexer",   spr: ENEMY_FR[1], idle: HEX_IDLE, atk: HEX_ATK, scale: 0.95, behavior: "ranged",
+    hpMul: 0.75, speedMul: 0.85, dmgMul: 1.1, essence: 2, score: 18, weight: 6, minThreat: 3,
+    preferDist: 200, shotCd: 2.0, shotSpeed: 220,
+    blurb: "Hooded caster. Keeps its distance and hurls hex bolts. Close the gap or it whittles you down." },
+];
+function threat() { return state.time * CONFIG.difficulty.threatPerSec * state.diffMult; }
+function spawnInterval() {
+  const d = CONFIG.difficulty;
+  return Math.max(d.spawnMin, d.spawnBase - threat() * d.spawnPerThreat);
+}
+function spawnBurst() {
+  const d = CONFIG.difficulty;
+  return Math.max(1, Math.round(d.burstBase + threat() * d.burstPerThreat));
+}
+function pickEnemyType() {
+  const th = threat();
+  const pool = ENEMY_TYPES.filter((t) => t.minThreat <= th);
+  let total = 0; for (const t of pool) total += t.weight;
+  let r = Math.random() * total;
+  for (const t of pool) { r -= t.weight; if (r <= 0) return t; }
+  return pool[0] || ENEMY_TYPES[0];
+}
+
+function spawnEnemyAtEdge() {
+  const d = CONFIG.difficulty;
+  if (state.enemies.length >= d.maxEnemies) return;
+  // spawn just beyond the visible camera rectangle, in world coordinates
+  const z = CONFIG.art.zoom, m = 36;
+  const halfW = (VIEW.w / 2) / z + m, halfH = (VIEW.h / 2) / z + m;
+  const edge = Math.floor(Math.random() * 4);
+  let x, y;
+  if (edge === 0) { x = cam.x + rand(-halfW, halfW); y = cam.y - halfH; }
+  else if (edge === 1) { x = cam.x + halfW; y = cam.y + rand(-halfH, halfH); }
+  else if (edge === 2) { x = cam.x + rand(-halfW, halfW); y = cam.y + halfH; }
+  else { x = cam.x - halfW; y = cam.y + rand(-halfH, halfH); }
+  x = clamp(x, 8, WORLD.w - 8); y = clamp(y, 8, WORLD.h - 8);
+
+  const th = threat();
+  const t = pickEnemyType();
+  const elite = Math.random() < Math.min(d.eliteMax, d.eliteBase + th * d.elitePerThreat);
+  let hp = d.hpBase * (1 + th * d.hpPerThreat) * t.hpMul;
+  let dmg = d.dmgBase * (1 + th * d.dmgPerThreat) * t.dmgMul;
+  let spd = CONFIG.enemy.speed * (1 + th * d.speedPerThreat) * t.speedMul + rand(-6, 6);
+  let ess = t.essence, score = t.score, scale = t.scale;
+  if (elite) { hp *= d.eliteHpMul; dmg *= d.eliteDmgMul; scale *= d.eliteScale; ess += d.eliteEssence; score *= 5; }
+
+  state.enemies.push({
+    x, y, hp, maxHp: hp, speed: spd, damage: dmg, essence: ess, scoreVal: score,
+    behavior: t.behavior, spr: t.spr, idle: t.idle, atk: t.atk, scale, elite, type: t.id, name: t.name,
+    preferDist: t.preferDist || 0, shotCd: t.shotCd || 0, shotSpeed: t.shotSpeed || 0, shotTimer: rand(0.5, 1.5),
+    attackTimer: 0, windup: 0, flash: 0, slowTimer: 0, phase: rand(0, 6.28), facing: 1, moving: false, lunge: 0, lx: 0, ly: 0,
+  });
+}
+
+function updateWaves(dt) {
+  state.spawnTimer -= dt;
+  if (state.spawnTimer <= 0) {
+    state.spawnTimer += spawnInterval();
+    const n = spawnBurst();
+    for (let i = 0; i < n; i++) spawnEnemyAtEdge();
+  }
+}
+
+/* =====================================================================
+   9. UPDATE SYSTEMS
+   ===================================================================== */
+function startDash() {
+  if (state.mode !== "playing") return;
+  const p = state.player;
+  if (p.dashCd > 0 || p.dashT > 0) return;
+  let mx = 0, my = 0;
+  if (keys["w"] || keys["arrowup"]) my -= 1;
+  if (keys["s"] || keys["arrowdown"]) my += 1;
+  if (keys["a"] || keys["arrowleft"]) mx -= 1;
+  if (keys["d"] || keys["arrowright"]) mx += 1;
+  if (!mx && !my) { mx = p.facing; my = 0; }       // no input: dash the way you face
+  const len = Math.hypot(mx, my) || 1;
+  p.dvx = mx / len; p.dvy = my / len;
+  p.dashT = CONFIG.player.dashTime;
+  p._iframe = Math.max(p._iframe, CONFIG.player.dashIframe);
+  p.dashCd = CONFIG.player.dashCd;
+  if (mx) p.facing = mx > 0 ? 1 : -1;
+  spawnParticles(p.x, p.y, "#bfe8ff", 8); addShake(2); beep(520, 0.05, "sine");
+}
+
+function updatePlayer(dt) {
+  const p = state.player;
+  p.flash = Math.max(0, p.flash - dt);
+  p.zapCd = Math.max(0, p.zapCd - dt);
+  p.swingCd = Math.max(0, p.swingCd - dt);
+  p.swingT = Math.max(0, p.swingT - dt);
+  p.dashCd = Math.max(0, p.dashCd - dt);
+  p.dashT = Math.max(0, p.dashT - dt);
+
+  let mx = 0, my = 0;
+  if (keys["w"] || keys["arrowup"]) my -= 1;
+  if (keys["s"] || keys["arrowdown"]) my += 1;
+  if (keys["a"] || keys["arrowleft"]) mx -= 1;
+  if (keys["d"] || keys["arrowright"]) mx += 1;
+
+  p.moving = false;
+  if (p.dashT > 0) {                       // dodge dash : fast burst, i-frames (startDash sets dvx/dvy)
+    p.x += p.dvx * CONFIG.player.dashSpeed * dt;
+    p.y += p.dvy * CONFIG.player.dashSpeed * dt;
+    p.moving = true;
+  } else if (mx || my) {
+    const len = Math.hypot(mx, my);
+    p.x += (mx / len) * p.speed * dt;
+    p.y += (my / len) * p.speed * dt;
+    if (mx) p.facing = mx > 0 ? 1 : -1;
+    p.moving = true;
+  }
+  p.x = clamp(p.x, 12, WORLD.w - 12);
+  p.y = clamp(p.y, 16, WORLD.h - 16);
+
+  // mana regen, boosted near a Bone Altar
+  let regen = p.manaRegen;
+  for (const st of state.structures) {
+    if (st.type === "altar" && dist(p.x, p.y, st.x, st.y) < CONFIG.structures.altarRadius) {
+      regen += CONFIG.structures.altarManaBonus;
+    }
+  }
+  p.mana = Math.min(p.maxMana, p.mana + regen * dt);
+}
+
+function nearestEnemy(x, y, maxRange) {
+  let best = null, bd = maxRange == null ? Infinity : maxRange;
+  for (const e of state.enemies) {
+    const d = dist(x, y, e.x, e.y);
+    if (d < bd) { bd = d; best = e; }
+  }
+  return best;
+}
+
+function updateSkeletons(dt) {
+  const p = state.player;
+  const cfg = CONFIG.summon;
+  for (let i = state.skeletons.length - 1; i >= 0; i--) {
+    const sk = state.skeletons[i];
+    sk.flash = Math.max(0, sk.flash - dt);
+    sk.attackTimer = Math.max(0, sk.attackTimer - dt);
+    sk.lunge = Math.max(0, sk.lunge - dt);
+    sk.spawnT = Math.max(0, sk.spawnT - dt);
+    sk.moving = false;
+
+    const target = nearestEnemy(sk.x, sk.y, cfg.skeletonDetectRange);
+    if (target) {
+      const d = dist(sk.x, sk.y, target.x, target.y);
+      if (d > cfg.skeletonAttackRange) {
+        const dx = target.x - sk.x, dy = target.y - sk.y;
+        const len = Math.hypot(dx, dy) || 1;
+        sk.x += (dx / len) * cfg.skeletonSpeed * dt;
+        sk.y += (dy / len) * cfg.skeletonSpeed * dt;
+        sk.moving = true; sk.facing = dx >= 0 ? 1 : -1;
+      } else if (sk.attackTimer <= 0) {
+        sk.attackTimer = cfg.skeletonAttackCd;
+        const dx = target.x - sk.x, dy = target.y - sk.y, len = Math.hypot(dx, dy) || 1;
+        sk.lunge = 0.18; sk.lx = dx / len; sk.ly = dy / len; sk.facing = dx >= 0 ? 1 : -1;
+        damageEnemy(target, p.skeletonDamage, sk.x, sk.y);
+      }
+    } else {
+      // follow player loosely
+      const d = dist(sk.x, sk.y, p.x, p.y);
+      if (d > cfg.skeletonFollowDist) {
+        const dx = p.x - sk.x, dy = p.y - sk.y;
+        const len = Math.hypot(dx, dy) || 1;
+        sk.x += (dx / len) * cfg.skeletonSpeed * dt;
+        sk.y += (dy / len) * cfg.skeletonSpeed * dt;
+        sk.moving = true; sk.facing = dx >= 0 ? 1 : -1;
+      }
+    }
+
+    if (sk.hp <= 0) {
+      spawnParticles(sk.x, sk.y, "#c8c8d8", 8);
+      state.skeletons.splice(i, 1);
+    }
+  }
+}
+
+function updateEnemies(dt) {
+  const p = state.player;
+  const cfg = CONFIG.enemy;
+  for (let i = state.enemies.length - 1; i >= 0; i--) {
+    const e = state.enemies[i];
+    e.flash = Math.max(0, e.flash - dt);
+    e.attackTimer = Math.max(0, e.attackTimer - dt);
+    e.slowTimer = Math.max(0, e.slowTimer - dt);
+    e.lunge = Math.max(0, e.lunge - dt);
+    e.shotTimer = Math.max(0, e.shotTimer - dt);
+    e.moving = false;
+    const slowMult = e.slowTimer > 0 ? CONFIG.spells.frost.slow : 1;
+
+    // BRUTE slam: a telegraphed ground pound that knocks the player back
+    if (e.windup > 0) {
+      e.windup -= dt;
+      if (e.windup <= 0) {
+        const R = 78;
+        state.rings.push({ x: e.x, y: e.y, r: R, life: 0.4, col: "#caa75a" });
+        spawnParticles(e.x, e.y, "#caa75a", 16); addShake(11); beep(80, 0.18, "sawtooth");
+        if (dist(e.x, e.y, p.x, p.y) < R) {
+          const dmg = e.damage * (1 - p.armorReduction);
+          p.hp -= dmg; p.flash = CONFIG.juice.flashTime;
+          const a = Math.atan2(p.y - e.y, p.x - e.x);
+          p.x = clamp(p.x + Math.cos(a) * 44, 12, WORLD.w - 12); p.y = clamp(p.y + Math.sin(a) * 44, 16, WORLD.h - 16);
+          floater(p.x, p.y - 24, "-" + Math.round(dmg), "#ff7a7a");
+        }
+        for (const sk of state.skeletons) if (dist(e.x, e.y, sk.x, sk.y) < R) { sk.hp -= e.damage; sk.flash = CONFIG.juice.flashTime; }
+      }
+      continue; // rooted during the slam
+    }
+
+    // RANGED (hexer): hold at a distance and lob bolts at the player
+    if (e.behavior === "ranged") {
+      const dp = dist(e.x, e.y, p.x, p.y);
+      const ang = Math.atan2(p.y - e.y, p.x - e.x);
+      e.facing = Math.cos(ang) >= 0 ? 1 : -1;
+      if (dp > e.preferDist + 25) { e.x += Math.cos(ang) * e.speed * slowMult * dt; e.y += Math.sin(ang) * e.speed * slowMult * dt; e.moving = true; }
+      else if (dp < e.preferDist - 45) { e.x -= Math.cos(ang) * e.speed * 0.8 * slowMult * dt; e.y -= Math.sin(ang) * e.speed * 0.8 * slowMult * dt; e.moving = true; }
+      if (dp < e.preferDist + 130 && e.shotTimer <= 0) {
+        e.shotTimer = e.shotCd;
+        state.shots.push({ x: e.x, y: e.y - 8, vx: Math.cos(ang) * e.shotSpeed, vy: Math.sin(ang) * e.shotSpeed, life: 3, dmg: e.damage });
+        beep(440, 0.06, "sawtooth");
+      }
+      continue;
+    }
+
+    // MELEE (soldier / brute / rusher): pick a target. Rushers ignore the
+    // skeleton wall and structures and barrel straight at the player.
+    let target = p, tx = p.x, ty = p.y, tkind = "player";
+    let bestD = dist(e.x, e.y, p.x, p.y);
+    if (e.behavior !== "rush") {
+      for (const sk of state.skeletons) {
+        const d = dist(e.x, e.y, sk.x, sk.y);
+        if (d < bestD * 0.9) { bestD = d; target = sk; tx = sk.x; ty = sk.y; tkind = "skel"; }
+      }
+      for (const st of state.structures) {
+        const d = dist(e.x, e.y, st.x, st.y);
+        if (d < cfg.attackRange + 14) { target = st; tx = st.x; ty = st.y; tkind = "struct"; bestD = d; }
+      }
+    }
+
+    const reach = e.behavior === "brute" ? 58 : cfg.attackRange;
+    const d = dist(e.x, e.y, tx, ty);
+    if (d > reach) {
+      const dx = tx - e.x, dy = ty - e.y, len = Math.hypot(dx, dy) || 1;
+      // rushers dash in fast bursts for a more frantic feel
+      const moveMul = e.behavior === "rush" ? (1 + 0.4 * Math.abs(Math.sin((state.time + e.phase) * 6))) : 1;
+      e.x += (dx / len) * e.speed * slowMult * moveMul * dt;
+      e.y += (dy / len) * e.speed * slowMult * moveMul * dt;
+      e.moving = true; e.facing = dx >= 0 ? 1 : -1;
+    } else if (e.attackTimer <= 0) {
+      const ldx = tx - e.x, ldy = ty - e.y, llen = Math.hypot(ldx, ldy) || 1;
+      e.facing = ldx >= 0 ? 1 : -1;
+      if (e.behavior === "brute") {
+        // wind up a heavy slam instead of a quick swipe
+        e.attackTimer = cfg.attackCd * 2.4; e.windup = 0.55; beep(150, 0.2, "sawtooth");
+      } else {
+        e.attackTimer = cfg.attackCd;
+        e.lunge = 0.18; e.lx = ldx / llen; e.ly = ldy / llen;
+        if (tkind === "player") {
+          if (p._iframe > 0) { floater(p.x, p.y - 24, "dodge", "#bfe8ff"); }
+          else {
+            const dmg = e.damage * (1 - p.armorReduction);
+            p.hp -= dmg; p.flash = CONFIG.juice.flashTime;
+            addShake(6); beep(140, 0.08, "sawtooth");
+            floater(p.x, p.y - 24, "-" + Math.round(dmg), "#ff7a7a");
+          }
+        } else { target.hp -= e.damage; target.flash = CONFIG.juice.flashTime; }
+      }
+    }
+    // light separation push so enemies do not perfectly overlap
+    if (d < cfg.contactPush && d > 0.01) {
+      e.x -= ((tx - e.x) / d) * 4 * dt * 10;
+      e.y -= ((ty - e.y) / d) * 4 * dt * 10;
+    }
+  }
+}
+
+function updateShots(dt) {
+  const p = state.player;
+  for (let i = state.shots.length - 1; i >= 0; i--) {
+    const s = state.shots[i];
+    s.x += s.vx * dt; s.y += s.vy * dt; s.life -= dt;
+    if (dist(s.x, s.y, p.x, p.y) < 16) {
+      if (p._iframe > 0) { floater(p.x, p.y - 24, "dodge", "#bfe8ff"); }
+      else {
+        const dmg = s.dmg * (1 - p.armorReduction);
+        p.hp -= dmg; p.flash = CONFIG.juice.flashTime; addShake(5); beep(150, 0.08, "sawtooth");
+        floater(p.x, p.y - 24, "-" + Math.round(dmg), "#ff7a7a");
+      }
+      state.shots.splice(i, 1); continue;
+    }
+    if (s.life <= 0 || s.x < 0 || s.y < 0 || s.x > WORLD.w || s.y > WORLD.h) state.shots.splice(i, 1);
+  }
+}
+
+function damageEnemy(e, amount, fromX, fromY) {
+  e.hp -= amount;
+  e.flash = CONFIG.juice.flashTime;
+  floater(e.x, e.y - 18, Math.round(amount), "#ffe14d");
+  if (e.hp <= 0) killEnemy(e);
+}
+
+function killEnemy(e) {
+  const idx = state.enemies.indexOf(e);
+  if (idx === -1) return;
+  state.enemies.splice(idx, 1);
+  state.kills++;
+  state.score += Math.round((e.scoreVal || 10) * (1 + threat() * 0.08));
+  spawnParticles(e.x, e.y, "#cc3a3a", CONFIG.juice.particleCount);
+  const life = CONFIG.essence.orbLife * state.player.orbLifeMult;
+  const bonus = state.player.essencePerKill - CONFIG.essence.perKill; // card/boon flat bonus
+  state.orbs.push({ x: e.x, y: e.y, life, value: (e.essence || 1) + bonus, vx: 0, vy: 0 });
+  if (e.elite) {                                  // elites burst extra essence + may drop loot
+    for (let k = 0; k < 3; k++) state.orbs.push({ x: e.x + rand(-24, 24), y: e.y + rand(-24, 24), life, value: 2, vx: 0, vy: 0 });
+    spawnParticles(e.x, e.y, "#ffd24a", 18); addShake(5);
+    if (Math.random() < CONFIG.difficulty.eliteItemChance) grantItem(ITEM_DROPS[(Math.random() * ITEM_DROPS.length) | 0]);
+  }
+  // some of the slain are dragged off alive, to be judged at the ritual
+  if (Math.random() < CONFIG.loop.prisonerChancePerKill) state.prisoners++;
+  beep(300 + Math.random() * 60, 0.05, "square");
+  if (e.elite || Math.random() < 0.18) { state.hitStop = CONFIG.juice.hitStopMs / 1000; addShake(4); }
+}
+
+function updateOrbs(dt) {
+  const p = state.player;
+  for (let i = state.orbs.length - 1; i >= 0; i--) {
+    const o = state.orbs[i];
+    o.life -= dt;
+    const d = dist(o.x, o.y, p.x, p.y);
+    if (d < p.pickupRadius) {
+      // magnet toward player
+      const dx = p.x - o.x, dy = p.y - o.y, len = Math.hypot(dx, dy) || 1;
+      o.x += (dx / len) * CONFIG.essence.magnetSpeed * dt;
+      o.y += (dy / len) * CONFIG.essence.magnetSpeed * dt;
+      if (d < 16) {
+        gainEssence(o.value);
+        spawnParticles(o.x, o.y, "#37e0a0", 4);
+        state.orbs.splice(i, 1);
+        continue;
+      }
+    }
+    if (o.life <= 0) state.orbs.splice(i, 1);
+  }
+}
+
+function gainEssence(v) {
+  state.essence += v;
+  beep(720, 0.04, "sine");
+  // bank essence during the ritual; resolve the level on continue
+  if (state.essence >= state.essenceNeeded && state.mode === "playing") levelUp();
+}
+
+function levelUp() {
+  state.essence -= state.essenceNeeded;
+  state.level++;
+  state.essenceNeeded = Math.round(CONFIG.leveling.baseNeeded * Math.pow(CONFIG.leveling.growth, state.level - 1));
+  state.cardChoices = rollCards();
+  state.mode = "levelup";
+  addShake(8);
+  beep(880, 0.12, "triangle");
+}
+
+function updateStructures(dt) {
+  for (let i = state.structures.length - 1; i >= 0; i--) {
+    const st = state.structures[i];
+    st.flash = Math.max(0, st.flash - dt);
+    if (st.type === "cemetery") {
+      st.timer -= dt;
+      if (st.timer <= 0) {
+        st.timer = CONFIG.structures.cemeteryInterval;
+        spawnSkeleton(st.x + rand(-16, 16), st.y + rand(-16, 16));
+      }
+    }
+    if (st.hp <= 0) {
+      spawnParticles(st.x, st.y, "#3a3a48", 12);
+      addShake(6);
+      state.structures.splice(i, 1);
+    }
+  }
+}
+
+function updateSpells(dt) {
+  const sp = state.spells;
+  if (sp.lightning.owned) {
+    sp.lightning.timer -= dt;
+    if (sp.lightning.timer <= 0) {
+      const c = CONFIG.spells.lightning;
+      sp.lightning.timer = Math.max(0.3, c.cooldown - (sp.lightning.level - 1) * c.cdPerLevel) * state.player.spellCdMult;
+      const dmg = (c.damage + (sp.lightning.level - 1) * c.dmgPerLevel) * state.player.spellPower;
+      const t = nearestEnemy(state.player.x, state.player.y, c.range);
+      if (t) {
+        state.bolts.push({ x1: state.player.x, y1: state.player.y - 10, x2: t.x, y2: t.y, life: 0.12 });
+        damageEnemy(t, dmg, state.player.x, state.player.y);
+        addShake(3); beep(900, 0.06, "square");
+      }
+    }
+  }
+  if (sp.frost.owned) {
+    sp.frost.timer -= dt;
+    if (sp.frost.timer <= 0) {
+      const c = CONFIG.spells.frost;
+      sp.frost.timer = c.cooldown * state.player.spellCdMult;
+      const r = c.radius + (sp.frost.level - 1) * c.radiusPerLevel;
+      state.rings.push({ x: state.player.x, y: state.player.y, r: r, life: 0.4 });
+      for (const e of state.enemies) {
+        if (dist(e.x, e.y, state.player.x, state.player.y) < r) {
+          e.slowTimer = c.slowDuration;
+          damageEnemy(e, c.damage * state.player.spellPower, state.player.x, state.player.y);
+        }
+      }
+      beep(500, 0.08, "sine");
+    }
+  }
+}
+
+function updateEffects(dt) {
+  for (let i = state.particles.length - 1; i >= 0; i--) {
+    const pt = state.particles[i];
+    pt.life -= dt;
+    pt.x += pt.vx * dt; pt.y += pt.vy * dt;
+    pt.vx *= 0.92; pt.vy *= 0.92;
+    if (pt.life <= 0) state.particles.splice(i, 1);
+  }
+  for (let i = state.floaters.length - 1; i >= 0; i--) {
+    const f = state.floaters[i];
+    f.life -= dt; f.y -= 26 * dt;
+    if (f.life <= 0) state.floaters.splice(i, 1);
+  }
+  for (let i = state.bolts.length - 1; i >= 0; i--) {
+    state.bolts[i].life -= dt;
+    if (state.bolts[i].life <= 0) state.bolts.splice(i, 1);
+  }
+  for (let i = state.rings.length - 1; i >= 0; i--) {
+    state.rings[i].life -= dt;
+    if (state.rings[i].life <= 0) state.rings.splice(i, 1);
+  }
+  for (let i = state.slashes.length - 1; i >= 0; i--) {
+    state.slashes[i].life -= dt;
+    if (state.slashes[i].life <= 0) state.slashes.splice(i, 1);
+  }
+  state.shake = Math.max(0, state.shake - CONFIG.juice.screenShakeDecay * dt);
+}
+
+/* =====================================================================
+   9b. BOSS : the Minotaur. Charges, throws its axe, and cleaves. On defeat
+   you may bind it as an undying ally (it stuns instead of dying).
+   ===================================================================== */
+function spawnBoss() {
+  state.bossNum++;
+  const cfg = CONFIG.boss;
+  // appear at the edge of the visible area
+  const a = rand(0, Math.PI * 2);
+  const dx = Math.cos(a), dy = Math.sin(a);
+  const dist0 = (VIEW.w / 2) / CONFIG.art.zoom + 60;
+  state.boss = {
+    type: "minotaur", name: "The Minotaur",
+    x: clamp(cam.x + dx * dist0, 40, WORLD.w - 40),
+    y: clamp(cam.y + dy * dist0, 40, WORLD.h - 40),
+    hp: cfg.hp + (state.bossNum - 1) * cfg.hpPerBoss,
+    maxHp: cfg.hp + (state.bossNum - 1) * cfg.hpPerBoss,
+    r: SPR_MINOTAUR.length * cfg.scale / 2,
+    facing: 1, flash: 0, ally: false, stunT: 0,
+    action: "idle", actTimer: 1.2, vx: 0, vy: 0, attackTimer: 0, bob: rand(0, 6.28),
+  };
+  announce("THE MINOTAUR APPROACHES", "#cc3a3a");
+  addShake(12); beep(70, 0.5, "sawtooth");
+}
+
+function updateBoss(dt) {
+  const b = state.boss; if (!b) return;
+  const p = state.player;
+  b.flash = Math.max(0, b.flash - dt);
+  b.bob += dt;
+  if (b.ally) { updateAllyBoss(dt); return; }
+
+  const d = dist(b.x, b.y, p.x, p.y);
+  b.facing = p.x >= b.x ? 1 : -1;
+  b.actTimer -= dt;
+
+  if (b.action === "idle") {
+    // stalk the player
+    if (d > 70) { const a = Math.atan2(p.y - b.y, p.x - b.x); b.x += Math.cos(a) * CONFIG.boss.speed * dt; b.y += Math.sin(a) * CONFIG.boss.speed * dt; }
+    if (b.actTimer <= 0) {
+      // choose an attack by range
+      const roll = Math.random();
+      if (d > 260) { b.action = "windup"; b.next = "throw"; b.actTimer = 0.5; }
+      else if (d > 150 || roll < 0.5) { b.action = "windup"; b.next = "charge"; b.actTimer = 0.6; }
+      else { b.action = "windup"; b.next = "swing"; b.actTimer = 0.45; }
+    }
+  } else if (b.action === "windup") {
+    if (b.actTimer <= 0) {
+      if (b.next === "throw") {
+        const a = Math.atan2(p.y - b.y, p.x - b.x);
+        state.axes.push({ x: b.x, y: b.y - 10, vx: Math.cos(a) * CONFIG.boss.axeSpeed, vy: Math.sin(a) * CONFIG.boss.axeSpeed, spin: 0, life: 2.4 });
+        beep(260, 0.12, "square"); b.action = "recover"; b.actTimer = 0.8;
+      } else if (b.next === "charge") {
+        const a = Math.atan2(p.y - b.y, p.x - b.x);
+        b.vx = Math.cos(a) * CONFIG.boss.chargeSpeed; b.vy = Math.sin(a) * CONFIG.boss.chargeSpeed;
+        b.action = "charge"; b.actTimer = 0.55; beep(120, 0.2, "sawtooth"); addShake(5);
+      } else {
+        b.action = "swing"; b.actTimer = 0.25;
+      }
+    }
+  } else if (b.action === "charge") {
+    b.x += b.vx * dt; b.y += b.vy * dt;
+    b.x = clamp(b.x, 30, WORLD.w - 30); b.y = clamp(b.y, 30, WORLD.h - 30);
+    if (d < b.r + 24) hitPlayer(CONFIG.boss.chargeDamage, b.x, b.y);
+    if (b.actTimer <= 0) { b.action = "recover"; b.actTimer = 0.7; }
+  } else if (b.action === "swing") {
+    if (d < CONFIG.boss.swingRange) hitPlayer(CONFIG.boss.swingDamage, b.x, b.y);
+    if (b.actTimer <= 0) { b.action = "recover"; b.actTimer = 0.6; addShake(4); }
+  } else if (b.action === "recover") {
+    if (b.actTimer <= 0) { b.action = "idle"; b.actTimer = rand(0.8, 1.6); }
+  }
+}
+
+function updateAllyBoss(dt) {
+  const b = state.boss, p = state.player;
+  if (b.stunT > 0) { b.stunT -= dt; if (b.stunT <= 0) { b.hp = b.maxHp; announce("The Minotaur rises again", "#dfe2ee"); } return; }
+  b.attackTimer = Math.max(0, b.attackTimer - dt);
+  const t = nearestEnemy(b.x, b.y, 320);
+  if (t) {
+    const d = dist(b.x, b.y, t.x, t.y);
+    b.facing = t.x >= b.x ? 1 : -1;
+    if (d > CONFIG.boss.swingRange * 0.7) { const a = Math.atan2(t.y - b.y, t.x - b.x); b.x += Math.cos(a) * CONFIG.boss.speed * 1.4 * dt; b.y += Math.sin(a) * CONFIG.boss.speed * 1.4 * dt; }
+    else if (b.attackTimer <= 0) {
+      b.attackTimer = 0.8;
+      for (const e of state.enemies) if (dist(b.x, b.y, e.x, e.y) < CONFIG.boss.swingRange) damageEnemy(e, CONFIG.boss.swingDamage * 1.5, b.x, b.y);
+      addShake(3); beep(200, 0.08, "square");
+    }
+  } else {
+    const d = dist(b.x, b.y, p.x, p.y);
+    if (d > 90) { const a = Math.atan2(p.y - b.y, p.x - b.x); b.x += Math.cos(a) * CONFIG.boss.speed * dt; b.y += Math.sin(a) * CONFIG.boss.speed * dt; }
+  }
+}
+
+function updateAxes(dt) {
+  const p = state.player;
+  for (let i = state.axes.length - 1; i >= 0; i--) {
+    const ax = state.axes[i];
+    ax.x += ax.vx * dt; ax.y += ax.vy * dt; ax.spin += dt * 18; ax.life -= dt;
+    if (dist(ax.x, ax.y, p.x, p.y) < 22) { hitPlayer(CONFIG.boss.axeDamage, ax.x, ax.y); state.axes.splice(i, 1); continue; }
+    if (ax.life <= 0 || ax.x < 0 || ax.y < 0 || ax.x > WORLD.w || ax.y > WORLD.h) state.axes.splice(i, 1);
+  }
+}
+
+function hitPlayer(amount, fx, fy) {
+  const p = state.player;
+  if (p._iframe > 0) return;
+  p._iframe = 0.4;
+  const dmg = amount * (1 - p.armorReduction);
+  p.hp -= dmg; p.flash = CONFIG.juice.flashTime;
+  addShake(8); beep(140, 0.1, "sawtooth");
+  floater(p.x, p.y - 24, "-" + Math.round(dmg), "#ff7a7a");
+}
+
+function defeatBoss() {
+  const b = state.boss;
+  b.hp = 0; b.action = "idle";
+  state.mode = "recruit";
+  addShake(14); beep(90, 0.4, "sawtooth");
+  spawnParticles(b.x, b.y, "#ffd24a", 30);
+}
+function bindBoss() {
+  const b = state.boss;
+  b.ally = true; b.hp = b.maxHp; b.stunT = 0; b.action = "idle"; b.attackTimer = 0;
+  state.mode = "playing";
+  grantItem(ITEM_DROPS[(Math.random() * ITEM_DROPS.length) | 0]);
+  announce("The Minotaur is bound to your will", "#dfe2ee");
+  beep(520, 0.14, "triangle");
+}
+function slayBoss() {
+  const b = state.boss;
+  spawnParticles(b.x, b.y, "#37e0a0", 36);
+  gainEssence(CONFIG.boss.essenceReward);
+  for (let i = 0; i < 6; i++) state.orbs.push({ x: b.x + rand(-30, 30), y: b.y + rand(-30, 30), life: 8, value: 2, vx: 0, vy: 0 });
+  grantItem(ITEM_DROPS[(Math.random() * ITEM_DROPS.length) | 0]);
+  state.boss = null;
+  state.mode = "playing";
+  beep(300, 0.1, "square");
+}
+
+// Rising-threat feedback: tier banners + a shout when a new enemy type joins.
+function updateMilestones() {
+  const tl = Math.floor(threat()) + 1;
+  if (tl > state.threatLevel) {
+    state.threatLevel = tl;
+    if (tl >= 2) { announce("THREAT LEVEL " + tl, "#ff7a7a"); addShake(4); }
+  }
+  const th = threat();
+  for (const t of ENEMY_TYPES) {
+    if (t.minThreat > 0 && th >= t.minThreat && !state.typeSeen[t.id]) {
+      state.typeSeen[t.id] = true;
+      announce(t.name + "s join the assault", "#ffd24a");
+    }
+  }
+}
+
+function update(dt) {
+  if (state.mode !== "playing") return;
+  if (state.hitStop > 0) { state.hitStop -= dt; updateEffects(dt); return; }
+
+  state.time += dt;
+  if (state.player._iframe > 0) state.player._iframe -= dt;
+  updatePlayer(dt);
+  updateWaves(dt);
+  updateSkeletons(dt);
+  updateEnemies(dt);
+  updateStructures(dt);
+  updateSpells(dt);
+  updateBoss(dt);
+  updateAxes(dt);
+  updateShots(dt);
+  updateOrbs(dt);
+  updateEffects(dt);
+  if (state.announce) { state.announce.life -= dt; if (state.announce.life <= 0) state.announce = null; }
+  updateMilestones();
+
+  // boss arrivals on a timer (no overlapping bosses)
+  if (!state.boss && state.time >= state.nextBossAt) {
+    spawnBoss();
+    state.nextBossAt = state.time + CONFIG.boss.interval;
+  }
+
+  // loop interlude: at the end of each loop, hold the ritual
+  state.loopTimer -= dt;
+  if (state.loopTimer <= 0) {
+    state.loopTimer = CONFIG.loop.duration;
+    state.loopNum++;
+    state.mode = "ritual";
+    state.ritualMsg = state.prisoners > 0 ? "" : "No prisoners were taken this loop.";
+    beep(330, 0.16, "triangle");
+  }
+
+  if (state.player.hp <= 0) {
+    state.mode = "dead";
+    addShake(14);
+    beep(120, 0.4, "sawtooth");
+    spawnParticles(state.player.x, state.player.y, "#7b3ff2", 24);
+  }
+}
+
+/* =====================================================================
+   10. UPGRADE CARDS : data driven build system
+   apply(state) mutates player / spells / structures.
+   ===================================================================== */
+function placeStructure(type) {
+  const c = baseCenter();
+  const n = state.structures.length;
+  const a = (n / 6) * Math.PI * 2;
+  const rad = rand(20, CONFIG.structures.baseRadius);
+  const x = c.x + Math.cos(a) * rad;
+  const y = c.y + Math.sin(a) * rad;
+  if (type === "cemetery") {
+    state.structures.push({ type, x, y, hp: CONFIG.structures.cemeteryHp, maxHp: CONFIG.structures.cemeteryHp, timer: CONFIG.structures.cemeteryInterval, flash: 0 });
+  } else {
+    state.structures.push({ type: "altar", x, y, hp: CONFIG.structures.altarHp, maxHp: CONFIG.structures.altarHp, flash: 0 });
+  }
+}
+
+/* =====================================================================
+   10a. PATRON DEITIES : every card swears to one patron. Picking cards of
+   a patron builds favor; favor thresholds grant escalating boons. This is
+   the meta-synergy layer that rewards leaning into one theme.
+   ===================================================================== */
+const DEITIES = {
+  mortarr: { name: "Mortarr", title: "Lord of Bone", color: "#dfe2ee", sigil: "skull",
+    blurb: "Master of the raised dead. Favor him to swell and sharpen your legion.",
+    boons: [
+      { at: 2, desc: "+1 maximum skeleton", apply: (s) => { s.player.maxSkeletons += 1; } },
+      { at: 4, desc: "Skeletons strike +25%", apply: (s) => { s.player.skeletonDamage *= 1.25; } },
+      { at: 6, desc: "Summons cost 25% less mana", apply: (s) => { s.player.summonCost = Math.max(2, Math.round(s.player.summonCost * 0.75)); } },
+    ] },
+  vael: { name: "Vael", title: "the Storm", color: "#ffe14d", sigil: "bolt",
+    blurb: "The sky's fury. Favor her to make every zap and spell devastating.",
+    boons: [
+      { at: 2, desc: "Spell power +30%", apply: (s) => { s.player.spellPower *= 1.3; } },
+      { at: 4, desc: "Spells recharge 20% faster", apply: (s) => { s.player.spellCdMult *= 0.8; } },
+      { at: 6, desc: "Spell power +40%", apply: (s) => { s.player.spellPower *= 1.4; } },
+    ] },
+  sylvanis: { name: "Sylvanis", title: "the Verdant", color: "#37e0a0", sigil: "leaf",
+    blurb: "Spirit of the reaping field. Favor her to drink more from every soul.",
+    boons: [
+      { at: 2, desc: "Pickup radius +40%", apply: (s) => { s.player.pickupRadius *= 1.4; } },
+      { at: 4, desc: "+1 essence per kill", apply: (s) => { s.player.essencePerKill += 1; } },
+      { at: 6, desc: "Souls linger far longer", apply: (s) => { s.player.orbLifeMult *= 1.7; } },
+    ] },
+  ankhara: { name: "Ankhara", title: "the Eternal", color: "#7fd4ff", sigil: "heart",
+    blurb: "Keeper of the undying body. Favor her to outlast any siege.",
+    boons: [
+      { at: 2, desc: "+30 max health, healed now", apply: (s) => { s.player.maxHp += 30; s.player.hp = Math.min(s.player.maxHp, s.player.hp + 30); } },
+      { at: 4, desc: "Mana regenerates +50%", apply: (s) => { s.player.manaRegen *= 1.5; } },
+      { at: 6, desc: "Defend blocks +15% more", apply: (s) => { s.player.defendReduction = Math.min(0.92, s.player.defendReduction + 0.15); } },
+    ] },
+};
+
+function announce(text, color) {
+  state.announce = { text, color: color || "#caa75a", life: 3 };
+  beep(990, 0.1, "triangle");
+}
+function checkBoons(deity) {
+  const d = DEITIES[deity];
+  if (!d) return;
+  for (const b of d.boons) {
+    const key = deity + ":" + b.at;
+    if (state.favor[deity] >= b.at && !state.boons[key]) {
+      state.boons[key] = true;
+      b.apply(state);
+      announce(d.name + " grants: " + b.desc, d.color);
+    }
+  }
+}
+function topDeity() {
+  let best = "mortarr", bv = -1;
+  for (const id in state.favor) { if (state.favor[id] > bv) { bv = state.favor[id]; best = id; } }
+  return best;
+}
+
+/* =====================================================================
+   10c. EQUIPMENT : weapon + clothing. Each item applies stat deltas on
+   equip and removes them on unequip, so it stacks cleanly with cards.
+   ===================================================================== */
+const ITEMS = {
+  // weapons (slot: weapon) — boost the sword
+  ironSword:    { slot: "weapon", name: "Iron Sword",    icon: "sword", tier: 1, stats: { swordDamage: 0,  swordRange: 0 } },
+  steelSword:   { slot: "weapon", name: "Steel Sword",   icon: "sword", tier: 2, stats: { swordDamage: 14, swordRange: 6 } },
+  warAxe:       { slot: "weapon", name: "War Axe",       icon: "sword", tier: 3, stats: { swordDamage: 30, swordRange: 16 } },
+  runeblade:    { slot: "weapon", name: "Runeblade",     icon: "sword", tier: 4, stats: { swordDamage: 48, swordRange: 24 } },
+  // clothing (slot: armor) — health + damage reduction
+  clothTunic:   { slot: "armor",  name: "Cloth Tunic",   icon: "chest", tier: 1, stats: { maxHp: 0,  reduction: 0 } },
+  leatherArmor: { slot: "armor",  name: "Leather Armor", icon: "chest", tier: 2, stats: { maxHp: 30, reduction: 0.08 } },
+  chainmail:    { slot: "armor",  name: "Chainmail",     icon: "chest", tier: 3, stats: { maxHp: 60, reduction: 0.16 } },
+  plateArmor:   { slot: "armor",  name: "Plate Armor",   icon: "chest", tier: 4, stats: { maxHp: 110, reduction: 0.26 } },
+};
+const ITEM_DROPS = ["steelSword", "warAxe", "runeblade", "leatherArmor", "chainmail", "plateArmor"];
+
+function itemStatLines(it) {
+  const s = it.stats, out = [];
+  if (s.swordDamage) out.push("+" + s.swordDamage + " sword dmg");
+  if (s.swordRange) out.push("+" + s.swordRange + " reach");
+  if (s.maxHp) out.push("+" + s.maxHp + " max HP");
+  if (s.reduction) out.push("-" + Math.round(s.reduction * 100) + "% dmg taken");
+  return out.length ? out : ["basic gear"];
+}
+function applyItemStats(id, sign) {
+  const it = ITEMS[id]; if (!it) return;
+  const p = state.player, s = it.stats;
+  if (s.swordDamage) p.swordDamageBonus += sign * s.swordDamage;
+  if (s.swordRange) p.swordRangeBonus += sign * s.swordRange;
+  if (s.maxHp) { p.maxHp += sign * s.maxHp; if (sign > 0) p.hp += s.maxHp; else p.hp = Math.min(p.hp, p.maxHp); }
+  if (s.reduction) p.armorReduction = clamp(p.armorReduction + sign * s.reduction, 0, 0.85);
+}
+function equipItem(id) {
+  const it = ITEMS[id]; if (!it || !state.player) return;
+  const slot = it.slot, cur = state.equipment[slot];
+  if (cur === id) return;
+  const idx = state.inventory.indexOf(id);
+  if (idx >= 0) state.inventory.splice(idx, 1);
+  if (cur) { applyItemStats(cur, -1); state.inventory.push(cur); }
+  state.equipment[slot] = id;
+  applyItemStats(id, 1);
+  beep(560, 0.07, "square");
+}
+function grantItem(id) {                       // boss loot → inventory
+  if (!ITEMS[id]) return;
+  state.inventory.push(id);
+  announce("Looted: " + ITEMS[id].name, GOLD);
+}
+
+const CARDS = [
+  { id: "hardenedBones", name: "Hardened Bones", cat: "Summon", deity: "mortarr", max: 99,
+    desc: "Skeleton damage +35%",
+    apply: (s) => { s.player.skeletonDamage *= 1.35; } },
+  { id: "graveLegion", name: "Grave Legion", cat: "Summon", deity: "mortarr", max: 99,
+    desc: "Max skeletons +2",
+    apply: (s) => { s.player.maxSkeletons += 2; } },
+  { id: "swiftRites", name: "Swift Rites", cat: "Summon", deity: "mortarr", max: 6,
+    desc: "Summon mana cost -15%",
+    apply: (s) => { s.player.summonCost = Math.max(2, Math.round(s.player.summonCost * 0.85)); } },
+  { id: "cemetery", name: "Cemetery", cat: "Structure", deity: "mortarr", max: 4,
+    desc: "A tomb that auto-spawns skeletons",
+    apply: (s) => { placeStructure("cemetery"); } },
+  { id: "boneAltar", name: "Bone Altar", cat: "Structure", deity: "ankhara", max: 3,
+    desc: "An altar with a mana-regen aura",
+    apply: (s) => { placeStructure("altar"); } },
+  { id: "stormCaller", name: "Storm Caller", cat: "Spell", deity: "vael", max: 8,
+    desc: "Lightning auto strikes nearest foe",
+    apply: (s) => { s.spells.lightning.owned = true; s.spells.lightning.level++; } },
+  { id: "frostPulse", name: "Frost Pulse", cat: "Spell", deity: "vael", max: 6,
+    desc: "Ring that slows nearby enemies",
+    apply: (s) => { s.spells.frost.owned = true; s.spells.frost.level++; } },
+  { id: "soulHarvest", name: "Soul Harvest", cat: "Essence", deity: "sylvanis", max: 8,
+    desc: "Essence pickup radius +30%",
+    apply: (s) => { s.player.pickupRadius *= 1.3; } },
+  { id: "greaterReaping", name: "Greater Reaping", cat: "Essence", deity: "sylvanis", max: 8,
+    desc: "Essence per kill +1",
+    apply: (s) => { s.player.essencePerKill += 1; } },
+  { id: "quickStep", name: "Quick Step", cat: "Self", deity: "ankhara", max: 8,
+    desc: "Move speed +15%",
+    apply: (s) => { s.player.speed *= 1.15; } },
+  { id: "deepWell", name: "Deep Well", cat: "Self", deity: "vael", max: 99,
+    desc: "Max mana +30",
+    apply: (s) => { s.player.maxMana += 30; s.player.mana += 30; } },
+  { id: "ironWill", name: "Iron Will", cat: "Self", deity: "ankhara", max: 4,
+    desc: "Defend blocks more damage",
+    apply: (s) => { s.player.defendReduction = Math.min(0.9, s.player.defendReduction + 0.08); } },
+  { id: "vitality", name: "Vitality", cat: "Self", deity: "ankhara", max: 99,
+    desc: "Max health +25 and heal now",
+    apply: (s) => { s.player.maxHp += 25; s.player.hp = Math.min(s.player.maxHp, s.player.hp + 35); } },
+];
+
+// More favor with your leading patron widens the offering.
+function cardChoiceCount() {
+  let mx = 0;
+  for (const id in state.favor) mx = Math.max(mx, state.favor[id]);
+  const c = CONFIG.cards;
+  return Math.min(c.maxChoices, c.baseChoices + Math.floor(mx / c.favorPerExtra));
+}
+function rollCards() {
+  const pool = CARDS.filter((c) => (state.cardLevels[c.id] || 0) < c.max);
+  const shuffled = pool.slice();
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled.slice(0, Math.min(cardChoiceCount(), shuffled.length));
+}
+
+function applyCard(card) {
+  card.apply(state);
+  state.cardLevels[card.id] = (state.cardLevels[card.id] || 0) + 1;
+  // grow patron favor, then grant any newly earned boon
+  if (card.deity) { state.favor[card.deity] = (state.favor[card.deity] || 0) + 1; checkBoons(card.deity); }
+}
+
+/* =====================================================================
+   10b. BUTTON ACTIONS : ascend (browse cards), grimoire (codex), ritual.
+   ===================================================================== */
+function forceAscend() {
+  if (state.mode !== "playing") return;
+  state.essence = state.essenceNeeded; // top up so a level is guaranteed
+  levelUp();
+}
+function openCodex() {
+  if (state.mode === "codex") return;
+  state.prevMode = state.mode;
+  state.mode = "codex";
+  beep(560, 0.07, "sine");
+}
+function closeCodex() {
+  state.mode = state.prevMode || "start";
+  beep(440, 0.06, "sine");
+}
+function pauseGame() {
+  if (state.mode !== "playing") return;
+  state.mode = "paused";
+  beep(330, 0.06, "sine");
+}
+function resumeGame() {
+  if (state.mode !== "paused") return;
+  state.mode = "playing";
+  beep(520, 0.06, "sine");
+}
+function openEquip() {
+  if (state.mode === "equip") { closeEquip(); return; }
+  if (state.mode !== "playing" && state.mode !== "paused") return;
+  state.equipReturn = state.mode;
+  state.mode = "equip";
+  beep(520, 0.07, "sine");
+}
+function closeEquip() {
+  state.mode = state.equipReturn === "paused" ? "paused" : "playing";
+  beep(440, 0.06, "sine");
+}
+function openBestiary() {
+  if (state.mode === "bestiary") { closeBestiary(); return; }
+  state.prevMode = state.mode;
+  state.mode = "bestiary";
+  beep(520, 0.07, "sine");
+}
+function closeBestiary() {
+  state.mode = state.prevMode || "start";
+  beep(440, 0.06, "sine");
+}
+
+// THE RITUAL : spend prisoners between loops.
+function ritualDevour() {
+  if (state.prisoners <= 0) return;
+  state.prisoners--;
+  state.player.hp = Math.min(state.player.maxHp, state.player.hp + CONFIG.loop.devourHeal);
+  state.essence += Math.round(state.essenceNeeded * CONFIG.loop.devourXpFrac);
+  state.ritualMsg = "You devour a prisoner. Flesh becomes power.";
+  beep(220, 0.12, "sawtooth");
+}
+function ritualRaise() {
+  if (state.prisoners <= 0) return;
+  state.prisoners--;
+  // bound prisoners rise as skeletons even past the usual cap
+  state.skeletons.push({
+    x: state.player.x + rand(-26, 26), y: state.player.y + rand(-26, 26),
+    hp: CONFIG.summon.skeletonHp, maxHp: CONFIG.summon.skeletonHp,
+    attackTimer: 0, flash: 0, phase: rand(0, 6.28), facing: 1, moving: false, lunge: 0, lx: 0, ly: 0, spawnT: 0.3,
+  });
+  spawnParticles(state.player.x, state.player.y, "#f3f3ff", 8);
+  state.ritualMsg = "The bound one rises to serve.";
+  beep(420, 0.1, "square");
+}
+function ritualOffer() {
+  if (state.prisoners <= 0) return;
+  state.prisoners--;
+  const d = topDeity();
+  state.favor[d] += 1; checkBoons(d);
+  state.ritualMsg = "Offered to " + DEITIES[d].name + ". Favor rises.";
+  beep(700, 0.1, "triangle");
+}
+function ritualRelease() {
+  if (state.prisoners <= 0) return;
+  state.prisoners--;
+  state.player.mana = Math.min(state.player.maxMana, state.player.mana + CONFIG.loop.releaseMana);
+  state.ritualMsg = "You release a prisoner. Their dread feeds your mana.";
+  beep(560, 0.09, "sine");
+}
+function ritualContinue() {
+  state.mode = "playing";
+  state.ritualMsg = "";
+  // resolve any experience banked during the ritual
+  if (state.essence >= state.essenceNeeded) levelUp();
+}
+
+/* =====================================================================
+   11. RENDERING
+   ===================================================================== */
+function drawSpriteTo(c, sprite, cx, cy, flash, flip, px, mul) {
+  px = (px || CONFIG.art.PIXEL) * (mul || 1);
+  const w = sprite[0].length, h = sprite.length;
+  const ox = cx - (w * px) / 2;
+  const oy = cy - (h * px) / 2;
+  for (let r = 0; r < h; r++) {
+    const row = sprite[r];
+    for (let col = 0; col < w; col++) {
+      const ch = flip ? row[w - 1 - col] : row[col];
+      const color = PALETTE[ch];
+      if (!color) continue;
+      c.fillStyle = flash > 0 ? "#ffffff" : color;
+      c.fillRect(ox + col * px, oy + r * px, px + 0.5, px + 0.5);
+    }
+  }
+}
+function drawSprite(sprite, cx, cy, flash, flip, px, mul) {
+  drawSpriteTo(ctx, sprite, cx, cy, flash, flip, px, mul);
+}
+// Pixel-art shadow: a blocky ellipse made of grid-snapped squares (no smooth curve).
+function softShadow(c, x, y, r) {
+  const PX = 4;                                   // shadow pixel size (world units)
+  const rx = Math.max(PX, Math.round(r / PX) * PX);
+  const ry = Math.max(PX, Math.round(r * 0.5 / PX) * PX);
+  const gx = Math.round(x / PX) * PX, gy = Math.round(y / PX) * PX;
+  c.save(); c.globalAlpha = 0.22; c.fillStyle = "#0a140a";
+  for (let oy = -ry; oy <= ry; oy += PX) {
+    const w = rx * Math.sqrt(Math.max(0, 1 - (oy * oy) / (ry * ry)));
+    const wq = Math.round(w / PX) * PX;
+    for (let ox = -wq; ox <= wq; ox += PX) c.fillRect(gx + ox - PX / 2, gy + oy - PX / 2, PX, PX);
+  }
+  c.restore();
+}
+
+// Offscreen, pre-rendered atmospheric ground + decor (built once per layout; bgCanvas declared up top).
+// Procedural octagonal fountain landmark (pale stone ring + blue water), top-down.
+function drawFountain(c, cx, cy, R) {
+  const oct = (rad) => {
+    c.beginPath();
+    for (let i = 0; i < 8; i++) {
+      const a = Math.PI / 8 + i * Math.PI / 4;
+      const px = cx + Math.cos(a) * rad, py = cy + Math.sin(a) * rad * 0.78;
+      i === 0 ? c.moveTo(px, py) : c.lineTo(px, py);
+    }
+    c.closePath();
+  };
+  c.save();
+  c.globalAlpha = 0.22; c.fillStyle = "#2f4a18"; oct(R + 12); c.fill(); c.globalAlpha = 1;
+  c.fillStyle = "#c7bd9c"; oct(R + 6); c.fill();
+  c.fillStyle = "#e8e0cb"; oct(R + 1); c.fill();
+  c.fillStyle = "#6fa8d8"; oct(R - 7); c.fill();
+  c.fillStyle = "#4d86bd"; oct(R - 15); c.fill();
+  c.fillStyle = "rgba(207,230,242,0.55)";
+  for (let i = 0; i < 6; i++) { c.beginPath(); c.ellipse(cx + rand(-R * 0.4, R * 0.4), cy + rand(-R * 0.28, R * 0.28), rand(4, 12), rand(2, 6), 0, 0, Math.PI * 2); c.fill(); }
+  c.fillStyle = "#9b9275"; oct(R * 0.28); c.fill();
+  c.fillStyle = "#e8e0cb"; oct(R * 0.2); c.fill();
+  c.strokeStyle = "rgba(155,146,117,0.7)"; c.lineWidth = 2; oct(R + 1); c.stroke();
+  c.restore();
+}
+function buildBackground() {
+  const W = WORLD.w, H = WORLD.h;
+  const af = CONFIG.art.worldMult * CONFIG.art.worldMult; // scale decor with area
+  bgCanvas = document.createElement("canvas");
+  bgCanvas.width = W; bgCanvas.height = H;
+  const c = bgCanvas.getContext("2d");
+  c.imageSmoothingEnabled = false;
+  // PIXEL grass: solid base + grid-snapped pixel blocks (no smooth gradients — pixel only)
+  const GPX = 8, snap = (val) => Math.floor(val / GPX) * GPX;
+  c.fillStyle = "#79b347"; c.fillRect(0, 0, W, H);                       // base grass
+  for (let i = 0; i < 1100 * af; i++) {                                  // light + dark pixel tufts
+    const x = snap(rand(0, W)), y = snap(rand(0, H));
+    const bw = (1 + (Math.random() * 3 | 0)) * GPX, bh = (1 + (Math.random() * 2 | 0)) * GPX;
+    c.fillStyle = Math.random() < 0.5 ? "#88c552" : "#67a138";
+    c.fillRect(x, y, bw, bh);
+  }
+  for (let i = 0; i < 360 * af; i++) { c.fillStyle = "#9bd45f"; c.fillRect(snap(rand(0, W)), snap(rand(0, H)), GPX, GPX); } // bright specks
+  const center = baseCenter();
+  const far = (x, y, d) => dist(x, y, center.x, center.y) > d;
+  // central fountain landmark
+  drawFountain(c, center.x, center.y, CONFIG.structures.baseRadius);
+  // flowers everywhere (lots, small) : pink / white / lilac
+  for (let i = 0; i < 90 * af; i++) { const s = [SPR_FLOWER, SPR_FLOWER2, SPR_FLOWER3][(Math.random() * 3) | 0]; drawSpriteTo(c, s, snap(rand(0, W)), snap(rand(0, H)), 0, false, 3); }
+  // grass tufts
+  for (let i = 0; i < 60 * af; i++) drawSpriteTo(c, SPR_GRASS, snap(rand(0, W)), snap(rand(0, H)), 0, Math.random() < 0.5, 3);
+  // a few bones (necromancer theme), small
+  for (let i = 0; i < 5 * af; i++) drawSpriteTo(c, SPR_BONES, snap(rand(0, W)), snap(rand(0, H)), 0, Math.random() < 0.5, 3);
+  // trees, ringed near the edges
+  for (let i = 0; i < 12 * af; i++) { const x = rand(40, W - 40), y = rand(60, H - 40); if (!far(x, y, CONFIG.structures.baseRadius + 130)) continue; softShadow(c, x, y + 26, 30); drawSpriteTo(c, Math.random() < 0.5 ? SPR_TREE : SPR_PINE, snap(x), snap(y - 16), 0, Math.random() < 0.5, 4); }
+}
+function drawBackground() {
+  if (!bgCanvas || bgCanvas.width !== WORLD.w || bgCanvas.height !== WORLD.h) buildBackground();
+  ctx.drawImage(bgCanvas, 0, 0);
+}
+
+function drawWorld() {
+  const ES = CONFIG.art.entityScale; // entity pixel scale (taller humanoids)
+  const US = CONFIG.art.unitScale;   // bigger scale for hero + skeletons
+  // structures
+  for (const st of state.structures) {
+    if (st.type === "altar" && st.hp > 0) {
+      ctx.fillStyle = "rgba(217,194,122,0.06)";
+      ctx.beginPath(); ctx.arc(st.x, st.y, CONFIG.structures.altarRadius, 0, Math.PI * 2); ctx.fill();
+    }
+    softShadow(ctx, st.x, st.y + 10, 16);
+    drawSprite(st.type === "cemetery" ? SPR_CEMETERY : SPR_ALTAR, st.x, st.y - 6, st.flash, false, 4);
+    drawBar(st.x - 16, st.y - 32, 32, 3, st.hp / st.maxHp, "#888");
+  }
+  // orbs (gentle pulse, blink when about to decay)
+  for (const o of state.orbs) {
+    if (o.life < 1.5 && Math.floor(o.life * 10) % 2 === 0) continue;
+    drawSprite(SPR_ORB, o.x, o.y, 0, false, 4, 1 + Math.sin(state.time * 8 + o.x) * 0.14);
+  }
+  // skeletons (walk cycle + bob + attack lunge + summon pop)
+  for (const sk of state.skeletons) {
+    const hh = (SKELE_FR[0].length * US) / 2;
+    const sframes = sk.lunge > 0 ? SKELE_ATK : sk.moving ? SKELE_FR : SKELE_IDLE;
+    const fr = Math.floor((state.time + sk.phase) * (sk.moving ? 9 : 2)) % sframes.length;
+    const bob = Math.sin((state.time + sk.phase) * 13) * (sk.moving ? 1.6 : 0.7);
+    const lp = sk.lunge > 0 ? (sk.lunge / 0.18) * 6 : 0;
+    const mul = sk.spawnT > 0 ? 0.4 + (1 - sk.spawnT / 0.3) * 0.6 : 1;
+    softShadow(ctx, sk.x, sk.y + hh - 3, 10 * mul);
+    drawSprite(sframes[fr], sk.x + sk.lx * lp, sk.y - bob + sk.ly * lp, sk.flash, sk.facing < 0, US, mul);
+    if (sk.hp < sk.maxHp) drawBar(sk.x - 13, sk.y - hh - 6, 26, 3, sk.hp / sk.maxHp, "#c8c8d8");
+  }
+  // enemies (per-type sprite + scale + walk cycle; elites ringed gold; brute slam telegraph)
+  for (const e of state.enemies) {
+    const ewalk = e.spr || ENEMY_FR[0];
+    const eframes = e.lunge > 0 ? (e.atk || ewalk) : e.moving ? ewalk : (e.idle || ewalk);
+    const esc = Math.round(US * (e.scale || 1)); // same pixel size as the player/skeletons
+    const hh = (ewalk[0].length * esc) / 2;
+    const fr = Math.floor((state.time + e.phase) * (e.moving ? 8 : 2)) % eframes.length;
+    const bob = Math.sin((state.time + e.phase) * 11) * (e.moving ? 1.3 : 0.5);
+    const lp = e.lunge > 0 ? (e.lunge / 0.18) * 6 : 0;
+    // brute slam telegraph: a growing warning ring on the ground
+    if (e.windup > 0) {
+      const t = 1 - e.windup / 0.55;
+      ctx.strokeStyle = "rgba(255,90,90," + (0.4 + t * 0.5) + ")"; ctx.lineWidth = 3;
+      ctx.beginPath(); ctx.arc(e.x, e.y + hh - 6, 78 * t, 0, Math.PI * 2); ctx.stroke();
+    }
+    softShadow(ctx, e.x, e.y + hh - 3, 10 * (e.scale || 1));
+    if (e.elite) { ctx.strokeStyle = "rgba(255,210,74,0.7)"; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(e.x, e.y + hh - 6, hh * 0.7, 0, Math.PI * 2); ctx.stroke(); }
+    const flash = e.windup > 0 && Math.floor(e.windup * 16) % 2 === 0 ? 0.5 : e.flash;
+    drawSprite(eframes[fr], e.x + e.lx * lp, e.y - bob + e.ly * lp, flash, e.facing < 0, esc);
+    if (e.hp < e.maxHp) drawBar(e.x - 13, e.y - hh - 6, 26, 3, e.hp / e.maxHp, e.elite ? "#ffd24a" : "#cc3a3a");
+  }
+  // enemy hex bolts
+  for (const s of state.shots) {
+    ctx.fillStyle = "#b061e0"; ctx.fillRect(s.x - 4, s.y - 4, 8, 8);
+    ctx.fillStyle = "#e6b3ff"; ctx.fillRect(s.x - 2, s.y - 2, 4, 4);
+  }
+  // boss (minotaur) + its axe in hand
+  const boss = state.boss;
+  if (boss) {
+    const bs = CONFIG.boss.scale;
+    const hh = (SPR_MINOTAUR.length * bs) / 2;
+    const stunned = boss.ally && boss.stunT > 0;
+    const lunge = boss.action === "charge" ? 5 : (boss.action === "windup" ? -3 : 0);
+    const bob = stunned ? 0 : Math.sin(boss.bob * 5) * 2;
+    const bx = boss.x + boss.facing * lunge;
+    softShadow(ctx, boss.x, boss.y + hh - 4, 24);
+    if (boss.ally && !stunned) { ctx.strokeStyle = "rgba(127,212,255,0.45)"; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(boss.x, boss.y, hh - 4, 0, Math.PI * 2); ctx.stroke(); }
+    if (boss.action === "windup") { ctx.fillStyle = "rgba(255,80,80,0.18)"; ctx.beginPath(); ctx.arc(boss.x, boss.y, hh + 6, 0, Math.PI * 2); ctx.fill(); }
+    drawSprite(SPR_MINOTAUR, bx, boss.y - bob, stunned ? 0 : boss.flash, boss.facing < 0, bs, stunned ? 0.92 : 1);
+    drawSprite(SPR_AXE, bx + boss.facing * hh * 0.5, boss.y - bob + 6, 0, boss.facing < 0, bs * 0.7);
+    if (stunned) { ctx.fillStyle = "#ffe14d"; ctx.font = "bold 18px Courier New"; ctx.textAlign = "center"; ctx.fillText("✦  ✦  ✦", boss.x, boss.y - hh - 6); ctx.textAlign = "left"; }
+  }
+  // boss axe projectiles (spinning)
+  for (const ax of state.axes) {
+    ctx.save(); ctx.translate(ax.x, ax.y); ctx.rotate(ax.spin);
+    drawSprite(SPR_AXE, 0, 0, 0, false, 4); ctx.restore();
+  }
+  // player (knight: walk cycle + bob + swing lunge toward the cursor)
+  const p = state.player;
+  {
+    const hh = (PLAYER_IDLE[0].length * US) / 2;
+    const bob = p.moving ? Math.sin(state.time * 16) * 1.6 : Math.sin(state.time * 3) * 1.0;
+    const swingP = p.swingT > 0 ? Math.sin((1 - p.swingT / 0.18) * Math.PI) : 0; // 0→1→0
+    const lx = swingP * Math.cos(p.swingAngle) * 6, ly = swingP * Math.sin(p.swingAngle) * 6;
+    // animation state: attack while swinging, walk while moving, else idle (breathing)
+    const pframe = p.swingT > 0 ? PLAYER_ATK[0]
+      : p.moving ? PLAYER_WALK[Math.floor(state.time * 8) % PLAYER_WALK.length]
+      : PLAYER_IDLE[Math.floor(state.time * 2) % PLAYER_IDLE.length];
+    softShadow(ctx, p.x, p.y + hh - 3, 11);
+    drawSprite(pframe, p.x + lx, p.y - bob + ly, p.flash, p.facing < 0, US);
+  }
+  // sword swing: a sweeping crescent trail + a rotating blade following the arc
+  for (const s of state.slashes) {
+    const dur = 0.18, prog = clamp(1 - s.life / dur, 0, 1);
+    const arc = CONFIG.sword.arc, R = s.range || CONFIG.sword.range;
+    const a0 = s.angle - arc / 2;            // arc start edge
+    const cur = a0 + arc * prog;             // current blade angle
+    // filled crescent from arc start to current angle, fading as it completes
+    ctx.save();
+    ctx.globalAlpha = (1 - prog) * 0.7;
+    ctx.fillStyle = "#eaf4ff";
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, R, a0, cur);
+    ctx.arc(s.x, s.y, R * 0.38, cur, a0, true);
+    ctx.closePath(); ctx.fill();
+    // bright leading edge
+    ctx.globalAlpha = Math.min(1, (1 - prog) + 0.2); ctx.lineCap = "round";
+    ctx.strokeStyle = "#ffffff"; ctx.lineWidth = 5;
+    ctx.beginPath(); ctx.arc(s.x, s.y, R, Math.max(a0, cur - arc * 0.3), cur); ctx.stroke();
+    ctx.strokeStyle = "#9fdcff"; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.arc(s.x, s.y, R, Math.max(a0, cur - arc * 0.3), cur); ctx.stroke();
+    ctx.restore();
+    // the blade itself, rotating through the swing (points up by default → +90deg)
+    const bx = s.x + Math.cos(cur) * R * 0.66, by = s.y + Math.sin(cur) * R * 0.66;
+    ctx.save(); ctx.translate(bx, by); ctx.rotate(cur + Math.PI / 2);
+    drawSprite(SPR_SWORD, 0, 0, 0, false, 4); ctx.restore();
+  }
+
+  // spell visuals : jagged, glowing lightning
+  for (const b of state.bolts) drawBolt(b);
+  for (const ring of state.rings) {
+    ctx.save();
+    if (ring.col) { ctx.globalAlpha = clamp(ring.life * 2.2, 0, 1); ctx.strokeStyle = ring.col; ctx.lineWidth = 4; }
+    else { ctx.strokeStyle = "rgba(127,212,255," + (ring.life * 2) + ")"; ctx.lineWidth = 3; }
+    ctx.beginPath(); ctx.arc(ring.x, ring.y, ring.r * (1 - ring.life), 0, Math.PI * 2); ctx.stroke();
+    ctx.restore();
+  }
+  // particles
+  for (const pt of state.particles) {
+    ctx.globalAlpha = Math.max(0, pt.life / pt.maxLife);
+    ctx.fillStyle = pt.color;
+    ctx.fillRect(pt.x, pt.y, pt.size, pt.size);
+  }
+  ctx.globalAlpha = 1;
+  // floaters
+  ctx.font = "bold 14px Courier New";
+  ctx.textAlign = "center";
+  for (const f of state.floaters) {
+    ctx.globalAlpha = clamp(f.life / CONFIG.juice.floaterLife, 0, 1);
+    ctx.fillStyle = f.color;
+    ctx.fillText(f.text, f.x, f.y);
+  }
+  ctx.globalAlpha = 1;
+  ctx.textAlign = "left";
+}
+
+function drawBar(x, y, w, h, frac, color) {
+  frac = clamp(frac, 0, 1);
+  ctx.fillStyle = "rgba(0,0,0,0.5)"; ctx.fillRect(x, y, w, h);
+  ctx.fillStyle = color; ctx.fillRect(x, y, w * frac, h);
+}
+
+// A forking, glowing lightning bolt with random jag (deterministic per-bolt seed).
+function drawBolt(b) {
+  if (b.seed === undefined) b.seed = Math.random() * 1000;
+  const dx = b.x2 - b.x1, dy = b.y2 - b.y1, len = Math.hypot(dx, dy) || 1;
+  const nx = -dy / len, ny = dx / len;       // perpendicular
+  const segs = 7;
+  const pts = [];
+  for (let i = 0; i <= segs; i++) {
+    const tt = i / segs;
+    const jag = (i === 0 || i === segs) ? 0 : (Math.sin(b.seed + i * 2.3) * 0.5 + Math.sin(b.seed * 1.7 + i) * 0.5) * 10;
+    pts.push([b.x1 + dx * tt + nx * jag, b.y1 + dy * tt + ny * jag]);
+  }
+  const path = () => { ctx.beginPath(); ctx.moveTo(pts[0][0], pts[0][1]); for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i][0], pts[i][1]); ctx.stroke(); };
+  ctx.save();
+  ctx.lineCap = "round"; ctx.lineJoin = "round";
+  ctx.shadowColor = "#9fe0ff"; ctx.shadowBlur = 14;
+  // outer glow
+  ctx.strokeStyle = "rgba(127,212,255,0.35)"; ctx.lineWidth = 6 + b.life * 18; path();
+  // mid
+  ctx.strokeStyle = "#ffe14d"; ctx.lineWidth = 3 + b.life * 8; path();
+  // bright core
+  ctx.shadowBlur = 0; ctx.strokeStyle = "#ffffff"; ctx.lineWidth = 1.4; path();
+  // little forks
+  ctx.strokeStyle = "rgba(255,225,77,0.7)"; ctx.lineWidth = 1.6;
+  for (let i = 2; i < segs - 1; i += 2) {
+    const f = pts[i]; ctx.beginPath(); ctx.moveTo(f[0], f[1]);
+    ctx.lineTo(f[0] + nx * rand(-14, 14) + dx / len * 6, f[1] + ny * rand(-14, 14) + dy / len * 6); ctx.stroke();
+  }
+  ctx.restore();
+}
+
+/* =====================================================================
+   12. HUD + SCREENS  (fantasy styling: serif type, gilded panels)
+   ===================================================================== */
+const FONT_TITLE = '"Luminari", "Papyrus", "Georgia", serif';
+const FONT_BODY = '"Georgia", "Palatino Linotype", "Times New Roman", serif';
+const GOLD = "#caa75a";
+function setFont(size, weight, family) {
+  ctx.font = (weight ? weight + " " : "") + size + 'px ' + (family || FONT_BODY);
+}
+// Gilded parchment panel with double border and corner flourishes.
+function panel(x, y, w, h, accent) {
+  accent = accent || GOLD;
+  const g = ctx.createLinearGradient(0, y, 0, y + h);
+  g.addColorStop(0, "rgba(30,24,42,0.97)");
+  g.addColorStop(1, "rgba(13,11,20,0.98)");
+  ctx.fillStyle = g; ctx.fillRect(x, y, w, h);
+  ctx.strokeStyle = accent; ctx.lineWidth = 2; ctx.strokeRect(x + 3, y + 3, w - 6, h - 6);
+  ctx.strokeStyle = "rgba(202,167,90,0.35)"; ctx.lineWidth = 1; ctx.strokeRect(x + 7, y + 7, w - 14, h - 14);
+  // corner flourishes
+  ctx.strokeStyle = accent; ctx.lineWidth = 2;
+  const s = 12;
+  const corner = (cx, cy, dx, dy) => { ctx.beginPath(); ctx.moveTo(cx, cy + dy * s); ctx.lineTo(cx, cy); ctx.lineTo(cx + dx * s, cy); ctx.stroke(); };
+  corner(x + 3, y + 3, 1, 1); corner(x + w - 3, y + 3, -1, 1);
+  corner(x + 3, y + h - 3, 1, -1); corner(x + w - 3, y + h - 3, -1, -1);
+}
+// Loop Hero-style pixel panel: flat dark fill + chunky 2-tone blocky border.
+function pixelPanel(x, y, w, h, accent) {
+  x = Math.round(x); y = Math.round(y); w = Math.round(w); h = Math.round(h);
+  const b = 4;                                   // border thickness (pixels)
+  ctx.fillStyle = "#0c0a14"; ctx.fillRect(x, y, w, h);                 // body
+  ctx.fillStyle = accent || "#5a4a2a"; ctx.fillRect(x, y, w, h);       // outer frame
+  ctx.fillStyle = "#191427"; ctx.fillRect(x + b, y + b, w - b * 2, h - b * 2); // inner body
+  // top/left highlight, bottom/right shadow for a chiselled pixel bevel
+  ctx.fillStyle = "rgba(255,255,255,0.10)"; ctx.fillRect(x + b, y + b, w - b * 2, 2);
+  ctx.fillStyle = "rgba(0,0,0,0.35)"; ctx.fillRect(x + b, y + h - b - 2, w - b * 2, 2);
+}
+// A single inventory/equipment cell, optionally holding an item (registers a click).
+function pixelSlot(x, y, size, itemId, action, highlight) {
+  x = Math.round(x); y = Math.round(y); size = Math.round(size);
+  pixelPanel(x, y, size, size, highlight ? GOLD : "#3a3550");
+  if (itemId && ITEMS[itemId]) {
+    const it = ITEMS[itemId];
+    const tierCol = ["#9a92b0", "#7fd4ff", "#b48cff", "#ffd24a"][Math.min(3, it.tier - 1)];
+    ctx.fillStyle = tierCol; ctx.globalAlpha = 0.14; ctx.fillRect(x + 4, y + 4, size - 8, size - 8); ctx.globalAlpha = 1;
+    drawSprite(ICONS[it.icon] || ICONS.sword, x + size / 2, y + size / 2, 0, false, Math.max(2, (size - 16) / 8));
+    // tier pip
+    ctx.fillStyle = tierCol; ctx.fillRect(x + size - 9, y + 5, 4, 4);
+  }
+  if (action) state.uiButtons.push({ x, y, w: size, h: size, action });
+}
+
+// Register + draw a clickable button. Returns nothing; rect lives in uiButtons.
+function uiButton(label, x, y, w, h, accent, action, enabled) {
+  enabled = enabled !== false;
+  if (enabled) state.uiButtons.push({ x, y, w, h, action });
+  pixelPanel(x, y, w, h, enabled ? accent : "#444");
+  let sc = 2; while (sc > 1 && ptextWidth(label, sc) > w - 12) sc--;
+  ptext(label, x + w / 2, y + (h - PXH * sc) / 2, sc, enabled ? accent : "#777", "center");
+}
+
+function drawHUD() {
+  const p = state.player;
+  const pad = 14, bx = pad + 26, bw = 210, bh = 16;
+  // health
+  drawSprite(ICONS.heart, pad + 10, pad + 8, 0, false, 2);
+  drawBar(bx, pad, bw, bh, p.hp / p.maxHp, "#cc3a3a");
+  hudLabel("HP " + Math.max(0, Math.round(p.hp)) + "/" + p.maxHp, bx + 6, pad + 12);
+  // mana
+  drawSprite(ICONS.mana, pad + 10, pad + 30, 0, false, 2);
+  drawBar(bx, pad + 22, bw, bh, p.mana / p.maxMana, "#5320b0");
+  hudLabel("MANA " + Math.round(p.mana) + "/" + p.maxMana, bx + 6, pad + 34);
+  // level / essence
+  drawSprite(ICONS.orb, pad + 10, pad + 52, 0, false, 2);
+  drawBar(bx, pad + 44, bw, bh, state.essence / state.essenceNeeded, "#37e0a0");
+  hudLabel("LVL " + state.level, bx + 6, pad + 56);
+
+  // timer + score top right
+  ctx.font = "bold 20px Courier New";
+  ctx.textAlign = "right";
+  ctx.fillStyle = "#e8e8f0";
+  ctx.fillText(formatTime(state.time), VIEW.w - pad, pad + 18);
+  setFont(13, "bold", FONT_BODY); ctx.fillStyle = GOLD;
+  ctx.fillText("SCORE " + state.score, VIEW.w - pad, pad + 36);
+  // threat meter
+  const tl = state.threatLevel, frac = (threat() % 1);
+  ctx.fillStyle = "#ff7a7a"; setFont(12, "bold", FONT_BODY);
+  ctx.fillText("THREAT " + tl, VIEW.w - pad, pad + 54);
+  ctx.textAlign = "left";
+  const tmW = 90, tmX = VIEW.w - pad - tmW;
+  ctx.fillStyle = "rgba(0,0,0,0.5)"; ctx.fillRect(tmX, pad + 60, tmW, 5);
+  ctx.fillStyle = "#ff7a7a"; ctx.fillRect(tmX, pad + 60, tmW * frac, 5);
+  // kills + skeleton count with icons
+  ctx.font = "14px Courier New"; ctx.fillStyle = "#9a9ab0"; ctx.textAlign = "right";
+  ctx.fillText("" + state.kills, VIEW.w - pad, pad + 84);
+  ctx.fillText(state.skeletons.length + "/" + p.maxSkeletons, VIEW.w - pad, pad + 104);
+  ctx.textAlign = "left";
+  drawSprite(ICONS.skull, VIEW.w - pad - 64, pad + 80, 0, false, 2);
+  drawSprite(ICONS.skele, VIEW.w - pad - 64, pad + 100, 0, false, 2);
+
+  // patron favor row (sigil + count for each deity)
+  let fx = bx;
+  const fy = pad + 70;
+  setFont(12, "bold", FONT_BODY); ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
+  for (const id in DEITIES) {
+    const d = DEITIES[id];
+    drawSprite(ICONS[d.sigil], fx + 8, fy + 8, 0, false, 2);
+    ctx.fillStyle = state.favor[id] > 0 ? d.color : "#555";
+    ctx.fillText("" + (state.favor[id] || 0), fx + 18, fy + 12);
+    fx += 50;
+  }
+
+  // prisoners (top right, under the counters)
+  drawSprite(ICONS.captive, VIEW.w - pad - 64, pad + 120, 0, false, 2);
+  ctx.font = "14px Courier New"; ctx.fillStyle = "#caa75a"; ctx.textAlign = "right";
+  ctx.fillText("" + state.prisoners, VIEW.w - pad, pad + 124);
+  ctx.textAlign = "left";
+
+  // action buttons (bottom right)
+  const bwid = 104, bhei = 34, bgap = 8, bbx = VIEW.w - pad - bwid;
+  uiButton("ASCEND", bbx, VIEW.h - pad - bhei, bwid, bhei, "#b48cff", forceAscend);
+  uiButton("GEAR", bbx - bwid - bgap, VIEW.h - pad - bhei, bwid, bhei, "#7fd4ff", openEquip);
+  uiButton("GRIMOIRE", bbx - (bwid + bgap) * 2, VIEW.h - pad - bhei, bwid, bhei, GOLD, openCodex);
+  uiButton("BESTIARY", bbx - (bwid + bgap) * 3, VIEW.h - pad - bhei, bwid, bhei, "#cc3a3a", openBestiary);
+
+  // controls hint
+  ctx.font = "12px Courier New";
+  ctx.fillStyle = "rgba(255,255,255,0.5)";
+  ctx.fillText("LEFT CLICK sword     RIGHT CLICK magic", pad, VIEW.h - pad - 18);
+  ctx.fillStyle = "rgba(255,255,255,0.35)";
+  ctx.fillText("WASD move   SHIFT dash   SPACE/E summon   I gear   ESC/P pause   M music", pad, VIEW.h - pad);
+
+  // boss health bar (top centre)
+  const b = state.boss;
+  if (b && !b.ally) {
+    const bw = Math.min(560, VIEW.w - 120), bx = VIEW.w / 2 - bw / 2, by = 70;
+    drawSprite(ICONS.skull, bx - 20, by + 7, 0, false, 2);
+    ctx.fillStyle = "rgba(0,0,0,0.55)"; ctx.fillRect(bx - 2, by - 2, bw + 4, 18);
+    ctx.fillStyle = "#5a1414"; ctx.fillRect(bx, by, bw, 14);
+    ctx.fillStyle = "#cc3a3a"; ctx.fillRect(bx, by, bw * clamp(b.hp / b.maxHp, 0, 1), 14);
+    ctx.strokeStyle = GOLD; ctx.lineWidth = 1; ctx.strokeRect(bx - 2, by - 2, bw + 4, 18);
+    setFont(14, "bold", FONT_TITLE); ctx.fillStyle = "#f4ecd8"; ctx.textAlign = "center";
+    ctx.fillText(b.name.toUpperCase(), VIEW.w / 2, by - 8); ctx.textAlign = "left";
+  }
+
+  // patron boon banner
+  if (state.announce) {
+    const a = clamp(state.announce.life, 0, 1);
+    ctx.globalAlpha = a; ctx.textAlign = "center";
+    setFont(22, "bold", FONT_TITLE); ctx.fillStyle = state.announce.color;
+    ctx.fillText(state.announce.text, VIEW.w / 2, 56);
+    ctx.globalAlpha = 1; ctx.textAlign = "left";
+  }
+}
+function hudLabel(t, x, y) {
+  ctx.font = "11px Courier New"; ctx.fillStyle = "#fff"; ctx.textAlign = "left";
+  ctx.fillText(t, x, y);
+}
+function formatTime(t) {
+  const m = Math.floor(t / 60), s = Math.floor(t % 60);
+  return (m < 10 ? "0" : "") + m + ":" + (s < 10 ? "0" : "") + s;
+}
+
+// drifting motes of light, used to give menus atmosphere
+function drawEmbers(n, hue) {
+  for (let i = 0; i < n; i++) {
+    const seed = i * 12.9898;
+    const baseX = ((Math.sin(seed) * 43758.5) % 1 + 1) % 1 * VIEW.w;
+    const speed = 8 + ((Math.sin(seed * 1.7) * 1000) % 1 + 1) % 1 * 16;
+    const y = VIEW.h - ((state.time * speed + i * 53) % (VIEW.h + 40));
+    const x = baseX + Math.sin(state.time * 0.6 + i) * 18;
+    const a = 0.25 + Math.sin(state.time * 2 + i) * 0.2;
+    ctx.globalAlpha = Math.max(0, a);
+    ctx.fillStyle = hue;
+    const s = 1 + (i % 3);
+    ctx.fillRect(x, y, s, s);
+  }
+  ctx.globalAlpha = 1;
+}
+
+function drawStart() {
+  dim(0.42);                                   // keep the bright field visible behind the panel
+  drawEmbers(46, "#ffe9a8");
+  const cx = VIEW.w / 2;
+  const pw = Math.min(620, VIEW.w - 48), ph = 486;
+  const px = cx - pw / 2, py = VIEW.h / 2 - ph / 2;
+  panel(px, py, pw, ph, GOLD);
+  ctx.textAlign = "center";
+  // title in big pixel type
+  ptext("BONEFIELD", cx, py + 44, 8, "#b48cff", "center");
+  setFont(16, "italic", FONT_BODY); ctx.fillStyle = GOLD;
+  ctx.fillText("A lone knight. Endless humans. Raise the dead.", cx, py + 130);
+
+  // patron sigils row, evenly spread
+  const ids = Object.keys(DEITIES);
+  const span = pw - 140, step = span / (ids.length - 1), sy = py + 176;
+  ids.forEach((id, i) => {
+    const d = DEITIES[id], sx = px + 70 + step * i;
+    drawSprite(ICONS[d.sigil], sx, sy, 0, false, 3);
+    setFont(11, "bold", FONT_BODY); ctx.fillStyle = d.color;
+    ctx.fillText(d.name, sx, sy + 28);
+  });
+
+  // controls
+  ctx.fillStyle = "#ffe14d"; setFont(15, "bold", FONT_BODY);
+  ctx.fillText("LEFT CLICK  swing sword          RIGHT CLICK  cast magic", cx, py + 234);
+  ctx.fillStyle = "#c9c2b2"; setFont(13, "", FONT_BODY);
+  ctx.fillText("WASD move   SHIFT dash   SPACE/E summon   I gear   M sound", cx, py + 256);
+  ctx.textAlign = "left";
+
+  // start prompt (single fixed difficulty)
+  ctx.textAlign = "center"; setFont(12, "italic", FONT_BODY); ctx.fillStyle = "#9a9ab0";
+  ctx.fillText("press any key to enter the bonefield", cx, py + 290);
+  ctx.textAlign = "left";
+  const dby = py + 300;
+  uiButton("ENTER THE BONEFIELD", cx - 226, dby, 452, 42, "#37e0a0", () => startRun(1));
+  uiButton("GRIMOIRE", cx - 226, dby + 42 + 14, 220, 38, GOLD, openCodex);
+  uiButton("BESTIARY", cx + 6, dby + 42 + 14, 220, 38, "#cc3a3a", openBestiary);
+  uiButton("SOUND: " + (CONFIG.juice.sound ? "ON" : "OFF"), cx - 226, dby + 106, 452, 32,
+    CONFIG.juice.sound ? "#37e0a0" : "#7a7a8a", toggleMusic);
+
+  // footer
+  ctx.textAlign = "center";
+  setFont(12, "italic", FONT_BODY); ctx.fillStyle = "#8a8a9a";
+  ctx.fillText("a roguelite raised from bone  ·  bonefield", cx, py + ph - 22);
+  ctx.textAlign = "left";
+}
+
+function drawDeath() {
+  dim(0.78);
+  const cx = VIEW.w / 2;
+  ctx.textAlign = "center";
+  ptext("YOU FELL", cx, VIEW.h / 2 - 96, 7, "#cc3a3a", "center");
+  ptext("SCORE " + state.score, cx, VIEW.h / 2 - 40, 4, GOLD, "center");
+  setFont(20, "", FONT_BODY); ctx.fillStyle = "#e8e8f0";
+  ctx.fillText("Survived " + formatTime(state.time) + "  ·  reached Threat " + state.threatLevel, cx, VIEW.h / 2 + 18);
+  ctx.fillText(state.kills + " slain  ·  level " + state.level + "  ·  " + state.loopNum + " loops", cx, VIEW.h / 2 + 46);
+  // patron favor summary
+  const d = topDeity();
+  setFont(15, "italic", FONT_BODY); ctx.fillStyle = DEITIES[d].color;
+  ctx.fillText("Sworn to " + DEITIES[d].name + ", " + DEITIES[d].title + "  (favor " + state.favor[d] + ")", cx, VIEW.h / 2 + 74);
+  setFont(22, "bold", FONT_TITLE); ctx.fillStyle = "#37e0a0";
+  ctx.fillText("press any key to rise again", cx, VIEW.h / 2 + 114);
+  ctx.textAlign = "left";
+}
+
+function drawLevelUp() {
+  dim(0.8);
+  ctx.textAlign = "center";
+  ptext("LEVEL " + state.level + "  CLAIM A BLESSING", VIEW.w / 2, VIEW.h * 0.2 - 22, 4, GOLD, "center");
+  if (state.cardChoices.length > CONFIG.cards.baseChoices) {
+    const td = DEITIES[topDeity()];
+    setFont(14, "italic", FONT_BODY); ctx.fillStyle = td.color;
+    ctx.fillText(td.name + "'s favor widens the offering to " + state.cardChoices.length + " blessings", VIEW.w / 2, VIEW.h * 0.2 + 26);
+  }
+
+  const cards = state.cardChoices;
+  state.cardRects = [];
+  const cw = Math.min(264, (VIEW.w - 80) / cards.length - 20);
+  const ch = 290;
+  const gap = 26;
+  const totalW = cards.length * cw + (cards.length - 1) * gap;
+  let x = (VIEW.w - totalW) / 2;
+  const y = VIEW.h / 2 - ch / 2 + 10;
+
+  let ci = 0;
+  for (const card of cards) {
+    const lvl = state.cardLevels[card.id] || 0;
+    const d = DEITIES[card.deity];
+    const col = d ? d.color : "#fff";
+    const pulse = 0.5 + Math.sin(state.time * 3 + ci * 1.3) * 0.5;
+    const icx = x + cw / 2;
+
+    // outer aura glow
+    ctx.save();
+    ctx.shadowColor = col; ctx.shadowBlur = 10 + pulse * 18;
+    panel(x, y, cw, ch, col);
+    ctx.restore();
+
+    // patron header band
+    ctx.fillStyle = "rgba(0,0,0,0.32)"; ctx.fillRect(x + 8, y + 8, cw - 16, 30);
+    ctx.fillStyle = col; ctx.globalAlpha = 0.16; ctx.fillRect(x + 8, y + 8, cw - 16, 30); ctx.globalAlpha = 1;
+    drawSprite(ICONS[d ? d.sigil : "spark"], x + 26, y + 23, 0, false, 2);
+    setFont(12, "bold", FONT_BODY); ctx.fillStyle = col; ctx.textAlign = "left";
+    ctx.fillText((d ? d.name : "") + "  ·  " + card.cat.toUpperCase(), x + 42, y + 27);
+
+    // radiant icon medallion
+    const my = y + 92;
+    const grad = ctx.createRadialGradient(icx, my, 4, icx, my, 46);
+    grad.addColorStop(0, col); grad.addColorStop(1, "rgba(0,0,0,0)");
+    ctx.globalAlpha = 0.32 + pulse * 0.18; ctx.fillStyle = grad;
+    ctx.beginPath(); ctx.arc(icx, my, 46, 0, Math.PI * 2); ctx.fill(); ctx.globalAlpha = 1;
+    ctx.strokeStyle = col; ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.arc(icx, my, 38, 0, Math.PI * 2); ctx.stroke();
+    const ic = ICONS[CARD_ICON[card.id]];
+    if (ic) drawSprite(ic, icx, my, 0, false, 7, 1 + Math.sin(state.time * 5 + ci) * 0.06);
+
+    // name + description
+    ctx.textAlign = "center";
+    ctx.fillStyle = "#f7f0dd"; setFont(22, "bold", FONT_TITLE);
+    wrapText(card.name, icx, y + 162, cw - 24, 26);
+    ctx.fillStyle = "#ccc6b6"; setFont(14, "", FONT_BODY);
+    wrapText(card.desc, icx, y + 208, cw - 36, 20);
+
+    if (lvl > 0) {
+      ctx.fillStyle = col; setFont(13, "italic", FONT_BODY);
+      ctx.fillText("owned x" + lvl, icx, y + ch - 38);
+    }
+    // call-to-claim shimmer
+    ctx.globalAlpha = 0.5 + pulse * 0.5; ctx.fillStyle = col; setFont(12, "bold", FONT_BODY);
+    ctx.fillText("CLAIM", icx, y + ch - 16); ctx.globalAlpha = 1;
+
+    state.cardRects.push({ x, y, w: cw, h: ch, card });
+    x += cw + gap; ci++;
+  }
+  ctx.textAlign = "left";
+}
+
+/* The Grimoire : a codex of every blessing, grouped by patron. */
+function drawCodex() {
+  dim(0.86);
+  const cx = VIEW.w / 2;
+  ctx.textAlign = "center";
+  ptext("THE GRIMOIRE", cx, 30, 4, GOLD, "center");
+  ptext("POWER-UP CARDS - LEAN INTO A PATRON FOR BOONS", cx, 72, 1, "#9a9ab0", "center");
+  ctx.textAlign = "left";
+
+  const ids = Object.keys(DEITIES);
+  const colW = (VIEW.w - 80) / ids.length;
+  let cxp = 40;
+  for (const id of ids) {
+    const d = DEITIES[id];
+    const top = 120;
+    // patron header
+    drawSprite(ICONS[d.sigil], cxp + 16, top + 4, 0, false, 3);
+    setFont(19, "bold", FONT_TITLE); ctx.fillStyle = d.color; ctx.textAlign = "left";
+    ctx.fillText(d.name, cxp + 36, top + 4);
+    setFont(12, "italic", FONT_BODY); ctx.fillStyle = "#9a9ab0";
+    ctx.fillText(d.title + "   ·   favor " + (state.favor[id] || 0), cxp + 36, top + 22);
+    setFont(12, "", FONT_BODY); ctx.fillStyle = "#b8b2a4";
+    wrapText2(d.blurb, cxp + 8, top + 44, colW - 30, 16);
+
+    // boons
+    let by = top + 80;
+    setFont(11, "bold", FONT_BODY); ctx.fillStyle = GOLD;
+    ctx.fillText("BOONS", cxp + 8, by); by += 16;
+    for (const b of d.boons) {
+      const earned = !!state.boons[id + ":" + b.at];
+      ctx.fillStyle = earned ? d.color : "#777"; setFont(11, "", FONT_BODY);
+      ctx.fillText((earned ? "✔ " : "") + "favor " + b.at + ": " + b.desc, cxp + 8, by);
+      by += 15;
+    }
+
+    // cards of this patron
+    by += 8;
+    setFont(11, "bold", FONT_BODY); ctx.fillStyle = GOLD;
+    ctx.fillText("BLESSINGS", cxp + 8, by); by += 4;
+    for (const card of CARDS.filter((c) => c.deity === id)) {
+      by += 18;
+      const ic = ICONS[CARD_ICON[card.id]];
+      if (ic) drawSprite(ic, cxp + 12, by - 4, 0, false, 1.5);
+      setFont(13, "bold", FONT_BODY); ctx.fillStyle = "#f4ecd8";
+      ctx.fillText(card.name, cxp + 26, by);
+      by += 14;
+      setFont(11, "", FONT_BODY); ctx.fillStyle = "#a8a290";
+      by += wrapText2(card.desc, cxp + 26, by, colW - 50, 13) * 13;
+    }
+    // divider
+    if (cxp > 40) { ctx.strokeStyle = "rgba(202,167,90,0.15)"; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(cxp - 6, top - 8); ctx.lineTo(cxp - 6, VIEW.h - 80); ctx.stroke(); }
+    cxp += colW;
+  }
+  uiButton("CLOSE", cx - 80, VIEW.h - 56, 160, 38, GOLD, closeCodex);
+}
+
+// like wrapText but left-aligned and returns the line count.
+function wrapText2(text, x, y, maxW, lh) {
+  const words = text.split(" ");
+  let line = "", lines = [];
+  for (const w of words) {
+    const test = line ? line + " " + w : w;
+    if (ctx.measureText(test).width > maxW && line) { lines.push(line); line = w; }
+    else line = test;
+  }
+  if (line) lines.push(line);
+  const al = ctx.textAlign; ctx.textAlign = "left";
+  for (let i = 0; i < lines.length; i++) ctx.fillText(lines[i], x, y + i * lh);
+  ctx.textAlign = al;
+  return lines.length;
+}
+
+/* The Ritual : spend the loop's prisoners. */
+function drawRitual() {
+  dim(0.84);
+  const cx = VIEW.w / 2, cy = VIEW.h / 2;
+  const pw = 580, ph = 446;
+  const top = cy - ph / 2;
+  panel(cx - pw / 2, top, pw, ph, "#a33");
+  ctx.textAlign = "center";
+  ptext("THE RITUAL", cx, top + 24, 4, "#e0556b", "center");
+  setFont(14, "italic", FONT_BODY); ctx.fillStyle = "#caa75a";
+  ctx.fillText("Loop " + (state.loopNum - 1) + " ends. Judge the captured.", cx, top + 72);
+
+  // prisoner tally
+  drawSprite(ICONS.captive, cx - 44, top + 104, 0, false, 4);
+  setFont(28, "bold", FONT_TITLE); ctx.fillStyle = "#f4ecd8"; ctx.textAlign = "left";
+  ctx.fillText("x " + state.prisoners, cx - 10, top + 114);
+  ctx.textAlign = "center";
+
+  if (state.ritualMsg) {
+    setFont(13, "italic", FONT_BODY); ctx.fillStyle = "#caa75a";
+    ctx.fillText(state.ritualMsg, cx, top + 142);
+  }
+
+  const has = state.prisoners > 0;
+  const bw = 300, bh = 40, gap = 11;
+  const bx = cx - bw / 2;
+  let by = top + 158;
+  uiButton("DEVOUR - XP + HEAL", bx, by, bw, bh, "#cc3a3a", ritualDevour, has); by += bh + gap;
+  uiButton("RAISE - SKELETON", bx, by, bw, bh, "#dfe2ee", ritualRaise, has); by += bh + gap;
+  uiButton("OFFER - PATRON FAVOR", bx, by, bw, bh, GOLD, ritualOffer, has); by += bh + gap;
+  uiButton("RELEASE - +" + CONFIG.loop.releaseMana + " MANA", bx, by, bw, bh, "#5aa0ff", ritualRelease, has); by += bh + gap;
+  uiButton("CONTINUE THE SIEGE", bx, by, bw, bh, "#37e0a0", ritualContinue);
+  ctx.textAlign = "left";
+}
+
+function wrapText(text, cx, cy, maxW, lh) {
+  const words = text.split(" ");
+  let line = "", lines = [];
+  for (const w of words) {
+    const test = line ? line + " " + w : w;
+    if (ctx.measureText(test).width > maxW && line) { lines.push(line); line = w; }
+    else line = test;
+  }
+  if (line) lines.push(line);
+  for (let i = 0; i < lines.length; i++) ctx.fillText(lines[i], cx, cy + i * lh);
+}
+
+/* Pause menu (ESC / P). */
+function drawPaused() {
+  dim(0.6);
+  const cx = VIEW.w / 2, cy = VIEW.h / 2;
+  const pw = 360, ph = 440, top = cy - ph / 2;
+  panel(cx - pw / 2, top, pw, ph, "#b48cff");
+  ptext("PAUSED", cx, top + 28, 5, "#b48cff", "center");
+  setFont(13, "italic", FONT_BODY); ctx.textAlign = "center"; ctx.fillStyle = "#9a9ab0";
+  ctx.fillText("ESC or P to resume", cx, top + 86); ctx.textAlign = "left";
+  const bw = 240, bh = 42, gap = 11, bx = cx - bw / 2;
+  let by = top + 104;
+  uiButton("RESUME", bx, by, bw, bh, "#37e0a0", resumeGame); by += bh + gap;
+  uiButton("EQUIPMENT", bx, by, bw, bh, "#7fd4ff", openEquip); by += bh + gap;
+  uiButton("GRIMOIRE", bx, by, bw, bh, GOLD, openCodex); by += bh + gap;
+  uiButton("BESTIARY", bx, by, bw, bh, "#cc3a3a", openBestiary); by += bh + gap;
+  uiButton("RESTART RUN", bx, by, bw, bh, "#ff7a7a", startRun);
+  ctx.textAlign = "left";
+}
+
+/* Equipment (Loop Hero-style pixel UI): paper-doll slots + inventory grid. */
+function unequip(slot) {
+  const cur = state.equipment[slot]; if (!cur) return;
+  applyItemStats(cur, -1); state.inventory.push(cur); state.equipment[slot] = null;
+  beep(360, 0.06, "square");
+}
+function drawEquip() {
+  dim(0.82);
+  const cx = VIEW.w / 2, cy = VIEW.h / 2;
+  const pw = 600, ph = 444, px = cx - pw / 2, py = cy - ph / 2;
+  pixelPanel(px, py, pw, ph, GOLD);
+  ptext("EQUIPMENT", cx, py + 22, 4, GOLD, "center");
+  const p = state.player;
+
+  // hero portrait panel
+  pixelPanel(px + 30, py + 70, 110, 170, "#3a3550");
+  drawSprite(PLAYER_IDLE[0], px + 85, py + 158, 0, false, 5);
+
+  // equip slots
+  const ss = 64, wx = px + 168, wy = py + 84, ax = px + 168, ay = py + 84 + ss + 30;
+  setFont(12, "bold", FONT_BODY); ctx.fillStyle = GOLD;
+  ctx.fillText("WEAPON", wx, wy - 8);
+  pixelSlot(wx, wy, ss, state.equipment.weapon, state.equipment.weapon ? () => unequip("weapon") : null, false);
+  ctx.fillStyle = "#f4ecd8"; setFont(14, "bold", FONT_BODY);
+  ctx.fillText(state.equipment.weapon ? ITEMS[state.equipment.weapon].name : "(empty)", wx + ss + 14, wy + 26);
+  ctx.fillStyle = "#9a92b0"; setFont(11, "", FONT_BODY);
+  if (state.equipment.weapon) ctx.fillText(itemStatLines(ITEMS[state.equipment.weapon]).join("   "), wx + ss + 14, wy + 44);
+
+  ctx.fillStyle = GOLD; setFont(12, "bold", FONT_BODY);
+  ctx.fillText("CLOTHING", ax, ay - 8);
+  pixelSlot(ax, ay, ss, state.equipment.armor, state.equipment.armor ? () => unequip("armor") : null, false);
+  ctx.fillStyle = "#f4ecd8"; setFont(14, "bold", FONT_BODY);
+  ctx.fillText(state.equipment.armor ? ITEMS[state.equipment.armor].name : "(empty)", ax + ss + 14, ay + 26);
+  ctx.fillStyle = "#9a92b0"; setFont(11, "", FONT_BODY);
+  if (state.equipment.armor) ctx.fillText(itemStatLines(ITEMS[state.equipment.armor]).join("   "), ax + ss + 14, ay + 44);
+
+  // inventory grid
+  ctx.fillStyle = "#9a92b0"; setFont(12, "bold", FONT_BODY);
+  ctx.fillText("INVENTORY  ·  click to equip", px + 378, py + 80);
+  const cols = 4, cell = 54, gap = 8, gx = px + 378, gy = py + 92;
+  if (!state.inventory.length) { ctx.fillStyle = "#5a5570"; setFont(12, "italic", FONT_BODY); ctx.fillText("empty — defeat bosses for loot", gx, gy + 24); }
+  state.inventory.forEach((id, i) => {
+    const c = i % cols, r = (i / cols) | 0;
+    pixelSlot(gx + c * (cell + gap), gy + r * (cell + gap), cell, id, () => equipItem(id), false);
+  });
+
+  // stat summary
+  const sw = CONFIG.sword, sy = py + ph - 90;
+  ctx.fillStyle = "#ccc6b6"; setFont(13, "", FONT_BODY);
+  ctx.fillText("Sword damage  " + (sw.damage + p.swordDamageBonus) + "      Reach  " + (sw.range + p.swordRangeBonus), px + 32, sy);
+  ctx.fillText("Max HP  " + Math.round(p.maxHp) + "      Damage taken  -" + Math.round(p.armorReduction * 100) + "%", px + 32, sy + 22);
+
+  // pixel close button
+  uiButton("CLOSE  (I)", cx - 85, py + ph - 50, 170, 36, GOLD, closeEquip);
+}
+
+/* THE BESTIARY : every enemy type, viewable from the menu (pixel font). */
+const BEH_TAG = { chase: "MELEE", rush: "FAST", ranged: "RANGED", brute: "HEAVY" };
+function drawBestiary() {
+  dim(0.88);
+  const cx = VIEW.w / 2;
+  ptext("THE BESTIARY", cx, 30, 4, GOLD, "center");
+  ptext("KNOW YOUR ENEMY", cx, 70, 2, "#9a9ab0", "center");
+
+  const cols = ENEMY_TYPES.length;
+  const cw = Math.min(232, (VIEW.w - 80) / cols - 16), chh = 360, gap = 16;
+  const totalW = cols * cw + (cols - 1) * gap;
+  let x0 = (VIEW.w - totalW) / 2, y0 = 108;
+  ENEMY_TYPES.forEach((t) => {
+    const xp = x0, yp = y0;
+    pixelPanel(xp, yp, cw, chh, "#3a3550");
+    // animated sprite
+    const fr = Math.floor(state.time * 4) % 2;
+    drawSprite(t.spr[fr], xp + cw / 2, yp + 64, 0, false, CONFIG.art.entityScale * (t.scale || 1));
+    ptext(t.name, xp + cw / 2, yp + 104, 3, "#f4ecd8", "center");
+    ptext(t.minThreat <= 0 ? "FROM THE START" : "UNLOCKS AT THREAT " + t.minThreat, xp + cw / 2, yp + 134, 1, "#ff7a7a", "center");
+    ptext(BEH_TAG[t.behavior], xp + cw / 2, yp + 150, 2, "#7fd4ff", "center");
+    // relative stat bars
+    const bar = (label, val, max, yy, col) => {
+      ptext(label, xp + 12, yy, 1, "#9a9ab0", "left");
+      const bw2 = cw - 70, bxx = xp + 50;
+      ctx.fillStyle = "rgba(0,0,0,0.45)"; ctx.fillRect(bxx, yy - 1, bw2, 8);
+      ctx.fillStyle = col; ctx.fillRect(bxx, yy - 1, bw2 * Math.min(1, val / max), 8);
+    };
+    bar("HP", t.hpMul, 4.2, yp + 178, "#cc3a3a");
+    bar("SPD", t.speedMul, 2, yp + 196, "#37e0a0");
+    bar("DMG", t.dmgMul, 2.4, yp + 214, "#ffd24a");
+    ptextWrap(t.blurb, xp + 12, yp + 238, cw - 24, 1, "#b8b2a4");
+    x0 += cw + gap;
+  });
+
+  ptext("ELITES (GOLD RING) HAVE 4.5x HEALTH AND DROP LOOT", cx, y0 + chh + 16, 1, "#ffd24a", "center");
+  uiButton("CLOSE  (B)", cx - 90, VIEW.h - 52, 180, 36, GOLD, closeBestiary);
+}
+
+function dim(a) { ctx.fillStyle = "rgba(5,5,10," + a + ")"; ctx.fillRect(0, 0, VIEW.w, VIEW.h); }
+
+function render() {
+  state.uiButtons = []; // clickable rects are rebuilt every frame
+  if (state.player) updateCamera();
+  else { cam.x = WORLD.w / 2; cam.y = WORLD.h / 2; }
+  ctx.save();
+  // camera: centre on the player, zoom out, with screen shake
+  ctx.translate(VIEW.w / 2, VIEW.h / 2);
+  if (state.shake > 0) ctx.translate(rand(-state.shake, state.shake), rand(-state.shake, state.shake));
+  ctx.scale(CONFIG.art.zoom, CONFIG.art.zoom);
+  ctx.translate(-cam.x, -cam.y);
+  drawBackground();
+  if (state.player) drawWorld();
+  ctx.restore();
+
+  if (state.mode === "start") drawStart();
+  else if (state.mode === "codex") drawCodex();
+  else if (state.mode === "bestiary") drawBestiary();
+  else if (state.mode === "dead") drawDeath();
+  else {
+    drawHUD();
+    if (state.mode === "levelup") drawLevelUp();
+    else if (state.mode === "ritual") drawRitual();
+    else if (state.mode === "paused") drawPaused();
+    else if (state.mode === "recruit") drawRecruit();
+    else if (state.mode === "equip") drawEquip();
+  }
+}
+
+/* The boss has fallen: bind it as an undying ally, or slay it for essence. */
+function drawRecruit() {
+  dim(0.82);
+  const cx = VIEW.w / 2, cy = VIEW.h / 2;
+  const pw = 540, ph = 340, top = cy - ph / 2;
+  panel(cx - pw / 2, top, pw, ph, GOLD);
+  ptext("THE MINOTAUR FALLS", cx, top + 30, 3, "#e0b24a", "center");
+  drawSprite(SPR_MINOTAUR, cx, top + 130, 0, false, 6);
+  ctx.textAlign = "center"; setFont(15, "italic", FONT_BODY); ctx.fillStyle = "#caa75a";
+  ctx.fillText("It is mighty. Will you bind it to your service?", cx, top + 200);
+  ctx.textAlign = "left";
+  const bw = 360, bh = 46, gap = 14, bx = cx - bw / 2;
+  let by = top + 222;
+  uiButton("BIND - UNDYING ALLY", bx, by, bw, bh, "#dfe2ee", bindBoss); by += bh + gap;
+  uiButton("SLAY - REAP ESSENCE", bx, by, bw, bh, "#37e0a0", slayBoss);
+}
+
+/* =====================================================================
+   13. GAME LOOP : fixed timestep updates, render each frame
+   ===================================================================== */
+const STEP = 1 / 60;
+let acc = 0, last = performance.now();
+
+function loop(now) {
+  let frame = (now - last) / 1000;
+  last = now;
+  if (frame > 0.25) frame = 0.25; // avoid spiral after tab switch
+  acc += frame;
+  while (acc >= STEP) { update(STEP); acc -= STEP; }
+  render();
+  // music swells on the battlefield, softens on menus, surges for the boss
+  MUSIC.target = (state.mode === "start" || state.mode === "dead" || state.mode === "codex") ? 0.3 : 1;
+  MUSIC.boss = !!(state.boss && !state.boss.ally && state.mode === "playing");
+  musicTick();
+  requestAnimationFrame(loop);
+}
+
+state = freshState();
+requestAnimationFrame(loop);
+
+/* =====================================================================
+   PHASE 1 COMPLETE. Future phases (TODO, do not build yet):
+   - Below ground levels, bosses, biome variety
+   - Multiple enemy types beyond one basic human
+   - Manual structure placement inside the base
+   - Meta progression / unlockable starting builds between runs
+   - Save files and persistent upgrades
+   - Mobile touch controls (movement stick + summon/defend buttons)
+   ===================================================================== */
+</script>
+</body>
+</html>

@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Essence · The Codex</title>
+<meta name="description" content="The Essence System Codex: every number, rule, and spell of the game, merging the v1.0 design specification with the current playable build. For developers and partners.">
+<link rel="icon" href="bonefield-sigil.svg" type="image/svg+xml">
+<meta property="og:title" content="Essence · The Codex">
+<meta property="og:type" content="website">
+<meta property="og:description" content="Every number, rule, and spell of Essence, tagged by what is in game, locked design, or planned.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Grenze+Gotisch:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============ TOKENS (shared with the site) ============ */
+:root{
+  --ink-0:#0b0908; --ink-1:#131009; --ink-2:#1a1610; --ink-3:#241d12;
+  --line:rgba(203,164,82,.16); --line-strong:rgba(203,164,82,.42);
+  --gold:#c9a24a; --gold-hi:#ecd192; --gold-deep:#8a6a2a;
+  --bone:#f0e7d1; --text:#cfc6b2; --dim:#9c9280;
+  --maxw:1180px; --pad:clamp(20px,4vw,48px);
+  --ff-disp:"Cinzel",serif; --ff-body:"EB Garamond",Georgia,serif; --ff-black:"Grenze Gotisch",serif;
+  /* codex status colours, tuned to the palette */
+  --ingame:#9db86a; --locked:#c9a24a; --planned:#8fa6b8; --diverge:#c9764a;
+  /* element colours */
+  --fire:#d98e4f; --wind:#adc8b4; --water:#87a4bd; --death:#a893c4; --grace:#e2d3a2;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{
+  background:var(--ink-0); color:var(--text);
+  font-family:var(--ff-body); font-size:1.16rem; line-height:1.7;
+  -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+::selection{background:var(--gold); color:var(--ink-0)}
+img{max-width:100%; display:block}
+a{color:var(--gold-hi); text-decoration:none}
+a:hover{color:var(--bone)}
+:focus-visible{outline:2px solid var(--gold); outline-offset:3px}
+strong,b{color:var(--bone); font-weight:600}
+em{color:var(--bone)}
+body::before{
+  content:""; position:fixed; inset:0; z-index:-1; pointer-events:none;
+  background:radial-gradient(120% 90% at 50% 0%, rgba(201,162,74,.05), transparent 55%),
+             radial-gradient(140% 100% at 50% 100%, rgba(0,0,0,.5), transparent 60%);
+}
+
+/* ============ NAV (site chrome) ============ */
+nav#top{
+  position:fixed; top:0; left:0; right:0; z-index:50;
+  transition:background .35s ease, border-color .35s ease, backdrop-filter .35s ease;
+  border-bottom:1px solid transparent;
+}
+nav#top.solid{background:rgba(11,9,8,.86); backdrop-filter:blur(14px); border-bottom-color:var(--line)}
+.nav-in{max-width:var(--maxw); margin:0 auto; padding:0 var(--pad);
+  display:flex; align-items:center; gap:28px; height:76px}
+.brand{display:flex; align-items:center; gap:12px}
+.brand img{width:36px; height:36px; opacity:.9}
+.brand b{font-family:var(--ff-black); font-weight:700; font-size:1.8rem; letter-spacing:.02em;
+  background:linear-gradient(to bottom, #f7efd9 30%, #e3c684 62%, #b08a40 100%);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  filter:drop-shadow(0 1px 6px rgba(0,0,0,.6))}
+.nav-links{display:flex; gap:4px; margin-left:auto; overflow-x:auto; scrollbar-width:none}
+.nav-links::-webkit-scrollbar{display:none}
+.nav-links a{
+  font-family:var(--ff-disp); font-size:.78rem; font-weight:600; letter-spacing:.11em;
+  text-transform:uppercase; color:var(--dim); padding:10px 9px; white-space:nowrap;
+  border-bottom:2px solid transparent; transition:color .25s;
+}
+.nav-links a:hover{color:var(--bone)}
+.nav-links a.active{color:var(--gold-hi); border-bottom-color:var(--gold)}
+@media (max-width:900px){
+  .nav-in{flex-wrap:wrap; height:auto; padding-top:10px; row-gap:0}
+  .brand b{font-size:1.5rem}
+  .nav-links{margin-left:0; width:100%; padding-bottom:6px; padding-right:14%;
+    -webkit-mask-image:linear-gradient(to right, #000 90%, transparent);
+    mask-image:linear-gradient(to right, #000 90%, transparent)}
+  .nav-links a{padding:14px 12px}
+}
+
+/* ============ PAGE HERO ============ */
+.page-hero{padding:clamp(140px,20vh,190px) var(--pad) clamp(28px,4vh,44px); text-align:center; position:relative}
+.page-hero .kicker{font-family:var(--ff-disp); font-size:clamp(.78rem,1.3vw,.9rem); font-weight:600;
+  letter-spacing:.5em; text-transform:uppercase; color:var(--gold-hi)}
+.page-hero h1{
+  font-family:var(--ff-black); font-weight:700; line-height:.95;
+  font-size:clamp(3rem,9vw,6.4rem); margin:12px 0 8px;
+  background:linear-gradient(to bottom, #f7efd9 30%, #e3c684 62%, #a6813a 100%);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  filter:drop-shadow(0 4px 26px rgba(0,0,0,.65))}
+.page-hero .tagline{font-size:clamp(1.25rem,2.3vw,1.6rem); font-style:italic; color:var(--bone)}
+.page-hero .intro{max-width:760px; margin:16px auto 0; color:var(--text)}
+.page-hero .metrics{display:flex; gap:clamp(18px,4vw,44px); flex-wrap:wrap; justify-content:center; margin-top:26px}
+.page-hero .metrics span{font-family:var(--ff-disp); font-size:.82rem; letter-spacing:.14em; text-transform:uppercase; color:var(--dim)}
+.page-hero .metrics b{color:var(--gold-hi); font-weight:700}
+
+/* ============ FILTER BAR ============ */
+#filterbar{position:sticky; top:0; z-index:40; padding:12px var(--pad);
+  background:rgba(11,9,8,.88); backdrop-filter:blur(12px);
+  border-top:1px solid var(--line); border-bottom:1px solid var(--line)}
+#filters{max-width:var(--maxw); margin:0 auto; display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:center}
+#filters .lbl{font-family:var(--ff-disp); font-size:.72rem; font-weight:600; letter-spacing:.24em; text-transform:uppercase; color:var(--dim); margin-right:6px}
+.fchip{cursor:pointer; user-select:none; display:flex; align-items:center; gap:8px;
+  font-family:var(--ff-disp); font-size:.74rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase;
+  padding:7px 15px; border:1px solid var(--line); border-radius:999px; color:var(--text);
+  background:rgba(201,162,74,.04); transition:.2s}
+.fchip:hover{border-color:var(--line-strong); color:var(--bone)}
+.fchip .dot{width:9px; height:9px; border-radius:50%; box-shadow:0 0 8px rgba(0,0,0,.6)}
+.fchip.off{opacity:.35; filter:grayscale(.9)}
+
+/* ============ LAYOUT ============ */
+.wrap{max-width:1400px; margin:0 auto; display:grid; grid-template-columns:264px minmax(0,1fr)}
+#side{position:sticky; top:66px; align-self:start; height:calc(100vh - 66px); overflow-y:auto;
+  padding:30px 14px 70px 26px; border-right:1px solid var(--line); scrollbar-width:thin}
+#side::-webkit-scrollbar{width:6px}
+#side::-webkit-scrollbar-thumb{background:var(--ink-3); border-radius:4px}
+#side .grp{font-family:var(--ff-disp); font-size:.68rem; font-weight:700; letter-spacing:.3em;
+  text-transform:uppercase; color:var(--gold); margin:24px 0 8px}
+#side .grp:first-child{margin-top:0}
+#side a{display:block; color:var(--dim); font-size:1.02rem; line-height:1.4; padding:4px 12px;
+  border-left:2px solid transparent; transition:.15s}
+#side a:hover{color:var(--bone); background:rgba(201,162,74,.05)}
+#side a.active{color:var(--gold-hi); border-left-color:var(--gold); background:rgba(201,162,74,.07)}
+main{padding:34px clamp(22px,4vw,52px) 130px; min-width:0}
+
+/* ============ CODEX HERO CARD ============ */
+.hero{border:1px solid var(--line); background:linear-gradient(160deg, var(--ink-2), var(--ink-1));
+  padding:34px 36px 30px; margin-bottom:36px; position:relative; overflow:hidden}
+.hero::after{content:""; position:absolute; inset:0; pointer-events:none;
+  background:radial-gradient(80% 120% at 100% 0%, rgba(201,162,74,.08), transparent 55%)}
+.hero h1{font-family:var(--ff-disp); font-weight:700; font-size:clamp(1.7rem,3.4vw,2.4rem);
+  letter-spacing:.18em; color:var(--bone); margin-bottom:6px}
+.hero .sub{font-family:var(--ff-disp); font-size:.85rem; font-weight:600; letter-spacing:.28em;
+  text-transform:uppercase; color:var(--gold)}
+.hero p{max-width:840px; margin-top:14px; color:var(--text)}
+.hero .meta{display:flex; gap:26px; flex-wrap:wrap; margin-top:18px}
+.hero .meta span{font-family:var(--ff-disp); font-size:.8rem; letter-spacing:.12em; text-transform:uppercase; color:var(--dim)}
+.hero .meta b{color:var(--gold-hi)}
+
+/* ============ SECTIONS ============ */
+section{padding:30px 0 10px; border-top:1px solid var(--line); scroll-margin-top:130px}
+section:first-of-type{border-top:0}
+h2{font-family:var(--ff-disp); font-weight:700; font-size:clamp(1.25rem,2.4vw,1.6rem);
+  letter-spacing:.06em; color:var(--bone); display:flex; align-items:center; gap:14px; flex-wrap:wrap; margin-bottom:6px}
+h2 .num{font-family:var(--ff-disp); font-size:.8rem; font-weight:600; letter-spacing:.2em; color:var(--gold)}
+h3{font-family:var(--ff-disp); font-weight:600; font-size:1.05rem; letter-spacing:.08em;
+  color:var(--gold-hi); margin:28px 0 10px}
+h4{font-family:var(--ff-disp); font-weight:600; font-size:.85rem; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--dim); margin:20px 0 8px}
+.lead{color:var(--text); max-width:900px; margin:6px 0 16px}
+p{max-width:900px}
+
+/* ============ STATUS TAGS ============ */
+.tag{font-family:var(--ff-disp); font-size:.66rem; font-weight:700; letter-spacing:.14em;
+  padding:4px 11px; border-radius:3px; white-space:nowrap; text-transform:uppercase; border:1px solid transparent}
+.t-ingame{color:var(--ingame); background:rgba(157,184,106,.09); border-color:rgba(157,184,106,.34)}
+.t-locked{color:var(--locked); background:rgba(201,162,74,.09); border-color:rgba(201,162,74,.36)}
+.t-planned{color:var(--planned); background:rgba(143,166,184,.09); border-color:rgba(143,166,184,.32)}
+.t-diverge{color:var(--diverge); background:rgba(201,118,74,.09); border-color:rgba(201,118,74,.36)}
+body.hide-ingame [data-s~="ingame"]{display:none}
+body.hide-locked [data-s~="locked"]{display:none}
+body.hide-planned [data-s~="planned"]{display:none}
+body.hide-diverge [data-s~="diverge"]{display:none}
+
+/* ============ TABLES ============ */
+.tbl{overflow-x:auto; border:1px solid var(--line); margin:14px 0 8px; background:var(--ink-1)}
+table{width:100%; border-collapse:collapse; font-size:1.02rem; min-width:440px}
+th,td{text-align:left; padding:10px 15px; border-bottom:1px solid var(--line); vertical-align:top}
+th{font-family:var(--ff-disp); font-size:.7rem; font-weight:700; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--gold); background:rgba(201,162,74,.05)}
+tr:last-child td{border-bottom:0}
+tbody tr:hover{background:rgba(201,162,74,.045)}
+td.n,th.n{font-variant-numeric:tabular-nums; font-weight:600; color:var(--gold-hi); white-space:nowrap}
+td b{color:var(--bone)}
+.el-fire{color:var(--fire)} .el-water{color:var(--water)} .el-death{color:var(--death)}
+.el-wind{color:var(--wind)} .el-grace{color:var(--grace)} .el-life{color:var(--grace)}
+/* each element section wears its own colour: heading icon, § number, and a left spine */
+#fire{--elc:var(--fire)} #wind{--elc:var(--wind)} #water{--elc:var(--water)} #death{--elc:var(--death)} #grace{--elc:var(--grace)}
+#fire,#wind,#water,#death,#grace{border-left:3px solid var(--elc); padding-left:clamp(14px,2vw,26px)}
+#fire h2 .h2ic,#wind h2 .h2ic,#water h2 .h2ic,#death h2 .h2ic,#grace h2 .h2ic{stroke:var(--elc)}
+#fire h2 .num,#wind h2 .num,#water h2 .num,#death h2 .num,#grace h2 .num{color:var(--elc)}
+#side a[href="#fire"] .em,#side a[href="#wind"] .em,#side a[href="#water"] .em,#side a[href="#death"] .em,#side a[href="#grace"] .em{opacity:1}
+
+/* ============ CARDS / CALLOUTS ============ */
+.grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(215px,1fr)); gap:14px; margin:16px 0}
+.card{border:1px solid var(--line); padding:16px 18px; background:var(--ink-1); transition:border-color .25s}
+.card:hover{border-color:var(--line-strong)}
+.card .k{font-family:var(--ff-disp); font-size:.68rem; font-weight:700; letter-spacing:.22em; color:var(--gold); text-transform:uppercase}
+.card .v{font-family:var(--ff-disp); font-weight:700; font-size:1.9rem; color:var(--bone); line-height:1.15; margin:7px 0 3px}
+.card .d{font-size:.98rem; color:var(--dim); line-height:1.5}
+.note{border-left:3px solid var(--line-strong); padding:12px 18px; margin:16px 0;
+  background:rgba(201,162,74,.04); color:var(--text); font-size:1.05rem}
+.note.diverge{border-left-color:var(--diverge); background:rgba(201,118,74,.06)}
+.note.planned{border-left-color:var(--planned); background:rgba(143,166,184,.06)}
+.note b{color:var(--bone)}
+pre{background:var(--ink-1); border:1px solid var(--line); padding:15px 18px; overflow-x:auto;
+  font-family:ui-monospace,Menlo,monospace; font-size:.92rem; color:var(--gold-hi); line-height:1.55; margin:14px 0}
+pre .c{color:var(--dim)}
+hr.soft{border:0; border-top:1px solid var(--line); margin:24px 0}
+.kbd{font-family:ui-monospace,Menlo,monospace; font-size:.9rem; background:var(--ink-2);
+  border:1px solid var(--line); border-bottom:2px solid var(--line-strong); border-radius:4px;
+  padding:1px 8px; color:var(--bone)}
+.mono{font-family:ui-monospace,Menlo,monospace; font-size:.95em; color:var(--gold-hi)}
+
+/* ============ FOOTER ============ */
+footer{border-top:1px solid var(--line); margin-top:60px; padding:34px var(--pad)}
+.foot-in{max-width:var(--maxw); margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:18px; flex-wrap:wrap}
+.foot-note{color:var(--dim); font-size:1rem}
+
+/* ============ SECTION + SIDEBAR ICONS ============ */
+h2 .h2ic{width:1.15em; height:1.15em; flex:none; stroke:var(--gold); fill:none;
+  stroke-width:1.55; stroke-linecap:round; stroke-linejoin:round}
+#side a{display:flex; align-items:center; gap:9px}
+#side a .sic{width:15px; height:15px; flex:none; stroke:currentColor; fill:none;
+  stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; opacity:.7}
+#side a.active .sic{opacity:1}
+#side a .em{width:15px; flex:none; text-align:center; opacity:.9}
+
+/* ============ TABLE POLISH ============ */
+tbody tr:nth-child(even){background:rgba(255,255,255,.014)}
+tbody tr[data-s~="diverge"]{box-shadow:inset 3px 0 0 rgba(201,118,74,.6)}
+tbody tr[data-s~="planned"]{box-shadow:inset 3px 0 0 rgba(143,166,184,.6)}
+tbody tr[data-s~="locked"]{box-shadow:inset 3px 0 0 rgba(201,162,74,.6)}
+tbody tr[data-s~="ingame"]{box-shadow:inset 3px 0 0 rgba(157,184,106,.7)}
+code{font-family:ui-monospace,Menlo,monospace; font-size:.9em; color:var(--gold-hi);
+  background:var(--ink-2); border:1px solid var(--line); border-radius:4px; padding:1px 6px}
+
+/* ============ STAT CARD POLISH ============ */
+.card .v{background:linear-gradient(to bottom,#f7efd9,#d9b968 70%,#a6813a);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent}
+.card.plain .v{-webkit-text-fill-color:var(--bone); background:none}
+
+/* ============ DIAGRAM FRAMEWORK ============ */
+figure.diagram{border:1px solid var(--line); margin:20px 0; padding:20px clamp(14px,3vw,28px) 16px;
+  background:linear-gradient(160deg,var(--ink-2),var(--ink-1)); position:relative; overflow-x:auto}
+figure.diagram::after{content:""; position:absolute; inset:0; pointer-events:none;
+  background:radial-gradient(70% 120% at 100% 0%, rgba(201,162,74,.06), transparent 60%)}
+figure.diagram > figcaption{position:relative; font-family:var(--ff-disp); font-size:.72rem;
+  font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:var(--gold);
+  margin-bottom:16px; display:flex; align-items:center; gap:10px}
+figure.diagram > figcaption svg{width:16px; height:16px; stroke:var(--gold); fill:none;
+  stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; flex:none}
+figure.diagram svg.dgm{display:block; width:100%; height:auto; max-width:100%; min-width:520px; margin:0 auto}
+figure.diagram text{font-family:var(--ff-disp); fill:var(--text)}
+figure.diagram text.dg-ink{fill:#0b0908 !important}
+.dg-ink{fill:var(--ink-0)} .dg-ink1{fill:var(--ink-1)} .dg-panel{fill:var(--ink-2)}
+.dg-gold{fill:var(--gold)} .dg-goldhi{fill:var(--gold-hi)} .dg-bone{fill:var(--bone)} .dg-dim{fill:var(--dim)}
+.dg-sline{stroke:var(--line-strong); fill:none} .dg-sgold{stroke:var(--gold); fill:none} .dg-sdim{stroke:var(--dim); fill:none}
+.dg-fire{fill:var(--fire)} .dg-wind{fill:var(--wind)} .dg-water{fill:var(--water)} .dg-death{fill:var(--death)} .dg-grace{fill:var(--grace)}
+.sg-fire{stroke:var(--fire)} .sg-wind{stroke:var(--wind)} .sg-water{stroke:var(--water)} .sg-death{stroke:var(--death)} .sg-grace{stroke:var(--grace)}
+.dg-ig{fill:var(--ingame)} .dg-lk{fill:var(--locked)} .dg-pl{fill:var(--planned)} .dg-dv{fill:var(--diverge)}
+.sg-ig{stroke:var(--ingame)} .sg-lk{stroke:var(--locked)} .sg-pl{stroke:var(--planned)} .sg-dv{stroke:var(--diverge)}
+text.t-lab{fill:var(--dim); font-size:11px; letter-spacing:.09em; text-transform:uppercase}
+text.t-val{fill:var(--gold-hi); font-weight:700}
+text.t-ttl{fill:var(--bone); font-weight:700; letter-spacing:.04em}
+text.t-mono{font-family:ui-monospace,Menlo,monospace; fill:var(--gold-hi)}
+@media (max-width:980px){
+  .wrap{grid-template-columns:1fr}
+  #side{display:none}
+  main{padding:26px 20px 100px}
+  section{scroll-margin-top:150px}
+  figure.diagram svg.dgm{min-width:480px}
+}
+</style>
+</head>
+<body>
+
+<svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
+  <symbol id="i-scroll" viewBox="0 0 24 24"><path d="M5 4h9v13a3 3 0 0 0 3 3H8a3 3 0 0 1-3-3V4Z"/><path d="M14 4a2 2 0 0 1 2 2M8 8h4M8 12h3"/></symbol>
+  <symbol id="i-tag" viewBox="0 0 24 24"><path d="M4 4h7l9 9-7 7-9-9V4Z"/><circle cx="8" cy="8" r="1.4"/></symbol>
+  <symbol id="i-split" viewBox="0 0 24 24"><path d="M6 20V9m0 0 4-4m-4 4L2 5"/><path d="M18 20V9m0 0-4-4m4 4 4-4"/><path d="M6 14h12"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7-4.6-7-9.6A3.9 3.9 0 0 1 12 7a3.9 3.9 0 0 1 7 3.4c0 5-7 9.6-7 9.6Z"/></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 11a8 8 0 0 0-14-4.5M4 5v3h3"/><path d="M4 13a8 8 0 0 0 14 4.5M20 19v-3h-3"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 3 5 13h5l-1 8 8-11h-5l1-7Z"/></symbol>
+  <symbol id="i-skull" viewBox="0 0 24 24"><path d="M5 11a7 7 0 0 1 14 0v4l-2 1v2a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2v-2l-2-1v-4Z"/><circle cx="9.5" cy="11" r="1.4"/><circle cx="14.5" cy="11" r="1.4"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3l1.8 5.7L20 10l-6.2 1.3L12 17l-1.8-5.7L4 10l6.2-1.3L12 3Z"/></symbol>
+  <symbol id="i-staff" viewBox="0 0 24 24"><path d="M12 8v13"/><circle cx="12" cy="6" r="3"/><path d="M9.5 20h5"/></symbol>
+  <symbol id="i-ladder" viewBox="0 0 24 24"><path d="M7 3v18M17 3v18M7 7h10M7 12h10M7 17h10"/></symbol>
+  <symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M6 11a6 6 0 0 0 12 0M12 17v4M9 21h6"/></symbol>
+  <symbol id="i-hourglass" viewBox="0 0 24 24"><path d="M6 3h12M6 21h12M7 3c0 5 5 6 5 9s-5 4-5 9M17 3c0 5-5 6-5 9s5 4 5 9"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V4M4 20h16"/><rect x="7" y="12" width="3" height="5"/><rect x="12" y="8" width="3" height="9"/><rect x="17" y="5" width="3" height="12"/></symbol>
+  <symbol id="i-flame" viewBox="0 0 24 24"><path d="M12 3s5 4 5 9a5 5 0 0 1-10 0c0-2 1-3 1-3s0 2 2 2c1.5 0 1-3 1-5s1-4 1-4Z"/></symbol>
+  <symbol id="i-wind" viewBox="0 0 24 24"><path d="M3 9h11a3 3 0 1 0-3-3M3 14h15a3 3 0 1 1-3 3M3 19h8"/></symbol>
+  <symbol id="i-drop" viewBox="0 0 24 24"><path d="M12 3s6 7 6 11a6 6 0 0 1-12 0c0-4 6-11 6-11Z"/></symbol>
+  <symbol id="i-cross" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-fusion" viewBox="0 0 24 24"><path d="M12 3v18M4.5 7.5l15 9M19.5 7.5l-15 9"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1"/></symbol>
+  <symbol id="i-sword" viewBox="0 0 24 24"><path d="M20 4v5L9 20l-3 1 1-3L18 7h2ZM6 18l-2 2M13 11l2 2"/></symbol>
+  <symbol id="i-mask" viewBox="0 0 24 24"><path d="M4 5h16v6a8 8 0 0 1-16 0V5Z"/><path d="M8 9c1 1 2 1 3 0M13 9c1 1 2 1 3 0M9 15c1.5 1.5 4.5 1.5 6 0"/></symbol>
+  <symbol id="i-hammer" viewBox="0 0 24 24"><path d="M14 4l6 6-3 3-6-6 3-3Z"/><path d="M11 7l-7 7 3 3 7-7"/></symbol>
+  <symbol id="i-anvil" viewBox="0 0 24 24"><path d="M4 8h11a5 5 0 0 1-4 4h6M7 12v4M4 20h8"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M4 12h16M12 4c3 3 3 13 0 16M12 4c-3 3-3 13 0 16"/></symbol>
+  <symbol id="i-braces" viewBox="0 0 24 24"><path d="M8 4a3 3 0 0 0-3 3v3a2 2 0 0 1-2 2 2 2 0 0 1 2 2v3a3 3 0 0 0 3 3"/><path d="M16 4a3 3 0 0 1 3 3v3a2 2 0 0 0 2 2 2 2 0 0 0-2 2v3a3 3 0 0 1-3 3"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11M4 6h.01M4 12h.01M4 18h.01"/></symbol>
+</svg>
+
+<nav id="top" aria-label="Chapters">
+  <div class="nav-in">
+    <a class="brand" href="index.html"><b>Essence</b></a>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Game</a>
+      <a href="magic.html">Spells</a>
+      <a href="case.html">Studio</a>
+      <a href="codex.html" class="active">Codex</a>
+    </div>
+  </div>
+</nav>
+
+<header class="page-hero">
+  <p class="kicker">For Developers · For Partners</p>
+  <h1>The Codex</h1>
+  <p class="tagline">Every number beneath the bone.</p>
+  <p class="intro">The single reference for how Essence actually works. It merges the <strong>v1.0 design specification</strong>, the intended full system, with the <strong>current playable build</strong>, and tags every value so you can see at a glance what is real today, what is locked design, and what is still planned.</p>
+  <div class="metrics">
+    <span>Spec · <b>v1.0 baseline</b></span>
+    <span>Build · <b>current session</b></span>
+    <span>Baseline · <b>100 HP · 100 Essence</b></span>
+    <span>Sections · <b>28</b></span>
+  </div>
+</header>
+
+<div id="filterbar">
+  <div id="filters">
+    <span class="lbl">Show</span>
+    <div class="fchip" data-f="ingame"><span class="dot" style="background:var(--ingame)"></span>In game</div>
+    <div class="fchip" data-f="locked"><span class="dot" style="background:var(--locked)"></span>Locked design</div>
+    <div class="fchip" data-f="planned"><span class="dot" style="background:var(--planned)"></span>Planned</div>
+    <div class="fchip" data-f="diverge"><span class="dot" style="background:var(--diverge)"></span>Divergence</div>
+  </div>
+</div>
+
+<div class="wrap">
+<nav id="side">
+  <div class="grp">Read first</div>
+  <a href="#overview">Overview</a>
+  <a href="#legend">Status legend</a>
+  <a href="#divergence">Spec ⇄ build divergences</a>
+  <div class="grp">Foundation</div>
+  <a href="#resources">Core resources</a>
+  <a href="#regen">Essence regeneration</a>
+  <a href="#stamina">Physical stamina</a>
+  <a href="#exhaustion">Winded / Arcane Collapse</a>
+  <div class="grp">Magic architecture</div>
+  <a href="#hearts">Magic Hearts</a>
+  <a href="#capacity">Capacity &amp; staffs</a>
+  <a href="#tiers">Tier ladder</a>
+  <a href="#incant">Incantation &amp; chants</a>
+  <a href="#containment">Containment</a>
+  <a href="#scaling">Spell scaling</a>
+  <div class="grp">Elements &amp; spells</div>
+  <a href="#fire">🔥 Fire</a>
+  <a href="#wind">🌪 Wind</a>
+  <a href="#water">💧 Water</a>
+  <a href="#death">☠ Death / Bone</a>
+  <a href="#grace">✚ Grace / Life</a>
+  <a href="#fusion">❄ Fusion (Ice / Explosion / Thunder)</a>
+  <div class="grp">Combat</div>
+  <a href="#damage">Damage model</a>
+  <a href="#weapons">Weapons &amp; melee</a>
+  <a href="#foes">Foes &amp; the risen</a>
+  <div class="grp">World &amp; systems</div>
+  <a href="#building">Building</a>
+  <a href="#crafting">Workbench / crafting</a>
+  <a href="#world">World, gather &amp; waves</a>
+  <div class="grp">Governance</div>
+  <a href="#datamodel">Data model</a>
+  <a href="#locked">Locked decisions</a>
+  <a href="#priority">Build priority</a>
+</nav>
+
+<main>
+
+  <!-- ============ OVERVIEW ============ -->
+  <section id="overview">
+    <h2><span class="num">§0</span> Overview</h2>
+    <p class="lead">Essence is a fast, dangerous glass-cannon combat game. You cast magic by <b>speaking or typing incantations</b> — never by a hotkey — chanting an element up its power ladder, then naming the spell to loose it. Between fights you gather wood and stone, and raise your own fort Valheim-style. Skeletons rise in waves at the red grave.</p>
+    <div class="grid">
+      <div class="card"><div class="k">❤️ Health</div><div class="v">100</div><div class="d">Physical life. 0 = death.</div></div>
+      <div class="card"><div class="k">✨ Essence</div><div class="v">100</div><div class="d">One bar: stamina + raw mana.</div></div>
+      <div class="card"><div class="k">🗣️ Cast trigger</div><div class="v">Word</div><div class="d">Voice or typed only.</div></div>
+      <div class="card"><div class="k">🪵🪨 Materials</div><div class="v">2</div><div class="d">Wood &amp; stone.</div></div>
+    </div>
+    <p class="lead">Two documents feed this codex. The <b>design spec</b> describes a deep magic economy — Contained Magic separate from Essence, Magic Hearts, staff capacity, an E→S tier ladder, containment timers and fusion recipes. The <b>current build</b> implements a leaner, faster version of that vision (a single essence bar, a three-rung D→C→B ladder, five elements, plus a whole building &amp; world layer the spec never described). Where they differ, this codex says so plainly.</p>
+  </section>
+
+  <!-- ============ LEGEND ============ -->
+  <section id="legend">
+    <h2><span class="num">§0.1</span> Status legend</h2>
+    <p class="lead">Every table row and section carries a tag. Use the filter chips at the top-right to hide any category.</p>
+    <div class="grid">
+      <div class="card" data-s="ingame"><span class="tag t-ingame">In game</span><div class="d" style="margin-top:9px">Implemented and playable in the current build right now.</div></div>
+      <div class="card" data-s="locked"><span class="tag t-locked">Locked design</span><div class="d" style="margin-top:9px">Decided in the v1.0 spec, not yet coded. The intended target.</div></div>
+      <div class="card" data-s="planned"><span class="tag t-planned">Planned / baseline</span><div class="d" style="margin-top:9px">Baseline value or future feature, meant to be playtested and tuned.</div></div>
+      <div class="card" data-s="diverge"><span class="tag t-diverge">Divergence</span><div class="d" style="margin-top:9px">The build deliberately differs from the spec. Read the note.</div></div>
+    </div>
+  </section>
+
+  <!-- ============ DIVERGENCE ============ -->
+  <section id="divergence">
+    <h2><span class="num">§0.2</span> Spec ⇄ build divergences <span class="tag t-diverge">Divergence</span></h2>
+    <p class="lead">The biggest thing a dev or partner needs up front: where the playable game is <b>not</b> the v1.0 document. These are intentional simplifications for a faster, shippable game — the spec remains the long-term target.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Area</th><th>v1.0 spec</th><th>Current build</th></tr></thead>
+      <tbody>
+        <tr data-s="diverge"><td><b>Tier ladder</b></td><td>Six tiers <code>E D C B A S</code>, base tier E at 25 capacity</td><td>Three tiers <code>D C B</code>. The game's <b>D</b> is the entry rung (≈ spec E). No A/S yet.</td></tr>
+        <tr data-s="diverge"><td><b>Magic economy</b></td><td>Contained Magic is a separate reserve; Essence converts into it and regenerates independently</td><td>One <b>Essence</b> bar. Chanting spends essence directly. No separate contained reserve, no Magic Heart, no capacity.</td></tr>
+        <tr data-s="diverge"><td><b>Staffs &amp; capacity</b></td><td>Staff levels 1–6 raise capacity 25→225, gate the tier you can reach, set containment time</td><td>Staff is just a weapon that regenerates essence faster and hits ~25% harder. No capacity gating.</td></tr>
+        <tr data-s="diverge"><td><b>Containment timers</b></td><td>Prepared magic disperses on a timer unless a Level-3+ staff holds it</td><td>No held reserve, so no timer. A rite is chanted and loosed in the same breath.</td></tr>
+        <tr data-s="diverge"><td><b>Fifth element</b></td><td>Life (heal / limb regrowth)</td><td><b>Grace</b> — heals HP <i>and</i> mends built structures. Functionally Life + repair.</td></tr>
+        <tr data-s="diverge"><td><b>Fusion</b></td><td>Ice (W+W+Wind) and Explosion (W+W+Fire+Fire)</td><td>Neither built yet. <b>Thunder</b> (Wind+Water storm-mix, breaks rock) is designed but not coded.</td></tr>
+        <tr data-s="diverge"><td><b>Building &amp; world</b></td><td>Not covered by the v1.0 spec</td><td>Fully implemented: Valheim-style build, workbench, gather, tree/rock regrowth, waves, raise-dead ally.</td></tr>
+      </tbody>
+    </table></div>
+    <div class="note diverge"><b>Reading rule for partners:</b> when a number appears in both a "spec" and a "build" column, the <b>build</b> column is what actually runs today. The spec column is the destination.</div>
+  </section>
+
+  <!-- ============ RESOURCES ============ -->
+  <section id="resources">
+    <h2><span class="num">§1</span> Core resources</h2>
+    <p class="lead">Three connected but separate quantities: Health, Essence, and (in the spec) Contained Magic.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Resource</th><th class="n">Start / Max</th><th>Function</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr data-s="ingame locked"><td>❤️ <b>Health</b></td><td class="n">100</td><td>Physical life. 0 HP = death.</td><td><span class="tag t-ingame">In game</span></td></tr>
+        <tr data-s="ingame locked"><td>✨ <b>Essence</b></td><td class="n">100</td><td>Shared raw resource — stamina and magic in one bar.</td><td><span class="tag t-ingame">In game</span></td></tr>
+        <tr data-s="locked diverge"><td>🔮 <b>Contained Magic</b></td><td class="n">0</td><td>Typed magic reserve, separate from essence. <i>Build: folded into the essence bar.</i></td><td><span class="tag t-locked">Locked</span></td></tr>
+        <tr data-s="locked diverge"><td>💜 <b>Magic Heart</b></td><td class="n">1</td><td>Number of independent reserves. <i>Build: not present.</i></td><td><span class="tag t-locked">Locked</span></td></tr>
+        <tr data-s="locked diverge"><td>🏺 <b>Natural capacity</b></td><td class="n">25</td><td>Magic points the body holds without a staff. <i>Build: no capacity system.</i></td><td><span class="tag t-locked">Locked</span></td></tr>
+        <tr data-s="ingame"><td>♻️ <b>Essence regen</b></td><td class="n">2 / s</td><td>Spec baseline. <i>Build regenerates faster (staff 10/s, hand 5/s, sword 7.5/s) and pauses on spend.</i></td><td><span class="tag t-ingame">In game</span></td></tr>
+      </tbody>
+    </table></div>
+    <div class="note"><b>Fundamental separation (spec):</b> physical actions spend Essence · incantation stages spend Essence and create Contained Magic · spell casts spend Contained Magic, not Essence · holding magic never drains Essence. <b>Build:</b> collapses this into one bar — chanting and casting both draw the violet essence bar directly.</div>
+  </section>
+
+  <!-- ============ REGEN ============ -->
+  <section id="regen">
+    <h2><span class="num">§3</span> Essence regeneration</h2>
+    <div class="grid">
+      <div class="card" data-s="locked"><div class="k">⏱️ R_base (spec)</div><div class="v">2/s</div><div class="d">0→100 in 50s</div></div>
+      <div class="card" data-s="ingame"><div class="k">🪄 Build · staff</div><div class="v">10/s</div><div class="d">hand 5 · sword 7.5</div></div>
+      <div class="card" data-s="locked"><div class="k">⚠️ Warning</div><div class="v">25</div><div class="d">Low-essence threshold</div></div>
+      <div class="card" data-s="locked"><div class="k">💤 Recover</div><div class="v">25</div><div class="d">Leave Winded / Collapse</div></div>
+    </div>
+    <figure class="diagram">
+      <figcaption><svg aria-hidden="true"><use href="#i-refresh"/></svg>How the essence bar moves</figcaption>
+      <svg class="dgm" viewBox="0 0 760 210" role="img" aria-label="Essence bar diagram: regeneration flows in from above, spending pauses it, with warning and recover thresholds at 25">
+        <defs>
+          <linearGradient id="essg" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#6f55b0"/><stop offset="1" stop-color="#bd90e2"/>
+          </linearGradient>
+        </defs>
+        <!-- inflow row -->
+        <text x="18" y="30" class="t-lab dg-ig">Regen in ↓</text>
+        <g font-size="12">
+          <rect x="86" y="16" width="96" height="26" rx="13" class="dg-panel dg-sline"/><text x="134" y="33" text-anchor="middle" class="t-val">2 / s</text><text x="134" y="55" text-anchor="middle" class="t-lab">Spec</text>
+          <rect x="250" y="16" width="96" height="26" rx="13" class="dg-panel dg-sline"/><text x="298" y="33" text-anchor="middle" class="t-val">5 / s</text><text x="298" y="55" text-anchor="middle" class="t-lab">Hand</text>
+          <rect x="414" y="16" width="96" height="26" rx="13" class="dg-panel dg-sline"/><text x="462" y="33" text-anchor="middle" class="t-val">7.5 / s</text><text x="462" y="55" text-anchor="middle" class="t-lab">Sword</text>
+          <rect x="578" y="16" width="96" height="26" rx="13" class="dg-panel dg-sline"/><text x="626" y="33" text-anchor="middle" class="t-val">10 / s</text><text x="626" y="55" text-anchor="middle" class="t-lab">Staff</text>
+        </g>
+        <g class="sg-ig" stroke-width="1.4" opacity=".7">
+          <line x1="134" y1="60" x2="134" y2="92"/><line x1="298" y1="60" x2="298" y2="92"/><line x1="462" y1="60" x2="462" y2="92"/><line x1="626" y1="60" x2="626" y2="92"/>
+        </g>
+        <!-- the bar -->
+        <rect x="70" y="95" width="620" height="34" rx="7" class="dg-ink1 dg-sline"/>
+        <rect x="70" y="95" width="620" height="34" rx="7" fill="url(#essg)" opacity=".92"/>
+        <rect x="70" y="95" width="155" height="34" rx="7" class="dg-dv" opacity=".22"/>
+        <!-- threshold at 25 -->
+        <line x1="225" y1="86" x2="225" y2="150" class="sg-dv" stroke-width="1.6" stroke-dasharray="4 3"/>
+        <text x="225" y="80" text-anchor="middle" class="t-val dg-dv" font-size="13">25</text>
+        <!-- ticks -->
+        <g font-size="11" class="t-lab" text-anchor="middle">
+          <text x="70" y="150">0</text><text x="380" y="150">50</text><text x="535" y="150">75</text><text x="690" y="150">100</text>
+        </g>
+        <text x="225" y="167" text-anchor="middle" class="t-lab dg-dv">Warning · recover</text>
+        <text x="640" y="120" text-anchor="end" class="t-ttl" font-size="13">FULL 100</text>
+        <!-- outflow row -->
+        <text x="18" y="192" class="t-lab dg-dv">Spend ↑ pauses</text>
+        <g class="sg-dv" stroke-width="1.4" opacity=".6">
+          <line x1="200" y1="132" x2="200" y2="176"/><line x1="380" y1="132" x2="380" y2="176"/><line x1="560" y1="132" x2="560" y2="176"/>
+        </g>
+        <g font-size="12" text-anchor="middle">
+          <text x="200" y="192" class="t-val">swing −7</text><text x="380" y="192" class="t-val">dash −10</text><text x="560" y="192" class="t-val">cast −10…14</text>
+        </g>
+      </svg>
+    </figure>
+    <pre><span class="c"># spec frame update</span>
+regen = R_base × regen_gate × dt
+Essence_next = clamp(Essence + regen − continuous − discrete, 0, 100)</pre>
+    <h3>Regeneration conditions <span class="tag t-locked">Locked design</span></h3>
+    <div class="tbl"><table>
+      <thead><tr><th>State</th><th>Regen?</th><th>Rule</th></tr></thead>
+      <tbody>
+        <tr data-s="locked"><td>🚶 Standing / walking</td><td>Yes</td><td>+2/s</td></tr>
+        <tr data-s="locked"><td>🏃 Sprinting</td><td>Yes</td><td>Exception: regen continues while sprint cost applies (net −3/s)</td></tr>
+        <tr data-s="locked"><td>✋ Holding prepared magic</td><td>Yes</td><td>Containment never drains essence</td></tr>
+        <tr data-s="locked"><td>🗣️ Speaking an incantation</td><td>Yes</td><td>Until another action pauses it; cost paid at line completion</td></tr>
+        <tr data-s="locked ingame"><td>⚔️ Weapon attack</td><td>Brief pause</td><td>Pause length depends on attack type</td></tr>
+        <tr data-s="locked ingame"><td>🛡️ Dodge / block</td><td>Paused</td><td>During and briefly after</td></tr>
+        <tr data-s="locked ingame"><td>✨ Actively casting</td><td>Brief pause</td><td>During cast + 1s after</td></tr>
+      </tbody>
+    </table></div>
+    <div class="note"><b>Build note:</b> the game already pauses essence regrowth on every swing, dash, block, sprint and cast (the "essence is stamina" rule). It does <b>not</b> yet model the spec's line-completion payment timing or the separate contained reserve.</div>
+  </section>
+
+  <!-- ============ STAMINA ============ -->
+  <section id="stamina">
+    <h2><span class="num">§4</span> Physical stamina — action costs</h2>
+    <p class="lead">Physical depletion causes <b>Winded</b>; magical depletion causes <b>Arcane Collapse</b>. Both drain the same bar.</p>
+    <h3>Spec action costs <span class="tag t-locked">Locked design</span></h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Action</th><th class="n">Essence</th><th>Regen</th><th class="n">Damage</th></tr></thead>
+      <tbody>
+        <tr data-s="locked"><td>🚶 Walk</td><td class="n">0</td><td>Continues</td><td class="n">—</td></tr>
+        <tr data-s="locked"><td>🏃 Sprint</td><td class="n">5/s</td><td>Continues (net −3/s)</td><td class="n">—</td></tr>
+        <tr data-s="locked"><td>🦘 Jump</td><td class="n">5</td><td>0.5s pause</td><td class="n">—</td></tr>
+        <tr data-s="locked"><td>🌀 Dodge / roll</td><td class="n">10</td><td>1s pause</td><td class="n">i-frames</td></tr>
+        <tr data-s="locked"><td>🗡️ Short sword light</td><td class="n">4</td><td>0.5s pause</td><td class="n">20</td></tr>
+        <tr data-s="locked"><td>🗡️ Short sword heavy</td><td class="n">8</td><td>0.9s pause</td><td class="n">30</td></tr>
+        <tr data-s="locked"><td>⚔️ Long sword light</td><td class="n">6</td><td>0.75s pause</td><td class="n">28</td></tr>
+        <tr data-s="locked"><td>⚔️ Long sword heavy</td><td class="n">12</td><td>1.25s pause</td><td class="n">40</td></tr>
+        <tr data-s="locked"><td>🛡️ Hold block</td><td class="n">2/s</td><td>None</td><td class="n">—</td></tr>
+      </tbody>
+    </table></div>
+    <h3>Build action costs (essence = stamina) <span class="tag t-ingame">In game</span></h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Action</th><th class="n">Essence</th><th>Note</th></tr></thead>
+      <tbody>
+        <tr data-s="ingame"><td>⚔️ Sword swing (chain)</td><td class="n">7</td><td>Longsword combo hit</td></tr>
+        <tr data-s="ingame"><td>💥 Cleave / thrust (MMB)</td><td class="n">16</td><td>Secondary heavy</td></tr>
+        <tr data-s="ingame"><td>🪄 Staff bash</td><td class="n">6</td><td>Unkindled club swing</td></tr>
+        <tr data-s="ingame"><td>💨 Dash (Shift)</td><td class="n">10</td><td>Footwork i-frames</td></tr>
+        <tr data-s="ingame"><td>🛡️ Guard raise (RMB)</td><td class="n">3 + 6/hit</td><td>Block cost; parry refunds 10</td></tr>
+        <tr data-s="ingame"><td>🏃 Sprint (Caps)</td><td class="n">8/s</td><td>Held run</td></tr>
+        <tr data-s="ingame"><td>💀 Kill reward</td><td class="n">+6</td><td>Aggression pays essence back</td></tr>
+      </tbody>
+    </table></div>
+    <div class="note diverge"><b>Divergence:</b> the build's per-action costs are tuned to its own faster economy and don't match the spec's 4/8/6/12 sword figures. Keep both data-driven so they can converge later.</div>
+  </section>
+
+  <!-- ============ EXHAUSTION ============ -->
+  <section id="exhaustion">
+    <h2><span class="num">§5</span> Winded &amp; Arcane Collapse <span class="tag t-locked">Locked design</span></h2>
+    <p class="lead">The final source that drives Essence to zero decides the state.</p>
+    <figure class="diagram">
+      <figcaption><svg aria-hidden="true"><use href="#i-skull"/></svg>Hit zero — what spent the last drop decides your fate</figcaption>
+      <svg class="dgm" viewBox="0 0 760 250" role="img" aria-label="Branch: essence hits zero, then physical leads to Winded, magical leads to Arcane Collapse, a spell cast leads to no zero state">
+        <rect x="306" y="16" width="148" height="46" rx="9" class="dg-panel dg-sgold"/>
+        <text x="380" y="38" text-anchor="middle" class="t-ttl" font-size="13">Essence → 0</text>
+        <text x="380" y="54" text-anchor="middle" class="t-lab">what spent it last?</text>
+        <g class="dg-sline" stroke-width="1.5" fill="none"><path d="M380 62v22H132v20"/><path d="M380 62v42"/><path d="M380 84h248v20"/></g>
+        <g text-anchor="middle" class="t-lab"><text x="132" y="78" class="dg-lk">physical</text><text x="380" y="78" class="dg-dv">magical</text><text x="628" y="78" class="dg-dim">spell cast</text></g>
+        <!-- Winded -->
+        <rect x="24" y="106" width="216" height="126" rx="9" class="dg-ink1 sg-lk" stroke-width="1.6"/>
+        <text x="132" y="132" text-anchor="middle" class="t-ttl dg-lk" font-size="15">WINDED</text>
+        <g text-anchor="middle" font-size="11.5" class="dg-dim"><text x="132" y="156">Conscious · slow walk only</text><text x="132" y="176">No sprint / dodge / attack</text><text x="132" y="196" class="dg-ig">No HP loss</text><text x="132" y="218">Recover at 25 essence</text></g>
+        <!-- Collapse -->
+        <rect x="272" y="106" width="216" height="126" rx="9" class="dg-ink1 sg-dv" stroke-width="1.6"/>
+        <text x="380" y="132" text-anchor="middle" class="t-ttl dg-dv" font-size="15">ARCANE COLLAPSE</text>
+        <g text-anchor="middle" font-size="11.5" class="dg-dim"><text x="380" y="156">Faints · all defence off</text><text x="380" y="176">Contained magic disperses</text><text x="380" y="196" class="dg-dv">−20% max HP</text><text x="380" y="218">Wake at 25 · lethal if HP ≤ 20</text></g>
+        <!-- No state -->
+        <rect x="520" y="106" width="216" height="126" rx="9" class="dg-ink1 dg-sline"/>
+        <text x="628" y="132" text-anchor="middle" class="t-ttl" font-size="15">NO ZERO STATE</text>
+        <g text-anchor="middle" font-size="11.5" class="dg-dim"><text x="628" y="160">Casts spend contained</text><text x="628" y="180">magic, not essence —</text><text x="628" y="200">so neither state fires.</text></g>
+      </svg>
+    </figure>
+    <div class="grid">
+      <div class="card" data-s="locked"><div class="k">😮‍💨 If PHYSICAL → Winded</div><div class="d" style="margin-top:8px">Conscious · slow walk only · no sprint/dodge/attack/block/conversion · <b>no HP loss</b> · recover at 25 essence.</div></div>
+      <div class="card" data-s="locked"><div class="k">😵 If MAGIC → Arcane Collapse</div><div class="d" style="margin-top:8px">Faints · all defence disabled · <b>contained magic disperses</b> · −20% max HP · wake at 25 essence · lethal if HP ≤ 20.</div></div>
+      <div class="card" data-s="locked"><div class="k">🔮 If SPELL CAST</div><div class="d" style="margin-top:8px">No zero-essence state — casts spend contained magic, not essence.</div></div>
+    </div>
+    <div class="note planned"><b>Build status:</b> not yet implemented. Running out of essence today simply gates further spending ("too winded to sprint") without the Winded / Collapse states or the HP penalty. This is a priority target from the spec.</div>
+  </section>
+
+  <!-- ============ HEARTS ============ -->
+  <section id="hearts">
+    <h2><span class="num">§6</span> Magic Hearts <span class="tag t-locked">Locked design</span></h2>
+    <p class="lead">A normal character has one Magic Heart = one active reserve. You may hold Fire <b>or</b> Water, not both — unless a fusion recipe transforms the single reserve. A second Heart permits two reserves whose amounts share total capacity.</p>
+    <pre>Sum(all active reserve amounts) &lt;= total magic capacity</pre>
+    <div class="note diverge"><b>Divergence:</b> the build has no Magic Heart or reserve object at all — one essence bar, one rite kindled at a time.</div>
+  </section>
+
+  <!-- ============ CAPACITY ============ -->
+  <section id="capacity">
+    <h2><span class="num">§7</span> Capacity &amp; staff progression <span class="tag t-locked">Locked design</span></h2>
+    <pre>TotalCapacity = 25 body + staff bonus + future armour + upgrades</pre>
+    <div class="tbl"><table>
+      <thead><tr><th>Equipment</th><th class="n">Bonus</th><th class="n">Total</th><th>Highest tier</th><th>Containment</th></tr></thead>
+      <tbody>
+        <tr data-s="locked"><td>🧍 Body only</td><td class="n">+0</td><td class="n">25</td><td>E</td><td>5 min</td></tr>
+        <tr data-s="locked"><td>🪄 Staff Lv 1</td><td class="n">+30</td><td class="n">55</td><td>D</td><td>10 min</td></tr>
+        <tr data-s="locked"><td>🪄 Staff Lv 2</td><td class="n">+50</td><td class="n">75</td><td>D (+20 reserve)</td><td>20 min</td></tr>
+        <tr data-s="locked"><td>🪄 Staff Lv 3</td><td class="n">+75</td><td class="n">100</td><td>C</td><td>∞ while equipped</td></tr>
+        <tr data-s="planned"><td>🪄 Staff Lv 4</td><td class="n">+105</td><td class="n">130</td><td>B</td><td>∞</td></tr>
+        <tr data-s="planned"><td>🪄 Staff Lv 5</td><td class="n">+150</td><td class="n">175</td><td>A</td><td>∞</td></tr>
+        <tr data-s="planned"><td>🪄 Staff Lv 6</td><td class="n">+200</td><td class="n">225</td><td>S</td><td>∞</td></tr>
+      </tbody>
+    </table></div>
+    <div class="note diverge"><b>Build:</b> the staff exists as a weapon (faster essence regrowth, +25% spell damage) but grants <b>no capacity and no tier gate</b>. Any of the three tiers can be reached with the staff in hand.</div>
+  </section>
+
+  <!-- ============ TIERS ============ -->
+  <section id="tiers">
+    <h2><span class="num">§8</span> Magic tier ladder</h2>
+    <figure class="diagram">
+      <figcaption><svg aria-hidden="true"><use href="#i-ladder"/></svg>The build's three rungs — quality climbs, never falls back</figcaption>
+      <svg class="dgm" viewBox="0 0 760 280" role="img" aria-label="Tier ladder: D at 1.0x damage, C at 1.7x, B at 2.5x, each reached by a spoken chant">
+        <defs><linearGradient id="tg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ecd192"/><stop offset="1" stop-color="#8a6a2a"/></linearGradient></defs>
+        <line x1="60" y1="232" x2="700" y2="232" class="dg-sline" stroke-width="1.5"/>
+        <polyline points="185,172 380,128 575,76" class="dg-sgold" fill="none" stroke-width="1.6" stroke-dasharray="5 4" opacity=".6"/>
+        <path d="M575 76 l-9 2 4 8Z" class="dg-gold"/>
+        <text x="70" y="60" class="t-lab">Damage ×</text>
+        <!-- D -->
+        <rect x="110" y="172" width="150" height="60" fill="url(#tg)" opacity=".38" class="dg-sgold"/>
+        <text x="185" y="205" text-anchor="middle" class="t-ttl" font-size="30">D</text>
+        <text x="185" y="223" text-anchor="middle" class="t-val" font-size="13">×1.0</text>
+        <rect x="150" y="150" width="70" height="20" rx="10" class="dg-panel dg-sline"/><text x="185" y="164" text-anchor="middle" class="t-val" font-size="11">10 ess</text>
+        <text x="185" y="252" text-anchor="middle" class="t-lab dg-ig">Entry</text>
+        <text x="185" y="268" text-anchor="middle" class="t-mono" font-size="11">"spirits of …"</text>
+        <!-- C -->
+        <rect x="305" y="128" width="150" height="104" fill="url(#tg)" opacity=".6" class="dg-sgold"/>
+        <text x="380" y="164" text-anchor="middle" class="t-ttl" font-size="30">C</text>
+        <text x="380" y="182" text-anchor="middle" class="t-val" font-size="13">×1.7</text>
+        <rect x="345" y="106" width="70" height="20" rx="10" class="dg-panel dg-sline"/><text x="380" y="120" text-anchor="middle" class="t-val" font-size="11">12 ess</text>
+        <text x="380" y="252" text-anchor="middle" class="t-lab dg-ig">Climb</text>
+        <text x="380" y="268" text-anchor="middle" class="t-mono" font-size="11">"bring destruction"</text>
+        <!-- B -->
+        <rect x="500" y="76" width="150" height="156" fill="url(#tg)" opacity=".85" class="dg-sgold"/>
+        <text x="575" y="118" text-anchor="middle" class="t-ttl dg-ink" font-size="30">B</text>
+        <text x="575" y="136" text-anchor="middle" class="dg-ink" font-size="13" font-weight="700">×2.5</text>
+        <rect x="540" y="54" width="70" height="20" rx="10" class="dg-panel dg-sline"/><text x="575" y="68" text-anchor="middle" class="t-val" font-size="11">14 ess</text>
+        <text x="575" y="252" text-anchor="middle" class="t-lab dg-ig">Peak</text>
+        <text x="575" y="268" text-anchor="middle" class="t-mono" font-size="11">element's own line</text>
+      </svg>
+    </figure>
+    <h3>Spec ladder E → S <span class="tag t-locked">Locked design</span></h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Tier</th><th class="n">Idx</th><th class="n">Stage cost</th><th class="n">Full reserve</th><th class="n">Min capacity</th></tr></thead>
+      <tbody>
+        <tr data-s="locked"><td>E</td><td class="n">0</td><td class="n">25</td><td class="n">25</td><td class="n">25</td></tr>
+        <tr data-s="locked"><td>D</td><td class="n">1</td><td class="n">30</td><td class="n">55</td><td class="n">55</td></tr>
+        <tr data-s="locked"><td>C</td><td class="n">2</td><td class="n">35</td><td class="n">90</td><td class="n">90</td></tr>
+        <tr data-s="locked"><td>B</td><td class="n">3</td><td class="n">40</td><td class="n">130</td><td class="n">130</td></tr>
+        <tr data-s="locked"><td>A</td><td class="n">4</td><td class="n">45</td><td class="n">175</td><td class="n">175</td></tr>
+        <tr data-s="planned"><td>S</td><td class="n">5</td><td class="n">50</td><td class="n">225</td><td class="n">225</td></tr>
+      </tbody>
+    </table></div>
+    <h3>Build ladder D → C → B <span class="tag t-ingame">In game</span></h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Tier</th><th class="n">Essence cost</th><th class="n">Damage ×</th><th>Chant to reach it</th></tr></thead>
+      <tbody>
+        <tr data-s="ingame"><td><b>D</b> (entry)</td><td class="n">10</td><td class="n">1.0×</td><td>"Spirits of &lt;element&gt;"</td></tr>
+        <tr data-s="ingame"><td><b>C</b></td><td class="n">12</td><td class="n">1.7×</td><td>"Bring destruction"</td></tr>
+        <tr data-s="ingame"><td><b>B</b></td><td class="n">14</td><td class="n">2.5×</td><td>each element's own final words (below)</td></tr>
+      </tbody>
+    </table></div>
+    <div class="note"><b>Tier never downgrades (spec + build intent):</b> once a rite reaches a tier its quality holds until spent or dispersed. Casting a spell ends the climb — to go higher you restart from the base rung.</div>
+  </section>
+
+  <!-- ============ INCANT ============ -->
+  <section id="incant">
+    <h2><span class="num">§9</span> Incantation &amp; chants <span class="tag t-ingame">In game</span></h2>
+    <p class="lead">Magic has exactly two triggers: <b>speak it</b> (voice, <span class="kbd">V</span>) or <b>type it</b> (<span class="kbd">T</span>). No hotkey, no click, ever casts. Hold click only aims the throw; the <b>word</b> looses it.</p>
+    <figure class="diagram">
+      <figcaption><svg aria-hidden="true"><use href="#i-mic"/></svg>The cast is a sentence — speak or type it, rung by rung</figcaption>
+      <svg class="dgm" viewBox="0 0 760 210" role="img" aria-label="Casting flow: choose voice or type, chant the element opener at D, climb to C, climb to B, then name the spell to loose it">
+        <defs><linearGradient id="castb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1f1a10"/><stop offset="1" stop-color="#15110a"/></linearGradient></defs>
+        <!-- connectors -->
+        <g class="dg-sgold" stroke-width="1.6" opacity=".7">
+          <line x1="150" y1="80" x2="176" y2="80"/><line x1="298" y1="80" x2="324" y2="80"/><line x1="446" y1="80" x2="472" y2="80"/><line x1="594" y1="80" x2="620" y2="80"/>
+        </g>
+        <g class="dg-gold"><path d="M176 80l-9-4v8Z"/><path d="M324 80l-9-4v8Z"/><path d="M472 80l-9-4v8Z"/><path d="M620 80l-9-4v8Z"/></g>
+        <!-- box 1: trigger -->
+        <rect x="18" y="46" width="132" height="68" rx="9" fill="url(#castb)" class="dg-sline"/>
+        <text x="84" y="74" text-anchor="middle" class="t-val" font-size="13">SPEAK · V</text>
+        <text x="84" y="96" text-anchor="middle" class="t-lab">or type · T</text>
+        <!-- box 2: D -->
+        <rect x="176" y="46" width="122" height="68" rx="9" fill="url(#castb)" class="dg-sgold"/>
+        <circle cx="290" cy="58" r="11" class="dg-panel dg-sline"/><text x="290" y="62" text-anchor="middle" class="t-val" font-size="11">D</text>
+        <text x="230" y="82" text-anchor="middle" class="t-mono" font-size="12">"spirits</text>
+        <text x="230" y="99" text-anchor="middle" class="t-mono" font-size="12">of fire"</text>
+        <!-- box 3: C -->
+        <rect x="324" y="46" width="122" height="68" rx="9" fill="url(#castb)" class="dg-sgold"/>
+        <circle cx="438" cy="58" r="11" class="dg-panel dg-sline"/><text x="438" y="62" text-anchor="middle" class="t-val" font-size="11">C</text>
+        <text x="378" y="82" text-anchor="middle" class="t-mono" font-size="12">"bring</text>
+        <text x="378" y="99" text-anchor="middle" class="t-mono" font-size="12">destruction"</text>
+        <!-- box 4: B -->
+        <rect x="472" y="46" width="122" height="68" rx="9" fill="url(#castb)" class="dg-sgold"/>
+        <circle cx="586" cy="58" r="11" class="dg-panel dg-sline"/><text x="586" y="62" text-anchor="middle" class="t-val" font-size="11">B</text>
+        <text x="526" y="82" text-anchor="middle" class="t-mono" font-size="12">"…to ash"</text>
+        <text x="526" y="99" text-anchor="middle" class="t-lab">element line</text>
+        <!-- box 5: cast -->
+        <rect x="620" y="46" width="122" height="68" rx="9" class="dg-gold"/>
+        <text x="681" y="74" text-anchor="middle" class="dg-ink" font-size="13" font-weight="700">NAME IT</text>
+        <text x="681" y="96" text-anchor="middle" class="dg-ink" font-size="12" font-weight="700">"FIREBALL!"</text>
+        <!-- tier row -->
+        <g text-anchor="middle" class="t-lab"><text x="237" y="132">Tier D</text><text x="385" y="132">Tier C</text><text x="533" y="132">Tier B</text><text x="681" y="132">loose</text></g>
+        <text x="380" y="178" text-anchor="middle" class="dg-dv" font-size="11.5">Holding click only aims the throw. The spoken or typed word is what casts — never a hotkey.</text>
+      </svg>
+    </figure>
+    <h3>Base element openers (Tier D)</h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Element</th><th>Opener</th><th>Spec Tier E line</th></tr></thead>
+      <tbody>
+        <tr data-s="ingame"><td class="el-fire">🔥 Fire</td><td class="mono">"spirits of fire"</td><td>"Spirits of Fire."</td></tr>
+        <tr data-s="ingame"><td class="el-wind">🌪 Wind</td><td class="mono">"spirits of wind"</td><td>"Spirits of Wind."</td></tr>
+        <tr data-s="ingame"><td class="el-water">💧 Water</td><td class="mono">"spirits of water"</td><td>"Spirits of Water."</td></tr>
+        <tr data-s="ingame"><td class="el-death">☠ Death</td><td class="mono">"spirits of death"</td><td>"Spirits of Death."</td></tr>
+        <tr data-s="ingame"><td class="el-grace">✚ Grace</td><td class="mono">"spirits of grace"</td><td>"Spirits of Life."</td></tr>
+      </tbody>
+    </table></div>
+    <h3>The climb</h3>
+    <div class="tbl"><table>
+      <thead><tr><th>To</th><th>Say</th></tr></thead>
+      <tbody>
+        <tr data-s="ingame"><td><b>C</b> (any element)</td><td class="mono">"bring destruction" &nbsp;<span style="color:var(--faint)">(or "burn my foe")</span></td></tr>
+        <tr data-s="ingame"><td><b>B</b> · Fire</td><td class="mono">"turn my enemies to ash"</td></tr>
+        <tr data-s="ingame"><td><b>B</b> · Water</td><td class="mono">"drown my enemies in the depths"</td></tr>
+        <tr data-s="ingame"><td><b>B</b> · Death</td><td class="mono">"all who defy me perish"</td></tr>
+        <tr data-s="ingame"><td><b>B</b> · Wind</td><td class="mono">"blow my enemies away"</td></tr>
+        <tr data-s="ingame"><td><b>B</b> · Grace</td><td class="mono">"let mercy bloom"</td></tr>
+        <tr data-s="ingame"><td><b>Loose it</b></td><td class="mono">name the form — "FIREBALL!" — or "cast / go / now"</td></tr>
+      </tbody>
+    </table></div>
+    <div class="note"><b>Spec continuation:</b> the universal Tier D line is "Bring destruction to my enemy," reserved C/B/A/S lines to come. The build shortens the C line and gives each element its own themed B line, while storing the same <code>element_token</code> the spec's fusion recognition needs.</div>
+    <div class="note planned"><b>Planned:</b> instant casting — act on the last spoken word the moment it is recognised (interim result) rather than waiting for the phrase to finalise. Designed this session, not yet in the file.</div>
+  </section>
+
+  <!-- ============ CONTAINMENT ============ -->
+  <section id="containment">
+    <h2><span class="num">§10</span> Containment &amp; dispersal <span class="tag t-locked">Locked design</span></h2>
+    <pre>containment_seconds = 300 × 2^(staff_level)   <span class="c"># levels 0–2</span>
+Body 300s · Staff-1 600s · Staff-2 1200s · Staff-3+ infinite while equipped</pre>
+    <p>Reaching a new tier or completing a fusion resets the timer to the current equipment limit. Casting a spell does <b>not</b> reset it. When the timer hits zero, all remaining magic disperses. Dropping a no-dispersal staff caps remaining time at 300s.</p>
+    <div class="note diverge"><b>Build:</b> no held reserve means no containment timer — a rite is chanted and cast in one exchange.</div>
+  </section>
+
+  <!-- ============ SCALING ============ -->
+  <section id="scaling">
+    <h2><span class="num">§12</span> Spell unlock &amp; scaling</h2>
+    <h3>Minimum-tier rule <span class="tag t-locked">Locked design</span></h3>
+    <p>A spell never casts below its unlock tier. Fireball unlocks at E (casts E→S). Fire Arrow unlocks at D (no E version). Freeze unlocks at C. In the build the rule is now universal: every form carries an unlock rung — Cyclone, Bone Cage and Flamethrower need <b>C</b>, Raise Dead stays <b>B-only</b>, and a refused cast names the tier it demands.</p>
+    <pre><span class="c"># spec, one-time spell</span>
+Cost(tier) = BaseCostAtUnlock + TierIndex(tier) − TierIndex(unlock)
+<span class="c"># build</span>
+Damage = FormBase × TierMult[D=1.0, C=1.7, B=2.5] × WeaponMult[staff 1.25]</pre>
+    <h3>Quality damage multipliers <span class="tag t-locked">Locked design</span></h3>
+    <div class="tbl"><table>
+      <thead><tr><th class="n">E</th><th class="n">D</th><th class="n">C</th><th class="n">B</th><th class="n">A</th><th class="n">S</th></tr></thead>
+      <tbody><tr data-s="locked"><td class="n">1.0</td><td class="n">1.65</td><td class="n">2.15</td><td class="n">2.65</td><td class="n">3.35</td><td class="n">4.25</td></tr></tbody>
+    </table></div>
+    <figure class="diagram">
+      <figcaption><svg aria-hidden="true"><use href="#i-chart"/></svg>Spec quality multiplier climbs E → S <span class="tag t-locked" style="margin-left:auto">Locked design</span></figcaption>
+      <svg class="dgm" viewBox="0 0 760 234" role="img" aria-label="Bar chart of quality multipliers: E 1.0, D 1.65, C 2.15, B 2.65, A 3.35, S 4.25">
+        <defs><linearGradient id="scg" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#8a6a2a"/><stop offset="1" stop-color="#ecd192"/></linearGradient></defs>
+        <line x1="60" y1="196" x2="716" y2="196" class="dg-sline" stroke-width="1.5"/>
+        <g text-anchor="middle">
+          <rect x="90" y="161" width="70" height="35" fill="url(#scg)" opacity=".85"/><text x="125" y="152" class="t-val" font-size="13">1.0</text><text x="125" y="216" class="t-ttl" font-size="14">E</text>
+          <rect x="198" y="138" width="70" height="58" fill="url(#scg)" opacity=".85"/><text x="233" y="129" class="t-val" font-size="13">1.65</text><text x="233" y="216" class="t-ttl" font-size="14">D</text>
+          <rect x="306" y="120" width="70" height="76" fill="url(#scg)" opacity=".85"/><text x="341" y="111" class="t-val" font-size="13">2.15</text><text x="341" y="216" class="t-ttl" font-size="14">C</text>
+          <rect x="414" y="102" width="70" height="94" fill="url(#scg)" opacity=".85"/><text x="449" y="93" class="t-val" font-size="13">2.65</text><text x="449" y="216" class="t-ttl" font-size="14">B</text>
+          <rect x="522" y="78" width="70" height="118" fill="url(#scg)" opacity=".85"/><text x="557" y="69" class="t-val" font-size="13">3.35</text><text x="557" y="216" class="t-ttl" font-size="14">A</text>
+          <rect x="630" y="46" width="70" height="150" fill="url(#scg)" opacity=".85"/><text x="665" y="37" class="t-val" font-size="13">4.25</text><text x="665" y="216" class="t-ttl" font-size="14">S</text>
+        </g>
+        <text x="30" y="120" transform="rotate(-90 30 120)" text-anchor="middle" class="t-lab">Damage ×</text>
+      </svg>
+    </figure>
+  </section>
+
+  <!-- ============ FIRE ============ -->
+  <section id="fire">
+    <h2><span class="num">§16</span> <span class="el-fire">🔥 Fire</span></h2>
+    <figure class="diagram">
+      <figcaption><svg aria-hidden="true"><use href="#i-fusion"/></svg>The five elements at a glance</figcaption>
+      <svg class="dgm" viewBox="0 0 760 362" role="img" aria-label="The five elements: Fire, Wind, Water, Death and Grace arranged in a ring">
+        <g class="dg-sline" stroke-width="1" opacity=".45">
+          <line x1="380" y1="190" x2="380" y2="68"/><line x1="380" y1="190" x2="496" y2="152"/>
+          <line x1="380" y1="190" x2="452" y2="289"/><line x1="380" y1="190" x2="308" y2="289"/><line x1="380" y1="190" x2="264" y2="152"/>
+        </g>
+        <circle cx="380" cy="190" r="40" class="dg-panel dg-sgold"/>
+        <text x="380" y="186" text-anchor="middle" class="t-lab">The five</text>
+        <text x="380" y="203" text-anchor="middle" class="t-ttl" font-size="13">ELEMENTS</text>
+        <!-- Fire (top) -->
+        <circle cx="380" cy="68" r="31" class="dg-ink1 sg-fire" stroke-width="2"/><text x="380" y="76" text-anchor="middle" font-size="25">🔥</text>
+        <text x="380" y="120" text-anchor="middle" class="t-ttl el-fire" font-size="14">Fire</text><text x="380" y="135" text-anchor="middle" class="el-fire" font-size="11" opacity=".7">burst &amp; burn</text>
+        <!-- Wind (right) -->
+        <circle cx="496" cy="152" r="31" class="dg-ink1 sg-wind" stroke-width="2"/><text x="496" y="160" text-anchor="middle" font-size="23">🌪</text>
+        <text x="534" y="150" text-anchor="start" class="t-ttl el-wind" font-size="14">Wind</text><text x="534" y="166" text-anchor="start" class="el-wind" font-size="11" opacity=".7">fell &amp; shove</text>
+        <!-- Water (lower-right) -->
+        <circle cx="452" cy="289" r="31" class="dg-ink1 sg-water" stroke-width="2"/><text x="452" y="297" text-anchor="middle" font-size="23">💧</text>
+        <text x="452" y="333" text-anchor="middle" class="t-ttl el-water" font-size="14">Water</text><text x="452" y="349" text-anchor="middle" class="el-water" font-size="11" opacity=".7">erupt &amp; shove</text>
+        <!-- Death (lower-left) -->
+        <circle cx="308" cy="289" r="31" class="dg-ink1 sg-death" stroke-width="2"/><text x="308" y="297" text-anchor="middle" font-size="23">☠</text>
+        <text x="308" y="333" text-anchor="middle" class="t-ttl el-death" font-size="14">Death</text><text x="308" y="349" text-anchor="middle" class="el-death" font-size="11" opacity=".7">bone &amp; raise</text>
+        <!-- Grace (left) -->
+        <circle cx="264" cy="152" r="31" class="dg-ink1 sg-grace" stroke-width="2"/><text x="264" y="160" text-anchor="middle" font-size="23">✚</text>
+        <text x="226" y="150" text-anchor="end" class="t-ttl el-grace" font-size="14">Grace</text><text x="226" y="166" text-anchor="end" class="el-grace" font-size="11" opacity=".7">mend the fort</text>
+        <!-- fusion note -->
+        <text x="638" y="300" text-anchor="middle" class="t-lab">Combine for</text>
+        <text x="638" y="319" text-anchor="middle" class="t-val" font-size="12">❄ Ice · 💥 Explosion</text>
+        <text x="638" y="336" text-anchor="middle" class="t-val" font-size="12">⚡ Thunder</text>
+      </svg>
+    </figure>
+    <h3>Build forms <span class="tag t-ingame">In game</span></h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Form</th><th class="n">Base dmg</th><th>Behaviour (× tier 1.0/1.7/2.5)</th></tr></thead>
+      <tbody>
+        <tr data-s="ingame"><td><b>Fireball</b></td><td class="n">26</td><td>Hurled blast. At C the impact births <b>4×10</b> real smaller fireballs, at B <b>6×12</b> — the spec's fragment rows.</td></tr>
+        <tr data-s="ingame"><td><b>Fire Arrow</b> <span style="color:var(--faint)">(was Fire Spear)</span></td><td class="n">20</td><td>Homing bolts. Volley grows <b>1 / 3 / 6</b> with tier.</td></tr>
+        <tr data-s="ingame"><td><b>Flamethrower</b> <span class="tag t-ingame" style="font-size:9px">C+</span></td><td class="n">16/tick</td><td>Sustained sweeping cone. Damage &amp; reach scale with tier from C.</td></tr>
+      </tbody>
+    </table></div>
+    <h3>Spec tables <span class="tag t-locked">Locked design</span></h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Fireball</th><th class="n">E</th><th class="n">D</th><th class="n">C</th><th class="n">B</th><th class="n">A</th><th class="n">S</th></tr></thead>
+      <tbody>
+        <tr data-s="locked"><td>Magic cost</td><td class="n">7</td><td class="n">8</td><td class="n">9</td><td class="n">10</td><td class="n">11</td><td class="n">12</td></tr>
+        <tr data-s="locked"><td>Direct damage</td><td class="n">30</td><td class="n">50</td><td class="n">65</td><td class="n">80</td><td class="n">101</td><td class="n">128</td></tr>
+        <tr data-s="locked"><td>Fragments</td><td class="n">—</td><td class="n">—</td><td class="n">4×10</td><td class="n">6×12</td><td class="n">8×15</td><td class="n">12×20</td></tr>
+      </tbody>
+    </table></div>
+    <p style="color:var(--dim);font-size:13px">Fire Arrow (unlock D): 45→115 dmg, tracks/pierces. Flamethrower (unlock C — the build now matches): 30→75 dmg/s channelled, 8→18 m. Full per-tier tables in the v1.0 spec §16.</p>
+  </section>
+
+  <!-- ============ WIND ============ -->
+  <section id="wind">
+    <h2><span class="num">§17</span> <span class="el-wind">🌪 Wind</span></h2>
+    <h3>Build forms <span class="tag t-ingame">In game</span></h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Form</th><th class="n">Base dmg</th><th>Behaviour</th></tr></thead>
+      <tbody>
+        <tr data-s="ingame"><td><b>Slash</b></td><td class="n">22</td><td>Cutting wind blades — <b>1 / 2 / 3</b> with tier, the spec's multi-blade rows. Fells trees for wood.</td></tr>
+        <tr data-s="ingame"><td><b>Gust</b></td><td class="n">10</td><td>Pure knockback wedge; fans wider &amp; further each tier.</td></tr>
+        <tr data-s="ingame"><td><b>Cyclone</b> <span class="tag t-ingame" style="font-size:9px">C+</span></td><td class="n">28</td><td>Lifts &amp; suspends the pack at your aim ~2 s. C 48 · B 70.</td></tr>
+        <tr data-s="planned"><td><b>Thunder</b> <span class="tag t-planned" style="font-size:9px">planned fusion</span></td><td class="n">50</td><td>Wind + Water storm-mix. The only thing that shatters rock. Designed, not yet coded.</td></tr>
+      </tbody>
+    </table></div>
+    <h3>Spec tables <span class="tag t-locked">Locked design</span></h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Spell</th><th>Unlock</th><th>Range E→S</th><th>Damage E→S</th></tr></thead>
+      <tbody>
+        <tr data-s="locked"><td>Push</td><td>E</td><td class="n">3→25 m cone</td><td class="n">5→21</td></tr>
+        <tr data-s="locked"><td>Slice</td><td>D</td><td class="n">1→5 blades</td><td class="n">40→175</td></tr>
+        <tr data-s="ingame"><td>Cyclone <span class="tag t-ingame" style="font-size:9px">shipped</span></td><td>C</td><td class="n">lift ~2 s (build)</td><td class="n">48→180</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <!-- ============ WATER ============ -->
+  <section id="water">
+    <h2><span class="num">§18</span> <span class="el-water">💧 Water</span></h2>
+    <h3>Build forms <span class="tag t-ingame">In game</span></h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Form</th><th class="n">Base dmg</th><th>Behaviour</th></tr></thead>
+      <tbody>
+        <tr data-s="ingame"><td><b>Geyser</b></td><td class="n">30</td><td>Erupts under your aim. Eruptions grow <b>1 / 2 / 3</b> with tier.</td></tr>
+        <tr data-s="ingame"><td><b>Torrent</b></td><td class="n">10</td><td>Shoving flood wave + knockback; reaches further each tier.</td></tr>
+      </tbody>
+    </table></div>
+    <h3>Spec tables <span class="tag t-locked">Locked design</span></h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Spell</th><th>Unlock</th><th>Damage E→S</th><th>Effect</th></tr></thead>
+      <tbody>
+        <tr data-s="locked"><td>Water Ball</td><td>E</td><td class="n">25→106</td><td>Impact + wet status</td></tr>
+        <tr data-s="locked"><td>Wave</td><td>D</td><td class="n">30→85</td><td>Forward push, displacement</td></tr>
+        <tr data-s="diverge"><td><s>Water Prison</s> <span class="tag t-diverge" style="font-size:9px">cut</span></td><td>C</td><td class="n">3→12 s</td><td>Cut from the build — Bone Cage carries the trap role.</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <!-- ============ DEATH ============ -->
+  <section id="death">
+    <h2><span class="num">§19</span> <span class="el-death">☠ Death / Bone</span></h2>
+    <h3>Build forms <span class="tag t-ingame">In game</span></h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Form</th><th class="n">Base</th><th>Behaviour</th></tr></thead>
+      <tbody>
+        <tr data-s="ingame"><td><b>Bone Spear</b></td><td class="n">44</td><td>Heavy lance. Lances grow <b>1 / 2 / 3</b> with tier.</td></tr>
+        <tr data-s="ingame"><td><b>Bone Wall</b></td><td class="n">—</td><td>Barricade to hide behind; widens <b>5 / 7 / 9</b> stakes with tier. HP <b>80 / 120 / 175</b> — the risen batter it down.</td></tr>
+        <tr data-s="ingame"><td><b>Bone Cage</b> <span class="tag t-ingame" style="font-size:9px">C+</span></td><td class="n">—</td><td>Ten stakes imprison one foe. Durability <b>150 / 220</b> (C/B); it batters its way out.</td></tr>
+        <tr data-s="ingame"><td><b>Raise Dead</b> <span class="tag t-planned" style="font-size:9px">B only</span></td><td class="n">14×tier</td><td>One of the fallen rises and holds that ground <b>120 s</b>. One guard at a time.</td></tr>
+      </tbody>
+    </table></div>
+    <h3>Spec tables <span class="tag t-locked">Locked design</span></h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Spell</th><th>Unlock</th><th>Value E→S</th></tr></thead>
+      <tbody>
+        <tr data-s="locked"><td>Bone Spike</td><td>E</td><td class="n">35→149 dmg</td></tr>
+        <tr data-s="locked"><td>Bone Wall</td><td>D</td><td class="n">80→400 durability</td></tr>
+        <tr data-s="ingame"><td>Bone Cage <span class="tag t-ingame" style="font-size:9px">shipped</span></td><td>C</td><td class="n">150→500 durability (build: 150/220)</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <!-- ============ GRACE ============ -->
+  <section id="grace">
+    <h2><span class="num">§20</span> <span class="el-grace">✚ Grace / Life</span></h2>
+    <h3>Build forms <span class="tag t-ingame">In game</span></h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Form</th><th class="n">Base</th><th>Behaviour</th></tr></thead>
+      <tbody>
+        <tr data-s="ingame"><td><b>Mend</b></td><td class="n">30</td><td>Repairs the single nearest damaged built piece or door.</td></tr>
+        <tr data-s="ingame"><td><b>Restoration</b></td><td class="n">16</td><td>Repair pulse over radius <b>6 / 8 / 10</b> — every damaged piece at once.</td></tr>
+        <tr data-s="ingame"><td><b>Heal</b> <span class="tag t-ingame" style="font-size:9px">new</span></td><td class="n">—</td><td>Knits the caster's own flesh: <b>+20 / +34 / +50</b> HP by tier. Unlocks at D.</td></tr>
+      </tbody>
+    </table></div>
+    <div class="note"><b>Merged:</b> the spec's fifth element is <b>Life</b> (heal HP, limb reattach/regrow). The build's <b>Grace</b> now carries both — Mend and Restoration for timber, <b>Heal</b> for flesh (the spec's Heal table, D/C/B slice = 20/34/50). Limb reattach/regrow stays future.</div>
+    <h3>Spec Life · Heal scaling <span class="tag t-ingame">In game — D/C/B slice</span></h3>
+    <div class="tbl"><table>
+      <thead><tr><th class="n">E</th><th class="n">D</th><th class="n">C</th><th class="n">B</th><th class="n">A</th><th class="n">S</th></tr></thead>
+      <tbody><tr data-s="locked"><td class="n">20</td><td class="n">40</td><td class="n">60</td><td class="n">85</td><td class="n">100</td><td class="n">130</td></tr></tbody>
+    </table></div>
+  </section>
+
+  <!-- ============ FUSION ============ -->
+  <section id="fusion">
+    <h2><span class="num">§21–23</span> Fusion — Ice · Explosion · Thunder</h2>
+    <p class="lead">Fusion transforms one reserve through a sequence of element tokens in a single uninterrupted climb. A recognised full sequence yields a fusion element; a recognised prefix yields an intermediate <b>Tainted</b> state.</p>
+    <figure class="diagram">
+      <figcaption><svg aria-hidden="true"><use href="#i-fusion"/></svg>Recipes — chant the tokens in one unbroken climb</figcaption>
+      <svg class="dgm" viewBox="0 0 760 250" role="img" aria-label="Fusion recipes: Water Water Wind makes Ice at C; Water Water Fire Fire makes Explosion at B; Wind plus Water makes Thunder">
+        <g font-size="22" text-anchor="middle">
+          <!-- ICE -->
+          <rect x="104" y="33" width="52" height="44" rx="9" class="dg-ink1 sg-water"/><text x="130" y="63">💧</text>
+          <text x="170" y="62" class="t-val">+</text>
+          <rect x="184" y="33" width="52" height="44" rx="9" class="dg-ink1 sg-water"/><text x="210" y="63">💧</text>
+          <text x="250" y="62" class="t-val">+</text>
+          <rect x="264" y="33" width="52" height="44" rx="9" class="dg-ink1 sg-wind"/><text x="290" y="63">🌪</text>
+          <path d="M330 55h34m0 0l-8-5m8 5l-8 5" class="dg-sgold" fill="none" stroke-width="1.6"/>
+          <rect x="378" y="33" width="180" height="44" rx="9" class="dg-ink1 sg-lk" stroke-width="1.6"/><text x="468" y="61" class="t-ttl" font-size="14">❄ Ice · at C</text>
+          <text x="588" y="60" text-anchor="start" class="t-lab dg-lk" font-size="11">Freeze 2.5→10s · Locked</text>
+          <!-- EXPLOSION -->
+          <rect x="104" y="108" width="52" height="44" rx="9" class="dg-ink1 sg-water"/><text x="130" y="138">💧</text>
+          <text x="170" y="137" class="t-val">+</text>
+          <rect x="184" y="108" width="52" height="44" rx="9" class="dg-ink1 sg-water"/><text x="210" y="138">💧</text>
+          <text x="250" y="137" class="t-val">+</text>
+          <rect x="264" y="108" width="52" height="44" rx="9" class="dg-ink1 sg-fire"/><text x="290" y="138">🔥</text>
+          <text x="330" y="137" class="t-val">+</text>
+          <rect x="344" y="108" width="52" height="44" rx="9" class="dg-ink1 sg-fire"/><text x="370" y="138">🔥</text>
+          <path d="M410 130h34m0 0l-8-5m8 5l-8 5" class="dg-sgold" fill="none" stroke-width="1.6"/>
+          <rect x="458" y="108" width="180" height="44" rx="9" class="dg-ink1 sg-lk" stroke-width="1.6"/><text x="548" y="136" class="t-ttl" font-size="14">💥 Explosion · at B</text>
+          <text x="548" y="171" class="t-lab dg-lk" font-size="11">120 dmg / 6m · after Tainted C · Locked</text>
+          <!-- THUNDER -->
+          <rect x="104" y="185" width="52" height="44" rx="9" class="dg-ink1 sg-wind"/><text x="130" y="215">🌪</text>
+          <text x="170" y="214" class="t-val">+</text>
+          <rect x="184" y="185" width="52" height="44" rx="9" class="dg-ink1 sg-water"/><text x="210" y="215">💧</text>
+          <path d="M250 207h34m0 0l-8-5m8 5l-8 5" class="sg-pl" fill="none" stroke-width="1.6"/>
+          <rect x="298" y="185" width="180" height="44" rx="9" class="dg-ink1 sg-pl" stroke-width="1.6"/><text x="388" y="213" class="t-ttl" font-size="14">⚡ Thunder</text>
+          <text x="508" y="205" text-anchor="start" class="t-lab dg-pl" font-size="11">stuns foes · the ONLY</text>
+          <text x="508" y="221" text-anchor="start" class="t-lab dg-pl" font-size="11">rock-breaker · Planned</text>
+        </g>
+      </svg>
+    </figure>
+    <h3>Ice <span class="tag t-locked">Locked design</span></h3>
+    <pre>Water E → Water D → Wind C = <span style="color:var(--water)">Ice C</span>   <span class="c"># Freeze unlocks at C: 2.5→10 s</span></pre>
+    <h3>Explosion <span class="tag t-locked">Locked design</span></h3>
+    <pre>Water E → Water D → Fire C <span class="c">(Tainted C, no spell)</span> → Fire B = <span style="color:var(--fire)">Explosion B</span>
+Explosion Ball B: 120 dmg / 6 m · Explosion Tower B: 5 × 30 eruptions</pre>
+    <h3>Thunder <span class="tag t-planned">Planned</span></h3>
+    <div class="note planned"><b>Designed this session (not yet coded):</b> chanting Wind then Water (or vice-versa) coils them into a <b>storm-mix</b>; naming <span class="mono">"thunder"</span> calls a bolt at your aim. Thunder is the <b>only</b> thing that shatters boulders. This is the build's own fusion, parallel to the spec's Ice/Explosion.</div>
+    <div class="tbl"><table>
+      <thead><tr><th>Fusion</th><th>Recipe</th><th>Payoff</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr data-s="locked"><td>Ice</td><td class="mono">Water·Water·Wind → C</td><td>Freeze (immobilise / slow)</td><td><span class="tag t-locked">Locked</span></td></tr>
+        <tr data-s="locked"><td>Explosion</td><td class="mono">Water·Water·Fire·Fire → B</td><td>Explosion Ball &amp; Tower</td><td><span class="tag t-locked">Locked</span></td></tr>
+        <tr data-s="planned"><td>Thunder</td><td class="mono">Wind + Water storm-mix</td><td>Bolt · stuns foes · shatters rock</td><td><span class="tag t-planned">Planned</span></td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <!-- ============ DAMAGE ============ -->
+  <section id="damage">
+    <h2><span class="num">§13</span> Damage model <span class="tag t-locked">Locked design</span></h2>
+    <p class="lead">Glass-cannon target: against 100 HP, short-sword light ≈ 5 hits, long-sword light ≈ 3–4, Fireball E ≈ 3–4, Fireball D ≈ 2. High tiers can one-shot.</p>
+    <figure class="diagram">
+      <figcaption><svg aria-hidden="true"><use href="#i-target"/></svg>Where you land the hit multiplies the damage</figcaption>
+      <svg class="dgm" viewBox="0 0 760 236" role="img" aria-label="Hit location: head or organ 1.5x, torso 1.0x, arm or leg 0.75x, feeding the final-damage formula">
+        <!-- figure -->
+        <circle cx="150" cy="52" r="24" class="dg-fire" opacity=".34"/><circle cx="150" cy="52" r="24" class="sg-fire" fill="none" stroke-width="1.6"/>
+        <rect x="126" y="82" width="48" height="72" rx="11" class="dg-gold" opacity=".26"/><rect x="126" y="82" width="48" height="72" rx="11" class="sg-gold" fill="none" stroke-width="1.6"/>
+        <rect x="98" y="86" width="22" height="60" rx="10" class="dg-water" opacity=".24"/><rect x="98" y="86" width="22" height="60" rx="10" class="sg-water" fill="none" stroke-width="1.5"/>
+        <rect x="180" y="86" width="22" height="60" rx="10" class="dg-water" opacity=".24"/><rect x="180" y="86" width="22" height="60" rx="10" class="sg-water" fill="none" stroke-width="1.5"/>
+        <rect x="130" y="156" width="18" height="64" rx="8" class="dg-water" opacity=".24"/><rect x="130" y="156" width="18" height="64" rx="8" class="sg-water" fill="none" stroke-width="1.5"/>
+        <rect x="152" y="156" width="18" height="64" rx="8" class="dg-water" opacity=".24"/><rect x="152" y="156" width="18" height="64" rx="8" class="sg-water" fill="none" stroke-width="1.5"/>
+        <!-- legend -->
+        <g font-size="13">
+          <rect x="252" y="44" width="16" height="16" rx="3" class="dg-fire" opacity=".5"/><text x="278" y="52" class="t-ttl">Head / organ</text><text x="278" y="70" class="t-lab">the head-shot bonus</text><text x="452" y="57" text-anchor="end" class="t-val" font-size="17">×1.50</text>
+          <rect x="252" y="98" width="16" height="16" rx="3" class="dg-gold" opacity=".5"/><text x="278" y="106" class="t-ttl">Torso</text><text x="278" y="124" class="t-lab">the baseline body shot</text><text x="452" y="111" text-anchor="end" class="t-val" font-size="17">×1.00</text>
+          <rect x="252" y="152" width="16" height="16" rx="3" class="dg-water" opacity=".5"/><text x="278" y="160" class="t-ttl">Arm / leg</text><text x="278" y="178" class="t-lab">a glancing limb hit</text><text x="452" y="165" text-anchor="end" class="t-val" font-size="17">×0.75</text>
+        </g>
+        <!-- formula card -->
+        <rect x="486" y="30" width="256" height="176" rx="10" class="dg-ink1 dg-sline"/>
+        <text x="506" y="58" class="t-lab dg-gold">The final number</text>
+        <text x="506" y="88" class="t-mono" font-size="12">Raw = Base × Quality[tier]</text>
+        <text x="506" y="116" class="t-mono" font-size="12">Final = Raw × Loc × (1−Res)</text>
+        <line x1="506" y1="132" x2="722" y2="132" class="dg-sline"/>
+        <text x="506" y="156" class="t-lab">Crit ~12% chance</text><text x="722" y="156" text-anchor="end" class="t-val">×1.6</text>
+        <text x="506" y="180" class="t-lab">Staggered foe</text><text x="722" y="180" text-anchor="end" class="t-val">×1.8</text>
+        <text x="506" y="198" class="t-lab dg-dv" font-size="10">Build: no armour/resist term yet</text>
+      </svg>
+    </figure>
+    <pre>RawDamage  = round(E_base × QualityMult[tier])
+FinalDamage= max(1, round(Raw × HitLocation × (1 − Resistance)))
+HitLocation: arm/leg 0.75 · torso 1.00 · head/organ 1.50</pre>
+    <div class="note diverge"><b>Build:</b> uses <code>FormBase × TierMult × WeaponMult</code> with no hit-location or armour term yet (the resistance hook is a planned add). Crits are a flat ~12% ×1.6 roll; staggered foes take ~×1.8.</div>
+  </section>
+
+  <!-- ============ WEAPONS ============ -->
+  <section id="weapons">
+    <h2><span class="num">§14</span> Weapons &amp; melee <span class="tag t-ingame">In game</span></h2>
+    <p class="lead">The build's melee is a <b>Valheim longsword</b>: a three-cut chain where the third hits double, a lunging thrust on the secondary, and a block that parries in the last instant.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Input</th><th>Attack</th><th class="n">Damage</th><th>Note</th></tr></thead>
+      <tbody>
+        <tr data-s="ingame"><td><span class="kbd">LMB</span></td><td>Combo 1 · slash</td><td class="n">14</td><td>Carried horizontal cut, steps in</td></tr>
+        <tr data-s="ingame"><td><span class="kbd">LMB</span></td><td>Combo 2 · backslash</td><td class="n">16</td><td>Hold to keep the chain flowing</td></tr>
+        <tr data-s="ingame"><td><span class="kbd">LMB</span></td><td>Combo 3 · finisher</td><td class="n">28</td><td>Overhead, double the opener, shoves</td></tr>
+        <tr data-s="ingame"><td><span class="kbd">MMB</span></td><td>Lunging thrust</td><td class="n">40</td><td>Narrow · long reach 3.2 · crushes guards</td></tr>
+        <tr data-s="ingame"><td><span class="kbd">RMB</span></td><td>Block / Parry</td><td class="n">—</td><td>Timed = parry → foe staggers, essence back</td></tr>
+        <tr data-s="ingame"><td><span class="kbd">LMB</span></td><td>Staff bash (unkindled)</td><td class="n">12</td><td>Staff/fist club when no rite is lit</td></tr>
+      </tbody>
+    </table></div>
+    <h3>Weapon reference (spec §14) <span class="tag t-locked">Locked design</span></h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Attack</th><th class="n">Essence</th><th class="n">Damage</th><th class="n">Torso hits</th></tr></thead>
+      <tbody>
+        <tr data-s="locked"><td>🗡️ Short sword light / heavy</td><td class="n">4 / 8</td><td class="n">20 / 30</td><td class="n">5 / 4</td></tr>
+        <tr data-s="locked"><td>⚔️ Long sword light / heavy</td><td class="n">6 / 12</td><td class="n">28 / 40</td><td class="n">4 / 3</td></tr>
+        <tr data-s="locked"><td>🪄 Staff quick / heavy / push</td><td class="n">3 / 7 / 6</td><td class="n">10 / 18 / 5+kb</td><td class="n">10 / 6 / util</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <!-- ============ FOES ============ -->
+  <section id="foes">
+    <h2><span class="num">§—</span> Foes &amp; the risen <span class="tag t-ingame">In game</span></h2>
+    <p class="lead">Not in the v1.0 spec — the build's enemy layer.</p>
+    <div class="grid">
+      <div class="card" data-s="ingame"><div class="k">💀 Skeleton raiders</div><div class="d" style="margin-top:8px">Rise in waves. Slash &amp; heavy combos, block, and a <b>gold-eye windup telegraph</b> — the parry window.</div></div>
+      <div class="card" data-s="ingame"><div class="k">💨 They dodge</div><div class="d" style="margin-top:8px">Read your longsword windup and hop to the flank (~26%, +2%/wave). Stunned / staggered / mid-swing foes cannot.</div></div>
+      <div class="card" data-s="ingame"><div class="k">🪓 They siege</div><div class="d" style="margin-top:8px">Can't reach you? They batter the wood — walls, doors, whatever blocks the path.</div></div>
+      <div class="card" data-s="ingame"><div class="k">🧟 Raise Dead ally</div><div class="d" style="margin-top:8px">Your own risen guard holds its ground 120 s, respects shut doors, returns to rest on your death.</div></div>
+    </div>
+  </section>
+
+  <!-- ============ BUILDING ============ -->
+  <section id="building">
+    <h2><span class="num">§—</span> Building <span class="tag t-ingame">In game</span></h2>
+    <p class="lead">A whole Valheim/Fortnite build layer the spec never described. Enter it by chanting <span class="mono">"spirits of wind"</span> then saying <span class="mono">"build"</span> — or press <span class="kbd">B</span>. Two materials only: <b>wood</b> &amp; <b>stone</b>.</p>
+    <figure class="diagram">
+      <figcaption><svg aria-hidden="true"><use href="#i-hammer"/></svg>Snap, stack, and it collapses if you cut its support</figcaption>
+      <svg class="dgm" viewBox="0 0 760 300" role="img" aria-label="Building schematic: walls stack three storeys on a 2m grid with floors, a roof cap, a diagonal beam brace and a door bearing a wall above">
+        <!-- snap grid -->
+        <g class="dg-sline" stroke-width="1" opacity=".4">
+          <line x1="90" y1="70" x2="90" y2="252"/><line x1="180" y1="70" x2="180" y2="252"/><line x1="270" y1="70" x2="270" y2="252"/>
+          <line x1="86" y1="70" x2="274" y2="70"/><line x1="86" y1="130" x2="274" y2="130"/><line x1="86" y1="190" x2="274" y2="190"/><line x1="86" y1="250" x2="274" y2="250"/>
+        </g>
+        <!-- roof cap -->
+        <rect x="80" y="56" width="200" height="14" rx="2" class="dg-gold" opacity=".55"/>
+        <!-- walls -->
+        <g class="dg-panel sg-gold" stroke-width="1.3">
+          <rect x="90" y="70" width="90" height="60"/><rect x="180" y="70" width="90" height="60"/>
+          <rect x="90" y="130" width="90" height="60"/><rect x="180" y="130" width="90" height="60"/>
+          <rect x="90" y="190" width="90" height="60"/>
+        </g>
+        <!-- window opening -->
+        <rect x="112" y="142" width="46" height="36" rx="2" class="dg-ink sg-gold" stroke-width="1"/>
+        <!-- beam: diagonal corner brace -->
+        <line x1="96" y1="124" x2="174" y2="76" class="dg-sgold" stroke-width="4" stroke-linecap="round" opacity=".9"/>
+        <path d="M80 118 L96 124" class="dg-sgold" stroke-width="1" opacity=".7" fill="none"/>
+        <text x="78" y="112" text-anchor="end" class="t-val" font-size="12">Beam</text>
+        <text x="78" y="127" text-anchor="end" class="t-lab" font-size="11">brace · lintel</text>
+        <!-- door bay + wall above -->
+        <rect x="180" y="190" width="90" height="60" class="dg-panel sg-gold" stroke-width="1.3"/>
+        <rect x="190" y="196" width="72" height="54" rx="2" class="dg-ink1 sg-gold" stroke-width="1"/>
+        <line x1="226" y1="196" x2="226" y2="250" class="dg-sline"/><circle cx="216" cy="224" r="2.5" class="dg-gold"/>
+        <!-- floor decks -->
+        <g class="dg-gold" opacity=".5"><rect x="84" y="128" width="192" height="5"/><rect x="84" y="188" width="192" height="5"/><rect x="84" y="248" width="192" height="5"/></g>
+        <!-- leaders + labels -->
+        <g class="dg-sgold" stroke-width="1" opacity=".7" fill="none"><path d="M280 63h40"/><path d="M270 100h50"/><path d="M158 160h44"/></g>
+        <g font-size="12"><text x="326" y="67" class="t-val">Roof · caps the stack</text><text x="326" y="104" class="t-val">Wall · 80 / 144 HP</text><text x="210" y="164" class="t-lab">window</text></g>
+        <text x="225" y="278" text-anchor="middle" class="t-lab">Door · <tspan class="t-val">F</tspan> swings, bears the wall above</text>
+        <text x="180" y="296" text-anchor="middle" class="t-lab dg-dim">footprint sits on a 2 m snap grid</text>
+        <!-- physics column -->
+        <text x="430" y="118" class="t-lab dg-gold">Placement physics</text>
+        <g font-size="12.5" class="dg-dim">
+          <text x="430" y="146">◇ <tspan class="t-val">Snap</tspan> to a 2 m grid · R cycles pieces</text>
+          <text x="430" y="176">▲ <tspan class="t-val">Stack</tspan> 3 storeys; floors &amp; roofs cap</text>
+          <text x="430" y="206">⚠ <tspan class="t-val dg-dv">Unsupported</tspan> collapses, storey by storey</text>
+          <text x="430" y="236">↺ <tspan class="t-val dg-ig">Break</tspan> = full material refund, no ruins</text>
+        </g>
+      </svg>
+    </figure>
+    <div class="tbl"><table>
+      <thead><tr><th>Piece</th><th class="n">Cost</th><th class="n">HP</th><th>Note</th></tr></thead>
+      <tbody>
+        <tr data-s="ingame"><td>🧱 Wall</td><td class="n">10 wood / 14 stone</td><td class="n">80 / 144</td><td>Stacks into storeys (3 high)</td></tr>
+        <tr data-s="ingame"><td>🪟 Window Wall</td><td class="n">12 wood</td><td class="n">80</td><td>Light in, sight out</td></tr>
+        <tr data-s="ingame"><td>🟫 Floor</td><td class="n">8 wood / 11 stone</td><td class="n">80 / 144</td><td>Walkable deck</td></tr>
+        <tr data-s="ingame"><td>🏠 Roof</td><td class="n">10 wood / 14 stone</td><td class="n">80 / 144</td><td>Walkable, caps a stack</td></tr>
+        <tr data-s="ingame"><td>🪜 Stairs</td><td class="n">8 wood / 11 stone</td><td class="n">80 / 144</td><td>One storey of climb, foes climb too</td></tr>
+        <tr data-s="ingame"><td>🪵 Beam</td><td class="n">4 wood</td><td class="n">80</td><td>Brace · lintel · rafter</td></tr>
+        <tr data-s="ingame"><td>🚪 Door</td><td class="n">8 wood</td><td class="n">60</td><td><span class="kbd">F</span> swings · bears a wall above</td></tr>
+        <tr data-s="ingame"><td>🪑 Chair</td><td class="n">4 wood</td><td class="n">80</td><td>Furnishing</td></tr>
+        <tr data-s="ingame"><td>🛠️ Workbench</td><td class="n">10 wood</td><td class="n">80</td><td>Weapon forge (§crafting)</td></tr>
+        <tr data-s="ingame"><td>🔥 Campfire</td><td class="n">12 wood</td><td class="n">80</td><td>Warm point light</td></tr>
+      </tbody>
+    </table></div>
+    <h3>Placement physics</h3>
+    <div class="grid">
+      <div class="card" data-s="ingame"><div class="k">🧲 Snapping</div><div class="d" style="margin-top:8px">2 m grid, 10 m reach, audible cell-tick + ghost pop. <span class="kbd">R</span> cycles pieces, wheel rotates.</div></div>
+      <div class="card" data-s="ingame"><div class="k">📐 Stacking</div><div class="d" style="margin-top:8px">Pieces snap on top of each other; walls make storeys, floors/roofs cap them, doors bear a wall above.</div></div>
+      <div class="card" data-s="ingame"><div class="k">🏗️ Support</div><div class="d" style="margin-top:8px">What loses its bearing collapses, storey by storey. Nothing hangs in empty air.</div></div>
+      <div class="card" data-s="ingame"><div class="k">♻️ Break = refund</div><div class="d" style="margin-top:8px">Anything destroyed, collapsed, smashed or demolished bursts and <b>returns its materials</b>.</div></div>
+    </div>
+  </section>
+
+  <!-- ============ CRAFTING ============ -->
+  <section id="crafting">
+    <h2><span class="num">§—</span> Workbench / crafting <span class="tag t-ingame">In game</span></h2>
+    <p class="lead">Stand at a placed workbench, press <span class="kbd">F</span>. It forges <b>weapons only</b> — it never gates building.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Recipe</th><th class="n">Cost</th><th>Yields</th></tr></thead>
+      <tbody>
+        <tr data-s="ingame"><td>🗡️ <b>Short Sword</b></td><td class="n">4 wood + 6 stone</td><td>The grave iron — combo, thrust, parry</td></tr>
+        <tr data-s="ingame"><td>🪄 <b>Essence Staff</b></td><td class="n">8 wood + 2 stone</td><td>Faster essence regrowth, +25% spell damage</td></tr>
+      </tbody>
+    </table></div>
+    <div class="note"><b>Belt:</b> <span class="kbd">1</span>–<span class="kbd">8</span> grab from the hotbar — weapons draw, the cape wears. Digits never chant.</div>
+  </section>
+
+  <!-- ============ WORLD ============ -->
+  <section id="world">
+    <h2><span class="num">§—</span> World, gathering &amp; waves <span class="tag t-ingame">In game</span></h2>
+    <p class="lead">The bonefield is a living, self-replenishing arena — driven, in fiction, by the grave essence of so many dead.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Resource</th><th>How</th><th>Regrows?</th></tr></thead>
+      <tbody>
+        <tr data-s="ingame"><td>🪵 <b>Wood</b></td><td>Fell dead trees — Wind Slash, Water, or melee</td><td>Yes — ~90 s, regrows from the ground by essence</td></tr>
+        <tr data-s="planned"><td>⚫ <b>Charcoal</b></td><td>Burn a tree with Fire instead of felling it</td><td><span class="tag t-planned" style="font-size:9px">planned</span> designed, not coded</td></tr>
+        <tr data-s="ingame"><td>🪨 <b>Stone</b></td><td>Shatter boulders</td><td>Yes — ~120 s, rubble is reknit by grave essence</td></tr>
+        <tr data-s="planned"><td>⚡ <b>Stone (rule)</b></td><td>Only <b>Thunder</b> (Wind+Water) breaks rock</td><td><span class="tag t-planned" style="font-size:9px">planned</span> resource-gating rule</td></tr>
+        <tr data-s="ingame"><td>🌳 <b>Everwood</b></td><td>The one green tree — strike it for +1 wood</td><td><b>Eternal</b> — never falls, never runs out</td></tr>
+      </tbody>
+    </table></div>
+    <div class="note"><b>Waves:</b> the glowing <b>red grave</b> is the wave bell — stand at it, press <span class="kbd">F</span> to rouse the next wave of the risen. It burns bright when a wave can be called, dim while the current one still walks.</div>
+  </section>
+
+  <!-- ============ DATA MODEL ============ -->
+  <section id="datamodel">
+    <h2><span class="num">§26–27</span> Engine data model <span class="tag t-locked">Locked design</span></h2>
+    <pre>MagicReserve {
+  heart_id · magic_type · tier · amount
+  recipe_sequence[] · has_cast_spell_since_chain_started
+  containment_time_remaining · containment_is_infinite · chain_is_valid
+}
+PlayerMagicState {
+  hp · max_hp · essence · max_essence · essence_regen_rate
+  regen_pause_remaining · exhaustion_state   <span class="c"># NORMAL | WINDED | ARCANE_COLLAPSE</span>
+  magic_hearts[] · body_capacity · equipment_capacity · total_capacity
+}</pre>
+    <pre><span class="c"># resolveRecipe(sequence, tier)</span>
+[Water,Water,Wind]      @C → Ice
+[Water,Water,Fire]      @C → Tainted
+[Water,Water,Fire,Fire] @B → Explosion
+all-same tokens             → that base element
+otherwise                   → Tainted</pre>
+  </section>
+
+  <!-- ============ LOCKED ============ -->
+  <section id="locked">
+    <h2><span class="num">§30</span> Locked decisions (spec) <span class="tag t-locked">Locked design</span></h2>
+    <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
+      <div class="card" data-s="locked"><div class="d">100 HP · 100 Essence · essence is both stamina and mana.</div></div>
+      <div class="card" data-s="locked"><div class="d">Essence regen 2/s; continues while holding magic and speaking.</div></div>
+      <div class="card" data-s="locked"><div class="d">Low warning at 25; recovery from zero at 25.</div></div>
+      <div class="card" data-s="locked"><div class="d">Physical zero = Winded; magical zero = Arcane Collapse (−20% max HP, magic disperses).</div></div>
+      <div class="card" data-s="locked"><div class="d">Body capacity 25; staffs the only capacity gear, two-handed.</div></div>
+      <div class="card" data-s="locked"><div class="d">Tier quality never downgrades; equipment loss cuts quantity, never earned quality.</div></div>
+      <div class="card" data-s="locked"><div class="d">Stage costs +25/+30/+35/+40/+45 through A; spell cost +1 per tier above unlock.</div></div>
+      <div class="card" data-s="locked"><div class="d">Ice begins at C (Freeze); Explosion at B after Water-Water-Fire-Fire.</div></div>
+    </div>
+  </section>
+
+  <!-- ============ PRIORITY ============ -->
+  <section id="priority">
+    <h2><span class="num">§32</span> Implementation priority (spec) <span class="tag t-locked">Locked design</span></h2>
+    <div class="tbl"><table>
+      <thead><tr><th class="n">#</th><th>Step</th><th>Build status</th></tr></thead>
+      <tbody>
+        <tr data-s="ingame"><td class="n">1</td><td>HP, Essence, regeneration</td><td><span class="tag t-ingame">In game</span> (leaner)</td></tr>
+        <tr data-s="planned"><td class="n">2</td><td>Physical action costs &amp; Winded</td><td><span class="tag t-planned">Partial</span></td></tr>
+        <tr data-s="planned"><td class="n">3</td><td>Magic conversion &amp; Arcane Collapse</td><td><span class="tag t-planned">Planned</span></td></tr>
+        <tr data-s="planned"><td class="n">4</td><td>One Magic Heart &amp; reserve</td><td><span class="tag t-diverge">Diverged</span></td></tr>
+        <tr data-s="planned"><td class="n">5</td><td>Capacity &amp; Staff Levels 1–3</td><td><span class="tag t-planned">Planned</span></td></tr>
+        <tr data-s="ingame"><td class="n">6</td><td>Tier climbing &amp; containment</td><td><span class="tag t-ingame">Tiers in</span> · no containment</td></tr>
+        <tr data-s="ingame"><td class="n">7</td><td>Base Fire/Wind/Water/Death/Life spells</td><td><span class="tag t-ingame">In game</span></td></tr>
+        <tr data-s="planned"><td class="n">8</td><td>Ice recipe &amp; Freeze</td><td><span class="tag t-planned">Planned</span> (Thunder designed)</td></tr>
+        <tr data-s="planned"><td class="n">9</td><td>Staff Level 4 &amp; Explosion</td><td><span class="tag t-planned">Planned</span></td></tr>
+        <tr data-s="planned"><td class="n">10</td><td>Second Heart, higher tiers, armour</td><td><span class="tag t-planned">Planned</span></td></tr>
+      </tbody>
+    </table></div>
+    <div class="note"><b>Design principle (spec §33):</b> Essence is renewable potential. Incantation turns it into typed power. Capacity decides whether that power can be reached and held. Tier decides the quality of every compatible spell. Equipment loss reduces quantity, never earned quality. The player is rewarded for preparation and punished severely for reckless magical exhaustion.</div>
+  </section>
+
+</main>
+</div>
+
+<footer>
+  <div class="foot-in">
+    <a class="brand" href="index.html"><img src="bonefield-sigil.svg" alt=""><b>Essence</b></a>
+    <p class="foot-note">System Codex · v1.0 specification ⇄ current build · for dev &amp; partners · © 2026</p>
+  </div>
+</footer>
+
+<script>
+  // section + sidebar icons, keyed by section id
+  const ICON={overview:'i-scroll',legend:'i-tag',divergence:'i-split',resources:'i-heart',
+    regen:'i-refresh',stamina:'i-bolt',exhaustion:'i-skull',hearts:'i-spark',capacity:'i-staff',
+    tiers:'i-ladder',incant:'i-mic',containment:'i-hourglass',scaling:'i-chart',fire:'i-flame',
+    wind:'i-wind',water:'i-drop',death:'i-skull',grace:'i-cross',fusion:'i-fusion',damage:'i-target',
+    weapons:'i-sword',foes:'i-mask',building:'i-hammer',crafting:'i-anvil',world:'i-globe',
+    datamodel:'i-braces',locked:'i-lock',priority:'i-list'};
+  document.querySelectorAll('main section[id]').forEach(sec=>{
+    const sym=ICON[sec.id]; if(!sym) return;
+    const h=sec.querySelector('h2');
+    if(h) h.insertAdjacentHTML('afterbegin','<svg class="h2ic" aria-hidden="true"><use href="#'+sym+'"/></svg>');
+  });
+  document.querySelectorAll('#side a').forEach(a=>{
+    const id=a.getAttribute('href').slice(1), sym=ICON[id];
+    const em=a.textContent.match(/^\s*([\u{1F000}-\u{1FFFF}☀-➿←-⇿☠])/u);
+    if(em){ a.innerHTML='<span class="em">'+em[1]+'</span>'+a.innerHTML.replace(em[1],'').replace(/^\s+/,''); }
+    else if(sym){ a.insertAdjacentHTML('afterbegin','<svg class="sic" aria-hidden="true"><use href="#'+sym+'"/></svg>'); }
+  });
+
+  // nav turns solid on scroll
+  const topNav=document.getElementById('top');
+  const onScroll=()=>topNav.classList.toggle('solid', scrollY>8);
+  addEventListener('scroll', onScroll, {passive:true}); onScroll();
+
+  // status filters
+  document.querySelectorAll('.fchip').forEach(c=>{
+    c.addEventListener('click',()=>{
+      c.classList.toggle('off');
+      document.body.classList.toggle('hide-'+c.dataset.f, c.classList.contains('off'));
+    });
+  });
+
+  // scrollspy
+  const links=[...document.querySelectorAll('#side a')];
+  const map=new Map(links.map(a=>[a.getAttribute('href').slice(1),a]));
+  const obs=new IntersectionObserver(es=>{
+    es.forEach(e=>{ if(e.isIntersecting){ links.forEach(l=>l.classList.remove('active')); const a=map.get(e.target.id); if(a)a.classList.add('active'); } });
+  },{rootMargin:'-45% 0px -50% 0px'});
+  document.querySelectorAll('section[id]').forEach(s=>obs.observe(s));
+</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>grab-multi</title></head>
+<body style="margin:0;background:#000">
+<video id="v" muted playsinline preload="auto" style="width:360px;display:block"></video>
+<canvas id="c" width="960" height="540" style="display:none"></canvas>
+<script>
+window.__st='init'; window.__done=[];
+const v=document.getElementById('v'), c=document.getElementById('c');
+const SRC = new URLSearchParams(location.search).get('src') || 'shot1-v2.mp4?v=1';
+const TIMES = (new URLSearchParams(location.search).get('t')||'2,8,10,11.5,13').split(',').map(Number);
+const PREFIX = new URLSearchParams(location.search).get('p') || 's1';
+function seekTo(t){return new Promise(res=>{const h=()=>{v.removeEventListener('seeked',h);res();};v.addEventListener('seeked',h);v.currentTime=t;});}
+async function post(name,b64){await fetch('http://localhost:8799/?name='+name,{method:'POST',headers:{'Content-Type':'text/plain'},body:b64});}
+async function run(){
+  for(const t of TIMES){
+    await seekTo(Math.min(t, v.duration-0.05));
+    c.getContext('2d').drawImage(v,0,0,960,540);
+    const b64=c.toDataURL('image/jpeg',0.82).split(',')[1];
+    const name=PREFIX+'-t'+String(t).replace('.','_')+'.jpg';
+    await post(name,b64);
+    window.__done.push(name+'@'+v.currentTime.toFixed(2));
+    window.__st='posted '+window.__done.length+'/'+TIMES.length;
+  }
+  window.__st='ALL DONE';
+}
+v.addEventListener('loadedmetadata',()=>{window.__st='meta '+v.duration.toFixed(1);run();});
+fetch(SRC).then(r=>r.blob()).then(b=>{window.__st='blob';v.src=URL.createObjectURL(b);}).catch(e=>{window.__st='fetcherr '+e;});
+</script>
+</body></html>

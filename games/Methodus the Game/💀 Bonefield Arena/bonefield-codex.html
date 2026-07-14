@@ -1,0 +1,751 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BONEFIELD · System Codex</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#07070d; --bg2:#0c0d18; --panel:rgba(14,16,28,.86); --line:#23253a; --line2:#181a2b;
+    --ink:#c4cade; --dim:#8b90a8; --faint:#5a5f78;
+    --pixel:'Press Start 2P',monospace; --mono:'VT323',monospace; --sans:'Space Grotesk',system-ui,sans-serif;
+    --fire:#ff9a4a; --water:#9fd0ff; --death:#e8e2d0; --wind:#bfe6a0; --grace:#f0d9a0; --life:#8cf0aa;
+    --gold:#ffd24a; --green:#9fe8b0; --red:#ff7a6a; --violet:#b9a6ff; --blue:#7fa8ff;
+    --ingame:#8cf0aa; --locked:#ffd24a; --planned:#7fa8ff; --diverge:#ff7a6a;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:radial-gradient(ellipse at 50% -10%,#12132a 0%,var(--bg) 55%) fixed;color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.6;}
+  a{color:var(--blue);text-decoration:none} a:hover{text-decoration:underline}
+  code,.mono{font-family:var(--mono);font-size:1.12em;color:var(--water);letter-spacing:.3px}
+  h1,h2,h3,h4{font-family:var(--pixel);font-weight:400;letter-spacing:1px;line-height:1.5;color:#eef2ff}
+
+  /* ---- top bar ---- */
+  #top{position:sticky;top:0;z-index:30;background:rgba(7,7,13,.9);backdrop-filter:blur(9px);border-bottom:1px solid var(--line);}
+  #top .row{max-width:1500px;margin:0 auto;display:flex;align-items:center;gap:18px;padding:11px 20px;flex-wrap:wrap;}
+  #top .brand{font-family:var(--pixel);font-size:15px;color:#fff;letter-spacing:2px;text-shadow:0 0 18px rgba(150,240,180,.3);}
+  #top .brand small{color:var(--faint);font-size:9px;letter-spacing:1px;margin-left:8px}
+  #filters{display:flex;gap:7px;flex-wrap:wrap;margin-left:auto;font-family:var(--sans)}
+  .fchip{cursor:pointer;user-select:none;font-size:11px;letter-spacing:.5px;padding:5px 11px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.02);color:var(--dim);display:flex;align-items:center;gap:6px;transition:.15s}
+  .fchip .dot{width:8px;height:8px;border-radius:50%}
+  .fchip.off{opacity:.32;filter:grayscale(1)}
+  .fchip:hover{border-color:var(--dim)}
+
+  /* ---- layout ---- */
+  .wrap{max-width:1500px;margin:0 auto;display:grid;grid-template-columns:248px 1fr;gap:0;}
+  #side{position:sticky;top:56px;align-self:start;height:calc(100vh - 56px);overflow-y:auto;padding:22px 12px 60px 20px;border-right:1px solid var(--line2);}
+  #side::-webkit-scrollbar{width:7px} #side::-webkit-scrollbar-thumb{background:#20223a;border-radius:4px}
+  #side .grp{font-family:var(--pixel);font-size:8px;letter-spacing:1px;color:var(--faint);margin:20px 0 8px;text-transform:uppercase}
+  #side a{display:block;color:var(--dim);font-size:13.5px;padding:4px 10px;border-radius:7px;border-left:2px solid transparent;line-height:1.35}
+  #side a:hover{color:var(--ink);background:rgba(255,255,255,.03);text-decoration:none}
+  #side a.active{color:#fff;background:rgba(127,168,255,.09);border-left-color:var(--blue)}
+  main{padding:30px 40px 120px;min-width:0}
+
+  /* ---- hero ---- */
+  .hero{border:1px solid var(--line);border-radius:16px;background:linear-gradient(160deg,rgba(30,20,54,.5),rgba(8,9,18,.4));padding:34px 34px 28px;margin-bottom:34px;position:relative;overflow:hidden}
+  .hero h1{font-size:30px;margin:0 0 8px;letter-spacing:5px;color:#eef2e6;text-shadow:0 0 40px rgba(150,240,180,.25)}
+  .hero .sub{font-family:var(--mono);font-size:21px;color:var(--dim);letter-spacing:2px}
+  .hero p{max-width:820px;color:var(--dim)}
+  .hero .meta{display:flex;gap:26px;flex-wrap:wrap;margin-top:18px;font-family:var(--mono);font-size:18px;color:var(--faint)}
+  .hero .meta b{color:var(--green)}
+
+  section{margin:0 0 12px;padding:26px 0 6px;border-top:1px solid var(--line2)}
+  section:first-of-type{border-top:0}
+  h2{font-size:17px;margin:0 0 4px;color:#fff;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  h2 .num{color:var(--faint);font-size:12px}
+  h3{font-size:13px;margin:26px 0 10px;color:#dfe4f5}
+  h4{font-size:11px;margin:18px 0 8px;color:var(--dim)}
+  .lead{color:var(--dim);max-width:900px;margin:6px 0 16px}
+  p{max-width:900px}
+
+  /* ---- status pills ---- */
+  .tag{font-family:var(--sans);font-size:10px;font-weight:600;letter-spacing:.6px;padding:3px 9px;border-radius:6px;white-space:nowrap;text-transform:uppercase;border:1px solid transparent}
+  .t-ingame{color:var(--ingame);background:rgba(140,240,170,.1);border-color:rgba(140,240,170,.3)}
+  .t-locked{color:var(--locked);background:rgba(255,210,74,.1);border-color:rgba(255,210,74,.28)}
+  .t-planned{color:var(--planned);background:rgba(127,168,255,.1);border-color:rgba(127,168,255,.28)}
+  .t-diverge{color:var(--diverge);background:rgba(255,122,106,.1);border-color:rgba(255,122,106,.3)}
+
+  /* filter hiding */
+  body.hide-ingame [data-s~="ingame"]{display:none}
+  body.hide-locked [data-s~="locked"]{display:none}
+  body.hide-planned [data-s~="planned"]{display:none}
+  body.hide-diverge [data-s~="diverge"]{display:none}
+
+  /* ---- tables ---- */
+  .tbl{overflow-x:auto;border:1px solid var(--line);border-radius:11px;margin:12px 0 6px;background:var(--panel)}
+  table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:440px}
+  th,td{text-align:left;padding:9px 13px;border-bottom:1px solid var(--line2);vertical-align:top}
+  th{font-family:var(--sans);font-size:11px;letter-spacing:.5px;text-transform:uppercase;color:var(--faint);background:rgba(255,255,255,.015);position:sticky;top:0}
+  tr:last-child td{border-bottom:0}
+  tbody tr:hover{background:rgba(127,168,255,.04)}
+  td.n,th.n{font-family:var(--mono);font-size:16px;color:var(--water);white-space:nowrap}
+  td b{color:#eef2ff}
+  .el-fire{color:var(--fire)} .el-water{color:var(--water)} .el-death{color:var(--death)} .el-wind{color:var(--wind)} .el-grace{color:var(--grace)} .el-life{color:var(--life)}
+
+  /* ---- cards / callouts ---- */
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:12px;margin:14px 0}
+  .card{border:1px solid var(--line);border-radius:11px;padding:15px 16px;background:var(--panel)}
+  .card .k{font-family:var(--pixel);font-size:9px;letter-spacing:1px;color:var(--faint);text-transform:uppercase}
+  .card .v{font-family:var(--mono);font-size:30px;color:#fff;line-height:1.1;margin:6px 0 2px}
+  .card .d{font-size:12.5px;color:var(--dim)}
+  .note{border-left:3px solid var(--line);padding:11px 16px;margin:14px 0;background:rgba(255,255,255,.02);border-radius:0 9px 9px 0;color:var(--dim);font-size:14px}
+  .note.diverge{border-left-color:var(--diverge);background:rgba(255,122,106,.05)}
+  .note.diverge b{color:var(--red)}
+  .note.planned{border-left-color:var(--planned);background:rgba(127,168,255,.05)}
+  .note b{color:#eef2ff}
+  pre{background:#0a0b14;border:1px solid var(--line);border-radius:10px;padding:14px 16px;overflow-x:auto;font-family:var(--mono);font-size:16px;color:#b9c4e6;line-height:1.5;margin:12px 0}
+  pre .c{color:var(--faint)}
+  .legend{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--dim);margin:8px 0 0}
+  .legend span{display:flex;align-items:center;gap:7px}
+  .legend .dot{width:9px;height:9px;border-radius:50%}
+  hr.soft{border:0;border-top:1px solid var(--line2);margin:22px 0}
+  .kbd{font-family:var(--mono);font-size:15px;background:#151626;border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:1px 7px;color:#dfe4f5}
+  footer{border-top:1px solid var(--line);margin-top:40px;padding:26px 40px;color:var(--faint);font-size:13px;max-width:1500px;margin-left:auto;margin-right:auto}
+
+  @media(max-width:980px){
+    .wrap{grid-template-columns:1fr}
+    #side{display:none}
+    main{padding:22px 18px 90px}
+  }
+</style>
+</head>
+<body>
+
+<div id="top"><div class="row">
+  <div class="brand">💀 BONEFIELD <small>SYSTEM CODEX</small></div>
+  <div id="filters">
+    <div class="fchip" data-f="ingame"><span class="dot" style="background:var(--ingame)"></span>In game</div>
+    <div class="fchip" data-f="locked"><span class="dot" style="background:var(--locked)"></span>Locked design</div>
+    <div class="fchip" data-f="planned"><span class="dot" style="background:var(--planned)"></span>Planned</div>
+    <div class="fchip" data-f="diverge"><span class="dot" style="background:var(--diverge)"></span>Divergence</div>
+  </div>
+</div></div>
+
+<div class="wrap">
+<nav id="side">
+  <div class="grp">Read first</div>
+  <a href="#overview">Overview</a>
+  <a href="#legend">Status legend</a>
+  <a href="#divergence">Spec ⇄ build divergences</a>
+  <div class="grp">Foundation</div>
+  <a href="#resources">Core resources</a>
+  <a href="#regen">Essence regeneration</a>
+  <a href="#stamina">Physical stamina</a>
+  <a href="#exhaustion">Winded / Arcane Collapse</a>
+  <div class="grp">Magic architecture</div>
+  <a href="#hearts">Magic Hearts</a>
+  <a href="#capacity">Capacity &amp; staffs</a>
+  <a href="#tiers">Tier ladder</a>
+  <a href="#incant">Incantation &amp; chants</a>
+  <a href="#containment">Containment</a>
+  <a href="#scaling">Spell scaling</a>
+  <div class="grp">Elements &amp; spells</div>
+  <a href="#fire">🔥 Fire</a>
+  <a href="#wind">🌪 Wind</a>
+  <a href="#water">💧 Water</a>
+  <a href="#death">☠ Death / Bone</a>
+  <a href="#grace">✚ Grace / Life</a>
+  <a href="#fusion">❄ Fusion (Ice / Explosion / Thunder)</a>
+  <div class="grp">Combat</div>
+  <a href="#damage">Damage model</a>
+  <a href="#weapons">Weapons &amp; melee</a>
+  <a href="#foes">Foes &amp; the risen</a>
+  <div class="grp">World &amp; systems</div>
+  <a href="#building">Building</a>
+  <a href="#crafting">Workbench / crafting</a>
+  <a href="#world">World, gather &amp; waves</a>
+  <div class="grp">Governance</div>
+  <a href="#datamodel">Data model</a>
+  <a href="#locked">Locked decisions</a>
+  <a href="#priority">Build priority</a>
+</nav>
+
+<main>
+
+  <div class="hero">
+    <h1>BONEFIELD</h1>
+    <div class="sub">System Codex — combat, essence, magic &amp; building</div>
+    <p>The single reference for how Bonefield actually works. It merges the <b>v1.0 design specification</b> (the intended full system) with the <b>current playable build</b>, and tags every value so dev and partners can see at a glance what is real today, what is locked design, and what is still planned.</p>
+    <div class="meta">
+      <span>Spec: <b>v1.0</b> baseline</span>
+      <span>Build: <b>current session</b></span>
+      <span>Baseline character: <b>100 HP · 100 Essence</b></span>
+    </div>
+  </div>
+
+  <!-- ============ OVERVIEW ============ -->
+  <section id="overview">
+    <h2><span class="num">§0</span> Overview</h2>
+    <p class="lead">Bonefield is a fast, dangerous glass-cannon combat game. You cast magic by <b>speaking or typing incantations</b> — never by a hotkey — chanting an element up its power ladder, then naming the spell to loose it. Between fights you gather wood and stone, and raise your own fort Valheim-style. Skeletons rise in waves at the red grave.</p>
+    <div class="grid">
+      <div class="card"><div class="k">Health</div><div class="v">100</div><div class="d">Physical life. 0 = death.</div></div>
+      <div class="card"><div class="k">Essence</div><div class="v">100</div><div class="d">One bar: stamina + raw mana.</div></div>
+      <div class="card"><div class="k">Cast trigger</div><div class="v">Word</div><div class="d">Voice or typed only.</div></div>
+      <div class="card"><div class="k">Materials</div><div class="v">2</div><div class="d">Wood &amp; stone.</div></div>
+    </div>
+    <p class="lead">Two documents feed this codex. The <b>design spec</b> describes a deep magic economy — Contained Magic separate from Essence, Magic Hearts, staff capacity, an E→S tier ladder, containment timers and fusion recipes. The <b>current build</b> implements a leaner, faster version of that vision (a single essence bar, a three-rung D→C→B ladder, five elements, plus a whole building &amp; world layer the spec never described). Where they differ, this codex says so plainly.</p>
+  </section>
+
+  <!-- ============ LEGEND ============ -->
+  <section id="legend">
+    <h2><span class="num">§0.1</span> Status legend</h2>
+    <p class="lead">Every table row and section carries a tag. Use the filter chips at the top-right to hide any category.</p>
+    <div class="grid">
+      <div class="card" data-s="ingame"><span class="tag t-ingame">In game</span><div class="d" style="margin-top:9px">Implemented and playable in the current build right now.</div></div>
+      <div class="card" data-s="locked"><span class="tag t-locked">Locked design</span><div class="d" style="margin-top:9px">Decided in the v1.0 spec, not yet coded. The intended target.</div></div>
+      <div class="card" data-s="planned"><span class="tag t-planned">Planned / baseline</span><div class="d" style="margin-top:9px">Baseline value or future feature, meant to be playtested and tuned.</div></div>
+      <div class="card" data-s="diverge"><span class="tag t-diverge">Divergence</span><div class="d" style="margin-top:9px">The build deliberately differs from the spec. Read the note.</div></div>
+    </div>
+  </section>
+
+  <!-- ============ DIVERGENCE ============ -->
+  <section id="divergence">
+    <h2><span class="num">§0.2</span> Spec ⇄ build divergences <span class="tag t-diverge">Divergence</span></h2>
+    <p class="lead">The biggest thing a dev or partner needs up front: where the playable game is <b>not</b> the v1.0 document. These are intentional simplifications for a faster, shippable game — the spec remains the long-term target.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Area</th><th>v1.0 spec</th><th>Current build</th></tr></thead>
+      <tbody>
+        <tr data-s="diverge"><td><b>Tier ladder</b></td><td>Six tiers <code>E D C B A S</code>, base tier E at 25 capacity</td><td>Three tiers <code>D C B</code>. The game's <b>D</b> is the entry rung (≈ spec E). No A/S yet.</td></tr>
+        <tr data-s="diverge"><td><b>Magic economy</b></td><td>Contained Magic is a separate reserve; Essence converts into it and regenerates independently</td><td>One <b>Essence</b> bar. Chanting spends essence directly. No separate contained reserve, no Magic Heart, no capacity.</td></tr>
+        <tr data-s="diverge"><td><b>Staffs &amp; capacity</b></td><td>Staff levels 1–6 raise capacity 25→225, gate the tier you can reach, set containment time</td><td>Staff is just a weapon that regenerates essence faster and hits ~25% harder. No capacity gating.</td></tr>
+        <tr data-s="diverge"><td><b>Containment timers</b></td><td>Prepared magic disperses on a timer unless a Level-3+ staff holds it</td><td>No held reserve, so no timer. A rite is chanted and loosed in the same breath.</td></tr>
+        <tr data-s="diverge"><td><b>Fifth element</b></td><td>Life (heal / limb regrowth)</td><td><b>Grace</b> — heals HP <i>and</i> mends built structures. Functionally Life + repair.</td></tr>
+        <tr data-s="diverge"><td><b>Fusion</b></td><td>Ice (W+W+Wind) and Explosion (W+W+Fire+Fire)</td><td>Neither built yet. <b>Thunder</b> (Wind+Water storm-mix, breaks rock) is designed but not coded.</td></tr>
+        <tr data-s="diverge"><td><b>Building &amp; world</b></td><td>Not covered by the v1.0 spec</td><td>Fully implemented: Valheim-style build, workbench, gather, tree/rock regrowth, waves, raise-dead ally.</td></tr>
+      </tbody>
+    </table></div>
+    <div class="note diverge"><b>Reading rule for partners:</b> when a number appears in both a "spec" and a "build" column, the <b>build</b> column is what actually runs today. The spec column is the destination.</div>
+  </section>
+
+  <!-- ============ RESOURCES ============ -->
+  <section id="resources">
+    <h2><span class="num">§1</span> Core resources</h2>
+    <p class="lead">Three connected but separate quantities: Health, Essence, and (in the spec) Contained Magic.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Resource</th><th class="n">Start / Max</th><th>Function</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr data-s="ingame locked"><td>♥ <b>Health</b></td><td class="n">100</td><td>Physical life. 0 HP = death.</td><td><span class="tag t-ingame">In game</span></td></tr>
+        <tr data-s="ingame locked"><td>✦ <b>Essence</b></td><td class="n">100</td><td>Shared raw resource — stamina and magic in one bar.</td><td><span class="tag t-ingame">In game</span></td></tr>
+        <tr data-s="locked diverge"><td>◆ <b>Contained Magic</b></td><td class="n">0</td><td>Typed magic reserve, separate from essence. <i>Build: folded into the essence bar.</i></td><td><span class="tag t-locked">Locked</span></td></tr>
+        <tr data-s="locked diverge"><td>◉ <b>Magic Heart</b></td><td class="n">1</td><td>Number of independent reserves. <i>Build: not present.</i></td><td><span class="tag t-locked">Locked</span></td></tr>
+        <tr data-s="locked diverge"><td>▣ <b>Natural capacity</b></td><td class="n">25</td><td>Magic points the body holds without a staff. <i>Build: no capacity system.</i></td><td><span class="tag t-locked">Locked</span></td></tr>
+        <tr data-s="ingame"><td>♻ <b>Essence regen</b></td><td class="n">2 / s</td><td>Spec baseline. <i>Build regenerates faster (staff 10/s, hand 5/s, sword 7.5/s) and pauses on spend.</i></td><td><span class="tag t-ingame">In game</span></td></tr>
+      </tbody>
+    </table></div>
+    <div class="note"><b>Fundamental separation (spec):</b> physical actions spend Essence · incantation stages spend Essence and create Contained Magic · spell casts spend Contained Magic, not Essence · holding magic never drains Essence. <b>Build:</b> collapses this into one bar — chanting and casting both draw the violet essence bar directly.</div>
+  </section>
+
+  <!-- ============ REGEN ============ -->
+  <section id="regen">
+    <h2><span class="num">§3</span> Essence regeneration</h2>
+    <div class="grid">
+      <div class="card" data-s="locked"><div class="k">R_base (spec)</div><div class="v">2/s</div><div class="d">0→100 in 50s</div></div>
+      <div class="card" data-s="ingame"><div class="k">Build · staff</div><div class="v">10/s</div><div class="d">hand 5 · sword 7.5</div></div>
+      <div class="card" data-s="locked"><div class="k">Warning</div><div class="v">25</div><div class="d">Low-essence threshold</div></div>
+      <div class="card" data-s="locked"><div class="k">Recover</div><div class="v">25</div><div class="d">Leave Winded / Collapse</div></div>
+    </div>
+    <pre><span class="c"># spec frame update</span>
+regen = R_base × regen_gate × dt
+Essence_next = clamp(Essence + regen − continuous − discrete, 0, 100)</pre>
+    <h3>Regeneration conditions <span class="tag t-locked">Locked design</span></h3>
+    <div class="tbl"><table>
+      <thead><tr><th>State</th><th>Regen?</th><th>Rule</th></tr></thead>
+      <tbody>
+        <tr data-s="locked"><td>Standing / walking</td><td>Yes</td><td>+2/s</td></tr>
+        <tr data-s="locked"><td>Sprinting</td><td>Yes</td><td>Exception: regen continues while sprint cost applies (net −3/s)</td></tr>
+        <tr data-s="locked"><td>Holding prepared magic</td><td>Yes</td><td>Containment never drains essence</td></tr>
+        <tr data-s="locked"><td>Speaking an incantation</td><td>Yes</td><td>Until another action pauses it; cost paid at line completion</td></tr>
+        <tr data-s="locked ingame"><td>Weapon attack</td><td>Brief pause</td><td>Pause length depends on attack type</td></tr>
+        <tr data-s="locked ingame"><td>Dodge / block</td><td>Paused</td><td>During and briefly after</td></tr>
+        <tr data-s="locked ingame"><td>Actively casting</td><td>Brief pause</td><td>During cast + 1s after</td></tr>
+      </tbody>
+    </table></div>
+    <div class="note"><b>Build note:</b> the game already pauses essence regrowth on every swing, dash, block, sprint and cast (the "essence is stamina" rule). It does <b>not</b> yet model the spec's line-completion payment timing or the separate contained reserve.</div>
+  </section>
+
+  <!-- ============ STAMINA ============ -->
+  <section id="stamina">
+    <h2><span class="num">§4</span> Physical stamina — action costs</h2>
+    <p class="lead">Physical depletion causes <b>Winded</b>; magical depletion causes <b>Arcane Collapse</b>. Both drain the same bar.</p>
+    <h3>Spec action costs <span class="tag t-locked">Locked design</span></h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Action</th><th class="n">Essence</th><th>Regen</th><th class="n">Damage</th></tr></thead>
+      <tbody>
+        <tr data-s="locked"><td>Walk</td><td class="n">0</td><td>Continues</td><td class="n">—</td></tr>
+        <tr data-s="locked"><td>Sprint</td><td class="n">5/s</td><td>Continues (net −3/s)</td><td class="n">—</td></tr>
+        <tr data-s="locked"><td>Jump</td><td class="n">5</td><td>0.5s pause</td><td class="n">—</td></tr>
+        <tr data-s="locked"><td>Dodge / roll</td><td class="n">10</td><td>1s pause</td><td class="n">i-frames</td></tr>
+        <tr data-s="locked"><td>Short sword light</td><td class="n">4</td><td>0.5s pause</td><td class="n">20</td></tr>
+        <tr data-s="locked"><td>Short sword heavy</td><td class="n">8</td><td>0.9s pause</td><td class="n">30</td></tr>
+        <tr data-s="locked"><td>Long sword light</td><td class="n">6</td><td>0.75s pause</td><td class="n">28</td></tr>
+        <tr data-s="locked"><td>Long sword heavy</td><td class="n">12</td><td>1.25s pause</td><td class="n">40</td></tr>
+        <tr data-s="locked"><td>Hold block</td><td class="n">2/s</td><td>None</td><td class="n">—</td></tr>
+      </tbody>
+    </table></div>
+    <h3>Build action costs (essence = stamina) <span class="tag t-ingame">In game</span></h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Action</th><th class="n">Essence</th><th>Note</th></tr></thead>
+      <tbody>
+        <tr data-s="ingame"><td>Sword swing (chain)</td><td class="n">7</td><td>Longsword combo hit</td></tr>
+        <tr data-s="ingame"><td>Cleave / thrust (MMB)</td><td class="n">16</td><td>Secondary heavy</td></tr>
+        <tr data-s="ingame"><td>Staff bash</td><td class="n">6</td><td>Unkindled club swing</td></tr>
+        <tr data-s="ingame"><td>Dash (Shift)</td><td class="n">10</td><td>Footwork i-frames</td></tr>
+        <tr data-s="ingame"><td>Guard raise (RMB)</td><td class="n">3 + 6/hit</td><td>Block cost; parry refunds 10</td></tr>
+        <tr data-s="ingame"><td>Sprint (Caps)</td><td class="n">8/s</td><td>Held run</td></tr>
+        <tr data-s="ingame"><td>Kill reward</td><td class="n">+6</td><td>Aggression pays essence back</td></tr>
+      </tbody>
+    </table></div>
+    <div class="note diverge"><b>Divergence:</b> the build's per-action costs are tuned to its own faster economy and don't match the spec's 4/8/6/12 sword figures. Keep both data-driven so they can converge later.</div>
+  </section>
+
+  <!-- ============ EXHAUSTION ============ -->
+  <section id="exhaustion">
+    <h2><span class="num">§5</span> Winded &amp; Arcane Collapse <span class="tag t-locked">Locked design</span></h2>
+    <p class="lead">The final source that drives Essence to zero decides the state.</p>
+    <div class="grid">
+      <div class="card" data-s="locked"><div class="k">If PHYSICAL → Winded</div><div class="d" style="margin-top:8px">Conscious · slow walk only · no sprint/dodge/attack/block/conversion · <b>no HP loss</b> · recover at 25 essence.</div></div>
+      <div class="card" data-s="locked"><div class="k">If MAGIC → Arcane Collapse</div><div class="d" style="margin-top:8px">Faints · all defence disabled · <b>contained magic disperses</b> · −20% max HP · wake at 25 essence · lethal if HP ≤ 20.</div></div>
+      <div class="card" data-s="locked"><div class="k">If SPELL CAST</div><div class="d" style="margin-top:8px">No zero-essence state — casts spend contained magic, not essence.</div></div>
+    </div>
+    <div class="note planned"><b>Build status:</b> not yet implemented. Running out of essence today simply gates further spending ("too winded to sprint") without the Winded / Collapse states or the HP penalty. This is a priority target from the spec.</div>
+  </section>
+
+  <!-- ============ HEARTS ============ -->
+  <section id="hearts">
+    <h2><span class="num">§6</span> Magic Hearts <span class="tag t-locked">Locked design</span></h2>
+    <p class="lead">A normal character has one Magic Heart = one active reserve. You may hold Fire <b>or</b> Water, not both — unless a fusion recipe transforms the single reserve. A second Heart permits two reserves whose amounts share total capacity.</p>
+    <pre>Sum(all active reserve amounts) &lt;= total magic capacity</pre>
+    <div class="note diverge"><b>Divergence:</b> the build has no Magic Heart or reserve object at all — one essence bar, one rite kindled at a time.</div>
+  </section>
+
+  <!-- ============ CAPACITY ============ -->
+  <section id="capacity">
+    <h2><span class="num">§7</span> Capacity &amp; staff progression <span class="tag t-locked">Locked design</span></h2>
+    <pre>TotalCapacity = 25 body + staff bonus + future armour + upgrades</pre>
+    <div class="tbl"><table>
+      <thead><tr><th>Equipment</th><th class="n">Bonus</th><th class="n">Total</th><th>Highest tier</th><th>Containment</th></tr></thead>
+      <tbody>
+        <tr data-s="locked"><td>Body only</td><td class="n">+0</td><td class="n">25</td><td>E</td><td>5 min</td></tr>
+        <tr data-s="locked"><td>Staff Lv 1</td><td class="n">+30</td><td class="n">55</td><td>D</td><td>10 min</td></tr>
+        <tr data-s="locked"><td>Staff Lv 2</td><td class="n">+50</td><td class="n">75</td><td>D (+20 reserve)</td><td>20 min</td></tr>
+        <tr data-s="locked"><td>Staff Lv 3</td><td class="n">+75</td><td class="n">100</td><td>C</td><td>∞ while equipped</td></tr>
+        <tr data-s="planned"><td>Staff Lv 4</td><td class="n">+105</td><td class="n">130</td><td>B</td><td>∞</td></tr>
+        <tr data-s="planned"><td>Staff Lv 5</td><td class="n">+150</td><td class="n">175</td><td>A</td><td>∞</td></tr>
+        <tr data-s="planned"><td>Staff Lv 6</td><td class="n">+200</td><td class="n">225</td><td>S</td><td>∞</td></tr>
+      </tbody>
+    </table></div>
+    <div class="note diverge"><b>Build:</b> the staff exists as a weapon (faster essence regrowth, +25% spell damage) but grants <b>no capacity and no tier gate</b>. Any of the three tiers can be reached with the staff in hand.</div>
+  </section>
+
+  <!-- ============ TIERS ============ -->
+  <section id="tiers">
+    <h2><span class="num">§8</span> Magic tier ladder</h2>
+    <h3>Spec ladder E → S <span class="tag t-locked">Locked design</span></h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Tier</th><th class="n">Idx</th><th class="n">Stage cost</th><th class="n">Full reserve</th><th class="n">Min capacity</th></tr></thead>
+      <tbody>
+        <tr data-s="locked"><td>E</td><td class="n">0</td><td class="n">25</td><td class="n">25</td><td class="n">25</td></tr>
+        <tr data-s="locked"><td>D</td><td class="n">1</td><td class="n">30</td><td class="n">55</td><td class="n">55</td></tr>
+        <tr data-s="locked"><td>C</td><td class="n">2</td><td class="n">35</td><td class="n">90</td><td class="n">90</td></tr>
+        <tr data-s="locked"><td>B</td><td class="n">3</td><td class="n">40</td><td class="n">130</td><td class="n">130</td></tr>
+        <tr data-s="locked"><td>A</td><td class="n">4</td><td class="n">45</td><td class="n">175</td><td class="n">175</td></tr>
+        <tr data-s="planned"><td>S</td><td class="n">5</td><td class="n">50</td><td class="n">225</td><td class="n">225</td></tr>
+      </tbody>
+    </table></div>
+    <h3>Build ladder D → C → B <span class="tag t-ingame">In game</span></h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Tier</th><th class="n">Essence cost</th><th class="n">Damage ×</th><th>Chant to reach it</th></tr></thead>
+      <tbody>
+        <tr data-s="ingame"><td><b>D</b> (entry)</td><td class="n">10</td><td class="n">1.0×</td><td>"Spirits of &lt;element&gt;"</td></tr>
+        <tr data-s="ingame"><td><b>C</b></td><td class="n">12</td><td class="n">1.7×</td><td>"Bring destruction"</td></tr>
+        <tr data-s="ingame"><td><b>B</b></td><td class="n">14</td><td class="n">2.5×</td><td>each element's own final words (below)</td></tr>
+      </tbody>
+    </table></div>
+    <div class="note"><b>Tier never downgrades (spec + build intent):</b> once a rite reaches a tier its quality holds until spent or dispersed. Casting a spell ends the climb — to go higher you restart from the base rung.</div>
+  </section>
+
+  <!-- ============ INCANT ============ -->
+  <section id="incant">
+    <h2><span class="num">§9</span> Incantation &amp; chants <span class="tag t-ingame">In game</span></h2>
+    <p class="lead">Magic has exactly two triggers: <b>speak it</b> (voice, <span class="kbd">V</span>) or <b>type it</b> (<span class="kbd">T</span>). No hotkey, no click, ever casts. Hold click only aims the throw; the <b>word</b> looses it.</p>
+    <h3>Base element openers (Tier D)</h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Element</th><th>Opener</th><th>Spec Tier E line</th></tr></thead>
+      <tbody>
+        <tr data-s="ingame"><td class="el-fire">🔥 Fire</td><td class="mono">"spirits of fire"</td><td>"Spirits of Fire."</td></tr>
+        <tr data-s="ingame"><td class="el-wind">🌪 Wind</td><td class="mono">"spirits of wind"</td><td>"Spirits of Wind."</td></tr>
+        <tr data-s="ingame"><td class="el-water">💧 Water</td><td class="mono">"spirits of water"</td><td>"Spirits of Water."</td></tr>
+        <tr data-s="ingame"><td class="el-death">☠ Death</td><td class="mono">"spirits of death"</td><td>"Spirits of Death."</td></tr>
+        <tr data-s="ingame"><td class="el-grace">✚ Grace</td><td class="mono">"spirits of grace"</td><td>"Spirits of Life."</td></tr>
+      </tbody>
+    </table></div>
+    <h3>The climb</h3>
+    <div class="tbl"><table>
+      <thead><tr><th>To</th><th>Say</th></tr></thead>
+      <tbody>
+        <tr data-s="ingame"><td><b>C</b> (any element)</td><td class="mono">"bring destruction" &nbsp;<span style="color:var(--faint)">(or "burn my foe")</span></td></tr>
+        <tr data-s="ingame"><td><b>B</b> · Fire</td><td class="mono">"turn my enemies to ash"</td></tr>
+        <tr data-s="ingame"><td><b>B</b> · Water</td><td class="mono">"drown my enemies in the depths"</td></tr>
+        <tr data-s="ingame"><td><b>B</b> · Death</td><td class="mono">"all who defy me perish"</td></tr>
+        <tr data-s="ingame"><td><b>B</b> · Wind</td><td class="mono">"blow my enemies away"</td></tr>
+        <tr data-s="ingame"><td><b>B</b> · Grace</td><td class="mono">"let mercy bloom"</td></tr>
+        <tr data-s="ingame"><td><b>Loose it</b></td><td class="mono">name the form — "FIREBALL!" — or "cast / go / now"</td></tr>
+      </tbody>
+    </table></div>
+    <div class="note"><b>Spec continuation:</b> the universal Tier D line is "Bring destruction to my enemy," reserved C/B/A/S lines to come. The build shortens the C line and gives each element its own themed B line, while storing the same <code>element_token</code> the spec's fusion recognition needs.</div>
+    <div class="note planned"><b>Planned:</b> instant casting — act on the last spoken word the moment it is recognised (interim result) rather than waiting for the phrase to finalise. Designed this session, not yet in the file.</div>
+  </section>
+
+  <!-- ============ CONTAINMENT ============ -->
+  <section id="containment">
+    <h2><span class="num">§10</span> Containment &amp; dispersal <span class="tag t-locked">Locked design</span></h2>
+    <pre>containment_seconds = 300 × 2^(staff_level)   <span class="c"># levels 0–2</span>
+Body 300s · Staff-1 600s · Staff-2 1200s · Staff-3+ infinite while equipped</pre>
+    <p>Reaching a new tier or completing a fusion resets the timer to the current equipment limit. Casting a spell does <b>not</b> reset it. When the timer hits zero, all remaining magic disperses. Dropping a no-dispersal staff caps remaining time at 300s.</p>
+    <div class="note diverge"><b>Build:</b> no held reserve means no containment timer — a rite is chanted and cast in one exchange.</div>
+  </section>
+
+  <!-- ============ SCALING ============ -->
+  <section id="scaling">
+    <h2><span class="num">§12</span> Spell unlock &amp; scaling</h2>
+    <h3>Minimum-tier rule <span class="tag t-locked">Locked design</span></h3>
+    <p>A spell never casts below its unlock tier. Fireball unlocks at E (casts E→S). Fire Arrow unlocks at D (no E version). Freeze unlocks at C. In the build the rule is now universal: every form carries an unlock rung — Cyclone, Bone Cage and Flamethrower need <b>C</b>, Raise Dead stays <b>B-only</b>, and a refused cast names the tier it demands.</p>
+    <pre><span class="c"># spec, one-time spell</span>
+Cost(tier) = BaseCostAtUnlock + TierIndex(tier) − TierIndex(unlock)
+<span class="c"># build</span>
+Damage = FormBase × TierMult[D=1.0, C=1.7, B=2.5] × WeaponMult[staff 1.25]</pre>
+    <h3>Quality damage multipliers <span class="tag t-locked">Locked design</span></h3>
+    <div class="tbl"><table>
+      <thead><tr><th class="n">E</th><th class="n">D</th><th class="n">C</th><th class="n">B</th><th class="n">A</th><th class="n">S</th></tr></thead>
+      <tbody><tr data-s="locked"><td class="n">1.0</td><td class="n">1.65</td><td class="n">2.15</td><td class="n">2.65</td><td class="n">3.35</td><td class="n">4.25</td></tr></tbody>
+    </table></div>
+  </section>
+
+  <!-- ============ FIRE ============ -->
+  <section id="fire">
+    <h2><span class="num">§16</span> <span class="el-fire">🔥 Fire</span></h2>
+    <h3>Build forms <span class="tag t-ingame">In game</span></h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Form</th><th class="n">Base dmg</th><th>Behaviour (× tier 1.0/1.7/2.5)</th></tr></thead>
+      <tbody>
+        <tr data-s="ingame"><td><b>Fireball</b></td><td class="n">26</td><td>Hurled blast. At C the impact births <b>4×10</b> real smaller fireballs, at B <b>6×12</b> — the spec's fragment rows.</td></tr>
+        <tr data-s="ingame"><td><b>Fire Arrow</b> <span style="color:var(--faint)">(was Fire Spear)</span></td><td class="n">20</td><td>Homing bolts. Volley grows <b>1 / 3 / 6</b> with tier.</td></tr>
+        <tr data-s="ingame"><td><b>Flamethrower</b> <span class="tag t-ingame" style="font-size:9px">C+</span></td><td class="n">16/tick</td><td>Sustained sweeping cone. Damage &amp; reach scale with tier from C.</td></tr>
+      </tbody>
+    </table></div>
+    <h3>Spec tables <span class="tag t-locked">Locked design</span></h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Fireball</th><th class="n">E</th><th class="n">D</th><th class="n">C</th><th class="n">B</th><th class="n">A</th><th class="n">S</th></tr></thead>
+      <tbody>
+        <tr data-s="locked"><td>Magic cost</td><td class="n">7</td><td class="n">8</td><td class="n">9</td><td class="n">10</td><td class="n">11</td><td class="n">12</td></tr>
+        <tr data-s="locked"><td>Direct damage</td><td class="n">30</td><td class="n">50</td><td class="n">65</td><td class="n">80</td><td class="n">101</td><td class="n">128</td></tr>
+        <tr data-s="locked"><td>Fragments</td><td class="n">—</td><td class="n">—</td><td class="n">4×10</td><td class="n">6×12</td><td class="n">8×15</td><td class="n">12×20</td></tr>
+      </tbody>
+    </table></div>
+    <p style="color:var(--dim);font-size:13px">Fire Arrow (unlock D): 45→115 dmg, tracks/pierces. Flamethrower (unlock C — the build now matches): 30→75 dmg/s channelled, 8→18 m. Full per-tier tables in the v1.0 spec §16.</p>
+  </section>
+
+  <!-- ============ WIND ============ -->
+  <section id="wind">
+    <h2><span class="num">§17</span> <span class="el-wind">🌪 Wind</span></h2>
+    <h3>Build forms <span class="tag t-ingame">In game</span></h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Form</th><th class="n">Base dmg</th><th>Behaviour</th></tr></thead>
+      <tbody>
+        <tr data-s="ingame"><td><b>Slash</b></td><td class="n">22</td><td>Cutting wind blades — <b>1 / 2 / 3</b> with tier, the spec's multi-blade rows. Fells trees for wood.</td></tr>
+        <tr data-s="ingame"><td><b>Gust</b></td><td class="n">10</td><td>Pure knockback wedge; fans wider &amp; further each tier.</td></tr>
+        <tr data-s="ingame"><td><b>Cyclone</b> <span class="tag t-ingame" style="font-size:9px">C+</span></td><td class="n">28</td><td>Lifts &amp; suspends the pack at your aim ~2 s. C 48 · B 70.</td></tr>
+        <tr data-s="planned"><td><b>Thunder</b> <span class="tag t-planned" style="font-size:9px">planned fusion</span></td><td class="n">50</td><td>Wind + Water storm-mix. The only thing that shatters rock. Designed, not yet coded.</td></tr>
+      </tbody>
+    </table></div>
+    <h3>Spec tables <span class="tag t-locked">Locked design</span></h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Spell</th><th>Unlock</th><th>Range E→S</th><th>Damage E→S</th></tr></thead>
+      <tbody>
+        <tr data-s="locked"><td>Push</td><td>E</td><td class="n">3→25 m cone</td><td class="n">5→21</td></tr>
+        <tr data-s="locked"><td>Slice</td><td>D</td><td class="n">1→5 blades</td><td class="n">40→175</td></tr>
+        <tr data-s="ingame"><td>Cyclone <span class="tag t-ingame" style="font-size:9px">shipped</span></td><td>C</td><td class="n">lift ~2 s (build)</td><td class="n">48→180</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <!-- ============ WATER ============ -->
+  <section id="water">
+    <h2><span class="num">§18</span> <span class="el-water">💧 Water</span></h2>
+    <h3>Build forms <span class="tag t-ingame">In game</span></h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Form</th><th class="n">Base dmg</th><th>Behaviour</th></tr></thead>
+      <tbody>
+        <tr data-s="ingame"><td><b>Geyser</b></td><td class="n">30</td><td>Erupts under your aim. Eruptions grow <b>1 / 2 / 3</b> with tier.</td></tr>
+        <tr data-s="ingame"><td><b>Torrent</b></td><td class="n">10</td><td>Shoving flood wave + knockback; reaches further each tier.</td></tr>
+      </tbody>
+    </table></div>
+    <h3>Spec tables <span class="tag t-locked">Locked design</span></h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Spell</th><th>Unlock</th><th>Damage E→S</th><th>Effect</th></tr></thead>
+      <tbody>
+        <tr data-s="locked"><td>Water Ball</td><td>E</td><td class="n">25→106</td><td>Impact + wet status</td></tr>
+        <tr data-s="locked"><td>Wave</td><td>D</td><td class="n">30→85</td><td>Forward push, displacement</td></tr>
+        <tr data-s="diverge"><td><s>Water Prison</s> <span class="tag t-diverge" style="font-size:9px">cut</span></td><td>C</td><td class="n">3→12 s</td><td>Cut from the build — Bone Cage carries the trap role.</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <!-- ============ DEATH ============ -->
+  <section id="death">
+    <h2><span class="num">§19</span> <span class="el-death">☠ Death / Bone</span></h2>
+    <h3>Build forms <span class="tag t-ingame">In game</span></h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Form</th><th class="n">Base</th><th>Behaviour</th></tr></thead>
+      <tbody>
+        <tr data-s="ingame"><td><b>Bone Spear</b></td><td class="n">44</td><td>Heavy lance. Lances grow <b>1 / 2 / 3</b> with tier.</td></tr>
+        <tr data-s="ingame"><td><b>Bone Wall</b></td><td class="n">—</td><td>Barricade to hide behind; widens <b>5 / 7 / 9</b> stakes with tier. HP <b>80 / 120 / 175</b> — the risen batter it down.</td></tr>
+        <tr data-s="ingame"><td><b>Bone Cage</b> <span class="tag t-ingame" style="font-size:9px">C+</span></td><td class="n">—</td><td>Ten stakes imprison one foe. Durability <b>150 / 220</b> (C/B); it batters its way out.</td></tr>
+        <tr data-s="ingame"><td><b>Raise Dead</b> <span class="tag t-planned" style="font-size:9px">B only</span></td><td class="n">14×tier</td><td>One of the fallen rises and holds that ground <b>120 s</b>. One guard at a time.</td></tr>
+      </tbody>
+    </table></div>
+    <h3>Spec tables <span class="tag t-locked">Locked design</span></h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Spell</th><th>Unlock</th><th>Value E→S</th></tr></thead>
+      <tbody>
+        <tr data-s="locked"><td>Bone Spike</td><td>E</td><td class="n">35→149 dmg</td></tr>
+        <tr data-s="locked"><td>Bone Wall</td><td>D</td><td class="n">80→400 durability</td></tr>
+        <tr data-s="ingame"><td>Bone Cage <span class="tag t-ingame" style="font-size:9px">shipped</span></td><td>C</td><td class="n">150→500 durability (build: 150/220)</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <!-- ============ GRACE ============ -->
+  <section id="grace">
+    <h2><span class="num">§20</span> <span class="el-grace">✚ Grace / Life</span></h2>
+    <h3>Build forms <span class="tag t-ingame">In game</span></h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Form</th><th class="n">Base</th><th>Behaviour</th></tr></thead>
+      <tbody>
+        <tr data-s="ingame"><td><b>Mend</b></td><td class="n">30</td><td>Repairs the single nearest damaged built piece or door.</td></tr>
+        <tr data-s="ingame"><td><b>Restoration</b></td><td class="n">16</td><td>Repair pulse over radius <b>6 / 8 / 10</b> — every damaged piece at once.</td></tr>
+        <tr data-s="ingame"><td><b>Heal</b> <span class="tag t-ingame" style="font-size:9px">new</span></td><td class="n">—</td><td>Knits the caster's own flesh: <b>+20 / +34 / +50</b> HP by tier. Unlocks at D.</td></tr>
+      </tbody>
+    </table></div>
+    <div class="note"><b>Merged:</b> the spec's fifth element is <b>Life</b> (heal HP, limb reattach/regrow). The build's <b>Grace</b> now carries both — Mend and Restoration for timber, <b>Heal</b> for flesh (the spec's Heal table, D/C/B slice = 20/34/50). Limb reattach/regrow stays future.</div>
+    <h3>Spec Life · Heal scaling <span class="tag t-ingame">In game — D/C/B slice</span></h3>
+    <div class="tbl"><table>
+      <thead><tr><th class="n">E</th><th class="n">D</th><th class="n">C</th><th class="n">B</th><th class="n">A</th><th class="n">S</th></tr></thead>
+      <tbody><tr data-s="locked"><td class="n">20</td><td class="n">40</td><td class="n">60</td><td class="n">85</td><td class="n">100</td><td class="n">130</td></tr></tbody>
+    </table></div>
+  </section>
+
+  <!-- ============ FUSION ============ -->
+  <section id="fusion">
+    <h2><span class="num">§21–23</span> Fusion — Ice · Explosion · Thunder</h2>
+    <p class="lead">Fusion transforms one reserve through a sequence of element tokens in a single uninterrupted climb. A recognised full sequence yields a fusion element; a recognised prefix yields an intermediate <b>Tainted</b> state.</p>
+    <h3>Ice <span class="tag t-locked">Locked design</span></h3>
+    <pre>Water E → Water D → Wind C = <span style="color:var(--water)">Ice C</span>   <span class="c"># Freeze unlocks at C: 2.5→10 s</span></pre>
+    <h3>Explosion <span class="tag t-locked">Locked design</span></h3>
+    <pre>Water E → Water D → Fire C <span class="c">(Tainted C, no spell)</span> → Fire B = <span style="color:var(--fire)">Explosion B</span>
+Explosion Ball B: 120 dmg / 6 m · Explosion Tower B: 5 × 30 eruptions</pre>
+    <h3>Thunder <span class="tag t-planned">Planned</span></h3>
+    <div class="note planned"><b>Designed this session (not yet coded):</b> chanting Wind then Water (or vice-versa) coils them into a <b>storm-mix</b>; naming <span class="mono">"thunder"</span> calls a bolt at your aim. Thunder is the <b>only</b> thing that shatters boulders. This is the build's own fusion, parallel to the spec's Ice/Explosion.</div>
+    <div class="tbl"><table>
+      <thead><tr><th>Fusion</th><th>Recipe</th><th>Payoff</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr data-s="locked"><td>Ice</td><td class="mono">Water·Water·Wind → C</td><td>Freeze (immobilise / slow)</td><td><span class="tag t-locked">Locked</span></td></tr>
+        <tr data-s="locked"><td>Explosion</td><td class="mono">Water·Water·Fire·Fire → B</td><td>Explosion Ball &amp; Tower</td><td><span class="tag t-locked">Locked</span></td></tr>
+        <tr data-s="planned"><td>Thunder</td><td class="mono">Wind + Water storm-mix</td><td>Bolt · stuns foes · shatters rock</td><td><span class="tag t-planned">Planned</span></td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <!-- ============ DAMAGE ============ -->
+  <section id="damage">
+    <h2><span class="num">§13</span> Damage model <span class="tag t-locked">Locked design</span></h2>
+    <p class="lead">Glass-cannon target: against 100 HP, short-sword light ≈ 5 hits, long-sword light ≈ 3–4, Fireball E ≈ 3–4, Fireball D ≈ 2. High tiers can one-shot.</p>
+    <pre>RawDamage  = round(E_base × QualityMult[tier])
+FinalDamage= max(1, round(Raw × HitLocation × (1 − Resistance)))
+HitLocation: arm/leg 0.75 · torso 1.00 · head/organ 1.50</pre>
+    <div class="note diverge"><b>Build:</b> uses <code>FormBase × TierMult × WeaponMult</code> with no hit-location or armour term yet (the resistance hook is a planned add). Crits are a flat ~12% ×1.6 roll; staggered foes take ~×1.8.</div>
+  </section>
+
+  <!-- ============ WEAPONS ============ -->
+  <section id="weapons">
+    <h2><span class="num">§14</span> Weapons &amp; melee <span class="tag t-ingame">In game</span></h2>
+    <p class="lead">The build's melee is a <b>Valheim longsword</b>: a three-cut chain where the third hits double, a lunging thrust on the secondary, and a block that parries in the last instant.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Input</th><th>Attack</th><th class="n">Damage</th><th>Note</th></tr></thead>
+      <tbody>
+        <tr data-s="ingame"><td><span class="kbd">LMB</span></td><td>Combo 1 · slash</td><td class="n">14</td><td>Carried horizontal cut, steps in</td></tr>
+        <tr data-s="ingame"><td><span class="kbd">LMB</span></td><td>Combo 2 · backslash</td><td class="n">16</td><td>Hold to keep the chain flowing</td></tr>
+        <tr data-s="ingame"><td><span class="kbd">LMB</span></td><td>Combo 3 · finisher</td><td class="n">28</td><td>Overhead, double the opener, shoves</td></tr>
+        <tr data-s="ingame"><td><span class="kbd">MMB</span></td><td>Lunging thrust</td><td class="n">40</td><td>Narrow · long reach 3.2 · crushes guards</td></tr>
+        <tr data-s="ingame"><td><span class="kbd">RMB</span></td><td>Block / Parry</td><td class="n">—</td><td>Timed = parry → foe staggers, essence back</td></tr>
+        <tr data-s="ingame"><td><span class="kbd">LMB</span></td><td>Staff bash (unkindled)</td><td class="n">12</td><td>Staff/fist club when no rite is lit</td></tr>
+      </tbody>
+    </table></div>
+    <h3>Weapon reference (spec §14) <span class="tag t-locked">Locked design</span></h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Attack</th><th class="n">Essence</th><th class="n">Damage</th><th class="n">Torso hits</th></tr></thead>
+      <tbody>
+        <tr data-s="locked"><td>Short sword light / heavy</td><td class="n">4 / 8</td><td class="n">20 / 30</td><td class="n">5 / 4</td></tr>
+        <tr data-s="locked"><td>Long sword light / heavy</td><td class="n">6 / 12</td><td class="n">28 / 40</td><td class="n">4 / 3</td></tr>
+        <tr data-s="locked"><td>Staff quick / heavy / push</td><td class="n">3 / 7 / 6</td><td class="n">10 / 18 / 5+kb</td><td class="n">10 / 6 / util</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <!-- ============ FOES ============ -->
+  <section id="foes">
+    <h2><span class="num">§—</span> Foes &amp; the risen <span class="tag t-ingame">In game</span></h2>
+    <p class="lead">Not in the v1.0 spec — the build's enemy layer.</p>
+    <div class="grid">
+      <div class="card" data-s="ingame"><div class="k">Skeleton raiders</div><div class="d" style="margin-top:8px">Rise in waves. Slash &amp; heavy combos, block, and a <b>gold-eye windup telegraph</b> — the parry window.</div></div>
+      <div class="card" data-s="ingame"><div class="k">They dodge</div><div class="d" style="margin-top:8px">Read your longsword windup and hop to the flank (~26%, +2%/wave). Stunned / staggered / mid-swing foes cannot.</div></div>
+      <div class="card" data-s="ingame"><div class="k">They siege</div><div class="d" style="margin-top:8px">Can't reach you? They batter the wood — walls, doors, whatever blocks the path.</div></div>
+      <div class="card" data-s="ingame"><div class="k">Raise Dead ally</div><div class="d" style="margin-top:8px">Your own risen guard holds its ground 120 s, respects shut doors, returns to rest on your death.</div></div>
+    </div>
+  </section>
+
+  <!-- ============ BUILDING ============ -->
+  <section id="building">
+    <h2><span class="num">§—</span> Building <span class="tag t-ingame">In game</span></h2>
+    <p class="lead">A whole Valheim/Fortnite build layer the spec never described. Enter it by chanting <span class="mono">"spirits of wind"</span> then saying <span class="mono">"build"</span> — or press <span class="kbd">B</span>. Two materials only: <b>wood</b> &amp; <b>stone</b>.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Piece</th><th class="n">Cost</th><th class="n">HP</th><th>Note</th></tr></thead>
+      <tbody>
+        <tr data-s="ingame"><td>Wall</td><td class="n">10 wood / 14 stone</td><td class="n">80 / 144</td><td>Stacks into storeys (3 high)</td></tr>
+        <tr data-s="ingame"><td>Window Wall</td><td class="n">12 wood</td><td class="n">80</td><td>Light in, sight out</td></tr>
+        <tr data-s="ingame"><td>Floor</td><td class="n">8 wood / 11 stone</td><td class="n">80 / 144</td><td>Walkable deck</td></tr>
+        <tr data-s="ingame"><td>Roof</td><td class="n">10 wood / 14 stone</td><td class="n">80 / 144</td><td>Walkable, caps a stack</td></tr>
+        <tr data-s="ingame"><td>Stairs</td><td class="n">8 wood / 11 stone</td><td class="n">80 / 144</td><td>One storey of climb, foes climb too</td></tr>
+        <tr data-s="ingame"><td>Beam</td><td class="n">4 wood</td><td class="n">80</td><td>Brace · lintel · rafter</td></tr>
+        <tr data-s="ingame"><td>Door</td><td class="n">8 wood</td><td class="n">60</td><td><span class="kbd">F</span> swings · bears a wall above</td></tr>
+        <tr data-s="ingame"><td>Chair</td><td class="n">4 wood</td><td class="n">80</td><td>Furnishing</td></tr>
+        <tr data-s="ingame"><td>Workbench</td><td class="n">10 wood</td><td class="n">80</td><td>Weapon forge (§crafting)</td></tr>
+        <tr data-s="ingame"><td>Campfire</td><td class="n">12 wood</td><td class="n">80</td><td>Warm point light</td></tr>
+      </tbody>
+    </table></div>
+    <h3>Placement physics</h3>
+    <div class="grid">
+      <div class="card" data-s="ingame"><div class="k">Snapping</div><div class="d" style="margin-top:8px">2 m grid, 10 m reach, audible cell-tick + ghost pop. <span class="kbd">R</span> cycles pieces, wheel rotates.</div></div>
+      <div class="card" data-s="ingame"><div class="k">Stacking</div><div class="d" style="margin-top:8px">Pieces snap on top of each other; walls make storeys, floors/roofs cap them, doors bear a wall above.</div></div>
+      <div class="card" data-s="ingame"><div class="k">Support</div><div class="d" style="margin-top:8px">What loses its bearing collapses, storey by storey. Nothing hangs in empty air.</div></div>
+      <div class="card" data-s="ingame"><div class="k">Break = refund</div><div class="d" style="margin-top:8px">Anything destroyed, collapsed, smashed or demolished bursts and <b>returns its materials</b>.</div></div>
+    </div>
+  </section>
+
+  <!-- ============ CRAFTING ============ -->
+  <section id="crafting">
+    <h2><span class="num">§—</span> Workbench / crafting <span class="tag t-ingame">In game</span></h2>
+    <p class="lead">Stand at a placed workbench, press <span class="kbd">F</span>. It forges <b>weapons only</b> — it never gates building.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Recipe</th><th class="n">Cost</th><th>Yields</th></tr></thead>
+      <tbody>
+        <tr data-s="ingame"><td><b>Short Sword</b></td><td class="n">4 wood + 6 stone</td><td>The grave iron — combo, thrust, parry</td></tr>
+        <tr data-s="ingame"><td><b>Essence Staff</b></td><td class="n">8 wood + 2 stone</td><td>Faster essence regrowth, +25% spell damage</td></tr>
+      </tbody>
+    </table></div>
+    <div class="note"><b>Belt:</b> <span class="kbd">1</span>–<span class="kbd">8</span> grab from the hotbar — weapons draw, the cape wears. Digits never chant.</div>
+  </section>
+
+  <!-- ============ WORLD ============ -->
+  <section id="world">
+    <h2><span class="num">§—</span> World, gathering &amp; waves <span class="tag t-ingame">In game</span></h2>
+    <p class="lead">The bonefield is a living, self-replenishing arena — driven, in fiction, by the grave essence of so many dead.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Resource</th><th>How</th><th>Regrows?</th></tr></thead>
+      <tbody>
+        <tr data-s="ingame"><td><b>Wood</b></td><td>Fell dead trees — Wind Slash, Water, or melee</td><td>Yes — ~90 s, regrows from the ground by essence</td></tr>
+        <tr data-s="planned"><td><b>Charcoal</b></td><td>Burn a tree with Fire instead of felling it</td><td><span class="tag t-planned" style="font-size:9px">planned</span> designed, not coded</td></tr>
+        <tr data-s="ingame"><td><b>Stone</b></td><td>Shatter boulders</td><td>Yes — ~120 s, rubble is reknit by grave essence</td></tr>
+        <tr data-s="planned"><td><b>Stone (rule)</b></td><td>Only <b>Thunder</b> (Wind+Water) breaks rock</td><td><span class="tag t-planned" style="font-size:9px">planned</span> resource-gating rule</td></tr>
+        <tr data-s="ingame"><td><b>Everwood</b></td><td>The one green tree — strike it for +1 wood</td><td><b>Eternal</b> — never falls, never runs out</td></tr>
+      </tbody>
+    </table></div>
+    <div class="note"><b>Waves:</b> the glowing <b>red grave</b> is the wave bell — stand at it, press <span class="kbd">F</span> to rouse the next wave of the risen. It burns bright when a wave can be called, dim while the current one still walks.</div>
+  </section>
+
+  <!-- ============ DATA MODEL ============ -->
+  <section id="datamodel">
+    <h2><span class="num">§26–27</span> Engine data model <span class="tag t-locked">Locked design</span></h2>
+    <pre>MagicReserve {
+  heart_id · magic_type · tier · amount
+  recipe_sequence[] · has_cast_spell_since_chain_started
+  containment_time_remaining · containment_is_infinite · chain_is_valid
+}
+PlayerMagicState {
+  hp · max_hp · essence · max_essence · essence_regen_rate
+  regen_pause_remaining · exhaustion_state   <span class="c"># NORMAL | WINDED | ARCANE_COLLAPSE</span>
+  magic_hearts[] · body_capacity · equipment_capacity · total_capacity
+}</pre>
+    <pre><span class="c"># resolveRecipe(sequence, tier)</span>
+[Water,Water,Wind]      @C → Ice
+[Water,Water,Fire]      @C → Tainted
+[Water,Water,Fire,Fire] @B → Explosion
+all-same tokens             → that base element
+otherwise                   → Tainted</pre>
+  </section>
+
+  <!-- ============ LOCKED ============ -->
+  <section id="locked">
+    <h2><span class="num">§30</span> Locked decisions (spec) <span class="tag t-locked">Locked design</span></h2>
+    <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
+      <div class="card" data-s="locked"><div class="d">100 HP · 100 Essence · essence is both stamina and mana.</div></div>
+      <div class="card" data-s="locked"><div class="d">Essence regen 2/s; continues while holding magic and speaking.</div></div>
+      <div class="card" data-s="locked"><div class="d">Low warning at 25; recovery from zero at 25.</div></div>
+      <div class="card" data-s="locked"><div class="d">Physical zero = Winded; magical zero = Arcane Collapse (−20% max HP, magic disperses).</div></div>
+      <div class="card" data-s="locked"><div class="d">Body capacity 25; staffs the only capacity gear, two-handed.</div></div>
+      <div class="card" data-s="locked"><div class="d">Tier quality never downgrades; equipment loss cuts quantity, never earned quality.</div></div>
+      <div class="card" data-s="locked"><div class="d">Stage costs +25/+30/+35/+40/+45 through A; spell cost +1 per tier above unlock.</div></div>
+      <div class="card" data-s="locked"><div class="d">Ice begins at C (Freeze); Explosion at B after Water-Water-Fire-Fire.</div></div>
+    </div>
+  </section>
+
+  <!-- ============ PRIORITY ============ -->
+  <section id="priority">
+    <h2><span class="num">§32</span> Implementation priority (spec) <span class="tag t-locked">Locked design</span></h2>
+    <div class="tbl"><table>
+      <thead><tr><th class="n">#</th><th>Step</th><th>Build status</th></tr></thead>
+      <tbody>
+        <tr data-s="ingame"><td class="n">1</td><td>HP, Essence, regeneration</td><td><span class="tag t-ingame">In game</span> (leaner)</td></tr>
+        <tr data-s="planned"><td class="n">2</td><td>Physical action costs &amp; Winded</td><td><span class="tag t-planned">Partial</span></td></tr>
+        <tr data-s="planned"><td class="n">3</td><td>Magic conversion &amp; Arcane Collapse</td><td><span class="tag t-planned">Planned</span></td></tr>
+        <tr data-s="planned"><td class="n">4</td><td>One Magic Heart &amp; reserve</td><td><span class="tag t-diverge">Diverged</span></td></tr>
+        <tr data-s="planned"><td class="n">5</td><td>Capacity &amp; Staff Levels 1–3</td><td><span class="tag t-planned">Planned</span></td></tr>
+        <tr data-s="ingame"><td class="n">6</td><td>Tier climbing &amp; containment</td><td><span class="tag t-ingame">Tiers in</span> · no containment</td></tr>
+        <tr data-s="ingame"><td class="n">7</td><td>Base Fire/Wind/Water/Death/Life spells</td><td><span class="tag t-ingame">In game</span></td></tr>
+        <tr data-s="planned"><td class="n">8</td><td>Ice recipe &amp; Freeze</td><td><span class="tag t-planned">Planned</span> (Thunder designed)</td></tr>
+        <tr data-s="planned"><td class="n">9</td><td>Staff Level 4 &amp; Explosion</td><td><span class="tag t-planned">Planned</span></td></tr>
+        <tr data-s="planned"><td class="n">10</td><td>Second Heart, higher tiers, armour</td><td><span class="tag t-planned">Planned</span></td></tr>
+      </tbody>
+    </table></div>
+    <div class="note"><b>Design principle (spec §33):</b> Essence is renewable potential. Incantation turns it into typed power. Capacity decides whether that power can be reached and held. Tier decides the quality of every compatible spell. Equipment loss reduces quantity, never earned quality. The player is rewarded for preparation and punished severely for reckless magical exhaustion.</div>
+  </section>
+
+</main>
+</div>
+
+<footer>
+  BONEFIELD System Codex · combines the v1.0 design specification with the current playable build · for dev &amp; partners.
+  Tags: <span class="tag t-ingame">In game</span> <span class="tag t-locked">Locked design</span> <span class="tag t-planned">Planned</span> <span class="tag t-diverge">Divergence</span> — use the filters at the top to focus.
+</footer>
+
+<script>
+  // status filters
+  document.querySelectorAll('.fchip').forEach(c=>{
+    c.addEventListener('click',()=>{
+      c.classList.toggle('off');
+      document.body.classList.toggle('hide-'+c.dataset.f, c.classList.contains('off'));
+    });
+  });
+  // scrollspy
+  const links=[...document.querySelectorAll('#side a')];
+  const map=new Map(links.map(a=>[a.getAttribute('href').slice(1),a]));
+  const obs=new IntersectionObserver(es=>{
+    es.forEach(e=>{ if(e.isIntersecting){ links.forEach(l=>l.classList.remove('active')); const a=map.get(e.target.id); if(a)a.classList.add('active'); } });
+  },{rootMargin:'-45% 0px -50% 0px'});
+  document.querySelectorAll('section[id]').forEach(s=>obs.observe(s));
+</script>
+</body>
+</html>

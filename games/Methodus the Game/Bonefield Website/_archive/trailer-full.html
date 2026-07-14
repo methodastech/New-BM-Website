@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BONEFIELD — gameplay teaser</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Grenze+Gotisch:wght@500;700;900&family=UnifrakturCook:wght@700&family=EB+Garamond:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;background:#000;font-family:'EB Garamond',serif;color:#ece3d0;overflow:hidden}
+  .stage{position:relative;width:100vw;height:100vh;background:#000}
+  video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#000;transition:opacity .45s ease}
+  #vB{opacity:0}
+  .veil{position:absolute;inset:0;background:#000;pointer-events:none;transition:opacity .7s ease;opacity:1;z-index:5}
+  .hud{position:absolute;inset:0;pointer-events:none;z-index:6;opacity:0;transition:opacity .8s}
+  .hud.on{opacity:1}
+  .bars{position:absolute;top:20px;left:22px;width:185px;font-family:'Grenze Gotisch',serif;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#cdbd96}
+  .bar{height:7px;border:1px solid rgba(201,162,74,.5);border-radius:4px;margin:3px 0 8px;overflow:hidden;background:rgba(0,0,0,.35)}
+  .bar i{display:block;height:100%}
+  .bar.hp i{width:100%;background:#9c2f3b}.bar.st i{width:100%;background:#3a7d5a}.bar.es i{width:80%;background:#3a5a9c;transition:width .6s}
+  .rank{position:absolute;top:20px;right:24px;font-family:'UnifrakturCook',serif;font-size:30px;color:#e6cd8e;text-shadow:0 2px 6px #000;text-align:right}
+  .rank small{display:block;font-family:'Grenze Gotisch',serif;font-size:9px;letter-spacing:.2em;color:#8a7c63;text-transform:uppercase}
+  .reticle{position:absolute;left:50%;top:50%;width:18px;height:18px;transform:translate(-50%,-50%);border:1.5px solid rgba(230,205,142,.7);border-radius:50%;box-shadow:0 0 8px rgba(0,0,0,.6)}
+  .hint{position:absolute;bottom:18px;right:22px;font-family:'Grenze Gotisch',serif;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#8a7c63}
+  .ladder{position:absolute;right:30px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column-reverse;gap:7px;opacity:0;transition:opacity .5s;z-index:7}
+  .ladder.on{opacity:1}
+  .rung{display:flex;align-items:center;gap:8px;justify-content:flex-end}
+  .rung b{font-family:'UnifrakturCook',serif;font-size:18px;width:26px;text-align:center;color:#5a4a2a;transition:.25s}
+  .rung i{width:46px;height:8px;border:1px solid rgba(201,162,74,.5);border-radius:3px;background:rgba(0,0,0,.4);transition:.25s}
+  .rung.lit b{color:#f3e2ac;text-shadow:0 0 10px rgba(201,162,74,.85)}.rung.lit i{background:linear-gradient(90deg,#caa24a,#f3e2ac);box-shadow:0 0 10px rgba(201,162,74,.7)}
+  .rung.locked{opacity:.38}
+  .powlbl{position:absolute;right:30px;top:calc(50% + 132px);font-family:'Grenze Gotisch',serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#e6cd8e;opacity:0;transition:.4s;z-index:7}
+  .powlbl.on{opacity:1}
+  /* combine brew panel */
+  .brew{position:absolute;left:30px;top:50%;transform:translateY(-50%);width:230px;border:1px solid rgba(201,162,74,.5);border-radius:10px;background:rgba(14,9,5,.62);padding:12px 14px;opacity:0;transition:.45s;z-index:7}
+  .brew.on{opacity:1}
+  .brew h4{margin:0 0 8px;font-family:'Grenze Gotisch',serif;font-weight:700;letter-spacing:.1em;text-transform:uppercase;font-size:11px;color:#c19a4e}
+  .brew .slot{font-family:'Grenze Gotisch',serif;font-size:13px;color:#5a4a2a;margin:4px 0;transition:.3s}
+  .brew .slot.on{color:#f0dca0;text-shadow:0 0 8px rgba(201,162,74,.6)}
+  .brew .res{margin-top:8px;border-top:1px dashed rgba(201,162,74,.4);padding-top:8px;font-family:'Grenze Gotisch',serif;font-size:14px;color:#bfe34a;opacity:0;transition:.4s}
+  .brew .res.on{opacity:1}
+  .chant{position:absolute;left:50%;bottom:25%;transform:translateX(-50%);font-family:'Grenze Gotisch',serif;font-weight:700;font-size:clamp(18px,2.4vw,28px);color:#f0dca0;text-shadow:0 2px 10px #000,0 0 18px rgba(201,162,74,.5);opacity:0;transition:opacity .4s;z-index:8;text-align:center;max-width:80%}
+  .chant.on{opacity:1}
+  .cap{position:absolute;left:50%;bottom:8%;transform:translateX(-50%);font-style:italic;font-size:clamp(16px,2.2vw,22px);color:#ece3d0;text-shadow:0 2px 8px #000;opacity:0;transition:opacity .5s;z-index:8;text-align:center;max-width:84%}
+  .cap.on{opacity:1}
+  .start,.endcard{position:absolute;inset:0;z-index:20;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(720px 440px at 50% 45%,#1a130a,#000 76%)}
+  .endcard{display:none}.endcard.on{display:flex}
+  .start{cursor:pointer}
+  h1{font-family:'UnifrakturCook',serif;margin:0;background:linear-gradient(180deg,#f3e2ac,#caa24a 55%,#7c5d2b);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .start h1{font-size:clamp(50px,9vw,104px)}.endcard h1{font-size:clamp(56px,10vw,120px)}
+  .play{margin-top:16px;font-family:'Grenze Gotisch',serif;letter-spacing:.2em;text-transform:uppercase;font-size:13px;color:#e6cd8e;border:1px solid #a9813f;border-radius:30px;padding:11px 24px}
+  .note{margin-top:14px;font-style:italic;color:#8a7c63;font-size:13px}
+  .tag{margin-top:10px;font-family:'Grenze Gotisch',serif;letter-spacing:.36em;text-transform:uppercase;font-size:13px;color:#c19a4e}
+</style>
+</head>
+<body>
+<div class="stage">
+  <video id="vA" playsinline></video>
+  <video id="vB" playsinline></video>
+  <div class="veil" id="veil"></div>
+
+  <div class="hud" id="hud">
+    <div class="bars"><span>Vitality</span><div class="bar hp"><i></i></div><span>Stamina</span><div class="bar st"><i></i></div><span>Essence</span><div class="bar es"><i></i></div></div>
+    <div class="rank" id="rank">D<small>Bounty</small></div>
+    <div class="reticle"></div>
+    <div class="hint">E cast · hold L charge · R parry</div>
+  </div>
+
+  <div class="ladder" id="ladder">
+    <div class="rung locked" data-r="L"><b>L</b><i></i></div><div class="rung locked" data-r="S"><b>S</b><i></i></div>
+    <div class="rung locked" data-r="A"><b>A</b><i></i></div><div class="rung" data-r="B"><b>B</b><i></i></div>
+    <div class="rung" data-r="C"><b>C</b><i></i></div><div class="rung" data-r="D"><b>D</b><i></i></div>
+  </div>
+  <div class="powlbl" id="powlbl">Fire power · tier —</div>
+
+  <div class="brew" id="brew">
+    <h4>The Forge</h4>
+    <div class="slot" data-s="w1">Water ×1</div>
+    <div class="slot" data-s="w2">Water ×2</div>
+    <div class="slot" data-s="p">+ Poison</div>
+    <div class="slot" data-s="f">+ Fire · combust</div>
+    <div class="slot" data-s="a">delivery · ARROW</div>
+    <div class="res" id="brewres">→ EXPLODING ARROW</div>
+  </div>
+
+  <div class="chant" id="chant"></div>
+  <div class="cap" id="cap"></div>
+
+  <div class="start" id="start"><h1>Bonefield</h1><div class="play">▶ Play the teaser</div><div class="note">~30s · concept gameplay · sound on</div></div>
+  <div class="endcard" id="end"><h1>Bonefield</h1><div class="tag">❖ &nbsp; Speak · Combine · Unleash &nbsp; ❖</div></div>
+</div>
+
+<script>
+const CLIPS = [
+  { src:'continuous-hook.mp4?v=1',
+    cues:[
+      {t:0.2, run:c=>{ cap('In this world, you can be anything.'); }},
+      {t:3.6, run:c=>{ chant('"Spirits of fire, hear me…"'); cap('They only fear what you say.'); }},
+      {t:6.2, run:c=>{ chant('"…bring ruin to all who defy me…"'); ladder(true); pow('Fire power · tier D'); rung('D'); }},
+      {t:8.2, run:c=>{ rung('C'); pow('Fire power · tier C'); }},
+      {t:10.0, run:c=>{ rung('B'); pow('Fire power · tier B'); chant('"…and turn them all to ash…"'); }},
+      {t:12.0, run:c=>{ chant('"Fireball!"'); cap('One word ends the day.'); ladder(false); pow(''); ess(50); rankto('C'); }},
+    ]},
+  { src:'shot2.mp4?v=1',
+    cues:[
+      {t:0.4, run:c=>{ cap(''); chant(''); brew(true); }},
+      {t:1.2, run:c=>{ slot('w1'); chant('"Water…"'); }},
+      {t:2.4, run:c=>{ slot('w2'); chant('"…water…"'); }},
+      {t:3.6, run:c=>{ slot('p'); chant('"…poison…"'); }},
+      {t:5.2, run:c=>{ slot('f'); chant('"…now, fire…"'); brewres(true); }},
+      {t:6.6, run:c=>{ slot('a'); chant('"…as an arrow…"'); cap('Stack spirits → a spell that did not exist.'); }},
+      {t:8.2, run:c=>{ chant('"Explosion!"'); brew(false); ess(28); rankto('B'); }},
+      {t:11.0, run:c=>{ chant(''); cap('Blade or word. Your call.'); }},
+    ]},
+];
+const vA=document.getElementById('vA'), vB=document.getElementById('vB'), veil=document.getElementById('veil'),
+  hud=document.getElementById('hud'), ladderEl=document.getElementById('ladder'), powEl=document.getElementById('powlbl'),
+  brewEl=document.getElementById('brew'), brewResEl=document.getElementById('brewres'),
+  chantEl=document.getElementById('chant'), capEl=document.getElementById('cap'),
+  startEl=document.getElementById('start'), endEl=document.getElementById('end'), rankEl=document.getElementById('rank');
+function cap(s){ if(s){capEl.textContent=s; capEl.classList.add('on');} else capEl.classList.remove('on'); }
+function chant(s){ if(s){chantEl.textContent=s; chantEl.classList.add('on');} else chantEl.classList.remove('on'); }
+function ladder(on){ ladderEl.classList.toggle('on',on); powEl.classList.toggle('on',on); if(!on){document.querySelectorAll('.rung').forEach(r=>r.classList.remove('lit'));} }
+function pow(s){ powEl.textContent=s; powEl.classList.toggle('on', !!s); }
+function rung(k){ const o=['D','C','B'],u=o.indexOf(k); o.forEach((x,idx)=>document.querySelector('.rung[data-r="'+x+'"]').classList.toggle('lit', idx<=u)); }
+function brew(on){ brewEl.classList.toggle('on',on); if(!on){document.querySelectorAll('.brew .slot').forEach(s=>s.classList.remove('on')); brewResEl.classList.remove('on');} }
+function slot(k){ const el=document.querySelector('.brew .slot[data-s="'+k+'"]'); if(el)el.classList.add('on'); }
+function brewres(on){ brewResEl.classList.toggle('on',on); }
+function ess(p){ document.querySelector('.bar.es i').style.width=p+'%'; }
+function rankto(r){ rankEl.firstChild.textContent=r; }
+
+let cur=0, A=true;
+function activeV(){ return A?vA:vB; }
+function startClip(n){
+  cur=n; const c=CLIPS[n]; c._fired=0;
+  const v=activeV(); v.src=c.src; v.muted=false; v.volume=1; v.currentTime=0; v.play().catch(()=>{});
+  v.style.opacity='1'; (A?vB:vA).style.opacity='0';
+  setTimeout(()=>{ veil.style.opacity='0'; hud.classList.add('on'); }, 80);
+  bindCues(v,c,n);
+}
+function bindCues(v,c,n){
+  v.ontimeupdate=function(){
+    const list=c.cues; for(let k=c._fired;k<list.length;k++){ if(v.currentTime>=list[k].t){ list[k].run(c); c._fired=k+1; } else break; }
+    // crossfade into next clip near end
+    if(v.duration && v.currentTime>=v.duration-0.55 && !c._next){
+      c._next=1;
+      if(n<CLIPS.length-1){ const nv=(A?vB:vA); A=!A; const nc=CLIPS[n+1]; nc._fired=0; nv.src=nc.src; nv.currentTime=0; nv.muted=false; nv.play().catch(()=>{});
+        nv.style.opacity='1'; v.style.opacity='0'; v.volume=0; cur=n+1; bindCues(nv,nc,n+1); }
+      else { veil.style.opacity='1'; setTimeout(()=>{ hud.classList.remove('on'); brew(false); ladder(false); chant(''); cap(''); endEl.classList.add('on'); }, 480); }
+    }
+  };
+}
+startEl.addEventListener('click', ()=>{ startEl.style.display='none'; startClip(0); });
+</script>
+</body>
+</html>

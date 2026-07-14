@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>BRAND DEFENSE GRID</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800;900&family=Chakra+Petch:wght@500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  /* ── original Brand Defense Grid palette: cyan-on-navy radar ── */
+  :root{
+    --pc:#22D3EE; --blue:#7FA8FF; --teal:#5EEAD4; --gold:#F1D27A; --mag:#E0447C;
+    --orange:#F97316; --purple:#C4B5FD; --bg:#0a0f1d; --ink:#070b16;
+    --bone:#dff6ff; --dim:#6b7a90; --line:rgba(127,168,255,.22); --acc:#c8f02a;
+    --mono:'Space Mono',ui-monospace,monospace; --disp:'Orbitron',var(--mono);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:100%;height:100%;overflow:hidden;background:var(--ink);color:var(--bone);
+    font-family:var(--mono);-webkit-user-select:none;user-select:none;cursor:none}
+  #game{position:fixed;inset:0;width:100%;height:100%;display:block}
+  #hud2d{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:8}
+  #fx{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:9}
+  /* scanner-feed post: scanlines + grain + vignette + edge aberration */
+  #post{position:fixed;inset:0;pointer-events:none;z-index:20}
+  #post .dots{position:absolute;inset:0;opacity:.12;mix-blend-mode:overlay;background-image:radial-gradient(rgba(190,220,255,.7) .7px,transparent .9px);background-size:4px 4px}
+  #post .scan{position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(0,10,14,.20) 0 1px,transparent 1px 3px)}
+  #post .vig{position:absolute;inset:0;background:radial-gradient(150% 130% at 50% 47%,transparent 62%,rgba(2,6,14,.5))}
+  #post .grain{position:absolute;inset:-50%;width:200%;height:200%;opacity:.03;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");animation:grain .5s steps(2) infinite}
+  @keyframes grain{0%{transform:translate(0,0)}50%{transform:translate(-2%,1.5%)}100%{transform:translate(1.5%,-1.5%)}}
+  .dmg{position:absolute;left:0;top:0;font-family:var(--disp);font-weight:700;font-size:14px;
+    text-shadow:0 0 8px rgba(0,0,0,.8);white-space:nowrap;will-change:transform,opacity}
+  .dmg.big{font-size:21px}
+
+  #hud{position:fixed;inset:0;pointer-events:none;z-index:10;font-family:var(--disp);transition:opacity .25s}
+  /* hide the in-game HUD whenever a menu/overlay is up */
+  body:not(.playing) #hud, body:not(.playing) #hud2d, body:not(.playing) #pauseBtn{opacity:0!important;visibility:hidden}
+  .corner{position:absolute;font-size:9px;letter-spacing:.22em;color:var(--dim)}
+  /* bracket-cornered technical panels (Marathon loot-UI feel) */
+  .panelui{background:linear-gradient(180deg,rgba(9,15,28,.86),rgba(6,10,20,.72));border:1px solid var(--line);padding:9px 12px;
+    box-shadow:0 0 0 1px rgba(0,0,0,.45),0 0 20px rgba(34,211,238,.07),inset 0 0 30px rgba(34,211,238,.03)}
+  .panelui::before,.panelui::after{content:"";position:absolute;width:11px;height:11px;border:1.5px solid var(--pc);opacity:.9}
+  .panelui::before{top:-1px;left:-1px;border-right:0;border-bottom:0}
+  .panelui::after{bottom:-1px;right:-1px;border-left:0;border-top:0}
+  .phead{display:flex;justify-content:space-between;align-items:center;font-size:8px;letter-spacing:.26em;color:var(--acc);margin-bottom:8px;text-shadow:0 0 8px rgba(200,240,42,.4)}
+  .phead .pdot{width:5px;height:5px;background:var(--acc);box-shadow:0 0 8px var(--acc);animation:pdot 1.4s ease-in-out infinite}
+  @keyframes pdot{0%,100%{opacity:1}50%{opacity:.25}}
+  .barcode{height:7px;margin-top:8px;opacity:.45;background-image:repeating-linear-gradient(90deg,var(--dim) 0 1px,transparent 1px 3px,var(--dim) 3px 5px,transparent 5px 6px,var(--dim) 6px 8px,transparent 8px 12px)}
+  /* top-left: hull + shield */
+  #stat{top:16px;left:18px;width:240px}
+  .barwrap{margin-bottom:8px}
+  .barlab{display:flex;justify-content:space-between;font-size:9px;letter-spacing:.2em;color:var(--dim);margin-bottom:3px}
+  .barlab b{color:var(--bone);font-weight:700}
+  .bar{height:11px;background:rgba(0,0,0,.55);border:1px solid var(--line);position:relative;overflow:hidden;
+    clip-path:polygon(0 0,100% 0,100% 100%,6px 100%,0 calc(100% - 6px))}
+  .bar i{position:absolute;inset:0;width:100%;transform-origin:left;transition:transform .16s ease-out}
+  .bar.hull i{background:linear-gradient(90deg,#1aa6c4,var(--pc));box-shadow:0 0 12px var(--pc)}
+  .bar.shield i{background:linear-gradient(90deg,#2bb6a0,var(--teal));box-shadow:0 0 12px var(--teal)}
+  /* top-center: status + timer / boss */
+  #center{top:14px;left:50%;transform:translateX(-50%);text-align:center;width:min(560px,70vw)}
+  #status{font-size:10px;letter-spacing:.34em;color:var(--pc);text-shadow:0 0 12px rgba(34,211,238,.5)}
+  #timer{font-family:var(--disp);font-weight:800;font-size:30px;letter-spacing:.06em;color:var(--bone);margin-top:2px;
+    text-shadow:0 0 18px rgba(34,211,238,.45)}
+  #timer.warn{color:var(--gold);text-shadow:0 0 18px rgba(241,210,122,.6)}
+  #bossbar{display:none;margin-top:6px}
+  #bossbar.on{display:block}
+  .bosshead{display:flex;justify-content:space-between;font-size:10px;letter-spacing:.2em;color:var(--mag);margin-bottom:3px;text-shadow:0 0 10px rgba(224,68,124,.6)}
+  .bosstrack{height:12px;background:rgba(0,0,0,.6);border:1px solid rgba(224,68,124,.5)}
+  .bosstrack i{display:block;height:100%;width:100%;transform-origin:left;background:linear-gradient(90deg,#8a1538,var(--mag));box-shadow:0 0 14px var(--mag);transition:transform .12s}
+  /* top-right: score + threats */
+  #score{top:16px;right:18px;width:188px;text-align:left}
+  #score .v{font-family:var(--disp);font-weight:700;font-size:26px;color:var(--bone);line-height:1;text-shadow:0 0 14px rgba(34,211,238,.3)}
+  #score .thr{margin-top:7px;font-size:10px;color:var(--teal);letter-spacing:.08em}
+  #score .thr b{color:var(--acc)}
+  /* bottom: weapon + hint */
+  #weapon{bottom:16px;left:18px;width:200px}
+  #weapon .wn{font-family:var(--disp);font-weight:700;font-size:17px;color:var(--pc);text-shadow:0 0 12px rgba(34,211,238,.4)}
+  #weapon .wt{font-size:9px;letter-spacing:.12em;color:var(--dim);margin-top:2px}
+  #wbar{display:flex;gap:5px;margin-top:9px;pointer-events:auto}
+  .wic{flex:1;height:32px;border:1px solid var(--line);background:rgba(0,0,0,.4);display:grid;place-items:center;cursor:pointer;position:relative;transition:border-color .12s,background .12s,box-shadow .12s}
+  .wic svg{width:19px;height:19px;fill:none;stroke:var(--dim);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  .wic .kn{position:absolute;top:1px;right:3px;font-size:7px;color:var(--dim)}
+  .wic:hover{border-color:var(--pc)}
+  .wic.on{border-color:var(--pc);background:rgba(34,211,238,.15);box-shadow:0 0 12px rgba(34,211,238,.35)}
+  .wic.on svg{stroke:var(--pc)} .wic.on .kn{color:var(--pc)}
+  #hint b.acc{color:var(--acc)}
+  #hint{bottom:16px;left:50%;transform:translateX(-50%);font-size:10px;letter-spacing:.14em;color:var(--dim);text-align:center;width:100%}
+  #hint b{color:var(--pc)}
+
+  /* dialogue */
+  #dlg{position:fixed;inset:0;z-index:24;display:none;align-items:flex-start;justify-content:center;pointer-events:auto;cursor:default}
+  #dlg.on{display:flex}
+  #dlgcard{margin-top:9%;max-width:440px;background:linear-gradient(180deg,rgba(10,15,29,.96),rgba(7,11,22,.96));
+    border:1px solid var(--dc,var(--pc));box-shadow:0 0 0 1px rgba(0,0,0,.6),0 0 28px rgba(34,211,238,.18);padding:16px 18px;position:relative}
+  #dlgspk{font-family:var(--disp);font-weight:700;font-size:11px;letter-spacing:.2em;color:var(--dc,var(--pc));margin-bottom:8px}
+  #dlgtext{font-size:14px;line-height:1.6;color:var(--bone);min-height:46px}
+  #dlghint{margin-top:10px;font-size:9px;letter-spacing:.2em;color:var(--dim)}
+
+  /* overlays */
+  .overlay{position:fixed;inset:0;z-index:30;display:none;align-items:center;justify-content:center;
+    background:radial-gradient(circle at 50% 42%,rgba(10,15,29,.86),rgba(5,7,14,.97));cursor:default}
+  .overlay.on{display:flex}
+  .eyebrow{font-size:10px;letter-spacing:.42em;color:var(--pc);text-transform:uppercase;text-shadow:0 0 12px rgba(34,211,238,.5)}
+  #title .box{text-align:center;max-width:600px;padding:30px}
+  #title .logo{width:62px;height:62px;margin:0 auto 14px;display:block}
+  #title h1{font-family:var(--disp);font-size:clamp(38px,7vw,72px);font-weight:800;letter-spacing:.06em;line-height:1;color:#EAF6FF;
+    text-shadow:0 2px 0 #62c0dd,0 4px 0 #2f8db2,0 6px 14px rgba(0,0,0,.5),0 0 32px rgba(34,211,238,.45)}
+  #title .sub{margin:12px 0 4px;font-size:11px;letter-spacing:.26em;color:var(--teal)}
+  #title .desc{margin:16px auto 24px;max-width:460px;font-size:13px;line-height:1.7;color:var(--dim)}
+  .btn{font-family:var(--disp);font-weight:700;font-size:15px;letter-spacing:.16em;padding:13px 38px;
+    background:transparent;color:var(--pc);border:1px solid var(--pc);cursor:pointer;text-transform:uppercase;
+    box-shadow:0 0 18px rgba(34,211,238,.25),inset 0 0 18px rgba(34,211,238,.08);transition:all .15s}
+  .btn:hover{background:rgba(34,211,238,.12);box-shadow:0 0 28px rgba(34,211,238,.5)}
+  .controls{display:flex;gap:16px;justify-content:center;margin-top:22px;font-size:10px;letter-spacing:.08em;color:var(--dim);flex-wrap:wrap}
+  .controls kbd{font-family:var(--mono);background:rgba(0,0,0,.5);border:1px solid var(--line);padding:3px 7px;color:var(--bone);margin-right:3px}
+  #best{margin-top:14px;font-size:10px;letter-spacing:.2em;color:var(--gold)}
+
+  /* weapon pick */
+  #pick .box{text-align:center;width:min(760px,94vw)}
+  #pick h2{font-family:var(--disp);font-weight:700;font-size:24px;color:var(--pc);letter-spacing:.1em}
+  #pick .psub{font-size:10px;letter-spacing:.3em;color:var(--dim);margin:4px 0 20px}
+  .prow{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .pcard{width:200px;background:linear-gradient(180deg,rgba(13,19,33,.95),rgba(7,11,22,.95));border:1px solid var(--ac);
+    box-shadow:0 0 16px rgba(0,0,0,.4);padding:16px;text-align:left;cursor:pointer;transition:all .12s}
+  .pcard:hover{transform:translateY(-3px);box-shadow:0 0 24px var(--ac)}
+  .pcard .pn{font-family:var(--disp);font-weight:700;font-size:16px;color:var(--ac);margin-bottom:6px}
+  .pcard .pd{font-size:11px;line-height:1.5;color:var(--dim)}
+
+  /* game over */
+  #over .box{text-align:center;max-width:540px;padding:30px}
+  #over h2{font-family:var(--disp);font-weight:800;font-size:clamp(34px,7vw,64px);letter-spacing:.04em}
+  #over.win h2{color:var(--teal);text-shadow:0 0 30px rgba(94,234,212,.5)} #over.lose h2{color:var(--mag);text-shadow:0 0 30px rgba(224,68,124,.5)}
+  #over .stats{display:flex;gap:26px;justify-content:center;margin:20px 0 26px}
+  #over .st{font-size:11px;letter-spacing:.16em;color:var(--dim)} #over .st b{display:block;font-family:var(--disp);font-size:28px;color:var(--bone);margin-top:3px}
+
+  .mutebtn{position:fixed;bottom:14px;right:16px;z-index:11;pointer-events:auto;background:rgba(0,0,0,.5);border:1px solid var(--line);color:var(--dim);font-family:var(--mono);font-size:10px;padding:6px 10px;cursor:pointer}
+  #loading{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;background:var(--ink);font-family:var(--disp);letter-spacing:.3em;color:var(--pc);font-size:13px}
+
+  /* ════ AAA MENU (Everspace 2 / Destiny 2 vibe) ════ */
+  #title.overlay, #pause.overlay{align-items:stretch;justify-content:stretch;background:radial-gradient(130% 100% at 50% 24%,rgba(10,16,30,.42),rgba(3,6,12,.82))}
+  .menu{position:relative;width:100%;height:100%;display:grid;grid-template-columns:minmax(300px,.92fr) minmax(440px,1.6fr);grid-template-rows:auto 1fr auto;gap:18px;padding:clamp(16px,2.6vw,40px);overflow:hidden}
+  .menu::before{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(0,12,18,.16) 0 1px,transparent 1px 3px)}
+  .menu>*{position:relative;z-index:1}
+  .m-top{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:10px;letter-spacing:.28em;color:var(--dim)}
+  .m-top b{color:var(--pc);font-weight:700}
+  /* pilot card */
+  .pilot{grid-column:1;grid-row:2;align-self:center;border:1px solid var(--line);background:linear-gradient(180deg,rgba(10,16,29,.72),rgba(6,10,20,.62));box-shadow:0 0 30px rgba(0,0,0,.5),inset 0 0 40px rgba(34,211,238,.04);padding:0;max-width:380px;width:100%}
+  .pilot .ph{display:flex;justify-content:space-between;align-items:center;padding:9px 13px;border-bottom:1px solid var(--line);font-family:var(--disp);font-size:10px;letter-spacing:.24em;color:var(--acc)}
+  .pilot .ph .dot{width:6px;height:6px;background:var(--acc);box-shadow:0 0 8px var(--acc);animation:pdot 1.4s ease-in-out infinite}
+  .helm-wrap{padding:6px 0 2px;display:flex;justify-content:center;position:relative;overflow:hidden}
+  .helm-wrap::after{content:"";position:absolute;bottom:10px;left:50%;transform:translateX(-50%);width:58%;height:18px;background:radial-gradient(ellipse,rgba(34,211,238,.4),transparent 70%);pointer-events:none}
+  .helm-wrap::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 38%,rgba(34,211,238,.10),transparent 70%);pointer-events:none}
+  #pilotCv{width:100%;height:300px;display:block}
+  .pname{text-align:center;font-family:var(--disp);font-weight:700;font-size:22px;color:var(--bone);letter-spacing:.05em;margin-top:2px}
+  .prole{text-align:center;font-family:var(--mono);font-size:9px;letter-spacing:.3em;color:var(--pc);margin-top:3px}
+  .pstats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--line);margin:14px 0 0;border-top:1px solid var(--line)}
+  .pstats div{background:rgba(6,10,20,.85);padding:9px 6px;text-align:center}
+  .pstats .k{font-family:var(--mono);font-size:8px;letter-spacing:.18em;color:var(--dim)}
+  .pstats .v{font-family:var(--disp);font-weight:700;font-size:18px;color:var(--pc);margin-top:2px}
+  /* centre */
+  .m-mid{grid-column:2;grid-row:2;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+  .m-eye{font-family:var(--mono);font-size:11px;letter-spacing:.5em;color:var(--orange);text-transform:uppercase;text-shadow:0 0 14px rgba(255,90,31,.5)}
+  .m-title{font-family:var(--disp);font-weight:800;font-size:clamp(52px,10vw,128px);line-height:.9;letter-spacing:.02em;color:#eaf6ff;margin:10px 0 4px;
+    text-shadow:0 3px 0 #2f8db2,0 6px 0 #1c5e7e,0 8px 22px rgba(0,0,0,.6),0 0 44px rgba(34,211,238,.4)}
+  .m-sub{font-family:var(--disp);font-weight:700;font-size:13px;letter-spacing:.34em;color:var(--pc)}
+  .m-desc{max-width:440px;font-size:12px;line-height:1.7;color:#aab8cc;margin:16px 0 26px;padding:10px 16px;background:rgba(5,9,16,.45);border:1px solid rgba(127,168,255,.12);backdrop-filter:blur(2px);text-shadow:0 1px 3px #000}
+  .m-cta{display:flex;flex-direction:column;gap:12px;align-items:center}
+  .bigbtn{font-family:var(--disp);font-weight:800;font-size:20px;letter-spacing:.16em;padding:16px 56px;color:#04121a;cursor:pointer;text-transform:uppercase;
+    background:linear-gradient(180deg,#56e7ff,var(--pc));border:none;clip-path:polygon(10px 0,100% 0,calc(100% - 10px) 100%,0 100%);
+    box-shadow:0 0 30px rgba(34,211,238,.5),0 8px 0 rgba(0,0,0,.4);transition:transform .12s,box-shadow .12s}
+  .bigbtn:hover{transform:translateY(-2px);box-shadow:0 0 44px rgba(34,211,238,.8),0 10px 0 rgba(0,0,0,.4)}
+  .bigbtn:active{transform:translateY(2px)}
+  .subbtns{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+  .ghostbtn{font-family:var(--disp);font-weight:700;font-size:12px;letter-spacing:.14em;padding:10px 22px;color:var(--bone);background:transparent;border:1px solid var(--line);cursor:pointer;text-transform:uppercase;transition:all .12s}
+  .ghostbtn:hover{border-color:var(--pc);color:var(--pc);box-shadow:0 0 16px rgba(34,211,238,.25)}
+  .ghostbtn.lock{opacity:.45;cursor:not-allowed}
+  /* loadout */
+  .loadout{grid-column:3;grid-row:2;align-self:center;border:1px solid var(--line);background:linear-gradient(180deg,rgba(10,16,29,.72),rgba(6,10,20,.62));box-shadow:0 0 30px rgba(0,0,0,.5);max-width:330px;margin-left:auto}
+  .loadout .ph{display:flex;justify-content:space-between;align-items:center;padding:9px 13px;border-bottom:1px solid var(--line);font-family:var(--disp);font-size:10px;letter-spacing:.24em;color:var(--acc)}
+  .lo{display:flex;align-items:center;gap:11px;padding:10px 13px;border-bottom:1px solid rgba(127,168,255,.1)}
+  .lo:last-child{border-bottom:none}
+  .lo .ic{flex:none;width:34px;height:34px;border:1px solid var(--line);display:grid;place-items:center;background:rgba(0,0,0,.35)}
+  .lo .ic svg{width:20px;height:20px;fill:none;stroke:var(--lc,var(--pc));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  .lo .nm{font-family:var(--disp);font-weight:700;font-size:13px;color:var(--bone)}
+  .lo .fn{font-family:var(--mono);font-size:9px;letter-spacing:.04em;color:var(--dim);margin-top:1px}
+  .lo .key{margin-left:auto;font-family:var(--mono);font-size:9px;color:var(--dim);border:1px solid var(--line);padding:2px 6px}
+  .m-foot{grid-column:1/-1;display:flex;justify-content:center;gap:18px;flex-wrap:wrap;font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--dim)}
+  .m-foot kbd{font-family:var(--mono);background:rgba(0,0,0,.5);border:1px solid var(--steel);border-bottom-width:2px;padding:2px 7px;color:var(--bone);margin-right:4px}
+  /* menu corner brackets */
+  .m-corner{position:absolute;width:22px;height:22px;border:2px solid var(--pc);opacity:.7;z-index:2}
+  .m-corner.tl{top:14px;left:14px;border-right:0;border-bottom:0}.m-corner.tr{top:14px;right:14px;border-left:0;border-bottom:0}
+  .m-corner.bl{bottom:14px;left:14px;border-right:0;border-top:0}.m-corner.br{bottom:14px;right:14px;border-left:0;border-top:0}
+  @media(max-width:860px){ .menu{grid-template-columns:1fr;grid-template-rows:auto auto 1fr auto auto} .pilot{grid-column:1;grid-row:2;margin:0 auto} .m-mid{grid-column:1;grid-row:3} .loadout{grid-column:1;grid-row:4;margin:0 auto} }
+
+  /* ════ HANGAR / LOADOUT ════ */
+  #loadout.overlay{align-items:stretch;justify-content:stretch;background:radial-gradient(130% 100% at 50% 30%,rgba(10,16,30,.82),rgba(3,6,12,.96))}
+  .lo-screen{position:relative;width:100%;height:100%;display:flex;flex-direction:column;gap:14px;padding:clamp(16px,2.6vw,40px)}
+  .lo-screen::before{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(0,12,18,.16) 0 1px,transparent 1px 3px)}
+  .lo-screen>*{position:relative;z-index:1}
+  .lo-head{display:flex;justify-content:space-between;align-items:center;font-family:var(--disp);font-weight:700;font-size:15px;letter-spacing:.24em;color:var(--bone)}
+  .lo-head b{color:var(--pc)}
+  .lo-grid{flex:1;display:grid;grid-template-columns:minmax(240px,1fr) minmax(360px,1.5fr);gap:18px;min-height:0}
+  .lo-ship{position:relative;border:1px solid var(--line);background:radial-gradient(ellipse 80% 70% at 50% 40%,rgba(34,211,238,.06),transparent 70%),linear-gradient(180deg,rgba(10,16,29,.6),rgba(6,10,20,.5));display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:14px;padding:14px}
+  #shipCv{width:100%;flex:1;min-height:240px;display:block;cursor:grab}
+  #shipCv:active{cursor:grabbing}
+  .lo-spin{position:absolute;top:12px;left:0;right:0;text-align:center;font-family:var(--mono);font-size:9px;letter-spacing:.28em;color:var(--dim);pointer-events:none}
+  .lo-svg circle[id^="slot-"]{transition:opacity .2s}
+  .lo-tabs{display:flex;gap:7px;flex-wrap:wrap;justify-content:center}
+  .lo-tab{font-family:var(--disp);font-weight:700;font-size:11px;letter-spacing:.1em;padding:8px 14px;border:1px solid var(--line);background:rgba(0,0,0,.4);color:var(--dim);cursor:pointer;transition:all .12s}
+  .lo-tab.on{border-color:var(--pc);color:var(--pc);box-shadow:0 0 14px rgba(34,211,238,.3)}
+  .lo-right{display:flex;flex-direction:column;gap:12px;min-height:0}
+  .lo-opt-head{font-family:var(--disp);font-weight:700;font-size:12px;letter-spacing:.24em;color:var(--acc)}
+  .lo-options{display:grid;grid-template-columns:1fr 1fr;gap:10px;overflow:auto;align-content:start}
+  .lo-opt{border:1px solid var(--line);background:linear-gradient(180deg,rgba(13,19,33,.82),rgba(7,11,22,.7));padding:13px;cursor:pointer;text-align:left;transition:transform .12s,box-shadow .12s,border-color .12s;position:relative}
+  .lo-opt:hover{transform:translateY(-2px);border-color:var(--oc)}
+  .lo-opt.on{border-color:var(--oc);box-shadow:0 0 18px color-mix(in srgb,var(--oc) 38%,transparent),inset 0 0 26px color-mix(in srgb,var(--oc) 8%,transparent)}
+  .lo-opt .on-name{font-family:var(--disp);font-weight:700;font-size:15px;color:var(--oc)}
+  .lo-opt .on-desc{font-size:11px;color:var(--dim);margin-top:5px;line-height:1.5;min-height:30px}
+  .lo-opt .on-eq{position:absolute;top:9px;right:11px;font-family:var(--mono);font-size:8px;letter-spacing:.12em;color:var(--oc)}
+  .lo-stats{display:grid;grid-template-columns:1fr 1fr;gap:9px 20px;padding-top:10px;border-top:1px solid var(--line)}
+  .lo-st{font-family:var(--mono);font-size:9px;letter-spacing:.12em;color:var(--dim)}
+  .lo-st .bar{height:8px;background:#000;border:1px solid var(--line);margin-top:4px;overflow:hidden}
+  .lo-st .bar i{display:block;height:100%;background:linear-gradient(90deg,#1aa6c4,var(--pc));box-shadow:0 0 8px var(--pc);transition:width .25s}
+  .lo-foot{display:flex;justify-content:center}
+  @media(max-width:780px){ .lo-grid{grid-template-columns:1fr} .lo-options{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+<canvas id="game"></canvas>
+<canvas id="hud2d"></canvas>
+<div id="fx"></div>
+<div id="post"><div class="scan"></div><div class="grain"></div><div class="vig"></div></div>
+
+<div id="hud">
+  <div id="stat" class="corner panelui">
+    <div class="phead"><span>DEFENDER · R-23-17-K</span><span class="pdot"></span></div>
+    <div class="barwrap"><div class="barlab"><span>HULL</span><b id="hullTxt">100</b></div><div class="bar hull"><i id="hullBar"></i></div></div>
+    <div class="barwrap"><div class="barlab"><span>SHIELD</span><b id="shTxt">0</b></div><div class="bar shield"><i id="shBar"></i></div></div>
+    <div class="barcode"></div>
+  </div>
+  <div id="center" class="corner">
+    <div id="status">BRAND ARRAY · WAVE 1</div>
+    <div id="timer">45</div>
+    <div id="bossbar"><div class="bosshead"><span id="bossName">OVERBILL PRIME</span><span id="bossTag">the overcharger</span></div><div class="bosstrack"><i id="bossBar"></i></div></div>
+  </div>
+  <div id="score" class="corner panelui"><div class="phead"><span>TELEMETRY</span><span class="pdot"></span></div><div class="v" id="scoreV">0</div><div class="thr">THREATS · <b id="thrV">0</b></div></div>
+  <div id="weapon" class="corner panelui"><div class="phead"><span>PRIMARY SYSTEM</span><span class="pdot"></span></div><div class="wn" id="wName">BLASTER</div><div class="wt" id="wTag">standard issue</div>
+    <div id="wbar">
+      <button class="wic on" data-w="blaster" title="Blaster"><span class="kn">1</span><svg viewBox="0 0 24 24"><path d="M3 12h11"/><path d="M14 9l5 3-5 3z"/></svg></button>
+      <button class="wic" data-w="cannon" title="Ion Cannon"><span class="kn">2</span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg></button>
+      <button class="wic" data-w="shotgun" title="Scatter Gun"><span class="kn">3</span><svg viewBox="0 0 24 24"><path d="M4 12h5"/><path d="M9 12l9-6M9 12l9 0M9 12l9 6"/></svg></button>
+      <button class="wic" data-w="mgun" title="Machine Gun"><span class="kn">4</span><svg viewBox="0 0 24 24"><path d="M3 7h18M3 12h18M3 17h18" stroke-dasharray="3 2.5"/></svg></button>
+      <button class="wic" data-w="rocket" title="Rocket Launcher"><span class="kn">5</span><svg viewBox="0 0 24 24"><path d="M6 14l4-9 4 9-4 3z"/><path d="M6 14l-2 5 4-2M14 14l2 5-4-2"/></svg></button>
+      <button class="wic" data-w="missile" title="Homing Missile"><span class="kn">6</span><svg viewBox="0 0 24 24"><path d="M4 12h9l4-3v6l-4-3"/><circle cx="18.5" cy="12" r="1.6"/></svg></button>
+    </div>
+  </div>
+  <div id="hint" class="corner"><b>WASD</b> thrust · <b>MOUSE</b> fire · <b>SHIFT</b> brake · <b>SPACE</b> boost · <b class="acc">1-6 / Q-E</b> weapon · <b>P</b> pause</div>
+</div>
+
+<div id="dlg"><div id="dlgcard"><div id="dlgspk">THE GRID</div><div id="dlgtext"></div><div id="dlghint">▸ CLICK TO CONTINUE</div></div></div>
+
+<button class="mutebtn" id="muteBtn">♪ SOUND ON</button>
+<button class="mutebtn" id="pauseBtn" style="right:120px">❚❚ PAUSE</button>
+
+<div class="overlay on" id="title">
+  <div class="menu">
+    <div class="m-corner tl"></div><div class="m-corner tr"></div><div class="m-corner bl"></div><div class="m-corner br"></div>
+    <div class="m-top"><div>METHODUS <b>// ORBITAL DEFENSE</b></div><div>TAU&nbsp;CETI&nbsp;IV · SECTOR&nbsp;07</div><div>BUILD <b>0.9</b></div></div>
+
+    <div class="pilot">
+      <div class="ph"><span>PILOT DOSSIER</span><span class="dot"></span></div>
+      <div class="helm-wrap"><canvas id="pilotCv"></canvas></div>
+      <div class="pname">R-23-17-K</div>
+      <div class="prole">DEFENSE RUNNER · CLEARANCE Δ</div>
+      <div class="pstats"><div><div class="k">BEST</div><div class="v" id="psBest">0</div></div><div><div class="k">THREATS</div><div class="v" id="psThreat">0</div></div><div><div class="k">RANK</div><div class="v">07</div></div></div>
+    </div>
+
+    <div class="m-mid">
+      <div class="m-eye">SURVIVAL PROTOCOL // LIVE</div>
+      <div class="m-title">METHODUS</div>
+      <div class="m-sub">BRAND DEFENSE GRID</div>
+      <p class="m-desc">Strap in, runner. The array is live and the swarm is already circling. Outfit your craft, pick your guns, and hold the line.</p>
+      <div class="m-cta">
+        <button class="bigbtn" id="startBtn">▸ LAUNCH</button>
+        <div class="subbtns"><button class="ghostbtn" id="loadoutBtn">⚙ LOADOUT</button><button class="ghostbtn lock">CAMPAIGN · LOCKED</button></div>
+      </div>
+    </div>
+
+    <div class="m-foot"><span><kbd>WASD</kbd>thrust</span><span><kbd>MOUSE</kbd>fire</span><span><kbd>SHIFT</kbd>brake</span><span><kbd>SPACE</kbd>boost</span><span><kbd>1-6</kbd>weapons</span><span><kbd>ESC</kbd>menu</span></div>
+  </div>
+</div>
+
+<div class="overlay" id="pick">
+  <div class="box"><div class="eyebrow">WAVE CLEARED</div><h2>ARM UP</h2><div class="psub">CHOOSE YOUR NEXT WEAPON</div><div class="prow" id="prow"></div></div>
+</div>
+
+<div class="overlay" id="pause">
+  <div class="box" style="text-align:center;padding:30px">
+    <div class="eyebrow">TEST PILOT · WEAPON RANGE</div>
+    <h2 style="font-family:var(--disp);font-weight:800;font-size:clamp(40px,8vw,64px);color:var(--pc);text-shadow:0 0 30px rgba(34,211,238,.4);letter-spacing:.04em">PAUSED</h2>
+    <div style="display:flex;gap:14px;justify-content:center;margin-top:26px;flex-wrap:wrap">
+      <button class="btn" id="resumeBtn">RESUME</button>
+      <button class="btn" id="loadoutBtn2" style="background:transparent;color:var(--pc);box-shadow:0 0 18px rgba(34,211,238,.25),inset 0 0 0 1px var(--pc)">⚙ LOADOUT</button>
+      <button class="btn" id="menuBtn" style="background:transparent;color:var(--pc);box-shadow:0 0 18px rgba(34,211,238,.25),inset 0 0 0 1px var(--pc)">MAIN MENU</button>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="loadout">
+  <div class="lo-screen">
+    <div class="m-corner tl"></div><div class="m-corner tr"></div><div class="m-corner bl"></div><div class="m-corner br"></div>
+    <div class="lo-head"><span>OUTFITTING <b>// HANGAR</b></span><button class="ghostbtn" id="loBack">◂ BACK</button></div>
+    <div class="lo-grid">
+      <div class="lo-ship">
+        <div class="lo-spin">◂ DRAG TO ROTATE ▸</div>
+        <canvas id="shipCv"></canvas>
+        <div class="lo-tabs" id="loTabs"></div>
+      </div>
+      <div class="lo-right">
+        <div class="lo-opt-head" id="loSlotName">PRIMARY WEAPON</div>
+        <div class="lo-options" id="loOptions"></div>
+        <div class="lo-stats" id="loStats"></div>
+      </div>
+    </div>
+    <div class="lo-foot"><button class="bigbtn" id="loLaunch">▸ LAUNCH WITH LOADOUT</button></div>
+  </div>
+</div>
+
+<div class="overlay" id="over">
+  <div class="box">
+    <div class="eyebrow" id="overEye">GRID BREACH</div>
+    <h2 id="overTitle">DEFENDER LOST</h2>
+    <div class="stats"><div class="st">WAVE<b id="ovWave">1</b></div><div class="st">THREATS<b id="ovKills">0</b></div><div class="st">SCORE<b id="ovScore">0</b></div></div>
+    <div id="ovBest" style="font-size:11px;letter-spacing:.2em;color:var(--gold);margin-bottom:20px"></div>
+    <button class="btn" id="retryBtn">REDEPLOY</button>
+  </div>
+</div>
+
+<div id="loading">BRAND DEFENSE GRID ONLINE…</div>
+
+<script type="importmap">
+{ "imports": {
+  "three": "./vendor/three.module.js",
+  "three/addons/": "./vendor/jsm/"
+}}
+</script>
+<script type="module" src="./game3d.js"></script>
+</body>
+</html>

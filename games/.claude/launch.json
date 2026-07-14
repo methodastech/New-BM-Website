@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "arena",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8791", "--directory", "/Users/zieel/Bazil Claude 3/Games-20260702T132132Z-3-001/Games/Methodus the Game/Essence3D"],
+      "port": 8791
+    },
+    {
+      "name": "bonefield",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8792", "--directory", "/Users/zieel/Bazil Claude 3/Games-20260702T132132Z-3-001/Games/Methodus the Game/💀 Bonefield Arena"],
+      "port": 8792
+    }
+  ]
+}

@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Essence · Press Kit</title>
+<link rel="icon" href="bonefield-sigil.svg" type="image/svg+xml">
+<meta name="description" content="Essence press kit: fact sheet, key art, gameplay screenshots, logo, and contact. Free to use when covering the game.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Grenze+Gotisch:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============ TOKENS (shared with index.html) ============ */
+:root{
+  --ink-0:#0b0908; --ink-1:#131009; --ink-2:#1a1610; --ink-3:#241d12;
+  --line:rgba(203,164,82,.16); --line-strong:rgba(203,164,82,.42);
+  --gold:#c9a24a; --gold-hi:#ecd192; --gold-deep:#8a6a2a;
+  --bone:#f0e7d1; --text:#cfc6b2; --dim:#9c9280;
+  --maxw:1180px; --pad:clamp(20px,4vw,48px);
+  --ff-disp:"Cinzel",serif; --ff-body:"EB Garamond",Georgia,serif; --ff-black:"Grenze Gotisch",serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{
+  background:var(--ink-0); color:var(--text);
+  font-family:var(--ff-body); font-size:1.22rem; line-height:1.75;
+  -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+::selection{background:var(--gold); color:var(--ink-0)}
+img{max-width:100%; display:block}
+a{color:var(--gold-hi); text-decoration:none}
+a:hover{color:var(--bone)}
+:focus-visible{outline:2px solid var(--gold); outline-offset:3px}
+strong,b{color:var(--bone); font-weight:600}
+em,i{color:var(--bone)}
+
+/* subtle vignette atmosphere over the whole page */
+body::before{
+  content:""; position:fixed; inset:0; z-index:-1; pointer-events:none;
+  background:radial-gradient(120% 90% at 50% 0%, rgba(201,162,74,.05), transparent 55%),
+             radial-gradient(140% 100% at 50% 100%, rgba(0,0,0,.5), transparent 60%);
+}
+/* no stacking context on main: lets the divider's mix-blend-mode reach the page background */
+
+/* ============ NAV ============ */
+nav#top{
+  position:fixed; top:0; left:0; right:0; z-index:50;
+  background:rgba(11,9,8,.86); backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.nav-in{max-width:var(--maxw); margin:0 auto; padding:0 var(--pad);
+  display:flex; align-items:center; gap:28px; height:76px}
+.brand{display:flex; align-items:center; gap:12px}
+.brand img{width:36px; height:36px; opacity:.9}
+.brand b{font-family:var(--ff-black); font-weight:700; font-size:1.8rem; letter-spacing:.02em;
+  background:linear-gradient(to bottom, #f7efd9 30%, #e3c684 62%, #b08a40 100%);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  filter:drop-shadow(0 1px 6px rgba(0,0,0,.6))}
+.brand small{font-family:var(--ff-disp); font-size:.68rem; font-weight:600; letter-spacing:.24em;
+  text-transform:uppercase; color:var(--dim); margin-left:2px; white-space:nowrap}
+.nav-links{display:flex; gap:4px; margin-left:auto; overflow-x:auto; scrollbar-width:none}
+.nav-links::-webkit-scrollbar{display:none}
+.nav-links a{
+  font-family:var(--ff-disp); font-size:.78rem; font-weight:600; letter-spacing:.11em;
+  text-transform:uppercase; color:var(--dim); padding:10px 9px; white-space:nowrap;
+  border-bottom:2px solid transparent; transition:color .25s;
+}
+.nav-links a:hover{color:var(--bone)}
+@media (max-width:900px){
+  .nav-in{flex-wrap:wrap; height:auto; padding-top:10px; row-gap:0}
+  .brand b{font-size:1.5rem}
+  .nav-links{margin-left:0; width:100%; padding-bottom:6px;
+    -webkit-mask-image:linear-gradient(to right, #000 90%, transparent);
+    mask-image:linear-gradient(to right, #000 90%, transparent)}
+}
+
+/* ============ BUTTONS ============ */
+.cta-row{display:flex; flex-wrap:wrap; gap:14px; justify-content:center; align-items:center}
+.btn{
+  display:inline-flex; align-items:center; gap:10px;
+  font-family:var(--ff-disp); font-weight:700; font-size:.92rem; letter-spacing:.12em;
+  text-transform:uppercase; padding:17px 30px; border-radius:3px;
+  transition:transform .2s ease, box-shadow .25s ease, background .25s ease, border-color .25s;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn.solid{
+  background:linear-gradient(to bottom, #e8cd8b, #c9a24a 55%, #9d7a30);
+  color:#171207; box-shadow:0 0 0 1px rgba(236,209,146,.55) inset, 0 10px 30px rgba(201,162,74,.22)}
+.btn.solid:hover{box-shadow:0 0 0 1px rgba(236,209,146,.8) inset, 0 14px 40px rgba(201,162,74,.4); color:#171207}
+.btn.ghost{border:1px solid var(--line-strong); color:var(--bone); background:rgba(11,9,8,.35)}
+.btn.ghost:hover{border-color:var(--gold-hi); color:var(--gold-hi); background:rgba(201,162,74,.08)}
+
+/* ============ PAGE HERO ============ */
+.page-hero{position:relative; text-align:center; max-width:var(--maxw); margin:0 auto;
+  padding:clamp(150px,22vh,210px) var(--pad) clamp(48px,7vh,72px)}
+.page-hero::before{content:""; position:absolute; top:0; bottom:0; left:50%; width:100vw;
+  transform:translateX(-50%); z-index:-1; pointer-events:none;
+  background:url(web/ui/embers.jpg) center/cover no-repeat; opacity:.45;
+  -webkit-mask-image:linear-gradient(to bottom, transparent, #000 30%, #000 70%, transparent);
+  mask-image:linear-gradient(to bottom, transparent, #000 30%, #000 70%, transparent)}
+.page-title{font-family:var(--ff-black); font-weight:700; line-height:.95;
+  font-size:clamp(3.8rem,10vw,7rem); margin:10px 0 6px;
+  background:linear-gradient(to bottom, #f7efd9 30%, #e3c684 62%, #a6813a 100%);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  filter:drop-shadow(0 4px 26px rgba(0,0,0,.65))}
+.page-tag{font-size:clamp(1.35rem,2.4vw,1.7rem); font-style:italic; color:var(--bone)}
+
+/* ============ SECTION SHELL ============ */
+.chap{max-width:var(--maxw); margin:0 auto; padding:clamp(64px,9vh,110px) var(--pad); scroll-margin-top:96px; position:relative}
+#assets::before{content:""; position:absolute; top:0; bottom:0; left:50%; width:100vw;
+  transform:translateX(-50%); z-index:-1; pointer-events:none;
+  background:url(web/ui/embers.jpg) center/cover no-repeat; opacity:.4;
+  -webkit-mask-image:linear-gradient(to bottom, transparent, #000 14%, #000 86%, transparent);
+  mask-image:linear-gradient(to bottom, transparent, #000 14%, #000 86%, transparent)}
+.chap-head{text-align:center; max-width:820px; margin:0 auto clamp(36px,5vh,56px)}
+.kicker{font-family:var(--ff-disp); font-size:.85rem; font-weight:600; letter-spacing:.42em;
+  text-transform:uppercase; color:var(--gold); margin-bottom:14px}
+h2{font-family:var(--ff-disp); font-weight:700; font-size:clamp(2.1rem,4.6vw,3.1rem);
+  letter-spacing:.03em; color:var(--bone); line-height:1.12; margin-bottom:18px}
+.lead{font-size:clamp(1.24rem,2.1vw,1.42rem); font-style:italic; color:var(--text)}
+h4,.callout h3{font-family:var(--ff-disp); font-weight:600; font-size:1.18rem; color:var(--bone);
+  letter-spacing:.03em; margin-bottom:8px}
+.mini-head{text-align:center; font-family:var(--ff-disp); font-weight:600;
+  font-size:clamp(1.4rem,2.4vw,1.75rem); color:var(--gold-hi); letter-spacing:.04em; margin:64px 0 20px}
+
+.divider{display:block; height:74px; max-width:520px; margin:0 auto;
+  background:url(web/ui/ornament.png) center/contain no-repeat;
+  mix-blend-mode:screen; opacity:.85}
+
+/* ============ COMPONENTS (shared with index.html) ============ */
+.grid{display:grid; gap:22px; margin-bottom:34px}
+.g2{grid-template-columns:repeat(2,1fr)}
+@media (max-width:620px){.g2{grid-template-columns:1fr}}
+
+.card{background:#0d0a08 url(web/ui/panel.jpg) center/cover; border:1px solid rgba(0,0,0,.8); border-radius:4px;
+  padding:26px 28px; transition:box-shadow .3s, transform .3s;
+  box-shadow:inset 0 1px 0 rgba(236,209,146,.09), inset 0 0 0 1px rgba(236,209,146,.04), 0 14px 34px rgba(0,0,0,.5)}
+.card:hover{transform:translateY(-3px);
+  box-shadow:inset 0 1px 0 rgba(236,209,146,.16), inset 0 0 0 1px rgba(236,209,146,.08), 0 20px 44px rgba(0,0,0,.6)}
+.card-lab{display:flex; align-items:center; gap:9px; font-family:var(--ff-disp);
+  font-size:.78rem; font-weight:700; letter-spacing:.22em; text-transform:uppercase;
+  color:var(--gold); margin-bottom:14px}
+.card p{font-size:1.08rem; line-height:1.65}
+.card p.card-lab{font-size:.78rem}
+
+.tbl-wrap{overflow-x:auto; margin-bottom:34px; border:1px solid var(--line); border-radius:4px; max-width:900px; margin-left:auto; margin-right:auto}
+.tbl{width:100%; border-collapse:collapse; background:var(--ink-1); min-width:560px}
+.tbl th{font-family:var(--ff-disp); font-size:.8rem; font-weight:700; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--gold); text-align:left;
+  padding:15px 20px; background:var(--ink-3); border-bottom:1px solid var(--line-strong)}
+.tbl td{padding:14px 20px; font-size:1.08rem; border-bottom:1px solid rgba(236,209,146,.07); vertical-align:top}
+.tbl tr:last-child td{border-bottom:none}
+.tbl tbody th[scope=row]{width:200px; vertical-align:top;
+  border-bottom:1px solid rgba(236,209,146,.07); background:transparent}
+.tbl tbody tr:last-child th[scope=row]{border-bottom:none}
+
+.callout{background:#0d0a08 url(web/ui/panel.jpg) center/cover; border:1px solid rgba(0,0,0,.8); border-left:3px solid var(--gold);
+  border-radius:4px; padding:26px 30px; margin:0 auto 34px; max-width:900px;
+  box-shadow:inset 0 1px 0 rgba(236,209,146,.09), 0 14px 34px rgba(0,0,0,.5)}
+.callout h4,.callout h3{color:var(--gold-hi)}
+.callout ul{list-style:none; margin-top:12px}
+.callout li{padding:7px 0 7px 22px; position:relative; font-size:1.08rem}
+.callout li::before{content:"✦"; position:absolute; left:0; color:var(--gold); font-size:.8rem; top:12px}
+
+.plate{display:block; background:#060504; border:1px solid var(--gold-deep);
+  outline:1px solid var(--line); outline-offset:6px;
+  padding:12px; margin:0 auto 34px; max-width:900px;
+  box-shadow:0 30px 80px rgba(0,0,0,.6), 0 0 60px rgba(201,162,74,.06)}
+.plate img{width:100%}
+.plate figcaption{text-align:center; padding:16px 8px 6px; font-family:var(--ff-disp);
+  font-size:.82rem; font-weight:600; letter-spacing:.34em; text-transform:uppercase; color:var(--gold)}
+
+.gallery{display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-bottom:10px}
+@media (max-width:820px){.gallery{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.gallery{grid-template-columns:1fr}}
+a.shot{display:block; position:relative; border:1px solid var(--line); border-radius:4px; overflow:hidden;
+  background:#060504; transition:border-color .3s, transform .3s}
+a.shot:hover{border-color:var(--line-strong); transform:translateY(-4px)}
+a.shot img{width:100%; aspect-ratio:16/10; object-fit:cover; transition:transform .5s ease}
+a.shot:hover img{transform:scale(1.035)}
+.gcap{text-align:center; color:var(--dim); font-style:italic; font-size:1.05rem; margin-top:18px}
+
+/* spell strip */
+.spells{display:grid; grid-template-columns:repeat(4,1fr); gap:18px; max-width:1000px; margin:0 auto}
+@media (max-width:760px){.spells{grid-template-columns:repeat(2,1fr)}}
+.spells a{display:block; border:1px solid var(--line); border-radius:4px; overflow:hidden;
+  background:#060504; transition:border-color .3s, transform .3s}
+.spells a:hover{border-color:var(--line-strong); transform:translateY(-4px)}
+.spells img{width:100%; aspect-ratio:1/1; object-fit:cover; transition:transform .5s ease}
+.spells a:hover img{transform:scale(1.035)}
+
+.note{text-align:center; color:var(--dim); font-size:1.05rem; font-style:italic; max-width:680px; margin:26px auto 0}
+
+/* ============ FOOTER ============ */
+footer{border-top:1px solid var(--line); margin-top:60px}
+.foot-in{max-width:var(--maxw); margin:0 auto; padding:56px var(--pad) 42px;
+  display:flex; flex-direction:column; gap:26px; align-items:center; text-align:center}
+.foot-in .brand img{width:44px; height:44px}
+.sitemap{display:flex; flex-wrap:wrap; gap:8px 22px; justify-content:center;
+  font-family:var(--ff-disp); font-size:.78rem; font-weight:600; letter-spacing:.16em; text-transform:uppercase}
+.sitemap a{color:var(--dim)}
+.sitemap a:hover{color:var(--gold-hi)}
+.sitemap a[aria-current="page"]{color:var(--gold-hi); border-bottom:1px solid var(--gold); padding-bottom:2px}
+.foot-note{font-size:1rem; color:var(--dim); font-style:italic; max-width:760px}
+</style>
+</head>
+<body>
+
+<nav id="top" aria-label="Sections">
+  <div class="nav-in">
+    <a class="brand" href="index.html"><img src="bonefield-sigil.svg" alt=""><b>Essence</b><small>Press kit</small></a>
+    <div class="nav-links">
+      <a href="index.html">← Back to site</a>
+      <a href="bonefield-investors.html">Investors</a>
+      <a href="#assets">Assets</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+<header class="page-hero">
+  <p class="kicker">Press &amp; Media Kit</p>
+  <h1 class="page-title">Essence</h1>
+  <p class="page-tag">&ldquo;Cast spells with your voice.&rdquo;</p>
+</header>
+
+<div class="divider" role="presentation"></div>
+
+<section class="chap" id="facts">
+  <header class="chap-head">
+    <p class="kicker">The Essentials</p>
+    <h2>Fact sheet</h2>
+  </header>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <tbody>
+        <tr><th scope="row">Title</th><td>Essence <i>(working title)</i></td></tr>
+        <tr><th scope="row">Genre</th><td>3D action-roguelite · cast spells by speaking aloud</td></tr>
+        <tr><th scope="row">Hook</th><td>Voice-cast spells · invent and combine your own · the long descent</td></tr>
+        <tr><th scope="row">Platforms</th><td>Web demo &amp; Steam (PC) first · mobile / console later</td></tr>
+        <tr><th scope="row">Price</th><td>Premium — Early Access ~$9–13, 1.0 ~$15–19 <i>(planned)</i></td></tr>
+        <tr><th scope="row">Status</th><td>Concept build · vertical slice in progress</td></tr>
+        <tr><th scope="row">Release</th><td>TBA · web demo first, then Steam Early Access</td></tr>
+        <tr><th scope="row">Developer</th><td>Bazil Zieel · designer &amp; developer · the team is growing — <a href="mailto:bazil@brandmethod.co?subject=I%20want%20to%20join%20the%20Essence%20team">join us</a></td></tr>
+        <tr><th scope="row">Contact</th><td><a href="mailto:bazil@brandmethod.co">bazil@brandmethod.co</a> · Bazil Zieel</td></tr>
+        <tr><th scope="row">Links</th><td><a href="index.html">Site</a> · <a href="trailer.html" target="_blank" rel="noopener">Teaser</a> · <a href="v3-summit.html" target="_blank" rel="noopener">Story build</a> · <a href="multiplayer.html" target="_blank" rel="noopener">Multiplayer</a> · <a href="bonefield-investors.html" target="_blank" rel="noopener">Investor brief</a></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="chap" id="about">
+  <header class="chap-head">
+    <p class="kicker">The Pitch</p>
+    <h2>Describe it in one breath</h2>
+  </header>
+  <div class="grid g2">
+    <div class="card">
+      <p class="card-lab">Short (one line)</p>
+      <p>A Vampire-Survivors-meets-Sekiro action-roguelite where you cast spells by speaking the incantation aloud.</p>
+    </div>
+    <div class="card">
+      <p class="card-lab">Medium</p>
+      <p>Born of grief, you descend an endless dungeon, devouring power and hiding among the people who hunt you. Swing steel like a knight, or chant long incantations to unleash an apocalypse — and invent your own spells by combining spirits in the Forge. Mispronounce the words and the spell fizzles, weakens, or detonates in your own face.</p>
+    </div>
+  </div>
+</section>
+
+<section class="chap" id="features">
+  <header class="chap-head">
+    <p class="kicker">The Hook</p>
+    <h2>Key features</h2>
+  </header>
+  <aside class="callout">
+    <ul>
+      <li><strong>Speak to cast.</strong> Say the incantation aloud; each correct phrase charges a higher tier, then a release word unleashes it.</li>
+      <li><strong>Invent your spells.</strong> Combine spirits in the Forge into spells that did not exist a moment ago, then name and share them.</li>
+      <li><strong>Word &amp; blade.</strong> A warrior snaps off fast spells; a mage chants for world-ending power. Where you sit is your identity.</li>
+      <li><strong>Learn by consuming.</strong> You don't shop for upgrades, you eat them. Progression is predation.</li>
+      <li><strong>The double life.</strong> Monster below, &ldquo;human&rdquo; above, wearing a stolen face among those who hunt you.</li>
+      <li><strong>Mastery you can hear.</strong> Cleaner pronunciation hits harder — the skill is real, and it's yours.</li>
+    </ul>
+  </aside>
+</section>
+
+<div class="divider" role="presentation"></div>
+
+<section class="chap" id="assets">
+  <header class="chap-head">
+    <p class="kicker">Media</p>
+    <h2>Key art &amp; screenshots</h2>
+    <p class="lead">Click any image to open it full-size. Free to use with credit to Essence. For the transparent emblem and wordmark, see the <a href="logo.html" target="_blank" rel="noopener">brand mark page</a>.</p>
+  </header>
+
+  <a href="trailer-key.png" target="_blank" rel="noopener">
+    <figure class="plate">
+      <img src="trailer-key.png?v=1" alt="Essence key art — a hooded caster holding an ember spell in a graveyard" loading="lazy">
+      <figcaption>Key Art · The Ember Cast</figcaption>
+    </figure>
+  </a>
+
+  <div class="gallery">
+    <a class="shot" href="gp1-walk.png" target="_blank" rel="noopener"><img src="gp1-walk.png?v=1" alt="Approaching the field" loading="lazy"></a>
+    <a class="shot" href="gp2-cast.png" target="_blank" rel="noopener"><img src="gp2-cast.png?v=1" alt="Beginning a cast" loading="lazy"></a>
+    <a class="shot" href="gp3-charge.png" target="_blank" rel="noopener"><img src="gp3-charge.png?v=1" alt="Charging a spell" loading="lazy"></a>
+    <a class="shot" href="gp4-fireball.png" target="_blank" rel="noopener"><img src="gp4-fireball.png?v=1" alt="Fireball detonation" loading="lazy"></a>
+    <a class="shot" href="gp5-parry.png" target="_blank" rel="noopener"><img src="gp5-parry.png?v=1" alt="A parry" loading="lazy"></a>
+    <a class="shot" href="gp6-arrow.png" target="_blank" rel="noopener"><img src="gp6-arrow.png?v=1" alt="Exploding arrow" loading="lazy"></a>
+    <a class="shot" href="gp7-guards.png" target="_blank" rel="noopener"><img src="gp7-guards.png?v=1" alt="Facing the kingdom's guards" loading="lazy"></a>
+    <a class="shot" href="bonefield-hero.png" target="_blank" rel="noopener"><img src="bonefield-hero.png?v=1" alt="The Ascension — cloaked figures and a radiant sun" loading="lazy"></a>
+  </div>
+  <p class="gcap">Concept gameplay &amp; key art · work in progress</p>
+
+  <h3 class="mini-head">The spellbook</h3>
+  <p class="lead" style="text-align:center; max-width:760px; margin:0 auto 34px">A sample of signature spells and crafted combinations.</p>
+  <div class="spells">
+    <a href="spell-fireball.png" target="_blank" rel="noopener"><img src="spell-fireball.png?v=1" alt="Fireball" loading="lazy"></a>
+    <a href="spell-flamespears.png" target="_blank" rel="noopener"><img src="spell-flamespears.png?v=1" alt="Flame Spears" loading="lazy"></a>
+    <a href="spell-thunder.png" target="_blank" rel="noopener"><img src="spell-thunder.png?v=1" alt="Thunder" loading="lazy"></a>
+    <a href="spell-steam.png" target="_blank" rel="noopener"><img src="spell-steam.png?v=1" alt="Steam" loading="lazy"></a>
+    <a href="spell-scald.png" target="_blank" rel="noopener"><img src="spell-scald.png?v=1" alt="Scald" loading="lazy"></a>
+    <a href="spell-souldrain.png" target="_blank" rel="noopener"><img src="spell-souldrain.png?v=1" alt="Soul Drain" loading="lazy"></a>
+    <a href="spell-fireworks.png" target="_blank" rel="noopener"><img src="spell-fireworks.png?v=1" alt="Fireworks" loading="lazy"></a>
+    <a href="spell-rift.png" target="_blank" rel="noopener"><img src="spell-rift.png?v=1" alt="Rift" loading="lazy"></a>
+  </div>
+</section>
+
+<section class="chap" id="logo">
+  <header class="chap-head">
+    <p class="kicker">Identity</p>
+    <h2>Logo &amp; wordmark</h2>
+    <p class="lead">The hero key plate. For a transparent wordmark or icon, get in touch.</p>
+  </header>
+  <a href="bonefield-hero.png" target="_blank" rel="noopener" style="display:block; max-width:620px; margin:0 auto">
+    <figure class="plate">
+      <img src="bonefield-hero.png?v=1" alt="Essence wordmark on the Ascension key art" loading="lazy">
+      <figcaption>Codex Plate · The Ascension</figcaption>
+    </figure>
+  </a>
+</section>
+
+<div class="divider" role="presentation"></div>
+
+<section class="chap" id="contact">
+  <header class="chap-head">
+    <p class="kicker">Reach Us</p>
+    <h2>Contact &amp; inquiries</h2>
+    <p class="lead">Press, creators, partnerships, and funding all welcome. We build in public and reply.</p>
+  </header>
+  <div class="cta-row">
+    <a class="btn solid" href="mailto:bazil@brandmethod.co"><span aria-hidden="true">✉</span> bazil@brandmethod.co</a>
+    <a class="btn ghost" href="index.html">← Back to the site</a>
+    <a class="btn ghost" href="bonefield-investors.html" target="_blank" rel="noopener">Investor brief</a>
+  </div>
+  <p class="note">Working title, subject to change. All art and footage are concept / work-in-progress. Figures elsewhere on the site are illustrative, not audited.</p>
+</section>
+
+</main>
+
+<footer>
+  <div class="foot-in">
+    <nav class="sitemap" aria-label="Site">
+      <a href="index.html">Home</a>
+      <a href="trailer.html">Teaser</a>
+      <a href="press.html" aria-current="page">Press</a>
+      <a href="bonefield-investors.html">Investors</a>
+      <a href="v3-summit.html">Play the story</a>
+      <a href="multiplayer.html">Multiplayer</a>
+    </nav>
+    <a class="brand" href="index.html"><img src="bonefield-sigil.svg" alt=""><b>Essence</b></a>
+    <p class="foot-note">BONEFIELD · Press &amp; Media Kit · free to use with credit · contact bazil@brandmethod.co</p>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll('a[target="_blank"]').forEach(function(a){
+  if(a.getAttribute('aria-label')) return;
+  var t=(a.textContent||a.querySelector('img')&&a.querySelector('img').alt||'Link').trim();
+  a.setAttribute('aria-label', t + ' (opens in a new tab)');
+});
+</script>
+
+</body>
+</html>

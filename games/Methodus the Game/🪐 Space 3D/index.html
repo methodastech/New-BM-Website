@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>METHODUS · DEEP RUN</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --lime:#c8f02a; --orange:#ff5a1f; --cyan:#39d7e6; --magenta:#e0447c;
+    --ink:#04060b; --ink2:#0c111b; --steel:#27303d; --bone:#e9e7dd; --dim:#828c9b;
+    --mono:'Space Mono',ui-monospace,monospace; --disp:'Chakra Petch',var(--mono);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:100%;height:100%;overflow:hidden;background:var(--ink);color:var(--bone);
+    font-family:var(--mono);-webkit-user-select:none;user-select:none}
+  #scene{position:fixed;inset:0;display:block;width:100%;height:100%;cursor:crosshair}
+  #fx{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:5}
+  .dmg{position:absolute;left:0;top:0;font-family:var(--disp);font-weight:700;font-size:15px;
+    text-shadow:0 2px 0 rgba(0,0,0,.8),0 0 10px rgba(0,0,0,.7);white-space:nowrap;will-change:transform,opacity}
+  .dmg.big{font-size:24px}
+  .dmg.crit{color:#fff}
+
+  /* ── HUD ── */
+  #hud{position:fixed;inset:0;pointer-events:none;z-index:10;font-family:var(--disp)}
+  .panel{position:absolute;background:linear-gradient(180deg,rgba(12,17,27,.86),rgba(4,6,11,.86));
+    border:1.5px solid rgba(0,0,0,.7);box-shadow:inset 0 0 0 1px rgba(233,231,221,.06),0 6px 22px rgba(0,0,0,.5);
+    backdrop-filter:blur(3px)}
+  #stat{top:14px;left:14px;width:286px;padding:11px 13px 12px}
+  .lab{display:flex;justify-content:space-between;align-items:baseline;font-size:9.5px;letter-spacing:.2em;color:var(--dim);margin:0 0 4px}
+  .lab b{color:var(--bone);letter-spacing:.06em}
+  .bar{height:14px;background:#000;border:1px solid rgba(255,255,255,.09);position:relative;overflow:hidden;margin-bottom:10px}
+  .bar i{position:absolute;inset:0;transform-origin:left;transition:transform .16s ease-out}
+  .bar.hull i{background:linear-gradient(90deg,var(--cyan),#9af4ff)}
+  .bar.core i{background:linear-gradient(90deg,var(--orange),#ffb061)}
+  .bar.xp{height:7px;margin-bottom:0} .bar.xp i{background:linear-gradient(90deg,#9fb2ff,var(--lime))}
+  .stats{display:flex;gap:7px;margin:2px 0 11px}
+  .chip{flex:1;background:#000;border:1px solid rgba(255,255,255,.09);padding:5px 4px;text-align:center}
+  .chip .k{font-size:8.5px;letter-spacing:.16em;color:var(--dim)}
+  .chip .v{font-size:15px;font-weight:700;color:var(--bone);line-height:1.1}
+
+  #wavebox{top:14px;left:50%;transform:translateX(-50%);text-align:center;padding:8px 22px}
+  #wavebox .w{font-size:11px;letter-spacing:.3em;color:var(--lime)}
+  #wavebox .s{font-size:23px;font-weight:700;letter-spacing:.05em}
+  #wavebox .sub{font-size:9px;letter-spacing:.22em;color:var(--dim)}
+
+  #ctrlhint{bottom:14px;left:50%;transform:translateX(-50%);display:flex;gap:7px;font-size:10px;letter-spacing:.12em;color:var(--dim)}
+  .key{background:#000;border:1px solid rgba(255,255,255,.12);padding:3px 7px;color:var(--bone);font-weight:700}
+  #ctrlhint span{align-self:center}
+
+  #topright{top:14px;right:14px;display:flex;gap:8px;pointer-events:auto}
+  .tb{width:34px;height:34px;display:grid;place-items:center;background:linear-gradient(180deg,rgba(12,17,27,.9),rgba(4,6,11,.9));
+    border:1.5px solid rgba(0,0,0,.7);color:var(--bone);cursor:pointer;font-family:var(--disp);font-weight:700;font-size:14px}
+  .tb:hover{border-color:var(--lime);color:var(--lime)}
+
+  /* ── overlays ── */
+  .ov{position:fixed;inset:0;z-index:30;display:none;place-items:center;background:radial-gradient(120% 90% at 50% 36%,rgba(8,12,20,.62),rgba(2,3,7,.93));backdrop-filter:blur(2px)}
+  .ov.show{display:grid}
+  .card{width:min(560px,92vw);background:linear-gradient(180deg,rgba(14,19,29,.97),rgba(6,9,15,.97));
+    border:1.5px solid rgba(0,0,0,.8);box-shadow:inset 0 0 0 1px rgba(233,231,221,.07),0 24px 70px rgba(0,0,0,.7);padding:34px 32px 30px;text-align:center}
+  .eyebrow{font-family:var(--disp);font-size:11px;letter-spacing:.4em;color:var(--orange);margin-bottom:12px}
+  .title{font-family:var(--disp);font-weight:700;font-size:46px;letter-spacing:.04em;line-height:.98}
+  .title .a{color:var(--lime)}
+  .by{font-family:var(--disp);font-size:10px;letter-spacing:.3em;color:var(--dim);margin-top:8px}
+  .blurb{font-size:12.5px;line-height:1.7;color:#c4ccd6;margin:18px auto 0;max-width:430px}
+  .btn{display:inline-block;margin-top:24px;font-family:var(--disp);font-weight:700;font-size:16px;letter-spacing:.14em;
+    color:#04060b;background:var(--lime);border:none;padding:14px 44px;cursor:pointer;box-shadow:0 6px 0 #6f8a10;transition:transform .08s,box-shadow .08s}
+  .btn:active{transform:translateY(4px);box-shadow:0 2px 0 #6f8a10}
+  .ctrls{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 12px;margin-top:22px;font-size:10px;letter-spacing:.12em;color:var(--dim)}
+  .ctrls .key{margin-right:4px}
+  .stat-final{display:flex;gap:26px;justify-content:center;margin-top:6px}
+  .stat-final .k{font-size:10px;letter-spacing:.22em;color:var(--dim)}
+  .stat-final .v{font-family:var(--disp);font-weight:700;font-size:30px}
+
+  /* level up choices */
+  #lvlChoices{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:24px}
+  .choice{pointer-events:auto;cursor:pointer;background:linear-gradient(180deg,rgba(18,24,35,.96),rgba(8,12,19,.96));
+    border:1.5px solid var(--steel);padding:18px 14px 16px;text-align:left;transition:transform .1s,border-color .1s,box-shadow .1s}
+  .choice:hover{transform:translateY(-3px);border-color:var(--lime);box-shadow:0 10px 26px rgba(0,0,0,.5)}
+  .choice .ic{font-size:22px;margin-bottom:8px}
+  .choice .cn{font-family:var(--disp);font-weight:700;font-size:14px;letter-spacing:.04em;margin-bottom:6px}
+  .choice .cd{font-size:11px;line-height:1.55;color:#aeb7c2}
+  .choice .tag{display:inline-block;margin-top:9px;font-size:8.5px;letter-spacing:.18em;color:var(--lime);border:1px solid rgba(200,240,42,.4);padding:2px 6px}
+  .choice .tag.down{color:var(--orange);border-color:rgba(255,90,31,.4)}
+
+  @media(max-width:700px){
+    #stat{width:210px} .title{font-size:34px} #lvlChoices{grid-template-columns:1fr}
+    #ctrlhint{display:none} #wavebox{padding:6px 14px} #wavebox .s{font-size:18px}
+  }
+  .hidden{display:none!important}
+</style>
+</head>
+<body>
+<canvas id="scene"></canvas>
+<div id="fx"></div>
+
+<div id="hud" class="hidden">
+  <div id="stat" class="panel">
+    <div class="lab"><span>HULL INTEGRITY</span><b id="hullPct">100%</b></div>
+    <div class="bar hull"><i id="hullBar"></i></div>
+    <div class="lab"><span>CORE SHIELD</span><b id="corePct">100%</b></div>
+    <div class="bar core"><i id="coreBar"></i></div>
+    <div class="stats">
+      <div class="chip"><div class="k">LVL</div><div class="v" id="lvlV">1</div></div>
+      <div class="chip"><div class="k">DPS</div><div class="v" id="dpsV">10</div></div>
+      <div class="chip"><div class="k">KILLS</div><div class="v" id="killV">0</div></div>
+    </div>
+    <div class="lab"><span>DATA · NEXT LEVEL</span><b id="xpPct">0%</b></div>
+    <div class="bar xp"><i id="xpBar"></i></div>
+  </div>
+
+  <div id="wavebox" class="panel">
+    <div class="w">WAVE <span id="waveV">1</span></div>
+    <div class="s" id="scoreV">0</div>
+    <div class="sub">SCORE</div>
+  </div>
+
+  <div id="topright">
+    <div class="tb" id="muteBtn" title="Sound">♪</div>
+    <div class="tb" id="pauseBtn" title="Pause">II</div>
+  </div>
+
+  <div id="ctrlhint">
+    <span class="key">W A S D</span><span>thrust</span>
+    <span class="key">MOUSE</span><span>aim · fire</span>
+    <span class="key">SHIFT</span><span>brake</span>
+    <span class="key">SPACE</span><span>boost</span>
+  </div>
+</div>
+
+<!-- START -->
+<div class="ov show" id="ovStart">
+  <div class="card">
+    <div class="eyebrow">DEEP RUN · ORBITAL DEFENSE</div>
+    <div class="title">METHO<span class="a">DUS</span></div>
+    <div class="by">A 3D ARCADE BY BRANDMETHOD</div>
+    <div class="blurb">Pilot a strike craft around the core station as raider fleets warp in to tear it down. Thrust and drift with real momentum, aim with the mouse, and hold the line. Vaporize raiders, bank their data, and level into a build that survives the swarm.</div>
+    <button class="btn" id="playBtn">LAUNCH</button>
+    <div class="ctrls">
+      <span><span class="key">W A S D</span> thrust</span>
+      <span><span class="key">MOUSE</span> aim and fire</span>
+      <span><span class="key">SHIFT</span> brake</span>
+      <span><span class="key">SPACE</span> boost</span>
+    </div>
+  </div>
+</div>
+
+<!-- LEVEL UP -->
+<div class="ov" id="ovLevel">
+  <div class="card">
+    <div class="eyebrow">SYSTEM UPGRADE · CHOOSE ONE</div>
+    <div class="title" style="font-size:30px">LEVEL <span class="a" id="lvlBig">2</span></div>
+    <div id="lvlChoices"></div>
+  </div>
+</div>
+
+<!-- GAME OVER -->
+<div class="ov" id="ovOver">
+  <div class="card">
+    <div class="eyebrow" id="overWhy">CORE BREACHED</div>
+    <div class="title">RUN <span class="a">ENDED</span></div>
+    <div class="stat-final" style="margin-top:22px">
+      <div><div class="k">SCORE</div><div class="v" id="finalScore">0</div></div>
+      <div><div class="k">WAVE</div><div class="v" id="finalWave">1</div></div>
+      <div><div class="k">BEST</div><div class="v" id="bestScore">0</div></div>
+    </div>
+    <button class="btn" id="againBtn">RUN IT AGAIN</button>
+  </div>
+</div>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+<script type="module" src="./main.js"></script>
+</body>
+</html>
