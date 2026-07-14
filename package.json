@@ -1,0 +1,14 @@
+{
+  "name": "brandmethod-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "BrandMethod website + ToyyibPay (sandbox) dev server",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "engines": {
+    "node": ">=20.12"
+  }
+}

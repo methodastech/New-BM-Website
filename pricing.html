@@ -11190,8 +11190,7 @@ body.services-overview-page{background:#ffffff}
     </div>
     <div class="bj2-traveller" id="bj2-traveller" style="--tc:#3B82F6;left:8.33%">
       <div class="bj2-traveller-bubble" id="bj2-traveller-bubble">You are here</div>
-      <div class="bj2-traveller-star" id="bj2-traveller-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0 C13 8 16 11 24 12 C16 13 13 16 12 24 C11 16 8 13 0 12 C8 11 11 8 12 0 Z"/></svg></div>
-    </div>
+          </div>
   </div>
 <!-- COLUMNS BOARD -->
   <div class="bj2-board">
@@ -14114,7 +14113,7 @@ body.services-overview-page{background:#ffffff}
         </div>
         <div class="pm-f-err" id="pmf-err">Please fill in your name and WhatsApp number.</div>
       </div>
-      <button class="pm-cta" id="pm-wa-cta" onclick="pmGo('wa')" type="button" style="display:flex;align-items:center;justify-content:center;gap:8px;width:100%;cursor:pointer">📱 Confirm order via WhatsApp →</button>
+      <button class="pm-cta" id="pm-wa-cta" onclick="pmPay()" type="button" style="display:flex;align-items:center;justify-content:center;gap:8px;width:100%;cursor:pointer">📱 Confirm order via WhatsApp →</button>
       <button class="pm-cta" id="pm-em-cta" onclick="pmGo('em')" type="button" style="display:flex;align-items:center;justify-content:center;gap:8px;width:100%;cursor:pointer;background:var(--bg3);color:var(--t1);border:1px solid var(--br);margin-top:10px">📧 Request invoice by email</button>
       <div class="pm-secure">🔒 A real person replies within 12 hours, any day of the week. Not a bot, not an auto-reply. Your project stays with a named lead from first message to delivery.</div>
     </div>
@@ -17427,6 +17426,8 @@ function openPayModal(price, btn) {
   document.getElementById('pm-overlay').classList.add('show');
   document.body.style.overflow = 'hidden';
   var nm = document.getElementById('pmf-name'); if (nm && !nm.value) setTimeout(function(){ nm.focus(); }, 120);
+  window._payTybPkg = (typeof pmResolveTybPkg==='function') ? pmResolveTybPkg(_paySvc) : '';
+  if (typeof pmSyncPayBtn==='function') pmSyncPayBtn(price);
 }
 function pmGo(channel) {
   function v(id){ var el=document.getElementById(id); return el ? el.value.trim() : ''; }
@@ -19044,5 +19045,43 @@ function startEngine(root){
 }
 if(document.readyState!=="loading")build();else document.addEventListener("DOMContentLoaded",build);
 })();</script>
+<script id="bm-toyyibpay">
+/* ── ToyyibPay online payment (via the backend, server.js) ─────────────────
+   Which packages pay online, mapped by their card TITLE -> package id.
+   The PRICE and the ToyyibPay secret key live on the SERVER — never in this page.
+   To enable more packages: add them here AND in the PACKAGES map in server.js.  */
+window.BM_PAY_PACKAGES = {
+  "Logo Starter": "logo_starter",
+  "Logo Growth":  "logo_growth"
+};
+function pmResolveTybPkg(svc){ return (window.BM_PAY_PACKAGES||{})[(svc||"").trim()] || ""; }
+/* label the modal's primary button: "Pay now" for online-payment packages */
+function pmSyncPayBtn(price){
+  var b=document.getElementById("pm-wa-cta"); if(!b) return;
+  b.innerHTML = window._payTybPkg ? ("💳 Pay now, "+(price||"")) : "📱 Confirm order via WhatsApp →";
+}
+/* primary button action: create a secure ToyyibPay bill on the server, then redirect.
+   Non-payment packages keep the existing WhatsApp lead flow. */
+function pmPay(){
+  var pkg = window._payTybPkg;
+  if(!pkg){ pmGo("wa"); return; }
+  function v(id){ var el=document.getElementById(id); return el?el.value.trim():""; }
+  var name=v("pmf-name"), phone=v("pmf-phone"), email=v("pmf-email");
+  var okEmail=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  var err=document.getElementById("pmf-err"), bad=false;
+  [["pmf-name",!name],["pmf-phone",!phone],["pmf-email",!okEmail]].forEach(function(x){ var el=document.getElementById(x[0]); if(el) el.classList.toggle("pmf-bad",x[1]); if(x[1]) bad=true; });
+  if(bad){ if(err){ err.textContent="Please fill in your name, WhatsApp number, and a valid email (needed for your payment receipt)."; err.classList.add("show"); } return; }
+  if(err) err.classList.remove("show");
+  var b=document.getElementById("pm-wa-cta"), old=b.innerHTML;
+  b.innerHTML="Creating secure payment…"; b.style.pointerEvents="none";
+  fetch("/api/toyyibpay/create-bill",{method:"POST",headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({pkg:pkg,name:name,phone:phone,email:email})})
+    .then(function(r){ return r.json(); })
+    .then(function(d){ if(d && d.url){ window.location.href=d.url; } else { throw new Error((d&&d.error)||"Payment error"); } })
+    .catch(function(ex){ b.innerHTML=old; b.style.pointerEvents="";
+      if(err){ err.textContent="Could not start payment — "+(ex&&ex.message||"try again")+"."; err.classList.add("show"); } });
+}
+</script>
+<style id="bm-hide-traveller-star">.bj2-traveller,.bj2-traveller-star,#bj2-traveller-star{display:none!important}.phv-eb .bmi,.section-tag .bmi,.ph-eyebrow .bmi{width:1em!important;height:1em!important;max-width:1em!important;max-height:1em!important;display:inline-block!important;vertical-align:-.12em!important}</style>
 </body>
 </html>
