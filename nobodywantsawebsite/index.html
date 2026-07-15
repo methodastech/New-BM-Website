@@ -76,7 +76,7 @@
 
 /* hero */
 /* light hero: blue galaxy starfield + spinning-ring world */
-#sales-overlay .sp-hero{position:relative;padding:78px 0 36px;overflow:visible;min-height:auto;display:flex;align-items:center;-webkit-user-select:none;user-select:none;background:transparent;}
+#sales-overlay .sp-hero{position:relative;padding:36px 0 36px;overflow:visible;min-height:auto;display:flex;align-items:center;-webkit-user-select:none;user-select:none;background:transparent;}
 #sales-overlay .sp3d{position:absolute;top:0;left:0;width:100%;display:block;z-index:1;}
 #sales-overlay .sp-stars-fade{display:none;}
 #sales-overlay .sp-hero-in{position:relative;z-index:3;width:100%;}
@@ -1004,16 +1004,20 @@
       #sales-overlay .sp-hero-in .sp-chips{justify-content:flex-start;flex-wrap:nowrap;}
       .hud{position:relative;width:100%;height:clamp(360px,46vw,600px);z-index:1;cursor:grab;-webkit-user-select:none;user-select:none;touch-action:pan-y;}
       .hud:active{cursor:grabbing;}
-      /* DESKTOP: visual column stretches to the text height so top + bottom align; morph fills, caption sits at the bottom */
+      /* DESKTOP: FULL-BLEED STAGE — the morph canvas covers the WHOLE hero. The scene renders offset over the right column; explosions and morph debris can fly across the entire section (passing BEHIND the text). */
       @media(min-width:881px){
-        #sales-overlay .sp-hero-in .hud-col{align-self:stretch;justify-content:space-between;}
-        #sales-overlay .sp-hero-in .sp-htext{align-self:stretch;display:flex;flex-direction:column;align-items:flex-start;}
-        #sales-overlay .sp-hero-in .sp-htext .sp-cta{margin-top:auto;}
+        #sales-overlay .sp-hero{position:relative;overflow:hidden;}
+        /* STRUCTURAL vertical layout (user): content cluster anchored to the TOP, the CTA button pushed to the BOTTOM so its centre rides the dot-caption line (caption centre = hero-in bottom - 74 - capH/2 = -116px) at ANY window size — replaces the old translateY pixel-hack that only held at one viewport */
+        #sales-overlay .sp-hero-in{display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;min-height:620px;position:relative;}
+        #sales-overlay .sp-hero-in>.sp-hero-kick,#sales-overlay .sp-hero-in>h1,#sales-overlay .sp-hero-in .sp-htext{position:relative;z-index:2;align-self:flex-start;}
+        #sales-overlay .sp-hero-in>h1{max-width:560px;margin:0 0 6px;}
+        #sales-overlay .sp-hero-in .sp-htext{display:flex;flex-direction:column;align-items:flex-start;flex:1 1 auto;}
         #sales-overlay .sp-hero-in .sp-htext .sp-hbul{margin-bottom:26px;}
-        #sales-overlay .sp-hero-in .hud-tl{margin-bottom:6px;}
-        /* justified banner: morph fills the top, caption sits on the CTA line at the bottom */
-        #sales-overlay .sp-hero-in .hud canvas{transform:translateY(30px);}
-        #sales-overlay .sp-hero-in .hud{flex:1 1 auto;height:auto;min-height:480px;}
+        #sales-overlay .sp-hero-in .sp-htext .sp-cta{margin-top:auto;margin-bottom:99px;}/* bottom-anchor so the button centre rides the caption's OPTICAL centre (density-weighted so descenders don't drag it down); 94->99 tiny lift (user). Both anchor to the hero bottom => holds across viewport heights. */
+        #sales-overlay .sp-hero-in .hud-col{position:absolute;top:0;bottom:0;left:calc(50% - 50vw);width:100vw;z-index:0;pointer-events:none;margin:0;}/* FULL-BLEED: the canvas breaks out of the content wrap to span the WHOLE banner edge-to-edge (user: the whole banner is the canvas). .sp-hero is overflow:hidden so the 100vw never scrolls. */
+        #sales-overlay .sp-hero-in .hud-col .hud{pointer-events:auto;width:100%;height:100%;min-height:0;margin:0;flex:1 1 auto;}
+        #sales-overlay .sp-hero-in .hud canvas{transform:none;}
+        #sales-overlay .sp-hero-in .hud-col .hud-tl{position:absolute;left:calc(max(0px,(100vw - 1240px)/2) + min(100vw,1240px)*0.44);right:max(0px,(100vw - 1240px)/2);width:auto;bottom:74px;z-index:2;pointer-events:none;margin:0;}/* anchor the caption to the CONTENT WRAP (max-width 1240), not the full-bleed 100vw canvas — otherwise left:44% lands ~44px right of where the scenes render (user: font must be centred with the visual) */
       }
       /* MOBILE: top-down centered stack */
       @media(max-width:880px){
@@ -1032,9 +1036,11 @@
       /* MOBILE: unboxed SHARP morph in its own slot BETWEEN the title and the description; bleeds edge-to-edge, no frame */
       @media(max-width:880px){
         #sales-overlay .sp-hero{position:relative;overflow:hidden;}
-        #sales-overlay .sp-hero-in .hud-col{position:relative;z-index:0;pointer-events:none;margin:-26px -24px -14px;}
-        #sales-overlay .sp-hero-in .hud-col .hud{width:100%;height:330px;opacity:1;}
-        #sales-overlay .sp-hero-in .hud-col .hud-tl{display:none;}
+        #sales-overlay .sp-hero-in .hud-col{position:relative;z-index:0;pointer-events:none;margin:-26px -24px -72px;}/* bottom -14 -> -72: pulls the DESCRIPTION tight up under the caption — closes the mobile gaps (user, twice) */
+        #sales-overlay .sp-hero-in .hud-col .hud{width:100%;height:415px;opacity:1;}/* taller mobile stage — the diagrams get more vertical space to fill (user) */
+        /* mobile: the dot-caption lives INSIDE the animation — overlaid at the base of the morph canvas, part of the visual (not a separate info block) */
+        #sales-overlay .sp-hero-in .hud-col .hud-tl{display:block;position:absolute;left:0;right:0;bottom:46px;z-index:2;pointer-events:none;margin:0;}/* bottom 12 -> 46: lifts the blue dot-caption closer to the visual — closes the mobile gaps (user) */
+        #sales-overlay .sp-marq{margin-top:30px;}
         #sales-overlay .sp-hero-in>.sp-hero-kick,#sales-overlay .sp-hero-in>h1,#sales-overlay .sp-hero-in>.sp-htext{position:relative;z-index:2;}
         #sales-overlay .sp-hero .sp-cross,#sales-overlay .sp-hero-in .hud-cnr,#sales-overlay .sp-hero-in .hud-tabs{display:none;}
       }
@@ -1067,12 +1073,11 @@
       .hud-tab.on{background:#2536f5;color:#fff;border-color:#2536f5;}
       .fw-ov{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .5s;}
       .hud.show-fw .fw-ov{opacity:1;}
-      .fw-lab{position:absolute;transform:translate(-50%,-50%);font-family:"JetBrains Mono",monospace;font-size:10px;line-height:1.2;letter-spacing:.02em;color:#3b49b8;background:rgba(255,255,255,.74);border:1px solid rgba(37,54,245,.25);border-radius:7px;padding:4px 8px;white-space:nowrap;transition:color .25s,background .25s,border-color .25s;}
-      .fw-lab.on{color:#fff;background:#2536f5;border-color:#2536f5;font-weight:600;}
-      .fw-mom{position:absolute;top:4px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:8px;font-family:"JetBrains Mono",monospace;font-size:10px;color:#5161d9;white-space:nowrap;}
-      .fw-mom-bar{width:120px;height:5px;border-radius:3px;background:rgba(37,54,245,.14);overflow:hidden;}
-      .fw-mom-fill{height:100%;width:10%;background:#2536f5;border-radius:3px;transition:width .3s;}
-      .fw-mom-x{color:#16224e;font-weight:600;}
+      .fw-lab{position:absolute;left:50%;top:20%;transform:translate(-50%,-50%) scale(.7);line-height:0;pointer-events:none;white-space:nowrap;opacity:0;will-change:transform,opacity,top;}
+      .fn-ov{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .5s;}
+      .hud.show-fn .fn-ov{opacity:1;}
+      .fn-lab{position:absolute;transform:translate(-50%,-50%) scale(.7);opacity:0;line-height:0;pointer-events:none;white-space:nowrap;transition:opacity .35s,transform .35s;}
+      .fn-lab.on{opacity:1;transform:translate(-50%,-50%) scale(1);}
       </style>
       <span class="sp-cross tl"></span><span class="sp-cross tr"></span><span class="sp-cross bl"></span><span class="sp-cross br"></span>
       <canvas id="heroField" class="hero-field" aria-hidden="true"></canvas>
@@ -1085,6 +1090,8 @@
             <canvas class="hud-cv" id="hudCv" aria-hidden="true"></canvas>
             <div class="hud-grid"></div>
             <div class="hud-scan"></div>
+            <div class="fn-ov" aria-hidden="true"><span class="fn-lab" id="fnL0" data-text="+ Conversions"></span><span class="fn-lab" id="fnL1" data-text="+ Reputation"></span><span class="fn-lab" id="fnL2" data-text="+ Awareness"></span></div>
+            <div class="fw-ov" aria-hidden="true"><span class="fw-lab" id="fwPop" data-text=""></span></div>
           </div>
           <div class="hud-tl"><canvas id="hudCapCv" class="hud-cap-cv" aria-hidden="true"></canvas><span class="hud-stage sr-only" id="hudStage">A website people actually use</span><span class="hud-desc sr-only" id="hudDesc"></span></div>
         </div>
@@ -1186,7 +1193,8 @@
           if(Math.max(o.measureText(l1).width,o.measureText(l2).width)<=W*0.95 || fs<=Math.round(17*DPR)){ lines=[l1,l2]; break; }
           fs-=2; fit(fs); }
       }
-      var lh=Math.round(fs*1.18), y0=Math.round(H/2-((lines.length-1)*lh)/2+fs*0.35);
+      o.textBaseline='middle';
+      var lh=Math.round(fs*1.18), y0=Math.round(H/2-((lines.length-1)*lh)/2);
       for(var li=0;li<lines.length;li++){ o.fillText(lines[li],cx,y0+li*lh); }
     } else {
       var ts=Math.round(43*DPR); o.font='700 '+ts+'px Inter, system-ui, -apple-system, sans-serif';
@@ -1208,17 +1216,17 @@
     var pts=sample(title,desc); var n=pts.length; if(!n) return;
     for(var i=pts.length-1;i>0;i--){ var j=(Math.random()*(i+1))|0,tmp=pts[i];pts[i]=pts[j];pts[j]=tmp; }
     for(var k=0;k<n;k++){
-      if(k<dots.length){ dots[k].tx=pts[k][0]; dots[k].ty=pts[k][1]; dots[k].dead=false; if(first){dots[k].x=dots[k].tx;dots[k].y=dots[k].ty;} }
-      else dots.push({x:first?pts[k][0]:(W/2+(Math.random()-0.5)*W),y:first?pts[k][1]:(H*0.5+(Math.random()-0.5)*H),tx:pts[k][0],ty:pts[k][1],ph:Math.random()*6.2832,sp:0.0008+Math.random()*0.0012,dead:false});
+      if(k<dots.length){ dots[k].tx=pts[k][0]; dots[k].ty=pts[k][1]; dots[k].dead=false; if(first){dots[k].x=dots[k].tx;dots[k].y=dots[k].ty;} else if(Math.random()<0.85){dots[k].x=dots[k].tx+(Math.random()-0.5)*W*0.3;dots[k].y=H+Math.random()*H*0.55;} }
+      else dots.push({x:first?pts[k][0]:(pts[k][0]+(Math.random()-0.5)*W*0.3),y:first?pts[k][1]:(H+Math.random()*H*0.55),tx:pts[k][0],ty:pts[k][1],ph:Math.random()*6.2832,sp:0.0008+Math.random()*0.0012,dead:false});
     }
-    for(var m=n;m<dots.length;m++){ dots[m].dead=true; dots[m].ty=H+30*DPR; dots[m].tx=Math.random()*W; }
+    for(var m=n;m<dots.length;m++){ dots[m].dead=true; dots[m].ty=H+30*DPR; dots[m].tx=dots[m].x; }
     if(dots.length>n*1.5) dots.length=Math.round(n*1.12);
     first=false;
   }
   function draw(){
     ctx.clearRect(0,0,W,H);
     for(var i=0;i<dots.length;i++){ var d=dots[i];
-      if(reduce){ d.x=d.tx; d.y=d.ty; } else { d.x+=(d.tx-d.x)*0.17; d.y+=(d.ty-d.y)*0.17; }
+      if(reduce){ d.x=d.tx; d.y=d.ty; } else { d.x+=(d.tx-d.x)*0.088; d.y+=(d.ty-d.y)*0.088; }
       if(d.dead && Math.abs(d.y-d.ty)<3) continue;
       var tw=0.7+0.3*Math.sin(t*d.sp+d.ph);
       ctx.beginPath(); ctx.fillStyle='rgba(37,54,245,'+(0.92*tw).toFixed(3)+')'; ctx.arc(d.x,d.y,1.5*DPR,0,6.2832); ctx.fill();
@@ -1292,7 +1300,9 @@
   var tlEl=document.querySelector('.hud-tl');
   var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
   var URLS=['./assets/three.module.min.js','https://cdn.jsdelivr.net/npm/three@0.184.0/build/three.module.min.js','https://unpkg.com/three@0.184.0/build/three.module.min.js','https://esm.sh/three@0.184.0'];
-  var N=6000;
+  var N=7500;/* denser cloud = super-detailed scenes */
+  var __fadeArr=new Float32Array(N),__fadeAttr=null,__fadeDirty=false;for(var __fi=0;__fi<N;__fi++)__fadeArr[__fi]=1;/* per-vertex alpha (app feed scroll fades WITHOUT the perspective drift a z-push causes) */
+  function __fadeReset(){for(var i=0;i<N;i++)__fadeArr[i]=1;if(__fadeAttr)__fadeAttr.needsUpdate=true;__fadeDirty=false;}
   function mkArr(){return new Float32Array(N*3);}
   function ease(x){x=x<0?0:x>1?1:x;return x*x*(3-2*x);}
   function fRect(b,k,n,x0,x1,y0,y1){var s=k;for(var j=0;j<n;j++){var o=k*3;b[o]=x0+Math.random()*(x1-x0);b[o+1]=y0+Math.random()*(y1-y0);b[o+2]=(Math.random()-0.5)*0.05;k++;}return {s:s,n:n,k:k};}
@@ -1306,181 +1316,586 @@
     r=fRect(b,k,Math.round(N*0.04),-SX+0.1,SX-0.1,SY-0.26,SY-0.08);k=r.k;
     r=fEdge(b,k,Math.round(N*0.05),hx0,hx1,hy0,hy1);k=r.k;
     r=fRect(b,k,Math.round(N*0.05),hcx-0.5,hcx+0.5,hy0+0.02,hy0+0.2);k=r.k;
-    r=fDisc(b,k,Math.round(N*0.008),hcx-0.14,hcy+0.18,0.045);k=r.k;
-    r=fDisc(b,k,Math.round(N*0.008),hcx+0.14,hcy+0.18,0.045);k=r.k;
-    var mN=Math.round(N*0.025),mS=k,mXn=new Float32Array(mN),mSg=new Float32Array(mN);for(var j=0;j<mN;j++){var o=k*3,xn=Math.random()*2-1,sg=Math.random()<0.5?1:-1;mXn[j]=xn;mSg[j]=sg;b[o]=hcx+xn*0.15;b[o+1]=hcy-0.07;b[o+2]=0.02;k++;}
+    /* no face — head only (built below) */
     var NB=16,wN=Math.round(N*0.05),wS=k,wCol=new Float32Array(wN),wF=new Float32Array(wN),wfX0=hx0+0.18,wfStep=(hx1-hx0-0.36)/(NB-1),wfY=hy0+0.06;for(var j2=0;j2<wN;j2++){var o=k*3,col=(Math.random()*NB)|0,f=Math.random();wCol[j2]=col;wF[j2]=f;b[o]=wfX0+col*wfStep;b[o+1]=wfY+f*0.1;b[o+2]=0.03;k++;}
     var phN=Math.round(N*0.02),phS=k,phY=new Float32Array(phN);for(var j3=0;j3<phN;j3++){var o=k*3,yy=hy0+Math.random()*(hy1-hy0);phY[j3]=yy;b[o]=hx0;b[o+1]=yy;b[o+2]=0.06;k++;}
-    r=fRect(b,k,Math.round(N*0.045),-SX+0.18,0.6,-0.22,-0.13);k=r.k;
-    r=fRect(b,k,Math.round(N*0.04),-SX+0.18,0.1,-0.42,-0.33);k=r.k;
-    r=fRect(b,k,Math.round(N*0.07),0.2,SX-0.18,-1.05,-0.22);k=r.k;
+    r=fRect(b,k,Math.round(N*0.045),-SX+0.18,-0.05,-0.22,-0.13);k=r.k;
+    r=fRect(b,k,Math.round(N*0.04),-SX+0.18,-0.35,-0.42,-0.33);k=r.k;
+    r=fRect(b,k,Math.round(N*0.07),0.35,SX-0.18,-1.05,-0.22);k=r.k;
     var btn=fRect(b,k,Math.round(N*0.075),-SX+0.18,-0.65,-1.0,-0.66);k=btn.k;
     var cN=Math.round(N*0.03),cS=k,cox=1.45,coy=-1.12;for(var j4=0;j4<cN;j4++){var o=k*3;b[o]=cox+(Math.random()-0.5)*0.1;b[o+1]=coy+(Math.random()-0.5)*0.14;b[o+2]=0.12;k++;}
     var coff=new Float32Array(cN*2);for(var c=0;c<cN;c++){coff[c*2]=b[(cS+c)*3]-cox;coff[c*2+1]=b[(cS+c)*3+1]-coy;}
-    var hdS=k,hdN=N-k;for(;k<N;k++){var o=k*3,a=Math.random()*6.2832,rr=Math.sqrt(Math.random())*0.37;b[o]=hcx+Math.cos(a)*rr;b[o+1]=hcy+0.12+Math.sin(a)*rr;b[o+2]=(Math.random()-0.5)*0.05;}
+    var hdS=k,hdN=Math.round(N*0.15);for(var jh=0;jh<hdN;jh++){var o=k*3,a=Math.random()*6.2832,rr=Math.sqrt(Math.random())*0.43;b[o]=hcx+Math.cos(a)*rr;b[o+1]=hcy+0.03+Math.sin(a)*rr;b[o+2]=(Math.random()-0.5)*0.05;k++;}
+    for(;k<N;k++){var o=k*3;b[o]=0.35+Math.random()*(SX-0.53);b[o+1]=-1.05+Math.random()*0.83;b[o+2]=(Math.random()-0.5)*0.05;}
     var bcx=((-SX+0.18)+(-0.65))/2,bcy=((-1.0)+(-0.66))/2,st={pt:0};
-    function anim(p,dt){st.pt=(st.pt+dt)%2600;var pt=st.pt;
-      var open=0.02+0.06*Math.max(0,Math.sin(pt*0.011))*(0.55+0.45*Math.sin(pt*0.028));
-      for(var j=0;j<mN;j++){var o=(mS+j)*3;p[o]=hcx+mXn[j]*0.15;p[o+1]=(hcy-0.07)+mSg[j]*open*(1-mXn[j]*mXn[j]);p[o+2]=0.03;}
+    /* cursor moves ONCE from its rest spot to the button, clicks, then glides back to rest by hold-end. No teleport-restart loop, and hold-end==base so the morph stays clean. */
+    function curPos(pt){if(pt<1300){var m=ease(pt/1300);return [cox+(bcx-cox)*m,coy+(bcy-coy)*m];}if(pt<2350)return [bcx,bcy];var m2=ease(Math.min(1,(pt-2350)/820));return [bcx+(cox-bcx)*m2,bcy+(coy-bcy)*m2];}
+    function anim(p,dt){st.pt+=dt;var pt=st.pt;
       var bob=Math.sin(pt*0.004)*0.016;for(var hh=0;hh<hdN;hh++)p[(hdS+hh)*3+1]+=bob;
       for(var j2=0;j2<wN;j2++){var col=wCol[j2],ch=0.03+0.17*Math.abs(Math.sin(pt*0.006+col*0.8)),o2=(wS+j2)*3;p[o2]=wfX0+col*wfStep;p[o2+1]=wfY+wF[j2]*ch;p[o2+2]=0.03;}
       var sw=(pt%2200)/2200,phx=hx0+(hx1-hx0)*sw;for(var j3=0;j3<phN;j3++){var o3=(phS+j3)*3;p[o3]=phx;p[o3+1]=phY[j3];p[o3+2]=0.07;}
-      var mv=Math.min(1,pt/1450),em=mv*mv*(3-2*mv),cx=cox+(bcx-cox)*em,cy=coy+(bcy-coy)*em;
+      var cp2=curPos(pt),cx=cp2[0],cy=cp2[1];
       for(var c=0;c<cN;c++){var o4=(cS+c)*3;p[o4]=cx+coff[c*2];p[o4+1]=cy+coff[c*2+1];p[o4+2]=0.14;}
-      if(pt>1450&&pt<1800){var pf=Math.sin((pt-1450)/350*Math.PI)*0.06;for(var i=0;i<btn.n;i++){var w=(btn.s+i)*3;p[w]+=(p[w]-bcx)*pf*2;p[w+1]+=(p[w+1]-bcy)*pf*2;}}}
+      if(pt>1300&&pt<1650){var pf=Math.sin((pt-1300)/350*Math.PI)*0.06;for(var i=0;i<btn.n;i++){var w=(btn.s+i)*3;p[w]+=(p[w]-bcx)*pf*2;p[w+1]+=(p[w+1]-bcy)*pf*2;}}}
     return {name:'A website people actually use',desc:'',base:b,flat:true,anim:anim,reset:function(){st.pt=0;}};}
-  function buildApp(){var b=mkArr(),k=0,SX=0.86,SY=1.74,r;
-    r=fEdge(b,k,Math.round(N*0.20),-SX,SX,-SY,SY);k=r.k;
-    r=fRect(b,k,Math.round(N*0.03),-0.17,0.17,SY-0.12,SY-0.04);k=r.k;
-    r=fRect(b,k,Math.round(N*0.04),-SX+0.14,SX-0.14,SY-0.4,SY-0.3);k=r.k;
-    r=fRect(b,k,Math.round(N*0.05),-SX+0.26,SX-0.26,-SY+0.14,-SY+0.24);k=r.k;
-    var fingerN=Math.round(N*0.08),cS=k,cC=N-k-fingerN;
-    var home=new Float32Array(cC*3),health=new Float32Array(cC*3);
-    (function(){var cols=3,rows=4,gx0=-SX+0.26,gx1=SX-0.26,gy0=-SY+0.62,gy1=SY-0.7,per=Math.floor(cC/(cols*rows)),idx=0;
-      for(var rr=0;rr<rows;rr++){for(var cc=0;cc<cols;cc++){var cx=gx0+(gx1-gx0)*(cc/(cols-1)),cy=gy0+(gy1-gy0)*(rr/(rows-1));for(var jj=0;jj<per&&idx<cC;jj++){home[idx*3]=cx+(Math.random()-0.5)*0.15;home[idx*3+1]=cy+(Math.random()-0.5)*0.15;home[idx*3+2]=(Math.random()-0.5)*0.04;idx++;}}}
-      while(idx<cC){home[idx*3]=(Math.random()-0.5)*1.6;home[idx*3+1]=(Math.random()-0.5)*1.6;home[idx*3+2]=0;idx++;}})();
-    var chartCount=Math.round(cC*0.46),chartX=new Float32Array(chartCount);
-    (function(){var idx=0;for(;idx<chartCount;idx++){var x=-SX+0.24+(2*SX-0.48)*(idx/(chartCount-1));chartX[idx]=x;health[idx*3]=x;health[idx*3+1]=0.2;health[idx*3+2]=0;}
-      var hN=Math.round(cC*0.14);for(var jj=0;jj<hN&&idx<cC;jj++){health[idx*3]=-SX+0.22+Math.random()*(2*SX-0.44);health[idx*3+1]=SY-0.7+Math.random()*0.24;health[idx*3+2]=0;idx++;}
-      for(;idx<cC;idx++){var cx=(Math.random()<0.5?-1:1)*SX*0.48;health[idx*3]=cx+(Math.random()-0.5)*0.62;health[idx*3+1]=-0.7+(Math.random()-0.5)*0.62;health[idx*3+2]=0;}})();
-    for(var c=0;c<cC;c++){var o=(cS+c)*3;b[o]=home[c*3];b[o+1]=home[c*3+1];b[o+2]=home[c*3+2];}
-    k=cS+cC;var fS=k,fC=N-k,fox=0.58,foy=-1.45;for(;k<N;k++){var o2=k*3;b[o2]=fox+(Math.random()-0.5)*0.12;b[o2+1]=foy+(Math.random()-0.5)*0.18;b[o2+2]=0.12;}
-    var foff=new Float32Array(fC*2);for(var c2=0;c2<fC;c2++){foff[c2*2]=b[(fS+c2)*3]-fox;foff[c2*2+1]=b[(fS+c2)*3+1]-foy;}
-    var icx=0,icy=(-SY+0.62)+((SY-0.7)-(-SY+0.62))*(1/3),st={lt:0};
-    function reset(){st.lt=0;}
-    function anim(p,dt){st.lt+=dt;var pt=st.lt,bh=pt<600?0:pt<1000?ease((pt-600)/400):1;
-      for(var c=0;c<cC;c++){var o=(cS+c)*3;p[o]=home[c*3]+(health[c*3]-home[c*3])*bh;p[o+1]=home[c*3+1]+(health[c*3+1]-home[c*3+1])*bh;p[o+2]=home[c*3+2]+(health[c*3+2]-home[c*3+2])*bh;}
-      if(bh>0.05){var amp=0.18*bh;for(var ci=0;ci<chartCount;ci++){var o3=(cS+ci)*3;p[o3+1]+=Math.sin(chartX[ci]*4.5-pt*0.012)*amp;}}
-      var fcx,fcy;if(pt<600){var m=ease(Math.min(1,pt/520));fcx=fox+(icx-fox)*m;fcy=foy+(icy-foy)*m;}else{var m2=ease(Math.min(1,(pt-600)/450));fcx=icx+(fox-icx)*m2;fcy=icy+(foy-icy)*m2;}
-      for(var fi=0;fi<fC;fi++){var o4=(fS+fi)*3;p[o4]=fcx+foff[fi*2];p[o4+1]=fcy+foff[fi*2+1];p[o4+2]=0.16;}}
-    return {name:'An app people open daily',desc:'',base:b,flat:true,anim:anim,reset:reset};}
+  function buildApp(){var b=mkArr(),k=0,SX=0.86,SY=1.74,r,j,o;
+    /* STORY: home icon grid -> a finger rises and TAPS an icon -> the app OPENS (header/avatar/badge/stat/chart/feed, feed scrolls) -> eases back to the grid at the end. base == hold-start == hold-end so both morphs stay clean. */
+    r=fEdge(b,k,Math.round(N*0.14),-SX,SX,-SY,SY);k=r.k;
+    r=fRect(b,k,Math.round(N*0.016),-0.13,0.13,SY-0.11,SY-0.05);k=r.k;
+    var tabY=-SY+0.2,tabX=[-0.5,-0.17,0.17,0.5],tS=k,tN=Math.round(N*0.06),tOff=new Float32Array(tN*2),tBi=new Uint8Array(tN);
+    for(j=0;j<tN;j++){var bi=j%4,aT=Math.random()*6.2832,rT=Math.sqrt(Math.random())*0.075;tBi[j]=bi;tOff[j*2]=Math.cos(aT)*rT;tOff[j*2+1]=Math.sin(aT)*rT;o=k*3;b[o]=tabX[bi]+tOff[j*2];b[o+1]=tabY+tOff[j*2+1];b[o+2]=0.03;k++;}
+    var fbx=0.42,fby=-SY-0.2,fgN=Math.round(N*0.05),fgS=k,fgOx=new Float32Array(fgN),fgOy=new Float32Array(fgN);
+    for(j=0;j<fgN;j++){var a2=Math.random()*6.2832,r2=Math.sqrt(Math.random());fgOx[j]=Math.cos(a2)*r2*0.105;fgOy[j]=Math.sin(a2)*r2*0.105;o=k*3;b[o]=fbx+fgOx[j];b[o+1]=fby+fgOy[j];b[o+2]=-5.7;k++;}
+    var cS=k,cC=N-k,hxA=new Float32Array(cC),hyA=new Float32Array(cC),axA=new Float32Array(cC),ayA=new Float32Array(cC),parA=new Float32Array(cC),typA=new Uint8Array(cC),tapIc=new Uint8Array(cC);
+    var gxs=[-0.55,0,0.55],gys=[1.00,0.35,-0.30,-0.95],B0=-1.30,BH=1.32,fx0=-0.66,fcw=1.32;/* feed runs DOWN to just above the tab dots (user: fill the empty space near the bottom) */
+    for(var c=0;c<cC;c++){var ic=(Math.random()*12)|0;
+      hxA[c]=gxs[ic%3]+(Math.random()-0.5)*0.30;hyA[c]=gys[(ic/3)|0]+(Math.random()-0.5)*0.30;
+      tapIc[c]=(ic===4)?1:0;/* the centre icon — the one the finger taps */
+      var u=Math.random();
+      if(u<0.08){typA[c]=0;axA[c]=-0.66+Math.random()*0.78;ayA[c]=1.32+Math.random()*0.10;}
+      else if(u<0.12){typA[c]=0;var aa=Math.random()*6.2832,ra=Math.sqrt(Math.random())*0.075;axA[c]=0.56+Math.cos(aa)*ra;ayA[c]=1.37+Math.sin(aa)*ra;}
+      else if(u<0.17){typA[c]=3;var ab=Math.random()*6.2832,rb=Math.sqrt(Math.random())*0.05;axA[c]=Math.cos(ab)*rb;ayA[c]=Math.sin(ab)*rb;}
+      else if(u<0.30){typA[c]=0;axA[c]=-0.66+Math.random()*0.66;ayA[c]=0.78+Math.random()*0.28;}
+      else if(u<0.42){typA[c]=1;parA[c]=Math.random();axA[c]=fx0+parA[c]*fcw;ayA[c]=Math.random();}
+      else if(u<0.56){typA[c]=4;parA[c]=Math.random();axA[c]=fx0+parA[c]*fcw;ayA[c]=Math.random();}
+      else{typA[c]=2;var rw=(Math.random()*7)|0;parA[c]=(rw+0.5)/7*BH+(Math.random()-0.5)*0.012;var rr5=Math.random();
+        if(rr5<0.26){var af=Math.random()*6.2832,rf=Math.sqrt(Math.random())*0.055;axA[c]=fx0+0.11+Math.cos(af)*rf;ayA[c]=Math.sin(af)*rf;}/* avatar */
+        else if(rr5<0.68){axA[c]=fx0+0.29+Math.random()*(fcw-0.42);ayA[c]=0.038+(Math.random()-0.5)*0.02;}/* top line */
+        else{axA[c]=fx0+0.29+Math.random()*(fcw-0.6);ayA[c]=-0.04+(Math.random()-0.5)*0.02;}/* bottom line, shorter */}
+      o=k*3;b[o]=hxA[c];b[o+1]=hyA[c];b[o+2]=(Math.random()-0.5)*0.04;k++;}
+    function CYa(t,tm){return 0.16+t*0.34+0.05*Math.sin(t*5.2+tm);}
+    /* finger: rises, TAPS an icon to open, then STAYS on the phone and swipe-scrolls (up-drags synced with the feed) — it never leaves; reads as a hand using the app. */
+    function fingerPos(t){var hx2=0.03,hy2=0.47,tx=0.0,ty=0.35;/* tap lands dead-centre on the icon */
+      if(t<500)return [fbx,fby];
+      if(t<1150){var m=ease((t-500)/650);return [fbx+(hx2-fbx)*m,fby+(hy2-fby)*m];}
+      if(t<1250){var m=ease((t-1150)/100);return [hx2+(tx-hx2)*m,hy2+(ty-hy2)*m];}   /* down onto the icon */
+      if(t<1380)return [tx,ty];                                                      /* DWELL dead-centre while it presses */
+      if(t<1450){var m=1-ease((t-1380)/70);return [hx2+(tx-hx2)*m,hy2+(ty-hy2)*m];}  /* lift off */
+      if(t<1900){var m=ease((t-1450)/450);return [hx2+(0.06-hx2)*m,hy2+(-0.42-hy2)*m];}
+      var cyc=((t-1900)%1400)/1400,yy=cyc<0.5?(-0.42+ease(cyc/0.5)*0.78):(0.36-ease((cyc-0.5)/0.5)*0.78);return [0.06,yy];}
+    function fingerVis(t){if(t<450)return 0;if(t<650)return ease((t-450)/200);if(t<1900)return 1;var cyc=((t-1900)%1400)/1400;if(cyc<0.5)return 1;if(cyc<0.63)return 1-ease((cyc-0.5)/0.13);if(cyc<0.85)return 0;return ease((cyc-0.85)/0.15);}
+    var st={t:0};
+    function anim(p,dt){st.t+=dt;var T=st.t,tm=T*0.0015;
+      var bh=(T<1400)?0:(T<2150)?ease((T-1400)/750):1;
+      var bp=1+0.28*Math.sin(T*0.005)*bh;
+      /* feed scroll is DRIVEN BY the finger swipe — the screen wipes with each up-drag (user: "make the swipe wipe with the moving screen") */
+      var swT2=Math.max(0,T-1900),nSw=Math.floor(swT2/1400),scyc=(swT2%1400)/1400,SWS=0.52,so=(scyc<0.5)?(nSw*SWS+ease(scyc/0.5)*SWS):((nSw+1)*SWS);
+      /* the tapped icon PRESSES under the finger: squash ramps as the finger lands, HOLDS while it
+         dwells dead-centre, and releases as it lifts — perfectly in sync with fingerPos */
+      var press=(T<=1150||T>=1450)?0:(T<1250?ease((T-1150)/100):(T<1380?1:1-ease((T-1380)/70))),ps=1-0.26*press;
+      for(var c=0;c<cC;c++){var ty2=typA[c],ax,ay,o2=(cS+c)*3;
+        var hx3=hxA[c],hy3=hyA[c];
+        if(press>0&&tapIc[c]){hx3=hx3*ps;hy3=0.35+(hy3-0.35)*ps;}
+        if(ty2===0){ax=axA[c];ay=ayA[c];}
+        else if(ty2===1){ax=axA[c]+ayA[c]*0.12;ay=CYa(parA[c],tm)+ayA[c]*0.09;}
+        else if(ty2===4){ax=axA[c];ay=0.06+(CYa(parA[c],tm)-0.06)*ayA[c];}
+        else if(ty2===3){ax=0.52+axA[c]*bp;ay=0.94+ayA[c]*bp;}
+        else{var dyd=(parA[c]+so)%BH;ax=axA[c];ay=B0+dyd+ayA[c];var vis=Math.min(dyd,BH-dyd)/0.12;if(vis>1)vis=1;if(vis<0)vis=0;__fadeArr[cS+c]=1-bh*(1-vis);}
+        p[o2]=hx3+(ax-hx3)*bh;p[o2+1]=hy3+(ay-hy3)*bh;}
+      __fadeDirty=true;__fadeAttr.needsUpdate=true;
+      var fp=fingerPos(T),fv=fingerVis(T),fz=0.3-(1-fv)*6;for(j=0;j<fgN;j++){o=(fgS+j)*3;p[o]=fp[0]+fgOx[j];p[o+1]=fp[1]+fgOy[j];p[o+2]=fz;}
+      var tp2=1+0.13*Math.sin(T*0.004)*bh;for(j=0;j<tN;j++){var bi2=tBi[j],sc=(bi2===0?tp2:1);o=(tS+j)*3;p[o]=tabX[bi2]+tOff[j*2]*sc;p[o+1]=tabY+tOff[j*2+1]*sc;}}
+    return {name:'An app people open daily',desc:'',base:b,flat:true,anim:anim,reset:function(){st.t=0;}};}
   function buildPong(){var b=mkArr(),k=0,SX=2.7,SY=1.55,r;
     r=fEdge(b,k,Math.round(N*0.16),-SX,SX,-SY,SY);k=r.k;
     r=fRect(b,k,Math.round(N*0.05),-0.03,0.03,-SY+0.1,SY-0.1);k=r.k;
-    var lp=fRect(b,k,Math.round(N*0.14),-SX+0.08,-SX+0.2,-0.34,0.34);k=lp.k;
-    var rpd=fRect(b,k,Math.round(N*0.14),SX-0.2,SX-0.08,-0.34,0.34);k=rpd.k;
-    var ball=fRect(b,k,N-k,-0.08,0.08,-0.08,0.08);k=ball.k;
-    var st={x:0,y:0,vx:2.7,vy:1.6,pl:0,pr:0};
-    function reset(){st.x=0;st.y=0;st.vx=2.7*(Math.random()<0.5?1:-1);st.vy=(Math.random()*2.6-1.3);st.pl=0;st.pr=0;}
-    function anim(p,dt){var s=Math.min(0.04,dt/1000);st.x+=st.vx*s;st.y+=st.vy*s;
-      if(st.y>SY-0.14){st.y=SY-0.14;st.vy=-Math.abs(st.vy);}else if(st.y<-(SY-0.14)){st.y=-(SY-0.14);st.vy=Math.abs(st.vy);}
-      var ty=Math.max(-(SY-0.4),Math.min(SY-0.4,st.y));st.pl+=(ty-st.pl)*0.22;st.pr+=(ty-st.pr)*0.16;
-      if(st.x<-SX+0.26&&st.vx<0&&Math.abs(st.y-st.pl)<0.44){st.vx=Math.abs(st.vx);st.vy+=(st.y-st.pl)*0.9;}
-      if(st.x>SX-0.26&&st.vx>0&&Math.abs(st.y-st.pr)<0.44){st.vx=-Math.abs(st.vx);st.vy+=(st.y-st.pr)*0.9;}
-      if(st.x<-SX-0.2||st.x>SX+0.2)reset();
-      if(st.vy>2.6)st.vy=2.6;if(st.vy<-2.6)st.vy=-2.6;
-      for(var i=0;i<lp.n;i++)p[(lp.s+i)*3+1]+=st.pl;
-      for(var i2=0;i2<rpd.n;i2++)p[(rpd.s+i2)*3+1]+=st.pr;
-      for(var i3=0;i3<ball.n;i3++){var o=(ball.s+i3)*3;p[o]+=st.x;p[o+1]+=st.y;}}
+    var lp=fRect(b,k,Math.round(N*0.13),-SX+0.08,-SX+0.2,-0.34,0.34);k=lp.k;
+    var rpd=fRect(b,k,Math.round(N*0.13),SX-0.2,SX-0.08,-0.34,0.34);k=rpd.k;
+    var bTot=N-k,ballN=Math.round(bTot*0.55),ball=fRect(b,k,ballN,-0.08,0.08,-0.08,0.08);k=ball.k;
+    /* one ONE bomb: dots parked camouflaged on the left paddle, then gather + fly + burst when it gets thrown */
+    var bmS=k,bmN=N-k,pHx=new Float32Array(bmN),pHy=new Float32Array(bmN),bmDx=new Float32Array(bmN),bmDy=new Float32Array(bmN),brC=new Float32Array(bmN),brS=new Float32Array(bmN),brR=new Float32Array(bmN);
+    for(var jb=0;jb<bmN;jb++){var ob=k*3,ab=Math.random()*6.2832,rb=Math.sqrt(Math.random());
+      pHx[jb]=(Math.random()-0.5)*0.13;pHy[jb]=(Math.random()-0.5)*0.64;
+      if(jb<bmN*0.86){bmDx[jb]=Math.cos(ab)*rb*0.17;bmDy[jb]=Math.sin(ab)*rb*0.17;}else{bmDx[jb]=(Math.random()-0.5)*0.03;bmDy[jb]=0.17+Math.random()*0.13;}
+      var ba=Math.random()*6.2832;brC[jb]=Math.cos(ba);brS[jb]=Math.sin(ba);brR[jb]=0.5+Math.random()*1.6;
+      b[ob]=-SX+0.15+pHx[jb];b[ob+1]=pHy[jb];b[ob+2]=0.05;k++;}
+    /* per-dot burst vector for the WHOLE board (radial + z pop) */
+    var exC=new Float32Array(N),exS=new Float32Array(N),exR=new Float32Array(N),exZ=new Float32Array(N);
+    for(var eg=0;eg<N;eg++){var ea=Math.random()*6.2832;exC[eg]=Math.cos(ea);exS[eg]=Math.sin(ea);exR[eg]=0.35+Math.pow(Math.random(),1.9)*2.3;exZ[eg]=(Math.random()-0.5)*2.2;}
+    var st={A:{x:0,y:0,vx:4.9,vy:1.7},pl:0,pr:0,t:0,cap:0,cap2:0,lx:0,ly:0,bax:0,bay:0,hitT:-999,hitSide:0,whiff:0,lostT:0};
+    function reset(){st.t=0;st.A.x=0;st.A.y=0;st.A.vx=4.9;st.A.vy=1.7;st.pl=0;st.pr=0;st.cap=0;st.cap2=0;st.lx=0;st.ly=0;st.bax=0;st.bay=0;st.hitT=-999;st.hitSide=0;st.whiff=0;st.lostT=0;}
+    /* NATURAL RALLY: the two players just PLAY — both paddles return the ball at full effort — until
+       the LEFT player, mid-rally, winds up and hurls the bomb to the MIDDLE while the point is still
+       live -> it DETONATES and blows the WHOLE board apart (every dot bursts outward + z-pop,
+       tanh-compressed to the stage bounds). No staged whiff/loss: the rally itself runs to the boom.
+       Board never reforms; the morph engine flies the debris straight into the next scene. */
+    var MAD=2500,THR=3000,BOOM=3400,BBRD=3490,EXR=520,BEXR=360,BX=0.0,BY=0.06;
+    function foldY(y){var h=SY-0.13,p4=4*h,ph=((y+h)%p4+p4)%p4;return (ph>2*h?p4-ph:ph)-h;}/* reflect a predicted ball-y into the court so a paddle can aim at the true bounce point */
+    function anim(p,dt){var s=Math.min(0.04,dt/1000);st.t+=dt;var T=st.t,sp=1.05+Math.min(0.9,T*0.0003);
+      if(T<BOOM){var o=st.A;o.x+=o.vx*sp*s;o.y+=o.vy*sp*s;/* the ball stays in play until the blast */
+        if(o.y>SY-0.13){o.y=SY-0.13;o.vy=-Math.abs(o.vy);}else if(o.y<-(SY-0.13)){o.y=-(SY-0.13);o.vy=Math.abs(o.vy);}
+        if(o.x<-SX+0.26&&o.vx<0){o.x=-SX+0.26;o.vx=Math.abs(o.vx)*1.05;o.vy+=(o.y-st.pl)*2.0;st.hitT=T;st.hitSide=-1;}
+        else if(o.x>SX-0.26&&o.vx>0){o.x=SX-0.26;o.vx=-Math.abs(o.vx)*1.05;o.vy+=(o.y-st.pr)*2.0;st.hitT=T;st.hitSide=1;}
+        if(o.vx>7.6)o.vx=7.6;if(o.vx<-7.6)o.vx=-7.6;if(o.vy>4.0)o.vy=4.0;if(o.vy<-4.0)o.vy=-4.0;}
+      /* players ANTICIPATE by PREDICTING the ball's bounce point at their OWN wall, so a paddle is ALWAYS
+         waiting exactly where the ball will land -> the ball is never out and always hits the bar (user).
+         When the ball heads away, ease toward its current y. */
+      var pC=SY-0.4,lpx=-SX+0.26,rpx=SX-0.26;
+      var tgtL=(st.A.vx<0)?foldY(st.A.y+st.A.vy*((lpx-st.A.x)/st.A.vx)):st.A.y;
+      var tgtR=(st.A.vx>0)?foldY(st.A.y+st.A.vy*((rpx-st.A.x)/st.A.vx)):st.A.y;
+      tgtL=Math.max(-pC,Math.min(pC,tgtL));tgtR=Math.max(-pC,Math.min(pC,tgtR));
+      if(T<BOOM)st.pl+=(tgtL-st.pl)*(st.A.vx<0?0.45:0.06);
+      if(T<BOOM)st.pr+=(tgtR-st.pr)*(st.A.vx>0?0.47:0.06);
+      var plD=st.pl,prD=st.pr;
+      var madJit=(T>=MAD&&T<BOOM)?Math.sin(T*0.09)*0.075*Math.min(1,(T-MAD)/(THR-MAD)):0;/* mid-rally windup shake */
+      var exAmt=0;if(T>=BBRD){var e0=Math.min(1,(T-BBRD)/EXR);exAmt=Math.min(1.35,e0*(2-e0)+Math.max(0,(T-BBRD-EXR))*0.0003);}/* board bursts a beat AFTER the bomb's own fireball, so the blast reads as coming FROM the bomb */
+      var since=T-st.hitT,lr=(st.hitSide===-1&&since<170)?Math.sin(since/170*Math.PI)*0.06:0,rr2=(st.hitSide===1&&since<170)?Math.sin(since/170*Math.PI)*0.06:0;
+      var sqx=(since<90&&T<BOOM)?1-0.42*(1-since/90):1,sqy=(since<90&&T<BOOM)?1+0.42*(1-since/90):1;
+      var lunge=(T>=THR)?Math.sin(Math.min(1,(T-THR)/260)*Math.PI)*0.5:0;/* mad player THRUSTS forward to hurl the bomb */
+      for(var i=0;i<lp.n;i++){var ol=(lp.s+i)*3;p[ol]+=lunge-lr;p[ol+1]+=plD+madJit;}
+      for(var i2=0;i2<rpd.n;i2++){var orr=(rpd.s+i2)*3;p[orr]+=rr2;p[orr+1]+=prD;}
+      if(T>=BOOM&&st.cap2===0){st.cap2=1;st.bax=st.A.x;st.bay=st.A.y;}
+      var baxD=(T>=BOOM)?st.bax:st.A.x,bayD=(T>=BOOM)?st.bay:st.A.y;
+      for(var i3=0;i3<ball.n;i3++){var o3=(ball.s+i3)*3;p[o3]=p[o3]*sqx+baxD;p[o3+1]=p[o3+1]*sqy+bayD;p[o3+2]=0.05;}/* ball lives right up to the blast */
+      if(T>=THR&&st.cap===0){st.cap=1;st.lx=-SX+0.32;st.ly=st.pl;}
+      for(var i5=0;i5<bmN;i5++){var o5=(bmS+i5)*3,px,py,pz=0.05;
+        if(T<THR){px=-SX+0.15+pHx[i5];py=(plD+madJit)+pHy[i5];}
+        else if(T<BOOM){var tp=(T-THR)/(BOOM-THR),e=Math.min(1,tp/0.3),em=e*e*(3-2*e),ox=pHx[i5]+(bmDx[i5]-pHx[i5])*em,oy=pHy[i5]+(bmDy[i5]-pHy[i5])*em,cx=st.lx+(BX-st.lx)*tp,cy=st.ly+(BY-st.ly)*tp+Math.sin(Math.PI*tp)*0.5;px=cx+ox;py=cy+oy;}
+        else{var bt=Math.min(1,(T-BOOM)/BEXR),be=1-Math.pow(1-bt,2.4),brd=be*brR[i5]*1.5;px=BX+brC[i5]*brd;py=BY+brS[i5]*brd*0.72;pz=0.05+Math.sin(bt*Math.PI)*brR[i5]*0.5;}/* the bomb DETONATES: its dots blast outward as a fireball, popping toward the camera, a beat before the whole board bursts */
+        p[o5]=px;p[o5+1]=py;p[o5+2]=pz;}
+      if(exAmt>0){var amp=2.5*exAmt,mixv=Math.min(1,exAmt*2.2),BR=window.__hudBR||3.2,BL=window.__hudBL||3.2,LY=window.__hudLY||2.5;for(var g=0;g<N;g++){var og=g*3,dxb=p[og]-BX,dyb=p[og+1]-BY,db=Math.sqrt(dxb*dxb+dyb*dyb)+1e-4,ux=dxb/db+exC[g]*0.16,uy=dyb/db+exS[g]*0.16,un=Math.sqrt(ux*ux+uy*uy)+1e-4,pw=exR[g]*amp,nx2=p[og]+(ux/un)*pw,ny2=p[og+1]+(uy/un)*pw*0.62,LXx=nx2>=0?BR:BL,sx2=Math.tanh(nx2/LXx)*LXx,sy2=Math.tanh(ny2/LY)*LY;p[og]=nx2+(sx2-nx2)*mixv;p[og+1]=ny2+(sy2-ny2)*mixv;p[og+2]+=exZ[g]*exAmt;}}}/* every dot blasts radially AWAY from the bomb origin (BX,BY) -> the explosion emanates FROM the bomb, not omnidirectionally in place */
     return {name:'A game people keep playing',desc:'',base:b,flat:true,anim:anim,reset:reset};}
   function buildGame3D(){var b=mkArr(),k=0;
-    function gh(x,z){return -1.05+0.32*Math.sin(x*1.05)*Math.cos(z*0.7)+0.12*Math.sin(z*1.7);}
-    var terN=Math.round(N*0.5),terS=k,terX=new Float32Array(terN),terZ=new Float32Array(terN);
-    for(var j=0;j<terN;j++){var o=k*3,x=(Math.random()-0.5)*5.4,z=Math.random()*4.5-1.5;terX[j]=x;terZ[j]=z;b[o]=x;b[o+1]=gh(x,z);b[o+2]=z;k++;}
-    var chS=k,chN=Math.round(N*0.2);for(var j2=0;j2<chN;j2++){var o=k*3,t=Math.random(),w=0.13+0.32*t,x=(Math.random()-0.5)*2*w;b[o]=x;b[o+1]=-0.95+t*0.85;b[o+2]=2.5+(Math.random()-0.5)*0.12;k++;}
-    var hN=Math.round(N*0.04);for(var j3=0;j3<hN;j3++){var o=k*3,a=Math.random()*6.2832,rr=Math.sqrt(Math.random())*0.16;b[o]=Math.cos(a)*rr;b[o+1]=0.02+Math.sin(a)*rr;b[o+2]=2.5;k++;}
+    /* bigger, more dramatic rolling hills so the ground reads clearly as 3D terrain */
+    function gh(x,z){return -1.05+0.46*Math.sin(x*1.0)*Math.cos(z*0.7)+0.18*Math.sin(z*1.7)+0.11*Math.cos(x*0.62+z*0.4)+0.15*Math.sin(x*2.3+z*1.1)+0.07*Math.cos(z*3.3-x*0.9);}/* richer rolling terrain: extra octaves for natural undulation */
+    var terN=Math.round(N*0.34),terS=k,terX=new Float32Array(terN),terZ=new Float32Array(terN);
+    for(var j=0;j<terN;j++){var o=k*3,x=(Math.random()-0.5)*7.8,z=Math.random()*5.4-1.5;terX[j]=x;terZ[j]=z;b[o]=x;b[o+1]=gh(x,z);b[o+2]=z;k++;}/* wide ground that bleeds OFF both edges — no boxed-in terrain patch */
+    /* FOREGROUND HERO — an ARMORED adventurer seen from behind, walking into the hills: plated torso
+       shell with ridge rings, domed shoulder pauldrons, a greatsword slung diagonally across the back,
+       armored boots + bracers, and a cape that sways with the stride. Every part is SURFACE-sampled
+       (shell-biased radii) so the figure reads as a 3D volume, not a flat scatter.
+       chP parts: 0 torso, 1 legL, 2 legR, 3 armL, 4 armR, 5 pauldrons, 6 sword, 7 cape. */
+    var chS=k,chN=Math.round(N*0.17),chP=new Uint8Array(chN),chX=new Float32Array(chN),chBY=new Float32Array(chN),chBZ=new Float32Array(chN),chOy=new Float32Array(chN),chOz=new Float32Array(chN),cpD=new Float32Array(chN),cpW=new Float32Array(chN),CZ=2.9;/* hero pushed FORWARD so the landscape opens up behind him */
+    for(var j2=0;j2<chN;j2++){var o=k*3,u=Math.random(),aa=Math.random()*6.2832,part;
+      if(u<0.30){part=0;/* MUSCULAR V-taper torso, seen from behind: narrow waist flaring UP to broad
+          shoulders with a lat/pec swell, armour plates over it — the heroic silhouette. */
+        var hgt=Math.random(),ty=-0.30+hgt*0.78;
+        var vt=0.112+0.150*hgt*hgt;                                  /* V-taper: narrow waist -> broad shoulders */
+        var delt=(hgt>0.80)?((hgt-0.80)/0.20)*0.055:0;               /* deltoid/trap flare at the very top */
+        var swell=Math.exp(-Math.pow((hgt-0.60)/0.25,2))*0.05;       /* lat + pec muscle swell through the upper-mid */
+        var radX=vt+delt+swell,radZ=(vt*0.80+swell)*0.92;            /* broad side-to-side, shallower front-back = powerful, not round */
+        var shell=0.80+0.20*Math.random();if((hgt*5)%1<0.13)shell*=1.12;/* plate ridge rings */
+        chX[j2]=Math.cos(aa)*radX*shell;chBY[j2]=ty;chBZ[j2]=CZ+Math.sin(aa)*radZ*shell;chOy[j2]=0;chOz[j2]=0;}
+      else if(u<0.42){part=1;var t=Math.random();/* thick leg: thigh + calf muscle, armoured boot flare */
+        var lr=0.072+Math.exp(-Math.pow((t-0.22)/0.20,2))*0.03+Math.exp(-Math.pow((t-0.62)/0.16,2))*0.028+(t>0.86?0.03:0);
+        chX[j2]=-0.12+Math.cos(aa)*lr;chBY[j2]=-0.24;chBZ[j2]=CZ;chOy[j2]=-0.52*t;chOz[j2]=Math.sin(aa)*lr;}
+      else if(u<0.54){part=2;var t=Math.random();
+        var lr=0.072+Math.exp(-Math.pow((t-0.22)/0.20,2))*0.03+Math.exp(-Math.pow((t-0.62)/0.16,2))*0.028+(t>0.86?0.03:0);
+        chX[j2]=0.12+Math.cos(aa)*lr;chBY[j2]=-0.24;chBZ[j2]=CZ;chOy[j2]=-0.52*t;chOz[j2]=Math.sin(aa)*lr;}
+      else if(u<0.62){part=3;var t=Math.random();/* beefy arm: bicep bulge + bracer at the forearm */
+        var ar=0.062+Math.exp(-Math.pow((t-0.28)/0.18,2))*0.035+(t>0.66?0.018:0);
+        chX[j2]=-0.30+Math.cos(aa)*ar;chBY[j2]=0.36;chBZ[j2]=CZ;chOy[j2]=-0.42*t;chOz[j2]=Math.sin(aa)*ar;}
+      else if(u<0.70){part=4;var t=Math.random();
+        var ar=0.062+Math.exp(-Math.pow((t-0.28)/0.18,2))*0.035+(t>0.66?0.018:0);
+        chX[j2]=0.30+Math.cos(aa)*ar;chBY[j2]=0.36;chBZ[j2]=CZ;chOy[j2]=-0.42*t;chOz[j2]=Math.sin(aa)*ar;}
+      else if(u<0.78){part=5;/* pauldrons: bigger domed caps capping the broad shoulders */
+        var sd=Math.random()<0.5?-1:1,vv=Math.random()*Math.PI*0.5,r5=0.14*(0.82+0.18*Math.random());
+        chX[j2]=sd*0.30+Math.cos(aa)*Math.cos(vv)*r5;chBY[j2]=0.44+Math.sin(vv)*r5*0.8;chBZ[j2]=CZ+Math.sin(aa)*Math.cos(vv)*r5*0.8;chOy[j2]=0;chOz[j2]=0;}
+      else if(u<0.88){part=6;/* greatsword across the back: blade low-left → high-right, the hilt riding
+        BESIDE the head (shifted right so the head silhouette stays clean), crossguard, pommel */
+        var w6=Math.random();
+        if(w6<0.66){var t6=Math.random();chX[j2]=-0.10+0.36*t6+(Math.random()-0.5)*0.022;chBY[j2]=-0.10+0.68*t6;chBZ[j2]=CZ+0.20+(Math.random()-0.5)*0.02;}
+        else if(w6<0.88){var g6=Math.random()-0.5;chX[j2]=0.188-0.884*g6*0.18;chBY[j2]=0.444+0.468*g6*0.18;chBZ[j2]=CZ+0.20+(Math.random()-0.5)*0.02;}
+        else{var a6=Math.random()*6.2832,r6=Math.sqrt(Math.random())*0.035;chX[j2]=0.295+Math.cos(a6)*r6;chBY[j2]=0.645+Math.sin(a6)*r6;chBZ[j2]=CZ+0.20;}
+        chOy[j2]=0;chOz[j2]=0;}
+      else{part=7;/* cape: hangs from the shoulders down the back, flaring toward the hem */
+        var dp=Math.random(),wd=Math.random()-0.5,wHalf=0.16+0.17*dp;
+        chX[j2]=wd*2*wHalf;chBY[j2]=0.42-0.86*dp;chBZ[j2]=CZ+0.13+Math.sin(dp*Math.PI)*0.05+(Math.random()-0.5)*0.02;
+        chOy[j2]=0;chOz[j2]=0;cpD[j2]=dp;cpW[j2]=wd;}
+      chP[j2]=part;b[o]=chX[j2];b[o+1]=chBY[j2]+chOy[j2];b[o+2]=chBZ[j2]+chOz[j2];k++;}
+    var hN=Math.round(N*0.04);for(var j3=0;j3<hN;j3++){var o=k*3,u=Math.random()*6.2832,v=Math.acos(2*Math.random()-1),rr=0.145;b[o]=Math.cos(u)*Math.sin(v)*rr;b[o+1]=0.5+Math.cos(v)*rr;b[o+2]=CZ+Math.sin(u)*Math.sin(v)*rr;k++;}
     var chTot=k-chS;
-    var trN=Math.round(N*0.12),trS=k,trX=new Float32Array(trN),trZ=new Float32Array(trN),trY=new Float32Array(trN),tp=[[-1.7,1.4],[1.9,0.4],[-2.1,-0.7],[1.3,-1.1]];
-    for(var j4=0;j4<trN;j4++){var o=k*3,P=tp[(Math.random()*tp.length)|0],hh=Math.random(),rad=(1-hh)*0.38,a=Math.random()*6.2832,x=P[0]+Math.cos(a)*rad,z0=P[1];trX[j4]=x;trZ[j4]=z0;trY[j4]=gh(P[0],P[1])+hh*1.15;b[o]=x;b[o+1]=trY[j4];b[o+2]=z0;k++;}
-    var twN=Math.round(N*0.06);for(var j5=0;j5<twN;j5++){var o=k*3,x=0.3+(Math.random()-0.5)*0.45,z=-1.35,y=-1.0+Math.random()*1.7;b[o]=x;b[o+1]=y;b[o+2]=z+(Math.random()-0.5)*0.3;k++;}
-    var atS=k,atN=N-k,atX=new Float32Array(atN),atY=new Float32Array(atN),atP=new Float32Array(atN);
-    for(var j6=0;j6<atN;j6++){var o=k*3,x=(Math.random()-0.5)*5,y=0.7+Math.random()*1.3;atX[j6]=x;atY[j6]=y;atP[j6]=Math.random()*6.2832;b[o]=x;b[o+1]=y;b[o+2]=Math.random()*4-1.5;k++;}
-    var st={t:0};
+    var chCX=0,chCY=0,chCZ=0;for(var jc=chS;jc<k;jc++){chCX+=b[jc*3];chCY+=b[jc*3+1];chCZ+=b[jc*3+2];}chCX/=chTot;chCY/=chTot;chCZ/=chTot;/* hero centroid (local) — the camera pins to THIS so he stays screen-locked no matter the yaw/zoom */
+    var trN=Math.round(N*0.16),trS=k,trX=new Float32Array(trN),trZ=new Float32Array(trN),trH=new Float32Array(trN);
+    /* proper LAYERED FIR trees: a thin trunk + three stacked cone tiers (the classic pine-skirt look),
+       each tier widest at its base tapering to a sharp crown. BIG — much TALLER than the hero — with a
+       clear mix of TALL and SHORT trees for a detailed forest. */
+    var TP=[[-2.4,1.5,2.2],[2.35,0.5,2.7],[-2.7,-0.7,1.55],[1.7,-1.2,2.45],[-2.15,2.3,1.9],[2.75,-0.2,2.0],[-3.0,0.2,1.75],[2.55,2.1,2.3]];/* mid-frame clusters moved to the EDGES — the hero owns the centre (premium order) */
+    for(var j4=0;j4<trN;j4++){var o=k*3,T=TP[(Math.random()*TP.length)|0],ts=T[2],a=Math.random()*6.2832,x,zz,hgt;
+      if(Math.random()<0.13){var rrT=Math.sqrt(Math.random())*0.045*ts;x=T[0]+Math.cos(a)*rrT;zz=T[1]+Math.sin(a)*rrT;hgt=Math.random()*0.26*ts;}/* trunk */
+      else{var tier=(Math.random()*3)|0,f=Math.random(),tRad=(0.34-tier*0.088)*ts*(1-f*0.92),rr4=Math.sqrt(Math.random())*tRad;
+        x=T[0]+Math.cos(a)*rr4;zz=T[1]+Math.sin(a)*rr4;hgt=([0.20,0.50,0.80][tier]+f*0.38)*ts;}/* stacked tier */
+      trX[j4]=x;trZ[j4]=zz;trH[j4]=hgt;b[o]=x;b[o+1]=gh(x,zz)+hgt;b[o+2]=zz;k++;}
+    /* low BUSHES / shrubs dotted across the ground — soft rounded domes that scroll with the terrain (was a stray vertical smear) */
+    var twN=Math.round(N*0.05),twS=k,twX=new Float32Array(twN),twZ=new Float32Array(twN),twH=new Float32Array(twN),BSH=[[-1.3,1.1],[0.9,1.7],[-0.7,-0.3],[1.6,-0.9],[-1.95,0.25],[0.45,-1.25],[2.0,0.85],[-0.45,0.65]];
+    for(var j5=0;j5<twN;j5++){var o=k*3,B=BSH[(Math.random()*BSH.length)|0],u=Math.random(),a=Math.random()*6.2832,rr=Math.sqrt(u)*0.20,dome=Math.sqrt(1-u)*0.15,x=B[0]+Math.cos(a)*rr,zz=B[1]+Math.sin(a)*rr;twX[j5]=x;twZ[j5]=zz;twH[j5]=dome;b[o]=x;b[o+1]=gh(x,zz)+dome;b[o+2]=zz;k++;}
+    var clN=Math.round(N*0.06),clS=k,clI=new Uint8Array(clN),clOx=new Float32Array(clN),clOy=new Float32Array(clN),clOz=new Float32Array(clN),clC=[[-1.55,1.55,0.4],[0.35,1.82,-0.3],[1.9,1.48,0.9]];
+    /* clouds are 3D PUFFS (denser + tighter so they read as solid clouds, not scattered noise) */
+    var CLB=[[0,0,0],[0.42,0.06,0.12],[-0.40,0.04,-0.14],[0.18,-0.09,0.22],[-0.16,-0.07,-0.10]];/* lobe offsets: each cloud is a fluffy multi-puff, not one blob */
+    for(var j7=0;j7<clN;j7++){var o=k*3,ci=j7%3,lb=CLB[(Math.random()*CLB.length)|0],a7=Math.random()*6.2832,r7=Math.sqrt(Math.random());clI[j7]=ci;clOx[j7]=lb[0]+Math.cos(a7)*r7*0.24;clOy[j7]=lb[1]+Math.sin(a7)*r7*0.13;clOz[j7]=lb[2]+(Math.random()*2-1)*0.14;b[o]=clC[ci][0]+clOx[j7];b[o+1]=clC[ci][1]+clOy[j7];b[o+2]=clC[ci][2]+clOz[j7];k++;}
+    /* ROCKS — boulders sitting ON the path, scrolling toward the camera; the hero JUMPS over each one.
+       (replaced the birds.) Positioned every frame in the anim from their scroll phase. */
+    var ROCKZ=[0.4,1.7,3.0,4.15,1.05,2.55],ROCKX=[-1.65,1.85,-2.05,1.45,-1.25,2.15],rkSz=[0.20,0.16,0.24,0.18,0.15,0.21],rkN=Math.round(N*0.04),rkS=k,rkI=new Uint8Array(rkN),rkOx=new Float32Array(rkN),rkOy=new Float32Array(rkN),rkOz=new Float32Array(rkN);
+    for(var j8=0;j8<rkN;j8++){var o=k*3,ri=(Math.random()*ROCKZ.length)|0,sz=rkSz[ri],a=Math.random()*6.2832,vv=Math.acos(2*Math.random()-1),rr=Math.cbrt(Math.random())*(0.85+0.35*Math.random());rkI[j8]=ri;
+      rkOx[j8]=Math.cos(a)*Math.sin(vv)*rr*sz;rkOy[j8]=Math.abs(Math.cos(vv))*rr*sz*0.78;rkOz[j8]=Math.sin(a)*Math.sin(vv)*rr*sz*0.9;b[o]=0;b[o+1]=-9;b[o+2]=0;k++;}
+    /* MOUNTAIN RIDGE on the horizon — a static far-field silhouette, dots biased to the crest so the
+       peaks read as a sharp skyline behind the rolling terrain */
+    function ridge(x){return 0.42+0.48*Math.pow(Math.abs(Math.sin(x*1.05+1.2)),1.5)+0.22*Math.sin(x*2.3+0.5);}
+    var mtN=Math.round(N*0.05);
+    for(var j9=0;j9<mtN;j9++){var o=k*3,mx=(Math.random()-0.5)*7.8,yT=ridge(mx);
+      b[o]=mx;b[o+1]=-1.05+(yT+1.05)*Math.pow(Math.random(),0.45);b[o+2]=-1.44+Math.random()*0.12;k++;}
+    /* WINDING PATH the hero walks along — scrolls with the terrain, curving toward the horizon: the
+       strongest single depth cue in the scene */
+    function pathC(z){return 0.26*Math.sin(z*0.85+0.9)+0.02;}
+    var ptN=Math.round(N*0.04),ptS=k,ptZ0=new Float32Array(ptN),ptW=new Float32Array(ptN);
+    for(var ja=0;ja<ptN;ja++){var o=k*3;ptZ0[ja]=Math.random()*5.4;var wj=(Math.random()-0.5);ptW[ja]=(wj<0?-1:1)*Math.pow(Math.abs(wj)*2,0.6)*0.16;/* edge-biased so the path has visible borders */
+      var zb=-1.5+ptZ0[ja],xb=pathC(zb)+ptW[ja];b[o]=xb;b[o+1]=gh(xb,zb)+0.015;b[o+2]=zb;k++;}
+    /* BIRDS — small flocks gliding across the sky with a wing-flap, staggered so one is always passing */
+    var ffN=Math.round(N*0.015),ffS=k,ffB=new Uint8Array(ffN),ffW=new Float32Array(ffN),ffJ=new Float32Array(ffN),ffJy=new Float32Array(ffN);
+    for(var jb=0;jb<ffN;jb++){var o=k*3;ffB[jb]=jb%3;var wp=Math.random()*2-1;ffW[jb]=(wp<0?-1:1)*Math.pow(Math.abs(wp),0.7);ffJ[jb]=(Math.random()-0.5)*0.05;ffJy[jb]=(Math.random()-0.5)*0.03;
+      b[o]=(ffB[jb]-2)*1.4;b[o+1]=1.45;b[o+2]=-0.4;k++;}
+    /* FX LAYERS (repurposed from the old ambient dust): contact shadow, footstep dust, sword glint, pickup orb */
+    var shN=Math.round(N*0.010),shS=k,shA=new Float32Array(shN),shR=new Float32Array(shN);
+    for(var js=0;js<shN;js++){var o=k*3;shA[js]=Math.random()*6.2832;shR[js]=Math.sqrt(Math.random());b[o]=0;b[o+1]=-1.0;b[o+2]=2.9;k++;}
+    var duN=Math.round(N*0.008),duS=k,duP=new Float32Array(duN),duA=new Float32Array(duN),duR=new Float32Array(duN);
+    for(var jd=0;jd<duN;jd++){var o=k*3;duP[jd]=jd/duN;duA[jd]=Math.random()*6.2832;duR[jd]=0.4+Math.random()*0.6;b[o]=0;b[o+1]=-1.0;b[o+2]=2.9;k++;}
+    var glN=14,glS=k,glT=new Float32Array(glN);
+    for(var jg=0;jg<glN;jg++){var o=k*3;glT[jg]=jg/(glN-1);b[o]=0;b[o+1]=-1.0;b[o+2]=2.9;k++;}
+    var orN=Math.round(N*0.006),orS=k,orU=new Float32Array(orN),orC=new Float32Array(orN),orW2=new Float32Array(orN);
+    for(var jo=0;jo<orN;jo++){var o=k*3,u=Math.random()*2-1,th=Math.random()*6.2832;orU[jo]=u;orC[jo]=Math.cos(th);orW2[jo]=Math.sin(th);b[o]=0;b[o+1]=-1.0;b[o+2]=2.9;k++;}
+    var atS=k,atN=N-k,atX=new Float32Array(Math.max(1,atN)),atY=new Float32Array(Math.max(1,atN)),atP=new Float32Array(Math.max(1,atN));
+    for(var j6=0;j6<atN;j6++){var o=k*3,x=(Math.random()-0.5)*7.2,y=0.6+Math.random()*0.8;atX[j6]=x;atY[j6]=y;atP[j6]=Math.random()*6.2832;b[o]=x;b[o+1]=y;b[o+2]=Math.random()*4-1.5;k++;}
+    var st={t:0,jT:null,landT:-9,landK:0,orbOff:Math.random()*4.7,orbBT:-9,orbBX:0,orbBY:0,orbBZ:0};
     function anim(p,dt){st.t+=dt*0.0009;var sc=st.t;
-      for(var j=0;j<terN;j++){var raw=(terZ[j]+1.5+sc)%4.5;if(raw<0)raw+=4.5;var z=-1.5+raw,x=terX[j],o=(terS+j)*3;p[o]=x;p[o+1]=gh(x,z);p[o+2]=z;}
-      for(var j2=0;j2<trN;j2++){var raw2=(trZ[j2]+1.5+sc)%4.5;if(raw2<0)raw2+=4.5;var z2=-1.5+raw2,o2=(trS+j2)*3;p[o2]=trX[j2];p[o2+1]=trY[j2];p[o2+2]=z2;}
-      var bob=Math.sin(st.t*6)*0.03;for(var c=0;c<chTot;c++)p[(chS+c)*3+1]+=bob;
+      /* PER-ELEMENT THICKNESS + brightness — aFade scales BOTH dot size and alpha: a bold thick HERO and
+         a crisp path up front, grounded terrain, fine faint mountains / sky / dust behind = real depth + drama. */
+      var faf=__fadeArr;
+      var fp9=(st.camP==null?1:st.camP),dim9=0.75+0.25*Math.min(1,Math.max(0,(fp9-0.68)/0.32));/* FOCUS PULL: world at 75% while the camera tracks him, full richness at settle — the character reads in every frame */
+      faf.fill(0.0,atS,atS+atN);             /* ambient dust: REMOVED (declutter around hero) */
+      faf.fill(0.82,terS,terS+terN);         /* terrain ground */
+      faf.fill(1.0,chS,chS+chTot);           /* HERO: bold but textured (user: a little less thick) */
+      faf.fill(0.98*dim9,trS,trS+trN);       /* trees: thick at settle, quieter while tracking */
+      faf.fill(0.50*dim9,trS+trN,trS+trN+twN);
+      faf.fill(0.45*dim9,clS,clS+clN);
+      faf.fill(0.80*dim9,rkS,rkS+rkN);
+      faf.fill(0.30*dim9,rkS+rkN,rkS+rkN+mtN);
+      faf.fill(1.20,ptS,ptS+ptN);            /* path: crisp, the strongest depth cue */
+      faf.fill(0.80*dim9,ffS,ffS+ffN);
+      faf.fill(0.55,shS,shS+shN);            /* hero contact shadow */
+      faf.fill(0.0,duS,duS+duN);faf.fill(0.0,glS,glS+glN);faf.fill(0.0,orS,orS+orN);/* dust / glint / orb: per-dot below */
+      __fadeDirty=true;__fadeAttr.needsUpdate=true;
+      for(var j=0;j<terN;j++){var raw=(terZ[j]+1.5+sc)%5.4;if(raw<0)raw+=5.4;var z=-1.5+raw,x=terX[j],o=(terS+j)*3;p[o]=x;p[o+1]=gh(x,z);p[o+2]=z;faf[terS+j]=(0.46+0.36*((z+1.5)/5.4))*(z>3.0?1-0.6*Math.min(1,(z-3.0)/0.9):1)*dim9;/* near-camera ground thins out so foreground dots never blow up */}/* depth haze: far ground dissolves */
+      for(var j2=0;j2<trN;j2++){var raw2=(trZ[j2]+1.5+sc)%4.5;if(raw2<0)raw2+=4.5;var z2=-1.5+raw2,o2=(trS+j2)*3;
+        var swy=Math.sin(sc*1.7+trX[j2]*2.7)*0.05*trH[j2];/* canopies sway more than trunks */
+        p[o2]=trX[j2]+swy;p[o2+1]=gh(trX[j2],z2)+trH[j2];p[o2+2]=z2;}
+      for(var jw=0;jw<twN;jw++){var rww=(twZ[jw]+1.5+sc)%4.5;if(rww<0)rww+=4.5;var zw=-1.5+rww,ow=(twS+jw)*3;p[ow]=twX[jw];p[ow+1]=gh(twX[jw],zw)+twH[jw];p[ow+2]=zw;}/* bushes scroll with the ground */
+      /* the path scrolls with the terrain, its curve fixed in world space so the hero stays on it */
+      for(var jp=0;jp<ptN;jp++){var rawp=(ptZ0[jp]+sc)%5.4;if(rawp<0)rawp+=5.4;var zp=-1.5+rawp,op=(ptS+jp)*3,xp=pathC(zp)+ptW[jp];
+        p[op]=xp;p[op+1]=gh(xp,zp)+0.015;p[op+2]=zp;faf[ptS+jp]=1.2*(zp>3.0?1-0.55*Math.min(1,(zp-3.0)/0.9):1);}
+      /* birds glide across the sky, wings flapping */
+      for(var jf=0;jf<ffN;jf++){var of=(ffS+jf)*3,bi=ffB[jf];
+        var bx=3.9-(((sc*(1.05+bi*0.16))+bi*2.6)%7.8),by=1.30+bi*0.15+Math.sin(sc*1.2+bi*2.1)*0.05,flap=Math.sin(sc*10+bi*1.7)*0.11;
+        p[of]=bx+ffW[jf]*0.17+ffJ[jf];p[of+1]=by+Math.abs(ffW[jf])*flap+ffJy[jf];p[of+2]=-0.5+bi*0.25;}
+      /* WALK CYCLE — a real, foot-PLANTED gait: each leg PLANTS its foot and drives it backward
+         through stance while the ground scrolls under it, then LIFTS it and swings it forward with a
+         bent knee, DECELERATING into the heel-strike (ease-out) so the plant lands soft, not snapped.
+         The body vaults over the stance leg, SWAYS onto it and ROLLS its shoulders into the step;
+         the armour (pauldrons + sword) rides the torso rigidly and the cape sways half a beat behind. */
+      var walkT=st.t*10, cyc=walkT/6.2832, swing=Math.sin(walkT), cs=Math.cos(walkT);
+      var STR=0.40, LIFT=0.18, STANCE=0.62, LEGL=0.52;
+      var bob=cs*cs*0.07-0.035, sway=swing*0.055, lean=0.05, roll=swing*0.055;
+      var capeLag=Math.sin(walkT-1.2);
+      function foot(ph){ var fz,fy;
+        if(ph<STANCE){ var s=ph/STANCE; fz=(-0.5+s)*STR; fy=-LEGL; }                       /* planted: slides back with the ground, leg straight */
+        else{ var w=(ph-STANCE)/(1-STANCE), we=1-Math.pow(1-w,1.8);                        /* swing: fast off the toe, slows into the plant */
+          fz=(0.5-we)*STR; fy=-LEGL+Math.sin(w*Math.PI)*LIFT; }
+        return [fz,fy]; }
+      var Lf=foot(cyc%1), Rf=foot((cyc+0.5)%1);      /* the two legs a half-cycle apart */
+      for(var cc=0;cc<chN;cc++){var oc=(chS+cc)*3,pt=chP[cc];
+        if(pt===0||pt===5||pt===6){ var lyr=chBY[cc]+0.24;   /* torso + pauldrons + sword: one rigid armored mass */
+          p[oc]=chX[cc]+sway+lyr*roll; p[oc+1]=chBY[cc]+bob; p[oc+2]=chBZ[cc]-lean+chX[cc]*swing*(pt===0?0.4:0.25); }
+        else if(pt<=2){ var fr=-chOy[cc]/LEGL, F=(pt===1)?Lf:Rf;   /* fr = 0 at hip → 1 at foot; place each leg dot hip→foot */
+          p[oc]=chX[cc]+sway; p[oc+1]=chBY[cc]+fr*F[1]+bob; p[oc+2]=chBZ[cc]+fr*F[0]+chOz[cc]-lean; }
+        else if(pt===7){ var dp=cpD[cc];                    /* cape: hangs off the shoulders, sways late */
+          p[oc]=chX[cc]+sway*0.8+(chBY[cc]+0.24)*roll+capeLag*0.045*dp+Math.sin(walkT*0.9+cpW[cc]*6)*0.012*dp;
+          p[oc+1]=chBY[cc]+bob*(1-0.3*dp); p[oc+2]=chBZ[cc]-lean+capeLag*0.06*dp; }
+        else{ var sgn=(pt===4)?1:-1, ang=swing*0.5*sgn, fwd=cs*sgn; if(fwd<0)fwd=0;   /* arm counter-swing + slight elbow bend */
+          var oy=chOy[cc]*(1-fwd*0.16);
+          p[oc]=chX[cc]+sway; p[oc+1]=chBY[cc]+oy*Math.cos(ang)+bob; p[oc+2]=chBZ[cc]+oy*Math.sin(ang)+chOz[cc]-lean; }}
+      for(var hh=0;hh<hN;hh++){var oh=(chS+chN+hh)*3;p[oh]+=sway+0.74*roll;p[oh+1]+=bob;p[oh+2]-=lean;}
+      /* TAP-TO-JUMP: envelope + landing impact (st.jT is set by the tap handler) */
+      var jY=0;
+      if(st.jT!=null){var jp9=(st.t-st.jT)/0.5;
+        if(jp9>=1){st.jT=null;st.landT=st.t;}
+        else if(jp9>=0){jY=4*jp9*(1-jp9)*0.5;}}
+      st.landK=Math.max(0,1-(st.t-st.landT)/0.32);
+      if(jY>0){for(var jj=chS;jj<chS+chTot;jj++)p[jj*3+1]+=jY;}
+      /* CONTACT SHADOW: soft ellipse under the feet, squashes with the gait, fades when airborne */
+      var shSc=(1+(0.035-bob)*2.2)*(1-Math.min(0.75,jY*1.5)),shF=0.55*(1-Math.min(0.8,jY*1.6))+st.landK*0.25;
+      for(var js2=0;js2<shN;js2++){var o9=(shS+js2)*3,rr9=shR[js2]*shSc;
+        p[o9]=sway+Math.cos(shA[js2])*rr9*0.36;p[o9+1]=-0.80;p[o9+2]=CZ+Math.sin(shA[js2])*rr9*0.22;faf[shS+js2]=shF;}
+      /* FOOTSTEP DUST: puffs kicked back from the feet each step; bursts wider on jump landing */
+      var dcyc=cyc*2;
+      for(var jd2=0;jd2<duN;jd2++){var o10=(duS+jd2)*3,lt=(dcyc+duP[jd2])%1,boost=1+st.landK*2.2;
+        p[o10]=sway+Math.cos(duA[jd2])*(0.06+lt*0.10*duR[jd2])*boost;
+        p[o10+1]=-0.78+Math.sin(lt*3.1416)*0.05*duR[jd2]*boost;
+        p[o10+2]=CZ+0.06+lt*(0.34*duR[jd2]+0.2*st.landK);
+        faf[duS+jd2]=(1-lt)*(0.38+st.landK*0.6);}
+      /* SWORD GLINT: a highlight sweeps up the blade, riding the rigid torso motion */
+      var gcyc=(st.t*0.55)%2.2;/* glint sweeps rarer — a classier accent */
+      for(var jg2=0;jg2<glN;jg2++){var o11=(glS+jg2)*3,gt=glT[jg2],gbx=-0.10+0.36*gt,gby=-0.10+0.68*gt,glyr=gby+0.24;
+        p[o11]=gbx+sway+glyr*roll;p[o11+1]=gby+bob+jY;p[o11+2]=CZ+0.21-lean+gbx*swing*0.25;
+        var gd=gcyc<=1?Math.exp(-Math.pow((gt-gcyc)/0.09,2)):0;faf[glS+jg2]=gd*1.7;}
+      /* PICKUP ORB: floats down the path toward the hero; on contact it BURSTS, then respawns next lap */
+      var oz=3.9-(((sc*0.9)+st.orbOff)%4.6);
+      if(st.orbBT<0&&oz<CZ+0.10&&oz>CZ-0.35){st.orbBT=st.t;st.orbBX=pathC(oz);st.orbBY=-0.30;st.orbBZ=oz;}
+      var oba=(st.t-st.orbBT)/0.55;
+      if(st.orbBT>=0&&oba>=1&&oz>CZ+0.6){st.orbBT=-9;}
+      for(var jo2=0;jo2<orN;jo2++){var o12=(orS+jo2)*3,sx9=Math.sqrt(1-orU[jo2]*orU[jo2]);
+        if(st.orbBT>=0){var be9=Math.min(1,oba),br9=0.09+be9*0.85;
+          p[o12]=st.orbBX+orC[jo2]*sx9*br9;p[o12+1]=st.orbBY+orU[jo2]*br9*0.8;p[o12+2]=st.orbBZ+orW2[jo2]*sx9*br9*0.5;
+          faf[orS+jo2]=Math.max(0,1.3*(1-be9));}
+        else if(oz>CZ-0.35){var obb=Math.sin(st.t*3)*0.05;
+          p[o12]=pathC(oz)+orC[jo2]*sx9*0.085;p[o12+1]=-0.30+obb+orU[jo2]*0.085;p[o12+2]=oz+orW2[jo2]*sx9*0.085;
+          faf[orS+jo2]=1.35;}
+        else faf[orS+jo2]=0;}
+      for(var j7b=0;j7b<clN;j7b++){var ci2=clI[j7b],o7=(clS+j7b)*3,xw=clC[ci2][0]+sc*0.12;xw=((xw+2.7)%5.4+5.4)%5.4-2.7;p[o7]=xw+clOx[j7b];p[o7+1]=clC[ci2][1]+clOy[j7b]+Math.sin(sc*0.7+ci2*2)*0.02;}
+      for(var j8b=0;j8b<rkN;j8b++){var ri2=rkI[j8b],rz2=((ROCKZ[ri2]+sc)%4.5+4.5)%4.5-1.5,rx2=ROCKX[ri2],o8=(rkS+j8b)*3;p[o8]=rx2+rkOx[j8b];p[o8+1]=gh(rx2,rz2)+rkOy[j8b]+0.02;p[o8+2]=rz2+rkOz[j8b];}/* rocks sit OFF to the sides as scenery and scroll past */
       for(var a2=0;a2<atN;a2++){var o3=(atS+a2)*3;p[o3]=atX[a2]+Math.sin(st.t*2+atP[a2])*0.22;p[o3+1]=atY[a2]+Math.cos(st.t*1.6+atP[a2])*0.06;}}
-    return {name:'Play an immersive 3D game',desc:'',base:b,flat:false,anim:anim,reset:function(){st.t=0;}};}
-  function buildBrand(){var b=mkArr(),k=0,r;
-    var core=fBlob(b,k,Math.round(N*0.16),0,0,0,0.34);k=core.k;
-    var radii=[0.8,1.3,1.85,2.35];for(var ri=0;ri<radii.length;ri++){r=fRing(b,k,Math.round(N*0.1),radii[ri],0.035);k=r.k;}
-    r=fBlob(b,k,Math.round(N*0.12),0,0,0,2.4);k=r.k;
-    var pS=k,pC=N-k,pAng=new Float32Array(pC);for(var c=0;c<pC;c++){var th=Math.random()*6.2832;pAng[c]=th;var o=k*3;b[o]=Math.cos(th)*0.6;b[o+1]=Math.sin(th)*0.6;b[o+2]=(Math.random()-0.5)*0.03;k++;}
-    var st={pt:0};
-    function anim(p,dt){st.pt=(st.pt+dt)%1500;var ph=st.pt/1500,rr=0.45+ph*2.1;
-      for(var c=0;c<pC;c++){var o=(pS+c)*3,a=pAng[c];p[o]=Math.cos(a)*rr;p[o+1]=Math.sin(a)*rr;}
-      var cp=1+0.14*Math.sin(st.pt*0.018);for(var i=0;i<core.n;i++){var q=(core.s+i)*3;p[q]*=cp;p[q+1]*=cp;p[q+2]*=cp;}}
-    return {name:'Get seen by more people',desc:'',base:b,flat:true,anim:anim,reset:function(){st.pt=0;}};}
+    return {name:'Play an immersive 3D game',desc:'',base:b,flat:false,anim:anim,st:st,chC:{x:chCX,y:chCY,z:chCZ},reset:function(){st.t=0;st.jT=null;st.landT=-9;st.landK=0;st.orbBT=-9;}};}
+  function buildBrand(){var b=mkArr(),k=0;
+    /* RADAR: a rotating sweep arm + PEOPLE walking in from the edge toward the centre */
+    var coreS=k,coreN=Math.round(N*0.10);for(var jc=0;jc<coreN;jc++){var o=k*3;if(jc<coreN*0.42){var a=Math.random()*6.2832,rr=Math.sqrt(Math.random())*0.065;b[o]=Math.cos(a)*rr;b[o+1]=Math.sin(a)*rr;}else{var a2=Math.random()*6.2832,rr2=0.17+(Math.random()-0.5)*0.022;b[o]=Math.cos(a2)*rr2;b[o+1]=Math.sin(a2)*rr2;}b[o+2]=(Math.random()-0.5)*0.03;k++;}var core={s:coreS,n:coreN};
+    var ringR=[0.85,1.5,2.15];for(var ri=0;ri<3;ri++){var rn=Math.round(N*0.05);for(var jr=0;jr<rn;jr++){var o=k*3,a=Math.random()*6.2832,rr=ringR[ri]+(Math.random()-0.5)*0.03;b[o]=Math.cos(a)*rr;b[o+1]=Math.sin(a)*rr;b[o+2]=(Math.random()-0.5)*0.03;k++;}}
+    var swS=k,swN=Math.round(N*0.10),swR=new Float32Array(swN);for(var js=0;js<swN;js++){var o=k*3,rr=Math.random()*2.35;swR[js]=rr;b[o]=rr;b[o+1]=(Math.random()-0.5)*0.02;b[o+2]=0.02;k++;}
+    var W=22,wS=k,wN=N-k,per=Math.floor(wN/W),used=per*W;
+    var figOx=new Float32Array(per),figOy=new Float32Array(per),hC=Math.round(per*0.32);
+    for(var jf=0;jf<per;jf++){if(jf<hC){var a=Math.random()*6.2832,rr=Math.sqrt(Math.random())*0.04;figOx[jf]=Math.cos(a)*rr;figOy[jf]=0.14+Math.sin(a)*rr;}else{var tt=Math.random();figOx[jf]=(Math.random()-0.5)*(0.06-tt*0.03);figOy[jf]=-0.12+tt*0.22;}}
+    var wAng=new Float32Array(W),wPh=new Float32Array(W),wSp=new Float32Array(W);
+    for(var wi=0;wi<W;wi++){wAng[wi]=Math.random()*6.2832;wPh[wi]=Math.random();wSp[wi]=0.055+Math.random()*0.05;}
+    var Redge=2.35,Rin=0.14;
+    for(var wb=0;wb<W;wb++){var prog=wPh[wb],rB=Redge-prog*(Redge-Rin),ca=Math.cos(wAng[wb]),sa=Math.sin(wAng[wb]),sB=Math.min(prog/0.12,(1-prog)/0.12,1);if(sB<0)sB=0;
+      for(var jb=0;jb<per;jb++){var g=(wS+wb*per+jb)*3;b[g]=ca*rB+figOx[jb]*sB;b[g+1]=sa*rB+figOy[jb]*sB;b[g+2]=(Math.random()-0.5)*0.03;}}
+    for(var ku=wS+used;ku<N;ku++){var o=ku*3,a=Math.random()*6.2832,rr=Math.sqrt(Math.random())*0.2;b[o]=Math.cos(a)*rr;b[o+1]=Math.sin(a)*rr;b[o+2]=0;}
+    var st={abs:0};
+    function anim(p,dt){st.abs+=dt;var t=st.abs*0.001,sweep=(t*3.0)%6.2832,cs=Math.cos(sweep),sn=Math.sin(sweep);
+      for(var s=0;s<swN;s++){var o=(swS+s)*3,rr=swR[s];p[o]=cs*rr;p[o+1]=sn*rr;}
+      for(var w=0;w<W;w++){var prog=(wPh[w]+t*wSp[w])%1,r=Redge-prog*(Redge-Rin),ang=wAng[w],cx=Math.cos(ang)*r,cy=Math.sin(ang)*r,
+        sc=Math.min(prog/0.12,(1-prog)/0.12,1);if(sc<0)sc=0;
+        var ad=Math.atan2(Math.sin(sweep-ang),Math.cos(sweep-ang)),ping=(r>0.25&&Math.abs(ad)<0.16)?(1-Math.abs(ad)/0.16):0,
+        bob=Math.sin(t*6.0+w*1.7)*0.014*sc,fs=sc*(1+ping*0.5);
+        for(var jf2=0;jf2<per;jf2++){var g=(wS+w*per+jf2)*3;p[g]=cx+figOx[jf2]*fs;p[g+1]=cy+figOy[jf2]*fs+bob;}}
+      var cp=1+0.05*Math.sin(t*3.0);for(var i=0;i<core.n;i++){var q=(core.s+i)*3;p[q]*=cp;p[q+1]*=cp;}}
+    return {name:'Get seen by more people',desc:'',base:b,flat:true,anim:anim,reset:function(){st.abs=0;}};}
   function buildFunnel(){var b=mkArr(),k=0,topR=1.7,botR=0.26,topY=1.4,botY=-0.55;
     var wallN=Math.round(N*0.36);for(var j=0;j<wallN;j++){var o=k*3,h=Math.random(),rad=topR-(topR-botR)*h,th=Math.random()*6.2832;b[o]=Math.cos(th)*rad;b[o+1]=topY-(topY-botY)*h;b[o+2]=Math.sin(th)*rad;k++;}
     var lv=[0.0,0.25,0.5,0.75,1.0];for(var li=0;li<lv.length;li++){var rad=topR-(topR-botR)*lv[li],y=topY-(topY-botY)*lv[li],rn=Math.round(N*0.03);for(var j2=0;j2<rn;j2++){var o=k*3,th2=Math.random()*6.2832;b[o]=Math.cos(th2)*rad;b[o+1]=y;b[o+2]=Math.sin(th2)*rad;k++;}}
     var spN=Math.round(N*0.08);for(var j3=0;j3<spN;j3++){var o=k*3,th3=Math.random()*6.2832;b[o]=Math.cos(th3)*botR;b[o+1]=botY-Math.random()*0.55;b[o+2]=Math.sin(th3)*botR;k++;}
     var fS=k,fC=N-k,ph=new Float32Array(fC),ang=new Float32Array(fC),rj=new Float32Array(fC);
-    for(var c=0;c<fC;c++){ph[c]=Math.random();ang[c]=Math.random()*6.2832;rj[c]=0.15+Math.random()*0.85;var o=(fS+c)*3;b[o]=0;b[o+1]=topY;b[o+2]=0;}
+    for(var c=0;c<fC;c++){ph[c]=Math.random();ang[c]=Math.random()*6.2832;rj[c]=0.15+Math.random()*0.85;var u0=ph[c],y0,rad0;if(u0<0.7){var uu0=u0/0.7;y0=topY-uu0*(topY-botY);rad0=(topR-(topR-botR)*uu0)*rj[c];}else{var u20=(u0-0.7)/0.3;y0=botY-u20*1.32;rad0=botR*(0.25+0.4*rj[c]);}var o=(fS+c)*3;b[o]=Math.cos(ang[c])*rad0;b[o+1]=y0;b[o+2]=Math.sin(ang[c])*rad0;}
     var st={t:0};
-    function anim(p,dt){st.t+=dt*0.0006;for(var c=0;c<fC;c++){var u=(ph[c]+st.t)%1,y,rad;if(u<0.7){var uu=u/0.7;y=topY-uu*(topY-botY);rad=(topR-(topR-botR)*uu)*rj[c];}else{var u2=(u-0.7)/0.3;y=botY-u2*1.5;rad=botR*(0.25+0.4*rj[c]);}var o=(fS+c)*3;p[o]=Math.cos(ang[c])*rad;p[o+1]=y;p[o+2]=Math.sin(ang[c])*rad;}}
-    return {name:'Turn visitors into customers',desc:'',base:b,flat:false,anim:anim,reset:function(){st.t=0;}};}
-  function buildFlywheel(){var b=mkArr(),k=0,R=1.95,hubR=0.32,NODES=6;
+    function anim(p,dt){st.t+=dt*0.0006;
+      for(var c=0;c<fC;c++){var o=(fS+c)*3;
+        var u=(ph[c]+st.t)%1,y,rad;if(u<0.7){var uu=u/0.7;y=topY-uu*(topY-botY);rad=(topR-(topR-botR)*uu)*rj[c];}else{var u2=(u-0.7)/0.3;y=botY-u2*1.32;rad=botR*(0.25+0.4*rj[c]);}p[o]=Math.cos(ang[c])*rad;p[o+1]=y;p[o+2]=Math.sin(ang[c])*rad;}}
+    return {name:'Turn visitors into customers',desc:'',base:b,flat:false,anim:anim,st:st,reset:function(){st.t=0;}};}
+  function buildFlywheel(){var b=mkArr(),k=0,R=1.95,hubR=0.24,NODES=6;
     var gr=new Float32Array(N),ga=new Float32Array(N),typ=new Uint8Array(N),ndx=new Float32Array(N),ndy=new Float32Array(N),ndi=new Int8Array(N);
-    function core(){var o=k*3,a=Math.random()*6.2832,rr=Math.sqrt(Math.random())*0.4;b[o]=Math.cos(a)*rr;b[o+1]=Math.sin(a)*rr;b[o+2]=(Math.random()-0.5)*0.05;typ[k]=2;ndi[k]=-1;k++;}
+    function core(){var o=k*3,u=Math.random()*2-1,th=Math.random()*6.2832,rr=Math.cbrt(Math.random())*0.34,sx=Math.sqrt(1-u*u);
+      b[o]=Math.cos(th)*sx*rr;b[o+1]=u*rr;b[o+2]=Math.sin(th)*sx*rr;typ[k]=2;ndi[k]=-1;k++;}
     function rim(rad,ang){var o=k*3;b[o]=Math.cos(ang)*rad;b[o+1]=Math.sin(ang)*rad;b[o+2]=(Math.random()-0.5)*0.05;gr[k]=rad;ga[k]=ang;typ[k]=1;ndi[k]=-1;k++;}
     function st0(x,y){var o=k*3;b[o]=x;b[o+1]=y;b[o+2]=(Math.random()-0.5)*0.05;gr[k]=Math.sqrt(x*x+y*y);ga[k]=Math.atan2(y,x);typ[k]=0;ndi[k]=-1;k++;}
     function nodeP(cx,cy,ni){var o=k*3,a=Math.random()*6.2832,rr=Math.sqrt(Math.random())*0.27,px=cx+Math.cos(a)*rr,py=cy+Math.sin(a)*rr;b[o]=px;b[o+1]=py;b[o+2]=(Math.random()-0.5)*0.05;gr[k]=Math.sqrt(px*px+py*py);ga[k]=Math.atan2(py,px);ndx[k]=cx;ndy[k]=cy;ndi[k]=ni;typ[k]=3;k++;}
-    var coreN=Math.round(N*0.12);for(var j=0;j<coreN;j++)core();
+    var coreN=Math.round(N*0.11);for(var j=0;j<coreN;j++)core();
     var rimN=Math.round(N*0.22);for(var j2=0;j2<rimN;j2++)rim(R+(Math.random()-0.5)*0.13,Math.random()*6.2832);
-    var spkN=Math.round(N*0.22);for(var j3=0;j3<spkN;j3++){var ni=(Math.random()*NODES)|0,a=ni/NODES*6.2832,rr=hubR+Math.random()*(R-hubR-0.24);st0(Math.cos(a)*rr,Math.sin(a)*rr);}
+    var spkN=Math.round(N*0.18);for(var j3=0;j3<spkN;j3++){var ni=(Math.random()*NODES)|0,a=ni/NODES*6.2832,rr=hubR+Math.random()*(R-hubR-0.24);st0(Math.cos(a)*rr,Math.sin(a)*rr);}
     var per=Math.floor((N-k)/NODES);for(var ni2=0;ni2<NODES;ni2++){var a=ni2/NODES*6.2832,cnt=(ni2===NODES-1)?(N-k):per,cx=Math.cos(a)*R,cy=Math.sin(a)*R;for(var j4=0;j4<cnt;j4++)nodeP(cx,cy,ni2);}
-    var st={ang:0,vel:0.0003,push:1100,mom:0.3,active:0,nt:0};
-    function anim(p,dt){st.push-=dt;if(st.push<=0){st.vel+=0.0006;st.push=2200;}st.vel*=0.9985;if(st.vel<0.0002)st.vel=0.0002;if(st.vel>0.0017)st.vel=0.0017;st.ang+=st.vel*dt;st.mom=(st.vel-0.0002)/0.0015;if(st.mom<0)st.mom=0;if(st.mom>1)st.mom=1;
+    var st={ang:0,vel:0.00032,push:1100,mom:0,active:0,nt:0,cph:0};
+    function anim(p,dt){st.vel+=dt*0.00000058;if(st.vel>0.0021)st.vel=0.0021;st.ang+=st.vel*dt;st.mom=(st.vel-0.0003)/0.0018;if(st.mom<0)st.mom=0;if(st.mom>1)st.mom=1;
       st.nt+=dt;if(st.nt>1300){st.nt=0;st.active=(st.active+1)%NODES;}
-      var A=st.ang,cp=1+0.13*Math.sin(st.ang*4),npul=1+0.24*Math.sin(st.nt/1300*Math.PI);
+      var A=st.ang,cp=1+0.12*Math.sin(A*5.5),npul=1+0.24*Math.sin(st.nt/1300*Math.PI);
       for(var i=0;i<N;i++){var t=typ[i],o=i*3;if(t===1){var a=ga[i]+A;p[o]=Math.cos(a)*gr[i];p[o+1]=Math.sin(a)*gr[i];}else if(t===0){var a0=ga[i]+A;p[o]=Math.cos(a0)*gr[i];p[o+1]=Math.sin(a0)*gr[i];}else if(t===2){p[o]*=cp;p[o+1]*=cp;}else if(t===3){var a3=ga[i]+A,px=Math.cos(a3)*gr[i],py=Math.sin(a3)*gr[i];if(ndi[i]===st.active){var ca=ndi[i]/NODES*6.2832+A,ccx=Math.cos(ca)*R,ccy=Math.sin(ca)*R;px=ccx+(px-ccx)*npul;py=ccy+(py-ccy)*npul;}p[o]=px;p[o+1]=py;}}}
-    return {name:'Growth that compounds itself',desc:'',base:b,flat:true,anim:anim,reset:function(){st.ang=0;st.vel=0.0003;st.push=1100;st.active=0;st.nt=0;},st:st,NODES:NODES,R:R};}
+    return {name:'Growth that compounds itself',desc:'',base:b,flat:true,anim:anim,reset:function(){st.ang=0;st.vel=0.00032;st.push=1100;st.active=0;st.nt=0;st.cph=0;},st:st,NODES:NODES,R:R};}
   function init(THREE){
     if(THREE.ColorManagement)THREE.ColorManagement.enabled=false;
-    var renderer=new THREE.WebGLRenderer({canvas:canvas,antialias:true,alpha:true});
+    var renderer=new THREE.WebGLRenderer({canvas:canvas,antialias:true,alpha:true,powerPreference:'high-performance'});
     renderer.setClearColor(0x000000,0);var PR=Math.min(window.devicePixelRatio||1,2);renderer.setPixelRatio(PR);
-    /* If the browser drops this canvas's GPU context (driver hiccup, GPU switch, memory pressure),
-       recover automatically instead of leaving the hero permanently blank. */
-    canvas.addEventListener('webglcontextlost',function(e){ e.preventDefault(); if(typeof raf!=='undefined'&&raf){ cancelAnimationFrame(raf); raf=null; } },false);
-    canvas.addEventListener('webglcontextrestored',function(){ setTimeout(function(){ try{ load(0); }catch(_){} },80); },false);
-    var scene=new THREE.Scene(),camera=new THREE.PerspectiveCamera(50,1,0.1,100);camera.position.z=5.45;
+    var scene=new THREE.Scene(),camera=new THREE.PerspectiveCamera(50,1,0.1,100);camera.position.z=6.2;
     function buildBars(){var b=mkArr(),k=0,i,j,o;
-      var yb=-1.35,bw=0.30,xs=[-1.75,-0.9,-0.05,0.8,1.65],hts=[0.55,0.95,1.45,1.95,2.55];
-      var barBudget=Math.round(N*0.62),barTot=0;for(i=0;i<5;i++)barTot+=hts[i];
-      var meta=[];
-      for(i=0;i<5;i++){var cnt=(i===4)?(barBudget-k):Math.round(barBudget*hts[i]/barTot);var s=k;for(j=0;j<cnt&&k<barBudget;j++){o=k*3;var zz=(Math.random()-0.5)*0.56;if(Math.random()<0.32)zz=(Math.random()<0.5?-0.28:0.28);var yy=(Math.random()<0.2)?hts[i]-Math.random()*0.06:Math.random()*hts[i];var xx=xs[i]+(Math.random()-0.5)*bw*2;if(Math.random()<0.22)xx=xs[i]+(Math.random()<0.5?-bw:bw);b[o]=xx;b[o+1]=yb+yy;b[o+2]=zz;k++;}meta.push({s:s,n:k-s});}
-      var axisN=Math.round(N*0.06);for(j=0;j<axisN;j++){o=k*3;b[o]=-2.0+Math.random()*3.9;b[o+1]=yb-0.05+(Math.random()-0.5)*0.05;b[o+2]=(Math.random()-0.5)*0.1;k++;}
-      var x0=-1.9,y0=-0.55,x1=1.7,y1=1.5,nx=-(y1-y0),ny=(x1-x0),ln=Math.hypot(nx,ny);nx/=ln;ny/=ln;
-      var arrowReserve=Math.round(N*0.06),lineEnd=N-arrowReserve;
-      for(;k<lineEnd;k++){o=k*3;var t=Math.random(),off=(Math.random()-0.5)*0.07;b[o]=x0+(x1-x0)*t+nx*off;b[o+1]=y0+(y1-y0)*t+ny*off;b[o+2]=(Math.random()-0.5)*0.1;}
-      for(;k<N;k++){o=k*3;var ww=Math.random()<0.5,tt=Math.random();if(ww){b[o]=x1-0.36*tt;b[o+1]=y1-0.05*tt;}else{b[o]=x1-0.05*tt;b[o+1]=y1-0.36*tt;}b[o]+=(Math.random()-0.5)*0.05;b[o+1]+=(Math.random()-0.5)*0.05;b[o+2]=(Math.random()-0.5)*0.1;}
+      var yb=-1.6,bw=0.20,xs=[-1.75,-0.9,-0.05,0.8,1.65],hts=[0.5,0.9,1.32,1.72,2.2];/* narrower bars => clear gap between columns (user: separate the columns properly). centres 0.85 apart, bar span 0.40, gap 0.45 */
+      var barBudget=Math.round(N*0.52),barTot=0;for(i=0;i<5;i++)barTot+=hts[i];
+      var meta=[],bTgt=new Float32Array(barBudget);
+      for(i=0;i<5;i++){var cnt=(i===4)?(barBudget-k):Math.round(barBudget*hts[i]/barTot);var s=k;for(j=0;j<cnt&&k<barBudget;j++){o=k*3;var zz=(Math.random()-0.5)*0.5;if(Math.random()<0.3)zz=(Math.random()<0.5?-0.25:0.25);var yy=Math.random()*hts[i];var xx=xs[i]+(Math.random()-0.5)*bw*2;if(Math.random()<0.22)xx=xs[i]+(Math.random()<0.5?-bw:bw);bTgt[k]=yy;b[o]=xx;b[o+1]=yb;b[o+2]=zz;k++;}meta.push({s:s,n:k-s});}
+      var axisN=Math.round(N*0.05);for(j=0;j<axisN;j++){o=k*3;b[o]=-2.0+Math.random()*3.9;b[o+1]=yb-0.05+(Math.random()-0.5)*0.05;b[o+2]=(Math.random()-0.5)*0.1;k++;}
+      /* $ money icons — MORE for TALLER bars; base collapsed at the baseline, they bloom up as the bars grow */
+      var symsPerBar=[1,2,3,4,6],totalSyms=0;/* thinned: one less $ per pillar (user: too messy) */for(i=0;i<5;i++)totalSyms+=symsPerBar[i];
+      var ARN=460;/* dots reserved for the rising trend arrow */
+      var symS=k,symBudget=N-k-ARN,dps=Math.floor(symBudget/totalSyms);
+      var sBar=new Int8Array(totalSyms),sCx=new Float32Array(totalSyms),sUp=new Float32Array(totalSyms),sPh=new Float32Array(totalSyms);
+      var symOfDot=new Int16Array(symBudget),gox=new Float32Array(symBudget),goy=new Float32Array(symBudget);
+      var syc=0,dc=0;
+      for(i=0;i<5;i++){for(var si=0;si<symsPerBar[i];si++){
+        sBar[syc]=i;sCx[syc]=(Math.random()-0.5)*bw*1.7;sUp[syc]=0.22+Math.random()*0.5;sPh[syc]=Math.random()*6.2832;
+        for(var d=0;d<dps&&k<N;d++){o=k*3;var u=Math.random(),ox,oy;
+          if(u<0.30){ox=(Math.random()-0.5)*0.02;oy=-0.07+Math.random()*0.14;}
+          else{var ss=Math.random(),aa;if(ss<0.5){aa=(ss/0.5)*1.5*Math.PI;ox=Math.cos(aa)*0.045;oy=0.04+Math.sin(aa)*0.04;}else{aa=(0.5-((ss-0.5)/0.5)*1.5)*Math.PI;ox=Math.cos(aa)*0.045;oy=-0.04+Math.sin(aa)*0.04;}}
+          symOfDot[dc]=syc;gox[dc]=ox;goy[dc]=oy;b[o]=xs[i]+sCx[syc];b[o+1]=yb;b[o+2]=0.25;k++;dc++;}
+        syc++;}}
+      /* RISING TREND ARROW — the classic bold "sales going up" diagonal: a straight foreground line
+         cutting from the first bar's base to high over the last bar, ending in a BIG solid arrowhead.
+         Tip kept INSIDE the frame (the old bar-top path ran the head off the top of the stage). */
+      var AP=[[-1.95,yb+1.75],[1.72,yb+3.55]];/* raised clear ABOVE the $ money bloom — no overlap (user) */
+      var segL=[],totL=0;for(i=0;i<AP.length-1;i++){var dxA=AP[i+1][0]-AP[i][0],dyA=AP[i+1][1]-AP[i][1];segL.push(Math.sqrt(dxA*dxA+dyA*dyA));totL+=segL[i];}
+      var thA=Math.atan2(AP[1][1]-AP[0][1],AP[1][0]-AP[0][0]),cA=Math.cos(thA),sA=Math.sin(thA);/* arrowhead aligned to the line */
+      var arS=k,arLineN=Math.round(ARN*0.58),arHeadN=Math.min(ARN,N-k)-arLineN;
+      var au=new Float32Array(arLineN),ajx=new Float32Array(arLineN),ajy=new Float32Array(arLineN);
+      for(j=0;j<arLineN&&k<N;j++){o=k*3;au[j]=Math.random();ajx[j]=(Math.random()-0.5)*0.055;ajy[j]=(Math.random()-0.5)*0.055;
+        var bp7=apath(Math.min(au[j],0.198));b[o]=bp7[0]+ajx[j];b[o+1]=bp7[1]+ajy[j];b[o+2]=0.45;k++;}/* base = the arrow's t=0 DRAW state (~20%, head-started), so when the hold begins the draw CONTINUES from here instead of collapsing the finished arrow and redrawing it (user: arrow starts then restarts, not smooth) */
+      var ahx=new Float32Array(arHeadN),ahy=new Float32Array(arHeadN),tip0=apath(0.198);/* head base rides the line-tip at t=0 (collapsed, hbe=0) — matches the anim so there's no snap */
+      for(j=0;j<arHeadN&&k<N;j++){o=k*3;var rr7=Math.sqrt(Math.random()),wy7=(Math.random()*2-1)*0.21*rr7,lx7=-0.42*rr7;/* BIG filled triangle: tip at 0, fanning back */
+        ahx[j]=lx7*cA-wy7*sA;ahy[j]=lx7*sA+wy7*cA;b[o]=tip0[0];b[o+1]=tip0[1];b[o+2]=0.45;k++;}
+      function apath(u){var d=u*totL;for(var q=0;q<segL.length;q++){if(d<=segL[q]||q===segL.length-1){var f=segL[q]>0?d/segL[q]:0;if(f>1)f=1;return [AP[q][0]+(AP[q+1][0]-AP[q][0])*f,AP[q][1]+(AP[q+1][1]-AP[q][1])*f];}d-=segL[q];}return AP[AP.length-1];}
+      for(;k<N;k++){o=k*3;b[o]=xs[(Math.random()*5)|0]+(Math.random()-0.5)*bw;b[o+1]=yb;b[o+2]=(Math.random()-0.5)*0.1;}
       var st={pt:0};
-      function anim(p,dt){st.pt=(st.pt+dt)%2800;var ph=st.pt/2800;for(var bi=0;bi<meta.length;bi++){var m=meta[bi],gg=0.42+0.58*Math.min(1,Math.max(0,(ph-bi*0.05))/0.5);for(var c=0;c<m.n;c++){var q=(m.s+c)*3;p[q+1]=yb+(b[q+1]-yb)*gg;}}}
+      /* bars grow up in SEQUENCE (left to right), then hold grown; $ money blooms out of each bar as it finishes. The morph snapshots the grown state, so there's no shrink-back. */
+      function bg(bi,t){return ease(Math.min(1,Math.max(0,(t-bi*230)/860)));}
+      function anim(p,dt){st.pt+=dt;var t=st.pt;
+        for(var bi=0;bi<meta.length;bi++){var m=meta[bi],g=bg(bi,t);for(var c=0;c<m.n;c++){var idx=m.s+c;p[idx*3+1]=yb+bTgt[idx]*g;}}
+        for(var dd=0;dd<dc;dd++){var sy=symOfDot[dd],bi2=sBar[sy],q2=(symS+dd)*3,g2=bg(bi2,t),topY=yb+hts[bi2]*g2,re=Math.max(0,Math.min(1,(t-(bi2*230+700))/620)),bob=Math.sin(t*0.0027+sPh[sy])*0.05*re,yT=topY+sUp[sy]+goy[dd]+bob;p[q2]=xs[bi2]+sCx[sy]*re+gox[dd]*re;p[q2+1]=topY+(yT-topY)*re;p[q2+2]=0.25;}
+        /* the trend arrow DRAWS itself from the first frames of the scene (head-started so there is
+           no invisible window), fully formed by ~1s and on screen for the whole hold + both morphs */
+        var ap=Math.max(0,Math.min(1,(t+400)/1400)),ae7=ap*ap*(3-2*ap);
+        for(var la=0;la<arLineN;la++){var q7=(arS+la)*3,ue=au[la]<ae7?au[la]:ae7,pp=apath(ue);p[q7]=pp[0]+ajx[la];p[q7+1]=pp[1]+ajy[la];p[q7+2]=0.45;}
+        var hb=Math.max(0,Math.min(1,(ap-0.86)/0.14)),hbe=hb*hb*(3-2*hb),pulse=1+0.05*Math.sin(t*0.004)*hbe,hp7=apath(ae7);
+        for(var ha=0;ha<arHeadN;ha++){var q8=(arS+arLineN+ha)*3;p[q8]=hp7[0]+ahx[ha]*hbe*pulse;p[q8+1]=hp7[1]+ahy[ha]*hbe*pulse;p[q8+2]=0.45;}
+      }
       return {name:'Increase sales month after month',desc:'',base:b,flat:true,anim:anim,reset:function(){st.pt=0;}};}
     var shapes=[buildWebsite(),buildApp(),buildPong(),buildGame3D(),buildBrand(),buildFunnel(),buildBars(),buildFlywheel()],S=shapes.length;
     /* normalise every scene to the same footprint, then centre each shape vertically in the full-bleed banner (caption floats at the banner's bottom edge) */
-    (function(){var TGT=2.04,YMID=0.12;for(var si=0;si<shapes.length;si++){var b=shapes[si].base,mnx=1e9,mxx=-1e9,ys=new Float32Array(N);for(var ii=0;ii<N;ii++){var x=b[ii*3],y=b[ii*3+1];ys[ii]=y;if(x<mnx)mnx=x;if(x>mxx)mxx=x;}ys.sort();var lo=ys[Math.floor(N*0.05)],hi=ys[Math.min(N-1,Math.floor(N*0.95))];var hw=(mxx-mnx)*0.5,hh=(hi-lo)*0.5;var he=Math.max(hw,hh)||1;var nm=shapes[si].name;var mul=nm==='A game people keep playing'?1.42:(nm==='Turn visitors into customers'?0.85:(nm==='Play an immersive 3D game'?1.05:(nm==='A website people actually use'?1.36:(nm==='Increase sales month after month'?1.12:(nm==='Get seen by more people'?1.18:1)))));var dy=nm==='Play an immersive 3D game'?-0.34:0;shapes[si].scl=TGT/he*mul;shapes[si].posY=YMID-(lo+hi)*0.5*shapes[si].scl+dy;}})();
+    (function(){var TGT=2.04,YMID=0.12;for(var si=0;si<shapes.length;si++){var b=shapes[si].base,mnx=1e9,mxx=-1e9,ys=new Float32Array(N);for(var ii=0;ii<N;ii++){var x=b[ii*3],y=b[ii*3+1];ys[ii]=y;if(x<mnx)mnx=x;if(x>mxx)mxx=x;}ys.sort();var lo=ys[Math.floor(N*0.05)],hi=ys[Math.min(N-1,Math.floor(N*0.95))];var hw=(mxx-mnx)*0.5,hh=(hi-lo)*0.5;var he=Math.max(hw,hh)||1;var nm=shapes[si].name;var mul=nm==='A game people keep playing'?1.42:(nm==='Turn visitors into customers'?0.85:(nm==='Play an immersive 3D game'?1.12:(nm==='A website people actually use'?1.36:(nm==='Increase sales month after month'?1.12:(nm==='Get seen by more people'?1.18:1)))));var dy=nm==='Play an immersive 3D game'?0.18:0;shapes[si].scl=TGT/he*mul;shapes[si].posY=YMID-(lo+hi)*0.5*shapes[si].scl+dy;if(nm==='Increase sales month after month'){shapes[si].posY=YMID-0.30*shapes[si].scl;}shapes[si].posX=-(mnx+mxx)*0.5*shapes[si].scl+(nm==='Play an immersive 3D game'?0.85:0);}})();
+    var gameBasePosX=shapes[3]?shapes[3].posX:0;/* game3d gets pulled LEFT out of the right-column box in resize() */
+    var gameFieldC=new THREE.Vector3(0,-0.85,1.2),_cwv=new THREE.Vector3();/* the FIELD's centre of mass (terrain is symmetric in local x, mid-depth z=1.2) + scratch vec: the camera pins THE FIELD to a fixed screen-x every frame (exact, no lerp lag). User: "the character is not what determines where the middle is, it's the field" — the hero roams within the frame; the WORLD stays centred. */
+    var fnBaseScl=shapes[5]?shapes[5].scl:1,fnBasePosY=shapes[5]?shapes[5].posY:0;/* funnel gets a mobile-only scale-down in resize() so its rim clears the headline */
+    var gameBaseScl=shapes[3]?shapes[3].scl:1,gameBasePosY=shapes[3]?shapes[3].posY:0;/* game gets a mobile-only scale-UP in resize() (user: give the animation good space) */
+    var s4BaseScl=shapes[4]?shapes[4].scl:1,s4BasePosY=shapes[4]?shapes[4].posY:0,s6BaseScl=shapes[6]?shapes[6].scl:1,s6BasePosY=shapes[6]?shapes[6].posY:0,s6BasePosX=shapes[6]?(shapes[6].posX||0):0,s1BasePosY=shapes[1]?shapes[1].posY:0;/* radar + bars get mobile-only scale-downs so their captions clear the dots; bars posX captured so it can be re-centred in its right-column zone (user: not too close to the text, keep it centred) */
     var posn=mkArr();posn.set(shapes[0].base);
     var rnd=new Float32Array(N),tdir=mkArr();for(var i=0;i<N;i++){rnd[i]=Math.random();var o=i*3;tdir[o]=Math.random()*2-1;tdir[o+1]=Math.random()*2-1;tdir[o+2]=Math.random()*2-1;}
     var geo=new THREE.BufferGeometry(),posAttr=new THREE.BufferAttribute(posn,3);if(posAttr.setUsage&&THREE.DynamicDrawUsage)posAttr.setUsage(THREE.DynamicDrawUsage);
     geo.setAttribute('position',posAttr);geo.setAttribute('aRand',new THREE.BufferAttribute(rnd,1));
+    __fadeAttr=new THREE.BufferAttribute(__fadeArr,1);if(__fadeAttr.setUsage&&THREE.DynamicDrawUsage)__fadeAttr.setUsage(THREE.DynamicDrawUsage);geo.setAttribute('aFade',__fadeAttr);
     var mat=new THREE.ShaderMaterial({
-      uniforms:{uSize:{value:2.7},uPR:{value:PR},uGold:{value:0}},
-      vertexShader:'uniform float uSize;uniform float uPR;attribute float aRand;varying float vDepth;void main(){vec4 mv=modelViewMatrix*vec4(position,1.0);gl_Position=projectionMatrix*mv;float dist=-mv.z;vDepth=clamp((dist-4.0)/8.0,0.0,1.0);gl_PointSize=uSize*uPR*(0.85+aRand*0.7)*(9.0/dist);}',
-      fragmentShader:'precision mediump float;uniform mediump float uGold;varying float vDepth;void main(){vec2 uv=gl_PointCoord-0.5;float d=length(uv);float soft=smoothstep(0.5,0.1,d);if(soft<=0.0)discard;vec3 nc=vec3(0.118,0.176,0.94);vec3 fc=vec3(0.55,0.64,0.96);vec3 col=mix(nc,fc,vDepth);col=mix(col,vec3(1.0,0.80,0.10),uGold);float alpha=soft*((0.96-vDepth*0.55)+uGold*0.25);gl_FragColor=vec4(col,alpha);}',
+      uniforms:{uSize:{value:2.7},uPR:{value:PR},uGold:{value:0},uTime:{value:0}},
+      vertexShader:'uniform float uSize;uniform float uPR;attribute float aRand;attribute float aFade;varying float vDepth;varying float vRand;varying float vFade;void main(){vec4 mv=modelViewMatrix*vec4(position,1.0);gl_Position=projectionMatrix*mv;float dist=-mv.z;vDepth=clamp((dist-4.0)/8.0,0.0,1.0);vRand=aRand;vFade=aFade;gl_PointSize=uSize*uPR*(0.85+aRand*0.7)*(9.0/dist)*(0.35+0.65*aFade);}',
+      fragmentShader:'precision mediump float;uniform mediump float uGold;uniform mediump float uTime;varying float vDepth;varying float vRand;varying float vFade;void main(){vec2 uv=gl_PointCoord-0.5;float d=length(uv);float soft=smoothstep(0.5,0.38,d);if(soft<=0.0)discard;vec3 nc=vec3(0.118,0.176,0.94);vec3 fc=vec3(0.55,0.64,0.96);vec3 col=mix(nc,fc,vDepth);col=mix(col,vec3(1.0,0.80,0.10),uGold);float tw=0.90+0.10*sin(uTime*1.7+vRand*6.2831);float alpha=soft*((0.96-vDepth*0.55)+uGold*0.25)*tw*vFade;gl_FragColor=vec4(col,alpha);}',
       transparent:true,depthTest:false,depthWrite:false});
     var points=new THREE.Points(geo,mat);scene.add(points);points.scale.setScalar(shapes[0].scl);points.position.y=shapes[0].posY;
-    var flyIdx=S-1,fly=shapes[flyIdx],fwFill=document.getElementById('fwFill'),fwX=document.getElementById('fwX'),fwLabs=[];for(var li=0;li<fly.NODES;li++)fwLabs.push(document.getElementById('fwL'+li));
-    function posFw(aoff){if(aoff==null)aoff=(fly.st&&fly.st.ang)||0;var w=host.clientWidth||1,h=host.clientHeight||1,asp=w/h,vhw=6.6*0.4663,lr=fly.R*1.12*(fly.scl||1);for(var ni=0;ni<fly.NODES;ni++){var a=ni/fly.NODES*6.2832+aoff,wx=Math.cos(a)*lr,wy=Math.sin(a)*lr,xp=50+(wx/(vhw*asp))*50,yp=50-((wy+(fly.posY||0))/vhw)*50;if(fwLabs[ni]){fwLabs[ni].style.left=xp+'%';fwLabs[ni].style.top=yp+'%';}}}
-    function resize(){var w=host.clientWidth||1,h=host.clientHeight||1;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();points.position.x=0;posFw();}
+    var mobS=1,mobY=0,sceneOff=0;/* mobile: shrink + lift every scene so the dot-caption never overlaps the visual. sceneOff: on desktop the full-bleed stage renders the scene over the RIGHT column */
+    var flyIdx=S-1,fly=shapes[flyIdx],fwLabs=[],fwThr=[];
+    var fnIdx=5,fnl=shapes[fnIdx],fnLabs=[document.getElementById('fnL0'),document.getElementById('fnL1'),document.getElementById('fnL2')];
+    function posFn(){var w=host.clientWidth||1,h=host.clientHeight||1,asp=w/h,vhw=6.6*0.4663,FA=sceneOff?[[1.95,-0.42],[2.10,-0.95],[1.95,-1.48]]:[[2.0,-1.30],[2.0,-1.74],[2.0,-2.18]];/* mobile: stacked beside the spout, clear of the funnel body */for(var i=0;i<3;i++){var wx=(FA[i][0]*(fnl.scl||1)+(fnl.posX||0))*mobS+sceneOff,wy=(FA[i][1]*(fnl.scl||1)+(fnl.posY||0))*mobS+mobY;var xp=50+(wx/(vhw*asp))*50,yp=50-(wy/vhw)*50;if(fnLabs[i]){fnLabs[i].style.left=xp+'%';fnLabs[i].style.top=yp+'%';}}}
+    /* render the funnel gain labels as DOT TEXT so they match the particle look (same sampler style as the caption) */
+    function dotLab(el,fsBase){var txt=el.getAttribute('data-text')||'';if(!txt)return;var D2=Math.min(window.devicePixelRatio||1,2),fs=Math.round((fsBase||21)*D2);
+      var oc=document.createElement('canvas'),o=oc.getContext('2d');if(!o){el.textContent=txt;return;}
+      o.font='700 '+fs+'px Inter, system-ui, sans-serif';var tw=Math.ceil(o.measureText(txt).width)+10;oc.width=tw;oc.height=Math.round(fs*1.5);
+      o.font='700 '+fs+'px Inter, system-ui, sans-serif';o.textBaseline='middle';o.fillStyle='#000';o.fillText(txt,5,oc.height/2);
+      var img;try{img=o.getImageData(0,0,oc.width,oc.height).data;}catch(e){el.textContent=txt;return;}
+      var c=document.createElement('canvas');c.width=oc.width;c.height=oc.height;c.style.width=(oc.width/D2)+'px';c.style.height=(oc.height/D2)+'px';
+      var x2=c.getContext('2d'),st2=Math.max(2,Math.round(0.9*D2));
+      for(var y=0;y<oc.height;y+=st2){for(var x=0;x<oc.width;x+=st2){if(img[(y*oc.width+x)*4+3]>110){x2.beginPath();x2.fillStyle='rgba(37,54,245,'+(0.55+Math.random()*0.4).toFixed(2)+')';x2.arc(x+(Math.random()-0.5)*st2*0.5,y+(Math.random()-0.5)*st2*0.5,1.05*D2,0,6.2832);x2.fill();}}}
+      el.appendChild(c);}
+    for(var fl2=0;fl2<3;fl2++)if(fnLabs[fl2])dotLab(fnLabs[fl2]);
+    window.__heroShapes=shapes;
+    function posFw(aoff){if(aoff==null)aoff=(fly.st&&fly.st.ang)||0;var w=host.clientWidth||1,h=host.clientHeight||1,asp=w/h,vhw=6.6*0.4663,lr=fly.R*1.30*(fly.scl||1)*mobS;for(var ni=0;ni<fly.NODES;ni++){var a=ni/fly.NODES*6.2832+aoff,wx=Math.cos(a)*lr+sceneOff,wy=Math.sin(a)*lr,xp=50+(wx/(vhw*asp))*50,yp=50-((wy+(fly.posY||0)*mobS+mobY)/vhw)*50;if(fwLabs[ni]){fwLabs[ni].style.left=xp+'%';fwLabs[ni].style.top=yp+'%';}}}
+    /* COMPOUNDING labels — each time a sphere passes the TOP of the flywheel, a dot-text label pops and
+       rises: "Brand +", then "Brand ++", then a random compounding gain. Growth stacking on itself. */
+    var fwPop=document.getElementById('fwPop'),fwOn=false,fwPass=0,fwSeq=0,fwT0=-9999,fwX=50,fwY=20,fwRise=7,FWDUR=1500,FSEG=6.2832/fly.NODES;
+    if(fwPop){fwPop.style.display='none';}/* wording removed from the flywheel (user) — the wheel just spins */
+    var FWPOOL=['+ referrals','+ reviews','+ repeat','× reach','+ authority','+ demand'];
+    function fwText(seq){return seq===0?'Brand +':(seq===1?'Brand ++':FWPOOL[(Math.random()*FWPOOL.length)|0]);}
+    function fwEmit(now){if(!fwPop)return;var txt=fwText(fwSeq);fwSeq++;
+      while(fwPop.firstChild)fwPop.removeChild(fwPop.firstChild);fwPop.setAttribute('data-text',txt);dotLab(fwPop,20);
+      var w=host.clientWidth||1,h=host.clientHeight||1,asp=w/h,vhw=6.6*0.4663,lr=fly.R*1.30*(fly.scl||1)*mobS;
+      fwX=50+(sceneOff/(vhw*asp))*50;var fwTopY=50-((lr+0.35+(fly.posY||0)*mobS+mobY)/vhw)*50,fwHubY=50-(((fly.posY||0)*mobS+mobY)/vhw)*50;if(!sceneOff||fwTopY<24){fwY=fwHubY;fwRise=3.2;}else{fwY=fwTopY;fwRise=7;}/* above the top node when there is headroom; otherwise at the HUB so the pop never climbs into the headline */
+      fwPop.style.left=fwX.toFixed(1)+'%';fwPop.style.top=fwY.toFixed(1)+'%';fwT0=now;}
+    function fwTick(now){if(!fwPop)return;var A=fly.st.ang,pass=Math.floor((A-1.5708)/FSEG);
+      if(!fwOn){fwOn=true;fwPass=pass;}else if(pass>fwPass){fwPass=pass;fwEmit(now);}
+      var t=(now-fwT0)/FWDUR;
+      if(t>=0&&t<1){var op,sc;if(t<0.12){op=t/0.12;sc=0.6+0.4*op;}else if(t<0.6){op=1;sc=1;}else{op=1-(t-0.6)/0.4;sc=1+0.14*(t-0.6)/0.4;}
+        fwPop.style.left=fwX+'%';fwPop.style.top=(fwY-t*fwRise).toFixed(2)+'%';fwPop.style.opacity=op.toFixed(2);fwPop.style.transform='translate(-50%,-50%) scale('+sc.toFixed(2)+')';}
+      else fwPop.style.opacity='0';}
+    function fwHide(){fwOn=false;if(fwPop)fwPop.style.opacity='0';}
+    function resize(){var w=host.clientWidth||1,h=host.clientHeight||1;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();mobS=w<620?0.88:(w<830?0.92:0.88);mobY=w<620?0.58:0.5;mat.uniforms.uSize.value=w<620?2.3:2.7;/* phones: finer dots — same scene at ~85% dot size reads more refined, less chunky (user) */
+      var hwX=3.078*(w/h);/* canvas half-width (full-bleed) — used for explosion/debris bounds so they fly edge-to-edge */
+      var wrapEl=host.closest('.sp-hero-in'),hwXw=3.078*(((wrapEl?wrapEl.clientWidth:w)||w)/h);sceneOff=(w>=830)?0.42*hwXw:0;/* sceneOff is based on the CONTENT-WRAP width (not the full-bleed canvas) so every flat scene keeps its exact pre-full-bleed position; the canvas just got wider so debris can bleed to the banner edges */
+      if(shapes[3])shapes[3].posX=sceneOff?gameBasePosX-(sceneOff/(mobS||1))*0.64:gameBasePosX-0.85;/* pulled less far left — the scene sits a touch more RIGHT in its column (user) *//* desktop: pull LEFT out of the right-column box; mobile: drop the desktop right-shift so the scene is CENTERED, not cropped */
+      if(shapes[5]){var fS=sceneOff?1:0.88;shapes[5].scl=fnBaseScl*fS;shapes[5].posY=0.12+(fnBasePosY-0.12)*fS-(sceneOff?0:0.34);}/* mobile: drop the funnel toward its caption — it sat too high, hugging the headline and far from the dot-font (user) */
+      if(shapes[1]){shapes[1].posY=s1BasePosY-(sceneOff?0:0.26);}/* mobile: drop the app PHONE a touch — its top rim grazed the headline (user) */
+      if(shapes[3]){var gS9=sceneOff?1:1.10;shapes[3].scl=gameBaseScl*gS9;shapes[3].posY=0.12+(gameBasePosY-0.12)*gS9;}
+      if(shapes[4]){var r4=sceneOff?1:0.92;shapes[4].scl=s4BaseScl*r4;shapes[4].posY=0.12+(s4BasePosY-0.12)*r4+(sceneOff?0.4:0);}/* lift the radar (DESKTOP only) so its lowest ring clears the dot-caption below it (user: too close to its font); mobile has its own stacked layout and the lift would stab the headline */
+      if(shapes[6]){var r6=sceneOff?1:0.86;shapes[6].scl=s6BaseScl*r6;shapes[6].posY=0.12+(s6BasePosY-0.12)*r6;shapes[6].posX=s6BasePosX+(sceneOff?0.21:0);/* nudge the chart RIGHT so it clears the text on the left and sits centred in its right-column zone (user: not too close, keep it centred) */}
+      window.__hudBR=Math.max(1.6,hwX-sceneOff-0.25);window.__hudBL=Math.max(1.6,hwX+sceneOff-0.25);window.__hudLY=2.55;
+      posFw();}
     resize();if(window.ResizeObserver){try{new ResizeObserver(resize).observe(host);}catch(e){window.addEventListener('resize',resize);}}else window.addEventListener('resize',resize);
-    var dragging=false,lx=0,ly=0,rotY=0,rotX=0,rotYt=0,rotXt=0,glow=0;canvas.style.touchAction='pan-y';
+    var dragging=false,lx=0,ly=0,rotY=0,rotX=0,rotYt=0,rotXt=0,glow=0,hmx=0,hmy=0,pmx=0,pmy=0;canvas.style.touchAction='pan-y';
+    host.addEventListener('pointermove',function(e){var r=host.getBoundingClientRect();hmx=((e.clientX-r.left)/r.width-0.5)*2;hmy=((e.clientY-r.top)/r.height-0.5)*2;});
+    var tpX=0,tpY=0,tpT=0;
+    host.addEventListener('pointerdown',function(e){tpX=e.clientX;tpY=e.clientY;tpT=(window.performance&&performance.now())||0;});
+    host.addEventListener('pointerup',function(e){var dt9=((window.performance&&performance.now())||0)-tpT,dx9=e.clientX-tpX,dy9=e.clientY-tpY;
+      if(dt9<320&&dx9*dx9+dy9*dy9<64&&window.__curShape===3&&!window.__frozen){var gst9=shapes[3].st;if(gst9&&gst9.jT==null)gst9.jT=gst9.t;}});/* TAP on the game = the hero JUMPS */
+    host.addEventListener('pointerleave',function(){hmx=0;hmy=0;});
     canvas.addEventListener('pointerdown',function(e){dragging=true;lx=e.clientX;ly=e.clientY;try{canvas.setPointerCapture(e.pointerId);}catch(_){}});
     window.addEventListener('pointermove',function(e){if(!dragging)return;var dx=e.clientX-lx,dy=e.clientY-ly;lx=e.clientX;ly=e.clientY;rotYt+=dx*0.004;rotXt+=dy*0.004;if(rotXt>0.7)rotXt=0.7;if(rotXt<-0.7)rotXt=-0.7;},{passive:true});
     window.addEventListener('pointerup',function(){dragging=false;});
-    var vis=true,raf=null,start0=0,lastT=0,lastReset=-1,lastShown=-1,HOLD=3200,MORPH=820;
-    function setLabel(i){var s=shapes[i];if(!s)return;if(stageEl)stageEl.textContent=s.desc||s.name;if(descEl)descEl.textContent='';if(tlEl){tlEl.classList.remove('lab-in');void tlEl.offsetWidth;tlEl.classList.add('lab-in');}}
+    /* per-shape hold times: story shapes (app, pong, bars) get longer scenes so they never feel rushed */
+    var vis=true,raf=null,start0=0,lastT=0,lastReset=-1,lastShown=-1,MORPH=820,HOLDS=[3200,5200,4600,7000,3200,3200,4200,3200],OFF=[],CYCLE=0;/* game3d hold: ~3.6s turn+zoom, then settled gameplay */
+    var pongExit=mkArr(),pongCap=false,appExit=mkArr(),appCap=false,barsExit=mkArr(),barsCap=false,gameExit=mkArr(),gameCap=false;/* snapshots of a scene's live end-state (exploded pong / app on its dashboard / grown bars / the WALKED game) so the morph-out flows from THERE, not from the shape's reset base — without the game snapshot the loop CUTS (walked character snaps back to base pose) */
+    for(var hi=0;hi<S;hi++){OFF.push(CYCLE);CYCLE+=HOLDS[hi]+MORPH;}
+    function setLabel(i){var s=shapes[i];if(!s)return;if(stageEl)stageEl.textContent=s.desc||s.name;if(descEl)descEl.textContent='';if(tlEl){var capShift=[0,0,0,48,-16,0,44,0];/* per-shape caption nudge (desktop) AFTER the wrap-anchor root fix: game +48 (its field-locks to 72.5% of the FULL canvas, right of the wrap centre), radar -16 (hub sits left), bars +44 (arrow/axis skew its auto-centre). (user: font must be centred with the visual) */tlEl.style.transform=(sceneOff&&capShift[i]?'translateX('+capShift[i]+'px)':'');tlEl.classList.remove('lab-in');void tlEl.offsetWidth;tlEl.classList.add('lab-in');}}
      setLabel(0);
-    function frame(ts){raf=requestAnimationFrame(frame);if(!vis)return;var now=ts||0;if(!start0)start0=now;if(!lastT)lastT=now;var dt=Math.min(50,now-lastT);lastT=now;var curFlat=true,curScl=shapes[0].scl,curPosY=shapes[0].posY;
-      if(!reduce){var tms=now-start0,seg=HOLD+MORPH,si=(tms/seg)|0,c=si%S,nx=(si+1)%S,within=tms-si*seg;
-        if(within<HOLD){if(c!==lastReset){if(shapes[c].reset)shapes[c].reset();lastReset=c;}posn.set(shapes[c].base);if(shapes[c].anim)shapes[c].anim(posn,dt);curFlat=shapes[c].flat;curScl=shapes[c].scl;curPosY=shapes[c].posY;if(c!==lastShown){lastShown=c;setLabel(c);}}
-        else{var mt=(within-HOLD)/MORPH,em=mt*mt*(3-2*mt),bump=Math.sin(Math.PI*em)*0.65,A=shapes[c].base,B=shapes[nx].base;for(var i=0;i<N*3;i++)posn[i]=A[i]+(B[i]-A[i])*em+tdir[i]*bump;curFlat=false;curScl=shapes[c].scl+(shapes[nx].scl-shapes[c].scl)*em;curPosY=shapes[c].posY+(shapes[nx].posY-shapes[c].posY)*em;lastReset=-1;var sw=em<0.5?c:nx;if(sw!==lastShown){lastShown=sw;setLabel(sw);}}
+    window.__heroJump=function(i){var nw=(window.performance&&performance.now())||lastT||0;i=((i%S)+S)%S;start0=nw-OFF[i]-HOLDS[i]*0.06;lastT=nw;lastReset=-1;window.__frozen=false;if(!raf){lastT=0;raf=requestAnimationFrame(frame);}};
+    window.__heroGameCam=function(ge,ms){/* QA: render the GAME shape through the live game camera at progress ge (0=establish, 1=settled) */
+      window.__frozen=true;if(raf){cancelAnimationFrame(raf);raf=null;}ge=Math.max(0,Math.min(1,ge==null?1:ge));
+      host.classList.remove('show-fn','show-fw');fwHide();for(var fq7=0;fq7<3;fq7++){if(fnLabs[fq7])fnLabs[fq7].className='fn-lab';}/* clear funnel/flywheel DOM overlays — a prior pose(5/7) otherwise leaks its labels over the game render (QA-only artifact; the live loop gates these per shape) */
+      var sh=shapes[3];if(sh.reset)sh.reset();sh.st.camP=ge;__fadeReset();var steps=Math.max(1,Math.round((ms||1400)/16));
+      for(var q=0;q<steps;q++){posn.set(sh.base);if(sh.anim)sh.anim(posn,16);}posAttr.needsUpdate=true;
+      var hss=function(a2,b2,x2){var t2=Math.max(0,Math.min(1,(x2-a2)/(b2-a2)));return t2*t2*(3-2*t2);};
+      var pArc=hss(0.28,0.82,ge),pLow=hss(0.0,0.45,ge),pIn=hss(0.55,1.0,ge);/* mirrors the FIRST visit: close RIGHT tracking -> orbit -> push-in */
+      points.rotation.y=1.05*(1-pArc)-0.09*(ge*5.5)*pArc;points.rotation.x=0.44-0.08*pArc;points.rotation.z=0;/* mirrors the live continuous orbit (wt approx ge*5.5s) */
+      points.scale.setScalar(sh.scl*mobS);points.position.x=(sh.posX||0)*mobS+sceneOff;points.position.y=sh.posY*mobS+mobY;
+      camera.position.z=5.35-0.25*ge-0.55*pIn-0.015*(ge*5.5);camera.position.y=0.40-0.24*pLow-0.02*ge-0.005*(ge*5.5);/* mirrors the live slow constant drift (wt approx ge*5.5s) */
+      points.updateMatrixWorld();_cwv.copy(gameFieldC).applyMatrix4(points.matrixWorld);
+      camera.position.x=_cwv.x-(sceneOff?0.45:0)*0.4663*(camera.position.z-_cwv.z)*camera.aspect;/* mirror live loop: EXACT field-lock at the per-device anchor (desktop ~72.5%, phone centre) */
+      setLabel(3);renderer.render(scene,camera);};
+    if(/[?&]game(=|&|$)/.test(location.search)){setInterval(function(){if(!window.__frozen&&window.__curShape!==3&&window.__heroJump)window.__heroJump(3);},600);}/* QA: add ?game to the URL to review ONLY the 3D game on loop */
+    window.__heroPose=function(i,ms){i=((i%S)+S)%S;window.__frozen=true;if(raf){cancelAnimationFrame(raf);raf=null;}vis=false;var sh=shapes[i];if(sh.reset)sh.reset();__fadeReset();var steps=Math.max(1,Math.round((ms||0)/16));for(var q=0;q<steps;q++){posn.set(sh.base);if(sh.anim)sh.anim(posn,16);}posAttr.needsUpdate=true;points.scale.setScalar(sh.scl*mobS);points.position.x=(sh.posX||0)*mobS+sceneOff;points.position.y=sh.posY*mobS+mobY;points.rotation.y=sh.flat?0:0.65;points.rotation.x=sh.flat?0:-0.06;setLabel(i);if(i===flyIdx){host.classList.add('show-fw');posFw(fly.st.ang);fwSeq=1;fwEmit((window.performance&&performance.now())||0);fwPop.style.opacity='1';fwPop.style.transform='translate(-50%,-50%) scale(1)';}else{host.classList.remove('show-fw');fwHide();}if(i===fnIdx){host.classList.add('show-fn');posFn();for(var fq=0;fq<3;fq++){if(fnLabs[fq])fnLabs[fq].className='fn-lab on';}}else{host.classList.remove('show-fn');}renderer.render(scene,camera);};
+    function frame(ts){raf=requestAnimationFrame(frame);if(window.__frozen)return;if(!vis)return;var now=ts||0;if(!start0)start0=now;if(!lastT)lastT=now;var dt=Math.min(50,now-lastT);lastT=now;var curFlat=true,curScl=shapes[0].scl,curPosY=shapes[0].posY,curPosX=shapes[0].posX||0;
+      if(!reduce){var tms=(now-start0)%CYCLE,c=S-1;for(var ci=0;ci<S;ci++){if(tms<OFF[ci]+HOLDS[ci]+MORPH){c=ci;break;}}var nx=(c+1)%S,within=tms-OFF[c],HOLDC=HOLDS[c];window.__curShape=within<HOLDC?c:nx;
+        if(!(within<HOLDC&&c===1)&&__fadeDirty)__fadeReset();
+        if(within<HOLDC){pongCap=false;appCap=false;barsCap=false;gameCap=false;if(c!==lastReset){if(shapes[c].reset)shapes[c].reset();lastReset=c;}posn.set(shapes[c].base);if(shapes[c].anim)shapes[c].anim(posn,dt);curFlat=shapes[c].flat;curScl=shapes[c].scl;curPosY=shapes[c].posY;curPosX=shapes[c].posX||0;if(c!==lastShown){lastShown=c;setLabel(c);}}
+        else{var mt=(within-HOLDC)/MORPH,em=mt*mt*(3-2*mt),bump=Math.sin(Math.PI*em)*0.22,A=shapes[c].base,B=shapes[nx].base;if(c===2){if(!pongCap){pongExit.set(posn);pongCap=true;}A=pongExit;bump*=0.4;}else if(c===1){if(!appCap){appExit.set(posn);appCap=true;}A=appExit;bump*=0.5;}else if(c===6){if(!barsCap){barsExit.set(posn);barsCap=true;}A=barsExit;bump*=0.5;}else if(c===3){if(!gameCap){gameExit.set(posn);gameCap=true;}A=gameExit;bump*=0.5;}/* GAME: morph out from the WALKED end-state, not the reset base — kills the loop cut */for(var i=0;i<N*3;i++)posn[i]=A[i]+(B[i]-A[i])*em+tdir[i]*bump;curFlat=false;curScl=shapes[c].scl+(shapes[nx].scl-shapes[c].scl)*em;curPosY=shapes[c].posY+(shapes[nx].posY-shapes[c].posY)*em;curPosX=(shapes[c].posX||0)+((shapes[nx].posX||0)-(shapes[c].posX||0))*em;lastReset=-1;var sw=em<0.5?c:nx;if(sw!==lastShown){lastShown=sw;setLabel(sw);}}
         posAttr.needsUpdate=true;
-        if(within<HOLD&&c===flyIdx){host.classList.add('show-fw');posFw(fly.st.ang);var fm=fly.st.mom;if(fwFill)fwFill.style.width=(8+fm*92).toFixed(1)+'%';if(fwX)fwX.textContent=(1.0+fm*1.4).toFixed(1)+'x';for(var lq=0;lq<fwLabs.length;lq++){if(fwLabs[lq])fwLabs[lq].className='fw-lab'+(lq===fly.st.active?' on':'');}}else{host.classList.remove('show-fw');}}
-      if(!dragging){if(curFlat){rotYt*=0.93;rotXt*=0.93;}else{rotYt+=0.0014;}}
-      rotY+=(rotYt-rotY)*0.09;rotX+=(rotXt-rotX)*0.09;glow+=((dragging?1:0)-glow)*0.1;mat.uniforms.uGold.value=glow;points.rotation.y=rotY;points.rotation.x=rotX;points.scale.setScalar(curScl);points.position.y=curPosY;renderer.render(scene,camera);}
+        if(within<HOLDC&&c===flyIdx){host.classList.add('show-fw');posFw(fly.st.ang);fwTick(now);}else{if(fwOn)fwHide();host.classList.remove('show-fw');}
+        if(within<HOLDC&&c===fnIdx){host.classList.add('show-fn');posFn();var ftv=fnl.st?fnl.st.t:9;for(var fq=0;fq<3;fq++){if(fnLabs[fq])fnLabs[fq].className='fn-lab'+(ftv>0.62+fq*0.46?' on':'');}}else{if(host.classList.contains('show-fn')){host.classList.remove('show-fn');for(var fq2=0;fq2<3;fq2++){if(fnLabs[fq2])fnLabs[fq2].className='fn-lab';}}}}
+      var toGame=(within>=HOLDC&&nx===3);
+      if(!(c===3||toGame)){window.__gameArmed=true;}
+      else if(window.__gameArmed){window.__gameArmed=false;window.__gameVisit=(window.__gameVisit||0)+1;}
+      var camZt=6.2,camXt=0,camYt=0,gLock=false,gNDC=0;
+      if(!dragging){
+        if(c===3||toGame){/* CHARACTER-FIRST CINEMATIC: a close TRACKING shot beside him from frame one
+           (his walk fills the frame in profile), a slow ORBIT around to his back, then a final PUSH-IN.
+           Always close, always moving — the character reads in EVERY frame. */
+          var wt=(c===3)?within*0.001:0;
+          var gv=window.__gameVisit||1,gside=(gv%2)?1:-1;/* odd visits track from the RIGHT, even from the LEFT */
+          var gD=(gv>1?3800:6000);
+          var gp=(c===3)?Math.min(1,((within||0)+480)/gD):Math.max(0,((within-HOLDC)/MORPH))*480/gD;/* pre-rolls through the morph-in, continues seamlessly */
+          var gss=function(a2,b2,x2){var t2=Math.max(0,Math.min(1,(x2-a2)/(b2-a2)));return t2*t2*(3-2*t2);};
+          var pArc=gss(0.28,0.82,gp),pLow=gss(0.0,0.45,gp),pIn=gss(0.55,1.0,gp);/* overlapping: settle-down, orbit, push-in */
+          var yawSide=(gside>0?1.05:1.35)*gside;
+          rotYt=yawSide*(1-pArc)-gside*0.09*wt*pArc+(0.03*Math.sin(wt*0.5))*pArc;/* NO stop at his back: the arc hands off into a slow continuous orbit (~0.09 rad/s, same direction) that keeps turning until the 3D ends (user: "no need to stop at his back, keep turning until the animation ends") */
+          rotXt=0.44-0.08*pArc+(0.02*Math.sin(wt*1.6))*pArc;
+          camZt=5.35-0.25*gp-0.55*pIn-0.015*wt;/* CLOSE from frame one (5.35) -> gentle push toward ~4.45; the -0.015*wt keeps a slow constant dolly going AFTER the arc completes so the camera never parks (user: keep moving until the 3D ends) */
+          camYt=0.40-0.24*pLow-0.02*gp-0.005*wt+(0.04*Math.sin(wt*2.6)+0.012*Math.sin(within*0.018))*pArc;/* slow settle keeps sinking too */
+          /* LOCK the hero at his settle framing for the WHOLE journey: track his yaw-swing (he sits at z~2.9,
+             so yaw throws him gZcL*sin(yaw) sideways) AND compensate the push-in (an off-axis subject drifts
+             as the camera dollies, so the framing offset must scale with camera distance). Result: only the
+             ANGLE and ZOOM change; his screen position never moves (user: 3d must stay centred, not start left). */
+          gLock=true;gNDC=sceneOff?0.45:0;/* pin the hero at a FIXED per-device anchor every frame (exact projection below): PHONE = exact screen middle (0), DESKTOP = the right-column point ~72.5% across (user marked it: "this is the point for the desktop, the point for phone is exactly the screen middle — it's different for certain devices"). Only angle+zoom change. */
+          camXt=(sceneOff?0.4:0.05);/* nominal (used only for the cosmetic bank) — real camera.x is set exactly at render time */
+          var gst3=shapes[3].st;if(gst3){gst3.camP=gp;if(gst3.landK){camYt-=gst3.landK*0.07;camZt-=gst3.landK*0.06;}}}/* focus-pull progress + landing dip */
+        else if(curFlat){rotYt*=0.93;rotXt*=0.93;}
+        else{var swayT=0.65+0.15*Math.sin(now*0.0005);rotYt+=(swayT-rotYt)*0.035;rotXt+=(-0.06-rotXt)*0.02;}}
+      rotY+=(rotYt-rotY)*0.09;rotX+=(rotXt-rotX)*0.09;glow+=((dragging?1:0)-glow)*0.1;var ptx=dragging?0.0:hmx*0.13,pty=dragging?0.0:hmy*0.09;pmx+=(ptx-pmx)*0.06;pmy+=(pty-pmy)*0.06;mat.uniforms.uGold.value=glow;mat.uniforms.uTime.value=now*0.001;points.rotation.y=rotY+pmx;points.rotation.x=rotX-pmy;var bnk9=Math.max(-0.05,Math.min(0.05,-camXt*0.5));points.rotation.z+=(bnk9-points.rotation.z)*0.06;/* micro bank into the lateral drift, CLAMPED — the entry camX is +-1.2 now and unclamped it rolled the whole world ~30deg */points.scale.setScalar(curScl*mobS);points.position.x=curPosX*mobS+sceneOff;points.position.y=curPosY*mobS+mobY;camera.position.z+=(camZt-camera.position.z)*0.07;camera.position.y+=(camYt-camera.position.y)*0.09;camera.position.x+=(camXt-camera.position.x)*0.09;
+      if(gLock){points.updateMatrixWorld();_cwv.copy(gameFieldC).applyMatrix4(points.matrixWorld);camera.position.x=_cwv.x-gNDC*0.4663*(camera.position.z-_cwv.z)*camera.aspect;}/* EXACT field-lock: pin the WORLD's centre of mass to the target screen-x using the live transform + live zoom => the field never drifts through orbit + push-in; the hero walks within the centred frame */
+      renderer.render(scene,camera);}
     if(window.IntersectionObserver){try{new IntersectionObserver(function(es){vis=es[0].isIntersecting;if(vis&&!raf){lastT=0;raf=requestAnimationFrame(frame);}else if(!vis&&raf){cancelAnimationFrame(raf);raf=null;}}).observe(host);}catch(e){}}
     raf=requestAnimationFrame(frame);
   }
@@ -2010,7 +2425,7 @@
         <p>A quick reel of what we&rsquo;ve shipped. Sound on.</p>
       </div>
       <style>
-      .sp-reel{max-width:720px;margin:0 auto;}
+      .sp-reel{max-width:940px;margin:0 auto;}
       /* To go live: paste a YouTube embed URL (https://www.youtube.com/embed/ID) or an .mp4 path
          into data-reel-src on .sp-reel-stage below. Empty = placeholder poster only. */
       .sp-reel-stage{position:relative;display:block;width:100%;aspect-ratio:16/9;border:0;padding:0;cursor:pointer;border-radius:18px;overflow:hidden;background:linear-gradient(180deg,rgba(10,16,60,.28),rgba(10,16,60,.5)),url("assets/showreel03-poster.jpg") center/cover no-repeat;box-shadow:0 40px 80px -40px rgba(20,30,120,.6),0 2px 0 rgba(255,255,255,.08) inset;transition:transform .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s;}
