@@ -2428,7 +2428,7 @@
       .sp-reel{max-width:940px;margin:0 auto;}
       /* To go live: paste a YouTube embed URL (https://www.youtube.com/embed/ID) or an .mp4 path
          into data-reel-src on .sp-reel-stage below. Empty = placeholder poster only. */
-      .sp-reel-stage{position:relative;display:block;width:100%;aspect-ratio:16/9;border:0;padding:0;cursor:pointer;border-radius:18px;overflow:hidden;background:linear-gradient(180deg,rgba(10,16,60,.28),rgba(10,16,60,.5)),url("assets/showreel03-poster.jpg") center/cover no-repeat;box-shadow:0 40px 80px -40px rgba(20,30,120,.6),0 2px 0 rgba(255,255,255,.08) inset;transition:transform .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s;}
+      .sp-reel-stage{position:relative;display:block;width:100%;aspect-ratio:16/9;border:0;padding:0;cursor:pointer;border-radius:18px;overflow:hidden;background:linear-gradient(180deg,rgba(10,16,60,.28),rgba(10,16,60,.5)),url("assets/showreel04-poster.jpg") center/cover no-repeat;box-shadow:0 40px 80px -40px rgba(20,30,120,.6),0 2px 0 rgba(255,255,255,.08) inset;transition:transform .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s;}
       .sp-reel-stage:hover{transform:translateY(-4px);box-shadow:0 54px 100px -44px rgba(37,54,245,.62);}
       .sp-reel-stage:focus-visible{outline:3px solid var(--bright-glow);outline-offset:3px;}
       .sp-reel-grid{position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.16) 1px,transparent 1.5px);background-size:22px 22px;opacity:.5;-webkit-mask-image:radial-gradient(120% 92% at 50% 40%,#000 40%,transparent 86%);mask-image:radial-gradient(120% 92% at 50% 40%,#000 40%,transparent 86%);}
@@ -2446,9 +2446,9 @@
       @media(prefers-reduced-motion:reduce){.sp-reel-play::before{animation:none}}
       </style>
       <div class="sp-reel" id="sp-reel">
-        <button class="sp-reel-stage" type="button" data-reel-src="assets/showreel03.webm" data-reel-mp4="assets/showreel03.mp4" aria-label="Play the showreel">
+        <button class="sp-reel-stage" type="button" data-reel-src="assets/showreel04.webm" data-reel-mp4="assets/showreel04.mp4" aria-label="Play the showreel">
           <span class="sp-reel-tag">Showreel</span>
-          <span class="sp-reel-time">0:42</span>
+          <span class="sp-reel-time">0:45</span>
           <span class="sp-reel-play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.2v13.6a1 1 0 0 0 1.53.85l10.7-6.8a1 1 0 0 0 0-1.7L9.53 4.35A1 1 0 0 0 8 5.2z"/></svg></span>
           <span class="sp-reel-bar" aria-hidden="true"><i></i></span>
         </button>
@@ -2462,7 +2462,7 @@
           if(!src)return; /* placeholder until a reel URL is added */
           var wrap=stage.parentNode,isYT=/youtu/.test(src),el;
           if(isYT){el=document.createElement('iframe');el.src=src+(src.indexOf('?')<0?'?':'&')+'autoplay=1';el.setAttribute('allow','autoplay; fullscreen; encrypted-media');el.setAttribute('allowfullscreen','');}
-          else{el=document.createElement('video');el.controls=true;el.autoplay=true;el.playsInline=true;el.poster='assets/showreel03-poster.jpg';var mp4=stage.getAttribute('data-reel-mp4');el.innerHTML='<source src="'+src+'" type="video/webm">'+(mp4?'<source src="'+mp4+'" type="video/mp4">':'');}
+          else{el=document.createElement('video');el.controls=true;el.autoplay=true;el.playsInline=true;el.poster='assets/showreel04-poster.jpg';var mp4=stage.getAttribute('data-reel-mp4');el.innerHTML='<source src="'+src+'" type="video/webm">'+(mp4?'<source src="'+mp4+'" type="video/mp4">':'');}
           el.className='sp-reel-video';
           wrap.innerHTML='';wrap.appendChild(el);
         });
