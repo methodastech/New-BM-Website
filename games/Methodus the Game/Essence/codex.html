@@ -71,6 +71,9 @@ nav#top.solid{background:rgba(11,9,8,.86); backdrop-filter:blur(14px); border-bo
 }
 .nav-links a:hover{color:var(--bone)}
 .nav-links a.active{color:var(--gold-hi); border-bottom-color:var(--gold)}
+.nav-links a.nav-cta{color:var(--gold-hi); border:1px solid var(--gold); border-radius:999px; padding:7px 14px; margin-left:8px; border-bottom:1px solid var(--gold)}
+.nav-links a.nav-cta:hover{background:rgba(232,200,116,.12); color:#fff}
+
 @media (max-width:900px){
   .nav-in{flex-wrap:wrap; height:auto; padding-top:10px; row-gap:0}
   .brand b{font-size:1.5rem}
@@ -305,6 +308,7 @@ text.t-mono{font-family:ui-monospace,Menlo,monospace; fill:var(--gold-hi)}
       <a href="magic.html">Spells</a>
       <a href="case.html">Studio</a>
       <a href="codex.html" class="active">Codex</a>
+      <a href="bonefield-investors.html" class="nav-cta">Investors</a>
     </div>
   </div>
 </nav>
@@ -340,6 +344,7 @@ text.t-mono{font-family:ui-monospace,Menlo,monospace; fill:var(--gold-hi)}
   <a href="#divergence">Spec ⇄ build divergences</a>
   <div class="grp">Foundation</div>
   <a href="#resources">Core resources</a>
+  <a href="#economy">The essence economy</a>
   <a href="#regen">Essence regeneration</a>
   <a href="#stamina">Physical stamina</a>
   <a href="#exhaustion">Winded / Arcane Collapse</a>
@@ -355,11 +360,12 @@ text.t-mono{font-family:ui-monospace,Menlo,monospace; fill:var(--gold-hi)}
   <a href="#wind">🌪 Wind</a>
   <a href="#water">💧 Water</a>
   <a href="#death">☠ Death / Bone</a>
-  <a href="#grace">✚ Grace / Life</a>
+  <a href="#grace">✦ Grace / Life</a>
   <a href="#fusion">❄ Fusion (Ice / Explosion / Thunder)</a>
   <div class="grp">Combat</div>
   <a href="#damage">Damage model</a>
   <a href="#weapons">Weapons &amp; melee</a>
+  <a href="#cards">🃏 Mastery, Cards &amp; Weight</a>
   <a href="#foes">Foes &amp; the risen</a>
   <div class="grp">World &amp; systems</div>
   <a href="#building">Building</a>
@@ -379,7 +385,7 @@ text.t-mono{font-family:ui-monospace,Menlo,monospace; fill:var(--gold-hi)}
     <p class="lead">Essence is a fast, dangerous glass-cannon combat game. You cast magic by <b>speaking or typing incantations</b> — never by a hotkey — chanting an element up its power ladder, then naming the spell to loose it. Between fights you gather wood and stone, and raise your own fort Valheim-style. Skeletons rise in waves at the red grave.</p>
     <div class="grid">
       <div class="card"><div class="k">❤️ Health</div><div class="v">100</div><div class="d">Physical life. 0 = death.</div></div>
-      <div class="card"><div class="k">✨ Essence</div><div class="v">100</div><div class="d">One bar: stamina + raw mana.</div></div>
+      <div class="card"><div class="k">✨ Essence</div><div class="v">150</div><div class="d">One bar: stamina + raw mana. Base 150 + 25/Essence card + garb.</div></div>
       <div class="card"><div class="k">🗣️ Cast trigger</div><div class="v">Word</div><div class="d">Voice or typed only.</div></div>
       <div class="card"><div class="k">🪵🪨 Materials</div><div class="v">2</div><div class="d">Wood &amp; stone.</div></div>
     </div>
@@ -433,6 +439,43 @@ text.t-mono{font-family:ui-monospace,Menlo,monospace; fill:var(--gold-hi)}
       </tbody>
     </table></div>
     <div class="note"><b>Fundamental separation (spec):</b> physical actions spend Essence · incantation stages spend Essence and create Contained Magic · spell casts spend Contained Magic, not Essence · holding magic never drains Essence. <b>Build:</b> collapses this into one bar — chanting and casting both draw the violet essence bar directly.</div>
+  </section>
+
+  <!-- ============ ESSENCE ECONOMY ============ -->
+  <section id="economy">
+    <h2><span class="num">§2</span> The essence economy <span class="tag t-locked">Locked design</span></h2>
+    <p class="lead">Essence is the one currency of the Bonefield: it spills from the dead, lives in the body, feeds the risen, and is forged into steel. You were born from it — so you wield it better than anything alive or dead.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Form</th><th>Where it comes from</th><th>What it does</th></tr></thead>
+      <tbody>
+        <tr data-s="locked"><td>💧 <b>Raw essence</b></td><td>Collected from any person or creature that dies</td><td>The loose, spendable form — harvest it from the fallen</td></tr>
+        <tr data-s="locked"><td>✨ <b>Body essence</b></td><td>Regenerates from within, <b>as strong as your life force</b></td><td>Fuels every action — the violet bar; as your life fades, so does its flow</td></tr>
+        <tr data-s="locked"><td>🏺 <b>Pooled essence</b></td><td>Raw essence banked in an <b>essence pool</b></td><td>Stored power — restores you faster and pays your workers</td></tr>
+      </tbody>
+    </table></div>
+    <h3>The two spends <span class="tag t-locked">Locked design</span></h3>
+    <p>Raw essence goes one of two ways, and the choice is the whole strategy: <b>into the pool</b> — upgrade wherever you store it, deepening what it can hold and what it can feed — or <b>into yourself</b> — upgrade what you are.</p>
+    <h3>The essence pool</h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Function</th><th>Rule</th></tr></thead>
+      <tbody>
+        <tr data-s="locked"><td>♻️ <b>Faster restoration</b></td><td>Near your pool, body essence returns quicker than anywhere else in the field</td></tr>
+        <tr data-s="locked"><td>💀 <b>Workers — the soulless</b></td><td>A soulless skeleton has no life force of its own: it needs essence just to <b>move</b>. Feed the pool and the bones work for you; let it run dry and they stand where they stopped</td></tr>
+        <tr data-s="locked"><td>🐛 <b>Workers — the hungry</b></td><td>Certain creatures need essence to <b>survive</b> — they eat it, and they crave it. Keep the pool stocked and they stay, serve, and defend what feeds them</td></tr>
+      </tbody>
+    </table></div>
+    <h3>Imbuing</h3>
+    <p>Essence can be <b>imbued into a weapon</b> to upgrade it. Most smiths burn themselves trying; you were born from essence, so shaping it into steel comes as naturally as breathing — every imbued edge remembers whose hand poured it.</p>
+    <h3>Eating <span class="tag t-locked">Locked design</span></h3>
+    <p class="lead">You must eat to live. What you eat is the choice:</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Meal</th><th>Keeps you alive?</th><th>Extra</th></tr></thead>
+      <tbody>
+        <tr data-s="locked"><td>✨ <b>Essence</b></td><td>Yes — the born-of-essence can live on it alone</td><td>Nothing beyond survival</td></tr>
+        <tr data-s="locked"><td>🍖 <b>Real food</b></td><td>Yes — there is essence in all living things</td><td>The better meal: bonus health and more on top of the essence it carries</td></tr>
+      </tbody>
+    </table></div>
+    <div class="note"><b>Build note:</b> none of this exists in the current build yet — the single violet bar stands in for body essence, and raw essence, pools, workers, imbuing and eating are the locked direction this section sets.</div>
   </section>
 
   <!-- ============ REGEN ============ -->
@@ -528,16 +571,16 @@ Essence_next = clamp(Essence + regen − continuous − discrete, 0, 100)</pre>
     <div class="tbl"><table>
       <thead><tr><th>Action</th><th class="n">Essence</th><th>Note</th></tr></thead>
       <tbody>
-        <tr data-s="ingame"><td>⚔️ Sword swing (chain)</td><td class="n">7</td><td>Longsword combo hit</td></tr>
-        <tr data-s="ingame"><td>💥 Cleave / thrust (MMB)</td><td class="n">16</td><td>Secondary heavy</td></tr>
-        <tr data-s="ingame"><td>🪄 Staff bash</td><td class="n">6</td><td>Unkindled club swing</td></tr>
+        <tr data-s="ingame"><td>⚔️ Sword swing (chain)</td><td class="n">4</td><td>Light combo hit</td></tr>
+        <tr data-s="ingame"><td>💥 Lunging thrust (MMB)</td><td class="n">8</td><td>Secondary heavy · dmg 30</td></tr>
+        <tr data-s="ingame"><td>🪄 Staff bash</td><td class="n">3</td><td>Unkindled club swing · dmg 10</td></tr>
         <tr data-s="ingame"><td>💨 Dash (Shift)</td><td class="n">10</td><td>Footwork i-frames</td></tr>
-        <tr data-s="ingame"><td>🛡️ Guard raise (RMB)</td><td class="n">3 + 6/hit</td><td>Block cost; parry refunds 10</td></tr>
+        <tr data-s="ingame"><td>🛡️ Guard raise (RMB)</td><td class="n">3 raise · 2/s · 3–8/hit</td><td>Block cost; parry refunds 10</td></tr>
         <tr data-s="ingame"><td>🏃 Sprint (Caps)</td><td class="n">8/s</td><td>Held run</td></tr>
         <tr data-s="ingame"><td>💀 Kill reward</td><td class="n">+6</td><td>Aggression pays essence back</td></tr>
       </tbody>
     </table></div>
-    <div class="note diverge"><b>Divergence:</b> the build's per-action costs are tuned to its own faster economy and don't match the spec's 4/8/6/12 sword figures. Keep both data-driven so they can converge later.</div>
+    <div class="note diverge"><b>Live costs:</b> the build's tuned economy is light 4 · thrust 8 · bash 3 · strong cut 9 · great cut 14 (plus a 2/s drain while guarding). These supersede the old spec's 6/12 bash/strong figures.</div>
   </section>
 
   <!-- ============ EXHAUSTION ============ -->
@@ -708,7 +751,7 @@ Essence_next = clamp(Essence + regen − continuous − discrete, 0, 100)</pre>
         <tr data-s="ingame"><td class="el-wind">🌪 Wind</td><td class="mono">"spirits of wind"</td><td>"Spirits of Wind."</td></tr>
         <tr data-s="ingame"><td class="el-water">💧 Water</td><td class="mono">"spirits of water"</td><td>"Spirits of Water."</td></tr>
         <tr data-s="ingame"><td class="el-death">☠ Death</td><td class="mono">"spirits of death"</td><td>"Spirits of Death."</td></tr>
-        <tr data-s="ingame"><td class="el-grace">✚ Grace</td><td class="mono">"spirits of grace"</td><td>"Spirits of Life."</td></tr>
+        <tr data-s="ingame"><td class="el-grace">✦ Grace</td><td class="mono">"spirits of grace"</td><td>"Spirits of Life."</td></tr>
       </tbody>
     </table></div>
     <h3>The climb</h3>
@@ -795,7 +838,7 @@ Damage = FormBase × TierMult[D=1.0, C=1.7, B=2.5] × WeaponMult[staff 1.25]</pr
         <circle cx="308" cy="289" r="31" class="dg-ink1 sg-death" stroke-width="2"/><text x="308" y="297" text-anchor="middle" font-size="23">☠</text>
         <text x="308" y="333" text-anchor="middle" class="t-ttl el-death" font-size="14">Death</text><text x="308" y="349" text-anchor="middle" class="el-death" font-size="11" opacity=".7">bone &amp; raise</text>
         <!-- Grace (left) -->
-        <circle cx="264" cy="152" r="31" class="dg-ink1 sg-grace" stroke-width="2"/><text x="264" y="160" text-anchor="middle" font-size="23">✚</text>
+        <circle cx="264" cy="152" r="31" class="dg-ink1 sg-grace" stroke-width="2"/><text x="264" y="160" text-anchor="middle" font-size="23">✦</text>
         <text x="226" y="150" text-anchor="end" class="t-ttl el-grace" font-size="14">Grace</text><text x="226" y="166" text-anchor="end" class="el-grace" font-size="11" opacity=".7">mend the fort</text>
         <!-- fusion note -->
         <text x="638" y="300" text-anchor="middle" class="t-lab">Combine for</text>
@@ -896,7 +939,7 @@ Damage = FormBase × TierMult[D=1.0, C=1.7, B=2.5] × WeaponMult[staff 1.25]</pr
 
   <!-- ============ GRACE ============ -->
   <section id="grace">
-    <h2><span class="num">§20</span> <span class="el-grace">✚ Grace / Life</span></h2>
+    <h2><span class="num">§20</span> <span class="el-grace">✦ Grace / Life</span></h2>
     <h3>Build forms <span class="tag t-ingame">In game</span></h3>
     <div class="tbl"><table>
       <thead><tr><th>Form</th><th class="n">Base</th><th>Behaviour</th></tr></thead>
@@ -1010,16 +1053,17 @@ HitLocation: arm/leg 0.75 · torso 1.00 · head/organ 1.50</pre>
   <!-- ============ WEAPONS ============ -->
   <section id="weapons">
     <h2><span class="num">§14</span> Weapons &amp; melee <span class="tag t-ingame">In game</span></h2>
-    <p class="lead">The build's melee is a <b>Valheim longsword</b>: a three-cut chain where the third hits double, a lunging thrust on the secondary, and a block that parries in the last instant.</p>
+    <p class="lead">The build's melee is a <b>Valheim longsword</b> ruled by the <b>SWORD MASTERY card</b> (§46): a light chain (3 cuts, 4 at rank B), held-LMB <b>charged strong cuts</b> from rank D, a lunging thrust on the secondary, a block that parries in the last instant — and the parried foe now visibly <b>REELS</b>. Two blades meeting mid-flight <b>CLASH</b>: sparks, both swings die, no damage traded.</p>
     <div class="tbl"><table>
       <thead><tr><th>Input</th><th>Attack</th><th class="n">Damage</th><th>Note</th></tr></thead>
       <tbody>
-        <tr data-s="ingame"><td><span class="kbd">LMB</span></td><td>Combo 1 · slash</td><td class="n">14</td><td>Carried horizontal cut, steps in</td></tr>
-        <tr data-s="ingame"><td><span class="kbd">LMB</span></td><td>Combo 2 · backslash</td><td class="n">16</td><td>Hold to keep the chain flowing</td></tr>
-        <tr data-s="ingame"><td><span class="kbd">LMB</span></td><td>Combo 3 · finisher</td><td class="n">28</td><td>Overhead, double the opener, shoves</td></tr>
-        <tr data-s="ingame"><td><span class="kbd">MMB</span></td><td>Lunging thrust</td><td class="n">40</td><td>Narrow · long reach 3.2 · crushes guards</td></tr>
-        <tr data-s="ingame"><td><span class="kbd">RMB</span></td><td>Block / Parry</td><td class="n">—</td><td>Timed = parry → foe staggers, essence back</td></tr>
-        <tr data-s="ingame"><td><span class="kbd">LMB</span></td><td>Staff bash (unkindled)</td><td class="n">12</td><td>Staff/fist club when no rite is lit</td></tr>
+        <tr data-s="ingame"><td><span class="kbd">LMB</span></td><td>Combo · slash / backslash / (rise) / finisher</td><td class="n">20 · 20 · (24) · 30</td><td>Base (short sword) · ×1.28 bastard, ×1.5 longsword · tap to chain · finisher shoves · crits ×1.6</td></tr>
+        <tr data-s="ingame"><td><span class="kbd">hold LMB</span></td><td>STRONG CUT (rank D+)</td><td class="n">44</td><td>Charge 2s / 0.8s / 0.5s by rank · C chains ×2, B ×3</td></tr>
+        <tr data-s="ingame"><td><span class="kbd">hold LMB</span></td><td>GREAT CUT (rank B, 3rd strong)</td><td class="n">70</td><td>The body spins the steel a FULL CIRCLE — the edge cuts all it passes</td></tr>
+        <tr data-s="ingame"><td><span class="kbd">MMB</span></td><td>Lunging thrust</td><td class="n">30</td><td>Narrow · long reach · crushes guards</td></tr>
+        <tr data-s="ingame"><td><span class="kbd">RMB</span></td><td>Block / Parry</td><td class="n">—</td><td>Timed = parry → foe STAGGERS (visible reel 1.2s), +10 essence</td></tr>
+        <tr data-s="ingame"><td><span class="kbd">hold G</span></td><td>Wound throw</td><td class="n">34</td><td>Tap ≈10m · full 1.2s wind ≈3× · BLADE-FIRST sticks, the flat clatters · fallen steel GLINTS</td></tr>
+        <tr data-s="ingame"><td><span class="kbd">LMB</span></td><td>Staff bash (unkindled)</td><td class="n">10</td><td>Staff/fist club when no rite is lit</td></tr>
       </tbody>
     </table></div>
     <h3>Weapon reference (spec §14) <span class="tag t-locked">Locked design</span></h3>
@@ -1029,6 +1073,60 @@ HitLocation: arm/leg 0.75 · torso 1.00 · head/organ 1.50</pre>
         <tr data-s="locked"><td>🗡️ Short sword light / heavy</td><td class="n">4 / 8</td><td class="n">20 / 30</td><td class="n">5 / 4</td></tr>
         <tr data-s="locked"><td>⚔️ Long sword light / heavy</td><td class="n">6 / 12</td><td class="n">28 / 40</td><td class="n">4 / 3</td></tr>
         <tr data-s="locked"><td>🪄 Staff quick / heavy / push</td><td class="n">3 / 7 / 6</td><td class="n">10 / 18 / 5+kb</td><td class="n">10 / 6 / util</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <!-- ============ SWORD MASTERY · SKILL CARDS · WEIGHT ============ -->
+  <section id="cards">
+    <h2><span class="num">§46</span> Sword Mastery, Skill Cards &amp; Weight <span class="tag t-ingame">In game</span></h2>
+    <p class="lead">Everything a body can DO is a <b>CARD with a level track, connected to the character</b>. Gear lends a card while worn (bracelet → Sword Mastery, staff → Rites, boots → Deathless, garb → Vestments); a <b>learned</b> card is permanent. Combat reads the card, never the gear.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Rank</th><th>Chain</th><th class="n">Swing speed</th><th class="n">Step-in</th><th>Charged strong</th></tr></thead>
+      <tbody>
+        <tr data-s="ingame"><td>bare / unlearned</td><td>3 cuts</td><td class="n">×1.08 dur</td><td class="n">×0.8</td><td>none</td></tr>
+        <tr data-s="ingame"><td>E</td><td>3 cuts</td><td class="n">×1.0</td><td class="n">×1.0</td><td>none — hold LMB auto-chains lights</td></tr>
+        <tr data-s="ingame"><td>D</td><td>3 cuts</td><td class="n">×0.96</td><td class="n">×1.2</td><td>hold 2.0s · one strong</td></tr>
+        <tr data-s="ingame"><td>C</td><td>3 cuts</td><td class="n">×0.86</td><td class="n">×1.45</td><td>hold 0.8s · chains ×2</td></tr>
+        <tr data-s="ingame"><td>B</td><td>4 cuts</td><td class="n">×0.76</td><td class="n">×1.6</td><td>hold 0.5s · ×3, the 3rd is the GREAT CUT (full-circle spin)</td></tr>
+      </tbody>
+    </table></div>
+    <h3>Cards v2 — collect, CONNECT, climb <span class="tag t-ingame">In game</span></h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Rule</th><th>Detail</th></tr></thead>
+      <tbody>
+        <tr data-s="ingame"><td>Connect</td><td>Right-click a card item: it becomes part of the body and is consumed. Duplicates climb one rung; at the peak the body refuses and keeps the card.</td></tr>
+        <tr data-s="ingame"><td>Innate floor</td><td>The body knows JUMP I and STRONG BACK I from frame one — the first such card teaches level II, never I again. Borrowed gear never speeds the climb.</td></tr>
+        <tr data-s="ingame"><td>Practice</td><td>THE ARM LEARNS BY CUTTING: landed blows climb mastery E→D→C on their own. Practice stops at C — rank B needs a TEACHER (a master’s card).</td></tr>
+        <tr data-s="ingame"><td>Drops</td><td>Skeletons drop BONES, never cards. Fallen adventurers drop their EQUIPMENT (knight → sword, mages → staves) — and an AGENT OF THE ABOVE descends after ~1 minute to resurrect and carry them home; their wake-stone relights.</td></tr>
+        <tr data-s="ingame"><td>Swimming</td><td>Deep water asks the SWIMMING card: without it a bone sinks and drowns (6/s); with it the body floats, slow, draining essence.</td></tr>
+        <tr data-s="ingame"><td>Life cards</td><td>The FIRST card on every sheet is the RACE: player = RISEN UNDEAD (chars, never panics, sinks), adventurers = HUMAN (burn → panic → run for water). Race sets the rules.</td></tr>
+        <tr data-s="ingame"><td>Sword styles (Z)</td><td>Three learnable SCHOOLS beyond the guild baseline — LIGHT SWORD (×0.85 dur, ×1.12 dmg, ×1.3 lunge; thin guard, 0.12s parry), WATER FLOW (0.3s parry, half-cost guard eating 80%, parried foes reel ×1.6; softer cuts), NORTH FIST (thrown blades ×1.6, clashes carry THROUGH). Z cycles learned styles.</td></tr>
+        <tr data-s="ingame"><td>Fire vs water</td><td>Every fire hit: 40% IGNITE, 5s burn (4/0.75s). Burning humans flee to the pond; water extinguishes in steam. Undead never panic.</td></tr>
+        <tr data-s="ingame"><td>Parry card</td><td>PARRY is its OWN school, apart from Sword Mastery: RMB timed the sword up (held HIGH, not the body cowering) TURNS a blow — the foe reels (near-double on the next hit), essence back. Window I 0.18s → III 0.32s; higher ranks fling the stagger harder. A SPELL can be parried at PARRY II+, and reflects back at the caster.</td></tr>
+        <tr data-s="ingame"><td>Throw any angle</td><td>The thrown blade follows the crosshair pitch (up, down, level), cartwheels along its flight, and buries itself BLADE-FIRST at whatever angle it arrives — into a trunk or the ground. The flat clatters. Throw every blade the bag holds; fallen steel shines moonlight off the edge.</td></tr>
+        <tr data-s="ingame"><td>Evasion card</td><td>SHIFT dodge roll with i-frames (untouchable through it): I 0.16s → III 0.28s diving roll, cheaper and quicker each rank. Innate at I.</td></tr>
+        <tr data-s="ingame"><td>Enemy spells</td><td>Enemies own NO private magic — every caster spell is the player’s own (the archmage & knight gale slash is the wind crescent, not a box/orb). Bone forges into skill cards at the workbench.</td></tr>
+        <tr data-s="ingame"><td>Multi-throw</td><td>Throw every blade the bag holds; each leaves the bag, another slides into the fist. Fallen steel shines moonlight off the blade itself. Chairs: F sits, regen ×2.</td></tr>
+        <tr data-s="ingame"><td>Reservoir cards</td><td>ESSENCE (+25 pool, +0.6/s regen a rung), STAMINA (−12% on every physical act a rung), MAGIC PROFICIENCY (+14% spell damage a rung). Innate level I; foes carry them too, so a veteran presses harder.</td></tr>
+        <tr data-s="ingame"><td>One impact language</td><td>Every swung weapon wears the same light: the player’s trail, the knight’s knight-blue ribbon, mage staffs sweeping their element’s colour through casts. Every landed blow fires hitSparks — white-hot spray along the cut, a coloured counter-kick off the body, a core flash — for player cuts, risen blades, the knight’s bastard, and hurled steel alike. The Elden-Ring block pose was solved numerically: fists at the sternum, blade diagonal across the line.</td></tr>
+        <tr data-s="ingame"><td>Sword incantation</td><td>Rites can be spoken over a BLADE: an E rite kindles and casts from the sword point. A sword is no vessel — bare-hand capacity (30, E only), no staff damage, no containment gifts.</td></tr>
+        <tr data-s="ingame"><td>Weapon hitboxes</td><td>Honest iron BOTH ways: the knight’s edge is a real swept hitbox like the player’s — his steel hits only where his steel truly is (no angle-and-distance phantom hits). Blades lengthened across the board (short 0.78, bastard 1.04, longsword 1.28); clashes trade real impulses and slam through the puppet rig.</td></tr>
+        <tr data-s="ingame"><td>Cloth physics</td><td>Capes and robe skirts ride damped springs with stored angular velocity — they flap on dashes, overshoot on stops, and every skirt hangs from a waist pivot. Four ops a frame per cloth: physics feel, no sim cost.</td></tr>
+        <tr data-s="ingame"><td>The world beyond the fence</td><td>The yard widened (fence r=44), the fence and gate stand head-high with three iron rails; a dead wood crowds the bound, far silhouettes climb the slopes, cliff crags shoulder out of the skirts, and a mountain ring walls the horizon. The leash follows (warn 54, fade 62).</td></tr>
+        <tr data-s="ingame"><td>Resurrection card</td><td>RESURRECTION is a skill card the adventurers carry (not the risen): a body with it does NOT burst — it lies, an angel gathers it, and it returns. Enemy cards are never looted; they exist only to define how each creature functions. The LIFE/race card sets strengths AND weaknesses: UNDEAD take 1.6× from holy GRACE and sink in deep water; HUMANS burn, panic, and resurrect.</td></tr>
+        <tr data-s="ingame"><td>Enemy parity</td><td>Enemies’ ESSENCE, MAGIC POWER and WORN GEAR function by the SAME formulas as the player. eMagicMult scales their spell damage (+14%/rung, like MAGIC PROFICIENCY); eEssenceMax (base 100 + essence card·25 + robe 10 + hat 20) sizes the reserve their spells spend and grows their cast count; eArmorMult reduces incoming damage (heavy plate B ×0.65, Light Armour/robes = no plate). Water Mage pool 135 / +14%; Archmage pool 180 / +28%; Knight plate B / +14%.</td></tr>
+        <tr data-s="ingame"><td>Creature sheets</td><td>EVERY creature fights from its own card sheet (e.cards): risen at E arms (D veterans from wave 6), Knight ONE-HAND SWORD B, Water Wizard WATER C, Archmage WIND B — their damage and speed are priced by their cards exactly as the player’s are.</td></tr>
+        <tr data-s="ingame"><td>Card forge</td><td>Cards are FORGED at the workbench from bone — SWORD MASTERY 24 · ESSENCE 16 · STAMINA 16 · EVASION 18 · PARRY 18. Right-click a forged card to CONNECT it and climb its track. There are no random card drops; the risen leave only bone.</td></tr>
+      </tbody>
+    </table></div>
+    <h3>Weight — Valheim rules <span class="tag t-ingame">In game</span></h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Rule</th><th>Detail</th></tr></thead>
+      <tbody>
+        <tr data-s="ingame"><td>Per unit</td><td>stone 4 · wood 2 · longsword 5 · staves 4 · short sword 3 · hammer 2 · garb 1–2 · bracelets 0.5 · cards 0.2. Tooltips show per-stack weight; the bag header shows ⚖ weight / cap.</td></tr>
+        <tr data-s="ingame"><td>Cap</td><td>120 base · +40 per STRONG BACK level (160, 200). One cell per item, Valheim grid.</td></tr>
+        <tr data-s="ingame"><td>Overburdened</td><td>Speed ×0.55 · sprint refused · essence leaks 1.2/s while moving · OVERBURDENED banner. Pickup is never blocked.</td></tr>
       </tbody>
     </table></div>
   </section>

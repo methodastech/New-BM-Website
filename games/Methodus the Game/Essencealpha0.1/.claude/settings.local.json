@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(open \"/Users/zieel/Bazil Claude 3/Games-20260702T132132Z-3-001/Games/Methodus the Game/💀 Bonefield Arena/index.html\")",
+      "Bash(node -e ' *)"
+    ]
+  }
+}

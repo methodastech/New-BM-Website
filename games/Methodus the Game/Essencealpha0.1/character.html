@@ -1,0 +1,1741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ESSENCE — Character Model</title>
+<style>
+  :root{ --grn:#9fe8b0; --dim:#8f93ad; --bg:#0b0d16; }
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html,body{ height:100%; background:var(--bg); overflow:hidden; font-family:'Courier New',ui-monospace,monospace; color:#cfd4e8; }
+  canvas{ display:block; }
+  #hdr{ position:fixed; top:20px; left:0; right:0; text-align:center; pointer-events:none; z-index:5; }
+  #hdr h1{ font-size:28px; letter-spacing:12px; color:var(--grn); text-shadow:0 0 18px rgba(140,240,170,.35); font-weight:700; }
+  #hdr p{ margin-top:5px; font-size:10px; letter-spacing:4px; color:var(--dim); }
+  #side{ position:fixed; left:16px; top:66px; bottom:16px; width:138px; z-index:8; display:flex; flex-direction:column; gap:4px; overflow-y:auto; padding-right:4px; }
+  #side .sec{ font-size:9px; letter-spacing:3px; color:#565b74; margin:8px 0 2px 2px; }
+  #side button{ font-family:inherit; font-size:10px; letter-spacing:2px; padding:7px 9px; background:rgba(20,26,40,.85); border:1px solid #2c3350; color:var(--dim); cursor:pointer; border-radius:3px; text-align:left; }
+  #side button.on{ color:var(--grn); border-color:#3f6a4c; box-shadow:0 0 10px rgba(140,240,170,.12) inset; }
+  #tabs{ display:flex; flex-direction:column; gap:4px; }
+  #verRow,#faceRow{ display:flex; flex-wrap:wrap; gap:4px; } #verRow button,#faceRow button{ flex:1 0 36px; text-align:center; padding:6px 3px; }
+  #zoomRow{ display:flex; gap:4px; } #zoomRow button{ flex:1; text-align:center; font-size:13px; }
+  #sub{ position:fixed; top:122px; left:0; right:0; text-align:center; font-size:10px; letter-spacing:3px; color:var(--dim); z-index:5; pointer-events:none; }
+  #hint{ position:fixed; top:144px; left:0; right:0; text-align:center; font-size:9px; letter-spacing:3px; color:#565b74; z-index:5; pointer-events:none; }
+  .lbl{ position:fixed; bottom:96px; width:30%; text-align:center; pointer-events:none; z-index:5; }
+  .lbl b{ display:block; font-size:12px; letter-spacing:5px; color:#e8ead8; }
+  .lbl span{ display:block; margin-top:5px; font-size:9px; letter-spacing:2px; color:var(--dim); line-height:1.6; }
+  #lbl1{ left:2%; } #lbl2{ left:35%; } #lbl3{ right:2%; }
+  .btnrow{ position:fixed; left:0; right:0; display:flex; justify-content:center; gap:8px; z-index:6; }
+  #garb{ bottom:56px; } #animBtns{ bottom:20px; }
+  .btnrow button{ font-family:inherit; font-size:10px; letter-spacing:2px; padding:6px 11px; background:rgba(20,26,40,.85);
+    border:1px solid #2c3350; color:var(--dim); cursor:pointer; border-radius:3px; }
+  .btnrow button.on{ color:var(--grn); border-color:#3f6a4c; box-shadow:0 0 10px rgba(140,240,170,.12) inset; }
+  #back{ position:fixed; top:20px; left:20px; z-index:7; font-size:10px; letter-spacing:2px; color:var(--dim); text-decoration:none; border:1px solid #2c3350; padding:7px 11px; border-radius:3px; background:rgba(20,26,40,.85); }
+  #back:hover{ color:var(--grn); border-color:#3f6a4c; }
+  /* (the old top-right #ver bar is retired — everything lives in the #side sidebar now) */
+  #fxBloom,#fxTint,#fxVig{ position:fixed; inset:0; pointer-events:none; display:none; }
+  #fxBloom{ width:100vw; height:100vh; mix-blend-mode:screen; filter:blur(14px) brightness(1.28) saturate(1.45); opacity:0.63; z-index:1; }   /* CINEMA softened ~30% (user 2026-07-15) */
+  #fxTint{ z-index:2; }
+  #fxVig{ background:radial-gradient(ellipse at 50% 42%, transparent 52%, rgba(0,0,0,0.6) 100%); z-index:3; }
+</style>
+</head>
+<body>
+<a id="back" href="./index.html" onclick="this.href='./index.html?t='+Date.now()">◂ THE BONEFIELD</a>
+
+<canvas id="fxBloom"></canvas><div id="fxTint"></div><div id="fxVig"></div>
+<div id="hdr"><h1>ESSENCE</h1><p>THE RISEN CASTER — CHARACTER MODEL</p></div>
+<div id="side">
+  <div class="sec">MODEL</div>
+  <div id="verRow">
+    <button data-ver="v1" class="on">V1</button><button data-ver="v1b">V1.1</button><button data-ver="v1c">V1.2</button><button data-ver="v2">V2</button><button data-ver="v3">V3</button>
+    <button data-ver="v4">V4</button><button data-ver="v5">V5</button><button data-ver="v6">V6</button><button data-ver="v7">V7</button>
+  </div>
+  <div id="polyInfo" style="font-size:9px;letter-spacing:1px;color:#7ee8a2;margin:3px 0 0 2px"></div>
+  <div class="sec">CHARACTER</div>
+  <div id="tabs">
+    <button data-v="simple" class="on">SIMPLE</button>
+    <button data-v="detail">DETAIL</button>
+    <button data-v="homage">HOMAGE</button>
+    <button data-v="knight">KNIGHT</button>
+    <button data-v="wizard">WATER MAGE</button>
+    <button data-v="archmage">ARCHMAGE</button>
+    <button data-v="angel">ANGEL</button>
+    <button data-v="cyclops">CYCLOPS</button>
+    <button data-v="fireskull">FIRE SKULL</button>
+  </div>
+  <div class="sec">FACE</div>
+  <div id="faceRow">
+    <button data-face="auto" class="on">AUTO</button><button data-face="neutral">NEUT</button><button data-face="happy">HAPPY</button><button data-face="sad">SAD</button><button data-face="angry">ANGRY</button><button data-face="meh">MEH</button><button data-face="laugh">LAUGH</button><button data-face="shock">SHOCK</button><button data-face="smug">SMUG</button>
+  </div>
+  <div class="sec">INFO</div>
+  <div id="charInfo" style="font-size:9px;letter-spacing:0.4px;color:#9fb0c8;line-height:1.55;margin:2px 0 0 2px"></div>
+  <div class="sec">FILTER</div><button id="pixBtn">OFF</button>
+  <div class="sec">LOOK</div><button id="lookBtn">OFF</button>
+  <div class="sec">DEBUG</div>
+  <button id="rigBtn">RIG · OFF</button>
+  <button id="hitBtn">HITBOX · OFF</button>
+  <div class="sec">ZOOM</div>
+  <div id="zoomRow"><button id="zoomIn">+</button><button id="zoomOut">−</button></div>
+</div>
+<div id="sub">GAME MODEL — exactly what the bonefield renders</div>
+<div id="hint">DRAG TO TURN · WHEEL TO CLOSE IN</div>
+<div class="lbl" id="lbl1" style="display:none"><b>BARE</b><span></span></div>
+<div class="lbl" id="lbl2"><b>THE CHARACTER</b><span>toggle what it wears &middot; pick a gait</span></div>
+<div class="lbl" id="lbl3" style="display:none"><b>IN MOTION</b><span></span></div>
+<div class="btnrow" id="garb"></div>
+<div class="btnrow" id="animBtns">
+  <button data-a="idle" class="on">IDLE</button>
+  <button data-a="run">RUN</button>
+  <button data-a="dash">DASH</button>
+  <button data-a="melee">MELEE ×3</button>
+</div>
+
+<script src="./three.global.js"></script>
+<script>
+// ============ ESSENCE character viewer ============
+// TABS = design level (SIMPLE game rig · HIGH DETAIL · HOMAGE). Every tab shows the SAME trio:
+// bare model, geared model, and an animation actor (idle/run/dash/melee) — all on one page.
+// The SIMPLE rig is COPIED from index.html buildSkeleton + wearables (2026-07-13) — re-copy if the game model changes.
+// The HOMAGE rig is an ORIGINAL model in the old-norse dungeon spirit (hunched, ragged, pale-eyed) — no game assets used.
+// All rigs share ONE joint interface (spine/neck/arm.sh|el|hand/leg.hip|knee), so one animation grammar drives all three.
+const scene=new THREE.Scene(); scene.background=new THREE.Color(0x0b0d16); scene.fog=new THREE.Fog(0x0b0d16,8,18);
+const camera=new THREE.PerspectiveCamera(42,innerWidth/innerHeight,0.1,50);
+const CAM={y:1.55,z:5.7}; const LOOK=new THREE.Vector3(0,0.95,0);
+camera.position.set(0,CAM.y,CAM.z); camera.lookAt(LOOK);
+const renderer=new THREE.WebGLRenderer({antialias:true}); renderer.setSize(innerWidth,innerHeight);
+renderer.setPixelRatio(Math.min(devicePixelRatio,2)); renderer.shadowMap.enabled=true; document.body.appendChild(renderer.domElement);
+// ---- PIXEL FILTER (user ruling 2026-07-15): render the 3D into a SMALL backing buffer and let the browser upscale it
+// with nearest-neighbour (image-rendering:pixelated) → a chunky pixel-art look over the models. Toggleable on the page.
+// A SPECTRUM, not a switch: SOFT is the Valheim-style low-res BLUR (no grid), FINE/PIXEL/CHUNKY are nearest-neighbour
+// pixel grids of rising block size. This is how you find the one that fits — flip through and look.
+const PIX_MODES=[
+  {name:'OFF',    div:1,   smooth:true },   // native, crisp
+  {name:'SOFT',   div:1.7, smooth:true },   // gentle low-res, softened (the Valheim feel — no visible pixels)
+  {name:'FINE',   div:2,   smooth:false},   // a light pixel crunch, detail mostly intact
+  {name:'PIXEL',  div:3,   smooth:false},   // clearly pixel-art, still readable
+  {name:'CHUNKY', div:5,   smooth:false} ]; // full lo-fi / PS1
+let pixIdx=0;
+function applyRes(){ const m=PIX_MODES[pixIdx];
+  if(pixIdx===0){ renderer.setPixelRatio(Math.min(devicePixelRatio,2)); renderer.setSize(innerWidth,innerHeight,true); renderer.domElement.style.imageRendering='auto'; return; }
+  renderer.setPixelRatio(1);
+  renderer.setSize(Math.max(1,Math.ceil(innerWidth/m.div)),Math.max(1,Math.ceil(innerHeight/m.div)),false);   // small buffer, CSS left full
+  const c=renderer.domElement; c.style.width=innerWidth+'px'; c.style.height=innerHeight+'px'; c.style.imageRendering=m.smooth?'auto':'pixelated'; }
+addEventListener('resize',()=>{ camera.aspect=innerWidth/innerHeight; camera.updateProjectionMatrix(); applyRes(); sizeBloom(); });
+// ---- LOOKS (user ruling 2026-07-15: two filters that are FANTASTIC for this game) ----
+// CINEMA: real glow — the render is copied each frame into a quarter-res canvas with darks crushed, blurred wide and
+// SCREEN-blended back, so everything emissive (eyes, hearts, crystals, magic) BLOOMS; plus a soft-light film grade and a
+// vignette. MOONLIT: a cool blue night haze lifted over the scene, desaturated — the Valheim night. Both pure overlay, ~free.
+const LOOKS=['OFF','CINEMA','MOONLIT']; let lookIdx=0;
+const fxBloom=document.getElementById('fxBloom'), fxTint=document.getElementById('fxTint'), fxVig=document.getElementById('fxVig');
+const bloomCtx=fxBloom.getContext('2d');
+function sizeBloom(){ fxBloom.width=Math.max(1,Math.ceil(innerWidth/4)); fxBloom.height=Math.max(1,Math.ceil(innerHeight/4)); }
+sizeBloom();
+function applyLook(){ const L=LOOKS[lookIdx], cv=renderer.domElement;
+  fxVig.style.display=L==='OFF'?'none':'block';
+  fxTint.style.display=L==='OFF'?'none':'block';
+  fxBloom.style.display=L==='CINEMA'?'block':'none';
+  if(L==='CINEMA'){ cv.style.filter='contrast(1.08) saturate(1.11) brightness(1.02)';
+    fxTint.style.background='linear-gradient(180deg, rgba(48,80,140,0.08), rgba(255,178,92,0.06))'; fxTint.style.mixBlendMode='soft-light'; fxVig.style.opacity='0.8'; }
+  else if(L==='MOONLIT'){ cv.style.filter='saturate(0.68) contrast(1.06) brightness(1.05)';
+    fxTint.style.background='linear-gradient(180deg, rgba(118,150,235,0.2), rgba(58,76,140,0.1))'; fxTint.style.mixBlendMode='screen'; fxVig.style.opacity='0.65'; }
+  else cv.style.filter='none'; }
+
+scene.add(new THREE.AmbientLight(0xbfc8ff,0.5));
+const key=new THREE.DirectionalLight(0xfff4e0,1.0); key.position.set(2.6,3.6,2.8); key.castShadow=true;
+key.shadow.mapSize.set(2048,2048); key.shadow.camera.left=-5; key.shadow.camera.right=5; key.shadow.camera.top=5; key.shadow.camera.bottom=-5; scene.add(key);
+const rim=new THREE.DirectionalLight(0x9fc0ff,0.55); rim.position.set(-2.5,2.2,-3); scene.add(rim);
+
+// ---- the game's materials, verbatim ----
+const toonGradient=new THREE.DataTexture(new Uint8Array([70,150,255]),3,1,THREE.RedFormat);
+toonGradient.minFilter=toonGradient.magFilter=THREE.NearestFilter; toonGradient.needsUpdate=true;
+const flat=(color,extra)=>new THREE.MeshToonMaterial(Object.assign({color,gradientMap:toonGradient},extra||{}));
+const M={ bone:flat(0xd9d2c0), boneDim:flat(0xb8b0a0), cloak:flat(0x2c2438), cloakHem:flat(0x3d3352), wood:flat(0x4a3a28), stoneDark:flat(0x3c3f48),
+  iron:new THREE.MeshStandardMaterial({color:0x6a6f7a,flatShading:true,roughness:0.5,metalness:0.4}) };
+const MGROBE=flat(0x262138), MGROBE2=flat(0x161226), WIZHATBAND=flat(0xe8c874);   // DARK wizard vestments (user ruling 2026-07-14): near-black violet-indigo over a deeper underlayer, thin antique gold — a risen skeleton's robe, not a royal court's
+const BOOTGOLD=flat(0xf6d888); BOOTGOLD.emissive.setHex(0x8a6516);
+const BOOTWING=flat(0xfff4d0); BOOTWING.emissive.setHex(0xb89a40);
+const box=(w,h,d,mat,x,y,z)=>{const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat);m.position.set(x||0,y||0,z||0);m.castShadow=true;return m;};
+
+// ============ SIMPLE RIG (the game's buildSkeleton) — V1 boxy · V2 rounded (both kept, user ruling 2026-07-15) ============
+let SKELV='v1';   // DEFAULT = V1 (user ruling 2026-07-15) — the game's model. All other versions stay one click away.
+function buildSkeleton(o){ o=o||{}; if(SKELV==='v5')return buildSkinnedSkeleton(o); if(SKELV==='v6')return buildProSkeleton(o);   // V5 skinned · V6 PRO RIG (user reference 2026-07-15: multi-spine, clavicles, pelvis root)
+  const g=new THREE.Group(); const B={root:g}; const V2=(SKELV==='v2'||SKELV==='v3'), V3=(SKELV==='v3'), V7=(SKELV==='v7'), V4=(SKELV==='v4'||V7), V1C=(SKELV==='v1c'), V1B=(SKELV==='v1b'), V1O=(SKELV==='v1');   // V1 upgrade (user 2026-07-15): a neck, a taller head, rigged ankles — the boxy charm stays
+  if(V1O){ B.faceW=0.225; B.faceHt=0.235; B.faceZ=0.121; B.faceY=0.014; }   // V1's face sits INSIDE the skull's edges — top, bottom and sides (user 2026-07-15: overlapped below the chin)   // V1.2 = V1's OWN boxes (user ruling 2026-07-15: from V1, NOT V1.1) + human head + a few extra surfaces + neck + ankle/toe   // V7 = V4 + neck + long skull · V1.1 = V1's OWN parts, 3× the surfaces (user ruling 2026-07-15: "not adding more parts, make the parts more detailed")
+  function box(w,h,d,mat,x,y,z){ if(V1B)return bx12(w,h,d,mat,x,y,z,0.3);   // V1.1 (user 2026-07-15: "not 18, 12"): bevel only along the long axis — subtler, boxier
+    if(V1C)return bx12(w,h,d,mat,x,y,z,0.16);   // V1.2: V1's boxes with a FAINT long-axis bevel — two-or-so extra reads per part, still V1
+    const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat); m.position.set(x||0,y||0,z||0); m.castShadow=true; return m; }
+  const bx12=(w,h,d,mat,x,y,z,rnd)=>{   // V1.1's cut: ONLY the 4 edges running along the part's LONG axis are bevelled — flat ends, flat faces, ~12 surfaces
+    const geo=new THREE.BoxGeometry(w,h,d,2,2,2).toNonIndexed(); const p=geo.attributes.position; const v=new THREE.Vector3();
+    const hw=w/2,hh=h/2,hd=d/2; const long=(h>=w&&h>=d)?'y':(w>=d?'x':'z');
+    const cc=(rnd||0.3)*(long==='y'?Math.min(hw,hd):long==='x'?Math.min(hh,hd):Math.min(hw,hh));
+    for(let i=0;i<p.count;i++){ v.set(p.getX(i),p.getY(i),p.getZ(i));
+      const ex=Math.abs(Math.abs(v.x)-hw)<1e-5, ey=Math.abs(Math.abs(v.y)-hh)<1e-5, ez=Math.abs(Math.abs(v.z)-hd)<1e-5;
+      const cx=(long!=='x'&&ex), cy=(long!=='y'&&ey), cz=(long!=='z'&&ez);
+      if((cx?1:0)+(cy?1:0)+(cz?1:0)===2){ if(cx)v.x-=Math.sign(v.x)*cc; if(cy)v.y-=Math.sign(v.y)*cc; if(cz)v.z-=Math.sign(v.z)*cc; }
+      p.setXYZ(i,v.x,v.y,v.z); }
+    geo.computeVertexNormals(); const m=new THREE.Mesh(geo,mat); m.position.set(x||0,y||0,z||0); m.castShadow=true; return m; };   // V3 = the LOW-POLY REFERENCE build · V4 = BOXY+ (user ruling 2026-07-15: V1's charm, ~2x the surfaces to detail it out)
+  const cylB=(rT,rB,h,mat,x,y,z,seg)=>{ const m=new THREE.Mesh(new THREE.CylinderGeometry(rT,rB,h,seg||7),mat); m.position.set(x||0,y||0,z||0); m.castShadow=true; return m; };
+  const ballB=(r,mat,x,y,z)=>{ const m=new THREE.Mesh(new THREE.SphereGeometry(r,8,6),mat); m.position.set(x||0,y||0,z||0); m.castShadow=true; return m; };
+  const skull4=(LONG)=>{   // LONG (V7): the HUMAN skull — taller box, one more horizontal band, no new parts (user ruling 2026-07-15)
+    const hw=LONG?0.125:0.14, hh=LONG?0.16:0.135, hd=LONG?0.125:0.13, cc=LONG?0.028:0.03;
+    const geo=new THREE.BoxGeometry(hw*2,hh*2,hd*2,2,LONG?4:3,2).toNonIndexed(); const p=geo.attributes.position; const v=new THREE.Vector3();
+    for(let i=0;i<p.count;i++){ v.set(p.getX(i),p.getY(i),p.getZ(i));
+      const ex=Math.abs(Math.abs(v.x)-hw)<1e-5, ey=Math.abs(Math.abs(v.y)-hh)<1e-5, ez=Math.abs(Math.abs(v.z)-hd)<1e-5;
+      if((ex?1:0)+(ey?1:0)+(ez?1:0)>=2){ if(ex)v.x-=Math.sign(v.x)*cc; if(ey)v.y-=Math.sign(v.y)*cc; if(ez)v.z-=Math.sign(v.z)*cc; }   // FLAT faces, crisp 45° bevels only
+      const yn=v.y/hh;
+      if(LONG){
+        if(yn<0.5){ const j=(0.5-yn)/1.5; v.x*=1-0.42*j; }                       // the FACE: temples taper steadily from the brow down to the chin
+        if(yn<0&&v.z<0){ v.z*=1-0.42*(-yn); }                                    // the OCCIPUT: the back of the head pulls in toward the jaw hinge
+        if(yn<-0.5&&v.z>0){ const j=(yn+0.5)/(-0.5); v.z*=1-0.2*j; }             // the CHIN: the front steps back below the jaw line
+      } else if(yn<-0.3){ const j=(yn+0.3)/(-0.7); v.x*=1-0.3*j; v.z*=1-0.18*j; }   // V4's jaw band, untouched
+      p.setXYZ(i,v.x,v.y,v.z); }
+    geo.computeVertexNormals(); const m=new THREE.Mesh(geo,M.bone); m.castShadow=true; return m; };
+  const skullV11=()=>{   // V1.1 (user reference render 2026-07-15): the low-poly SKELETON skull — domed crown, brow, tapered jaw, a chin
+    const hw=0.135,hh=0.15,hd=0.128;
+    const geo=new THREE.BoxGeometry(hw*2,hh*2,hd*2,3,4,3).toNonIndexed(); const p=geo.attributes.position; const v=new THREE.Vector3();
+    for(let i=0;i<p.count;i++){ v.set(p.getX(i),p.getY(i),p.getZ(i));
+      const yn=v.y/hh;
+      if(yn>0.3){ const j=(yn-0.3)/0.7; const sh=1-0.5*j*j; v.x*=sh; v.z*=sh; }
+      if(yn<0.15){ const j=(0.15-yn)/1.15; v.x*=1-0.42*j; }
+      if(yn<0.05&&v.z<0){ v.z*=1-0.4*(0.05-yn); }
+      if(yn<-0.45&&v.z>0){ const j=(yn+0.45)/(-0.55); v.z-=0.028*j; v.x*=1-0.25*j; }
+      if(yn>-0.1&&yn<0.35&&v.z>hd*0.55){ v.z+=0.014; }
+      p.setXYZ(i,v.x,v.y,v.z); }
+    geo.computeVertexNormals(); const m=new THREE.Mesh(geo,M.bone); m.castShadow=true; return m; };
+  const bx4=(w,h,d,mat,x,y,z,rnd,tap,waist)=>{   // V4's SCULPTED BOX (user ruling 2026-07-15: "more surfaces ON the box, not more parts"):
+    // the box subdivided 2×2×2, corners blended toward the ellipsoid (chamfer), optionally tapering toward the foot — same charm, shaped
+    const geo=new THREE.BoxGeometry(w,h,d,2,2,2).toNonIndexed(); const p=geo.attributes.position; const v=new THREE.Vector3();
+    const hw=w/2,hh=h/2,hd=d/2, cc=(rnd===undefined?0.35:rnd)*Math.min(hw,hh,hd);   // NOT ROUND (user ruling 2026-07-15): a fixed EDGE BEVEL —
+    for(let i=0;i<p.count;i++){ v.set(p.getX(i),p.getY(i),p.getZ(i));               // faces stay dead FLAT, only edges and corners take the 45° cut
+      const ex=Math.abs(Math.abs(v.x)-hw)<1e-5, ey=Math.abs(Math.abs(v.y)-hh)<1e-5, ez=Math.abs(Math.abs(v.z)-hd)<1e-5;
+      if((ex?1:0)+(ey?1:0)+(ez?1:0)>=2){ if(ex)v.x-=Math.sign(v.x)*cc; if(ey)v.y-=Math.sign(v.y)*cc; if(ez)v.z-=Math.sign(v.z)*cc; }
+      if(tap){ const t=1-tap*(0.5-v.y/h); v.x*=t; v.z*=t; }
+      if(waist&&Math.abs(v.y)<h*0.26){ v.x*=waist; v.z*=waist; }
+      p.setXYZ(i,v.x,v.y,v.z); }
+    geo.computeVertexNormals();
+    const m=new THREE.Mesh(geo,mat); m.position.set(x||0,y||0,z||0); m.castShadow=true; return m; };
+  const pelvis=V4?bx4(0.34,0.15,0.21,M.bone,0,0.92,0,0.4,0.1):V1B?(()=>{ const pg=new THREE.Group(); pg.position.y=0.92;   // V1.1 (reference sheet 2026-07-15): the BUTTERFLY pelvis — sacrum block, hip wings, low poly
+      pg.add(box(0.13,0.13,0.12,M.boneDim,0,0.02,-0.015));   // the sacrum
+      for(const s2 of[-1,1]){ const wing=box(0.2,0.12,0.13,M.bone,s2*0.135,0.045,0.005); wing.rotation.z=s2*0.46; wing.rotation.y=s2*0.14; pg.add(wing); const sit=box(0.09,0.07,0.09,M.bone,s2*0.09,-0.07,0.02); pg.add(sit); }   // the iliac blocks tipping up-out
+      pg.add(box(0.11,0.05,0.08,M.boneDim,0,-0.075,0.03)); return pg; })():V3?(()=>{ const pg=new THREE.Group(); pg.position.y=0.92;   // V3: the reference's BUTTERFLY pelvis — iliac wings flaring UP-and-out, a V pubis meeting at the front
+      pg.add(box(0.1,0.12,0.09,M.boneDim,0,0.02,-0.02));   // sacrum
+      for(const s of[-1,1]){ const wing=box(0.16,0.15,0.045,M.bone,s*0.12,0.045,-0.005); wing.rotation.y=s*0.5; wing.rotation.z=s*0.42; pg.add(wing);   // crest tips point UP-out
+        const pub=box(0.1,0.045,0.045,M.bone,s*0.045,-0.045,0.035); pub.rotation.z=s*-0.5; pg.add(pub); }   // the V meeting at the pubis
+      return pg; })():V2?(()=>{ const p=cylB(0.16,0.135,0.14,M.bone,0,0.92,0,9); p.scale.z=0.72; return p; })():box(0.34,0.14,0.2,M.bone,0,(V1C||V1O)?0.99:0.92,0); g.add(pelvis); B.pelvis=pelvis;   // V3 bowl · V2 lathed ring · V4 sculpted box · V1 box
+  const spine=new THREE.Group(); spine.position.y=(V1C||V1O)?1.06:0.99; g.add(spine); B.spine=spine; B.spineBase=(V1C||V1O)?1.06:0.99;   // V1.2: legs +0.07 (user 2026-07-15: they look short) — the torso rises with them
+  // THE PRO RIG ON THE REAL MODELS (user ruling 2026-07-15: "the RIG, not the skin"): spine 1-2-3-4 chain + clavicles,
+  // exactly the production diagram — the SAME segmented bones ride it, so the torso bends as a CURVE and the shoulders lift.
+  const spine2=new THREE.Group(); spine2.position.y=0.14; spine.add(spine2);
+  const spine3=new THREE.Group(); spine3.position.y=0.14; spine2.add(spine3);
+  const spine4=new THREE.Group(); spine4.position.y=0.13; spine3.add(spine4);
+  B.spine2=spine2; B.spine3=spine3; B.spine4=spine4; B.pro=true;
+  const clav={}; B.clav=clav;
+  for(const sd of[-1,1]){ const c=new THREE.Group(); c.position.set(sd*0.06,0.1,0.01); spine3.add(c); clav[sd>0?'r':'l']=c; }   // the clavicles, off spine 3
+  const spineAdd=(m)=>{ const y=m.position.y;   // every torso piece is FILED onto the spine segment that owns its height
+    if(y<0.14)spine.add(m); else if(y<0.28){ m.position.y-=0.14; spine2.add(m); } else if(y<0.41){ m.position.y-=0.28; spine3.add(m); } else { m.position.y-=0.41; spine4.add(m); } }; B.spineAdd=spineAdd;
+  { const colSeg=(par,h)=>{ const c=V2?cylB(0.05,0.046,h+0.02,M.bone,0,h/2,0):V4?bx4(0.1,h+0.02,0.1,M.bone,0,h/2,0,0.35,0):box(0.1,h+0.02,0.1,M.bone,0,h/2,0); par.add(c); };
+    colSeg(spine,0.14); colSeg(spine2,0.14); colSeg(spine3,0.13); colSeg(spine4,0.11); }   // the column is one short bone PER SEGMENT — bend the chain and the spine curves
+  if(V4)spine.add(bx4(0.1,0.18,0.1,M.bone,0,-0.09,0,0.35,0));   // V4 keeps its run down into the pelvis
+  if(V4)spine.add(bx4(0.09,0.09,0.09,M.boneDim,0,-0.06,0,0.6,0));   // and the waist vertebra nugget
+  if(V1O||V1C)spine.add(box(0.095,0.14,0.095,M.boneDim,0,-0.06,0));   // V1/V1.2: the waist vertebra — the spine roots INTO the pelvis and turns with the bend, no floating hinge (user 2026-07-15)
+  if(V3){   // V3 RIBS: stacked angular slab PAIRS, wide at the top, tips drooping outward-down — the reference's loudest feature
+    const rw=[0.2,0.23,0.215,0.19,0.155];
+    for(let i=0;i<5;i++){ const ry=0.34-i*0.062;
+      for(const s of[-1,1]){ const rib=box(rw[i],0.042,0.16,M.bone,s*(rw[i]/2+0.02),ry,0.01); rib.rotation.z=s*-0.22; rib.rotation.y=s*0.28; spineAdd(rib); } }
+    spineAdd(box(0.05,0.34,0.04,M.boneDim,0,0.22,0.1));   // the sternum the pairs hang from
+    for(let i=0;i<3;i++)spineAdd(box(0.075,0.045,0.08,i%2?M.bone:M.boneDim,0,0.02-i*0.062,0)); }   // the SEGMENTED lower spine showing between cage and hips
+  else if(V2){   // A REAL RIBCAGE — flattened hoops tapering from the mid-chest, the heart glowing through the bars (user refs 2026-07-15)
+    const rr=[0.145,0.185,0.2,0.185,0.15];
+    for(let i=0;i<5;i++){ const rib=new THREE.Mesh(new THREE.TorusGeometry(rr[i],0.016,5,14),M.bone); rib.rotation.x=Math.PI/2; rib.scale.set(1,0.68,1); rib.position.set(0,0.1+i*0.06,0.015); rib.castShadow=true; spineAdd(rib); }
+    spineAdd(box(0.045,0.28,0.028,M.boneDim,0,0.22,0.115)); }   // slim sternum
+  else if(V4)for(let i=0;i<3;i++){ const RR=0.2-i*0.026, arc=5.2;   // V4 RIBS (reference): chamfered HOOPS, open at the FRONT — the heart burns through the gap
+    const rib=new THREE.Mesh(new THREE.TorusGeometry(RR,0.037,4,8,arc),M.bone);
+    rib.rotation.z=-(Math.PI+arc)/2; rib.rotation.x=Math.PI/2;
+    rib.scale.set(1,1,0.74); rib.position.set(0,0.16+i*0.12,0.01); rib.castShadow=true; spineAdd(rib); }
+  else if(V1B){   // V1.1 RIBS (reference sheet 2026-07-15): a sternum plate, rib PAIRS angling down-and-back off it — every slat one low-poly bx12
+    spineAdd(box(0.05,0.32,0.045,M.boneDim,0,0.25,0.115));   // the sternum
+    const rw=[0.17,0.2,0.19,0.16,0.12];
+    for(let i=0;i<5;i++){ const ry=0.385-i*0.058;
+      for(const s2 of[-1,1]){ const rib=box(rw[i],0.042,0.15,M.bone,s2*(rw[i]/2+0.025),ry,0.015); rib.rotation.z=s2*-0.2; rib.rotation.y=s2*0.3; spineAdd(rib); } } }
+  else for(let i=0;i<3;i++) spineAdd(box(V1C?[0.27,0.35,0.31][i]:(V1O?[0.26,0.38,0.33][i]:0.4-i*0.05),0.07,V1C?[0.2,0.24,0.22][i]:(V1O?[0.19,0.26,0.24][i]:0.26-i*0.04),M.bone,0,0.16+i*0.12,0));   // V1 + V1.2 slats: MIDDLE biggest, bottom pulled in (user 2026-07-15: bottom rib too big)
+  if(V1C)for(let i=0;i<2;i++)spineAdd(box(0.105,0.055,0.1,i%2?M.boneDim:M.bone,0,0.03+i*0.065,0));   // V1.2: LUMBAR vertebrae — the waist connects, no floating hips (user annotation 2026-07-15)
+  if(o.slime&&!V1C){ const hgeo=V1B?new THREE.SphereGeometry(0.072,14,11):new THREE.IcosahedronGeometry(0.085,0);
+    const heart=new THREE.Mesh(hgeo,new THREE.MeshStandardMaterial({color:0x5cf09a,emissive:0x4ae67f,emissiveIntensity:2.4,flatShading:!V1B}));
+    if(V1B)heart.position.set(0,0.215,0.085); else heart.position.set(0.05,0.3,0.05); spineAdd(heart); B.slimeHeart=heart; B.slime=[];   // the character's TRUE left (+x facing the viewer — it sat on the right, user caught it 2026-07-15)
+    const halo=new THREE.Mesh(new THREE.IcosahedronGeometry(0.115,0),new THREE.MeshBasicMaterial({color:0x8cf0aa,transparent:true,opacity:0.2,blending:THREE.AdditiveBlending,depthWrite:false})); heart.add(halo); }   // ANATOMICAL (user 2026-07-15): upper-mid chest, character's left, behind the sternum   // the SLIME peers out of the ribcage: a beating green heart, seen through the rib gaps — the sign this skeleton is worn, not dead (canon; simple rig gets it 2026-07-14)
+  if(!o.bare){ const cloakPivot=new THREE.Group(); spine.add(cloakPivot); B.cloakPivot=cloakPivot;
+    const cloak=box(0.5,0.62,0.06,M.cloak,0,0.16,-0.17); cloak.rotation.x=0.12; cloakPivot.add(cloak);
+    cloakPivot.add(box(0.56,0.1,0.3,M.cloakHem,0,0.44,0)); }
+  const neck=new THREE.Group(); neck.position.y=0.11; spine4.add(neck); B.neck=neck;   // world height unchanged: 0.99+0.14+0.14+0.13+0.11
+  const skull=V3?(()=>{ const s=new THREE.Mesh(new THREE.SphereGeometry(0.148,7,5),M.bone); s.scale.set(0.9,0.98,1.06); s.rotation.y=Math.PI/7; return s; })():V2?(()=>{ const s=new THREE.Mesh(new THREE.SphereGeometry(0.15,12,9),M.bone); s.scale.set(0.88,0.94,1.08); return s; })():V4?skull4(V7):(V1C||V1B)?skullV11():new THREE.Mesh(new THREE.BoxGeometry(V1O?0.225:0.26,V1O?0.26:0.24,V1O?0.225:0.26),M.bone); skull.position.set(0,V3?0.2:(V7?0.235:(V1B?0.27:(V1C?0.26:(V1O?0.195:0.16)))),0); skull.castShadow=true; neck.add(skull); B.skull=skull;   // V3 faceted dome · V2 smooth dome · V1 box
+  if(!V3&&!V4&&!V1C&&!V1O)neck.add(box(V2?0.125:0.16,V2?0.07:0.08,V2?0.14:0.18,M.boneDim,0,V2?0.03:(V1B?0.09:-0.005),V2?0.06:0.02));   // V1's jaw lives in the PAINTED face — the grey block is gone (user 2026-07-15)   // mandible (V3 and V4 carry the jaw IN the head's own shape)
+  if(V4)neck.add(V7?bx4(0.072,0.17,0.072,M.boneDim,0,0,0,0.4):bx4(0.09,0.1,0.09,M.boneDim,0,-0.03,0,0.6,0));   // V7: a real NECK column (skull rides higher) · V4: the low nugget, frozen
+  if(V1B)neck.add(bx12(0.072,0.21,0.072,M.boneDim,0,0.035,0,0.35));   // V1.1: a REAL neck — a full column between jaw and ribcage, turning with the head
+  if(V1C)neck.add(bx12(0.076,0.23,0.076,M.boneDim,0,0.02,0,0.3));   // V1.2: the neck column — rooted DOWN into the collar and UP inside the skull, no hover (user 2026-07-15)
+  if(V1O)neck.add(box(0.075,0.18,0.075,M.boneDim,0,0.02,0));   // V1: the neck column — SHORTER (user 2026-07-15), still buried into the head
+  if(V4){ const MOUTH=new THREE.MeshBasicMaterial({color:0x0a0c10});   // V4 (reference): a dark mouth recess with a row of BONE TEETH
+    neck.add(box(V7?0.105:0.13,0.032,0.02,MOUTH,0,V7?0.148:0.062,V7?0.122:0.126));
+    for(let ti=-1;ti<=1;ti++)neck.add(box(V7?0.024:0.026,0.03,0.022,M.boneDim,ti*(V7?0.031:0.038),V7?0.148:0.062,V7?0.124:0.128)); }
+  if(V1B){ const MOUTH1=new THREE.MeshBasicMaterial({color:0x0a0c10}); B.faceExtra=[];   // V1.1 FACE: a nasal hollow and TEETH — tagged so the paint can hide them
+    const nose=box(0.026,0.034,0.012,MOUTH1,0,0.222,0.136); neck.add(nose); B.faceExtra.push(nose);
+    for(let ti=0;ti<4;ti++){ const th=box(0.017,0.024,0.02,M.bone,-0.036+ti*0.024,0.128,0.112); neck.add(th); B.faceExtra.push(th); } }
+  neck.add(box(0.09,0.055,0.09,M.boneDim,0,-0.0775,0));   // cervical peg
+  const em=new THREE.MeshBasicMaterial({color:0x8cf0aa}); B.eyeMat=em; B.eyes=[];
+  if(V3){   // V3 FACE (the low-poly reference, second pass — user check 2026-07-15): broad flat jaw, WIDE mouth seam over a chin, brooding sockets
+    const SOCK3=new THREE.MeshBasicMaterial({color:0x0a0c10});
+    { const max=new THREE.Mesh(new THREE.CylinderGeometry(0.088,0.072,0.12,4),M.bone); max.rotation.y=Math.PI/4; max.position.set(0,0.075,0.032); max.scale.set(1.35,1,1.0); max.castShadow=true; neck.add(max); }   // a BROAD maxilla, the reference's wide jaw
+    neck.add(box(0.135,0.045,0.11,M.boneDim,0,0.005,0.032));   // the chin/mandible shelf under the mouth seam
+    for(const s of[-1,1]){ const sock=box(0.06,0.048,0.02,SOCK3,s*0.054,0.178,0.128); sock.rotation.z=s*0.1; neck.add(sock);   // brooding sockets, outer corners dropped
+      const e=new THREE.Mesh(new THREE.BoxGeometry(0.02,0.022,0.015),em); e.position.set(s*0.054,0.175,0.141); neck.add(e); B.eyes.push(e); }   // the essence ember deep in each
+    { const nose=new THREE.Mesh(new THREE.ConeGeometry(0.017,0.04,3),SOCK3); nose.rotation.x=Math.PI; nose.position.set(0,0.128,0.132); neck.add(nose); }
+    neck.add(box(0.128,0.014,0.02,SOCK3,0,0.05,0.115));   // the WIDE mouth seam, jaw to jaw
+    { const ncol=new THREE.Mesh(new THREE.CylinderGeometry(0.034,0.038,0.1,6),M.boneDim); ncol.position.set(0,-0.035,0); ncol.castShadow=true; neck.add(ncol); } }   // a visible neck column
+  else if(V2){   // A PROPER SKULL (Valheim reference, 2026-07-15): brow ridge, dark sockets the essence glows FROM, a nasal hollow — reads as BONE, not a smiley ball
+    const SOCK=new THREE.MeshBasicMaterial({color:0x0a0c10});
+    const brow=box(0.15,0.022,0.04,M.boneDim,0,0.196,0.138); brow.rotation.x=-0.18; neck.add(brow);   // a subtle brow ridge, proud of the face
+    for(const s of[-1,1]){ const sock=new THREE.Mesh(new THREE.SphereGeometry(0.05,8,6),SOCK); sock.position.set(s*0.058,0.166,0.142); sock.scale.set(1,0.92,0.3); neck.add(sock);   // the dark socket, a shallow disc set into the face
+      const e=new THREE.Mesh(new THREE.BoxGeometry(0.026,0.03,0.02),em); e.position.set(s*0.058,0.166,0.152); neck.add(e); B.eyes.push(e); }   // the essence glow, deep in the socket
+    const nose=new THREE.Mesh(new THREE.ConeGeometry(0.023,0.055,4),SOCK); nose.rotation.x=Math.PI; nose.position.set(0,0.108,0.146); neck.add(nose);   // the nasal hollow
+  } else for(const s of[-1,1]){ const e=new THREE.Mesh(new THREE.BoxGeometry(V7?0.062:(V1C?0.06:(V4?0.075:0.055)),V4?0.07:0.055,0.02),em); e.position.set(s*(V7?0.056:(V1C?0.058:0.062)),V7?0.265:(V1C?0.255:(V4?0.185:(V1B?0.265:(V1O?0.215:0.17)))),V7?0.126:(V1C?0.138:(V4?0.142:0.135))); neck.add(e); B.eyes.push(e); }   // V4: BIG square lamps, the reference's stare
+  for(const s of[-1,1]){ let cb; if(V4){ cb=bx4(0.2,0.08,0.1,M.boneDim,s*0.15,0.475,0.02,0.45,0); cb.rotation.z=s*-0.28; cb.rotation.y=s*0.12; }
+    else if(V1C||V1O){ clav[s>0?'r':'l'].add(box(0.19,0.05,0.065,M.boneDim,s*0.115,0.05,0)); continue; }   // the COLLARBONE rides the CLAVICLE, clear of the NECK — no bulge at the throat (user 2026-07-15)
+    else cb=box(0.19,0.055,0.07,M.boneDim,s*0.15,0.47,0.02); spineAdd(cb); }   // V4: shoulder WEDGES sloping down-and-out (reference) · others keep the flat slat
+  B.arm={};
+  for(const s of[-1,1]){ const sh=new THREE.Group(); sh.position.set(s*((V1C||V1O)?0.19:0.24),(V1C||V1O)?0.02:0.06,-0.01); clav[s>0?'r':'l'].add(sh);   // the arm hangs FROM the clavicle — LOWER and TUCKED to the body (user 2026-07-15: shoulders too high, arms stick to the body)
+    if(V2){ sh.add(ballB(0.056,M.boneDim,0,0.03,0)); sh.add(cylB(0.043,0.037,0.32,M.bone,0,-0.16,0)); }   // V2: humeral head + tapered humerus
+    else if(V4){ sh.add(bx4(0.105,0.07,0.105,M.boneDim,0,0.045,0,0.55,0)); sh.add(bx4(0.1,0.34,0.1,M.bone,0,-0.16,0,0.4)); }   // V4: cap + a straight CHAMFERED prism — flat faces, cut edges (reference)
+    else{ sh.add(box(V1O?0.09:0.1,0.06,V1O?0.09:0.1,M.boneDim,0,0.045,0)); sh.add(box(V1O?0.075:0.09,V1C?0.3:0.34,V1O?0.075:0.09,M.bone,0,V1C?-0.145:-0.16,0)); }   // V1: box cap + THIN bone humerus (user 2026-07-15: it's bone)
+    const el=new THREE.Group(); el.position.y=V1C?-0.3:-0.34; sh.add(el);
+    if(V2){ el.add(ballB(0.047,M.boneDim,0,0,0)); el.add(cylB(0.038,0.033,0.28,M.bone,0,-0.14,0)); }
+    else if(V4){ el.add(bx4(0.095,0.09,0.095,M.boneDim,0,0,0,0.65,0));   // V4: the ELBOW nugget, riding the pivot — the gap can never open
+      el.add(bx4(0.09,0.3,0.09,M.bone,0,-0.14,0,0.4)); }   // the forearm: same crisp prism
+    else el.add(box(V1O?0.065:0.08,V1C?0.27:0.3,V1O?0.065:0.08,M.bone,0,V1C?-0.125:-0.14,0));
+    if(V1B||V1C)el.add(box(0.082,0.07,0.082,M.boneDim,0,0,0));   // V1.1/V1.2: the elbow cap — slimmed, it sits BETWEEN the bone widths (user 2026-07-15: elbows too wide)
+    const hand=new THREE.Group(); hand.position.y=V1C?-0.27:-0.3; el.add(hand);
+    if(V3){ hand.add(box(0.08,0.09,0.075,M.bone,0,-0.04,0));   // V3: a broad flat palm…
+      for(let f=0;f<3;f++){ const fg=box(0.02,0.085,0.03,M.boneDim,-0.026+f*0.026,-0.12,0.02); fg.rotation.x=0.24; hand.add(fg); }   // …three SEPARATE fingers, slightly curled…
+      const th=box(0.02,0.06,0.028,M.boneDim,s*0.045,-0.075,0.025); th.rotation.z=s*-0.5; th.rotation.x=0.3; hand.add(th); }   // …and a thumb angling in — the reference's big articulate mitts
+    else if(V2){ const fist=ballB(0.058,M.boneDim,0,-0.045,0); fist.scale.set(0.92,0.8,1.05); hand.add(fist); }   // V2 rounded fist
+    else if(V4)hand.add(bx4(0.105,0.105,0.105,M.boneDim,0,-0.045,0,0.5,0));   // V4: the fist, chamfered round
+    else if(V1B){ hand.add(box(0.092,0.075,0.052,M.boneDim,0,-0.02,0));
+      for(let fi=0;fi<3;fi++)hand.add(box(0.024,0.075,0.04,M.bone,-0.03+fi*0.03,-0.09,0.004));
+      const th=box(0.028,0.055,0.038,M.bone,-s*0.05,-0.04,0.022); th.rotation.z=s*0.5; hand.add(th); }
+    else hand.add(box(0.1,0.1,0.1,M.boneDim,0,-0.045,0));   // V1 box hand
+    B.arm[s>0?'r':'l']={sh,el,hand}; }
+  B.leg={};
+  for(const s of[-1,1]){ const hip=new THREE.Group(); hip.position.set(s*0.11,(V1C||V1O)?0.97:0.9,0); g.add(hip);
+    if(V2){ hip.add(ballB(0.055,M.boneDim,0,0,0)); hip.add(cylB(0.048,0.041,0.38,M.bone,0,-0.19,0)); }   // V2 hip ball + femur
+    else if(V4){ hip.add(bx4(0.115,0.1,0.115,M.boneDim,0,0,0,0.65,0));   // V4: the HIP nugget at the pivot
+      hip.add(bx4(0.11,0.4,0.11,M.bone,0,-0.19,0,0.4)); }   // the femur: crisp chamfered prism
+    else hip.add(box(V1O?0.085:0.1,(V1C||V1O)?0.435:0.4,V1O?0.085:0.1,M.bone,0,(V1C||V1O)?-0.2075:-0.19,0));   // V1 box thigh — thinner, it's BONE (user 2026-07-15)
+    const knee=new THREE.Group(); knee.position.y=(V1C||V1O)?-0.435:-0.4; hip.add(knee);
+    if(V2){ knee.add(ballB(0.048,M.boneDim,0,0,0)); knee.add(cylB(0.041,0.035,0.38,M.bone,0,-0.19,0)); }
+    else if(V4){ knee.add(bx4(0.105,0.095,0.105,M.boneDim,0,0,0,0.65,0));   // V4: the KNEE nugget at the pivot
+      knee.add(bx4(0.1,0.4,0.1,M.bone,0,-0.19,0,0.4));
+      knee.add(bx4(0.085,0.07,0.085,M.boneDim,0,-0.39,0,0.6,0)); }   // sculpted shin, and an ankle nugget where it meets the foot
+    else knee.add(box(V1O?0.075:0.09,(V1C||V1O)?0.435:0.4,V1O?0.075:0.09,M.bone,0,(V1C||V1O)?-0.2075:-0.19,0));
+    if(V1B||V1C)knee.add(box(0.098,0.08,0.098,M.boneDim,0,0,0));   // V1.1/V1.2: the knee cap riding the pivot
+    let foot=null;
+    if(V1B||V1C||V1O){ foot=new THREE.Group(); foot.position.set(0,(V1C||V1O)?-0.435:-0.4,0); knee.add(foot);   // V1/V1.1/V1.2: the ANKLE is a real pivot — the foot is RIGGED, not welded to the shin (user 2026-07-15: feet riggings were bad)
+      if(V1O){ foot.add(box(0.075,0.1,0.075,M.boneDim,0,-0.015,0)); foot.add(box(0.11,0.07,0.22,M.boneDim,0,-0.065,0.05)); }   // V1: ankle block BRIDGES shin to foot + the box foot, sole ON the floor
+      else{
+      foot.add(box(0.065,0.07,0.065,M.boneDim,0,-0.008,0));   // the ankle block
+      foot.add(box(0.1,0.075,0.09,M.boneDim,0,-0.062,-0.02));   // the HEEL block, raised at the back
+      foot.add(box(0.11,0.055,0.13,M.boneDim,0,-0.0725,0.06));   // the foot body — sole ON the floor (user 2026-07-15: feet were hovering)
+      if(V1C){ const toe=new THREE.Group(); toe.position.set(0,-0.06,0.09); foot.add(toe); foot.toe=toe;   // V1.2: the BALL joint — heel → ball → toe
+        toe.add(box(0.105,0.055,0.07,M.bone,0,-0.0125,0.035)); }
+      else{ for(let toe=0;toe<3;toe++)foot.add(box(0.032,0.045,0.06,M.bone,-0.037+toe*0.037,-0.08,0.13)); } } }   // V1.1: three split toes (reference render)
+    else if(V3){ knee.add(box(0.095,0.055,0.26,M.boneDim,0,-0.43,0.06)); knee.add(box(0.1,0.05,0.07,M.bone,0,-0.433,0.2)); }   // V3: a long flat foot stepping out to a toe block
+    else if(V4)knee.add(bx4(0.11,0.07,0.23,M.boneDim,0,-0.43,0.05,0.4,0));   // V4: the foot, chamfered
+    else if(!V1O)knee.add(box(V2?0.1:0.11,V2?0.065:0.07,V2?0.21:0.22,M.boneDim,0,-0.43,0.05));   // the foot
+    B.leg[s>0?'r':'l']={hip,knee,foot}; }
+  if(!o.bare){ const st=new THREE.Group(); B.arm.l.hand.add(st);
+    st.add(box(0.06,0.62,0.06,M.wood,0,-0.64,0));   // SYNCED FROM THE GAME (2026-07-19): the gnarled three-segment focus with the iron crown and runes
+    { const mid=box(0.07,0.52,0.07,M.wood,0,-0.1,0); mid.rotation.y=0.35; st.add(mid); }
+    { const up=box(0.058,0.48,0.058,M.wood,0,0.34,0); up.rotation.y=-0.3; st.add(up); }
+    st.add(box(0.082,0.07,0.082,M.iron,0,-0.92,0));
+    st.add(box(0.086,0.15,0.086,M.cloakHem||M.iron,0,-0.32,0));
+    for(const pa of[0,1,2,3]){ const px2=Math.sin(pa*1.5708)*0.07, pz2=Math.cos(pa*1.5708)*0.07;
+      const pr=box(0.028,0.17,0.028,M.iron,px2,0.56,pz2); pr.rotation.z=-px2*4.5; pr.rotation.x=pz2*4.5; st.add(pr); }
+    for(const ry of[-0.52,-0.06,0.3]){ const rn=new THREE.Mesh(new THREE.BoxGeometry(0.075,0.05,0.02),new THREE.MeshStandardMaterial({color:0x8cf0aa,emissive:0x2f9a55,emissiveIntensity:0.9,flatShading:true})); rn.position.set(0,ry,0.048); st.add(rn); }
+    const cr=new THREE.Mesh(new THREE.IcosahedronGeometry(0.135,0),new THREE.MeshStandardMaterial({color:0x8cf0aa,emissive:0x2f9a55,emissiveIntensity:1.3,flatShading:true}));
+    cr.position.y=0.64; st.add(cr); st.rotation.x=1.5; B.staff=st; B.crystal=cr; }
+  g.traverse(m=>{if(m.isMesh){m.castShadow=true; if(V1O&&m.material===M.boneDim)m.material=M.bone;}});   // V1: ONE bone colour, a streamlined body (user 2026-07-15)
+  return B; }
+// ============ V5 — THE SKINNED RIG (user reference 2026-07-15): ONE continuous mesh, vertices WEIGHTED to bones, ============
+// so shoulders, elbows and knees BEND smoothly instead of hinging as separate pieces. Same joint names, same positions,
+// same animation grammar — only the flesh differs: THREE.Bone hierarchy + THREE.SkinnedMesh with per-ring weights.
+function buildSkinnedSkeleton(o){ o=o||{}; const container=new THREE.Group(); const B={root:container,skinned:true,slime:[]};
+  const mk=(x,y,z,parent)=>{ const b=new THREE.Bone(); b.position.set(x,y,z); if(parent)parent.add(b); return b; };
+  const rootB=mk(0,0,0,null); container.add(rootB);
+  const pelvisB=mk(0,0.92,0,rootB);
+  const spineB=mk(0,0.99,0,rootB), neckB=mk(0,0.52,0,spineB), headB=mk(0,0.16,0,neckB);
+  const arm={},leg={};
+  for(const sd of[-1,1]){ const sh=mk(sd*0.3,0.44,0,spineB), el=mk(0,-0.34,0,sh), hand=mk(0,-0.3,0,el);
+    const hip=mk(sd*0.11,0.9,0,rootB), knee=mk(0,-0.4,0,hip);
+    arm[sd>0?'r':'l']={sh,el,hand}; leg[sd>0?'r':'l']={hip,knee}; }
+  B.pelvis=pelvisB; B.spine=spineB; B.neck=neckB; B.skull=headB; B.arm=arm; B.leg=leg;
+  const bones=[rootB,pelvisB,spineB,neckB,headB,arm.l.sh,arm.l.el,arm.l.hand,arm.r.sh,arm.r.el,arm.r.hand,leg.l.hip,leg.l.knee,leg.r.hip,leg.r.knee];
+  const bi=b=>bones.indexOf(b);
+  // ---- the body: rings of vertices along each chain, each ring weighted to its bones; JOINT rings split 50/50 = the smooth bend ----
+  const SEG=o.boxy?4:8, pos=[],si=[],sw=[],idx=[], rings=[];   // boxy (user 2026-07-15): 4-corner rings = SQUARE sections — a box body that bends CONNECTED, one skin
+  const ring=(x,y,z,r,b1,w1,b2,w2)=>{ rings.push({x,y,z,r,b1,w1,b2:b2||b1,w2:w2||0}); return rings.length-1; };
+  const bake=(list,capA,capB)=>{ const bases=list.map(ri=>{ const rr=rings[ri]; const base=pos.length/3;
+      for(let k=0;k<SEG;k++){ const th=k/SEG*Math.PI*2+(o.boxy?Math.PI/4:0); const rq=rr.r*(o.boxy?1.15:1); pos.push(rr.x+Math.cos(th)*rq, rr.y, rr.z+Math.sin(th)*rq);
+        si.push(bi(rr.b1),bi(rr.b2),0,0); sw.push(rr.w1,rr.w2,0,0); } return base; });
+    for(let i=0;i<list.length-1;i++){ const bA=bases[i],bB2=bases[i+1];
+      for(let k=0;k<SEG;k++){ const k2=(k+1)%SEG; idx.push(bA+k,bB2+k,bA+k2, bA+k2,bB2+k,bB2+k2); } }
+    const capOf=(ri,base,dir)=>{ const rr=rings[ri]; const c=pos.length/3;
+      pos.push(rr.x,rr.y+dir*rr.r*0.55,rr.z); si.push(bi(rr.b1),bi(rr.b2),0,0); sw.push(rr.w1,rr.w2,0,0);
+      for(let k=0;k<SEG;k++){ const k2=(k+1)%SEG; if(dir>0)idx.push(c,base+k,base+k2); else idx.push(c,base+k2,base+k); } };
+    if(capA)capOf(list[0],bases[0],-1); if(capB)capOf(list[list.length-1],bases[bases.length-1],1); };
+  // torso: hips up through the chest to the neck — lower rings ride the root, upper the spine
+  bake([ ring(0,0.8,0,0.15,rootB,1), ring(0,0.99,0,0.135,rootB,0.5,spineB,0.5), ring(0,1.16,0,0.155,spineB,1),
+         ring(0,1.33,0,0.165,spineB,1), ring(0,1.44,0,0.13,spineB,1), ring(0,1.5,0,0.055,spineB,0.4,neckB,0.6) ], true,false);
+  // head: neck up over the crown
+  bake([ ring(0,1.5,0,0.05,neckB,1), ring(0,1.56,0,0.085,headB,0.7,neckB,0.3), ring(0,1.63,0,0.105,headB,1), ring(0,1.72,0,0.075,headB,1) ], false,true);
+  // arms: shoulder → elbow → wrist → hand, joints split so the tube FOLDS instead of breaking
+  for(const sd of[-1,1]){ const A=arm[sd>0?'r':'l'];
+    bake([ ring(sd*0.185,1.455,0,0.075,spineB,0.65,A.sh,0.35), ring(sd*0.295,1.41,0,0.06,A.sh,0.85,spineB,0.15),   // the DELTOID bridge: the arm tube grows OUT of the torso, buried at its root — no detached strap, no open ring
+           ring(sd*0.3,1.26,0,0.047,A.sh,1), ring(sd*0.3,1.09,0,0.045,A.sh,0.5,A.el,0.5),
+           ring(sd*0.3,0.94,0,0.04,A.el,1), ring(sd*0.3,0.79,0,0.038,A.el,0.55,A.hand,0.45), ring(sd*0.3,0.68,0,0.048,A.hand,1) ], false,true);
+    const L=leg[sd>0?'r':'l'];
+    bake([ ring(sd*0.11,0.9,0,0.075,rootB,0.45,L.hip,0.55), ring(sd*0.11,0.7,0,0.062,L.hip,1), ring(sd*0.11,0.5,0,0.056,L.hip,0.5,L.knee,0.5),
+           ring(sd*0.11,0.3,0,0.05,L.knee,1), ring(sd*0.11,0.1,0,0.046,L.knee,1) ], false,false);
+    const foot=box(0.105,0.06,0.22,M.boneDim,0,-0.43,0.06); L.knee.add(foot); }   // a rigid shoe on the skinned leg
+  const geo=new THREE.BufferGeometry();
+  geo.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));
+  geo.setAttribute('skinIndex',new THREE.Uint16BufferAttribute(si,4));
+  geo.setAttribute('skinWeight',new THREE.Float32BufferAttribute(sw,4));
+  geo.setIndex(idx); geo.computeVertexNormals();
+  const skinMat=new THREE.MeshStandardMaterial({color:0xb8b1a3,roughness:0.88,metalness:0});   // the smooth mannequin — deliberately unfaceted, this variant is about the DEFORMATION
+  const mesh=new THREE.SkinnedMesh(geo,skinMat); mesh.castShadow=true; mesh.receiveShadow=true;
+  container.add(mesh); container.updateMatrixWorld(true); mesh.bind(new THREE.Skeleton(bones));
+  const em=new THREE.MeshBasicMaterial({color:0x8cf0aa}); B.eyeMat=em; B.eyes=[];
+  for(const sd of[-1,1]){ const e=new THREE.Mesh(new THREE.BoxGeometry(0.045,0.045,0.02),em); e.position.set(sd*0.045,0.06,0.1); headB.add(e); B.eyes.push(e); }
+  if(o.slime){ const heart=new THREE.Mesh(new THREE.IcosahedronGeometry(0.05,0),new THREE.MeshStandardMaterial({color:0x6fe89a,emissive:0x2f9a55,emissiveIntensity:1.2,flatShading:true}));
+    heart.position.set(0,0.34,0.14); spineB.add(heart); B.slimeHeart=heart; }   // the essence heart rides the chest surface
+  if(!o.bare){ const st=new THREE.Group(); B.arm.l.hand.add(st);
+    st.add(box(0.06,0.62,0.06,M.wood,0,-0.64,0));   // SYNCED FROM THE GAME (2026-07-19): the gnarled three-segment focus with the iron crown and runes
+    { const mid=box(0.07,0.52,0.07,M.wood,0,-0.1,0); mid.rotation.y=0.35; st.add(mid); }
+    { const up=box(0.058,0.48,0.058,M.wood,0,0.34,0); up.rotation.y=-0.3; st.add(up); }
+    st.add(box(0.082,0.07,0.082,M.iron,0,-0.92,0));
+    st.add(box(0.086,0.15,0.086,M.cloakHem||M.iron,0,-0.32,0));
+    for(const pa of[0,1,2,3]){ const px2=Math.sin(pa*1.5708)*0.07, pz2=Math.cos(pa*1.5708)*0.07;
+      const pr=box(0.028,0.17,0.028,M.iron,px2,0.56,pz2); pr.rotation.z=-px2*4.5; pr.rotation.x=pz2*4.5; st.add(pr); }
+    for(const ry of[-0.52,-0.06,0.3]){ const rn=new THREE.Mesh(new THREE.BoxGeometry(0.075,0.05,0.02),new THREE.MeshStandardMaterial({color:0x8cf0aa,emissive:0x2f9a55,emissiveIntensity:0.9,flatShading:true})); rn.position.set(0,ry,0.048); st.add(rn); }
+    const cr=new THREE.Mesh(new THREE.IcosahedronGeometry(0.135,0),new THREE.MeshStandardMaterial({color:0x8cf0aa,emissive:0x2f9a55,emissiveIntensity:1.3,flatShading:true}));
+    cr.position.y=0.64; st.add(cr); st.rotation.x=1.5; B.staff=st; B.crystal=cr; }
+  return B; }
+// ============ V6 — THE PRO RIG (user's production-rig diagram, 2026-07-15): pelvis root at the centre of mass, ============
+// a THREE-SEGMENT spine that bends as a curve, CLAVICLES that lift with the arm — the professional layout, skinned.
+// The same pose grammar drives it: poses write to B.spine/B.arm as always, and proDistribute() spreads the bend down the
+// chain and lifts the clavicles every frame. (Roll bones and fingers are deliberately omitted: no animation twists wrists
+// yet, and a joint no animation uses is dead weight, not realism.)
+function buildProSkeleton(o){ o=o||{}; const container=new THREE.Group(); const B={root:container,skinned:true,pro:true,slime:[]};
+  const mk=(x,y,z,parent)=>{ const b=new THREE.Bone(); b.position.set(x,y,z); if(parent)parent.add(b); return b; };
+  const HU=!!o.human;   // HUMAN mode (user 2026-07-15): the SAME body plan as the V1.2 skeleton — same height, same limb lengths, longer legs
+  const rootB=mk(0,0,0,null); container.add(rootB);
+  const pelvisB=mk(0,HU?0.99:0.92,0,rootB);   // THE ROOT OF THE SKELETON — the centre of mass, as the diagram says
+  const spine1=mk(0,HU?1.06:0.99,0,rootB), spine2=mk(0,0.14,0,spine1), spine3=mk(0,0.14,0,spine2), spine4=mk(0,0.13,0,spine3);   // spine1 hangs off the ROOT at the grammar height (resetPose pins spine.position.y=B.spineBase)
+  const neckB=mk(0,0.11,0,spine4), headB=mk(0,0.16,0,neckB);
+  B.spineBase=HU?1.06:0.99;
+  const arm={},leg={},clav={};
+  for(const sd of[-1,1]){ const cl=mk(sd*0.06,0.1,0.01,spine3);   // the CLAVICLE — it lifts the shoulder when the arm goes up
+    const sh=mk(sd*(HU?0.205:0.24),0.06,-0.01,cl), el=mk(0,HU?-0.3:-0.34,0,sh), hand=mk(0,HU?-0.27:-0.3,0,el);
+    const hip=mk(sd*0.11,-0.02,0,pelvisB), knee=mk(0,HU?-0.435:-0.4,0,hip);
+    clav[sd>0?'r':'l']=cl; arm[sd>0?'r':'l']={sh,el,hand}; leg[sd>0?'r':'l']={hip,knee}; }
+  B.pelvis=pelvisB; B.spine=spine1; B.spine2=spine2; B.spine3=spine3; B.spine4=spine4; B.clav=clav; B.neck=neckB; B.skull=headB; B.arm=arm; B.leg=leg;
+  const bones=[rootB,pelvisB,spine1,spine2,spine3,spine4,neckB,headB,clav.l,clav.r,arm.l.sh,arm.l.el,arm.l.hand,arm.r.sh,arm.r.el,arm.r.hand,leg.l.hip,leg.l.knee,leg.r.hip,leg.r.knee];
+  const bi=b=>bones.indexOf(b);
+  const SEG=8, pos=[],si=[],sw=[],idx=[], rings=[];
+  const ring=(x,y,z,r,b1,w1,b2,w2)=>{ rings.push({x,y,z,r,b1,w1,b2:b2||b1,w2:w2||0}); return rings.length-1; };
+  const bake=(list,capA,capB)=>{ const bases=list.map(ri=>{ const rr=rings[ri]; const base=pos.length/3;
+      for(let k=0;k<SEG;k++){ const th=k/SEG*Math.PI*2; pos.push(rr.x+Math.cos(th)*rr.r, rr.y, rr.z+Math.sin(th)*rr.r);
+        si.push(bi(rr.b1),bi(rr.b2),0,0); sw.push(rr.w1,rr.w2,0,0); } return base; });
+    for(let i=0;i<list.length-1;i++){ const bA=bases[i],bB2=bases[i+1];
+      for(let k=0;k<SEG;k++){ const k2=(k+1)%SEG; idx.push(bA+k,bB2+k,bA+k2, bA+k2,bB2+k,bB2+k2); } }
+    const capOf=(ri,base,dir)=>{ const rr=rings[ri]; const c=pos.length/3;
+      pos.push(rr.x,rr.y+dir*rr.r*0.55,rr.z); si.push(bi(rr.b1),bi(rr.b2),0,0); sw.push(rr.w1,rr.w2,0,0);
+      for(let k=0;k<SEG;k++){ const k2=(k+1)%SEG; if(dir>0)idx.push(c,base+k,base+k2); else idx.push(c,base+k2,base+k); } };
+    if(capA)capOf(list[0],bases[0],-1); if(capB)capOf(list[list.length-1],bases[bases.length-1],1); };
+  // torso: every ring hands off to the NEXT spine segment — bend the chain and the flesh curves
+  if(HU&&o.boxy){   // the BOX-WORLD HERO (user 2026-07-15: "this isn't a box world hero") — straight box volumes, one bending skin
+    bake([ ring(0,0.87,0,0.15,pelvisB,1), ring(0,1.06,0,0.15,pelvisB,0.5,spine1,0.5),   // a straight box trunk
+           ring(0,1.34,0,0.15,spine2,0.55,spine3,0.45), ring(0,1.56,0,0.15,spine3,0.6,spine4,0.4),
+           ring(0,1.575,0,0.06,spine4,0.5,neckB,0.5) ], true,false);   // a sharp shoulder shelf, then the neck
+    bake([ ring(0,1.575,0,0.055,neckB,1), ring(0,1.62,0,0.115,headB,0.7,neckB,0.3), ring(0,1.63,0,0.115,headB,1), ring(0,1.86,0,0.115,headB,1) ], false,true);   // a clean BOX head
+    for(const sd of[-1,1]){ const A=arm[sd>0?'r':'l'], C=clav[sd>0?'r':'l'];
+      bake([ ring(sd*0.13,1.5,0,0.08,C,0.5,spine3,0.5),   // the shoulder fuses INTO the trunk
+             ring(sd*0.25,1.48,0,0.06,A.sh,0.85,C,0.15),
+             ring(sd*0.265,1.2,0,0.055,A.sh,0.5,A.el,0.5), ring(sd*0.265,0.91,0,0.055,A.hand,1) ], false,true);   // one straight box arm
+      const L=leg[sd>0?'r':'l'];
+      bake([ ring(sd*0.11,0.97,0,0.07,pelvisB,0.45,L.hip,0.55), ring(sd*0.11,0.535,0,0.065,L.hip,0.5,L.knee,0.5),
+             ring(sd*0.11,0.1,0,0.06,L.knee,1) ], false,false);   // one straight box leg
+      const foot=box(0.105,0.06,0.22,M.boneDim,0,-0.5,0.06); L.knee.add(foot); } }
+  else if(HU){   // the HUMAN skin v2 (user ref: Valheim body): broad chest, TAPERED waist, deltoids FUSED into the trunk, forearms, fists, calves
+    bake([ ring(0,0.87,0,0.155,pelvisB,1), ring(0,1.06,0,0.128,pelvisB,0.5,spine1,0.5),   // hips, then the waist PINCHES
+           ring(0,1.20,0,0.148,spine1,0.6,spine2,0.4), ring(0,1.34,0,0.175,spine2,0.55,spine3,0.45),   // …and the chest opens BROAD
+           ring(0,1.46,0,0.16,spine3,1), ring(0,1.53,0,0.11,spine3,0.6,spine4,0.4),
+           ring(0,1.575,0,0.055,spine4,0.5,neckB,0.5) ], true,false);
+    bake([ ring(0,1.575,0,0.052,neckB,1), ring(0,1.66,0,0.10,headB,0.7,neckB,0.3), ring(0,1.75,0,0.13,headB,1), ring(0,1.86,0,0.09,headB,1) ], false,true);
+    for(const sd of[-1,1]){ const A=arm[sd>0?'r':'l'], C=clav[sd>0?'r':'l'];
+      bake([ ring(sd*0.13,1.50,0,0.09,C,0.5,spine3,0.5),   // the deltoid STARTS INSIDE the chest — no armpit gap, the shoulder is one flesh with the trunk
+             ring(sd*0.245,1.465,0,0.08,A.sh,0.8,C,0.2),   // the shoulder ball
+             ring(sd*0.265,1.36,0,0.06,A.sh,1), ring(sd*0.265,1.20,0,0.052,A.sh,0.5,A.el,0.5),
+             ring(sd*0.265,1.10,0,0.056,A.el,1),   // the FOREARM swells below the elbow (the reference's working arms)
+             ring(sd*0.265,0.97,0,0.04,A.el,0.55,A.hand,0.45), ring(sd*0.265,0.91,0,0.054,A.hand,1) ], false,true);   // …and ends in a FIST
+      const L=leg[sd>0?'r':'l'];
+      bake([ ring(sd*0.11,0.97,0,0.092,pelvisB,0.45,L.hip,0.55), ring(sd*0.11,0.75,0,0.08,L.hip,1), ring(sd*0.11,0.535,0,0.06,L.hip,0.5,L.knee,0.5),
+             ring(sd*0.11,0.40,0,0.062,L.knee,1),   // the CALF
+             ring(sd*0.11,0.1,0,0.048,L.knee,1) ], false,false);
+      const foot=box(0.105,0.06,0.22,M.boneDim,0,-0.5,0.06); L.knee.add(foot); } }
+  else{
+  bake([ ring(0,0.8,0,0.15,pelvisB,1), ring(0,0.99,0,0.135,pelvisB,0.5,spine1,0.5), ring(0,1.13,0,0.15,spine1,0.6,spine2,0.4),
+         ring(0,1.27,0,0.16,spine2,0.55,spine3,0.45), ring(0,1.38,0,0.15,spine3,1), ring(0,1.45,0,0.12,spine3,0.6,spine4,0.4),
+         ring(0,1.5,0,0.055,spine4,0.5,neckB,0.5) ], true,false);
+  bake([ ring(0,1.5,0,0.05,neckB,1), ring(0,1.56,0,0.085,headB,0.7,neckB,0.3), ring(0,1.63,0,0.105,headB,1), ring(0,1.72,0,0.075,headB,1) ], false,true);
+  for(const sd of[-1,1]){ const A=arm[sd>0?'r':'l'], C=clav[sd>0?'r':'l'];
+    bake([ ring(sd*0.185,1.455,0,0.075,C,0.6,spine3,0.4),   // the deltoid grows off the CLAVICLE — raise the arm and the whole shoulder lifts
+           ring(sd*0.295,1.41,0,0.06,A.sh,0.85,C,0.15),
+           ring(sd*0.3,1.26,0,0.047,A.sh,1), ring(sd*0.3,1.09,0,0.045,A.sh,0.5,A.el,0.5),
+           ring(sd*0.3,0.94,0,0.04,A.el,1), ring(sd*0.3,0.79,0,0.038,A.el,0.55,A.hand,0.45), ring(sd*0.3,0.68,0,0.048,A.hand,1) ], false,true);
+    const L=leg[sd>0?'r':'l'];
+    bake([ ring(sd*0.11,0.9,0,0.075,pelvisB,0.45,L.hip,0.55), ring(sd*0.11,0.7,0,0.062,L.hip,1), ring(sd*0.11,0.5,0,0.056,L.hip,0.5,L.knee,0.5),
+           ring(sd*0.11,0.3,0,0.05,L.knee,1), ring(sd*0.11,0.1,0,0.046,L.knee,1) ], false,false);
+    const foot=box(0.105,0.06,0.22,M.boneDim,0,-0.43,0.06); L.knee.add(foot); } }
+  const geo=new THREE.BufferGeometry();
+  geo.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));
+  geo.setAttribute('skinIndex',new THREE.Uint16BufferAttribute(si,4));
+  geo.setAttribute('skinWeight',new THREE.Float32BufferAttribute(sw,4));
+  geo.setIndex(idx); geo.computeVertexNormals();
+  const skinMat=new THREE.MeshStandardMaterial({color:0xb8b1a3,roughness:0.88,metalness:0});
+  const mesh=new THREE.SkinnedMesh(geo,skinMat); mesh.castShadow=true; mesh.receiveShadow=true;
+  container.add(mesh); container.updateMatrixWorld(true); mesh.bind(new THREE.Skeleton(bones));
+  const em=new THREE.MeshBasicMaterial({color:0x8cf0aa}); B.eyeMat=em; B.eyes=[];
+  for(const sd of[-1,1]){ const e=new THREE.Mesh(new THREE.BoxGeometry(0.045,0.045,0.02),em); e.position.set(sd*0.045,0.06,0.1); headB.add(e); B.eyes.push(e); }
+  if(o.slime){ const heart=new THREE.Mesh(new THREE.IcosahedronGeometry(0.05,0),new THREE.MeshStandardMaterial({color:0x6fe89a,emissive:0x2f9a55,emissiveIntensity:1.2,flatShading:true}));
+    heart.position.set(0,0.24,0.15); spine2.add(heart); B.slimeHeart=heart; }
+  if(!o.bare){ const st=new THREE.Group(); B.arm.l.hand.add(st);
+    st.add(box(0.06,0.62,0.06,M.wood,0,-0.64,0));   // SYNCED FROM THE GAME (2026-07-19): the gnarled three-segment focus with the iron crown and runes
+    { const mid=box(0.07,0.52,0.07,M.wood,0,-0.1,0); mid.rotation.y=0.35; st.add(mid); }
+    { const up=box(0.058,0.48,0.058,M.wood,0,0.34,0); up.rotation.y=-0.3; st.add(up); }
+    st.add(box(0.082,0.07,0.082,M.iron,0,-0.92,0));
+    st.add(box(0.086,0.15,0.086,M.cloakHem||M.iron,0,-0.32,0));
+    for(const pa of[0,1,2,3]){ const px2=Math.sin(pa*1.5708)*0.07, pz2=Math.cos(pa*1.5708)*0.07;
+      const pr=box(0.028,0.17,0.028,M.iron,px2,0.56,pz2); pr.rotation.z=-px2*4.5; pr.rotation.x=pz2*4.5; st.add(pr); }
+    for(const ry of[-0.52,-0.06,0.3]){ const rn=new THREE.Mesh(new THREE.BoxGeometry(0.075,0.05,0.02),new THREE.MeshStandardMaterial({color:0x8cf0aa,emissive:0x2f9a55,emissiveIntensity:0.9,flatShading:true})); rn.position.set(0,ry,0.048); st.add(rn); }
+    const cr=new THREE.Mesh(new THREE.IcosahedronGeometry(0.135,0),new THREE.MeshStandardMaterial({color:0x8cf0aa,emissive:0x2f9a55,emissiveIntensity:1.3,flatShading:true}));
+    cr.position.y=0.64; st.add(cr); st.rotation.x=1.5; B.staff=st; B.crystal=cr; }
+  return B; }
+function proDistribute(B){ if(!B.pro)return;   // runs AFTER the pose each frame: the one spine value the grammar wrote is SPREAD down the chain, and the clavicles answer the arms
+  const s1=B.spine, rx=s1.rotation.x, ry=s1.rotation.y, rz=s1.rotation.z;
+  s1.rotation.set(rx*0.45,ry*0.5,rz*0.5); B.spine2.rotation.set(rx*0.35,ry*0.3,rz*0.3); B.spine3.rotation.set(rx*0.3,ry*0.25,rz*0.25);
+  for(const sd of['l','r']){ const A=B.arm[sd], C=B.clav[sd], sx=sd==='r'?1:-1;
+    const raise=Math.max(0,-A.sh.rotation.x-0.85);   // the arm swings high — the CLAV LIFTS THE ARM, as the diagram says
+    C.rotation.z=sx*-Math.min(0.32,raise*0.3); C.rotation.x=-Math.min(0.2,raise*0.16); } }
+// ---------- the sword is HELD, not sprouted (user ruling 2026-07-14) ----------
+// Built HILT-FIRST, every piece stacking +Y out of the grip, so the hand closes on the grip and the blade leaves the
+// THUMB side at an angle to the forearm. blade direction in hand space = (0, cos θ, sin θ):
+const SW_HOLD=1.7;     // MIDDLE GUARD — blade forward and up, crossguard riding the fist, point at the enemy
+const SW_COCK=0.45;    // WOUND UP — blade laid back over the shoulder, the coil before a cut
+const SW_CUT=3.0;      // THE CUT — blade runs out to the arm's line: a horizontal swing goes HORIZONTAL, a cleave points down (measured, not guessed)
+const SW_THRUST=3.15;  // THE THRUST — blade fully in line with the arm, point first
+function attachSword(B,mat,gripMat){ const swd=new THREE.Group();   // the LONGSWORD — the game's makeBlade proportions (user 2026-07-15: "use the long sword")
+  const bladeLen=1.0, gripTop=0.10, bladeBase=gripTop+0.03, tipLen=Math.min(0.16,bladeLen*0.24), bodyLen=bladeLen-tipLen, tip=bladeBase+bladeLen;
+  const pom=new THREE.Mesh(new THREE.IcosahedronGeometry(0.036,0),mat||M.iron); pom.position.y=-0.095; pom.castShadow=true; swd.add(pom);   // faceted wheel pommel
+  swd.add(box(0.038,0.15,0.042,M.wood,0,0.005,0));                                  // leather-wrapped grip
+  swd.add(box(0.045,0.026,0.2,mat||M.iron,0,gripTop,0));                            // the crossguard runs ACROSS the blade's flat — turned 90° (user 2026-07-15)
+  const bl=new THREE.Mesh(new THREE.CylinderGeometry(0.05*0.6,0.05,bodyLen,4,1),mat||M.iron); bl.scale.set(0.42,1,1.5); bl.position.y=bladeBase+bodyLen/2; bl.castShadow=true; swd.add(bl);   // diamond-section blade: thin EDGE, wide FLAT
+  const pt=new THREE.Mesh(new THREE.ConeGeometry(0.05*0.6,tipLen,4,1),mat||M.iron); pt.scale.set(0.42,1,1.5); pt.position.y=bladeBase+bodyLen+tipLen/2; pt.castShadow=true; swd.add(pt);   // the POINT
+  swd.userData.eIn=bladeBase; swd.userData.eOut=tip+0.02;   // THE EDGE — the hitbox viz reads the true steel
+  swd.position.y=-0.045;   // sword-local 0 sits at the FIST's centre — the hand closes on the grip, nothing sprouts from the knuckles
+  swd.rotation.x=SW_HOLD; swd.visible=false; B.arm.r.hand.add(swd); B.sword=swd; return swd; }
+
+// ============ WEARABLES — dresses ANY rig that shares the joint interface ============
+function dressSkeleton(B){
+  if(!B.cloakPivot){ const cloakPivot=new THREE.Group(); B.spine.add(cloakPivot); B.cloakPivot=cloakPivot;
+    const cloak=box(0.5,0.62,0.06,M.cloak,0,0.16,-0.17); cloak.rotation.x=0.12; cloakPivot.add(cloak);
+    cloakPivot.add(box(0.56,0.1,0.3,M.cloakHem,0,0.44,0)); }
+  if(!B.staff){ const st=new THREE.Group(); B.arm.l.hand.add(st);
+    st.add(box(0.06,0.62,0.06,M.wood,0,-0.64,0));   // SYNCED FROM THE GAME (2026-07-19): the gnarled three-segment focus with the iron crown and runes
+    { const mid=box(0.07,0.52,0.07,M.wood,0,-0.1,0); mid.rotation.y=0.35; st.add(mid); }
+    { const up=box(0.058,0.48,0.058,M.wood,0,0.34,0); up.rotation.y=-0.3; st.add(up); }
+    st.add(box(0.082,0.07,0.082,M.iron,0,-0.92,0));
+    st.add(box(0.086,0.15,0.086,M.cloakHem||M.iron,0,-0.32,0));
+    for(const pa of[0,1,2,3]){ const px2=Math.sin(pa*1.5708)*0.07, pz2=Math.cos(pa*1.5708)*0.07;
+      const pr=box(0.028,0.17,0.028,M.iron,px2,0.56,pz2); pr.rotation.z=-px2*4.5; pr.rotation.x=pz2*4.5; st.add(pr); }
+    for(const ry of[-0.52,-0.06,0.3]){ const rn=new THREE.Mesh(new THREE.BoxGeometry(0.075,0.05,0.02),new THREE.MeshStandardMaterial({color:0x8cf0aa,emissive:0x2f9a55,emissiveIntensity:0.9,flatShading:true})); rn.position.set(0,ry,0.048); st.add(rn); }
+    const cr=new THREE.Mesh(new THREE.IcosahedronGeometry(0.135,0),new THREE.MeshStandardMaterial({color:0x8cf0aa,emissive:0x2f9a55,emissiveIntensity:1.3,flatShading:true}));
+    cr.position.y=0.64; st.add(cr); st.rotation.x=1.5; B.staff=st; B.crystal=cr; }
+  B.robeG=new THREE.Group();   // SLICK dark-wizard cut (user ruling 2026-07-14): two nested skirts + one belt — no hem rags, no knot, no tails, nothing pokes through anything
+  { const under=new THREE.Mesh(new THREE.CylinderGeometry(0.24,0.4,0.52,10),MGROBE2); under.position.y=0.56; under.castShadow=true; B.robeG.add(under);   // the near-black underskirt falls a touch longer
+    const skirt=new THREE.Mesh(new THREE.CylinderGeometry(0.26,0.44,0.5,10),MGROBE); skirt.position.y=0.68; skirt.castShadow=true; B.robeG.add(skirt);   // the dark overskirt flares over it
+    const belt=new THREE.Mesh(new THREE.CylinderGeometry(0.27,0.27,0.07,10),WIZHATBAND); belt.position.y=0.93; belt.castShadow=true; B.robeG.add(belt); }   // a round gold belt HUGS the skirt's top ring (r 0.26→0.27) and covers the skirt-to-wrap seam — the old box sash floated over a round skirt
+  B.root.add(B.robeG);
+  B.hatG=new THREE.Group();
+  { const brim=new THREE.Mesh(new THREE.CylinderGeometry(0.29,0.31,0.045,12),MGROBE2); brim.castShadow=true; B.hatG.add(brim);   // SMALLER hat, and it SITS on the crown now instead of hovering
+    B.hatG.add(box(0.31,0.08,0.31,WIZHATBAND,0,0.05,0));
+    const cone=new THREE.Mesh(new THREE.ConeGeometry(0.185,0.58,12),MGROBE); cone.position.y=0.32; cone.rotation.z=0.11; cone.castShadow=true; B.hatG.add(cone);
+    const tip=new THREE.Mesh(new THREE.SphereGeometry(0.032,5,4),MGROBE2); tip.position.set(-0.038,0.598,0); B.hatG.add(tip);   // the slouched tip, seated on the cone's lean
+    B.hatG.rotation.x=-0.06; B.hatG.position.y=B.skull.isMesh?0.13:0.115; }
+  B.skull.add(B.hatG);
+  B.robeParts=[B.robeG];
+  { const sAdd=B.spineAdd||(m=>B.spine.add(m)); const wrap=box(0.44,0.58,0.24,MGROBE,0,0.16,0); sAdd(wrap); B.robeParts.push(wrap);
+    const collar=new THREE.Mesh(new THREE.CylinderGeometry(0.15,0.23,0.13,8),MGROBE2); collar.position.y=0.46; collar.castShadow=true; sAdd(collar); B.robeParts.push(collar);   // a raised collar at the throat — the mantle caps that used to slice through it are gone
+    const clasp=box(0.08,0.08,0.03,WIZHATBAND,0,0.4,0.14); sAdd(clasp); B.robeParts.push(clasp);   // ONE gold accent on the chest: the throat clasp — the twin front trims read as an overlapping frame and are gone (user ruling 2026-07-14)
+    for(const s of['l','r']){ const A=B.arm[s];
+      const sl=box(0.12,0.36,0.12,MGROBE,0,-0.16,0); A.sh.add(sl); B.robeParts.push(sl);
+      const sl2=box(0.115,0.24,0.115,MGROBE,0,-0.1,0); A.el.add(sl2); B.robeParts.push(sl2);
+      const cuff=new THREE.Mesh(new THREE.CylinderGeometry(0.075,0.115,0.14,8),MGROBE2); cuff.position.y=-0.24; cuff.castShadow=true; A.el.add(cuff); B.robeParts.push(cuff); } }   // BELL cuffs — the sleeve opens over the wrist
+  function buildBoot(){ const g=new THREE.Group();   // SYNCED FROM THE GAME (2026-07-19): the sabaton RIDES THE ANKLE PIVOT and hugs the foot
+    g.add(box(0.155,0.125,0.29,BOOTGOLD,0,-0.045,0.06));
+    g.add(box(0.16,0.035,0.3,BOOTWING,0,-0.115,0.06));
+    g.add(box(0.135,0.14,0.135,BOOTGOLD,0,0.075,-0.01));
+    for(const s of[-1,1]){ const w=box(0.022,0.13,0.18,BOOTWING,s*0.085,0.05,-0.07); w.rotation.z=s*0.42; w.rotation.x=-0.5; g.add(w);
+      const w2=box(0.018,0.08,0.11,BOOTWING,s*0.1,0.0,-0.095); w2.rotation.z=s*0.7; w2.rotation.x=-0.65; g.add(w2); }
+    return g; }
+  B.bootL=buildBoot(); B.bootR=buildBoot();
+  { const fL=B.leg.l.foot||B.leg.l.knee, fR=B.leg.r.foot||B.leg.r.knee;
+    fL.add(B.bootL); fR.add(B.bootR);
+    if(!B.leg.l.foot)B.bootL.position.y=-0.4; if(!B.leg.r.foot)B.bootR.position.y=-0.4; }
+  let cov=B.cover;   // detailed rigs declare their own coverage lists; the simple rig derives them from bone materials
+  if(!cov){ const dmesh=g=>g.children.filter(m=>m.isMesh&&(m.material===M.bone||m.material===M.boneDim));
+    cov={ torso:[...dmesh(B.spine),B.pelvis],
+      armL:[...dmesh(B.arm.l.sh),...dmesh(B.arm.l.el)], armR:[...dmesh(B.arm.r.sh),...dmesh(B.arm.r.el)],
+      legL:dmesh(B.leg.l.hip), legR:dmesh(B.leg.r.hip),
+      footL:dmesh(B.leg.l.knee).filter(m=>m.material===M.boneDim), footR:dmesh(B.leg.r.knee).filter(m=>m.material===M.boneDim) }; }
+  B.body=cov;
+  B.wear={cape:false,robe:false,hat:false,boots:false,staff:false};   // DEFAULT IS BARE (user ruling 2026-07-15): nothing worn until toggled
+  B.applyWear=function(){ const w=B.wear, covered=new Set();
+    if(w.robe)['torso','armL','armR','legL','legR'].forEach(p=>covered.add(p));
+    if(w.boots)['footL','footR'].forEach(p=>covered.add(p));
+    for(const part in B.body)for(const m of B.body[part])m.visible=!covered.has(part);
+    B.robeParts.forEach(m=>m.visible=w.robe); B.hatG.visible=w.hat;
+    B.bootL.visible=w.boots; B.bootR.visible=w.boots;
+    if(B.cloakPivot)B.cloakPivot.visible=w.cape; if(B.staff)B.staff.visible=w.staff; };
+  B.applyWear(); return B; }
+
+// ============ HIGH-DETAIL RIG — bone by bone, slime-bound ============
+const DBONE =new THREE.MeshStandardMaterial({color:0xdcd4bf,roughness:0.62,flatShading:true});
+const DBONE2=new THREE.MeshStandardMaterial({color:0xbfb49a,roughness:0.7 ,flatShading:true});
+const DBONE3=new THREE.MeshStandardMaterial({color:0xa89d84,roughness:0.78,flatShading:true});
+const SLIME =new THREE.MeshStandardMaterial({color:0x6fe89a,emissive:0x2f9a55,emissiveIntensity:0.9,transparent:true,opacity:0.8,flatShading:true});
+const SOCKET=new THREE.MeshBasicMaterial({color:0x090b08});
+const DEYE  =new THREE.MeshBasicMaterial({color:0x8cf0aa});
+function dmeshOf(geo,mat){ const m=new THREE.Mesh(geo,mat); m.castShadow=true; return m; }
+function longBone(len,r,mat){ const g=new THREE.Group(); mat=mat||DBONE;
+  const shaft=dmeshOf(new THREE.CylinderGeometry(r*0.62,r*0.7,len-r*1.4,6),mat); shaft.position.y=-len/2; g.add(shaft);
+  const top=dmeshOf(new THREE.SphereGeometry(r*0.95,6,5),mat); top.position.y=-r*0.4; g.add(top);
+  const bot=dmeshOf(new THREE.SphereGeometry(r*0.88,6,5),mat); bot.position.y=-len+r*0.4; g.add(bot);
+  return g; }
+function slimeBlob(r){ const m=dmeshOf(new THREE.IcosahedronGeometry(r,0),SLIME); m.castShadow=false; return m; }
+function buildDetailedSkeleton(){ const g=new THREE.Group(); const B={root:g,detail:true,slime:[]};
+  const cov={torso:[],armL:[],armR:[],legL:[],legR:[],footL:[],footR:[]}; B.cover=cov;
+  const pel=new THREE.Group(); pel.position.y=0.92; g.add(pel); B.pelvis=pel; cov.torso.push(pel);
+  { const sac=dmeshOf(new THREE.CylinderGeometry(0.055,0.09,0.16,5),DBONE2); sac.rotation.x=0.25; sac.position.set(0,-0.02,-0.03); pel.add(sac);
+    for(const s of[-1,1]){ const wing=box(0.16,0.15,0.05,DBONE,s*0.115,0.03,-0.01); wing.rotation.z=s*-0.5; wing.rotation.y=s*0.42; pel.add(wing);
+      const crest=box(0.14,0.045,0.06,DBONE2,s*0.15,0.095,-0.005); crest.rotation.z=s*-0.28; crest.rotation.y=s*0.42; pel.add(crest);
+      const sock=dmeshOf(new THREE.SphereGeometry(0.045,6,5),DBONE2); sock.position.set(s*0.11,-0.045,0.01); pel.add(sock); } }
+  const spine=new THREE.Group(); spine.position.y=0.99; g.add(spine); B.spine=spine;
+  for(let i=0;i<7;i++){ const v=dmeshOf(new THREE.CylinderGeometry(0.035,0.038,0.045,6),i%2?DBONE:DBONE2); v.position.y=0.02+i*0.062; spine.add(v); cov.torso.push(v);
+    const sp=box(0.018,0.02,0.05,DBONE2,0,0.02+i*0.062,-0.045); sp.rotation.x=-0.35; spine.add(sp); cov.torso.push(sp);
+    if(i%3===1){ const sb=slimeBlob(0.02); sb.position.set(0.02,0.05+i*0.062,0.015); spine.add(sb); B.slime.push(sb); cov.torso.push(sb); } }
+  const ribR=[0.15,0.18,0.195,0.195,0.175,0.145];
+  for(let i=0;i<6;i++){ const ry=0.135+i*0.055;
+    const rib=dmeshOf(new THREE.TorusGeometry(ribR[i],0.014,5,16),i%2?DBONE:DBONE2);
+    rib.rotation.x=Math.PI/2; rib.scale.set(1,0.72,1); rib.rotation.z=0.06; rib.position.set(0,ry,0.02); spine.add(rib); cov.torso.push(rib); }
+  { const stern=box(0.05,0.3,0.025,DBONE,0,0.27,0.185); stern.rotation.x=0.1; spine.add(stern); cov.torso.push(stern);
+    const heart=slimeBlob(0.075); heart.position.set(0,0.3,0.06); spine.add(heart); B.slimeHeart=heart; cov.torso.push(heart); }
+  for(const s of[-1,1]){ const cl=dmeshOf(new THREE.CylinderGeometry(0.014,0.016,0.26,5),DBONE); cl.rotation.z=s*1.38; cl.rotation.y=s*-0.25; cl.position.set(s*0.15,0.435,0.06); spine.add(cl); cov.torso.push(cl);
+    const scap=box(0.1,0.13,0.02,DBONE2,s*0.17,0.36,-0.075); scap.rotation.y=s*0.2; scap.rotation.z=s*-0.12; spine.add(scap); cov.torso.push(scap); }
+  const neck=new THREE.Group(); neck.position.y=0.52; spine.add(neck); B.neck=neck;
+  for(let i=0;i<2;i++){ const cv=dmeshOf(new THREE.CylinderGeometry(0.026,0.03,0.035,6),DBONE2); cv.position.y=-0.015+i*0.045; neck.add(cv); }
+  { const nb=slimeBlob(0.022); nb.position.set(-0.015,0.02,0.02); neck.add(nb); B.slime.push(nb); }
+  const skull=new THREE.Group(); skull.position.y=0.175; neck.add(skull); B.skull=skull;
+  { const cran=dmeshOf(new THREE.SphereGeometry(0.135,8,7),DBONE); cran.scale.set(1,0.94,1.08); cran.position.set(0,0.045,-0.01); skull.add(cran);
+    const brow=box(0.21,0.035,0.05,DBONE,0,0.015,0.095); skull.add(brow);
+    for(const s of[-1,1]){ const cheek=box(0.045,0.035,0.05,DBONE2,s*0.083,-0.045,0.078); skull.add(cheek);
+      const sockRim=box(0.075,0.062,0.02,DBONE3,s*0.052,-0.015,0.105); skull.add(sockRim);
+      const sock=dmeshOf(new THREE.BoxGeometry(0.06,0.05,0.02),SOCKET); sock.position.set(s*0.052,-0.015,0.112); skull.add(sock);
+      const eye=dmeshOf(new THREE.BoxGeometry(0.026,0.026,0.012),DEYE); eye.position.set(s*0.052,-0.018,0.118); skull.add(eye); }
+    const nose=dmeshOf(new THREE.ConeGeometry(0.022,0.045,4),SOCKET); nose.rotation.x=Math.PI; nose.position.set(0,-0.055,0.105); skull.add(nose);
+    const maxTeeth=new THREE.Group(); maxTeeth.position.set(0,-0.093,0.09); skull.add(maxTeeth);
+    for(let i=0;i<5;i++)maxTeeth.add(box(0.02,0.025,0.016,i%2?DBONE:DBONE3,-0.048+i*0.024,0,0.012));
+    const jaw=new THREE.Group(); jaw.position.set(0,-0.1,0.01); skull.add(jaw); B.jaw=jaw;
+    jaw.add(box(0.15,0.04,0.13,DBONE2,0,-0.028,0.045));
+    for(const s of[-1,1])jaw.add(box(0.025,0.075,0.03,DBONE2,s*0.068,0.008,-0.005));
+    for(let i=0;i<5;i++)jaw.add(box(0.018,0.022,0.014,i%2?DBONE3:DBONE,-0.044+i*0.022,-0.001,0.098)); }
+  B.arm={};
+  for(const s of[-1,1]){ const armCov=s>0?cov.armR:cov.armL;
+    const sh=new THREE.Group(); sh.position.set(s*0.3,0.44,0); spine.add(sh);
+    const hum=longBone(0.34,0.045); sh.add(hum); armCov.push(hum);
+    const sj=slimeBlob(0.033); sj.position.y=-0.01; sh.add(sj); B.slime.push(sj); armCov.push(sj);
+    const el=new THREE.Group(); el.position.y=-0.34; sh.add(el);
+    const radius=longBone(0.3,0.026); radius.position.x=s*0.017; el.add(radius); armCov.push(radius);
+    const ulna=longBone(0.3,0.02,DBONE2); ulna.position.x=s*-0.014; ulna.position.z=-0.012; el.add(ulna); armCov.push(ulna);
+    const ej=slimeBlob(0.027); el.add(ej); B.slime.push(ej); armCov.push(ej);
+    const hand=new THREE.Group(); hand.position.y=-0.3; el.add(hand);
+    hand.add(box(0.075,0.07,0.028,DBONE,0,-0.035,0.004));
+    for(let f=0;f<4;f++){ const fx=-0.028+f*0.019;
+      const p1=box(0.013,0.042,0.014,DBONE2,fx,-0.088,0.008); p1.rotation.x=0.28; hand.add(p1);
+      const p2=box(0.011,0.032,0.012,DBONE3,fx,-0.118,0.022); p2.rotation.x=0.62; hand.add(p2); }
+    const th=box(0.014,0.045,0.015,DBONE2,s*0.045,-0.05,0.02); th.rotation.z=s*-0.7; th.rotation.x=0.4; hand.add(th);
+    const wj=slimeBlob(0.02); wj.position.y=-0.005; hand.add(wj); B.slime.push(wj);
+    B.arm[s>0?'r':'l']={sh,el,hand}; }
+  B.leg={};
+  for(const s of[-1,1]){ const legCov=s>0?cov.legR:cov.legL;
+    const hip=new THREE.Group(); hip.position.set(s*0.11,0.9,0); g.add(hip);
+    const femur=longBone(0.4,0.05); femur.rotation.z=s*0.06; hip.add(femur); legCov.push(femur);
+    const fhead=dmeshOf(new THREE.SphereGeometry(0.042,6,5),DBONE); fhead.position.set(s*-0.02,0.005,0); hip.add(fhead); legCov.push(fhead);
+    const hj=slimeBlob(0.032); hip.add(hj); B.slime.push(hj); legCov.push(hj);
+    const knee=new THREE.Group(); knee.position.y=-0.4; hip.add(knee);
+    const pat=dmeshOf(new THREE.SphereGeometry(0.03,5,4),DBONE2); pat.position.set(0,-0.01,0.045); knee.add(pat);
+    const tibia=longBone(0.36,0.038); knee.add(tibia);
+    const fib=longBone(0.36,0.016,DBONE2); fib.position.set(s*0.028,0,-0.015); knee.add(fib);
+    const kj=slimeBlob(0.028); knee.add(kj); B.slime.push(kj);
+    const foot=new THREE.Group(); foot.position.y=-0.375; knee.add(foot); (s>0?cov.footR:cov.footL).push(foot);
+    foot.add(box(0.07,0.05,0.09,DBONE2,0,-0.02,-0.01));
+    foot.add(box(0.075,0.035,0.09,DBONE,0,-0.028,0.075));
+    for(let tI=0;tI<4;tI++)foot.add(box(0.015,0.022,0.035,tI%2?DBONE3:DBONE2,-0.026+tI*0.017,-0.032,0.135));
+    const aj=slimeBlob(0.022); aj.position.y=-0.01; foot.add(aj); B.slime.push(aj);
+    B.leg[s>0?'r':'l']={hip,knee,foot}; }
+  return B; }
+
+// ============ HOMAGE RIG — an ORIGINAL skeleton in the old-norse dungeon spirit ============
+// Hunched, heavy-boned, pale dead-light eyes, rotted rags, a rusted blade and a crude round shield.
+const HBONE =flat(0xcfc3a8), HBONE2=flat(0xa89a7e), RAG=flat(0x3a3d2b), RAG2=flat(0x2c2f21);
+const RUST=new THREE.MeshStandardMaterial({color:0x7a6a52,flatShading:true,roughness:0.7,metalness:0.3});
+const HEYE=new THREE.MeshBasicMaterial({color:0xbfe6ff});
+function buildRaggedSkeleton(o){ o=o||{}; const g=new THREE.Group(); const B={root:g,hunch:true};
+  const pelvis=box(0.38,0.16,0.24,HBONE,0,0.92,0); g.add(pelvis); B.pelvis=pelvis;
+  const spine=new THREE.Group(); spine.position.y=0.99; g.add(spine); B.spine=spine;
+  spine.add(box(0.13,0.44,0.13,HBONE,0,0.2,0));
+  for(let i=0;i<4;i++)spine.add(box(0.46-i*0.06,0.075,0.3-i*0.045,i%2?HBONE:HBONE2,0,0.1+i*0.11,0.01));   // a heavier, rougher cage
+  const neck=new THREE.Group(); neck.position.y=0.52; spine.add(neck); B.neck=neck;
+  const skull=new THREE.Group(); skull.position.y=0.16; neck.add(skull); B.skull=skull;
+  { skull.add(box(0.3,0.26,0.3,HBONE,0,0.02,0));   // broad, heavy cranium
+    skull.add(box(0.26,0.06,0.08,HBONE2,0,-0.05,0.14));   // jutting brow
+    for(const s of[-1,1]){ skull.add((()=>{const so=box(0.08,0.07,0.02,RAG2,s*0.07,-0.03,0.152); so.material=new THREE.MeshBasicMaterial({color:0x0a0c08}); return so;})());
+      const e=new THREE.Mesh(new THREE.BoxGeometry(0.042,0.042,0.014),HEYE); e.position.set(s*0.07,-0.035,0.164); skull.add(e); }   // pale dead-light, bright enough to read under the brow
+    skull.add(box(0.2,0.07,0.24,HBONE2,0,-0.14,0.01));   // the underbitten jaw
+    for(let i=0;i<4;i++)skull.add(box(0.022,0.03,0.02,HBONE,-0.05+i*0.033,-0.105,0.13)); }
+  B.arm={};
+  for(const s of[-1,1]){ const sh=new THREE.Group(); sh.position.set(s*0.32,0.42,0); spine.add(sh);
+    sh.add(box(0.12,0.36,0.12,HBONE,0,-0.17,0));
+    sh.add(box(0.14,0.09,0.14,HBONE2,0,-0.01,0));   // a knobbed shoulder
+    const el=new THREE.Group(); el.position.y=-0.36; sh.add(el);
+    el.add(box(0.1,0.32,0.1,HBONE,0,-0.15,0));
+    const hand=new THREE.Group(); hand.position.y=-0.32; el.add(hand);
+    hand.add(box(0.12,0.12,0.11,HBONE2,0,-0.05,0));
+    B.arm[s>0?'r':'l']={sh,el,hand}; }
+  B.leg={};
+  for(const s of[-1,1]){ const hip=new THREE.Group(); hip.position.set(s*0.12,0.9,0); g.add(hip);
+    hip.add(box(0.12,0.42,0.12,HBONE,0,-0.2,0));
+    const knee=new THREE.Group(); knee.position.y=-0.42; hip.add(knee);
+    knee.add(box(0.11,0.4,0.11,HBONE,0,-0.18,0));
+    knee.add(box(0.13,0.08,0.26,HBONE2,0,-0.38,0.06));
+    B.leg[s>0?'r':'l']={hip,knee}; }
+  // ---- the gear: rotted rags, a rusted blade, a crude round shield ----
+  B.rags=[]; B.wear={rags:!o.bare,sword:!o.bare,shield:!o.bare};
+  { const belt=box(0.42,0.07,0.28,RAG2,0,0.99,0); g.add(belt); B.rags.push(belt);
+    for(let i=0;i<5;i++){ const st=box(0.09,0.28+(i%2)*0.1,0.03,i%2?RAG:RAG2,-0.15+i*0.075,0.82,0.13); st.rotation.x=0.1+(i%3)*0.06; st.rotation.z=(i%2?-1:1)*0.07; g.add(st); B.rags.push(st); }
+    for(let i=0;i<3;i++){ const st=box(0.1,0.3,0.03,i%2?RAG2:RAG,-0.08+i*0.09,0.82,-0.12); st.rotation.x=-0.12; g.add(st); B.rags.push(st); }
+    const wrap=box(0.34,0.16,0.3,RAG,0,0.36,0.01); B.spine.add(wrap); B.rags.push(wrap);   // a torn shoulder wrap
+    const tail=box(0.12,0.34,0.03,RAG2,0.1,0.12,-0.16); tail.rotation.x=0.25; B.spine.add(tail); B.rags.push(tail); }
+  attachSword(B,RUST,HBONE2); B.sword.visible=B.wear.sword;
+  { const sg=new THREE.Group();   // the round shield rides the LEFT forearm
+    const disc=new THREE.Mesh(new THREE.CylinderGeometry(0.3,0.3,0.045,14),M.wood); disc.rotation.x=Math.PI/2; disc.castShadow=true; sg.add(disc);
+    for(let i=0;i<3;i++){ const pl=box(0.17,0.58,0.014,i%2?RAG2:flat(0x54402c),-0.18+i*0.18,0,0.03); sg.add(pl); }
+    const boss=new THREE.Mesh(new THREE.SphereGeometry(0.07,7,5),RUST); boss.position.z=0.05; sg.add(boss);
+    const rimb=new THREE.Mesh(new THREE.TorusGeometry(0.3,0.02,5,18),RUST); sg.add(rimb);
+    sg.position.set(0,-0.12,0.1); sg.rotation.y=0; B.arm.l.el.add(sg); B.shield=sg; }
+  B.applyWear=function(){ B.rags.forEach(m=>m.visible=B.wear.rags); if(B.sword)B.sword.visible=B.wear.sword; if(B.shield)B.shield.visible=B.wear.shield; };
+  B.applyWear();
+  g.traverse(m=>{if(m.isMesh)m.castShadow=true;});
+  return B; }
+
+// ============ BLADE TRAIL — the crescent that follows the sword (Valheim / arcade-fighter style) ============
+// A ribbon stitched between the blade's BASE and TIP, sampled every frame of a swing. The newest rung is bright,
+// the oldest fades to nothing, so the arc of the cut hangs in the air for a moment behind the steel.
+// (Declared ABOVE the stages: makeStage() calls makeTrail(), so TRAIL_LEN must already be initialised, not in its TDZ.)
+const TRAIL_LEN=12;                      // ~0.2 s of arc — long enough to read the cut, short enough not to smear the fighter
+const TRAIL_IN=0.34, TRAIL_OUT=0.70;     // the ribbon spans only the OUTER half of the blade: a thin crescent, not a wedge fanning out of the fist
+function makeTrail(parent,color){
+  const geo=new THREE.BufferGeometry();
+  geo.setAttribute('position',new THREE.BufferAttribute(new Float32Array(TRAIL_LEN*2*3),3));
+  geo.setAttribute('color',   new THREE.BufferAttribute(new Float32Array(TRAIL_LEN*2*3),3));
+  const idx=[]; for(let i=0;i<TRAIL_LEN-1;i++){ const a=i*2,b=i*2+1,c=(i+1)*2,d=(i+1)*2+1; idx.push(a,b,c, b,d,c); }
+  geo.setIndex(idx);
+  const mesh=new THREE.Mesh(geo,new THREE.MeshBasicMaterial({vertexColors:true,transparent:true,opacity:0.8,
+    side:THREE.DoubleSide,depthWrite:false,blending:THREE.AdditiveBlending}));   // additive: a faded rung adds nothing, so black IS invisible
+  mesh.frustumCulled=false; mesh.renderOrder=6; parent.add(mesh);
+  return {mesh,geo,parent,pts:[],col:new THREE.Color(color)}; }
+const _tb=new THREE.Vector3(), _tt=new THREE.Vector3();
+function trailSample(tr,sword,live){   // live: the blade is mid-cut — otherwise the ribbon eats itself and vanishes
+  if(live){ sword.updateWorldMatrix(true,false);
+    const ei=sword.userData.eIn!==undefined?sword.userData.eIn:TRAIL_IN, eo=sword.userData.eOut!==undefined?sword.userData.eOut:TRAIL_OUT;   // the ribbon reads the STEEL's own edge (user 2026-07-15: the glow must match the blade)
+    _tb.set(0,ei+(eo-ei)*0.45,0).applyMatrix4(sword.matrixWorld);
+    _tt.set(0,eo+0.02,0).applyMatrix4(sword.matrixWorld);   // just past the point, so the arc's leading edge sits on the steel
+    tr.parent.worldToLocal(_tb); tr.parent.worldToLocal(_tt);   // the ribbon lives in the actor's own space, so a turning stage can't smear it
+    tr.pts.push([_tb.clone(),_tt.clone()]); if(tr.pts.length>TRAIL_LEN)tr.pts.shift(); }
+  else if(tr.pts.length)tr.pts.shift();   // not swinging: the ribbon eats itself from the tail until it's gone
+  const P=tr.geo.attributes.position.array, C=tr.geo.attributes.color.array, n=tr.pts.length;
+  for(let i=0;i<TRAIL_LEN;i++){
+    const p=i<n?tr.pts[n-1-i]:(n?tr.pts[0]:null), o=i*6;
+    if(!p){ for(let j=0;j<6;j++){P[o+j]=0;C[o+j]=0;} continue; }
+    P[o]=p[0].x;P[o+1]=p[0].y;P[o+2]=p[0].z; P[o+3]=p[1].x;P[o+4]=p[1].y;P[o+5]=p[1].z;
+    const f=Math.pow(1-i/(TRAIL_LEN-1),1.7);   // the newest rung burns brightest, the tail dies out
+    C[o]=tr.col.r*f*0.08; C[o+1]=tr.col.g*f*0.08; C[o+2]=tr.col.b*f*0.08;   // the inner rail is nearly dark — the glow lives out at the EDGE, so it reads as an arc of light, not a painted slab
+    C[o+3]=tr.col.r*f; C[o+4]=tr.col.g*f; C[o+5]=tr.col.b*f; }
+  tr.geo.attributes.position.needsUpdate=true; tr.geo.attributes.color.needsUpdate=true;
+  tr.mesh.visible=n>1; }
+
+// ============ THE ADVENTURERS — knight, water mage, wind archmage · ported from the game (2026-07-15) ============
+const KSTEEL=flat(0xb8c4d4), KSTEEL2=flat(0x8a95a8), KBLUE=flat(0x24357a), KGOLD=flat(0x9aa5b8), KDARK=flat(0x2a2f3a);
+const KPLUME=flat(0x2c1ee0), KPLUME2=flat(0x1a10a0);
+if(KPLUME.emissive)KPLUME.emissive.setHex(0x1a12b8); if(KPLUME2.emissive)KPLUME2.emissive.setHex(0x0e0880);
+const WIZROBE=flat(0x2f5aa8), WIZROBE2=flat(0x1b2f5e), WIZSKIN=flat(0xca9c76), WIZPANTS=flat(0x233150), WIZBOOT=flat(0x241d16), WIZBEARD=flat(0xcfc9bd);
+const WMROBE=flat(0x4f9a52), WMROBE2=flat(0x2c5e30), WMBAND=flat(0xe6f2c0), WMSKIN=flat(0xd8b48a), WMBEARD=flat(0xeef0e0);
+const lathe=(rT,rB,h,mat,seg)=>{ const m=new THREE.Mesh(new THREE.CylinderGeometry(rT,rB,h,seg||10),mat); m.castShadow=true; return m; };
+const orb=(r,mat)=>{ const m=new THREE.Mesh(new THREE.SphereGeometry(r,10,7),mat); m.castShadow=true; return m; };
+
+// ---- SOFT BITS (feathers, beards, tabards): springs driven by the anchor's real world-motion ----
+const softBits=[];
+const _sbP=new THREE.Vector3(),_sbQ=new THREE.Quaternion(),_sbS=new THREE.Vector3(),_sbW=new THREE.Vector3(),_sbV=new THREE.Vector3(),_sbQi=new THREE.Quaternion();
+function registerSoft(pivot,opt){ opt=opt||{}; const s={pivot,rx0:pivot.rotation.x,rz0:pivot.rotation.z,vx:0,vz:0,init:false,wx:0,wy:0,wz:0,k:opt.k||130,d:opt.d||10,move:opt.move||7,ph:opt.ph||0,fl:opt.fl!==undefined?opt.fl:0.03,grav:opt.grav||0,rootRef:opt.rootRef||null}; softBits.push(s); return s; }
+function updateSoft(t,dt){ const h=Math.min(0.033,dt||0.016);
+  for(const s of softBits){ const pv=s.pivot,p=pv.parent; if(!p){ s.vx*=0.7; s.vz*=0.7; continue; }
+    // THE TURNTABLE IS NOT MOTION (workbench-only, 2026-07-15): measure the bit's velocity in the PEDESTAL's frame, so the
+    // steady display spin is cancelled and the bits react ONLY to the model's own animation (run, dash, melee) — the drape
+    // presents symmetric while it rotates. The game keeps world-frame velocity so its cloth still trails real turns.
+    const ped=s.rootRef?s.rootRef.parent:null;
+    pv.getWorldPosition(_sbW); if(ped)ped.worldToLocal(_sbW);
+    if(!s.init){ s.wx=_sbW.x;s.wy=_sbW.y;s.wz=_sbW.z;s.init=true; }
+    _sbV.set((_sbW.x-s.wx)/h,(_sbW.y-s.wy)/h,(_sbW.z-s.wz)/h); s.wx=_sbW.x;s.wy=_sbW.y;s.wz=_sbW.z;
+    if(_sbV.lengthSq()>2500)_sbV.multiplyScalar(0);
+    if(!ped){ p.matrixWorld.decompose(_sbP,_sbQ,_sbS); _sbQi.copy(_sbQ).invert(); _sbV.applyQuaternion(_sbQi); }   // pedestal-local velocity already faces model-forward; world-frame needs the parent transform
+    const tx=s.rx0+_sbV.z*s.move*0.02+s.grav+Math.sin(t*3.1+s.ph)*s.fl, tz=s.rz0-_sbV.x*s.move*0.02+Math.sin(t*2.3+s.ph+1)*s.fl*0.7;
+    s.vx+=((tx-pv.rotation.x)*s.k-s.vx*s.d)*h; s.vz+=((tz-pv.rotation.z)*s.k-s.vz*s.d)*h;
+    pv.rotation.x+=s.vx*h; pv.rotation.z+=s.vz*h; } }
+
+// ---- soft cloth CHAINS (cape + robe skirt): hinged segments, each a damped spring ----
+function capeChain(parent,widths,segH,depth,mat,hemMat){ const segs=[];
+  for(const col of[-1,1]){ let hold=parent;
+    for(let ci=0;ci<widths.length;ci++){ const w2=widths[ci]/2; const gg=new THREE.Group(); gg.position.y=ci===0?0:-segH; hold.add(gg);
+      const mm=new THREE.Mesh(new THREE.BoxGeometry(w2-0.005,segH+0.02,depth),mat); mm.position.set(col*w2/2,-segH/2,0); mm.castShadow=true; gg.add(mm);
+      if(hemMat&&ci===widths.length-1){ const hh=new THREE.Mesh(new THREE.BoxGeometry(w2+0.02,0.07,depth+0.02),hemMat); hh.position.set(col*w2/2,-segH-0.01,0); gg.add(hh); }
+      segs.push({g:gg,v:0,u:0,row:ci,ph:ci*1.35+(col>0?0.9:0),curl:-0.045*ci,rz0:col*0.045}); hold=gg; } }
+  return segs; }
+function skirtChain(parent,rings,mat){ const segs=[]; let hold=parent;
+  for(let ri=0;ri<rings.length;ri++){ const rt=rings[ri][0],rb=rings[ri][1],hh=rings[ri][2]; const gg=new THREE.Group(); gg.position.y=ri===0?0:-(rings[ri-1][2]-0.04); hold.add(gg);
+    const cyl=new THREE.Mesh(new THREE.CylinderGeometry(rt,rb,hh,12),mat); cyl.position.y=-hh/2; cyl.castShadow=true; gg.add(cyl);
+    segs.push({g:gg,v:0,u:0,row:ri,ph:ri*1.35,curl:0.03*ri,rz0:0,skirt:true}); hold=gg; }
+  return segs; }
+function driveChain(segs,amp,spd,dash,t){ if(!segs)return;
+  for(let i=0;i<segs.length;i++){ const c=segs[i], row=c.row, ph=c.ph;
+    const tx=(c.curl)+Math.sin(t*(5.2+row*1.8)+ph)*amp*(0.25+spd*1.4)-(dash?0.14*(row+1):0)-spd*0.05*row;
+    c.v+=((tx-c.g.rotation.x)*150-c.v*8)*0.016; c.g.rotation.x+=c.v*0.016;
+    const clampIn=c.skirt?0.45:0.1; if(c.g.rotation.x>clampIn){ c.g.rotation.x=clampIn; if(c.v>0)c.v=0; }
+    const tz=(c.rz0||0)+Math.sin(t*(4.3+row*1.3)+ph*0.83+1.1)*amp*0.7*(0.3+spd);
+    c.u+=((tz-c.g.rotation.z)*130-c.u*9)*0.016; c.g.rotation.z+=c.u*0.016;
+    if(c.g.rotation.z>0.6){c.g.rotation.z=0.6;if(c.u>0)c.u=0;}else if(c.g.rotation.z<-0.6){c.g.rotation.z=-0.6;if(c.u<0)c.u=0;} } }
+function driveCloth(B,spd,dash,t){ if(B.capeSegs)driveChain(B.capeSegs,0.15,spd,dash,t); if(B.skirtSegs)driveChain(B.skirtSegs,0.07,spd,dash,t); }
+
+// ---------- REAL VERLET CLOTH (ported from the game's dark cape, user 2026-07-16: "the cloth should flow exactly like that") ----------
+// A coarse simulated sheet — pleated so it MUST fold, colliding with body spheres so it can NEVER enter the body.
+const cloths=[];
+function makeCloth(baseMat,W,H,width,len,pleatTop,pleatHem,tube){   // pleat GRADES down the sheet — tight at the anchor, gathered at the hem — and the hem row FLARES 1.05
+  const m2=baseMat.isMeshStandardMaterial?baseMat:new THREE.MeshStandardMaterial({color:baseMat.color.clone(),roughness:0.97,metalness:0,side:THREE.DoubleSide});
+  const geo=new THREE.PlaneGeometry(width,len,W-1,H-1);
+  { const n=geo.attributes.position.count; geo.setAttribute('color',new THREE.BufferAttribute(new Float32Array(n*3).fill(1),3)); }   // per-vertex shade — free hem/seam darkening
+  const mesh=new THREE.Mesh(geo,m2); mesh.castShadow=true; mesh.receiveShadow=true; mesh.frustumCulled=false; scene.add(mesh);
+  const N=W*H, pts=new Float32Array(N*3), prev=new Float32Array(N*3), cons=[];
+  const id=(x,y)=>y*W+x, sx=width/(W-1), sy=len/(H-1), pT=pleatTop||1, pH=pleatHem!==undefined?pleatHem:pT;
+  const pl=y=>(pT+(pH-pT)*(H>1?y/(H-1):0))*(y===H-1?1.05:1);
+  for(let y=0;y<H;y++)for(let x=0;x<W;x++){   // the PLEAT TRICK, now per-row: shorter horizontal rests force standing folds, more of them toward the hem
+    if(x<W-1)cons.push([id(x,y),id(x+1,y),sx*pl(y)]);
+    if(y<H-1)cons.push([id(x,y),id(x,y+1),sy]);
+    if(x<W-1&&y<H-1){ const dg=Math.hypot(sx*pl(y),sy); cons.push([id(x,y),id(x+1,y+1),dg]); cons.push([id(x+1,y),id(x,y+1),dg]); } }
+  if(tube)for(let y=0;y<H;y++){ cons.push([id(0,y),id(W-1,y),0.001]);   // a SEWN TUBE: first and last columns share one world line — a limb can never leave the garment
+    if(y<H-1){ cons.push([id(0,y),id(W-1,y+1),sy]); cons.push([id(W-1,y),id(0,y+1),sy]); } }
+  const c={mesh,geo,pts,prev,cons,W,H,width,len,init:false,lastMX:0,lastMZ:0,floorY:-1e9};
+  cloths.push(c); return c; }
+function tintRows(c,o){ o=o||{}; const col=c.geo.attributes.color, W=c.W, H=c.H;   // build-time fabric shading: darker hem band + a shadowed seam column — zero runtime cost
+  for(let y=0;y<H;y++)for(let x=0;x<W;x++){ let b=1;
+    if(y===H-1)b=o.hem!==undefined?o.hem:0.85; else if(y===H-2)b=o.hem2!==undefined?o.hem2:0.93;
+    if((x===0||x===W-1)&&o.seam!==undefined)b=Math.min(b,o.seam);
+    col.setXYZ(y*W+x,b,b,b); } col.needsUpdate=true; }
+function stepCloth(c,anchors,spheres,t,dt){ const {pts,prev,cons,W,H}=c, N=W*H, segY=c.len/(H-1), DT=dt||0.016;
+  if(!c.init){ for(let y=0;y<H;y++)for(let x=0;x<W;x++){ const i=(y*W+x)*3, a=anchors[x];
+      pts[i]=a.x+(Math.random()-0.5)*0.015; pts[i+1]=a.y-y*segY; pts[i+2]=a.z+(Math.random()-0.5)*0.015; prev[i]=pts[i]; prev[i+1]=pts[i+1]; prev[i+2]=pts[i+2]; }
+    c.lastMX=anchors[(W-1)>>1].x; c.lastMZ=anchors[(W-1)>>1].z; c.init=true; }
+  const mid=(W-1)>>1;
+  const wm=(typeof CLOTH_DEBUG!=='undefined'&&CLOTH_DEBUG.noWind)?0:1;
+  const WA=c.windAmbient!==undefined?c.windAmbient:0.3;
+  const wx=wm*(-(anchors[mid].x-c.lastMX)/DT*0.55+Math.sin(t*1.9)*WA), wz=wm*(-(anchors[mid].z-c.lastMZ)/DT*0.55+Math.sin(t*1.3+2)*WA);
+  c.lastMX=anchors[mid].x; c.lastMZ=anchors[mid].z;
+  for(let x=0;x<W;x++){ const i=x*3, a=anchors[x]; pts[i]=a.x; pts[i+1]=a.y; pts[i+2]=a.z; prev[i]=a.x; prev[i+1]=a.y; prev[i+2]=a.z; }
+  const DT2=DT*DT;
+  const DAMP=c.damping!==undefined?c.damping:0.986, WG=c.windGain!==undefined?c.windGain:16;
+  for(let i=W;i<N;i++){ const o=i*3, vx=(pts[o]-prev[o])*DAMP, vy=(pts[o+1]-prev[o+1])*DAMP, vz=(pts[o+2]-prev[o+2])*DAMP;
+    prev[o]=pts[o]; prev[o+1]=pts[o+1]; prev[o+2]=pts[o+2];
+    const wf=Math.pow(((i/W)|0)/(H-1),1.5)*WG;   // wind bites the free hem hardest — a row-power curve, not linear
+    pts[o]+=vx+wx*DT2*wf; pts[o+1]+=vy-10.5*DT2; pts[o+2]+=vz+wz*DT2*wf; }
+  for(let it=0;it<4;it++){ for(const cc of cons){ const ia=cc[0],ib=cc[1],rest=cc[2],oa=ia*3,ob=ib*3;
+      let dx=pts[ob]-pts[oa], dy=pts[ob+1]-pts[oa+1], dz=pts[ob+2]-pts[oa+2];
+      const d=Math.sqrt(dx*dx+dy*dy+dz*dz)||1e-6, k=(d-rest)/d;
+      if(ia<W){ pts[ob]-=dx*k; pts[ob+1]-=dy*k; pts[ob+2]-=dz*k; }
+      else if(ib<W){ pts[oa]+=dx*k; pts[oa+1]+=dy*k; pts[oa+2]+=dz*k; }
+      else{ const h=k*0.5; pts[oa]+=dx*h; pts[oa+1]+=dy*h; pts[oa+2]+=dz*h; pts[ob]-=dx*h; pts[ob+1]-=dy*h; pts[ob+2]-=dz*h; } }
+    for(const sp of spheres)for(let i=W;i<N;i++){ const o=i*3;   // THE BODY IS SOLID — the cloth slides over the spheres, never through
+      let dx=pts[o]-sp.x, dy=pts[o+1]-sp.y, dz=pts[o+2]-sp.z; const d=Math.sqrt(dx*dx+dy*dy+dz*dz);
+      if(d<sp.r&&d>1e-6){
+        if(dy>0){ const rh=Math.sqrt(Math.max(0,sp.r*sp.r-dy*dy)), dh=Math.sqrt(dx*dx+dz*dz);   // the WHOLE upper hemisphere: push OUT sideways only —
+          if(dh>1e-6&&dh<rh){ const push=rh/dh; pts[o]=sp.x+dx*push; pts[o+2]=sp.z+dz*push; } }   // a radial up-push traps risen cloth in a WAD; sideways lets gravity settle it back down
+        else{ const push=sp.r/d; pts[o]=sp.x+dx*push; pts[o+1]=sp.y+dy*push; pts[o+2]=sp.z+dz*push; } } } }
+  if(c.hang)for(let x=0;x<W;x++){ let lim=1e9; for(let y=0;y<H;y++){ const o=(y*W+x)*3; if(pts[o+1]>lim){ pts[o+1]=lim; prev[o+1]=lim; } lim=pts[o+1]-0.012; } }   // A HANGING GARMENT DRAPES DOWN: each column strictly descends from the anchor, so a fast swing can NEVER fold the skirt up over the body (user 2026-07-16)
+  if(c.girth){ let cx=0,cz=0; for(let x=0;x<W;x++){ cx+=anchors[x].x; cz+=anchors[x].z; } cx/=W; cz/=W;   // GIRTH CAP: the cloth is held inside a tube round the body axis — a violent swing/dash/melee can never fling it out into a flat sheet
+    for(let i=W;i<N;i++){ const o=i*3, row=(i/W)|0, gr=0.26+(c.girth-0.26)*(row/(H-1)), dx=pts[o]-cx, dz=pts[o+2]-cz, dd=dx*dx+dz*dz;
+      if(dd>gr*gr){ const k=gr/Math.sqrt(dd); pts[o]=cx+dx*k; pts[o+2]=cz+dz*k; } } }
+  for(let i=W;i<N;i++){ const o=i*3; if(pts[o+1]<c.floorY)pts[o+1]=c.floorY; }   // the hem rests on the pedestal, never inside it
+  const gp=c.geo.attributes.position.array; gp.set(pts); c.geo.attributes.position.needsUpdate=true; c.geo.computeVertexNormals(); }
+function ringAnchors(node,W,r,ly,opt){ opt=opt||{}; node.updateWorldMatrix(true,false); const arr=[]; const rz0=opt.rz||r;   // a FULL RING — first and last anchors COINCIDE at the back seam.
+  for(let x=0;x<W;x++){ const th=Math.PI+(x/(W-1))*Math.PI*2, s=Math.sin(th), co=Math.cos(th);   // opt shapes a real NECKLINE: rz ellipse, front dip, back pinch (under wing roots), scalloped gather
+    let rx=r, rzz=rz0;
+    if(opt.backPinch&&co<-0.3){ const k=(-co-0.3)/0.7; rx=rx*(1-k)+opt.backPinch*k; rzz=rzz*(1-k)+opt.backPinch*k; }
+    if(opt.scallop&&(x&1)&&x!==W-1){ rx+=opt.scallop; rzz+=opt.scallop; }
+    const yy=ly-(opt.dip?opt.dip*Math.max(0,co):0);
+    arr.push(new THREE.Vector3(s*rx,yy,co*rzz).applyMatrix4(node.matrixWorld)); }
+  return arr; }
+function clothAnchorsArc(spine,W,r,ly,zBase,spread){ const arr=[]; spine.updateWorldMatrix(true,false);   // an OPEN collar arc wrapping the front of the shoulders (the angel's capelet — her wings own the back)
+  for(let x=0;x<W;x++){ const th=(-1+2*x/(W-1))*spread;
+    const v=new THREE.Vector3(Math.sin(th)*r,ly-Math.abs(th)*0.02,zBase+Math.cos(th)*0.16).applyMatrix4(spine.matrixWorld); arr.push(v); }
+  return arr; }
+function bodyTubeSpheres(B,ctx){   // what a full robe slides over: waist · hips · chest (centred, yaw-immune) + the LIVE leg chains + calm-gait arm spheres
+  const sph=[{x:ctx.rx,y:ctx.ry+1.05,z:ctx.rz,r:0.24},{x:ctx.rx,y:ctx.ry+0.8,z:ctx.rz,r:0.22}];
+  if(!CLOTH_DEBUG.noChest)sph.push({x:ctx.rx,y:ctx.ry+1.24,z:ctx.rz,r:0.26});
+  if(ctx.cowl){ B.neck.getWorldPosition(_cwQ); sph.push({x:_cwQ.x,y:_cwQ.y-0.02,z:_cwQ.z,r:0.11});   // COWL NECK: the dress gathers at the neck then the shoulder balls FLARE it out softly (no hard cone)
+    for(const sd of['l','r']){ const A=B.arm&&B.arm[sd]; if(!A)continue; A.sh.getWorldPosition(_cwQ); sph.push({x:_cwQ.x,y:_cwQ.y+0.02,z:_cwQ.z,r:ctx.shoulderR||0.18}); } }
+  if(B.crystal&&B.staff&&B.staff.visible&&(!B.wear||B.wear.staff!==false)){ B.crystal.getWorldPosition(_cwQ); sph.push({x:_cwQ.x,y:_cwQ.y,z:_cwQ.z,r:0.17}); }   // the staff ORB parts the cloth instead of glowing through it
+  for(const sd of['l','r']){ const L=B.leg&&B.leg[sd]; if(!L||!L.knee)continue;
+    L.hip.getWorldPosition(_cwQ); const hx=_cwQ.x,hy=_cwQ.y,hz=_cwQ.z;
+    L.knee.getWorldPosition(_cwQ); const kx=_cwQ.x,ky=_cwQ.y,kz=_cwQ.z;
+    for(let f=0;f<=3;f++){ const u=f/3; sph.push({x:hx+(kx-hx)*u,y:hy+(ky-hy)*u,z:hz+(kz-hz)*u,r:0.19-0.012*f}); }
+    if(L.foot){ L.foot.getWorldPosition(_cwQ);
+      for(const u of[0.35,0.7,1.0])sph.push({x:kx+(_cwQ.x-kx)*u,y:ky+(_cwQ.y-ky)*u,z:kz+(_cwQ.z-kz)*u,r:u<0.5?0.15:0.13}); } }   // three shin/ankle balls, fatter — a striding leg TENTS the hem instead of knifing through it
+  if(ctx.armPush)for(const sd of['l','r']){ const A=B.arm&&B.arm[sd]; if(!A)continue;   // the arm chain parts the fabric in EVERY gait now (user ruling 2026-07-19: a melee swing punched the forearm straight through the robe) —
+    A.el.getWorldPosition(_cwQ); const e2x=_cwQ.x,e2y=_cwQ.y,e2z=_cwQ.z; sph.push({x:e2x,y:e2y,z:e2z,r:0.14});
+    A.hand.getWorldPosition(_cwQ); sph.push({x:_cwQ.x,y:_cwQ.y,z:_cwQ.z,r:0.12},{x:(e2x+_cwQ.x)/2,y:(e2y+_cwQ.y)/2,z:(e2z+_cwQ.z)/2,r:0.12}); }
+  return sph; }
+function sleeveSpheres(B,sd){ const A=B.arm[sd], sph=[];   // the sleeve's OWN arm, hip to fist — ring and colliders ride the SAME bone, so a pumping fist has no relative velocity to churn with
+  A.sh.getWorldPosition(_cwQ); const ax=_cwQ.x,ay=_cwQ.y,az=_cwQ.z;
+  A.el.getWorldPosition(_cwQ); const ex=_cwQ.x,ey=_cwQ.y,ez=_cwQ.z;
+  sph.push({x:ax,y:ay,z:az,r:0.11},{x:(ax+ex)/2,y:(ay+ey)/2,z:(az+ez)/2,r:0.1},{x:ex,y:ey,z:ez,r:0.1});
+  A.hand.getWorldPosition(_cwQ);
+  sph.push({x:(ex+_cwQ.x)/2,y:(ey+_cwQ.y)/2,z:(ez+_cwQ.z)/2,r:0.09},{x:_cwQ.x,y:_cwQ.y,z:_cwQ.z,r:0.09});
+  return sph; }
+function capeletSpheres(B,ctx,chestR){ const sph=[{x:ctx.rx,y:ctx.ry+1.28,z:ctx.rz,r:chestR||0.32}];   // chest PADDED past the body tube's anchor so the capelet settles OUTSIDE it
+  B.neck.getWorldPosition(_cwQ); sph.push({x:_cwQ.x,y:_cwQ.y,z:_cwQ.z,r:0.12});
+  for(const sd of['l','r']){ const A=B.arm&&B.arm[sd]; if(!A)continue; A.sh.getWorldPosition(_cwQ); sph.push({x:_cwQ.x,y:_cwQ.y,z:_cwQ.z,r:0.17}); }
+  if(B.wingPivots)for(const w of B.wingPivots){ w.g.getWorldPosition(_cwQ); sph.push({x:_cwQ.x,y:_cwQ.y,z:_cwQ.z,r:0.1}); }   // wing roots are SOLID — a deep flap can never drag cloth into them
+  return sph; }
+const CLOTH_DEBUG={noArms:false,noChest:false,noWind:false};   // console switches for isolating cloth misbehaviour
+const _cwP=new THREE.Vector3(), _cwQ=new THREE.Vector3();   // cloth scratch — no per-frame allocation
+
+// ---- THE BLUE KNIGHT: lathed human plate over the joint rig, soft plume + tabard + cape ----
+function makeKnight(B){   // THE KNIGHT = the SIMPLE human wearing a LEVEL-B PLATE SET (user 2026-07-16): FIVE worn pieces — helmet · body · gloves · pants · shoes,
+  // each a separate toggle over the same human base. All on = the Blue Knight; toggle any off and the bare human shows underneath.
+  const KCHAIN=flat(0x555c6a), KDARK2=flat(0x111319);   // the mail weave · the dark window backing
+  if(B.cloakPivot)B.cloakPivot.visible=false;
+  if(B.staff)B.staff.visible=false; if(B.handOrb)B.handOrb.visible=false;
+  const sAdd=B.spineAdd||(m=>B.spine.add(m));
+  const seat=(B.skull?B.skull.position.y:0.2)+(B.skinned?0.02:0);   // the skinned head-bone sits at the head's BASE — lift the helm to its true centre
+  B.equip={helmet:[],body:[],gloves:[],pants:[],shoes:[]};   // every plate filed under the slot it belongs to
+  const N=(slot,m)=>{ B.neck.add(m); B.equip[slot].push(m); return m; };    // worn on the head/neck
+  const T=(slot,m)=>{ sAdd(m); B.equip[slot].push(m); return m; };          // worn on the torso (routed onto the spine)
+  const P=(slot,par,m)=>{ par.add(m); B.equip[slot].push(m); return m; };   // worn on a given limb pivot
+  if(!B.skinned){   // BOX body only: hide the skin part-by-part under each worn piece (a ONE-MESH body can't split — its plates carry clearance instead)
+    const cover={body:[],gloves:[],pants:[],shoes:[]};
+    [B.spine,B.spine2,B.spine3,B.spine4,B.root].forEach(g=>{ if(g)g.children.forEach(m=>{ if(m.isMesh&&m.visible)cover.body.push(m); }); });
+    for(const sd of['l','r']){ const A=B.arm[sd], L=B.leg[sd];
+      A.sh.children.forEach(m=>{ if(m.isMesh&&m.visible)cover.body.push(m); }); A.el.children.forEach(m=>{ if(m.isMesh&&m.visible)cover.body.push(m); });
+      A.hand.children.forEach(m=>{ if(m.isMesh&&m.visible)cover.gloves.push(m); });
+      L.hip.children.forEach(m=>{ if(m.isMesh&&m.visible)cover.pants.push(m); }); L.knee.children.forEach(m=>{ if(m.isMesh&&m.visible)cover.pants.push(m); });
+      if(L.foot)L.foot.children.forEach(m=>{ if(m.isMesh&&m.visible)cover.shoes.push(m); }); }
+    B.cover=cover; }
+
+  // ===== HELMET · B — the armet: shorter dome, eyes through the window, plume =====
+  N('helmet',box(0.3,0.16,0.3,KSTEEL,0,seat+0.125,0));     // the skull DOME — sized round the ROUND head (0.13 radius)
+  N('helmet',box(0.24,0.07,0.24,KSTEEL,0,seat+0.23,0));    // the crown cap, sealing the scalp
+  N('helmet',box(0.3,0.19,0.3,KSTEEL,0,seat-0.105,0));     // the face/jaw shell
+  N('helmet',box(0.06,0.09,0.27,KSTEEL,0.12,seat+0.02,0)); N('helmet',box(0.06,0.09,0.27,KSTEEL,-0.12,seat+0.02,0));   // steel sides of the slit — the WINDOW between them is OPEN to the face
+  { const SKINLIT=new THREE.MeshBasicMaterial({color:0xd6a97e}); N('helmet',box(0.18,0.1,0.02,SKINLIT,0,seat+0.02,0.125)); }   // the LIT skin panel behind the window — his lit face, never a black plate
+  N('helmet',box(0.22,0.11,0.15,KSTEEL,0,seat+0.02,-0.085)); // steel closes the BACK of the slit
+  { const brow=box(0.315,0.05,0.13,KSTEEL,0,seat+0.066,0.1); brow.rotation.x=-0.15; N('helmet',brow); }   // the BROW visor tight over the slit — only the EYES show
+  { const chin=box(0.17,0.12,0.24,KSTEEL,0,seat-0.165,0.03); chin.rotation.x=0.12; N('helmet',chin); }     // the pointed chin (the bevor)
+  for(let r=0;r<3;r++)for(let c=0;c<2;c++){ const y=seat-0.065-r*0.03, x=0.045+c*0.03;   // BREATHING HOLES on the face plate
+    N('helmet',box(0.013,0.013,0.02,KDARK2,x,y,0.152)); N('helmet',box(0.013,0.013,0.02,KDARK2,-x,y,0.152)); }
+  B.faceFlat=true; B.faceZ=0.145; B.faceW=0.235; B.faceHt=0.265;   // the face decal sits FLAT in the window — outside the round head (0.13), inside the jaw front (0.15)
+  N('helmet',box(0.04,0.14,0.04,KSTEEL2,0,seat+0.27,0));   // the crest SPIKE
+  { const KBLUE2=flat(0x3f6fd0), KBLUE3=flat(0x5e8ee8); const piv=new THREE.Group(); piv.position.set(0,seat+0.27,0.0); N('helmet',piv);   // the FEATHER, truly SOFT — many thin vanes, a gentle arc, loose springs
+    let seg=piv; const L=9; const springs=[piv];
+    for(let i=0;i<L;i++){ const g2=new THREE.Group(); g2.position.set(0,i?0.075:0.05,0); g2.rotation.x=i?-0.15:-0.05; seg.add(g2);   // a HIGHER arc — the plume rises clear of the dome, never overlapping the helm (user 2026-07-16)
+      const t=i/(L-1), wd=0.06+Math.sin(t*Math.PI)*0.075;
+      g2.add(box(0.012,0.095,wd,t<0.35?KBLUE:(t<0.75?KBLUE2:KBLUE3),0,0.04,-wd*0.22));
+      if(i===3||i===6)springs.push(g2); seg=g2; }
+    springs.push(seg);
+    springs.forEach((sp,si)=>registerSoft(sp,{k:48-si*6,d:4.5,move:4+si*1.2,ph:0.6+si*1.1,fl:0.05+si*0.02,grav:0.006+si*0.004,rootRef:B.root})); }   // less droop + gentler whip — soft, but it keeps its lift
+  N('helmet',box(0.26,0.36,0.26,KCHAIN,0,-0.185,0));   // the MAIL COIF seals the neck under the helm
+  B.faceSeat=seat; B.faceY=0;   // the painted EYES land dead-centre in the WINDOW slit (user 2026-07-16: the window layer sits AT the eyes)
+
+  // ===== BODY · B — cuirass, gorget, faulds, pauldrons + arm plate to the wrist (DEEPER plates: the one-piece body is round, the steel clears it all the way round) =====
+  T('body',box(0.44,0.44,0.4,KSTEEL,0,0.26,0));   // the breastplate, chest to waist
+  T('body',box(0.05,0.4,0.42,KSTEEL2,0,0.28,0));  // the center ridge
+  T('body',box(0.5,0.14,0.36,KSTEEL,0,0.5,0));    // the GORGET at the neck-shoulder line
+  T('body',box(0.46,0.06,0.38,KGOLD,0,0.46,0));   // the collar rim
+  T('body',box(0.45,0.07,0.36,KSTEEL2,0,0.06,0)); T('body',box(0.46,0.07,0.37,KSTEEL2,0,0.0,0));   // the two fauld rings
+  P('body',B.spine,box(0.4,0.28,0.36,KCHAIN,0,-0.06,0));   // the mail waistband on the spine
+  { const sk=new THREE.Group(); sk.position.y=0.99; B.root.add(sk); B.equip.body.push(sk);   // one SHORT mail band tight to the hips — no long box hanging between the legs (user 2026-07-16)
+    sk.add(box(0.44,0.2,0.34,KCHAIN,0,-0.02,0)); }
+  { const tassets=[];   // the TASSETS are CLOTH — and cloth NEVER overlaps the body (user 2026-07-16):
+    // the FRONT pair RIDES THE THIGHS — parented to the leg itself, they move WITH the stride, so the swinging cuisse can never punch through them
+    for(const sd of['l','r']){ const L=B.leg[sd];
+      const pp=new THREE.Group(); pp.rotation.y=Math.PI; pp.position.y=-0.02; L.hip.add(pp); B.equip.body.push(pp);
+      const hang=new THREE.Group(); hang.position.z=-0.16; pp.add(hang);
+      tassets.push.apply(tassets,capeChain(hang,[0.23,0.26,0.27],0.14,0.04,KBLUE,KSTEEL2)); }   // 3 hinged panels, longer — reads as a draping cloth war-apron, not a stiff flap
+    // the REAR pair is SHORT — its hem ends above the trailing kick's reach, so the heels never touch it
+    { const tw=new THREE.Group(); tw.position.y=0.98; B.root.add(tw); B.equip.body.push(tw);
+      for(const ang of[2.5,-2.5]){
+        const pp=new THREE.Group(); pp.rotation.y=ang+Math.PI; tw.add(pp);   // flipped: local -z faces out, the drive only ever swings hems AWAY
+        const hang=new THREE.Group(); hang.position.z=-0.22; pp.add(hang);
+        tassets.push.apply(tassets,capeChain(hang,[0.3,0.33,0.35],0.12,0.04,KBLUE,KSTEEL2)); } }   // rear pair also 3 panels, draping
+    B.capeSegs=tassets; }
+  for(const sd of['l','r']){ const A=B.arm[sd];
+    P('body',A.sh,box(0.16,0.16,0.24,KSTEEL,(sd==='r'?1:-1)*0.03,0.14,0));   // the spaulder cap
+    for(let i=0;i<3;i++)P('body',A.sh,box(0.26-i*0.02,0.09,0.24-i*0.015,KSTEEL,(sd==='r'?1:-1)*0.05,0.08-i*0.085,0));   // the layered pauldron
+    P('body',A.sh,box(0.145,0.4,0.145,KSTEEL2,0,-0.18,0));   // the rerebrace (upper arm)
+    P('body',A.el,box(0.155,0.13,0.155,KCHAIN,0,0,0));       // the mail couter at the elbow
+    P('body',A.el,box(0.14,0.34,0.14,KSTEEL2,0,-0.17,0)); }  // the vambrace (forearm)
+
+  // ===== GLOVES · B — the gauntlets =====
+  for(const sd of['l','r']) P('gloves',B.arm[sd].hand,box(0.15,0.16,0.15,KSTEEL,0,-0.045,0));
+
+  // ===== PANTS · B — hip cap, cuisse, poleyn, greave (hip to ankle) =====
+  for(const sd of['l','r']){ const L=B.leg[sd];
+    P('pants',L.hip,box(0.21,0.17,0.21,KSTEEL2,0,0.03,0));    // the hip cap over the joint
+    P('pants',L.hip,box(0.2,0.5,0.2,KSTEEL2,0,-0.2,0));       // the cuisse (thigh) — clears the round thigh
+    P('pants',L.knee,box(0.21,0.14,0.21,KCHAIN,0,0,0));       // the mail poleyn at the knee
+    P('pants',L.knee,box(0.17,0.42,0.17,KSTEEL2,0,-0.22,0)); }// the greave (shin)
+
+  // ===== SHOES · B — the sabatons (the skinned rig has no ankle pivot — they ride the shin at foot height) =====
+  for(const sd of['l','r']){ const L=B.leg[sd]; const FT=L.foot||L.knee, fo=L.foot?0:-0.435;
+    P('shoes',FT,box(0.15,0.12,0.15,KSTEEL2,0,fo-0.01,0));
+    P('shoes',FT,box(0.15,0.1,0.27,KSTEEL,0,fo-0.062,0.05)); }
+
+  B.wear={helmet:true,body:true,gloves:true,pants:true,shoes:true};   // the KNIGHT wears the full LEVEL-B set; toggle any piece off to bare the human (user 2026-07-16)
+  B.applyWear=function(){ for(const k in B.equip)B.equip[k].forEach(m=>{ m.visible=B.wear[k]; });
+    if(B.cover)for(const k of['body','gloves','pants','shoes'])if(B.cover[k])B.cover[k].forEach(m=>{ m.visible=!B.wear[k]; });   // box body: skin OFF where a plate is ON
+    if(B.hair)B.hair.forEach(m=>{ m.visible=!B.wear.helmet; }); };   // the hair lives under the helmet
+  B.applyWear();
+  attachSword(B,M.iron); B.sword.visible=true;   // sword only — the knight carries NO shield
+  { const sw=B.sword; while(sw.children.length)sw.remove(sw.children[0]);   // THE BASTARD SWORD (user 2026-07-16: bigger, shaped amazing) — his LEVEL-B blade, built +Y like every blade:
+    sw.add(box(0.07,0.06,0.07,KGOLD,0,-0.13,0));            // the gold WHEEL pommel under the little finger
+    sw.add(box(0.05,0.2,0.055,M.wood,0,-0.02,0));           // the TWO-HAND grip through the palm
+    sw.add(box(0.08,0.045,0.3,KGOLD,0,0.1,0));              // the wide gold CROSS — quillons run ALONG the blade's flat (local z), the makeBlade doctrine (user 2026-07-16: the guard was 90° wrong)
+    const bl=new THREE.Mesh(new THREE.CylinderGeometry(0.032,0.055,0.95,4),KSTEEL); bl.scale.set(0.45,1,1.5); bl.position.y=0.6; bl.castShadow=true; sw.add(bl);   // the LONG diamond-section blade, tapering as it runs
+    const rc=new THREE.Mesh(new THREE.CylinderGeometry(0.05,0.06,0.16,4),KSTEEL2); rc.scale.set(0.5,1,1.6); rc.position.y=0.17; rc.castShadow=true; sw.add(rc);    // the RICASSO shoulder where blade meets cross
+    const pt=new THREE.Mesh(new THREE.ConeGeometry(0.032,0.18,4),KSTEEL); pt.scale.set(0.45,1,1.5); pt.position.y=1.16; pt.castShadow=true; sw.add(pt);            // run out to the POINT
+    sw.userData.eIn=0.15; sw.userData.eOut=1.3; }
+  return B; }
+function makeWizard(B,wopts){ wopts=wopts||{};   // THE WATER MAGE = the SIMPLE human wearing WATER-CLOTH equipment (user 2026-07-16) — and the TEMPLATE
+  // for every robed caster (the archmage is this in GREEN): the robe is ONE SOFT CLOTH from the chest to the floor, every piece WEARABLE: HAT · ROBE · STAFF.
+  const MAIN=flat(wopts.main||0x2b55c8), DARK=flat(wopts.dark||0x1d3d96), WMGOLD=WIZHATBAND, BEARD=flat(wopts.beard||0xdfe3e6);
+  if(B.cloakPivot)B.cloakPivot.visible=false;
+  const sAdd=B.spineAdd||(m=>B.spine.add(m));
+  B.equip={hat:[],robe:[],staff:[]};   // every worn piece filed under its slot, exactly like the knight's plate
+  const E=(slot,m)=>{ B.equip[slot].push(m); return m; };
+  if(!B.skinned){   // BOX body only: hide the skin under the worn robe (the ONE-MESH body can't split — the cloth carries clearance instead)
+    const cover={robe:[]};
+    [B.spine,B.spine2,B.spine3,B.spine4,B.root].forEach(g=>{ if(g)g.children.forEach(m=>{ if(m.isMesh&&m.visible)cover.robe.push(m); }); });
+    for(const sd of['l','r']){ const A=B.arm[sd]; A.sh.children.forEach(m=>{ if(m.isMesh&&m.visible)cover.robe.push(m); }); }
+    B.cover=cover; }   // the FOREARM stays bare (user ruling 2026-07-19: 'actual limbs, not just palm') — the sleeve ends at the elbow, the arm comes OUT of it
+
+  // ===== THE WHOLE OUTFIT IS CLOTH (user 2026-07-16: "the whole thing he wears is actually the garment"): FOUR simulated pieces —
+  // a BODY TUBE chest→floor, two SLEEVE TUBES riding the arm bones (a fist can't churn a sleeve that moves WITH it), and a
+  // SHOULDER CAPELET draping from the neck over the arm exits. Only the collar stays rigid, cut from the same fabric.
+  const CLOTHM=new THREE.MeshStandardMaterial({color:wopts.main||0x2b55c8,roughness:0.97,metalness:0,side:THREE.DoubleSide,vertexColors:true});
+  { const collar=box(0.17,0.16,0.17,new THREE.MeshStandardMaterial({color:wopts.main||0x2b55c8,roughness:0.97,metalness:0}),0,-0.09,0); B.neck.add(collar); E('robe',collar); }   // a small SOFT neck cap — the robe itself gathers up to the neck (NO hard cone, user 2026-07-16)
+  B.clothPieces=[];   // NO simulated cloth on the casters any more (user ruling 2026-07-19: no flexible material) — the vestments are CUT in the game's own rigid style: nested flat-shaded skirts, a belt, a bodice, every piece bone-parented so it can never lag the pose
+  { const under=new THREE.Mesh(new THREE.CylinderGeometry(0.26,0.44,0.94,10),DARK); under.position.y=0.47; under.castShadow=true; B.root.add(under); E('robe',under);   // the darker underskirt falls longest and peeks below the hem
+    const skirt=new THREE.Mesh(new THREE.CylinderGeometry(0.28,0.47,0.86,10),MAIN); skirt.position.y=0.55; skirt.castShadow=true; B.root.add(skirt); E('robe',skirt);   // the overskirt flares wider and stops short, exactly as the player's robe is layered
+    const belt=new THREE.Mesh(new THREE.CylinderGeometry(0.3,0.3,0.075,10),WMGOLD); belt.position.y=0.96; belt.castShadow=true; B.root.add(belt); E('robe',belt);   // the belt hugs the skirt's top ring and hides the seam
+    const bodice=new THREE.Mesh(new THREE.CylinderGeometry(0.2,0.3,0.58,10),MAIN); bodice.position.y=0.25; bodice.castShadow=true; B.spine.add(bodice); E('robe',bodice); }   // the chest rides the SPINE, so the torso lean carries the garment with it
+  { const SLM=MAIN;   // rigid sleeves, shoulder to elbow — the bare forearm comes OUT of them (user ruling 2026-07-19)
+    for(const sd of['l','r']){ const A=B.arm[sd];
+      const sl=box(0.165,0.36,0.165,SLM,0,-0.15,0); sl.castShadow=true; A.sh.add(sl); E('robe',sl);
+      const cuff=new THREE.Mesh(new THREE.CylinderGeometry(0.085,0.125,0.13,8),SLM); cuff.position.y=-0.03; cuff.castShadow=true; A.el.add(cuff); E('robe',cuff); } }
+  // (no separate shoulder mantle — the cowl-gathered body robe IS the shoulder cover now)
+
+  // ===== HAT =====
+  { const seat=(B.skull?B.skull.position.y:0.2)+(B.skinned?0.02:0);
+    const brim=new THREE.Mesh(new THREE.CylinderGeometry(0.24,0.26,0.045,4,1),DARK); brim.rotation.y=Math.PI/4; brim.position.y=seat+0.14; brim.castShadow=true; B.neck.add(brim); E('hat',brim);
+    const cone=new THREE.Mesh(new THREE.CylinderGeometry(0.015,0.17,0.44,4,1),MAIN); cone.rotation.y=Math.PI/4; cone.position.y=seat+0.36; cone.rotation.z=0.08; cone.castShadow=true; B.neck.add(cone); E('hat',cone);
+    const band=box(0.27,0.05,0.27,WMGOLD,0,seat+0.155,0); B.neck.add(band); E('hat',band); }
+
+  // the BEARD is HIM, not equipment — a NARROW chin-fall (user 2026-07-16: "fix the beard" — it was a mask over the cheeks; the cheeks stay SKIN)
+  { const seat=(B.skull?B.skull.position.y:0.2)+(B.skinned?0.02:0); const bd=new THREE.Group(); bd.position.set(0,seat-0.05,B.skinned?0.12:0.1); B.neck.add(bd);
+    bd.add(box(0.14,0.1,0.05,BEARD,0,-0.03,0.01));    // the chin tuft — mouth-wide, NOT cheek-to-cheek
+    bd.add(box(0.12,0.14,0.045,BEARD,0,-0.13,0));     // narrowing as it falls
+    const tip=new THREE.Group(); tip.position.y=-0.2; bd.add(tip);
+    tip.add(box(0.09,wopts.beardLong?0.34:0.16,0.04,BEARD,0,wopts.beardLong?-0.17:-0.08,-0.01));   // the sage's beard falls to the chest
+    registerSoft(bd,{k:120,d:10,move:3,ph:0.5,fl:0.025,rootRef:B.root});
+    registerSoft(tip,{k:90,d:8,move:6,ph:1.6,fl:0.05,grav:0.02,rootRef:B.root}); B.beard=bd; }
+
+  // ===== STAFF =====
+  { const st=new THREE.Group(); B.arm.l.hand.add(st); E('staff',st);
+    st.add(box(0.06,1.5,0.06,M.wood,0,-0.3,0));
+    const oc=wopts.orb||{color:0x6fb4ff,emissive:0x2a6fdf};
+    const orb=new THREE.Mesh(new THREE.IcosahedronGeometry(0.14,0),new THREE.MeshStandardMaterial({color:oc.color,emissive:oc.emissive,emissiveIntensity:1.6,flatShading:true}));
+    orb.position.y=0.5; st.add(orb); st.rotation.x=1.5; B.staff=st; B.crystal=orb; }
+
+  B.wear={hat:true,robe:true,staff:true};   // the WATER MAGE wears his full kit; toggle any piece off to bare the human (user 2026-07-16: wearable like the knight)
+  B.applyWear=function(){ for(const k in B.equip)B.equip[k].forEach(m=>{ m.visible=B.wear[k]; });
+    if(B.cover)B.cover.robe.forEach(m=>{ m.visible=!B.wear.robe; });
+    if(B.hairTop)B.hairTop.forEach(m=>{ m.visible=!B.wear.hat; }); };   // only the CROWN hides under the brim — his grey sides and back stay in view (user 2026-07-16: where's his grey hair)
+  B.applyWear();
+  return B; }
+function makeAngel(B){   // THE ANGEL (user 2026-07-16): the gatherer of the fallen, made WHOLE — the FEMALE body is drawn first (gold hair, blue eyes via
+  // the 'angel' face), and the vestments are worn ON TOP like the knight's plate: a WHITE robe tube + two soft WHITE FEATHER wings, each a toggle.
+  const AWHITE=flat(0xf2f3ee), AWHITE2=flat(0xd8dbd4), AGOLD=flat(0xe8c874);
+  if(B.cloakPivot)B.cloakPivot.visible=false;
+  if(B.staff)B.staff.visible=false; if(B.handOrb)B.handOrb.visible=false;
+  const sAdd=B.spineAdd||(m=>B.spine.add(m));
+  B.equip={robe:[],wings:[]};
+  const E=(slot,m)=>{ B.equip[slot].push(m); return m; };
+  if(!B.skinned){   // hide the skin under the worn robe (the box-base coverage rule)
+    const cover={robe:[]};
+    [B.spine,B.spine2,B.spine3,B.spine4,B.root].forEach(g=>{ if(g)g.children.forEach(m=>{ if(m.isMesh&&m.visible)cover.robe.push(m); }); });
+    for(const sd of['l','r']){ const A=B.arm[sd]; A.sh.children.forEach(m=>{ if(m.isMesh&&m.visible)cover.robe.push(m); }); }
+    B.cover=cover; }   // her FOREARM stays bare too (user ruling 2026-07-19) — a limb, not a floating palm
+  // ===== THE WHOLE DRESS IS CLOTH (user 2026-07-16): body tube + sleeve tubes + a FRONT-ARC capelet (her wings own the back).
+  const CLOTHM=new THREE.MeshStandardMaterial({color:0xf2f3ee,roughness:0.92,metalness:0,side:THREE.DoubleSide,vertexColors:true});
+  { const collar=box(0.15,0.15,0.15,new THREE.MeshStandardMaterial({color:0xf2f3ee,roughness:0.92,metalness:0}),0,-0.08,0); B.neck.add(collar); E('robe',collar); }   // a small SOFT neck cap — the dress itself gathers up to the neck (NO hard cone, user 2026-07-16)
+  B.clothPieces=[];   // NO simulated cloth on the casters any more (user ruling 2026-07-19: no flexible material) — the vestments are CUT in the game's own rigid style: nested flat-shaded skirts, a belt, a bodice, every piece bone-parented so it can never lag the pose
+  { const under=new THREE.Mesh(new THREE.CylinderGeometry(0.244,0.414,0.94,10),AWHITE2); under.position.y=0.47; under.castShadow=true; B.root.add(under); E('robe',under);   // the darker underskirt falls longest and peeks below the hem
+    const skirt=new THREE.Mesh(new THREE.CylinderGeometry(0.263,0.442,0.86,10),AWHITE); skirt.position.y=0.55; skirt.castShadow=true; B.root.add(skirt); E('robe',skirt);   // the overskirt flares wider and stops short, exactly as the player's robe is layered
+    const belt=new THREE.Mesh(new THREE.CylinderGeometry(0.282,0.282,0.075,10),AGOLD); belt.position.y=0.96; belt.castShadow=true; B.root.add(belt); E('robe',belt);   // the belt hugs the skirt's top ring and hides the seam
+    const bodice=new THREE.Mesh(new THREE.CylinderGeometry(0.188,0.282,0.58,10),AWHITE); bodice.position.y=0.25; bodice.castShadow=true; B.spine.add(bodice); E('robe',bodice); }   // the chest rides the SPINE, so the torso lean carries the garment with it
+  { const SLM=AWHITE;   // rigid sleeves, shoulder to elbow — the bare forearm comes OUT of them (user ruling 2026-07-19)
+    for(const sd of['l','r']){ const A=B.arm[sd];
+      const sl=box(0.15,0.34,0.15,SLM,0,-0.15,0); sl.castShadow=true; A.sh.add(sl); E('robe',sl);
+      const cuff=new THREE.Mesh(new THREE.CylinderGeometry(0.075,0.11,0.12,8),SLM); cuff.position.y=-0.03; cuff.castShadow=true; A.el.add(cuff); E('robe',cuff); } }
+  // ===== WINGS — REAL wing silhouettes, BIGGER (user 2026-07-16): each wing is a raised leading-edge ARM sweeping up-and-out,
+  // with PRIMARY feathers hanging off it — short by the shoulder, LONGEST at the tip — and the whole wing breathes on soft springs
+  B.wingPivots=[];
+  for(const sd of[-1,1]){ const wp=new THREE.Group(); wp.position.set(sd*0.13,0.36,-0.16); wp.rotation.y=sd*0.4; B.spine.add(wp); E('wings',wp); B.wingPivots.push({g:wp,sd});
+    const rail=new THREE.Group(); rail.rotation.z=-sd*1.15; rail.rotation.x=-0.12; wp.add(rail);   // the ARM rises at ~65 degrees
+    rail.add(box(0.05,0.66,0.035,AWHITE,0,0.3,0));   // the leading edge the feathers hang from
+    for(let i=0;i<7;i++){ const t2=i/6;
+      const q=new THREE.Group(); q.position.y=0.08+i*0.09; q.rotation.z=-sd*(1.35+t2*0.3); rail.add(q);   // each primary hangs DOWN-OUT off the arm, sweeping steeper toward the tip
+      const len=0.24+t2*0.34;   // the wing SHAPE: short at the shoulder, longest at the tip
+      q.add(box(0.085,len,0.02,t2<0.75?AWHITE:AWHITE2,0,len/2,0));   // near-touching blades — a closed feather face with grooves
+      if(i===2||i===5)registerSoft(q,{k:55-i*4,d:5,move:4,ph:0.5+i*0.7,fl:0.04+t2*0.03,grav:0.015,rootRef:B.root}); } }
+  // the WHOLE wing FLAPS from B.wingPivots in the frame loop (user 2026-07-16) — the pivots are driven directly, so no soft spring on them
+  B.wear={robe:true,wings:true};   // the ANGEL wears her kit; toggle a piece off to bare the human beneath (the body was drawn FIRST)
+  B.applyWear=function(){ for(const k in B.equip)B.equip[k].forEach(m=>{ m.visible=B.wear[k]; });
+    if(B.cover)B.cover.robe.forEach(m=>{ m.visible=!B.wear.robe; }); };
+  B.applyWear();
+  return B; }
+function makeArchmage(B){   // THE WIND ARCHMAGE (user 2026-07-16: "identical but green") — the water-mage TEMPLATE in the sage's greens, white beard to the chest
+  return makeWizard(B,{main:0x2f8048,dark:0x1e5232,beard:0xf2f3ef,beardLong:true,orb:{color:0x9ff2b0,emissive:0x3fae5f}}); }
+
+// ============ THE RIG VIEW (user ruling 2026-07-15: "how are you rigging this — show an on/off rigging") ============
+// The character IS a hierarchy of rotation-only pivots: root → spine → neck/shoulders → elbows → hands, root → hips → knees.
+// Meshes hang OFF those groups; animation only turns the pivots. The viz drops a glowing DOT on every pivot and an amber
+// LINE down every bone — parented to the real joints, so it follows any pose, drawn depthTest-off like an x-ray.
+let rigOn=false;
+const RIG_DOT=new THREE.MeshBasicMaterial({color:0x8cf0aa,depthTest:false,transparent:true,opacity:0.95});
+const RIG_BONE=new THREE.MeshBasicMaterial({color:0xffb04a,transparent:true,opacity:0.5,depthTest:false});
+const RIG_OCTA=new THREE.OctahedronGeometry(1,0); RIG_OCTA.translate(0,1,0);
+const RIG_UP=new THREE.Vector3(0,1,0);
+function buildRigViz(B){ const out=[]; B._rigViz=out; const V0=new THREE.Vector3();
+  const dot=(g,p,r)=>{ const d=new THREE.Mesh(new THREE.SphereGeometry(r||0.035,6,5),RIG_DOT); if(p)d.position.copy(p); d.renderOrder=99; g.add(d); out.push(d); };
+  const ln=(g,a,b)=>{ const d2=new THREE.Vector3().subVectors(b,a), len=d2.length(); if(len<1e-4)return;   // OCTAHEDRAL bones — the Blender-style triangular read (user 2026-07-15)
+    const o=new THREE.Mesh(RIG_OCTA,RIG_BONE); o.scale.set(0.032,len/2,0.032); o.position.copy(a);
+    o.quaternion.setFromUnitVectors(RIG_UP,d2.normalize()); o.renderOrder=98; g.add(o); out.push(o); };
+  dot(B.root,new THREE.Vector3(0,0.9,0),0.045); ln(B.root,new THREE.Vector3(0,0.9,0),new THREE.Vector3(0,0.99,0));   // the pelvis root
+  dot(B.spine,null,0.04); if(!B.pro)ln(B.spine,V0,new THREE.Vector3(0,0.52,0));   // spine pivot up to the neck (pro rigs draw the true chain below)
+  if(B.pro){ dot(B.spine2,null,0.032); dot(B.spine3,null,0.032); dot(B.spine4,null,0.03); dot(B.clav.l,null,0.028); dot(B.clav.r,null,0.028);
+    ln(B.spine,V0,new THREE.Vector3(0,0.14,0)); ln(B.spine2,V0,new THREE.Vector3(0,0.14,0)); ln(B.spine3,V0,new THREE.Vector3(0,0.13,0));
+    for(const sd of['l','r']){ const sx=sd==='r'?1:-1; ln(B.clav[sd],V0,new THREE.Vector3(sx*0.24,0.06,-0.01)); } }   // the pro chain: spine 1-2-3-4 and both clavicles
+  dot(B.neck,null,0.035); ln(B.neck,V0,new THREE.Vector3(0,0.16,0)); dot(B.neck,new THREE.Vector3(0,0.16,0),0.03);   // neck and head
+  for(const sd of['l','r']){ const A=B.arm[sd], L=B.leg[sd], sx=sd==='r'?1:-1;
+    if(!B.pro)ln(B.spine,V0,new THREE.Vector3(sx*0.3,0.44,0));   // collar line out to the shoulder (pro: clav lines below)
+    dot(A.sh); ln(A.sh,V0,A.el.position);   // shoulder pivot, humerus line (reads the rig's true elbow offset)
+    dot(A.el,null,0.03); ln(A.el,V0,A.hand.position);   // elbow pivot, forearm line (true wrist offset)
+    dot(A.hand,null,0.03);   // the hand pivot
+    ln(B.root,new THREE.Vector3(0,0.9,0),new THREE.Vector3(sx*0.11,0.9,0));   // pelvis out to the hip
+    dot(L.hip); ln(L.hip,V0,new THREE.Vector3(0,-0.4,0));   // hip pivot, femur line
+    dot(L.knee,null,0.03);
+    if(L.foot){ ln(L.knee,V0,new THREE.Vector3(0,-0.4,0)); dot(L.foot,null,0.028);
+      if(L.foot.toe){ ln(L.foot,V0,new THREE.Vector3(0,-0.03,0.09)); dot(L.foot.toe,null,0.024); ln(L.foot.toe,V0,new THREE.Vector3(0,-0.007,0.06)); }   // ankle → BALL → toe, the production chain
+      else ln(L.foot,V0,new THREE.Vector3(0,-0.03,0.14)); }   // ankle, then the foot bone out to the toe
+    else ln(L.knee,V0,new THREE.Vector3(0,-0.43,0.12)); }   // no ankle: shin line straight to the toe
+  out.forEach(o=>o.visible=rigOn); }
+let hitOn=false;
+const HIT_MAT=new THREE.MeshBasicMaterial({color:0xff5a4a,transparent:true,opacity:0.14,side:THREE.DoubleSide,depthWrite:false});
+const HIT_EDGE=new THREE.LineBasicMaterial({color:0xff8a6a,transparent:true,opacity:0.9,depthTest:false});
+function buildHitViz(B){ const out=[]; B._hitViz=out;   // THE HITBOX (user ruling 2026-07-15): the combat capsule every hit test reads — body cylinder r0.5, y 0.15..2.0 — plus the weapon's edge box
+  const cyl=new THREE.Mesh(new THREE.CylinderGeometry(0.42,0.42,1.85,14,1,true),HIT_MAT); cyl.position.y=1.075; cyl.renderOrder=90; B.root.add(cyl); out.push(cyl);   // r 0.42 = the game's BODY_R (user 2026-07-15: a bit smaller)
+  const eg=new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.CylinderGeometry(0.42,0.42,1.85,14,1,true)),HIT_EDGE); eg.position.y=1.075; eg.renderOrder=91; B.root.add(eg); out.push(eg);
+  if(B.sword){ const u=B.sword.userData||{}; const eIn=u.eIn!==undefined?u.eIn:0.1, eOut=u.eOut!==undefined?u.eOut:0.66;
+    const wb=new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(0.09,eOut-eIn,0.15)),HIT_EDGE); wb.position.y=(eIn+eOut)/2; wb.renderOrder=91; B.sword.add(wb); out.push(wb); }   // the honest steel: this box IS the swept edge
+  out.forEach(o=>o.visible=hitOn); }
+function applyHit(){ const S=stages[view]; if(!S)return;
+  for(const B of[S.bare,S.geared,S.actor]){ if(hitOn&&!B._hitViz)buildHitViz(B); if(B._hitViz)B._hitViz.forEach(o=>o.visible=hitOn); } }
+function applyRig(){ const S=stages[view]; if(!S)return;
+  for(const B of[S.bare,S.geared,S.actor]){ if(rigOn&&!B._rigViz)buildRigViz(B); if(B._rigViz)B._rigViz.forEach(o=>o.visible=rigOn); } }
+// ============ STAGES — every tab gets the same trio: BARE · GEARED · IN MOTION ============
+function pedestal(x,parent){ const g=new THREE.Group(); g.position.set(x,0,0);
+  const p=new THREE.Mesh(new THREE.CylinderGeometry(0.85,0.95,0.1,24),M.stoneDark); p.position.y=-0.05; p.receiveShadow=true; g.add(p);
+  const rim2=new THREE.Mesh(new THREE.TorusGeometry(0.85,0.02,6,40),flat(0x3d4358)); rim2.rotation.x=-Math.PI/2; rim2.position.y=0.005; g.add(rim2);
+  parent.add(g); return g; }
+{ const fl=new THREE.Mesh(new THREE.CircleGeometry(10,40),new THREE.MeshToonMaterial({color:0x11141f,gradientMap:toonGradient}));
+  fl.rotation.x=-Math.PI/2; fl.position.y=-0.1; fl.receiveShadow=true; scene.add(fl); }
+const SPREAD=1.95;
+// ============ THE NAKED HUMAN (user reference 2026-07-15: Character → Game Rig) — flesh volumes on the SAME rig, low poly ============
+const SKIN=flat(0x9aa6ba), SKIN2=flat(0x8794a9);   // a blue-grey clay body, flat-shaded — reads as a sculpt reference beside the bones
+function fleshify(B){   // hide the bones, drape muscle volumes on the joint groups — it poses with the skeleton
+  B.root.traverse(m=>{ if(m.isMesh)m.visible=false; });   // every bone goes dark; the flesh below carries the read
+  const cyl=(rT,rB,h,mat,y,zsq)=>{ const m=new THREE.Mesh(new THREE.CylinderGeometry(rT,rB,h,8),mat||SKIN); m.position.y=y||0; if(zsq)m.scale.z=zsq; m.castShadow=true; return m; };
+  const ball=(r,mat,sx,sy,sz)=>{ const m=new THREE.Mesh(new THREE.SphereGeometry(r,8,6),mat||SKIN); if(sx)m.scale.set(sx,sy,sz); m.castShadow=true; return m; };
+  // TORSO — a rounded trunk on the base spine, a chest swelling on spine 3, hips on the root
+  B.spine.add(cyl(0.185,0.15,0.4,SKIN,0.2,0.66));   // the belly-to-ribs trunk
+  B.spine3.add((()=>{ const c=cyl(0.215,0.17,0.2,SKIN,0.04,0.66); return c; })());   // the chest, widest at the pecs
+  B.spine4.add(ball(0.12,SKIN,1.5,0.7,0.9));   // the upper-chest / clavicle shelf
+  { const pel=ball(0.17,SKIN2,1.1,0.8,0.8); pel.position.set(0,0.9,0); B.root.add(pel); }   // the pelvis mass
+  // NECK + HEAD on the neck group (it turns as one)
+  B.neck.add(cyl(0.056,0.064,0.17,SKIN,0.05));   // the neck roots into the shoulder shelf and reaches the jaw — no float
+  { const head=ball(0.155,SKIN,0.92,1.06,0.98); head.position.y=B.skull?B.skull.position.y:0.24;   // BIGGER head (user 2026-07-15: too small)
+    const jaw=ball(0.115,SKIN,0.88,0.7,0.86); jaw.position.y=(B.skull?B.skull.position.y:0.24)-0.08; B.neck.add(head); B.neck.add(jaw); }
+  // ARMS
+  for(const sd of['l','r']){ const A=B.arm[sd];
+    if(B.clav&&B.clav[sd]){ const sock=ball(0.062,SKIN); sock.position.copy(A.sh.position); B.clav[sd].add(sock); }   // the shoulder SOCKET rides the clavicle — the joint keeps flesh behind it however high the arm swings (user 2026-07-15)
+    { const dl=ball(0.069,SKIN,1.05,0.95,1); dl.position.set(0,-0.015,0); A.sh.add(dl); }  A.sh.add(cyl(0.06,0.05,0.3,SKIN,-0.15));   // deltoid TUCKED into the arm line, not a shelf (user 2026-07-15)
+    A.el.add(ball(0.047,SKIN));  A.el.add(cyl(0.048,0.038,0.27,SKIN,-0.135));     // elbow + forearm — the joint no wider than the arm (user 2026-07-15)
+    A.hand.add(ball(0.062,SKIN,0.95,0.75,1.1)); A.hand.position.y=A.hand.position.y; A.hand.children[A.hand.children.length-1].position.y=-0.05; }
+  // LEGS
+  for(const sd of['l','r']){ const L=B.leg[sd];
+    L.hip.add(ball(0.088,SKIN));  L.hip.add(cyl(0.092,0.07,0.4,SKIN,-0.2));   // hip + thigh
+    L.knee.add(ball(0.07,SKIN));  L.knee.add(cyl(0.072,0.048,0.4,SKIN,-0.2)); // knee + calf
+    const foot=L.foot||L.knee; const shoe=new THREE.Mesh(new THREE.BoxGeometry(0.1,0.06,0.24),SKIN2); shoe.position.set(0,L.foot?-0.03:-0.43,0.06); shoe.castShadow=true; foot.add(shoe); }
+  B.isFlesh=true; return B; }
+
+function fleshifyBox(B,o){ o=o||{};   // V1's companion (user 2026-07-15): a BOX human — same box language, light skin, full expressions
+  // o.female = the WOMAN's build (narrower shoulders, hips as wide as them, long hair) · o.hair = a hair colour (the angel's gold)
+  B.root.traverse(m=>{ if(m.isMesh)m.visible=false; });
+  const FEM=!!o.female;
+  const SK=flat(o.skin||0xf1cba7), SK2=flat(0xd9ac85), HAIR=flat(o.hair||0x3a2a1c);   // the skin (o.skin — the angel's is porcelain) + the hair (user 2026-07-16)
+  const bxh=(w,h,d,x,y,z,mat)=>{   // every box carries a FAINT long-axis bevel (the bx12 cut at V1.2's 0.16) — the edges soften, the SQUARISH language stays (user 2026-07-16: smoother, still boxy)
+    const geo=new THREE.BoxGeometry(w,h,d,2,2,2).toNonIndexed(); const p=geo.attributes.position; const v=new THREE.Vector3();
+    const hw=w/2,hh=h/2,hd=d/2; const long=(h>=w&&h>=d)?'y':(w>=d?'x':'z');
+    const cc=0.16*(long==='y'?Math.min(hw,hd):long==='x'?Math.min(hh,hd):Math.min(hw,hh));
+    for(let i=0;i<p.count;i++){ v.set(p.getX(i),p.getY(i),p.getZ(i));
+      const ex=Math.abs(Math.abs(v.x)-hw)<1e-5, ey=Math.abs(Math.abs(v.y)-hh)<1e-5, ez=Math.abs(Math.abs(v.z)-hd)<1e-5;
+      const cx=(long!=='x'&&ex), cy=(long!=='y'&&ey), cz=(long!=='z'&&ez);
+      if((cx?1:0)+(cy?1:0)+(cz?1:0)===2){ if(cx)v.x-=Math.sign(v.x)*cc; if(cy)v.y-=Math.sign(v.y)*cc; if(cz)v.z-=Math.sign(v.z)*cc; }
+      p.setXYZ(i,v.x,v.y,v.z); }
+    geo.computeVertexNormals(); const m=new THREE.Mesh(geo,mat||SK); m.position.set(x||0,y||0,z||0); m.castShadow=true; return m; };
+  const sAdd=B.spineAdd||(m=>B.spine.add(m));
+  // TORSO — FEW parts, a smooth athletic taper: broad chest → narrow waist, slim depth (user 2026-07-16: smooth, not bulky, not a lot of parts)
+  sAdd(bxh(FEM?0.2:0.27,0.32,FEM?0.13:0.17,0,0.1,0));     // the WAIST + belly — ONE tall box, the narrow point (hers pinches to the hourglass throat)
+  sAdd(bxh(FEM?0.29:0.36,0.32,FEM?0.15:0.18,0,0.27,0));    // the CHEST — broad on him, slighter on her
+  if(FEM){ for(const s of[-1,1]){ const bb=bxh(0.125,0.16,0.16,s*0.066,0.315,0.055); bb.rotation.x=-0.2; sAdd(bb); }   // the BUST — apex LOW: the top slopes gently down-forward from the chest to a low point, the underside cuts back short (user 2026-07-16: the slant was inverted)
+    for(const sd of['l','r'])B.arm[sd].sh.position.x*=0.78; }   // her arms TUCK IN — the narrow chest left a gap at the armpit; the hands now rest against her body (user 2026-07-16)
+  sAdd(bxh(FEM?0.29:0.38,0.1,FEM?0.14:0.16,0,0.46,0));    // the shoulder line — LOWER and thinner, so the NECK shows above it — his is the widest line, hers is NARROWER than her hips
+  { const pelv=bxh(FEM?0.32:0.28,0.2,FEM?0.19:0.18,0,1.05,0); B.root.add(pelv); }   // the pelvis, bottom CUT at the hip line — HERS flares WIDER than her shoulders = the hourglass (user 2026-07-16)
+  B.neck.add(bxh(FEM?0.095:0.11,0.22,FEM?0.095:0.11,0,0.02,0));   // the NECK — tall enough to show clearly between the shoulders and the head (user 2026-07-16), slender on her
+  const seat=B.skull?B.skull.position.y:0.215;
+  B.neck.add(bxh(0.23,0.27,0.235,0,seat,0));   // the head
+  // HAIR — a cap over the crown, back and sides, the FACE left open (user 2026-07-16). B.hair = all of it (an enclosing HELMET hides everything);
+  // B.hairTop = just the crown + fringe (a brimmed HAT hides only those — the sides and back still show beneath the brim)
+  B.hair=[]; B.hairTop=[];
+  const HB=(w,h,d,x,y,z,top)=>{ const m=bxh(w,h,d,x,y,z,HAIR); B.neck.add(m); B.hair.push(m); if(top)B.hairTop.push(m); return m; };
+  HB(0.25,0.09,0.25,0,seat+0.15,0,true);    // the crown on top
+  if(FEM){   // HER long hair is CLOTH, not a slab (user 2026-07-16): a hinged chain off the crown that ARCS clear of the back and SWAYS — it never stabs the shoulders
+    const hp=new THREE.Group(); hp.position.set(0,seat+0.1,-0.13); B.neck.add(hp); B.hair.push(hp);
+    let hold=hp; const hl=[0.2,0.2,0.16];
+    for(let i=0;i<3;i++){ const g2=new THREE.Group(); g2.position.y=i?-(hl[i-1]-0.02):0; g2.rotation.x=0.1+i*0.07; hold.add(g2);   // each segment tips a little further OFF the back
+      g2.add(bxh(0.24-i*0.02,hl[i]+0.03,0.055,0,-hl[i]/2,0,HAIR)); hold=g2;
+      if(i>0)registerSoft(g2,{k:70-i*15,d:7,move:5,ph:0.4+i,fl:0.03,grav:0.02,rootRef:B.root}); }
+    HB(0.07,0.32,0.2,0.115,seat-0.01,-0.02); HB(0.07,0.32,0.2,-0.115,seat-0.01,-0.02);   // the sides frame the face to the jaw, ending clear of the collar
+    HB(0.24,0.06,0.05,0,seat+0.11,0.11,true); }   // the fringe
+  else{ HB(0.25,0.26,0.07,0,seat+0.03,-0.11);   // the back of the head
+    HB(0.07,0.25,0.23,0.115,seat+0.03,-0.005); HB(0.07,0.25,0.23,-0.115,seat+0.03,-0.005);   // the sides, framing the face
+    HB(0.24,0.06,0.05,0,seat+0.11,0.11,true); }   // a short fringe above the brow
+  // LIMBS — still ONE box per bone, but every box runs PAST its pivot into its parent: the joints stay filled at rest AND mid-bend = a BENDABLE connected body (user 2026-07-16)
+  for(const sd of['l','r']){ const A=B.arm[sd];
+    A.sh.add(bxh(FEM?0.12:0.14,0.52,FEM?0.115:0.135,0,-0.15,0));   // the UPPER ARM — its top reaches INTO the shoulder line, its bottom past the elbow pivot
+    A.el.add(bxh(FEM?0.105:0.12,0.44,FEM?0.1:0.115,0,-0.14,0));   // the FOREARM — its top reaches INTO the upper arm, its bottom covers the wrist
+    A.hand.add(bxh(FEM?0.095:0.11,FEM?0.13:0.14,FEM?0.06:0.07,0,-0.05,0));  // the hand — hers daintier
+    const L=B.leg[sd];
+    L.hip.add(bxh(FEM?0.145:0.16,0.6,FEM?0.135:0.15,0,-0.19,0));    // the THIGH — its top reaches INTO the pelvis, its bottom past the knee pivot — hers slimmer
+    L.knee.add(bxh(FEM?0.125:0.14,0.56,FEM?0.125:0.14,0,-0.19,0));  // the CALF — its top reaches INTO the thigh, its bottom covers the ankle
+    if(L.foot){ L.foot.add(bxh(FEM?0.11:0.13,0.1,FEM?0.23:0.25,0,-0.05,0.05)); } }   // ONE foot box — hers smaller
+  B.faceFlat=true; B.faceZ=0.125; B.faceW=0.235; B.faceHt=0.265; B.isFlesh=true; return B; }
+function smoothHuman(){   // THE ONE-PIECE HUMAN (user 2026-07-16, Valheim ref): the skinned pro body — ONE smooth mesh that bends, no separate parts
+  const B=buildProSkeleton({bare:true,human:true});
+  const SKIN_T=flat(0xdbb08a); B.root.traverse(m=>{ if(m.isMesh){ m.material=SKIN_T; m.receiveShadow=false; } });   // one skin, head to feet
+  const HAIR=flat(0x3a2a1c); B.hair=[];   // the dark hair cap — hidden under a worn helmet or hat
+  const H=(w,h,d,x,y,z)=>{ const m=box(w,h,d,HAIR,x,y,z); B.neck.add(m); B.hair.push(m); return m; };
+  H(0.24,0.07,0.24,0,0.30,0);      // the crown
+  H(0.25,0.2,0.07,0,0.19,-0.1);    // the back of the head
+  H(0.07,0.18,0.2,0.115,0.19,-0.02); H(0.07,0.18,0.2,-0.115,0.19,-0.02);   // the sides, framing the face
+  H(0.2,0.05,0.04,0,0.26,0.12);    // the fringe
+  B.faceSeat=0.17; B.faceR=0.14; B.faceH=0.26; B.headBend=0.05;   // the face decal wraps the round head
+  B.spineAdd=(m)=>{ const y=m.position.y;   // torso gear files onto the spine segment that owns its height — same routing as the bone rig
+    if(y<0.14)B.spine.add(m); else if(y<0.28){ m.position.y-=0.14; B.spine2.add(m); } else if(y<0.41){ m.position.y-=0.28; B.spine3.add(m); } else { m.position.y-=0.41; B.spine4.add(m); } };
+  return B; }
+function makeCyclops(B){   // THE CYCLOPS on the bench (user ruling 2026-07-19) — the one-eyed stone at bench scale, and his whole face EMOTES: one eye, one brow, one hinged jaw
+  B.root.scale.setScalar(1.55);
+  if(B.sword)B.sword.visible=false;
+  if(B.eyes)B.eyes.forEach(e=>e.visible=false);
+  if(B.facePlane)B.facePlane.visible=false;   // his single eye IS his face
+  const eye=new THREE.Mesh(new THREE.BoxGeometry(0.13,0.11,0.03),new THREE.MeshStandardMaterial({color:0xffb36a,emissive:0xb86a1a,emissiveIntensity:1.6,flatShading:true}));
+  eye.position.set(0,0.215,0.135); B.neck.add(eye); B.bigEye=eye;
+  const HIDE=flat(0x7d8672);   // brow and jaw are his own hide now, not bone
+  const brow=box(0.2,0.05,0.06,HIDE,0,0.29,0.125); B.neck.add(brow); B.cycBrow=brow;
+  const jawG=new THREE.Group(); jawG.position.set(0,0.09,0.06); B.neck.add(jawG);
+  jawG.add(box(0.19,0.07,0.19,HIDE,0,-0.035,0.015)); B.cycJaw=jawG;
+  B.faceExpr='off';
+  B.setExpression=function(name){ if(name===B.faceExpr)return; B.faceExpr=name;   // [eyeX, eyeY, browLean, jawGape] per mood — a one-eyed face still ACTS
+    const m={neutral:[1,1,0,0.06],happy:[1,1.08,0.16,0.12],sad:[0.95,0.8,-0.1,0.14],angry:[1.25,0.55,-0.4,0.02],meh:[1,0.72,0,0.06],laugh:[1.05,0.85,0.14,0.5],shock:[1.35,1.55,0.24,0.62],smug:[1.1,0.78,0.18,0.05],attack:[1.3,0.5,-0.45,0.02],off:[1,1,0,0.06]}[name]||[1,1,0,0.06];
+    eye.scale.x+= (m[0]-eye.scale.x); eye.scale.y+=(m[1]-eye.scale.y);
+    brow.rotation.x=m[2]; brow.position.y=0.29+m[2]*0.055;
+    jawG.rotation.x=m[3]; };
+  return B; }
+function makeFireskullBench(){   // THE BURNING SKULL on the bench (user ruling 2026-07-19) — the game's wraith head, big, hovering, and it EMOTES: embers, jaw, twin flame crowns
+  const B=buildSkeleton({bare:true});
+  B.root.traverse(m=>{ if(m.isMesh)m.visible=false; });   // the rig is a ghost — only the burning head shows, but the gait grammar still has bones to drive
+  const h=new THREE.Group(); const SC=2.3;
+  const sk=box(0.36,0.3,0.36,M.bone,0,0.02,0); h.add(sk);
+  h.add(box(0.4,0.09,0.38,M.bone,0,0.17,0.005));
+  for(const s2 of[-1,1])h.add(box(0.07,0.11,0.11,M.boneDim,s2*0.185,-0.03,0.09));
+  const em=new THREE.MeshBasicMaterial({color:0xff7a2a});
+  B.fsEyes=[];
+  for(const s2 of[-1,1]){ h.add(box(0.125,0.125,0.02,M.stoneDark,s2*0.085,0.05,0.181));
+    const e2=new THREE.Mesh(new THREE.BoxGeometry(0.065,0.065,0.02),em); e2.position.set(s2*0.085,0.05,0.192); h.add(e2); B.fsEyes.push(e2); }
+  h.add(box(0.055,0.08,0.02,M.stoneDark,0,-0.06,0.181));
+  const jaw=new THREE.Group(); jaw.position.set(0,-0.12,0.06); h.add(jaw);
+  jaw.add(box(0.26,0.09,0.24,M.boneDim,0,-0.05,0));
+  for(const tx of[-0.08,0,0.08])jaw.add(box(0.045,0.06,0.02,M.bone,tx,0.005,0.115));
+  for(const tx of[-0.11,-0.04,0.04,0.11])h.add(box(0.04,0.05,0.02,M.bone,tx,-0.14,0.178));
+  const crown=new THREE.Mesh(new THREE.ConeGeometry(0.17,0.4,4),new THREE.MeshBasicMaterial({color:0xff9a4a,transparent:true,opacity:0.75,depthWrite:false}));
+  crown.position.y=0.36; h.add(crown);
+  const crown2=new THREE.Mesh(new THREE.ConeGeometry(0.1,0.28,4),new THREE.MeshBasicMaterial({color:0xffd24a,transparent:true,opacity:0.85,depthWrite:false}));
+  crown2.position.y=0.5; h.add(crown2);
+  h.scale.setScalar(SC); h.position.y=1.3; B.root.add(h);
+  h.traverse(m=>{ if(m.isMesh&&m.material===M.bone)m.castShadow=true; });
+  B.hoverHead=h; B.fsJaw=jaw; B.fsCrown=crown; B.fsCrown2=crown2;
+  B.faceExpr='off';
+  B.setExpression=function(name){ if(name===B.faceExpr)return; B.faceExpr=name;   // [eyeX, eyeY, jawGape, flameHeat] — the wraith grins, gapes, rages and gutters
+    const m={neutral:[1,1,0.12,1],happy:[1,1.1,0.22,1.15],sad:[0.9,0.6,0.05,0.6],angry:[1.3,0.5,0.08,1.5],meh:[1,0.7,0.1,0.8],laugh:[1.1,0.9,0.55,1.3],shock:[1.4,1.5,0.65,1.4],smug:[1.15,0.72,0.14,1.1],attack:[1.35,0.5,0.5,1.6],off:[1,1,0.12,1]}[name]||[1,1,0.12,1];
+    for(const e2 of B.fsEyes){ e2.scale.x=m[0]; e2.scale.y=m[1]; }
+    jaw.rotation.x=m[2];
+    crown.material.opacity=0.45+0.35*m[3]; crown2.material.opacity=0.5+0.4*m[3];
+    crown.scale.setScalar(0.7+0.35*m[3]); crown2.scale.setScalar(0.7+0.35*m[3]); };
+  return B; }
+function makeStage(kind){ const st=new THREE.Group(); scene.add(st);   // ONE character per view (user ruling 2026-07-15): it wears the gear AND performs the gaits
+  const s2=pedestal(0,st), s1=s2, s3=s2;
+  let bare,geared,actor;
+  if(kind==='simple'){ geared=dressSkeleton(buildSkeleton({slime:true})); attachSword(geared); }
+  else if(kind==='detail'){ geared=dressSkeleton(buildDetailedSkeleton()); attachSword(geared); }
+  else if(kind==='homage'){ geared=buildRaggedSkeleton({}); geared.sword.visible=false; }
+  else if(kind==='knight'){ geared=makeKnight(fleshifyBox(buildSkeleton({bare:true}))); attachFace(geared,'human'); geared.sword.visible=true; }   // THE KNIGHT IS THE BOX HUMAN in the plate — squarish, simple (user 2026-07-16)
+  else if(kind==='wizard'){ geared=makeWizard(fleshifyBox(buildSkeleton({bare:true}),{hair:0x8f969c})); attachFace(geared,'elder'); }   // the WATER MAGE: GREY hair (user 2026-07-16), the ELDER's face — bushy brows, heavy lids
+  else if(kind==='angel'){ geared=makeAngel(fleshifyBox(buildSkeleton({bare:true}),{female:true,hair:0xe8c874,skin:0xfdf0e2})); attachFace(geared,'angel'); }   // THE ANGEL: the female body FIRST — VERY light porcelain skin, gold hair, blue eyes (user 2026-07-16)
+  else if(kind==='archmage'){ geared=makeArchmage(fleshifyBox(buildSkeleton({bare:true}),{hair:0xcfd6d2})); attachFace(geared,'elder'); }
+  else if(kind==='cyclops'){ geared=makeCyclops(fleshifyBox(buildSkeleton({bare:true}),{skin:0x9aa08e,hair:0x4a4238})); }   // the one-eyed giant is FLESH (user ruling 2026-07-19), bench-scaled
+  else if(kind==='fireskull'){ geared=makeFireskullBench(); }   // the burning wraith head on its hover   // the GREEN sage = the water-mage build in green, WHITE hair + elder face (user 2026-07-16)
+  bare=geared; actor=geared;   // the trio collapses to one body — every downstream reference still works
+  if(kind==='simple')attachFace(geared,'skel');   // the skeleton face: black hollows
+  const npc=(kind==='knight'||kind==='wizard'||kind==='archmage'||kind==='angel'||kind==='cyclops'||kind==='fireskull');
+  let mann=null, mannPed=null, woman=null, womanPed=null;
+  if(kind==='simple'&&(SKELV==='v1c'||SKELV==='v1')){   // V1.2 and V1 (user 2026-07-15): the naked human stands BESIDE the skeleton, same rig, same pose
+    s2.position.x=SKELV==='v1'?-1.7:-1.05;
+    if(SKELV==='v1'){ mann=fleshifyBox(buildSkeleton({bare:true})); mann.headBend=0.04; }   // V1: the BOX human — SQUARISH but simple, one clean box per bone (user 2026-07-16: "the squarish was better")
+    else{ mann=buildProSkeleton({bare:true,human:true});   // V1.2: the smooth Valheim-silhouette body
+      const SKIN_T=flat(0xc9946e); mann.root.traverse(m=>{ if(m.isMesh){ m.material=SKIN_T; m.receiveShadow=false; } });
+      mann.faceSeat=0.17; mann.faceR=0.14; mann.faceH=0.26; mann.headBend=0.05; }   // the face decal hugs the skinned head · a gentle natural head bend
+    mannPed=pedestal(SKELV==='v1'?0:1.05,st); mannPed.add(mann.root);
+    attachFace(mann,'human'); attachSword(mann);   // HIS face: heavy brows, big PEAK pupils — and it FIGHTS too (user 2026-07-15)
+    if(SKELV==='v1'){ woman=fleshifyBox(buildSkeleton({bare:true}),{female:true}); woman.headBend=0.04;   // THE WOMAN (user 2026-07-16): her own build — long hair, her silhouette
+      womanPed=pedestal(1.7,st); womanPed.add(woman.root);
+      attachFace(woman,'femme'); attachSword(woman); } }   // HER face: lashes + blush — and she fights the same
+  s2.add(geared.root);
+  const trail=actor.sword?makeTrail(s3,kind==='knight'?0x6fa8ff:0xa8f0c8):null;   // the cut hangs in the air behind the steel — knight-blue for him, essence-green for the player
+  const stripDashes=[]; const strip=new THREE.Group(); s3.add(strip); strip.visible=false;
+  for(let i=0;i<9;i++){ const d=box(0.05,0.012,0.34,flat(0x2a3046),(i%2?-1:1)*0.28,0.012,-3+i*0.75); d.castShadow=false; strip.add(d); stripDashes.push(d); }
+  return {kind,st,s1,s2,s3,bare,geared,actor,strip,stripDashes,trail,npc,mann,mannPed,woman,womanPed}; }
+let stages={};
+function buildAllStages(){   // rebuilt whole when the V1/V2 skeleton is toggled — both versions stay one click apart
+  for(const k in stages){ if(stages[k].st){ scene.remove(stages[k].st); stages[k].st.traverse(m=>{ if(m.geometry)m.geometry.dispose(); }); } }
+  for(const c of cloths){ scene.remove(c.mesh); c.geo.dispose(); c.mesh.material.dispose(); } cloths.length=0;   // verlet gowns live in WORLD space — sweep them with their stages
+  softBits.length=0;   // the old stages' soft bits go with them
+  stages={ simple:makeStage('simple'), detail:makeStage('detail'), homage:makeStage('homage'),
+    knight:makeStage('knight'), wizard:makeStage('wizard'), archmage:makeStage('archmage'), angel:makeStage('angel'),
+    cyclops:makeStage('cyclops'), fireskull:makeStage('fireskull') };
+  for(const k in stages)stages[k].st.visible=(k==='simple'); }   // setView() (called right after) restores the actual active tab
+buildAllStages();
+
+// ============ particles ============
+const parts=[]; const partGeo=new THREE.BoxGeometry(0.05,0.05,0.05);
+function burst(x,y,z,c,n,sp,up,life){ for(let i=0;i<n;i++){ const m=new THREE.Mesh(partGeo,new THREE.MeshBasicMaterial({color:c,transparent:true}));
+  m.position.set(x,y,z); scene.add(m);
+  const a=Math.random()*6.283, v=(0.3+Math.random()*0.7)*sp;
+  parts.push({m,vx:Math.cos(a)*v,vy:(0.3+Math.random()*0.7)*up,vz:Math.sin(a)*v,life:life||0.5,max:life||0.5}); } }
+function updateParts(dt){ for(let i=parts.length-1;i>=0;i--){ const p=parts[i]; p.life-=dt;
+  if(p.life<=0){ scene.remove(p.m); p.m.material.dispose(); parts.splice(i,1); continue; }
+  p.m.position.x+=p.vx*dt; p.m.position.y+=p.vy*dt; p.m.position.z+=p.vz*dt; p.vy-=dt*3;
+  p.m.material.opacity=p.life/p.max; p.m.rotation.x+=dt*5; p.m.rotation.y+=dt*4; } }
+
+// ============ animation grammar (shared by every rig) ============
+function resetPose(B){ B.root.position.set(0,0,0); B.root.rotation.set(0,0,0);
+  B.spine.position.y=B.spineBase||0.99; B.spine.rotation.set(0,0,0); B.neck.rotation.set(0,0,0);
+  if(B.jaw)B.jaw.rotation.x=0; if(B.sword)B.sword.rotation.x=SW_HOLD;   // the blade rests at the MIDDLE GUARD — the game's carry
+  for(const s of['l','r']){ const A=B.arm[s]; A.sh.rotation.set(0,0,0); A.el.rotation.set(0,0,0); A.hand.rotation.set(0,0,0);
+    const L=B.leg[s]; L.hip.rotation.set(0,0,0); L.knee.rotation.set(0,0,0); if(L.foot){ L.foot.rotation.set(0,0,0); if(L.foot.toe)L.foot.toe.rotation.set(0,0,0); } } }
+function applyHunch(B,k){ if(!B.hunch)return; k=k===undefined?1:k;   // the homage stands like something long dead: bowed, coiled, head pushed forward
+  B.spine.rotation.x+=0.3*k; B.neck.rotation.x-=0.34*k;
+  B.arm.l.sh.rotation.x-=0.18*k; B.arm.r.sh.rotation.x-=0.18*k;   // hunched arms dangle FORWARD of the bowed spine, not behind it
+  B.leg.l.knee.rotation.x+=0.12*k; B.leg.r.knee.rotation.x+=0.12*k; B.root.position.y-=0.03*k; }
+function poseIdle(B,t,ph){ B.spine.position.y=(B.spineBase||0.99)+Math.sin(t*1.7+ph)*0.012;
+  B.neck.rotation.x=Math.sin(t*1.3+ph)*0.05;
+  B.arm.l.sh.rotation.x=Math.sin(t*1.5+ph)*0.03; B.arm.r.sh.rotation.x=-Math.sin(t*1.5+ph)*0.03;
+  B.arm.l.el.rotation.x=-0.25-Math.sin(t*1.1+ph)*0.02; B.arm.r.el.rotation.x=-0.25+Math.sin(t*1.1+ph)*0.02;   // elbows flex FORWARD — negative x, the game's own convention (a positive bend hyperextends the joint backward)
+  if(B.jaw)B.jaw.rotation.x=Math.max(0,Math.sin(t*0.7+ph))*0.05;
+  applyHunch(B,1); }
+function poseRun(B,t){ const w=t*9.5, s=Math.sin(w), c=Math.cos(w);
+  B.leg.r.hip.rotation.x=s*0.92; B.leg.l.hip.rotation.x=-s*0.92;
+  B.leg.r.knee.rotation.x=Math.max(0,-s)*1.5+0.12; B.leg.l.knee.rotation.x=Math.max(0,s)*1.5+0.12;
+  if(B.leg.r.foot)B.leg.r.foot.rotation.x=Math.max(0,-s)*0.5; if(B.leg.l.foot)B.leg.l.foot.rotation.x=Math.max(0,s)*0.5;
+  if(B.leg.r.foot&&B.leg.r.foot.toe)B.leg.r.foot.toe.rotation.x=Math.max(0,-s)*0.45; if(B.leg.l.foot&&B.leg.l.foot.toe)B.leg.l.foot.toe.rotation.x=Math.max(0,s)*0.45;   // the BALL joint bends as the heel lifts — the push-off
+  B.spine.rotation.x=0.3; B.spine.rotation.z=s*0.05; B.spine.position.y=(B.spineBase||0.99)+Math.abs(c)*0.075;
+  B.root.position.y=Math.abs(c)*0.035;
+  B.neck.rotation.x=-0.18;
+  B.arm.r.sh.rotation.x=-s*0.95; B.arm.l.sh.rotation.x=s*0.95;
+  B.arm.r.el.rotation.x=-0.25-Math.max(0,-s)*0.45; B.arm.l.el.rotation.x=-0.25-Math.max(0,s)*0.45;   // the game's run elbows, verbatim: pumped forward, deeper on the trailing arm
+  if(B.jaw)B.jaw.rotation.x=0.08;
+  applyHunch(B,0.45); }
+const easeOut=k=>1-Math.pow(1-k,3);
+function poseDash(B,t){ const p=(t%1.3)/1.3;
+  if(p<0.16){ const k=easeOut(p/0.16);
+    B.spine.rotation.x=0.1+k*0.4; B.root.position.y=-k*0.09;
+    B.leg.l.hip.rotation.x=k*0.5; B.leg.l.knee.rotation.x=k*1.0;
+    B.leg.r.hip.rotation.x=-k*0.35; B.leg.r.knee.rotation.x=k*0.9;
+    B.arm.l.sh.rotation.x=k*0.5; B.arm.r.sh.rotation.x=k*0.5; }
+  else if(p<0.52){ const k=easeOut((p-0.16)/0.36);
+    B.spine.rotation.x=0.5+k*0.18; B.root.position.y=-0.09+k*0.045; B.root.position.z=k*0.55;
+    B.leg.r.hip.rotation.x=-1.0*k; B.leg.r.knee.rotation.x=0.25;
+    B.leg.l.hip.rotation.x=0.95*k; B.leg.l.knee.rotation.x=0.5;
+    B.arm.l.sh.rotation.x=-1.05*k; B.arm.l.el.rotation.x=-0.9;   // SPRINT arms, not superman arms (user ruling 2026-07-14): left arm pumps forward, bent hard — opposite the leading right leg
+    B.arm.r.sh.rotation.x=0.7*k; B.arm.r.el.rotation.x=-0.6;     // right arm drives back
+    B.neck.rotation.x=-0.3*k; }
+  else{ const k=easeOut((p-0.52)/0.48); const inv=1-k;
+    B.spine.rotation.x=0.68*inv; B.root.position.y=-0.045*inv; B.root.position.z=0.55*inv;
+    B.leg.r.hip.rotation.x=-1.0*inv; B.leg.r.knee.rotation.x=0.25*inv;
+    B.leg.l.hip.rotation.x=0.95*inv; B.leg.l.knee.rotation.x=0.5*inv;
+    B.arm.l.sh.rotation.x=-1.05*inv; B.arm.l.el.rotation.x=-0.9*inv;
+    B.arm.r.sh.rotation.x=0.7*inv; B.arm.r.el.rotation.x=-0.6*inv;
+    B.neck.rotation.x=-0.3*inv; }
+  applyHunch(B,0.35); return p; }
+function swingPhases(p,sf){ sf=sf||0.4; const kIn=p<sf?Math.pow(p/sf,3):1, kOut=p<sf?0:1-Math.pow(1-(p-sf)/(1-sf),3); return [kIn,kOut]; }
+function bladeArc(kIn,kOut){   // ONE continuous blade arc for a coiled swing: guard → laid back → whipped through the cut → back to guard
+  if(kOut<=0)return SW_HOLD+(SW_COCK-SW_HOLD)*kIn;                       // the raise: the blade lies back over the shoulder
+  const s=SW_COCK+(SW_CUT-SW_COCK)*Math.min(1,kOut*1.8);                 // the drive: the edge WHIPS ahead of the arm into the cut line
+  return s+(SW_HOLD-s)*Math.max(0,(kOut-0.72)/0.28); }                   // the recovery: the point comes back up to the guard, never left in the dirt
+// A CUT IS A WHOLE BODY, NOT AN ARM (user ruling 2026-07-14, against a fighting-game sprite sheet).
+// The old melee left the legs planted flat and the torso square while the arm flailed — a mannequin waving a stick.
+// Every hit now runs: FIGHTING STANCE → coil away from the target (weight back, blade cocked) → UNWIND through it
+// with a stepping lunge (hips and spine whip, the body TRAVELS forward) → recover to the stance.
+//   C = the coil, peaks the instant before the cut and decays as the body unwinds
+//   S = the strike travelling through, rising fast then easing back so the fighter recovers instead of freezing mid-follow-through
+function swingWeights(p,sf){ const [kIn,kOut]=swingPhases(p,sf);
+  const thru=Math.min(1,kOut*1.6);                 // the strike EXPLODES out of the coil — it does not ease politely
+  const C=kIn*(1-thru);                            // …and the coil is SPENT into it, so the body isn't still half-wound at impact
+  const r=Math.max(0,(p-0.72)/0.28);               // recovery is timed off the hit's own clock, not off kOut (which saturates almost instantly,
+  const S=thru*(1-r);                              // yanking the fighter back before the cut had even landed)
+  return [C,S]; }
+function poseMelee(B,t){ const cyc=t%2.7; let strike=null; let sw=SW_HOLD;
+  // ---- THE STANCE: bladed to the target, knees live, weight down. never standing at attention ----
+  B.spine.rotation.y=0.18; B.spine.rotation.x=0.07;
+  B.arm.r.sh.rotation.x=-0.28; B.arm.r.el.rotation.x=-0.5;
+  B.arm.l.sh.rotation.x=-0.15; B.arm.l.sh.rotation.z=0.15; B.arm.l.el.rotation.x=-0.6;
+  B.leg.l.hip.rotation.x=-0.34; B.leg.l.knee.rotation.x=0.3; B.leg.l.hip.rotation.z=-0.18;   // lead leg forward, planted WIDE (user 2026-07-15: feet were overlapping)
+  B.leg.r.hip.rotation.x=0.24;  B.leg.r.knee.rotation.x=0.4;  B.leg.r.hip.rotation.z=0.18;   // rear leg coiled and braced out, ready to drive
+  B.root.position.y=-0.09; B.neck.rotation.x=-0.06;   // knees bent means the body SITS lower — a fighter's base, not a parade rest
+  if(cyc<0.85){ const p=cyc/0.85, [C,S]=swingWeights(p,0.42);   // HIT 1 — a diagonal cut down across the body
+    B.spine.rotation.y+=0.45*C-1.0*S; B.spine.rotation.x+=-0.2*C+0.3*S;   // coil the torso away, then WHIP it through past neutral
+    B.arm.r.sh.rotation.x+=-1.8*C+0.43*S; B.arm.r.sh.rotation.z+=-0.5*C-1.35*S; B.arm.r.el.rotation.x+=-1.1*C+0.4*S;   // from cocked HIGH behind the ear, the cut travels DOWN and ACROSS to the far hip — a descending diagonal, not a poke at head height
+    B.arm.l.sh.rotation.x+=-0.35*C+0.8*S; B.arm.l.sh.rotation.z+=0.2*C-0.55*S;   // the off arm counterweights the cut
+    B.leg.l.hip.rotation.x+=0.24*C-0.32*S; B.leg.l.knee.rotation.x+=0.16*C+0.14*S;   // load onto the back foot…
+    B.leg.r.hip.rotation.x+=-0.14*C+0.34*S; B.leg.r.knee.rotation.x+=0.22*C+0.28*S;  // …then the rear leg DRIVES
+    B.root.position.z+=-0.08*C+0.28*S; B.root.position.y+=-0.03*C-0.05*S;            // the body travels INTO the cut
+    B.neck.rotation.y+=-0.2*C+0.12*S;   // the head holds the target while the body winds
+    sw=SW_HOLD+(SW_COCK-SW_HOLD)*C+(SW_CUT-SW_HOLD)*S; if(p>0.5&&p<0.62)strike=1; }
+  else if(cyc<1.7){ const p=(cyc-0.85)/0.85, [C,S]=swingWeights(p,0.42);   // HIT 2 — a backhand ripping the other way
+    B.spine.rotation.y+=-0.55*C+0.95*S; B.spine.rotation.x+=0.14*C+0.2*S;
+    B.arm.r.sh.rotation.x+=-0.4*C-1.3*S; B.arm.r.sh.rotation.z+=0.9*C+1.3*S; B.arm.r.el.rotation.x+=-0.9*C+0.5*S;
+    B.arm.l.sh.rotation.x+=0.3*C-0.6*S; B.arm.l.sh.rotation.z+=-0.15*C+0.4*S;
+    B.leg.l.hip.rotation.x+=0.2*C-0.28*S; B.leg.l.knee.rotation.x+=0.14*C+0.12*S;
+    B.leg.r.hip.rotation.x+=-0.12*C+0.3*S; B.leg.r.knee.rotation.x+=0.2*C+0.24*S;
+    B.root.position.z+=-0.06*C+0.24*S; B.root.position.y+=-0.04*C-0.04*S;
+    B.neck.rotation.y+=0.18*C-0.1*S;
+    sw=SW_HOLD+(SW_COCK-SW_HOLD)*C+(SW_CUT-SW_HOLD)*S; if(p>0.5&&p<0.62)strike=2; }
+  else{ const p=(cyc-1.7)/1.0, [C,S]=swingWeights(p,0.46);   // HIT 3 — the HEAVY: blade straight overhead, then the whole body falls behind a vertical cleave
+    B.spine.rotation.x+=-0.42*C+0.85*S; B.spine.rotation.y+=0.12*C-0.18*S;   // arch back over the raise, then FOLD through the chop
+    B.arm.r.sh.rotation.x+=-2.5*C+0.8*S; B.arm.r.el.rotation.x+=-0.8*C+0.6*S;
+    B.arm.l.sh.rotation.x+=-2.15*C+1.0*S; B.arm.l.sh.rotation.z+=-0.3*C+0.25*S; B.arm.l.el.rotation.x+=-0.4*C+0.35*S;   // the off hand rides up with it — a two-handed cleave
+    B.leg.l.hip.rotation.x+=0.28*C-0.6*S; B.leg.l.knee.rotation.x+=0.12*C+0.32*S;   // a DEEP lunging step: the front leg plants far ahead…
+    B.leg.r.hip.rotation.x+=-0.16*C+0.46*S; B.leg.r.knee.rotation.x+=0.26*C+0.64*S; // …the back leg stretches out behind
+    B.root.position.z+=-0.1*C+0.36*S; B.root.position.y+=-0.02*C-0.18*S;            // and the whole body DROPS behind the blade
+    B.neck.rotation.x+=-0.14*C+0.22*S;
+    sw=SW_HOLD+(SW_COCK-SW_HOLD)*C+(SW_CUT-SW_HOLD)*S; if(p>0.52&&p<0.64)strike=3; }
+  if(B.jaw)B.jaw.rotation.x=0.1;
+  if(B.sword)B.sword.rotation.x=sw;
+  applyHunch(B,0.3); return strike; }
+
+// ============ tabs, buttons, input ============
+const SUBS={ simple:'GAME MODEL — exactly what the bonefield renders',
+  detail:'HIGH DETAIL — bone by bone, the green slime for mortar',
+  homage:'HOMAGE — an original skeleton in the old-norse dungeon spirit (no game assets)',
+  knight:'THE KNIGHT — the SIMPLE human in a LEVEL-B plate set · toggle helmet · body · gloves · pants · shoes',
+  wizard:'THE WATER MAGE — the human in ONE water-cloth tube · toggle hat · robe · staff',
+  archmage:'THE WIND ARCHMAGE — the water mage’s twin in GREEN · white beard to the chest · toggle hat · robe · staff',
+  angel:'THE ANGEL — she gathers the fallen · blue eyes, gold hair, white feather wings · toggle robe · wings',
+  cyclops:'THE CYCLOPS — the one-eyed stone at bench scale · one eye, one brow, one hinged jaw, and every FACE mood plays on them',
+  fireskull:'THE BURNING SKULL — the pyre-stone wraith · ember eyes, chattering jaw, twin flame crowns · every FACE mood burns differently' };
+const NPC_LBLS={ knight:[null,'THE KNIGHT',null], wizard:[null,'THE WATER MAGE',null], archmage:[null,'THE ARCHMAGE',null], angel:[null,'THE ANGEL',null], cyclops:[null,'THE CYCLOPS',null], fireskull:[null,'THE BURNING SKULL',null] };
+let view='simple', mode='idle', lastStrike=0;
+function buildGarbRow(){ const row=document.getElementById('garb'); row.innerHTML='';
+  const S=stages[view], target=S.geared;
+  let keys, suffix='';
+  if(view==='knight'){ keys=['helmet','body','gloves','pants','shoes']; suffix=' B'; }   // the KNIGHT = the human + a LEVEL-B plate SET, each piece a toggle (user 2026-07-16)
+  else if(view==='wizard'||view==='archmage'){ keys=['hat','robe','staff']; }   // both robed casters wear the same kit — toggle any piece (user 2026-07-16)
+  else if(view==='angel'){ keys=['robe','wings']; }   // the ANGEL's vestments come off the same way — the female body was drawn first (user 2026-07-16)
+  else if(S.npc)return;   // the other adventurers wear ONE fixed kit — nothing to toggle
+  else keys=view==='homage'?['rags','sword','shield']:['cape','robe','hat','boots','staff'];
+  for(const k of keys){ const b=document.createElement('button'); b.textContent=k.toUpperCase()+suffix;
+    b.className=target.wear[k]?'on':''; b.onclick=()=>{ target.wear[k]=!target.wear[k]; b.classList.toggle('on',target.wear[k]); target.applyWear(); };
+    row.appendChild(b); } }
+function actorSword(S){ return S.actor.sword; }
+function setView(v){ view=v; const S=stages[v];
+  for(const k in stages)stages[k].st.visible=k===v;
+  document.querySelectorAll('#tabs button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));
+  document.getElementById('sub').textContent=SUBS[v];
+  const lb=NPC_LBLS[v]||[null,'THE CHARACTER',null];   // ONE caption for the one figure
+  document.querySelector('#lbl2 b').textContent=lb[1];
+  if(S.actor.sword)S.actor.sword.visible=S.npc?true:(mode==='melee');   // the knight is ALWAYS armed; the player draws only to cut
+  S.strip.visible=(mode==='run');
+  { let tris=0; S.bare.root.traverse(m=>{ if(m.isMesh&&m.geometry){ const g2=m.geometry; tris+=(g2.index?g2.index.count:g2.attributes.position.count)/3; } });
+    document.getElementById('polyInfo').textContent=(SKELV==='v1b'?'V1.1':SKELV==='v1c'?'V1.2':SKELV.toUpperCase())+' · '+Math.round(tris).toLocaleString()+' TRIS'; }
+  buildGarbRow(); applyRig(); applyHit(); }
+document.querySelectorAll('#faceRow button[data-face]').forEach(b=>b.onclick=()=>{ faceMode=b.dataset.face;
+  document.querySelectorAll('#faceRow button[data-face]').forEach(x=>x.classList.toggle('on',x===b)); });
+document.querySelectorAll('#tabs button').forEach(b=>b.onclick=()=>setView(b.dataset.v));
+function updateTabsForModel(){ for(const v of['detail','homage']){ const d=document.querySelector('#tabs button[data-v="'+v+'"]'); if(d)d.style.display=(SKELV==='v1')?'none':''; } }   // V1 has no DETAIL or HOMAGE build (user 2026-07-15)
+document.querySelectorAll('#verRow button[data-ver]').forEach(b=>b.onclick=()=>{ if(SKELV===b.dataset.ver)return;   // flip the whole workbench between the model lines (all kept)
+  SKELV=b.dataset.ver; document.querySelectorAll('#verRow button[data-ver]').forEach(x=>x.classList.toggle('on',x===b));
+  updateTabsForModel(); buildAllStages(); setView(SKELV==='v1'&&(view==='detail'||view==='homage')?'simple':view); });
+updateTabsForModel();   // rebuild every stage in the chosen version, then restore the current tab/gait
+document.getElementById('pixBtn').onclick=function(){ pixIdx=(pixIdx+1)%PIX_MODES.length; this.textContent=PIX_MODES[pixIdx].name; this.classList.toggle('on',pixIdx!==0); applyRes(); };   // cycle OFF → SOFT → FINE → PIXEL → CHUNKY
+document.getElementById('lookBtn').onclick=function(){ lookIdx=(lookIdx+1)%LOOKS.length; this.textContent=LOOKS[lookIdx]; this.classList.toggle('on',lookIdx!==0); applyLook(); };   // cycle OFF → CINEMA → MOONLIT
+document.getElementById('rigBtn').onclick=function(){ rigOn=!rigOn; this.textContent=rigOn?'RIG · ON':'RIG · OFF'; this.classList.toggle('on',rigOn); applyRig(); };   // the RIG x-ray, on and off
+document.getElementById('hitBtn').onclick=function(){ hitOn=!hitOn; this.textContent=hitOn?'HITBOX · ON':'HITBOX · OFF'; this.classList.toggle('on',hitOn); applyHit(); };   // the combat capsule + weapon edge, on and off
+const zoomBy=f=>{ CAM.z=Math.min(8,Math.max(1.4,CAM.z*f)); camera.position.z=CAM.z; camera.lookAt(LOOK); };
+document.getElementById('zoomIn').onclick=()=>zoomBy(0.82);
+document.getElementById('zoomOut').onclick=()=>zoomBy(1.22);
+document.querySelectorAll('#animBtns button').forEach(b=>{ b.onclick=()=>{ mode=b.dataset.a;
+  document.querySelectorAll('#animBtns button').forEach(x=>x.classList.toggle('on',x===b));
+  const S=stages[view]; if(S.actor.sword)S.actor.sword.visible=S.npc?true:(mode==='melee'); S.strip.visible=mode==='run';
+  if(S.kind==='homage')S.actor.applyWear&&(S.actor.wear.sword=mode==='melee',S.actor.applyWear()); }; });
+setView('simple');
+
+let yaw=0.5, dragging=false, lx=0, autoT=0;
+addEventListener('pointerdown',e=>{ if(e.target.closest('.btnrow,#back,#side'))return; dragging=true; lx=e.clientX; });
+addEventListener('pointermove',e=>{ if(dragging){ yaw+=(e.clientX-lx)*0.011; lx=e.clientX; autoT=2.5; } });
+addEventListener('pointerup',()=>dragging=false);
+addEventListener('wheel',e=>{ CAM.z=Math.min(7,Math.max(2.2,CAM.z+e.deltaY*0.0018)); camera.position.z=CAM.z; camera.lookAt(LOOK); },{passive:true});
+
+// ============ THE PAINTED FACE (user ruling 2026-07-15: full painted, reacts to the fight) ============
+function drawFace(cx,name,style){ const W=128; cx.clearRect(0,0,W,W);   // PEAK-level faces (user 2026-07-16): 'skel' = a SKULL that reads skull ·
+  // 'human' = the MAN (heavy brows) · 'elder' = the old MAGE (bushy brows, heavy lids) · 'femme' = the WOMAN (lashes, blush) · 'angel' = the woman with BLUE eyes
+  const SKL=style==='skel';
+  const FS={ human:{brow:11, pup:'#1a2230', lash:0, blush:0, lid:0, es:1,    ns:1},
+             elder:{brow:15, pup:'#1a2230', lash:0, blush:0, lid:1, es:0.95, ns:1.1},
+             femme:{brow:6,  pup:'#2a2436', lash:1, blush:1, lid:0, es:1.18, ns:0.6},
+             angel:{brow:6,  pup:'#3f7fe8', lash:1, blush:1, lid:0, es:1.22, ns:0.6} }[style]||{brow:10,pup:'#1a2230',lash:0,blush:0,lid:0,es:1,ns:1};   // es = eye scale (HER eyes are the biggest) · ns = nose scale (hers the daintiest)
+  const INK='#0a0d12', WHT='#f4f6ef', TOOTH='#e9e3d1', BLUSH='rgba(226,138,138,0.55)';
+  const L=42,R=86,EY=SKL?46:52,MY=SKL?101:96;   // the skull face runs LONGER — sockets high, jaw low
+  const rr=(x,y,w,h,r)=>{ cx.beginPath(); cx.roundRect(x-w/2,y-h/2,w,h,r); cx.fill(); };
+  const ink=()=>{ cx.shadowBlur=0; cx.fillStyle=INK; cx.strokeStyle=INK; };
+  // — the SKULL vocabulary: hollows, not eyeballs —
+  const sock=(x,w,h,tilt)=>{ ink(); cx.save(); cx.translate(x,EY); cx.rotate((tilt||0)*(x<64?1:-1)); rr(0,0,w,h,7); cx.restore(); };
+  const nose=()=>{ ink(); cx.beginPath(); cx.moveTo(64,EY+12); cx.lineTo(56,EY+28); cx.lineTo(72,EY+28); cx.closePath(); cx.fill(); };   // a BIGGER nasal hollow — the skull reads skull at a glance
+  const jawTeeth=(n,open)=>{ ink(); rr(64,MY,48,open?24:17,5); cx.fillStyle=TOOTH; const tw=6,total=n*tw+(n-1)*3;
+    for(let i=0;i<n;i++)cx.fillRect(64-total/2+i*(tw+3),MY-(open?11:7),tw,open?9:14); };   // bone teeth hanging in the black seam
+  const crack=()=>{ ink(); cx.lineWidth=3; cx.lineCap='round'; cx.beginPath(); cx.moveTo(98,EY-24); cx.lineTo(103,EY-12); cx.lineTo(97,EY-4); cx.stroke(); };   // the hairline CRACK over the right socket — an old wound in the bone
+  // — the HUMAN vocabulary: BIG whites, BIG pupils, real brows (PEAK) —
+  const eyeH=(x,w,h,px,py)=>{ w*=FS.es; h*=FS.es; cx.shadowBlur=0; cx.fillStyle=WHT; cx.beginPath(); cx.ellipse(x,EY,w/2,h/2,0,0,Math.PI*2); cx.fill();
+    cx.fillStyle=FS.pup; cx.beginPath(); cx.ellipse(x+(px||0),EY+(py||0),Math.min(7,w*0.28),Math.min(8.5,h*0.42),0,0,Math.PI*2); cx.fill();
+    cx.fillStyle=WHT; cx.beginPath(); cx.ellipse(x+(px||0)+2,EY+(py||0)-2.5,1.8,2.2,0,0,Math.PI*2); cx.fill();   // the CATCHLIGHT — the PEAK sparkle that makes the eye alive
+    if(FS.lid&&h>16){ ink(); cx.lineWidth=6; cx.lineCap='round'; cx.beginPath(); cx.moveTo(x-w/2+1,EY-h/2+4); cx.lineTo(x+w/2-1,EY-h/2+7); cx.stroke(); }   // the elder's HEAVY LID — only over an OPEN eye; on a squint it made a broken double-slit (user 2026-07-16)
+    if(FS.lash){ ink(); cx.lineWidth=3; cx.lineCap='round'; const out=x<64?-1:1;   // LASHES flicking off the outer corner — hers
+      for(let i=0;i<3;i++){ const a=-0.5-i*0.42; cx.beginPath(); cx.moveTo(x+out*(w/2-3),EY-h/2+5+i*2); cx.lineTo(x+out*(w/2+5),EY-h/2+1+i*4+a); cx.stroke(); } } };
+  const blush=()=>{ cx.shadowBlur=0; cx.fillStyle=BLUSH; cx.beginPath(); cx.ellipse(L-4,EY+19,7,4,0,0,Math.PI*2); cx.fill(); cx.beginPath(); cx.ellipse(R+4,EY+19,7,4,0,0,Math.PI*2); cx.fill(); };
+  const noseH=()=>{ ink(); cx.lineWidth=5*FS.ns; cx.lineCap='round'; cx.beginPath(); cx.moveTo(65,EY+11); cx.lineTo(64-FS.ns,EY+11+12*FS.ns); cx.lineTo(64-FS.ns+5*FS.ns,EY+13+12*FS.ns); cx.stroke(); };   // the nose scales with its owner — hers a dainty tick, the elder's a long one
+  const browH=(x,tilt,th)=>{ ink(); cx.lineWidth=th||FS.brow; cx.lineCap='round'; cx.beginPath(); cx.moveTo(x-14,EY-19+tilt*8); cx.lineTo(x+14,EY-19-tilt*8); cx.stroke();
+    if(style==='elder'){ cx.lineWidth=(th||FS.brow)*0.7; cx.beginPath(); cx.moveTo(x-15,EY-24+tilt*8); cx.lineTo(x+11,EY-25-tilt*8); cx.stroke(); } };   // the mage's brows are BUSHY — a second shaggy stroke riding the first
+  const shut=(x,up)=>{ ink(); cx.lineWidth=9; cx.lineCap='round'; cx.beginPath(); cx.arc(x,EY+(up?6:-4),12,up?Math.PI*1.15:Math.PI*0.15,up?Math.PI*1.85:Math.PI*0.85); cx.stroke(); };
+  const teethRow=(y,n,tw,th,maxW)=>{ cx.shadowBlur=0; cx.fillStyle=TOOTH; if(maxW){ const fit=Math.floor((maxW-(n-1)*3)/n); if(fit<tw)tw=Math.max(4,fit); } const total=n*tw+(n-1)*3; for(let i=0;i<n;i++)cx.fillRect(64-total/2+i*(tw+3),y,tw,th); };   // teeth never wider than the mouth (user 2026-07-15)
+  const grit=()=>{ ink(); rr(64,MY,44,22,5); teethRow(MY-9,5,7,8,40); teethRow(MY+1,5,7,8,40); };
+  const smileOpen=(rw,rh,tongue)=>{ ink(); cx.beginPath(); cx.ellipse(64,MY,rw,rh,0,0,Math.PI*2); cx.fill(); teethRow(MY-rh+3,4,8,6,Math.round(rw*1.5));
+    if(tongue){ cx.fillStyle=SKL?'#5fae7d':'#c96a72'; cx.beginPath(); cx.ellipse(64,MY+rh-7,rw*0.5,7,0,Math.PI,0,true); cx.fill(); } };
+  const mouthArc=(r,down,th)=>{ ink(); cx.lineWidth=th||8; cx.lineCap='round'; cx.beginPath(); if(down)cx.arc(64,MY+r-8,r,Math.PI*1.2,Math.PI*1.8); else cx.arc(64,MY-r+6,r,Math.PI*0.2,Math.PI*0.8); cx.stroke(); };   // canvas Y grows DOWN — down:true is now a real FROWN (user 2026-07-15: sad was smiling)
+  const mouthFlat=(w,dy)=>{ ink(); cx.lineWidth=8; cx.lineCap='round'; cx.beginPath(); cx.moveTo(64-w/2,MY+(dy||0)); cx.lineTo(64+w/2,MY+(dy||0)); cx.stroke(); };
+  if(SKL){   // THE SKULL: black eyes, black nose, toothed black mouth, a cracked brow — it reads DEAD first, expressive second
+    if(name==='happy'){ sock(L,24,22,-0.25); sock(R,24,22,-0.25); nose(); jawTeeth(6,false); }   // ONE mouth: the toothed seam smiles through the tilted sockets (user 2026-07-15: there were two)
+    else if(name==='sad'){ sock(L,22,24,0.3); sock(R,22,24,0.3); nose(); mouthArc(15,true,9); }
+    else if(name==='angry'){ sock(L,26,16,0.35); sock(R,26,16,0.35); nose(); grit(); }
+    else if(name==='meh'){ sock(L,24,13,0); sock(R,24,13,0); nose(); mouthFlat(18,0); }
+    else if(name==='laugh'){ shut(L,true); shut(R,true); nose(); smileOpen(21,15,true); }
+    else if(name==='attack'){ sock(L,27,27,0.3); sock(R,27,27,0.3); nose(); smileOpen(16,18); }
+    else if(name==='shock'){ sock(L,28,30,0); sock(R,28,30,0); nose(); ink(); cx.beginPath(); cx.ellipse(64,MY,8,11,0,0,Math.PI*2); cx.fill(); }   // sockets BLOWN wide, a little O of a mouth
+    else if(name==='smug'){ sock(L,24,12,0); sock(R,24,15,-0.3); nose(); ink(); cx.lineWidth=8; cx.lineCap='round'; cx.beginPath(); cx.moveTo(52,MY+3); cx.quadraticCurveTo(70,MY+5,80,MY-5); cx.stroke(); }   // one hollow cocked, the seam curling up one side
+    else { sock(L,26,26,0); sock(R,26,26,0); nose(); jawTeeth(6,false); }   // neutral: hollow stare over a toothed seam
+    crack(); }
+  else {     // THE HUMANS: PEAK whites, big pupils with a catchlight, real brows — each face its OWNER's
+    if(name==='happy'){ browH(L,0.5); browH(R,-0.5); eyeH(L,24,24,0,-4); eyeH(R,24,24,0,-4); smileOpen(19,13); }
+    else if(name==='sad'){ browH(L,1); browH(R,-1); eyeH(L,20,22,0,5); eyeH(R,20,22,0,5); mouthArc(15,true,9); }
+    else if(name==='angry'){ browH(L,-1,FS.brow+3); browH(R,1,FS.brow+3); eyeH(L,26,14,0,0); eyeH(R,26,14,0,0); grit(); }
+    else if(name==='meh'){ browH(L,0); browH(R,-0.4); eyeH(L,24,12,3,0); eyeH(R,24,12,3,0); mouthFlat(16,2); }
+    else if(name==='laugh'){ shut(L,true); shut(R,true); smileOpen(22,16,true); }
+    else if(name==='attack'){ browH(L,-1,FS.brow+3); browH(R,1,FS.brow+3); eyeH(L,28,28,0,0); eyeH(R,28,28,0,0); smileOpen(16,19); }
+    else if(name==='shock'){ browH(L,0.4); browH(R,-0.4); eyeH(L,27,29,0,0); eyeH(R,27,29,0,0); ink(); cx.beginPath(); cx.ellipse(64,MY,8,11,0,0,Math.PI*2); cx.fill(); }   // eyes saucers, mouth a small O
+    else if(name==='smug'){ browH(L,0); browH(R,-0.7); eyeH(L,24,12,4,0); eyeH(R,24,14,4,0); ink(); cx.lineWidth=8; cx.lineCap='round'; cx.beginPath(); cx.moveTo(52,MY+3); cx.quadraticCurveTo(70,MY+5,80,MY-5); cx.stroke(); }   // one brow up, pupils sliding, a curled smirk
+    else { browH(L,0); browH(R,0); eyeH(L,24,26); eyeH(R,24,26); mouthFlat(22); }
+    noseH();   // every human face carries a NOSE — the laugh included (user 2026-07-15)
+    if(FS.blush&&name!=='angry'&&name!=='attack')blush(); }   // her cheeks carry the PEAK blush — dropped when she fights
+}
+function attachFace(B,style){ if(!B.neck||!document.createElement)return; style=style||'skel';
+  const cv=document.createElement('canvas'); cv.width=cv.height=128; const cx=cv.getContext('2d');
+  const tex=new THREE.CanvasTexture(cv); const mat=new THREE.MeshBasicMaterial({map:tex,transparent:true,depthWrite:false});
+  const seat=B.faceSeat!==undefined?B.faceSeat:(B.skull?B.skull.position.y:0.24);
+  const plane=(style!=='skel'&&!B.faceFlat)
+    ?new THREE.Mesh(new THREE.CylinderGeometry(B.faceR||0.163,B.faceR||0.163,B.faceH||0.30,10,1,true,-0.8,1.6),mat)   // HUMAN styles: the paint bends around the head's curve, sized to the head it rides
+    :new THREE.Mesh(new THREE.PlaneGeometry(B.faceW||0.28,B.faceHt||(style==='skel'?0.32:0.30)),mat);   // SKULL and BOX-HUMAN: the flat face suits the flat head — SIZED to it (user 2026-07-15: overlap)
+  plane.position.set(0,seat-0.005+(B.faceY||0),(style!=='skel'&&!B.faceFlat)?0:(B.faceZ||0.148)); plane.visible=false; B.neck.add(plane);
+  B.faceTex=tex; B.facePlane=plane; B.faceExpr='off'; B.faceStyle=style;
+  B.setExpression=function(name){ if(name===B.faceExpr)return; B.faceExpr=name;
+    const on=!!name&&name!=='off'; plane.visible=on;
+    if(B.eyes)B.eyes.forEach(e=>e.visible=!on);           // the box eyes give way to the paint
+    if(B.faceExtra)B.faceExtra.forEach(m=>m.visible=!on); // the bony nose + teeth too
+    if(on){ drawFace(cx,name,style); tex.needsUpdate=true; } };
+}
+let faceMode='auto', lastInfoStr='';
+function updateInfo(){ const S=stages[view]; if(!S)return; const mv=(SKELV==='v1b'?'V1.1':SKELV==='v1c'?'V1.2':SKELV.toUpperCase());
+  let tris=0; S.geared.root.traverse(m=>{ if(m.isMesh&&m.visible&&m.geometry){ const g2=m.geometry; tris+=(g2.index?g2.index.count:g2.attributes.position.count)/3; } });
+  const nm=(NPC_LBLS[view]&&NPC_LBLS[view][1])||'THE RISEN CASTER';
+  const fx=S.geared.faceExpr&&S.geared.faceExpr!=='off'?S.geared.faceExpr:'—';
+  const str='NAME · '+nm+'\nMODEL · '+mv+'\nRIG · pro spine×4 + clavicles\nTRIS · '+Math.round(tris).toLocaleString()+'\nGAIT · '+mode.toUpperCase()+'\nFACE · '+fx.toUpperCase();
+  if(str!==lastInfoStr){ lastInfoStr=str; const el=document.getElementById('charInfo'); if(el)el.textContent=str; } }
+const _htH=new THREE.Vector3(), _htT=new THREE.Vector3();   // head-tracking scratch
+let last=performance.now();
+function frame(now){ requestAnimationFrame(frame); const dt=Math.min(0.05,(now-last)/1000); last=now; const t=now/1000;
+  autoT=Math.max(0,autoT-dt); if(!dragging&&autoT<=0)yaw+=dt*0.18;
+  const S=stages[view];
+  S.s1.rotation.y=yaw; S.s2.rotation.y=yaw; S.s3.rotation.y=yaw+0.4; if(S.mannPed)S.mannPed.rotation.y=yaw; if(S.womanPed)S.womanPed.rotation.y=yaw;
+  resetPose(S.bare); resetPose(S.geared); resetPose(S.actor);
+  poseIdle(S.bare,t,0); poseIdle(S.geared,t,1.7);
+  if(S.geared.cloakPivot&&!S.npc)S.geared.cloakPivot.rotation.x=Math.sin(t*1.2)*0.04;
+  if(S.geared.crystal)S.geared.crystal.rotation.y=t*0.8;
+  let aSpd=0.03, aDash=false;
+  if(mode==='idle')poseIdle(S.actor,t,0.8);
+  else if(mode==='run'){ poseRun(S.actor,t); aSpd=0.5;
+    for(const d of S.stripDashes){ d.position.z-=dt*6.5; if(d.position.z<-3)d.position.z+=6.75; } }
+  else if(mode==='dash'){ const p=poseDash(S.actor,t); aSpd=0.55; aDash=true;
+    if(p>0.16&&p<0.52&&Math.random()<0.75){ const wp=new THREE.Vector3(); S.actor.pelvis.getWorldPosition(wp);
+      burst(wp.x,wp.y-0.92,wp.z-0.3,0x8cf0aa,2,0.7,0.8,0.4); } }   // the dust kicks off the HEELS at the ground — not out of the hips (user 2026-07-15)
+  else if(mode==='melee'){ const strike=poseMelee(S.actor,t); aSpd=0.12;
+    if(strike&&S.actor.sword&&now-lastStrike>300){ lastStrike=now; const wp=new THREE.Vector3(); S.actor.sword.getWorldPosition(wp);
+      burst(wp.x,wp.y,wp.z,strike===3?0xffd24a:0xcfd8ff,strike===3?10:6,2.2,1.6,0.35); } }
+  if(S.mann){ resetPose(S.mann);   // the naked human mirrors the skeleton's gait
+    if(mode==='run')poseRun(S.mann,t); else if(mode==='dash')poseDash(S.mann,t); else if(mode==='melee')poseMelee(S.mann,t); else poseIdle(S.mann,t,0.8);
+    if(S.mann.sword)S.mann.sword.visible=(mode==='melee');
+    proDistribute(S.mann); }
+  if(S.woman){ resetPose(S.woman);   // SHE fights the same grammar, a half-beat off HIS phase (user 2026-07-16)
+    if(mode==='run')poseRun(S.woman,t+0.55); else if(mode==='dash')poseDash(S.woman,t+0.3); else if(mode==='melee')poseMelee(S.woman,t+0.45); else poseIdle(S.woman,t+1.2,0.8);
+    if(S.woman.sword)S.woman.sword.visible=(mode==='melee');
+    proDistribute(S.woman); }
+  if(S.geared.setExpression){ let ex=faceMode;   // the face reacts to the fight when AUTO (user ruling 2026-07-15)
+    if(faceMode==='auto')ex=(SKELV==='v1b'||SKELV==='v1c'||SKELV==='v1'||S.kind==='cyclops'||S.kind==='fireskull')?(mode==='melee'?'attack':mode==='dash'?'angry':mode==='run'?'meh':'neutral'):'off';
+    S.geared.setExpression(ex);
+    if(S.mann&&S.mann.setExpression)S.mann.setExpression(ex==='off'?'off':ex);   // the human wears the SAME mood in its own style
+    if(S.woman&&S.woman.setExpression)S.woman.setExpression(ex==='off'?'off':ex); }   // and so does she — in HERS
+  updateInfo();
+  for(const Bx of[S.bare,S.geared,S.actor])proDistribute(Bx);   // V6: spread the spine bend down the chain, lift the clavicles
+  for(const [B,other,ped] of (S.npc?[[S.geared,null,S.s2]]:[[S.geared,S.mann,S.s2],[S.mann,S.geared,S.mannPed],[S.woman,S.mann,S.womanPed]])){   // HEAD TRACKING for EVERY head (user 2026-07-16: it turns up, down, left, right like a human) — at the other figure, else the VIEWER
+    if(!B||!B.neck)continue;
+    B.skull?B.skull.getWorldPosition(_htH):B.neck.getWorldPosition(_htH);
+    if(other&&other.skull)other.skull.getWorldPosition(_htT); else _htT.copy(camera.position);
+    const dx=_htT.x-_htH.x, dy=_htT.y-_htH.y, dz=_htT.z-_htH.z;
+    let wy=Math.atan2(dx,dz)-(ped?ped.rotation.y:0); while(wy>Math.PI)wy-=Math.PI*2; while(wy<-Math.PI)wy+=Math.PI*2;
+    wy=Math.max(-0.9,Math.min(0.9,wy));   // a human neck: ~50° each way, no owl turns
+    let wx=-Math.atan2(dy,Math.hypot(dx,dz)); wx=Math.max(-0.45,Math.min(0.45,wx));   // and a modest nod range up/down
+    B._hy=(B._hy||0)+((wy-(B._hy||0))*Math.min(1,dt*5)); B._hx=(B._hx||0)+((wx-(B._hx||0))*Math.min(1,dt*5));   // it TURNS to look, it doesn't snap
+    B.neck.rotation.y+=B._hy; B.neck.rotation.x+=B._hx+(B.headBend||0); }
+  for(const k in stages){ const g2=stages[k].geared; if(g2&&g2.clothPieces)for(const p of g2.clothPieces)p.c.mesh.visible=(stages[k]===S&&g2.wear.robe!==false); }   // world-space garments obey the tab AND their toggle
+  if(S.npc){ driveCloth(S.bare,0.03,false,t); driveCloth(S.geared,0.03,false,t); driveCloth(S.actor,aSpd,aDash,t);   // soft cape + gown for the adventurers
+    if(S.geared.wingPivots){ const fw=aDash?11:(aSpd>0.4?7:2.4), fa=aDash?0.5:(aSpd>0.4?0.32:0.09);   // the WINGS FLAP (user 2026-07-16) — a breath at rest, BEATING in flight
+      for(const w of S.geared.wingPivots)w.g.rotation.z=w.sd*(0.04+Math.max(0,Math.sin(t*fw))*fa); }
+    const Bc=S.geared;   // THE GARMENT IS CLOTH, every piece of it (user 2026-07-16): body tube + sleeves + capelet all step here
+    if(Bc.clothPieces&&Bc.wear.robe!==false){
+      if(mode==='run'||mode==='dash')for(const sd of['l','r']){ const L=Bc.leg&&Bc.leg[sd]; if(!L)continue;   // a floor-gown SHORTENS the stride —
+        L.hip.rotation.x*=(mode==='dash'?0.4:0.55); if(L.knee)L.knee.rotation.x*=0.7; }                       // the limb can never outrun its own fabric (dash tightest)
+      Bc.root.updateWorldMatrix(true,true);
+      Bc.root.getWorldPosition(_cwP);
+      const ctx={mode,rx:_cwP.x,ry:_cwP.y,rz:_cwP.z};
+      for(const p of Bc.clothPieces){
+        if(p.floor)p.c.floorY=_cwP.y+0.02;
+        const anc=p.anchor(Bc), sph=p.spheres(Bc,ctx), SUB=p.sub||3;
+        if(p.pA){ const m0=anc[(anc.length-1)>>1], m1=p.pA[(p.pA.length-1)>>1];   // TELEPORT/HARD-SPIN GUARD: simulating through a jump rolls the tube into a WAD — reseed instead
+          if(Math.hypot(m0.x-m1.x,m0.y-m1.y,m0.z-m1.z)>0.35){ p.c.init=false; p.pA=null; p.pS=null; } }
+        if(p.pA&&p.pS&&p.pS.length===sph.length){ for(let k2=1;k2<=SUB;k2++){ const u=k2/SUB;   // SUBSTEP: colliders walk in small hops, never JUMPING across the fabric
+            const a2=anc.map((v,i2)=>new THREE.Vector3(p.pA[i2].x+(v.x-p.pA[i2].x)*u,p.pA[i2].y+(v.y-p.pA[i2].y)*u,p.pA[i2].z+(v.z-p.pA[i2].z)*u));
+            const s2=sph.map((s,i2)=>({x:p.pS[i2].x+(s.x-p.pS[i2].x)*u,y:p.pS[i2].y+(s.y-p.pS[i2].y)*u,z:p.pS[i2].z+(s.z-p.pS[i2].z)*u,r:s.r}));
+            stepCloth(p.c,a2,s2,t,0.016/SUB); } }
+        else stepCloth(p.c,anc,sph,t);
+        p.pA=anc; p.pS=sph; } } }
+  updateSoft(t,dt);   // feathers, beards, tabards — springs off the real motion of the turntable and the animation
+  if(S.trail){ const cyc=t%2.7;   // the ribbon only breathes while the steel is actually MOVING — it feeds through each cut, then eats itself
+    const live=mode==='melee'&&((cyc>0.3&&cyc<0.72)||(cyc>1.15&&cyc<1.57)||(cyc>2.12&&cyc<2.55));
+    S.actor.root.updateWorldMatrix(true,true); trailSample(S.trail,S.actor.sword,live); }
+  for(const k in stages)if(stages[k]!==S&&stages[k].trail)stages[k].trail.mesh.visible=false;
+  { let bi=0; for(const B of[S.bare,S.geared,S.actor]){ bi++; if(!B.slime)continue;
+    const pu=1+Math.sin(t*3.2)*0.12; if(B.slimeHeart)B.slimeHeart.scale.setScalar(pu);
+    if(B.eyes){ const sq=((t+bi*1.3)%3.7)<0.11?0.12:1; for(const e of B.eyes)e.scale.y=sq; }   // a blink every few seconds — squashed to a slit for a tenth of a second, staggered per pedestal
+    for(let i=0;i<B.slime.length;i++)B.slime[i].scale.setScalar(1+Math.sin(t*2.6+i*1.7)*0.1); } }
+  if(S.geared.hoverHead){ const hh=S.geared.hoverHead;   // the wraith head HOVERS — bobbing at rest, lifting when the fight quickens
+    hh.position.y=1.3+Math.sin(t*1.8)*0.12+(mode==='dash'?0.4:0)+(mode==='melee'?0.25:0);
+    hh.rotation.y=Math.sin(t*0.7)*0.3; hh.rotation.z=Math.sin(t*1.1)*0.06;
+    if(S.geared.fsCrown){ const fl=1+Math.sin(t*6.3)*0.14; S.geared.fsCrown.scale.x=S.geared.fsCrown.scale.x*0.9+fl*0.1; S.geared.fsCrown.scale.z=S.geared.fsCrown.scale.z*0.9+fl*0.1; }
+    if(S.geared.fsCrown2)S.geared.fsCrown2.scale.y=S.geared.fsCrown2.scale.y*0.85+(1+Math.sin(t*8.1)*0.28)*0.15; }
+  updateParts(dt);
+  renderer.render(scene,camera);
+  if(LOOKS[lookIdx]==='CINEMA'){ bloomCtx.filter='contrast(2.0) brightness(0.75) saturate(1.4)';   // crush the darks so only the BRIGHT survives (softened ~30%, user 2026-07-15)…
+    bloomCtx.drawImage(renderer.domElement,0,0,fxBloom.width,fxBloom.height); } }   // …then CSS blurs it wide and screens it back: the glow
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>

@@ -98,6 +98,10 @@ const server = http.createServer(async (req, res) => {
       const b = JSON.parse((await readBody(req)) || '{}');
       if (!b.pkg || !PACKAGES[b.pkg]) return json(res, 400, { error: 'Invalid package' });
       if (!b.name || !b.phone)        return json(res, 400, { error: 'Name and phone are required' });
+      // ToyyibPay rejects a missing/malformed billEmail; catch it here so the
+      // buyer gets a useful message instead of a generic provider error.
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(b.email || '')))
+        return json(res, 400, { error: 'A valid email is required for your payment receipt' });
       const out = await createBill(b.pkg, { name: b.name, phone: b.phone, email: b.email });
       return json(res, 200, { url: out.url, ref: out.ref });
     } catch (e) { console.error('[create-bill]', e.message); return json(res, 500, { error: e.message }); }
