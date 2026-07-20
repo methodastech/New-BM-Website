@@ -91,7 +91,9 @@ const server = http.createServer(async (req, res) => {
   const pathname = u.pathname;
 
   // create a payment bill
-  if (pathname === '/api/toyyibpay/create-bill' && req.method === 'POST') {
+  // production is PHP (Cloudways), so the page calls the .php path — accept both
+  // here so local `npm start` exercises the exact same URL the live site uses.
+  if (/^\/api\/toyyibpay\/create-bill(\.php)?$/.test(pathname) && req.method === 'POST') {
     try {
       const b = JSON.parse((await readBody(req)) || '{}');
       if (!b.pkg || !PACKAGES[b.pkg]) return json(res, 400, { error: 'Invalid package' });
@@ -102,13 +104,13 @@ const server = http.createServer(async (req, res) => {
   }
 
   // ToyyibPay server-to-server callback (verify + fulfill here in production)
-  if (pathname === '/api/toyyibpay/callback' && req.method === 'POST') {
+  if (/^\/api\/toyyibpay\/callback(\.php)?$/.test(pathname) && req.method === 'POST') {
     console.log('[toyyibpay callback]', await readBody(req));
     return send(res, 200, 'OK');
   }
 
   // return page after payment
-  if (pathname === '/pay/return') {
+  if (pathname === '/pay/return' || pathname === '/pay/return.php') {
     const status = u.searchParams.get('status_id');       // 1=success 2=pending 3=fail
     const bill = u.searchParams.get('billcode') || '';
     const ok = status === '1', pending = status === '2';

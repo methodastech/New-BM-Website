@@ -1,0 +1,31 @@
+# The git deployment path is public_html/, so the repo root IS the web root —
+# every file here is downloadable unless blocked. These rules hide the things
+# that should never have been servable.
+
+# --- dev/server files that are not part of the public site ---
+<FilesMatch "^(server\.js|package\.json|package-lock\.json|\.env.*|.*\.bak.*|CONFIG-TEMPLATE\.php)$">
+  Require all denied
+</FilesMatch>
+
+# --- editor/backup leftovers anywhere in the tree ---
+<FilesMatch "\.(bak|bak-[^.]*|orig|save|swp|tmp|log|jsonl)$">
+  Require all denied
+</FilesMatch>
+
+# --- dotfiles and VCS metadata ---
+<FilesMatch "^\.">
+  Require all denied
+</FilesMatch>
+RedirectMatch 404 /\.git
+
+# --- the shared PHP include is not an endpoint; only its callers are ---
+<Files "_config.php">
+  Require all denied
+</Files>
+
+# --- payment endpoints must never be cached ---
+<IfModule mod_headers.c>
+  <FilesMatch "^(create-bill|callback|return)\.php$">
+    Header always set Cache-Control "no-store, no-cache, must-revalidate"
+  </FilesMatch>
+</IfModule>

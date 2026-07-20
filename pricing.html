@@ -8460,7 +8460,7 @@ body.services-overview-page{background:#ffffff}
 #bm-svc-embed .bm-fade.show{opacity:1}
 #bm-svc-embed .bm-fade-l{left:0;background:linear-gradient(90deg,rgba(247,248,252,.98) 28%,rgba(247,248,252,0))}
 #bm-svc-embed .bm-fade-r{right:0;background:linear-gradient(270deg,rgba(247,248,252,.98) 28%,rgba(247,248,252,0))}
-#bm-svc-embed .bm-mob-menu-btn,#bm-svc-embed .bm-mob-talk{display:none}
+#bm-svc-embed .bm-mob-actions,#bm-svc-embed .bm-mob-menu-btn,#bm-svc-embed .bm-mob-talk{display:none}
 
 #bm-svc-embed .bm-all-menu-btn{position:absolute;top:50%;right:0;transform:translateY(-50%);z-index:5;flex:none;width:30px;height:30px;border-radius:0;background:#fff;border:1px solid var(--br);box-shadow:0 4px 12px -4px rgba(15,23,42,.25);display:flex;align-items:center;justify-content:center;color:var(--t1);cursor:pointer;transition:background .15s,color .15s}
 #bm-svc-embed .bm-all-menu-btn:hover,#bm-svc-embed .bm-all-menu-btn[aria-expanded="true"]{background:var(--bl);color:var(--blue);border-color:var(--bb)}
@@ -8485,10 +8485,14 @@ body.services-overview-page{background:#ffffff}
   #bm-svc-embed .bm-mdiv{display:none !important}
   #bm-svc-embed .bm-mpill-cta{display:none !important} 
   #bm-svc-embed .bm-mpill{font-size:13px;padding:9px 14px}
-  #bm-svc-embed .bm-mob-menu-btn{display:inline-flex;align-items:center;gap:8px;margin-left:auto;background:var(--bg3);border:1px solid var(--br);border-radius:0;padding:8px 13px;font-family:'Inter',sans-serif;font-size:13px;font-weight:600;color:var(--t1);cursor:pointer}
+  /* #svcnav is display:block, so inline-flex buttons baseline-align and look off.
+     A flex row gives them one shared height and an even split of the bar. */
+  #bm-svc-embed .bm-mob-actions{display:flex;align-items:stretch;gap:8px;padding:2px 0 1px}
+  #bm-svc-embed .bm-mob-menu-btn,#bm-svc-embed .bm-mob-talk{flex:1 1 0;min-width:0;display:inline-flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap;border-radius:0;padding:0 13px;height:40px;font-family:'Inter',sans-serif;font-size:13px;font-weight:600;line-height:1;cursor:pointer}
+  #bm-svc-embed .bm-mob-menu-btn{background:var(--bg3);border:1px solid var(--br);color:var(--t1)}
   #bm-svc-embed .bm-mob-menu-btn .bars{display:flex;flex-direction:column;gap:3px}
   #bm-svc-embed .bm-mob-menu-btn .bars span{display:block;width:14px;height:2px;border-radius:0;background:currentColor}
-  #bm-svc-embed .bm-mob-talk{display:inline-flex;align-items:center;white-space:nowrap;margin-left:8px;background:var(--navy);color:#fff;border:none;border-radius:0;padding:8px 13px;font-family:'Inter',sans-serif;font-size:13px;font-weight:600;cursor:pointer}
+  #bm-svc-embed .bm-mob-talk{background:var(--navy);color:#fff;border:1px solid var(--navy)}
 }
 
 
@@ -11497,8 +11501,10 @@ body.services-overview-page{background:#ffffff}
     <div class="bm-all-menu-inner" id="bm-all-menu-inner"></div>
   </div>
 </div>
-<button class="bm-mob-menu-btn" onclick="bmMenuToggle(event)"><span class="bars"><span></span><span></span><span></span></span> Menu</button>
-<button class="bm-mob-talk" onclick="openTalkModal(this)">💬 Talk To Us</button>
+<div class="bm-mob-actions">
+  <button class="bm-mob-menu-btn" onclick="bmMenuToggle(event)"><span class="bars"><span></span><span></span><span></span></span> Menu</button>
+  <button class="bm-mob-talk" onclick="openTalkModal(this)">💬 Talk To Us</button>
+</div>
 </nav>
 
 <div class="wrap" style="padding-top:1.5rem">
@@ -19079,7 +19085,7 @@ function pmPay(){
   if(err) err.classList.remove("show");
   var b=document.getElementById("pm-wa-cta"), old=b.innerHTML;
   b.innerHTML="Creating secure payment…"; b.style.pointerEvents="none";
-  fetch("/api/toyyibpay/create-bill",{method:"POST",headers:{"Content-Type":"application/json"},
+  fetch("/api/toyyibpay/create-bill.php",{method:"POST",headers:{"Content-Type":"application/json"},
         body:JSON.stringify({pkg:pkg,name:name,phone:phone,email:email})})
     .then(function(r){ return r.json(); })
     .then(function(d){ if(d && d.url){ window.location.href=d.url; } else { throw new Error((d&&d.error)||"Payment error"); } })
@@ -19100,6 +19106,9 @@ function pmPay(){
 html.nav-down #bm-svc-embed #svcnav{top:0}
 /* compact + lifted once it starts sticking (is-stuck already hides the title row) */
 #bm-svc-embed #svcnav.is-stuck{padding-top:8px!important;padding-bottom:8px!important;box-shadow:0 16px 32px -24px rgba(15,23,42,.45)}
-@media(max-width:820px){#bm-svc-embed #svcnav{top:70px}}</style>
+@media(max-width:820px){#bm-svc-embed #svcnav{top:70px}}
+/* mobile menu panel was fixed at top:54px, which now sits behind the sticky bar.
+   #svcnav is sticky (= positioned), so anchor the panel to its bottom edge instead. */
+@media(max-width:860px){#bm-svc-embed .bm-scroll-wrap{position:absolute;top:100%;left:0;right:0}}</style>
 </body>
 </html>
