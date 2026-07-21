@@ -16,3 +16,15 @@ Thumbs.db
 # Scratch / working backups
 tmp/
 scratchpad/
+
+# Local dev server (production runs the PHP endpoints in api/toyyibpay/)
+server.js
+package.json
+package-lock.json
+
+# Editor / working backups — never deploy these (repo root is the web root)
+*.bak
+*.bak-*
+*.PRE-*
+*.orig
+*.save
