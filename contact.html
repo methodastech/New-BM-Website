@@ -64,7 +64,7 @@
 
       </div>
 
-      <div class="contact-form-wrap reveal reveal-delay-1">
+      <div id="brief" class="contact-form-wrap reveal reveal-delay-1">
         <div class="contact-form-card">
           <div class="contact-form-heading">
             <span>Project Brief</span>
@@ -200,10 +200,42 @@
 <!-- prefill the enquiry form from ?service= & ?package= (e.g. coming from a pricing "Get started") -->
 <script id="contact-prefill-js">
 (function(){
+  function navH(){
+    var v=getComputedStyle(document.documentElement).getPropertyValue('--nav-h');
+    var n=parseInt(v,10); return isNaN(n)?72:n;
+  }
+  // The form column is .reveal (opacity:0; translateY(32px)) until the
+  // IntersectionObserver reveals it. Force it + its ancestors visible first
+  // so its geometry is final before we measure, otherwise the scroll lands short.
+  function revealNow(el){
+    for(var n=el; n && n!==document.body; n=n.parentElement){
+      if(n.classList && n.classList.contains('reveal')) n.classList.add('visible');
+    }
+  }
+  function scrollToEl(el){
+    if(!el) return;
+    revealNow(el);
+    // measure on the next frame, after the reveal transform is cleared
+    requestAnimationFrame(function(){
+      var top=el.getBoundingClientRect().top+window.pageYOffset-navH()-16;
+      if(top<0) top=0;
+      try{ window.scrollTo({top:top,behavior:'smooth'}); }catch(e){ window.scrollTo(0,top); }
+    });
+  }
+  function scrollToBrief(){
+    scrollToEl(document.getElementById('brief')||document.querySelector('form[action*="formsubmit"]'));
+  }
   function init(){
-    var p; try{ p=new URLSearchParams(location.search); }catch(e){ return; }
-    var svc=p.get('service'), pkg=p.get('package');
-    if(!svc && !pkg) return;
+    var p; try{ p=new URLSearchParams(location.search); }catch(e){ p=null; }
+    var svc=p?p.get('service'):null, pkg=p?p.get('package'):null;
+    if(!svc && !pkg){
+      if(location.hash==='#brief'){
+        // run after paint + a beat so late layout shifts (fonts/images) don't offset us
+        requestAnimationFrame(scrollToBrief);
+        setTimeout(scrollToBrief,220);
+      }
+      return;
+    }
     var form=document.querySelector('form[action*="formsubmit"]') || document;
     var sel=form.querySelector('select[name="Service"]');
     if(svc && sel){
@@ -219,12 +251,11 @@
         ta.dispatchEvent(new Event('input',{bubbles:true}));
       }
     }
-    var target = sel || form.querySelector('input,textarea');
-    if(target && target.scrollIntoView){
-      try{ target.scrollIntoView({behavior:'smooth',block:'center'}); }catch(e){ target.scrollIntoView(); }
-    }
+    scrollToEl(document.getElementById('brief')||sel||form.querySelector('input,textarea'));
   }
-  if(document.readyState!=='loading')init(); else document.addEventListener('DOMContentLoaded',init);
+  // wait for full load (images settle the layout) so the target position is stable
+  if(document.readyState==='complete')init();
+  else window.addEventListener('load',init);
 })();
 </script>
 </body>

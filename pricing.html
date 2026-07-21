@@ -12254,7 +12254,7 @@ body.services-overview-page{background:#ffffff}
           </div>
           <div class="panel-view-footer">
             <button class="view-full-btn" onclick="openDrawer('app_custom')">📋 View full breakdown →</button>
-            <button class="panel-btn gold-btn" onclick="openPayModal('RM30,000 (50% to start)', this)">Pay 50% to start, RM30,000</button>
+            <button class="panel-btn gold-btn" onclick="openTalkModal(this)">💬 Talk Now →</button>
           </div>
         </div>
       </div>
@@ -12351,7 +12351,7 @@ body.services-overview-page{background:#ffffff}
           </div>
           <div class="panel-view-footer">
             <button class="view-full-btn" onclick="openDrawer('game_3d')">📋 View full breakdown →</button>
-            <button class="panel-btn gold-btn" onclick="openPayModal('RM37,500 (50% to start)', this)">Pay 50% to start, RM37,500</button>
+            <button class="panel-btn gold-btn" onclick="openTalkModal(this)">💬 Talk Now →</button>
           </div>
         </div>
       </div>
@@ -13352,7 +13352,7 @@ body.services-overview-page{background:#ffffff}
           </div>
           <div class="panel-view-footer">
             <button class="view-full-btn" onclick="openDrawer('expertbiz_full')">📋 View full breakdown →</button>
-            <button class="panel-btn b" onclick="openPayModal('RM36,000 (50% deposit)', this)">Pay 50% deposit, RM36,000</button>
+            <button class="panel-btn b" onclick="openTalkModal(this)">💬 Talk Now →</button>
           </div>
         </div>
       </div>
@@ -14152,7 +14152,7 @@ body.services-overview-page{background:#ffffff}
 
       
 
-      <a class="tn-option tn-email" href="mailto:bazil@brandmethod.co?subject=Discovery%20Enquiry&body=Hi%20BrandMethod%2C%0A%0AI%27m%20interested%20in%20learning%20more%20about%20your%20services.%0A%0AMy%20name%3A%0AMy%20business%3A%0AWhat%20I%27m%20looking%20for%3A%0A%0ALooking%20forward%20to%20hearing%20from%20you." target="_blank">
+      <a class="tn-option tn-email" href="contact.html#brief">
         <div class="tn-opt-icon">📧</div>
         <div class="tn-opt-body">
           <div class="tn-opt-title">Send us an email</div>
@@ -19062,8 +19062,46 @@ if(document.readyState!=="loading")build();else document.addEventListener("DOMCo
    The PRICE and the ToyyibPay secret key live on the SERVER — never in this page.
    To enable more packages: add them here AND in the PACKAGES map in server.js.  */
 window.BM_PAY_PACKAGES = {
-  "Logo Starter": "logo_starter",
-  "Logo Growth":  "logo_growth"
+  "Logo Starter"                   : "logo_starter",
+  "Logo Growth"                    : "logo_growth",
+  "Logo Premium"                   : "logo_premium",
+  "Brand Foundation"               : "brand_foundation",
+  "Brand Growth System"            : "brand_growth",
+  "Full Brand Architecture"        : "brand_architecture",
+  "Bespoke Engagement"             : "brand_bespoke",
+  "Starter Website"                : "website_starter",
+  "Growth Website"                 : "website_growth",
+  "Website Corporate / E-commerce" : "website_corporate",
+  "Starter"                        : "personal_starter",
+  "Profile Slam Dunk"              : "company_slam",
+  "Profile Professional"           : "company_pro",
+  "Profile Signature"              : "company_custom",
+  "Trademark Filing"               : "trademark_filing",
+  "Managed Trademark"              : "trademark_managed",
+  "Global Trademark System"        : "trademark_global",
+  "App Validation Sprint"          : "app_starter",
+  "App Build"                      : "app_growth",
+  "Campaign Game"                  : "game_campaign",
+  "Game Custom"                    : "game_custom",
+  "Interactive Pitch Deck"         : "pres_starter",
+  "Signature Interactive Deck"     : "pres_signature",
+  "UX Audit Sprint"                : "ux_audit",
+  "UX Redesign Sprint"             : "ux_redesign",
+  "Strategy Sprint"                : "strategy_sprint",
+  "Growth Architecture"            : "strategy_growth",
+  "Full Growth Architecture"       : "strategy_full",
+  "Automation Core"                : "auto_starter",
+  "Automation System"              : "auto_system",
+  "Automation Custom"              : "auto_custom",
+  "AI Readiness Audit"             : "ai_audit",
+  "AI Setup Fixed"                 : "ai_fixed",
+  "AI Setup Custom"                : "ai_custom",
+  "Content Sprint"                 : "content_starter",
+  "Content Starter"                : "content_system",
+  "Campaign Audit"                 : "ads_audit",
+  "SEO Audit Sprint"               : "seo_audit",
+  "SEO Growth"                     : "seo_growth",
+  "Signature Module Launch"        : "expertbiz_module"
 };
 function pmResolveTybPkg(svc){ return (window.BM_PAY_PACKAGES||{})[(svc||"").trim()] || ""; }
 /* label the modal's primary button: "Pay now" for online-payment packages */

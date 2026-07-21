@@ -501,7 +501,7 @@
   <div class="tlogo">ESSENCE<span class="tver">ALPHA 0.1</span></div>
   <div class="tsub">ARENA OF BONES · A CASTING TRIAL · working title</div>
   <button class="tbtn" id="btnEnter">▶&nbsp; ENTER THE BONEFIELD</button>
-  <div><a class="tsite" id="siteLink" href="../ESSENCE%20WEBSITE/index.html">← BACK TO THE WEBSITE</a><a class="tsite" href="./character.html" target="_blank" rel="noopener">💀 CHARACTER MODEL</a></div>
+  <div><a class="tsite" id="siteLink" href="../Essence/">← BACK TO THE WEBSITE</a><a class="tsite" href="./character.html" target="_blank" rel="noopener">💀 CHARACTER MODEL</a></div>
   <div class="tkeys"><b>THREE RITES</b> : <b>FIRE · WATER · DEATH</b> · chant <b>"SPIRITS OF FIRE"</b> for tier <b>E</b> · <b>"BRING DESTRUCTION"</b> for <b>D</b> · each rite’s OWN final words for <b>C</b> · a RISING line for <b>B</b> (needs the Lv III staff) <span style="opacity:.55">(A·S coming soon)</span><br>
   power gathers in your <b>staff</b> (or bare <b>hand</b> — swap with <b>E</b>) · hold <b>CLICK</b> to set the throw : how far, how fast · then speak the form : <b>"FIREBALL"</b> · <b>"FIRE ARROW"</b> (homing) · <b>"GEYSER"</b> · <b>"TORRENT"</b> · <b>"BONE PISTOL"</b> · <b>"BONE WALL"</b><br>
   each chant spends <b>essence</b> (violet bar) — the staff regrows it faster and hits harder · no mic? press <b>T</b> and type the chant — the word is the ONLY trigger · <b>R</b> shapes it · <b>1-8</b> grab from the belt · the glowing <b>RED GRAVE</b> wakes each wave: <b>F</b> at its foot · <b>ESC</b> menu &amp; codex · <b>TAB</b> inventory<br>
@@ -5426,7 +5426,7 @@ function demolishNearest(){ const best=nearestPieceTo(player.position.x,player.p
   removePiece(best,true); }
 document.getElementById('mResume').onclick=closeAll;
 document.getElementById('mTitle').onclick=()=>location.reload();   // back to the game's title screen — a fresh boot, same road PLAY AGAIN takes
-document.getElementById('mMain').onclick=()=>{ location.href='../ESSENCE%20WEBSITE/index.html'; };   // and all the way OUT to the landing page you came in from
+document.getElementById('mMain').onclick=()=>{ location.href='../Essence/'; };   // and all the way OUT to the landing page you came in from
 const muteBtn=document.getElementById('muteBtn');
 function syncMute(){ if(MG)MG.gain.value=muted?0:1; muteBtn.textContent=muted?'🔇 MUTED':'🔊 SOUND'; }
 muted=store.get('bonefield-muted')==='1'; syncMute();   // the choice survives reloads
