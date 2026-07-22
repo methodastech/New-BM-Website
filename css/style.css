@@ -9757,6 +9757,14 @@ footer {
 .pflow2-head .section-title { margin-bottom: 0; }
 .pflow2-sub { font-family: var(--font-body); font-size: clamp(14px, 1.5vw, 16px); line-height: 1.7; color: var(--muted); margin: 16px auto 0; max-width: 560px; }
 
+/* ===== A word from our founder — video block ===== */
+.ceo-video { position: relative; aspect-ratio: 16/9; background: radial-gradient(120% 100% at 70% 20%, #0e1430, #070810 72%); overflow: hidden; display: grid; place-items: center; cursor: pointer; }
+.ceo-video .vbg { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px); background-size: 54px 54px; opacity: .6; }
+.ceo-video .play { position: relative; z-index: 2; width: 88px; height: 88px; border-radius: 50%; background: var(--accent); display: grid; place-items: center; transition: transform .3s var(--ease), box-shadow .3s; box-shadow: 0 0 0 0 rgba(0,0,255,.5); }
+.ceo-video:hover .play { transform: scale(1.08); box-shadow: 0 0 46px rgba(40,60,255,.6); }
+.ceo-video .play svg { width: 30px; height: 30px; fill: #fff; margin-left: 5px; }
+.ceo-cap { font-family: var(--font-body); font-size: 13.5px; color: var(--muted); margin-top: 16px; text-align: center; }
+
 .flow3 { position: relative; max-width: none; margin: 0 auto; --mh: clamp(150px, 17vw, 248px); }
 .flow3-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(20px, 3vw, 40px); }
 .flow3-step { position: relative; display: flex; flex-direction: column; }

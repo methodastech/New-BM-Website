@@ -79,7 +79,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=20260620d">
+  <link rel="stylesheet" href="css/style.css?v=20260722a">
   <style>
     /* index-only: use Fraunces for display headings (matches the pricing page) */
     body.hero-page { --font-display: 'Fraunces', Georgia, serif; font-optical-sizing: auto; }
@@ -367,6 +367,45 @@
           </div>
         </div>
       </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- A WORD FROM OUR FOUNDER (video) -->
+    <section class="founder-video-section" style="background:#fff; padding:clamp(40px,5vw,60px) 20px clamp(60px,7vw,96px);">
+      <div class="section-inner">
+        <div class="reveal" style="text-align:center; max-width:760px; margin:0 auto 30px;">
+          <h2 class="section-title" style="margin:0 auto;">See the <em style="font-style:italic; color:var(--accent);">work</em>, not the pitch.</h2>
+        </div>
+        <div class="ceo-video reveal" id="ceoVideo" role="button" tabindex="0" aria-label="Play the showreel"
+          data-reel-src="nobodywantsawebsite/assets/showreel05.webm?v=2"
+          data-reel-mp4="nobodywantsawebsite/assets/showreel05.mp4?v=2"
+          data-reel-poster="nobodywantsawebsite/assets/thumbnail-showreel02.webp"
+          style="background:linear-gradient(180deg,rgba(10,16,60,.12),rgba(10,16,60,.42)), url('nobodywantsawebsite/assets/thumbnail-showreel02.webp') center/cover no-repeat;">
+          <div class="play"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></div>
+        </div>
+        <div class="ceo-cap reveal">A quick reel of what we&rsquo;ve shipped. Sound on.</div>
+      </div>
+      <script>
+      (function(){
+        var box=document.getElementById('ceoVideo');
+        if(!box)return;
+        function play(){
+          var src=box.getAttribute('data-reel-src'),
+              mp4=box.getAttribute('data-reel-mp4'),
+              poster=box.getAttribute('data-reel-poster'),
+              v=document.createElement('video');
+          v.controls=true;v.autoplay=true;v.playsInline=true;
+          if(poster)v.poster=poster;
+          v.style.cssText='width:100%;aspect-ratio:16/9;display:block;background:#000;';
+          v.innerHTML=(src?'<source src="'+src+'" type="video/webm">':'')+(mp4?'<source src="'+mp4+'" type="video/mp4">':'');
+          box.replaceWith(v);
+          if(v.play){var p=v.play();if(p&&p.catch)p.catch(function(){});}
+        }
+        box.addEventListener('click',play);
+        box.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();play();}});
+      })();
+      </script>
     </section>
 
     <div class="divider"></div>
