@@ -17,6 +17,7 @@ declare(strict_types=1);
 // ---- Authoritative prices (server-side; the browser can NOT change these) ----
 // Mirrors the PACKAGES map in server.js. amount is in cents (RM * 100).
 const TB_PACKAGES = [
+    'test_rm1'             => ['name' => 'Test Payment', 'amount' => 100],   // RM1 — TEMPORARY go-live test; remove after verifying. Not linked to any button.
     'logo_starter'         => ['name' => 'Logo Starter', 'amount' => 29000],   // RM290
     'logo_growth'          => ['name' => 'Logo Growth', 'amount' => 199000],   // RM1,990
     'logo_premium'         => ['name' => 'Logo Premium', 'amount' => 395000],   // RM3,950 (50% deposit)
