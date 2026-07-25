@@ -41,7 +41,7 @@ import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js'
     x.fillText(label, 14, 23);
     x.fillStyle = 'rgba(255,255,255,0.65)'; x.font = '12px "Space Mono", ui-monospace, monospace';
     x.textAlign = 'right'; x.fillText(code, 306, 22); x.textAlign = 'left';
-    x.fillStyle = 'rgba(255,41,66,0.22)'; x.font = '800 70px "Chakra Petch", system-ui, sans-serif';
+    x.fillStyle = 'rgba(255,41,66,0.22)'; x.font = '800 70px "ARDELA EDGE X01 ExtraBold", "Barlow Condensed", system-ui, sans-serif';
     x.fillText(big, 188, 156);
     x.strokeStyle = 'rgba(255,255,255,0.13)'; x.lineWidth = 1;
     for(let i=0;i<5;i++){ const yy = 60 + i*26; x.beginPath(); x.moveTo(16, yy); x.lineTo(16 + 70 + ((i*53)%150), yy); x.stroke(); }

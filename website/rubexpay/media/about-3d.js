@@ -122,7 +122,14 @@ function sprite(){
     const hit = new THREE.Mesh(new THREE.SphereGeometry(1.4,8,8), new THREE.MeshBasicMaterial({ visible:false })); g.add(hit); // raycast target
     /* pulse ring removed per client — the halo glow alone marks a packet passing through */
     g.userData = { spin, mats, core, halo, hit, baseEmis:0.34, i, hot:0, flat, gate, flare:0 };
-    g.scale.setScalar(1.62);   // per client: bigger node visuals
+    /* NORMALISE apparent size: the five forms have different intrinsic footprints (banks colonnade
+       is widest, core cube smallest). Scale each so its largest on-screen dimension is identical,
+       so every icon reads equally large under its title. */
+    spin.updateMatrixWorld(true);
+    const _box = new THREE.Box3().setFromObject(spin), _sz = new THREE.Vector3();
+    _box.getSize(_sz);
+    const _max = Math.max(_sz.x, _sz.y) || 1.6;
+    g.scale.setScalar(2.5 / _max);   // 2.5 world-units tall/wide for every node
     scene.add(g);
     return g;
   }
@@ -151,8 +158,17 @@ function sprite(){
 
   /* the pipeline fills the section, end to end: node spread derived from the camera's visible width */
   applySpread = function(){
-    const halfW = Math.tan(0.349) * CAM.z * camera.aspect;   // fov 40deg half-angle
-    const S = Math.max(5.6, halfW * 0.84 - 1.0);             // edge margin keeps the end nodes whole
+    camera.updateMatrixWorld();
+    let S;
+    if(window.innerWidth <= 760){
+      /* phones: derive the spread from the projection so the two edge icons land at a fixed screen
+         fraction (~18% / 82%), leaving room for their labels and keeping every icon fully on-screen */
+      const k = Math.abs(new THREE.Vector3(1,0,0).project(camera).x) || 0.1;   // ndc.x per world unit
+      S = 0.64 / k;
+    } else {
+      const halfW = Math.tan(0.349) * CAM.z * camera.aspect;   // fov 40deg half-angle
+      S = Math.max(5.6, halfW * 0.84 - 1.0);                   // edge margin keeps the end nodes whole
+    }
     for(let i = 0; i < X.length; i++){ X[i] = -S + i * (S / 2); nodes[i].position.x = X[i]; }
     const RA = X[0] - 0.9, RB = X[X.length - 1] + 0.9;
     railGeo1.setFromPoints([new THREE.Vector3(RA, 0, 0), new THREE.Vector3(RB, 0, 0)]);
@@ -204,9 +220,9 @@ function sprite(){
   const labels = [].slice.call(document.querySelectorAll('.ab-op-lab'));
   /* tie each HTML label to its 3D node: project the node's X to screen so the label sits exactly under its visual */
   let labInit = false;
-  const lastLeft = [], lastLead = [], relTops = [];
-  let leadDirty = true, chCache = 0, cvLeft = 0, wrapLeft = 0;
-  window.addEventListener('resize', function(){ leadDirty = true; }, { passive:true });
+  const lastLeft = [], lastLead = [], relTops = [], labW = [], labOff = [];
+  let leadDirty = true, labMeasured = false, chCache = 0, cvLeft = 0, wrapLeft = 0;
+  window.addEventListener('resize', function(){ leadDirty = true; labMeasured = false; }, { passive:true });
   function alignLabels(){
     if(cvW < 2) return;
     const narrow = (window.innerWidth <= 1024);
@@ -238,9 +254,20 @@ function sprite(){
         leadDirty = false;
       }
     }
+    /* Position by the label's LEFT EDGE with an explicit transform:none. Do NOT rely on the CSS
+       translateX(-50%) to center — another rule (the .rvl-done reveal-settle) can null it out, and
+       when it does, a center-based `left` shifts every label half a width off (edge label ran
+       off-screen on real phones). Left-edge math + forced transform:none is state-independent. */
     for(let i=0;i<labels.length && i<X.length;i++){
+      const w = labels[i].offsetWidth || 0;
+      /* every width: centre the label on its node's PROJECTED screen X so it sits exactly under the
+         icon (the mobile spread above already pulls edge nodes in far enough for the label to fit) */
       v.set(X[i], 0, 0).project(camera);
-      const left = cvLeft + (v.x*0.5 + 0.5)*cvW - wrapLeft;
+      let center = cvLeft + (v.x*0.5 + 0.5)*cvW;
+      const pad = window.innerWidth <= 760 ? 6 : 10;
+      center = Math.min(innerWidth - w/2 - pad, Math.max(w/2 + pad, center)); // whole box stays on-screen
+      if(labels[i].style.transform !== 'none') labels[i].style.transform = 'none';
+      const left = center - w/2 - wrapLeft;   // left edge, in offset-parent coords
       if(lastLeft[i] === undefined || Math.abs(left - lastLeft[i]) >= 0.5){   // skip sub-pixel style writes
         lastLeft[i] = left;
         labels[i].style.left = left.toFixed(1) + 'px';

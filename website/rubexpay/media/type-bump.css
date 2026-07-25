@@ -103,8 +103,494 @@ body{overflow-x:clip}
 /* loader polish (client): bigger cube, crisper (renderer forces >=2x), the RUBEXPAY wordmark sits
    NEAR the cube (seam bar removed, not just hidden), everything centered. */
 #pre .pl-stage{transform:none}                 /* true vertical center (was nudged up 4%) */
-#pre .pl-cube{width:200px;height:200px}
-#pre .pre-bloom{width:440px;height:440px}
-#pre .pre-seam{display:none!important}          /* remove the progress bar box so the word tucks up close */
-#pre .pre-word{margin-top:22px}
-@media(max-width:600px){#pre .pl-cube{width:160px;height:160px}#pre .pre-bloom{width:320px;height:320px}#pre .pre-word{margin-top:18px}}
+#pre .pl-cube{width:310px;height:310px}         /* client: bigger cube (round 2) */
+#pre .pre-bloom{width:660px;height:660px}
+#pre .pre-seam{display:none!important}          /* progress bar box removed */
+#pre .pre-word{display:none!important}          /* client: no RUBEXPAY wordmark on the loader */
+#pre .pre-tag{display:none!important}           /* client: no SECURED text either — cube only */
+@media(max-width:600px){#pre .pl-cube{width:235px;height:235px}#pre .pre-bloom{width:470px;height:470px}}
+
+
+/* TOP LAYER (client): a fixed full-page scanline veil sat at z-index 8900 — ABOVE every visual on
+   the site — laying 16% black lines over the hero video, the feature cubes and the 3D scenes.
+   Nothing decorative should outrank the artwork, so the veil is retired and the visuals are the
+   top layer everywhere. */
+.scanlines{display:none!important}
+
+
+/* HERO MEDIA BOTTOM FADE (client: "black layer cutting the glow"): the banner video/poster content
+   carries hard horizontal edges; mask the media container so it dissolves into the page background
+   well before the section boundary, and deepen the hero bottom fade. No hard edge can survive. */
+.hero .hero-bg{-webkit-mask-image:linear-gradient(180deg,#000 40%,rgba(0,0,0,.55) 66%,rgba(0,0,0,.18) 84%,transparent 96%);mask-image:linear-gradient(180deg,#000 40%,rgba(0,0,0,.55) 66%,rgba(0,0,0,.18) 84%,transparent 96%)}
+.hero::after{height:46%;background:linear-gradient(180deg,rgba(7,7,9,0),rgba(7,7,9,.65) 58%,#070709 86%)}
+
+/* BUTTONS ARE RECTANGLES (client): remove the notched corners site-wide. The .nav-cta hover fill
+   wipe stays (its ::before is already a plain rectangle). */
+.btn,.nav-cta,.mnav-cta{clip-path:none!important}
+
+
+/* TENSION BAND SEAMS (client: "black layer cutting the glow" round 2): the fracture canvas's CSS
+   mask does not composite on the accelerated WebGL canvas, so its opaque base tone starts/ends in
+   razor lines at the section boundary. Real DOM gradient overlays cannot fail: they sit above the
+   canvas (z1) and below the headline (.wrap z2), dissolving both edges into the page background. */
+#tension{position:relative}
+#tension::before,#tension::after{content:"";position:absolute;left:0;right:0;height:200px;z-index:1;pointer-events:none}
+#tension::before{top:0;height:110px;background:linear-gradient(180deg,rgba(7,7,9,.8),rgba(7,7,9,0))}
+#tension::after{bottom:0;background:linear-gradient(0deg,#070709,rgba(7,7,9,.6) 45%,rgba(7,7,9,0))}
+
+
+/* NO PLATE BEHIND THE HEADLINE (client): .hero-veil laid a horizontal dark gradient over the video
+   behind the hero title. Removed site-wide — the headline sits directly on the banner. */
+.hero-veil,.hero--vid .hero-veil,#hero .hero-veil{display:none!important}
+
+
+/* FEATURE/SYSTEM CUBES REDONE (client: faint square behind each cube, "scrap and redo").
+   Root cause: drop-shadow filter + will-change + the idle hover-video each forced a standalone
+   composited GPU layer, and such a layer's black is a shade off the page black on wide-gamut
+   screens — a perfect square. Redo: zero standalone layers.
+   - no CSS filter, no will-change on the artwork (the PNGs carry their own baked glow)
+   - ambient glow = a plain radial-gradient painted in the normal raster (cannot mismatch)
+   - the hover clip is visibility:hidden while idle (no layer at all), fades in on hover */
+.feat-media img,.why-media img,.flow-cube img{filter:none!important;will-change:auto!important}
+.feat-card:hover .feat-media img{filter:none!important;transform:none!important}
+.feat-media::before{content:"";position:absolute;left:50%;bottom:-14%;width:130%;height:128%;transform:translateX(-50%);z-index:0;pointer-events:none;
+  background:radial-gradient(44% 40% at 50% 58%,rgba(216,12,36,.30),rgba(216,12,36,.10) 55%,transparent 78%)}
+.feat-anim{visibility:hidden;transition:opacity .55s var(--ease),visibility 0s .55s}
+.feat-card:hover .feat-anim{visibility:visible;opacity:1;transition:opacity .55s var(--ease),visibility 0s 0s}
+
+/* same treatment for every idle decorative layer near pure black: static raster only */
+.feat-media::after,.why-media::after{animation:none!important;opacity:.6}
+.istrip-ico img{filter:none!important}
+.pv-icon{filter:none!important;animation:none!important}
+
+
+/* GROUND TRUTH BUILD (client): the cube zone is now artwork + text on FLAT BLACK — every CSS
+   gradient under the cubes is OFF (the PNGs carry their own baked glow), and the mono labels are
+   exempt from decode/reveal animation so the browser never rasterizes them onto their own layer.
+   If any box remains on screen after this, it cannot be coming from this page's code. */
+.feat-media::before,.feat-media::after,.why-media::after{display:none!important}
+.feat-card .fk,.why-card .fk{opacity:1!important;transform:none!important}
+
+
+/* AXIFORMA (client): replaces Orbitron accents. Commercial face — served from local install when
+   present (drop woff2 files in media/fonts/ + add real @font-face to upgrade every visitor);
+   Poppins (its standard free counterpart) renders for everyone else. */
+/* REAL AXIFORMA (client-licensed, Kastelov): self-hosted file — every visitor gets it.
+   (never use local('Axiforma'): a font on this Mac matches that name with an off-by-one glyph
+   map, drawing "Behind" as "Adghmc".) */
+@font-face{font-family:'Axiforma';src:url('fonts/Axiforma-Light.ttf') format('truetype');font-weight:300;font-style:normal;font-display:swap}
+@font-face{font-family:'Axiforma';src:url('fonts/Axiforma-Regular.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Axiforma';src:url('fonts/Axiforma-SemiBold.ttf') format('truetype');font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:'Axiforma';src:url('fonts/Axiforma-Bold.ttf') format('truetype');font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:'Axiforma';src:url('fonts/Axiforma-ExtraBold.ttf') format('truetype');font-weight:800;font-style:normal;font-display:swap}
+
+/* sub-title: real Axiforma, THIN cut (client) */
+.hero-2nd{font-family:'Axiforma','Poppins','Inter',sans-serif!important;font-weight:400!important}   /* one step thicker (client) */
+
+/* HEADLINE CLIPPING (client: "dont cut off the font"): ARDELA's tall glyphs overflow the reveal
+   masks' tight line boxes. Give every mask line breathing room that cancels itself out visually. */
+h1,.hero h1{line-height:1.1}
+.hh .ln,h1 .ln,.reveal-mask{padding-block:.07em;margin-block:-.07em}
+.hero-2nd{line-height:1.14;padding-bottom:.05em}
+
+/* NAV (client): menu sits on the RIGHT, next to the language switch; bigger wordmark */
+@media(min-width:1201px){
+  .nav-links{margin-left:auto;margin-right:clamp(1.2rem,2.4vw,2.6rem)}
+  .lang-switch{margin-left:0!important}   /* its own auto margin was splitting the free space */
+}
+.brand-logo{height:56px!important;width:auto!important}
+@media(max-width:600px){.brand-logo{height:44px!important}}
+
+
+/* NO GLOW PLATES BEHIND TEXT (client): text-shadows on masked lines clip into hard rectangles.
+   The type stands clean. */
+.hero-2nd{text-shadow:none!important;animation:none!important}
+.tension .big .accent{text-shadow:none!important}
+.hero--vid #hero h1,.hero--vid .hero-2nd,.hero--vid .hero-sub{text-shadow:none!important}
+
+/* NO RED LINES on the Operational Foundations rows (client): the 2px red gradient bar each row
+   painted at its left edge via ::before */
+.op-rail{display:none!important}
+.op-row::before{display:none!important;content:none!important}
+
+
+/* CLEAN PREMIUM PASS (client): kicker labels lose their numbers, grow, and match everywhere */
+.fk{font-size:.84rem!important;letter-spacing:.3em!important}
+
+/* decorative techno-jargon micro-labels removed site-wide — "SYS.RBX // ONLINE", "RBX // TRUST",
+   "SYNC 60Hz", "CALIBRATED 270°", "ENCRYPTED · LIVE" and kin. Real credentials (FINTRAC, PCI,
+   ISO, AML) stay — they are content, not decoration. */
+.hud-tag,.cv-hud{display:none!important}
+
+/* eyebrow micro-labels retired site-wide (client: clutter) */
+.eyebrow{display:none!important}
+
+
+/* HERO VISUAL framing (client): cube smaller + centred in the right half. The panel stays right,
+   the footage is centred in it, and a gentle scale-down zooms OUT so the whole cube reads (less
+   crop) instead of filling the frame. Left mask still fades it into the copy. */
+.hero--vid .hero-video,.hero--vid .hero-img{object-position:50% 50%!important}
+@media(min-width:1025px){.hero--vid .hero-video,.hero--vid .hero-img{width:60%!important}}
+/* seamless: the earlier radial left the panel ~60% opaque at its left edge — that WAS the visible
+   vertical seam. Now a long, gradual horizontal dissolve carries it from fully transparent to solid
+   across 64% of the panel, so there is no edge to perceive; the top/bottom/right edges are already
+   clipped outside the hero bounds. */
+.hero--vid .hero-video,.hero--vid .hero-img{
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.04) 14%,rgba(0,0,0,.16) 26%,rgba(0,0,0,.42) 40%,rgba(0,0,0,.74) 54%,#000 64%)!important;
+  mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.04) 14%,rgba(0,0,0,.16) 26%,rgba(0,0,0,.42) 40%,rgba(0,0,0,.74) 54%,#000 64%)!important}
+
+
+/* FLOW CONNECTOR — minimalist thin light animated arrow between steps (client). Drops the glowing
+   pulse blob and the heavy red track; leaves a hairline rail and one slim chevron per gap that
+   gently drifts + fades in the flow direction. */
+.flow-wire .fw-flow{display:none!important}
+.flow-wire .fw-track{background:linear-gradient(90deg,transparent,rgba(255,255,255,.10) 16%,rgba(255,255,255,.10) 84%,transparent)!important;height:1px!important;top:50%!important;transform:translateY(-50%)}
+.flow-wire .fw-arrow{width:8px!important;height:8px!important;border-top:1px solid rgba(255,150,156,.75)!important;border-right:1px solid rgba(255,150,156,.75)!important;box-shadow:none!important;opacity:0;animation:fwGlideMin 3.4s var(--ease) infinite}
+.flow-wire .fw-arrow--1{left:25%!important;animation-delay:0s}
+.flow-wire .fw-arrow--2{left:75%!important;animation-delay:.5s}
+@keyframes fwGlideMin{0%{opacity:0;transform:translate(-190%,-50%) rotate(45deg)}30%{opacity:.85}68%{opacity:.85}100%{opacity:0;transform:translate(90%,-50%) rotate(45deg)}}
+@media(prefers-reduced-motion:reduce){.flow-wire .fw-arrow{animation:none;opacity:.7;transform:translate(-50%,-50%) rotate(45deg)}}
+
+
+/* "precision and trust" no longer thick (client): match the paragraph weight, keep a hair of
+   brightness for emphasis but drop the bold. */
+.hero-sub b{font-weight:400!important;color:#e9e9ee!important}
+
+/* BUTTONS use the TITLE font (client): ARDELA display face instead of the mono, uppercase, but
+   lighter-feeling — smaller size + tighter tracking so it reads thinner than the big headings.
+   (ARDELA ships a single heavy weight, so "thinner" here is size/tracking, not stroke weight.) */
+.btn,.nav-cta,.mnav-cta{font-family:var(--disp)!important;letter-spacing:.06em!important;font-weight:800!important}
+.btn{font-size:.98rem!important;padding:1.2rem 2.4rem!important}
+.nav-cta{font-size:.88rem!important}
+
+
+/* METRICS STRIP (client): no divider lines, no hover line, no hairline — clean columns — and real
+   vertical air around the strip so the sections breathe. */
+.metric{border-left:0!important}
+.metric::before{display:none!important}
+.metrics .m-grid{box-shadow:none!important}
+.metrics{margin-block:clamp(3.5rem,9vh,7rem)!important;background:none!important}
+
+/* SHARP ICONS (client: "sharp like the rubexpay brand"): the brand mark is hard-angled — icon
+   linework loses its rounded caps/joins and rounded rect corners across all icon sets. Gauge arcs
+   and check circles stay round (they are dials, not glyphs). */
+.op-ico svg *,.cp-ico svg *,.flow-ico svg *,.solx-ico svg *,.ab-prin-ico svg *,.ab-vmp-ico svg *,.dia-m-ico svg *,
+.ico-growth *,.ico-lattice *,.ico-seal *,.ico-shield *{stroke-linecap:square!important;stroke-linejoin:miter!important}
+.op-ico svg rect,.cp-ico svg rect,.flow-ico svg rect,.solx-ico svg rect,.ab-prin-ico svg rect,.ab-vmp-ico svg rect,
+.dia-m-ico svg rect,.ico-growth rect,.ico-lattice rect,.ico-seal rect,.ico-shield rect{rx:0!important;ry:0!important}
+
+
+/* PREMIUM CREDENTIAL STRIP (client): one type system, one baseline. The boxed L1 loses its frame
+   and sits at full display scale; the FINTRAC ID joins the same display voice; every label gets
+   the same sharp red square marker; all four cells bottom-align so the labels sit on one line. */
+.metrics .m-grid{align-items:end;gap:clamp(1.4rem,3vw,3rem)}
+.metric{padding-block:.4rem!important;gap:1.15rem!important}
+/* values: identical scale + baseline behaviour */
+.metric .mv{font-size:clamp(2.9rem,6vw,5.2rem)!important;line-height:.9!important}
+/* L1: unboxed, full scale, check becomes a small floating badge */
+.seal{border:0!important;padding:0!important;box-shadow:none!important;background:none!important;gap:.55rem!important}
+.metric--seal:hover .seal{border:0!important;box-shadow:none!important}
+.seal-kicker{display:none!important}                       /* "PCI DSS" already lives in the label */
+.seal-num{font-size:clamp(2.9rem,6vw,5.2rem)!important;line-height:.9!important;letter-spacing:-.03em!important}
+.seal svg,.seal-check{width:22px;height:22px;align-self:start;margin-top:.35em}
+/* FINTRAC ID: same display voice as the numbers, red kept as the accent */
+.metric .mv.id{font-family:var(--disp)!important;font-weight:700!important;font-size:clamp(1.9rem,3.4vw,3.1rem)!important;letter-spacing:.01em!important;color:var(--red-2)!important;line-height:1.1!important;align-self:end}
+/* labels: one voice + sharp brand marker */
+.metric .mk{font-size:.72rem!important;letter-spacing:.26em!important;color:var(--muted)!important;display:flex!important;align-items:flex-start;gap:.6rem;text-transform:uppercase;min-height:2.7em;line-height:1.35}
+.metric .mk::before{margin-top:.28em}
+.metric .mk::before{content:"";width:7px;height:7px;background:var(--red);flex:none}
+
+
+/* Space Grotesk trial reverted (client: ARDELA is truer to the logo). */
+
+/* CONTAINER ALIGNMENT for all pages (client): every section's content sits on a centered 1480px
+   rail; the fixed nav was full-bleed and started ~135px further left. The nav now shares the same
+   rail, so the logo, headings, copy and footer all begin on one line. */
+.nav{padding-inline:max(var(--gut),calc((100% - var(--maxw))/2 + var(--gut)))!important}
+
+/* exact match to rubexpay.com production titles: ARDELA ExtraBold 800 with the live site's
+   tracking — H1 tightened to -0.02em (theirs), section headings at their +0.04em. */
+h1{letter-spacing:-.02em!important;font-weight:800!important}
+h3{letter-spacing:.04em!important}
+
+
+/* COMPLIANCE REGISTRY FIGURE (client): bigger, no white frame, no corner brackets — the footage
+   dissolves into the background like the other embedded visuals. */
+.reg-frame{border:0!important;clip-path:none!important;
+  -webkit-mask-image:radial-gradient(96% 92% at 52% 46%,#000 30%,rgba(0,0,0,.42) 58%,transparent 84%)!important;
+  mask-image:radial-gradient(96% 92% at 52% 46%,#000 30%,rgba(0,0,0,.42) 58%,transparent 84%)!important}
+/* the footage's bright zones no longer reach the frame edge — dimmed so the rectangle never reads */
+.reg-vid{opacity:.78!important;filter:brightness(.82) saturate(1.05)}
+.reg-tick{display:none!important}
+@media(min-width:1025px){.comp-vis{width:118%!important;margin-left:-9%!important}}
+
+/* hero credential line under the CTA: was 10.5px — up to readable (client: fonts too small) */
+.hero-note{font-size:.84rem!important;letter-spacing:.16em!important}
+
+
+/* ABOUT PIPELINE (client): no leader stems/dots under the icons — wording stands clean */
+.ab-op-lab::before,.ab-op-lab::after{display:none!important}
+
+/* FOOTER (client): no border, no visible separation — the page dissolves into the footer.
+   footer.site-foot beats a bare footer selector, and its old gradient warmed to a different dark
+   than the page black (the visible band); the red glow also started 300px ABOVE the footer and
+   spilled its edge into the section above. Now: same cool black as the body, glow clipped inside. */
+footer,footer.site-foot{border-top:0!important;overflow:hidden!important;background:none!important}
+.foot-glow{display:none!important}   /* client: no background layout behind the footer at all */
+.foot-divider{height:0!important;background:none!important;overflow:hidden}   /* keeps its big margins = the footer's breathing room, loses the line */
+
+
+/* TITLE SHINE KILLED (client): the "ignite" word effect tinted one hero word pink mid-animation.
+   !important beats the animation's inline styles, so the word stays clean white always. */
+.ignite{color:inherit!important;text-shadow:none!important}
+
+/* NO GREEN ANYWHERE (client): the accent variable now resolves to brand red, and the literal
+   green indicator dots are gone. */
+:root{--acid:#ff2942}
+.hero-note::before,.reg-led,.tc-sub-dot{display:none!important}
+
+/* CUSTOM CURSOR RETIRED (client: stray red dot near Contact Us was the cursor follower) */
+.cursor,.cursor-dot{display:none!important}
+
+/* NAVIGATION: one voice — links, language toggle and button all in the display font.
+   The display:flex MUST stay desktop-only: unscoped it overrode the mobile hide, forcing the
+   links visible at 344px wide, which squeezed the logo to 0px and shoved the burger off-screen. */
+@media(min-width:1201px){.nav-links{display:flex;gap:clamp(1.5rem,2.4vw,2.7rem)}}
+@media(max-width:1200px){
+  .nav-links{display:none!important}
+  .burger{display:flex!important;margin-left:auto}
+  .brand{flex:0 0 auto}
+  .brand-logo{height:40px!important;width:auto!important;max-width:52vw}
+}
+.nav-links a{font-family:var(--disp)!important;font-size:.84rem!important;letter-spacing:.08em!important}
+.lang-switch,.lang-switch button{font-family:var(--disp)!important;letter-spacing:.08em!important}
+
+/* HERO RHYTHM (client: spacing/structure): a clean modular stack — title, sub, copy, action, proof */
+.hero-2nd{margin-top:1rem!important}
+.hero-sub{margin-top:0!important}
+.hero-cta-row{margin-top:1.7rem!important}
+.hero-note{margin-top:1.1rem!important}
+
+
+/* VERTICAL RHYTHM (client): one confident scale between sections — the dead voids collapse, the
+   page reads as a continuous journey instead of islands separated by black. Desktop; phones
+   already have their own tighter rhythm. */
+@media(min-width:761px){
+  .tension{min-height:72svh!important}
+  .cta{min-height:auto!important;padding-block:clamp(7rem,15vh,11rem)!important}
+  .platform-stage{min-height:auto!important;padding-block:clamp(6rem,13vh,9.5rem)!important}
+  .features{padding-block:clamp(6rem,12vh,9rem)!important}
+  .imgtext,.why,.flow,.opfound{padding-block:clamp(6.5rem,13vh,10rem)!important}
+}
+
+/* SCROLL EXPERIENCE (client): each section breathes in as it enters the viewport — scrubbed by
+   scroll position itself. Opacity-only on purpose: transform/parallax layers are what caused this
+   site's earlier jank and wide-gamut box artifacts (see 2026-07-02 rule), and opacity at rest is
+   invisible to the compositor. Chromium-only progressive enhancement; reduced-motion exempt. */
+@supports (animation-timeline: view()){
+  @media (prefers-reduced-motion: no-preference){
+    main section:not(.hero):not(.tension){
+      animation:rbxSecIn linear both;
+      animation-timeline:view();
+      animation-range:entry 0% entry 38%;
+    }
+  }
+}
+@keyframes rbxSecIn{from{opacity:.22}to{opacity:1}}
+
+
+/* RESOURCES HERO (client): the floating node windows cleared off the headline (cluster starts
+   further right) and sit visually DEEPER — darker so overlapping content always wins. */
+@media(min-width:1025px){.hero-files{left:63%!important;top:26%!important}}   /* cluster rides lower */
+/* dynamic drift: each window floats independently (uses the separate `translate` property so the
+   cards' 3D rotations stay untouched); slow, staggered, premium */
+.hero-files .hf-card{animation:hfDrift 7s ease-in-out infinite alternate}
+.hero-files .hf-card:nth-child(2){animation-duration:8.5s;animation-delay:-2s}
+.hero-files .hf-card:nth-child(3){animation-duration:6.2s;animation-delay:-4s}
+.hero-files .hf-card:nth-child(4){animation-duration:9.3s;animation-delay:-1s}
+.hero-files .hf-card:nth-child(5){animation-duration:7.8s;animation-delay:-3s}
+@keyframes hfDrift{from{translate:0 -7px}to{translate:0 9px}}
+@media(prefers-reduced-motion:reduce){.hero-files .hf-card{animation:none}}
+.hero-files{opacity:.82}
+.hero-files .hf-card{filter:brightness(.78)}
+
+/* content column rhythm on this hero */
+
+
+
+/* HERO TITLE (client): same brand font — ARDELA EDGE — but the lighter Bold cut instead of
+   ExtraBold, so the big title loses stroke mass without changing typeface. Title block sits
+   lower, and the dead gap between the red sub-line and the paragraph closes. */
+#hero h1{font-family:'ARDELA EDGE X01','ARDELA EDGE X01 ExtraBold',sans-serif!important;font-weight:700!important}
+.hero .wrap{margin-top:clamp(.8rem,2.5vh,2rem)}   /* block rides higher (client) */
+.hero-foot{margin-top:1.1rem!important}   /* description hugs the sub-title (client) */
+
+
+/* CONTACT US (client: subtle premium): quiet glass chip — soft red hairline, faint tint, gentle
+   glow that answers hover. No hard fill until hovered (the existing wipe stays). */
+.nav-cta{border:1px solid rgba(255,42,66,.42)!important;background:rgba(216,12,36,.05);
+  padding:.8rem 1.55rem!important;
+  transition:border-color .35s var(--ease),background .35s var(--ease),box-shadow .35s var(--ease),color .3s!important}
+.nav-cta:hover{border-color:rgba(255,42,66,.95)!important;box-shadow:0 0 24px rgba(216,12,36,.28),inset 0 0 14px rgba(216,12,36,.12)}
+
+/* hierarchy: no section title outweighs the hero (tension .big was 91px vs hero 87px) */
+.tension .big{font-size:clamp(2rem,5.8vw,5.4rem)!important}
+
+/* hero paragraph->button distance identical on every page (the 24px flex gap was stacking on the margin) */
+.hero-sub{margin-bottom:0!important}
+.hero-foot-l{gap:0!important}
+
+/* node cluster tightened vertically: the lower cards ride up toward the top pair */
+@media(min-width:1025px){
+  .hf-slot--3{top:30%!important}
+  .hf-slot--4{top:33%!important}
+  .hf-slot--5{top:56%!important}
+}
+
+
+/* TENSION LAYOUT (client): the 3D animation gets its own BAND ABOVE the text — the canvas no
+   longer sits behind the copy at all. The section grows to give both room. */
+#fracture{bottom:auto!important;height:clamp(300px,42vh,470px)!important}
+@media(min-width:761px){
+  #tension{min-height:auto!important;place-items:start center!important;
+    padding-top:clamp(280px,38vh,420px)!important;
+    padding-bottom:clamp(5rem,10vh,8rem)!important}
+  #fracture{height:clamp(300px,40vh,450px)!important}
+}
+@media(max-width:760px){
+  #tension{padding-top:clamp(200px,30vh,290px)!important}
+  #fracture{height:clamp(220px,33vh,310px)!important}
+}
+
+
+/* registry footage blends fully into the page (client) */
+.reg-frame{-webkit-mask-image:radial-gradient(84% 80% at 52% 46%,#000 22%,rgba(0,0,0,.35) 50%,transparent 76%)!important;
+  mask-image:radial-gradient(84% 80% at 52% 46%,#000 22%,rgba(0,0,0,.35) 50%,transparent 76%)!important}
+.reg-vid{opacity:.72!important;filter:brightness(.8) saturate(1.05)}
+
+/* op table: corner tick gone; decorative cell glyphs gone (area icons stay — they carry meaning) */
+.op-head::after{display:none!important;content:none!important}
+.op-gly{display:none!important}
+.op-c-sys,.op-c-fn{padding-left:0!important}
+.op-head .op-h--sys,.op-head .op-h--fn{padding-left:0!important}
+
+/* flow arrows: visible, riding the cube-visual line between steps 1-2 and 2-3 */
+.flow-wire{top:calc(clamp(92px,9vw,140px) + clamp(52px,6.4vw,88px))!important}
+.flow-wire .fw-track{display:none!important}   /* client: arrows only, no connector line */
+.flow-wire .fw-arrow{width:13px!important;height:13px!important;border-top:2px solid #ff4a56!important;border-right:2px solid #ff4a56!important;filter:drop-shadow(0 0 6px rgba(216,12,36,.6))}
+@keyframes fwGlideMin{0%{opacity:0;transform:translate(-170%,-50%) rotate(45deg)}25%{opacity:1}70%{opacity:1}100%{opacity:0;transform:translate(80%,-50%) rotate(45deg)}}
+
+
+/* ---- B) THE WALL WAS BEING DARKENED BY THREE STACKED VEILS (client: "why still dark") ----
+   1. .t-veil painted an 88%-opaque near-black radial right over the band's centre
+   2. the canvas's own mask faded its bottom 18% — exactly where the wall now renders
+   3. #tension::after laid a 200px solid-black gradient over that same bottom zone
+   All three existed to protect text that used to overlap the canvas. It doesn't anymore. */
+#tension .t-veil{display:none!important}
+/* the animation is NOT a contained band — it spans the full viewport and dissolves on all sides,
+   so the page layout itself reads as its canvas (client). */
+#fracture{left:50%!important;right:auto!important;width:100vw!important;transform:translateX(-50%)!important;
+  -webkit-mask-image:radial-gradient(78% 128% at 50% 52%,#000 26%,rgba(0,0,0,.75) 52%,rgba(0,0,0,.3) 74%,transparent 92%)!important;
+  mask-image:radial-gradient(78% 128% at 50% 52%,#000 26%,rgba(0,0,0,.75) 52%,rgba(0,0,0,.3) 74%,transparent 92%)!important}
+#tension{overflow:visible!important}
+#tension::before,#tension::after{display:none!important}   /* no top/bottom seams either */
+#tension::after{height:90px!important;background:linear-gradient(0deg,rgba(7,7,9,.85),rgba(7,7,9,0))!important}
+
+
+/* EMBEDDED, not pasted on (client): the panel bleeds past the right edge so no border of it can be
+   seen. NOTE: mix-blend-mode:screen was tried here and caused a DOUBLE-EXPOSED image (the video
+   screen-blended against its own poster underneath) — never reinstate it. Instead the poster is
+   hidden outright while the video plays, so exactly one layer ever renders. */
+@media(min-width:1025px){.hero--vid .hero-video,.hero--vid .hero-img{
+  width:64%!important;right:-3%!important}}
+.hero--vid .hero-video{mix-blend-mode:normal!important;opacity:.92!important}
+.hero--vid.hero--playing .hero-img{opacity:0!important}
+
+
+/* ================= DOUBLE-LAYER SWEEP (client) =================
+   Every hero on this site stacks a poster <div class="hero-img"> UNDER a <video>. Whenever both
+   paint at once you see a ghosted double image, and the browser composites two full-bleed layers
+   for one visual — heavier as well as uglier. Rule: the poster is the fallback ONLY.
+   Also retiring the blend-mode overlays that double-composite the same pixels. */
+.hero--vid .hero-img{opacity:0!important}                 /* video pages: poster never co-paints */
+html.no-video .hero--vid .hero-img{opacity:1!important}   /* ...unless the video can't play */
+.hero-sweep{display:none!important}                       /* overlay blend pass over the hero */
+.scanlines{display:none!important}                        /* full-page multiply layer */
+
+
+/* ABOUT — section heading smaller + centred (client) */
+.sec-head{text-align:center!important;display:block!important;width:100%!important}
+.sec-head h2{font-size:clamp(1.8rem,3.6vw,3.2rem)!important;margin-inline:auto!important;max-width:none!important;text-align:center!important}
+
+/* ABOUT — Vision/Mission/Promise: ghost numbers out, icons bigger (client) */
+.ab-vmp-rn{display:none!important}
+.ab-vmp-ico{width:clamp(130px,12vw,180px)!important;height:clamp(130px,12vw,180px)!important}
+
+
+/* ABOUT framework cards: no red corner brackets, no notched corner (client) */
+.ab-frame-card::after{display:none!important;content:none!important}
+.ab-frame-card{clip-path:none!important}
+
+
+/* ABOUT framework intro: heading + description share one centred column, description held to
+   ~4 lines by its measure (client) */
+.ab-frame-head{text-align:center!important}
+.ab-frame-sub{max-width:68ch!important;margin-inline:auto!important;text-align:center!important}
+@media(max-width:900px){.ab-frame-sub{max-width:52ch!important}}
+
+
+/* ================= RESPONSIVE PASS — all pages (client) =================
+   Audited 5 pages x 390/768/1024/1440. No horizontal scroll anywhere; these fix the real
+   layout + legibility problems the audit surfaced. */
+
+/* PHONE: feature cubes were still resolving to a 4-track grid (cards ~90px wide, unreadable).
+   One clean full-width card per row instead. */
+@media(max-width:760px){
+  .feat-grid{display:grid!important;grid-template-columns:1fr!important;gap:2.4rem!important;
+    overflow:visible!important;scroll-snap-type:none!important;padding-bottom:0!important}
+  .feat-card{flex:none!important;width:auto!important;scroll-snap-align:none!important}
+}
+
+/* TABLET: three flow steps side-by-side at 768 crams each to ~230px — stack them. */
+@media(max-width:900px){
+  .flow-grid{grid-template-columns:1fr!important;gap:2.6rem!important}
+  .flow-wire{display:none!important}          /* connector is meaningless once stacked */
+}
+
+/* LEGIBILITY FLOOR on small screens: the audit found 28 sub-11px labels on the phone home page.
+   Mono micro-labels get a readable minimum and tighter tracking so they still fit. */
+@media(max-width:900px){
+  .fk,.flow-k,.mk,.hero-note,.reg-k,.op-h,.foot-bottom p,.seal-kicker,.ab-vmp-k,.solx-k,
+  .why-card .fk,.wc-body .fk{font-size:.74rem!important;letter-spacing:.14em!important}
+  .op-c-sys,.op-c-fn{font-size:.86rem!important}
+  /* the live-registry ledger renders at 8px on phones — unreadable; scale it up and let it wrap */
+  .reg-ledger{font-size:.68rem!important;padding:.55rem .7rem!important}
+  .reg-r{gap:.7rem!important}
+}
+
+/* footer: 2 link columns at 390 are cramped — single column on phones */
+@media(max-width:560px){.foot-cols{grid-template-columns:1fr!important;gap:1.8rem!important}}
+
+/* remaining sub-11px offenders found by the phone audit (index: the 4 system kickers + the live
+   ledger rows; resources: the node-window chrome). Raised to a readable floor. */
+@media(max-width:900px){
+  .why-card .fk,.wc-body .fk,.feat-card .fk{font-size:.74rem!important}
+  .reg-r,.reg-v,.reg-k{font-size:.68rem!important}
+  .tc-sub{font-size:.7rem!important}
+  .hf-bar,.hf-stat,.ros-bar,.ros-wdate{font-size:.66rem!important}
+}
+
+/* .fk kickers resolve to 9.3px on phones regardless of parent — direct floor */
+@media(max-width:900px){.fk{font-size:.76rem!important;letter-spacing:.15em!important}}
+
+
+/* FOOTER CENTRED ON MOBILE ONLY (client) — desktop keeps its left-aligned columns */
+@media(max-width:760px){
+  footer .wrap,.foot-lead,.foot-brand,.foot-cols,.foot-col,.foot-bottom,.foot-logo-row{text-align:center!important}
+  .foot-lead{display:flex!important;flex-direction:column;align-items:center;gap:1.4rem}
+  .foot-lead .btn,.foot-lead .btn-primary{align-self:center!important}
+  .foot-cols{justify-items:center!important}
+  .foot-col{display:flex!important;flex-direction:column;align-items:center}
+  .foot-col a,.foot-brand p,.foot-brand address{text-align:center!important}
+  .foot-bottom{display:flex!important;flex-direction:column;align-items:center;gap:.6rem}
+}
