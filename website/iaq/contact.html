@@ -48,16 +48,12 @@ body.embedded .topbar{display:none}
 .wordmark{display:flex;align-items:center;gap:10px;text-decoration:none}
 .wordmark img{height:46px;width:auto;display:block}
 .logo3d{height:46px;width:auto;perspective:600px;perspective-origin:50% 45%;flex:none}
-.logo3d-in{position:relative;height:100%;transform-style:preserve-3d;animation:logoIdle 6s var(--e1) infinite;will-change:transform}
+.logo3d-in{position:relative;height:100%;transform-style:preserve-3d;animation:logoIdle 10s ease-in-out infinite;will-change:transform}
 .logo3d:hover .logo3d-in{animation-play-state:paused;transform:rotateY(14deg) rotateX(-5deg)}
 .logo3d img{height:46px;width:auto;display:block}
 .logo3d .lface{position:relative;z-index:1}
-.logo3d .ldepth{position:absolute;top:0;left:0;filter:brightness(.35) saturate(.8)}
-@keyframes logoIdle{
-  0%{transform:rotateY(-10deg) rotateX(3deg)}
-  50%{transform:rotateY(10deg) rotateX(-2deg)}
-  100%{transform:rotateY(-10deg) rotateX(3deg)}
-}
+.logo3d .ldepth{display:none}
+@keyframes logoIdle{0%,74%{transform:rotateY(0deg) rotateX(0deg)}80%{transform:rotateY(16deg) rotateX(-5deg)}86%{transform:rotateY(-10deg) rotateX(3deg)}92%,100%{transform:rotateY(0deg) rotateX(0deg)}}
 @media(prefers-reduced-motion:reduce){.logo3d-in{animation:none;transform:rotateY(-6deg) rotateX(2deg)}.logo3d:hover .logo3d-in{transform:rotateY(-6deg) rotateX(2deg)}}
 .wordmark span{font-family:"JetBrains Mono",monospace;font-size:8.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--faint)}
 .nav-links{display:flex;align-items:center;gap:4px}
@@ -67,6 +63,9 @@ body.embedded .topbar{display:none}
 .nav-links a:hover::after{right:11px}
 .nav-links a.here{color:var(--ink)}
 .nav-links a.here::after{right:11px}
+.nav-dis{position:relative;display:inline-flex;align-items:center;gap:7px;font-size:13.5px;font-weight:500;color:#AEB6C6;padding:7px 11px;white-space:nowrap;cursor:not-allowed;user-select:none}
+.nav-dis i{font-style:normal;font-family:"JetBrains Mono",monospace;font-size:8px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:#98A2B6;border:1px solid rgba(12,18,32,.16);padding:2.5px 5px;background:rgba(12,18,32,.035)}
+
 .nav-links .lock{display:inline-flex;align-items:center;gap:6px;color:var(--faint)}
 .cta{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;background:var(--blue);color:#fff;text-decoration:none;padding:11px 18px;transition:background .25s;white-space:nowrap}
 .cta:hover{background:var(--blue-bright)}
@@ -94,6 +93,9 @@ body.embedded .topbar{display:none}
   .nav-drawer a:active{color:#fff}
   .nav-drawer a.here{color:#fff;box-shadow:inset 2px 0 0 #EC2027;padding-left:12px}
   .nav-drawer .nd-cta{margin-top:16px;border-bottom:0;background:#EC2027;color:#fff;justify-content:center;font-family:"JetBrains Mono",monospace;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;padding:15px}
+  .nav-drawer .nd-dis{display:flex;align-items:center;gap:14px;padding:16px 2px;font-size:17.5px;font-weight:600;color:#5B6780;border-bottom:1px solid rgba(255,255,255,.08);cursor:not-allowed}
+  .nav-drawer .nd-dis .nn{color:#55617C}
+  .nav-drawer .nd-dis i{font-style:normal;font-family:"JetBrains Mono",monospace;font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:#7A87A2;border:1px solid rgba(255,255,255,.14);padding:3px 6px;margin-left:auto;margin-right:2px}
 }
 
 .head{padding:clamp(44px,7vh,80px) 0 10px}
@@ -173,15 +175,17 @@ body.embedded .topbar{display:none}
 <nav class="nav"><div class="nav-in">
   <a class="wordmark" href="index.html"><span class="logo3d"><span class="logo3d-in"><img class="ldepth" src="assets/iaq-logo.png" alt="" aria-hidden="true" style="transform:translateZ(-6.3px)"><img class="ldepth" src="assets/iaq-logo.png" alt="" aria-hidden="true" style="transform:translateZ(-5.6px)"><img class="ldepth" src="assets/iaq-logo.png" alt="" aria-hidden="true" style="transform:translateZ(-4.9px)"><img class="ldepth" src="assets/iaq-logo.png" alt="" aria-hidden="true" style="transform:translateZ(-4.2px)"><img class="ldepth" src="assets/iaq-logo.png" alt="" aria-hidden="true" style="transform:translateZ(-3.5px)"><img class="ldepth" src="assets/iaq-logo.png" alt="" aria-hidden="true" style="transform:translateZ(-2.8px)"><img class="ldepth" src="assets/iaq-logo.png" alt="" aria-hidden="true" style="transform:translateZ(-2.1px)"><img class="ldepth" src="assets/iaq-logo.png" alt="" aria-hidden="true" style="transform:translateZ(-1.4px)"><img class="lface" src="assets/iaq-logo.png" alt="IAQ"></span></span></a>
   <div class="nav-links">
-    <a href="index.html">Home</a><a href="projects.html">Projects</a><a href="careers.html">Careers</a>  </div>
+    <a href="index.html">Home</a><a href="about.html">About</a><span class="nav-dis" title="Not available in this demo" aria-disabled="true">Services</span><a href="projects.html">Projects</a><a href="careers.html">Careers</a>  </div>
   <a class="cta" href="contact.html">Start a project</a>
   <button class="nav-burger" id="navBurger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="navDrawer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path class="bx-lid" d="M12 2.6 20.4 7.4 12 12.2 3.6 7.4z"/><path class="bx-body" d="M3.6 7.4v9.2L12 21.4l8.4-4.8V7.4M3.6 7.4 12 12.2l8.4-4.8M12 12.2v9.2"/></svg></button>
 </div>
   <div class="nav-drawer" id="navDrawer">
     <span class="nd-k">Menu</span>
     <a href="index.html"><span class="nn">01</span>Home</a>
-    <a href="projects.html"><span class="nn">02</span>Projects</a>
-    <a href="careers.html"><span class="nn">03</span>Careers</a>
+    <a href="about.html"><span class="nn">02</span>About</a>
+    <span class="nd-dis"><span class="nn">--</span>Services</span>
+    <a href="projects.html"><span class="nn">03</span>Projects</a>
+    <a href="careers.html"><span class="nn">04</span>Careers</a>
     <a class="nd-cta" href="contact.html">Start a project →</a>
   </div></nav>
 
@@ -243,7 +247,7 @@ body.embedded .topbar{display:none}
 <footer class="sitefoot">
   <div class="f-in">
     <div><div class="wm"><span>IAQ &middot; Total Facility Solutions</span></div><p>Sustainable and innovative engineering and facility solutions, driven by expertise and leadership since 1994.</p></div>
-    <div><h4>The Company</h4><a href="index.html#story">Overview</a><a href="index.html#services">Services</a><a href="projects.html">Projects</a><a href="careers.html">Careers</a><a href="index.html#news">Newsroom</a></div>
+    <div><h4>The Company</h4><a href="index.html#story">Overview</a><a href="index.html#services">Services</a><a href="projects.html">Projects</a><a href="careers.html">Careers</a><a href="index.html#news">Newsroom</a><a href="portal.html">Client Portal</a></div>
     <div><h4>Compliance</h4><a href="#" tabindex="-1">ISO 9001:2015</a><a href="#" tabindex="-1">ISO 14001:2015</a><a href="#" tabindex="-1">ISO 45001:2018</a><a href="#" tabindex="-1">CIDB Registered</a></div>
   </div>
   <div class="f-base"><span>&copy; 2026 IAQ Group (690214-V)</span><span>Contact page concept &middot; Brand Method</span></div>
@@ -260,7 +264,7 @@ body.embedded .topbar{display:none}
 <style id="bm-footrib-css">
 .bm-footrib-strip{position:relative;z-index:1;background:transparent;padding:0 0 clamp(18px,3vh,34px)}
 .bm-footrib{display:flex;justify-content:center;padding:clamp(22px,3.4vh,38px) 0 .4rem;pointer-events:none}
-.bm-footrib canvas{width:min(460px,96vw);height:auto;display:block}
+.bm-footrib canvas{width:min(460px,88vw);height:auto;display:block}
 .bm-footrib-fb{font-family:var(--mono,monospace);font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:#fff;background:linear-gradient(90deg,#1421B8,#2536F5);padding:.5rem 1.4rem;clip-path:polygon(10px 0,calc(100% - 10px) 0,100% 50%,calc(100% - 10px) 100%,10px 100%,0 50%)}
 .bm-footrib-fb[hidden]{display:none}
 
@@ -284,7 +288,7 @@ body.embedded .topbar{display:none}
   .sitefoot .f-base{margin-top:14px;padding-top:11px}
   .bm-footrib-strip{padding-bottom:8px}
   .bm-footrib{padding-top:10px}
-  .bm-footrib canvas{width:min(460px,96vw)}
+  .bm-footrib canvas{width:min(430px,94vw)}
 }
 </style>
 <script>
