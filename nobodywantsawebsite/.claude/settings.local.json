@@ -1,7 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(ls -la \"/Users/zieel/Bazil Claude 3/Sales page/bm sales page\" 2>&1; echo \"---PARENT---\"; ls -la \"/Users/zieel/Bazil Claude 3/Sales page\" 2>&1)"
-    ]
-  }
-}

@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="262" height="80" viewBox="0 0 262 80" fill="none">
- <rect x="10" y="19" width="48" height="9" rx="2" fill="#C0673F"/>
- <rect x="10" y="33.5" width="48" height="9" rx="2" fill="#1B1E24"/>
- <rect x="10" y="48" width="32" height="9" rx="2" fill="#1B1E24"/>
- <text x="74" y="49" font-family="'Helvetica Neue',Arial,sans-serif" font-weight="800" font-size="46" letter-spacing="-1.5" fill="#1B1E24">MIL</text>
- <text x="76" y="67" font-family="'Helvetica Neue',Arial,sans-serif" font-size="10" letter-spacing="6" fill="#1B1E24" opacity="0.6">DESIGN HOTEL</text>
-</svg>

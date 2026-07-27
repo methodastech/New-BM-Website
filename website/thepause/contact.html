@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact · THE PAUSE</title>
+  <meta name="description" content="Write to The Pause about products, orders, gifting, or partnerships. We answer slowly, but we answer well.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Hanken+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Fraunces:ital,opsz,wght@1,9..144,300;1,9..144,400&family=Space+Mono&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="assets/logo/favicon.svg">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/shop.css">
+  <link rel="stylesheet" href="css/quiz.css">
+  <script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <main id="main" class="page">
+    <div class="wrap">
+      <section class="page-intro">
+        <p class="eyebrow">Contact</p>
+        <h1>Say it <em>softly.</em></h1>
+        <p>Product questions, orders, thoughtful gifting, or partnership enquiries. We read everything, and we answer well.</p>
+      </section>
+
+      <section class="section--tight" style="padding-bottom:var(--section-y);">
+        <div class="story-vm" style="border-top:none; padding-top:0;">
+          <div class="story-vm__item">
+            <p class="eyebrow">Write to us</p>
+            <form class="field" style="max-width:420px; margin-top:1.25rem;" onsubmit="event.preventDefault();this.insertAdjacentHTML('afterend','<p role=&quot;status&quot; class=&quot;news__thanks&quot;>Thank you. Messages are not available in this demo, so nothing was sent.</p>');this.remove();">
+              <input type="email" placeholder="Your email" aria-label="Email" required>
+              <button class="btn btn--sm" type="submit" aria-label="Send"><span data-icon="arrow"></span></button>
+            </form>
+            <p style="margin-top:1rem; font-size:var(--fs-sm); color:var(--smoke);">Or write directly: <a class="link" href="mailto:hello@thepause.co">hello@thepause.co</a></p>
+            <p style="margin-top:0.5rem; font-size:var(--fs-xs); color:var(--mist);">This is a demo form. Nothing is sent yet.</p>
+          </div>
+          <div class="story-vm__item">
+            <p class="eyebrow">The studio</p>
+            <p class="serif-lead" style="margin-top:1.25rem;">Hive 5, Jalan Inovasi 2,<br>Taman Teknologi Malaysia,<br>57000 Bukit Jalil, Kuala Lumpur.</p>
+            <p style="margin-top:1rem; font-size:var(--fs-sm); color:var(--smoke);">Attn: Brand and Partnerships. For collaboration and wholesale, mention the house you represent and how you keep things quiet.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <script type="module" src="js/page.js"></script>
+</body>
+</html>

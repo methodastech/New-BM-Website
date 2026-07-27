@@ -1,0 +1,120 @@
+/* ============================================================
+   THE PAUSE : Design Tokens
+   Warm, quiet, premium. One accent. Slow, eased motion.
+   ============================================================ */
+
+:root {
+  /* ---- Color ---- */
+  --paper:  #f6f5f2;   /* base background, the quiet canvas */
+  --cream:  #f2efe6;   /* alternate sections, cards */
+  --sand:   #e7e2d6;   /* soft warm block */
+  --sand-deep: #c7c1b0;/* dividers, warm accents */
+  --clay:   #6b6559;   /* muted secondary text (WCAG AA on paper) */
+  --clay-soft: #8a8174;/* decorative / hairline warm tone only, not for small text */
+  --ink:    #1d1d1f;   /* headings, primary text */
+  --ink-soft: #2b2a28;
+  --smoke:  #625d55;   /* body copy */
+  --mist:   #6d675b;   /* captions, meta (AA) */
+  --ember:  #c5382e;   /* single signal color, used almost never */
+  --logo-gold: #cbb06a;/* brand wordmark, light brownish yellow */
+
+  /* Official Brand OS palette (THE PAUSE Brand Book) */
+  --dust:   #c7c1b0;   /* Primary I: DUST, 75% of the identity */
+  --greige: #a89284;   /* Secondary II: WARM GREIGE, warm depth */
+  --olive:  #807a67;   /* gradient anchor, nature note */
+
+  /* Pastel accents: choosing states, mood colour, icon tints */
+  --pastel-sage:  #cfdcc4;   /* focus / awake */
+  --pastel-sky:   #c9d9e2;   /* clear space / airy */
+  --pastel-sand:  #ecdfc0;   /* slower nights / calm */
+  --pastel-blush: #eed2c4;   /* soft reset / renewed */
+  --pastel-lilac: #dcd3e8;   /* ritual, misc */
+  --pastel-ink-sage:  #55684a;  /* AA text partners on paper */
+  --pastel-ink-sky:   #48626f;
+  --pastel-ink-sand:  #77613a;
+  --pastel-ink-blush: #82543f;
+  --pastel-ink-lilac: #5d5375;
+  --sky-wash: #dfe7ec;  /* soft block, tinted from the still-water photo */
+
+  --line:      rgba(29, 29, 31, 0.10);  /* hairline borders */
+  --line-soft: rgba(29, 29, 31, 0.06);
+  --overlay:   rgba(20, 19, 17, 0.42);  /* image scrims */
+
+  /* surface aliases */
+  --bg: var(--paper);
+  --fg: var(--ink);
+
+  /* ---- Type ---- */
+  --font-display: "Montserrat", "Hanken Grotesk", "Inter", system-ui, sans-serif; /* Brand OS: Gotham-family geometric headlines */
+  --font-body:    "Inter", system-ui, sans-serif;
+  --font-serif:   "Fraunces", Georgia, serif;   /* editorial / poetic accent */
+  --font-mono:    "Space Mono", ui-monospace, monospace; /* labels, meta */
+
+  /* fluid type scale */
+  --fs-hero:  clamp(3.25rem, 11vw, 12rem);
+  --fs-d1:    clamp(2.6rem, 6.5vw, 5.75rem);
+  --fs-d2:    clamp(2rem, 4.5vw, 3.75rem);
+  --fs-h1:    clamp(1.75rem, 3.2vw, 2.6rem);
+  --fs-h2:    clamp(1.4rem, 2.2vw, 1.9rem);
+  --fs-h3:    clamp(1.15rem, 1.6vw, 1.4rem);
+  --fs-body:  clamp(1rem, 1.05vw, 1.125rem);
+  --fs-sm:    0.9375rem;
+  --fs-xs:    0.8125rem;
+  --fs-label: 0.75rem;   /* mono uppercase labels */
+
+  --lh-tight: 1.02;
+  --lh-snug:  1.14;
+  --lh-body:  1.6;
+
+  --ls-label: 0.1em;    /* letter spacing for mono labels */
+  --ls-tight: -0.02em;
+
+  /* ---- Spacing (8pt base, fluid sections) ---- */
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.5rem;
+  --sp-6: 2rem;
+  --sp-7: 3rem;
+  --sp-8: 4rem;
+  --sp-9: 6rem;
+  --sp-10: 8rem;
+  --sp-11: 12rem;
+
+  --section-y: clamp(4.5rem, 9vw, 9rem);   /* vertical section rhythm */
+  --gutter:    clamp(1.25rem, 4vw, 3.5rem); /* page side padding */
+  --maxw:      1560px;                        /* max content width */
+  --maxw-text: 62ch;                          /* readable measure */
+
+  /* ---- Radius (sharp, editorial) ---- */
+  --r-xs: 0px;
+  --r-sm: 2px;
+  --r-md: 3px;
+  --r-lg: 4px;
+  --r-pill: 999px; /* reserved for dots/meters only */
+
+  /* ---- Motion ---- */
+  --ease:      cubic-bezier(0.22, 1, 0.36, 1);   /* soft ease out */
+  --ease-soft: cubic-bezier(0.16, 1, 0.30, 1);   /* very gentle */
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-1: 0.45s;
+  --dur-2: 0.7s;
+  --dur-3: 1.05s;
+  --dur-4: 1.4s;
+
+  /* ---- Elevation (whisper soft, warm) ---- */
+  --shadow-sm: 0 1px 2px rgba(29,29,31,0.04), 0 2px 8px rgba(29,29,31,0.04);
+  --shadow-md: 0 4px 12px rgba(29,29,31,0.06), 0 12px 40px rgba(29,29,31,0.07);
+  --shadow-lg: 0 8px 30px rgba(29,29,31,0.10), 0 24px 70px rgba(29,29,31,0.10);
+
+  /* ---- Layout chrome ---- */
+  --header-h: 74px;
+  --z-header: 100;
+  --z-drawer: 200;
+  --z-cursor: 9999;
+}
+
+@media (max-width: 640px) {
+  :root { --header-h: 62px; }
+}

@@ -9,7 +9,7 @@
 <meta http-equiv="Expires" content="0" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>RubexPay · Digital Payment Infrastructure</title>
-<link rel="preload" as="image" href="media/hero-home.jpg">
+<link rel="preload" as="image" href="media/hero-home.webp">
 <meta name="description" content="RubexPay connects businesses, banks, and financial platforms through unified architecture, engineered for trust, compliance and scalability." />
 <meta name="theme-color" content="#050507" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -447,11 +447,11 @@ footer{border-top:1px solid var(--line);padding-block:clamp(4rem,8vh,6rem) 2.5re
 @keyframes footLogoGlow{0%,100%{opacity:.38;transform:translate(-50%,-50%)}50%{opacity:.6;transform:translate(-50%,-50%)}}
 /* footer logo = lit silhouette: dim lockup with a slow red light gliding across it (same "slow lighting" as the old RUBEXPAY wordmark) */
 .foot-logo{position:relative;display:block;width:min(94vw,1500px);aspect-ratio:500/91;
-  -webkit-mask:url('home_files/logo-DHSag-HB.png') center/contain no-repeat;mask:url('home_files/logo-DHSag-HB.png') center/contain no-repeat;
+  -webkit-mask:url('home_files/logo-DHSag-HB.webp') center/contain no-repeat;mask:url('home_files/logo-DHSag-HB.webp') center/contain no-repeat;
   background-image:linear-gradient(100deg,rgba(176,28,42,.95) 0%,rgba(176,28,42,.95) 33%,rgba(255,140,146,.9) 44%,rgba(255,235,236,1) 50%,rgba(255,140,146,.9) 56%,rgba(176,28,42,.95) 67%,rgba(176,28,42,.95) 100%);
   background-size:250% 100%;animation:footSheen 6s linear infinite;will-change:background-position,transform;transform-style:preserve-3d;filter:drop-shadow(0 0 26px rgba(255,255,255,.16))}
 @keyframes footSheen{0%{background-position:135% 0}100%{background-position:-135% 0}}
-.foot-logo::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at var(--sx,50%) var(--sy,42%),rgba(255,246,247,.6),transparent 40%);opacity:var(--spec-o,0);transition:opacity .45s var(--ease);mix-blend-mode:screen;-webkit-mask:url('home_files/logo-DHSag-HB.png') center/contain no-repeat;mask:url('home_files/logo-DHSag-HB.png') center/contain no-repeat}
+.foot-logo::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at var(--sx,50%) var(--sy,42%),rgba(255,246,247,.6),transparent 40%);opacity:var(--spec-o,0);transition:opacity .45s var(--ease);mix-blend-mode:screen;-webkit-mask:url('home_files/logo-DHSag-HB.webp') center/contain no-repeat;mask:url('home_files/logo-DHSag-HB.webp') center/contain no-repeat}
 .foot-logo.is-lit{filter:drop-shadow(0 0 30px rgba(255,70,80,.26))}
 .foot-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-top:clamp(1.5rem,3vh,2.5rem);padding-top:2rem;border-top:1px solid var(--line-2);position:relative;z-index:2}
 .foot-bottom p{font-size:.82rem;color:var(--faint)}
@@ -980,10 +980,10 @@ html.anim .tc-sub-dot{background:var(--red);box-shadow:0 0 6px var(--red-glow)}
   <!-- HERO -->
   <section class="hero hero--vid" id="hero">
     <div class="hero-bg" aria-hidden="true">
-      <div class="hero-img" style="background-image:url('media/hero-home.jpg?v=5')"></div>
+      <div class="hero-img" style="background-image:url('media/hero-home.webp?v=5')"></div>
       <canvas id="hero-cube" aria-hidden="true"></canvas>
-      <video class="hero-video" muted loop playsinline preload="none" poster="media/hero-home.jpg?v=5">
-        <source src="media/hero-home.mp4?v=5" type="video/mp4">
+      <video class="hero-video" muted loop playsinline preload="none" poster="media/hero-home.webp?v=5">
+        <source src="media/hero-home.webm?v=5" type="video/mp4">
       </video>
       <div class="hero-veil"></div>
       <canvas id="net" aria-hidden="true"></canvas>
@@ -1001,7 +1001,7 @@ html.anim .tc-sub-dot{background:var(--red);box-shadow:0 0 6px var(--red-glow)}
         <span class="ln"><i><span class="ignite">Infrastructure</span></i></span>
       </h1>
       <p class="hero-2nd" data-reveal>Behind Modern Commerce</p>
-      <div class="hero-vis" aria-hidden="true" style="background-image:url('media/hero-home.jpg?v=5')"></div>
+      <div class="hero-vis" aria-hidden="true" style="background-image:url('media/hero-home.webp?v=5')"></div>
       <div class="hero-foot">
         <div class="hero-foot-l">
           <p class="hero-sub" data-reveal>RubexPay unifies payments, compliance, and data intelligence into one secure architecture, enabling enterprises and financial institutions to move capital with <b>precision and trust</b>.</p>
@@ -1018,19 +1018,19 @@ html.anim .tc-sub-dot{background:var(--red);box-shadow:0 0 6px var(--red-glow)}
   <section class="features wrap" aria-label="Why RubexPay infrastructure">
     <div class="feat-grid">
       <article class="feat-card" data-reveal data-anim="scale">
-        <div class="feat-media"><img decoding="async" src="home_files/home-feature-1-B4WGjLnC.png" alt="Unified Architecture" loading="lazy"><video class="feat-anim" src="media/feat-anim-1.mp4" muted loop playsinline preload="none" aria-hidden="true"></video></div>
+        <div class="feat-media"><img decoding="async" src="home_files/home-feature-1-B4WGjLnC.webp" alt="Unified Architecture" loading="lazy"><video class="feat-anim" src="media/feat-anim-1.webm" muted loop playsinline preload="none" aria-hidden="true"></video></div>
         <span class="fk">Architecture</span>
         <h3>Unified Architecture</h3>
         <p>Consolidate payments, reconciliation, and compliance under one secure system, built to scale across markets and currencies.</p>
       </article>
       <article class="feat-card" data-reveal data-anim="scale">
-        <div class="feat-media"><img decoding="async" src="home_files/home-feature-2-BaQIsf_a.png" alt="Financial Security" loading="lazy"><video class="feat-anim" src="media/feat-anim-2.mp4" muted loop playsinline preload="none" aria-hidden="true"></video></div>
+        <div class="feat-media"><img decoding="async" src="home_files/home-feature-2-BaQIsf_a.webp" alt="Financial Security" loading="lazy"><video class="feat-anim" src="media/feat-anim-2.webm" muted loop playsinline preload="none" aria-hidden="true"></video></div>
         <span class="fk">Security</span>
         <h3>Financial Security</h3>
         <p>Operate with confidence through PCI DSS certification, real-time fraud intelligence, and regulatory oversight.</p>
       </article>
       <article class="feat-card" data-reveal data-anim="scale">
-        <div class="feat-media"><img decoding="async" src="home_files/home-feature-3-DuNkA3i0.png" alt="Data Driven Control" loading="lazy"><video class="feat-anim" src="media/feat-anim-3.mp4" muted loop playsinline preload="none" aria-hidden="true"></video></div>
+        <div class="feat-media"><img decoding="async" src="home_files/home-feature-3-DuNkA3i0.webp" alt="Data Driven Control" loading="lazy"><video class="feat-anim" src="media/feat-anim-3.webm" muted loop playsinline preload="none" aria-hidden="true"></video></div>
         <span class="fk">Control</span>
         <h3>Data Driven Control</h3>
         <p>Gain total visibility into transaction performance, liquidity flow, and operational insights, in real time.</p>
@@ -1060,7 +1060,7 @@ html.anim .tc-sub-dot{background:var(--red);box-shadow:0 0 6px var(--red-glow)}
       </div>
       <div class="it-fig it-fig--3d" data-reveal>
         <canvas class="plat-3d" aria-label="Interactive 3D platform core, drag to rotate"></canvas>
-        <img decoding="async" class="plat-fallback" src="home_files/home-section2-CtHyIGSm.jpg" alt="A platform engineered for financial-grade performance" loading="lazy">
+        <img decoding="async" class="plat-fallback" src="home_files/home-section2-CtHyIGSm.webp" alt="A platform engineered for financial-grade performance" loading="lazy">
       </div>
     </div>
   </section>
@@ -1072,7 +1072,7 @@ html.anim .tc-sub-dot{background:var(--red);box-shadow:0 0 6px var(--red-glow)}
     </div>
     <div class="why-grid">
       <article class="why-card" data-reveal>
-        <div class="why-media"><img decoding="async" src="home_files/why-1-BNljH-xT.png" alt="Rubex Gateway" loading="lazy"></div>
+        <div class="why-media"><img decoding="async" src="home_files/why-1-BNljH-xT.webp" alt="Rubex Gateway" loading="lazy"></div>
         <div class="wc-body">
           <span class="fk" data-decode>Acceptance</span>
           <h3>Rubex Gateway</h3>
@@ -1080,7 +1080,7 @@ html.anim .tc-sub-dot{background:var(--red);box-shadow:0 0 6px var(--red-glow)}
         </div>
       </article>
       <article class="why-card" data-reveal>
-        <div class="why-media"><img decoding="async" src="home_files/why-2-CvobkCm6.png" alt="Rubex Shield" loading="lazy"></div>
+        <div class="why-media"><img decoding="async" src="home_files/why-2-CvobkCm6.webp" alt="Rubex Shield" loading="lazy"></div>
         <div class="wc-body">
           <span class="fk" data-decode>Protection</span>
           <h3>Rubex Shield</h3>
@@ -1088,7 +1088,7 @@ html.anim .tc-sub-dot{background:var(--red);box-shadow:0 0 6px var(--red-glow)}
         </div>
       </article>
       <article class="why-card" data-reveal>
-        <div class="why-media"><img decoding="async" src="home_files/why-3-CxYb8B57.png" alt="Rubex Core" loading="lazy"></div>
+        <div class="why-media"><img decoding="async" src="home_files/why-3-CxYb8B57.webp" alt="Rubex Core" loading="lazy"></div>
         <div class="wc-body">
           <span class="fk" data-decode>Intelligence</span>
           <h3>Rubex Core</h3>
@@ -1096,7 +1096,7 @@ html.anim .tc-sub-dot{background:var(--red);box-shadow:0 0 6px var(--red-glow)}
         </div>
       </article>
       <article class="why-card" data-reveal>
-        <div class="why-media"><img decoding="async" src="home_files/why-4-vcK_nNKm.png" alt="Rubex Connect" loading="lazy"></div>
+        <div class="why-media"><img decoding="async" src="home_files/why-4-vcK_nNKm.webp" alt="Rubex Connect" loading="lazy"></div>
         <div class="wc-body">
           <span class="fk" data-decode>Integration</span>
           <h3>Rubex Connect</h3>
@@ -1123,7 +1123,7 @@ html.anim .tc-sub-dot{background:var(--red);box-shadow:0 0 6px var(--red-glow)}
           <div class="comp-vis" role="img" aria-label="Live encrypted data registry: records cascading through the architecture in real time">
             <div class="reg-frame" aria-hidden="true">
               <div class="reg-tiltw">
-                <video class="reg-vid" src="media/registry-core.mp4" poster="media/registry-core.png" autoplay loop muted playsinline preload="metadata"></video>
+                <video class="reg-vid" src="media/registry-core.webm" poster="media/registry-core.webp" autoplay loop muted playsinline preload="metadata"></video>
                 <span class="reg-vig"></span>
               </div>
               <span class="cv-scan"></span>
@@ -1358,7 +1358,7 @@ html.anim .tc-sub-dot{background:var(--red);box-shadow:0 0 6px var(--red-glow)}
   <!-- CTA · BORDERLESS ECONOMY (animated globe network) -->
   <section class="cta" id="contact">
     <div class="cta-bg" aria-hidden="true">
-      <div class="cta-img" style="background-image:url('home_files/globe-CuwFVeHq.jpg')"></div>
+      <div class="cta-img" style="background-image:url('home_files/globe-CuwFVeHq.webp')"></div>
       <canvas class="cta-globe"></canvas>
       <div class="cta-veil"></div>
     </div>

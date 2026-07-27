@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Care, Shipping and Returns · THE PAUSE</title>
+  <meta name="description" content="How to care for your candles, diffusers and incense, and how shipping and returns work at The Pause.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Hanken+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Fraunces:ital,opsz,wght@1,9..144,300;1,9..144,400&family=Space+Mono&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="assets/logo/favicon.svg">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/shop.css">
+  <link rel="stylesheet" href="css/quiz.css">
+  <script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <main id="main" class="page">
+    <div class="wrap">
+      <section class="page-intro">
+        <p class="eyebrow">Care and use</p>
+        <h1>Kept well, <em>kept long.</em></h1>
+        <p>Gentle objects last when they are treated gently. A few quiet notes on care, shipping, and returns.</p>
+      </section>
+
+      <section class="section--tight" style="max-width:760px;">
+        <h2 style="font-size:var(--fs-h2); margin-bottom:1rem;">Caring for your pieces</h2>
+        <div class="accordion">
+          <div class="acc-item">
+            <button class="acc-head" aria-expanded="false">Candles<span data-icon="plus"></span></button>
+            <div class="acc-body"><div class="acc-body__inner">Trim the wick to 5mm before each light. Burn for at least an hour the first time so the pool reaches the edge. Keep away from drafts, and never leave a flame unattended.</div></div>
+          </div>
+          <div class="acc-item">
+            <button class="acc-head" aria-expanded="false">Diffusers<span data-icon="plus"></span></button>
+            <div class="acc-body"><div class="acc-body__inner">Place the reeds in the oil and let them draw. Flip the reeds every few days to refresh the scent. Keep away from direct sun and heat.</div></div>
+          </div>
+          <div class="acc-item">
+            <button class="acc-head" aria-expanded="false">Incense<span data-icon="plus"></span></button>
+            <div class="acc-body"><div class="acc-body__inner">Light the tip, let it catch, then gently blow out the flame. Rest it on a heatproof holder, open a window slightly, and let the smoke do the rest.</div></div>
+          </div>
+          <div class="acc-item">
+            <button class="acc-head" aria-expanded="false">Jade holders<span data-icon="plus"></span></button>
+            <div class="acc-body"><div class="acc-body__inner">Wipe clean with a soft, dry cloth. Each piece is natural stone, so veins and tone vary. That variation is the point.</div></div>
+          </div>
+          <div class="acc-item">
+            <button class="acc-head" aria-expanded="false">Room sprays<span data-icon="plus"></span></button>
+            <div class="acc-body"><div class="acc-body__inner">Two or three presses into the air, or over soft furnishings. Let it settle for a moment before you breathe it in.</div></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section--tight" style="max-width:760px;" id="shipping">
+        <h2 style="font-size:var(--fs-h2); margin-bottom:1rem;">Shipping</h2>
+        <div class="prose">
+          <p>Every order is packed with care and usually dispatched within three to five business days. Complimentary shipping applies to orders over RM 250 within Malaysia.</p>
+          <p>Candles and jade pieces travel wrapped and cushioned. If anything arrives less than perfect, tell us and we will make it right.</p>
+        </div>
+      </section>
+
+      <section class="section--tight" style="max-width:760px; padding-bottom:var(--section-y);" id="returns">
+        <h2 style="font-size:var(--fs-h2); margin-bottom:1rem;">Returns</h2>
+        <div class="prose">
+          <p>Unopened items can be returned within 14 days of delivery. Write to us first and we will walk you through it, gently.</p>
+          <p>Because fragrance is personal and hygiene matters, opened or burned pieces cannot be returned. If you are unsure before buying, the <a class="link" href="find-your-scent.html">Scent and Space Quiz</a> is a quiet way to choose well the first time.</p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <script type="module" src="js/page.js"></script>
+  <script type="module">
+    // accordion behaviour (shared pattern with PDP)
+    document.querySelectorAll(".acc-item").forEach((it) => {
+      const head = it.querySelector(".acc-head");
+      const body = it.querySelector(".acc-body");
+      head.addEventListener("click", () => {
+        const open = it.classList.toggle("is-open");
+        head.setAttribute("aria-expanded", String(open));
+        if (open) {
+          body.style.maxHeight = body.scrollHeight + "px";
+          body.addEventListener("transitionend", () => {
+            if (it.classList.contains("is-open")) body.style.maxHeight = "none";
+          }, { once: true });
+        } else {
+          body.style.maxHeight = body.scrollHeight + "px";
+          requestAnimationFrame(() => { body.style.maxHeight = 0; });
+        }
+      });
+    });
+  </script>
+</body>
+</html>

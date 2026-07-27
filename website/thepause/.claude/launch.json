@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "The Pause (no-cache dev)",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["serve.py", "8140"],
+      "port": 8140
+    },
+    {
+      "name": "The Pause (plain http.server)",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8080"],
+      "port": 8080
+    }
+  ]
+}

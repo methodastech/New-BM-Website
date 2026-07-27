@@ -431,11 +431,11 @@ footer{border-top:1px solid var(--line);padding-block:clamp(4rem,8vh,6rem) 2.5re
 @keyframes footLogoGlow{0%,100%{opacity:.38;transform:translate(-50%,-50%) scale(.9)}50%{opacity:.6;transform:translate(-50%,-50%) scale(1.14)}}
 /* footer logo = lit silhouette: dim lockup with a slow red light gliding across it (same "slow lighting" as the old RUBEXPAY wordmark) */
 .foot-logo{position:relative;display:block;width:min(94vw,1500px);aspect-ratio:500/91;
-  -webkit-mask:url('home_files/logo-DHSag-HB.png') center/contain no-repeat;mask:url('home_files/logo-DHSag-HB.png') center/contain no-repeat;
+  -webkit-mask:url('home_files/logo-DHSag-HB.webp') center/contain no-repeat;mask:url('home_files/logo-DHSag-HB.webp') center/contain no-repeat;
   background-image:linear-gradient(100deg,rgba(176,28,42,.95) 0%,rgba(176,28,42,.95) 33%,rgba(255,140,146,.9) 44%,rgba(255,235,236,1) 50%,rgba(255,140,146,.9) 56%,rgba(176,28,42,.95) 67%,rgba(176,28,42,.95) 100%);
   background-size:250% 100%;animation:footSheen 6s linear infinite;will-change:background-position,transform;transform-style:preserve-3d;filter:drop-shadow(0 0 26px rgba(255,255,255,.16))}
 @keyframes footSheen{0%{background-position:135% 0}100%{background-position:-135% 0}}
-.foot-logo::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at var(--sx,50%) var(--sy,42%),rgba(255,246,247,.6),transparent 40%);opacity:var(--spec-o,0);transition:opacity .45s var(--ease);mix-blend-mode:screen;-webkit-mask:url('home_files/logo-DHSag-HB.png') center/contain no-repeat;mask:url('home_files/logo-DHSag-HB.png') center/contain no-repeat}
+.foot-logo::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at var(--sx,50%) var(--sy,42%),rgba(255,246,247,.6),transparent 40%);opacity:var(--spec-o,0);transition:opacity .45s var(--ease);mix-blend-mode:screen;-webkit-mask:url('home_files/logo-DHSag-HB.webp') center/contain no-repeat;mask:url('home_files/logo-DHSag-HB.webp') center/contain no-repeat}
 .foot-logo.is-lit{filter:drop-shadow(0 0 30px rgba(255,70,80,.26))}
 .foot-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-top:clamp(1.5rem,3vh,2.5rem);padding-top:2rem;border-top:1px solid var(--line-2);position:relative;z-index:2}
 .foot-bottom p{font-size:.82rem;color:var(--faint)}

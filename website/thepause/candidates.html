@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Hero loop candidates</title>
+<style>
+  body { margin: 0; background: #f6f5f2; font: 12px/1.4 monospace; color: #1d1d1f; }
+  .row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; padding: 4px; }
+  figure { margin: 0; }
+  video { width: 100%; display: block; }
+  figcaption { padding: 2px 4px; }
+</style>
+</head>
+<body>
+<div class="row" style="grid-template-columns:1fr">
+  <figure><video src="assets/video/hero-final-take.webm" muted preload="auto" data-v></video><figcaption>Final take: breeze, foliage shadows, breathing</figcaption></figure>
+</div>
+<script>
+  window.seekAll = (t) => Promise.all([...document.querySelectorAll("[data-v]")].map((v) => new Promise((res) => {
+    const done = () => res(v.currentTime);
+    v.addEventListener("seeked", done, { once: true });
+    v.currentTime = t;
+  })));
+</script>
+</body>
+</html>

@@ -3864,6 +3864,22 @@
       </div>
     </div></section>
     <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+    <!-- On a completed Calendly booking, send the visitor to the thank-you page.
+         The dedicated page-view is what lets us track appointments set. -->
+    <script>
+    (function(){
+      function isCalendly(e){
+        return e.origin === 'https://calendly.com'
+          && e.data && typeof e.data.event === 'string'
+          && e.data.event.indexOf('calendly.') === 0;
+      }
+      window.addEventListener('message', function(e){
+        if(isCalendly(e) && e.data.event === 'calendly.event_scheduled'){
+          window.location.href = 'thank-you.html';
+        }
+      });
+    })();
+    </script>
 
 
 <style>

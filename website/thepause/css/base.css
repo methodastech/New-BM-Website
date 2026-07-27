@@ -1,0 +1,168 @@
+/* ============================================================
+   THE PAUSE : Base: reset, typography, layout primitives
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; padding: 0; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: auto; /* Lenis handles smooth scroll */
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--ink);
+  background: var(--bg);
+  font-weight: 400;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Lenis */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+/* Scroll lock for overlays. Must not depend on Lenis: Lenis is skipped under
+   prefers-reduced-motion and if its CDN fails, and the page behind an open
+   overlay was still scrollable in both cases. */
+html.is-locked, html.is-locked body { overflow: hidden; touch-action: none; }
+
+img, picture, video, canvas, svg { display: block; max-width: 100%; }
+img { height: auto; }
+input, button, textarea, select { font: inherit; color: inherit; }
+button { background: none; border: none; cursor: pointer; }
+a { color: inherit; text-decoration: none; }
+ul, ol { list-style: none; }
+
+::selection { background: var(--ink); color: var(--paper); }
+
+/* ---- Headings ---- */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  line-height: var(--lh-snug);
+  letter-spacing: var(--ls-tight);
+  color: var(--ink);
+  text-wrap: balance;
+}
+/* large display sizes read best a touch lighter */
+h1 { font-size: var(--fs-d1); line-height: var(--lh-tight); font-weight: 400; }
+h2 { font-size: var(--fs-d2); line-height: var(--lh-tight); font-weight: 400; }
+h3 { font-size: var(--fs-h2); }
+h4 { font-size: var(--fs-h3); }
+
+p { color: var(--smoke); max-width: var(--maxw-text); }
+
+/* Serif italic accents inside display headings: Fraunces italic has a much
+   smaller x-height than the sans, so it is optically upsized to match. */
+:is(h1, h2, h3) em, .hero__title em {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 1.13em;
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+
+/* ---- Reusable type styles ---- */
+.label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--clay);
+  font-weight: 400;
+}
+.serif { font-family: var(--font-serif); font-weight: 300; font-style: italic; }
+.display { font-family: var(--font-display); }
+.muted { color: var(--mist); }
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-3);
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--clay);
+}
+.eyebrow::before { content: none; }
+
+/* ---- Layout primitives ---- */
+.wrap {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+.section { padding-block: var(--section-y); }
+.section--tight { padding-block: clamp(3rem, 5vw, 5rem); }
+
+.stack > * + * { margin-top: var(--sp-4); }
+.grid { display: grid; gap: var(--sp-6); }
+
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: var(--sp-6);
+  margin-bottom: clamp(2rem, 4vw, 3.5rem);
+  flex-wrap: wrap;
+}
+.section-head__title { max-width: 22ch; }
+.section-head__intro { max-width: 42ch; color: var(--smoke); }
+
+/* ---- Accessibility ---- */
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+  border-radius: var(--r-xs);
+}
+/* light ring on dark surfaces so focus is always visible */
+.mood:focus-visible, .brandcard:focus-visible, .quiz-opt:focus-visible,
+.values a:focus-visible, .feature a:focus-visible, .footer a:focus-visible,
+.header--over-hero:not(.is-solid) a:focus-visible,
+.header--over-hero:not(.is-solid) button:focus-visible,
+.drawer .btn:focus-visible {
+  outline-color: var(--paper);
+}
+.skip-link {
+  position: absolute; left: var(--sp-4); top: -60px;
+  background: var(--ink); color: var(--paper);
+  padding: var(--sp-3) var(--sp-5); border-radius: var(--r-sm);
+  z-index: 1000; transition: top var(--dur-1) var(--ease);
+}
+.skip-link:focus { top: var(--sp-4); }
+
+/* ---- Reveal (scroll-in) base state ----
+   Only hidden when JS is present (html.js). If scripts fail or a CDN is
+   blocked, content stays visible. JS reveals it (and falls back to visible
+   when GSAP is unavailable). */
+[data-reveal] { will-change: transform, opacity; }
+@media (prefers-reduced-motion: no-preference) {
+  html.js [data-reveal] { opacity: 0; transform: translateY(28px); }
+  html.js [data-split-reveal] { opacity: 0; transform: translateY(24px); }
+}
+
+/* ---- Reduced motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  [data-reveal], [data-split-reveal] { opacity: 1 !important; transform: none !important; }
+}

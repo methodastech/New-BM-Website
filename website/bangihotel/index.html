@@ -55,18 +55,9 @@ html.loading{overflow:hidden}
 @media(prefers-reduced-motion:reduce){#loader{transition:opacity .4s ease}#loader.zoom{transform:none;filter:none}}
 
 /* ============ BM chrome ============ */
-/* topbar + nav share ONE sticky wrapper so nothing can drift between them */
+/* sticky header wrapper */
 .hdr{position:sticky;top:0;z-index:120;transition:transform .4s var(--e1)}
 .hdr.hide{transform:translateY(-100%)}
-.topbar{background:#0A101F;color:#EAF0FB;border-bottom:1px solid #232a40}
-body.embedded .topbar{display:none}
-.topbar-in{display:flex;align-items:center;justify-content:space-between;padding:9px var(--gut);max-width:var(--maxw);margin:0 auto;gap:12px}
-.brandmark{font-family:var(--sans);font-weight:600;letter-spacing:.14em;font-size:13px;text-transform:uppercase}
-.wsw{display:flex;align-items:center;border:1px solid rgba(255,255,255,.24);overflow:auto;max-width:100%}
-.wsw a{font-family:var(--sans);font-weight:500;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#C7D3EE;text-decoration:none;padding:7px 12px;border-right:1px solid rgba(255,255,255,.18);white-space:nowrap;transition:background .25s,color .25s}
-.wsw a:last-child{border-right:0}
-.wsw a:hover{background:rgba(255,255,255,.09);color:#fff}
-.wsw a.on{background:#2536F5;color:#fff;font-weight:600}
 #bmBack{display:none;position:fixed;top:12px;right:16px;z-index:99998;align-items:center;gap:6px;font-family:var(--sans);font-weight:600;font-size:12.5px;color:#8F5D06;background:rgba(251,247,238,.97);border:1px solid var(--line2);border-radius:30px;padding:8px 14px;cursor:pointer;box-shadow:0 6px 18px -8px rgba(80,60,10,.35)}
 body.bm-standalone #bmBack{display:none}
 @media print{#bmBack{display:none!important}}
@@ -710,12 +701,7 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;opa
   </div>
 </div>
 
-<!-- one sticky header stack: topbar + nav move as a unit so no gap can open between them -->
 <div class="hdr" id="hdr">
-  <div class="topbar" id="topbar"><div class="topbar-in">
-    <span class="brandmark">BM</span>
-    <nav class="wsw"><a href="audit.html">01 Audit</a><a href="framework.html">02 Framework</a><a href="index.html" class="on">03 Website</a></nav>
-  </div></div>
   <nav class="nav" id="nav"><div class="nav-in">
     <a class="wordmark" href="index.html" aria-label="Bangi Resort Hotel, home"><span class="logo3d"><span class="logo3d-in"><img class="ldep" src="assets/brh-logo-gold.png" alt="" aria-hidden="true" style="transform:translateZ(-7px)"><img class="ldep" src="assets/brh-logo-gold.png" alt="" aria-hidden="true" style="transform:translateZ(-5px)"><img class="ldep" src="assets/brh-logo-gold.png" alt="" aria-hidden="true" style="transform:translateZ(-3px)"><img class="ldep" src="assets/brh-logo-gold.png" alt="" aria-hidden="true" style="transform:translateZ(-1.5px)"><img class="lface" src="assets/brh-logo-gold.png" alt="Bangi Resort Hotel"></span></span></a>
     <div class="nav-links">
