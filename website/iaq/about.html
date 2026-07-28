@@ -225,8 +225,8 @@ body.embedded .topbar{display:none}
 .vtile:hover{transform:translateY(-4px);box-shadow:0 20px 40px -24px rgba(12,18,32,.28)}
 .vico{width:40px;height:40px;background:var(--blue);display:flex;align-items:center;justify-content:center;flex:none}
 .vico svg{width:21px;height:21px;stroke:#fff;opacity:0;transition:opacity .4s .1s}
-.vtile.iconed .vico{background:rgba(236,32,39,.10)}
-.vtile.iconed .vico svg{opacity:1;stroke:var(--blue-bright)}
+.vtile.iconed .vico{background:none}
+.vtile.iconed .vico svg{opacity:1;stroke:var(--ink)}
 .vtile h3{font-size:16.5px}
 .vtile p{font-size:13.3px;color:var(--soft);line-height:1.55}
 @media(max-width:960px){.vgrid{grid-template-columns:1fr 1fr}}
@@ -347,6 +347,7 @@ body.embedded .topbar{display:none}
 .fp-cap .dot.of{background:#FF3B44}
 .fp-cap .dot.dl{background:#9FB4D8}
 .fp-cap em{font-style:normal;color:#6C7A96;margin-left:4px}
+.fp-tag i{font-style:normal;margin-right:6px;font-size:1.15em;line-height:1;vertical-align:-1px}
 .fp-tag{position:absolute;left:0;top:0;z-index:2;pointer-events:none;opacity:0;font-family:"JetBrains Mono",monospace;font-size:8px;letter-spacing:.11em;text-transform:uppercase;color:#EDF2FC;font-weight:700;background:rgba(194,39,48,.88);padding:3px 7px;white-space:nowrap;transition:opacity .35s;will-change:transform}
 .fp-tag.hot{background:#EC2027;box-shadow:0 0 16px rgba(236,32,39,.55);transform-origin:left center}
 .fp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px}
@@ -568,19 +569,20 @@ body::after{content:"";position:fixed;inset:0;z-index:9998;pointer-events:none;o
 .vt-r .vico{grid-column:1;grid-row:1}
 .vt-r .vtx{grid-column:2;grid-row:1 / span 2}
 .vnum{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.18em;font-weight:700;color:var(--faint);transition:color .3s;align-self:center}
-.vtile .vico{width:40px;height:40px;border-radius:0;background:transparent;border:1px solid rgba(12,18,32,.16);display:flex;align-items:center;justify-content:center;position:relative;transition:border-color .3s,background .3s;align-self:start}
-.vtile .vico::before,.vtile .vico::after{content:"";position:absolute;width:7px;height:7px;border-color:rgba(236,32,39,.55);border-style:solid;transition:opacity .3s;opacity:0}
-.vtile .vico::before{top:-4px;left:-4px;border-width:1.5px 0 0 1.5px}
-.vtile .vico::after{bottom:-4px;right:-4px;border-width:0 1.5px 1.5px 0}
-.vtile .vico svg{width:20px;height:20px;stroke:var(--ink);opacity:.85;transition:stroke .3s}
+.vtile .vico{width:40px;height:40px;border:0;background:none;display:flex;align-items:center;justify-content:center;position:relative;transition:opacity .3s;align-self:start}
+.vtile .vico::before,.vtile .vico::after{content:none}
+
+
+.vtile .vico svg{width:24px;height:24px;stroke:var(--ink);opacity:.85;transition:stroke .3s,opacity .3s}
 .vtile h3{font-size:17.5px;letter-spacing:-.01em;transition:color .3s}
 .vtile p{font-size:13.3px;color:var(--soft);line-height:1.6;max-width:34ch}
 .vt-l p{margin-left:auto}
 .vtile.hot .vnum{color:#EC2027}
 .vtile.hot h3{color:#B5121B}
-.vtile.hot .vico{border-color:rgba(236,32,39,.6);background:rgba(236,32,39,.05)}
-.vtile.hot .vico svg{stroke:#EC2027}
-.vtile.hot .vico::before,.vtile.hot .vico::after{opacity:1}
+.vtile.hot .vico{background:none}
+.vtile.hot .vico svg{stroke:#EC2027;opacity:1}
+.vtile:not(.hot) .vico svg{stroke:var(--faint);opacity:.75}
+
 
 /* the core: floating 3D, no box */
 .vcore{position:relative;background:transparent;border:0;overflow:visible;display:flex;align-items:center;justify-content:center;min-height:460px;z-index:2}
@@ -594,7 +596,7 @@ body::after{content:"";position:fixed;inset:0;z-index:9998;pointer-events:none;o
 .vcross-t{top:6px}.vcross-b{bottom:6px}
 .vcross::after{content:"";position:absolute;top:50%;left:50%;width:14px;height:1px;background:inherit;transform:translate(-50%,-50%)}
 .vcore .vc-lab{position:absolute;left:50%;bottom:28px;transform:translateX(-50%);font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--faint);white-space:nowrap;z-index:3}
-.vcore .vc-cur{position:absolute;left:50%;top:22px;transform:translateX(-50%);font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:#EC2027;opacity:0;transition:opacity .3s;white-space:nowrap;z-index:3}
+.vcore .vc-cur{position:absolute;left:50%;bottom:6px;top:auto;transform:translateX(-50%);font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:#EC2027;opacity:0;transition:opacity .3s;white-space:nowrap;z-index:3}
 .vcore.lit .vc-cur{opacity:1}
 .vcore.lit .vc-lab{color:#B5121B}
 
@@ -854,6 +856,7 @@ body::after{content:"";position:fixed;inset:0;z-index:9998;pointer-events:none;o
   <div class="nav-links">
     <a href="index.html">Home</a><a href="about.html" class="here">About</a><span class="nav-dis" title="Not available in this demo" aria-disabled="true">Services</span><a href="projects.html">Projects</a><a href="careers.html">Careers</a>
   </div>
+  <button class="nav-search" type="button" aria-label="Search the site" title="Search ( / )"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></button>
   <a class="cta" href="contact.html">Start a project</a>
   <button class="nav-burger" id="navBurger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="navDrawer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path class="bx-lid" d="M12 2.6 20.4 7.4 12 12.2 3.6 7.4z"/><path class="bx-body" d="M3.6 7.4v9.2L12 21.4l8.4-4.8V7.4M3.6 7.4 12 12.2l8.4-4.8M12 12.2v9.2"/></svg></button>
 </div>
@@ -871,7 +874,7 @@ body::after{content:"";position:fixed;inset:0;z-index:9998;pointer-events:none;o
 <header class="ab-hero" id="top">
   <div class="plx-back" data-speed="0.22">
     <div class="ph-slot dark"><img class="hero-img" src="assets/about-hero-dusk.webp" alt=""></div>
-    <div class="ab-video" aria-hidden="true"><video id="abVid" muted loop playsinline autoplay preload="metadata" poster="assets/hero-campus-dusk.webp"><source src="assets/hero-campus-dusk.webm" type="video/webm"></video></div>
+    <div class="ab-video" aria-hidden="true"><video id="abVid" muted loop playsinline autoplay preload="metadata" poster="assets/hero-campus-dusk.webp"><source src="assets/hero-campus-dusk.mp4" type="video/mp4"></video></div>
     <div class="ab-scrim" aria-hidden="true"></div>
     <canvas class="ab-part" id="abPart" aria-hidden="true"></canvas>
   </div>
@@ -895,7 +898,7 @@ body::after{content:"";position:fixed;inset:0;z-index:9998;pointer-events:none;o
 <section class="manifesto" id="story">
   <div class="man-video" aria-hidden="true">
     <video id="manVid" muted loop playsinline autoplay preload="metadata" poster="assets/about-story-broll.webp">
-      <source src="assets/about-story-build.webm" type="video/webm">
+      <source src="assets/about-story-build.mp4" type="video/mp4">
     </video>
   </div>
   <div class="man-scrim" aria-hidden="true"></div>
@@ -1532,20 +1535,27 @@ body::after{content:"";position:fixed;inset:0;z-index:9998;pointer-events:none;o
     /* THE METAPHOR: six pillars, one per value, carry the roof over the site core.
        Remove any one and the structure fails. Hover a value: its pillar takes the load. */
     var g=new T.Group(); scene.add(g);
-    var rim2=new T.DirectionalLight(0x8FB5FF,0.9); rim2.position.set(-5,3,-4); scene.add(rim2);
-    var warm2=new T.PointLight(0xFFD9B0,0.45,12); warm2.position.set(2.4,2.6,2.4); scene.add(warm2);
+    var rim2=new T.DirectionalLight(0xDCE8FF,0.55); rim2.position.set(-5,3.4,-4); scene.add(rim2);
+    var warm2=new T.PointLight(0xFFFFFF,0.5,12); warm2.position.set(2.4,3.0,2.6); scene.add(warm2);
+    scene.add(new T.AmbientLight(0xffffff,.35));
     var RED=0xEC2027;
     function edges(mesh,c,o){ mesh.add(new T.LineSegments(new T.EdgesGeometry(mesh.geometry),
-      new T.LineBasicMaterial({color:c||0x2A3446,transparent:true,opacity:o||.3}))); return mesh; }
-    var ground=edges(new T.Mesh(new T.CylinderGeometry(2.3,2.3,0.1,6),
-      new T.MeshStandardMaterial({color:0xE7ECF4,roughness:.55})),0x2A3446,.25);
+      new T.LineBasicMaterial({color:c||0x9AA6BB,transparent:true,opacity:o||.22}))); return mesh; }
+    var ground=edges(new T.Mesh(new T.CylinderGeometry(1.96,2.04,0.075,72),
+      new T.MeshStandardMaterial({color:0xFFFFFF,roughness:.48,metalness:.02})),0x9AA6BB,.18);
     ground.position.y=-0.95; g.add(ground);
-    var roof=edges(new T.Mesh(new T.CylinderGeometry(1.82,1.82,0.09,6),
-      new T.MeshStandardMaterial({color:0xF2F5FA,roughness:.4})),0x2A3446,.35);
+    var roof=edges(new T.Mesh(new T.CylinderGeometry(1.8,1.84,0.048,72),
+      new T.MeshStandardMaterial({color:0xFFFFFF,roughness:.32,metalness:.02})),0x9AA6BB,.24);
     roof.position.y=0.72; g.add(roof);
-    var trim=new T.Mesh(new T.CylinderGeometry(1.86,1.86,0.03,6),
-      new T.MeshStandardMaterial({color:0xC22730,roughness:.5}));
-    trim.position.y=0.65; g.add(trim);
+    var roof2=new T.Mesh(new T.CylinderGeometry(1.68,1.74,0.032,72),
+      new T.MeshStandardMaterial({color:0xFCFDFF,roughness:.38,metalness:.02}));
+    roof2.position.y=0.678; g.add(roof2);
+    var groundStep=new T.Mesh(new T.CylinderGeometry(1.72,1.8,0.045,72),
+      new T.MeshStandardMaterial({color:0xFCFDFF,roughness:.48,metalness:.02}));
+    groundStep.position.y=-0.9; g.add(groundStep);
+    var trim=new T.Mesh(new T.TorusGeometry(1.74,0.006,10,90),
+      new T.MeshStandardMaterial({color:0xEC2027,roughness:.35,metalness:.05}));
+    trim.rotation.x=Math.PI/2; trim.position.y=0.657; g.add(trim);
     /* the IAQ mark, genuinely 3D: an extruded stack of layers that swings to face the viewer */
     var core=new T.Group(); core.position.y=-0.38; g.add(core);
     var coreFront=null;
@@ -1557,8 +1567,8 @@ body::after{content:"";position:fixed;inset:0;z-index:9998;pointer-events:none;o
           color:back?0x481014:0xFFFFFF});
         var lp=new T.Mesh(LG,lm); lp.position.z=-0.096+li*0.016; lp.renderOrder=li;
         core.add(lp); if(!back) coreFront=lm; } });
-    var ped=edges(new T.Mesh(new T.CylinderGeometry(0.3,0.34,0.16,6),
-      new T.MeshStandardMaterial({color:0xD7DFEA,roughness:.5})));
+    var ped=edges(new T.Mesh(new T.CylinderGeometry(0.3,0.34,0.13,24),
+      new T.MeshStandardMaterial({color:0xFCFDFF,roughness:.44,metalness:.02})));
     ped.position.y=-0.82; g.add(ped);
     function vlabel(i){ var cv=document.createElement('canvas'); cv.width=256; cv.height=96;
       var c=cv.getContext('2d'); c.font='700 44px "JetBrains Mono",monospace';
@@ -1566,70 +1576,177 @@ body::after{content:"";position:fixed;inset:0;z-index:9998;pointer-events:none;o
       var tex=new T.CanvasTexture(cv); if(T.SRGBColorSpace) tex.colorSpace=T.SRGBColorSpace;
       var sp2=new T.Sprite(new T.SpriteMaterial({map:tex,transparent:true,opacity:.12,depthWrite:false}));
       sp2.scale.set(0.62,0.23,1); sp2.material.opacity=0; return sp2; }
-    /* emblem statues: one crown per pillar, the value made literal */
-    function statue(i){ var st2=new T.Group();
-      var red=new T.MeshStandardMaterial({color:0xC22730,roughness:.38,metalness:.18});
-      var steel=new T.MeshStandardMaterial({color:0xB7C2D1,roughness:.35,metalness:.3});
-      var pl=new T.Mesh(new T.BoxGeometry(0.2,0.05,0.2),steel); pl.position.y=0.025; st2.add(pl);
-      var mv=new T.Group(); st2.add(mv); st2.userData.mv=mv; st2.userData.type=i;
-      if(i===0){ /* shield: guard heartbeat */
-        var sh=new T.Mesh(new T.CylinderGeometry(0.13,0.012,0.24,4,1),red); sh.position.y=0.19; sh.rotation.y=Math.PI/4; sh.scale.z=0.4; mv.add(sh);
-        var hb=new T.Mesh(new T.BoxGeometry(0.2,0.05,0.05),red); hb.position.y=0.32; mv.add(hb); }
-      else if(i===1){ /* gauge: needle sweeps */
-        var rg=new T.Mesh(new T.TorusGeometry(0.11,0.022,10,40),red); rg.position.y=0.2; mv.add(rg);
-        var nd=new T.Mesh(new T.BoxGeometry(0.02,0.1,0.02),steel); nd.geometry.translate(0,0.05,0); nd.position.y=0.2; mv.add(nd); st2.userData.needle=nd; }
-      else if(i===2){ /* gem: levitates */
-        var oc=new T.Mesh(new T.OctahedronGeometry(0.125),red); oc.position.y=0.21; mv.add(oc); }
-      else if(i===3){ /* gear: turns like a cog */
-        var gearG=new T.Group(); gearG.position.y=0.2; mv.add(gearG); st2.userData.gearG=gearG;
-        var gwheel=new T.Mesh(new T.CylinderGeometry(0.1,0.1,0.05,8),red); gwheel.rotation.x=Math.PI/2; gearG.add(gwheel);
-        for(var tt=0;tt<8;tt++){ var th=new T.Mesh(new T.BoxGeometry(0.034,0.034,0.05),red);
-          th.position.set(Math.cos(tt*Math.PI/4)*0.125,Math.sin(tt*Math.PI/4)*0.125,0); gearG.add(th); }
-        var hub=new T.Mesh(new T.CylinderGeometry(0.032,0.032,0.06,10),steel); hub.rotation.x=Math.PI/2; gearG.add(hub); }
-      else if(i===4){ /* bolt: strike pulse */
-        var b1=new T.Mesh(new T.BoxGeometry(0.065,0.16,0.04),red); b1.position.set(0.035,0.27,0); b1.rotation.z=0.5; mv.add(b1);
-        var b2=new T.Mesh(new T.BoxGeometry(0.065,0.16,0.04),red); b2.position.set(-0.035,0.14,0); b2.rotation.z=0.5; mv.add(b2); }
-      else { /* trophy: hoisted */
-        var cup=new T.Mesh(new T.CylinderGeometry(0.095,0.05,0.13,14),red); cup.position.y=0.26; mv.add(cup);
-        var stem=new T.Mesh(new T.CylinderGeometry(0.02,0.03,0.08,10),red); stem.position.y=0.16; mv.add(stem);
-        var bb=new T.Mesh(new T.BoxGeometry(0.12,0.03,0.12),red); bb.position.y=0.1; mv.add(bb); }
+    /* the emblem IS the statue: each value stands on its capital as a monument in its own right,
+       carved at scale, nobody holding it */
+    function statue(i){
+      var st2=new T.Group();
+      var stoneS=new T.MeshStandardMaterial({color:0xFCFDFF,roughness:.42,metalness:.03});
+      var stoneD=new T.MeshStandardMaterial({color:0xF4F7FB,roughness:.48,metalness:.02});
+      var red=new T.MeshStandardMaterial({color:0xEC2027,roughness:.3,metalness:.08});
+      var redD=new T.MeshStandardMaterial({color:0xC2151B,roughness:.34,metalness:.06});
+      /* a low plinth, the way a monument meets its pedestal */
+      var pl=new T.Mesh(new T.CylinderGeometry(0.11,0.125,0.04,28),stoneD); pl.position.y=0.02; st2.add(pl);
+      var mv=new T.Group(); mv.position.y=0.075; st2.add(mv);
+      st2.userData.mv=mv; st2.userData.type=i;
+
+      if(i===0){            /* SAFETY: a standing shield */
+        var sp=[new T.Vector2(0,0),new T.Vector2(0.085,0.055),new T.Vector2(0.1,0.145),
+                new T.Vector2(0.072,0.235),new T.Vector2(0,0.285)];
+        var shield=new T.Mesh(new T.LatheGeometry(sp,26),red);
+        shield.scale.z=0.34; mv.add(shield);
+        var rim=new T.Mesh(new T.TorusGeometry(0.098,0.008,8,30),stoneS);
+        rim.scale.set(1,1.35,0.34); rim.position.y=0.145; mv.add(rim);
+        var chev=new T.Mesh(new T.BoxGeometry(0.075,0.016,0.03),stoneS);
+        chev.position.set(0,0.15,0.03); mv.add(chev);
+      }else if(i===1){      /* QUALITY: a monumental dial */
+        var dial=new T.Mesh(new T.CylinderGeometry(0.115,0.115,0.035,34),red);
+        dial.rotation.x=Math.PI/2; dial.position.y=0.125; mv.add(dial);
+        var bez=new T.Mesh(new T.TorusGeometry(0.118,0.014,10,36),stoneS); bez.position.y=0.125; mv.add(bez);
+        var faceD=new T.Mesh(new T.CircleGeometry(0.098,30),stoneS); faceD.position.set(0,0.125,0.019); mv.add(faceD);
+        for(var q=0;q<12;q++){ var qa=q/12*Math.PI*2;
+          var tk=new T.Mesh(new T.BoxGeometry(0.007,q%3===0?0.024:0.013,0.006),redD);
+          tk.position.set(Math.cos(qa)*0.081,0.125+Math.sin(qa)*0.081,0.023); tk.rotation.z=qa+Math.PI/2; mv.add(tk); }
+        var nd=new T.Mesh(new T.BoxGeometry(0.011,0.078,0.009),red); nd.geometry.translate(0,0.039,0);
+        nd.position.set(0,0.125,0.028); mv.add(nd); st2.userData.needle=nd;
+      }else if(i===2){      /* INTEGRITY: a cut gem raised clear of its pedestal on a slender stem */
+        var stem=new T.Mesh(new T.CylinderGeometry(0.013,0.017,0.1,14),stoneS); stem.position.y=0.05; mv.add(stem);
+        var gem=new T.Mesh(new T.OctahedronGeometry(0.098,0),red); gem.position.y=0.2; mv.add(gem);
+        var facet=new T.LineSegments(new T.EdgesGeometry(new T.OctahedronGeometry(0.098,0)),
+          new T.LineBasicMaterial({color:0xFFFFFF,transparent:true,opacity:.5})); facet.position.y=0.2; mv.add(facet);
+      }else if(i===3){      /* ENGINEERING: a great cog set upright */
+        var gearG=new T.Group(); gearG.position.y=0.125; mv.add(gearG); st2.userData.gearG=gearG;
+        var gw=new T.Mesh(new T.CylinderGeometry(0.092,0.092,0.036,26),red); gw.rotation.x=Math.PI/2; gearG.add(gw);
+        for(var tt=0;tt<10;tt++){ var ta=tt*Math.PI*2/10;
+          var th=new T.Mesh(new T.BoxGeometry(0.03,0.03,0.038),red);
+          th.position.set(Math.cos(ta)*0.108,Math.sin(ta)*0.108,0); th.rotation.z=ta; gearG.add(th); }
+        var hub=new T.Mesh(new T.CylinderGeometry(0.03,0.03,0.042,18),stoneS); hub.rotation.x=Math.PI/2; gearG.add(hub);
+      }else if(i===4){      /* EFFICIENCY: a bolt driven upward */
+        var b1=new T.Mesh(new T.BoxGeometry(0.052,0.13,0.032),red); b1.position.set(0.026,0.155,0); b1.rotation.z=0.5; mv.add(b1);
+        var b2=new T.Mesh(new T.BoxGeometry(0.052,0.13,0.032),red); b2.position.set(-0.026,0.055,0); b2.rotation.z=0.5; mv.add(b2);
+      }else{                /* EXCELLENCE: a trophy on its stand */
+        var cupg=[new T.Vector2(0.012,0),new T.Vector2(0.03,0.024),new T.Vector2(0.026,0.07),
+                  new T.Vector2(0.088,0.098),new T.Vector2(0.095,0.2)];
+        var trophy=new T.Mesh(new T.LatheGeometry(cupg,26),red); trophy.position.y=0.022; mv.add(trophy);
+        [-1,1].forEach(function(sg){ var handle=new T.Mesh(new T.TorusGeometry(0.036,0.009,8,20,Math.PI),red);
+          handle.position.set(sg*0.092,0.178,0); handle.rotation.z=sg>0?-Math.PI/2:Math.PI/2; mv.add(handle); });
+      }
       return st2; }
-    var pillars=[];
+    var pillars=[],picks=[],P_pool=null;
     for(var i=0;i<6;i++){ var a=i*Math.PI/3+Math.PI/6, px=Math.cos(a)*1.42, pz=Math.sin(a)*1.42;
-      var mat=new T.MeshStandardMaterial({color:0x9AA6B8,roughness:.42,metalness:.12});
-      var col=edges(new T.Mesh(new T.BoxGeometry(0.24,1.5,0.24),mat),0x2A3446,.4);
+      var mat=new T.MeshStandardMaterial({color:0xFDFEFF,roughness:.33,metalness:.03});
+      var shaftPts=[];
+      for(var sv=0;sv<=12;sv++){ var u=sv/12; /* subtle entasis: a classical swell, not a tube */
+        shaftPts.push(new T.Vector2(0.072+0.009*Math.sin(Math.PI*u*0.86)-0.011*u, -0.75+1.5*u)); }
+      var col=new T.Mesh(new T.LatheGeometry(shaftPts,44),mat);
+      /* shallow flutes, finer now: carved, not corrugated */
+      for(var fl=0;fl<16;fl++){ var fa=fl/16*Math.PI*2;
+        var flute=new T.Mesh(new T.CylinderGeometry(0.0075,0.0075,1.44,6),
+          new T.MeshStandardMaterial({color:0xF8FAFD,roughness:.48,metalness:.02}));
+        flute.position.set(Math.cos(fa)*0.0735,0,Math.sin(fa)*0.0735); col.add(flute); }
       col.position.set(px,-0.13,pz); g.add(col);
-      var pad=edges(new T.Mesh(new T.BoxGeometry(0.4,0.09,0.4),
-        new T.MeshStandardMaterial({color:0xD7DFEA,roughness:.5})));
+      var pad=new T.Group();
+      var pd1=new T.Mesh(new T.CylinderGeometry(0.175,0.19,0.036,40),
+        new T.MeshStandardMaterial({color:0xFBFCFE,roughness:.44,metalness:.02})); pd1.position.y=0.018; pad.add(pd1);
+      var pd2=new T.Mesh(new T.TorusGeometry(0.135,0.018,10,40),
+        new T.MeshStandardMaterial({color:0xF7FAFD,roughness:.4,metalness:.03})); pd2.rotation.x=Math.PI/2; pd2.position.y=0.05; pad.add(pd2);
       pad.position.set(px,-0.87,pz); g.add(pad);
-      var cap=new T.Mesh(new T.BoxGeometry(0.34,0.06,0.34),
-        new T.MeshStandardMaterial({color:0xC22730,roughness:.5}));
+      var capMat=new T.MeshStandardMaterial({color:0xFDFEFF,roughness:.33,metalness:.03});
+      var cap=new T.Group();
+      var cp1=new T.Mesh(new T.TorusGeometry(0.115,0.018,10,40),capMat); cp1.rotation.x=Math.PI/2; cp1.position.y=-0.008; cap.add(cp1);
+      var cp2=new T.Mesh(new T.CylinderGeometry(0.165,0.142,0.036,40),capMat); cp2.position.y=0.028; cap.add(cp2);
+      cap.material=capMat;
       cap.position.set(px,0.645,pz); g.add(cap);
-      var beam=new T.Mesh(new T.CylinderGeometry(0.09,0.13,1.4,10),
-        new T.MeshBasicMaterial({color:0xFF4D55,transparent:true,opacity:0,depthWrite:false}));
-      beam.position.set(px,1.9,pz); g.add(beam);
+      /* a shaft of light that falls onto the chosen value */
+      var beam=new T.Mesh(new T.CylinderGeometry(0.028,0.15,1.9,24,1,true),
+        new T.MeshBasicMaterial({color:0xFFD9DB,transparent:true,opacity:0,depthWrite:false,
+          side:T.DoubleSide,blending:T.AdditiveBlending}));
+      beam.position.set(px,1.85,pz); g.add(beam);
+      /* a soft pool where the light lands */
+      var pool=new T.Mesh(new T.CircleGeometry(0.26,32),
+        new T.MeshBasicMaterial({color:0xEC2027,transparent:true,opacity:0,depthWrite:false}));
+      pool.rotation.x=-Math.PI/2; pool.position.set(px,0.768,pz); g.add(pool);
+      P_pool=pool;
       var lab=vlabel(i); lab.position.set(px*1.12,1.42,pz*1.12); g.add(lab);
       var ring=new T.Mesh(new T.TorusGeometry(0.36,0.014,8,60),
         new T.MeshBasicMaterial({color:RED,transparent:true,opacity:0}));
       ring.rotation.x=Math.PI/2; ring.position.set(px,-0.88,pz); g.add(ring);
-      var st=statue(i); st.position.set(px,0.765,pz); st.lookAt(0,0.765,0); g.add(st);
-      pillars.push({mat:mat,col:col,beam:beam.material,lab:lab.material,ring:ring,ringM:ring.material,a:a,px:px,pz:pz,st:st,cap:cap,h:0}); }
-    [2.6,3.0].forEach(function(rr,ri){ var gr3=new T.Mesh(new T.TorusGeometry(rr,0.006,6,110),
-      new T.MeshBasicMaterial({color:0x9AA6BB,transparent:true,opacity:ri?0.18:0.3}));
+      var st=statue(i); st.position.set(px,0.744,pz); st.lookAt(0,0.744,0); g.add(st);
+      /* an invisible column you can actually point at */
+      var pick=new T.Mesh(new T.CylinderGeometry(0.34,0.34,2.5,10),
+        new T.MeshBasicMaterial({transparent:true,opacity:0,depthWrite:false,depthTest:false}));
+      pick.position.set(px,0.05,pz); pick.userData.vi=i; g.add(pick); picks.push(pick);
+      pillars.push({pool:P_pool.material,mat:mat,col:col,beam:beam.material,lab:lab.material,ring:ring,ringM:ring.material,a:a,px:px,pz:pz,st:st,cap:cap,h:0}); }
+    [2.3,2.66].forEach(function(rr,ri){ var gr3=new T.Mesh(new T.TorusGeometry(rr,0.006,6,110),
+      new T.MeshBasicMaterial({color:0xB6C0D2,transparent:true,opacity:ri?0.14:0.24}));
       gr3.rotation.x=Math.PI/2; gr3.position.y=-1.02; g.add(gr3); });
     camera.position.set(0,1.85,10.4); camera.lookAt(0,0.0,0); var prjV=new T.Vector3(), vcv=document.getElementById('valCv');
-    var rotT=0.5, rot=0.5, base=new T.Color(0x9AA6B8), redC=new T.Color(0xFF3B44);
+    /* point at the temple itself: hover a pillar, click to hold it */
+    (function(){
+      if(!vcv) return;
+      var rayV=new T.Raycaster(), pv=new T.Vector2(-9,-9), lockV=-1;
+      window.__vSetLock=function(v){ lockV=v; };
+      function pickAt(e){
+        var r=vcv.getBoundingClientRect();
+        pv.x=((e.clientX-r.left)/r.width)*2-1; pv.y=-((e.clientY-r.top)/r.height)*2+1;
+        rayV.setFromCamera(pv,camera);
+        var h=rayV.intersectObjects(picks,false)[0];
+        return h?h.object.userData.vi:-1;
+      }
+      vcv.style.pointerEvents='auto';
+      var lastVi=-1, offT=null, settleT=null, turning=false;
+      window.__vTurning=function(){ turning=true; clearTimeout(settleT);
+        /* ignore new picks until the turn has settled, or the model would chase the cursor */
+        settleT=setTimeout(function(){turning=false;},620); };
+      vcv.addEventListener('pointermove',function(e){
+        window.__vCanvasHover=true;
+        if(turning) return;
+        var vi=pickAt(e);
+        vcv.style.cursor=vi>=0?'pointer':'default';
+        if(vi>=0){
+          clearTimeout(offT); offT=null;
+          if(vi!==lastVi){ lastVi=vi; if(window.__vHover)window.__vHover(vi); if(window.__vTurning)window.__vTurning(); }
+        }else if(lockV<0&&lastVi>=0&&!offT){
+          /* leaving a pillar: wait a beat before dropping it, so a shaky hand keeps the selection */
+          offT=setTimeout(function(){ offT=null; lastVi=-1; if(window.__vHover)window.__vHover(-1); },260);
+        }
+      });
+      vcv.addEventListener('pointerleave',function(){
+        window.__vCanvasHover=false; vcv.style.cursor='default';
+        clearTimeout(offT); offT=null; lastVi=-1;
+        if(lockV<0&&window.__vHover)window.__vHover(-1);
+      });
+      vcv.addEventListener('click',function(e){
+        var vi=pickAt(e);
+        if(vi<0) return;
+        lockV=(lockV===vi)?-1:vi;
+        window.__vCanvasHover=(lockV<0);   /* locked: allow the turn-to-face */
+        if(window.__vHover)window.__vHover(lockV<0?vi:lockV,lockV>=0);
+      });
+    })();
+    var rotT=0.5, rot=0.5, base=new T.Color(0xF7FAFD), redC=new T.Color(0xEC2027);
     return {tick:function(t,hot){
-      if(coreTarget>=0){ rotT=Math.PI/2-pillars[coreTarget].a; } else { rotT+=0.0016; }
-      var d=rotT-rot; d=Math.atan2(Math.sin(d),Math.cos(d)); rot+=d*0.07; g.rotation.y=rot;
+      /* only turn to face a value chosen from the tiles or a click: rotating while the cursor
+         is on the model would slide a different pillar under the pointer and oscillate */
+      /* bring the chosen value round to the front, wherever the choice came from */
+      if(coreTarget>=0){ rotT=pillars[coreTarget].a-Math.PI/2; } else { rotT+=0.0016; }
+      var d=rotT-rot; d=Math.atan2(Math.sin(d),Math.cos(d)); rot+=d*0.055; g.rotation.y=rot;
       var anyH=0;
       for(var i2=0;i2<6;i2++){ var P=pillars[i2], tgt=(coreTarget===i2)?1:0;
-        P.h+=(tgt-P.h)*0.09; anyH=Math.max(anyH,P.h);
-        P.mat.color.copy(base).lerp(redC,P.h);
+        P.h+=(tgt-P.h)*0.065; anyH=Math.max(anyH,P.h);
+        /* the chosen column lights from within, warm white into brand red at the capital */
+        P.mat.color.copy(base).lerp(new T.Color(0xFFFFFF),P.h);
+        if(P.mat.emissive)P.mat.emissive.setRGB(0.30*P.h,0.045*P.h,0.055*P.h);
+        P.cap.material.color.copy(new T.Color(0xFFFFFF)).lerp(redC,P.h);
+        if(P.cap.material.emissive)P.cap.material.emissive.setRGB(0.34*P.h,0.05*P.h,0.06*P.h);
         P.col.scale.y=1+0.05*P.h;
-        P.beam.opacity=0.15*P.h*(0.8+0.2*Math.sin(t*0.0028));
+        P.col.position.y=-0.13+0.045*P.h;
+        P.beam.opacity=0.22*P.h*(0.85+0.15*Math.sin(t*0.0022));
+        if(P.pool)P.pool.opacity=0.10*P.h;
         P.lab.opacity=P.h;
         var UD=P.st.userData, MV=UD.mv, amp=1+2.2*P.h;
+        /* the emblem itself lifts into full brand red when its value is chosen */
+        P.st.traverse(function(o){ if(o.material&&o.material.emissive&&o.material.color&&
+          o.material.color.r>0.5&&o.material.color.g<0.4){ o.material.emissive.setRGB(0.26*P.h,0.02*P.h,0.025*P.h); } });
         if(UD.type===0){ var hb3=1+(0.02+0.02*P.h)*Math.sin(t*0.0014); MV.scale.set(hb3,hb3,hb3); }
         else if(UD.type===1){ UD.needle.rotation.z=-0.55+(0.4+0.3*P.h)*Math.sin(t*0.001); }
         else if(UD.type===2){ MV.position.y=0.03*(1+0.6*P.h)*Math.sin(t*0.0012); MV.rotation.y=0.3*Math.sin(t*0.0006); }
@@ -1637,11 +1754,11 @@ body::after{content:"";position:fixed;inset:0;z-index:9998;pointer-events:none;o
         else if(UD.type===4){ var j2=Math.pow(Math.max(0,Math.sin(t*0.0014)),12);
           var js=1+0.09*j2*(0.6+0.6*P.h); MV.scale.set(js,js,js); }
         else { MV.position.y=(0.018+0.016*Math.sin(t*0.0008))*(1+0.6*P.h); MV.rotation.z=0.04*Math.sin(t*0.0007); }
-        var ss2=1+0.24*P.h; P.st.scale.set(ss2,ss2,ss2);
-        P.ringM.opacity=P.h*(0.4+0.22*Math.sin(t*0.0032));
+        var ss2=1.02+0.24*P.h; P.st.scale.set(ss2,ss2,ss2);
+        P.ringM.opacity=0;
         var rs=1+0.18*P.h*(0.5+0.5*Math.sin(t*0.002)); P.ring.scale.set(rs,rs,1); }
-      roof.position.y=0.72+0.05*anyH; trim.position.y=0.65+0.05*anyH;
-      for(var i5=0;i5<6;i5++){ pillars[i5].st.position.y=0.765+0.05*anyH; pillars[i5].cap.position.y=0.645+0.05*anyH; }
+      roof.position.y=0.72+0.05*anyH; roof2.position.y=0.678+0.05*anyH; trim.position.y=0.657+0.05*anyH;
+      for(var i5=0;i5<6;i5++){ pillars[i5].st.position.y=0.744+0.05*anyH; pillars[i5].cap.position.y=0.645+0.05*anyH; }
       if(window.__valTrack&&vcv){ g.updateMatrixWorld();
         var cr4=vcv.getBoundingClientRect(), pts4=[];
         for(var i6=0;i6<6;i6++){ var P6=pillars[i6];
@@ -1812,12 +1929,22 @@ body::after{content:"";position:fixed;inset:0;z-index:9998;pointer-events:none;o
     /* tile hover → core face + label */
     var names=['Safety commitment','Quality consistency','Honesty & integrity','Engineering capabilities','Efficiency & proficiency','Pursuit of excellence'];
     var coreEl=document.getElementById('vCore'), curEl=document.getElementById('vcCur');
-    document.querySelectorAll('.vtile[data-vi]').forEach(function(tile){
+    var tiles=[].slice.call(document.querySelectorAll('.vtile[data-vi]')), vLock=-1;
+    function setValue(vi,lock){
+      if(typeof lock==='boolean') vLock=lock?vi:-1;
+      if(vi<0&&vLock>=0) vi=vLock;
+      coreTarget=vi;
+      tiles.forEach(function(t){ t.classList.toggle('hot',parseInt(t.getAttribute('data-vi'),10)===vi); });
+      if(coreEl)coreEl.classList.toggle('lit',vi>=0);
+      if(curEl&&vi>=0)curEl.textContent=names[vi];
+    }
+    window.__vHover=setValue;
+    tiles.forEach(function(tile){
       var vi=parseInt(tile.getAttribute('data-vi'),10);
-      tile.addEventListener('pointerenter',function(){ coreTarget=vi; tile.classList.add('hot');
-        if(coreEl)coreEl.classList.add('lit'); if(curEl)curEl.textContent=names[vi]; });
-      tile.addEventListener('pointerleave',function(){ coreTarget=-1; tile.classList.remove('hot');
-        if(coreEl)coreEl.classList.remove('lit'); });
+      tile.style.cursor='pointer';
+      tile.addEventListener('pointerenter',function(){ window.__vCanvasHover=false; setValue(vi); });
+      tile.addEventListener('pointerleave',function(){ setValue(-1); });
+      tile.addEventListener('click',function(){ var lock=vLock!==vi; setValue(vi,lock); if(window.__vSetLock)window.__vSetLock(lock?vi:-1); });
     });
   }
   function load(i){ if(i>=URLS.length) return;
@@ -1838,8 +1965,8 @@ body::after{content:"";position:fixed;inset:0;z-index:9998;pointer-events:none;o
             'https://esm.sh/three@0.184.0'];
   var LAND='ffffffffffffffffffffffffffffffffffffffffffffffff|000000000000000000000000000000000000000000000000|800000000000000000000000000000000000000000000000|800000000000000000000000000000000000000000000001|8000000000000000003f8000000000000000000000000001|800000000000ffc1fffff000000000000000000000000001|8000000000001f1ffffff800009000000000000000000001|0000000040007c1ffffffc00000000000000070000000001|80000000090198003ffffc00000000008007fff0007c0001|80000003e00000003ffff800000000040ffffffff87f8001|800e000037067f8007ffd0000000000c1ffffffffffffc01|80ffffff3fcb19f017ffc000007fc007ffffffffffffffff|e0fffffff7dff0780ffc000001fffdffffffffffffffffff|98fffffffffff0780fc00f0003ffffffffffffffffffffff|80ffffffffff003807c006000fffffffffffffffffffffff|80fffffffffe01c0038000001fdffffffffffffffffffff8|80ff93fffffc01e0000000001fdfffffffffffffffffc701|000e00fffffe01fe000000060f9fffffffffffffffe01e01|0010007fffffc1ff000000060f1fffffffffffffff803c00|8000001ffffffbffc000001f0fffffffffffffffffc03801|8000000fffffffffc000001ffffffffffffffffffff01001|8000000fffffffff60000003fffffffffffffffffff00001|00000003ffffbffc70000003ffffffffffffffffffd00001|80000003ffffdffc10000001ffffffffffffffffffd00001|80000003fffff7fe00000001feff3fffffffffffff900001|80000003ffffffe00000001fc37e03cffffffffffc100001|80000003ffffffc00000001f80bfffcffffffffff8200001|80000003ffffff800000001f0013ffcffffffffff0200001|80000001ffffff000000001e7901ffffffffffffb8600001|80000000ffffff0000000007fc001fffffffffff13c00001|800000003ffffc000000000ffc003fffffffffff86000001|800000003ffff8000000001fff3c3fffffffffff80000001|800000000fff98000000003fffffffffffffffff80000001|800000001ff80c000000007fffffdfcfffffffff00000001|8000000003f80400000000ffffffcfe1fffffffe00000001|8000000001f00000000001ffffffeffe0ffffffe80000001|8000000000f04e00000001fffffff7fe07fffff000000001|8000000000f8c020000001fffffff7fe03fc7f2000000001|80000000007fc048000001fffffff3fc03f83f0080000001|80000000001fc000000001fffffffbf001e03f8180000001|800000000001f000000001ffffffffc001e00fc080000001|8000000000003000000001fffffffe0000c00bc040000001|80000000000030f3000000fffffffee000c0098040000001|8000000000001fff8000007fffffffe00060080060000001|80000000000001ffc000003fffffffc00020040060000001|80000000000001fff80000181fffffc00000160e00000001|80000000000001fffc00000007ffff8000000e1e00000001|80000000000003fffe00000007ffff0000000e3e00000001|80000000000007ffff00000007fffe000000073d82000001|80000000000007ffffe0000007fffc00000007bd8be00001|80000000000007fffff0000003fff8000000010100f80001|80000000000007fffffc000003fff80000000050007d0001|80000000000003fffffc000001fff8000000000020360001|80000000000001fffff8000001fffc000000000000010001|80000000000001fffff0000001fffc000000000007100000|80000000000000ffffe0000003fffc60000000001f100001|800000000000007fffe0000003fff8e0000000003f980001|800000000000003fffe0000003fff1c0000000007ffc0002|000000000000001fffe0000001ffe1c000000000fffe0000|000000000000001fffc0000001ffe1c000000007fffe0000|800000000000001fff00000001ffe1800000000fffff0001|800000000000003ffc00000000ffc0000000000fffff8001|800000000000003ffc00000000ffc0000000000fffff8001|800000000000003ffc000000007f800000000007ffff8001|000000000000003ff8000000007f000000000007ffff8001|800000000000003ff0000000003e000000000007c1ff0001|800000000000003fe00000000000000000000002007f0000|800000000000007fc00000000000000000000000003e0004|800000000000007f0000000000000000000000000000000c|800000000000007e00000000000000000000000000000014|800000000000007c00000000000000000000000000040031|800000000000007800000000000000000000000000000061|80000000000000f800000000000000000000000000000001|80000000000000f800000000000000000000000000000001|80000000000000f000000000000000000000000000000000|800000000000007000000000000000000000000000000001|800000000000003800000000000000000000000000000001|800000000000000000000000000000000000000000000001|800000000000000000000000000000000000000000000001|800000000000000000000000000000000000000000000001|800000000000000000000000000000000000000000000000|800000000000000000000000000000000000000000000001|800000000000000100000000000000000000000000000000|8000000000000007000000000000001c00001f9c7fc00001|800000000000000f000000000000e3fffe7ffffffffff001|800000000000007f0000001fffffffffffffffffffffff81|80000000003c007f000001ffffffffffffffffffffffff81|8000312ffc7fffff00001ffffffffffffffffffffffffe01|800dfffffffffffff000fffffffffffffffffffffffffe41|f03fffffffffffffffffffffffffffffffffffffffffffff|ffffffffffffffffffffffffffffffffffffffffffffffff|ffffffffffffffffffffffffffffffffffffffffffffffff|ffffffffffffffffffffffffffffffffffffffffffffffff|ffffffffffffffffffffffffffffffffffffffffffffffff|ffffffffffffffffffffffffffffffffffffffffffffffff|ffffffffffffffffffffffffffffffffffffffffffffffff'.split('|');
   var GW=192,GH=96,R=1.62;
-  var OFFICES=[[3.08,101.53,'Shah Alam \u00b7 HQ'],[5.18,100.49,'Penang'],[1.35,103.82,'Singapore'],
-               [51.05,13.74,'Dresden'],[46.6,2.4,'France'],[21.0,78.0,'India']];
+  var OFFICES=[[3.08,101.53,'Shah Alam \u00b7 HQ','\ud83c\uddf2\ud83c\uddfe'],[5.18,100.49,'Penang','\ud83c\uddf2\ud83c\uddfe'],[1.35,103.82,'Singapore','\ud83c\uddf8\ud83c\uddec'],
+               [51.05,13.74,'Dresden','\ud83c\udde9\ud83c\uddea'],[46.6,2.4,'France','\ud83c\uddeb\ud83c\uddf7'],[21.0,78.0,'India','\ud83c\uddee\ud83c\uddf3']];
   var DELIVERED=[[31.2,121.5],[63.8,20.3],[52.2,21.0],[33.6,-7.6]];
   var T,renderer,scene,camera,g,ofMat,dlMat,raf=null,visb=false,intro=0,tagEls=[],tagVs=[],prV;
   var travs=[],travGeo=null,travPts=null,travMat=null;
@@ -1903,7 +2030,8 @@ body::after{content:"";position:fixed;inset:0;z-index:9998;pointer-events:none;o
     var orb2=new T.Mesh(new T.TorusGeometry(R*1.42,0.003,8,140),new T.MeshBasicMaterial({color:0x33415E,transparent:true,opacity:.28}));
     orb2.rotation.x=Math.PI/2.05; orb2.rotation.y=-0.3; g.add(orb2);
     prV=new T.Vector3();
-    OFFICES.forEach(function(o){ var d=document.createElement('div'); d.className='fp-tag'; d.textContent=o[2];
+    OFFICES.forEach(function(o){ var d=document.createElement('div'); d.className='fp-tag';
+      d.innerHTML='<i>'+(o[3]||'')+'</i>'+o[2];
       host.appendChild(d); tagEls.push(d); var p=ll(o[0],o[1],R*1.02); tagVs.push(new T.Vector3(p[0],p[1],p[2])); });
     rotY=rotYt=-Math.PI/2-101*Math.PI/180; /* open on Malaysia */
     g.rotation.x=rotX; g.rotation.y=rotY;
@@ -1926,11 +2054,25 @@ body::after{content:"";position:fixed;inset:0;z-index:9998;pointer-events:none;o
   function tags(){
     var w=host.clientWidth,h=host.clientHeight;
     g.updateMatrixWorld();
+    var placed=[];
     for(var i=0;i<tagEls.length;i++){
       var wp=prV.copy(tagVs[i]).applyMatrix4(g.matrixWorld);
       var facing=wp.z>0.25; wp.project(camera);
-      tagEls[i].style.transform='translate('+Math.round((wp.x*0.5+0.5)*w+8)+'px,'+Math.round((-wp.y*0.5+0.5)*h-18)+'px)';
-      tagEls[i].style.opacity=(facing&&wp.z<1&&intro>0.6)?1:0; }
+      var vis=(facing&&wp.z<1&&intro>0.6);
+      var tx=(wp.x*0.5+0.5)*w+8, ty=(-wp.y*0.5+0.5)*h-18;
+      if(vis){
+        var tw=tagEls[i].offsetWidth||90, th=tagEls[i].offsetHeight||18, guard=0;
+        /* nudge downward until this tag clears every tag already placed */
+        for(var q=0;q<placed.length&&guard<24;q++){
+          var pz=placed[q];
+          if(Math.abs(tx-pz.x)<Math.max(tw,pz.w)*.82 && Math.abs(ty-pz.y)<th+5){
+            ty=pz.y+th+5; q=-1; guard++;
+          }
+        }
+        placed.push({x:tx,y:ty,w:tw});
+      }
+      tagEls[i].style.transform='translate('+Math.round(tx)+'px,'+Math.round(ty)+'px)';
+      tagEls[i].style.opacity=vis?1:0; }
   }
   function frame(ts){ raf=requestAnimationFrame(frame); if(!visb) return;
     var t=ts||0;
@@ -2900,5 +3042,171 @@ body::after{content:"";position:fixed;inset:0;z-index:9998;pointer-events:none;o
 .ab-hero .head.wrap{padding-left:var(--gut);padding-right:var(--gut)}
 .tl-head.wrap{padding-left:var(--gut);padding-right:var(--gut)}
 </style>
+<!-- ============ UNIVERSAL SEARCH ============ -->
+<style>
+.nav-search{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;flex:none;border:1px solid var(--line2);background:none;color:var(--soft);cursor:pointer;transition:border-color .25s,color .25s,transform .25s}
+.nav-search svg{width:16px;height:16px}
+.nav-search:hover{border-color:var(--blue);color:var(--blue-bright)}
+.us-overlay{position:fixed;inset:0;z-index:400;background:rgba(7,12,24,.52);backdrop-filter:blur(9px) saturate(1.2);-webkit-backdrop-filter:blur(9px) saturate(1.2);opacity:0;pointer-events:none;transition:opacity .3s ease}
+.us-overlay.open{opacity:1;pointer-events:auto}
+.us-panel{max-width:680px;margin:10vh auto 0;background:#fff;border:1px solid var(--line2);box-shadow:0 40px 90px rgba(7,12,24,.35);transform:translateY(-14px) scale(.985);opacity:0;transition:transform .38s cubic-bezier(.22,1,.36,1),opacity .3s ease;width:calc(100% - 32px)}
+.us-overlay.open .us-panel{transform:none;opacity:1}
+.us-bar{display:flex;align-items:center;gap:13px;padding:17px 20px;border-bottom:1px solid var(--line)}
+.us-bar>svg{width:18px;height:18px;color:var(--blue);flex:none}
+.us-bar input{flex:1;border:0;outline:0;background:none;font:600 17px/1.3 inherit;font-family:inherit;color:var(--ink);min-width:0}
+.us-bar input::placeholder{color:var(--faintest);font-weight:500}
+.us-esc{font-family:"JetBrains Mono",monospace;font-size:8.5px;letter-spacing:.1em;color:var(--faint);border:1px solid var(--line2);padding:4px 7px;flex:none;cursor:pointer}
+.us-results{max-height:56vh;overflow-y:auto;overscroll-behavior:contain}
+.us-group{font-family:"JetBrains Mono",monospace;font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);padding:13px 20px 6px;font-weight:700}
+.us-row{display:flex;align-items:center;gap:14px;width:100%;text-align:left;padding:10px 20px;border:0;border-left:2px solid transparent;background:none;cursor:pointer;text-decoration:none;transition:background .15s,border-color .15s}
+.us-row.sel,.us-row:hover{background:rgba(236,32,39,.045);border-left-color:var(--blue)}
+.us-row .us-tx{min-width:0;flex:1}
+.us-row .us-t{display:block;font-size:14px;font-weight:600;color:var(--ink);line-height:1.35}
+.us-row .us-t mark{background:none;color:var(--blue-bright);text-decoration:underline;text-underline-offset:2px}
+.us-row .us-d{display:block;font-size:11.5px;color:var(--soft);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.us-row .us-k{font-family:"JetBrains Mono",monospace;font-size:7.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);border:1px solid var(--line2);padding:3px 6px;flex:none;white-space:nowrap}
+.us-row .us-go{color:var(--faintest);flex:none;width:13px;height:13px;transition:transform .2s,color .2s}
+.us-row.sel .us-go,.us-row:hover .us-go{color:var(--blue-bright);transform:translateX(2px)}
+.us-none{padding:30px 20px;font-size:13.5px;color:var(--soft)}
+.us-none b{color:var(--ink)}
+.us-foot{display:flex;justify-content:space-between;align-items:center;padding:10px 20px;border-top:1px solid var(--line);font-family:"JetBrains Mono",monospace;font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.us-foot .us-n{color:var(--blue-bright);font-weight:700}
+html.us-lock,html.us-lock body{overflow:hidden}
+@media(max-width:640px){.us-panel{margin-top:14px}.us-results{max-height:62vh}.us-foot .us-keys{display:none}}
+
+/* the values model and its tiles stack on a phone */
+@media(max-width:760px){
+  /* the model was floating in dead space on a phone */
+  /* the temple owns the phone screen: full-bleed and tall enough to read the monuments */
+  .vcore{min-height:0;height:58vh;max-height:470px;margin:0 calc(var(--gut) * -1)}
+  .vcore canvas{height:100%}
+  .values .wrap{padding-bottom:0}
+  .vtile{grid-template-columns:34px 1fr;column-gap:11px}
+  .vtile h3{font-size:15.5px}
+  .vtile p{font-size:12.8px;max-width:none}
+  .vtile .vico{width:34px;height:34px}
+  .vtile .vico svg{width:20px;height:20px}
+}
+/* ============ mobile pass ============ */
+@media(max-width:760px){
+  /* nothing may push the page sideways */
+  html,body{max-width:100%;overflow-x:hidden}
+  /* the smallest mono labels were below comfortable reading size on a phone */
+  .eyebrow,.svc-tag,.lp-step,.lp-kick,.fm-k,.nd-k,.ph-cap,.note,.tag,.ref,.iso{font-size:10.5px!important}
+  .lp-tag .nm{font-size:10.5px!important}
+  .lp-tag .no{font-size:10px!important}
+  /* tap targets: nothing interactive under 40px */
+  .lp-tag{min-height:40px;padding:9px 8px!important}
+  .lp-steps button{min-height:44px}
+  .us-esc{min-height:34px;padding:8px 10px}
+  .nav-search{width:44px;height:44px}
+  .fchip,.ss,.clearbtn{min-height:40px;display:inline-flex;align-items:center}
+  .vtile{cursor:pointer}
+  /* footer navigation and search rows need a full tap target */
+  footer a,.close3d footer a{min-height:40px;display:inline-flex;align-items:center}
+  .us-row{padding:14px 18px}
+  .us-group{padding:15px 18px 7px}
+  .us-bar{padding:15px 16px}
+  .us-bar input{font-size:16px}
+}
+</style>
+<div class="us-overlay" id="usOverlay" role="dialog" aria-modal="true" aria-label="Search the site">
+  <div class="us-panel">
+    <div class="us-bar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <input id="usInput" type="search" placeholder="Search pages, services, projects, roles" aria-label="Search the site" autocomplete="off">
+      <button class="us-esc" id="usClose" type="button">ESC</button>
+    </div>
+    <div class="us-results" id="usResults" data-lenis-prevent></div>
+    <div class="us-foot"><span class="us-keys">&uarr;&darr; navigate &middot; &crarr; open</span><span><span class="us-n" id="usCount">0</span> results</span></div>
+  </div>
+</div>
+<script>
+(function(){
+  var DATA=[{"t":"Home","d":"IAQ Group homepage","k":"Page","u":"index.html","s":"home landing main"},{"t":"About IAQ","d":"Vision, mission, core values, awards, global presence","k":"Page","u":"about.html","s":"about overview history esg iso certification safety"},{"t":"Projects","d":"Project registry, filter by industry, location and tag","k":"Page","u":"projects.html","s":"projects registry portfolio reference past work"},{"t":"Careers","d":"16 open roles across five departments","k":"Page","u":"careers.html","s":"careers jobs vacancy hiring join internship graduate"},{"t":"Contact","d":"Start a project, offices and general enquiries","k":"Page","u":"contact.html","s":"contact start a project enquiry quote proposal phone email"},{"t":"The delivery cycle","d":"Five disciplines working as one continuous loop","k":"Section","u":"index.html#services","s":"services delivery cycle loop disciplines"},{"t":"Industries we serve","d":"Seven hi-tech industries, one standard of clean","k":"Section","u":"index.html#industries","s":"industries markets sectors"},{"t":"Engineering Design & Consultation","d":"Concept to detailed design across CSA and MEP","k":"Service","u":"index.html#services","s":"design consultation csa mep feasibility value engineering drawings"},{"t":"Procurement","d":"Tracked sourcing aligned to quality and budget","k":"Service","u":"index.html#services","s":"procurement sourcing vendor tender supply chain"},{"t":"Construction","d":"Construction programs on schedule and within budget","k":"Service","u":"index.html#services","s":"construction site management build trades"},{"t":"Testing & Commissioning","d":"Proven performance before you move in","k":"Service","u":"index.html#services","s":"testing commissioning validation t&c iso classification handover"},{"t":"Maintenance","d":"Protecting your investment, long after handover","k":"Service","u":"index.html#services","s":"maintenance preventive breakdown compliance lifecycle"},{"t":"EPCC","d":"Engineering, Procurement, Construction & Commissioning: full turnkey delivery","k":"Business model","u":"index.html#services","s":"epcc turnkey single contract business model"},{"t":"EPCM","d":"Engineering, Procurement & Construction Management","k":"Business model","u":"index.html#services","s":"epcm construction management business model"},{"t":"Process Critical Utilities & Total Tool Installation","d":"Critical utilities, tool hook-up and equipment integration","k":"Business model","u":"index.html#services","s":"process utilities tool hookup installation gases chemical"},{"t":"Energy Management","d":"Risk-free, no-upfront-cost energy saving solutions","k":"Business model","u":"index.html#services","s":"energy management efm audit retrofit savings cooling"},{"t":"Semiconductor","d":"Wafer fabs, backend plants, ISO 3 to 6 cleanrooms","k":"Industry","u":"projects.html#semiconductor","s":"industry market semiconductor"},{"t":"Data Centre","d":"Cooling and reliability for the digital world","k":"Industry","u":"projects.html#data-centre","s":"industry market data centre"},{"t":"EV Battery","d":"Contamination-controlled battery manufacturing","k":"Industry","u":"projects.html#ev-battery","s":"industry market ev battery"},{"t":"Photovoltaics","d":"Solar manufacturing facilities","k":"Industry","u":"projects.html#photovoltaic","s":"industry market photovoltaics"},{"t":"Pharmaceuticals & Hospitals","d":"Ultra-clean regulated environments","k":"Industry","u":"projects.html#pharma","s":"industry market pharmaceuticals & hospitals"},{"t":"Food & Beverages","d":"Hygienic farm to package facilities","k":"Industry","u":"projects.html#fnb","s":"industry market food & beverages"},{"t":"District Cooling & Heating","d":"Centralized cooling at scale","k":"Industry","u":"projects.html#district-cooling","s":"industry market district cooling & heating"},{"t":"Robert Bosch","d":"Testing manufacturing plant, 25,000 m2 greenfield","k":"Project","u":"project.html?p=0","s":"project semiconductor penang"},{"t":"Silterra","d":"Wafer fab facility and expansion, cleanroom package","k":"Project","u":"project.html?p=1","s":"project semiconductor kulim"},{"t":"Infineon","d":"Semiconductor backend plant, 43,000 m2 test and assembly","k":"Project","u":"project.html?p=2","s":"project semiconductor melaka ifkm"},{"t":"Texas Instruments","d":"DLP cleanroom facility","k":"Project","u":"project.html?p=3","s":"project semiconductor"},{"t":"MEMC","d":"Silicon wafer manufacturing, multi-class greenfield","k":"Project","u":"project.html?p=4","s":"project semiconductor"},{"t":"Northvolt","d":"Lithium-ion battery gigafactory dry room, 62,000 m2","k":"Project","u":"project.html?p=5","s":"project ev battery sweden dry room"},{"t":"ACC","d":"EV battery gigafab phase 1, 8,000 m2 dry room","k":"Project","u":"project.html?p=6","s":"project ev battery france"},{"t":"Svolt","d":"Lithium cell facility, 79,000 m2 air-conditioning","k":"Project","u":"project.html?p=7","s":"project ev battery"},{"t":"Pharmaniaga","d":"Pharmaceutical manufacturing plant, small volume parenteral","k":"Project","u":"project.html?p=8","s":"project pharma"},{"t":"Vital","d":"Healthcare manufacturing plant, medical device greenfield","k":"Project","u":"project.html?p=9","s":"project pharma medical"},{"t":"NUS","d":"Tissue culture laboratory, class 1K to 10K cleanroom","k":"Project","u":"project.html?p=10","s":"project pharma singapore laboratory"},{"t":"KLCC","d":"District cooling centre, Malaysia's largest","k":"Project","u":"project.html?p=11","s":"project district cooling kuala lumpur"},{"t":"Siemens","d":"Co-generative plant, first in Southeast Asia","k":"Project","u":"project.html?p=12","s":"project district cooling energy"},{"t":"Tunas","d":"Cool energy centre","k":"Project","u":"project.html?p=13","s":"project district cooling"},{"t":"T-Hasegawa","d":"Flavor manufacturing plant","k":"Project","u":"project.html?p=14","s":"project food beverage fnb"},{"t":"Matrix","d":"Flavor manufacturing plant","k":"Project","u":"project.html?p=15","s":"project food beverage fnb"},{"t":"Microsoft","d":"Data centre KUL03 phase 1, chilled and condenser water piping","k":"Project","u":"project.html?p=16","s":"project data centre kul03 cooling"},{"t":"First Solar","d":"Solar panel manufacturing plant, KMW building M&E works","k":"Project","u":"project.html?p=17","s":"project photovoltaic solar kulim"},{"t":"Manager, Commercial","d":"Open role at IAQ, apply now","k":"Job","u":"careers.html#q=Manager%2C%20Commercial","s":"job career vacancy opening"},{"t":"Engineer, Mechanical","d":"Open role at IAQ, apply now","k":"Job","u":"careers.html#q=Engineer%2C%20Mechanical","s":"job career vacancy opening"},{"t":"Senior Engineer, Mechanical","d":"Open role at IAQ, apply now","k":"Job","u":"careers.html#q=Senior%20Engineer%2C%20Mechanical","s":"job career vacancy opening"},{"t":"Senior Engineer, Electrical","d":"Open role at IAQ, apply now","k":"Job","u":"careers.html#q=Senior%20Engineer%2C%20Electrical","s":"job career vacancy opening"},{"t":"Engineer, Electrical","d":"Open role at IAQ, apply now","k":"Job","u":"careers.html#q=Engineer%2C%20Electrical","s":"job career vacancy opening"},{"t":"Engineer, Process","d":"Open role at IAQ, apply now","k":"Job","u":"careers.html#q=Engineer%2C%20Process","s":"job career vacancy opening"},{"t":"Senior Engineer, Process","d":"Open role at IAQ, apply now","k":"Job","u":"careers.html#q=Senior%20Engineer%2C%20Process","s":"job career vacancy opening"},{"t":"BIM Coordinator","d":"Open role at IAQ, apply now","k":"Job","u":"careers.html#q=BIM%20Coordinator","s":"job career vacancy opening"},{"t":"Engineer, QAQC","d":"Open role at IAQ, apply now","k":"Job","u":"careers.html#q=Engineer%2C%20QAQC","s":"job career vacancy opening"},{"t":"Manager, Project","d":"Open role at IAQ, apply now","k":"Job","u":"careers.html#q=Manager%2C%20Project","s":"job career vacancy opening"},{"t":"BIM Modeler","d":"Open role at IAQ, apply now","k":"Job","u":"careers.html#q=BIM%20Modeler","s":"job career vacancy opening"},{"t":"Manager, Construction","d":"Open role at IAQ, apply now","k":"Job","u":"careers.html#q=Manager%2C%20Construction","s":"job career vacancy opening"},{"t":"Site Safety Supervisor","d":"Open role at IAQ, apply now","k":"Job","u":"careers.html#q=Site%20Safety%20Supervisor","s":"job career vacancy opening"},{"t":"Document Controller","d":"Open role at IAQ, apply now","k":"Job","u":"careers.html#q=Document%20Controller","s":"job career vacancy opening"},{"t":"Manager, Finance","d":"Open role at IAQ, apply now","k":"Job","u":"careers.html#q=Manager%2C%20Finance","s":"job career vacancy opening"},{"t":"Senior Executive, Accounts","d":"Open role at IAQ, apply now","k":"Job","u":"careers.html#q=Senior%20Executive%2C%20Accounts","s":"job career vacancy opening"},{"t":"HQ Shah Alam","d":"No.12, Jalan Sungai Jeluh 32/192, Seksyen 32, 40460 Shah Alam","k":"Office","u":"contact.html","s":"office address headquarters selangor malaysia"}];
+  var ov=document.getElementById('usOverlay'), inp=document.getElementById('usInput'), res=document.getElementById('usResults'), cnt=document.getElementById('usCount');
+  var sel=0, rows=[];
+  var KIND_ORDER=['Page','Section','Service','Business model','Industry','Project','Job','Office'];
+  function openUS(){ov.classList.add('open');document.documentElement.classList.add('us-lock');setTimeout(function(){inp.focus();},60);run(inp.value);}
+  function closeUS(){ov.classList.remove('open');document.documentElement.classList.remove('us-lock');inp.blur();}
+  function esc(s){return s.replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function hi(t,q){
+    if(!q) return esc(t);
+    var i=t.toLowerCase().indexOf(q.toLowerCase());
+    if(i<0) return esc(t);
+    return esc(t.slice(0,i))+'<mark>'+esc(t.slice(i,i+q.length))+'</mark>'+esc(t.slice(i+q.length));
+  }
+  function run(q){
+    q=(q||'').trim();
+    var toks=q.toLowerCase().split(/\s+/).filter(Boolean);
+    var list;
+    if(!toks.length){
+      list=DATA.filter(function(d){return d.k==='Page'||d.k==='Section';}).map(function(d){return {d:d,sc:1};});
+    }else{
+      list=[];
+      DATA.forEach(function(d,ix){
+        var hay=(d.t+' '+d.d+' '+d.s).toLowerCase();
+        var ok=toks.every(function(t){return hay.indexOf(t)>=0;});
+        if(!ok) return;
+        var tl=d.t.toLowerCase(), sc=tl.indexOf(toks[0])===0?0:(tl.indexOf(toks[0])>=0?1:2);
+        list.push({d:d,sc:sc,ix:ix});
+      });
+      list.sort(function(a,b){return a.sc-b.sc||a.ix-b.ix;});
+      list=list.slice(0,14);
+    }
+    cnt.textContent=list.length;
+    if(!list.length){
+      res.innerHTML='<div class="us-none">Nothing for <b>'+esc(q)+'</b>. Try a client name, an industry, a service or a role.</div>';
+      rows=[];return;
+    }
+    var groups={};var order=[];
+    list.forEach(function(it){var k=it.d.k;if(!groups[k]){groups[k]=[];order.push(k);}groups[k].push(it.d);});
+    order.sort(function(a,b){return KIND_ORDER.indexOf(a)-KIND_ORDER.indexOf(b);});
+    var html='';
+    order.forEach(function(k){
+      html+='<div class="us-group">'+esc(k)+(groups[k].length>1?'s':'')+'</div>';
+      groups[k].forEach(function(d){
+        html+='<a class="us-row" href="'+d.u+'"><span class="us-tx"><span class="us-t">'+hi(d.t,q)+'</span><span class="us-d">'+esc(d.d)+'</span></span><span class="us-k">'+esc(d.k)+'</span><svg class="us-go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>';
+      });
+    });
+    res.innerHTML=html;
+    rows=[].slice.call(res.querySelectorAll('.us-row'));
+    sel=0; mark();
+  }
+  function mark(){rows.forEach(function(r,i){r.classList.toggle('sel',i===sel);});
+    if(rows[sel]){var r=rows[sel].getBoundingClientRect(),c=res.getBoundingClientRect();
+      if(r.bottom>c.bottom||r.top<c.top)rows[sel].scrollIntoView({block:'nearest'});}}
+  function go(url){
+    /* same-page hash: close and handle in place so it never dead-ends */
+    var here=location.pathname.split('/').pop()||'index.html';
+    if(url.indexOf(here+'#')===0){
+      closeUS();
+      var h=url.split('#')[1];
+      location.hash=h;
+      var t=document.getElementById(h); if(t)t.scrollIntoView({behavior:'smooth',block:'start'});
+      if(h.indexOf('q=')===0&&window.__usApplyQ)window.__usApplyQ(decodeURIComponent(h.slice(2)));
+      return;
+    }
+    location.href=url;
+  }
+  inp.addEventListener('input',function(){run(inp.value);});
+  inp.addEventListener('keydown',function(e){
+    if(e.key==='ArrowDown'){e.preventDefault();sel=Math.min(sel+1,rows.length-1);mark();}
+    else if(e.key==='ArrowUp'){e.preventDefault();sel=Math.max(sel-1,0);mark();}
+    else if(e.key==='Enter'&&rows[sel]){e.preventDefault();go(rows[sel].getAttribute('href'));}
+  });
+  res.addEventListener('click',function(e){var a=e.target.closest('.us-row');if(a){e.preventDefault();go(a.getAttribute('href'));}});
+  document.getElementById('usClose').addEventListener('click',closeUS);
+  ov.addEventListener('mousedown',function(e){if(e.target===ov)closeUS();});
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'&&ov.classList.contains('open')){closeUS();return;}
+    var tag=(e.target.tagName||'').toLowerCase();
+    var typing=tag==='input'||tag==='textarea'||e.target.isContentEditable;
+    if(((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k')||(!typing&&e.key==='/')){e.preventDefault();openUS();}
+  });
+  [].forEach.call(document.querySelectorAll('.nav-search'),function(b){b.addEventListener('click',openUS);});
+})();
+</script>
+
 </body>
 </html>

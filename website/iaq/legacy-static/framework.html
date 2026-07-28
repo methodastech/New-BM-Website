@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><link rel="icon" type="image/png" href="assets/iaq-logo.png"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IAQ Group · Website Framework · Brand Method</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{--paper:#F5F7FC;--paper2:#FCFDFF;--ink:#101626;--soft:#4A5468;--faint:#8A93A6;--line:#E2E7F1;--line2:#D6DCEA;--blue:#EC2027;--blue-deep:#B5121B;--wash:#FDEEEF;--ok:#1A8F5A;--warn:#C9941F;--red:#D7263D;--dark:#0A101F;--maxw:1080px;}
+  *{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+  body{font-family:"Inter",system-ui,sans-serif;background:var(--paper);color:var(--ink);font-size:16px;line-height:1.62;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}.mono{font-family:"JetBrains Mono",monospace}
+  .topbar{background:var(--dark);color:#EAF0FB;position:sticky;top:0;z-index:50;border-bottom:1px solid #232a40}
+  body.embedded .topbar{display:none}
+  .topbar-in{display:flex;align-items:center;justify-content:space-between;padding:12px 28px;max-width:var(--maxw);margin:0 auto;gap:12px;flex-wrap:wrap}
+  .brandmark{font-family:"JetBrains Mono",monospace;font-weight:700;letter-spacing:.07em;font-size:12.5px;text-transform:uppercase}
+  .brandmark{font-size:13.5px;letter-spacing:.08em}
+.wsw{display:flex;align-items:center;border:1px solid rgba(255,255,255,.24);border-radius:0;overflow:auto;max-width:100%;margin-left:auto}
+.wsw a{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#C7D3EE;text-decoration:none;padding:7px 12px;border-right:1px solid rgba(255,255,255,.18);white-space:nowrap;transition:background .25s,color .25s}
+.wsw a:last-child{border-right:0}
+.wsw a:hover{background:rgba(255,255,255,.09);color:#fff}
+.wsw a.on{background:#2536F5;color:#fff;font-weight:700}
+  .nav{border-bottom:1px solid var(--line);background:rgba(245,247,252,.97);position:sticky;top:48px;z-index:49;overflow-x:auto}
+  .nav-in{display:flex;gap:3px;padding:8px 28px;max-width:var(--maxw);margin:0 auto;white-space:nowrap}
+  .nav a{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--faint);text-decoration:none;padding:6px 10px;border-radius:8px}.nav a:hover{color:var(--ink);background:var(--wash)}.nav .ch-no{color:var(--blue-deep);font-weight:700;margin-right:6px}
+  .eyebrow{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--blue-deep);display:inline-flex;align-items:center;gap:10px;font-weight:600}
+  .hero{padding:50px 0 8px}.hero h1{font-family:"Fraunces",serif;font-weight:500;font-size:clamp(36px,5.6vw,62px);line-height:1.03;letter-spacing:-.02em;margin:18px 0 0}.hero h1 em{font-style:italic;color:var(--blue-deep)}
+  .hero .lede{font-size:clamp(17px,2vw,20px);color:var(--soft);max-width:66ch;margin:20px 0 0}
+  .vrow{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}.vchip{background:var(--paper2);border:1px solid var(--line);border-radius:999px;padding:8px 15px;font-size:13px;color:var(--soft)}
+  section{padding:32px 0}
+  .chapdiv{display:flex;align-items:baseline;gap:18px;padding:42px 0 4px;border-top:1px solid var(--line);margin-top:10px}.cd-no{font-family:"Fraunces",serif;font-weight:600;font-size:38px;color:var(--blue-deep);line-height:1}.cd-h{font-family:"Fraunces",serif;font-weight:500;font-size:27px;letter-spacing:-.01em}.cd-sub{font-size:15px;color:var(--soft);margin-top:5px}
+  .secmark{display:flex;align-items:center;gap:13px;margin-top:6px}.secicon{width:34px;height:34px;border-radius:9px;background:var(--dark);display:flex;align-items:center;justify-content:center;color:#FF8A90;flex:none}.secicon svg{width:17px;height:17px}
+  .sec-no{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--blue-deep);letter-spacing:.1em;text-transform:uppercase;font-weight:600}
+  h2{font-family:"Fraunces",serif;font-weight:500;font-size:clamp(25px,3.6vw,37px);line-height:1.08;letter-spacing:-.015em;margin:13px 0 0;max-width:26ch}
+  h3.sub{font-family:"Fraunces",serif;font-weight:500;font-size:22px;margin:30px 0 0}
+  .sec-intro{font-size:16.5px;color:var(--soft);max-width:72ch;margin:15px 0 0}.sec-intro b,.sec-intro strong{color:var(--ink)}.sec-intro em{color:var(--blue-deep)}
+  .grid{display:grid;gap:16px;margin-top:22px}.g2{grid-template-columns:repeat(auto-fit,minmax(290px,1fr))}.g3{grid-template-columns:repeat(auto-fit,minmax(225px,1fr))}
+  .card{background:var(--paper2);border:1px solid var(--line);border-radius:14px;padding:20px 21px}.card .tag{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--blue-deep);font-weight:700}.card h3{font-family:"Fraunces",serif;font-weight:500;font-size:19px;margin-top:8px}.card p{font-size:14px;color:var(--soft);margin-top:9px;line-height:1.55}.card p b{color:var(--ink)}
+  .card.dark{background:var(--dark);border-color:#232a40;color:#D6DEF2}.card.dark h3{color:#fff}.card.dark p{color:#AEB9D2}.card.dark .tag{color:#FF8A90}.card.dark p b{color:#fff}
+  table{width:100%;border-collapse:separate;border-spacing:0;margin-top:18px;font-size:14px;background:var(--paper2);border:1px solid var(--line);border-radius:12px;overflow:hidden}th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}thead th{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#fff;background:var(--dark)}tr:last-child td{border-bottom:none}td.dim{font-weight:600;white-space:nowrap}td.sc{font-family:"JetBrains Mono",monospace;color:var(--blue-deep);font-weight:700;white-space:nowrap}
+  .vtag{font-family:"JetBrains Mono",monospace;font-size:9.5px;text-transform:uppercase;letter-spacing:.04em;padding:3px 8px;border-radius:6px;font-weight:700}.vtag.hi{background:rgba(26,143,90,.14);color:var(--ok)}.vtag.lo{background:rgba(201,148,31,.16);color:#9a6f12}
+  .diagram{margin-top:18px;border:1px solid var(--line);border-radius:14px;background:var(--paper2);padding:18px}.diagram .cap{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--faint);margin-bottom:10px}.diagram svg{width:100%;height:auto;display:block}
+  .pin{margin-top:22px;border-left:3px solid var(--blue);background:linear-gradient(90deg,rgba(236,32,39,.06),transparent);padding:15px 19px;border-radius:0 12px 12px 0;font-size:15px;display:block}.pin b{color:var(--blue-deep)}.pin.warn{border-left-color:var(--warn);background:linear-gradient(90deg,rgba(201,148,31,.09),transparent)}.pin.warn b{color:#9a6f12}
+  .tree{font-family:"JetBrains Mono",monospace;font-size:12.5px;line-height:1.9;background:var(--paper2);border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin-top:18px;overflow-x:auto;white-space:pre}
+  .tree b{color:var(--blue-deep)}.tree i{font-style:normal;color:var(--faint)}.tree .lk{color:#9a6f12}
+  /* ===== HOMEPAGE BLUEPRINT (wireframes) ===== */
+  .bplegend{display:flex;flex-wrap:wrap;gap:16px;margin-top:24px;padding:14px 18px;border:1px solid var(--line);border-radius:12px;background:var(--paper2)}
+  .bplegend .lg{display:flex;align-items:center;gap:8px;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.04em;color:var(--faint);text-transform:uppercase}
+  .bplegend .sw{width:18px;height:11px;border:1px solid var(--line2);border-radius:1px}
+  .bplegend .sw.b{background:rgba(16,22,38,.04)}
+  .bplegend .sw.act{border-color:rgba(236,32,39,.55);background:rgba(236,32,39,.12)}
+  .bplegend .sw.cy{border-color:rgba(14,116,144,.5);background:rgba(14,116,144,.14)}
+  .bplist{margin-top:26px;display:flex;flex-direction:column}
+  .bp{display:grid;grid-template-columns:40px 196px 1fr;gap:22px;align-items:start;padding:22px 0;border-top:1px solid var(--line)}
+  .bp:first-child{border-top:0}
+  .bp .bp-n{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--blue-deep);font-weight:700;padding-top:3px}
+  .bp h3{font-family:"Fraunces",serif;font-weight:500;font-size:19px}
+  .bp .bp-purpose{color:var(--soft);font-size:13.5px;margin-top:6px;max-width:60ch}
+  .bp .bp-meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .bp .bp-meta span{font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.04em;color:var(--faint);border:1px solid var(--line);padding:5px 9px}
+  .bp .bp-meta span b{color:var(--blue-deep);font-weight:500}
+  .bp .bp-why{font-size:13px;color:var(--soft);margin-top:11px;max-width:62ch;line-height:1.6}
+  .bp .bp-why b{color:var(--ink);font-weight:600}
+  @media(max-width:720px){.bp{grid-template-columns:34px 1fr;gap:14px}.bp .wf{grid-column:1/-1;order:3}}
+  /* wireframe primitives */
+  .wf{border:1px solid var(--line2);background:linear-gradient(180deg,rgba(16,22,38,.035),rgba(16,22,38,0));border-radius:2px;padding:9px;display:flex;flex-direction:column;gap:5px;height:120px;overflow:hidden}
+  .wf .h{height:8px;width:62%;background:var(--line2);border-radius:1px}
+  .wf .h.lg{height:11px;width:78%}
+  .wf .h.sm{height:5px;width:42%;background:var(--line)}
+  .wf .t{height:4px;width:84%;background:var(--line);border-radius:1px}
+  .wf .t.s{width:60%}
+  .wf .row{display:flex;gap:5px;flex:1;min-height:0}
+  .wf .col{display:flex;flex-direction:column;gap:4px;flex:1;min-height:0}
+  .wf .b{flex:1;border:1px solid var(--line);background:rgba(16,22,38,.035);border-radius:1px}
+  .wf .b.act{border-color:rgba(236,32,39,.55);background:rgba(236,32,39,.10)}
+  .wf .b.cy{border-color:rgba(14,116,144,.45);background:rgba(14,116,144,.12)}
+  .wf .pill{height:9px;width:34%;background:#EC2027;opacity:.75;border-radius:1px}
+  .wf .chips{display:flex;gap:4px}
+  .wf .chips span{height:6px;width:20px;background:var(--line2);border-radius:1px}
+  .wf .badges{display:flex;gap:4px}
+  .wf .badges span{flex:1;height:14px;border:1px solid var(--line);border-radius:1px}
+  .wf .tabs{display:flex;gap:4px}
+  .wf .tabs span{height:7px;width:26px;background:var(--line);border-radius:1px}
+  .wf .tabs span.on{background:#EC2027;opacity:.8}
+  .wf .ctr{align-items:center}.wf .ctr .h,.wf .ctr .t{margin:0 auto}
+  .wf .steps{display:flex;align-items:center;gap:0;flex:1}
+  .wf .steps i{width:13px;height:13px;border-radius:50%;border:1px solid var(--line2);flex:none}
+  .wf .steps i.on{border-color:#EC2027;background:rgba(236,32,39,.14)}
+  .wf .steps .ln{height:1px;flex:1;background:var(--line2)}
+  .wfgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:18px}
+  .wfgrid .wfcell .cap{font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--blue-deep);font-weight:700;margin-bottom:8px}
+  .wfgrid .wf{height:150px}
+  footer{padding:34px 0 70px;color:var(--faint);font-size:12px;font-family:"JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.05em;border-top:1px solid var(--line);margin-top:30px}
+  .ic{stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="topbar-in"><span class="brandmark">BM</span><nav class="wsw"><a href="audit.html">01 Audit</a><a href="framework.html" class="on">02 Framework</a><a href="index.html">03 Website</a></nav></div></div>
+<div class="nav"><div class="nav-in">
+  <a href="#c1"><span class="ch-no">01</span>The Flow</a><a href="#c2"><span class="ch-no">02</span>Sitemap</a><a href="#c3"><span class="ch-no">03</span>Homepage</a><a href="#c4"><span class="ch-no">04</span>Tagging</a><a href="#c5"><span class="ch-no">05</span>3D &amp; Motion</a><a href="#c6"><span class="ch-no">06</span>The Build</a><a href="#c7"><span class="ch-no">07</span>Timeline</a><a href="#c8"><span class="ch-no">08</span>Inputs</a>
+</div></div>
+
+<div class="wrap">
+  <header class="hero">
+    <span class="eyebrow">Website Framework · Brand Method</span>
+    <img src="assets/iaq-logo.png" alt="IAQ" style="height:52px;width:auto;display:block;margin:0 0 22px">
+    <h1>IAQ Group, <em>the Website Framework</em></h1>
+    <p class="lede">The blueprint the new site is built on: the conversion flow, the sitemap with a gated investor section, the homepage section by section, the tag spine that powers every filter, the 3D plan, the build stack and the road to September. Tab 03 of this workspace is this framework, already running as a working prototype, Projects and Careers included.</p>
+    <div class="vrow"><span class="vchip">Custom build, no WordPress</span><span class="vchip">One tag spine</span><span class="vchip">3D as the headline act</span><span class="vchip">September launch</span></div>
+  </header>
+
+  <!-- 01 THE FLOW -->
+  <div class="chapdiv" id="c1"><span class="cd-no">01</span><div><div class="cd-h">The Flow</div><div class="cd-sub">Three visitors, one site, three jobs done.</div></div></div>
+  <section style="padding-top:14px">
+    <div class="secmark"><span class="secicon"><svg viewBox="0 0 24 24" class="ic"><path d="M4 12h16M14 6l6 6-6 6"/></svg></span><span class="sec-no">01 · Who arrives, what must happen</span></div>
+    <h2>Every page earns one of three outcomes</h2>
+    <p class="sec-intro">The site is engineered around its three real audiences. Each has a distinct path, and every section exists to move one of them forward. Nothing decorative survives this rule.</p>
+    <div class="grid g3">
+      <div class="card"><span class="tag">Visitor 1 · The buyer</span><h3>MNC capex &amp; facility leads</h3><p><b>Path:</b> lands on Home or a project page from a referral or search, feels the engineering grade in five seconds, filters the registry to their industry and region, forwards two projects to a colleague, submits an enquiry.</p></div>
+      <div class="card"><span class="tag">Visitor 2 · The investor</span><h3>Analysts, media, the listing</h3><p><b>Path:</b> verifies the story pre-listing: scale, record, governance signals, newsroom. On listing day the IR gate opens and the same visitor finds reports and announcements in two clicks.</p></div>
+      <div class="card"><span class="tag">Visitor 3 · The hire</span><h3>Senior engineering talent</h3><p><b>Path:</b> checks whether IAQ is career-grade: the projects say yes, the culture signals say yes, the career engine filters to their location and discipline, they apply.</p></div>
+    </div>
+    <div class="diagram"><div class="cap">Diagram · the conversion flow, per visitor</div>
+      <svg viewBox="0 0 880 240" role="img" aria-label="Three visitor flows converging on enquiry, investor readiness and application">
+        <g font-family="Inter,sans-serif" font-size="12.5" font-weight="600">
+          <rect x="20" y="30" width="150" height="36" rx="8" fill="rgba(236,32,39,.12)" stroke="#EC2027"/><text x="95" y="53" text-anchor="middle" fill="#B5121B">Buyer</text>
+          <rect x="20" y="100" width="150" height="36" rx="8" fill="rgba(236,32,39,.12)" stroke="#EC2027"/><text x="95" y="123" text-anchor="middle" fill="#B5121B">Investor</text>
+          <rect x="20" y="170" width="150" height="36" rx="8" fill="rgba(236,32,39,.12)" stroke="#EC2027"/><text x="95" y="193" text-anchor="middle" fill="#B5121B">Hire</text>
+          <rect x="330" y="30" width="220" height="36" rx="8" fill="#FCFDFF" stroke="#D6DCEA"/><text x="440" y="53" text-anchor="middle" fill="#101626">Registry, filtered proof</text>
+          <rect x="330" y="100" width="220" height="36" rx="8" fill="#FCFDFF" stroke="#D6DCEA"/><text x="440" y="123" text-anchor="middle" fill="#101626">Story + newsroom + IR gate</text>
+          <rect x="330" y="170" width="220" height="36" rx="8" fill="#FCFDFF" stroke="#D6DCEA"/><text x="440" y="193" text-anchor="middle" fill="#101626">Career engine, filtered roles</text>
+          <rect x="700" y="30" width="160" height="36" rx="8" fill="rgba(26,143,90,.14)" stroke="#1A8F5A"/><text x="780" y="53" text-anchor="middle" fill="#14724a">Enquiry sent</text>
+          <rect x="700" y="100" width="160" height="36" rx="8" fill="rgba(26,143,90,.14)" stroke="#1A8F5A"/><text x="780" y="123" text-anchor="middle" fill="#14724a">Listing-day ready</text>
+          <rect x="700" y="170" width="160" height="36" rx="8" fill="rgba(26,143,90,.14)" stroke="#1A8F5A"/><text x="780" y="193" text-anchor="middle" fill="#14724a">Application in</text>
+        </g>
+        <g stroke="#8A93A6" stroke-width="1.6" fill="none">
+          <path d="M170 48 H 330"/><path d="M170 118 H 330"/><path d="M170 188 H 330"/>
+          <path d="M550 48 H 700"/><path d="M550 118 H 700"/><path d="M550 188 H 700"/>
+        </g>
+      </svg></div>
+    <span class="pin"><b>The rule that governs everything:</b> five seconds to credibility, thirty seconds to relevant proof, two minutes to action. Every design and engineering choice below serves those three clocks.</span>
+  </section>
+
+  <!-- 02 SITEMAP -->
+  <div class="chapdiv" id="c2"><span class="cd-no">02</span><div><div class="cd-h">Sitemap</div><div class="cd-sub">The architecture, including the gated investor section.</div></div></div>
+  <section style="padding-top:14px" id="ir">
+    <div class="secmark"><span class="secicon"><svg viewBox="0 0 24 24" class="ic"><path d="M12 3v6M12 9l-7 5M12 9l7 5M5 14v5M19 14v5M12 14v7"/></svg></span><span class="sec-no">02 · Architecture</span></div>
+    <h2>Lean public structure, one hidden wing</h2>
+    <div class="tree"><b>Home</b>  <i>the flagship, prototype in tab 03</i>
+├─ <b>About</b>            Overview · History · Corporate commitment · Leadership
+├─ <b>Markets</b>          7 industry pages, one template, tag-driven project pulls
+├─ <b>Services</b>         5 disciplines, one accountable-delivery story
+├─ <b>Projects</b>         the tagged registry, live in the prototype nav
+├─ <b>Careers</b>          the filter engine, live in the prototype nav
+├─ <b>Newsroom</b>         articles, tagged and filterable, feeds Markets pages
+├─ <b>Contact</b>          enquiry routing by intent: project, career, media
+└─ <span class="lk">Investor Relations</span>   <i>hidden + password-gated + unindexed until listing day</i>
+    ├─ Announcements · Reports · Governance · Share information
+    └─ <i>switched public in one deploy, structure built now</i></div>
+    <div class="grid g2" style="margin-top:18px">
+      <div class="card"><span class="tag">Global elements</span><h3>On every page</h3><p>Sticky nav with one CTA ("Start a project"), the Investors item visible but lock-marked pre-listing, a compliance footer (ISO 9001, 14001, 45001, CIDB), and the tag spine underneath everything.</p></div>
+      <div class="card dark"><span class="tag">The IR gate</span><h3>How hidden works</h3><p>The IR wing ships <b>noindex, unlinked from public nav flows, and password-protected at the edge</b>. Content is prepared quietly during development. On listing day the gate opens with one configuration change, no rebuild, no downtime.</p></div>
+    </div>
+  </section>
+
+  <!-- 03 HOMEPAGE -->
+  <div class="chapdiv" id="c3"><span class="cd-no">03</span><div><div class="cd-h">The Homepage</div><div class="cd-sub">Wireframed band by band. Tab 03 is this blueprint, running.</div></div></div>
+  <section style="padding-top:14px">
+    <div class="secmark"><span class="secicon"><svg viewBox="0 0 24 24" class="ic"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18M8 21h8"/></svg></span><span class="sec-no">03 · The flagship, engineered</span></div>
+    <h2>One scrolling page, wireframed band by band</h2>
+    <p class="sec-intro">Eleven bands, rhythm alternating busy and calm so the eye rests. Each band has a job, a layout, a motion, and the reasoning. The wireframes are schematic on purpose: structure first, polish second. Tab 03 is this blueprint, running.</p>
+    <div class="bplegend">
+      <div class="lg"><span class="sw b"></span>Content block</div>
+      <div class="lg"><span class="sw act"></span>IAQ red · primary action</div>
+      <div class="lg"><span class="sw cy"></span>Cyan · air &amp; 3D signal</div>
+    </div>
+    <div class="bplist">
+
+      <div class="bp">
+        <div class="bp-n">00</div>
+        <div class="wf"><div class="row" style="flex:0 0 auto"><div class="h sm" style="flex:1"></div><div class="chips" style="margin-left:auto"><span></span><span></span><span></span></div><div class="pill" style="width:40px"></div></div><div class="b" style="opacity:.4"></div></div>
+        <div class="bp-body"><h3>Nav</h3><p class="bp-purpose">Orient, always offer the action. Wordmark, section links, the lock-marked Investors item, one CTA.</p><div class="bp-meta"><span>Layout · <b>sticky bar</b></span><span>Motion · solidifies on scroll, blur backdrop</span></div><p class="bp-why"><b>Why.</b> The visible lock on Investors quietly signals the listing without publishing anything before its day.</p></div>
+      </div>
+
+      <div class="bp">
+        <div class="bp-n">01</div>
+        <div class="wf"><div class="row"><div class="col" style="flex:1.4"><div class="h sm"></div><div class="h lg"></div><div class="h lg" style="width:62%"></div><div class="t"></div><div class="row" style="flex:0 0 auto"><div class="pill"></div><div class="b" style="max-width:48px"></div></div><div class="chips"><span></span><span></span><span></span><span></span></div></div><div class="b cy" style="flex:.9"></div></div></div>
+        <div class="bp-body"><h3>Hero · the power statement</h3><p class="bp-purpose">"We build the environments where the future is made", over a live laminar particle field: turbulence resolving into clean order. The metaphor is the business.</p><div class="bp-meta"><span>Layout · <b>left-weighted</b>, field right</span><span>Motion · masked line reveal, decode eyebrow, count-up chips, cursor bends the airflow</span></div><p class="bp-why"><b>Why.</b> Credibility must be legible at rest: claim, copy and CTA are visible in CSS before any script runs. On phones the field sits between the headline and the copy.</p></div>
+      </div>
+
+      <div class="bp">
+        <div class="bp-n">02</div>
+        <div class="wf"><div class="ctr col" style="flex:0 0 auto"><div class="h sm"></div></div><div class="badges"><span></span><span></span><span></span><span></span><span></span><span></span></div><div class="t s" style="margin:0 auto"></div></div>
+        <div class="bp-body"><h3>Client proof</h3><p class="bp-purpose">Bosch, Infineon, Texas Instruments, Northvolt, Siemens in the first screen and a half.</p><div class="bp-meta"><span>Layout · <b>single quiet band</b></span><span>Motion · slow marquee, masked edges</span></div><p class="bp-why"><b>Why.</b> Trust is felt before it is read. Real client names, no logo soup, no carousel controls.</p></div>
+      </div>
+
+      <div class="bp">
+        <div class="bp-n">03</div>
+        <div class="wf"><div class="h sm"></div><div class="row"><div class="b"></div><div class="b"></div><div class="b"></div></div><div class="row"><div class="b"></div><div class="b"></div><div class="b"></div></div></div>
+        <div class="bp-body"><h3>The record</h3><p class="bp-purpose">Six verified numbers: 32 years, 1,050,000 m², 230+ projects, 8 countries, 450 people, 2.6M safe manhours.</p><div class="bp-meta"><span>Layout · <b>stat grid</b>, 2-up on phones</span><span>Motion · count-up once on entry</span></div><p class="bp-why"><b>Why.</b> One source of truth per number, ending the 230 vs 235 problem the audit found.</p></div>
+      </div>
+
+      <div class="bp">
+        <div class="bp-n">04</div>
+        <div class="wf"><div class="h sm"></div><div class="t"></div><div class="t"></div><div class="t"></div><div class="t s"></div><div class="t s"></div></div>
+        <div class="bp-body"><h3>Services</h3><p class="bp-purpose">Five disciplines as an engineering index: design, procurement, construction, T&amp;C, maintenance.</p><div class="bp-meta"><span>Layout · <b>numbered index rows</b></span><span>Motion · staggered reveal, underline draw on hover</span></div><p class="bp-why"><b>Why.</b> An index reads as one accountable delivery, not five separate departments.</p></div>
+      </div>
+
+      <div class="bp">
+        <div class="bp-n">05</div>
+        <div class="wf"><div class="h sm"></div><div class="row"><div class="b"></div><div class="b"></div><div class="b"></div><div class="b"></div></div><div class="row"><div class="b"></div><div class="b act"></div><div class="b"></div></div></div>
+        <div class="bp-body"><h3>Industries</h3><p class="bp-purpose">Seven tiles with bespoke line icons, each deep-linking into the registry pre-filtered.</p><div class="bp-meta"><span>Layout · <b>tile grid</b>, 2-up on phones</span><span>Motion · hover lift, baseline draw</span></div><p class="bp-why"><b>Why.</b> The homepage teaches the filtering: tap Semiconductor, land on the registry already filtered.</p></div>
+      </div>
+
+      <div class="bp">
+        <div class="bp-n">06</div>
+        <div class="wf"><div class="tabs"><span class="on"></span><span></span><span></span><span></span></div><div class="row"><div class="col" style="flex:1"><div class="t"></div><div class="t s"></div><div class="h sm"></div></div><div class="b cy" style="flex:1.3"></div></div></div>
+        <div class="bp-body"><h3>3D showpiece · pinned</h3><p class="bp-purpose">Dark band. The cleanroom cutaway assembles as you scroll: structure, MEP, FFU ceiling, laminar downflow, with captions and a progress rail. The 360&deg; slot sits below.</p><div class="bp-meta"><span>Layout · <b>pinned, scrubbed</b>, static on phones</span><span>Motion · four-layer assembly, cyan airflow</span></div><p class="bp-why"><b>Why.</b> 3D is the client&rsquo;s stated highlight, so it is demonstrated, not claimed. Reduced motion and mobile get the finished cutaway.</p></div>
+      </div>
+
+      <div class="bp">
+        <div class="bp-n">07</div>
+        <div class="wf"><div class="h sm"></div><div class="row"><div class="b act"></div><div class="b"></div><div class="b"></div><div class="b"></div></div></div>
+        <div class="bp-body"><h3>Selected work</h3><p class="bp-purpose">Four flagship projects with real names: Bosch, Infineon, Northvolt, KLCC, each into the registry.</p><div class="bp-meta"><span>Layout · <b>card row</b></span><span>Motion · lift on hover</span></div><p class="bp-why"><b>Why.</b> The strongest four earn homepage space; the other 226 live one click away, findable.</p></div>
+      </div>
+
+      <div class="bp">
+        <div class="bp-n">08</div>
+        <div class="wf"><div class="h sm"></div><div class="t"></div><div class="t"></div><div class="t s"></div></div>
+        <div class="bp-body"><h3>Newsroom</h3><p class="bp-purpose">Three real signals: the Penang office, the France roundtable, The Star feature.</p><div class="bp-meta"><span>Layout · <b>list rows</b></span><span>Motion · quiet reveal</span></div><p class="bp-why"><b>Why.</b> Fresh, dated activity reads as a living company, which matters to an analyst pre-listing.</p></div>
+      </div>
+
+      <div class="bp">
+        <div class="bp-n">09</div>
+        <div class="wf"><div class="row"><div class="col" style="flex:1"><div class="h"></div><div class="t s"></div><div class="pill"></div></div><div class="col" style="flex:1"><div class="b"></div><div class="b"></div></div></div></div>
+        <div class="bp-body"><h3>Careers teaser</h3><p class="bp-purpose">Live role count and two real openings, into the career engine.</p><div class="bp-meta"><span>Layout · <b>split</b></span><span>Motion · count-up</span></div><p class="bp-why"><b>Why.</b> Senior engineers judge an employer by its projects; this band sits after the proof on purpose.</p></div>
+      </div>
+
+      <div class="bp">
+        <div class="bp-n">10</div>
+        <div class="wf"><div class="row"><div class="col" style="flex:1"><div class="h sm"></div><div class="t s"></div></div><div class="col" style="flex:1"><div class="b"></div><div class="b"></div><div class="b"></div></div></div><div class="b" style="flex:0 0 14px;background:#0A101F;border-color:#0A101F"></div></div>
+        <div class="bp-body"><h3>Contact + footer</h3><p class="bp-purpose">Dark close: one enquiry path, real coordinates, the compliance line (ISO 9001, 14001, 45001, CIDB).</p><div class="bp-meta"><span>Layout · <b>split + baseline</b></span><span>Motion · calm, minimal</span></div><p class="bp-why"><b>Why.</b> One action, no competing links. The footer belongs to IAQ alone, no vendor credit.</p></div>
+      </div>
+
+    </div>
+    <span class="pin"><b>Why this order:</b> statement, proof, record, capability, findability, showpiece, evidence, momentum, talent, action. A buyer can leave satisfied at any depth, and every exit point has a door deeper in.</span>
+
+    <h3 class="sub">The inner templates, wireframed</h3>
+    <div class="wfgrid">
+      <div class="wfcell"><div class="cap">Projects · registry console</div>
+        <div class="wf"><div class="tabs"><span class="on"></span><span></span><span></span></div><div class="chips"><span></span><span></span><span></span><span></span></div><div class="row"><div class="b"></div><div class="b act"></div><div class="b"></div></div><div class="row"><div class="b"></div><div class="b"></div><div class="b"></div></div></div>
+      </div>
+      <div class="wfcell"><div class="cap">Careers · filter engine</div>
+        <div class="wf"><div class="chips"><span></span><span></span><span></span></div><div class="h sm"></div><div class="t"></div><div class="t"></div><div class="t s"></div><div class="row" style="flex:0 0 auto"><div class="pill" style="width:44px;margin-left:auto"></div></div></div>
+      </div>
+      <div class="wfcell"><div class="cap">Investor relations · gated</div>
+        <div class="wf ctr" style="justify-content:center"><div class="b act" style="flex:0 0 22px;max-width:26px;margin:0 auto"></div><div class="h sm"></div><div class="t s"></div><div class="pill" style="margin:0 auto"></div></div>
+      </div>
+    </div>
+    <span class="pin"><b>Working proof:</b> the registry and career wireframes above are running inside the tab 03 prototype, under Projects and Careers in its nav, filters and all. The IR gate ships hidden, unindexed and password-protected until listing day.</span>
+  </section>
+
+  <!-- 04 TAGGING -->
+  <div class="chapdiv" id="c4"><span class="cd-no">04</span><div><div class="cd-h">The Tag Spine</div><div class="cd-sub">One taxonomy powers every filter, search and page pull.</div></div></div>
+  <section style="padding-top:14px">
+    <div class="secmark"><span class="secicon"><svg viewBox="0 0 24 24" class="ic"><path d="M20.6 13.4L11 3H4v7l9.6 10.4a2 2 0 0 0 2.8 0l4.2-4.2a2 2 0 0 0 0-2.8z"/><circle cx="7.5" cy="6.5" r="1.2"/></svg></span><span class="sec-no">04 · The taxonomy</span></div>
+    <h2>Tag once, filter everywhere</h2>
+    <p class="sec-intro">The audit&rsquo;s deepest structural fix. Every project, role and article carries structured tags from one controlled vocabulary. The registry, the career engine, site search, the Markets pages and SEO all read the same spine, so content is entered once and works everywhere.</p>
+    <table>
+      <thead><tr><th>Dimension</th><th>Controlled values</th><th>Powers</th></tr></thead>
+      <tbody>
+        <tr><td class="dim">Industry</td><td>Semiconductor · Data Centre · EV Battery · Photovoltaic · Pharma &amp; Hospitals · F&amp;B · District Cooling</td><td>Registry filter, Markets page pulls, related projects</td></tr>
+        <tr><td class="dim">Region</td><td>Malaysia · Singapore · Southeast Asia · Europe · <span class="vtag lo">extensible to all 8 offices</span></td><td>Registry filter, careers locations, the global-presence story</td></tr>
+        <tr><td class="dim">Delivery type</td><td>Cleanroom · Dry Room · EPCC · EPCM · HVAC / M&amp;E · District Cooling</td><td>Registry filter, service page proof pulls</td></tr>
+        <tr><td class="dim">Cleanroom class</td><td>ISO 3 to ISO 8 · GMP</td><td>Registry badge, technical credibility, search</td></tr>
+        <tr><td class="dim">Department</td><td>Engineering · Project · Commercial · Finance &amp; Accounts</td><td>Career engine grouping and filter</td></tr>
+        <tr><td class="dim">Status / visibility</td><td>Public · Confidential client · Gated (IR)</td><td>What publishes, what anonymizes, what stays behind the gate</td></tr>
+      </tbody>
+    </table>
+    <div class="diagram"><div class="cap">Diagram · one spine, five consumers</div>
+      <svg viewBox="0 0 880 250" role="img" aria-label="One tag spine feeding registry, careers, search, market pages and SEO">
+        <rect x="245" y="18" width="390" height="54" rx="10" fill="#0A101F"/>
+        <text x="440" y="40" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="11" font-weight="700" fill="#FF8A90" letter-spacing="1.5">THE TAG SPINE</text>
+        <text x="440" y="59" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#AEB9D2">industry · region · type · class · dept · visibility</text>
+        <g stroke="#EC2027" stroke-width="1.8" fill="none">
+          <path d="M370 72 C 300 110, 180 120, 120 150"/><path d="M410 72 C 380 120, 320 140, 290 155"/><path d="M440 72 V 150"/><path d="M470 72 C 500 120, 560 140, 590 155"/><path d="M510 72 C 580 110, 700 120, 760 150"/>
+        </g>
+        <g font-family="Inter,sans-serif" font-size="12.5" font-weight="600" text-anchor="middle">
+          <rect x="40" y="155" width="160" height="40" rx="9" fill="#FCFDFF" stroke="#D6DCEA"/><text x="120" y="180" fill="#101626">Project registry</text>
+          <rect x="215" y="160" width="150" height="40" rx="9" fill="#FCFDFF" stroke="#D6DCEA"/><text x="290" y="185" fill="#101626">Career engine</text>
+          <rect x="375" y="155" width="130" height="40" rx="9" fill="#FCFDFF" stroke="#D6DCEA"/><text x="440" y="180" fill="#101626">Site search</text>
+          <rect x="520" y="160" width="150" height="40" rx="9" fill="#FCFDFF" stroke="#D6DCEA"/><text x="595" y="185" fill="#101626">Market pages</text>
+          <rect x="685" y="155" width="160" height="40" rx="9" fill="#FCFDFF" stroke="#D6DCEA"/><text x="765" y="180" fill="#101626">SEO / sharing</text>
+        </g>
+        <text x="440" y="235" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="10" fill="#8A93A6">ENTER ONCE · CONSISTENT EVERYWHERE · NO MORE 230 VS 235</text>
+      </svg></div>
+    <span class="pin"><b>See it running:</b> the Projects page of the tab 03 prototype filters IAQ&rsquo;s real published projects across industry, region and type with search and shareable pre-filtered links; its Careers page runs the same engine over the 16 live job openings. Both are this table, working.</span>
+  </section>
+
+  <!-- 05 3D & MOTION -->
+  <div class="chapdiv" id="c5"><span class="cd-no">05</span><div><div class="cd-h">3D &amp; Motion</div><div class="cd-sub">The highlight act, engineered to stay fast.</div></div></div>
+  <section style="padding-top:14px">
+    <div class="secmark"><span class="secicon"><svg viewBox="0 0 24 24" class="ic"><path d="M12 2l9 5v10l-9 5-9-5V7z"/><path d="M12 12l9-5M12 12L3 7M12 12v10"/></svg></span><span class="sec-no">05 · The 3D plan</span></div>
+    <h2>3D that proves the craft, without the weight</h2>
+    <p class="sec-intro">3D is the client&rsquo;s stated priority and the site&rsquo;s signature. The rule that keeps it premium: <em>every 3D moment demonstrates what IAQ engineers</em>, air, environments, precision, and loads only when it earns its bytes.</p>
+    <div class="grid g2">
+      <div class="card"><span class="tag">Moment 1 · Hero</span><h3>The laminar field</h3><p>Turbulent particles resolve into clean laminar flow around the headline. The business, as physics, in the first five seconds. Canvas-based, feather-light.</p></div>
+      <div class="card"><span class="tag">Moment 2 · Showpiece</span><h3>The facility, assembled</h3><p>A dark-band cleanroom cutaway that builds on scroll: shell, MEP, FFU ceiling, laminar downflow. Upgraded to a full WebGL model in production.</p></div>
+      <div class="card"><span class="tag">Moment 3 · 360&deg; captures</span><h3>Real sites, explorable</h3><p>IAQ&rsquo;s existing 360&deg; camera assets embedded on project pages and the showpiece, placed at decision points rather than cluttering the homepage, exactly as discussed.</p></div>
+      <div class="card"><span class="tag">Moment 4 · Micro-motion</span><h3>Apple-grade restraint</h3><p>Masked headline reveals, count-ups, hover physics, section wipes. Calm, weighted, never bouncy. Full reduced-motion fallbacks.</p></div>
+    </div>
+    <h3 class="sub">The performance contract</h3>
+    <table>
+      <thead><tr><th>Metric</th><th>Current site</th><th>New site budget</th></tr></thead>
+      <tbody>
+        <tr><td class="dim">Homepage weight</td><td>26 MB</td><td class="sc">under 1.5 MB first load</td></tr>
+        <tr><td class="dim">CSS + JS files</td><td>152</td><td class="sc">under 12</td></tr>
+        <tr><td class="dim">3D loading</td><td>none</td><td class="sc">lazy, viewport-gated, capped pixel ratio</td></tr>
+        <tr><td class="dim">Low-power devices</td><td>same heavy page</td><td class="sc">static art fallback, full content</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 06 THE BUILD -->
+  <div class="chapdiv" id="c6"><span class="cd-no">06</span><div><div class="cd-h">The Build</div><div class="cd-sub">The stack decision the performance budget forces.</div></div></div>
+  <section style="padding-top:14px">
+    <div class="secmark"><span class="secicon"><svg viewBox="0 0 24 24" class="ic"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg></span><span class="sec-no">06 · Stack &amp; operations</span></div>
+    <h2>Custom build, editable where it matters</h2>
+    <div class="grid g3">
+      <div class="card"><span class="tag">Platform</span><h3>Custom, not WordPress</h3><p>Hand-built front end, no page-builder runtime, no plugin surface to bloat, break or attack. This is what makes the performance contract and Apple-grade motion physically possible.</p></div>
+      <div class="card"><span class="tag">Content ops</span><h3>Structured data, easy edits</h3><p>Projects, roles and articles live as structured tagged data. IAQ&rsquo;s team edits content and publishes roles without touching design or code.</p></div>
+      <div class="card"><span class="tag">Delivery</span><h3>Fast everywhere</h3><p>CDN-served, image pipeline that resizes and compresses automatically, no raw uploads reaching production, monitored uptime with maintenance cover.</p></div>
+    </div>
+    <span class="pin warn"><b>Security posture for the listing:</b> no advertised CMS version, no third-party plugin surface, the IR wing gated at the edge and unindexed, and one owner for DNS and hosting access, locked early so launch is never blocked.</span>
+  </section>
+
+  <!-- 07 TIMELINE -->
+  <div class="chapdiv" id="c7"><span class="cd-no">07</span><div><div class="cd-h">Timeline</div><div class="cd-sub">Four build weeks plus refinement, inside September.</div></div></div>
+  <section style="padding-top:14px">
+    <div class="secmark"><span class="secicon"><svg viewBox="0 0 24 24" class="ic"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></span><span class="sec-no">07 · The road to launch</span></div>
+    <h2>Approve, build, refine, launch</h2>
+    <table>
+      <thead><tr><th>Phase</th><th>Window</th><th>What happens</th><th>You see</th></tr></thead>
+      <tbody>
+        <tr><td class="sc">Approve</td><td class="dim">Week 0</td><td>Direction, framework and prototypes signed off; tag taxonomy locked; assets requested.</td><td>This workspace</td></tr>
+        <tr><td class="sc">Build 1</td><td class="dim">Weeks 1 to 2</td><td>Design system, homepage, registry and career engine at production depth; brand applied as it lands.</td><td>Staging link, live</td></tr>
+        <tr><td class="sc">Build 2</td><td class="dim">Weeks 3 to 4</td><td>Inner pages, newsroom migration, 3D showpiece and 360&deg; integration, IR wing gated, full registry migration.</td><td>Staging, full site</td></tr>
+        <tr><td class="sc">Refine</td><td class="dim">Week 5</td><td>Content correction pass, performance verification against the budget, device and access testing.</td><td>Pre-launch review</td></tr>
+        <tr><td class="sc">Launch</td><td class="dim">September</td><td>DNS cutover, monitoring on, maintenance cover begins. IR stays gated until listing day.</td><td>The new IAQ</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 08 INPUTS -->
+  <div class="chapdiv" id="c8"><span class="cd-no">08</span><div><div class="cd-h">Inputs</div><div class="cd-sub">What we need from IAQ, and when.</div></div></div>
+  <section style="padding-top:14px">
+    <div class="secmark"><span class="secicon"><svg viewBox="0 0 24 24" class="ic"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M9 8l1.5 1.5L13 7M9 14l1.5 1.5L13 13"/></svg></span><span class="sec-no">08 · The intake list</span></div>
+    <h2>Eight inputs unlock the build</h2>
+    <table>
+      <thead><tr><th>#</th><th>Input</th><th>Needed for</th><th>When</th></tr></thead>
+      <tbody>
+        <tr><td class="sc">1</td><td class="dim">The open job list</td><td>Career engine at production depth</td><td>Week 0</td></tr>
+        <tr><td class="sc">2</td><td class="dim">Project master list with clients, locations, classes</td><td>The full 230+ registry, correct tags</td><td>Weeks 0 to 1</td></tr>
+        <tr><td class="sc">3</td><td class="dim">360&deg; camera assets</td><td>The showpiece and project pages</td><td>Weeks 1 to 2</td></tr>
+        <tr><td class="sc">4</td><td class="dim">Logo and brand files (as rebrand lands)</td><td>Applying the new identity site-wide</td><td>Rolling</td></tr>
+        <tr><td class="sc">5</td><td class="dim">One source of truth per number</td><td>Ending the 230 vs 235 problem forever</td><td>Week 1</td></tr>
+        <tr><td class="sc">6</td><td class="dim">Domain and DNS access</td><td>Staging and launch, never blocked</td><td>Week 1</td></tr>
+        <tr><td class="sc">7</td><td class="dim">IR content owner and gate policy</td><td>The hidden wing, prepared quietly</td><td>Weeks 2 to 3</td></tr>
+        <tr><td class="sc">8</td><td class="dim">Photography direction decision</td><td>Replacing stock imagery; quoted separately as agreed</td><td>Week 2</td></tr>
+      </tbody>
+    </table>
+    <span class="pin"><b>Next step:</b> approve this framework with the audit, and Build 1 starts immediately. The tab 03 prototype, with its Projects and Careers pages, carries straight into production; nothing here is thrown away.</span>
+  </section>
+</div>
+<footer><div class="wrap">Brand Method · Website Framework for IAQ Group · Confidential</div></footer>
+<script>if(window.top!==window.self)document.body.classList.add("embedded");</script>
+<button id="bmBack" type="button" aria-label="Back">&larr; Back</button>
+<style>#bmBack{display:none;position:fixed;top:14px;right:16px;z-index:99999;align-items:center;gap:6px;font:600 12.5px "Inter",system-ui,sans-serif;color:#1E73E8;background:rgba(255,255,255,.97);border:1px solid #D4D5CC;border-radius:30px;padding:8px 14px;cursor:pointer;box-shadow:0 6px 18px -8px rgba(20,33,184,.35)}
+#bmBack:hover{border-color:#1E73E8}
+body.bm-standalone #bmBack{display:none}
+@media print{#bmBack{display:none!important}}</style>
+<script>(function(){if(window.top===window.self){document.body.classList.add('bm-standalone');var b=document.getElementById('bmBack');if(b)b.addEventListener('click',function(){var r=document.referrer;if(r&&r.indexOf(location.origin)===0&&r!==location.href&&history.length>1){history.back();}else{location.href='index.html';}})}})();</script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
+<script>
+/* Buttery lerped scrolling (synced from index.html): Lenis animates the REAL scrollTop every frame,
+   so motion glides between wheel ticks instead of stepping with them. Wheel-only: touch keeps native
+   scrolling. Disabled under reduced motion. */
+(function(){
+  if(!window.Lenis) return;
+  if(window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+  var lenis=new Lenis({lerp:0.11,smoothWheel:true,wheelMultiplier:1.8});
+  document.documentElement.style.scrollBehavior='auto';
+  if(window.gsap){
+    if(window.ScrollTrigger) lenis.on('scroll',ScrollTrigger.update);
+    gsap.ticker.add(function(t){lenis.raf(t*1000);});
+    gsap.ticker.lagSmoothing(0);
+  } else {
+    requestAnimationFrame(function raf(t){ lenis.raf(t); requestAnimationFrame(raf); });
+  }
+  document.addEventListener('click',function(e){
+    var a=e.target.closest&&e.target.closest('a[href^="#"]'); if(!a) return;
+    var id=a.getAttribute('href'); if(!id||id==='#') return;
+    var el=document.querySelector(id); if(!el) return;
+    e.preventDefault(); lenis.scrollTo(el);
+    try{ history.pushState(null,'',id); }catch(_){}
+  });
+  window.__lenis=lenis;
+})();
+</script>
+</body>
+</html>

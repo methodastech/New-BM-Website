@@ -3,9 +3,9 @@
   "configurations": [
     {
       "name": "iaq-static",
-      "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "8971", "--directory", "/Users/zieel/Bazil Claude 3/Websites/iaq website"],
-      "port": 8971
+      "runtimeExecutable": "sh",
+      "runtimeArgs": ["-c", "python3 -m http.server \"$PORT\" --directory \"$CLAUDE_PROJECT_DIR/website/iaq\""],
+      "autoPort": true
     }
   ]
 }

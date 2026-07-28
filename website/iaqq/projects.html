@@ -1,0 +1,981 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><link rel="icon" type="image/png" href="assets/iaq-logo.webp"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IAQ Group · Project Registry Concept · Brand Method</title>
+<meta name="description" content="Filterable project registry concept for IAQ Group, prepared by Brand Method.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F7F9FC; --bg2:#FFFFFF; --panel:#FCFDFF;
+  --ink:#0C1220; --soft:#48536A; --faint:#828B9E;
+  --line:rgba(12,18,32,.09); --line2:rgba(12,18,32,.15);
+  --blue:#EC2027; --blue-bright:#B5121B;
+  --maxw:1180px; --gut:clamp(20px,4vw,60px);
+  --e1:cubic-bezier(.22,1,.36,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"Instrument Sans",system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+/* Desktop nudge (matches index): scale the whole UI ~12% on real desktops so type isn't small on
+   large monitors; zoom re-flows the responsive layout so nothing overflows. Mobile untouched. */
+@media(min-width:1025px){:root{zoom:1.12}}
+.mono{font-family:"JetBrains Mono",monospace}
+h1,h2,h3{font-family:"Switzer",sans-serif;font-weight:600;letter-spacing:-.02em;line-height:1.06}
+h1 em{font-style:normal;color:var(--blue-bright)}
+a{color:inherit}
+.wrap{max-width:var(--maxw);margin:0 auto;padding-left:var(--gut);padding-right:var(--gut)}
+.eyebrow{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--blue-bright);display:inline-flex;align-items:center;gap:10px;font-weight:600}
+
+
+.topbar{background:#0A101F;color:#EAF0FB;position:sticky;top:0;z-index:90;border-bottom:1px solid #1d2438;transition:transform .34s var(--e1)}
+.topbar.tb-hide{transform:translateY(-100%)}
+body.embedded .topbar{display:none}
+.topbar-in{display:flex;align-items:center;justify-content:space-between;padding:10px var(--gut);max-width:var(--maxw);margin:0 auto;gap:12px;flex-wrap:wrap}
+.brandmark{font-family:"JetBrains Mono",monospace;font-weight:700;letter-spacing:.07em;font-size:11.5px;text-transform:uppercase;white-space:nowrap}
+.brandmark{font-size:13.5px;letter-spacing:.08em}
+.wsw{display:flex;align-items:center;border:1px solid rgba(255,255,255,.24);border-radius:0;overflow:auto;max-width:100%;margin-left:auto}
+.wsw a{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#C7D3EE;text-decoration:none;padding:7px 12px;border-right:1px solid rgba(255,255,255,.18);white-space:nowrap;transition:background .25s,color .25s}
+.wsw a:last-child{border-right:0}
+.wsw a:hover{background:rgba(255,255,255,.09);color:#fff}
+.wsw a.on{background:#2536F5;color:#fff;font-weight:700}
+
+.nav{position:sticky;top:0;z-index:80;background:rgba(247,249,252,.88);backdrop-filter:blur(14px) saturate(1.3);-webkit-backdrop-filter:blur(14px) saturate(1.3);border-bottom:1px solid var(--line);transition:transform .32s var(--e1),box-shadow .32s}
+.nav.nav-hide{transform:translateY(-105%)}
+.nav.nav-float{z-index:95;box-shadow:0 12px 32px rgba(12,18,32,.10)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;gap:18px;max-width:var(--maxw);margin:0 auto;padding:14px var(--gut)}
+.wordmark{display:flex;align-items:center;gap:10px;text-decoration:none}
+.wordmark img{height:46px;width:auto;display:block}
+.logo3d{height:46px;width:auto;perspective:600px;perspective-origin:50% 45%;flex:none}
+.logo3d-in{position:relative;height:100%;transform-style:preserve-3d;animation:logoIdle 10s ease-in-out infinite;will-change:transform}
+.logo3d:hover .logo3d-in{animation-play-state:paused;transform:rotateY(14deg) rotateX(-5deg)}
+.logo3d img{height:46px;width:auto;display:block}
+.logo3d .lface{position:relative;z-index:1}
+.logo3d .ldepth{display:none}
+@keyframes logoIdle{0%,74%{transform:rotateY(0deg) rotateX(0deg)}80%{transform:rotateY(16deg) rotateX(-5deg)}86%{transform:rotateY(-10deg) rotateX(3deg)}92%,100%{transform:rotateY(0deg) rotateX(0deg)}}
+@media(prefers-reduced-motion:reduce){.logo3d-in{animation:none;transform:rotateY(-6deg) rotateX(2deg)}.logo3d:hover .logo3d-in{transform:rotateY(-6deg) rotateX(2deg)}}
+.wordmark span{font-family:"JetBrains Mono",monospace;font-size:8.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--faint)}
+.nav-links{display:flex;align-items:center;gap:4px}
+.nav-links a{position:relative;font-size:13.5px;font-weight:500;color:var(--soft);text-decoration:none;padding:7px 11px;transition:color .2s;white-space:nowrap}
+.nav-links a::after{content:"";position:absolute;left:11px;right:100%;bottom:3px;height:1.5px;background:var(--blue);transition:right .35s cubic-bezier(.16,1,.3,1)}
+.nav-links a:hover{color:var(--ink)}
+.nav-links a:hover::after{right:11px}
+.nav-links a.here{color:var(--ink)}
+.nav-links a.here::after{right:11px}
+.nav-dis{position:relative;display:inline-flex;align-items:center;gap:7px;font-size:13.5px;font-weight:500;color:#AEB6C6;padding:7px 11px;white-space:nowrap;cursor:not-allowed;user-select:none}
+.nav-dis i{font-style:normal;font-family:"JetBrains Mono",monospace;font-size:8px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:#98A2B6;border:1px solid rgba(12,18,32,.16);padding:2.5px 5px;background:rgba(12,18,32,.035)}
+
+.cta{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;background:var(--blue);color:#fff;text-decoration:none;padding:11px 18px;transition:background .25s;white-space:nowrap}
+.cta:hover{background:var(--blue-bright)}
+.cta{display:inline-flex;align-items:center;gap:9px}
+.cta::after{content:"\2192";transition:transform .3s var(--e1)}
+.cta:hover::after{transform:translateX(4px)}
+.cta:focus-visible,.cta-ghost:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+/* mobile + tablet nav: tabs fold into an isometric-cube burger on the right; dark drawer panel */
+.nav-burger{display:none;width:48px;height:48px;align-items:center;justify-content:center;background:none;border:0;color:var(--ink);cursor:pointer;padding:0;transition:color .3s}
+.nav-burger svg{width:34px;height:34px;overflow:visible;transition:filter .4s ease,transform .5s var(--e1)}
+.nav-burger .bx-lid{transition:transform .55s cubic-bezier(.34,1.56,.64,1)}
+.nav-burger[aria-expanded="true"]{color:#EC2027}
+.nav-burger[aria-expanded="true"] svg{filter:drop-shadow(0 0 7px rgba(236,32,39,.55))}
+.nav-burger[aria-expanded="true"] .bx-lid{transform:translateY(-4.6px)}
+.nav-drawer{display:none}
+@media(max-width:960px){
+  .nav-links{display:none}
+  .nav-in>.cta{display:none}
+  .nav-burger{display:inline-flex}
+  .nav-drawer{display:block;position:absolute;left:0;right:0;top:100%;z-index:94;background:#0A101F;border-bottom:1px solid #1d2438;box-shadow:0 30px 60px rgba(4,8,18,.45);padding:6px var(--gut) 18px;opacity:0;transform:translateY(-10px);visibility:hidden;pointer-events:none;transition:opacity .32s ease,transform .4s var(--e1),visibility 0s .4s}
+  .nav.menu-open .nav-drawer{opacity:1;transform:none;visibility:visible;pointer-events:auto;transition:opacity .32s ease,transform .4s var(--e1)}
+  .nav-drawer .nd-k{display:block;font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:#7A87A2;font-weight:700;padding:14px 2px 6px}
+  .nav-drawer a{display:flex;align-items:center;gap:14px;padding:16px 2px;font-size:17.5px;font-weight:600;color:#C7D3EE;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.08);transition:color .25s,padding-left .3s var(--e1)}
+  .nav-drawer a .nn{font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.14em;color:#FF6A70;font-weight:700}
+  .nav-drawer a:active{color:#fff}
+  .nav-drawer a.here{color:#fff;box-shadow:inset 2px 0 0 #EC2027;padding-left:12px}
+  .nav-drawer .nd-cta{margin-top:16px;border-bottom:0;background:#EC2027;color:#fff;justify-content:center;font-family:"JetBrains Mono",monospace;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;padding:15px}
+  .nav-drawer .nd-dis{display:flex;align-items:center;gap:14px;padding:16px 2px;font-size:17.5px;font-weight:600;color:#5B6780;border-bottom:1px solid rgba(255,255,255,.08);cursor:not-allowed}
+  .nav-drawer .nd-dis .nn{color:#55617C}
+  .nav-drawer .nd-dis i{font-style:normal;font-family:"JetBrains Mono",monospace;font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:#7A87A2;border:1px solid rgba(255,255,255,.14);padding:3px 6px;margin-left:auto;margin-right:2px}
+}
+
+.head{padding:clamp(44px,7vh,80px) 0 34px}
+.headband{position:relative;background:#070C18;overflow:hidden}
+.headband .hb{position:absolute;inset:0}
+.headband .hb img{width:100%;height:100%;object-fit:cover;opacity:.72}
+.headband .hb::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,12,24,.88) 0%,rgba(7,12,24,.5) 46%,rgba(7,12,24,.12) 100%),linear-gradient(180deg,rgba(7,12,24,.14),rgba(7,12,24,.46))}
+.headband .head{position:relative;z-index:1}
+.headband .head h1{color:#fff}
+.headband .head h1 em{color:#FF4D55}
+.headband .head .lede{color:#C2CCDD}
+.headband .eyebrow{color:#FF8A90}
+
+.head.wrap{padding-left:var(--gut);padding-right:var(--gut)}
+.head h1{font-size:clamp(32px,4.8vw,58px);max-width:18ch;margin-top:16px}
+.head .lede{font-size:clamp(15px,1.7vw,18px);color:var(--soft);max-width:60ch;margin-top:16px}
+
+/* ============ filter console ============ */
+/* light-grey filter/sort band so the controls read as a distinct toolbar separated from the white
+   page + content, while chips and text stay fully legible */
+.console{position:relative;z-index:1;background:rgba(228,233,240,.97);border-top:1px solid var(--line2,#D4DAE4);border-bottom:1px solid var(--line2,#D4DAE4);padding:16px 0}
+.console .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.console .row + .row{margin-top:9px}
+.flabel{display:flex;align-items:center;gap:7px;font-family:"JetBrains Mono",monospace;font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);font-weight:700;width:112px;flex:none}
+.flabel svg{width:14px;height:14px;color:var(--blue);flex:none}
+.chips{display:flex;gap:6px;flex-wrap:wrap;flex:1;min-width:0}
+.fchip{font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;padding:7px 11px;border:1px solid var(--line2);background:var(--bg2);color:var(--soft);cursor:pointer;transition:all .2s;user-select:none}
+.fchip:hover{border-color:var(--blue);color:var(--blue-bright);transform:translateY(-1px)}
+.fchip.on{background:var(--blue);border-color:var(--blue);color:#fff}
+.fchip .ct{font-size:8px;color:var(--faint);margin-left:6px;font-weight:400}
+.fchip.on .ct{color:rgba(255,255,255,.72)}
+.fchip.zero{opacity:.4}
+.console.stuck{box-shadow:0 14px 30px rgba(12,18,32,.08)}
+.readout .rn{display:inline-block}
+.readout .rn.tick{animation:rtick .24s var(--e1)}
+@keyframes rtick{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+.search{display:flex;align-items:center;gap:8px;border:1px solid var(--line2);background:var(--bg2);padding:7px 12px;flex:1;min-width:170px;max-width:320px}
+.search svg{width:13px;height:13px;color:var(--faint);flex:none}
+.search input{border:0;outline:0;background:none;font:500 13px "Instrument Sans",sans-serif;color:var(--ink);width:100%}
+@media (hover:none), (max-width:960px){.search input{font-size:16px}}/* 16px stops iOS/iPad zoom-on-focus */
+.sortseg{display:inline-flex;align-items:center;border:1px solid var(--line2);background:var(--bg2)}
+.sortseg .ss-lab{display:inline-flex;align-items:center;gap:6px;font-family:"JetBrains Mono",monospace;font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);font-weight:700;padding:0 10px;border-right:1px solid var(--line)}
+.sortseg .ss-lab svg{width:13px;height:13px;color:var(--blue)}
+.sortseg .ss{font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.06em;text-transform:uppercase;padding:9px 11px;border:0;background:none;color:var(--soft);cursor:pointer;transition:background .2s,color .2s}
+.sortseg .ss:hover{color:var(--blue-bright)}
+.sortseg .ss.on{background:var(--blue);color:#fff;font-weight:700}
+.readout{font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--blue-bright);font-weight:700;margin-left:auto;white-space:nowrap}
+.clearbtn{font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);background:none;border:0;cursor:pointer;text-decoration:underline;padding:6px}
+.clearbtn:hover{color:var(--blue-bright)}
+@media(max-width:640px){
+  .console{top:0}
+  .flabel{width:100%;padding-bottom:4px}
+  .chips{overflow-x:auto;flex-wrap:nowrap;scroll-snap-type:x proximity;padding-bottom:3px;scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .fchip{flex:0 0 auto;scroll-snap-align:start}
+}
+
+/* ============ registry grid ============ */
+.reg{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;padding:30px 0 10px}
+.pc{border:1px solid var(--line);background:var(--panel);display:flex;flex-direction:column;overflow:hidden;transition:border-color .35s,transform .45s var(--e1)}
+.pc:hover{border-color:rgba(236,32,39,.45);transform:translateY(-4px)}
+.pc-in{padding:26px 20px 20px;display:flex;flex-direction:column;gap:9px;flex:1}
+.pcv{position:relative;aspect-ratio:16/8.4;background:linear-gradient(120deg,#0C1428 0%,#111C36 55%,#0A101F 100%);border-bottom:1px solid var(--line)}
+.pcv .clip{position:absolute;inset:0;overflow:hidden}
+.pcv .clip img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s var(--e1)}
+.pc:hover .pcv .clip img{transform:scale(1.045)}
+.pcv .grid-bg{position:absolute;inset:0;background:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:26px 26px;mask-image:radial-gradient(90% 90% at 50% 40%,#000 30%,transparent 100%);-webkit-mask-image:radial-gradient(90% 90% at 50% 40%,#000 30%,transparent 100%)}
+.pcv .ph-ico{position:absolute;top:50%;left:50%;transform:translate(-50%,-56%);width:44px;height:44px;color:#FF4D55;opacity:.9}
+.pcv .ph-ico svg{width:100%;height:100%}
+.pcv .ph-cap{font-weight:700;position:absolute;left:50%;transform:translateX(-50%);bottom:9px;font-family:"JetBrains Mono",monospace;font-size:7.5px;letter-spacing:.16em;text-transform:uppercase;color:#7A87A2;white-space:nowrap}
+.pcv .brand{position:absolute;left:14px;bottom:0;transform:translateY(50%);z-index:3;background:#fff;border:1px solid var(--line2);box-shadow:0 6px 18px rgba(12,18,32,.14);padding:7px 12px;display:inline-flex;align-items:center;font-family:"Switzer",sans-serif;font-weight:700;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);line-height:1}
+.pcv .brand.blogo img{height:20px;width:auto;max-width:110px;object-fit:contain;display:block}
+.pcv.photo .ph-cap{left:auto;right:10px;transform:none;color:#fff;background:rgba(7,12,24,.78);padding:5px 9px;letter-spacing:.12em;backdrop-filter:blur(4px)}
+.pcv.photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(7,12,24,.38));pointer-events:none}
+.pc .ref{font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);display:flex;justify-content:space-between;gap:8px}
+.pc .ref .iso{color:var(--blue-bright);font-weight:700}
+.pc h3{font-size:18.5px;line-height:1.22}
+.pc .cl{font-size:13.5px;color:var(--soft);min-height:24px;display:flex;align-items:center}
+.pc .cl img{height:21px;width:auto;max-width:130px;object-fit:contain;display:block}
+.pc .meta{display:flex;gap:14px;font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.07em;text-transform:uppercase;color:var(--faint);flex-wrap:wrap}
+.pc .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:auto;padding-top:10px}
+.tag{font-family:"JetBrains Mono",monospace;font-size:8.5px;letter-spacing:.08em;text-transform:uppercase;padding:4px 8px;border:1px solid var(--line);color:var(--soft);background:var(--bg)}
+.tag.b{color:var(--blue-bright);border-color:rgba(236,32,39,.3);background:rgba(236,32,39,.05)}
+@media(max-width:640px){.reg{grid-template-columns:1fr 1fr;gap:8px}.pc-in{padding:20px 12px 12px}.pc h3{font-size:14px}.pc .cl{font-size:11.5px}.pc .meta{gap:8px}.pc .ref{flex-direction:column;gap:2px}.pcv .ph-ico{width:30px;height:30px}.pcv .brand{font-size:8.5px;padding:5px 9px;letter-spacing:.1em}.pcv .brand.blogo img{height:15px}.pcv .ph-cap{font-weight:700;display:none}}
+
+.empty{display:none;border:1px dashed var(--line2);padding:44px 24px;text-align:center;margin:30px 0}
+.empty.show{display:block}
+.empty h3{font-size:20px}
+.empty p{color:var(--soft);font-size:14px;margin-top:8px}
+
+.note{font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);padding:18px 0 56px;line-height:2}
+
+@media(max-width:640px){
+  :root{--gut:16px}
+  .head{padding:26px 0 18px}
+}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.001ms!important;transition-duration:.05ms!important}}
+#bmBack{display:none;position:fixed;top:14px;right:16px;z-index:99999;align-items:center;gap:6px;font:600 12.5px "Instrument Sans",system-ui,sans-serif;color:#1E73E8;background:rgba(255,255,255,.97);border:1px solid #D4D5CC;border-radius:30px;padding:8px 14px;cursor:pointer;box-shadow:0 6px 18px -8px rgba(20,33,184,.35)}
+#bmBack:hover{border-color:#1E73E8}
+body.bm-standalone #bmBack{display:none}
+@media print{#bmBack{display:none!important}}
+
+/* ==== shared 3D campus footer (transplanted from home) ==== */
+.dark-band{
+  --bg:#070C18; --bg2:#0A101F; --panel:#0F1728;
+  --ink:#EDF2FC; --soft:#AAB6CE; --faint:#7A87A2; --faintest:#39435C;
+  --line:rgba(255,255,255,.08); --line2:rgba(255,255,255,.16);
+  --blue:#FF4D55; --blue-bright:#FF8A90; --cyan:#35E0C8;
+  background:var(--bg2); color:var(--ink);
+}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,64px);align-items:center}
+@media(max-width:820px){.split{grid-template-columns:1fr}}
+.fpc{border:1px solid var(--line);background:var(--panel);padding:22px;overflow:hidden;text-decoration:none;display:flex;flex-direction:column;gap:10px;transition:border-color .35s,transform .45s var(--e1)}
+.fpc:hover{border-color:rgba(236,32,39,.45);transform:translateY(-4px)}
+.fp3d{position:relative;aspect-ratio:16/9;margin:-22px -22px 6px;background:linear-gradient(165deg,#101B36,#0A101F);cursor:grab}
+.fp3d:active{cursor:grabbing}
+.fp3d canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.fpc-ic{width:38px;height:38px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(236,32,39,.22);background:rgba(236,32,39,.05);color:var(--blue);transition:background .35s,color .35s}
+.fpc:hover .fpc-ic{background:var(--blue);color:#fff}
+.fpc-ic svg{width:19px;height:19px}
+.fpc .ref{font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.fpc h3{font-size:18px;line-height:1.2}
+.fpc .cl2{font-size:13px;color:var(--soft)}
+.fpc .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:auto;padding-top:10px}
+.close3d{position:relative;overflow:hidden;background:#070C18;padding-top:clamp(56px,9vh,104px)}
+/* three stacked zones, nothing overlaps: contact content on solid dark, the 3D campus in its OWN
+   contained strip, then the footer (synced from index.html) */
+.close-in{position:relative;z-index:1;padding-bottom:clamp(36px,6vh,72px)}
+.close-viz{position:relative;height:clamp(420px,54vh,620px);overflow:hidden;background:radial-gradient(62% 80% at 50% 64%,#101B30 0%,#0A1322 46%,#070C18 80%)}
+.close-viz canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.close-scrim{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,#070C18 0%,rgba(7,12,24,.28) 13%,rgba(7,12,24,0) 34%,rgba(7,12,24,.14) 56%,rgba(7,12,24,.5) 78%,rgba(7,12,24,.86) 91%,#070C18 99%)}
+.close3d footer{position:relative;z-index:1;background:#070C18;color:#AAB6CE;padding:clamp(32px,5vh,60px) 0 40px;font-size:13.5px}
+@media(max-width:760px){
+  .close3d{padding-top:clamp(28px,5vh,44px)}
+  .close-in{padding-bottom:24px}
+  .close-viz{height:46vh;min-height:300px}
+  .close3d footer{padding-top:clamp(20px,4vh,36px)}
+}
+footer::before{content:"";position:absolute;inset:auto 0 0 0;height:78%;background:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:44px 44px;transform:perspective(560px) rotateX(58deg) scale(2.1);transform-origin:50% 100%;mask-image:linear-gradient(180deg,transparent,#000 60%);-webkit-mask-image:linear-gradient(180deg,transparent,#000 60%);pointer-events:none}
+.f-in{position:relative;z-index:1;max-width:var(--maxw);margin:0 auto;padding:0 var(--gut);display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:34px}
+footer .wm{perspective:600px}
+footer .wm img{height:44px;width:auto;display:block;filter:drop-shadow(0 12px 26px rgba(0,0,0,.6));transform:rotateX(9deg) rotateY(-7deg);transform-style:preserve-3d;transition:transform .7s var(--e1),filter .7s}
+footer .wm:hover img{transform:rotateX(0) rotateY(0) scale(1.04)}
+footer .wm span{display:block;font-family:"JetBrains Mono",monospace;font-size:8.5px;letter-spacing:.22em;text-transform:uppercase;color:#7A87A2;margin-top:12px}
+footer p{margin-top:14px;line-height:1.65;max-width:40ch}
+footer h4{font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:#7A87A2;font-weight:700;margin-bottom:12px}
+footer a{color:#AAB6CE;text-decoration:none;display:block;padding:4px 0}
+footer a:hover{color:#fff}
+.f-base{position:relative;z-index:1;max-width:var(--maxw);margin:38px auto 0;padding:20px var(--gut) 0;border-top:1px solid rgba(255,255,255,.09);display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#5b6685}
+@media(max-width:820px){.f-in{grid-template-columns:1fr 1fr}}
+
+@keyframes hbKen{from{transform:scale(1) translateY(0)}to{transform:scale(1.09) translateY(-2%)}}
+.headband .hb img{animation:hbKen 22s ease-in-out infinite alternate;will-change:transform}
+@keyframes bandUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+.headband .eyebrow{animation:bandUp .7s var(--e1) .1s backwards}
+.headband .head h1{animation:bandUp .8s var(--e1) .22s backwards}
+.headband .head .lede{animation:bandUp .8s var(--e1) .36s backwards}
+.headband .head-stats{animation:bandUp .8s var(--e1) .5s backwards}
+.headband::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:100%;background:linear-gradient(90deg,var(--blue),transparent 70%);z-index:2}
+@media(prefers-reduced-motion:reduce){.headband .hb img,.headband .eyebrow,.headband .head h1,.headband .head .lede,.headband .head-stats{animation:none}}
+
+</style>
+</head>
+<body>
+
+<div class="topbar"><div class="topbar-in">
+  <span class="brandmark">BM</span>
+  <nav class="wsw">
+    <a href="audit.html">01 Audit</a><a href="framework.html">02 Framework</a><a href="index.html" class="on">03 Website</a>
+  </nav>
+</div></div>
+
+<nav class="nav"><div class="nav-in">
+  <a class="wordmark" href="index.html"><span class="logo3d"><span class="logo3d-in"><img class="ldepth" src="assets/iaq-logo.webp" alt="" aria-hidden="true" style="transform:translateZ(-6.3px)"><img class="ldepth" src="assets/iaq-logo.webp" alt="" aria-hidden="true" style="transform:translateZ(-5.6px)"><img class="ldepth" src="assets/iaq-logo.webp" alt="" aria-hidden="true" style="transform:translateZ(-4.9px)"><img class="ldepth" src="assets/iaq-logo.webp" alt="" aria-hidden="true" style="transform:translateZ(-4.2px)"><img class="ldepth" src="assets/iaq-logo.webp" alt="" aria-hidden="true" style="transform:translateZ(-3.5px)"><img class="ldepth" src="assets/iaq-logo.webp" alt="" aria-hidden="true" style="transform:translateZ(-2.8px)"><img class="ldepth" src="assets/iaq-logo.webp" alt="" aria-hidden="true" style="transform:translateZ(-2.1px)"><img class="ldepth" src="assets/iaq-logo.webp" alt="" aria-hidden="true" style="transform:translateZ(-1.4px)"><img class="lface" src="assets/iaq-logo.webp" alt="IAQ"></span></span></a>
+  <div class="nav-links">
+    <a href="index.html">Home</a><a href="about.html">About</a><span class="nav-dis" title="Not available in this demo" aria-disabled="true">Services</span><a href="projects.html" class="here">Projects</a><a href="careers.html">Careers</a>  </div>
+  <a class="cta" href="contact.html">Start a project</a>
+  <button class="nav-burger" id="navBurger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="navDrawer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path class="bx-lid" d="M12 2.6 20.4 7.4 12 12.2 3.6 7.4z"/><path class="bx-body" d="M3.6 7.4v9.2L12 21.4l8.4-4.8V7.4M3.6 7.4 12 12.2l8.4-4.8M12 12.2v9.2"/></svg></button>
+</div>
+  <div class="nav-drawer" id="navDrawer">
+    <span class="nd-k">Menu</span>
+    <a href="index.html"><span class="nn">01</span>Home</a>
+    <a href="about.html"><span class="nn">02</span>About</a>
+    <span class="nd-dis"><span class="nn">--</span>Services</span>
+    <a href="projects.html" class="here"><span class="nn">03</span>Projects</a>
+    <a href="careers.html"><span class="nn">04</span>Careers</a>
+    <a class="nd-cta" href="contact.html">Start a project →</a>
+  </div></nav>
+
+<div class="headband"><div class="hb" aria-hidden="true"><img src="assets/projects/bosch.webp" alt=""></div><header class="head wrap">
+  <span class="eyebrow">Project registry</span>
+  <h1>230+ projects. <em>Findable in seconds.</em></h1>
+  <p class="lede">Every project carries structured tags: industry, region, delivery type and cleanroom class. One registry powers filtering, search, related projects and SEO. This working sample holds 18 published projects; the full registry migrates at launch.</p>
+</header></div>
+
+<div class="console"><div class="wrap">
+  <div class="row">
+    <span class="flabel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V9l6 4V9l6 4V5l6-2v18z"/></svg>Industry</span>
+    <div class="chips" id="fIndustry"></div>
+  </div>
+  <div class="row">
+    <span class="flabel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 11-8 11s-8-5-8-11a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="2.6"/></svg>Region</span>
+    <div class="chips" id="fRegion"></div>
+  </div>
+  <div class="row">
+    <span class="flabel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/></svg>Type</span>
+    <div class="chips" id="fType"></div>
+  </div>
+  <div class="row">
+    <span class="flabel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>Search</span>
+    <label class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><input id="q" type="search" placeholder="Client, project, keyword" aria-label="Search projects"></label>
+    <div class="sortseg" id="sortSeg" role="group" aria-label="Sort projects">
+      <span class="ss-lab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M11 5h10M11 9h7M11 13h4M3 17h18"/><path d="M5.5 5v9M3 11.5L5.5 14 8 11.5"/></svg>Sort</span>
+      <button type="button" class="ss on" data-v="default">Featured</button>
+      <button type="button" class="ss" data-v="az">A&ndash;Z</button>
+      <button type="button" class="ss" data-v="size">Largest</button>
+      <button type="button" class="ss" data-v="industry">Industry</button>
+    </div>
+    <button class="clearbtn" id="clear" type="button">Reset</button>
+    <span class="readout" id="readout" role="status" aria-live="polite"></span>
+  </div>
+</div></div>
+
+<main class="wrap">
+  <div class="reg" id="reg"></div>
+  <div class="empty" id="empty">
+    <h3>No projects match that combination</h3>
+    <p>Loosen a filter or clear the search. On the production site this state suggests the nearest matches.</p>
+  </div>
+  <p class="note">Sample registry compiled from iaqtechnology.com.my · photography from IAQ project records · full 230+ registry migrates with the new site</p>
+</main>
+
+<section class="close3d dark-band" id="contact">
+  <div class="close-in wrap split">
+    <div>
+      <span class="eyebrow" style="color:var(--blue)"><span data-scramble>START A PROJECT</span></span>
+      <h2 style="margin-top:14px;max-width:18ch">Tell us what you are building</h2>
+      <p class="lede" style="margin-top:16px">From feasibility to handover, one accountable team. Response within one working day.</p>
+    </div>
+    <div style="display:grid;gap:10px">
+      <a class="fpc" style="--panel:rgba(15,23,40,.82)" href="mailto:info@iaqtechnology.com.my"><span class="ref">Email</span><h3 style="font-size:17px">info@iaqtechnology.com.my</h3></a>
+      <a class="fpc" style="--panel:rgba(15,23,40,.82)" href="tel:+60351248319"><span class="ref">Phone</span><h3 style="font-size:17px">+603 5124 8319</h3></a>
+      <div class="fpc" style="--panel:rgba(15,23,40,.82);cursor:default"><span class="ref">HQ · Shah Alam</span><h3 style="font-size:15px;line-height:1.45;font-weight:500">No.12, Jalan Sungai Jeluh 32/192, Kawasan Perindustrian Kemuning, Seksyen 32, 40460 Shah Alam, Selangor</h3></div>
+    </div>
+  </div>
+  <div class="close-viz" aria-hidden="true"><canvas id="closeCv"></canvas><div class="close-scrim"></div></div>
+  <footer>
+  <div class="f-in">
+    <div><div class="wm"><span>IAQ &middot; Total Facility Solutions</span></div><p>Sustainable and innovative engineering and facility solutions, driven by expertise and leadership since 1994.</p></div>
+    <div><h4>The Company</h4><a href="index.html#story">Overview</a><a href="index.html#services">Services</a><a href="projects.html">Projects</a><a href="careers.html">Careers</a><a href="index.html#news">Newsroom</a><a href="portal.html">Client Portal</a></div>
+    <div><h4>Compliance</h4><a href="#" tabindex="-1">ISO 9001:2015</a><a href="#" tabindex="-1">ISO 14001:2015</a><a href="#" tabindex="-1">ISO 45001:2018</a><a href="#" tabindex="-1">CIDB Registered</a></div>
+  </div>
+  <div class="f-base"><span>&copy; 2026 IAQ Group (690214-V)</span><span>Registry concept &middot; Brand Method</span></div>
+  <div class="bm-footrib-strip">
+  <div class="bm-footrib" role="img" aria-label="Demo by BrandMethod.co">
+  <canvas id="bmRibCv" width="460" height="110" aria-hidden="true"></canvas>
+  <span class="bm-footrib-fb" hidden>Demo · BrandMethod.co</span>
+</div>
+</div>
+</footer>
+</section>
+
+<!-- BrandMethod ribbon: its own dark strip below the footer (matches rubex) -->
+
+<style id="bm-footrib-css">
+.bm-footrib-strip{position:relative;z-index:1;background:transparent;padding:0 0 clamp(18px,3vh,34px)}
+.bm-footrib{display:flex;justify-content:center;padding:clamp(22px,3.4vh,38px) 0 .4rem;pointer-events:none}
+.bm-footrib canvas{width:min(460px,88vw);height:auto;display:block}
+.bm-footrib-fb{font-family:var(--mono,monospace);font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:#fff;background:linear-gradient(90deg,#1421B8,#2536F5);padding:.5rem 1.4rem;clip-path:polygon(10px 0,calc(100% - 10px) 0,100% 50%,calc(100% - 10px) 100%,10px 100%,0 50%)}
+.bm-footrib-fb[hidden]{display:none}
+
+/* larger tap targets + no brandmark clip on touch / narrow screens (final QA pass) */
+@media (hover:none), (max-width:820px){
+  footer a, .sitefoot a{padding:10px 0}
+  .fchip{padding:11px 13px}
+  .sortseg .ss{padding:12px 12px}
+  .clearbtn{padding:11px 10px}
+}
+@media (max-width:380px){ .brandmark{font-size:10.3px;letter-spacing:.03em} }
+
+/* mobile: compress the whole closing section — 3D band, contact cards, columns, base line */
+@media(max-width:640px){
+  .close-viz{height:32vh;min-height:220px}
+  .close-in .split{gap:16px}
+  .close-in .fpc{padding:13px 14px;gap:5px}
+  .close-in .fpc h3{font-size:15px}
+  .close3d footer{padding-bottom:20px}
+  .f-in{grid-template-columns:1fr 1fr;gap:14px 18px}
+  .f-in>div:first-child{grid-column:1/-1}
+  .close3d footer .wm img{height:34px}
+  .close3d footer p{margin-top:8px;font-size:12.5px;line-height:1.5}
+  .close3d footer h4{margin-bottom:5px}
+  .close3d footer a{padding:7px 0;font-size:12.5px}
+  .f-base{margin-top:14px;padding-top:11px}
+  .bm-footrib-strip{padding-bottom:8px}
+  .bm-footrib{padding-top:10px}
+  .bm-footrib canvas{width:min(430px,94vw)}
+}
+</style>
+<script>
+(function(){
+  var cv=document.getElementById('bmRibCv'),fb=document.querySelector('.bm-footrib-fb');
+  var ctx;try{ctx=cv&&cv.getContext('2d');}catch(e){}
+  if(!ctx){if(cv)cv.style.display='none';if(fb)fb.hidden=false;return;}
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W=460,H=110,dpr=Math.min(window.devicePixelRatio||1,2);
+  cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
+  var X0=40,X1=420,BH=32,BY=40,running=false,looping=false,t=0;
+  /* the signature: utility label, the star, then BRAND METHOD spaced as two words */
+  var SEGS=[
+    {t:'DEMO BY',f:'600 12px Inter,sans-serif',sp:3.6,a:1,dy:0,gap:8},
+    {star:true,w:13,gap:9},
+    {t:'BRAND',f:'600 12px Inter,sans-serif',sp:3.6,a:0.98,dy:0},
+    {t:'METHOD.CO',f:'600 12px Inter,sans-serif',sp:3.6,a:0.98,dy:0}
+  ];
+  var GLYPHS=null;
+  function buildGlyphs(){
+    GLYPHS=[];
+    SEGS.forEach(function(s){
+      if(s.star){GLYPHS.push({star:true,w:s.w});if(s.gap)GLYPHS.push({gap:s.gap});return;}
+      if(!s.t){if(s.gap)GLYPHS.push({gap:s.gap});return;}
+      ctx.font=s.f;
+      for(var i=0;i<s.t.length;i++){
+        var ch=s.t[i];
+        if(ch===' '){GLYPHS.push({gap:6.5});continue;}
+        GLYPHS.push({ch:ch,f:s.f,a:s.a,dy:s.dy||0,w:ctx.measureText(ch).width+s.sp});
+      }
+      if(s.gap)GLYPHS.push({gap:s.gap});
+    });
+  }
+  function wave(x,tt){return 4.0*Math.sin(x*0.0135+tt*0.0011)+2.4*Math.sin(x*0.029-tt*0.00068)+1.2*Math.sin(x*0.055+tt*0.0016);}
+  function slope(x,tt){return (wave(x+2,tt)-wave(x-2,tt))/4;}
+  function lerp(a,b,p){return a+(b-a)*p;}
+  function shade(p){
+    var r=Math.round(lerp(18,86,p)),g=Math.round(lerp(28,116,p)),b=Math.round(lerp(158,255,p));
+    return 'rgb('+r+','+g+','+b+')';
+  }
+  function tail(xEdge,dir,tt){
+    var y=BY+wave(xEdge,tt)*0.7+9;
+    var x2=xEdge-dir*40;
+    ctx.beginPath();
+    ctx.moveTo(xEdge,y);
+    ctx.lineTo(x2,y+7);
+    ctx.lineTo(x2+dir*13,y+7+BH/2);
+    ctx.lineTo(x2,y+7+BH);
+    ctx.lineTo(xEdge,y+BH);
+    ctx.closePath();
+    ctx.fillStyle='#101C96';ctx.fill();
+    ctx.fillStyle='rgba(0,0,0,.22)';ctx.fill();
+  }
+  function draw(tt){
+    if(!GLYPHS)buildGlyphs();
+    ctx.clearRect(0,0,W,H);
+    tail(X0+6,1,tt);tail(X1-6,-1,tt);
+    for(var x=X0;x<=X1;x+=2){
+      var y=BY+wave(x,tt),s=slope(x,tt);
+      var p=Math.max(0,Math.min(1,0.52+s*5.5+0.14*Math.sin(x*0.006-tt*0.00042)));
+      ctx.fillStyle=shade(p);
+      ctx.fillRect(x-1,y,2.4,BH);
+    }
+    ctx.beginPath();
+    for(var x=X0;x<=X1;x+=4){var y=BY+wave(x,tt);(x===X0)?ctx.moveTo(x,y+0.6):ctx.lineTo(x,y+0.6);}
+    ctx.strokeStyle='rgba(255,255,255,.28)';ctx.lineWidth=1.1;ctx.stroke();
+    ctx.beginPath();
+    for(var x=X0;x<=X1;x+=4){var y=BY+wave(x,tt)+BH;(x===X0)?ctx.moveTo(x,y-0.6):ctx.lineTo(x,y-0.6);}
+    ctx.strokeStyle='rgba(0,10,60,.4)';ctx.lineWidth=1.2;ctx.stroke();
+    /* the signature rides the fabric */
+    ctx.textAlign='left';ctx.textBaseline='middle';
+    var total=0;GLYPHS.forEach(function(g){total+=g.w||g.gap||0;});
+    var xs=(X0+X1)/2-total/2;
+    GLYPHS.forEach(function(g){
+      if(g.gap){xs+=g.gap;return;}
+      var cxx=xs+(g.w||0)/2;
+      var y=BY+wave(cxx,tt)+BH/2+0.5,a=Math.atan(slope(cxx,tt));
+      ctx.save();ctx.translate(cxx,y);ctx.rotate(a);
+      if(g.star){
+        ctx.strokeStyle='rgba(255,255,255,.97)';ctx.lineWidth=1.5;ctx.lineCap='round';
+        for(var sp=0;sp<4;sp++){var an=sp*Math.PI/4;
+          ctx.beginPath();ctx.moveTo(-Math.cos(an)*4.6,-Math.sin(an)*4.6);ctx.lineTo(Math.cos(an)*4.6,Math.sin(an)*4.6);ctx.stroke();}
+      } else {
+        ctx.font=g.f;
+        ctx.fillStyle='rgba(2,8,40,.4)';ctx.fillText(g.ch,-((g.w||0)/2)+0.7,(g.dy||0)+1.1);
+        ctx.fillStyle='rgba(255,255,255,'+g.a+')';ctx.fillText(g.ch,-((g.w||0)/2),(g.dy||0));
+      }
+      ctx.restore();
+      xs+=g.w||0;
+    });
+  }
+  function frame(){if(!running){looping=false;return;}looping=true;t+=16;draw(t);requestAnimationFrame(frame);}
+  function boot(){
+    draw(0);
+    if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){GLYPHS=null;draw(t);});
+    if(reduce)return;
+    if(window.IntersectionObserver){
+      new IntersectionObserver(function(es){es.forEach(function(en){running=en.isIntersecting;if(running&&!looping)requestAnimationFrame(frame);});}).observe(cv);
+    }else{running=true;requestAnimationFrame(frame);}
+    document.addEventListener('visibilitychange',function(){if(document.hidden){running=false;}else{var r=cv.getBoundingClientRect();if(r.top<innerHeight&&r.bottom>0){running=true;if(!looping)requestAnimationFrame(frame);}}});
+  }
+  boot();
+})();
+</script>
+
+
+<script>
+/* ============ data: 18 published projects, tags to verify with IAQ ============ */
+var PROJECTS=[
+{name:"Testing manufacturing plant, 25,000 m² greenfield",client:"Robert Bosch",ind:"semiconductor",region:"malaysia",loc:"Malaysia",type:"cleanroom",iso:"ISO 4 to 6",size:25000,img:"assets/projects/bosch.webp",cap:"Photo · iaqtechnology.com.my"},
+{name:"Wafer fab facility and expansion, cleanroom package with utilities",client:"Silterra",ind:"semiconductor",region:"malaysia",loc:"Kulim, Kedah",type:"epcc",iso:"ISO 5",size:0,img:"assets/projects/silterra.webp",cap:"Photo · iaqtechnology.com.my"},
+{name:"Semiconductor backend plant, 43,000 m² test, probe and assembly",client:"Infineon",ind:"semiconductor",region:"malaysia",loc:"Melaka",type:"epcm",iso:"ISO 5",size:43000,img:"assets/projects/infineon.webp",cap:"Photo · iaqtechnology.com.my"},
+{name:"DLP cleanroom facility",client:"Texas Instruments",ind:"semiconductor",region:"malaysia",loc:"Malaysia",type:"cleanroom",iso:"ISO 4",size:0,img:"assets/projects/ti.webp",cap:"Photo · iaqtechnology.com.my"},
+{name:"Silicon wafer manufacturing, multi-class greenfield with full MEP",client:"MEMC",ind:"semiconductor",region:"malaysia",loc:"Ipoh, Perak",type:"cleanroom",iso:"ISO 3 to 7",size:0,img:"assets/projects/memc.webp",cap:"Photo · iaqtechnology.com.my"},
+{name:"Lithium-ion battery gigafactory dry room, 62,000 m²",client:"Northvolt",ind:"ev-battery",region:"europe",loc:"Europe",type:"dryroom",iso:"Dry room",size:62000,img:"assets/projects/northvolt.webp",cap:"Photo · iaqtechnology.com.my"},
+{name:"EV battery gigafab phase 1, 8,000 m² dry room system",client:"ACC",ind:"ev-battery",region:"europe",loc:"Europe",type:"dryroom",iso:"Dry room",size:8000,img:"assets/projects/acc.webp",cap:"Photo · iaqtechnology.com.my"},
+{name:"Lithium cell facility, 79,000 m² air-conditioning system",client:"Svolt",ind:"ev-battery",region:"sea",loc:"Southeast Asia",type:"hvac",iso:"ISO 7",size:79000,img:"assets/projects/svolt.webp",cap:"Photo · iaqtechnology.com.my"},
+{name:"Pharmaceutical manufacturing plant, small volume parenteral",client:"Pharmaniaga",ind:"pharma",region:"malaysia",loc:"Malaysia",type:"cleanroom",iso:"ISO 5 to 8",size:0,img:"assets/projects/pharmaniaga.webp",cap:"Photo · iaqtechnology.com.my"},
+{name:"Healthcare manufacturing plant, medical device greenfield",client:"Vital",ind:"pharma",region:"malaysia",loc:"Malaysia",type:"cleanroom",iso:"ISO 8",size:0,img:"assets/projects/vital.webp",cap:"Photo · iaqtechnology.com.my"},
+{name:"Tissue culture laboratory, class 1K to 10K cleanroom",client:"NUS",ind:"pharma",region:"singapore",loc:"Singapore",type:"cleanroom",iso:"ISO 6 to 7",size:0,img:"assets/projects/nus.webp",cap:"Photo · iaqtechnology.com.my"},
+{name:"District cooling centre, Malaysia's largest",client:"KLCC",ind:"district-cooling",region:"malaysia",loc:"Kuala Lumpur",type:"district-cooling",iso:"Energy",size:0,img:"assets/projects/klcc.webp",cap:"Photo · iaqtechnology.com.my"},
+{name:"Co-generative plant, first in Southeast Asia",client:"Siemens",ind:"district-cooling",region:"malaysia",loc:"Malaysia",type:"district-cooling",iso:"Energy",size:0,img:"assets/projects/siemens-cogen.webp",cap:"Photo · iaqtechnology.com.my"},
+{name:"Cool energy centre",client:"Tunas",ind:"district-cooling",region:"malaysia",loc:"Malaysia",type:"district-cooling",iso:"Energy",size:0,img:"assets/projects/tunas.webp",cap:"Photo · iaqtechnology.com.my"},
+{name:"Flavor manufacturing plant",client:"T-Hasegawa",ind:"fnb",region:"malaysia",loc:"Malaysia",type:"cleanroom",iso:"Hygienic",size:0,img:"assets/photo-hasegawa.webp",cap:"Site photo · IAQ"},
+{name:"Flavor manufacturing plant",client:"Matrix",ind:"fnb",region:"malaysia",loc:"Malaysia",type:"cleanroom",iso:"Hygienic",size:0,img:"assets/projects/matrix.webp",cap:"Photo · iaqtechnology.com.my"},
+{name:"Data centre KUL03 phase 1, chilled and condenser water piping",client:"Microsoft",ind:"data-centre",region:"malaysia",loc:"Kuala Lumpur",type:"hvac",iso:"Cooling",size:0,img:"assets/projects/microsoft-dc.webp",cap:"Photo · iaqtechnology.com.my"},
+{name:"Solar panel manufacturing plant, KMW building M&E works",client:"First Solar",ind:"photovoltaic",region:"malaysia",loc:"Kulim, Kedah",type:"hvac",iso:"ISO 6",size:0,img:"assets/projects/firstsolar.webp",cap:"Photo · iaqtechnology.com.my"}
+];
+var INDUSTRIES=[["semiconductor","Semiconductor"],["data-centre","Data Centre"],["ev-battery","EV Battery"],["photovoltaic","Photovoltaic"],["pharma","Pharma & Hospitals"],["fnb","Food & Beverages"],["district-cooling","District Cooling"]];
+var REGIONS=[["malaysia","Malaysia"],["singapore","Singapore"],["sea","Southeast Asia"],["europe","Europe"]];
+var TYPES=[["cleanroom","Cleanroom"],["dryroom","Dry Room"],["epcc","EPCC"],["epcm","EPCM"],["hvac","HVAC / M&E"],["district-cooling","District Cooling"]];
+var INDLBL={},REGLBL={},TYPLBL={};
+INDUSTRIES.forEach(function(x){INDLBL[x[0]]=x[1]});REGIONS.forEach(function(x){REGLBL[x[0]]=x[1]});TYPES.forEach(function(x){TYPLBL[x[0]]=x[1]});
+
+/* industry icons for the visual header, same line style as the homepage industry cards */
+var ICONS={
+"semiconductor":'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="7" y="7" width="10" height="10" rx="1.5"/><path d="M10 7V4M14 7V4M10 20v-3M14 20v-3M7 10H4M7 14H4M20 10h-3M20 14h-3"/></svg>',
+"data-centre":'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="4" y="4" width="16" height="7" rx="1.5"/><rect x="4" y="13" width="16" height="7" rx="1.5"/><path d="M8 7.5h.01M8 16.5h.01M12 7.5h4M12 16.5h4"/></svg>',
+"ev-battery":'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="16" height="9" rx="2"/><path d="M21 11v3M11.5 9.5l-2 3h3l-2 3"/></svg>',
+"photovoltaic":'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 14h12l1.6 6H4.4zM9 14l.6-4h4.8l.6 4M12 7V4M7 8L5.5 6M17 8l1.5-2"/></svg>',
+"pharma":'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3h4M11 3v6l-5 9a2.4 2.4 0 0 0 2.1 3.5h7.8A2.4 2.4 0 0 0 18 18l-5-9V3"/><path d="M8.4 15h7.2"/></svg>',
+"fnb":'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16M6 20V9a6 6 0 0 1 12 0v11M12 3v2"/></svg>',
+"district-cooling":'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 3v18M5 6.5l14 11M19 6.5l-14 11M12 3l-2 2M12 3l2 2M12 21l-2-2M12 21l2-2"/></svg>'
+};
+
+/* NUS deliberately stays a text plate: its logo renders poorly at small sizes */
+var CLOGOS={"Robert Bosch":"assets/clients/bosch.webp","Infineon":"assets/clients/infineon.webp","Texas Instruments":"assets/clients/ti.webp","Silterra":"assets/clients/silterra.webp","Northvolt":"assets/clients/northvolt.webp","Pharmaniaga":"assets/clients/pharmaniaga.webp","Siemens":"assets/clients/siemens.webp","MEMC":"assets/clients/memc.webp","ACC":"assets/clients/acc.webp","Svolt":"assets/clients/svolt.webp","T-Hasegawa":"assets/clients/t-hasegawa.webp","KLCC":"assets/clients/klcc.webp","Vital":"assets/clients/vital.webp","Tunas":"assets/clients/tunas.webp","Matrix":"assets/clients/matrix.webp","Microsoft":"assets/clients/microsoft.webp","First Solar":"assets/clients/firstsolar.webp"};
+function brandHTML(c){return CLOGOS[c] ? '<span class="brand blogo"><img src="'+CLOGOS[c]+'" alt="'+c+'" loading="lazy"></span>' : '<span class="brand">'+c+'</span>';}
+
+var state={ind:new Set(),region:new Set(),type:new Set(),q:"",sort:"default"};
+var REDUCED=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var FACETS=[['fIndustry','ind'],['fRegion','region'],['fType','type']];
+
+function chipRow(mount,items,key){
+  var el=document.getElementById(mount);
+  items.forEach(function(it){
+    var b=document.createElement('button');
+    b.type='button';b.className='fchip';b.dataset.v=it[0];
+    b.innerHTML='<span class="lb">'+it[1]+'</span><span class="ct">0</span>';
+    b.setAttribute('aria-pressed','false');
+    b.addEventListener('click',function(){
+      if(state[key].has(it[0])){state[key].delete(it[0]);b.classList.remove('on');b.setAttribute('aria-pressed','false');}
+      else{state[key].add(it[0]);b.classList.add('on');b.setAttribute('aria-pressed','true');}
+      if(b.animate&&!REDUCED)b.animate([{transform:'scale(.94)'},{transform:'scale(1)'}],{duration:180,easing:'cubic-bezier(.22,1,.36,1)'});
+      render();
+    });
+    el.appendChild(b);
+  });
+}
+chipRow('fIndustry',INDUSTRIES,'ind');
+chipRow('fRegion',REGIONS,'region');
+chipRow('fType',TYPES,'type');
+
+function matchQ(p){
+  if(!state.q)return true;
+  var h=(p.name+' '+p.client+' '+p.loc+' '+INDLBL[p.ind]+' '+TYPLBL[p.type]+' '+p.iso).toLowerCase();
+  return h.indexOf(state.q)>=0;
+}
+function pass(p){
+  if(state.ind.size&&!state.ind.has(p.ind))return false;
+  if(state.region.size&&!state.region.has(p.region))return false;
+  if(state.type.size&&!state.type.has(p.type))return false;
+  return matchQ(p);
+}
+/* count for a chip: items passing every OTHER active facet plus search */
+function passExcept(p,skip){
+  if(skip!=='ind'&&state.ind.size&&!state.ind.has(p.ind))return false;
+  if(skip!=='region'&&state.region.size&&!state.region.has(p.region))return false;
+  if(skip!=='type'&&state.type.size&&!state.type.has(p.type))return false;
+  return matchQ(p);
+}
+function updateCounts(){
+  FACETS.forEach(function(f){
+    document.querySelectorAll('#'+f[0]+' .fchip').forEach(function(ch){
+      var n=0,v=ch.dataset.v;
+      PROJECTS.forEach(function(p){if(p[f[1]]===v&&passExcept(p,f[1]))n++;});
+      ch.querySelector('.ct').textContent=n;
+      ch.classList.toggle('zero',n===0&&!ch.classList.contains('on'));
+    });
+  });
+}
+var lastCount=-1;
+function render(){
+  var list=PROJECTS.filter(pass);
+  if(state.sort==='az')list.sort(function(a,b){return a.name.localeCompare(b.name)});
+  else if(state.sort==='industry')list.sort(function(a,b){return a.ind.localeCompare(b.ind)});
+  else if(state.sort==='size')list.sort(function(a,b){return b.size-a.size});
+  var reg=document.getElementById('reg');
+
+  /* FLIP: record old positions keyed by data-key before mutating */
+  var oldRects={};
+  if(!REDUCED){
+    reg.querySelectorAll('.pc').forEach(function(el){oldRects[el.dataset.key]=el.getBoundingClientRect();});
+  }
+
+  reg.innerHTML=list.map(function(p){
+    var idx=PROJECTS.indexOf(p);
+    var vis = p.img
+      ? '<div class="pcv photo"><div class="clip"><img src="'+p.img+'" alt="'+p.client+' project" loading="lazy"></div><span class="ph-cap">'+(p.cap||'Site photo')+'</span>'+'</div>'
+      : '<div class="pcv"><div class="grid-bg"></div><span class="ph-ico">'+(ICONS[p.ind]||'')+'</span><span class="ph-cap">'+INDLBL[p.ind]+' &middot; photo at production</span>'+'</div>';
+    return '<article class="pc" data-key="'+idx+'">'+vis+'<div class="pc-in"><div class="ref"><span>IAQ-PRJ-'+String(idx+1).padStart(3,'0')+'</span><span class="iso">'+p.iso+'</span></div>'+
+    '<h3>'+p.name+'</h3><div class="cl">'+(CLOGOS[p.client]?'<img src="'+CLOGOS[p.client]+'" alt="'+p.client+'" loading="lazy">':p.client)+'</div>'+
+    '<div class="meta"><span>'+p.loc+'</span>'+(p.size?'<span>'+p.size.toLocaleString('en-US')+' m²</span>':'')+'</div>'+
+    '<div class="tags"><span class="tag b">'+INDLBL[p.ind]+'</span><span class="tag">'+REGLBL[p.region]+'</span><span class="tag">'+TYPLBL[p.type]+'</span></div></div></article>';
+  }).join('');
+
+  if(!REDUCED){
+    var cards=reg.querySelectorAll('.pc'),fresh=0,moves=[],enters=[];
+    cards.forEach(function(el){
+      var k=el.dataset.key;
+      if(oldRects[k]){
+        var nr=el.getBoundingClientRect();
+        var dx=oldRects[k].left-nr.left,dy=oldRects[k].top-nr.top;
+        if(dx||dy){
+          el.style.transition='none';
+          el.style.transform='translate('+dx+'px,'+dy+'px)';
+          moves.push(el);
+        }
+      }else{
+        el.style.transition='none';
+        el.style.opacity='0';
+        el.style.transform='translateY(14px)';
+        enters.push([el,Math.min(fresh,10)*22]);
+        fresh++;
+      }
+    });
+    if(moves.length||enters.length){
+      void reg.offsetHeight; /* force reflow so the inverted state paints */
+      moves.forEach(function(el){
+        el.style.transition='transform .32s cubic-bezier(.22,1,.36,1)';
+        el.style.transform='';
+      });
+      enters.forEach(function(en){
+        en[0].style.transition='opacity .38s cubic-bezier(.22,1,.36,1) '+en[1]+'ms,transform .38s cubic-bezier(.22,1,.36,1) '+en[1]+'ms';
+        en[0].style.opacity='';
+        en[0].style.transform='';
+      });
+      setTimeout(function(){cards.forEach(function(el){el.style.transition='';el.style.transform='';el.style.opacity='';});},700);
+    }
+  }
+
+  document.getElementById('empty').classList.toggle('show',!list.length);
+  var ro=document.getElementById('readout');
+  if(list.length!==lastCount){
+    ro.innerHTML='<span class="rn">'+list.length+'</span> / '+PROJECTS.length+' projects';
+    if(!REDUCED){var rn=ro.querySelector('.rn');void rn.offsetWidth;rn.classList.add('tick');}
+    lastCount=list.length;
+  }
+  updateCounts();
+}
+document.getElementById('q').addEventListener('input',function(){state.q=this.value.trim().toLowerCase();render();});
+document.querySelectorAll('#sortSeg .ss').forEach(function(b){
+  b.addEventListener('click',function(){
+    state.sort=b.dataset.v;
+    document.querySelectorAll('#sortSeg .ss').forEach(function(x){x.classList.toggle('on',x===b);});
+    render();
+  });
+});
+document.getElementById('clear').addEventListener('click',function(){
+  state.ind.clear();state.region.clear();state.type.clear();state.q='';state.sort='default';
+  document.getElementById('q').value='';document.querySelectorAll('#sortSeg .ss').forEach(function(x){x.classList.toggle('on',x.dataset.v==='default');});
+  document.querySelectorAll('.fchip.on').forEach(function(c){c.classList.remove('on');c.setAttribute('aria-pressed','false');});
+  render();
+});
+
+/* deep-link: index.html industry cards land pre-filtered, e.g. projects.html#semiconductor */
+(function(){
+  var h=location.hash.replace('#','');
+  if(h&&INDLBL[h]){
+    state.ind.add(h);
+    var c=document.querySelector('#fIndustry .fchip[data-v="'+h+'"]');
+    if(c){c.classList.add('on');c.setAttribute('aria-pressed','true');}
+  }
+})();
+render();
+
+/* filter console scrolls with the page (non-sticky) — no stuck-state elevation */
+
+if(window.top!==window.self)document.body.classList.add('embedded');
+</script>
+<button id="bmBack" type="button" aria-label="Back">&larr; Back</button>
+<script>(function(){if(window.top===window.self){document.body.classList.add('bm-standalone');var b=document.getElementById('bmBack');if(b)b.addEventListener('click',function(){var r=document.referrer;if(r&&r.indexOf(location.origin)===0&&r!==location.href&&history.length>1){history.back();}else{location.href='index.html';}})}})();</script>
+<script>
+(function(){
+  var nav=document.querySelector('.nav'); if(!nav) return;
+  var tb=document.querySelector('.topbar');
+  var lastY=window.scrollY||0;
+  window.addEventListener('scroll',function(){
+    var y=window.scrollY;
+    if(y<90){nav.classList.remove('nav-hide','nav-float'); if(tb)tb.classList.remove('tb-hide');}
+    else if(y>lastY+5){nav.classList.add('nav-hide');nav.classList.remove('nav-float'); if(tb)tb.classList.add('tb-hide');}
+    else if(y<lastY-5){nav.classList.remove('nav-hide');nav.classList.add('nav-float');} /* topbar returns only at the very top */
+    lastY=y;
+  },{passive:true});
+})();
+</script>
+<script>
+/* ---- closing section: interactive 3D IAQ campus, follows the cursor ---- */
+(function(){
+  var host=document.querySelector('.close-stage')||document.querySelector('.close3d'); if(!host) return;
+  var canvas=document.getElementById('closeCv'); if(!canvas) return;
+  var URLS=['https://cdn.jsdelivr.net/npm/three@0.184.0/build/three.module.min.js',
+            'https://unpkg.com/three@0.184.0/build/three.module.min.js',
+            'https://esm.sh/three@0.184.0'];
+  var T,renderer,scene,camera,g,beacons=[],raf=null,visb=false,truck,dust,stars,clouds,starMat,trees=[];
+  var px=0,py=0,pxt=0,pyt=0;
+  /* self-contained reduced-motion flag so this engine works on every page it is propagated to */
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function mat(c,o){o=o||{};return new T.MeshStandardMaterial({color:c,roughness:o.rough!==undefined?o.rough:.65,metalness:o.metal||0});}
+  function bx(w,h,d,c,o){var m=new T.Mesh(new T.BoxGeometry(w,h,d),mat(c,o));
+    m.castShadow=true;m.receiveShadow=true;
+    m.add(new T.LineSegments(new T.EdgesGeometry(m.geometry),new T.LineBasicMaterial({color:0x0B1120,transparent:true,opacity:.38})));return m;}
+  function cl(r,h,c,o){var m=new T.Mesh(new T.CylinderGeometry(r,r,h,18),mat(c,o));m.castShadow=true;return m;}
+  function init(mod){
+    T=mod;
+    scene=new T.Scene();
+    camera=new T.PerspectiveCamera(30,2,0.1,100);
+    renderer=new T.WebGLRenderer({canvas:canvas,antialias:true,alpha:true});
+    renderer.setClearColor(0x000000,0); renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,1.75));
+    renderer.shadowMap.enabled=true; renderer.shadowMap.type=T.PCFShadowMap;/* grounded contact shadows read as a real site */
+    renderer.toneMapping=T.ACESFilmicToneMapping; renderer.toneMappingExposure=1.1;
+    scene.add(new T.HemisphereLight(0xEAF2FF,0x2A3346,1.05));
+    var sun=new T.DirectionalLight(0xF4F7FF,2.2); sun.position.set(7,11,5);
+    sun.castShadow=true; sun.shadow.mapSize.set(1024,1024);
+    sun.shadow.camera.left=-9; sun.shadow.camera.right=9; sun.shadow.camera.top=7; sun.shadow.camera.bottom=-5;
+    sun.shadow.camera.near=2; sun.shadow.camera.far=32; sun.shadow.bias=-0.0002; sun.shadow.normalBias=0.03;
+    scene.add(sun);
+    var rim=new T.DirectionalLight(0x7FA8FF,0.8); rim.position.set(-6,5,-7); scene.add(rim);
+    /* subtle dusk fog: the far ground melts into the sky instead of a hard edge */
+    scene.fog=new T.Fog(0x14203C,24,64);
+    /* ---- SKY: dusk gradient dome + starfield + soft moon + horizon haze + drifting clouds ---- */
+    (function(){
+      var scn=document.createElement('canvas'); scn.width=8; scn.height=256; var sc=scn.getContext('2d');
+      var sg=sc.createLinearGradient(0,0,0,256);
+      /* cool twilight: a SMOOTH monotonic ramp from deep navy zenith to a soft blue horizon glow,
+         evenly spaced so there is no hard band edge / horizontal seam line in the sky */
+      sg.addColorStop(0.00,'#05080F'); sg.addColorStop(0.28,'#0A1526'); sg.addColorStop(0.48,'#152740');
+      sg.addColorStop(0.64,'#1F3B61'); sg.addColorStop(0.80,'#2A5080'); sg.addColorStop(0.92,'#326096');
+      sg.addColorStop(1.00,'#35669E');
+      sc.fillStyle=sg; sc.fillRect(0,0,8,256);
+      var stex=new T.CanvasTexture(scn); if(T.SRGBColorSpace) stex.colorSpace=T.SRGBColorSpace;
+      var sky=new T.Mesh(new T.SphereGeometry(72,24,16),new T.MeshBasicMaterial({map:stex,side:T.BackSide,depthWrite:false,fog:false}));
+      sky.position.y=-8; sky.renderOrder=-10; scene.add(sky);
+    })();
+    function radialTex(stops){ var cv=document.createElement('canvas'); cv.width=cv.height=128; var g2=cv.getContext('2d');
+      var rg=g2.createRadialGradient(64,64,2,64,64,64); stops.forEach(function(s){rg.addColorStop(s[0],s[1]);});
+      g2.fillStyle=rg; g2.fillRect(0,0,128,128); return new T.CanvasTexture(cv); }
+    /* sparse dusk stars, low over the horizon so a few sit in the visible sky strip */
+    var stn=130, stp=new Float32Array(stn*3);
+    for(var si=0;si<stn;si++){ var th=Math.random()*Math.PI*2, rr=40+Math.random()*16;
+      stp[si*3]=Math.cos(th)*rr; stp[si*3+1]=2.6+Math.random()*9; stp[si*3+2]=Math.sin(th)*rr-2; }
+    var stgeo=new T.BufferGeometry(); stgeo.setAttribute('position',new T.BufferAttribute(stp,3));
+    starMat=new T.PointsMaterial({color:0xDCE8FF,size:0.2,transparent:true,opacity:0.8,depthWrite:false,fog:false});
+    stars=new T.Points(stgeo,starMat); scene.add(stars);
+    /* soft moon low on the horizon (a moonrise behind the site), off to one side so buildings don't hide it */
+    var moon=new T.Sprite(new T.SpriteMaterial({map:radialTex([[0,'rgba(240,244,255,0.95)'],[0.32,'rgba(210,224,255,0.4)'],[0.6,'rgba(200,216,250,0.12)'],[1,'rgba(200,216,250,0)']]),transparent:true,depthWrite:false,fog:false}));
+    moon.scale.set(6,6,1); moon.position.set(15.5,3.6,-18); scene.add(moon);
+    /* (horizon haze removed: its additive glow band drew a hard horizontal line where it met the dark sky) */
+    /* drifting cloud banks along the horizon */
+    var cloudTex=radialTex([[0,'rgba(158,176,212,0.42)'],[0.5,'rgba(158,176,212,0.11)'],[1,'rgba(158,176,212,0)']]);
+    clouds=[];
+    for(var ci=0;ci<6;ci++){ var csp=new T.Sprite(new T.SpriteMaterial({map:cloudTex,transparent:true,depthWrite:false,fog:false,opacity:0.5}));
+      var cw=7+Math.random()*7; csp.scale.set(cw,cw*0.3,1);
+      csp.position.set(-18+Math.random()*36,2.8+Math.random()*3.2,-11-Math.random()*9);
+      csp.userData.sp=0.5+Math.random()*0.7; scene.add(csp); clouds.push(csp); }
+    g=new T.Group(); scene.add(g);
+    /* ---- ground: layered site, not a black void ----
+       dark asphalt base, a lit concrete apron the campus stands on, kerbs, and a front service road */
+    var gnd=new T.Mesh(new T.PlaneGeometry(96,64),new T.MeshStandardMaterial({color:0x090D14,roughness:1,metalness:0}));
+    gnd.rotation.x=-Math.PI/2; gnd.position.y=-0.03; gnd.receiveShadow=true; g.add(gnd);
+    /* concrete apron slab: the campus footprint sits on a grounded pad */
+    var apron=new T.Mesh(new T.PlaneGeometry(12.6,5.6),new T.MeshStandardMaterial({color:0x1B2432,roughness:.9,metalness:0}));
+    apron.rotation.x=-Math.PI/2; apron.position.set(0.2,-0.012,0.05); apron.receiveShadow=true; g.add(apron);
+    /* apron kerb: a thin raised edge around the pad */
+    var kerbMat=new T.MeshStandardMaterial({color:0x2A3546,roughness:.85});
+    [[0.2,-0.008,2.85,12.6,0.16],[0.2,-0.008,-2.75,12.6,0.16]].forEach(function(k){
+      var kb=new T.Mesh(new T.BoxGeometry(k[3],0.06,k[4]),kerbMat); kb.position.set(k[0],0.02,k[2]); kb.receiveShadow=true; g.add(kb); });
+    [[-6.1,-0.008,0.05,0.16,5.6],[6.5,-0.008,0.05,0.16,5.6]].forEach(function(k){
+      var kb=new T.Mesh(new T.BoxGeometry(k[3],0.06,k[4]),kerbMat); kb.position.set(k[0],0.02,k[2]); kb.receiveShadow=true; g.add(kb); });
+    /* front service road (the truck + bollards run here) with a dashed centre line */
+    var road=new T.Mesh(new T.PlaneGeometry(15,1.05),new T.MeshStandardMaterial({color:0x0C1017,roughness:1}));
+    road.rotation.x=-Math.PI/2; road.position.set(0.2,-0.006,2.25); road.receiveShadow=true; g.add(road);
+    for(var dl=0;dl<11;dl++){ var dash=new T.Mesh(new T.PlaneGeometry(0.5,0.05),new T.MeshBasicMaterial({color:0x5C6A7E}));
+      dash.rotation.x=-Math.PI/2; dash.position.set(-6.3+dl*1.3,0.002,2.25); g.add(dash); }
+    /* landscaped strip behind the campus for depth */
+    var lawn=new T.Mesh(new T.PlaneGeometry(12.6,0.9),new T.MeshStandardMaterial({color:0x122019,roughness:1}));
+    lawn.rotation.x=-Math.PI/2; lawn.position.set(0.2,-0.008,-2.4); lawn.receiveShadow=true; g.add(lawn);
+    /* ---- floor detail: expansion joints, parking bays, landscaping ---- */
+    /* concrete expansion joints (subtle darker seams gridding the apron) */
+    var jointMat=new T.MeshBasicMaterial({color:0x121A26,transparent:true,opacity:0.55});
+    for(var jz=0;jz<4;jz++){ var jl=new T.Mesh(new T.PlaneGeometry(12.4,0.03),jointMat); jl.rotation.x=-Math.PI/2; jl.position.set(0.2,0.0006,-2.0+jz*1.35); g.add(jl); }
+    for(var jx=0;jx<7;jx++){ var jc=new T.Mesh(new T.PlaneGeometry(0.03,5.4),jointMat); jc.rotation.x=-Math.PI/2; jc.position.set(-5.6+jx*1.72,0.0006,0.05); g.add(jc); }
+    /* painted parking bays, front-left corner of the apron */
+    var lineMat=new T.MeshBasicMaterial({color:0x8B97AB});
+    for(var pk=0;pk<6;pk++){ var pl=new T.Mesh(new T.PlaneGeometry(0.045,1.0),lineMat); pl.rotation.x=-Math.PI/2; pl.position.set(-5.4+pk*0.62,0.0012,1.15); g.add(pl); }
+    var pbCap=new T.Mesh(new T.PlaneGeometry(3.15,0.045),lineMat); pbCap.rotation.x=-Math.PI/2; pbCap.position.set(-4.47,0.0012,0.66); g.add(pbCap);
+    /* landscaping trees along the rear lawn (two-tier conifers, they cast shadows) */
+    function tree(x,z,s){ var tg=new T.Group(); tg.userData.ph=Math.random()*6.283; trees.push(tg);
+      var trunk=new T.Mesh(new T.CylinderGeometry(0.05*s,0.07*s,0.5*s,6),new T.MeshStandardMaterial({color:0x4A3A2E,roughness:1})); trunk.position.y=0.25*s; trunk.castShadow=true; tg.add(trunk);
+      var f1=new T.Mesh(new T.ConeGeometry(0.42*s,0.95*s,7),new T.MeshStandardMaterial({color:0x24513A,roughness:1})); f1.position.y=0.78*s; f1.castShadow=true; tg.add(f1);
+      var f2=new T.Mesh(new T.ConeGeometry(0.31*s,0.66*s,7),new T.MeshStandardMaterial({color:0x2E6247,roughness:1})); f2.position.y=1.12*s; f2.castShadow=true; tg.add(f2);
+      tg.position.set(x,0,z); g.add(tg); }
+    [[-5.3,-2.45,1.05],[-3.5,-2.55,0.85],[1.0,-2.5,0.8],[3.6,-2.55,0.92],[5.4,-2.45,1.08]].forEach(function(tp){ tree(tp[0],tp[1],tp[2]); });
+    /* campus: fab, tower, dry hall, chiller yard, stacks */
+    var fab=bx(3.0,1.0,1.8,0xE8EDF4); fab.position.set(-3.6,0.5,-0.4); g.add(fab);
+    var band=bx(3.04,0.1,1.84,0xC22730); band.position.set(-3.6,0.82,-0.4); g.add(band);
+    var pent=bx(1.3,0.35,1.0,0xD5DCE6); pent.position.set(-3.9,1.18,-0.4); g.add(pent);
+    for(var i=0;i<3;i++){var ru=bx(0.34,0.22,0.34,0xB9C2CE); ru.position.set(-4.3+i*0.6,1.11,-0.4); g.add(ru);}
+    var hq=bx(1.7,1.9,1.3,0xDDE3EB); hq.position.set(-0.5,0.95,-0.9); g.add(hq);
+    var hqTrim=bx(1.74,0.08,1.34,0xC22730); hqTrim.position.set(-0.5,1.94,-0.9); g.add(hqTrim);
+    /* IAQ sign on the tower crown */
+    var signBack=bx(1.5,0.58,0.07,0xFFFFFF,{rough:.25}); signBack.position.set(-0.5,1.56,-0.22); g.add(signBack);
+    new T.TextureLoader().load('assets/iaq-logo.webp',function(tex){
+      if(T.SRGBColorSpace) tex.colorSpace=T.SRGBColorSpace;
+      tex.anisotropy=8;
+      var sm=new T.MeshBasicMaterial({map:tex,transparent:true});
+      var sp=new T.Mesh(new T.PlaneGeometry(1.16,0.48),sm); sp.position.set(-0.5,1.56,-0.178); g.add(sp);
+    });
+    for(var w=0;w<4;w++){var win=bx(1.72,0.02,1.32,0x39424F,{rough:.4}); win.position.set(-0.5,0.42+w*0.42,-0.9); g.add(win);}
+    var hall=bx(3.4,0.8,1.6,0xE8EDF4); hall.position.set(2.9,0.4,-0.2); g.add(hall);
+    for(var r2=0;r2<8;r2++){var rib=bx(0.06,0.06,1.66,0xC7CFDA); rib.position.set(1.45+r2*0.42,0.83,-0.2); g.add(rib);}
+    var dock=bx(0.5,0.4,0.9,0xD5DCE6); dock.position.set(4.85,0.2,-0.2); g.add(dock);
+    /* chiller yard */
+    var plinth=bx(2.2,0.12,1.1,0x39424F); plinth.position.set(0.9,0.06,1.15); g.add(plinth);
+    for(var c2=0;c2<3;c2++){
+      var ch=bx(0.58,0.42,0.5,0xCBD4DF); ch.position.set(0.25+c2*0.66,0.35,1.15); g.add(ch);
+      /* the fan sits INSIDE the unit: only a recessed dark intake with louvres shows on top */
+      var gr=bx(0.34,0.015,0.34,0x141B27,{rough:.9}); gr.position.set(0.25+c2*0.66,0.563,1.15); gr.castShadow=false; g.add(gr);
+      for(var gb=0;gb<4;gb++){ var lv=bx(0.30,0.008,0.04,0x2A3546); lv.position.set(0.25+c2*0.66,0.572,1.024+gb*0.084); lv.castShadow=false; g.add(lv); }
+      var pn=bx(0.09,0.24,0.36,0xC22730); pn.position.set(0.52+c2*0.66,0.28,1.15); g.add(pn);
+    }
+    var run=cl(0.045,1.9,0xC22730); run.rotation.z=Math.PI/2; run.position.set(0.9,0.2,1.72); g.add(run);
+    /* stacks with aviation beacons */
+    [[-2.1,1.6,-1.1],[3.9,1.3,-1.0]].forEach(function(sp){
+      var stк=cl(0.09,sp[1],0xC7CFDA); stк.position.set(sp[0],sp[1]/2,sp[2]); g.add(stк);
+      var bcn=new T.Mesh(new T.SphereGeometry(0.05,10,10),new T.MeshBasicMaterial({color:0xFF3B44,transparent:true}));
+      bcn.position.set(sp[0],sp[1]+0.06,sp[2]); g.add(bcn); beacons.push(bcn);
+    });
+    /* drifting dust in the sky */
+    var dn=140, dp=new Float32Array(dn*3);
+    for(var di=0;di<dn;di++){ dp[di*3]=(Math.random()-0.5)*26; dp[di*3+1]=1.5+Math.random()*6; dp[di*3+2]=-6+Math.random()*10; }
+    var dg=new T.BufferGeometry(); dg.setAttribute('position',new T.BufferAttribute(dp,3));
+    var dm=new T.PointsMaterial({color:0x9FB4D8,size:0.035,transparent:true,opacity:.5,depthWrite:false});
+    dust=new T.Points(dg,dm); g.add(dust);
+    /* a little site truck looping the front road */
+    truck=new T.Group();
+    /* an actual articulated truck: chassis rail, red tractor cab with dark windshield
+       and grille, white box trailer with the fleet's red band, six wheels */
+    var chas=bx(0.95,0.05,0.28,0x1A2233); chas.position.set(0.05,0.105,0); truck.add(chas);
+    var cab=bx(0.24,0.26,0.30,0xC22730); cab.position.set(0.46,0.27,0); truck.add(cab);
+    var wind=bx(0.02,0.10,0.24,0x0E1622,{rough:.25}); wind.position.set(0.585,0.315,0); truck.add(wind);
+    var grille=bx(0.02,0.07,0.26,0x39424F); grille.position.set(0.585,0.185,0); truck.add(grille);
+    var boxT=bx(0.62,0.36,0.34,0xE8EDF4); boxT.position.set(-0.12,0.33,0); truck.add(boxT);
+    var bandT=bx(0.625,0.07,0.345,0xC22730); bandT.position.set(-0.12,0.245,0); truck.add(bandT);
+    [0.46,-0.02,-0.36].forEach(function(ax){ for(var side=0;side<2;side++){
+      var wh=cl(0.07,0.06,0x0D1420); wh.rotation.x=Math.PI/2;
+      wh.position.set(ax,0.07,side?0.17:-0.17); truck.add(wh); } });
+    /* the truck is the only moving caster: drop its shadow so the static shadow map can be baked once */
+    truck.traverse(function(n){ if(n.isMesh) n.castShadow=false; });
+    truck.position.set(-9,0,2.4); g.add(truck);
+    /* red site bollards: an even protective row along the front kerb, centred on the apron (x0.2),
+       forward of the truck lane (z2.4 box reaches 2.57) and inside the side kerbs and front kerb (z2.77) */
+    for(var b2=0;b2<9;b2++){var bd=cl(0.035,0.17,0xC22730); bd.position.set(-5.4+b2*1.4,0.085,2.72); g.add(bd);}
+    /* parked cars in the painted bays: static, so their shadows bake with the site */
+    function car(x,c){ var cg=new T.Group();
+      var bd2=bx(0.24,0.09,0.5,c); bd2.position.y=0.095; cg.add(bd2);
+      var cab2=bx(0.20,0.085,0.26,0x11192A,{rough:.3}); cab2.position.set(0,0.175,-0.02); cg.add(cab2);
+      for(var cw=0;cw<4;cw++){ var wh2=cl(0.045,0.04,0x0D1420); wh2.rotation.z=Math.PI/2;
+        wh2.position.set(cw%2?0.115:-0.115,0.045,cw<2?0.16:-0.16); cg.add(wh2); }
+      cg.position.set(x,0,1.12); g.add(cg); }
+    car(-5.09,0x9AA6B6); car(-3.85,0x3A4557); car(-2.61,0x7E1F27);
+    resize(); window.addEventListener('resize',resize);
+    if(window.ResizeObserver){try{var ro=new ResizeObserver(resize);ro.observe(host);ro.observe(canvas);}catch(e){}}
+    host.addEventListener('pointermove',function(e){
+      var r=host.getBoundingClientRect();
+      pxt=((e.clientX-r.left)/r.width-0.5); pyt=((e.clientY-r.top)/r.height-0.5);
+    },{passive:true});
+    host.addEventListener('pointerleave',function(){pxt=0;pyt=0;});
+    renderer.render(scene,camera);
+    /* bake the static shadow map once, then stop re-rendering it every frame (only the truck moves, and it no longer casts) */
+    renderer.shadowMap.needsUpdate=true; renderer.render(scene,camera); renderer.shadowMap.autoUpdate=false;
+    if(reduce) return;
+    /* run immediately; the observer only pauses the loop when the footer is far offscreen */
+    visb=true; raf=requestAnimationFrame(frame);
+    /* watchdog: if rAF is being throttled by the embedder, step the scene on a timer */
+    setInterval(function(){ if(document.hidden||!visb) return;
+      if(performance.now()-lastF>700){ try{ frame(performance.now()); }catch(e){} } },350);
+    if(window.IntersectionObserver){ try{ new IntersectionObserver(function(es){ visb=es[0].isIntersecting;
+      if(visb){ if(!raf) raf=requestAnimationFrame(frame); } else if(raf){ cancelAnimationFrame(raf); raf=null; } },{rootMargin:'200px'}).observe(host);
+    }catch(e){ visb=true; if(!raf) raf=requestAnimationFrame(frame);} }
+  }
+  var lastF=0;
+  function frame(ts){ raf=requestAnimationFrame(frame); lastF=performance.now(); if(!visb)return;
+    var t=ts||0;
+    px+=(pxt-px)*0.05; py+=(pyt-py)*0.05;
+    /* orbit AROUND the campus centre (CX) with a gentle idle swing, so the model sits in the
+       middle of the frame on every breakpoint instead of drifting to the right */
+    var CX=0.3;/* campus bounding-box centre in x */
+    var a=px*0.32+Math.sin(t*0.00005)*0.12;
+    /* the canvas is now a WIDE contained strip, not a full-height band: camera sits closer and
+       lower so the campus fills the strip while its full width stays in frame */
+    var mob=canvas.clientWidth<720;
+    var camR=mob?17.4:6.4, camH=(mob?4.6:3.0)+py*0.8;/* closer + lower: campus fills the strip end to end */
+    camera.position.set(CX+Math.sin(a)*camR*0.55, camH, Math.cos(a)*camR*0.8+2.6);
+    camera.lookAt(CX+px*0.5, mob?0.7:0.35, 0);
+    beacons.forEach(function(b3,bi){ b3.material.opacity=0.35+0.65*Math.abs(Math.sin(t*0.0018+bi*1.7)); });
+    if(truck){ var tp=((t*0.00006)%1); truck.position.x=-10+tp*20; }
+    if(dust){ dust.rotation.y=t*0.000012; }
+    /* a light wind: each tree sways on its own phase, small enough that baked shadows still read true */
+    for(var tw=0;tw<trees.length;tw++){ var tg2=trees[tw];
+      tg2.rotation.z=Math.sin(t*0.0011+tg2.userData.ph)*0.024;
+      tg2.rotation.x=Math.sin(t*0.0009+tg2.userData.ph*1.7)*0.014; }
+    if(starMat){ starMat.opacity=0.68+0.22*Math.sin(t*0.0009); }
+    if(clouds){ for(var ck=0;ck<clouds.length;ck++){ var ccl=clouds[ck]; ccl.position.x+=ccl.userData.sp*0.003; if(ccl.position.x>22)ccl.position.x=-22; } }
+    renderer.render(scene,camera); }
+  function resize(){ if(!renderer)return; var cr=canvas.getBoundingClientRect();
+    var w=Math.round(cr.width)||host.clientWidth||600, h=Math.round(cr.height)||host.clientHeight||500;
+    renderer.setSize(w,h,false); camera.aspect=w/h; camera.updateProjectionMatrix();
+    var mob=w<720;
+    camera.position.set(0.3,mob?4.6:3.0,mob?17.4:7.7); camera.lookAt(0.3,mob?0.7:0.35,0);
+    renderer.render(scene,camera); }
+  function load(i){ if(i>=URLS.length) return;
+    import(URLS[i]).then(function(m){try{init(m);}catch(err){}}).catch(function(){load(i+1);}); }
+  load(0);
+})();
+</script>
+<script>
+/* burger drawer: toggles, closes on link tap, Escape, or a real scroll away */
+(function(){var nav=document.querySelector('.nav'),b=document.getElementById('navBurger');if(!nav||!b)return;
+var openedY=0;
+function close(){nav.classList.remove('menu-open');b.setAttribute('aria-expanded','false');}
+b.addEventListener('click',function(){var open=nav.classList.toggle('menu-open');b.setAttribute('aria-expanded',open?'true':'false');if(open)openedY=window.scrollY;});
+nav.querySelectorAll('.nav-drawer a').forEach(function(a){a.addEventListener('click',close);});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
+window.addEventListener('scroll',function(){if(nav.classList.contains('menu-open')&&Math.abs(window.scrollY-openedY)>90)close();},{passive:true});
+})();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
+<script>
+/* Buttery lerped scrolling (synced from index.html): Lenis animates the REAL scrollTop every frame,
+   so motion glides between wheel ticks instead of stepping with them. Wheel-only: touch keeps native
+   scrolling. Disabled under reduced motion. */
+(function(){
+  if(!window.Lenis) return;
+  if(window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+  var lenis=new Lenis({lerp:0.11,smoothWheel:true,wheelMultiplier:1.8});
+  document.documentElement.style.scrollBehavior='auto';
+  if(window.gsap){
+    if(window.ScrollTrigger) lenis.on('scroll',ScrollTrigger.update);
+    gsap.ticker.add(function(t){lenis.raf(t*1000);});
+    gsap.ticker.lagSmoothing(0);
+  } else {
+    requestAnimationFrame(function raf(t){ lenis.raf(t); requestAnimationFrame(raf); });
+  }
+  document.addEventListener('click',function(e){
+    var a=e.target.closest&&e.target.closest('a[href^="#"]'); if(!a) return;
+    var id=a.getAttribute('href'); if(!id||id==='#') return;
+    var el=document.querySelector(id); if(!el) return;
+    e.preventDefault(); lenis.scrollTo(el);
+    try{ history.pushState(null,'',id); }catch(_){}
+  });
+  window.__lenis=lenis;
+})();
+</script>
+</body>
+</html>
