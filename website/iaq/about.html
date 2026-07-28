@@ -3090,7 +3090,11 @@ html.us-lock,html.us-lock body{overflow:hidden}
 /* ============ mobile pass ============ */
 @media(max-width:760px){
   /* nothing may push the page sideways */
-  html,body{max-width:100%;overflow-x:hidden}
+  /* `clip`, not `hidden`: overflow-x:hidden on <html> propagates to the viewport and leaves <body>
+     as its own scroll container, which silently kills every position:sticky on the page (the nav,
+     and the pinned 3D showpiece runway). clip contains the same horizontal overflow without
+     creating a scroll container. Browsers without `clip` keep the old `hidden`. */
+  html,body{max-width:100%;overflow-x:hidden;overflow-x:clip}
   /* the smallest mono labels were below comfortable reading size on a phone */
   .eyebrow,.svc-tag,.lp-step,.lp-kick,.fm-k,.nd-k,.ph-cap,.note,.tag,.ref,.iso{font-size:10.5px!important}
   .lp-tag .nm{font-size:10.5px!important}
