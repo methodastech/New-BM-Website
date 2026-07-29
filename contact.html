@@ -76,11 +76,14 @@
               <div class="form-success-mark">OK</div>
               <div>Thank you! We'll be in touch within 24 hours.</div>
             </div>
-            <form action="https://formsubmit.co/ajax/bazil@brandmethod.co" method="POST">
+            <!-- Standard (non-ajax) FormSubmit endpoint on purpose: the /ajax/ endpoint cannot
+                 render a captcha, so _captcha=false was the only option there. Posting natively
+                 lets FormSubmit show its captcha and then redirect to _next. -->
+            <form action="https://formsubmit.co/bazil@brandmethod.co" method="POST" data-native-submit>
               <input type="hidden" name="_subject" value="New project brief from Brand Method website">
               <input type="hidden" name="_cc" value="amina@brandmethod.co">
               <input type="hidden" name="_template" value="table">
-              <input type="hidden" name="_captcha" value="false">
+              <input type="hidden" name="_next" value="https://brandmethod.co/thank-you.html?form=contact">
               <!-- honeypot: bots fill this, humans never see it -->
               <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
               <div class="form-row">

@@ -429,6 +429,20 @@ if (form) {
   form.addEventListener('submit', async (e) => {
     const action = form.getAttribute('action');
 
+    // Forms marked data-native-submit POST straight to the endpoint so it can run its
+    // own captcha and redirect to the thank-you page. Don't intercept them.
+    if (form.hasAttribute('data-native-submit')) {
+      const submitButton = form.querySelector('button[type="submit"]');
+      if (submitButton) {
+        // Deferred so the browser has already started the POST before the button is disabled.
+        setTimeout(() => {
+          submitButton.disabled = true;
+          submitButton.textContent = 'Sending...';
+        }, 0);
+      }
+      return;
+    }
+
     if (action) {
       e.preventDefault();
 
