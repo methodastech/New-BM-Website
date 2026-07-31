@@ -1,0 +1,29 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "cards",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "8794"
+      ],
+      "port": 8794,
+      "autoPort": false
+    },
+    {
+      "name": "baik",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "8795",
+        "--directory",
+        "/Users/zieel/Bazil Claude 3/Apps/Baik Khayr"
+      ],
+      "port": 8795,
+      "autoPort": false
+    }
+  ]
+}
