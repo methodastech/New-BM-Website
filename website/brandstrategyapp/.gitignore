@@ -1,0 +1,10 @@
+_backups/
+*.zip
+.DS_Store
+.claude/
+
+# Working files — the app is self-contained, none of these ship to the web root
+*.pre-*.bak.html
+Claude.pdf
+_ref_education.html
+Eskayvie Demo.html
