@@ -6652,18 +6652,31 @@ footer {
   }
 
   .clients-section {
-    padding: 60px 20px;
+    padding: 46px 12px;
+  }
+
+  .clients-heading {
+    margin-bottom: 28px;
+  }
+
+  .clients-row {
+    padding: 2px 0;
+  }
+
+  .clients-row::before,
+  .clients-row::after {
+    width: 48px;
   }
 
   .client-logo {
-    width: 32vw;
-    height: 82px;
-    padding: 0 10px;
+    width: 40vw;
+    height: 94px;
+    padding: 0 4px;
   }
 
   .client-logo img {
-    width: 124px;
-    height: 52px;
+    width: 100%;
+    height: 86px;
   }
 
   .sticky-brand-cta {
