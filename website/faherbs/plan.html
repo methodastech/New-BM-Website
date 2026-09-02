@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FA Herbs · Website Plan · Brand Method</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{--paper:#F7F9FC;--paper2:#FFFFFF;--ink:#0B1526;--soft:#45536B;--faint:#8593A9;--line:#E3E9F2;--line2:#D3DCE8;--org:#1F8A4C;--org-deep:#15693B;--wash:#EAF6EF;--ok:#128A54;--warn:#C08A1D;--bad:#D7263D;--dark:#0F241A;}
+  *{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+  body{font-family:"Inter",system-ui,sans-serif;background:var(--paper);color:var(--ink);font-size:16px;line-height:1.62;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  .wrap{max-width:none;margin:0;padding:0 22px}.mono{font-family:"JetBrains Mono",monospace}
+  .eyebrow{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--org-deep);display:inline-flex;align-items:center;gap:10px;font-weight:600}
+  .hero{padding:50px 0 8px}.hero h1{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:clamp(32px,5vw,54px);line-height:1.06;letter-spacing:-.02em;margin:18px 0 0;max-width:26ch}.hero h1 em{font-style:normal;color:var(--org-deep)}
+  .hero .lede{font-size:clamp(17px,2vw,20px);color:var(--soft);max-width:68ch;margin:20px 0 0}
+  .vrow{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}.vchip{background:var(--paper2);border:1px solid var(--line);border-radius:999px;padding:8px 15px;font-size:13px;color:var(--soft)}.vchip b{color:var(--org-deep)}
+  section{padding:32px 0}
+  .chapdiv{display:flex;align-items:baseline;gap:18px;padding:42px 0 4px;border-top:1px solid var(--line);margin-top:10px}.cd-no{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:38px;color:var(--org);line-height:1}.cd-h{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:27px;letter-spacing:-.01em}.cd-sub{font-size:15px;color:var(--soft);margin-top:5px}
+  h3.sub{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:21px;margin:30px 0 0}
+  .sec-intro{font-size:16.5px;color:var(--soft);max-width:74ch;margin:15px 0 0}.sec-intro b{color:var(--ink)}
+  .grid{display:grid;gap:16px;margin-top:22px}.g2{grid-template-columns:repeat(auto-fit,minmax(290px,1fr))}.g3{grid-template-columns:repeat(auto-fit,minmax(225px,1fr))}
+  .card{background:var(--paper2);border:1px solid var(--line);border-radius:14px;padding:20px 21px}.card .tag{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--org-deep);font-weight:700}.card h3{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:18.5px;margin-top:8px}.card p{font-size:14px;color:var(--soft);margin-top:9px;line-height:1.55}.card p b{color:var(--ink)}
+  table{width:100%;border-collapse:separate;border-spacing:0;margin-top:18px;font-size:14px;background:var(--paper2);border:1px solid var(--line);border-radius:12px;overflow:hidden}th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}thead th{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#fff;background:var(--dark)}tr:last-child td{border-bottom:none}td.dim{font-weight:600}td.sc{font-family:"JetBrains Mono",monospace;color:var(--org-deep);font-weight:700;white-space:nowrap}td.gate{color:var(--bad);font-weight:600}
+  .tbl-scroll{overflow-x:auto;margin-top:18px}.tbl-scroll table{margin-top:0;min-width:760px}
+  .pin{margin-top:22px;border-left:3px solid var(--org);background:linear-gradient(90deg,rgba(31,138,76,.07),transparent);padding:15px 19px;border-radius:0 12px 12px 0;font-size:15px;display:block}.pin b{color:var(--org-deep)}.pin.warn{border-left-color:var(--warn);background:linear-gradient(90deg,rgba(192,138,29,.09),transparent)}.pin.warn b{color:#96690D}
+  .diagram{margin-top:18px;border:1px solid var(--line);border-radius:14px;background:var(--paper2);padding:18px}.diagram .cap{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--faint);margin-bottom:10px}.diagram svg{width:100%;height:auto;display:block}
+  .scene{display:flex;gap:18px;margin-top:22px;border:1px solid var(--line);border-radius:14px;background:var(--paper2);padding:20px 22px}
+  .scene .no{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:26px;color:var(--org);line-height:1;min-width:34px}
+  .scene h3{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:18.5px}
+  .scene .mech{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--org-deep);font-weight:700;margin-top:5px}
+  .scene p{font-size:14.5px;color:var(--soft);margin-top:9px;line-height:1.58}.scene p b{color:var(--ink)}
+  .scene p.ref{font-size:12.5px;color:var(--faint);margin-top:8px}
+  footer{padding:34px 0 70px;color:var(--faint);font-size:12px;font-family:"JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.05em;border-top:1px solid var(--line);margin-top:30px}
+</style>
+<style id="printFix">
+@media print{ body{background:#fff} svg *{opacity:1!important} table,tr,td,th,.card,.diagram,.scene{page-break-inside:avoid} h2,h3{page-break-after:avoid} .bmws{display:none!important} }
+</style>
+</head>
+<body>
+<style id="bmwsCss">
+.bmws{background:#0A1224;color:#E7EDF7;position:sticky;top:0;z-index:900;border-bottom:1px solid #1d2a45}
+.bmws-in{display:flex;align-items:center;justify-content:space-between;padding:9px 22px;max-width:none;margin:0;gap:12px;flex-wrap:wrap}
+.bmws-crumb{display:flex;flex-direction:column;line-height:1.3;white-space:nowrap}
+.bmws-crumb b{font-size:13px;font-weight:700;color:#fff;letter-spacing:.01em;font-family:Inter,system-ui,sans-serif}
+.bmws-crumb span{font-family:"JetBrains Mono",monospace;font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;color:#8593A9}
+.bmws-tabs{display:flex;align-items:center;border:1px solid rgba(255,255,255,.22);border-radius:11px;overflow:auto;max-width:100%;margin-left:auto;padding:3px;gap:3px;background:rgba(255,255,255,.04)}
+.bmws-tabs a,.bmws-tabs span.off{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#C6D2E4;text-decoration:none;padding:7px 13px;border-radius:8px;white-space:nowrap;display:inline-flex;align-items:center;gap:7px;transition:background .25s,color .25s}
+.bmws-tabs a i,.bmws-tabs span.off i{font-style:normal;color:#8593A9;font-size:9px;font-weight:700}
+.bmws-tabs a:hover{background:rgba(255,255,255,.09);color:#fff}
+.bmws-tabs a.on{background:#1F8A4C;color:#fff;font-weight:700}
+.bmws-tabs a.on i{color:rgba(255,255,255,.72)}
+.bmws-tabs span.off{opacity:.45;cursor:default}
+</style>
+<div class="bmws"><div class="bmws-in">
+  <div class="bmws-crumb"><b>FA Herbs &middot; Website 1</b><span>Brand Method &middot; Admin Navigation</span></div>
+  <nav class="bmws-tabs" aria-label="Admin navigation">
+    <a href="audit.html"><i>00</i>Web Audit</a>
+    <a href="competitors.html"><i>01</i>Competitors</a>
+    <a class="on" href="plan.html"><i>02</i>Web Plan</a>
+    <a href="index.html"><i>03</i>Prototype Web 1</a>
+  </nav>
+</div></div>
+
+<div class="wrap">
+
+<header class="hero">
+  <span class="eyebrow">FA Herbs &middot; Website Plan &middot; 20 Aug 2026</span>
+  <h1>Keep the identity. Open both lanes. <em>Publish the proof.</em></h1>
+  <p class="lede">This plan turns the research and the 14 Aug meeting into one buildable engagement: <b>two websites in every package</b>. Website 1 sells the ODM route to founders and startups: ready formulas, their label, fast to market. Website 2 is faherbs.com rebuilt on the existing identity as the corporate factory site for established brands: logo untouched, narration kept, wording tightened, carrying the proof layer the current site leaves blank. Three packages ladder the scale, from 1 to 5 pages up to 40+ with interactive 3D. A WhatsApp-first close on every page, and SEO plus AI findability included free, exactly as agreed in the meeting.</p>
+  <div class="vrow">
+    <span class="vchip"><b>2</b> websites in every package</span>
+    <span class="vchip">Website 1: <b>ODM brand builder</b>, domain at kickoff</span>
+    <span class="vchip">Website 2: <b>faherbs.com</b>, the factory site</span>
+    <span class="vchip">Packages: <b>1 to 5 &middot; 5 to 20 &middot; 20 to 40+</b> pages combined</span>
+    <span class="vchip">SEO + AI findability: <b>included free</b></span>
+  </div>
+</header>
+
+<section id="p01">
+  <div class="chapdiv"><div class="cd-no">01</div><div><div class="cd-h">What the evidence decided</div><div class="cd-sub">Written from the 20 Aug research dossier and the 14 Aug discovery call. The agreed direction lives in the pin below and binds everything after it</div></div></div>
+  <span class="pin"><b>Meeting record, 14 Aug 2026, Mervyn Goh, General Manager:</b> scope is <b>FA Herbs only</b>, never the Sedania holding company. <b>Lead generation is the primary objective.</b> The existing logo and brand identity are <b>kept, no modifications</b>. Phase 1 is the website as the lowest hanging fruit, and it is a <b>refresh, not a teardown</b>: Mervyn asked that we "don't want to change it too much from the existing", so the content narration stays, the wording gets touched up, and the design, UX and click paths are the exercise. SEO ships free with the build, AI findability was shown as a checklist item, and the post-launch motion is content first, then ads on the winners. Mervyn is gathering quotations from multiple providers and the new financial year has started: he prefers not to waste any time. Full minutes live in MEETING-14AUG.md.</span>
+  <span class="pin"><b>Offer update, 20 Aug 2026:</b> Bazil restructured the offer. Every package now delivers <b>two websites</b>: Website 1 sells the ODM route to founders, Website 2 is faherbs.com rebuilt as the corporate factory site. Three packages ladder the scale: 1 to 5 pages, 5 to 20, and 20 to 40+ combined, with interactive 3D only in Package 3. Chapter 03 carries the full shape.</span>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>Decision</th><th>The evidence behind it</th><th>What it binds in this plan</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">Refresh, not teardown</td><td>Mervyn asked not to change too much from the existing; the audit found the layout modern-leaning, with incompleteness, not age, as the problem</td><td>Logo and narration kept, wording tightened. Presentation and click paths are the whole exercise</td></tr>
+      <tr><td class="dim">Two websites in every package</td><td>Bazil's offer restructure of 20 Aug: a B2C brand builder plus the corporate factory site, in all three packages</td><td>faherbs.com is rebuilt in place as Website 2. Website 1's domain and positioning are decided at kickoff, gate 10</td></tr>
+      <tr><td class="dim">Lead generation is the site's one job</td><td>Mervyn named sales and marketing "the weakest link"; the sales side is one manager, one exec and the GM</td><td>Every page ends in a WhatsApp-first CTA plus the enquiry form, and every enquiry arrives pre-qualified</td></tr>
+      <tr><td class="dim">Two lanes, never mixed</td><td>Mervyn's own audience split: startups take the ODM route, established brands take the OEM route</td><td>A website per lane: ODM on Website 1, OEM on Website 2, with separate keyword lanes and WhatsApp openers</td></tr>
+      <tr><td class="dim">Proof is the rebuild's heart</td><td>The certificates page shows 5 placeholder images and the portfolio 16 placeholder logos, on a GMP factory's own shop window</td><td>The proof layer: named certificates, named clients, case studies and the numbers strip, all gated on client facts</td></tr>
+      <tr><td class="dim">The factory undersells the reality</td><td>The site says 100+ clients; Sedania's corporate page says 250+ and names Amway, Tupperware and Tanamera in the roster</td><td>The numbers reconciliation gate in chapter 08, and the Tanamera built-a-brand story, permission gated</td></tr>
+      <tr><td class="dim">SEO and AI findability ship free</td><td>Agreed in-call: SEO included with the website build; findability through ChatGPT and Gemini shown as a checklist item</td><td>Chapter 07 sits inside the build price. Ongoing SEO stays an optional retainer, quoted only when asked</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="p02">
+  <div class="chapdiv"><div class="cd-no">02</div><div><div class="cd-h">The strategy the site carries</div><div class="cd-sub">Three jobs, in lead order</div></div></div>
+  <div class="grid g3">
+    <div class="card"><span class="tag">Job 1 &middot; route</span><h3>Send each buyer to the right website</h3><p>Two websites, one factory. <b>Website 1, ODM for startups:</b> ready formulas, their label, fast to market, with product lines, MOQ, timeline and process shown. <b>Website 2, OEM for established brands:</b> custom requirements, answered with capability, R&amp;D, certifications and capacity. The sites interlink and never dilute each other.</p></div>
+    <div class="card"><span class="tag">Job 2 &middot; prove</span><h3>Pass the brand owner's background check</h3><p>A buyer choosing a contract manufacturer checks exactly what the site currently leaves blank: certificates, clients, outcomes, numbers. The proof layer exists so that check finds named certs, a named roster, 2 or 3 flagship case studies and one consistent set of figures.</p></div>
+    <div class="card"><span class="tag">Job 3 &middot; be found</span><h3>Get found by search and by AI</h3><p>The meeting's stated problem: not enough prospects finding the OEM and ODM services. Chapter 07 answers it with the two keyword lanes, the schema layer and an AEO pass so the factory is findable when a founder asks ChatGPT or Gemini instead of a search box.</p></div>
+  </div>
+  <h3 class="sub">Why the bar is reachable</h3>
+  <p class="sec-intro">FA Herbs has stronger real credentials than several boarded rivals and publishes almost none of it. The table below cites the winners' own published claims as <b>market patterns</b>, not our verification, and never as numbers FA Herbs may borrow.</p>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>What the winners publish</th><th>On faherbs.com today</th><th>The pattern on the competitor board</th><th>What the silence costs</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">MOQ and idea-to-market timeline</td><td class="sc">Absent</td><td>NaViBiotech publishes MOQ 100 boxes and roughly 3 months idea to market</td><td>The startup comparing factories signs with whoever states the numbers</td></tr>
+      <tr><td class="dim">Certifications, named</td><td class="sc">5 placeholders</td><td>Rivals name GMP, JAKIM Halal, ISO and HACCP marks on the homepage</td><td>The halal-bound or NPRA-bound buyer cannot tick the box, so moves on</td></tr>
+      <tr><td class="dim">Client proof</td><td class="sc">16 placeholder logos</td><td>Bionutricia shows 239+ brand partners; Skinlab claims 2,000+ brands</td><td>The strongest roster on the board (Amway, Tupperware, Tanamera) stays invisible</td></tr>
+      <tr><td class="dim">WhatsApp-first capture</td><td class="sc">1 contextless CTA</td><td>NaViBiotech runs prefilled templates and a free formulation consult; Bionutricia promises a 24 hour reply</td><td>Enquiries arrive cold, and a three-person sales team pays the qualification cost</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="p03">
+  <div class="chapdiv"><div class="cd-no">03</div><div><div class="cd-h">The two websites, top to bottom</div><div class="cd-sub">The locked design direction, one website per lane, three packages, every page mapped</div></div></div>
+  <h3 class="sub">Design direction, locked</h3>
+  <p class="sec-intro">Re-locked by Bazil on 21 Aug, superseding the 20 Aug pairing: <b>one reference, the Japanese OEM corporate register</b>, applied on FA Herbs&rsquo; own colours. The prototype in the 03 tab is the direction, built.</p>
+  <div class="grid g3">
+    <div class="card"><span class="tag">Reference &middot; the register</span><h3>Izumi Dress</h3><p>izmd.com, a Japanese women&rsquo;s-apparel OEM and ODM manufacturer. <b>Taken:</b> the light sage base with one green doing all the work, giant single-word section titles, white cards with offset photography, the numbered six-strength grid, the case carousel with pill filters, the framed about band, and the calm wide-tracked type voice.</p></div>
+    <div class="card"><span class="tag">Applied &middot; the brand</span><h3>FA Herbs&rsquo; own colours</h3><p>The accent green is sampled from faherbs.com itself: deep forest <b>#054321</b> on the site&rsquo;s own bar, mid green <b>#207850</b> on its links. The wordmark runs in the logo&rsquo;s Times-class serif, brown <b>#5A4126</b>, beside the kept brown-and-amber mark. Identity kept, exactly as agreed in the call.</p></div>
+    <div class="card"><span class="tag">Reserve &middot; the ceiling</span><h3>Igloo Inc</h3><p>igloo.inc, Awwwards Site of the Year 2024. <b>Reserved</b> as the ceiling for Package 3's scroll-driven interactive 3D. Not used below Package 3.</p></div>
+  </div>
+  <span class="pin"><b>Prototype Web 1 is the living proof of this direction:</b> the 03 tab beside this plan, one page, real faherbs.com assets plus labeled concept visuals, under a "Demo by Brand Method" ribbon. What the client clicks there is what this plan specifies here.</span>
+  <div class="diagram">
+    <div class="cap">D1 &middot; The two-site architecture. One website per lane. They interlink, never dilute.</div>
+    <svg viewBox="0 0 960 410" role="img" aria-label="Two-site architecture: Website 1 B2C brand builder and Website 2 B2B factory site">
+      <g font-family="Inter,system-ui,sans-serif">
+        <rect x="30" y="20" width="430" height="330" rx="12" fill="#FFFFFF" stroke="#1F8A4C" stroke-width="1.6"/>
+        <rect x="30" y="20" width="430" height="64" rx="12" fill="#1F8A4C"/>
+        <text x="245" y="47" text-anchor="middle" fill="#fff" font-size="14.5" font-weight="700">WEBSITE 1 &middot; B2C &middot; THE BRAND BUILDER</text>
+        <text x="245" y="67" text-anchor="middle" fill="#EAF6EF" font-size="12">domain and positioning confirmed at kickoff</text>
+        <g font-family="JetBrains Mono,monospace" font-size="10" fill="#15693B" font-weight="700">
+          <text x="54" y="112">AUDIENCE</text><text x="54" y="156">FUNNEL</text><text x="54" y="200">SEO LANE</text><text x="54" y="244">PAGES, INDICATIVE</text><text x="54" y="288">CLOSE</text>
+        </g>
+        <g font-size="12.5" fill="#0B1526">
+          <text x="54" y="130">Founders and startups building a brand</text>
+          <text x="54" y="174">ODM: ready formulas, their label, fast to market</text>
+          <text x="54" y="218">ODM and ready-formula queries, per product line</text>
+          <text x="54" y="262" font-size="11.5">Home &middot; Start Your Brand &middot; Product Lines &middot; MOQ &middot; Contact</text>
+          <text x="54" y="306">WhatsApp-first CTA plus the enquiry form, every page</text>
+        </g>
+        <rect x="500" y="20" width="430" height="330" rx="12" fill="#FFFFFF" stroke="#0F241A" stroke-width="1.6"/>
+        <rect x="500" y="20" width="430" height="64" rx="12" fill="#0F241A"/>
+        <text x="715" y="47" text-anchor="middle" fill="#fff" font-size="14.5" font-weight="700">WEBSITE 2 &middot; B2B &middot; FAHERBS.COM</text>
+        <text x="715" y="67" text-anchor="middle" fill="#A9C9B6" font-size="12">the corporate factory site, rebuilt in place</text>
+        <g font-family="JetBrains Mono,monospace" font-size="10" fill="#0F241A" font-weight="700">
+          <text x="524" y="112">AUDIENCE</text><text x="524" y="156">FUNNEL</text><text x="524" y="200">SEO LANE</text><text x="524" y="244">PAGES</text><text x="524" y="288">CARRIES</text>
+        </g>
+        <g font-size="12.5" fill="#0B1526">
+          <text x="524" y="130">Established brands with custom requirements</text>
+          <text x="524" y="174">OEM: capability, R&amp;D, certifications, capacity</text>
+          <text x="524" y="218">OEM manufacturer queries, category plus Malaysia</text>
+          <text x="524" y="262">The 7-page map below, plus the case-study template</text>
+          <text x="524" y="306">The proof layer: certificates, clients, case studies</text>
+        </g>
+        <path d="M462 170 H492" stroke="#15693B" stroke-width="2.2" fill="none"/><polygon points="492,165 500,170 492,175" fill="#15693B"/>
+        <path d="M498 214 H468" stroke="#0F241A" stroke-width="2.2" fill="none"/><polygon points="468,209 460,214 468,219" fill="#0F241A"/>
+        <text x="480" y="386" text-anchor="middle" fill="#8593A9" font-size="12" font-family="JetBrains Mono,monospace">EACH SITE LINKS THE OTHER LANE ACROSS AND NEVER DILUTES ITS OWN MESSAGE &middot; ONE FACT SHEET FEEDS BOTH</text>
+      </g>
+    </svg>
+  </div>
+  <h3 class="sub">Website 1 &middot; the ODM brand builder, page map</h3>
+  <p class="sec-intro">The shape is <b>indicative</b>: the final map is confirmed at kickoff together with the domain and positioning, gate 10. Every page ends in a prefilled WhatsApp plus the enquiry form.</p>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>Page</th><th>The job, one line</th><th>Content rules</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">Home</td><td>Turn a founder's idea into an enquiry in one scroll</td><td>Speaks to the founder, never to procurement. Links the OEM buyer across to faherbs.com</td></tr>
+      <tr><td class="dim">Start Your Brand &middot; How ODM Works</td><td>Show the route: pick a formula, add your label, launch</td><td>The process steps, MOQ and timeline, published only once the client confirms them</td></tr>
+      <tr><td class="dim">Product Lines</td><td>Show the ready formulas a founder can pick from</td><td>The 10 lines, real photography only. Gate: the factory shoot</td></tr>
+      <tr><td class="dim">Pricing or MOQ</td><td>State the entry cost plainly</td><td>Real figures only, from gate 7. Nothing borrowed from rivals</td></tr>
+      <tr><td class="dim">Contact</td><td>Start the WhatsApp thread, prefilled with the line picked</td><td>Same canonical number as Website 2, gate 9</td></tr>
+    </tbody>
+  </table></div>
+  <h3 class="sub">Website 2 &middot; faherbs.com, every page specified</h3>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>Page</th><th>The job, one line</th><th>Migrates from</th><th>Key components</th><th>Content rules</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">Home</td><td>Route each buyer down the right lane in one scroll</td><td>Existing Home: narration kept, wording tightened</td><td>Hero on the kept identity, numbers strip, two lane doors, proof band, product rail, WhatsApp closer</td><td>Only reconciled numbers. Placeholders banned estate-wide</td></tr>
+      <tr><td class="dim">/oem &middot; OEM route</td><td>Convince an established brand the factory can carry its spec</td><td>Lab &amp; Facility page content lands here</td><td>Capability walk, R&amp;D and lab, certifications band, capacity, enquiry form</td><td>Capacity figures only from the client. Nothing borrowed from rivals</td></tr>
+      <tr><td class="dim">/odm &middot; ODM route</td><td>Get a startup from idea to their-label product, fast</td><td>New page, drawing on the homepage's product categories</td><td>Ready-formula catalogue, MOQ, idea-to-market timeline, process strip, prefilled WhatsApp</td><td>MOQ and timeline published only once the client confirms them</td></tr>
+      <tr><td class="dim">/products &middot; Product Lines</td><td>Show the 10 lines a buyer can build on</td><td>Homepage category grid, placeholders replaced</td><td>10 line cards with real photos, each with a line-specific WhatsApp opener</td><td>Real photography only. Gate: the factory shoot</td></tr>
+      <tr><td class="dim">/proof &middot; Certificates &amp; Clients</td><td>Let the verifier tick every box on one page</td><td>Certificates page and Portfolio page merge here</td><td>Named certificates with numbers and validity, client roster with real logos, case-study links</td><td>A certificate appears only as sighted. A client appears only with permission</td></tr>
+      <tr><td class="dim">/story &middot; About</td><td>Tell the factory's story once, with evidence</td><td>/ourstory/, broken images and the empty team section fixed</td><td>Founding narrative, the three factories, team with names and faces, one line of Sedania context</td><td>Founding year printed only after the 1994 vs 1996 answer</td></tr>
+      <tr><td class="dim">/contact</td><td>Start a qualified WhatsApp thread with zero friction</td><td>Existing Contact page</td><td>One canonical WhatsApp, the form with lane and product-line fields, map, hours, LocalBusiness schema</td><td>The three published numbers reconcile to one canonical route</td></tr>
+      <tr><td class="dim">Case-study template (x2 or 3)</td><td>One client outcome, told properly</td><td>New. Tanamera material subject to permission</td><td>The brief, the route taken, the outcome, timeline, pull quote</td><td>Tanamera flagship gated on permission. No invented outcomes, ever</td></tr>
+    </tbody>
+  </table></div>
+  <h3 class="sub">Three packages, two websites</h3>
+  <p class="sec-intro">Page counts are <b>combined across both websites</b>. Craft rises at every step. Interactive 3D ships only in Package 3.</p>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>Package</th><th>Pages, combined</th><th>Craft</th><th>Website 1 ships</th><th>Website 2 ships</th></tr></thead>
+    <tbody>
+      <tr><td class="sc">Package 1</td><td class="dim">1 to 5</td><td>Clean, professional</td><td>One page: the ODM pitch with contact built in</td><td>Home with the proof band, /proof, /contact</td></tr>
+      <tr><td class="sc">Package 2</td><td class="dim">5 to 20</td><td>Premium. Every page a sales page</td><td>The full 5-page map</td><td>The full 7-page map plus 2 or 3 case studies</td></tr>
+      <tr><td class="sc">Package 3</td><td class="dim">20 to 40+</td><td>High-end, scroll-driven, with interactive 3D on both sites</td><td>Package 2 plus a page per product line and an FAQ hub</td><td>Package 2 plus a page per product line, more case studies and an FAQ hub for the AEO layer</td></tr>
+    </tbody>
+  </table></div>
+  <h3 class="sub">The motion system, per package</h3>
+  <p class="sec-intro">The techniques are the reference's actual build DNA, per the designers' published breakdown: GSAP, Lenis smooth scroll, SplitText-style line-mask text reveals, clip-path image reveals with a scale settle, parallax layers at different speeds, magnetic buttons, a counting loader, floating absolute-positioned compositions. <b>Our builds implement the same technique class</b>, laddered by package.</p>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>Package</th><th>Motion that ships</th></tr></thead>
+    <tbody>
+      <tr><td class="sc">Package 1</td><td>Restrained editorial reveals and smooth scroll. Nothing else</td></tr>
+      <tr><td class="sc">Package 2</td><td>The full reference system: line-mask text reveals, clip-path image reveals with a scale settle, differential parallax, logo marquee, magnetic CTAs, a counting loader, Lenis smooth scroll</td></tr>
+      <tr><td class="sc">Package 3</td><td>Everything in Package 2, plus scroll-driven interactive 3D on both sites: the Igloo mechanic</td></tr>
+      <tr><td class="sc">Always</td><td class="dim">Every package ships reduced-motion fallbacks with content visible by default. A missed trigger never hides a section</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="p04">
+  <div class="chapdiv"><div class="cd-no">04</div><div><div class="cd-h">Audiences, from first touch to reply</div><div class="cd-sub">Four journeys, and the task each must complete</div></div></div>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>The task</th><th>Who needs it</th><th>Where it happens</th><th>Steps allowed</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">"Can I launch my own brand on their ready formulas, and how fast?"</td><td>Startup founder, first factory search</td><td>Website 1: formulas, MOQ, timeline, process</td><td class="sc">1 page to a prefilled WhatsApp</td></tr>
+      <tr><td class="dim">"Can this factory carry our formula, volume and certification needs?"</td><td>Brand owner with an existing product and custom requirements</td><td>/oem, then /proof</td><td class="sc">2 clicks to the enquiry form</td></tr>
+      <tr><td class="dim">"Is the factory actually certified, and who else trusts it?"</td><td>The verifier: procurement, a halal-bound buyer, a cautious founder</td><td>/proof: named certs, named clients, then a case study</td><td class="sc">2 clicks, every box tickable</td></tr>
+      <tr><td class="dim">"Which Malaysian factory should I even shortlist?"</td><td>The AI-asker, querying ChatGPT or Gemini before Googling</td><td>The AEO layer: fact blocks, FAQ schema, the one-liner</td><td class="sc">1 cited answer to the site</td></tr>
+    </tbody>
+  </table></div>
+  <div class="diagram">
+    <div class="cap">D2 &middot; The four journeys, entry to reply, drawn</div>
+    <svg viewBox="0 0 960 360" role="img" aria-label="Four audience journeys from entry to conversion">
+      <g font-family="Inter,system-ui,sans-serif" font-size="13">
+        <g font-size="13.5" font-weight="700" fill="#0B1526">
+          <text x="20" y="52">Startup founder</text>
+          <text x="20" y="132">Established brand</text>
+          <text x="20" y="212">The verifier</text>
+          <text x="20" y="292">The AI-asker</text>
+        </g>
+        <g>
+          <rect x="230" y="30" width="150" height="36" rx="9" fill="#EAF6EF" stroke="#1F8A4C"/><text x="305" y="53" text-anchor="middle" fill="#15693B">Search: ODM factory</text>
+          <rect x="420" y="30" width="150" height="36" rx="9" fill="#FFFFFF" stroke="#D3DCE8"/><text x="495" y="53" text-anchor="middle" fill="#45536B">Website 1, MOQ shown</text>
+          <rect x="610" y="30" width="150" height="36" rx="9" fill="#FFFFFF" stroke="#D3DCE8"/><text x="685" y="53" text-anchor="middle" fill="#45536B">Product line picked</text>
+          <rect x="800" y="30" width="140" height="36" rx="9" fill="#1F8A4C"/><text x="870" y="53" text-anchor="middle" fill="#fff" font-weight="700">WhatsApp, prefilled</text>
+          <rect x="230" y="110" width="150" height="36" rx="9" fill="#EAF6EF" stroke="#1F8A4C"/><text x="305" y="133" text-anchor="middle" fill="#15693B">Referral or search</text>
+          <rect x="420" y="110" width="150" height="36" rx="9" fill="#FFFFFF" stroke="#D3DCE8"/><text x="495" y="133" text-anchor="middle" fill="#45536B">/oem, capability</text>
+          <rect x="610" y="110" width="150" height="36" rx="9" fill="#FFFFFF" stroke="#D3DCE8"/><text x="685" y="133" text-anchor="middle" fill="#45536B">/proof, boxes ticked</text>
+          <rect x="800" y="110" width="140" height="36" rx="9" fill="#1F8A4C"/><text x="870" y="133" text-anchor="middle" fill="#fff" font-weight="700">Enquiry form sent</text>
+          <rect x="230" y="190" width="150" height="36" rx="9" fill="#EAF6EF" stroke="#1F8A4C"/><text x="305" y="213" text-anchor="middle" fill="#15693B">Google "FA Herbs"</text>
+          <rect x="420" y="190" width="150" height="36" rx="9" fill="#FFFFFF" stroke="#D3DCE8"/><text x="495" y="213" text-anchor="middle" fill="#45536B">/proof, named certs</text>
+          <rect x="610" y="190" width="150" height="36" rx="9" fill="#FFFFFF" stroke="#D3DCE8"/><text x="685" y="213" text-anchor="middle" fill="#45536B">Tanamera case study</text>
+          <rect x="800" y="190" width="140" height="36" rx="9" fill="#1F8A4C"/><text x="870" y="213" text-anchor="middle" fill="#fff" font-weight="700">Shortlist survived</text>
+          <rect x="230" y="270" width="150" height="36" rx="9" fill="#EAF6EF" stroke="#0F241A"/><text x="305" y="293" text-anchor="middle" fill="#0F241A">Asks ChatGPT / Gemini</text>
+          <rect x="420" y="270" width="150" height="36" rx="9" fill="#FFFFFF" stroke="#D3DCE8"/><text x="495" y="293" text-anchor="middle" fill="#45536B">Fact block cited</text>
+          <rect x="610" y="270" width="150" height="36" rx="9" fill="#FFFFFF" stroke="#D3DCE8"/><text x="685" y="293" text-anchor="middle" fill="#45536B">Home, the one-liner</text>
+          <rect x="800" y="270" width="140" height="36" rx="9" fill="#0F241A"/><text x="870" y="293" text-anchor="middle" fill="#fff" font-weight="700">WhatsApp opened</text>
+        </g>
+        <g stroke="#B9C4D6" stroke-width="1.8" fill="none">
+          <path d="M380 48 h40 M570 48 h40 M760 48 h40 M380 128 h40 M570 128 h40 M760 128 h40 M380 208 h40 M570 208 h40 M760 208 h40 M380 288 h40 M570 288 h40 M760 288 h40"/>
+        </g>
+        <text x="480" y="345" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="11" fill="#8593A9">EVERY JOURNEY ENDS IN A HUMAN REPLY FROM A SALES TEAM OF THREE &middot; SO EVERY ENQUIRY MUST ARRIVE PRE-QUALIFIED</text>
+      </g>
+    </svg>
+  </div>
+  <span class="pin"><b>The pre-qualification rule:</b> the sales side is one manager, one exec and the GM. Every CTA therefore carries context: the lane, the product line and the page that sent the buyer travel inside the prefilled WhatsApp text and the form fields, so the first human minute is spent selling, not asking who is this.</span>
+</section>
+
+<section id="p05">
+  <div class="chapdiv"><div class="cd-no">05</div><div><div class="cd-h">Website 2's home page, scene by scene</div><div class="cd-sub">One scroll that keeps the identity, opens both doors and publishes the proof</div></div></div>
+  <p class="sec-intro">The order is the buyer's own: <b>the kept identity, then the two doors, then the proof, then the ask</b>. Mervyn asked for a refresh, not a teardown, so every scene reuses the existing narration where it exists and tightens the wording where it drifted. Motion follows the locked ladder in chapter 03: the reference's technique class per package, content visible by default, nothing hidden behind a missed trigger. Website 1's home follows the same grammar with the ODM pitch; its full spec follows the kickoff domain decision.</p>
+  <p class="sec-intro"><b>As built in Prototype Web 1 (tab 03):</b> hero with the numbers strip, Reasons, Services (the OEM and ODM strengths, the six-step process, the ten-line carousel), Concept, About, Clients with the roster, Proof, then the contact ask. The navigation carries only what the mockup contains: <b>About, Services, Contact</b>, with Homepage on the logo; pages outside this mockup (Product Lines, Certificates, Lab &amp; Facility) appear greyed in the footer sitemap until their build.</p>
+
+  <div class="scene"><div class="no">1</div><div>
+    <h3>The same company, finally legible</h3>
+    <div class="mech">Kept identity hero &middot; numbers strip &middot; zero placeholders</div>
+    <p>The existing logo and the existing positioning stay: <b>"Malaysia's Premier Health &amp; Beauty Manufacturer"</b>, wording tightened, with the OEM and ODM offer stated in the first line. Under it, the numbers strip: years operating since 1994, three factories, clients served, 10 product lines. Every counter binds to the fact sheet and every figure waits for reconciliation.</p>
+    <p class="ref">Gate: the numbers reconciliation. Chapter 08, row 1.</p>
+  </div></div>
+
+  <div class="scene"><div class="no">2</div><div>
+    <h3>Two doors, one question</h3>
+    <div class="mech">Lane router &middot; ODM left &middot; OEM right</div>
+    <p>One question splits every visitor: <b>launching a brand, or scaling one</b>. The ODM door: ready formulas, your label, fast to market, routing across to Website 1. The OEM door: your requirements, our capability, R&amp;D, certifications and capacity, staying on this site. Each door states its lane in one line, and neither lane ever borrows the other's message.</p>
+    <p class="ref">Rule: one website per lane, chapter 02 job 1. The doors are the interlink.</p>
+  </div></div>
+
+  <div class="scene"><div class="no">3</div><div>
+    <h3>The proof band</h3>
+    <div class="mech">Certs named &middot; clients named &middot; one strip</div>
+    <p>The heart of the rebuild, promoted to the home page: named certificates with numbers, the client roster with real logos, and the Tanamera flagship teaser. The band ships only as gated facts land; until then each slot reads "to be confirmed" honestly rather than showing a placeholder image ever again.</p>
+    <p class="ref">Gates: certificate scans, per-client permission. Chapter 08, rows 2 and 3.</p>
+  </div></div>
+
+  <div class="scene"><div class="no">4</div><div>
+    <h3>Ten lines, real product</h3>
+    <div class="mech">Product rail &middot; real photography &middot; line-level WhatsApp</div>
+    <p>The 10 product lines already on the current homepage, from soaps and capsules to jamu and pre and post natal, with the placeholder category images replaced by the factory shoot. Each card routes to its line on /products and carries its own prefilled WhatsApp opener.</p>
+    <p class="ref">Gate: photography of the three factories. Chapter 08, row 8.</p>
+  </div></div>
+
+  <div class="scene"><div class="no">5</div><div>
+    <h3>Idea to market, drawn</h3>
+    <div class="mech">Process strip &middot; six steps &middot; MOQ and timeline published</div>
+    <p>Brief, formula, sample, registration, production, delivery. The strip publishes the real MOQ and the real idea-to-market timeline once the client confirms them: the winners on the competitor board publish both, and FA Herbs currently publishes neither. A free consultation hook closes the strip, the same low-friction pattern the board's best converter runs.</p>
+    <p class="ref">Market pattern: NaViBiotech's published MOQ and timeline. Their numbers are never borrowed.</p>
+  </div></div>
+
+  <div class="scene"><div class="no">6</div><div>
+    <h3>The story, told once</h3>
+    <div class="mech">Story band &middot; cottage industry to GMP &middot; the team</div>
+    <p>The narrative the /ourstory/ page already tells, kept and repaired: the cottage-industry origin, the three factories in Kuala Selangor and Ijok, the team with names and faces where the current page shows an empty section, and one line of Sedania Group context. The founding year prints only after the client answers 1994 vs 1996.</p>
+    <p class="ref">Gates: the founding year answer (row 1) and the shoot (row 8).</p>
+  </div></div>
+
+  <div class="scene"><div class="no">7</div><div>
+    <h3>The ask, both lanes</h3>
+    <div class="mech">Split closer &middot; WhatsApp first &middot; the form beside it</div>
+    <p>Left: the ODM ask, routed across to Website 1. Right: the OEM ask with its prefilled opener. Beneath both, the enquiry form with lane and product-line fields so nothing arrives cold. The footer carries the canonical number, the email, the Ijok address and the reconciled numbers one last time.</p>
+    <p class="ref">Every journey from chapter 04 terminates here or earlier.</p>
+  </div></div>
+
+  <span class="pin"><b>Copy voice for the whole estate:</b> the existing narration kept, wording tightened, B2B plain. Short declaratives, numbers with dates, no exclamation marks. "CREAM &amp; JELS" and its sibling typos are corrected estate-wide, and the ISO 9001:2008 line is restated only as whatever certificate the client actually holds today.</span>
+</section>
+
+<section id="p06">
+  <div class="chapdiv"><div class="cd-no">06</div><div><div class="cd-h">Engineering</div><div class="cd-sub">Keep the CMS, rebuild the shop window, end the placeholder era</div></div></div>
+  <div class="grid g2">
+    <div class="card"><span class="tag">Stack</span><h3>The CMS stays, the scaffolding goes</h3><p>The site runs WordPress on the XStore theme. WordPress stays so the client's team keeps its editor; the XStore demo scaffolding, placeholder blocks and dead sections go. Templates are rebuilt page by page on the kept identity, which is what "refresh, not teardown" means in code. Website 1 is a fresh build with no legacy to carry.</p></div>
+    <div class="card"><span class="tag">Budget</span><h3>The numbers the build must hit</h3><p>Targets, set by this plan: first meaningful paint under 2.5 seconds on a phone over mobile data, images as compressed WebP real files, lazy loaded, no autoplay video. A B2B buyer forwarded a link on WhatsApp opens it on a phone; the page must not make them wait.</p></div>
+    <div class="card"><span class="tag">Hygiene</span><h3>The link and claim sweep</h3><p>The misspelled /portolio link and the /certificate vs /certificates split resolve with 301s into the new page set. Typos corrected estate-wide. Every certification claim restated only as evidenced, and every broken image either replaced by the shoot or removed.</p></div>
+    <div class="card"><span class="tag">One fact sheet</span><h3>Facts as configuration</h3><p>Client count, founding year, factory count, contacts, MOQ and timeline live in one place both websites read. One edit updates every page on both sites, which is how 100+ on one page and 250+ on another never happens again after we leave.</p></div>
+  </div>
+</section>
+
+<section id="p07">
+  <div class="chapdiv"><div class="cd-no">07</div><div><div class="cd-h">SEO, schema and AI findability</div><div class="cd-sub">Included free with the build, exactly as agreed on 14 Aug</div></div></div>
+  <p class="sec-intro">Two lanes of queries, one schema layer, and an AEO pass so the factory is findable when the buyer asks an AI instead of a search box. <b>Nothing here is a retainer:</b> this chapter sits inside the build price, and ongoing SEO beyond launch stays optional, quoted only when the client asks.</p>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>Step</th><th>What happens</th><th>Proof it worked</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">1 &middot; Technical base</td><td>Unique titles and metas per page, one h1 each, clean heading trees, canonicals, XML sitemap</td><td>Crawl shows every page titled, no duplicates</td></tr>
+      <tr><td class="dim">2 &middot; Schema layer</td><td>Organization and LocalBusiness on the Ijok address, Service markup per lane, FAQPage on the answer blocks</td><td>Rich results test passes per template</td></tr>
+      <tr><td class="dim">3 &middot; OEM keyword lane</td><td>/oem and /proof target OEM manufacturer queries: category plus Malaysia phrasings, mapped page for page</td><td>One page answers each target query, indexed</td></tr>
+      <tr><td class="dim">4 &middot; ODM keyword lane</td><td>Website 1's pages target ODM and ready-formula queries per product line</td><td>One page answers each target query, indexed</td></tr>
+      <tr><td class="dim">5 &middot; AEO checklist</td><td>The one-liner positioning sentence on every page, quotable fact blocks (founded, factories, lines, certifications), FAQ schema, clean headings an AI can lift verbatim</td><td>Ask ChatGPT and Gemini the buyer's questions; the factory appears and is cited correctly</td></tr>
+      <tr><td class="dim">6 &middot; Launch hygiene</td><td>Old URLs 301 to the new set, broken slugs resolved, Search Console live and monitored</td><td>Zero 404s in the week-one and week-four crawls</td></tr>
+    </tbody>
+  </table></div>
+  <span class="pin"><b>Scope rule, stated now:</b> titles, metas, schema, keyword lanes, AEO and redirects are inside the build, per the meeting. Ongoing SEO and content is a separate optional retainer, quoted when asked. Phase 1 contains no logo or identity work and no e-commerce. The post-launch motion is the agreed one: content first, see what lands, then ads on the winners.</span>
+</section>
+
+<section id="p08">
+  <div class="chapdiv"><div class="cd-no">08</div><div><div class="cd-h">Content plan</div><div class="cd-sub">Every block, what it must say, whose facts, and what gates it</div></div></div>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>Page / block</th><th>What it must say</th><th>Facts from</th><th>Words by</th><th>Gate</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">1 &middot; The numbers strip, everywhere</td><td>One client count, one founding year, three factories, 10 lines</td><td>Client reconciliation session</td><td>Brand Method</td><td class="gate">THE gate: 100+ vs 250+ clients, 1994 vs 1996 founding</td></tr>
+      <tr><td class="dim">2 &middot; Certificates</td><td>Each certificate named, numbered, dated</td><td>The client's actual certificates</td><td>Brand Method</td><td class="gate">Cert scans and numbers; none sighted to date, the live page shows placeholders</td></tr>
+      <tr><td class="dim">3 &middot; Client portfolio</td><td>Named roster with real logos</td><td>Client permissions, per name</td><td>Brand Method</td><td class="gate">Per-client permission for the 16 listed plus any additions</td></tr>
+      <tr><td class="dim">4 &middot; Tanamera case study</td><td>The built-a-brand flagship story</td><td>Sedania and client material</td><td>Brand Method</td><td class="gate">Permission to tell it. Sister company, so likely receptive: inference, not fact</td></tr>
+      <tr><td class="dim">5 &middot; Two more case studies</td><td>Client, brief, route, outcome, timeline</td><td>Client selection and approval</td><td>Brand Method</td><td class="gate">Which clients, and their sign-off</td></tr>
+      <tr><td class="dim">6 &middot; OEM page</td><td>Capability, R&amp;D, certifications, capacity</td><td>Client facts plus the Lab &amp; Facility page</td><td>Brand Method</td><td class="gate">Real capacity figures</td></tr>
+      <tr><td class="dim">7 &middot; ODM page + product lines</td><td>Ready formulas, MOQ, timeline, process</td><td>Client confirmation</td><td>Brand Method</td><td class="gate">The real MOQ and idea-to-market timeline</td></tr>
+      <tr><td class="dim">8 &middot; Photography</td><td>Real factories, lab, products, people</td><td>The three-factory shoot</td><td>Brand Method shot list</td><td class="gate">Shoot access to the three factories</td></tr>
+      <tr><td class="dim">9 &middot; Contact truth</td><td>One canonical WhatsApp route</td><td>Client decision</td><td>Brand Method</td><td class="gate">Which of the three published numbers leads</td></tr>
+      <tr><td class="dim">10 &middot; Website 1 domain + positioning</td><td>Which domain, and the exact one-line positioning</td><td>Kickoff decision</td><td>Brand Method proposes, client decides</td><td class="gate">Decided at kickoff; Website 1 cannot launch without it</td></tr>
+    </tbody>
+  </table></div>
+  <span class="pin warn"><b>Red gates are client-owed facts and they feed the questionnaire directly:</b> certificate scans, per-client naming permissions, the numbers reconciliation, the founding year answer, factory photography and the Website 1 domain decision. The build ships gated blocks marked "to be confirmed" honestly rather than with invented figures, exactly as this workspace's other clients get.</span>
+</section>
+
+<section id="p09">
+  <div class="chapdiv"><div class="cd-no">09</div><div><div class="cd-h">Look and feel</div><div class="cd-sub">The identity already exists. The exercise is presentation</div></div></div>
+  <div class="grid g3">
+    <div class="card"><span class="tag">Identity</span><h3>Kept, exactly as asked</h3><p>The existing logo, mark and identity carry over with no modifications, per the meeting. The lift comes from hierarchy, spacing, consistent components and real imagery, staged in the locked direction of chapter 03, not from a new skin. If a light brand strategy is taken up later, it layers on top; nothing in phase 1 depends on it.</p></div>
+    <div class="card"><span class="tag">Imagery</span><h3>Real factory, real product</h3><p>The placeholder era ends. The shoot covers the three factories, the lab, the 10 product lines and the team. Until the shoot lands, no placeholder ships: a section gates and says so rather than faking it, because the placeholders are the audit's single loudest finding.</p></div>
+    <div class="card"><span class="tag">Voice</span><h3>Narration kept, wording tightened</h3><p>The existing story and claims stay where they hold, and get tightened where they drifted: the "24+ years" line has aged, and the ISO 9001:2008 wording points at a superseded standard. B2B plain, evidence beside every claim, no superlative without a number behind it.</p></div>
+  </div>
+  <span class="pin"><b>Typography:</b> the reference pairs PP Mori with PP Editorial New, licensed commercial faces, per the designers' published breakdown. The demo runs the analogous pairing, Fraunces with Inter. The production decision is made at kickoff: license the originals or keep the analogous pair.</span>
+</section>
+
+<section id="p10">
+  <div class="chapdiv"><div class="cd-no">10</div><div><div class="cd-h">Build plan and clock</div><div class="cd-sub">Staged against a prospect who is comparing quotations right now</div></div></div>
+  <div class="diagram">
+    <div class="cap">D3 &middot; The build path &middot; marker as of 20 Aug 2026 &middot; the proposal has been owed since 15 Aug</div>
+    <svg viewBox="0 0 960 110" role="img" aria-label="Build path with current position">
+      <g font-family="JetBrains Mono,monospace" font-size="10.5">
+        <rect x="10"  y="20" width="150" height="52" rx="9" fill="#1F8A4C"/><text x="85" y="42" text-anchor="middle" fill="#fff" font-weight="700">NOW &middot; WK 0</text><text x="85" y="60" text-anchor="middle" fill="#EAF6EF">PROPOSAL + MOCKUP OUT</text>
+        <rect x="170" y="20" width="150" height="52" rx="9" fill="#FFFFFF" stroke="#1F8A4C"/><text x="245" y="42" text-anchor="middle" fill="#15693B" font-weight="700">WK 1</text><text x="245" y="60" text-anchor="middle" fill="#45536B">FACTS GATE + SHOOT</text>
+        <rect x="330" y="20" width="150" height="52" rx="9" fill="#FFFFFF" stroke="#0F241A"/><text x="405" y="42" text-anchor="middle" fill="#0F241A" font-weight="700">WKS 1-3</text><text x="405" y="60" text-anchor="middle" fill="#45536B">PAGE BUILD</text>
+        <rect x="490" y="20" width="150" height="52" rx="9" fill="#FFFFFF" stroke="#0F241A"/><text x="565" y="42" text-anchor="middle" fill="#0F241A" font-weight="700">WKS 3-4</text><text x="565" y="60" text-anchor="middle" fill="#45536B">SEO + AEO LAYER</text>
+        <rect x="650" y="20" width="150" height="52" rx="9" fill="#FFFFFF" stroke="#0F241A"/><text x="725" y="42" text-anchor="middle" fill="#0F241A" font-weight="700">WK 4</text><text x="725" y="60" text-anchor="middle" fill="#45536B">LAUNCH + VERIFY</text>
+        <rect x="810" y="14" width="140" height="64" rx="9" fill="#0F241A"/><text x="880" y="40" text-anchor="middle" fill="#fff" font-weight="700">AFTER LAUNCH</text><text x="880" y="58" text-anchor="middle" fill="#A9C9B6">CONTENT, THEN ADS</text>
+      </g>
+    </svg>
+  </div>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>When</th><th>What ships</th><th>Owner</th></tr></thead>
+    <tbody>
+      <tr><td class="sc">Week 0 &middot; now</td><td class="dim">The proposal with two pricing options, the first-page mockup and the pre-filled questionnaire carrying every chapter 08 gate. All three were promised for 15 to 18 Aug and are overdue: they go out together, first</td><td>Brand Method</td></tr>
+      <tr><td class="sc">Week 1</td><td class="dim">Client approval; the questionnaire returns with certificate scans, permissions and reconciled numbers; the three-factory shoot booked and shot</td><td>Client, prompted</td></tr>
+      <tr><td class="sc">Weeks 1-3</td><td class="dim">Both websites built: Website 2's page map on the kept identity, Website 1's pages on the kickoff decision, scoped to the chosen package, with gated facts flowing in as they land. Package 3's 3D scope extends this stage; the proposal states the dates per package</td><td>Brand Method</td></tr>
+      <tr><td class="sc">Weeks 3-4</td><td class="dim">Schema, the two keyword lanes, AEO blocks, 301s from the old URLs, Search Console live</td><td>Brand Method</td></tr>
+      <tr><td class="sc">Week 4</td><td class="dim">Both websites launch, the zero-404 crawl on faherbs.com, the AI-answer spot check on ChatGPT and Gemini</td><td>Both</td></tr>
+      <tr><td class="sc">After launch</td><td class="dim">The agreed motion: content first, see what lands, then ads on the winners. The optional SEO retainer quoted only if the client asks</td><td>Client, armed; Brand Method reviews</td></tr>
+    </tbody>
+  </table></div>
+  <span class="pin"><b>The clock in one line:</b> Mervyn is collecting quotations from other providers right now, the new financial year has started, and he said plainly that he prefers not to waste any time. Every week the proposal sits, another factory's published MOQ is winning the comparison this plan is built to win.</span>
+</section>
+
+<section id="p11">
+  <div class="chapdiv"><div class="cd-no">11</div><div><div class="cd-h">Gap analysis and evidence</div><div class="cd-sub">What stands between today's site and this plan, and where every figure came from</div></div></div>
+  <h3 class="sub">The gap, summarised</h3>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>#</th><th>Gap</th><th>Today</th><th>Planned</th><th>Closed by</th></tr></thead>
+    <tbody>
+      <tr><td class="sc">1</td><td class="dim">Certificates</td><td>5 placeholder slots, zero named certs</td><td>Named, numbered, dated certificates on /proof</td><td>Client scans week 1; build weeks 1-3</td></tr>
+      <tr><td class="sc">2</td><td class="dim">Client proof</td><td>16 placeholder logos, two conflicting counts</td><td>Named roster with permissions, plus 2 or 3 case studies</td><td>Permissions week 1; build weeks 1-3</td></tr>
+      <tr><td class="sc">3</td><td class="dim">Lanes</td><td>One generic "I'm interested" CTA for everyone</td><td>A website per lane: ODM on Website 1, OEM on faherbs.com, prefilled WhatsApp per line</td><td>Build, weeks 1-3</td></tr>
+      <tr><td class="sc">4</td><td class="dim">Numbers</td><td>100+ vs 250+ clients, 1994 vs 1996, and the "24+ years" line dates the copy to roughly 2018 to 2020</td><td>One reconciled fact sheet the whole site reads</td><td>Client session, week 1</td></tr>
+      <tr><td class="sc">5</td><td class="dim">Findability</td><td>Prospects not finding the OEM and ODM services, the meeting's stated problem</td><td>Schema, two keyword lanes, AEO blocks, free with the build</td><td>Weeks 3-4, compounds after</td></tr>
+      <tr><td class="sc">6</td><td class="dim">Hygiene</td><td>Typos, broken slugs, broken images, a superseded ISO claim</td><td>Corrected, redirected, restated as evidenced</td><td>Build, weeks 1-3</td></tr>
+      <tr><td class="sc">7</td><td class="dim">Imagery</td><td>Placeholders across products, story and portfolio</td><td>The three-factory shoot, real photography estate-wide</td><td>Shoot week 1; build weeks 1-3</td></tr>
+    </tbody>
+  </table></div>
+  <h3 class="sub">Evidence, inherited</h3>
+  <p class="sec-intro">Every figure in this plan is sourced in the workspace research file (<b>RESEARCH-20AUG.md</b>) and the meeting record (<b>MEETING-14AUG.md</b>): the registry facts, the page-by-page findings, the competitor claims and the in-call decisions. Known gaps carried forward, never papered over: Mervyn's role is sourced from the call itself, the certificate claims are the company's own with no certificate yet sighted, 250+ clients is Sedania's claim while 100+ is FA Herbs' own site, and social follower counts sit behind login walls. This plan invents none of the missing facts; it gates on them.</p>
+</section>
+
+<footer>
+  <div>Brand Method &middot; FA Herbs website plan &middot; built on the 20 Aug 2026 research and the 14 Aug meeting &middot; gates feed the questionnaire</div>
+</footer>
+
+</div>
+<script id="bmPdfName">(function(){var t0=document.title;var n=t0.replace(/\s*[·\u00b7]\s*Brand Method\s*$/,'').replace(/[\u00b7·]/g,'-').replace(/&amp;/g,'and').replace(/[^\w\- ]+/g,'').trim().replace(/\s+/g,'-').replace(/-+/g,'-');if(!n)n='Brand-Method-Document';window.addEventListener('beforeprint',function(){document.title=n});window.addEventListener('afterprint',function(){document.title=t0});})();</script>
+</body>
+</html>

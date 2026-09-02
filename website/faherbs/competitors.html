@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FA Herbs · Competitor Audit · Brand Method</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{--paper:#F7F9FC;--paper2:#FFFFFF;--ink:#0B1526;--soft:#45536B;--faint:#8593A9;--line:#E3E9F2;--line2:#D3DCE8;--org:#1F8A4C;--org-deep:#15693B;--wash:#EAF6EF;--ok:#128A54;--warn:#C08A1D;--bad:#D7263D;--dark:#0F241A;}
+  *{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+  body{font-family:"Inter",system-ui,sans-serif;background:var(--paper);color:var(--ink);font-size:16px;line-height:1.62;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  .wrap{max-width:none;margin:0;padding:0 22px}.mono{font-family:"JetBrains Mono",monospace}
+  .eyebrow{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--org-deep);display:inline-flex;align-items:center;gap:10px;font-weight:600}
+  .hero{padding:50px 0 8px}.hero h1{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:clamp(32px,5vw,54px);line-height:1.06;letter-spacing:-.02em;margin:18px 0 0;max-width:26ch}.hero h1 em{font-style:normal;color:var(--org-deep)}
+  .hero .lede{font-size:clamp(17px,2vw,20px);color:var(--soft);max-width:68ch;margin:20px 0 0}
+  .vrow{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}.vchip{background:var(--paper2);border:1px solid var(--line);border-radius:999px;padding:8px 15px;font-size:13px;color:var(--soft)}.vchip b{color:var(--org-deep)}
+  section{padding:32px 0}
+  .chapdiv{display:flex;align-items:baseline;gap:18px;padding:42px 0 4px;border-top:1px solid var(--line);margin-top:10px}.cd-no{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:38px;color:var(--org);line-height:1}.cd-h{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:27px;letter-spacing:-.01em}.cd-sub{font-size:15px;color:var(--soft);margin-top:5px}
+  h3.sub{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:21px;margin:30px 0 0}
+  .sec-intro{font-size:16.5px;color:var(--soft);max-width:76ch;margin:15px 0 0}.sec-intro b{color:var(--ink)}
+  .quote{font-family:"Space Grotesk",sans-serif;font-size:18px;color:var(--soft);border-left:3px solid var(--org);padding:6px 0 6px 18px;margin-top:16px}
+  table{width:100%;border-collapse:separate;border-spacing:0;margin-top:18px;font-size:14px;background:var(--paper2);border:1px solid var(--line);border-radius:12px;overflow:hidden}th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}thead th{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#fff;background:var(--dark)}tr:last-child td{border-bottom:none}td.dim{font-weight:600}td.sc2{font-family:"JetBrains Mono",monospace;color:var(--org-deep);font-weight:700;white-space:nowrap}
+  .tbl-scroll{overflow-x:auto;margin-top:18px}.tbl-scroll table{margin-top:0;min-width:820px}
+  .sc{display:inline-block;min-width:30px;text-align:center;font-family:"JetBrains Mono",monospace;font-size:11.5px;font-weight:700;border-radius:6px;padding:3px 8px;border:1px solid var(--line);white-space:nowrap}
+  .sc.hi{background:#E9F7EF;color:#0E7A3C;border-color:#BFE6CE}
+  .sc.mid{background:#FDF6E7;color:#8A5A05;border-color:#E7D3A4}
+  .sc.lo{background:#F1F4F8;color:#65708A;border-color:#D9E0EA}
+  .sc.bad{background:#FDECEA;color:#B3261E;border-color:#F0B6AE}
+  .pin{margin-top:22px;border-left:3px solid var(--org);background:linear-gradient(90deg,rgba(31,138,76,.07),transparent);padding:15px 19px;border-radius:0 12px 12px 0;font-size:15px;display:block}.pin b{color:var(--org-deep)}.pin.warn{border-left-color:var(--warn);background:linear-gradient(90deg,rgba(192,138,29,.09),transparent)}.pin.warn b{color:#96690D}
+  .shotboard{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-top:20px}
+  .shot{background:var(--paper2);border:1px solid var(--line);border-radius:14px;overflow:hidden}.shot img{width:100%;display:block;border-bottom:1px solid var(--line)}.shot .meta{padding:14px 16px}.shot .nm{font-weight:700;font-size:14.5px}.shot .u{font-family:"JetBrains Mono",monospace;font-size:10.5px;color:var(--org-deep);margin-top:2px}.shot .rd{font-size:13px;color:var(--soft);margin-top:7px;line-height:1.5}
+  .card{background:var(--paper2);border:1px solid var(--line);border-radius:14px;padding:20px 21px}.card .tag{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--org-deep);font-weight:700}.card h3{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:18.5px;margin-top:8px}.card p{font-size:14px;color:var(--soft);margin-top:9px;line-height:1.55}.card p b{color:var(--ink)}
+  .grid{display:grid;gap:16px;margin-top:22px}.g2{grid-template-columns:repeat(auto-fit,minmax(290px,1fr))}
+  .diagram{margin-top:18px;border:1px solid var(--line);border-radius:14px;background:var(--paper2);padding:18px}.diagram .cap{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--faint);margin-bottom:10px}.diagram svg{width:100%;height:auto;display:block}
+  /* confirmed-anchor movecards */
+  .moves{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:16px;margin-top:22px}
+  .movecard{background:var(--paper2);border:1px solid var(--line);border-radius:14px;padding:20px 21px}
+  .movecard .mv-k{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--org-deep);font-weight:700}
+  .movecard h3{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:17.5px;margin-top:8px;line-height:1.3}
+  .movecard p{font-size:14px;color:var(--soft);margin-top:9px;line-height:1.55}.movecard p b{color:var(--ink)}
+  .mv-src{margin-top:11px;font-size:12px;color:var(--faint);border-top:1px dashed var(--line2);padding-top:9px}
+  /* full rival profiles, IAQ format */
+  .rvs{display:flex;flex-direction:column;gap:20px;margin-top:22px}
+  .rv{border:1px solid var(--line2);border-radius:14px;background:var(--paper2);overflow:hidden}
+  .rv-h{display:flex;align-items:flex-start;gap:14px;padding:16px 20px 14px;background:#FAFBFD;border-bottom:1px solid var(--line)}
+  .rv-rk{flex:0 0 auto;width:30px;height:30px;border-radius:8px;background:var(--dark);color:#fff;font:700 12px "JetBrains Mono",monospace;display:flex;align-items:center;justify-content:center}
+  .rv-ttl{flex:1 1 auto;min-width:0}
+  .rv-ttl b{display:block;font-family:"Space Grotesk",sans-serif;font-size:17.5px;line-height:1.3;color:var(--ink)}
+  .rv-sub{margin-top:3px;font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--faint)}
+  .rv-th{flex:0 0 auto;display:flex;flex-direction:column;align-items:flex-end;gap:5px;text-align:right}
+  .rv-b{padding:16px 20px 18px}
+  .rv-facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:0 22px;margin-bottom:16px;border-top:1px solid var(--line)}
+  .rv-f{padding:11px 0;border-bottom:1px solid var(--line)}
+  .rv-f k{display:block;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--faint);margin-bottom:4px}
+  .rv-f span{display:block;font-size:13.5px;line-height:1.5;color:var(--ink)}
+  .rv-brand{margin-bottom:16px;padding:12px 15px;border-radius:10px;background:var(--paper);border:1px solid var(--line);font-size:13.5px;line-height:1.6;color:var(--soft)}
+  .rv-brand b{color:var(--ink)}
+  .rv-brand k{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--org-deep);font-weight:700;display:block;margin-bottom:5px}
+  .rv-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+  .rv-c k{display:block;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.07em;text-transform:uppercase;margin-bottom:6px;font-weight:700}
+  .rv-c.up k{color:#B3261E}
+  .rv-c.dn k{color:#0E7A3C}
+  .rv-c ul{margin:0;padding-left:17px}
+  .rv-c li{font-size:13.5px;line-height:1.55;color:var(--soft);margin-bottom:6px}
+  .rv-c li b{color:var(--ink)}
+  .rv-why{margin-top:15px;padding:12px 15px;border-radius:10px;background:var(--wash);border-left:3px solid var(--org);font-size:14px;line-height:1.55;color:var(--ink)}
+  .rv-why b{color:var(--org-deep)}
+  .rv-src{margin-top:11px;font-size:12px;line-height:1.5;color:var(--faint)}
+  /* who-is-who groups */
+  .cgroup{margin-top:26px}
+  .cg-h{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+  .cg-h .cg-k{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.1em;color:var(--org-deep);font-weight:700}
+  .cg-h h3{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:19px}
+  .cg-h p{font-size:13.5px;color:var(--soft);flex-basis:100%;margin-top:4px}
+  .cfirms{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin-top:14px}
+  .cfirm{border:1px solid var(--line);border-radius:12px;background:var(--paper2);padding:14px 16px}
+  .cf-h{display:flex;align-items:baseline;justify-content:space-between;gap:8px;flex-wrap:wrap}
+  .cf-h b{font-size:14.5px}
+  .cf-hq{font-family:"JetBrains Mono",monospace;font-size:10px;color:var(--faint);text-transform:uppercase;letter-spacing:.04em}
+  .cf-sc{display:flex;gap:6px;margin-top:8px}
+  .cfirm p{font-size:13px;color:var(--soft);margin-top:8px;line-height:1.5}
+  @media(max-width:640px){.rv-h{flex-wrap:wrap}.rv-th{align-items:flex-start;text-align:left}}
+  footer{padding:34px 0 70px;color:var(--faint);font-size:12px;font-family:"JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.05em;border-top:1px solid var(--line);margin-top:30px}
+</style>
+<style id="printFix">
+@media print{ body{background:#fff} svg *{opacity:1!important} table,tr,td,th,.card,.diagram,.shot,.rv,.cfirm,.movecard{page-break-inside:avoid} h2,h3{page-break-after:avoid} .bmws{display:none!important} }
+</style>
+</head>
+<body>
+<style id="bmwsCss">
+.bmws{background:#0A1224;color:#E7EDF7;position:sticky;top:0;z-index:900;border-bottom:1px solid #1d2a45}
+.bmws-in{display:flex;align-items:center;justify-content:space-between;padding:9px 22px;max-width:none;margin:0;gap:12px;flex-wrap:wrap}
+.bmws-crumb{display:flex;flex-direction:column;line-height:1.3;white-space:nowrap}
+.bmws-crumb b{font-size:13px;font-weight:700;color:#fff;letter-spacing:.01em;font-family:Inter,system-ui,sans-serif}
+.bmws-crumb span{font-family:"JetBrains Mono",monospace;font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;color:#8593A9}
+.bmws-tabs{display:flex;align-items:center;border:1px solid rgba(255,255,255,.22);border-radius:11px;overflow:auto;max-width:100%;margin-left:auto;padding:3px;gap:3px;background:rgba(255,255,255,.04)}
+.bmws-tabs a,.bmws-tabs span.off{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#C6D2E4;text-decoration:none;padding:7px 13px;border-radius:8px;white-space:nowrap;display:inline-flex;align-items:center;gap:7px;transition:background .25s,color .25s}
+.bmws-tabs a i,.bmws-tabs span.off i{font-style:normal;color:#8593A9;font-size:9px;font-weight:700}
+.bmws-tabs a:hover{background:rgba(255,255,255,.09);color:#fff}
+.bmws-tabs a.on{background:#1F8A4C;color:#fff;font-weight:700}
+.bmws-tabs a.on i{color:rgba(255,255,255,.72)}
+.bmws-tabs span.off{opacity:.45;cursor:default}
+</style>
+<div class="bmws"><div class="bmws-in">
+  <div class="bmws-crumb"><b>FA Herbs &middot; Website 1</b><span>Brand Method &middot; Admin Navigation</span></div>
+  <nav class="bmws-tabs" aria-label="Admin navigation">
+    <a href="audit.html"><i>00</i>Web Audit</a>
+    <a class="on" href="competitors.html"><i>01</i>Competitors</a>
+    <a href="plan.html"><i>02</i>Web Plan</a>
+    <a href="index.html"><i>03</i>Prototype Web 1</a>
+  </nav>
+</div></div>
+
+<div class="wrap">
+
+<header class="hero">
+  <span class="eyebrow">FA Herbs &middot; Competitor Audit &middot; Web and Brand Lens &middot; 20 Aug 2026</span>
+  <h1>Every rival on this board publishes its numbers. The factory behind Tanamera publishes <em>placeholders</em>.</h1>
+  <p class="lede">This board reads the six Malaysian OEM and ODM manufacturers a brand owner actually meets while choosing a factory, ranked by how well each website converts that buyer: the B2B founder or established brand Mervyn named on the 14 August call, startups routed to ODM, established brands to OEM. For each rival: who they are, the proof they publish, how they capture the enquiry, where they stay beatable, and the lesson the FA Herbs rebuild takes. Every site was read live on 20 August 2026. Every figure comes from that live read or the 20 August research dossier, and every count is labelled as the rival's own claim where no external source exists.</p>
+  <div class="vrow">
+    <span class="vchip"><b>1,200+</b> brands served, NaViBiotech's claim, the bar this board is ranked against</span>
+    <span class="vchip"><b>6,000+</b> formulations and <b>2,000+</b> brands claimed at Skinlab</span>
+    <span class="vchip"><b>239+</b> brand partners at Bionutricia, with a written 24 business hour reply promise</span>
+    <span class="vchip"><b>55+</b> years at Eng Kah, 8 certifications, and only an email CTA</span>
+    <span class="vchip"><b>250+</b> clients behind FA Herbs per Sedania, published nowhere on faherbs.com</span>
+  </div>
+</header>
+
+<section id="s01">
+  <div class="chapdiv"><div class="cd-no">01</div><div><div class="cd-h">The frame</div><div class="cd-sub">One arena, one buyer, four anchors the evidence already fixed</div></div></div>
+  <p class="quote">"Malaysia's Premier Health &amp; Beauty Manufacturer. Innovation at our surface, Science at our core."</p>
+  <p class="sec-intro">That is faherbs.com's own headline, and the page beneath it shows five placeholder certificates and sixteen placeholder client logos. In this category the competition happens in <b>one arena: the research check</b>. A brand owner about to trust a factory with their product opens six manufacturer websites side by side and compares what each one proves and how easy each one is to talk to. There is no impulse purchase, no retail funnel; the site either survives that comparison or the enquiry goes to the rival that does. Four anchors fix how this board is read.</p>
+  <div class="moves">
+    <div class="movecard"><span class="mv-k">Anchor &middot; measured</span><h3>FA Herbs' shop window is empty</h3><p>Certificates page: five slots, all placeholder images, zero named certificates. Portfolio: sixteen clients, every logo the identical theme placeholder. "CREAM &amp; JELS" in the nav, and an ISO 9001:2008 claim years after that version was superseded.</p><div class="mv-src">Source: faherbs.com read 20 Aug 2026; full findings in the 00 Web Audit</div></div>
+    <div class="movecard"><span class="mv-k">Anchor &middot; measured</span><h3>The substance is real, and bigger than the site says</h3><p>The site claims 100+ clients; Sedania's corporate page says 250+. The roster names Amway, Tupperware, Tanamera and Eskayvie. Three factories in Kuala Selangor and Ijok, incorporated 26 October 1994. Both counts are their claims; the conflict is itself a finding.</p><div class="mv-src">Source: faherbs.com and sedaniagroup.com, research dossier 20 Aug 2026</div></div>
+    <div class="movecard"><span class="mv-k">Anchor &middot; meeting</span><h3>The buyer is defined</h3><p>B2B brand owners, founders, entrepreneurs. Startups go the ODM route: ready formulas, their label, fast to market. Established brands go OEM: their own specification. Lead generation is the engagement's primary objective; the sales team today is one manager, one exec and the GM.</p><div class="mv-src">Source: MEETING-14AUG, Mervyn Goh in-call</div></div>
+    <div class="movecard"><span class="mv-k">Anchor &middot; market</span><h3>The winning pattern is visible</h3><p>The winners on this board publish numbers: formulations, brands served, MOQ, capacity, idea-to-market time. And they run WhatsApp-first, low-friction capture: pre-filled templates, free formulation consults, refundable sample deposits.</p><div class="mv-src">Source: all six rival sites read live 20 Aug 2026</div></div>
+  </div>
+</section>
+
+<section id="s02">
+  <div class="chapdiv"><div class="cd-no">02</div><div><div class="cd-h">Most convincing to least</div><div class="cd-sub">Ranked by how well the website converts a B2B OEM/ODM buyer. Site scores and capture reads are ours, on a ten point judgement scale</div></div></div>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>#</th><th>Rival</th><th>Lane</th><th>Why they rank here</th><th>Their headline number</th><th>Capture</th><th>Site</th></tr></thead>
+    <tbody>
+      <tr><td class="sc2">1</td><td class="dim">NaViBiotech</td><td>Supplements + cosmetics, MY + China</td><td>Sets the bar. The full answer sheet, MOQ, timeline, capacity, sampling terms, plus the lowest-friction capture on the board. Serves the ODM startup and the OEM brand on the same page</td><td class="sc2">1,200+ brands</td><td><span class="sc hi">hi</span></td><td><span class="sc hi">9</span></td></tr>
+      <tr><td class="sc2">2</td><td class="dim">Skinlab Biochem</td><td>Skincare OEM, Johor Bahru</td><td>The biggest raw proof after the bar: formulation library and brand count in the hero, WhatsApp one tap away, EN and CN. Hides MOQ, timeline and case studies</td><td class="sc2">6,000+ formulations</td><td><span class="sc hi">hi</span></td><td><span class="sc hi">7</span></td></tr>
+      <tr><td class="sc2">3</td><td class="dim">Bionutricia</td><td>Extracts + supplements, wholesale only</td><td>The tightest B2B manners: a written reply-time promise, an NDA line, patents shown as certificates. Smaller counts, narrower lane</td><td class="sc2">239+ brand partners</td><td><span class="sc hi">hi</span></td><td><span class="sc hi">7</span></td></tr>
+      <tr><td class="sc2">4</td><td class="dim">HBT Food &amp; Beverage</td><td>Supplements + F&amp;B, Melaka</td><td>The only active content engine on the board, and a stat strip that shipped with no figures in it. Contact CTAs everywhere, all funnelling to phone and email</td><td class="sc2">counters empty</td><td><span class="sc mid">mid</span></td><td><span class="sc mid">5</span></td></tr>
+      <tr><td class="sc2">5</td><td class="dim">Eng Kah Corporation</td><td>Cosmetics + perfume OEM/ODM</td><td>The deepest substance, 55+ years and eight certifications, funnelled into a single email address. No WhatsApp, placeholder graphics live on read day</td><td class="sc2">55+ years</td><td><span class="sc bad">bad</span></td><td><span class="sc lo">4</span></td></tr>
+      <tr><td class="sc2">6</td><td class="dim">Bioalpha</td><td>Nutraceutical OEM/ODM/OBM, listed</td><td>Status without proof: not one figure on the homepage, one soft CTA aimed at the About page. The closest mirror of FA Herbs' own failure</td><td class="sc2">no numbers published</td><td><span class="sc lo">lo</span></td><td><span class="sc lo">3</span></td></tr>
+    </tbody>
+  </table></div>
+  <span class="pin"><b>The strategic read, one line:</b> FA Herbs holds more substance than most of this board and converts worse than all of it. The rebuild's job is not to manufacture credibility, it is to publish credibility that already exists. Every profile below ends with the lesson it hands the rebuild.</span>
+</section>
+
+<section id="s03">
+  <div class="chapdiv"><div class="cd-no">03</div><div><div class="cd-h">What each one actually looks like</div><div class="cd-sub">The board as a brand owner met it on 20 August 2026, every capture opened and looked at</div></div></div>
+  <p class="sec-intro">The exhibit first, because it settles the question this whole board turns on: <b>can FA Herbs' output be marketed world class?</b> It already is, by the brand the factory itself builds. Then the six rivals.</p>
+  <h3 class="sub">The exhibit, the brand this factory built</h3>
+  <div class="shotboard">
+    <div class="shot"><img src="assets/site-tanamera.png" alt="Tanamera official store capture"><div class="meta"><div class="nm">Tanamera &middot; made by FA Herbs</div><div class="u">tanameraofficial.com</div><div class="rd">"600 Years of Asian Perfection." JAKIM Halal, GMP and Vegetarian Society marks, Good Design Awards, shipping to 30+ countries. Every product manufactured by FA Herbs, per Sedania. Proof the factory's output can be marketed world class, and today the brand outshines its own manufacturer online.</div></div></div>
+  </div>
+  <h3 class="sub">The six rivals</h3>
+  <div class="shotboard">
+    <div class="shot"><img src="assets/comp-navibiotech.png" alt="NaViBiotech homepage capture"><div class="meta"><div class="nm">NaViBiotech</div><div class="u">navibio.tech</div><div class="rd">"From idea to shelf, engineered to win." The count stack in the hero, MOQ and timeline in plain sight, WhatsApp pre-filled, sampling priced. The bar this board is ranked against.</div></div></div>
+    <div class="shot"><img src="assets/comp-skinlab.png" alt="Skinlab Biochem OEM page capture"><div class="meta"><div class="nm">Skinlab Biochem</div><div class="u">skinlab.com.my</div><div class="rd">"Your Trusted OEM Skincare Manufacturer in Malaysia." 6,000+ formulations and 2,000+ brands doing the arguing, WhatsApp one tap away, EN and CN.</div></div></div>
+    <div class="shot"><img src="assets/comp-bionutricia.png" alt="Bionutricia homepage capture"><div class="meta"><div class="nm">Bionutricia</div><div class="u">bionutricia.com</div><div class="rd">Wholesale-only framing, a patent certificate displayed, a reply-time promise in writing, an NDA on request. Smaller numbers than the leaders, tighter manners than all of them.</div></div></div>
+    <div class="shot"><img src="assets/comp-hbt.png" alt="HBT homepage capture"><div class="meta"><div class="nm">HBT Food &amp; Beverage</div><div class="u">hbt.co.com</div><div class="rd">A stats strip with four labels, Happy Clients, Products, Hours of Support, Hard Workers, and no figures in any of them. An active blog above, an empty proof widget below.</div></div></div>
+    <div class="shot"><img src="assets/comp-engkah.png" alt="Eng Kah homepage capture"><div class="meta"><div class="nm">Eng Kah Corporation</div><div class="u">engkah.com</div><div class="rd">55+ years and eight certifications presented like an annual report, with placeholder graphics through the page. The deepest substance on the board, funnelled into one email address.</div></div></div>
+    <div class="shot"><img src="assets/comp-bioalpha.png" alt="Bioalpha homepage capture"><div class="meta"><div class="nm">Bioalpha</div><div class="u">bioa.com.my</div><div class="rd">"From Seed to Life, From Good to Great." Public listed, GMP and Halal in the tagline, and not one number on the page.</div></div></div>
+  </div>
+</section>
+
+<section id="s04">
+  <div class="chapdiv"><div class="cd-no">04</div><div><div class="cd-h">Real rivals, in full</div><div class="cd-sub">Six profiles, ranked. For each: the facts, the brand read, what the site does well, where it is weak, and the lesson the rebuild takes</div></div></div>
+  <p class="sec-intro">Figures are quoted from each rival's own published pages, read live on 20 August 2026, and labelled as their claims. Site scores and capture reads are Brand Method's judgement of conversion craft against the defined buyer, not published data. Where something could not be evidenced it is marked as not verified, or as our inference, rather than stated as fact.</p>
+
+  <div class="rvs">
+
+  <div class="rv"><div class="rv-h"><span class="rv-rk">01</span><span class="rv-ttl"><b>NaViBiotech</b><span class="rv-sub">Malaysia + China &middot; supplements and cosmetics OEM/ODM &middot; navibio.tech</span></span><span class="rv-th"><span class="sc hi">Site 9</span><span class="sc hi">Capture hi</span></span></div>
+  <div class="rv-b">
+    <div class="rv-facts">
+      <div class="rv-f"><k>Positioning</k><span>"The Force Behind Great Brands"; hero on 20 Aug: "From idea to shelf, engineered to win". End to end, formulation through global logistics, plants in Malaysia and China</span></div>
+      <div class="rv-f"><k>Numbers published</k><span>15+ years, 1,200+ brands, 3 GMP factories in 2 countries, 500 million+ units a year combined, MOQ from about 100 boxes ready stock with starter batches from ±5,000 sachets, product registration support in 24 countries, roughly 3 months idea to market. All self-stated</span></div>
+      <div class="rv-f"><k>Capture mechanics</k><span>WhatsApp button with a pre-filled brief, reply within one working day, an all-in quote on WhatsApp within 24 hours, a form with a product-type dropdown, a free formulation consult, sampling secured by an RM250 per SKU deposit credited to the order</span></div>
+      <div class="rv-f"><k>Certifications shown</k><span>GMP PIC/S, ISO 22000, JAKIM Halal, HACCP, KKM MeSTI, plus pharma licensing claims (NPRA-registered medicines)</span></div>
+    </div>
+    <div class="rv-brand"><k>The brand, read</k><b>The complete answer sheet.</b> Every question a first-time brand owner asks, cost of entry, speed, volume ceiling, halal status, is answered on the page before the enquiry, and the enquiry itself is engineered: the sample deposit filters tyre kickers while the credit-back removes the sting. Nothing here is externally verified. It converts anyway, because specificity reads as confidence.</div>
+    <div class="rv-cols">
+      <div class="rv-c up"><k>What the site does well</k><ul>
+        <li><b>Serves both buyer lanes at once.</b> MOQ, timeline and deposit-backed sampling convert the ODM startup; capacity and 24-country registration convert the OEM brand.</li>
+        <li><b>Removes friction and price fear:</b> an all-in quote in 24 hours on WhatsApp, the consult free, the deposit refundable.</li>
+        <li><b>Precision as persuasion:</b> 500 million units, 100 boxes, 3 months. Numbers this specific pre-answer the credibility check.</li>
+      </ul></div>
+      <div class="rv-c dn"><k>Where it is weak</k><ul>
+        <li><b>Every figure is its own claim.</b> No external register, no audited count, no certifying body behind the 1,200+.</li>
+        <li><b>No named clients beside the counts</b> in our 20 Aug read of the pages fetched: volume is asserted, not evidenced.</li>
+        <li><b>The two-country, two-category spread</b> can read as an ecosystem rather than one accountable factory floor. Our inference, not a measured finding.</li>
+      </ul></div>
+    </div>
+    <div class="rv-why"><b>Take this into the rebuild:</b> this is the bar. Match the answer sheet, MOQ, timeline, capacity and sampling terms published per product line, split into an ODM lane for startups and an OEM lane for established brands, then beat it with the one thing NaViBiotech does not show: named, permissioned clients of Amway and Tupperware weight and a flagship brand built in-house.</div>
+    <div class="rv-src">Sources: navibio.tech read live 20 Aug 2026; RESEARCH-20AUG dossier, section 5. All figures the company's own claims.</div>
+  </div></div>
+
+  <div class="rv"><div class="rv-h"><span class="rv-rk">02</span><span class="rv-ttl"><b>Skinlab Biochem</b><span class="rv-sub">Johor Bahru &middot; skincare OEM &middot; skinlab.com.my</span></span><span class="rv-th"><span class="sc hi">Site 7</span><span class="sc hi">Capture hi</span></span></div>
+  <div class="rv-b">
+    <div class="rv-facts">
+      <div class="rv-f"><k>Positioning</k><span>"Your Trusted OEM Skincare Manufacturer in Malaysia", serving businesses, entrepreneurs, aesthetic clinics, spas and facial centres</span></div>
+      <div class="rv-f"><k>Numbers published</k><span>6,000+ proven formulations, trusted by 2,000+ brands worldwide. No years of operation stated in our 20 Aug read. Self-claims</span></div>
+      <div class="rv-f"><k>Capture mechanics</k><span>Prominent WhatsApp with the pre-filled opener "Hi, i am interested to know more", two mobile lines, English and Simplified Chinese, category pages led by sheet masks, sunscreen and serums</span></div>
+      <div class="rv-f"><k>Certifications shown</k><span>GMP, ISO 22716, Halal</span></div>
+    </div>
+    <div class="rv-brand"><k>The brand, read</k><b>Scale as the pitch.</b> The formulation library is the moat: 6,000+ formulas says "your product already exists here, come pick it", which is precisely the ODM startup's dream. The bilingual estate quietly serves the Chinese-speaking founder market that most of this board ignores.</div>
+    <div class="rv-cols">
+      <div class="rv-c up"><k>What the site does well</k><ul>
+        <li><b>Two headline counts do all the work,</b> stated in the hero where the comparison happens.</li>
+        <li><b>Bilingual EN and CN</b> widens the funnel to a founder segment the others leave unserved.</li>
+        <li><b>WhatsApp one tap away</b> with an opener already typed: zero-friction first contact.</li>
+      </ul></div>
+      <div class="rv-c dn"><k>Where it is weak</k><ul>
+        <li><b>No MOQ, no timeline, no case studies:</b> the buyer still has to ask the basics NaViBiotech answers on the page.</li>
+        <li><b>The pre-filled opener is generic.</b> It captures interest without qualifying product type or quantity.</li>
+        <li><b>Skincare only.</b> A buyer planning a multi-category brand outgrows them; FA Herbs runs ten product lines.</li>
+      </ul></div>
+    </div>
+    <div class="rv-why"><b>Take this into the rebuild:</b> publish a formulation library count. FA Herbs has manufactured across ten product lines since 1994; a real library number in the hero would do here what 6,000+ does for Skinlab. And note the language finding: in the pages we read, the bilingual estates chose Chinese, and none led with Bahasa Melayu.</div>
+    <div class="rv-src">Sources: skinlab.com.my/oem-skincare-manufacturer-malaysia read live 20 Aug 2026; research dossier section 5. Counts are the company's claims.</div>
+  </div></div>
+
+  <div class="rv"><div class="rv-h"><span class="rv-rk">03</span><span class="rv-ttl"><b>Bionutricia</b><span class="rv-sub">Malaysia &middot; founded 2006 &middot; extracts and supplements, wholesale only &middot; bionutricia.com</span></span><span class="rv-th"><span class="sc hi">Site 7</span><span class="sc hi">Capture hi</span></span></div>
+  <div class="rv-b">
+    <div class="rv-facts">
+      <div class="rv-f"><k>Positioning</k><span>"Your Reliable Manufacturing Partner": OEM, ODM and botanical extract manufacturer for nutraceutical, functional food and beverage. Wholesale only, stated plainly</span></div>
+      <div class="rv-f"><k>Numbers published</k><span>15+ years, 239+ brand partners. Patents: the dossier records 4; the live homepage leads with the Ultrasonic Processing patent certificate and Herbosomal patented technology</span></div>
+      <div class="rv-f"><k>Capture mechanics</k><span>WhatsApp B2B sales line with a preset OEM enquiry, the written promise "we reply within 24 business hours, Mon to Fri", a request-a-wholesale-quote form, NDA available on request</span></div>
+      <div class="rv-f"><k>Certifications shown</k><span>JAKIM Halal, FSSC 22000, GMP, HACCP, MeSTI, US FDA registered, Buatan Malaysia mark</span></div>
+    </div>
+    <div class="rv-brand"><k>The brand, read</k><b>The professional's counter.</b> Everything is tuned to a B2B reader: wholesale-only gatekeeping, an NDA offered before you ask, a reply-time promise with a timezone attached, and a partner count precise enough, 239+, to sound counted rather than rounded. Smaller numbers than the leaders, better manners than anyone.</div>
+    <div class="rv-cols">
+      <div class="rv-c up"><k>What the site does well</k><ul>
+        <li><b>A reply-time promise in writing:</b> the cheapest trust device on the board, and only Bionutricia and NaViBiotech make it.</li>
+        <li><b>NDA on request</b> pre-answers the founder's IP anxiety before the first message.</li>
+        <li><b>Patents shown as certificates,</b> not adjectives: proof as an image with a number on it.</li>
+      </ul></div>
+      <div class="rv-c dn"><k>Where it is weak</k><ul>
+        <li><b>A narrow lane:</b> extracts and supplements, no cosmetics or personal care breadth.</li>
+        <li><b>239+ partners is a fraction of the leaders' counts,</b> and no MOQ or timeline appears in our read.</li>
+      </ul></div>
+    </div>
+    <div class="rv-why"><b>Take this into the rebuild:</b> steal the manners. A written reply-time promise, an NDA line, and certificates shown as images with numbers on them. FA Herbs' placeholder certificate page is the exact inverse of Bionutricia's move, and fixing it costs nothing. Note the precision lesson too: an exact count reads more credible than a rounded one, so reconcile and state the real client number.</div>
+    <div class="rv-src">Sources: bionutricia.com read live 20 Aug 2026; research dossier section 5. Counts are the company's claims.</div>
+  </div></div>
+
+  <div class="rv"><div class="rv-h"><span class="rv-rk">04</span><span class="rv-ttl"><b>HBT Food &amp; Beverage</b><span class="rv-sub">Melaka &middot; OEM supplements and F&amp;B, powder-focused &middot; hbt.co.com</span></span><span class="rv-th"><span class="sc mid">Site 5</span><span class="sc mid">Capture mid</span></span></div>
+  <div class="rv-b">
+    <div class="rv-facts">
+      <div class="rv-f"><k>Positioning</k><span>"We Provide OEM/ODM Services": a one stop OEM health supplement manufacturer, powder-based products for Malaysia and international markets</span></div>
+      <div class="rv-f"><k>Numbers published</k><span>None. The homepage stat strip renders four labels, Happy Clients, Products, Hours of Support, Hard Workers, with no figures in any of them, confirmed live 20 Aug</span></div>
+      <div class="rv-f"><k>Capture mechanics</k><span>Seven plus Contact Us CTAs, phone and email published. No WhatsApp visible and no contact form visible in our read</span></div>
+      <div class="rv-f"><k>Content engine</k><span>An active blog, posts dated August 2026: brain health, protein powder development, how-to-choose-a-manufacturer guides. English and Simplified Chinese</span></div>
+      <div class="rv-f"><k>Certifications shown</k><span>ISO 22000, HACCP MS 1480, Food GMP MS 1514, MeSTI, Halal</span></div>
+    </div>
+    <div class="rv-brand"><k>The brand, read</k><b>The diligent one with stage fright.</b> The blog does real top-of-funnel work: it is the only estate on this board writing the guides a researching founder actually reads. Then the homepage undoes it with a proof widget that shipped empty. An empty counter is worse than no counter, because it shows the intent to prove and the absence of proof in the same pixel.</div>
+    <div class="rv-cols">
+      <div class="rv-c up"><k>What the site does well</k><ul>
+        <li><b>The only active content engine on the board:</b> current posts, aimed at the buyer's research stage.</li>
+        <li><b>CTA density:</b> contact is never more than a scroll away.</li>
+        <li><b>Bilingual EN and CN,</b> like Skinlab.</li>
+      </ul></div>
+      <div class="rv-c dn"><k>Where it is weak</k><ul>
+        <li><b>Zero quantified proof anywhere,</b> and the empty counters advertise the absence.</li>
+        <li><b>No WhatsApp and no form in our read:</b> every CTA funnels to a phone call or an email.</li>
+      </ul></div>
+    </div>
+    <div class="rv-why"><b>Take this into the rebuild:</b> two lessons, one per direction. Copy the blog: how-to-choose-an-OEM-partner content catches Mervyn's exact buyer at research stage, and it feeds the SEO and AI-findability commitment from the 14 Aug call. And treat the empty counters as the mirror: FA Herbs' placeholder certificates and placeholder logos are the same wound at larger scale. Never ship the frame before the proof.</div>
+    <div class="rv-src">Sources: hbt.co.com read live 20 Aug 2026; research dossier section 5.</div>
+  </div></div>
+
+  <div class="rv"><div class="rv-h"><span class="rv-rk">05</span><span class="rv-ttl"><b>Eng Kah Corporation</b><span class="rv-sub">Malaysia &middot; cosmetics and perfume OEM/ODM &middot; engkah.com</span></span><span class="rv-th"><span class="sc lo">Site 4</span><span class="sc bad">Capture bad</span></span></div>
+  <div class="rv-b">
+    <div class="rv-facts">
+      <div class="rv-f"><k>Positioning</k><span>"Malaysia's largest perfume contract manufacturer" and a leading OEM and ODM manufacturer for beauty, custom-made and private label</span></div>
+      <div class="rv-f"><k>Numbers published</k><span>55+ years of expertise, stated twice. No capacity, client count or revenue anywhere on the page</span></div>
+      <div class="rv-f"><k>Certifications shown</k><span>The deepest stack on the board: GMP, Halal, FDA-registered plant, ISO 9001:2015, ISO 14001:2015, ISO 22716:2007, SEDEX, plus an Industry Excellence Award 2012 from the National Pharmaceutical Control Bureau</span></div>
+      <div class="rv-f"><k>Capture mechanics</k><span>An email address in the FAQ, a generic Contact Us Now button, a contact page. No WhatsApp anywhere in our read. Multiple placeholder SVGs across logos, product sections and certification badges, live on 20 Aug</span></div>
+    </div>
+    <div class="rv-brand"><k>The brand, read</k><b>The annual report as a homepage.</b> Fifty-five years and eight certifications presented with corporate reserve, to a buyer who has already left for WhatsApp. It would persuade a procurement committee and it loses a founder: no MOQ, no speed, no chat, no price signal. The placeholder graphics say the estate is maintained the way a plaque is maintained.</div>
+    <div class="rv-cols">
+      <div class="rv-c up"><k>What the site does well</k><ul>
+        <li><b>Substance nobody younger can copy:</b> 55+ years, current ISO versions, SEDEX membership.</li>
+        <li><b>A claimable superlative:</b> "Malaysia's largest perfume contract manufacturer" is category authority in one line.</li>
+      </ul></div>
+      <div class="rv-c dn"><k>Where it is weak</k><ul>
+        <li><b>Email-only capture:</b> the highest-friction funnel on the board.</li>
+        <li><b>Placeholder images through the page,</b> live on the day of this board.</li>
+        <li><b>Not one operational number</b> a buyer can plan around.</li>
+      </ul></div>
+    </div>
+    <div class="rv-why"><b>Take this into the rebuild:</b> substance does not convert unpublished. And note the detail: even the flattest rival keeps its ISO current, Eng Kah shows 9001:2015 while faherbs.com still claims 9001:2008, a version superseded years ago. Correct that claim or remove it, then refuse Eng Kah's real error: proof without a low-friction path to a human.</div>
+    <div class="rv-src">Sources: engkah.com read live 20 Aug 2026; research dossier section 5.</div>
+  </div></div>
+
+  <div class="rv"><div class="rv-h"><span class="rv-rk">06</span><span class="rv-ttl"><b>Bioalpha</b><span class="rv-sub">Malaysia &middot; public listed nutraceutical OEM/ODM/OBM &middot; bioa.com.my</span></span><span class="rv-th"><span class="sc lo">Site 3</span><span class="sc lo">Capture lo</span></span></div>
+  <div class="rv-b">
+    <div class="rv-facts">
+      <div class="rv-f"><k>Positioning</k><span>"From Seed to Life, From Good to Great": public listed, GMP and Halal certified, R&amp;D-driven, science-backed nutraceutical solutions</span></div>
+      <div class="rv-f"><k>Numbers published</k><span>None on the homepage in our 20 Aug read. "800+ formulations developed" surfaces in its search listing per the dossier, unsighted on the page itself</span></div>
+      <div class="rv-f"><k>Capture mechanics</k><span>One Discover More CTA that leads to the About page, plus a floating WhatsApp icon. Navigation offers OBM/ODM customisation, OEM predesigned solutions, R&amp;D and Super Brand Solution</span></div>
+      <div class="rv-f"><k>Status</k><span>Public listed, stated in the value proposition itself</span></div>
+    </div>
+    <div class="rv-brand"><k>The brand, read</k><b>Status as a substitute for proof.</b> The tagline asserts credibility, listing, certification, science, and the page proves none of it with a single figure; its best number lives in a search snippet rather than its own hero. This is the closest mirror to FA Herbs on the board: real institutional substance, an empty shop window, and a homepage that routes its one CTA to an About page instead of an enquiry.</div>
+    <div class="rv-cols">
+      <div class="rv-c up"><k>What the site does well</k><ul>
+        <li><b>Listed status and an R&amp;D posture</b> set an institutional tone a startup founder respects.</li>
+        <li><b>The WhatsApp float</b> at least keeps one low-friction door open.</li>
+      </ul></div>
+      <div class="rv-c dn"><k>Where it is weak</k><ul>
+        <li><b>No numbers on the page:</b> the weakest proof display on the board.</li>
+        <li><b>One soft CTA aimed at About, not enquiry:</b> the funnel leads nowhere commercial.</li>
+      </ul></div>
+    </div>
+    <div class="rv-why"><b>Take this into the rebuild:</b> this is the control group. Bioalpha proves that being credible, even Bursa-listed, converts nothing while the numbers stay unpublished. FA Herbs sits one placeholder page away from the same verdict, with far better material available to fix it.</div>
+    <div class="rv-src">Sources: bioa.com.my/en read live 20 Aug 2026; research dossier section 5, "800+ formulations" from the search listing, not sighted on the page.</div>
+  </div></div>
+
+  </div>
+</section>
+
+<section id="s05">
+  <div class="chapdiv"><div class="cd-no">05</div><div><div class="cd-h">Who is who, and what to take from each</div><div class="cd-sub">The one-glance summary for the pitch room, grouped by role</div></div></div>
+  <div class="cgroup"><div class="cg-h"><span class="cg-k">01</span><h3>The bar</h3><p>The one estate that publishes the full answer sheet and captures with the least friction. The rebuild's checklist in a single homepage.</p></div><div class="cfirms">
+    <div class="cfirm"><div class="cf-h"><b>NaViBiotech</b><span class="cf-hq">MY + China</span></div><div class="cf-sc"><span class="sc hi">Site 9</span><span class="sc hi">Capture hi</span></div><p>MOQ, timeline, capacity, refundable sampling, pre-filled WhatsApp. Match the sheet, then beat it with named clients.</p></div>
+  </div></div>
+  <div class="cgroup"><div class="cg-h"><span class="cg-k">02</span><h3>The strong capture pack</h3><p>Big claims and easy contact. Each one still leaves a gap the rebuild can occupy.</p></div><div class="cfirms">
+    <div class="cfirm"><div class="cf-h"><b>Skinlab Biochem</b><span class="cf-hq">JB &middot; skincare</span></div><div class="cf-sc"><span class="sc hi">Site 7</span><span class="sc hi">Capture hi</span></div><p>6,000+ formulations in the hero, EN and CN, WhatsApp one tap away. Hides MOQ and case studies; skincare only.</p></div>
+    <div class="cfirm"><div class="cf-h"><b>Bionutricia</b><span class="cf-hq">est. 2006 &middot; wholesale</span></div><div class="cf-sc"><span class="sc hi">Site 7</span><span class="sc hi">Capture hi</span></div><p>Reply promise in writing, NDA line, patents as certificates. Steal the manners; the counts are beatable.</p></div>
+  </div></div>
+  <div class="cgroup"><div class="cg-h"><span class="cg-k">03</span><h3>Substance without publishing</h3><p>Real credentials, unconverted. The cautionary half of the board, and FA Herbs' current company.</p></div><div class="cfirms">
+    <div class="cfirm"><div class="cf-h"><b>HBT Food &amp; Beverage</b><span class="cf-hq">Melaka</span></div><div class="cf-sc"><span class="sc mid">Site 5</span><span class="sc mid">Capture mid</span></div><p>The only active blog on the board, and stat counters that shipped empty. Copy the content, avoid the frame-without-proof.</p></div>
+    <div class="cfirm"><div class="cf-h"><b>Eng Kah</b><span class="cf-hq">55+ yrs</span></div><div class="cf-sc"><span class="sc lo">Site 4</span><span class="sc bad">Capture bad</span></div><p>Eight certifications funnelled into one email address. Substance does not convert unpublished and unreachable.</p></div>
+    <div class="cfirm"><div class="cf-h"><b>Bioalpha</b><span class="cf-hq">listed</span></div><div class="cf-sc"><span class="sc lo">Site 3</span><span class="sc lo">Capture lo</span></div><p>Listed, certified, numberless. The control group: status alone converts nothing.</p></div>
+  </div></div>
+  <div class="cgroup"><div class="cg-h"><span class="cg-k">04</span><h3>The exhibit, not a rival</h3><p>The proof of capability sits inside the house.</p></div><div class="cfirms">
+    <div class="cfirm"><div class="cf-h"><b>Tanamera</b><span class="cf-hq">made by FA Herbs</span></div><div class="cf-sc"><span class="sc hi">Exhibit</span><span class="sc lo">n/s</span></div><p>Marketed world class at tanameraofficial.com, shipping to 30+ countries, award marks on show. Today the brand outshines its own manufacturer online.</p></div>
+  </div></div>
+</section>
+
+<section id="s06">
+  <div class="chapdiv"><div class="cd-no">06</div><div><div class="cd-h">The lesson board</div><div class="cd-sub">Every rival reduced to three columns: what they publish that FA Herbs does not, where they stay beatable, and what the rebuild takes</div></div></div>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>Rival</th><th>What they publish that FA Herbs does not</th><th>Where they stay beatable</th><th>What the rebuild takes</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">NaViBiotech</td><td>The full answer sheet: 1,200+ brands, MOQ from 100 boxes, ~3 months, 500m+ units, RM250 refundable sampling</td><td>All self-claims, no named clients in our read</td><td class="sc2">The same sheet per line, plus named clients</td></tr>
+      <tr><td class="dim">Skinlab Biochem</td><td>6,000+ formulations and 2,000+ brands in the hero, EN and CN</td><td>MOQ, timeline and case studies absent; skincare only</td><td class="sc2">A real library count, 10-line breadth</td></tr>
+      <tr><td class="dim">Bionutricia</td><td>239+ partners, patents as certificates, a written reply promise, an NDA line</td><td>Narrow extract lane, modest counts, no MOQ in our read</td><td class="sc2">The manners: reply promise, NDA, real certificates</td></tr>
+      <tr><td class="dim">HBT</td><td>An active buyer-education blog, posts dated Aug 2026</td><td>Empty stat counters, no WhatsApp or form in our read</td><td class="sc2">The blog plan, never frames before proof</td></tr>
+      <tr><td class="dim">Eng Kah</td><td>55+ years and 8 current certifications, ISO 9001:2015 included</td><td>Email-only capture, placeholder graphics, zero operational numbers</td><td class="sc2">A current ISO claim, proof with a path</td></tr>
+      <tr><td class="dim">Bioalpha</td><td>Listed status and an R&amp;D posture</td><td>No numbers on the page, one CTA aimed at About</td><td class="sc2">The warning: status alone converts nothing</td></tr>
+    </tbody>
+  </table></div>
+  <span class="pin"><b>The pattern across all six:</b> every winner on this board publishes numbers, formulations, brands served, MOQ, capacity, idea-to-market time, and runs WhatsApp-first, low-friction capture: pre-filled templates, free formulation consults, refundable sample deposits. FA Herbs holds stronger substance than most of this board, 250+ clients per Sedania, Amway and Tupperware on the roster, the whole Tanamera brand as a live case study, three factories running since 1994, and publishes none of it. Every rival's advantage is publishing craft, not substance.</span>
+</section>
+
+<section id="s07">
+  <div class="chapdiv"><div class="cd-no">07</div><div><div class="cd-h">Five things the rebuild must do</div><div class="cd-sub">Each one taken from a rival that proves it works, or fails without it; each one cites its evidence</div></div></div>
+  <div class="moves">
+    <div class="movecard"><div class="mv-k">Move 01</div><h3>Reconcile one client count, then publish it loud</h3><p>faherbs.com says 100+ clients, Sedania's corporate page says 250+. Both are self-claims and the conflict is a finding. Settle the number that survives verification, then state it in the hero's first sentence the way NaViBiotech states 1,200+: loudly, specifically, everywhere the same.</p><div class="mv-src">Evidence from: faherbs.com and sedaniagroup.com read 20 Aug; navibio.tech hero</div></div>
+    <div class="movecard"><div class="mv-k">Move 02</div><h3>Name the roster, with permission</h3><p>Amway, Tupperware, Tanamera, Eskayvie. In our read of all six rivals, none publishes client names of that weight; every rival counts brands, none shows them. One permissioned logo row beats every counter on this board, and Eskayvie is a live Brand Method client, so that permission conversation is one call away.</p><div class="mv-src">Evidence from: the portfolio roster on faherbs.com, currently all placeholder logos; the six rival reads, 20 Aug 2026</div></div>
+    <div class="movecard"><div class="mv-k">Move 03</div><h3>Publish the answer sheet, split by lane</h3><p>MOQ, capacity, idea-to-market time and sampling terms, published per product line, and split the way the buyer splits: an ODM lane for startups, ready formulas, their label, fast, and an OEM lane for established brands with their own specification. NaViBiotech proves the format converts; nobody else on the board completes it.</p><div class="mv-src">Evidence from: navibio.tech read 20 Aug; buyer definition per MEETING-14AUG</div></div>
+    <div class="movecard"><div class="mv-k">Move 04</div><h3>WhatsApp-first capture with qualifying pre-fills</h3><p>A product-type dropdown, a pre-filled brief, a written reply-time promise, a free formulation consult, and a refundable sample deposit that filters tyre kickers politely. The mechanics are proven twice on this board, NaViBiotech and Bionutricia. faherbs.com's current "I'm interested" button carries no context at all.</p><div class="mv-src">Evidence from: navibio.tech and bionutricia.com capture mechanics; faherbs.com CTA, all read 20 Aug</div></div>
+    <div class="movecard"><div class="mv-k">Move 05</div><h3>Real certificates or none</h3><p>Five placeholder slots on a GMP factory's certificates page is the worst page in the category, per the 00 audit. Publish the actual GMP, JAKIM and MAL evidence with numbers, correct the ISO 9001:2008 claim to whatever is current and true, and delete every placeholder. HBT's empty counters and Eng Kah's placeholder badges show how visibly a frame without proof fails.</p><div class="mv-src">Evidence from: faherbs.com certificates page; hbt.co.com counters; engkah.com badges, all read 20 Aug</div></div>
+  </div>
+  <div class="diagram" style="margin-top:26px">
+    <div class="cap">The positioning map &middot; publishing craft against substance held, our judgement, 20 Aug 2026</div>
+    <svg viewBox="0 0 960 420" role="img" aria-label="Positioning map of rivals by publishing craft and substance held">
+      <g font-family="Inter,system-ui,sans-serif">
+        <line x1="80" y1="360" x2="920" y2="360" stroke="#D3DCE8" stroke-width="1.6"/>
+        <line x1="80" y1="40" x2="80" y2="360" stroke="#D3DCE8" stroke-width="1.6"/>
+        <text x="500" y="398" text-anchor="middle" font-size="12.5" fill="#8593A9" font-family="JetBrains Mono,monospace">PUBLISHING CRAFT →</text>
+        <text x="34" y="200" text-anchor="middle" font-size="12.5" fill="#8593A9" font-family="JetBrains Mono,monospace" transform="rotate(-90 34 200)">SUBSTANCE HELD →</text>
+        <g font-size="13" font-weight="600">
+          <circle cx="180" cy="110" r="9" fill="#0F241A" opacity=".8"/><text x="180" y="92" text-anchor="middle" fill="#45536B">Eng Kah</text>
+          <circle cx="230" cy="185" r="8" fill="#0F241A" opacity=".55"/><text x="230" y="167" text-anchor="middle" fill="#45536B">Bioalpha</text>
+          <circle cx="380" cy="265" r="8" fill="#0F241A" opacity=".45"/><text x="380" y="247" text-anchor="middle" fill="#45536B">HBT</text>
+          <circle cx="620" cy="195" r="8" fill="#0F241A" opacity=".65"/><text x="620" y="177" text-anchor="middle" fill="#45536B">Bionutricia</text>
+          <circle cx="665" cy="150" r="8" fill="#0F241A" opacity=".8"/><text x="665" y="132" text-anchor="middle" fill="#45536B">Skinlab</text>
+          <circle cx="780" cy="130" r="9" fill="#0F241A"/><text x="780" y="112" text-anchor="middle" fill="#45536B">NaViBiotech</text>
+          <circle cx="745" cy="255" r="8" fill="#C08A1D"/><text x="745" y="237" text-anchor="middle" fill="#96690D">Tanamera, the exhibit</text>
+          <circle cx="130" cy="70" r="11" fill="#1F8A4C"/><text x="228" y="52" text-anchor="middle" fill="#15693B">FA HERBS TODAY</text>
+          <rect x="700" y="46" width="210" height="56" rx="12" fill="none" stroke="#1F8A4C" stroke-width="2.4" stroke-dasharray="8 6"/>
+          <text x="805" y="70" text-anchor="middle" fill="#15693B" font-family="JetBrains Mono,monospace" font-size="11" font-weight="700">FA HERBS TARGET</text>
+          <text x="805" y="88" text-anchor="middle" fill="#15693B" font-size="12">substance kept, craft built</text>
+          <path d="M148 70 Q420 118 692 76" stroke="#1F8A4C" stroke-width="2.6" fill="none" marker-end="url(#arrv)"/>
+          <defs><marker id="arrv" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 Z" fill="#1F8A4C"/></marker></defs>
+        </g>
+        <text x="500" y="345" text-anchor="middle" font-size="12.5" fill="#45536B">The move the rebuild exists to make: keep the substance nobody else on this board has, build the publishing craft everybody else has.</text>
+      </g>
+    </svg>
+  </div>
+  <span class="pin"><b>Honesty pin:</b> both axes are our professional judgement of what each site publishes and what the dossier evidences, not panel data, and the map says so. Site scores in this document use the same ten point judgement scale, ours alone.</span>
+  <span class="pin warn"><b>What we could not verify, named:</b> every rival count on this board, 1,200+ brands, 6,000+ formulations, 2,000+ brands, 239+ partners, 55+ years, 500 million+ units, is that company's own published claim, read live on 20 August 2026 and audited by nobody we can cite. FA Herbs' 250+ clients is Sedania's claim, 100+ is FA Herbs' own site, and the conflict is unresolved. No FA Herbs certificate has been sighted; the certificates page shows placeholders only. Bioalpha's 800+ formulations comes from a search listing, not its homepage. Bionutricia's patent count: the dossier records 4, the live homepage displays the Ultrasonic Processing certificate. Social follower counts are login walled. Rival language coverage was read on Skinlab and HBT only.</span>
+</section>
+
+<footer>
+  <div>Brand Method &middot; FA Herbs competitor audit, web and brand lens &middot; rival sites read live 20 Aug 2026, captures in assets/ &middot; site findings and the claims record live in the 00 Web Audit</div>
+</footer>
+
+</div>
+<script id="bmPdfName">(function(){var t0=document.title;var n=t0.replace(/\s*[··]\s*Brand Method\s*$/,'').replace(/[··]/g,'-').replace(/&amp;/g,'and').replace(/[^\w\- ]+/g,'').trim().replace(/\s+/g,'-').replace(/-+/g,'-');if(!n)n='Brand-Method-Document';window.addEventListener('beforeprint',function(){document.title=n});window.addEventListener('afterprint',function(){document.title=t0});})();</script>
+</body>
+</html>

@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FA Herbs · Website &amp; Digital Audit · Brand Method</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{--paper:#F7F9FC;--paper2:#FFFFFF;--ink:#0B1526;--soft:#45536B;--faint:#8593A9;--line:#E3E9F2;--line2:#D3DCE8;--org:#1F8A4C;--org-deep:#15693B;--wash:#EAF6EF;--ok:#128A54;--warn:#C08A1D;--bad:#D7263D;--dark:#0F241A;--amber:#E8A020;--maxw:none;}
+  *{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+  body{font-family:"Inter",system-ui,sans-serif;background:var(--paper);color:var(--ink);font-size:16px;line-height:1.62;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  .wrap{max-width:none;margin:0;padding:0 22px}.mono{font-family:"JetBrains Mono",monospace}
+  .eyebrow{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--org-deep);display:inline-flex;align-items:center;gap:10px;font-weight:600}
+  .hero{padding:50px 0 8px}.hero h1{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:clamp(34px,5.4vw,58px);line-height:1.05;letter-spacing:-.02em;margin:18px 0 0;max-width:24ch}.hero h1 em{font-style:normal;color:var(--org-deep)}
+  .hero .lede{font-size:clamp(17px,2vw,20px);color:var(--soft);max-width:68ch;margin:20px 0 0}
+  .vrow{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}.vchip{background:var(--paper2);border:1px solid var(--line);border-radius:999px;padding:8px 15px;font-size:13px;color:var(--soft)}.vchip b{color:var(--org-deep)}
+  .execsum{margin-top:32px;border:1px solid var(--line);border-radius:16px;background:var(--paper2);padding:26px 28px}
+  .execsum .tag{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--org-deep);font-weight:700}
+  .execsum p{margin-top:10px;font-size:15.5px;color:var(--soft)}.execsum p b{color:var(--ink)}
+  section{padding:32px 0}
+  .chapdiv{display:flex;align-items:baseline;gap:18px;padding:42px 0 4px;border-top:1px solid var(--line);margin-top:10px}.cd-no{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:38px;color:var(--org);line-height:1}.cd-h{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:27px;letter-spacing:-.01em}.cd-sub{font-size:15px;color:var(--soft);margin-top:5px}
+  h2{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:clamp(25px,3.6vw,37px);line-height:1.08;letter-spacing:-.015em;margin:13px 0 0;max-width:30ch}
+  h3.sub{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:21px;margin:30px 0 0}
+  .sec-intro{font-size:16.5px;color:var(--soft);max-width:74ch;margin:15px 0 0}.sec-intro b,.sec-intro strong{color:var(--ink)}.sec-intro em{font-style:normal;color:var(--org-deep)}
+  .grid{display:grid;gap:16px;margin-top:22px}.g2{grid-template-columns:repeat(auto-fit,minmax(290px,1fr))}.g3{grid-template-columns:repeat(auto-fit,minmax(225px,1fr))}
+  .card{background:var(--paper2);border:1px solid var(--line);border-radius:14px;padding:20px 21px}.card .tag{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--org-deep);font-weight:700}.card h3{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:18.5px;margin-top:8px}.card p{font-size:14px;color:var(--soft);margin-top:9px;line-height:1.55}.card p b{color:var(--ink)}
+  .card.dark{background:var(--dark);border-color:#1e3a2b;color:#DCEFE3}.card.dark h3{color:#fff}.card.dark p{color:#A9CBB6}.card.dark .tag{color:#7FD6A4}.card.dark p b{color:#fff}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-top:22px}.stat{border:1px solid var(--line);border-radius:13px;background:var(--paper2);padding:16px 18px}.stat .num{font-family:"Space Grotesk",sans-serif;font-size:27px;font-weight:700;color:var(--org-deep);line-height:1.05}.stat .lab{font-size:13px;font-weight:600;margin-top:8px}.stat .s{font-size:12px;color:var(--faint);margin-top:3px}
+  table{width:100%;border-collapse:separate;border-spacing:0;margin-top:18px;font-size:14px;background:var(--paper2);border:1px solid var(--line);border-radius:12px;overflow:hidden}th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}thead th{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#fff;background:var(--dark)}tr:last-child td{border-bottom:none}td.dim{font-weight:600;white-space:nowrap}td.sc{font-family:"JetBrains Mono",monospace;color:var(--org-deep);font-weight:700;white-space:nowrap}
+  .tbl-scroll{overflow-x:auto;margin-top:18px}.tbl-scroll table{margin-top:0;min-width:720px}
+  .vtag{font-family:"JetBrains Mono",monospace;font-size:9.5px;text-transform:uppercase;letter-spacing:.04em;padding:3px 8px;border-radius:6px;font-weight:700;white-space:nowrap}.vtag.hi{background:rgba(18,138,84,.14);color:var(--ok)}.vtag.lo{background:rgba(192,138,29,.16);color:#96690D}.vtag.bad{background:rgba(215,38,61,.12);color:var(--bad)}
+  .diagram{margin-top:18px;border:1px solid var(--line);border-radius:14px;background:var(--paper2);padding:18px}.diagram .cap{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--faint);margin-bottom:10px}.diagram svg{width:100%;height:auto;display:block}
+  .pin{margin-top:22px;border-left:3px solid var(--org);background:linear-gradient(90deg,rgba(31,138,76,.07),transparent);padding:15px 19px;border-radius:0 12px 12px 0;font-size:15px;display:block}.pin b{color:var(--org-deep)}.pin.warn{border-left-color:var(--warn);background:linear-gradient(90deg,rgba(192,138,29,.09),transparent)}.pin.warn b{color:#96690D}
+  .quote{font-family:"Space Grotesk",sans-serif;font-size:17px;color:var(--soft);border-left:3px solid var(--line2);padding:6px 0 6px 18px;margin-top:16px}
+  .shotband{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-top:20px}
+  .shot{background:var(--paper2);border:1px solid var(--line);border-radius:14px;overflow:hidden}.shot img{width:100%;display:block;border-bottom:1px solid var(--line)}.shot .meta{padding:14px 16px}.shot .nm{font-weight:700;font-size:14.5px}.shot .u{font-family:"JetBrains Mono",monospace;font-size:10.5px;color:var(--org-deep);margin-top:2px}.shot .rd{font-size:13px;color:var(--soft);margin-top:7px;line-height:1.5}
+  footer{padding:34px 0 70px;color:var(--faint);font-size:12px;font-family:"JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.05em;border-top:1px solid var(--line);margin-top:30px}
+</style>
+<style id="printFix">
+@media print{
+  body{background:#fff}
+  .reveal,.fade,.draw,[data-reveal],[data-r],.rv{opacity:1!important;transform:none!important;clip-path:none!important;filter:none!important}
+  svg *{opacity:1!important}
+  table,tr,td,th,figure,.card,.diagram,.shot{page-break-inside:avoid}
+  h2,h3{page-break-after:avoid}
+  .bmws{display:none!important}
+}
+</style>
+</head>
+<body>
+<style id="bmwsCss">
+.bmws{background:#0A1224;color:#E7EDF7;position:sticky;top:0;z-index:900;border-bottom:1px solid #1d2a45}
+.bmws-in{display:flex;align-items:center;justify-content:space-between;padding:9px 22px;max-width:none;margin:0;gap:12px;flex-wrap:wrap}
+.bmws-crumb{display:flex;flex-direction:column;line-height:1.3;white-space:nowrap}
+.bmws-crumb b{font-size:13px;font-weight:700;color:#fff;letter-spacing:.01em;font-family:Inter,system-ui,sans-serif}
+.bmws-crumb span{font-family:"JetBrains Mono",monospace;font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;color:#8593A9}
+.bmws-tabs{display:flex;align-items:center;border:1px solid rgba(255,255,255,.22);border-radius:11px;overflow:auto;max-width:100%;margin-left:auto;padding:3px;gap:3px;background:rgba(255,255,255,.04)}
+.bmws-tabs a,.bmws-tabs span.off{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#C6D2E4;text-decoration:none;padding:7px 13px;border-radius:8px;white-space:nowrap;display:inline-flex;align-items:center;gap:7px;transition:background .25s,color .25s}
+.bmws-tabs a i,.bmws-tabs span.off i{font-style:normal;color:#8593A9;font-size:9px;font-weight:700}
+.bmws-tabs a:hover{background:rgba(255,255,255,.09);color:#fff}
+.bmws-tabs a.on{background:#1F8A4C;color:#fff;font-weight:700}
+.bmws-tabs a.on i{color:rgba(255,255,255,.72)}
+.bmws-tabs span.off{opacity:.45;cursor:default}
+</style>
+<div class="bmws"><div class="bmws-in">
+  <div class="bmws-crumb"><b>FA Herbs &middot; Website 1</b><span>Brand Method &middot; Admin Navigation</span></div>
+  <nav class="bmws-tabs" aria-label="Admin navigation">
+    <a class="on" href="audit.html"><i>00</i>Web Audit</a>
+    <a href="competitors.html"><i>01</i>Competitors</a>
+    <a href="plan.html"><i>02</i>Web Plan</a>
+    <a href="index.html"><i>03</i>Prototype Web 1</a>
+  </nav>
+</div></div>
+
+<div class="wrap">
+
+<header class="hero">
+  <span class="eyebrow">FA Herbs &middot; faherbs.com &middot; Web Audit &middot; 20 Aug 2026</span>
+  <h1>The factory is proven. The website shows <em>placeholders</em>.</h1>
+  <p class="lede">Every figure below was measured live on 20 August 2026 or traced to a named source, never estimated. The finding in one line: FA Herbs is the GMP factory behind Tanamera, Amway and Tupperware, running three plants and serving 250+ brands by its own parent's count, and its shop window greets an OEM buyer with unnamed certificate slots, sixteen client tiles rendering one identical placeholder graphic, and copy whose newest claims date from around 2019. The buyers it wants check exactly the proof the site leaves blank, while smaller rivals publish MOQ, capacity and formulation counts.</p>
+  <div class="vrow">
+    <span class="vchip"><b>3</b> factories, per its own parent's page</span>
+    <span class="vchip"><b>250+ vs 100+</b> clients, the parent's count vs the site's own</span>
+    <span class="vchip"><b>16</b> client tiles, one identical placeholder graphic</span>
+    <span class="vchip"><b>5</b> certificate slots, newest validity lapsed May 2022</span>
+    <span class="vchip"><b>51</b> lorem ipsum demo posts live in the sitemap</span>
+    <span class="vchip"><b>3.7 / 10</b> nine-lens estate score</span>
+  </div>
+  <div class="execsum">
+    <span class="tag">The 60 second verdict</span>
+    <p>This is a <b>refresh, not a teardown</b>, by the client's own instruction: logo and identity kept, the narration kept, the critique aimed at completeness, never at the company. The company is real and enviable: incorporated 1994, 51% acquired by Sedania Innovator Berhad in 2023, the contract manufacturer behind Tanamera and a roster that includes Amway and Tupperware. The website is where that reality goes missing. Measured 20 August: the Certificates page names <b>zero certificates</b> in its copy, and the scans hiding behind its five gray slots have <b>all lapsed</b>, the newest in May 2022. The Portfolio page renders <b>every one of its 16 client logos as the same theme placeholder</b>, while the genuine Amway, Tanamera and Tupperware logo files sit uploaded on the server, unseen since 2020. The homepage links to <b>/portolio, a 404</b>, flips a card that reads <b>CREAM &amp; JELS</b>, and publishes no MOQ, no process, no capacity, no case study. Mervyn Goh called sales and marketing "the weakest link in the operations right now". The website is that link's front door, and the fix starts with proof the company already owns.</p>
+  </div>
+</header>
+
+<section id="c01">
+  <div class="chapdiv"><div class="cd-no">01</div><div><div class="cd-h">The company before the site</div><div class="cd-sub">Who FA Herbs actually is, and the six jobs a winning estate must do for them</div></div></div>
+  <p class="sec-intro">An audit that starts with the site judges aesthetics. This one starts with the company, so every score that follows is a score against revenue. <b>FA Herbs Sdn. Bhd., 199401035761 (old 321444-X)</b>, incorporated 26 October 1994 in Selangor, manufacturing at Bukit Badong, Ijok. A GMP contract manufacturer of herbal supplements, personal care and food products, inside Sedania's Sustainable Brands division since the 2023 acquisition, positioned by its GM as <em>a premier OEM and ODM manufacturing facility</em>. In his words from the 14 August call: "It's not about products."</p>
+  <div class="grid g3">
+    <div class="card"><span class="tag">The commercial model</span><h3>Contract manufacturing, two lanes</h3><p>Ten product lines from bar soap to jamu to pre and post natal. Two buyer routes named in the call: <b>startups take ODM</b>, ready formulas, their label, fast to market; <b>established brands take OEM</b>, their own specification. The parent's page counts <b>250+ clients</b> across hospitality, MLM, SME and corporate.</p></div>
+    <div class="card"><span class="tag">The demand problem</span><h3>Three people carry all sales</h3><p>The whole commercial engine is <b>one sales manager, one sales executive and the GM</b>. Group marketing serves the sister companies. Mervyn's own diagnosis on the call: sales and marketing is "the weakest link in the operations right now", and the new financial year has him gathering quotations in a hurry.</p></div>
+    <div class="card"><span class="tag">The hidden asset</span><h3>A roster most factories would frame</h3><p><b>Tanamera, Amway, Tupperware, Eskayvie</b> and twelve more names sit on the Portfolio page today, as alt text behind placeholder tiles. The factory built Tanamera's entire product line, a brand shipping to 30+ countries. The proof exists. The site declines to show it.</p></div>
+  </div>
+  <p class="quote">"That is the weakest weakest link in the operations right now." Mervyn Goh, GM, on sales and marketing, 14 Aug 2026.</p>
+  <h3 class="sub">Six things a winning FA Herbs estate has to do</h3>
+  <div class="goals2" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-top:18px">
+    <div class="card"><span class="tag">Job 1</span><p><b>Pass the OEM buyer's proof check.</b> A brand owner picking a manufacturer verifies certificates, clients and capacity before the first call. Today every one of those checks lands on a placeholder.</p></div>
+    <div class="card"><span class="tag">Job 2</span><p><b>Explain OEM vs ODM in one screen.</b> The two lanes Mervyn described are the site's natural architecture, and no page currently draws the fork.</p></div>
+    <div class="card"><span class="tag">Job 3</span><p><b>Publish the numbers.</b> MOQ, capacity, timeline, formulation count. Rivals half FA Herbs' size publish all four; FA Herbs publishes none.</p></div>
+    <div class="card"><span class="tag">Job 4</span><p><b>Convert to WhatsApp and enquiry.</b> A WhatsApp line exists (012-365 3232). The capture around it is a bare form and an "I'm interested" button with no context.</p></div>
+    <div class="card"><span class="tag">Job 5</span><p><b>Be findable by search and by AI.</b> The call named ChatGPT and Gemini alongside SEO as a requirement. An engine can only cite numbers a site actually states.</p></div>
+    <div class="card"><span class="tag">Job 6</span><p><b>Sell the factory, not products.</b> The GM's own framing. The site must read as a manufacturing partner's credentials, not a product catalogue.</p></div>
+  </div>
+  <span class="pin"><b>The rest of this audit scores the estate against these six jobs.</b> Every chapter names the job it serves.</span>
+</section>
+
+<section id="c02">
+  <div class="chapdiv"><div class="cd-no">02</div><div><div class="cd-h">What the estate actually is</div><div class="cd-sub">One live domain, one dead one, and two other shop windows nobody counts</div></div></div>
+  <p class="sec-intro">The estate is small on paper: one WordPress site of six pages. The full picture holds <b>four shop windows</b>, and the factory controls only one of them. The parent's corporate page sells FA Herbs harder than FA Herbs does, and the brand the factory built, Tanamera, is materially stronger online than its own manufacturer. There is Facebook and Instagram, and <b>no LinkedIn company page found</b>, for a business whose entire market is B2B founders and brand owners.</p>
+  <div class="diagram">
+    <div class="cap">F1 &middot; The shop windows, read 20 Aug 2026</div>
+    <svg viewBox="0 0 960 330" role="img" aria-label="Inventory of the FA Herbs web estate">
+      <g font-family="Inter,system-ui,sans-serif" font-size="15">
+        <rect x="250" y="20"  width="330" height="34" rx="7" fill="#1F8A4C"/><text x="20" y="43" fill="#0B1526" font-weight="600">faherbs.com</text><text x="596" y="43" fill="#45536B">6 pages, WordPress &middot; the only window the factory controls</text>
+        <rect x="250" y="66"  width="70" height="34" rx="7" fill="#D7263D" opacity=".75"/><text x="20" y="89" fill="#0B1526" font-weight="600">faherbs.com.my</text><text x="336" y="89" fill="#45536B">does not resolve &middot; the TLD a Malaysian B2B buyer guesses first</text>
+        <rect x="250" y="112" width="430" height="34" rx="7" fill="#0F241A"/><text x="20" y="135" fill="#0B1526" font-weight="600">sedaniagroup.com/fa-herbs</text><text x="696" y="135" fill="#45536B">the parent's page: 250+ clients, 3 factories, the Tanamera credit</text>
+        <rect x="250" y="158" width="520" height="34" rx="7" fill="#15693B"/><text x="20" y="181" fill="#0B1526" font-weight="600">tanameraofficial.com</text><text x="786" y="181" fill="#45536B">the brand the factory built &middot; halal, GMP marks, ships to 30+ countries</text>
+        <rect x="250" y="204" width="160" height="34" rx="7" fill="#C6D2E4"/><text x="20" y="227" fill="#0B1526" font-weight="600">Facebook + Instagram</text><text x="426" y="227" fill="#45536B">linked from the site &middot; follower counts login walled, unread</text>
+        <line x1="20" y1="258" x2="940" y2="258" stroke="#E3E9F2" stroke-width="1.5"/>
+        <text x="20" y="288" fill="#45536B" font-size="13.5">No LinkedIn company page found, for a factory whose buyers are founders and procurement teams.</text>
+        <text x="20" y="314" fill="#96690D" font-size="13.5" font-weight="600">The parent's one-page profile makes a stronger sales case than the factory's whole site: it states the client count, the plant count and the flagship credit. faherbs.com states none of them.</text>
+      </g>
+    </svg>
+  </div>
+  <h3 class="sub">What the live site ships, measured</h3>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>Measurement</th><th>faherbs.com, read 20 Aug 2026</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">Stack</td><td>WordPress 6.8.8 &middot; XStore theme &middot; Elementor 3.30.4 &middot; Yoast SEO &middot; Contact Form 7 &middot; nginx with Powered Cache</td></tr>
+      <tr><td class="dim">Pages</td><td>6 in the page sitemap: Home, Our Story, Portfolio, Certificates, Lab-Facility, Contact</td></tr>
+      <tr><td class="dim">Headline</td><td>"Malaysia's Premier Health &amp; Beauty Manufacturer", motto "Innovation at our surface, Science at our core"</td></tr>
+      <tr><td class="dim">Claims shown</td><td class="sc">24+ years &middot; 30+ employees &middot; 100+ happy clients &middot; the years counter renders "0 +" until scripts run</td></tr>
+      <tr><td class="dim">Contact</td><td>Mobile 010-398 7948 &middot; landline 03-3279 1855 &middot; WhatsApp 012-365 3232 &middot; info.faherbs@sedaniagroup.com</td></tr>
+      <tr><td class="dim">Homepage HTML</td><td class="sc">180,743 bytes &middot; first byte in 0.06s &middot; cached and quick</td></tr>
+      <tr><td class="dim">Broken pieces</td><td class="sc">/portolio link on the homepage returns 404 &middot; "CREAM &amp; JELS" card back &middot; "Tuppaware" in the portfolio alt text</td></tr>
+    </tbody>
+  </table></div>
+  <span class="pin"><b>Why this matters for the pitch:</b> the scope agreed on 14 August is FA Herbs only, not the holding company. That makes faherbs.com the entire battlefield: one domain, six pages, every fix inside a perimeter the client already owns. The lowest hanging fruit, in the client's own phrase, and it is genuinely low.</span>
+</section>
+
+<section id="c03">
+  <div class="chapdiv"><div class="cd-no">03</div><div><div class="cd-h">The buyer journey, walked</div><div class="cd-sub">A brand owner shortlisting OEM partners, from first search to first message</div></div></div>
+  <p class="sec-intro">The buyer here is not a shopper. It is a founder or product manager comparing three or four contract manufacturers for a five or six figure production commitment. That journey has five stages, and it is won or lost at the <b>proof check</b>, the stage FA Herbs' site currently fails on sight. Grades below are our judgement of measured facts, flagged as judgement.</p>
+  <div class="diagram">
+    <div class="cap">F2 &middot; The OEM buyer's journey, graded stage by stage, walked 20 Aug 2026</div>
+    <svg viewBox="0 0 960 330" role="img" aria-label="Buyer journey stages with grades">
+      <g font-family="Inter,system-ui,sans-serif">
+        <g font-size="15" font-weight="600" fill="#0B1526">
+          <text x="20" y="48">Discover &middot; search, referral</text>
+          <text x="20" y="108">Land &middot; faherbs.com</text>
+          <text x="20" y="168">Check proof &middot; certs, clients</text>
+          <text x="20" y="228">Compare &middot; against rivals</text>
+          <text x="20" y="288">Contact &middot; WhatsApp, form</text>
+        </g>
+        <g font-size="13.5">
+          <rect x="290" y="28" width="650" height="32" rx="7" fill="rgba(192,138,29,.13)" stroke="#C08A1D"/><text x="306" y="49" fill="#96690D" font-weight="600">WEAK. No LinkedIn, no articles, no rankings to own the "OEM manufacturer Malaysia" queries rivals answer.</text>
+          <rect x="290" y="88" width="650" height="32" rx="7" fill="rgba(192,138,29,.13)" stroke="#C08A1D"/><text x="306" y="109" fill="#96690D" font-weight="600">MIXED. Modern-leaning layout, a real motto, and no OEM vs ODM path, no H1, a counter that shows "0 +".</text>
+          <rect x="290" y="148" width="650" height="32" rx="7" fill="rgba(215,38,61,.12)" stroke="#D7263D"/><text x="306" y="169" fill="#B3261E" font-weight="600">FAILS. Five unnamed certificate slots, every dated scan behind them lapsed by May 2022, 16 placeholder logos.</text>
+          <rect x="290" y="208" width="650" height="32" rx="7" fill="rgba(215,38,61,.12)" stroke="#D7263D"/><text x="306" y="229" fill="#B3261E" font-weight="600">LOSES. NaViBiotech states MOQ 100 boxes and 1,200+ brands. Skinlab states 6,000+ formulations. FA Herbs states none.</text>
+          <rect x="290" y="268" width="650" height="32" rx="7" fill="rgba(192,138,29,.13)" stroke="#C08A1D"/><text x="306" y="289" fill="#96690D" font-weight="600">MIXED. A WhatsApp float on every page, then a generic four-field form and an "I'm interested" button with no brief.</text>
+        </g>
+      </g>
+    </svg>
+  </div>
+  <h3 class="sub">The same journey, scored</h3>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>Touchpoint</th><th>Score</th><th>What is won or lost</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">Discover &middot; search and referral</td><td class="sc">3 / 10</td><td>Brand searches resolve, category searches go to rivals. The parent's page and Tanamera absorb the story the factory should own</td></tr>
+      <tr><td class="dim">Land &middot; the homepage</td><td class="sc">5 / 10</td><td>The layout is modern-leaning; the incompleteness, not the age, is the problem. No fork for the two buyer types</td></tr>
+      <tr><td class="dim">Check proof &middot; Certificates, Portfolio</td><td class="sc">1 / 10</td><td>The two pages that exist to convince are the two pages that show placeholders. The buyer worth having checks, and the check fails</td></tr>
+      <tr><td class="dim">Compare &middot; rivals one search away</td><td class="sc">2 / 10</td><td>Every rival on the board states at least one hard number. FA Herbs' hard numbers live on its parent's site and in its unshown scans</td></tr>
+      <tr><td class="dim">Contact &middot; WhatsApp and form</td><td class="sc">4 / 10</td><td>The channel is right for Malaysia. Nothing qualifies the lead: no product type, no volume band, no response promise</td></tr>
+    </tbody>
+  </table></div>
+  <span class="pin"><b>Job 1 is the whole game.</b> Discovery can be built and contact can be sharpened, but both leak into the same hole: a proof layer that shows gray boxes to the exact person it was built to convince. Fix the proof first and every other stage starts paying back.</span>
+</section>
+
+<section id="c04">
+  <div class="chapdiv"><div class="cd-no">04</div><div><div class="cd-h">The shop windows, looked at honestly</div><div class="cd-sub">The four pages that decide the deal, captured 20 Aug</div></div></div>
+  <p class="sec-intro">Credit where due, then the gap. The design language is greener and more current than the 2019-era copy suggests, and the narration, the mother's-house founding story, is genuinely good and stays per the client's instruction. What follows is what a buyer actually sees, and what we found underneath it. Every capture below was opened and looked at, and every claim under a capture was measured on 20 August 2026.</p>
+  <div class="shotband">
+    <div class="shot"><img src="assets/site-faherbs-home.png" alt="faherbs.com homepage capture"><div class="meta"><div class="nm">Home &middot; faherbs.com</div><div class="u">captured 20 Aug 2026</div><div class="rd">Modern-leaning layout, "Malaysia's Premier Health &amp; Beauty Manufacturer". Ten product category flip cards carry no imagery, one card back reads "CREAM &amp; JELS", the See Our Portfolio path links /portolio, a 404, and the years-of-experience counter renders "0 +" before scripts run.</div></div></div>
+    <div class="shot"><img src="assets/site-faherbs-certificates.png" alt="faherbs.com certificates page capture"><div class="meta"><div class="nm">Certificates &middot; the proof page</div><div class="u">captured 20 Aug 2026</div><div class="rd">Five certificate slots, zero certificates named in the copy, every slot painting the theme's gray placeholder on first load. We pulled the scans hiding behind them: all five are real, and every dated one has lapsed, the newest in May 2022.</div></div></div>
+    <div class="shot"><img src="assets/site-faherbs-portfolio.png" alt="faherbs.com portfolio page capture"><div class="meta"><div class="nm">Portfolio &middot; the client wall</div><div class="u">captured 20 Aug 2026</div><div class="rd">16 clients, 17 logo tiles, and in our rendered session every single tile displayed the identical XStore placeholder graphic. The names, Tanamera, Amway, "Tuppaware", Eskayvie and twelve more, survive only in the alt text.</div></div></div>
+    <div class="shot"><img src="assets/site-faherbs-ourstory.png" alt="faherbs.com our story page capture"><div class="meta"><div class="nm">Our Story &middot; the narration</div><div class="u">captured 20 Aug 2026</div><div class="rd">The real 1996 story: three siblings, a makeshift factory behind their mother's house. Photos load placeholder-first, the Our Team section names nobody and shows no faces, and this page carries the "MS ISO 9001:2008" claim, a standard superseded since 2015.</div></div></div>
+  </div>
+  <div class="grid g2" style="margin-top:22px">
+    <div class="card"><span class="tag">Measured 20 Aug</span><h3>The proof page expired quietly</h3><p>Behind the five gray slots sit five genuine scans, which we downloaded and read one by one: an <b>ISO 9001:2015</b> certificate valid to <b>19 Feb 2021</b>, a KKM manufacturer's licence valid to <b>31 Dec 2020</b>, a SIRIM TQM recognition valid to <b>16 May 2022</b>, a MITI manufacturing licence dated 2019, and a 2019 SME Corp 4-star rating. The newest proof on the proof page ran out in May 2022.</p></div>
+    <div class="card"><span class="tag">Measured 20 Aug</span><h3>The logos exist. The page hides them.</h3><p>The genuine Amway, Tanamera and Tupperware Brands logo files are <b>uploaded on the server</b>, placed behind each tile since September 2020, and in our rendered session the lazy-load swap never fired: all 17 tiles stayed on the placeholder graphic. The single most persuasive asset the company owns has been invisible for years.</p></div>
+    <div class="card"><span class="tag">Claim audit</span><h3>One company, three founding dates</h3><p>SSM incorporation says <b>1994</b>. The site says founded <b>1996</b> and "24+ years", copy that dates itself to roughly 2019. The Tanamera story starts the siblings in 1995. The site says <b>100+ clients</b>, the parent says <b>250+</b>. Our Story claims ISO 9001:<b>2008</b>; the hidden scan is the <b>2015</b> standard. Any buyer who notices one conflict stops trusting the rest.</p></div>
+    <div class="card dark"><span class="tag">The single highest-value fix</span><h3>Publish what already exists</h3><p>This is the rare audit where the fix needs almost no new material. The client logos are on the server. The certificate scans are on the server, and the QA office holds whatever current versions replaced them. The factory photos are on the server. Name the certificates, show the current ones, switch the real logos on with permission, and the proof layer goes from blank to enviable without a photoshoot.</p></div>
+  </div>
+</section>
+
+<section id="c05">
+  <div class="chapdiv"><div class="cd-no">05</div><div><div class="cd-h">Technical SEO and AI findability</div><div class="cd-sub">The fundamentals exist, the substance behind them does not</div></div></div>
+  <p class="sec-intro">The surprise of this chapter: the plumbing is mostly present. Canonical, og:image, robots, a Yoast sitemap, an Organization schema block, all live. What is missing is everything a search engine or an AI assistant could actually <b>say</b> about FA Herbs: the headings are broken, the description is auto-scraped, the blog is theme demo filler, and no crawlable text states a single number an answer engine could cite. The 14 August call named ChatGPT and Gemini findability as a requirement; that is a content problem before it is a markup problem.</p>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>Layer</th><th>State, measured 20 Aug</th><th>Consequence</th><th>Verdict</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">Canonical</td><td>Present on the homepage</td><td>One of the fundamentals done right; carries over in the rebuild</td><td><span class="vtag hi">Keep</span></td></tr>
+      <tr><td class="dim">og:image</td><td>Present, a thumbnail uploaded Jul 2025</td><td>Link previews work; the one asset touched since 2020</td><td><span class="vtag hi">Keep</span></td></tr>
+      <tr><td class="dim">Meta description</td><td>Auto-scraped page text, cut mid-sentence: "...Here are the"</td><td>The pitch line Google shows is literally an unfinished sentence</td><td><span class="vtag bad">Fix</span></td></tr>
+      <tr><td class="dim">H1 structure</td><td class="sc">0 H1 on Home, Certificates and Portfolio &middot; 28 H2s on Home</td><td>The three money pages give crawlers no topic statement at all</td><td><span class="vtag bad">Fix</span></td></tr>
+      <tr><td class="dim">Title tag</td><td>"Home | FA Herbs"</td><td>The most valuable tag on the site says nothing about OEM, manufacturing or Malaysia</td><td><span class="vtag bad">Fix</span></td></tr>
+      <tr><td class="dim">Structured data</td><td>1 Yoast block: Organization, WebSite, WebPage, BreadcrumbList</td><td>No LocalBusiness, Service, Product or FAQ types, so no rich results and nothing for answer engines to ground on</td><td><span class="vtag bad">Add</span></td></tr>
+      <tr><td class="dim">Sitemap and robots</td><td>Yoast index present, robots.txt allows all</td><td>Working, and dutifully submitting the problem below</td><td><span class="vtag hi">Keep</span></td></tr>
+      <tr><td class="dim">The demo blog</td><td class="sc">51 post URLs in the sitemap, most lorem ipsum theme demos, live at 200</td><td>"Ornare ultricies amet" and "hello world" are indexed as FA Herbs content; a credibility and crawl-budget leak</td><td><span class="vtag bad">Purge</span></td></tr>
+      <tr><td class="dim">Broken paths</td><td class="sc">/portolio 404 linked from the homepage &middot; /certificate vs /certificates inconsistency</td><td>A misspelled internal link on the primary CTA path</td><td><span class="vtag bad">Fix</span></td></tr>
+      <tr><td class="dim">hreflang / BM</td><td>None; the site is EN only</td><td>Acceptable for a B2B audience; decide deliberately, not by omission</td><td><span class="vtag lo">Decide</span></td></tr>
+      <tr><td class="dim">AI findability</td><td>No crawlable MOQ, capacity, cert names or client list text</td><td>Ask an assistant for OEM manufacturers in Malaysia and rivals get cited on the numbers they publish; FA Herbs has given engines nothing to quote</td><td><span class="vtag bad">Build</span></td></tr>
+    </tbody>
+  </table></div>
+  <span class="pin"><b>Job 5 in one sentence:</b> AI answers are assembled from published facts, and FA Herbs has published almost none, so the strongest factory on the board is unquotable by the tools its buyers increasingly ask first.</span>
+</section>
+
+<section id="c06">
+  <div class="chapdiv"><div class="cd-no">06</div><div><div class="cd-h">Performance</div><div class="cd-sub">The one lens that passes, measured</div></div></div>
+  <p class="sec-intro">Fairness requires saying this plainly: the site is quick. The homepage HTML is <b>180,743 bytes</b> and the first byte arrived in <b>0.06 seconds</b> on our 20 August reads, served by nginx with a caching plugin in front of a patched stack, WordPress 6.8.8 and Elementor 3.30.4, both current. The platform is maintained. The content is what stood still: the newest content upload we could find, other than one 2025 thumbnail, dates to September 2020.</p>
+  <div class="diagram">
+    <div class="cap">F3 &middot; HTML weight per page, measured 20 Aug 2026</div>
+    <svg viewBox="0 0 960 190" role="img" aria-label="HTML page weight bar chart">
+      <g font-family="Inter,system-ui,sans-serif" font-size="15">
+        <text x="20" y="46" fill="#0B1526" font-weight="600">Home</text>
+        <rect x="280" y="28" width="560" height="30" rx="7" fill="#1F8A4C"/>
+        <text x="850" y="49" fill="#15693B" font-weight="700">177KB</text>
+        <text x="20" y="106" fill="#0B1526" font-weight="600">Portfolio</text>
+        <rect x="280" y="88" width="368" height="30" rx="7" fill="#15693B"/>
+        <text x="658" y="109" fill="#15693B" font-weight="700">116KB</text>
+        <text x="20" y="166" fill="#0B1526" font-weight="600">Certificates</text>
+        <rect x="280" y="148" width="312" height="30" rx="7" fill="#0F241A"/>
+        <text x="602" y="169" fill="#15693B" font-weight="700">98KB</text>
+      </g>
+    </svg>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="num">0.06s</div><div class="lab">TTFB, homepage</div><div class="s">nginx + Powered Cache, measured by curl</div></div>
+    <div class="stat"><div class="num">177KB</div><div class="lab">Homepage HTML</div><div class="s">180,743 bytes on the wire</div></div>
+    <div class="stat"><div class="num">6.8.8</div><div class="lab">WordPress core</div><div class="s">current; Elementor 3.30.4 likewise</div></div>
+    <div class="stat"><div class="num">2020</div><div class="lab">Newest content uploads</div><div class="s">Sep 2020, bar one Jul 2025 thumbnail</div></div>
+  </div>
+  <span class="pin"><b>The performance tax is not weight, it is the lazy-load.</b> Every image on the site paints as a gray theme placeholder first and swaps in only when its scripts fire on scroll. On the Portfolio page in our session the swap never fired at all. A fast site that first-paints its proof as gray boxes is fast at showing the wrong thing.</span>
+</section>
+
+<section id="c07">
+  <div class="chapdiv"><div class="cd-no">07</div><div><div class="cd-h">The content engines</div><div class="cd-sub">Claims that conflict, a roster left unsold, and a blog full of lorem ipsum</div></div></div>
+  <p class="sec-intro">Three content systems live on this domain. A <b>claims layer</b> that contradicts itself and its parent. A <b>roster</b> that would headline any competitor's site, stored as alt text. And a <b>blog</b> of 51 posts, most of them the theme's lorem ipsum demo content, live, indexed and submitted to Google in the sitemap since 2020.</p>
+  <div class="grid g3">
+    <div class="card"><span class="tag">The claims, in conflict</span><h3>Pick one set of numbers</h3><p><b>100+ clients</b> on the site vs <b>250+</b> on the parent's page. <b>24+ years</b> vs incorporation in <b>1994</b> vs "established 1996". <b>ISO 9001:2008</b> in the copy vs a 9001:<b>2015</b> scan on the certificates page. Even the homepage counter hedges, rendering "0 +" years until JavaScript arrives. One reconciliation session with the client settles all of it.</p></div>
+    <div class="card"><span class="tag">The roster, unsold</span><h3>Names any rival would frame</h3><p>Tanamera, Amway, Tupperware, 101 Hair Care, Eskayvie and eleven more sit in the portfolio alt text behind placeholder tiles. One of them, <b>Eskayvie, is a live Brand Method SEO client</b>: a real, verifiable overlap and the natural first permission to ask for. Named clients with permission, MOQ and a process diagram beat any slogan this market writes.</p></div>
+    <div class="card"><span class="tag">The blog, demo filler</span><h3>51 posts, mostly lorem ipsum</h3><p>"Ornare ultricies amet", "hello world", "this is just a single clean post": theme demo posts from the 2020 install, live at 200 and listed in the sitemap Google reads. Every one is a page telling crawlers this site was never finished. Purge or noindex the lot in an afternoon.</p></div>
+  </div>
+  <span class="pin warn"><b>What no page states, anywhere:</b> no MOQ, no capacity figure, no formulation count, no lead time, no process explainer, no case study. These are the exact fields NaViBiotech, Skinlab and Bionutricia lead with, and per the parent's own copy FA Herbs has the stronger reality behind every one of them. The engine is not broken; it was never installed.</span>
+</section>
+
+<section id="c08">
+  <div class="chapdiv"><div class="cd-no">08</div><div><div class="cd-h">The resolution</div><div class="cd-sub">Rebuild faherbs.com as the lead engine, on the identity the client is keeping</div></div></div>
+  <p class="sec-intro">The direction agreed on 14 August holds: <b>refresh, not teardown</b>. Logo and identity unchanged, the founding narration kept, wording touched up here and there, and the exercise concentrated on design, UX and where people go and click. The architecture that serves it: one domain, two lanes, matching the two buyers Mervyn named, with the proof layer published for real and WhatsApp-first capture on both lanes. SEO ships free with the build, as offered in the call, and the AI findability checklist rides on the same published facts.</p>
+  <div class="diagram">
+    <div class="cap">F4 &middot; One domain, two lanes, resolved</div>
+    <svg viewBox="0 0 960 360" role="img" aria-label="Two lane architecture on one domain">
+      <g font-family="Inter,system-ui,sans-serif">
+        <rect x="310" y="20" width="340" height="64" rx="12" fill="#0F241A"/>
+        <text x="480" y="47" text-anchor="middle" fill="#fff" font-size="17" font-weight="700">FAHERBS.COM</text>
+        <text x="480" y="68" text-anchor="middle" fill="#9CC7AE" font-size="12.5">one domain &middot; one set of numbers &middot; two lanes</text>
+        <path d="M400 84 L240 150" stroke="#15693B" stroke-width="2.4" fill="none"/>
+        <path d="M560 84 L720 150" stroke="#0F241A" stroke-width="2.4" fill="none"/>
+        <rect x="40" y="150" width="400" height="150" rx="14" fill="#FFFFFF" stroke="#1F8A4C" stroke-width="2"/>
+        <text x="60" y="182" fill="#15693B" font-size="12" font-weight="700" font-family="JetBrains Mono,monospace">LANE 1 &middot; ODM &middot; FOR STARTUPS</text>
+        <text x="60" y="210" fill="#0B1526" font-size="16" font-weight="700">Ready formulas, your label</text>
+        <text x="60" y="236" fill="#45536B" font-size="13.5">The fast lane: product categories, ready-made</text>
+        <text x="60" y="256" fill="#45536B" font-size="13.5">formulations, MOQ and timeline stated, a</text>
+        <text x="60" y="276" fill="#45536B" font-size="13.5">prefilled WhatsApp brief per category.</text>
+        <rect x="520" y="150" width="400" height="150" rx="14" fill="#FFFFFF" stroke="#0F241A" stroke-width="2"/>
+        <text x="540" y="182" fill="#0F241A" font-size="12" font-weight="700" font-family="JetBrains Mono,monospace">LANE 2 &middot; OEM &middot; FOR ESTABLISHED BRANDS</text>
+        <text x="540" y="210" fill="#0B1526" font-size="16" font-weight="700">Your spec, our three plants</text>
+        <text x="540" y="236" fill="#45536B" font-size="13.5">The proof lane: named current certificates,</text>
+        <text x="540" y="256" fill="#45536B" font-size="13.5">named clients with permission, capacity and</text>
+        <text x="540" y="276" fill="#45536B" font-size="13.5">process, lab and facility, an enquiry brief form.</text>
+        <text x="480" y="332" text-anchor="middle" fill="#8593A9" font-size="12" font-family="JetBrains Mono,monospace">IDENTITY KEPT &middot; NARRATION KEPT &middot; PROOF PUBLISHED &middot; DEMO POSTS PURGED &middot; SCHEMA AND AI LAYER ON TOP</text>
+      </g>
+    </svg>
+  </div>
+  <span class="pin"><b>The sequencing rule:</b> proof before polish. The certificates, logos and factory photos already sit in wp-content/uploads; the current certificate versions sit with the QA office. Publishing them is week one work and needs no design decision, so nothing about the redesign may wait on it, and nothing about it may wait on the redesign.</span>
+</section>
+
+<section id="c09">
+  <div class="chapdiv"><div class="cd-no">09</div><div><div class="cd-h">The score, and how we got it</div><div class="cd-sub">Peers first, then nine lenses, then the priorities on the new-financial-year clock</div></div></div>
+  <h3 class="sub">The peer bridge, what each type does well</h3>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>Peer</th><th>What they publish</th><th>What we take</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">NaViBiotech</td><td>Sets the bar: 1,200+ brands, 3 factories, 500m+ units a year, MOQ 100 boxes, ~3 months idea to market, prefilled WhatsApp templates</td><td>The whole numbers-first pattern, and the low-friction capture around it</td></tr>
+      <tr><td class="dim">Skinlab Biochem</td><td>6,000+ formulations, 2,000+ brands, GMP and ISO 22716, prominent WhatsApp, EN and CN</td><td>A formulation count as headline proof; weak on MOQ, which FA Herbs can beat</td></tr>
+      <tr><td class="dim">Bionutricia</td><td>239+ brand partners, 4 patents, a 24 hour reply promise, quotation forms</td><td>The stated response-time promise, cheap to make and rare in this market</td></tr>
+      <tr><td class="dim">Eng Kah</td><td>55+ years, 8 certifications displayed properly</td><td>The certificate wall done right, and a warning: email-only capture flattens even strong proof</td></tr>
+      <tr><td class="dim">Bioalpha &middot; HBT</td><td>Listed status; stat counters that render with no figures</td><td>The cautionary tale: unfinished proof reads as abandonment, which is FA Herbs' current disease</td></tr>
+    </tbody>
+  </table></div>
+  <p class="sec-intro">The full board, ranked with captures and cards, lives in the <b>01 Competitors</b> tab. The nine lenses below score faherbs.com as one property. Market pattern in one line: <em>the winners publish numbers</em>, and FA Herbs holds better numbers than several of them while publishing none.</p>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>Lens</th><th>Score</th><th>Finding</th><th>Read</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">First impression</td><td class="sc">5 / 10</td><td>Modern-leaning layout and a real motto; no H1, a "0 +" counter, placeholder category cards</td><td>Judgement lens, flagged as such</td></tr>
+      <tr><td class="dim">Proof &amp; certification</td><td class="sc">1 / 10</td><td>Zero named certificates; every dated scan behind the slots lapsed by May 2022; 16 client logos render as one placeholder</td><td>The lens the OEM buyer checks first</td></tr>
+      <tr><td class="dim">Claims consistency</td><td class="sc">3 / 10</td><td>100+ vs 250+ clients, 1994 vs 1996 vs 24+ years, ISO 9001:2008 copy vs 9001:2015 scan</td><td>Every conflict is theirs to settle, ours to publish once</td></tr>
+      <tr><td class="dim">Story &amp; positioning</td><td class="sc">4 / 10</td><td>A genuinely good founding story, kept; no OEM vs ODM fork, no factory numbers, "premier" asserted not evidenced</td><td>Judgement lens, flagged as such</td></tr>
+      <tr><td class="dim">Content depth</td><td class="sc">2 / 10</td><td>Six pages, no MOQ, no process, no case studies; the blog is 51 posts of mostly lorem ipsum demo content</td><td>The engine was never installed</td></tr>
+      <tr><td class="dim">Technical SEO</td><td class="sc">5 / 10</td><td>Canonical, og:image, sitemap and robots present; 0 H1 on the money pages, auto-cut description, demo posts indexed, /portolio 404</td><td>Plumbing present, substance absent</td></tr>
+      <tr><td class="dim">Performance</td><td class="sc">7 / 10</td><td>177KB homepage HTML, 0.06s first byte, patched current stack</td><td>The one passing lens; partial read, no device lab run</td></tr>
+      <tr><td class="dim">Accessibility</td><td class="sc">4 / 10</td><td>No H1 on three key pages, heading order jumps H2 to H4, empty alts on the award logos, five certificates sharing one alt text</td><td>Partial evidence, stated as such</td></tr>
+      <tr><td class="dim">Search &amp; AI findability</td><td class="sc">2 / 10</td><td>No crawlable numbers, no LinkedIn found, no content answering the queries OEM buyers ask engines and assistants</td><td>Nothing published for an answer engine to cite</td></tr>
+    </tbody>
+  </table></div>
+  <div class="stats">
+    <div class="stat"><div class="num">3.7 / 10</div><div class="lab">Composite, this audit</div><div class="s">33 points over 9 lenses, plain average, not weighted</div></div>
+    <div class="stat"><div class="num">1 / 10</div><div class="lab">Proof &amp; certification</div><div class="s">the lens the whole engagement exists to fix</div></div>
+    <div class="stat"><div class="num">7 / 10</div><div class="lab">Performance</div><div class="s">the foundation is fast; nothing needs rescuing</div></div>
+  </div>
+  <p class="sec-intro"><b>Method note, fact vs inference:</b> every figure in the table is measured or traced to a named source. First impression and Story are judgement lenses, our professional read of measured facts, flagged as such. Accessibility and Performance are partial reads. The composite is the plain average of the nine. <b>The pattern in one line:</b> the platform and the identity pass, everything a sceptical B2B buyer touches fails, and the failing layers are precisely the ones whose raw material already exists.</p>
+  <h3 class="sub">Priorities, on the new-financial-year clock</h3>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>Priority</th><th>What to resolve</th><th>Why now</th></tr></thead>
+    <tbody>
+      <tr><td class="sc">1 &middot; this week</td><td class="dim">The proof drop: current certificates from the QA office, named with numbers; real client logos switched on with permission</td><td>The raw files already exist; this is the 1/10 lens fixed without a redesign</td></tr>
+      <tr><td class="sc">2 &middot; this week</td><td class="dim">The claims reconciliation: one client count, one founding year, one ISO version, published identically everywhere</td><td>Costs a conversation and a spreadsheet, ends every self-contradiction a buyer can find</td></tr>
+      <tr><td class="sc">3 &middot; weeks 1 to 4</td><td class="dim">The two-lane rebuild: OEM and ODM paths, MOQ, capacity, process, WhatsApp-first briefs, identity and narration kept</td><td>Mervyn is collecting quotes now; phase 1 was agreed as the lowest hanging fruit</td></tr>
+      <tr><td class="sc">4 &middot; weeks 2 to 5</td><td class="dim">The findability layer: titles, H1s, real descriptions, LocalBusiness and Service schema, LinkedIn company page, demo posts purged</td><td>Search and AI answers can only cite what priority 1 to 3 publish</td></tr>
+      <tr><td class="sc">5 &middot; weeks 4 to 6</td><td class="dim">Case studies: start with the verifiable overlap, then the roster with permissions</td><td>Named proof compounds; every rival on the board is beatable on evidence FA Herbs already owns</td></tr>
+      <tr><td class="sc">6 &middot; after launch</td><td class="dim">The content motion from the call: volume first, watch what lands, put spend behind winners</td><td>The agreed low-risk ads posture needs a site that converts before a ringgit is spent</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="c10">
+  <div class="chapdiv"><div class="cd-no">10</div><div><div class="cd-h">The verdict ledger</div><div class="cd-sub">Every finding, what to do about it, and when</div></div></div>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>#</th><th>Area</th><th>What is good</th><th>What is bad</th><th>Verdict</th><th>The action</th><th>When</th></tr></thead>
+    <tbody>
+      <tr><td class="sc">01</td><td class="dim">Identity &amp; narration</td><td>Logo, green identity, the 1996 founding story</td><td>Nothing; the client keeps these by instruction</td><td><span class="vtag hi">Keep</span></td><td>Carried into the rebuild untouched; presentation redesigned around them</td><td class="sc">Throughout</td></tr>
+      <tr><td class="sc">02</td><td class="dim">Certificates page</td><td>Five real scans exist behind the slots</td><td>Zero named certs in copy; every dated scan lapsed by May 2022</td><td><span class="vtag bad">Fix</span></td><td>Current certificates from QA, named with numbers and validity dates</td><td class="sc">Week 1</td></tr>
+      <tr><td class="sc">03</td><td class="dim">Portfolio logos</td><td>Real Amway, Tanamera, Tupperware files uploaded since 2020</td><td>All 17 tiles render one identical placeholder</td><td><span class="vtag bad">Fix</span></td><td>Permission sweep, then the real logos live; Eskayvie overlap first</td><td class="sc">Weeks 1 to 2</td></tr>
+      <tr><td class="sc">04</td><td class="dim">Claims set</td><td>A real track record underneath</td><td>100+ vs 250+, 1994 vs 1996, ISO 2008 vs 2015</td><td><span class="vtag bad">Fix</span></td><td>Client reconciles once, we publish once, everywhere</td><td class="sc">Week 1</td></tr>
+      <tr><td class="sc">05</td><td class="dim">Demo blog</td><td>Nothing</td><td>51 sitemap posts, mostly lorem ipsum, indexed since 2020</td><td><span class="vtag bad">Purge</span></td><td>Delete or noindex, resubmit the sitemap</td><td class="sc">Week 1</td></tr>
+      <tr><td class="sc">06</td><td class="dim">Broken details</td><td>Small, cheap fixes</td><td>/portolio 404, CREAM &amp; JELS, Tuppaware, "0 +" counter</td><td><span class="vtag bad">Fix</span></td><td>One correction pass across nav, cards and counters</td><td class="sc">Week 1</td></tr>
+      <tr><td class="sc">07</td><td class="dim">OEM vs ODM fork</td><td>Both lanes named by the GM in-call</td><td>No page draws the fork</td><td><span class="vtag bad">Build</span></td><td>Two lanes on one domain, each with its own path and brief</td><td class="sc">Weeks 1 to 4</td></tr>
+      <tr><td class="sc">08</td><td class="dim">The numbers layer</td><td>Capacity and roster exist per the parent</td><td>No MOQ, capacity, formulation count or lead time anywhere</td><td><span class="vtag bad">Build</span></td><td>Client supplies the figures, the site states them where rivals state theirs</td><td class="sc">Weeks 2 to 4</td></tr>
+      <tr><td class="sc">09</td><td class="dim">Schema &amp; findability</td><td>Organization block, canonical, sitemap live</td><td>No LocalBusiness, Service or FAQ types; broken H1s; auto description</td><td><span class="vtag bad">Add</span></td><td>Full markup on the reconciled numbers, titles and H1s rewritten</td><td class="sc">Weeks 2 to 5</td></tr>
+      <tr><td class="sc">10</td><td class="dim">LinkedIn</td><td>Nothing yet</td><td>No company page found, for a B2B factory</td><td><span class="vtag bad">Build</span></td><td>Company page, the factory story, the roster as posts</td><td class="sc">Weeks 2 to 5</td></tr>
+      <tr><td class="sc">11</td><td class="dim">faherbs.com.my</td><td>Nothing yet</td><td>Does not resolve; the TLD Malaysian buyers guess</td><td><span class="vtag lo">Acquire</span></td><td>Register if available and 301 to faherbs.com</td><td class="sc">Weeks 4 to 6</td></tr>
+      <tr><td class="sc">12</td><td class="dim">WhatsApp capture</td><td>A float on every page, the right channel</td><td>No brief, no context, no response promise</td><td><span class="vtag lo">Edit</span></td><td>Prefilled per-lane briefs and a stated reply time</td><td class="sc">Weeks 3 to 4</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="c11">
+  <div class="chapdiv"><div class="cd-no">11</div><div><div class="cd-h">Evidence</div><div class="cd-sub">Every load-bearing figure, where it came from, and when it was read</div></div></div>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>Claim</th><th>Figure</th><th>Source</th><th>Read</th></tr></thead>
+    <tbody>
+      <tr><td>Entity, registration</td><td class="sc">FA Herbs Sdn Bhd &middot; 199401035761 / 321444-X &middot; inc. 26 Oct 1994, Selangor</td><td>CTOS company listing, EMIS</td><td>20 Aug 2026</td></tr>
+      <tr><td>Ownership</td><td class="sc">51% acquired by Sedania Innovator Berhad (KLSE: 0178), 2023</td><td>sedaniagroup.com, The Edge Malaysia</td><td>20 Aug 2026</td></tr>
+      <tr><td>Parent's claims</td><td class="sc">250+ clients &middot; three factories, Kuala Selangor and Ijok &middot; manufacturer behind Tanamera</td><td>sedaniagroup.com FA Herbs page; their claim, not our verification</td><td>20 Aug 2026</td></tr>
+      <tr><td>Site's own claims</td><td class="sc">24+ years &middot; 30+ employees &middot; 100+ happy clients &middot; est. 1996</td><td>faherbs.com homepage and Our Story text; their claim, not our verification</td><td>20 Aug 2026</td></tr>
+      <tr><td>Homepage measurements</td><td class="sc">180,743 bytes HTML &middot; TTFB 0.06s &middot; canonical present &middot; og:image present &middot; 0 H1 &middot; 28 H2</td><td>curl and source reads, live</td><td>20 Aug 2026</td></tr>
+      <tr><td>Stack</td><td class="sc">WordPress 6.8.8 &middot; XStore &middot; Elementor 3.30.4 &middot; Yoast &middot; nginx + Powered Cache</td><td>Generator metas, response headers</td><td>20 Aug 2026</td></tr>
+      <tr><td>Structured data</td><td class="sc">1 ld+json block: Organization, WebSite, WebPage, BreadcrumbList; no LocalBusiness or Service</td><td>Homepage source, parsed</td><td>20 Aug 2026</td></tr>
+      <tr><td>Sitemap inventory</td><td class="sc">6 pages (lastmod 5 Aug 2025) + 51 posts, mostly lorem ipsum demos, live at 200</td><td>Yoast sitemap XMLs, spot-checked URLs</td><td>20 Aug 2026</td></tr>
+      <tr><td>Certificate scans</td><td class="sc">ISO 9001:2015 AR 2799 to 19 Feb 2021 &middot; KKM MAL/LP20202243 to 31 Dec 2020 &middot; SIRIM TQM to 16 May 2022 &middot; MITI licence 2019 &middot; SME Corp 4-star 2019</td><td>The five image files behind the certificate slots, downloaded and read</td><td>20 Aug 2026</td></tr>
+      <tr><td>Portfolio render</td><td class="sc">17 tiles, 16 clients, all rendering xstore-placeholder in session; real logo files behind them, uploaded Sep 2020</td><td>Rendered browser session + server file reads</td><td>20 Aug 2026</td></tr>
+      <tr><td>Broken pieces</td><td class="sc">/portolio 404 &middot; CREAM &amp; JELS &middot; Tuppaware &middot; years counter static "0 +"</td><td>Live fetches and source reads</td><td>20 Aug 2026</td></tr>
+      <tr><td>faherbs.com.my</td><td class="sc">Does not resolve</td><td>curl, DNS failure, corroborates the 20 Aug research read</td><td>20 Aug 2026</td></tr>
+      <tr><td>Competitor proof points</td><td class="sc">NaViBiotech MOQ 100 / 1,200+ brands &middot; Skinlab 6,000+ formulations &middot; Bionutricia 239+ partners, 4 patents &middot; Eng Kah 55+ yrs</td><td>Their public sites; their claims, recorded in the 20 Aug dossier</td><td>20 Aug 2026</td></tr>
+      <tr><td>Meeting facts</td><td class="sc">Scope, two lanes, refresh not teardown, free SEO, ChatGPT and Gemini requirement, team of three</td><td>14 Aug 2026 discovery call record (Gemini notes)</td><td>14 Aug 2026</td></tr>
+    </tbody>
+  </table></div>
+  <p class="sec-intro"><b>Known gaps, stated outright:</b> Mervyn Goh's GM role is sourced from the 14 August call itself, not from any public record, and we cite the call, not the web. The five certificate scans on the site are the only certificates we have sighted; whether current, valid versions exist is unknown to us and presumed with the QA office, so nothing here asserts the factory's present certification status either way. Facebook and Instagram follower counts were not read, both login walled. "250+ clients" is Sedania's claim and "100+ clients" is FA Herbs' own site's claim; both are their claims, not our verification, and the conflict between them is itself a finding. We hold no analytics or Search Console access, so traffic and query data are absent from this audit. The judgement that the parent's page "makes a stronger sales case" is our professional read of the two pages side by side, flagged as judgement.</p>
+</section>
+
+<footer>
+  <div>Brand Method &middot; FA Herbs web audit &middot; all figures measured 20 Aug 2026 &middot; captures in assets/, archived, none deleted</div>
+</footer>
+
+</div>
+<script id="bmPdfName">(function(){var t0=document.title;var n=t0.replace(/\s*[··]\s*Brand Method\s*$/,'').replace(/[··]/g,'-').replace(/&amp;/g,'and').replace(/[^\w\- ]+/g,'').trim().replace(/\s+/g,'-').replace(/-+/g,'-');if(!n)n='Brand-Method-Document';window.addEventListener('beforeprint',function(){document.title=n});window.addEventListener('afterprint',function(){document.title=t0});})();</script>
+</body>
+</html>
