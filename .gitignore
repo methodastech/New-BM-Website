@@ -25,6 +25,8 @@ package-lock.json
 # Editor / working backups — never deploy these (repo root is the web root)
 *.bak
 *.bak-*
+*.bak.html
 *.PRE-*
 *.orig
 *.save
+index-backup-*.html
