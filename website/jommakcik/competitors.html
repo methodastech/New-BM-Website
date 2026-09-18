@@ -1,0 +1,762 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jom Makcik &middot; Competitor Audit &middot; Brand Method</title>
+<link rel="icon" type="image/webp" sizes="32x32" href="assets/img/favicon-32.webp">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/bmws.css?v=1">
+<style>
+  :root{
+    --paper:#F5F7FC;--paper2:#FCFDFF;--ink:#101626;--soft:#4A5468;--faint:#8A93A6;
+    --line:#E2E7F1;--line2:#D6DCEA;--blue:#2536F5;--blue-deep:#1421B8;--wash:#EEF1FE;
+    --ok:#1A8F5A;--warn:#C9941F;--red:#D7263D;--dark:#0E1424;--maxw:1080px;
+    --jm:#F91B2A;--jm-deep:#C60815;--jm-wash:#FFF1F2;--e1:cubic-bezier(.22,.8,.28,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+  body{font-family:"Inter",system-ui,sans-serif;background:var(--paper);color:var(--ink);font-size:16px;line-height:1.62;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+  .mono{font-family:"JetBrains Mono",monospace}
+  .bmws{position:sticky;top:0;z-index:80}
+
+  .chapnav{border-bottom:1px solid var(--line);background:rgba(245,247,252,.97);position:sticky;top:0;z-index:49;overflow-x:auto;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+  .chapnav-in{display:flex;gap:3px;padding:8px 28px;max-width:var(--maxw);margin:0 auto;white-space:nowrap}
+  .chapnav a{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--faint);text-decoration:none;padding:6px 10px;border-radius:8px}
+  .chapnav a:hover{color:var(--ink);background:var(--wash)}
+  .chapnav .ch-no{color:var(--blue-deep);font-weight:700;margin-right:6px}
+
+
+  .eyebrow{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--blue-deep);display:inline-flex;align-items:center;gap:10px;font-weight:600}
+  .eyebrow::before{content:"";width:28px;height:1px;background:var(--blue);display:inline-block}
+  .hero{padding:50px 0 8px}
+  .hero h1{font-family:"Fraunces",serif;font-weight:500;font-size:clamp(36px,5.6vw,62px);line-height:1.03;letter-spacing:-.02em;margin:18px 0 0}
+  .hero h1 em{font-style:italic;color:var(--jm-deep)}
+  .hero .lede{font-size:clamp(17px,2vw,20px);color:var(--soft);max-width:66ch;margin:20px 0 0}
+  .vrow{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+  .vchip{background:var(--paper2);border:1px solid var(--line);border-radius:999px;padding:8px 15px;font-size:13px;color:var(--soft)}
+  .vchip b{color:var(--ink)}
+  .execsum{margin-top:32px;border:1px solid var(--line);border-radius:16px;background:var(--paper2);padding:26px 28px}
+  .execsum .k{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--jm-deep);font-weight:700}
+  .execsum p{margin-top:12px;font-size:16.5px;color:var(--soft)}
+  .execsum p b{color:var(--ink)}
+  .execsum p+p{margin-top:11px}
+
+  section{padding:32px 0}
+  .chapdiv{display:flex;align-items:baseline;gap:18px;padding:46px 0 4px;border-top:1px solid var(--line);margin-top:10px}
+  .cd-no{font-family:"Fraunces",serif;font-weight:600;font-size:38px;color:var(--blue-deep);line-height:1}
+  h2.cd-h{font-family:"Fraunces",serif;font-weight:500;font-size:27px;letter-spacing:-.01em;margin:0}
+  .cd-sub{font-size:15px;color:var(--soft);margin-top:5px}
+  .secmark{display:flex;align-items:center;gap:13px;margin-top:6px}
+  .secicon{width:34px;height:34px;border-radius:9px;background:var(--dark);display:flex;align-items:center;justify-content:center;color:#9FB4FF;flex:none}
+  .secicon svg{width:17px;height:17px}
+  .sec-no{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--blue-deep);letter-spacing:.1em;text-transform:uppercase;font-weight:600}
+  h3.sechead{font-family:"Fraunces",serif;font-weight:500;font-size:clamp(25px,3.6vw,37px);line-height:1.08;letter-spacing:-.015em;margin:13px 0 0;max-width:26ch}
+  h3.sub{font-family:"Fraunces",serif;font-weight:500;font-size:22px;margin:30px 0 0}
+  .sec-intro{font-size:16.5px;color:var(--soft);max-width:74ch;margin:15px 0 0}
+  .sec-intro b,.sec-intro strong{color:var(--ink)}
+
+  .grid{display:grid;gap:16px;margin-top:22px}
+  .g2{grid-template-columns:repeat(auto-fit,minmax(290px,1fr))}
+  .g3{grid-template-columns:repeat(auto-fit,minmax(225px,1fr))}
+  .card{background:var(--paper2);border:1px solid var(--line);border-radius:14px;padding:20px 21px}
+  .card .tag{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--blue-deep);font-weight:700}
+  .card h3{font-family:"Fraunces",serif;font-weight:500;font-size:19px;margin-top:8px}
+  .card p{font-size:14px;color:var(--soft);margin-top:9px;line-height:1.55}
+  .card p b{color:var(--ink)}
+  .card.dark{background:var(--dark);border-color:#232a40;color:#D6DEF2}
+  .card.dark h3{color:#fff}.card.dark p{color:#AEB9D2}.card.dark .tag{color:#9FB4FF}.card.dark p b{color:#fff}
+  .card.jm{border-color:#F7C9CD;background:var(--jm-wash)}
+  .card.jm .tag{color:var(--jm-deep)}
+
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-top:22px}
+  .stat{border:1px solid var(--line);border-radius:13px;background:var(--paper2);padding:16px 18px}
+  .stat .num{font-family:"Fraunces",serif;font-size:28px;font-weight:500;color:var(--blue-deep);line-height:1.05}
+  .stat.bad .num{color:var(--jm-deep)}
+  .stat .lab{font-size:13px;font-weight:600;margin-top:8px}
+  .stat .s{font-size:12px;color:var(--faint);margin-top:3px}
+
+  .goals2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-top:22px}
+  .goal{display:flex;gap:13px;align-items:flex-start;border:1px solid var(--line);border-radius:13px;background:var(--paper2);padding:16px 18px}
+  .goal .gi{width:30px;height:30px;border-radius:8px;background:var(--wash);color:var(--blue-deep);display:flex;align-items:center;justify-content:center;flex:none;font-family:"JetBrains Mono",monospace;font-size:12px;font-weight:700}
+  .goal b{font-size:15px}.goal p{font-size:13.5px;color:var(--soft);margin-top:4px}
+
+  table{width:100%;border-collapse:separate;border-spacing:0;margin-top:18px;font-size:14px;background:var(--paper2);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  thead th{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#fff;background:var(--dark)}
+  tr:last-child td{border-bottom:none}
+  td.dim{font-weight:600;white-space:nowrap}
+  td.sc{font-family:"JetBrains Mono",monospace;color:var(--blue-deep);font-weight:700;white-space:nowrap}
+  tr.hl td{background:var(--jm-wash)}
+  tr.hl td.dim{color:var(--jm-deep)}
+
+  .vtag{font-family:"JetBrains Mono",monospace;font-size:9.5px;text-transform:uppercase;letter-spacing:.04em;padding:3px 8px;border-radius:6px;font-weight:700;display:inline-block}
+  .vtag.hi{background:rgba(26,143,90,.14);color:var(--ok)}
+  .vtag.lo{background:rgba(201,148,31,.16);color:#9a6f12}
+  .vtag.bad{background:rgba(215,38,61,.12);color:var(--red)}
+
+  .pin{margin-top:22px;border-left:3px solid var(--blue);background:linear-gradient(90deg,rgba(37,54,245,.06),transparent);padding:15px 19px;border-radius:0 12px 12px 0;font-size:15px}
+  .pin b{color:var(--blue-deep)}
+  .pin.warn{border-left-color:var(--warn);background:linear-gradient(90deg,rgba(201,148,31,.09),transparent)}
+  .pin.warn b{color:#9a6f12}
+  .pin.jm{border-left-color:var(--jm);background:linear-gradient(90deg,rgba(249,27,42,.07),transparent)}
+  .pin.jm b{color:var(--jm-deep)}
+
+  .quote{margin-top:22px;border:1px solid var(--line);border-radius:14px;background:var(--paper2);padding:22px 24px}
+  .quote q{font-family:"Fraunces",serif;font-size:20px;line-height:1.4;font-style:italic;color:var(--ink);display:block;overflow-wrap:anywhere;word-break:break-word}
+  .quote .src{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin-top:12px;display:block}
+
+  .bars{margin-top:22px;display:flex;flex-direction:column;gap:11px}
+  .bar{display:grid;grid-template-columns:150px 1fr 68px;gap:12px;align-items:center;font-size:13.5px}
+  .bar .bn{font-weight:600}
+  .bar .bt{height:15px;border-radius:4px;background:#E7ECF6;overflow:hidden;position:relative}
+  .bar .bf{height:100%;border-radius:4px;background:var(--blue);display:block}
+  .bar.is-jm .bf{background:var(--jm)}
+  .bar .bv{font-family:"JetBrains Mono",monospace;font-size:12px;font-weight:700;text-align:right;color:var(--soft)}
+  .bar.is-jm .bv{color:var(--jm-deep)}
+
+  .scorewrap{margin-top:22px;border:1px solid var(--line);border-radius:14px;background:var(--paper2);overflow:hidden}
+  .srow{display:grid;grid-template-columns:180px 1fr 92px;gap:14px;align-items:center;padding:13px 18px;border-bottom:1px solid var(--line)}
+  .srow:last-child{border-bottom:0}
+  .srow .sn{font-weight:600;font-size:14.5px}
+  .srow .sn small{display:block;font-weight:400;font-size:12.5px;color:var(--faint);margin-top:2px}
+  .srow .st{height:9px;border-radius:5px;background:#E7ECF6;overflow:hidden}
+  .srow .sf{height:100%;display:block;border-radius:5px}
+  .srow .sv{font-family:"JetBrains Mono",monospace;font-weight:700;font-size:14px;text-align:right}
+  .sv.g{color:var(--ok)}.sv.a{color:#9a6f12}.sv.r{color:var(--jm-deep)}
+  .sf.g{background:var(--ok)}.sf.a{background:var(--warn)}.sf.r{background:var(--jm)}
+
+  .shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:22px}
+  .shot{border:1px solid var(--line);border-radius:13px;background:var(--paper2);overflow:hidden}
+  .shot img{width:100%;height:auto;max-height:430px;object-fit:cover;object-position:top center;display:block;border-bottom:1px solid var(--line);background:#fff}
+  .shot .cp{padding:11px 14px;font-size:12.5px;color:var(--soft);line-height:1.5}
+  .shot .cp b{color:var(--ink);display:block;font-size:13px;margin-bottom:3px}
+
+  .vl-scroll{overflow-x:auto;border:1px solid var(--line2);border-radius:14px;background:#fff;margin-top:20px}
+  table.vledger{width:100%;border-collapse:separate;border-spacing:0;min-width:1000px;font-size:13.5px;border:0;border-radius:0;margin:0}
+  table.vledger th{text-align:left;padding:12px 14px;background:#0B1020;color:#fff;font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;font-weight:700;border-right:1px solid rgba(255,255,255,.1)}
+  table.vledger th:last-child{border-right:0}
+  table.vledger td{padding:14px;vertical-align:top;line-height:1.55;color:#3d4048;border-bottom:1px solid rgba(12,18,32,.09);border-right:1px solid rgba(12,18,32,.06)}
+  table.vledger td:last-child{border-right:0}
+  table.vledger tr:last-child td{border-bottom:0}
+  table.vledger tbody tr:nth-child(even) td{background:#FBFBFD}
+  .vl-n{font-family:"JetBrains Mono",monospace;font-weight:700;color:#9a9ca6;font-size:12px;width:34px}
+  .vl-area{font-weight:700;color:#15161A;min-width:120px}
+  .vl-when{font-family:"JetBrains Mono",monospace;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--blue-deep);font-weight:700;white-space:nowrap}
+
+  ul.tick{margin-top:14px;list-style:none;display:flex;flex-direction:column;gap:9px}
+  ul.tick li{position:relative;padding-left:26px;font-size:15px;color:var(--soft)}
+  ul.tick li b{color:var(--ink)}
+  ul.tick li::before{content:"";position:absolute;left:0;top:9px;width:11px;height:11px;border-radius:3px;border:1.6px solid var(--blue);background:var(--wash)}
+  ul.tick.x li::before{border-color:var(--jm);background:var(--jm-wash)}
+
+  .srcs{margin-top:18px;display:flex;flex-direction:column;gap:7px;font-size:13.5px}
+  .srcs a{color:var(--blue-deep);text-decoration:none;border-bottom:1px solid rgba(20,33,184,.28);word-break:break-all}
+  .srcs a:hover{border-bottom-color:var(--blue-deep)}
+
+  footer{padding:34px 0 70px;color:var(--faint);font-size:12px;font-family:"JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.05em;border-top:1px solid var(--line);margin-top:30px}
+  .ic{stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+  @media(max-width:720px){
+    .wrap{padding:0 18px}
+    .chapnav-in{padding:8px 16px}
+    section{padding:26px 0}
+    .bar{grid-template-columns:106px 1fr 58px;gap:9px;font-size:12.5px}
+    .srow{grid-template-columns:1fr 74px;gap:9px}
+    .srow .st{grid-column:1/-1;order:3}
+    table:not(.vledger){display:block;overflow-x:auto;white-space:nowrap}
+    .chapdiv{flex-direction:column;gap:4px;padding-top:34px}
+  }
+  /* Phones: the chapter rail was 11px type in a 30px tall target, under the 44px touch minimum.
+     It stays a horizontal scroller, the targets simply get full height and a legible size. */
+  @media (max-width:768px){
+    .chapnav-in{gap:2px;padding:4px 16px}
+    .chapnav a{font-size:12px;min-height:44px;display:inline-flex;align-items:center;padding:0 12px}
+  }
+  /* Phones: the mono labels are set between 9.5px and 11px for a desktop reading of these documents,
+     which is below comfortable on a 390px screen. They are lifted to a floor of 11.5px here, and the
+     hero's live links get a full touch target. Nothing above 768px changes. */
+  @media (max-width:768px){
+    thead th,table.vledger th{font-size:12px}
+    .tag,.vtag,.src,.vl-when,.card .tag,.quote .src{font-size:11.5px}
+    .livelinks .ll{min-height:44px;display:flex;flex-direction:column;justify-content:center}
+    .srcs{gap:0}
+    .srcs a{display:block;padding:11px 0}
+  }
+
+  /* Tables in these documents are built for a desktop reading. Below 900px any of them, not only
+     table.rv, becomes its own horizontal scroller so the page itself never scrolls sideways: the
+     seven column performance table was 770px of min-content inside a 712px column at 768. */
+  @media (max-width:900px){
+    table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}
+  }
+  /* and the small mono chip labels get an 11.5px floor on phones */
+  @media (max-width:768px){
+    .k,.sh,.sl,.slot,.who,.bs-k,.fn-k,.v,.s,small,code{font-size:11.5px}
+  }
+  /* Phones: a hard floor for every small label in these documents. The earlier floor used single class selectors and
+     lost to two class rules such as .spec small, and it missed the bare <k> element the plan uses for table keys.
+     Font size only, never SVG text, which is part of a drawn diagram. */
+  @media (max-width:768px){
+    body small, body k, body .k, body .sl, body .slot, body .who, body .bs-k, body .fn-k, body .sh, body .tag, body .vtag, body .src, body .vl-when, body thead th, body .mini-eb, body .swi .m .cr, body .ratio-row .g, body .vc .r.h > div, body .cat, body .own, body .chk .t, body .bshead, body .bshead span, body .pv .r.h, body .pv .r.h > div, body .tk .r.h, body .tk .r.h > div{font-size:11.5px!important}
+  }
+</style>
+<style>
+  /* sitemap tree */
+  .tree{margin-top:22px;border:1px solid var(--line);border-radius:16px;background:var(--paper2);padding:22px 24px}
+  .tnode{display:grid;grid-template-columns:210px 1fr;gap:10px 18px;padding:13px 0;border-bottom:1px solid var(--line);align-items:start}
+  .tnode:last-child{border-bottom:0}
+  .tnode .tn{font-weight:700;font-size:15px;color:var(--ink)}
+  .tnode .tn small{display:block;font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--faint);font-weight:700;margin-top:4px}
+  .tnode .td{font-size:14px;color:var(--soft);line-height:1.55}
+  .tnode .td b{color:var(--ink)}
+  .tnode.kid .tn{padding-left:20px;font-weight:600;font-size:14.5px;position:relative}
+  .tnode.kid .tn::before{content:"";position:absolute;left:4px;top:9px;width:9px;height:1.5px;background:var(--line2)}
+  .tnode.new{background:linear-gradient(90deg,rgba(249,27,42,.045),transparent)}
+  @media(max-width:640px){.tnode{grid-template-columns:1fr;gap:4px}.tnode.kid .tn{padding-left:14px}}
+
+  /* flow strip */
+  .flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(158px,1fr));gap:12px;margin-top:22px}
+  .fstep{border:1px solid var(--line);border-radius:13px;background:var(--paper2);padding:15px 16px;position:relative}
+  .fstep .fn{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--blue-deep);font-weight:700}
+  .fstep b{display:block;font-size:14.5px;margin-top:7px}
+  .fstep p{font-size:13px;color:var(--soft);margin-top:5px;line-height:1.5}
+  .fstep.end{background:var(--jm-wash);border-color:#F7C9CD}
+  .fstep.end .fn{color:var(--jm-deep)}
+
+  /* swatches */
+  .sw{display:grid;grid-template-columns:repeat(auto-fit,minmax(132px,1fr));gap:12px;margin-top:20px}
+  .swi{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--paper2)}
+  .swi .chip{height:62px;display:block}
+  .swi .m{padding:10px 12px;font-size:12.5px;line-height:1.45}
+  .swi .m b{display:block;font-size:13px}
+  .swi .m code{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--faint)}
+
+  /* type specimen */
+  .spec{margin-top:20px;border:1px solid var(--line);border-radius:14px;background:var(--paper2);padding:20px 22px}
+  .spec .sl{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--faint);font-weight:700}
+  .spec .s1{font-size:34px;font-weight:700;letter-spacing:-.02em;line-height:1.12;margin-top:6px}
+  .spec .s2{font-size:19px;font-weight:600;margin-top:16px}
+  .spec .s3{font-size:16px;color:var(--soft);margin-top:10px;max-width:60ch}
+  .spec .s4{font-family:"JetBrains Mono",monospace;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--blue-deep);font-weight:700;margin-top:16px}
+  .spec hr{border:0;border-top:1px solid var(--line);margin:18px 0}
+</style>
+
+<style>
+/* IAQ plan devices */
+.sec-n{font-family:"JetBrains Mono",monospace;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue-deep);font-weight:700;display:block;margin-bottom:7px}
+.si{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:22px 0 6px}
+.si>div{border:1px solid var(--line);border-radius:12px;background:var(--paper2);padding:15px 17px}
+.si k{display:flex;align-items:center;gap:8px;font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue-deep);font-weight:700}
+.si k s{width:8px;height:8px;border-radius:2px;background:var(--blue);display:inline-block;text-decoration:none}
+.si .c k s{background:var(--jm)}.si .c k{color:var(--jm-deep)}
+.si p{font-size:14px;color:var(--soft);margin-top:8px;line-height:1.55}.si p b{color:var(--ink)}
+.dwrap{margin-top:18px;border:1px solid var(--line);border-radius:14px;background:#fff;overflow:hidden;break-inside:avoid}
+.dhead{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;padding:12px 16px;background:var(--paper2);border-bottom:1px solid var(--line)}
+.dhead b{font-family:"JetBrains Mono",monospace;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue-deep);font-weight:700}
+.dhead span{font-size:14px;color:var(--soft)}
+.dbody{padding:18px}
+.dbody svg{width:100%;height:auto;display:block}
+.fx-h{font-family:"Fraunces",serif;font-weight:500;font-size:24px;margin:38px 0 8px;letter-spacing:-.01em}
+/* decisions and strategy tables */
+table.dec td:first-child{font-weight:700;color:var(--ink);white-space:nowrap}
+.bstable{margin-top:18px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--paper2)}
+.bshead{display:grid;grid-template-columns:1fr 1.6fr;background:var(--dark);color:#fff;font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase}
+.bshead span{padding:11px 16px}
+.bsrow{display:grid;grid-template-columns:1fr 1.6fr;border-top:1px solid var(--line)}
+.bsrow>div{padding:16px}
+.bs-idea{background:var(--wash)}
+.bs-k{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--blue-deep);font-weight:700;display:block;margin-bottom:6px}
+.bsrow p{font-size:14.5px;color:var(--soft);line-height:1.55}.bsrow p b{color:var(--ink)}
+/* the ladder */
+.ladder{margin-top:20px;display:flex;flex-direction:column;gap:10px}
+.rung{display:grid;grid-template-columns:52px 1fr 190px;gap:16px;align-items:center;border:1px solid var(--line);border-radius:12px;background:var(--paper2);padding:14px 18px}
+.rung .rn{font-family:"Fraunces",serif;font-size:26px;color:var(--faint);font-weight:500}
+.rung b{display:block;font-size:16px}.rung p{font-size:14px;color:var(--soft);margin-top:3px}
+.rung .who{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);text-align:right}
+.rung.us{background:var(--dark);border-color:var(--dark);color:#fff}.rung.us .rn{color:#FF9AA2}.rung.us p{color:#AEB9D2}.rung.us .who{color:#FF9AA2}
+/* audience loop */
+.fnwrap{padding:18px}
+.fnrow{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.fnstage{border:1px solid var(--line);border-radius:12px;background:var(--paper2);padding:14px 15px}
+.fn-k{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--blue-deep);font-weight:700;display:flex;gap:8px;align-items:center}
+.fn-k i{font-style:normal;background:var(--blue);color:#fff;border-radius:5px;padding:2px 6px;font-size:10px}
+.fnstage p{font-size:13.5px;color:var(--soft);margin-top:7px}
+.fnstage ul{list-style:none;margin-top:10px;display:flex;flex-direction:column;gap:5px}
+.fnstage li{font-size:13.5px;padding-left:14px;position:relative}
+.fnstage li::before{content:"";position:absolute;left:0;top:8px;width:6px;height:6px;border-radius:2px;background:var(--blue)}
+.fnsplit{text-align:center;font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin:16px 0 12px;position:relative}
+.fnsplit::before{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:var(--line)}
+.fnsplit span{background:#fff;padding:0 12px;position:relative}
+.fnouts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.fnout{border:1px solid var(--line);border-left:4px solid var(--o);border-radius:12px;background:var(--paper2);padding:14px 15px}
+.fno-k{font-weight:700;font-size:15px;color:var(--o)}
+.fnout p{font-size:13.5px;color:var(--soft);margin-top:6px}
+.fnout ul{list-style:none;margin-top:9px;display:flex;flex-direction:column;gap:5px}
+.fnout li{font-size:13.5px;padding-left:14px;position:relative}
+.fnout li::before{content:"";position:absolute;left:0;top:8px;width:6px;height:6px;border-radius:2px;background:var(--o)}
+/* route cards */
+.route{margin-top:16px;border:1px solid var(--line);border-radius:14px;background:var(--paper2);overflow:hidden}
+.route .rh{display:flex;align-items:baseline;gap:12px;padding:14px 18px;background:var(--wash);border-bottom:1px solid var(--line)}
+.route .rh b{font-family:"Fraunces",serif;font-size:20px;font-weight:500}
+.route .rh span{font-size:13px;color:var(--soft)}
+.route ol{counter-reset:r;list-style:none;display:grid;grid-template-columns:repeat(5,1fr);gap:0;padding:0}
+.route li{counter-increment:r;padding:14px 16px;border-right:1px solid var(--line);font-size:13.5px;color:var(--soft);position:relative}
+.route li:last-child{border-right:0}
+.route li::before{content:counter(r,decimal-leading-zero);display:block;font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.1em;color:var(--blue-deep);font-weight:700;margin-bottom:6px}
+.route li b{display:block;color:var(--ink);margin-bottom:3px}
+.route li.ask{background:rgba(249,27,42,.05)}.route li.ask::before{color:var(--jm-deep)}
+/* page briefs */
+.pb{margin-top:14px;border:1px solid var(--line);border-radius:14px;background:var(--paper2);overflow:hidden}
+.pb .ph{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:baseline;padding:14px 18px;border-bottom:1px solid var(--line)}
+.pb .ph b{font-family:"Fraunces",serif;font-size:20px;font-weight:500}
+.pb .ph code{font-family:"JetBrains Mono",monospace;font-size:11.5px;color:var(--faint)}
+.pb .pg{display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr;gap:0}
+.pb .pg>div{padding:14px 18px;border-right:1px solid var(--line);font-size:13.5px;color:var(--soft);line-height:1.55}
+.pb .pg>div:last-child{border-right:0}
+.pb .pg k{display:block;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue-deep);font-weight:700;margin-bottom:6px}
+.pb .pg ul{list-style:none;display:flex;flex-direction:column;gap:3px}
+.pb .pg li{padding-left:12px;position:relative}.pb .pg li::before{content:"";position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:2px;background:var(--blue)}
+.pb .pg .ask{color:var(--jm-deep);font-weight:700}
+.pb.new .ph b::after{content:"new";font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--jm-deep);background:var(--jm-wash);border:1px solid #F7C9CD;border-radius:5px;padding:2px 6px;margin-left:10px;vertical-align:middle}
+/* scored gap table */
+table.gap td.sc{font-size:15px}
+/* rules and acceptance */
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:18px}
+.rule{border:1px solid var(--line);border-radius:12px;background:var(--paper2);padding:14px 16px}
+.rule k{display:block;font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--blue-deep);font-weight:700}
+.rule b{display:block;margin-top:5px;font-size:15px}.rule p{font-size:13.5px;color:var(--soft);margin-top:4px}
+@media(max-width:900px){
+  .si,.fnrow,.fnouts{grid-template-columns:1fr}
+  .bshead,.bsrow{grid-template-columns:1fr}.bshead span:last-child{display:none}
+  .rung{grid-template-columns:44px 1fr}.rung .who{grid-column:2;text-align:left}
+  .route ol{grid-template-columns:1fr}.route li{border-right:0;border-bottom:1px solid var(--line)}
+  .pb .pg{grid-template-columns:1fr}.pb .pg>div{border-right:0;border-bottom:1px solid var(--line)}
+}
+
+/* competitor devices, IAQ house form */
+.sc{display:inline-block;min-width:30px;text-align:center;font-family:"JetBrains Mono",monospace;font-size:12.5px;font-weight:700;border-radius:6px;padding:3px 8px;border:1px solid var(--line)}
+.sc.hi{background:#E9F7EF;color:#0E7A3C;border-color:#BFE6CE}
+.sc.mid{background:#FDF6E7;color:#8A5A05;border-color:#E7D3A4}
+.sc.lo{background:#F4F5F8;color:#6B7180}
+.cgroup{margin-top:26px}
+.cg-h h3{margin:6px 0 4px;font-size:21px}
+.cg-h p{font-size:14px;color:var(--soft);max-width:80ch}
+.cfirms{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:14px;margin-top:14px}
+.cfirm{border:1px solid var(--line);border-radius:13px;padding:16px 17px;background:var(--paper2)}
+.cf-h b{font-size:16px;font-weight:700;display:block}
+.cf-hq{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--faint)}
+.cf-sc{display:flex;gap:7px;margin:10px 0 9px}
+.cfirm p{font-size:14px;color:var(--soft);line-height:1.55}
+.moves{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:16px;margin-top:20px}
+.movecard{border:1px solid var(--line);border-radius:14px;padding:19px 20px;background:#fff}
+.mv-k{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--jm-deep)}
+.movecard h3{margin:8px 0 8px;font-size:19px;line-height:1.25}
+.movecard p{font-size:14px;color:var(--soft);line-height:1.55}
+.mv-src{margin-top:12px;padding-top:10px;border-top:1px dashed var(--line);font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--faint)}
+.cshots{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:20px;margin-top:22px}
+.cshot{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff;display:flex;flex-direction:column}
+.cs-img{background:#F2F4F8;border-bottom:1px solid var(--line);aspect-ratio:1280/860;overflow:hidden}
+.cs-img img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
+.cs-body{padding:15px 17px 17px}
+.cs-h{display:flex;align-items:baseline;gap:10px}
+.cs-rk{font-family:"JetBrains Mono",monospace;font-size:12.5px;font-weight:700;color:#fff;background:#0B1020;border-radius:6px;padding:3px 8px}
+.cs-h b{font-size:17px;font-weight:700}
+.cs-meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+.cs-hq,.cs-url{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--faint)}
+.cs-url{color:var(--jm-deep)}
+.cshot .cf-sc{margin:11px 0 10px}
+.cs-why{font-size:14px;color:var(--soft);line-height:1.55}
+.cs-why b{color:var(--ink)}
+.cs-vd{margin-top:9px;padding-top:9px;border-top:1px dashed var(--line);font-size:13.5px;color:var(--faint);line-height:1.5}
+.rvs{display:flex;flex-direction:column;gap:18px;margin-top:22px}
+.rv{border:1px solid rgba(12,18,32,.14);border-radius:14px;background:#fff;overflow:hidden}
+.rv-h{display:flex;align-items:flex-start;gap:14px;padding:16px 20px 14px;background:#FAFAFC;border-bottom:1px solid rgba(12,18,32,.10)}
+.rv-rk{flex:0 0 auto;width:30px;height:30px;border-radius:8px;background:#0B1020;color:#fff;font:700 12px "JetBrains Mono",monospace;display:flex;align-items:center;justify-content:center}
+.rv-ttl{flex:1 1 auto;min-width:0}
+.rv-ttl b{display:block;font-size:17px;line-height:1.3;color:var(--ink)}
+.rv-sub{display:block;margin-top:3px;font-family:"JetBrains Mono",monospace;font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--faint)}
+.rv-th{flex:0 0 auto;display:flex;flex-direction:column;align-items:flex-end;gap:5px;text-align:right}
+.rv-th .sc{min-width:34px}
+.rv-b{padding:16px 20px 18px}
+.rv-facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:0 22px;margin-bottom:18px;border-top:1px solid rgba(12,18,32,.10)}
+.rv-f{padding:11px 0 11px;border-bottom:1px solid rgba(12,18,32,.08)}
+.rv-f k{display:block;font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--faint);margin-bottom:4px}
+.rv-f span{display:block;font-size:14px;line-height:1.45;color:var(--ink)}
+.rv-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.rv-c k{display:block;font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;margin-bottom:6px}
+.rv-c.up k{color:#B4341F}
+.rv-c.dn k{color:#12734A}
+.rv-c ul{margin:0;padding-left:17px}
+.rv-c li{font-size:14px;line-height:1.55;color:var(--soft);margin-bottom:5px}
+.rv-why{margin-top:15px;padding:12px 15px;border-radius:10px;background:#F5F6FA;border-left:3px solid #0B1020;font-size:14.5px;line-height:1.55;color:var(--ink)}
+.rv-why b{color:var(--ink)}
+@media(max-width:640px){.rv-h{flex-wrap:wrap}.rv-th{align-items:flex-start;text-align:left}}
+</style>
+</head>
+<body>
+<div class="bmws" style="--bmws-acc:#F91B2A"><div class="bmws-in"><div class="bmws-crumb"><b>Jom Makcik &middot; Website 1</b><span>Brand Method &middot; Admin Navigation</span></div><nav class="bmws-tabs"><a href="audit.html"><i>00</i>Web Audit</a><a href="competitors.html" class="on"><i>01</i>Competitors</a><a href="plan.html"><i>02</i>Web Plan</a><a href="design.html"><i>03</i>Design</a><a href="index.html"><i>04</i>Prototype Web 1</a><a href="review.html"><i>05</i>Review</a><a href="qa.html"><i>06</i>Q&amp;A</a></nav></div></div>
+
+<nav class="chapnav"><div class="chapnav-in">
+  <a href="#c00"><span class="ch-no">00</span>Confirmed</a>
+  <a href="#c01"><span class="ch-no">01</span>The ranking</a>
+  <a href="#c02"><span class="ch-no">02</span>What each looks like</a>
+  <a href="#c03"><span class="ch-no">03</span>Real rivals, in full</a>
+  <a href="#c04"><span class="ch-no">04</span>Who is who</a>
+  <a href="#c05"><span class="ch-no">05</span>Five things</a>
+  <a href="#c06"><span class="ch-no">06</span>Could not verify</a>
+</div></nav>
+
+<div class="wrap">
+  <header class="hero">
+    <span class="eyebrow">Competitor Audit &middot; Brand Method</span>
+    <h1>Who a family compares us to, and <em>what each one teaches us</em></h1>
+    <p class="lede">Jom Makcik is not compared against taxis. When an adult child needs to move a parent
+      who cannot leave her wheelchair, the shortlist is built from anyone who says the word wheelchair,
+      accessible, escort or companion near a Malaysian place name. Eleven operators were checked against
+      their own live pages on 9 and 10 September 2026, every one captured, and the four with the most
+      to teach were measured on the same throttled rig as the audit. Where a claim could not be
+      verified it is listed in part 06 rather than promoted into a fact.</p>
+    <div class="vrow">
+      <div class="vchip">Compiled <b>10 Sep 2026</b></div>
+      <div class="vchip">For <b>Dr Sazlina Kamaralzaman, CEO</b></div>
+      <div class="vchip">Operators <b>11 checked, 11 captured</b></div>
+      <div class="vchip">Speed <b>4 measured on one rig</b></div>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="num">11</div><div class="lab">Operators checked</div><div class="s">platform, commercial, charity, public, companion</div></div>
+      <div class="stat"><div class="num">11</div><div class="lab">Sites captured</div><div class="s">screenshots in part 02</div></div>
+      <div class="stat"><div class="num">2</div><div class="lab">Publish a trip fare</div><div class="s">both are non profits</div></div>
+      <div class="stat"><div class="num">0</div><div class="lab">Explain their partners</div><div class="s">every site shows logos, none say why</div></div>
+    </div>
+    <div class="pin jm"><b>The finding that matters:</b> in this category the ability to carry someone seated in their own wheelchair and the willingness to walk them to the door are split across different operators, and the two best funded entrants do neither. GrabAssist takes a folding chair only and its drivers may not leave the vehicle. Homage sends an escort but no vehicle. Jom Makcik is the only operator on this board that does both, and its website says neither.</div>
+  </header>
+
+  <!-- 00 ══════════════════════════════════════════════════════════ -->
+  <div class="chapdiv" id="c00"><div class="cd-no">00</div><div>
+    <h2 class="cd-h">What is confirmed, and what waits for Friday</h2>
+    <div class="cd-sub">Three things the research settles on its own. Four things only Dr Sazlina can settle.</div>
+  </div></div>
+  <section>
+    <p class="sec-intro">The IAQ and Tenthpin boards open with the client's own confirmations from the review meeting. This board has not had that meeting yet. So the top of it carries what the evidence confirms without her, and the four questions that will re-rank this board once she answers them on Friday 11 September.</p>
+    <div class="moves">
+      <div class="movecard"><span class="mv-k">Confirmed &middot; primary threat</span><h3>GrabAssist is the entrant that changes the category, and it published the moat</h3><p>Launched December 2025 in the Klang Valley with roughly 100 trained driver partners. Its own page limits it to a foldable wheelchair or crutches, and states that drivers are unable to leave their vehicles unattended. Those two sentences describe Jom Makcik's two products.</p><div class="mv-src">Source: grab.com/my/grabassist, captured 10 Sep 2026, quoted verbatim in part 03</div></div>
+      <div class="movecard"><span class="mv-k">Confirmed &middot; the search rival</span><h3>Love On Wheels is winning search on pages nobody else bothered to write</h3><p>Service pages, a hospital transport page, an accessible tourism blog by state, syndicated on Medium. Its homepage headline is the search phrase itself. Weaker credentials than Jom Makcik, better findability than everyone.</p><div class="mv-src">Source: loveonwheels.com.my, captured 9 Sep 2026; measured FCP 3.48 s on the audit rig</div></div>
+      <div class="movecard"><span class="mv-k">Confirmed &middot; the price anchor</span><h3>Only the charities tell you what it costs</h3><p>Mobiliti publishes RM17 per wheelchair user one way. Little Fook publishes RM5 plus RM1.50 per kilometre. No commercial wheelchair van operator on this board publishes a fare. The companion services publish hourly rates instead.</p><div class="mv-src">Source: mobiliti.org.my and shuangfu.org, captured 10 Sep 2026</div></div>
+      <div class="movecard" style="border-color:#F7C9CD;background:var(--jm-wash)"><span class="mv-k" style="color:var(--jm-deep)">Waits for Friday &middot; four questions</span><h3>What only Dr Sazlina can tell us</h3><p>Whether PERKESO and JKM are referral, funding or panel relationships. Whether Jom Makcik's own rates sit above or below Mobiliti's RM17 anchor. Whether weekend service exists in practice. Which hospitals actually refer today. Each answer moves at least one operator on the ranking below.</p><div class="mv-src">Meeting Friday 11 September 2026, 2pm</div></div>
+    </div>
+  </section>
+
+  <!-- 01 ══════════════════════════════════════════════════════════ -->
+  <div class="chapdiv" id="c01"><div class="cd-no">01</div><div>
+    <h2 class="cd-h">Most important to least, and why</h2>
+    <div class="cd-sub">Ranked by how much each one should change what Jom Makcik builds, not by size</div>
+  </div></div>
+  <section>
+    <p class="sec-intro">An operator can matter because it threatens the business, because it shows the target, or because it warns us. Both scores are Brand Method's own assessment from the live pages, not published data. <b>Website score</b> rates the site as a sales asset for winning a family's booking. <b>Threat score</b> rates the commercial risk to Jom Makcik in its four areas.</p>
+
+    <div class="dwrap">
+      <div class="dhead"><b>Diagram 01</b><span>All eleven operators, plotted. The red field is where a booking is actually lost, and it is where Jom Makcik's site sits today.</span></div>
+      <div class="dbody">
+        <svg viewBox="0 0 960 560" role="img" aria-label="Quadrant plot. Horizontal axis: website quality as a sales asset, one to ten. Vertical axis: commercial threat to Jom Makcik, one to ten. GrabAssist sits high threat, strong site. Love On Wheels and Pearlcare sit medium high threat, medium site. Multicare, Mobiliti, Little Fook medium. Homage strong site, medium threat. Seniora, GPM, Rapid Mobility lower. Jom Makcik today sits at weak site; Jom Makcik after the rebuild sits at strong site, drawn as an outline in the top right.">
+          <defs>
+            <marker id="qa" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0L8 4L0 8z" fill="#8A93A6"/></marker>
+            <style>.ql{font-family:Inter,sans-serif;font-size:12.5px;fill:#101626;font-weight:600}.qs{font-family:Inter,sans-serif;font-size:11.5px;fill:#4A5468}.qk{font-family:"JetBrains Mono",monospace;font-size:10.5px;fill:#8A93A6;letter-spacing:1.2px}
+</style>
+          </defs>
+          <rect x="80" y="30" width="820" height="440" fill="#FCFDFF" stroke="#E2E7F1"/>
+          <rect x="80" y="30" width="410" height="220" fill="rgba(249,27,42,.055)"/>
+          <text class="qk" x="92" y="50">THE REAL RIVALS: WEAK SITE, HIGH THREAT</text>
+          <text class="qk" x="500" y="50">DANGEROUS: STRONG SITE, HIGH THREAT</text>
+          <text class="qk" x="92" y="462">BACKGROUND NOISE</text>
+          <text class="qk" x="500" y="462">THE BAR SETTERS: STRONG SITE, LOW THREAT</text>
+          <line x1="490" y1="30" x2="490" y2="470" stroke="#E2E7F1" stroke-dasharray="4 5"/>
+          <line x1="80" y1="250" x2="900" y2="250" stroke="#E2E7F1" stroke-dasharray="4 5"/>
+          <line x1="80" y1="470" x2="905" y2="470" stroke="#8A93A6" marker-end="url(#qa)"/>
+          <line x1="80" y1="470" x2="80" y2="25" stroke="#8A93A6" marker-end="url(#qa)"/>
+          <text class="qs" x="490" y="510" text-anchor="middle">Website quality as a sales asset, 1 to 10 &rarr;</text>
+          <text class="qs" x="34" y="250" text-anchor="middle" transform="rotate(-90 34 250)">Commercial threat to Jom Makcik, 1 to 10 &rarr;</text>
+          <!-- x: 80 + (score-1)*(820/9) ; y: 470 - (score-1)*(440/9) -->
+          <circle cx="718" cy="79" r="11" fill="#0E1424"/><text class="ql" x="736" y="76">GrabAssist</text><text class="qs" x="736" y="92">site 8, threat 9</text>
+          <circle cx="536" cy="128" r="10" fill="#1421B8"/><text class="ql" x="552" y="124">Love On Wheels</text><text class="qs" x="552" y="140">site 6, threat 8</text>
+          <circle cx="445" cy="177" r="10" fill="#1421B8"/><text class="ql" x="300" y="173">Pearlcare</text><text class="qs" x="300" y="189">site 5, threat 7</text>
+          <circle cx="445" cy="274" r="9" fill="#1421B8" opacity=".8"/><text class="ql" x="300" y="270">Multicare</text><text class="qs" x="300" y="286">site 5, threat 5</text>
+          <circle cx="354" cy="225" r="9" fill="#1421B8" opacity=".8"/><text class="ql" x="200" y="221">Mobiliti</text><text class="qs" x="200" y="237">site 4, threat 6</text>
+          <circle cx="263" cy="274" r="9" fill="#1421B8" opacity=".7"/><text class="ql" x="120" y="270">Little Fook</text><text class="qs" x="120" y="286">site 3, threat 5</text>
+          <circle cx="627" cy="274" r="9" fill="#1421B8" opacity=".7"/><text class="ql" x="643" y="270">Homage</text><text class="qs" x="643" y="286">site 7, threat 5, escort only</text>
+          <circle cx="536" cy="323" r="8" fill="#1421B8" opacity=".55"/><text class="ql" x="552" y="319">Seniora</text><text class="qs" x="552" y="335">site 6, threat 4, north and Johor</text>
+          <circle cx="354" cy="372" r="8" fill="#1421B8" opacity=".55"/><text class="ql" x="370" y="368">GPM Ambulance</text><text class="qs" x="370" y="384">site 4, threat 3</text>
+          <circle cx="263" cy="372" r="8" fill="#1421B8" opacity=".45"/><text class="ql" x="120" y="368">Rapid Mobility</text><text class="qs" x="120" y="384">site 3, threat 3, public</text>
+          <circle cx="172" cy="128" r="12" fill="#F91B2A"/><text class="ql" x="190" y="124">Jom Makcik today</text><text class="qs" x="190" y="140">site 2, strongest credentials on the board</text>
+          <path d="M184 122 C 380 60, 640 40, 790 110" fill="none" stroke="#F91B2A" stroke-width="2" stroke-dasharray="6 6" opacity=".55" marker-end="url(#qa)"/>
+          <circle cx="809" cy="128" r="12" fill="none" stroke="#F91B2A" stroke-width="2.4" stroke-dasharray="4 4"/><text class="ql" x="700" y="166">Jom Makcik, after the rebuild</text><text class="qs" x="700" y="182">same vans, same credentials, a real site</text>
+          <rect x="92" y="420" width="12" height="12" fill="rgba(249,27,42,.14)" stroke="#F7C9CD"/><text class="qs" x="110" y="430">where bookings are lost to a better site</text>
+        </svg>
+      </div>
+    </div>
+
+    <table>
+      <thead><tr><th>#</th><th>Operator</th><th>Base</th><th>Tier</th><th>Why it ranks here</th></tr></thead>
+      <tbody>
+        <tr><td class="sc">1</td><td class="dim">GrabAssist</td><td>Petaling Jaya, Klang Valley</td><td>Platform</td><td>The only entrant with an app, a brand every family already has, and 100 trained drivers. It will take the easy half of the market. It has published, in writing, that it cannot take the hard half.</td></tr>
+        <tr><td class="sc">2</td><td class="dim">Love On Wheels</td><td>Kuala Lumpur</td><td>Commercial WAV</td><td>The search rival. Hydraulic lift vans, seven states, 24/7 claimed, one tap WhatsApp, and a content programme no one else runs. Where a stranger's search ends up today.</td></tr>
+        <tr><td class="sc">3</td><td class="dim">Pearlcare Mobility</td><td>Petaling Jaya</td><td>Commercial WAV</td><td>The closest product match: lift vehicle plus a caregiver package, 24 by 7 stated, and the pickup mechanics published. Says more than Jom Makcik about a smaller operation.</td></tr>
+        <tr><td class="sc">4</td><td class="dim">Mobiliti</td><td>Petaling Jaya</td><td>Non profit</td><td>Sets the public price anchor at RM17 one way. Five lift vans, four working days notice. Not a commercial rival, but every family who has used it arrives with that number in their head.</td></tr>
+        <tr><td class="sc">5</td><td class="dim">Multicare Mobility</td><td>Klang Valley</td><td>Commercial WAV</td><td>Founded 2019, driver plus assistant on every job, three named reviews with towns. Thin site, but the one operator whose testimonials carry names.</td></tr>
+        <tr><td class="sc">6</td><td class="dim">Homage</td><td>Kuala Lumpur, five regions</td><td>Companion, no vehicle</td><td>Venture funded, app first, RM28 an hour. Sells the escort and tells the family to arrange a taxi. Competes for the same monthly budget and shows what a premium booking flow looks like.</td></tr>
+        <tr><td class="sc">7</td><td class="dim">Little Fook, Dual Blessing</td><td>Klang Valley</td><td>Charity</td><td>RM5 plus RM1.50 a kilometre, seated in the chair, three to seven days notice, no personal assistant. The second price anchor, and a warning about how cheap the floor is.</td></tr>
+        <tr><td class="sc">8</td><td class="dim">Seniora</td><td>Taiping, Penang, Johor Bahru</td><td>Companion with transport</td><td>Transport and companion in one, RM50 an hour in KL, minimum two hours. Publishes everything. Outside the four areas today, but the model is the closest to Jom Makcik's chaperone.</td></tr>
+        <tr><td class="sc">9</td><td class="dim">GPM Ambulance</td><td>Kuala Lumpur and Selangor</td><td>Ambulance with mobility</td><td>24 hours, 7 days, price on distance. The fallback a hospital desk reaches for at 9pm. Owns the hours Jom Makcik does not.</td></tr>
+        <tr><td class="sc">10</td><td class="dim">Rapid Mobility</td><td>Prasarana, Klang Valley</td><td>Public</td><td>Hydraulic lift vans, door to door, nine named areas, phone booking, weekdays 8.30 to 5. Free or near free for the eligible. Shows why a private operator has to justify its price with dignity and time.</td></tr>
+        <tr><td class="sc">11</td><td class="dim">MBSA and council vans</td><td>Shah Alam</td><td>Public</td><td>One modified Hiace with a tail lift for residents. Background noise, listed for completeness.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="dwrap">
+      <div class="dhead"><b>Diagram 02</b><span>What each operator can actually do, read off their own pages. The two columns on the left are the ones GrabAssist cannot enter.</span></div>
+      <div class="dbody" style="padding:0">
+        <div class="vl-scroll" style="margin:0;border:0;border-radius:0">
+        <table class="vledger" style="min-width:980px">
+          <thead><tr><th>Operator</th><th>Seated in own chair</th><th>Walks you in</th><th>Publishes a fare</th><th>Weekend</th><th>Notice</th><th>Content pages</th><th>Bahasa Melayu</th></tr></thead>
+          <tbody>
+            <tr><td class="vl-area">Jom Makcik, today</td><td><span class="vtag hi">Yes, AbiliCar</span></td><td><span class="vtag hi">Yes, chaperone</span></td><td><span class="vtag bad">No</span></td><td><span class="vtag bad">Weekdays only, stated</span></td><td>24 hours, in the app</td><td><span class="vtag bad">One page</span></td><td><span class="vtag bad">No</span></td></tr>
+            <tr><td class="vl-area">GrabAssist</td><td><span class="vtag bad">No, foldable only</span></td><td><span class="vtag bad">No, by policy</span></td><td><span class="vtag bad">No</span></td><td><span class="vtag hi">App hours</span></td><td>75 minutes to 90 days</td><td>Grab's own</td><td><span class="vtag hi">App</span></td></tr>
+            <tr><td class="vl-area">Love On Wheels</td><td><span class="vtag hi">Yes, lift</span></td><td><span class="vtag lo">Unstated</span></td><td><span class="vtag bad">No</span></td><td><span class="vtag hi">24/7 claimed</span></td><td>Unstated</td><td><span class="vtag hi">Blog, state pages</span></td><td><span class="vtag bad">No</span></td></tr>
+            <tr><td class="vl-area">Pearlcare</td><td><span class="vtag hi">Yes, lift</span></td><td><span class="vtag hi">Caregiver package</span></td><td><span class="vtag bad">No</span></td><td><span class="vtag hi">24 x 7 stated</span></td><td>Unstated</td><td>Service pages</td><td><span class="vtag bad">No</span></td></tr>
+            <tr><td class="vl-area">Mobiliti</td><td><span class="vtag hi">Yes, lift</span></td><td><span class="vtag lo">Unstated</span></td><td><span class="vtag hi">RM17 one way</span></td><td><span class="vtag lo">Sat am, Sun by booking</span></td>4 working days<td><span class="vtag lo">Association site</span></td><td><span class="vtag bad">No</span></td></tr>
+            <tr><td class="vl-area">Multicare</td><td><span class="vtag hi">Yes, specialised vehicle</span></td><td><span class="vtag hi">Driver plus assistant</span></td><td><span class="vtag bad">No</span></td><td><span class="vtag lo">Unstated</span></td><td>Unstated</td><td><span class="vtag bad">One page</span></td><td><span class="vtag bad">No</span></td></tr>
+            <tr><td class="vl-area">Homage</td><td><span class="vtag bad">No vehicle</span></td><td><span class="vtag hi">Yes, escort</span></td><td><span class="vtag hi">RM28 to 45 an hour</span></td><td><span class="vtag hi">App</span></td><td>App</td><td><span class="vtag hi">Full site</span></td><td><span class="vtag lo">Partial</span></td></tr>
+            <tr><td class="vl-area">Little Fook</td><td><span class="vtag hi">Yes, modified van</span></td><td><span class="vtag bad">No, stated</span></td><td><span class="vtag hi">RM5 + RM1.50/km</span></td><td><span class="vtag lo">Sat to 1pm</span></td><td>3 to 7 days</td><td><span class="vtag bad">One page</span></td><td><span class="vtag bad">No</span></td></tr>
+            <tr><td class="vl-area">Seniora</td><td><span class="vtag lo">Assists wheelchair, vehicle unstated</span></td><td><span class="vtag hi">Yes, companion</span></td><td><span class="vtag hi">RM40 to 50 an hour</span></td><td><span class="vtag lo">Sat by appointment</span></td><td>WhatsApp</td><td>Service pages</td><td><span class="vtag bad">No</span></td></tr>
+            <tr><td class="vl-area">GPM Ambulance</td><td><span class="vtag lo">Unstated</span></td><td><span class="vtag lo">Unstated</span></td><td><span class="vtag bad">On distance</span></td><td><span class="vtag hi">24/7</span></td><td>Phone</td><td>Service pages</td><td><span class="vtag bad">No</span></td></tr>
+            <tr><td class="vl-area">Rapid Mobility</td><td><span class="vtag hi">Yes, hydraulic lift</span></td><td><span class="vtag lo">Unstated</span></td><td><span class="vtag lo">Not shown</span></td><td><span class="vtag bad">Weekdays only</span></td><td>Phone</td><td>One page</td><td><span class="vtag lo">Site is bilingual</span></td></tr>
+          </tbody>
+        </table>
+        </div>
+      </div>
+    </div>
+    <div class="pin"><b>Read the first two columns.</b> Six operators can carry a seated wheelchair. Four will walk you in. Only three do both, and of those three, one is a charity that will not send a personal assistant, one has a homepage that says nothing about it, and one is Pearlcare. Then read the last column: one operator on this board serves the passenger in Malay.</div>
+  </section>
+
+  <!-- 02 ══════════════════════════════════════════════════════════ -->
+  <div class="chapdiv" id="c02"><div class="cd-no">02</div><div>
+    <h2 class="cd-h">What each one actually looks like</h2>
+    <div class="cd-sub">Every homepage captured on 9 and 10 September 2026, at 1280 wide, unedited</div>
+  </div></div>
+  <section>
+    <p class="sec-intro">Screenshots, not descriptions, so the comparison is against the page a family actually meets. Scores are ours. The verdict under each is what the page does to a stranger in the first ten seconds.</p>
+    <div class="cshots">
+      <div class="cshot"><div class="cs-img"><img src="assets/img/comp/jommakcik.webp" alt="Jom Makcik homepage, captured 9 September 2026" loading="lazy"></div><div class="cs-body"><div class="cs-h"><span class="cs-rk">00</span><b>Jom Makcik, today</b></div><div class="cs-meta"><span class="cs-hq">Nilai, Negeri Sembilan</span><span class="cs-url">jommakcik.my</span></div><div class="cf-sc"><span class="sc lo">Site 2</span><span class="sc hi">Credentials 9</span></div><p class="cs-why"><b>Why it is here.</b> The board is measured against this. Four equal buttons, two of them logins, and a funder's Instagram embed as the main visual.</p><p class="cs-vd">A Canva export. Zero headings, 53 images without alt text, 13 second main content on 4G. The strongest credential set on the board, invisible.</p></div></div>
+      <div class="cshot"><div class="cs-img"><img src="assets/img/comp/grabassist.webp" alt="GrabAssist page on grab.com Malaysia, captured 10 September 2026" loading="lazy"></div><div class="cs-body"><div class="cs-h"><span class="cs-rk">01</span><b>GrabAssist</b></div><div class="cs-meta"><span class="cs-hq">Petaling Jaya</span><span class="cs-url">grab.com/my/grabassist</span></div><div class="cf-sc"><span class="sc hi">Site 8</span><span class="sc hi">Threat 9</span></div><p class="cs-why"><b>Why it ranks here.</b> One headline, one button, the Grab brand behind it. A family already has the app.</p><p class="cs-vd">Reads the limits and they are on the page in a box marked IMPORTANT: foldable chair only, driver stays in the car.</p></div></div>
+      <div class="cshot"><div class="cs-img"><img src="assets/img/comp/loveonwheels.webp" alt="Love On Wheels homepage, captured 9 September 2026" loading="lazy"></div><div class="cs-body"><div class="cs-h"><span class="cs-rk">02</span><b>Love On Wheels</b></div><div class="cs-meta"><span class="cs-hq">Kuala Lumpur</span><span class="cs-url">loveonwheels.com.my</span></div><div class="cf-sc"><span class="sc mid">Site 6</span><span class="sc hi">Threat 8</span></div><p class="cs-why"><b>Why it ranks here.</b> The h1 is the search phrase, the button says Booking Now and opens WhatsApp. Real van photography.</p><p class="cs-vd">Template look, 0.228 layout shift, but it answers what and where before the fold and has pages underneath it.</p></div></div>
+      <div class="cshot"><div class="cs-img"><img src="assets/img/comp/pearlcare.webp" alt="Pearlcare Mobility homepage, captured 9 September 2026" loading="lazy"></div><div class="cs-body"><div class="cs-h"><span class="cs-rk">03</span><b>Pearlcare Mobility</b></div><div class="cs-meta"><span class="cs-hq">Petaling Jaya</span><span class="cs-url">pearlcaremobility.com.my</span></div><div class="cf-sc"><span class="sc mid">Site 5</span><span class="sc hi">Threat 7</span></div><p class="cs-why"><b>Why it ranks here.</b> Says 24 x 7, names the two packages, publishes when to call for pickup. The operational honesty Jom Makcik lacks.</p><p class="cs-vd">Dated build, no BM, no price, but the fastest first paint of the commercial set at 2.24 s.</p></div></div>
+      <div class="cshot"><div class="cs-img"><img src="assets/img/comp/mobiliti.webp" alt="Persatuan Mobiliti Selangor dan Kuala Lumpur homepage, captured 9 September 2026" loading="lazy"></div><div class="cs-body"><div class="cs-h"><span class="cs-rk">04</span><b>Mobiliti</b></div><div class="cs-meta"><span class="cs-hq">Petaling Jaya</span><span class="cs-url">mobiliti.org.my</span></div><div class="cf-sc"><span class="sc lo">Site 4</span><span class="sc mid">Threat 6</span></div><p class="cs-why"><b>Why it ranks here.</b> The only page on the board with a fare on it. RM17, RM6 per companion, a worked round trip at RM46.</p><p class="cs-vd">Association site, phone booking, four working days notice. Fastest homepage in the category on no budget.</p></div></div>
+      <div class="cshot"><div class="cs-img"><img src="assets/img/comp/multicare.webp" alt="Multicare Mobility Services homepage, captured 10 September 2026" loading="lazy"></div><div class="cs-body"><div class="cs-h"><span class="cs-rk">05</span><b>Multicare Mobility</b></div><div class="cs-meta"><span class="cs-hq">Klang Valley</span><span class="cs-url">multicaremobility.com</span></div><div class="cf-sc"><span class="sc mid">Site 5</span><span class="sc mid">Threat 5</span></div><p class="cs-why"><b>Why it ranks here.</b> Three reviews with names and towns, a BOOK NOW button, driver plus assistant on every job.</p><p class="cs-vd">Site builder template behind a bot wall. Same clinic donation credit as Love On Wheels, noted in part 06.</p></div></div>
+      <div class="cshot"><div class="cs-img"><img src="assets/img/comp/homage.webp" alt="Homage Malaysia medical escort page, captured 10 September 2026" loading="lazy"></div><div class="cs-body"><div class="cs-h"><span class="cs-rk">06</span><b>Homage</b></div><div class="cs-meta"><span class="cs-hq">Kuala Lumpur</span><span class="cs-url">homage.com.my</span></div><div class="cf-sc"><span class="sc hi">Site 7</span><span class="sc mid">Threat 5</span></div><p class="cs-why"><b>Why it ranks here.</b> The best built page on the board: hourly price, seven listed inclusions, app download, Get Care Now.</p><p class="cs-vd">Then the small print: the escort arranges a taxi. No vehicle, no ramp. Sells the half Jom Makcik sells, minus the van.</p></div></div>
+      <div class="cshot"><div class="cs-img"><img src="assets/img/comp/littlefook.webp" alt="Little Fook accessible transport page, Dual Blessing Bhd, captured 10 September 2026" loading="lazy"></div><div class="cs-body"><div class="cs-h"><span class="cs-rk">07</span><b>Little Fook</b></div><div class="cs-meta"><span class="cs-hq">Klang Valley</span><span class="cs-url">shuangfu.org</span></div><div class="cf-sc"><span class="sc lo">Site 3</span><span class="sc mid">Threat 5</span></div><p class="cs-why"><b>Why it ranks here.</b> RM5 plus RM1.50 a kilometre, in the chair, WhatsApp booking, hours and surcharge all on one page.</p><p class="cs-vd">Charity page inside a larger site. States plainly it does not provide a personal assistant.</p></div></div>
+      <div class="cshot"><div class="cs-img"><img src="assets/img/comp/seniora.webp" alt="Seniora medical escort and companionship page, captured 10 September 2026" loading="lazy"></div><div class="cs-body"><div class="cs-h"><span class="cs-rk">08</span><b>Seniora</b></div><div class="cs-meta"><span class="cs-hq">Taiping, Penang, Johor Bahru</span><span class="cs-url">seniora.com.my</span></div><div class="cf-sc"><span class="sc mid">Site 6</span><span class="sc lo">Threat 4</span></div><p class="cs-why"><b>Why it ranks here.</b> A rate table by area, minimum hours, toll and parking included, a Sunday surcharge. Everything a family needs to budget.</p><p class="cs-vd">Northern and Johor operation. Not in the four areas today. The closest published model to the chaperone.</p></div></div>
+      <div class="cshot"><div class="cs-img"><img src="assets/img/comp/gpm.webp" alt="GPM Ambulance mobility transport page, captured 10 September 2026" loading="lazy"></div><div class="cs-body"><div class="cs-h"><span class="cs-rk">09</span><b>GPM Ambulance</b></div><div class="cs-meta"><span class="cs-hq">Kuala Lumpur, Selangor</span><span class="cs-url">gpmambulance.com.my</span></div><div class="cf-sc"><span class="sc lo">Site 4</span><span class="sc lo">Threat 3</span></div><p class="cs-why"><b>Why it ranks here.</b> 24 hours, 7 days, nationwide transfers. The number a ward clerk has.</p><p class="cs-vd">Ambulance branding, no lift or ramp detail, price on distance only.</p></div></div>
+      <div class="cshot"><div class="cs-img"><img src="assets/img/comp/rapidmobility.webp" alt="Rapid KL Rapid Mobility page, captured 10 September 2026" loading="lazy"></div><div class="cs-body"><div class="cs-h"><span class="cs-rk">10</span><b>Rapid Mobility</b></div><div class="cs-meta"><span class="cs-hq">Prasarana, Klang Valley</span><span class="cs-url">myrapid.com.my</span></div><div class="cf-sc"><span class="sc lo">Site 3</span><span class="sc lo">Threat 3</span></div><p class="cs-why"><b>Why it ranks here.</b> Hydraulic lift vans, door to door, nine named areas, a phone extension to book.</p><p class="cs-vd">Weekdays 8.30 to 5 only. A public floor that a private operator has to be visibly better than.</p></div></div>
+    </div>
+  </section>
+
+  <!-- 03 ══════════════════════════════════════════════════════════ -->
+  <div class="chapdiv" id="c03"><div class="cd-no">03</div><div>
+    <h2 class="cd-h">Real rivals, in full</h2>
+    <div class="cd-sub">The six that can take a booking Jom Makcik would otherwise win</div>
+  </div></div>
+  <section>
+    <p class="sec-intro">Captured 9 and 10 September 2026. Quotes under "on their page" are read off the screenshot in part 02 or the live page text. No operator carries a rubric score here; the rank order carries the assessment, and every inference is labelled as ours.</p>
+
+    <div class="rvs">
+      <div class="rv"><div class="rv-h"><span class="rv-rk">01</span><span class="rv-ttl"><b>GrabAssist</b><span class="rv-sub">Grab Malaysia, MyTeksi Sdn Bhd and GrabCar Sdn Bhd &middot; launched December 2025 &middot; Klang Valley</span></span><span class="rv-th"><span class="sc hi">Threat 9</span><span class="sc hi">Site 8</span></span></div>
+        <div class="rv-b">
+          <div class="rv-facts">
+            <div class="rv-f"><k>On their page</k><span>"GrabAssist: Travel easier with PWD-friendly rides." And in a box marked IMPORTANT: "our driver-partners are unable to leave their vehicles unattended. If you require assistance getting to the pickup point or after drop-off, we encourage you to arrange for someone to assist you."</span></div>
+            <div class="rv-f"><k>What they sell</k><span>A ride type inside the Grab app for mobility aid users, people with communication disabilities and seniors, "or anyone with foldable wheelchair or crutches", with specially trained driver partners.</span></div>
+            <div class="rv-f"><k>Vehicles</k><span>Plus range cars with larger boots. No ramp, no lift. A person who cannot transfer out of their chair cannot use it.</span></div>
+            <div class="rv-f"><k>How they acquire</k><span>The app. Advance booking 75 minutes to 90 days ahead. Roughly 100 driver partners at launch, trained with certified care providers, in car communication flip cards.</span></div>
+            <div class="rv-f"><k>Price</k><span>Not published. Standard Grab fare logic.</span></div>
+          </div>
+          <div class="rv-cols">
+            <div class="rv-c up"><k>What they beat us on</k><ul><li>Every family already has the app installed. There is no discovery problem.</li><li>Booking in under a minute, fare shown before confirming, driver tracked on a map.</li><li>Scale: 100 drivers on day one, in the exact areas Jom Makcik serves.</li><li>Bilingual by default, the app is already in Malay.</li></ul></div>
+            <div class="rv-c dn"><k>What they cannot do</k><ul><li>Carry a passenger seated in a non folding wheelchair. Stated.</li><li>Walk anyone to a door, wait, or sit through an appointment. Stated as policy.</li><li>Guarantee a woman driver.</li><li>Speak to a dialysis household about a monthly plan.</li></ul></div>
+          </div>
+          <div class="rv-why"><b>Our read.</b> Grab will take the ambulatory seniors and the folding chair users who want a fast pickup, and that is fine, because the margin, the loyalty and the recurring medical journeys live in the half Grab has said in writing it cannot serve. The correct response is not to compete on app convenience. It is to put Grab's two sentences on the homepage, beside a photograph of the ramp and the khaki field vest, which the prototype now does.</div>
+        </div></div>
+
+      <div class="rv"><div class="rv-h"><span class="rv-rk">02</span><span class="rv-ttl"><b>Love On Wheels Mobility</b><span class="rv-sub">Kuala Lumpur &middot; loveonwheels.com.my &middot; KL, Penang, Melaka, Johor, Selangor, Putrajaya, Perak</span></span><span class="rv-th"><span class="sc hi">Threat 8</span><span class="sc mid">Site 6</span></span></div>
+        <div class="rv-b">
+          <div class="rv-facts">
+            <div class="rv-f"><k>On their page</k><span>"Wheelchair Transport Services in Malaysia", with "Caring, Comfort, Convenience" and a "Booking Now" button straight into WhatsApp, +6011 5356 5688.</span></div>
+            <div class="rv-f"><k>What they sell</k><span>KLIA, KLIA2 and Subang transfers, wheelchair cab, non emergency hospital transport, dialysis, physiotherapy, wheelchair friendly tours and group outings.</span></div>
+            <div class="rv-f"><k>Vehicles</k><span>Vans with automatic hydraulic wheelchair lifts, restraints, high roof interiors. The passenger stays in the chair.</span></div>
+            <div class="rv-f"><k>How they acquire</k><span>Search. Dedicated pages for wheelchair transport services, hospital transport and about, a blog of accessible tourism guides by state, syndicated on Medium. 24/7 claimed.</span></div>
+            <div class="rv-f"><k>Measured</k><span>FCP 3.48 s, LCP 13.11 s, TBT 79 ms, 2.5 MB, 37 requests, CLS 0.228, on the audit rig.</span></div>
+            <div class="rv-f"><k>Price</k><span>Not published.</span></div>
+          </div>
+          <div class="rv-cols">
+            <div class="rv-c up"><k>What they beat us on</k><ul><li>They wrote the pages. A search for the service by state lands on them.</li><li>One tap to WhatsApp from the first screen, against four buttons.</li><li>Seven states against four.</li><li>24/7 against weekdays only.</li></ul></div>
+            <div class="rv-c dn"><k>What they cannot do</k><ul><li>Show a single institutional partner, a training body, or a clinician.</li><li>Promise a woman driver or a companion who stays.</li><li>Serve the passenger in Malay.</li><li>Tell a family what it costs.</li></ul></div>
+          </div>
+          <div class="rv-why"><b>Our read.</b> This is the operator to take search ground from first, and it is beatable on everything except effort. Weaker credentials, no BM, no price, but pages exist and ours do not. Fourteen pages in two languages, each titled with what a person actually types, closes it inside a quarter.</div>
+        </div></div>
+
+      <div class="rv"><div class="rv-h"><span class="rv-rk">03</span><span class="rv-ttl"><b>Pearlcare Mobility Service</b><span class="rv-sub">No 54 Jalan Kemajuan, Seksyen 12, Petaling Jaya &middot; pearlcaremobility.com.my &middot; roughly three years</span></span><span class="rv-th"><span class="sc hi">Threat 7</span><span class="sc mid">Site 5</span></span></div>
+        <div class="rv-b">
+          <div class="rv-facts">
+            <div class="rv-f"><k>On their page</k><span>"Here's Everything You Need to Travel Anywhere." Hotline 03 7890 2555, plus 016 444 1925 and 012 525 5594. "24x7 mobility service" stated.</span></div>
+            <div class="rv-f"><k>What they sell</k><span>Medical appointments and hospital discharge, dialysis, airport transfers, weddings and social events, day care and rehabilitation runs. Two packages: with caregiver, or driver only.</span></div>
+            <div class="rv-f"><k>Vehicles</k><span>Multi purpose vehicles with wheelchair lifts, trained drivers and caregivers.</span></div>
+            <div class="rv-f"><k>How they acquire</k><span>WhatsApp, phone hotline and an online form. Publishes the pickup mechanic: call 30 to 45 minutes before the appointment ends.</span></div>
+            <div class="rv-f"><k>Measured</k><span>FCP 2.24 s, TBT 32 ms, 2.3 MB, 58 requests, CLS 0.</span></div>
+            <div class="rv-f"><k>Price</k><span>Not published.</span></div>
+          </div>
+          <div class="rv-cols">
+            <div class="rv-c up"><k>What they beat us on</k><ul><li>The same two package structure as Jom Makcik, named plainly on the page.</li><li>24 x 7, stated. Weekdays only is printed on jommakcik.my.</li><li>The pickup mechanic, which removes the fear of being stranded.</li><li>Three phone lines and a hotline, all tappable.</li></ul></div>
+            <div class="rv-c dn"><k>What they cannot do</k><ul><li>Name a partner, a university or a hospital.</li><li>Promise a woman driver.</li><li>Serve in Malay.</li><li>Publish a price.</li></ul></div>
+          </div>
+          <div class="rv-why"><b>Our read.</b> The nearest thing to a direct competitor on product. They say more about a smaller operation than Jom Makcik says about a bigger one. The counter is not a better van, it is a bigger story told plainly: 600 trained drivers, four universities, two government bodies, a clinician founder, and the same operational honesty about hours and pickup.</div>
+        </div></div>
+
+      <div class="rv"><div class="rv-h"><span class="rv-rk">04</span><span class="rv-ttl"><b>Persatuan Mobiliti Selangor dan Kuala Lumpur</b><span class="rv-sub">Petaling Jaya &middot; mobiliti.org.my &middot; registered association &middot; five vans</span></span><span class="rv-th"><span class="sc mid">Threat 6</span><span class="sc lo">Site 4</span></span></div>
+        <div class="rv-b">
+          <div class="rv-facts">
+            <div class="rv-f"><k>On their page</k><span>"Door to Door transport service for wheelchair bound users and elderly." 03 7957 7255, WhatsApp 016 252 7255 for booking details only. Free registration, mandatory before booking.</span></div>
+            <div class="rv-f"><k>Fares</k><span>RM17.00 per wheelchair user one way, RM6.00 per accompanying carer. Worked example: RM46.00 for a round trip. Surcharge outside hours.</span></div>
+            <div class="rv-f"><k>Vehicles</k><span>Five vans with hydraulic lifts and wheelchair restraints. The passenger never leaves the chair.</span></div>
+            <div class="rv-f"><k>Hours and notice</k><span>Monday to Friday 8.30 to 4.30, Saturday 8.30 to 12.30, Sunday and public holidays by booking. Minimum four working days notice, follow up call two days before.</span></div>
+            <div class="rv-f"><k>Measured</k><span>FCP 1.92 s, LCP 6.09 s, TBT 0 ms, 2.3 MB, 30 requests. The fastest homepage in the category.</span></div>
+          </div>
+          <div class="rv-cols">
+            <div class="rv-c up"><k>What they beat us on</k><ul><li>A fare on the page. Every family who has used them arrives with RM17 in their head.</li><li>Honesty about notice and hours, in one paragraph.</li><li>Speed, on no budget.</li></ul></div>
+            <div class="rv-c dn"><k>What they cannot do</k><ul><li>Take a booking inside four working days.</li><li>Send a companion.</li><li>Serve outside the Klang Valley.</li><li>Grow. Five vans and a registration list.</li></ul></div>
+          </div>
+          <div class="rv-why"><b>Our read.</b> Not a commercial rival, but the price anchor for the whole category. A Jom Makcik pricing page has to be read against RM17 and say plainly what the difference buys: 24 hours notice against four days, a woman driver, a companion who stays, and four areas against one. Friday's first pricing question is where Jom Makcik's rate sits against this number.</div>
+        </div></div>
+
+      <div class="rv"><div class="rv-h"><span class="rv-rk">05</span><span class="rv-ttl"><b>Multicare Mobility Services</b><span class="rv-sub">Klang Valley &middot; multicaremobility.com &middot; founded 2019</span></span><span class="rv-th"><span class="sc mid">Threat 5</span><span class="sc mid">Site 5</span></span></div>
+        <div class="rv-b">
+          <div class="rv-facts">
+            <div class="rv-f"><k>On their page</k><span>"Reliable, wheelchair-friendly transport across Malaysia, staffed by a skilled team committed to safe, dignified journeys for every passenger." A BOOK NOW button. "Founded in 2019 with a mission to advance equality for people with disabilities."</span></div>
+            <div class="rv-f"><k>What they sell</k><span>Dialysis appointments, hospital discharge, airport transfers, clinic visits, special events. "Specialised vehicles and dedicated assistance for wheelchair occupants."</span></div>
+            <div class="rv-f"><k>Proof</k><span>Three five star reviews with full names and towns: Petaling Jaya, Kuala Lumpur, Subang Jaya. One names "the driver and assistant". One names a Deepavali journey home. Two say "reasonably priced".</span></div>
+            <div class="rv-f"><k>How they acquire</k><span>Search and word of mouth. The site is a builder template behind a Cloudflare challenge.</span></div>
+            <div class="rv-f"><k>Price</k><span>Not published. Reviews call it reasonable.</span></div>
+          </div>
+          <div class="rv-cols">
+            <div class="rv-c up"><k>What they beat us on</k><ul><li>Named, placed testimonials. Jom Makcik's three are anonymous.</li><li>A driver plus an assistant on every job, stated.</li><li>A single BOOK NOW.</li></ul></div>
+            <div class="rv-c dn"><k>What they cannot do</k><ul><li>Show any partner, funder or training body.</li><li>State coverage, hours or notice anywhere on the page.</li><li>Serve in Malay.</li></ul></div>
+          </div>
+          <div class="rv-why"><b>Our read.</b> Small, credible, and the one operator whose social proof is done properly. Copy the testimonial format exactly: name, town, service, and a sentence about the person not the company. The clinic donation credit it shares with Love On Wheels is noted in part 06.</div>
+        </div></div>
+
+      <div class="rv"><div class="rv-h"><span class="rv-rk">06</span><span class="rv-ttl"><b>Little Fook Accessible Transport</b><span class="rv-sub">Dual Blessing Bhd, charity 971063M &middot; shuangfu.org &middot; Klang Valley only</span></span><span class="rv-th"><span class="sc mid">Threat 5</span><span class="sc lo">Site 3</span></span></div>
+        <div class="rv-b">
+          <div class="rv-facts">
+            <div class="rv-f"><k>On their page</k><span>"Excellent Accessible Transport Service to Serve Wheelchair Users." Eligibility: "Any wheelchair user and family in need of accessible transportation." And plainly: "We do not provide personal assistant."</span></div>
+            <div class="rv-f"><k>Fares</k><span>RM5 per wheelchair user with one caregiver, plus RM1.50 per kilometre. RM5 per additional passenger. RM50 surcharge after hours.</span></div>
+            <div class="rv-f"><k>Vehicles</k><span>A van modified for wheelchair users; the user remains seated.</span></div>
+            <div class="rv-f"><k>Hours and notice</k><span>Monday to Friday 8 to 4, Saturday 8 to 1, closed Sunday and public holidays. WhatsApp 016 210 4403. Minimum three days, maximum seven days in advance.</span></div>
+          </div>
+          <div class="rv-cols">
+            <div class="rv-c up"><k>What they beat us on</k><ul><li>The cheapest published floor in the category, by a distance.</li><li>Everything a family needs on one short page: fare, hours, notice, surcharge, who qualifies.</li></ul></div>
+            <div class="rv-c dn"><k>What they cannot do</k><ul><li>Send anyone to walk the passenger in. Stated.</li><li>Take a booking inside three days or beyond seven.</li><li>Serve outside the Klang Valley.</li></ul></div>
+          </div>
+          <div class="rv-why"><b>Our read.</b> A warning about how low the floor is, and a lesson in how little text a family actually needs. The counter to a RM5 charity is not price, it is the companion, the notice, the areas and the woman at the wheel, said as plainly as this page says its fare.</div>
+        </div></div>
+    </div>
+  </section>
+
+  <!-- 04 ══════════════════════════════════════════════════════════ -->
+  <div class="chapdiv" id="c04"><div class="cd-no">04</div><div>
+    <h2 class="cd-h">Who is who, and what to take from each</h2>
+    <div class="cd-sub">All eleven, grouped by what they are, with the one thing worth taking</div>
+  </div></div>
+  <section>
+    <div class="cgroup"><div class="cg-h"><h3 class="sub" style="margin-top:0">Platforms</h3><p>Big brands with an app. They take the easy half of the market and set the expectation for how booking should feel.</p></div>
+      <div class="cfirms">
+        <div class="cfirm"><div class="cf-h"><b>GrabAssist</b><span class="cf-hq">Grab Malaysia, Klang Valley</span></div><div class="cf-sc"><span class="sc hi">Site 8</span><span class="sc hi">Threat 9</span></div><p>Take the booking window language, 75 minutes to 90 days, and the flip card idea for communication. Quote their two limits on our homepage.</p></div>
+        <div class="cfirm"><div class="cf-h"><b>airasia ride</b><span class="cf-hq">On Jom Makcik's own partner wall</span></div><div class="cf-sc"><span class="sc lo">Site n/a</span><span class="sc mid">Threat 4</span></div><p>A partner today, an infrastructure competitor tomorrow if it follows Grab into assisted rides. Keep the relationship visible on the Partners page.</p></div>
+      </div></div>
+    <div class="cgroup"><div class="cg-h"><h3 class="sub">Commercial wheelchair van operators</h3><p>The direct field. Lift or ramp vehicles, WhatsApp booking, no published fare.</p></div>
+      <div class="cfirms">
+        <div class="cfirm"><div class="cf-h"><b>Love On Wheels</b><span class="cf-hq">Kuala Lumpur, seven states</span></div><div class="cf-sc"><span class="sc mid">Site 6</span><span class="sc hi">Threat 8</span></div><p>Take the one tap WhatsApp button and the search phrase as the h1. Then out write them: a page per service, per area, in two languages.</p></div>
+        <div class="cfirm"><div class="cf-h"><b>Pearlcare Mobility</b><span class="cf-hq">Petaling Jaya</span></div><div class="cf-sc"><span class="sc mid">Site 5</span><span class="sc hi">Threat 7</span></div><p>Take the two package naming and the pickup mechanic. Settle the hours and print one version.</p></div>
+        <div class="cfirm"><div class="cf-h"><b>Multicare Mobility</b><span class="cf-hq">Klang Valley, since 2019</span></div><div class="cf-sc"><span class="sc mid">Site 5</span><span class="sc mid">Threat 5</span></div><p>Take the testimonial format: name, town, a sentence about the person. Nothing else worth taking.</p></div>
+        <div class="cfirm"><div class="cf-h"><b>GPM Ambulance</b><span class="cf-hq">Kuala Lumpur and Selangor</span></div><div class="cf-sc"><span class="sc lo">Site 4</span><span class="sc lo">Threat 3</span></div><p>Take the lesson that 24/7 is a sentence, not a fleet. If Jom Makcik cannot say it, say what it can: 24 hours notice, and an honest answer on weekends.</p></div>
+      </div></div>
+    <div class="cgroup"><div class="cg-h"><h3 class="sub">Non profit and public</h3><p>They set the price floor and the honesty bar. A family who has used them expects both.</p></div>
+      <div class="cfirms">
+        <div class="cfirm"><div class="cf-h"><b>Mobiliti</b><span class="cf-hq">Petaling Jaya, five vans</span></div><div class="cf-sc"><span class="sc lo">Site 4</span><span class="sc mid">Threat 6</span></div><p>Take the worked fare example. A round trip in RM, with the carer priced, is the most reassuring sentence on any page in this set.</p></div>
+        <div class="cfirm"><div class="cf-h"><b>Little Fook, Dual Blessing</b><span class="cf-hq">Klang Valley</span></div><div class="cf-sc"><span class="sc lo">Site 3</span><span class="sc mid">Threat 5</span></div><p>Take the one page discipline: fare, hours, notice, surcharge, eligibility. Take the honesty of "we do not provide personal assistant" and answer it with "we do".</p></div>
+        <div class="cfirm"><div class="cf-h"><b>Rapid Mobility</b><span class="cf-hq">Prasarana, nine named areas</span></div><div class="cf-sc"><span class="sc lo">Site 3</span><span class="sc lo">Threat 3</span></div><p>Take the named area list. Nine suburbs written out beats "Klang Valley". The Coverage page does this for four areas.</p></div>
+        <div class="cfirm"><div class="cf-h"><b>MBSA council van</b><span class="cf-hq">Shah Alam residents</span></div><div class="cf-sc"><span class="sc lo">Site n/a</span><span class="sc lo">Threat 1</span></div><p>Background noise. One vehicle, one council. Listed so the board is complete.</p></div>
+      </div></div>
+    <div class="cgroup"><div class="cg-h"><h3 class="sub">Companion services</h3><p>They sell the person, not the van. They compete for the same monthly budget and they publish prices.</p></div>
+      <div class="cfirms">
+        <div class="cfirm"><div class="cf-h"><b>Homage</b><span class="cf-hq">Kuala Lumpur, five regions, app</span></div><div class="cf-sc"><span class="sc hi">Site 7</span><span class="sc mid">Threat 5</span></div><p>Take the seven listed inclusions and the from RM28 an hour pricing device. Then say the one thing they cannot: we bring the vehicle, and it has a ramp.</p></div>
+        <div class="cfirm"><div class="cf-h"><b>Seniora</b><span class="cf-hq">Taiping, Penang, Johor Bahru</span></div><div class="cf-sc"><span class="sc mid">Site 6</span><span class="sc lo">Threat 4</span></div><p>Take the rate table by area with toll and parking included and a Sunday surcharge. It is the most complete pricing page on the board, and it belongs to a company outside our four areas.</p></div>
+      </div></div>
+  </section>
+
+  <!-- 05 ══════════════════════════════════════════════════════════ -->
+  <div class="chapdiv" id="c05"><div class="cd-no">05</div><div>
+    <h2 class="cd-h">Five things the new site must do</h2>
+    <div class="cd-sub">The whole board reduced to five instructions, each already in the web plan and the prototype</div>
+  </div></div>
+  <section>
+    <div class="moves">
+      <div class="movecard"><span class="mv-k">Move 01</span><h3>Say the two things Grab cannot do, in the hero</h3><p>Stay in your own wheelchair. We walk you in. Six words the largest competitor has published that it cannot use. Placed where a comparison shopper reads first. Built.</p><div class="mv-src">Source: grab.com/my/grabassist capture, 10 Sep 2026</div></div>
+      <div class="movecard"><span class="mv-k">Move 02</span><h3>Publish a fare, and a worked round trip</h3><p>Mobiliti's RM46 round trip example is the most reassuring sentence in the set. Jom Makcik's structure is built and shows On request until Dr Sazlina confirms figures. Being the first commercial operator to publish takes the position outright.</p><div class="mv-src">Source: mobiliti.org.my and shuangfu.org captures</div></div>
+      <div class="movecard"><span class="mv-k">Move 03</span><h3>Write the pages Love On Wheels is writing, in two languages</h3><p>A page per service, a page per area, a FAQ marked up as schema, each titled with what a person types. One operator does this in English. Nobody does it in Malay.</p><div class="mv-src">Source: loveonwheels.com.my capture and its blog index</div></div>
+      <div class="movecard"><span class="mv-k">Move 04</span><h3>Turn sixteen logos into sixteen sentences</h3><p>Zero operators on this board explain a partner. Jom Makcik has PERKESO, JKM, Khazanah's foundation, four universities and two hospitals. One sentence each, on the homepage rail and a Partners page. Built, with the two agency sentences pending approval.</p><div class="mv-src">Source: every capture in part 02; none carries an explained partner</div></div>
+      <div class="movecard"><span class="mv-k">Move 05</span><h3>Name the testimonials and match Pearlcare's operational honesty</h3><p>Multicare names its reviewers. Pearlcare states 24 x 7 and the pickup mechanic. Jom Makcik's three quotes are anonymous and its hours contradict its own app. Names, towns, and one version of the hours, everywhere.</p><div class="mv-src">Source: multicaremobility.com and pearlcaremobility.com.my captures; audit finding 6</div></div>
+    </div>
+  </section>
+
+  <!-- 06 ══════════════════════════════════════════════════════════ -->
+  <div class="chapdiv" id="c06"><div class="cd-no">06</div><div>
+    <h2 class="cd-h">What we could not verify</h2>
+    <div class="cd-sub">Attempted on 9 and 10 September 2026 and stated plainly rather than guessed at</div>
+  </div></div>
+  <section>
+    <table>
+      <thead><tr><th>Attempted</th><th>Result</th></tr></thead>
+      <tbody>
+        <tr><td class="dim">Multicare and Love On Wheels, same operation?</td><td>Both homepages carry an identical credit thanking Klinik Dr.Prevents 24 JAM PJ Old Town for a donation. Shared ownership, shared supplier or a coincidence could not be established. They are scored separately and the overlap is recorded here, not asserted.</td></tr>
+        <tr><td class="dim">Multicare measured speed</td><td>The site sits behind a Cloudflare bot challenge for scripted fetches. It rendered for a screenshot in a real browser but was not run on the throttled rig, so it carries no speed figures.</td></tr>
+        <tr><td class="dim">Rapid Mobility fares and eligibility</td><td>The page states the lift vans, the nine areas, the phone extension and the weekday hours. It does not state a fare or an OKU card requirement, and the FAQ link was not followed. Free or near free is an inference from the operator's public role, labelled as such.</td></tr>
+        <tr><td class="dim">Homage wheelchair handling</td><td>The escort page does not mention wheelchairs. "No vehicle" is stated on their page; "no ramp" follows from it and is ours.</td></tr>
+        <tr><td class="dim">GPM lift or ramp</td><td>Mobility Transport is described for "those who are wheelchair bound" with no vehicle detail. Whether the passenger stays seated is unknown.</td></tr>
+        <tr><td class="dim">Seniora coverage of the four areas</td><td>The rate table names KL and Selangor at RM50 an hour, but the operating centres listed are Taiping, Penang and Johor Bahru. Whether a KL booking is served locally or by a travelling companion could not be confirmed.</td></tr>
+        <tr><td class="dim">GrabAssist driver count today</td><td>Roughly 100 at launch, from the December 2025 press release. No later figure is published.</td></tr>
+        <tr><td class="dim">Jom Makcik's own 2026 numbers</td><td>The 600 drivers, 75% share and RM98,000 per AbiliCar are from Free Malaysia Today, January 2025. Current figures are the first question for Friday.</td></tr>
+        <tr><td class="dim">Follower counts and review volumes</td><td>Not pulled for any operator. Nothing in this document rests on them.</td></tr>
+      </tbody>
+    </table>
+    <div class="fx-h">Sources</div>
+    <div class="srcs">
+      <a href="https://www.grab.com/my/grabassist/" target="_blank" rel="noopener">grab.com/my/grabassist</a>
+      <a href="https://www.grab.com/my/press/others/grab-malaysia-expands-access-to-mobility-with-grabassist/" target="_blank" rel="noopener">Grab Malaysia press release, GrabAssist launch</a>
+      <a href="https://loveonwheels.com.my/" target="_blank" rel="noopener">loveonwheels.com.my</a>
+      <a href="https://pearlcaremobility.com.my/services/" target="_blank" rel="noopener">pearlcaremobility.com.my/services</a>
+      <a href="https://mobiliti.org.my/the-transport-service/" target="_blank" rel="noopener">mobiliti.org.my/the-transport-service</a>
+      <a href="https://multicaremobility.com/" target="_blank" rel="noopener">multicaremobility.com</a>
+      <a href="https://www.shuangfu.org/accessible-transport-department/" target="_blank" rel="noopener">shuangfu.org, Dual Blessing Bhd, Accessible Transport Department</a>
+      <a href="https://www.homage.com.my/services/medical-escort/" target="_blank" rel="noopener">homage.com.my/services/medical-escort</a>
+      <a href="https://www.seniora.com.my/escortservice-elderly" target="_blank" rel="noopener">seniora.com.my/escortservice-elderly</a>
+      <a href="https://services.gpmambulance.com.my/patient-transport-service/" target="_blank" rel="noopener">services.gpmambulance.com.my/patient-transport-service</a>
+      <a href="https://myrapid.com.my/bus-train/rapid-kl/rapidkl-rapid-mobility/" target="_blank" rel="noopener">myrapid.com.my, Rapid Mobility</a>
+      <a href="https://themalaysianreserve.com/2017/03/31/mbsa-provides-free-transport-service-for-oku/" target="_blank" rel="noopener">The Malaysian Reserve, MBSA OKU van</a>
+      <a href="https://yayasanhasanah.org/2026/08/24/caring-for-our-elders-a-shared-responsibility/" target="_blank" rel="noopener">Yayasan Hasanah, 24 August 2026, the 68% figure</a>
+      <a href="https://www.freemalaysiatoday.com/category/leisure/2025/01/11/jom-makcik-inspires-change-with-compassionate-rides" target="_blank" rel="noopener">Free Malaysia Today, 11 January 2025</a>
+    </div>
+    <div class="pin"><b>Paired documents.</b> The measurements behind the speed scores are in the <a href="audit.html" style="color:var(--blue-deep)">Web Audit</a>. The five moves above are carried into the <a href="plan.html" style="color:var(--blue-deep)">Web Plan</a> and built in <a href="index.html" style="color:var(--blue-deep)">Prototype Web 1</a>.</div>
+  </section>
+
+  <footer>Brand Method &middot; Jom Makcik competitor audit &middot; captured 9 and 10 September 2026 &middot; prepared for Dr Sazlina Kamaralzaman &middot; meeting Friday 11 September, 2pm</footer>
+</div>
+</body>
+</html>

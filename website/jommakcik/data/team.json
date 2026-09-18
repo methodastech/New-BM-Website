@@ -1,0 +1,40 @@
+{
+  "team": [
+    {
+      "name": "Dr Sazlina Kamaralzaman",
+      "role": {
+        "en": "Founder and Chief Executive Officer",
+        "bm": "Pengasas dan Ketua Pegawai Eksekutif"
+      },
+      "photo": "assets/img/team-sazlina.webp",
+      "featured": true
+    },
+    {
+      "name": "Ms Siti Sarah Anuar",
+      "role": {
+        "en": "CFO and Co-founder",
+        "bm": "CFO dan Pengasas Bersama"
+      },
+      "photo": "assets/img/team-sitisarah.webp",
+      "featured": false
+    },
+    {
+      "name": "Dr Anuar Sani",
+      "role": {
+        "en": "Technical Health Advisor",
+        "bm": "Penasihat Kesihatan Teknikal"
+      },
+      "photo": "assets/img/team-anuar.webp",
+      "featured": false
+    },
+    {
+      "name": "Ms Norlin Husna Sanusi",
+      "role": {
+        "en": "Corporate Relations Officer",
+        "bm": "Pegawai Perhubungan Korporat"
+      },
+      "photo": "assets/img/team-norlin.webp",
+      "featured": false
+    }
+  ]
+}

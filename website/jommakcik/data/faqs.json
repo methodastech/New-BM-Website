@@ -1,0 +1,70 @@
+{
+  "faqs": [
+    {
+      "question": {
+        "en": "My mother cannot get out of her wheelchair. Can you still take her?",
+        "bm": "Ibu saya tidak boleh keluar dari kerusi roda. Boleh anda bawa dia?"
+      },
+      "answer": {
+        "en": "Yes. That is exactly what AbiliCar is for. The ramp comes down, she rolls on in her own chair, and the chair is secured with factory fitted restraints for the whole journey. She never has to transfer.",
+        "bm": "Ya. Itulah tujuan AbiliCar. Tanjakan diturunkan, dia naik dengan kerusi rodanya sendiri, dan kerusi diikat dengan sistem keselamatan pasangan kilang sepanjang perjalanan. Dia tidak perlu berpindah langsung."
+      },
+      "icon": "assets/img/icons/faq-wheelchair.webp"
+    },
+    {
+      "question": {
+        "en": "How much notice do you need?",
+        "bm": "Berapa lama notis diperlukan?"
+      },
+      "answer": {
+        "en": "Book at least 24 hours ahead where you can. For anything sooner, message us on WhatsApp and we will tell you honestly whether we can cover it.",
+        "bm": "Tempah sekurang-kurangnya 24 jam lebih awal jika boleh. Jika lebih segera, WhatsApp kami dan kami akan beritahu dengan jujur sama ada kami mampu."
+      },
+      "icon": "assets/img/icons/faq-clock.webp"
+    },
+    {
+      "question": {
+        "en": "What if the appointment runs late?",
+        "bm": "Bagaimana jika temujanji lewat?"
+      },
+      "answer": {
+        "en": "We wait. Hospital appointments overrun, and nobody should be left at an entrance because a clock ran out. Tell us at booking if a long wait is likely so we can plan the driver's day around it.",
+        "bm": "Kami tunggu. Temujanji hospital selalu lewat, dan tiada siapa patut ditinggalkan di pintu masuk kerana masa tamat. Beritahu kami semasa tempahan jika jangkaan menunggu lama."
+      },
+      "icon": "assets/img/icons/faq-hourglass.webp"
+    },
+    {
+      "question": {
+        "en": "Can a family member ride along?",
+        "bm": "Boleh ahli keluarga ikut sama?"
+      },
+      "answer": {
+        "en": "Yes. There is room for a companion in every vehicle, and there is no charge for one accompanying family member.",
+        "bm": "Boleh. Ada ruang untuk seorang teman dalam setiap kenderaan, dan tiada caj untuk seorang ahli keluarga yang mengiringi."
+      },
+      "icon": "assets/img/icons/faq-family.webp"
+    },
+    {
+      "question": {
+        "en": "What exactly does a chaperone do?",
+        "bm": "Apa sebenarnya tugas teman iringan?"
+      },
+      "answer": {
+        "en": "She collects your parent from the house, helps them to the vehicle, walks them into the clinic, takes the queue number, waits through the appointment, collects the medication if needed, and brings them home. You get a message when they are back inside.",
+        "bm": "Dia menjemput ibu bapa anda dari rumah, membantu ke kenderaan, mengiringi masuk ke klinik, mengambil nombor giliran, menunggu sepanjang temujanji, mengambil ubat jika perlu, dan membawa mereka pulang. Anda akan terima mesej apabila mereka selamat di rumah."
+      },
+      "icon": "assets/img/icons/faq-hands.webp"
+    },
+    {
+      "question": {
+        "en": "Are your drivers checked?",
+        "bm": "Adakah pemandu anda disaring?"
+      },
+      "answer": {
+        "en": "Yes. Adinita drivers are vetted before they join and complete driving and care training delivered with UTM and UiTM, plus programme specific training in senior and autism travel care funded by AirAsia Foundation.",
+        "bm": "Ya. Pemandu Adinita disaring sebelum menyertai dan menamatkan latihan pemanduan dan penjagaan bersama UTM dan UiTM, serta latihan khusus penjagaan perjalanan warga emas dan autisme yang dibiayai AirAsia Foundation."
+      },
+      "icon": "assets/img/icons/faq-shield.webp"
+    }
+  ]
+}

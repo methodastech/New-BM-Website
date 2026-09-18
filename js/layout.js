@@ -20,7 +20,17 @@ document.body.insertAdjacentHTML('afterbegin', `
     <div class="nav-links">
       <a href="${basePath}index.html">Home</a>
       <a href="${basePath}about.html">About</a>
-      <a href="${basePath}work.html">Work</a>
+      <div class="nav-dd nav-dd--simple">
+        <a href="${basePath}work.html" class="nav-dd-trigger" aria-haspopup="true" aria-expanded="false">Work <svg class="cv" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 4l4 4 4-4"/></svg></a>
+        <div class="nav-dd-panel">
+          <div class="ddp-col">
+            <span class="ddp-head">Our work</span>
+            <a class="ddp-svc" href="${basePath}work.html" style="--dc:#d63a7e"><span class="ddp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="7.5" y="3" width="13" height="15.5" stroke-opacity=".45"/><rect x="3.5" y="5.5" width="13" height="15.5" fill="#fff"/><circle cx="10" cy="11.5" r="2.6"/><path d="M7 17h6" stroke-opacity=".5"/></svg></span><span class="ddp-txt"><span class="ddp-nm">Branding Portfolio</span><span class="ddp-desc">Brand identities &amp; case studies</span></span></a>
+            <a class="ddp-svc" href="${basePath}portfolio.html" style="--dc:#0fa67a"><span class="ddp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16"/><path d="M3 8h18" stroke-opacity=".5"/><path d="M10 11.5 7.5 14l2.5 2.5M14 11.5l2.5 2.5-2.5 2.5"/></svg></span><span class="ddp-txt"><span class="ddp-nm">Tech Portfolio</span><span class="ddp-desc">Websites, apps &amp; digital products</span></span></a>
+            <a class="ddp-svc" href="${basePath}logo-gallery.html" style="--dc:#3a55e8"><span class="ddp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l5.5 8.2-3 8.8h-5l-3-8.8z"/><path d="M12 3v7" stroke-opacity=".55"/><circle cx="12" cy="11.8" r="1.6"/><path d="M9.5 20h5" stroke-opacity=".5"/></svg></span><span class="ddp-txt"><span class="ddp-nm">Logo Gallery</span><span class="ddp-desc">Brand marks, symbols &amp; explorations</span></span></a>
+          </div>
+        </div>
+      </div>
       <div class="nav-dd">
         <a href="${basePath}services.html" class="nav-dd-trigger" aria-haspopup="true" aria-expanded="false">Services <svg class="cv" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 4l4 4 4-4"/></svg></a>
         <div class="nav-dd-panel">
@@ -71,7 +81,21 @@ document.body.insertAdjacentHTML('afterbegin', `
 <div class="nav-mobile">
   <a href="${basePath}index.html">Home</a>
   <a href="${basePath}about.html">About</a>
-  <a href="${basePath}work.html">Work</a>
+  <div class="nav-mobile-services">
+    <div class="nav-mobile-services-row">
+      <a href="${basePath}work.html">Work</a>
+      <button class="nav-mobile-services-toggle" type="button" aria-label="Toggle work submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+    <div class="nav-mobile-sub">
+      <a href="${basePath}work.html">Branding Portfolio</a>
+      <a href="${basePath}portfolio.html">Tech Portfolio</a>
+      <a href="${basePath}logo-gallery.html">Logo Gallery</a>
+    </div>
+  </div>
   <div class="nav-mobile-services">
     <div class="nav-mobile-services-row">
       <a href="${basePath}services.html">Services</a>

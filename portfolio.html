@@ -31,7 +31,32 @@
 <link rel="stylesheet" href="css/style.css?v=20260620d">
 <style>
 .portfolio-page-inner { padding-inline: 28px; }
-.portfolio-head { text-align:center; max-width:680px; margin:0 auto 48px; }
+.portfolio-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 34px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  transition: color 0.2s var(--ease), transform 0.2s var(--ease);
+}
+.portfolio-back::before {
+  content: '';
+  width: 18px;
+  height: 10px;
+  background: currentColor;
+  clip-path: polygon(0 50%, 42% 0, 42% 38%, 100% 38%, 100% 62%, 42% 62%, 42% 100%);
+  flex: 0 0 auto;
+}
+.portfolio-back:hover {
+  color: var(--accent);
+  transform: translateX(-4px);
+}
+.portfolio-head { text-align:center; max-width:880px; margin:0 auto 48px; }
 .portfolio-head .wkx-count {
   display:inline-flex; align-items:center; margin:0 auto 16px;
   font-family:var(--font-sans); font-size:10px; font-weight:700; letter-spacing:0.13em;
@@ -50,8 +75,10 @@
   color:var(--white); font-family:var(--font-display); font-weight:400;
   font-size:clamp(30px,4.4vw,46px); line-height:1.05; letter-spacing:-0.01em; margin-bottom:16px;
 }
-.portfolio-head h1 em { font-style:italic; color:var(--accent); }
+.portfolio-head h1 em { display:block; font-style:italic; color:var(--accent); }
 .portfolio-head p { color:var(--off-white); font-size:16px; line-height:1.5; }
+/* the lede is one sentence pair, held on a single line wherever the screen has room for it */
+@media(min-width:900px){ .portfolio-head p { white-space:nowrap; } }
 
 /* ===== Live-build cards (ported from the Brand Method live-work grid) ===== */
 #portfolio-work {
@@ -85,6 +112,7 @@
 @media(max-width:1024px){ #portfolio-work .wkc-grid{grid-template-columns:repeat(2,1fr);} }
 @media(max-width:768px){
   .portfolio-page-inner { padding-inline: 16px; }
+  .portfolio-back { margin-bottom: 22px; }
   .portfolio-head { margin-bottom: 34px; }
 }
 @media(max-width:560px){
@@ -114,8 +142,10 @@
 
 <section>
   <div class="section-inner portfolio-page-inner">
+    <a class="portfolio-back reveal" href="work.html">Back to work</a>
+
     <div class="portfolio-head reveal">
-      <span class="wkx-count">11 live builds</span>
+      <span class="wkx-count">14 live builds</span>
       <span class="portfolio-eyebrow">Proof / live work</span>
       <h1>Real builds you can open, and <em>what changed once they went live.</em></h1>
       <p>Every tile is a working build, not a mockup. Open any one and the full thing loads in a new tab.</p>
@@ -219,6 +249,48 @@
             <div class="wkc-name">The Pause</div>
             <div class="wkc-desc">Store for a curated home-fragrance and scent-ritual brand</div>
             <a class="wkc-cover" href="website/thepause/" target="_blank" rel="noopener" aria-label="Open live build in a new tab"></a>
+          </div>
+        </div>
+
+        <div class="wkc reveal reveal-delay-1">
+          <div class="wkc-thumb" style="--wkph-accent:#2E3BD0">
+            <a class="wkc-demo" href="website/helldive/" target="_blank" rel="noopener" aria-label="Open Helldive Command live demo in a new tab"><img class="wkc-shot" src="Image/portfolio/helldive-ss.webp" loading="lazy" decoding="async" alt="Helldive Command website preview"></a>
+            <span class="wkc-live">Live</span>
+            <span class="wkc-open" aria-hidden="true"><b>View live demo</b><span>open &#8599;</span></span>
+          </div>
+          <div class="wkc-body">
+            <span class="wkc-ind">Gaming / Community</span>
+            <div class="wkc-name">Helldive Command</div>
+            <div class="wkc-desc">Training hub for Helldivers 2 players with stratagems, weapons and drills</div>
+            <a class="wkc-cover" href="website/helldive/" target="_blank" rel="noopener" aria-label="Open live build in a new tab"></a>
+          </div>
+        </div>
+
+        <div class="wkc reveal reveal-delay-2">
+          <div class="wkc-thumb" style="--wkph-accent:#2536F5">
+            <a class="wkc-demo" href="website/jommakcik/" target="_blank" rel="noopener" aria-label="Open Jom Makcik live demo in a new tab"><img class="wkc-shot" src="Image/portfolio/jommakcik-ss.webp" loading="lazy" decoding="async" alt="Jom Makcik website preview"></a>
+            <span class="wkc-live">Live</span>
+            <span class="wkc-open" aria-hidden="true"><b>View live demo</b><span>open &#8599;</span></span>
+          </div>
+          <div class="wkc-body">
+            <span class="wkc-ind">Care / Mobility</span>
+            <div class="wkc-name">Jom Makcik</div>
+            <div class="wkc-desc">Site for wheelchair-accessible transport and trained women chaperones</div>
+            <a class="wkc-cover" href="website/jommakcik/" target="_blank" rel="noopener" aria-label="Open live build in a new tab"></a>
+          </div>
+        </div>
+
+        <div class="wkc reveal">
+          <div class="wkc-thumb" style="--wkph-accent:#1F2DBE">
+            <a class="wkc-demo" href="website/al-ain/" target="_blank" rel="noopener" aria-label="Open AL AiN IT Consultants live demo in a new tab"><img class="wkc-shot" src="Image/portfolio/alain-ss.webp" loading="lazy" decoding="async" alt="AL AiN IT Consultants website preview"></a>
+            <span class="wkc-live">Live</span>
+            <span class="wkc-open" aria-hidden="true"><b>View live demo</b><span>open &#8599;</span></span>
+          </div>
+          <div class="wkc-body">
+            <span class="wkc-ind">B2B / Tech</span>
+            <div class="wkc-name">AL AiN IT Consultants</div>
+            <div class="wkc-desc">Site for an accredited software testing lab in Kuala Lumpur</div>
+            <a class="wkc-cover" href="website/al-ain/" target="_blank" rel="noopener" aria-label="Open live build in a new tab"></a>
           </div>
         </div>
 

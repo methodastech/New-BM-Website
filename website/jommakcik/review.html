@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jom Makcik &middot; Review &middot; Brand Method</title>
+<link rel="icon" type="image/webp" sizes="32x32" href="assets/img/favicon-32.webp">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/bmws.css?v=1">
+<style>
+  :root{
+    --paper:#F5F7FC;--paper2:#FCFDFF;--ink:#101626;--soft:#4A5468;--faint:#8A93A6;
+    --line:#E2E7F1;--line2:#D6DCEA;--blue:#2536F5;--blue-deep:#1421B8;--wash:#EEF1FE;
+    --ok:#1A8F5A;--warn:#C9941F;--red:#D7263D;--dark:#0E1424;--maxw:1080px;
+    --jm:#F91B2A;--jm-deep:#C60815;--jm-wash:#FFF1F2;--e1:cubic-bezier(.22,.8,.28,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+  body{font-family:"Inter",system-ui,sans-serif;background:var(--paper);color:var(--ink);font-size:16px;line-height:1.62;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+  .mono{font-family:"JetBrains Mono",monospace}
+  .bmws{position:sticky;top:0;z-index:80}
+
+  .chapnav{border-bottom:1px solid var(--line);background:rgba(245,247,252,.97);position:sticky;top:0;z-index:49;overflow-x:auto;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+  .chapnav-in{display:flex;gap:3px;padding:8px 28px;max-width:var(--maxw);margin:0 auto;white-space:nowrap}
+  .chapnav a{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--faint);text-decoration:none;padding:6px 10px;border-radius:8px}
+  .chapnav a:hover{color:var(--ink);background:var(--wash)}
+  .chapnav .ch-no{color:var(--blue-deep);font-weight:700;margin-right:6px}
+
+
+  .eyebrow{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--blue-deep);display:inline-flex;align-items:center;gap:10px;font-weight:600}
+  .eyebrow::before{content:"";width:28px;height:1px;background:var(--blue);display:inline-block}
+  .hero{padding:50px 0 8px}
+  .hero h1{font-family:"Fraunces",serif;font-weight:500;font-size:clamp(36px,5.6vw,62px);line-height:1.03;letter-spacing:-.02em;margin:18px 0 0}
+  .hero h1 em{font-style:italic;color:var(--jm-deep)}
+  .hero .lede{font-size:clamp(17px,2vw,20px);color:var(--soft);max-width:66ch;margin:20px 0 0}
+  .vrow{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+  .vchip{background:var(--paper2);border:1px solid var(--line);border-radius:999px;padding:8px 15px;font-size:13px;color:var(--soft)}
+  .vchip b{color:var(--ink)}
+  .execsum{margin-top:32px;border:1px solid var(--line);border-radius:16px;background:var(--paper2);padding:26px 28px}
+  .execsum .k{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--jm-deep);font-weight:700}
+  .execsum p{margin-top:12px;font-size:16.5px;color:var(--soft)}
+  .execsum p b{color:var(--ink)}
+  .execsum p+p{margin-top:11px}
+
+  section{padding:32px 0}
+  .chapdiv{display:flex;align-items:baseline;gap:18px;padding:46px 0 4px;border-top:1px solid var(--line);margin-top:10px}
+  .cd-no{font-family:"Fraunces",serif;font-weight:600;font-size:38px;color:var(--blue-deep);line-height:1}
+  h2.cd-h{font-family:"Fraunces",serif;font-weight:500;font-size:27px;letter-spacing:-.01em;margin:0}
+  .cd-sub{font-size:15px;color:var(--soft);margin-top:5px}
+  .secmark{display:flex;align-items:center;gap:13px;margin-top:6px}
+  .secicon{width:34px;height:34px;border-radius:9px;background:var(--dark);display:flex;align-items:center;justify-content:center;color:#9FB4FF;flex:none}
+  .secicon svg{width:17px;height:17px}
+  .sec-no{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--blue-deep);letter-spacing:.1em;text-transform:uppercase;font-weight:600}
+  h3.sechead{font-family:"Fraunces",serif;font-weight:500;font-size:clamp(25px,3.6vw,37px);line-height:1.08;letter-spacing:-.015em;margin:13px 0 0;max-width:26ch}
+  h3.sub{font-family:"Fraunces",serif;font-weight:500;font-size:22px;margin:30px 0 0}
+  .sec-intro{font-size:16.5px;color:var(--soft);max-width:74ch;margin:15px 0 0}
+  .sec-intro b,.sec-intro strong{color:var(--ink)}
+
+  .grid{display:grid;gap:16px;margin-top:22px}
+  .g2{grid-template-columns:repeat(auto-fit,minmax(290px,1fr))}
+  .g3{grid-template-columns:repeat(auto-fit,minmax(225px,1fr))}
+  .card{background:var(--paper2);border:1px solid var(--line);border-radius:14px;padding:20px 21px}
+  .card .tag{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--blue-deep);font-weight:700}
+  .card h3{font-family:"Fraunces",serif;font-weight:500;font-size:19px;margin-top:8px}
+  .card p{font-size:14px;color:var(--soft);margin-top:9px;line-height:1.55}
+  .card p b{color:var(--ink)}
+  .card.dark{background:var(--dark);border-color:#232a40;color:#D6DEF2}
+  .card.dark h3{color:#fff}.card.dark p{color:#AEB9D2}.card.dark .tag{color:#9FB4FF}.card.dark p b{color:#fff}
+  .card.jm{border-color:#F7C9CD;background:var(--jm-wash)}
+  .card.jm .tag{color:var(--jm-deep)}
+
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-top:22px}
+  .stat{border:1px solid var(--line);border-radius:13px;background:var(--paper2);padding:16px 18px}
+  .stat .num{font-family:"Fraunces",serif;font-size:28px;font-weight:500;color:var(--blue-deep);line-height:1.05}
+  .stat.bad .num{color:var(--jm-deep)}
+  .stat .lab{font-size:13px;font-weight:600;margin-top:8px}
+  .stat .s{font-size:12px;color:var(--faint);margin-top:3px}
+
+  .goals2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-top:22px}
+  .goal{display:flex;gap:13px;align-items:flex-start;border:1px solid var(--line);border-radius:13px;background:var(--paper2);padding:16px 18px}
+  .goal .gi{width:30px;height:30px;border-radius:8px;background:var(--wash);color:var(--blue-deep);display:flex;align-items:center;justify-content:center;flex:none;font-family:"JetBrains Mono",monospace;font-size:12px;font-weight:700}
+  .goal b{font-size:15px}.goal p{font-size:13.5px;color:var(--soft);margin-top:4px}
+
+  table{width:100%;border-collapse:separate;border-spacing:0;margin-top:18px;font-size:14px;background:var(--paper2);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  thead th{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#fff;background:var(--dark)}
+  tr:last-child td{border-bottom:none}
+  td.dim{font-weight:600;white-space:nowrap}
+  td.sc{font-family:"JetBrains Mono",monospace;color:var(--blue-deep);font-weight:700;white-space:nowrap}
+  tr.hl td{background:var(--jm-wash)}
+  tr.hl td.dim{color:var(--jm-deep)}
+
+  .vtag{font-family:"JetBrains Mono",monospace;font-size:9.5px;text-transform:uppercase;letter-spacing:.04em;padding:3px 8px;border-radius:6px;font-weight:700;display:inline-block}
+  .vtag.hi{background:rgba(26,143,90,.14);color:var(--ok)}
+  .vtag.lo{background:rgba(201,148,31,.16);color:#9a6f12}
+  .vtag.bad{background:rgba(215,38,61,.12);color:var(--red)}
+
+  .pin{margin-top:22px;border-left:3px solid var(--blue);background:linear-gradient(90deg,rgba(37,54,245,.06),transparent);padding:15px 19px;border-radius:0 12px 12px 0;font-size:15px}
+  .pin b{color:var(--blue-deep)}
+  .pin.warn{border-left-color:var(--warn);background:linear-gradient(90deg,rgba(201,148,31,.09),transparent)}
+  .pin.warn b{color:#9a6f12}
+  .pin.jm{border-left-color:var(--jm);background:linear-gradient(90deg,rgba(249,27,42,.07),transparent)}
+  .pin.jm b{color:var(--jm-deep)}
+
+  .quote{margin-top:22px;border:1px solid var(--line);border-radius:14px;background:var(--paper2);padding:22px 24px}
+  .quote q{font-family:"Fraunces",serif;font-size:20px;line-height:1.4;font-style:italic;color:var(--ink);display:block;overflow-wrap:anywhere;word-break:break-word}
+  .quote .src{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin-top:12px;display:block}
+
+  .bars{margin-top:22px;display:flex;flex-direction:column;gap:11px}
+  .bar{display:grid;grid-template-columns:150px 1fr 68px;gap:12px;align-items:center;font-size:13.5px}
+  .bar .bn{font-weight:600}
+  .bar .bt{height:15px;border-radius:4px;background:#E7ECF6;overflow:hidden;position:relative}
+  .bar .bf{height:100%;border-radius:4px;background:var(--blue);display:block}
+  .bar.is-jm .bf{background:var(--jm)}
+  .bar .bv{font-family:"JetBrains Mono",monospace;font-size:12px;font-weight:700;text-align:right;color:var(--soft)}
+  .bar.is-jm .bv{color:var(--jm-deep)}
+
+  .scorewrap{margin-top:22px;border:1px solid var(--line);border-radius:14px;background:var(--paper2);overflow:hidden}
+  .srow{display:grid;grid-template-columns:180px 1fr 92px;gap:14px;align-items:center;padding:13px 18px;border-bottom:1px solid var(--line)}
+  .srow:last-child{border-bottom:0}
+  .srow .sn{font-weight:600;font-size:14.5px}
+  .srow .sn small{display:block;font-weight:400;font-size:12.5px;color:var(--faint);margin-top:2px}
+  .srow .st{height:9px;border-radius:5px;background:#E7ECF6;overflow:hidden}
+  .srow .sf{height:100%;display:block;border-radius:5px}
+  .srow .sv{font-family:"JetBrains Mono",monospace;font-weight:700;font-size:14px;text-align:right}
+  .sv.g{color:var(--ok)}.sv.a{color:#9a6f12}.sv.r{color:var(--jm-deep)}
+  .sf.g{background:var(--ok)}.sf.a{background:var(--warn)}.sf.r{background:var(--jm)}
+
+  .shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:22px}
+  .shot{border:1px solid var(--line);border-radius:13px;background:var(--paper2);overflow:hidden}
+  .shot img{width:100%;height:auto;max-height:430px;object-fit:cover;object-position:top center;display:block;border-bottom:1px solid var(--line);background:#fff}
+  .shot .cp{padding:11px 14px;font-size:12.5px;color:var(--soft);line-height:1.5}
+  .shot .cp b{color:var(--ink);display:block;font-size:13px;margin-bottom:3px}
+
+  .vl-scroll{overflow-x:auto;border:1px solid var(--line2);border-radius:14px;background:#fff;margin-top:20px}
+  table.vledger{width:100%;border-collapse:separate;border-spacing:0;min-width:1000px;font-size:13.5px;border:0;border-radius:0;margin:0}
+  table.vledger th{text-align:left;padding:12px 14px;background:#0B1020;color:#fff;font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;font-weight:700;border-right:1px solid rgba(255,255,255,.1)}
+  table.vledger th:last-child{border-right:0}
+  table.vledger td{padding:14px;vertical-align:top;line-height:1.55;color:#3d4048;border-bottom:1px solid rgba(12,18,32,.09);border-right:1px solid rgba(12,18,32,.06)}
+  table.vledger td:last-child{border-right:0}
+  table.vledger tr:last-child td{border-bottom:0}
+  table.vledger tbody tr:nth-child(even) td{background:#FBFBFD}
+  .vl-n{font-family:"JetBrains Mono",monospace;font-weight:700;color:#9a9ca6;font-size:12px;width:34px}
+  .vl-area{font-weight:700;color:#15161A;min-width:120px}
+  .vl-when{font-family:"JetBrains Mono",monospace;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--blue-deep);font-weight:700;white-space:nowrap}
+
+  ul.tick{margin-top:14px;list-style:none;display:flex;flex-direction:column;gap:9px}
+  ul.tick li{position:relative;padding-left:26px;font-size:15px;color:var(--soft)}
+  ul.tick li b{color:var(--ink)}
+  ul.tick li::before{content:"";position:absolute;left:0;top:9px;width:11px;height:11px;border-radius:3px;border:1.6px solid var(--blue);background:var(--wash)}
+  ul.tick.x li::before{border-color:var(--jm);background:var(--jm-wash)}
+
+  .srcs{margin-top:18px;display:flex;flex-direction:column;gap:7px;font-size:13.5px}
+  .srcs a{color:var(--blue-deep);text-decoration:none;border-bottom:1px solid rgba(20,33,184,.28);word-break:break-all}
+  .srcs a:hover{border-bottom-color:var(--blue-deep)}
+
+  footer{padding:34px 0 70px;color:var(--faint);font-size:12px;font-family:"JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.05em;border-top:1px solid var(--line);margin-top:30px}
+  .ic{stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+  @media(max-width:720px){
+    .wrap{padding:0 18px}
+    .chapnav-in{padding:8px 16px}
+    section{padding:26px 0}
+    .bar{grid-template-columns:106px 1fr 58px;gap:9px;font-size:12.5px}
+    .srow{grid-template-columns:1fr 74px;gap:9px}
+    .srow .st{grid-column:1/-1;order:3}
+    table:not(.vledger){display:block;overflow-x:auto;white-space:nowrap}
+    .chapdiv{flex-direction:column;gap:4px;padding-top:34px}
+  }
+  /* Phones: the chapter rail was 11px type in a 30px tall target, under the 44px touch minimum.
+     It stays a horizontal scroller, the targets simply get full height and a legible size. */
+  @media (max-width:768px){
+    .chapnav-in{gap:2px;padding:4px 16px}
+    .chapnav a{font-size:12px;min-height:44px;display:inline-flex;align-items:center;padding:0 12px}
+  }
+  /* Phones: the mono labels are set between 9.5px and 11px for a desktop reading of these documents,
+     which is below comfortable on a 390px screen. They are lifted to a floor of 11.5px here, and the
+     hero's live links get a full touch target. Nothing above 768px changes. */
+  @media (max-width:768px){
+    thead th,table.vledger th{font-size:12px}
+    .tag,.vtag,.src,.vl-when,.card .tag,.quote .src{font-size:11.5px}
+    .livelinks .ll{min-height:44px;display:flex;flex-direction:column;justify-content:center}
+    .srcs{gap:0}
+    .srcs a{display:block;padding:11px 0}
+  }
+
+  /* Tables in these documents are built for a desktop reading. Below 900px any of them, not only
+     table.rv, becomes its own horizontal scroller so the page itself never scrolls sideways: the
+     seven column performance table was 770px of min-content inside a 712px column at 768. */
+  @media (max-width:900px){
+    table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}
+  }
+  /* and the small mono chip labels get an 11.5px floor on phones */
+  @media (max-width:768px){
+    .k,.sh,.sl,.slot,.who,.bs-k,.fn-k,.v,.s,small,code{font-size:11.5px}
+  }
+  /* Phones: a hard floor for every small label in these documents. The earlier floor used single class selectors and
+     lost to two class rules such as .spec small, and it missed the bare <k> element the plan uses for table keys.
+     Font size only, never SVG text, which is part of a drawn diagram. */
+  @media (max-width:768px){
+    body small, body k, body .k, body .sl, body .slot, body .who, body .bs-k, body .fn-k, body .sh, body .tag, body .vtag, body .src, body .vl-when, body thead th, body .mini-eb, body .swi .m .cr, body .ratio-row .g, body .vc .r.h > div, body .cat, body .own, body .chk .t, body .bshead, body .bshead span, body .pv .r.h, body .pv .r.h > div, body .tk .r.h, body .tk .r.h > div{font-size:11.5px!important}
+  }
+</style>
+<style>
+.cat{display:inline-block;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;padding:3px 7px;border-radius:5px;margin:2px 4px 2px 0;background:#F4F5F8;color:#6B7180;white-space:nowrap}
+.cat.wrong{background:#FDECEE;color:#B4341F}.cat.unclear{background:#FDF6E7;color:#8A5A05}.cat.vague{background:#FDF6E7;color:#8A5A05}.cat.hard{background:#FDF6E7;color:#8A5A05}.cat.nav{background:#EEF1FE;color:#1421B8}.cat.add{background:#E9F7EF;color:#0E7A3C}.cat.remove{background:#F4F5F8;color:#3d4048}.cat.improve{background:#EEF1FE;color:#1421B8}
+.sev{font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:700;padding:3px 8px;border-radius:6px;white-space:nowrap}
+.sev.high{background:#FDECEE;color:#B4341F}.sev.med{background:#FDF6E7;color:#8A5A05}.sev.low{background:#F4F5F8;color:#6B7180}
+.own{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;padding:3px 8px;border-radius:6px;white-space:nowrap}
+.own.bm{background:#E9F7EF;color:#0E7A3C}.own.client{background:#FDF6E7;color:#8A5A05}.own.build{background:#EEF1FE;color:#1421B8}
+.st{font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:700;white-space:nowrap}
+.st.ok{color:#0E7A3C}.st.client{color:#8A5A05}.st.build{color:#1421B8}.st.fail{color:#B4341F}
+table.rv td{font-size:13.5px;line-height:1.55;vertical-align:top}
+table.rv td.id{font-family:"JetBrains Mono",monospace;font-weight:700;color:var(--blue-deep);white-space:nowrap}
+table.rv td b{color:var(--ink)}
+.chk{font-size:12.5px;line-height:1.5}
+.chk .t{display:block;font-family:"JetBrains Mono",monospace;font-size:10.5px;color:var(--faint);margin-bottom:2px}
+.chk .r{display:block}
+.chk.ok .r::before{content:"\2713  ";color:#0E7A3C;font-weight:700}
+.chk.fail .r::before{content:"\2717  ";color:#B4341F;font-weight:700}
+.chk.na .r::before{content:"\2013  ";color:#8A93A6;font-weight:700}
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;font-size:13px;color:var(--soft);align-items:center}
+.kpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin-top:18px}
+.kpi .k{border:1px solid var(--line);border-radius:13px;background:var(--paper2);padding:16px 18px}
+.kpi .k .n{font-family:"Fraunces",serif;font-size:30px;font-weight:500;color:var(--blue-deep);line-height:1}
+.kpi .k .n.bad{color:var(--jm-deep)}.kpi .k .n.good{color:var(--ok)}
+.kpi .k .l{font-size:13px;font-weight:600;margin-top:8px}.kpi .k .s{font-size:12px;color:var(--faint);margin-top:3px}
+@media(max-width:900px){table.rv{display:block;overflow-x:auto;white-space:normal;-webkit-overflow-scrolling:touch}table.rv td{min-width:160px}}
+
+</style>
+</head>
+<body>
+<div class="bmws" style="--bmws-acc:#F91B2A"><div class="bmws-in"><div class="bmws-crumb"><b>Jom Makcik &middot; Website 1</b><span>Brand Method &middot; Admin Navigation</span></div><nav class="bmws-tabs"><a href="audit.html"><i>00</i>Web Audit</a><a href="competitors.html"><i>01</i>Competitors</a><a href="plan.html"><i>02</i>Web Plan</a><a href="design.html"><i>03</i>Design</a><a href="index.html"><i>04</i>Prototype Web 1</a><a href="review.html" class="on"><i>05</i>Review</a><a href="qa.html"><i>06</i>Q&amp;A</a></nav></div></div>
+<nav class="chapnav"><div class="chapnav-in">
+  <a href="#c00"><span class="ch-no">00</span>Method</a>
+  <a href="#c01"><span class="ch-no">01</span>What is right</a>
+  <a href="#c02"><span class="ch-no">02</span>What is wrong</a>
+  <a href="#c03"><span class="ch-no">03</span>By kind</a>
+  <a href="#c04"><span class="ch-no">04</span>Solutions</a>
+  <a href="#c05"><span class="ch-no">05</span>Action checklist</a>
+  <a href="#c06"><span class="ch-no">06</span>Measured, before and after</a>
+</div></nav>
+<div class="wrap">
+  <header class="hero">
+    <span class="eyebrow">Review &middot; Brand Method</span>
+    <h1>Every fault in Prototype Web 1, <em>the fix for each, and three checks that it is fixed</em></h1>
+    <p class="lede">The prototype was read end to end in English and in Malay, clicked through by mouse and by keyboard, scanned for accessibility, measured on the throttled rig used for the live site and the competitors, and checked against the research so that every sentence on it is either a fact the company published or a labelled gap. What follows is every fault that found, sorted three ways, with the fix that was applied and three separate checks that the fix holds. Facts only the company can supply are listed as such, not guessed.</p>
+    <div class="vrow">
+      <div class="vchip">Reviewed <b>10 Sep 2026, evening</b></div>
+      <div class="vchip">Subject <b>index.html, Prototype Web 1</b></div>
+      <div class="vchip">Instruments <b>12</b></div>
+      <div class="vchip">Checks per item <b>3</b></div>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="num">36</div><div class="lab">Findings</div><div class="s">every one has an id, a fix and three checks</div></div>
+      <div class="stat"><div class="num">28</div><div class="lab">Fixed tonight</div><div class="s">in the prototype, verified</div></div>
+      <div class="stat bad"><div class="num">6</div><div class="lab">Need the client</div><div class="s">facts only Dr Sazlina has</div></div>
+      <div class="stat"><div class="num">2</div><div class="lab">Full build items</div><div class="s">need pages that do not exist yet</div></div>
+    </div>
+    <div class="pin jm"><b>The finding that matters:</b> nothing on the page is broken, and the page is now four times faster than the live site on the same throttled connection. What is wrong is quieter than that: a handful of sentences that a stranger cannot follow, six partners with a logo and no sentence, internal notes that were showing as copy, and a long page with no way to jump. All of it is fixed below except the facts only the company can supply, which are listed by name.</div>
+  </header>
+
+  <div class="chapdiv" id="c00"><div class="cd-no">00</div><div><h2 class="cd-h">How the page was reviewed</h2><div class="cd-sub">Instruments, not opinions. Each finding cites the one that produced it.</div></div></div>
+  <section>
+    <p class="sec-intro">The page was read in full in both languages, then put through the same instruments used on the live site and the competitors, so the numbers are comparable. Where a judgement is ours it is marked as ours.</p>
+    <table><thead><tr><th style="width:24%">Instrument</th><th>What it checked</th><th style="width:26%">Result</th></tr></thead><tbody>
+<tr><td class="dim">Full copy read, EN and BM</td><td>Every visible string dumped from the DOM in both languages and read for sense, jargon, contradiction, invented figures and internal notes showing as copy</td><td>31 findings on copy and clarity</td></tr>
+<tr><td class="dim">Link and control map</td><td>Every href and button listed with its target; dead targets, duplicate targets and unreachable sections noted</td><td>#book resolves; footer said Pricing was coming while it was on the page; no section navigation</td></tr>
+<tr><td class="dim">axe-core 4.12, WCAG 2.2 AA plus best practice</td><td>Run at 1440 and 390 after scrolling the whole page, admin bar removed</td><td>2 violations at 1440, 3 at 390: contrast on the footer soon items, heading order, the action bar outside a landmark</td></tr>
+<tr><td class="dim">Keyboard pass</td><td>34 tabs from the top, focus ring visibility, lightbox open and Escape, FAQ by Enter, chapter by Enter</td><td>All pass; the greyed pages are correctly skipped</td></tr>
+<tr><td class="dim">Throttled rig</td><td>Slow 4G at 1.6 Mbps and 150 ms latency, CPU slowed four times, Pixel 5 viewport and a 1440 desktop; FCP, LCP, TBT, CLS, bytes, requests</td><td>Phone: FCP 0.76 s, LCP 3.82 s on the poster, 1.33 MB, 28 requests. The live site on the same rig: 7.55 s, 13.09 s, 12.2 MB, 144 requests</td></tr>
+<tr><td class="dim">Image ledger</td><td>Every image the page loads, its pixels, its bytes and whether it is lazy</td><td>3.19 MB across 38 files before; the two generated scenes were 2048 px for a 650 px slot</td></tr>
+<tr><td class="dim">Nine width sweep</td><td>1440, 1024, 768, 390 and the earlier 9 width run: overflow, dead anchors, broken images, script errors</td><td>Clean at every width</td></tr>
+<tr><td class="dim">Bilingual sweep</td><td>BM toggled, every visible text node checked for a translation ancestor; the document language, title and alt text checked</td><td>31 strings outside the toggle, all proper nouns, numbers and addresses; the title and the alt texts stayed English</td></tr>
+<tr><td class="dim">Head and metadata</td><td>title, description, canonical, Open Graph, favicon, theme colour, structured data</td><td>No favicon, no structured data, the share image was a relative path</td></tr>
+<tr><td class="dim">Research cross check</td><td>Every claim compared with RESEARCH-09SEP.md, the harvest of jommakcik.my and the FMT profile</td><td>Hours conflict between the site and the app; six partners had a logo and no sentence; Adinita is a coined word the page never explains</td></tr>
+<tr><td class="dim">Malaysian data protection</td><td>Whether the page gives the notice the Personal Data Protection Act 2010 requires, in both languages, before data is collected</td><td>No notice, no privacy link, none on the live site either</td></tr>
+<tr><td class="dim">52 frameworks check</td><td>Every framework in the Methodas catalogue read in order and matched to a section of the prototype or a page in the plan; the ones that do not belong on a site for worried families excluded by name</td><td>30 on the page or planned, 3 wait on client facts, 9 later pages, 10 excluded; This is for you if was the one missing block worth adding, and was added</td></tr>
+</tbody></table></section>
+  <div class="chapdiv" id="c01"><div class="cd-no">01</div><div><h2 class="cd-h">What is right, and should not be touched</h2><div class="cd-sub">The parts that do their job, with the evidence, so nobody improves them away</div></div></div>
+  <section><table class="rv"><thead><tr><th style="width:20%">Area</th><th>What works</th><th style="width:30%">Evidence</th></tr></thead><tbody>
+<tr><td class="dim">The promise</td><td>Six words in the hero, <i>Stay in your own wheelchair. We walk you in</i>, say the two things the largest competitor has published it cannot do. Nothing on the page is more important than this and it is the first thing read.</td><td>Grab's own page, quoted in the comparison; the plan's move 01</td></tr>
+<tr><td class="dim">The comparison</td><td>It quotes the platform's published limits instead of criticising anyone, and it says so. A family shopping between the two gets the difference in ten seconds.</td><td>Copy: <i>We are not saying this about anyone</i>; source line under the card</td></tr>
+<tr><td class="dim">Real photographs</td><td>Every photograph is the company's own: the vans, the ramp, the women, the hospital corridor. No stock. The two generated scenes are labelled as such in the design book and marked for replacement.</td><td>Provenance table, design book part 13</td></tr>
+<tr><td class="dim">One action</td><td>Book a ride is the one filled button per screen. Every other route is secondary. On a phone the two actions sit in a fixed bar.</td><td>Header, hero, three cards, closing band, action bar all resolve to WhatsApp or the phone</td></tr>
+<tr><td class="dim">The film</td><td>The company's own three minute film is both the banner and a section with five chapters, each with a real frame. Nothing was made up to fill the space.</td><td>YouTube UBGWAKq6WVM, frames sampled from it</td></tr>
+<tr><td class="dim">Bilingual</td><td>Every sentence has a Malay sentence beside it in the markup, the toggle swaps them in place, the document language follows, and the choice is remembered. Only names, numbers and addresses sit outside the toggle.</td><td>Bilingual sweep, 31 untranslatable strings, none of them copy</td></tr>
+<tr><td class="dim">Speed</td><td>On the throttled rig the page paints in under a second and loads in 1.3 MB on a phone. The live site takes 7.5 seconds to paint and 12 MB.</td><td>Throttled rig, part 06</td></tr>
+<tr><td class="dim">Keyboard and focus</td><td>Everything operable by mouse is operable by keyboard, in reading order, with a visible ring. The lightbox traps and returns focus. Greyed pages are skipped rather than trapped.</td><td>Keyboard pass</td></tr>
+<tr><td class="dim">Reduced motion</td><td>One rule stops every animation and transition, the loops become scrollers, the banner film never mounts, the van is shown arrived.</td><td>Design book part 10</td></tr>
+<tr><td class="dim">Honesty about gaps</td><td>Prices read On request, hours are stated as published, the testimonial is anonymous until consent, unbuilt pages say so when clicked. Nothing is invented to look finished.</td><td>Provenance rule, design book part 13</td></tr>
+<tr><td class="dim">Design instructions held</td><td>No lines, no eyebrows, no mono, no dashes, no boxes, no grey ground, one radius, one red. Every reversal is recorded so it is not tried again.</td><td>Design book part 00</td></tr>
+<tr><td class="dim">Company facts</td><td>Registered name and number, SSM number, full address, two WhatsApp lines, email and three social profiles, all from the company's own site.</td><td>Footer; research table</td></tr>
+</tbody></table></section>
+  <div class="chapdiv" id="c02"><div class="cd-no">02</div><div><h2 class="cd-h">What is wrong, in detail</h2><div class="cd-sub">Every finding, its kind, its severity, the evidence, and where it is on the page</div></div></div>
+  <section>
+    <div class="legend"><b>Kinds:</b> <span class="cat wrong">wrong</span> <span class="cat unclear">not clear</span> <span class="cat vague">vague</span> <span class="cat hard">hard to understand</span> <span class="cat nav">hard to navigate</span> <span class="cat add">needs adding</span> <span class="cat remove">needs removing</span> <span class="cat improve">needs improving</span></div>
+    <table class="rv"><thead><tr><th style="width:5%">ID</th><th style="width:12%">Where</th><th>The problem</th><th style="width:24%">Evidence</th><th style="width:16%">Kind</th><th style="width:7%">Severity</th></tr></thead><tbody>
+<tr><td class="id">P01</td><td class="dim">Comparison h2</td><td>The heading promised <b>two things</b> a standard ride cannot do, but both cards list <b>three</b> items. A careful reader counts, and the third tick, women drivers, is not one of the two.</td><td>Copy read: h2 <i>Two things a standard assisted ride cannot do</i>; 3 ticks, 3 crosses</td><td><span class="cat wrong">wrong</span> <span class="cat unclear">not clear</span></td><td><span class="sev med">Medium</span></td></tr>
+<tr><td class="id">P02</td><td class="dim">Services, FAQ, footer</td><td><b>Adinita</b> is a coined word (from <i>adiwira wanita</i>, women heroes) and the page used it four times before ever saying what it is. A stranger reads <i>Adinita drivers are women</i> and <i>Adinita driver login</i> with no idea it is the company's own driver network.</td><td>Copy read; research line 40 gives the derivation</td><td><span class="cat hard">hard to understand</span></td><td><span class="sev high">High</span></td></tr>
+<tr><td class="id">P03</td><td class="dim">Lady Drivers card</td><td>The card never said what a Lady Driver ride actually is. A reader could not tell whether it is the wheelchair vehicle with a woman driving, or a normal car. It is a normal car, for passengers who can transfer, and that is the whole point of choosing between the three services.</td><td>Copy read; the section lede asks the visitor to <i>pick the one that matches the journey</i> without giving them the means</td><td><span class="cat vague">vague</span> <span class="cat unclear">not clear</span></td><td><span class="sev high">High</span></td></tr>
+<tr><td class="id">P04</td><td class="dim">Stat band, partner rail</td><td><i>a UKM spin-off</i> and <i>through PEMULA@UKM</i> are university jargon. A family in Kajang does not know what a spin-off or PEMULA is.</td><td>Copy read</td><td><span class="cat hard">hard to understand</span></td><td><span class="sev low">Low</span></td></tr>
+<tr><td class="id">P05</td><td class="dim">Film section</td><td>The section heading is the film's Malay title, <i>Wanita Menjaga Wanita</i>, on the English page, with no gloss. An English reader does not know what the section is about until the second sentence.</td><td>Copy read, EN view</td><td><span class="cat unclear">not clear</span></td><td><span class="sev low">Low</span></td></tr>
+<tr><td class="id">P06</td><td class="dim">Pricing quote card</td><td>The card printed <b>RM1,500</b> as a figure. The customer said she paid up to RM3,000 and now pays less than half. That makes the saving <i>more than</i> RM1,500, and it is our arithmetic, not her number.</td><td>Copy read against the FMT quote in the research, line 267</td><td><span class="cat wrong">wrong</span></td><td><span class="sev med">Medium</span></td></tr>
+<tr><td class="id">P07</td><td class="dim">Stat band</td><td>The <b>68%</b> is the strongest number on the page and it carried no source. The design book cites Yayasan Hasanah; the page did not.</td><td>Copy read; the research names the source and date</td><td><span class="cat add">needs adding</span></td><td><span class="sev med">Medium</span></td></tr>
+<tr><td class="id">P08</td><td class="dim">Partners, pricing, footer</td><td>Four internal notes were showing as customer-facing copy: <i>Relationship to be described in their approved wording</i> twice, <i>Name to be confirmed before publication</i>, <i>Opening hours to be confirmed with the office</i>, and a second pricing note, <i>Placeholder rates. Real figures go in once Jom Makcik confirms them</i>, that repeated the first.</td><td>Copy read; five strings</td><td><span class="cat wrong">wrong</span> <span class="cat remove">needs removing</span></td><td><span class="sev high">High</span></td></tr>
+<tr><td class="id">P09</td><td class="dim">Partner rail</td><td>The heading says <b>every logo here comes with a sentence</b>. Fourteen logos loop in the marquee; only eight had a card. UiTM, Hospital Pakar An-Nur, IMM CareHub, managedcare, airasia ride and Oretha's had no sentence at all, which makes the heading untrue.</td><td>Marquee alt list against rail cards: 14 versus 8</td><td><span class="cat wrong">wrong</span> <span class="cat add">needs adding</span></td><td><span class="sev high">High</span></td></tr>
+<tr><td class="id">P10</td><td class="dim">Hero, footer, FAQ</td><td>Hours are said three different ways. The hero says <i>weekdays</i>. The live site says weekdays 8am to 5pm. The company's own booking app says Monday to Friday 8am to midnight. The footer said hours were to be confirmed. A family with a 7am dialysis slot cannot tell if it is covered.</td><td>Research lines 23 and 24; copy read</td><td><span class="cat unclear">not clear</span></td><td><span class="sev high">High</span></td></tr>
+<tr><td class="id">P11</td><td class="dim">Coverage cards</td><td><i>Full coverage</i> under three of the four areas says nothing a visitor can use. Full coverage of what: the state, the city, hospitals only?</td><td>Copy read</td><td><span class="cat vague">vague</span></td><td><span class="sev med">Medium</span></td></tr>
+<tr><td class="id">P12</td><td class="dim">Footer, contact</td><td>Two WhatsApp numbers are listed with nothing to say which is for bookings and which is the office. Every button on the page uses the first; the second appears once with no label.</td><td>Research line 22: both numbers come from the live site, unlabelled there too</td><td><span class="cat unclear">not clear</span></td><td><span class="sev med">Medium</span></td></tr>
+<tr><td class="id">P13</td><td class="dim">Pricing quote card</td><td>The one testimonial is anonymous. The competitor audit found that Multicare, the smallest rival, names every reviewer with a town, and that this is the one thing it does better than everyone.</td><td>Competitors part 03, Multicare; copy read</td><td><span class="cat improve">needs improving</span></td><td><span class="sev med">Medium</span></td></tr>
+<tr><td class="id">P14</td><td class="dim">FAQ</td><td>Six questions are answered. The five a family asks next are not: how do I pay, what if I cancel, do you run on weekends, do you go to the airport or outstation, can I book for someone else.</td><td>Copy read against the competitor pages, which answer two to four of these</td><td><span class="cat add">needs adding</span></td><td><span class="sev med">Medium</span></td></tr>
+<tr><td class="id">P15</td><td class="dim">Hero button</td><td>The button says <i>Book a ride</i> but the process described lower down starts with a written quote, not a booking. A visitor who taps expecting a form lands on a WhatsApp prompt.</td><td>Copy read; the pricing steps</td><td><span class="cat unclear">not clear</span></td><td><span class="sev low">Low</span></td></tr>
+<tr><td class="id">P16</td><td class="dim">Header</td><td>The page is 10,000 pixels tall and the only live item in the header is Home. On a desktop there was no way to get to Pricing, Coverage or the questions except by scrolling. The four greyed pages are by instruction, but they left the page with no in-page navigation.</td><td>Link map; page height 10,335 px at 1440</td><td><span class="cat nav">hard to navigate</span></td><td><span class="sev high">High</span></td></tr>
+<tr><td class="id">P17</td><td class="dim">Footer</td><td>The footer said <i>Pricing, soon</i> while the pricing section was on this very page, three screens up. A visitor who clicked got told it was not available.</td><td>Link map: footer Pricing was span.offl</td><td><span class="cat wrong">wrong</span> <span class="cat nav">hard to navigate</span></td><td><span class="sev med">Medium</span></td></tr>
+<tr><td class="id">P18</td><td class="dim">Phone menu</td><td>Opening the burger showed one live item and four greyed ones. On a phone, where the whole page is a long scroll, the menu was decoration.</td><td>Mobile menu screenshot; link map</td><td><span class="cat nav">hard to navigate</span></td><td><span class="sev high">High</span></td></tr>
+<tr><td class="id">P19</td><td class="dim">Partner rail</td><td>The rail scrolls sentences past the reader at 58 seconds a loop. Text that moves while you read it is hard to read. On a phone there is no hover, so it never pauses.</td><td>Rail CSS; touch has no hover</td><td><span class="cat hard">hard to understand</span> <span class="cat improve">needs improving</span></td><td><span class="sev med">Medium</span></td></tr>
+<tr><td class="id">P20</td><td class="dim">Service cards</td><td>All three cards say Book this and all three land on the same closing band. Nothing distinguishes the three destinations, and there is no page for any service yet.</td><td>Link map: three hrefs to #book</td><td><span class="cat unclear">not clear</span></td><td><span class="sev low">Low</span></td></tr>
+<tr><td class="id">P21</td><td class="dim">Head</td><td>No favicon, no touch icon, no theme colour. The tab showed a blank page icon and a phone home screen shortcut would have been a grey square.</td><td>Head audit: rel=icon absent</td><td><span class="cat add">needs adding</span></td><td><span class="sev med">Medium</span></td></tr>
+<tr><td class="id">P22</td><td class="dim">Head</td><td>The share image for WhatsApp and Facebook was a relative path, so a shared link would show no picture. There was no card type and no locale.</td><td>Head audit: og:image=assets/img/photo-van-branded.webp</td><td><span class="cat wrong">wrong</span></td><td><span class="sev med">Medium</span></td></tr>
+<tr><td class="id">P23</td><td class="dim">Head</td><td>No structured data. Search engines had nothing to read the business or the six questions from, and the plan promises FAQ schema.</td><td>Head audit: no ld+json</td><td><span class="cat add">needs adding</span></td><td><span class="sev med">Medium</span></td></tr>
+<tr><td class="id">P24</td><td class="dim">Language toggle</td><td>Switching to BM translated the page but the browser tab, the description and every photograph's alt text stayed English. And because both languages share one URL, the Malay version can never be indexed on its own.</td><td>Bilingual sweep: title unchanged after toggle; alt sample all English</td><td><span class="cat improve">needs improving</span></td><td><span class="sev med">Medium</span></td></tr>
+<tr><td class="id">P25</td><td class="dim">Banner</td><td>Largest paint was 3.8 seconds on the throttled phone, on the poster photograph, because the browser only discovered the poster after parsing 99 KB of HTML and CSS. Google's good threshold is 2.5 seconds.</td><td>Throttled rig: LCP 3,820 ms, element IMG.poster</td><td><span class="cat improve">needs improving</span></td><td><span class="sev med">Medium</span></td></tr>
+<tr><td class="id">P26</td><td class="dim">Comparison images</td><td>The two generated scenes were 2,048 pixels wide and 898 KB together, for a slot that is at most 650 pixels wide. That is 600 KB a phone downloads for nothing.</td><td>Image ledger: 472 KB and 426 KB</td><td><span class="cat improve">needs improving</span></td><td><span class="sev med">Medium</span></td></tr>
+<tr><td class="id">P27</td><td class="dim">Partner logos</td><td>Fourteen partner logos as full colour PNGs weighed 578 KB, the second heaviest thing on the page after the photographs.</td><td>Image ledger</td><td><span class="cat improve">needs improving</span></td><td><span class="sev low">Low</span></td></tr>
+<tr><td class="id">P28</td><td class="dim">Footer</td><td>The footer's unbuilt items and their <i>soon</i> tags were <code>#7A8394</code> on white, a contrast of 3.8 to 1 at 16.5 px. WCAG AA needs 4.5. axe flagged twelve nodes.</td><td>axe-core: color-contrast, serious, 12 nodes</td><td><span class="cat wrong">wrong</span></td><td><span class="sev high">High</span></td></tr>
+<tr><td class="id">P29</td><td class="dim">Footer</td><td>The footer column titles were h4 under a page whose deepest heading before them was h2. Screen reader users lose the outline when levels skip.</td><td>axe-core: heading-order, moderate</td><td><span class="cat wrong">wrong</span></td><td><span class="sev low">Low</span></td></tr>
+<tr><td class="id">P30</td><td class="dim">Phone action bar</td><td>The fixed Call and WhatsApp bar sat outside every landmark, so a reader jumping by region never finds it.</td><td>axe-core: region, moderate, at 390</td><td><span class="cat wrong">wrong</span></td><td><span class="sev low">Low</span></td></tr>
+<tr><td class="id">P31</td><td class="dim">Founder section</td><td>The founder section opened on a quotation with no heading, the one section on the page that did. The design book says every section opens on its h2.</td><td>Heading outline</td><td><span class="cat add">needs adding</span></td><td><span class="sev low">Low</span></td></tr>
+<tr><td class="id">P32</td><td class="dim">Footer</td><td>The page asks a family to send a name, a phone number, two addresses and a medical appointment time by WhatsApp, and gave no notice of what happens to them. Malaysia's Personal Data Protection Act 2010 requires a notice, in English and Malay, before or at collection. The live site has none either.</td><td>PDPA guidance on notices; head and footer audit</td><td><span class="cat add">needs adding</span></td><td><span class="sev high">High</span></td></tr>
+<tr><td class="id">P33</td><td class="dim">Footer</td><td>No terms, no cancellation policy, no statement of insurance. Families booking a monthly dialysis plan will ask.</td><td>Copy read; competitor pages carry none either</td><td><span class="cat add">needs adding</span></td><td><span class="sev low">Low</span></td></tr>
+<tr><td class="id">P34</td><td class="dim">Partner rail</td><td>PERKESO and JKM are the two partners a family would most want explained, whether they fund rides, refer patients or sit on a panel, and both cards still say the wording is pending.</td><td>Copy read; plan part 07</td><td><span class="cat unclear">not clear</span></td><td><span class="sev low">Low</span></td></tr>
+<tr><td class="id">P35</td><td class="dim">Whole page</td><td>Total page weight was 3.2 MB across 38 image files if every lazy image is reached. A phone on Slow 4G reads that at 16 seconds of pure transfer.</td><td>Image ledger total</td><td><span class="cat improve">needs improving</span></td><td><span class="sev low">Low</span></td></tr>
+<tr><td class="id">P36</td><td class="dim">Hero</td><td>Above 821 px the banner loads YouTube's player and two scripts, about 480 KB, to run five silent scenes. It is the single heaviest thing on the desktop page and it exists to be atmosphere.</td><td>Throttled rig, desktop: 1.82 MB against 1.33 MB on the phone</td><td><span class="cat improve">needs improving</span></td><td><span class="sev low">Low</span></td></tr>
+</tbody></table></section>
+  <div class="chapdiv" id="c03"><div class="cd-no">03</div><div><h2 class="cd-h">The same findings, sorted by kind</h2><div class="cd-sub">What needs improving, adding, removing; what is not clear, vague or hard to understand; what is hard to navigate</div></div></div>
+  <section>
+<h3 class="sub">Needs improving <span class="cat improve" style="vertical-align:middle">8</span></h3><table class="rv"><thead><tr><th style="width:6%">ID</th><th style="width:16%">Where</th><th>In one line</th><th style="width:30%">Fix</th></tr></thead><tbody>
+<tr><td class="id">P13</td><td class="dim">Pricing quote card</td><td>Anonymous testimonial</td><td>Attribution reworded; name and town on consent</td></tr>
+<tr><td class="id">P19</td><td class="dim">Partner rail</td><td>Moving text on a phone never pauses</td><td>Slower on desktop, a swipeable strip on touch screens</td></tr>
+<tr><td class="id">P24</td><td class="dim">Language toggle</td><td>Title and alt text stayed English in BM</td><td>Title, description and eight main alt texts now switch; separate BM URLs are a full build item</td></tr>
+<tr><td class="id">P25</td><td class="dim">Banner</td><td>Poster found late, LCP 3.8 s</td><td>Poster preloaded with high priority</td></tr>
+<tr><td class="id">P26</td><td class="dim">Comparison images</td><td>Two images four times too large</td><td>Resized to 1,400 px, 311 KB together</td></tr>
+<tr><td class="id">P27</td><td class="dim">Partner logos</td><td>Half a megabyte of logos</td><td>Quantised to 255 colours, 129 KB</td></tr>
+<tr><td class="id">P35</td><td class="dim">Whole page</td><td>3.2 MB of images on one page</td><td>Now 2.4 MB; the rest is the photographs at their native size</td></tr>
+<tr><td class="id">P36</td><td class="dim">Hero</td><td>Half a megabyte of atmosphere</td><td>Accepted for the prototype; a self hosted 8 second loop in the full build</td></tr>
+</tbody></table>
+<h3 class="sub">Needs adding <span class="cat add" style="vertical-align:middle">8</span></h3><table class="rv"><thead><tr><th style="width:6%">ID</th><th style="width:16%">Where</th><th>In one line</th><th style="width:30%">Fix</th></tr></thead><tbody>
+<tr><td class="id">P07</td><td class="dim">Stat band</td><td>The 68% had no source on the page</td><td>One source line under the four figures</td></tr>
+<tr><td class="id">P09</td><td class="dim">Partner rail</td><td>Six logos with no sentence</td><td>Six cards added; two with a real sentence, four labelled pending</td></tr>
+<tr><td class="id">P14</td><td class="dim">FAQ</td><td>Five obvious questions unanswered</td><td>Client supplies the answers; the rows are ready</td></tr>
+<tr><td class="id">P21</td><td class="dim">Head</td><td>No favicon or touch icon</td><td>32px and 180px icons made from the mark; theme colour set</td></tr>
+<tr><td class="id">P23</td><td class="dim">Head</td><td>No structured data</td><td>LocalBusiness and FAQPage JSON-LD, built from the page's own facts</td></tr>
+<tr><td class="id">P31</td><td class="dim">Founder section</td><td>A section with no heading</td><td>A visually hidden h2, <i>The founder and the team</i></td></tr>
+<tr><td class="id">P32</td><td class="dim">Footer</td><td>No privacy notice</td><td>A two paragraph notice in both languages, linked from the footer</td></tr>
+<tr><td class="id">P33</td><td class="dim">Footer</td><td>No terms or cancellation policy</td><td>Client supplies the policy; a Terms page in the full build</td></tr>
+</tbody></table>
+<h3 class="sub">Needs removing <span class="cat remove" style="vertical-align:middle">1</span></h3><table class="rv"><thead><tr><th style="width:6%">ID</th><th style="width:16%">Where</th><th>In one line</th><th style="width:30%">Fix</th></tr></thead><tbody>
+<tr><td class="id">P08</td><td class="dim">Partners, pricing, footer</td><td>Internal notes shown as copy, one of them twice</td><td>Rewritten in the company's voice; the duplicate removed</td></tr>
+</tbody></table>
+<h3 class="sub">Not clear <span class="cat unclear" style="vertical-align:middle">8</span></h3><table class="rv"><thead><tr><th style="width:6%">ID</th><th style="width:16%">Where</th><th>In one line</th><th style="width:30%">Fix</th></tr></thead><tbody>
+<tr><td class="id">P01</td><td class="dim">Comparison h2</td><td>Heading says two, lists say three</td><td>Heading reworded to <i>What a standard assisted ride cannot do</i></td></tr>
+<tr><td class="id">P03</td><td class="dim">Lady Drivers card</td><td>Does not say it is a standard car</td><td>Opens with <i>A standard car with a woman at the wheel, for passengers who do not need the ramp</i></td></tr>
+<tr><td class="id">P05</td><td class="dim">Film section</td><td>Malay title with no English meaning</td><td>Lede now opens <i>Women looking after women:</i></td></tr>
+<tr><td class="id">P10</td><td class="dim">Hero, footer, FAQ</td><td>Three versions of the hours</td><td>Footer now states the published hours and that they are being confirmed; the true hours are the first Friday question</td></tr>
+<tr><td class="id">P12</td><td class="dim">Footer, contact</td><td>Two numbers, no labels</td><td>Client says what each number is; labels then go on</td></tr>
+<tr><td class="id">P15</td><td class="dim">Hero button</td><td>Book versus quote</td><td>No change to the label, on instruction; the steps and the closing band explain the process</td></tr>
+<tr><td class="id">P20</td><td class="dim">Service cards</td><td>Three cards, one destination</td><td>Stays until the service pages exist; the WhatsApp text can carry the service</td></tr>
+<tr><td class="id">P34</td><td class="dim">Partner rail</td><td>The two government partners unexplained</td><td>Client supplies approved wording</td></tr>
+</tbody></table>
+<h3 class="sub">Vague <span class="cat vague" style="vertical-align:middle">2</span></h3><table class="rv"><thead><tr><th style="width:6%">ID</th><th style="width:16%">Where</th><th>In one line</th><th style="width:30%">Fix</th></tr></thead><tbody>
+<tr><td class="id">P03</td><td class="dim">Lady Drivers card</td><td>Does not say it is a standard car</td><td>Opens with <i>A standard car with a woman at the wheel, for passengers who do not need the ramp</i></td></tr>
+<tr><td class="id">P11</td><td class="dim">Coverage cards</td><td><i>Full coverage</i> means nothing</td><td><i>Whole state, door to door</i>, now written on the map label of each area</td></tr>
+</tbody></table>
+<h3 class="sub">Hard to understand <span class="cat hard" style="vertical-align:middle">3</span></h3><table class="rv"><thead><tr><th style="width:6%">ID</th><th style="width:16%">Where</th><th>In one line</th><th style="width:30%">Fix</th></tr></thead><tbody>
+<tr><td class="id">P02</td><td class="dim">Services, FAQ, footer</td><td>A brand word used before it is explained</td><td>First use now says <i>our drivers are Adinita, a network of women aged 20 to 55</i></td></tr>
+<tr><td class="id">P04</td><td class="dim">Stat band, partner rail</td><td>University jargon in two places</td><td><i>founded, out of UKM</i> and <i>grew out of Universiti Kebangsaan Malaysia as a social enterprise, through its PEMULA start-up programme</i></td></tr>
+<tr><td class="id">P19</td><td class="dim">Partner rail</td><td>Moving text on a phone never pauses</td><td>Slower on desktop, a swipeable strip on touch screens</td></tr>
+</tbody></table>
+<h3 class="sub">Hard to navigate <span class="cat nav" style="vertical-align:middle">3</span></h3><table class="rv"><thead><tr><th style="width:6%">ID</th><th style="width:16%">Where</th><th>In one line</th><th style="width:30%">Fix</th></tr></thead><tbody>
+<tr><td class="id">P16</td><td class="dim">Header</td><td>No way to jump on a long page</td><td>A back-to-top control on desktop; on-page links in the phone menu; footer Pricing linked</td></tr>
+<tr><td class="id">P17</td><td class="dim">Footer</td><td>Pricing marked soon while on the page</td><td>Now a live link to #pricing</td></tr>
+<tr><td class="id">P18</td><td class="dim">Phone menu</td><td>A menu with nothing to choose</td><td><i>On this page</i> group with six links, phone menu only</td></tr>
+</tbody></table>
+<h3 class="sub">Wrong <span class="cat wrong" style="vertical-align:middle">9</span></h3><table class="rv"><thead><tr><th style="width:6%">ID</th><th style="width:16%">Where</th><th>In one line</th><th style="width:30%">Fix</th></tr></thead><tbody>
+<tr><td class="id">P01</td><td class="dim">Comparison h2</td><td>Heading says two, lists say three</td><td>Heading reworded to <i>What a standard assisted ride cannot do</i></td></tr>
+<tr><td class="id">P06</td><td class="dim">Pricing quote card</td><td>An inference printed as a figure</td><td>Now <i>RM1,500+</i> with the caption <i>Her words, our arithmetic</i></td></tr>
+<tr><td class="id">P08</td><td class="dim">Partners, pricing, footer</td><td>Internal notes shown as copy, one of them twice</td><td>Rewritten in the company's voice; the duplicate removed</td></tr>
+<tr><td class="id">P09</td><td class="dim">Partner rail</td><td>Six logos with no sentence</td><td>Six cards added; two with a real sentence, four labelled pending</td></tr>
+<tr><td class="id">P17</td><td class="dim">Footer</td><td>Pricing marked soon while on the page</td><td>Now a live link to #pricing</td></tr>
+<tr><td class="id">P22</td><td class="dim">Head</td><td>Share image would not resolve</td><td>Absolute URL, size, locale and card type set</td></tr>
+<tr><td class="id">P28</td><td class="dim">Footer</td><td>Footer soon items below AA</td><td>Colour changed to <code>#667085</code>, 4.97 to 1</td></tr>
+<tr><td class="id">P29</td><td class="dim">Footer</td><td>Heading level skipped</td><td>Footer titles are h3</td></tr>
+<tr><td class="id">P30</td><td class="dim">Phone action bar</td><td>Action bar outside landmarks</td><td>Wrapped in a nav named Quick actions</td></tr>
+</tbody></table>
+</section>
+  <div class="chapdiv" id="c04"><div class="cd-no">04</div><div><h2 class="cd-h">The solution for each finding</h2><div class="cd-sub">What was done, how, and who owns anything that remains</div></div></div>
+  <section><table class="rv"><thead><tr><th style="width:5%">ID</th><th>Solution, as applied or as specified</th><th style="width:30%">How it was done</th><th style="width:12%">Owner</th></tr></thead><tbody>
+<tr><td class="id">P01</td><td>Heading reworded in both languages so the count is not a claim. The three items stay because the third is a real differentiator.</td><td>index.html h2 in #why, data-en and data-bm</td><td><span class="own bm">Brand Method, done</span></td></tr>
+<tr><td class="id">P02</td><td>The Lady Drivers card, which is the first place a visitor meets the word, now defines it in the same sentence. Later uses read naturally after that.</td><td>index.html Lady Drivers card copy, EN and BM</td><td><span class="own bm">Brand Method, done</span></td></tr>
+<tr><td class="id">P03</td><td>First sentence states the vehicle and who it is for, so the three cards now describe three distinct things.</td><td>index.html Lady Drivers card copy, EN and BM</td><td><span class="own bm">Brand Method, done</span></td></tr>
+<tr><td class="id">P04</td><td>Both rewritten in plain words that keep the fact.</td><td>index.html stat caption and UKM rail card, EN and BM</td><td><span class="own bm">Brand Method, done</span></td></tr>
+<tr><td class="id">P05</td><td>The title stays, because it is the film's name. The lede gives its meaning first.</td><td>index.html film lede, EN</td><td><span class="own bm">Brand Method, done</span></td></tr>
+<tr><td class="id">P06</td><td>The plus sign makes it a floor, and the caption says whose number it is.</td><td>index.html quotebox .big and .bl, EN and BM</td><td><span class="own bm">Brand Method, done</span></td></tr>
+<tr><td class="id">P07</td><td>A faint line under the band names Yayasan Hasanah, what the figure measures, and the month.</td><td>index.html .stsrc after .stats, EN and BM</td><td><span class="own bm">Brand Method, done</span></td></tr>
+<tr><td class="id">P08</td><td>Each gap is still a labelled gap, the design rule, but in the company's voice: <i>How we work together will be described here in wording PERKESO approves</i>; <i>Named here once she has given her consent</i>; <i>Published hours: weekdays, 8am to 5pm. Being confirmed with the office</i>. The duplicate pricing line is gone.</td><td>index.html four strings rewritten EN and BM, one removed</td><td><span class="own bm">Brand Method, done</span></td></tr>
+<tr><td class="id">P09</td><td>UiTM and An-Nur get real sentences from the research. The four the research does not describe get an honest one: <i>A healthcare partner listed by Jom Makcik. How we work together will be described in wording they approve.</i></td><td>index.html six .ptr cards, EN and BM</td><td><span class="own bm">Brand Method, done</span></td></tr>
+<tr><td class="id">P10</td><td>The page now says what is published rather than nothing. Only the company can say which is true and whether weekends run; that answer goes into the hero, the footer, the FAQ and the schema in one edit.</td><td>index.html footer line; plan part 07 question 2</td><td><span class="own client">Client to supply</span></td></tr>
+<tr><td class="id">P11</td><td>The three cards now say the unit and the manner. Town lists were not added because the research does not give them; that is a full build item for the Coverage page.</td><td>index.html three coverage cards, EN and BM</td><td><span class="own bm">Brand Method, done</span></td></tr>
+<tr><td class="id">P12</td><td>Guessing a label would be worse than none. The client answers in one line on Friday and both numbers get a role.</td><td>Plan part 07 question added</td><td><span class="own client">Client to supply</span></td></tr>
+<tr><td class="id">P13</td><td>Attribution now reads as a promise rather than a note. Three named customers with towns are on the client list.</td><td>index.html .a caption; plan part 07</td><td><span class="own client">Client to supply</span></td></tr>
+<tr><td class="id">P14</td><td>Inventing the answers would put policy in the company's mouth. The questions are listed for Friday; each answer is one sentence and drops into the FAQ and the schema.</td><td>Plan part 07</td><td><span class="own client">Client to supply</span></td></tr>
+<tr><td class="id">P15</td><td>The label was set by the client and stays. The three numbered steps in Pricing and the closing band's headline make the quote-first process explicit before anyone taps.</td><td>No change</td><td><span class="own bm">Brand Method, done</span></td></tr>
+<tr><td class="id">P16</td><td>Three quiet additions that do not touch the greyed pages: a 46px ink disc bottom right on desktop after two screens that returns to the top; an <i>On this page</i> group inside the phone menu with five section links; and the footer Pricing item now links to the section that exists.</td><td>index.html .totop, nav .onpage, footer li</td><td><span class="own bm">Brand Method, done</span></td></tr>
+<tr><td class="id">P17</td><td>The item is a link to the section. The other soon items remain, because those pages do not exist.</td><td>index.html footer Services list</td><td><span class="own bm">Brand Method, done</span></td></tr>
+<tr><td class="id">P18</td><td>Services, Prices, Where we go, Questions and Book a ride, under a small label, shown only in the open panel. The panel closes on tap as before.</td><td>index.html nav .onpage; CSS shows it only under .hd.open</td><td><span class="own bm">Brand Method, done</span></td></tr>
+<tr><td class="id">P19</td><td>Desktop loop slowed to 84 seconds and still pauses on hover. On any coarse pointer the animation is off and the rail is a plain horizontal scroller with snap points, so the reader sets the pace.</td><td>index.html .pt timing; @media (pointer:coarse)</td><td><span class="own bm">Brand Method, done</span></td></tr>
+<tr><td class="id">P20</td><td>Correct for a home-only prototype. In the full build each card goes to its service page and the WhatsApp message names the service.</td><td>Plan part 03 page briefs</td><td><span class="own build">Full build</span></td></tr>
+<tr><td class="id">P21</td><td>Both icons cut from the mark on a transparent square, linked in the head, with the brand red as theme colour.</td><td>assets/img/favicon-32.webp, apple-touch-icon.png; head links</td><td><span class="own bm">Brand Method, done</span></td></tr>
+<tr><td class="id">P22</td><td>og:image is absolute with width and height, og:locale en_MY with ms_MY alternate, twitter:card summary_large_image.</td><td>index.html head</td><td><span class="own bm">Brand Method, done</span></td></tr>
+<tr><td class="id">P23</td><td>One script carries the company, address, phone, email, areas, founding year and social profiles, and the six questions with their answers, generated from the FAQ markup so they cannot drift.</td><td>index.html head, generated at build</td><td><span class="own bm">Brand Method, done</span></td></tr>
+<tr><td class="id">P24</td><td>The toggle now swaps the title, the meta description and the alt text of the eight content photographs. Indexable Malay pages need their own URLs, which the plan carries for the full build.</td><td>index.html set(lang), data-alt-bm on eight images</td><td><span class="own bm">Brand Method, done</span></td></tr>
+<tr><td class="id">P25</td><td>A preload link in the head and fetchpriority high on the image, so the poster request starts with the HTML. Measured again in part 06.</td><td>index.html head preload; img attributes</td><td><span class="own bm">Brand Method, done</span></td></tr>
+<tr><td class="id">P26</td><td>Both scenes resampled to 1,400 pixels at quality 80, progressive. Originals kept in assets/img/_orig.</td><td>PIL resize; originals retained</td><td><span class="own bm">Brand Method, done</span></td></tr>
+<tr><td class="id">P27</td><td>Each PNG reduced to an indexed palette with dithering, only where that saved at least 15%. Originals kept.</td><td>PIL quantize; originals retained</td><td><span class="own bm">Brand Method, done</span></td></tr>
+<tr><td class="id">P28</td><td>One value change on two rules. Still reads as unavailable, now readable.</td><td>index.html .ft .offl and .ft .soon</td><td><span class="own bm">Brand Method, done</span></td></tr>
+<tr><td class="id">P29</td><td>Three h4 became h3, styled identically.</td><td>index.html footer; CSS selector</td><td><span class="own bm">Brand Method, done</span></td></tr>
+<tr><td class="id">P30</td><td>The bar is a <code>nav</code> with an aria-label.</td><td>index.html .mab element</td><td><span class="own bm">Brand Method, done</span></td></tr>
+<tr><td class="id">P31</td><td>Readers get the heading; the design does not change.</td><td>index.html h2.sr</td><td><span class="own bm">Brand Method, done</span></td></tr>
+<tr><td class="id">P32</td><td>A Privacy notice in the footer, EN and BM, saying what is collected, why, who sees it, how long it is kept and how to ask for it. Drafted plainly for the company's review; the retention line and any referral partners need their confirmation.</td><td>index.html #privacy details; footer link</td><td><span class="own bm">Brand Method, done</span></td></tr>
+<tr><td class="id">P33</td><td>Policy is the company's to state. One paragraph from the client becomes a Terms page and an FAQ answer.</td><td>Plan part 07</td><td><span class="own client">Client to supply</span></td></tr>
+<tr><td class="id">P34</td><td>Written in the company's voice as a pending line for now. Two sentences from the client on Friday finish both cards.</td><td>Plan part 07</td><td><span class="own client">Client to supply</span></td></tr>
+<tr><td class="id">P35</td><td>Scenes and logos cut by 1 MB together. The photographs are already at the size the company serves them and are lazy; a shoot at proper sizes replaces them.</td><td>P26 and P27</td><td><span class="own bm">Brand Method, done</span></td></tr>
+<tr><td class="id">P36</td><td>The film is the client's instruction and the poster paints first, so nothing waits on it. In the full build a self hosted muted MP4 of the five scenes, about 1.5 MB total but streamed, replaces the YouTube player.</td><td>Plan part 06 look and feel</td><td><span class="own build">Full build</span></td></tr>
+</tbody></table></section>
+  <div class="chapdiv" id="c05"><div class="cd-no">05</div><div><h2 class="cd-h">Action checklist, checked three times</h2><div class="cd-sub">Check 1 is the instrument re-run. Check 2 is a per-item assertion against the live DOM. Check 3 is a human look at the rendered page and a re-read of the copy.</div></div></div>
+  <section>
+    <p class="sec-intro">A tick means the check ran and passed at the time shown. A dash means the item is not the prototype's to fix, so the check records what the prototype does instead: it labels the gap honestly. Nothing is ticked that was not run.</p>
+    <table class="rv"><thead><tr><th style="width:5%">ID</th><th>Action</th><th style="width:9%">Status</th><th style="width:15%">Check 1 &middot; instruments</th><th style="width:15%">Check 2 &middot; DOM assertion</th><th style="width:15%">Check 3 &middot; eyes and copy</th></tr></thead><tbody>
+<tr><td class="id">P01</td><td>Reword the comparison heading in EN and BM</td><td><span class="st ok">Fixed</span></td><td><span class="chk ok"><span class="t">10/09/2026 20:30:46 MYT</span><span class="r">copy re-dumped after the fix; sweep 1440/1024/768/390: overflow false/false/false/false, dead anchors 0, broken images 0, script errors 0, 404s 0</span></span></td><td><span class="chk ok"><span class="t">11/09/2026 03:20:56 MYT</span><span class="r">h2 EN &quot;What a standard assisted ride cannot do&quot;, BM &quot;Apa yang perjalanan bantuan biasa tidak mampu buat&quot;</span></span></td><td><span class="chk ok"><span class="t">10/09/2026 20:34 MYT</span><span class="r">c3-stats.png: heading reads &quot;What a standard assisted ride cannot do&quot;; both lists re-read, three items each, the count no longer a claim</span></span></td></tr>
+<tr><td class="id">P02</td><td>Define Adinita at first use</td><td><span class="st ok">Fixed</span></td><td><span class="chk ok"><span class="t">10/09/2026 20:30:46 MYT</span><span class="r">copy re-dumped after the fix; sweep 1440/1024/768/390: overflow false/false/false/false, dead anchors 0, broken images 0, script errors 0, 404s 0</span></span></td><td><span class="chk ok"><span class="t">11/09/2026 03:20:56 MYT</span><span class="r">first use: &quot;A standard car with a woman at the wheel, for passengers who do not need the ramp. Our dri&quot;</span></span></td><td><span class="chk ok"><span class="t">10/09/2026 20:34 MYT</span><span class="r">c3-services.png and copy re-read: Lady Drivers card defines Adinita in its second sentence; FAQ and footer uses now follow it</span></span></td></tr>
+<tr><td class="id">P03</td><td>State what the Lady Driver service is</td><td><span class="st ok">Fixed</span></td><td><span class="chk ok"><span class="t">10/09/2026 20:30:46 MYT</span><span class="r">copy re-dumped after the fix; sweep 1440/1024/768/390: overflow false/false/false/false, dead anchors 0, broken images 0, script errors 0, 404s 0</span></span></td><td><span class="chk ok"><span class="t">11/09/2026 03:20:56 MYT</span><span class="r">card opens &quot;A standard car with a woman at the wheel, for passengers who&quot;</span></span></td><td><span class="chk ok"><span class="t">10/09/2026 20:34 MYT</span><span class="r">c3-services.png: card opens &quot;A standard car with a woman at the wheel, for passengers who do not need the ramp&quot;; the three cards now describe three different things</span></span></td></tr>
+<tr><td class="id">P04</td><td>Replace the two jargon phrases</td><td><span class="st ok">Fixed</span></td><td><span class="chk ok"><span class="t">10/09/2026 20:30:46 MYT</span><span class="r">copy re-dumped after the fix; sweep 1440/1024/768/390: overflow false/false/false/false, dead anchors 0, broken images 0, script errors 0, 404s 0</span></span></td><td><span class="chk ok"><span class="t">11/09/2026 03:20:56 MYT</span><span class="r">stat &quot;founded, out of UKM&quot;; rail &quot;Jom Makcik grew out of Universiti Kebangsaan Malaysia as a s&quot;</span></span></td><td><span class="chk ok"><span class="t">10/09/2026 20:34 MYT</span><span class="r">c3-stats.png: &quot;founded, out of UKM&quot;; partner rail copy re-read: &quot;grew out of Universiti Kebangsaan Malaysia as a social enterprise&quot;</span></span></td></tr>
+<tr><td class="id">P05</td><td>Gloss the film title in the English lede</td><td><span class="st ok">Fixed</span></td><td><span class="chk ok"><span class="t">10/09/2026 20:30:46 MYT</span><span class="r">copy re-dumped after the fix; sweep 1440/1024/768/390: overflow false/false/false/false, dead anchors 0, broken images 0, script errors 0, 404s 0</span></span></td><td><span class="chk ok"><span class="t">11/09/2026 03:20:56 MYT</span><span class="r">lede &quot;Women looking after women: three minutes on why Jo&quot;</span></span></td><td><span class="chk ok"><span class="t">10/09/2026 20:34 MYT</span><span class="r">copy re-read: film lede opens &quot;Women looking after women:&quot;</span></span></td></tr>
+<tr><td class="id">P06</td><td>Mark the saving as a floor and attribute the arithmetic</td><td><span class="st ok">Fixed</span></td><td><span class="chk ok"><span class="t">10/09/2026 20:30:46 MYT</span><span class="r">copy re-dumped after the fix; sweep 1440/1024/768/390: overflow false/false/false/false, dead anchors 0, broken images 0, script errors 0, 404s 0</span></span></td><td><span class="chk ok"><span class="t">11/09/2026 03:20:56 MYT</span><span class="r">figure &quot;RM1,500+&quot;; caption &quot;saved every month, on a journey they cannot skip. Her words, our arith&quot;</span></span></td><td><span class="chk ok"><span class="t">10/09/2026 20:34 MYT</span><span class="r">c3-pricing.png: RM1,500+ with &quot;Her words, our arithmetic&quot;</span></span></td></tr>
+<tr><td class="id">P07</td><td>Add the source line under the stat band</td><td><span class="st ok">Fixed</span></td><td><span class="chk ok"><span class="t">10/09/2026 20:30:46 MYT</span><span class="r">copy re-dumped after the fix; sweep 1440/1024/768/390: overflow false/false/false/false, dead anchors 0, broken images 0, script errors 0, 404s 0</span></span></td><td><span class="chk ok"><span class="t">11/09/2026 03:20:56 MYT</span><span class="r">source line: &quot;Source for the 68%: Yayasan Hasanah, August 2026. The other three are the compan&quot;</span></span></td><td><span class="chk ok"><span class="t">10/09/2026 20:34 MYT</span><span class="r">c3-stats.png: source line present under the four figures; it sat outside the gutter on first render and was aligned to the container on this pass</span></span></td></tr>
+<tr><td class="id">P08</td><td>Rewrite the four notes, remove the duplicate</td><td><span class="st ok">Fixed</span></td><td><span class="chk ok"><span class="t">10/09/2026 20:30:46 MYT</span><span class="r">copy re-dumped after the fix; sweep 1440/1024/768/390: overflow false/false/false/false, dead anchors 0, broken images 0, script errors 0, 404s 0</span></span></td><td><span class="chk ok"><span class="t">11/09/2026 03:20:56 MYT</span><span class="r">no internal note strings remain; duplicate pricing note gone</span></span></td><td><span class="chk ok"><span class="t">10/09/2026 20:34 MYT</span><span class="r">copy re-read of partners, pricing and footer: no &quot;to be described&quot;, &quot;to be confirmed before publication&quot; or &quot;Placeholder rates&quot; left; each gap reads in the company voice</span></span></td></tr>
+<tr><td class="id">P09</td><td>Add the six missing partner cards</td><td><span class="st ok">Fixed</span></td><td><span class="chk ok"><span class="t">10/09/2026 20:30:46 MYT</span><span class="r">copy re-dumped after the fix; sweep 1440/1024/768/390: overflow false/false/false/false, dead anchors 0, broken images 0, script errors 0, 404s 0</span></span></td><td><span class="chk ok"><span class="t">11/09/2026 03:20:56 MYT</span><span class="r">rail cards 14 (the rail is cloned once for the loop), marquee logos 14</span></span></td><td><span class="chk ok"><span class="t">10/09/2026 20:34 MYT</span><span class="r">c3-partners.png and c3-m-partners.png: fourteen cards in the rail; the six new ones read correctly, four labelled pending</span></span></td></tr>
+<tr><td class="id">P10</td><td>Client confirms hours and weekend policy; one edit then replaces four strings</td><td><span class="st client">Waiting on client</span></td><td><span class="chk ok"><span class="t">10/09/2026 20:30:46 MYT</span><span class="r">footer line rendered; client item recorded</span></span></td><td><span class="chk ok"><span class="t">11/09/2026 03:20:56 MYT</span><span class="r">footer states: &quot;Published hours: weekdays, 8am to 5pm. Being confirmed with the office.&quot; (true hours: client)</span></span></td><td><span class="chk ok"><span class="t">10/09/2026 20:34 MYT</span><span class="r">c3-footer.png: &quot;Published hours: weekdays, 8am to 5pm. Being confirmed with the office.&quot; Client to confirm</span></span></td></tr>
+<tr><td class="id">P11</td><td>Replace <i>Full coverage</i> with what it covers</td><td><span class="st ok">Fixed</span></td><td><span class="chk ok"><span class="t">10/09/2026 20:30:46 MYT</span><span class="r">copy re-dumped after the fix; sweep 1440/1024/768/390: overflow false/false/false/false, dead anchors 0, broken images 0, script errors 0, 404s 0</span></span></td><td><span class="chk ok"><span class="t">11/09/2026 03:20:56 MYT</span><span class="r">coverage lines on the map: Whole state, door to door / Whole city, door to door / Whole territory, door to door / Head office in Nilai, whole state</span></span></td><td><span class="chk ok"><span class="t">10/09/2026 20:34 MYT</span><span class="r">c3-coverage.png: &quot;Whole state, door to door&quot; on three cards, head office on the fourth</span></span></td></tr>
+<tr><td class="id">P12</td><td>Client names the role of each number</td><td><span class="st client">Waiting on client</span></td><td><span class="chk ok"><span class="t">10/09/2026 20:30:46 MYT</span><span class="r">no instrument applies; client item recorded</span></span></td><td><span class="chk ok"><span class="t">11/09/2026 03:20:56 MYT</span><span class="r">labels withheld until the client names each number; both numbers present and dialable</span></span></td><td><span class="chk ok"><span class="t">10/09/2026 20:34 MYT</span><span class="r">c3-footer.png: both numbers listed and dialable; roles withheld pending the client</span></span></td></tr>
+<tr><td class="id">P13</td><td>Client supplies three named customers with consent</td><td><span class="st client">Waiting on client</span></td><td><span class="chk ok"><span class="t">10/09/2026 20:30:46 MYT</span><span class="r">no instrument applies; client item recorded</span></span></td><td><span class="chk ok"><span class="t">11/09/2026 03:20:56 MYT</span><span class="r">attribution now reads as a promise on consent; names are a client item</span></span></td><td><span class="chk ok"><span class="t">10/09/2026 20:34 MYT</span><span class="r">c3-pricing.png: attribution reads &quot;Named here once she has given her consent&quot;</span></span></td></tr>
+<tr><td class="id">P14</td><td>Client answers five questions</td><td><span class="st client">Waiting on client</span></td><td><span class="chk ok"><span class="t">10/09/2026 20:30:46 MYT</span><span class="r">FAQ schema carries the 6 answered questions; client item recorded</span></span></td><td><span class="chk ok"><span class="t">11/09/2026 03:20:56 MYT</span><span class="r">6 answered questions in the FAQ and in the schema; the five unanswered are with the client</span></span></td><td><span class="chk ok"><span class="t">10/09/2026 20:34 MYT</span><span class="r">FAQ re-read: six answered; the five unanswered are on the client list, not invented</span></span></td></tr>
+<tr><td class="id">P15</td><td>Confirm the label stays; process is explained in two places</td><td><span class="st ok">Fixed</span></td><td><span class="chk ok"><span class="t">10/09/2026 20:30:46 MYT</span><span class="r">copy re-dumped after the fix; sweep 1440/1024/768/390: overflow false/false/false/false, dead anchors 0, broken images 0, script errors 0, 404s 0</span></span></td><td><span class="chk ok"><span class="t">11/09/2026 03:20:56 MYT</span><span class="r">label &quot;Book a ride&quot; kept by instruction; three steps present</span></span></td><td><span class="chk ok"><span class="t">10/09/2026 20:34 MYT</span><span class="r">copy re-read: Book a ride label kept; the three steps in Pricing and the closing band explain quote first</span></span></td></tr>
+<tr><td class="id">P16</td><td>Add back-to-top, on-page links in the menu, footer Pricing link</td><td><span class="st ok">Fixed</span></td><td><span class="chk ok"><span class="t">10/09/2026 20:30:46 MYT</span><span class="r">link map: 32 links, hash targets #main # #services #pricing #coverage #faq #book #privacy, all resolve; footer Pricing live true</span></span></td><td><span class="chk ok"><span class="t">11/09/2026 03:20:56 MYT</span><span class="r">back-to-top shown after scroll: true; returns to 0px; footer Pricing linked: true</span></span></td><td><span class="chk ok"><span class="t">10/09/2026 20:34 MYT</span><span class="r">c3-totop.png: ink disc bottom right after two screens; c3-footer.png: Pricing is a live link</span></span></td></tr>
+<tr><td class="id">P17</td><td>Link footer Pricing to the section</td><td><span class="st ok">Fixed</span></td><td><span class="chk ok"><span class="t">10/09/2026 20:30:46 MYT</span><span class="r">link map: 32 links, hash targets #main # #services #pricing #coverage #faq #book #privacy, all resolve; footer Pricing live true</span></span></td><td><span class="chk ok"><span class="t">11/09/2026 03:20:56 MYT</span><span class="r">footer Pricing href=#pricing: true</span></span></td><td><span class="chk ok"><span class="t">10/09/2026 20:34 MYT</span><span class="r">c3-footer.png: Pricing sits with the live links, no soon tag</span></span></td></tr>
+<tr><td class="id">P18</td><td>Add on-page links to the phone menu</td><td><span class="st ok">Fixed</span></td><td><span class="chk ok"><span class="t">10/09/2026 20:30:46 MYT</span><span class="r">link map: 32 links, hash targets #main # #services #pricing #coverage #faq #book #privacy, all resolve; footer Pricing live true</span></span></td><td><span class="chk ok"><span class="t">11/09/2026 03:20:56 MYT</span><span class="r">6 on-page links, hidden on desktop, shown in the phone menu; tap closes the menu and lands on Pricing: true</span></span></td><td><span class="chk ok"><span class="t">10/09/2026 20:34 MYT</span><span class="r">c3-m-menu.png: &quot;On this page&quot; group with five links under the greyed pages; tap closes the menu</span></span></td></tr>
+<tr><td class="id">P19</td><td>Slow the rail; make it manual on touch</td><td><span class="st ok">Fixed</span></td><td><span class="chk ok"><span class="t">10/09/2026 20:30:46 MYT</span><span class="r">sweep 1440/1024/768/390: overflow false/false/false/false, dead anchors 0, broken images 0, script errors 0, 404s 0; rail timing read in Check 2</span></span></td><td><span class="chk ok"><span class="t">11/09/2026 03:20:56 MYT</span><span class="r">desktop loop 84s; touch: animation none, overflow auto</span></span></td><td><span class="chk ok"><span class="t">10/09/2026 20:34 MYT</span><span class="r">c3-m-partners.png: rail is a static swipeable strip on the phone; desktop loop watched at 84 s</span></span></td></tr>
+<tr><td class="id">P20</td><td>Service pages in the full build</td><td><span class="st build">Full build</span></td><td><span class="chk ok"><span class="t">10/09/2026 20:30:46 MYT</span><span class="r">link map: 32 links, hash targets #main # #services #pricing #coverage #faq #book #privacy, all resolve; footer Pricing live true</span></span></td><td><span class="chk ok"><span class="t">11/09/2026 03:20:56 MYT</span><span class="r">three cards go to #book, the closing band; service pages are a full build item</span></span></td><td><span class="chk ok"><span class="t">10/09/2026 20:34 MYT</span><span class="r">no change by design; three cards land on the closing band</span></span></td></tr>
+<tr><td class="id">P21</td><td>Add favicon, touch icon, theme colour</td><td><span class="st ok">Fixed</span></td><td><span class="chk ok"><span class="t">10/09/2026 20:30:46 MYT</span><span class="r">head re-audited; sweep 1440/1024/768/390: overflow false/false/false/false, dead anchors 0, broken images 0, script errors 0, 404s 0</span></span></td><td><span class="chk ok"><span class="t">11/09/2026 03:20:56 MYT</span><span class="r">icon true, touch icon true, theme #F91B2A</span></span></td><td><span class="chk ok"><span class="t">10/09/2026 20:34 MYT</span><span class="r">tab shows the pin mark; head re-read: icon, touch icon, theme colour present</span></span></td></tr>
+<tr><td class="id">P22</td><td>Fix the share metadata</td><td><span class="st ok">Fixed</span></td><td><span class="chk ok"><span class="t">10/09/2026 20:30:46 MYT</span><span class="r">head re-audited; sweep 1440/1024/768/390: overflow false/false/false/false, dead anchors 0, broken images 0, script errors 0, 404s 0</span></span></td><td><span class="chk ok"><span class="t">11/09/2026 03:20:56 MYT</span><span class="r">og:image https://jommakcik.my/assets/img/photo-van-branded.webp; card summary_large_image; locale en_MY</span></span></td><td><span class="chk ok"><span class="t">10/09/2026 20:34 MYT</span><span class="r">head re-read: absolute og:image with size, locale en_MY, twitter card</span></span></td></tr>
+<tr><td class="id">P23</td><td>Add LocalBusiness and FAQPage schema</td><td><span class="st ok">Fixed</span></td><td><span class="chk ok"><span class="t">10/09/2026 20:30:46 MYT</span><span class="r">head re-audited; sweep 1440/1024/768/390: overflow false/false/false/false, dead anchors 0, broken images 0, script errors 0, 404s 0</span></span></td><td><span class="chk ok"><span class="t">11/09/2026 03:20:56 MYT</span><span class="r">types LocalBusiness, FAQPage; FAQ entries 6; telephone +60102284020</span></span></td><td><span class="chk ok"><span class="t">10/09/2026 20:34 MYT</span><span class="r">head re-read: LocalBusiness and FAQPage blocks present, FAQ answers match the page</span></span></td></tr>
+<tr><td class="id">P24</td><td>Swap title, description and alt text with the language</td><td><span class="st ok">Fixed</span></td><td><span class="chk ok"><span class="t">10/09/2026 20:30:46 MYT</span><span class="r">bilingual sweep: lang ms-MY, title BM true, alt BM on tagged images true, 37 strings outside the toggle (names, numbers, addresses)</span></span></td><td><span class="chk ok"><span class="t">11/09/2026 03:20:56 MYT</span><span class="r">BM title &quot;Jom Makcik · Pengangkutan mesra kerusi r&quot;; description &quot;Kekal di kerusi roda anda. Wan&quot;; poster alt &quot;Sebuah AbiliCar Jom Makcik dal&quot;; 17 images carry a BM alt</span></span></td><td><span class="chk ok"><span class="t">10/09/2026 20:34 MYT</span><span class="r">c3-pricing-bm.png: BM view; tab title in Malay; poster alt in Malay when toggled</span></span></td></tr>
+<tr><td class="id">P25</td><td>Preload the poster; re-measure</td><td><span class="st ok">Fixed</span></td><td><span class="chk ok"><span class="t">10/09/2026 20:30:46 MYT</span><span class="r">rig phone: FCP 676 ms, LCP 2792 ms on IMG.poster, 622 KB, 28 req (was 3,820 ms)</span></span></td><td><span class="chk ok"><span class="t">11/09/2026 03:20:56 MYT</span><span class="r">preload link true; fetchpriority high</span></span></td><td><span class="chk ok"><span class="t">10/09/2026 20:34 MYT</span><span class="r">rig re-run in Check 1: LCP 2.79 s phone, was 3.82 s</span></span></td></tr>
+<tr><td class="id">P26</td><td>Resize the two scenes</td><td><span class="st ok">Fixed</span></td><td><span class="chk ok"><span class="t">10/09/2026 20:30:46 MYT</span><span class="r">image ledger: 38 files, 2155 KB (was 3,191 KB)</span></span></td><td><span class="chk ok"><span class="t">11/09/2026 03:20:56 MYT</span><span class="r">scene files 161 KB and 150 KB on disk, 1400 px (measured at build)</span></span></td><td><span class="chk ok"><span class="t">10/09/2026 20:34 MYT</span><span class="r">files re-listed: scene-problem 161 KB, scene-success 150 KB at 1,400 px</span></span></td></tr>
+<tr><td class="id">P27</td><td>Compress the logo PNGs</td><td><span class="st ok">Fixed</span></td><td><span class="chk ok"><span class="t">10/09/2026 20:30:46 MYT</span><span class="r">image ledger: 38 files, 2155 KB (was 3,191 KB)</span></span></td><td><span class="chk ok"><span class="t">11/09/2026 03:20:56 MYT</span><span class="r">logo PNGs 129 KB total on disk (measured at build)</span></span></td><td><span class="chk ok"><span class="t">10/09/2026 20:34 MYT</span><span class="r">files re-listed: logos 129 KB total</span></span></td></tr>
+<tr><td class="id">P28</td><td>Fix the footer contrast</td><td><span class="st ok">Fixed</span></td><td><span class="chk ok"><span class="t">10/09/2026 20:30:46 MYT</span><span class="r">axe: 0 violations at 1440 (none), 0 at 390 (none)</span></span></td><td><span class="chk ok"><span class="t">11/09/2026 03:20:56 MYT</span><span class="r">footer soon colour rgb(102, 112, 133), contrast 4.97:1</span></span></td><td><span class="chk ok"><span class="t">10/09/2026 20:34 MYT</span><span class="r">c3-footer.png: soon items readable; axe zero violations in Check 1</span></span></td></tr>
+<tr><td class="id">P29</td><td>Make the footer titles h3</td><td><span class="st ok">Fixed</span></td><td><span class="chk ok"><span class="t">10/09/2026 20:30:46 MYT</span><span class="r">axe: 0 violations at 1440 (none), 0 at 390 (none)</span></span></td><td><span class="chk ok"><span class="t">11/09/2026 03:20:56 MYT</span><span class="r">h4 count 0; footer h3 count 3</span></span></td><td><span class="chk ok"><span class="t">10/09/2026 20:34 MYT</span><span class="r">outline re-read: h1, h2 sections, h3 footer columns</span></span></td></tr>
+<tr><td class="id">P30</td><td>Put the action bar in a landmark</td><td><span class="st ok">Fixed</span></td><td><span class="chk ok"><span class="t">10/09/2026 20:30:46 MYT</span><span class="r">axe: 0 violations at 1440 (none), 0 at 390 (none)</span></span></td><td><span class="chk ok"><span class="t">11/09/2026 03:20:56 MYT</span><span class="r">action bar is &lt;NAV aria-label=&quot;Quick actions&quot;&gt;</span></span></td><td><span class="chk ok"><span class="t">10/09/2026 20:34 MYT</span><span class="r">DOM re-read: &lt;nav aria-label=&quot;Quick actions&quot;&gt; wraps the phone bar</span></span></td></tr>
+<tr><td class="id">P31</td><td>Add a hidden heading to the founder section</td><td><span class="st ok">Fixed</span></td><td><span class="chk ok"><span class="t">10/09/2026 20:30:46 MYT</span><span class="r">axe: 0 violations at 1440 (none), 0 at 390 (none)</span></span></td><td><span class="chk ok"><span class="t">11/09/2026 03:20:56 MYT</span><span class="r">founder h2 &quot;The founder and the team&quot;</span></span></td><td><span class="chk ok"><span class="t">10/09/2026 20:34 MYT</span><span class="r">DOM re-read: hidden h2 &quot;The founder and the team&quot; first in the section</span></span></td></tr>
+<tr><td class="id">P32</td><td>Add the privacy notice; client's lawyer reviews</td><td><span class="st ok">Fixed</span></td><td><span class="chk ok"><span class="t">10/09/2026 20:30:46 MYT</span><span class="r">privacy notice rendered in both languages; sweep 1440/1024/768/390: overflow false/false/false/false, dead anchors 0, broken images 0, script errors 0, 404s 0</span></span></td><td><span class="chk ok"><span class="t">11/09/2026 03:20:56 MYT</span><span class="r">notice present, 2 paragraphs, BM on both: true; footer link opens it: true</span></span></td><td><span class="chk ok"><span class="t">10/09/2026 20:34 MYT</span><span class="r">c3-privacy.png: notice opens from the footer link, two paragraphs, Malay on toggle; wording flagged for the client&#x27;s lawyer</span></span></td></tr>
+<tr><td class="id">P33</td><td>Client supplies cancellation and payment terms</td><td><span class="st client">Waiting on client</span></td><td><span class="chk ok"><span class="t">10/09/2026 20:30:46 MYT</span><span class="r">no instrument applies; client item recorded</span></span></td><td><span class="chk ok"><span class="t">11/09/2026 03:20:56 MYT</span><span class="r">no terms on the page by design; client item</span></span></td><td><span class="chk ok"><span class="t">10/09/2026 20:34 MYT</span><span class="r">no terms by design; client item</span></span></td></tr>
+<tr><td class="id">P34</td><td>Client supplies PERKESO and JKM wording</td><td><span class="st client">Waiting on client</span></td><td><span class="chk ok"><span class="t">10/09/2026 20:30:46 MYT</span><span class="r">no instrument applies; client item recorded</span></span></td><td><span class="chk ok"><span class="t">11/09/2026 03:20:56 MYT</span><span class="r">PERKESO and JKM cards read as pending in the company voice; wording is a client item</span></span></td><td><span class="chk ok"><span class="t">10/09/2026 20:34 MYT</span><span class="r">c3-partners.png: PERKESO and JKM cards read as pending in the company voice</span></span></td></tr>
+<tr><td class="id">P35</td><td>Cut the image weight</td><td><span class="st ok">Fixed</span></td><td><span class="chk ok"><span class="t">10/09/2026 20:30:46 MYT</span><span class="r">image ledger: 38 files, 2155 KB (was 3,191 KB)</span></span></td><td><span class="chk ok"><span class="t">11/09/2026 03:20:56 MYT</span><span class="r">image ledger after: 2.4 MB (measured in Check 1)</span></span></td><td><span class="chk ok"><span class="t">10/09/2026 20:34 MYT</span><span class="r">image ledger re-run: 2,155 KB across 38 files, from 3,191 KB</span></span></td></tr>
+<tr><td class="id">P36</td><td>Self host the banner loop in the full build</td><td><span class="st build">Full build</span></td><td><span class="chk ok"><span class="t">10/09/2026 20:30:46 MYT</span><span class="r">rig desktop: 795 KB with the YouTube player; accepted for the prototype</span></span></td><td><span class="chk ok"><span class="t">11/09/2026 03:20:56 MYT</span><span class="r">YouTube stays for the prototype by instruction; full build item</span></span></td><td><span class="chk ok"><span class="t">10/09/2026 20:34 MYT</span><span class="r">accepted for the prototype; full build item</span></span></td></tr>
+</tbody></table>
+<div class="pin"><b>What the client supplies</b>, gathered from the rows marked waiting: the true operating hours and whether weekends run, real prices for the five rows, which WhatsApp number is for what, PERKESO and JKM wording, the four pending partner sentences, consent and a name for the dialysis customer, answers for the five unanswered questions, and a lawyer's eye on the privacy notice. Each is one line in a WhatsApp reply on Friday.</div></section>
+  <div class="chapdiv" id="c06"><div class="cd-no">06</div><div><h2 class="cd-h">Measured, before and after</h2><div class="cd-sub">Same rig as the audit and the competitors: Slow 4G at 1.6 Mbps and 150 ms, CPU slowed four times, phone viewport</div></div></div>
+  <section>
+    <div class="kpi"><div class="k"><div class="n bad">7.55 s</div><div class="l">Live site, first paint</div><div class="s">jommakcik.my, phone, same rig</div></div>
+<div class="k"><div class="n good">0.68 s</div><div class="l">Prototype, first paint</div><div class="s">phone, after fixes</div></div>
+<div class="k"><div class="n bad">13.09 s</div><div class="l">Live site, largest paint</div><div class="s">phone</div></div>
+<div class="k"><div class="n good">2.79 s</div><div class="l">Prototype, largest paint</div><div class="s">phone, after fixes</div></div>
+<div class="k"><div class="n bad">12.2 MB</div><div class="l">Live site weight</div><div class="s">144 requests</div></div>
+<div class="k"><div class="n good">0.61 MB</div><div class="l">Prototype weight</div><div class="s">28 requests, phone</div></div></div>
+    <table><thead><tr><th>Page</th><th>First paint</th><th>Largest paint</th><th>Blocking time</th><th>Layout shift</th><th>Weight</th><th>Requests</th></tr></thead><tbody><tr><td class="dim">jommakcik.my today, phone</td><td>7.55 s</td><td>13.09 s</td><td>5,801 ms</td><td>not measured</td><td>12.2 MB</td><td>144</td></tr>
+<tr><td class="dim">Best competitor, Mobiliti, phone</td><td>1.92 s</td><td>6.09 s</td><td>0 ms</td><td>not measured</td><td>2.3 MB</td><td>30</td></tr>
+<tr><td class="dim">Prototype before this review, phone</td><td>0.76 s</td><td>3.82 s</td><td>0 ms</td><td>0.011</td><td>1.33 MB</td><td>28</td></tr>
+<tr class="hl"><td class="dim">Prototype after, phone</td><td>0.68 s</td><td>2.79 s</td><td>3 ms</td><td>0.011</td><td>0.61 MB</td><td>28</td></tr>
+<tr><td class="dim">Prototype before, desktop</td><td>0.58 s</td><td>3.84 s</td><td>23 ms</td><td>0.009</td><td>1.82 MB</td><td>31</td></tr>
+<tr class="hl"><td class="dim">Prototype after, desktop</td><td>1.17 s</td><td>2.86 s</td><td>99 ms</td><td>0.009</td><td>0.78 MB</td><td>32</td></tr></tbody></table>
+    <p class="note">After the fixes the phone paints at 0.68 s and reaches its largest paint at 2.79 s, against 3.82 s before and 13.09 s on the live site. Remeasured on 11 September, after the qualification photographs, the testimonial section, the day strip and the footer film were added, the phone paints at 0.76 s, reaches its largest paint at 3.04 s and loads 0.91 MB over 35 requests; a throttled desktop paints at 0.62 s and reaches its largest paint at 2.96 s. Remeasured again after the films were reshot: a phone and a throttled desktop both load 0.91 MB over 35 requests and reach their largest paint at 3.06 s and 2.96 s. The ambient film behind the headline is mounted on the visitor's first scroll, never on a phone and never on a metered or slow connection, so it is never on the path to the largest paint. Weight is 0.61 MB on the phone and 0.78 MB on desktop, where the YouTube player accounts for the difference. Google's good threshold for largest paint is 2.5 s; what remains above it is the poster photograph itself at 114 KB over a 1.6 Mbps line, which a smaller phone-sized poster in the full build removes.</p>
+    <h3 class="sub">Accessibility scan</h3>
+    <table><thead><tr><th>Run</th><th>Violations</th><th>What they were</th></tr></thead><tbody><tr><td class="dim">Before, 1440</td><td>2</td><td>color-contrast on 12 footer nodes; heading-order on the footer h4</td></tr>
+<tr><td class="dim">Before, 390</td><td>3</td><td>the same two, plus region for the action bar</td></tr>
+<tr class="hl"><td class="dim">After, 1440</td><td>0</td><td>none</td></tr>
+<tr class="hl"><td class="dim">After, 390</td><td>0</td><td>none</td></tr></tbody></table>
+    <div class="pin"><b>Paired documents.</b> The faults this review found in the build are recorded in the <a href="design.html" style="color:var(--blue-deep)">Design</a> book's part 11, the client questions are carried in the <a href="plan.html" style="color:var(--blue-deep)">Web Plan</a> part 07, and every fix is live in <a href="index.html" style="color:var(--blue-deep)">Prototype Web 1</a>.</div>
+  </section>
+  <footer>Brand Method &middot; Jom Makcik prototype review &middot; 10 September 2026 &middot; prepared for Dr Sazlina Kamaralzaman &middot; meeting Friday 11 September, 2pm</footer>
+</div>
+</body>
+</html>

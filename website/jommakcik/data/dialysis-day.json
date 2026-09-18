@@ -1,0 +1,104 @@
+{
+  "dialysis_day": [
+    {
+      "time": {
+        "en": "6.40am",
+        "bm": "6.40 pagi"
+      },
+      "headline": {
+        "en": "She leaves the house before the traffic.",
+        "bm": "Dia keluar dari rumah sebelum jalan sesak."
+      },
+      "what_she_gets": [
+        {
+          "en": "Collected at her own front gate",
+          "bm": "Dijemput di pintu pagar rumahnya"
+        },
+        {
+          "en": "A chaperone brings her to the van in her chair",
+          "bm": "Teman iringan membawanya ke van dengan kerusi roda"
+        },
+        {
+          "en": "She stays in her own wheelchair",
+          "bm": "Dia kekal di atas kerusi rodanya sendiri"
+        }
+      ],
+      "photo": "assets/img/day/scene-day-1.webp"
+    },
+    {
+      "time": {
+        "en": "7.05am",
+        "bm": "7.05 pagi"
+      },
+      "headline": {
+        "en": "She never leaves her own chair. It is strapped to the floor.",
+        "bm": "Dia tidak pernah keluar dari kerusinya sendiri. Kerusi itu diikat pada lantai."
+      },
+      "what_she_gets": [
+        {
+          "en": "Rolls up a factory fitted ramp",
+          "bm": "Naik melalui tanjakan yang dipasang dari kilang"
+        },
+        {
+          "en": "Chair secured with safety restraints",
+          "bm": "Kerusi diikat kemas dengan tali keselamatan"
+        },
+        {
+          "en": "A woman at the wheel",
+          "bm": "Dipandu oleh pemandu wanita"
+        }
+      ],
+      "photo": "assets/img/day/scene-day-2.webp"
+    },
+    {
+      "time": {
+        "en": "9.10am",
+        "bm": "9.10 pagi"
+      },
+      "headline": {
+        "en": "In at the door, not left at the kerb.",
+        "bm": "Diiring masuk ke pintu, bukan ditinggalkan di tepi jalan."
+      },
+      "what_she_gets": [
+        {
+          "en": "Walked in to the dialysis centre",
+          "bm": "Diiring masuk ke pusat dialisis"
+        },
+        {
+          "en": "Registration and queue handled for her",
+          "bm": "Pendaftaran dan giliran diuruskan untuknya"
+        },
+        {
+          "en": "Someone stays with her through the treatment",
+          "bm": "Ditemani sepanjang rawatan"
+        }
+      ],
+      "photo": "assets/img/day/scene-day-3.webp"
+    },
+    {
+      "time": {
+        "en": "4.30pm",
+        "bm": "4.30 petang"
+      },
+      "headline": {
+        "en": "Home again, by the same person who took her.",
+        "bm": "Pulang ke rumah, bersama orang yang sama yang membawanya pergi."
+      },
+      "what_she_gets": [
+        {
+          "en": "Wheeled right to her own door",
+          "bm": "Dihantar terus ke pintu rumahnya"
+        },
+        {
+          "en": "The same trained chaperone both ways",
+          "bm": "Teman iringan terlatih yang sama, pergi dan balik"
+        },
+        {
+          "en": "Regular runs can be billed monthly",
+          "bm": "Perjalanan tetap boleh dibil setiap bulan"
+        }
+      ],
+      "photo": "assets/img/day/scene-day-4.webp"
+    }
+  ]
+}

@@ -282,6 +282,11 @@ nav.nav-hidden {
   z-index: 50;
 }
 
+.nav-dd--simple .nav-dd-panel {
+  min-width: 320px;
+  grid-template-columns: 1fr;
+}
+
 .nav-dd-panel::before {
   content: '';
   position: absolute;

@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jom Makcik &middot; Q&amp;A &middot; Brand Method</title>
+<link rel="icon" type="image/webp" sizes="32x32" href="assets/img/favicon-32.webp">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/bmws.css?v=1">
+<style>
+  :root{
+    --paper:#F5F7FC;--paper2:#FCFDFF;--ink:#101626;--soft:#4A5468;--faint:#8A93A6;
+    --line:#E2E7F1;--line2:#D6DCEA;--blue:#2536F5;--blue-deep:#1421B8;--wash:#EEF1FE;
+    --ok:#1A8F5A;--warn:#C9941F;--red:#D7263D;--dark:#0E1424;--maxw:1080px;
+    --jm:#F91B2A;--jm-deep:#C60815;--jm-wash:#FFF1F2;--e1:cubic-bezier(.22,.8,.28,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+  body{font-family:"Inter",system-ui,sans-serif;background:var(--paper);color:var(--ink);font-size:16px;line-height:1.62;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+  .mono{font-family:"JetBrains Mono",monospace}
+  .bmws{position:sticky;top:0;z-index:80}
+
+  .chapnav{border-bottom:1px solid var(--line);background:rgba(245,247,252,.97);position:sticky;top:0;z-index:49;overflow-x:auto;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+  .chapnav-in{display:flex;gap:3px;padding:8px 28px;max-width:var(--maxw);margin:0 auto;white-space:nowrap}
+  .chapnav a{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--faint);text-decoration:none;padding:6px 10px;border-radius:8px}
+  .chapnav a:hover{color:var(--ink);background:var(--wash)}
+  .chapnav .ch-no{color:var(--blue-deep);font-weight:700;margin-right:6px}
+
+
+  .eyebrow{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--blue-deep);display:inline-flex;align-items:center;gap:10px;font-weight:600}
+  .eyebrow::before{content:"";width:28px;height:1px;background:var(--blue);display:inline-block}
+  .hero{padding:50px 0 8px}
+  .hero h1{font-family:"Fraunces",serif;font-weight:500;font-size:clamp(36px,5.6vw,62px);line-height:1.03;letter-spacing:-.02em;margin:18px 0 0}
+  .hero h1 em{font-style:italic;color:var(--jm-deep)}
+  .hero .lede{font-size:clamp(17px,2vw,20px);color:var(--soft);max-width:66ch;margin:20px 0 0}
+  .vrow{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+  .vchip{background:var(--paper2);border:1px solid var(--line);border-radius:999px;padding:8px 15px;font-size:13px;color:var(--soft)}
+  .vchip b{color:var(--ink)}
+  .execsum{margin-top:32px;border:1px solid var(--line);border-radius:16px;background:var(--paper2);padding:26px 28px}
+  .execsum .k{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--jm-deep);font-weight:700}
+  .execsum p{margin-top:12px;font-size:16.5px;color:var(--soft)}
+  .execsum p b{color:var(--ink)}
+  .execsum p+p{margin-top:11px}
+
+  section{padding:32px 0}
+  .chapdiv{display:flex;align-items:baseline;gap:18px;padding:46px 0 4px;border-top:1px solid var(--line);margin-top:10px}
+  .cd-no{font-family:"Fraunces",serif;font-weight:600;font-size:38px;color:var(--blue-deep);line-height:1}
+  h2.cd-h{font-family:"Fraunces",serif;font-weight:500;font-size:27px;letter-spacing:-.01em;margin:0}
+  .cd-sub{font-size:15px;color:var(--soft);margin-top:5px}
+  .secmark{display:flex;align-items:center;gap:13px;margin-top:6px}
+  .secicon{width:34px;height:34px;border-radius:9px;background:var(--dark);display:flex;align-items:center;justify-content:center;color:#9FB4FF;flex:none}
+  .secicon svg{width:17px;height:17px}
+  .sec-no{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--blue-deep);letter-spacing:.1em;text-transform:uppercase;font-weight:600}
+  h3.sechead{font-family:"Fraunces",serif;font-weight:500;font-size:clamp(25px,3.6vw,37px);line-height:1.08;letter-spacing:-.015em;margin:13px 0 0;max-width:26ch}
+  h3.sub{font-family:"Fraunces",serif;font-weight:500;font-size:22px;margin:30px 0 0}
+  .sec-intro{font-size:16.5px;color:var(--soft);max-width:74ch;margin:15px 0 0}
+  .sec-intro b,.sec-intro strong{color:var(--ink)}
+
+  .grid{display:grid;gap:16px;margin-top:22px}
+  .g2{grid-template-columns:repeat(auto-fit,minmax(290px,1fr))}
+  .g3{grid-template-columns:repeat(auto-fit,minmax(225px,1fr))}
+  .card{background:var(--paper2);border:1px solid var(--line);border-radius:14px;padding:20px 21px}
+  .card .tag{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--blue-deep);font-weight:700}
+  .card h3{font-family:"Fraunces",serif;font-weight:500;font-size:19px;margin-top:8px}
+  .card p{font-size:14px;color:var(--soft);margin-top:9px;line-height:1.55}
+  .card p b{color:var(--ink)}
+  .card.dark{background:var(--dark);border-color:#232a40;color:#D6DEF2}
+  .card.dark h3{color:#fff}.card.dark p{color:#AEB9D2}.card.dark .tag{color:#9FB4FF}.card.dark p b{color:#fff}
+  .card.jm{border-color:#F7C9CD;background:var(--jm-wash)}
+  .card.jm .tag{color:var(--jm-deep)}
+
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-top:22px}
+  .stat{border:1px solid var(--line);border-radius:13px;background:var(--paper2);padding:16px 18px}
+  .stat .num{font-family:"Fraunces",serif;font-size:28px;font-weight:500;color:var(--blue-deep);line-height:1.05}
+  .stat.bad .num{color:var(--jm-deep)}
+  .stat .lab{font-size:13px;font-weight:600;margin-top:8px}
+  .stat .s{font-size:12px;color:var(--faint);margin-top:3px}
+
+  .goals2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-top:22px}
+  .goal{display:flex;gap:13px;align-items:flex-start;border:1px solid var(--line);border-radius:13px;background:var(--paper2);padding:16px 18px}
+  .goal .gi{width:30px;height:30px;border-radius:8px;background:var(--wash);color:var(--blue-deep);display:flex;align-items:center;justify-content:center;flex:none;font-family:"JetBrains Mono",monospace;font-size:12px;font-weight:700}
+  .goal b{font-size:15px}.goal p{font-size:13.5px;color:var(--soft);margin-top:4px}
+
+  table{width:100%;border-collapse:separate;border-spacing:0;margin-top:18px;font-size:14px;background:var(--paper2);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  thead th{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#fff;background:var(--dark)}
+  tr:last-child td{border-bottom:none}
+  td.dim{font-weight:600;white-space:nowrap}
+  td.sc{font-family:"JetBrains Mono",monospace;color:var(--blue-deep);font-weight:700;white-space:nowrap}
+  tr.hl td{background:var(--jm-wash)}
+  tr.hl td.dim{color:var(--jm-deep)}
+
+  .vtag{font-family:"JetBrains Mono",monospace;font-size:9.5px;text-transform:uppercase;letter-spacing:.04em;padding:3px 8px;border-radius:6px;font-weight:700;display:inline-block}
+  .vtag.hi{background:rgba(26,143,90,.14);color:var(--ok)}
+  .vtag.lo{background:rgba(201,148,31,.16);color:#9a6f12}
+  .vtag.bad{background:rgba(215,38,61,.12);color:var(--red)}
+
+  .pin{margin-top:22px;border-left:3px solid var(--blue);background:linear-gradient(90deg,rgba(37,54,245,.06),transparent);padding:15px 19px;border-radius:0 12px 12px 0;font-size:15px}
+  .pin b{color:var(--blue-deep)}
+  .pin.warn{border-left-color:var(--warn);background:linear-gradient(90deg,rgba(201,148,31,.09),transparent)}
+  .pin.warn b{color:#9a6f12}
+  .pin.jm{border-left-color:var(--jm);background:linear-gradient(90deg,rgba(249,27,42,.07),transparent)}
+  .pin.jm b{color:var(--jm-deep)}
+
+  .quote{margin-top:22px;border:1px solid var(--line);border-radius:14px;background:var(--paper2);padding:22px 24px}
+  .quote q{font-family:"Fraunces",serif;font-size:20px;line-height:1.4;font-style:italic;color:var(--ink);display:block;overflow-wrap:anywhere;word-break:break-word}
+  .quote .src{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin-top:12px;display:block}
+
+  .bars{margin-top:22px;display:flex;flex-direction:column;gap:11px}
+  .bar{display:grid;grid-template-columns:150px 1fr 68px;gap:12px;align-items:center;font-size:13.5px}
+  .bar .bn{font-weight:600}
+  .bar .bt{height:15px;border-radius:4px;background:#E7ECF6;overflow:hidden;position:relative}
+  .bar .bf{height:100%;border-radius:4px;background:var(--blue);display:block}
+  .bar.is-jm .bf{background:var(--jm)}
+  .bar .bv{font-family:"JetBrains Mono",monospace;font-size:12px;font-weight:700;text-align:right;color:var(--soft)}
+  .bar.is-jm .bv{color:var(--jm-deep)}
+
+  .scorewrap{margin-top:22px;border:1px solid var(--line);border-radius:14px;background:var(--paper2);overflow:hidden}
+  .srow{display:grid;grid-template-columns:180px 1fr 92px;gap:14px;align-items:center;padding:13px 18px;border-bottom:1px solid var(--line)}
+  .srow:last-child{border-bottom:0}
+  .srow .sn{font-weight:600;font-size:14.5px}
+  .srow .sn small{display:block;font-weight:400;font-size:12.5px;color:var(--faint);margin-top:2px}
+  .srow .st{height:9px;border-radius:5px;background:#E7ECF6;overflow:hidden}
+  .srow .sf{height:100%;display:block;border-radius:5px}
+  .srow .sv{font-family:"JetBrains Mono",monospace;font-weight:700;font-size:14px;text-align:right}
+  .sv.g{color:var(--ok)}.sv.a{color:#9a6f12}.sv.r{color:var(--jm-deep)}
+  .sf.g{background:var(--ok)}.sf.a{background:var(--warn)}.sf.r{background:var(--jm)}
+
+  .shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:22px}
+  .shot{border:1px solid var(--line);border-radius:13px;background:var(--paper2);overflow:hidden}
+  .shot img{width:100%;height:auto;max-height:430px;object-fit:cover;object-position:top center;display:block;border-bottom:1px solid var(--line);background:#fff}
+  .shot .cp{padding:11px 14px;font-size:12.5px;color:var(--soft);line-height:1.5}
+  .shot .cp b{color:var(--ink);display:block;font-size:13px;margin-bottom:3px}
+
+  .vl-scroll{overflow-x:auto;border:1px solid var(--line2);border-radius:14px;background:#fff;margin-top:20px}
+  table.vledger{width:100%;border-collapse:separate;border-spacing:0;min-width:1000px;font-size:13.5px;border:0;border-radius:0;margin:0}
+  table.vledger th{text-align:left;padding:12px 14px;background:#0B1020;color:#fff;font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;font-weight:700;border-right:1px solid rgba(255,255,255,.1)}
+  table.vledger th:last-child{border-right:0}
+  table.vledger td{padding:14px;vertical-align:top;line-height:1.55;color:#3d4048;border-bottom:1px solid rgba(12,18,32,.09);border-right:1px solid rgba(12,18,32,.06)}
+  table.vledger td:last-child{border-right:0}
+  table.vledger tr:last-child td{border-bottom:0}
+  table.vledger tbody tr:nth-child(even) td{background:#FBFBFD}
+  .vl-n{font-family:"JetBrains Mono",monospace;font-weight:700;color:#9a9ca6;font-size:12px;width:34px}
+  .vl-area{font-weight:700;color:#15161A;min-width:120px}
+  .vl-when{font-family:"JetBrains Mono",monospace;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--blue-deep);font-weight:700;white-space:nowrap}
+
+  ul.tick{margin-top:14px;list-style:none;display:flex;flex-direction:column;gap:9px}
+  ul.tick li{position:relative;padding-left:26px;font-size:15px;color:var(--soft)}
+  ul.tick li b{color:var(--ink)}
+  ul.tick li::before{content:"";position:absolute;left:0;top:9px;width:11px;height:11px;border-radius:3px;border:1.6px solid var(--blue);background:var(--wash)}
+  ul.tick.x li::before{border-color:var(--jm);background:var(--jm-wash)}
+
+  .srcs{margin-top:18px;display:flex;flex-direction:column;gap:7px;font-size:13.5px}
+  .srcs a{color:var(--blue-deep);text-decoration:none;border-bottom:1px solid rgba(20,33,184,.28);word-break:break-all}
+  .srcs a:hover{border-bottom-color:var(--blue-deep)}
+
+  footer{padding:34px 0 70px;color:var(--faint);font-size:12px;font-family:"JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.05em;border-top:1px solid var(--line);margin-top:30px}
+  .ic{stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+  @media(max-width:720px){
+    .wrap{padding:0 18px}
+    .chapnav-in{padding:8px 16px}
+    section{padding:26px 0}
+    .bar{grid-template-columns:106px 1fr 58px;gap:9px;font-size:12.5px}
+    .srow{grid-template-columns:1fr 74px;gap:9px}
+    .srow .st{grid-column:1/-1;order:3}
+    table:not(.vledger){display:block;overflow-x:auto;white-space:nowrap}
+    .chapdiv{flex-direction:column;gap:4px;padding-top:34px}
+  }
+  /* Phones: the chapter rail was 11px type in a 30px tall target, under the 44px touch minimum.
+     It stays a horizontal scroller, the targets simply get full height and a legible size. */
+  @media (max-width:768px){
+    .chapnav-in{gap:2px;padding:4px 16px}
+    .chapnav a{font-size:12px;min-height:44px;display:inline-flex;align-items:center;padding:0 12px}
+  }
+  /* Phones: the mono labels are set between 9.5px and 11px for a desktop reading of these documents,
+     which is below comfortable on a 390px screen. They are lifted to a floor of 11.5px here, and the
+     hero's live links get a full touch target. Nothing above 768px changes. */
+  @media (max-width:768px){
+    thead th,table.vledger th{font-size:12px}
+    .tag,.vtag,.src,.vl-when,.card .tag,.quote .src{font-size:11.5px}
+    .livelinks .ll{min-height:44px;display:flex;flex-direction:column;justify-content:center}
+    .srcs{gap:0}
+    .srcs a{display:block;padding:11px 0}
+  }
+
+  /* Tables in these documents are built for a desktop reading. Below 900px any of them, not only
+     table.rv, becomes its own horizontal scroller so the page itself never scrolls sideways: the
+     seven column performance table was 770px of min-content inside a 712px column at 768. */
+  @media (max-width:900px){
+    table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}
+  }
+  /* and the small mono chip labels get an 11.5px floor on phones */
+  @media (max-width:768px){
+    .k,.sh,.sl,.slot,.who,.bs-k,.fn-k,.v,.s,small,code{font-size:11.5px}
+  }
+  /* Phones: a hard floor for every small label in these documents. The earlier floor used single class selectors and
+     lost to two class rules such as .spec small, and it missed the bare <k> element the plan uses for table keys.
+     Font size only, never SVG text, which is part of a drawn diagram. */
+  @media (max-width:768px){
+    body small, body k, body .k, body .sl, body .slot, body .who, body .bs-k, body .fn-k, body .sh, body .tag, body .vtag, body .src, body .vl-when, body thead th, body .mini-eb, body .swi .m .cr, body .ratio-row .g, body .vc .r.h > div, body .cat, body .own, body .chk .t, body .bshead, body .bshead span, body .pv .r.h, body .pv .r.h > div, body .tk .r.h, body .tk .r.h > div{font-size:11.5px!important}
+  }
+</style>
+<style>
+  /* sitemap tree */
+  .tree{margin-top:22px;border:1px solid var(--line);border-radius:16px;background:var(--paper2);padding:22px 24px}
+  .tnode{display:grid;grid-template-columns:210px 1fr;gap:10px 18px;padding:13px 0;border-bottom:1px solid var(--line);align-items:start}
+  .tnode:last-child{border-bottom:0}
+  .tnode .tn{font-weight:700;font-size:15px;color:var(--ink)}
+  .tnode .tn small{display:block;font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--faint);font-weight:700;margin-top:4px}
+  .tnode .td{font-size:14px;color:var(--soft);line-height:1.55}
+  .tnode .td b{color:var(--ink)}
+  .tnode.kid .tn{padding-left:20px;font-weight:600;font-size:14.5px;position:relative}
+  .tnode.kid .tn::before{content:"";position:absolute;left:4px;top:9px;width:9px;height:1.5px;background:var(--line2)}
+  .tnode.new{background:linear-gradient(90deg,rgba(249,27,42,.045),transparent)}
+  @media(max-width:640px){.tnode{grid-template-columns:1fr;gap:4px}.tnode.kid .tn{padding-left:14px}}
+
+  /* flow strip */
+  .flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(158px,1fr));gap:12px;margin-top:22px}
+  .fstep{border:1px solid var(--line);border-radius:13px;background:var(--paper2);padding:15px 16px;position:relative}
+  .fstep .fn{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--blue-deep);font-weight:700}
+  .fstep b{display:block;font-size:14.5px;margin-top:7px}
+  .fstep p{font-size:13px;color:var(--soft);margin-top:5px;line-height:1.5}
+  .fstep.end{background:var(--jm-wash);border-color:#F7C9CD}
+  .fstep.end .fn{color:var(--jm-deep)}
+
+  /* swatches */
+  .sw{display:grid;grid-template-columns:repeat(auto-fit,minmax(132px,1fr));gap:12px;margin-top:20px}
+  .swi{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--paper2)}
+  .swi .chip{height:62px;display:block}
+  .swi .m{padding:10px 12px;font-size:12.5px;line-height:1.45}
+  .swi .m b{display:block;font-size:13px}
+  .swi .m code{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--faint)}
+
+  /* type specimen */
+  .spec{margin-top:20px;border:1px solid var(--line);border-radius:14px;background:var(--paper2);padding:20px 22px}
+  .spec .sl{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--faint);font-weight:700}
+  .spec .s1{font-size:34px;font-weight:700;letter-spacing:-.02em;line-height:1.12;margin-top:6px}
+  .spec .s2{font-size:19px;font-weight:600;margin-top:16px}
+  .spec .s3{font-size:16px;color:var(--soft);margin-top:10px;max-width:60ch}
+  .spec .s4{font-family:"JetBrains Mono",monospace;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--blue-deep);font-weight:700;margin-top:16px}
+  .spec hr{border:0;border-top:1px solid var(--line);margin:18px 0}
+</style>
+
+<style>
+/* IAQ plan devices */
+.sec-n{font-family:"JetBrains Mono",monospace;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue-deep);font-weight:700;display:block;margin-bottom:7px}
+.si{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:22px 0 6px}
+.si>div{border:1px solid var(--line);border-radius:12px;background:var(--paper2);padding:15px 17px}
+.si k{display:flex;align-items:center;gap:8px;font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue-deep);font-weight:700}
+.si k s{width:8px;height:8px;border-radius:2px;background:var(--blue);display:inline-block;text-decoration:none}
+.si .c k s{background:var(--jm)}.si .c k{color:var(--jm-deep)}
+.si p{font-size:14px;color:var(--soft);margin-top:8px;line-height:1.55}.si p b{color:var(--ink)}
+.dwrap{margin-top:18px;border:1px solid var(--line);border-radius:14px;background:#fff;overflow:hidden;break-inside:avoid}
+.dhead{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;padding:12px 16px;background:var(--paper2);border-bottom:1px solid var(--line)}
+.dhead b{font-family:"JetBrains Mono",monospace;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue-deep);font-weight:700}
+.dhead span{font-size:14px;color:var(--soft)}
+.dbody{padding:18px}
+.dbody svg{width:100%;height:auto;display:block}
+.fx-h{font-family:"Fraunces",serif;font-weight:500;font-size:24px;margin:38px 0 8px;letter-spacing:-.01em}
+/* decisions and strategy tables */
+table.dec td:first-child{font-weight:700;color:var(--ink);white-space:nowrap}
+.bstable{margin-top:18px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--paper2)}
+.bshead{display:grid;grid-template-columns:1fr 1.6fr;background:var(--dark);color:#fff;font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase}
+.bshead span{padding:11px 16px}
+.bsrow{display:grid;grid-template-columns:1fr 1.6fr;border-top:1px solid var(--line)}
+.bsrow>div{padding:16px}
+.bs-idea{background:var(--wash)}
+.bs-k{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--blue-deep);font-weight:700;display:block;margin-bottom:6px}
+.bsrow p{font-size:14.5px;color:var(--soft);line-height:1.55}.bsrow p b{color:var(--ink)}
+/* the ladder */
+.ladder{margin-top:20px;display:flex;flex-direction:column;gap:10px}
+.rung{display:grid;grid-template-columns:52px 1fr 190px;gap:16px;align-items:center;border:1px solid var(--line);border-radius:12px;background:var(--paper2);padding:14px 18px}
+.rung .rn{font-family:"Fraunces",serif;font-size:26px;color:var(--faint);font-weight:500}
+.rung b{display:block;font-size:16px}.rung p{font-size:14px;color:var(--soft);margin-top:3px}
+.rung .who{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);text-align:right}
+.rung.us{background:var(--dark);border-color:var(--dark);color:#fff}.rung.us .rn{color:#FF9AA2}.rung.us p{color:#AEB9D2}.rung.us .who{color:#FF9AA2}
+/* audience loop */
+.fnwrap{padding:18px}
+.fnrow{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.fnstage{border:1px solid var(--line);border-radius:12px;background:var(--paper2);padding:14px 15px}
+.fn-k{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--blue-deep);font-weight:700;display:flex;gap:8px;align-items:center}
+.fn-k i{font-style:normal;background:var(--blue);color:#fff;border-radius:5px;padding:2px 6px;font-size:10px}
+.fnstage p{font-size:13.5px;color:var(--soft);margin-top:7px}
+.fnstage ul{list-style:none;margin-top:10px;display:flex;flex-direction:column;gap:5px}
+.fnstage li{font-size:13.5px;padding-left:14px;position:relative}
+.fnstage li::before{content:"";position:absolute;left:0;top:8px;width:6px;height:6px;border-radius:2px;background:var(--blue)}
+.fnsplit{text-align:center;font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin:16px 0 12px;position:relative}
+.fnsplit::before{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:var(--line)}
+.fnsplit span{background:#fff;padding:0 12px;position:relative}
+.fnouts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.fnout{border:1px solid var(--line);border-left:4px solid var(--o);border-radius:12px;background:var(--paper2);padding:14px 15px}
+.fno-k{font-weight:700;font-size:15px;color:var(--o)}
+.fnout p{font-size:13.5px;color:var(--soft);margin-top:6px}
+.fnout ul{list-style:none;margin-top:9px;display:flex;flex-direction:column;gap:5px}
+.fnout li{font-size:13.5px;padding-left:14px;position:relative}
+.fnout li::before{content:"";position:absolute;left:0;top:8px;width:6px;height:6px;border-radius:2px;background:var(--o)}
+/* route cards */
+.route{margin-top:16px;border:1px solid var(--line);border-radius:14px;background:var(--paper2);overflow:hidden}
+.route .rh{display:flex;align-items:baseline;gap:12px;padding:14px 18px;background:var(--wash);border-bottom:1px solid var(--line)}
+.route .rh b{font-family:"Fraunces",serif;font-size:20px;font-weight:500}
+.route .rh span{font-size:13px;color:var(--soft)}
+.route ol{counter-reset:r;list-style:none;display:grid;grid-template-columns:repeat(5,1fr);gap:0;padding:0}
+.route li{counter-increment:r;padding:14px 16px;border-right:1px solid var(--line);font-size:13.5px;color:var(--soft);position:relative}
+.route li:last-child{border-right:0}
+.route li::before{content:counter(r,decimal-leading-zero);display:block;font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.1em;color:var(--blue-deep);font-weight:700;margin-bottom:6px}
+.route li b{display:block;color:var(--ink);margin-bottom:3px}
+.route li.ask{background:rgba(249,27,42,.05)}.route li.ask::before{color:var(--jm-deep)}
+/* page briefs */
+.pb{margin-top:14px;border:1px solid var(--line);border-radius:14px;background:var(--paper2);overflow:hidden}
+.pb .ph{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:baseline;padding:14px 18px;border-bottom:1px solid var(--line)}
+.pb .ph b{font-family:"Fraunces",serif;font-size:20px;font-weight:500}
+.pb .ph code{font-family:"JetBrains Mono",monospace;font-size:11.5px;color:var(--faint)}
+.pb .pg{display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr;gap:0}
+.pb .pg>div{padding:14px 18px;border-right:1px solid var(--line);font-size:13.5px;color:var(--soft);line-height:1.55}
+.pb .pg>div:last-child{border-right:0}
+.pb .pg k{display:block;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue-deep);font-weight:700;margin-bottom:6px}
+.pb .pg ul{list-style:none;display:flex;flex-direction:column;gap:3px}
+.pb .pg li{padding-left:12px;position:relative}.pb .pg li::before{content:"";position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:2px;background:var(--blue)}
+.pb .pg .ask{color:var(--jm-deep);font-weight:700}
+.pb.new .ph b::after{content:"new";font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--jm-deep);background:var(--jm-wash);border:1px solid #F7C9CD;border-radius:5px;padding:2px 6px;margin-left:10px;vertical-align:middle}
+/* scored gap table */
+table.gap td.sc{font-size:15px}
+/* rules and acceptance */
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:18px}
+.rule{border:1px solid var(--line);border-radius:12px;background:var(--paper2);padding:14px 16px}
+.rule k{display:block;font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--blue-deep);font-weight:700}
+.rule b{display:block;margin-top:5px;font-size:15px}.rule p{font-size:13.5px;color:var(--soft);margin-top:4px}
+@media(max-width:900px){
+  .si,.fnrow,.fnouts{grid-template-columns:1fr}
+  .bshead,.bsrow{grid-template-columns:1fr}.bshead span:last-child{display:none}
+  .rung{grid-template-columns:44px 1fr}.rung .who{grid-column:2;text-align:left}
+  .route ol{grid-template-columns:1fr}.route li{border-right:0;border-bottom:1px solid var(--line)}
+  .pb .pg{grid-template-columns:1fr}.pb .pg>div{border-right:0;border-bottom:1px solid var(--line)}
+}
+
+</style>
+</head>
+<body>
+<div class="bmws" style="--bmws-acc:#F91B2A"><div class="bmws-in"><div class="bmws-crumb"><b>Jom Makcik &middot; Website 1</b><span>Brand Method &middot; Admin Navigation</span></div><nav class="bmws-tabs"><a href="audit.html"><i>00</i>Web Audit</a><a href="competitors.html"><i>01</i>Competitors</a><a href="plan.html"><i>02</i>Web Plan</a><a href="design.html"><i>03</i>Design</a><a href="index.html"><i>04</i>Prototype Web 1</a><a href="review.html"><i>05</i>Review</a><a class="on" href="qa.html"><i>06</i>Q&amp;A</a></nav></div></div>
+
+<nav class="chapnav"><div class="chapnav-in">
+  <a href="#c00"><span class="ch-no">00</span>Her questions</a>
+  <a href="#c01"><span class="ch-no">01</span>Our questions</a>
+  <a href="#c02"><span class="ch-no">02</span>Objections</a>
+  <a href="#c03"><span class="ch-no">03</span>A family's questions</a>
+  <a href="#c04"><span class="ch-no">04</span>Friday, in order</a>
+</div></nav>
+
+<div class="wrap">
+  <header class="hero">
+    <span class="eyebrow">Q&amp;A &middot; Brand Method</span>
+    <h1>Every question Friday can raise, <em>answered before it is asked</em></h1>
+    <p class="lede">The questions Dr Sazlina is likely to put to us, the questions we have to put to her, the objections a careful buyer raises, and the questions a family asks the site itself. Each answer points at the tab and part where the evidence sits, so nothing in the meeting rests on memory.</p>
+    <div class="vrow">
+      <div class="vchip">Prepared <b>11 Sep 2026</b></div>
+      <div class="vchip">For <b>Friday 11 September, 2pm</b></div>
+      <div class="vchip">Questions <b>47</b></div>
+      <div class="vchip">Facts still hers to give <b>12</b></div>
+    </div>
+    <div class="execsum">
+      <span class="k">How to use this tab</span>
+      <p><b>Part 00 is read before the meeting.</b> Sixteen questions she may ask, with the short answer and where the proof sits in the other tabs.</p>
+      <p><b>Part 01 is worked through in the meeting.</b> Twelve facts only the company can give, as questions, each with why it matters and where it lands on the site.</p>
+      <p><b>Part 02 is kept in the pocket.</b> The objections a careful buyer raises, with the honest answer, including where we say no.</p>
+      <p><b>Parts 03 and 04 close the loop.</b> The questions the site answers for a family, and the running order for the hour.</p>
+    </div>
+  </header>
+
+  <div class="chapdiv" id="c00"><div class="cd-no">00</div><div>
+    <h2 class="cd-h">What Dr Sazlina is likely to ask</h2>
+    <div class="cd-sub">Sixteen questions, the short answer, and where the proof sits</div>
+  </div></div>
+  <section>
+    <p class="sec-intro">Read before the meeting. Every answer here is either on a tab or is honestly hers to give; none is a number spoken from memory.</p>
+    <table>
+      <thead><tr><th>Question</th><th>The answer</th><th>Where it sits</th></tr></thead>
+      <tbody>
+        <tr><td class="dim">How much, and what is included</td><td>Quoted in writing after Friday, against the scope in plan part 03: fourteen pages in English and fourteen in Bahasa Melayu, the booking path, the pricing structure, the coverage set, and handover with the guides in plan part 07. No figure is spoken from memory in the room.</td><td>Plan 03, 07</td></tr>
+        <tr><td class="dim">How long will it take</td><td>The prototype in tab 04 is the home page built to the finished standard, so the build is the remaining thirteen pages, the BM copy she signs off, and the photo shoot. The timeline is set against her answers in part 01, not before them.</td><td>Prototype 04; Plan 07</td></tr>
+        <tr><td class="dim">What happens to the current site</td><td>It is a Canva export, audit part 02. It cannot be edited into this; it is replaced. The domain, the WhatsApp numbers and the film carry over unchanged. Nothing a customer has saved breaks.</td><td>Audit 02, 06</td></tr>
+        <tr><td class="dim">What happens to app.jommakcik.my</td><td>An open decision, plan part 07. The prototype hands a booking to WhatsApp with the details pre filled. The app can sit behind it for the office, replace it later, or be retired. Her call, and it changes nothing in the design.</td><td>Plan 07; Review P12</td></tr>
+        <tr><td class="dim">Who owns the domain, hosting and analytics</td><td>Jom Makcik. Plan part 07, H3: every key stays in the company's accounts, we work inside them and hold none of them.</td><td>Plan 07</td></tr>
+        <tr><td class="dim">Why not stay on Canva or move to Wix</td><td>Audit part 03: 12 MB, 7.5 seconds to first paint on a phone, 12.8 px text, 10 px contact details, no headings, no sitemap, no BM. The same page on the throttled rig loads in 0.6 MB and paints under a second. Competitors part 02 shows what the rivals ship.</td><td>Audit 03, 04; Competitors 02</td></tr>
+        <tr><td class="dim">Will people find it on Google</td><td>Love On Wheels wins search today with pages it writes, competitors part 03. The plan gives Jom Makcik one page per service, per area and per question, in two languages, with the structured data already on the prototype. Ranking is earned over months; the pages that earn it are in the plan.</td><td>Competitors 03; Plan 03</td></tr>
+        <tr><td class="dim">What about GrabAssist</td><td>It is the entrant that changes the category, competitors part 00. Its own published limits, a foldable chair only and a driver who cannot leave the car, are exactly the two things the hero says. The comparison quotes them, it does not argue with them.</td><td>Competitors 00; Prototype, comparison</td></tr>
+        <tr><td class="dim">Do we need a photo shoot</td><td>The company's own photographs carry most of the site today. Two comparison scenes, the pricing photograph, the four qualification photographs, the saving photograph and the footer van are generated to a written brief and labelled as such in design part 13. A half day shoot replaces them and the monochrome portraits.</td><td>Design 13; Plan 07</td></tr>
+        <tr><td class="dim">Can the office change a price or an area</td><td>Yes. Handover H1 and H2 in plan part 07: a recorded walkthrough and one page guides, one job each. Changing a rate, adding an area, swapping a photograph, updating hours everywhere at once.</td><td>Plan 07</td></tr>
+        <tr><td class="dim">What if the prices are not ready at launch</td><td>The structure is built and reads On request, with the written quote promise. It launches that way and fills in the day she sends the numbers.</td><td>Prototype, pricing</td></tr>
+        <tr><td class="dim">Do you run on weekends</td><td>Her fact to give. The site says weekdays because jommakcik.my says so and the app says Monday to Friday. The answer goes into the hero, the footer, the FAQ and the schema at once.</td><td>Plan 07; Review P17</td></tr>
+        <tr><td class="dim">How will bookings reach the office</td><td>WhatsApp, with the journey details already typed, from every Book button and the phone action bar. Nothing new to learn. If the office later wants a form that writes into the app, the plan allows it.</td><td>Prototype; Plan 05</td></tr>
+        <tr><td class="dim">How do we know it is working</td><td>Plan part 07, H4: the same throttled rig rerun after launch, before and after published; monthly numbers reviewed with a named person, not an invoice.</td><td>Plan 07; Audit 03</td></tr>
+        <tr><td class="dim">Is the privacy notice enough</td><td>A plain notice under the Personal Data Protection Act 2010 is drafted in both languages on the prototype footer. It needs her company secretary or lawyer to sign it off, part 01, question 12.</td><td>Prototype footer; Review P36</td></tr>
+        <tr><td class="dim">How was the prototype checked</td><td>Tab 05: thirty six findings, each with its fix and three separate checks that the fix holds, plus axe at zero violations, the keyboard pass, the bilingual sweep and the 52 frameworks check.</td><td>Review 05</td></tr>
+        
+      </tbody>
+    </table>
+  </section>
+
+  <div class="chapdiv" id="c01"><div class="cd-no">01</div><div>
+    <h2 class="cd-h">What we have to ask her</h2>
+    <div class="cd-sub">Twelve facts only the company can give, as questions</div>
+  </div></div>
+  <section>
+    <p class="sec-intro">Worked through in the meeting, in this order. Each one is written down as she gives it and goes to the place named in the last column. These are the same twelve rows as plan part 07, turned into questions.</p>
+    <table>
+      <thead><tr><th>The question</th><th>Why it matters</th><th>Where it lands</th></tr></thead>
+      <tbody>
+        <tr><td class="dim">Real prices per service, and the dialysis monthly</td><td>The pricing structure is built and empty. It is the commercial wedge against a category that publishes nothing.</td><td>Pricing section, FAQ, schema</td></tr>
+        <tr><td class="dim">The true hours</td><td>The site says weekdays 8 to 5, the app says Monday to Friday until midnight. One answer, everywhere.</td><td>Hero, footer, FAQ</td></tr>
+        <tr><td class="dim">Weekend service, yes or no</td><td>A family with a Saturday dialysis slot needs one answer.</td><td>Hero, footer, FAQ, schema</td></tr>
+        <tr><td class="dim">PERKESO and JKM: referral, funding or panel</td><td>Changes the whole positioning if either is a funding route.</td><td>Partner rail, About, hero facts</td></tr>
+        <tr><td class="dim">app.jommakcik.my: feed it, replace it or retire it</td><td>Decides whether the booking flow ends at WhatsApp or writes into the app.</td><td>Booking path</td></tr>
+        <tr><td class="dim">The photo shoot: when, who, where</td><td>Replaces the generated scenes and the monochrome portraits.</td><td>Every photographed section</td></tr>
+        <tr><td class="dim">Two or three customers willing to be named</td><td>Including the dialysis household already quoted anonymously.</td><td>Saving section, proof</td></tr>
+        <tr><td class="dim">Which WhatsApp number is for what</td><td>Two numbers are published with no roles.</td><td>Footer, contact</td></tr>
+        <tr><td class="dim">Answers to five family questions</td><td>How do I pay, what if I cancel, weekends, airport and outstation, booking for someone else.</td><td>FAQ rows and schema</td></tr>
+        <tr><td class="dim">Cancellation and payment terms</td><td>A paragraph from the company becomes the Terms page and an FAQ answer.</td><td>Terms page, FAQ</td></tr>
+        <tr><td class="dim">One sentence for each of four partners</td><td>IMM CareHub, managedcare, airasia ride and Oretha's have a logo and a pending line.</td><td>Partner rail</td></tr>
+        <tr><td class="dim">Privacy notice sign off</td><td>The PDPA notice is drafted; the retention line and any referral partners need her lawyer's eye.</td><td>Footer notice</td></tr>
+        
+      </tbody>
+    </table>
+  </section>
+
+  <div class="chapdiv" id="c02"><div class="cd-no">02</div><div>
+    <h2 class="cd-h">Objections, and the honest answer</h2>
+    <div class="cd-sub">Where we agree, where we disagree, and the evidence for each</div>
+  </div></div>
+  <section>
+    <p class="sec-intro">Kept in the pocket. A careful buyer raises these; a careful seller has already conceded the true ones.</p>
+    <table>
+      <thead><tr><th>The objection</th><th>The answer</th><th>Our position</th></tr></thead>
+      <tbody>
+        <tr><td class="dim">Why a website at all, WhatsApp already works</td><td>WhatsApp is where the booking ends, not where a family starts. They start on Google at 4pm in a corridor. Audit part 05: the current page is not indexable for the words they type.</td><td>Agree, and keep WhatsApp as the close</td></tr>
+        <tr><td class="dim">Grab is cheaper</td><td>It is, for someone who can get out of her chair. The qualification section says so in the company's own voice, and says who Jom Makcik is not for.</td><td>Agree, in writing, on the page</td></tr>
+        <tr><td class="dim">Bilingual doubles the work</td><td>Every sentence on the prototype already has its BM beside it in the markup; the toggle swaps in place. The cost is her sign off on the BM copy, not a second build.</td><td>Mostly no</td></tr>
+        <tr><td class="dim">The generated photographs are a risk</td><td>They are labelled, bounded to the scenes listed in design part 13, and scheduled for replacement by the shoot. None shows a real person claiming to be a customer.</td><td>Agree, hence the shoot</td></tr>
+        <tr><td class="dim">Red and white is too loud</td><td>The red is the company's own, used once per screen where a person should look. Everything else is white and ink. Design part 02 measures every contrast.</td><td>Disagree, with evidence</td></tr>
+        <tr><td class="dim">A prototype is not a site</td><td>Correct. It is the home page at finished standard so the decisions are made on the real thing. Thirteen pages follow the same rules, plan part 03.</td><td>Agree</td></tr>
+        <tr><td class="dim">We cannot publish prices</td><td>Then the site says On request and promises a written quote the same day, which is still more than any rival publishes. Competitors part 01.</td><td>Agree, with the fallback built</td></tr>
+        <tr><td class="dim">Our team can build it in house</td><td>The handoff standard in plan part 07, H5, is written so they can take it into React or Next.js without a rewrite. We would rather be judged on the numbers rerun after launch.</td><td>Welcome it</td></tr>
+        
+      </tbody>
+    </table>
+  </section>
+
+  <div class="chapdiv" id="c03"><div class="cd-no">03</div><div>
+    <h2 class="cd-h">What a family asks the site</h2>
+    <div class="cd-sub">Six answered on the prototype, five with the row ready for her words</div>
+  </div></div>
+  <section>
+    <p class="sec-intro">These are the questions a worried adult child types or asks. The first six are answered on the prototype FAQ in both languages; the last five have their row and their schema entry ready.</p>
+    <table>
+      <thead><tr><th>The question</th><th>The answer</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td class="dim">My mother cannot get out of her wheelchair. Can you still take her?</td><td>Yes. That is what AbiliCar is for. Ramp down, she rolls on in her own chair, restrained for the whole journey.</td><td>On the page</td></tr>
+        <tr><td class="dim">How much notice do you need?</td><td>Answered as published; the exact lead time is her fact.</td><td>On the page, to confirm</td></tr>
+        <tr><td class="dim">What if the appointment runs late?</td><td>The chaperone stays; waiting time is part of the chaperone rate.</td><td>On the page</td></tr>
+        <tr><td class="dim">Can a family member ride along?</td><td>Yes, one companion travels at no charge in the AbiliCar.</td><td>On the page, to confirm</td></tr>
+        <tr><td class="dim">What exactly does a chaperone do?</td><td>Collects, walks in, queues, handles paperwork, brings home.</td><td>On the page</td></tr>
+        <tr><td class="dim">Are your drivers checked?</td><td>Vetted, trained with UTM and UiTM, women only.</td><td>On the page</td></tr>
+        <tr><td class="dim">How do I pay?</td><td>Her answer becomes the row.</td><td>Row ready</td></tr>
+        <tr><td class="dim">What if I cancel?</td><td>Her terms become the row and the Terms page.</td><td>Row ready</td></tr>
+        <tr><td class="dim">Do you go to the airport or outstation?</td><td>Case by case today; her rule becomes the row.</td><td>Row ready</td></tr>
+        <tr><td class="dim">Can I book for someone else?</td><td>Yes in practice; her wording becomes the row.</td><td>Row ready</td></tr>
+        <tr><td class="dim">Do you run on weekends?</td><td>Her fact. It changes four places at once.</td><td>Row ready</td></tr>
+        
+      </tbody>
+    </table>
+  </section>
+
+  <div class="chapdiv" id="c04"><div class="cd-no">04</div><div>
+    <h2 class="cd-h">Friday, in order</h2>
+    <div class="cd-sub">The hour, in five parts</div>
+  </div></div>
+  <section>
+    <p class="sec-intro">A running order so the hour ends with the twelve facts captured and the quote date agreed.</p>
+    <table>
+      <thead><tr><th>Minute</th><th>What happens</th><th>Tab</th></tr></thead>
+      <tbody>
+        <tr><td class="dim">0 to 10 min</td><td>The argument in one line, plan part 01: stay in your own chair, we walk you in. Agreement on that before anything is shown.</td><td>Plan 01</td></tr>
+        <tr><td class="dim">10 to 25 min</td><td>The prototype on a phone first, then on the screen. Hero, comparison, services, qualification, pricing, map, FAQ, footer.</td><td>Prototype 04</td></tr>
+        <tr><td class="dim">25 to 40 min</td><td>Part 01 of this tab, the twelve facts, worked through with her answers written down as they are given.</td><td>Q&amp;A 01</td></tr>
+        <tr><td class="dim">40 to 50 min</td><td>Audit and competitors, only the pages she asks about. The numbers are there if wanted, not recited.</td><td>Audit 00; Competitors 00</td></tr>
+        <tr><td class="dim">50 to 60 min</td><td>The decisions still open in plan part 07, who owns each, and the date of the written quote.</td><td>Plan 07</td></tr>
+        
+      </tbody>
+    </table>
+    <div class="pin jm"><b>What a good Friday looks like.</b> She agrees the argument, reads the prototype on her own phone, gives most of the twelve facts, and we leave with the date for the written quote and the photo shoot pencilled in.</div>
+  </section>
+
+  <footer>Brand Method &middot; Jom Makcik Q&amp;A &middot; revised 10 September 2026 &middot; prepared for Dr Sazlina Kamaralzaman &middot; meeting Friday 11 September, 2pm</footer>
+</div>
+</body>
+</html>

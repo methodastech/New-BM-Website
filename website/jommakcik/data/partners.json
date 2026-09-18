@@ -1,0 +1,116 @@
+{
+  "partners": [
+    {
+      "name": "PERKESO",
+      "about": {
+        "en": "Malaysia's social security organisation, and one of our partners.",
+        "bm": "Pertubuhan keselamatan sosial Malaysia, dan salah satu rakan kami."
+      },
+      "logo": "assets/img/logo-perkeso.webp"
+    },
+    {
+      "name": "Jabatan Kebajikan Masyarakat",
+      "about": {
+        "en": "The Department of Social Welfare, and one of our partners.",
+        "bm": "Jabatan Kebajikan Masyarakat, dan salah satu rakan kami."
+      },
+      "logo": "assets/img/logo-jkm.webp"
+    },
+    {
+      "name": "Yayasan Hasanah",
+      "about": {
+        "en": "Khazanah Nasional's impact foundation. Supports our work on senior mobility and isolation.",
+        "bm": "Yayasan impak Khazanah Nasional. Menyokong kerja kami dalam mobiliti dan pengasingan warga emas."
+      },
+      "logo": "assets/img/logo-yayasan-hasanah.webp"
+    },
+    {
+      "name": "AirAsia Foundation",
+      "about": {
+        "en": "Funded the Senior TravelCare and Autism TravelCare training programmes.",
+        "bm": "Membiayai program latihan Senior TravelCare dan Autism TravelCare."
+      },
+      "logo": "assets/img/logo-airasia-foundation.webp"
+    },
+    {
+      "name": "Universiti Kebangsaan Malaysia",
+      "about": {
+        "en": "Jom Makcik grew out of Universiti Kebangsaan Malaysia as a social enterprise, through its PEMULA start-up programme.",
+        "bm": "Jom Makcik lahir dari Universiti Kebangsaan Malaysia sebagai perusahaan sosial, melalui program pemula PEMULA@UKM."
+      },
+      "logo": "assets/img/logo-ukm.webp"
+    },
+    {
+      "name": "MyAgeing, UPM",
+      "about": {
+        "en": "The Malaysian Research Institute on Ageing. Collaborated on elder care training for drivers.",
+        "bm": "Institut Penyelidikan Penuaan Malaysia. Bekerjasama dalam latihan penjagaan warga emas untuk pemandu."
+      },
+      "logo": "assets/img/logo-upm-myageing.webp"
+    },
+    {
+      "name": "Universiti Teknologi Malaysia",
+      "about": {
+        "en": "Delivers the driving and entrepreneurship training our Adinita drivers complete.",
+        "bm": "Menyampaikan latihan pemanduan dan keusahawanan yang dilalui pemandu Adinita kami."
+      },
+      "logo": "assets/img/logo-utm.webp"
+    },
+    {
+      "name": null,
+      "about": {
+        "en": "MAHSA Specialist Hospital",
+        "bm": "Hospital Pakar MAHSA"
+      },
+      "logo": "assets/img/logo-mahsa.webp"
+    },
+    {
+      "name": "Universiti Teknologi MARA",
+      "about": {
+        "en": "Co-delivers the driving and care training our Adinita drivers complete, with UTM.",
+        "bm": "Bersama UTM menyampaikan latihan pemanduan dan penjagaan yang diikuti pemandu Adinita kami."
+      },
+      "logo": "assets/img/logo-uitm.webp"
+    },
+    {
+      "name": "Hospital Pakar An-Nur",
+      "about": {
+        "en": "A specialist hospital in Bangi we carry patients to and from regularly.",
+        "bm": "Hospital pakar di Bangi yang kami hantar dan jemput pesakit secara berkala."
+      },
+      "logo": "assets/img/logo-annur.webp"
+    },
+    {
+      "name": "IMM CareHub",
+      "about": {
+        "en": "One of our healthcare partners.",
+        "bm": "Salah satu rakan penjagaan kesihatan kami."
+      },
+      "logo": "assets/img/logo-imm-carehub.webp"
+    },
+    {
+      "name": "managedcare",
+      "about": {
+        "en": "One of our healthcare partners.",
+        "bm": "Salah satu rakan penjagaan kesihatan kami."
+      },
+      "logo": "assets/img/logo-managedcare.webp"
+    },
+    {
+      "name": "airasia ride",
+      "about": {
+        "en": "One of our ride partners.",
+        "bm": "Salah satu rakan perjalanan kami."
+      },
+      "logo": "assets/img/logo-airasia-ride.webp"
+    },
+    {
+      "name": "Oretha's",
+      "about": {
+        "en": "One of our commercial partners.",
+        "bm": "Salah satu rakan komersial kami."
+      },
+      "logo": "assets/img/logo-orethas.webp"
+    }
+  ]
+}

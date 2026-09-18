@@ -1,0 +1,1018 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jom Makcik · Website &amp; Brand Audit · Brand Method</title>
+<link rel="icon" type="image/webp" sizes="32x32" href="assets/img/favicon-32.webp">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/bmws.css?v=1">
+<style>
+  :root{
+    --paper:#F5F7FC;--paper2:#FCFDFF;--ink:#101626;--soft:#4A5468;--faint:#8A93A6;
+    --line:#E2E7F1;--line2:#D6DCEA;--blue:#2536F5;--blue-deep:#1421B8;--wash:#EEF1FE;
+    --ok:#1A8F5A;--warn:#C9941F;--red:#D7263D;--dark:#0E1424;--maxw:1080px;
+    --jm:#F91B2A;--jm-deep:#C60815;--jm-wash:#FFF1F2;--e1:cubic-bezier(.22,.8,.28,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+  body{font-family:"Inter",system-ui,sans-serif;background:var(--paper);color:var(--ink);font-size:16px;line-height:1.62;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+  .mono{font-family:"JetBrains Mono",monospace}
+  .bmws{position:sticky;top:0;z-index:80}
+
+  .chapnav{border-bottom:1px solid var(--line);background:rgba(245,247,252,.97);position:sticky;top:0;z-index:49;overflow-x:auto;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+  .chapnav-in{display:flex;gap:3px;padding:8px 28px;max-width:var(--maxw);margin:0 auto;white-space:nowrap}
+  .chapnav a{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--faint);text-decoration:none;padding:6px 10px;border-radius:8px}
+  .chapnav a:hover{color:var(--ink);background:var(--wash)}
+  .chapnav .ch-no{color:var(--blue-deep);font-weight:700;margin-right:6px}
+
+
+  .eyebrow{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--blue-deep);display:inline-flex;align-items:center;gap:10px;font-weight:600}
+  .eyebrow::before{content:"";width:28px;height:1px;background:var(--blue);display:inline-block}
+  .hero{padding:50px 0 8px}
+  .hero h1{font-family:"Fraunces",serif;font-weight:500;font-size:clamp(36px,5.6vw,62px);line-height:1.03;letter-spacing:-.02em;margin:18px 0 0}
+  .hero h1 em{font-style:italic;color:var(--jm-deep)}
+  .hero .lede{font-size:clamp(17px,2vw,20px);color:var(--soft);max-width:66ch;margin:20px 0 0}
+  .vrow{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+  .livelinks{margin-top:22px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .livelinks .ll-k{grid-column:1/-1;font-size:12.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--soft)}
+  .livelinks .ll{display:block;padding:14px 16px;background:var(--paper2);border:1px solid var(--line);border-radius:10px;text-decoration:none;transition:border-color .2s,background .2s}
+  .livelinks .ll:hover{border-color:var(--blue-deep);background:#fff}
+  .livelinks .ll b{display:block;font-size:15px;color:var(--blue-deep)}
+  .livelinks .ll span{display:block;margin-top:4px;font-size:13px;color:var(--soft);line-height:1.45}
+  @media(max-width:820px){.livelinks{grid-template-columns:1fr}}
+  .vchip{background:var(--paper2);border:1px solid var(--line);border-radius:999px;padding:8px 15px;font-size:13px;color:var(--soft)}
+  .vchip b{color:var(--ink)}
+  .execsum{margin-top:32px;border:1px solid var(--line);border-radius:16px;background:var(--paper2);padding:26px 28px}
+  .execsum .k{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--jm-deep);font-weight:700}
+  .execsum p{margin-top:12px;font-size:16.5px;color:var(--soft)}
+  .execsum p b{color:var(--ink)}
+  .execsum p+p{margin-top:11px}
+
+  section{padding:32px 0}
+  .chapdiv{display:flex;align-items:baseline;gap:18px;padding:46px 0 4px;border-top:1px solid var(--line);margin-top:10px}
+  .cd-no{font-family:"Fraunces",serif;font-weight:600;font-size:38px;color:var(--blue-deep);line-height:1}
+  h2.cd-h{font-family:"Fraunces",serif;font-weight:500;font-size:27px;letter-spacing:-.01em;margin:0}
+  .cd-sub{font-size:15px;color:var(--soft);margin-top:5px}
+  .secmark{display:flex;align-items:center;gap:13px;margin-top:6px}
+  .secicon{width:34px;height:34px;border-radius:9px;background:var(--dark);display:flex;align-items:center;justify-content:center;color:#9FB4FF;flex:none}
+  .secicon svg{width:17px;height:17px}
+  .sec-no{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--blue-deep);letter-spacing:.1em;text-transform:uppercase;font-weight:600}
+  h3.sechead{font-family:"Fraunces",serif;font-weight:500;font-size:clamp(25px,3.6vw,37px);line-height:1.08;letter-spacing:-.015em;margin:13px 0 0;max-width:26ch}
+  h3.sub{font-family:"Fraunces",serif;font-weight:500;font-size:22px;margin:30px 0 0}
+  .sec-intro{font-size:16.5px;color:var(--soft);max-width:74ch;margin:15px 0 0}
+  .sec-intro b,.sec-intro strong{color:var(--ink)}
+
+  .grid{display:grid;gap:16px;margin-top:22px}
+  .g2{grid-template-columns:repeat(auto-fit,minmax(290px,1fr))}
+  .g3{grid-template-columns:repeat(auto-fit,minmax(225px,1fr))}
+  .card{background:var(--paper2);border:1px solid var(--line);border-radius:14px;padding:20px 21px}
+  .card .tag{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--blue-deep);font-weight:700}
+  .card h3{font-family:"Fraunces",serif;font-weight:500;font-size:19px;margin-top:8px}
+  .card p{font-size:14px;color:var(--soft);margin-top:9px;line-height:1.55}
+  .card p b{color:var(--ink)}
+  .card.dark{background:var(--dark);border-color:#232a40;color:#D6DEF2}
+  .card.dark h3{color:#fff}.card.dark p{color:#AEB9D2}.card.dark .tag{color:#9FB4FF}.card.dark p b{color:#fff}
+  .card.jm{border-color:#F7C9CD;background:var(--jm-wash)}
+  .card.jm .tag{color:var(--jm-deep)}
+
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-top:22px}
+  .stat{border:1px solid var(--line);border-radius:13px;background:var(--paper2);padding:16px 18px}
+  .stat .num{font-family:"Fraunces",serif;font-size:28px;font-weight:500;color:var(--blue-deep);line-height:1.05}
+  .stat.bad .num{color:var(--jm-deep)}
+  .stat .lab{font-size:13px;font-weight:600;margin-top:8px}
+  .stat .s{font-size:12px;color:var(--faint);margin-top:3px}
+
+  .goals2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-top:22px}
+  .goal{display:flex;gap:13px;align-items:flex-start;border:1px solid var(--line);border-radius:13px;background:var(--paper2);padding:16px 18px}
+  .goal .gi{width:30px;height:30px;border-radius:8px;background:var(--wash);color:var(--blue-deep);display:flex;align-items:center;justify-content:center;flex:none;font-family:"JetBrains Mono",monospace;font-size:12px;font-weight:700}
+  .goal b{font-size:15px}.goal p{font-size:13.5px;color:var(--soft);margin-top:4px}
+
+  table{width:100%;border-collapse:separate;border-spacing:0;margin-top:18px;font-size:14px;background:var(--paper2);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  thead th{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#fff;background:var(--dark)}
+  tr:last-child td{border-bottom:none}
+  td.dim{font-weight:600;white-space:nowrap}
+  td.sc{font-family:"JetBrains Mono",monospace;color:var(--blue-deep);font-weight:700;white-space:nowrap}
+  tr.hl td{background:var(--jm-wash)}
+  tr.hl td.dim{color:var(--jm-deep)}
+
+  .vtag{font-family:"JetBrains Mono",monospace;font-size:9.5px;text-transform:uppercase;letter-spacing:.04em;padding:3px 8px;border-radius:6px;font-weight:700;display:inline-block}
+  .vtag.hi{background:rgba(26,143,90,.14);color:var(--ok)}
+  .vtag.lo{background:rgba(201,148,31,.16);color:#9a6f12}
+  .vtag.bad{background:rgba(215,38,61,.12);color:var(--red)}
+
+  .pin{margin-top:22px;border-left:3px solid var(--blue);background:linear-gradient(90deg,rgba(37,54,245,.06),transparent);padding:15px 19px;border-radius:0 12px 12px 0;font-size:15px}
+  .pin b{color:var(--blue-deep)}
+  .pin.warn{border-left-color:var(--warn);background:linear-gradient(90deg,rgba(201,148,31,.09),transparent)}
+  .pin.warn b{color:#9a6f12}
+  .pin.jm{border-left-color:var(--jm);background:linear-gradient(90deg,rgba(249,27,42,.07),transparent)}
+  .pin.jm b{color:var(--jm-deep)}
+
+  .quote{margin-top:22px;border:1px solid var(--line);border-radius:14px;background:var(--paper2);padding:22px 24px}
+  .quote q{font-family:"Fraunces",serif;font-size:20px;line-height:1.4;font-style:italic;color:var(--ink);display:block;overflow-wrap:anywhere;word-break:break-word}
+  .quote .src{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin-top:12px;display:block}
+
+  .bars{margin-top:22px;display:flex;flex-direction:column;gap:11px}
+  .bar{display:grid;grid-template-columns:150px 1fr 68px;gap:12px;align-items:center;font-size:13.5px}
+  .bar .bn{font-weight:600}
+  .bar .bt{height:15px;border-radius:4px;background:#E7ECF6;overflow:hidden;position:relative}
+  .bar .bf{height:100%;border-radius:4px;background:var(--blue);display:block}
+  .bar.is-jm .bf{background:var(--jm)}
+  .bar .bv{font-family:"JetBrains Mono",monospace;font-size:12px;font-weight:700;text-align:right;color:var(--soft)}
+  .bar.is-jm .bv{color:var(--jm-deep)}
+
+  .scorewrap{margin-top:22px;border:1px solid var(--line);border-radius:14px;background:var(--paper2);overflow:hidden}
+  .srow{display:grid;grid-template-columns:180px 1fr 92px;gap:14px;align-items:center;padding:13px 18px;border-bottom:1px solid var(--line)}
+  .srow:last-child{border-bottom:0}
+  .srow .sn{font-weight:600;font-size:14.5px}
+  .srow .sn small{display:block;font-weight:400;font-size:12.5px;color:var(--faint);margin-top:2px}
+  .srow .st{height:9px;border-radius:5px;background:#E7ECF6;overflow:hidden}
+  .srow .sf{height:100%;display:block;border-radius:5px}
+  .srow .sv{font-family:"JetBrains Mono",monospace;font-weight:700;font-size:14px;text-align:right}
+  .sv.g{color:var(--ok)}.sv.a{color:#9a6f12}.sv.r{color:var(--jm-deep)}
+  .sf.g{background:var(--ok)}.sf.a{background:var(--warn)}.sf.r{background:var(--jm)}
+
+  .shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:22px}
+  .shot{border:1px solid var(--line);border-radius:13px;background:var(--paper2);overflow:hidden}
+  .shot img{width:100%;height:auto;max-height:430px;object-fit:cover;object-position:top center;display:block;border-bottom:1px solid var(--line);background:#fff}
+  .shot .cp{padding:11px 14px;font-size:12.5px;color:var(--soft);line-height:1.5}
+  .shot .cp b{color:var(--ink);display:block;font-size:13px;margin-bottom:3px}
+
+  .vl-scroll{overflow-x:auto;border:1px solid var(--line2);border-radius:14px;background:#fff;margin-top:20px}
+  table.vledger{width:100%;border-collapse:separate;border-spacing:0;min-width:1000px;font-size:13.5px;border:0;border-radius:0;margin:0}
+  table.vledger th{text-align:left;padding:12px 14px;background:#0B1020;color:#fff;font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;font-weight:700;border-right:1px solid rgba(255,255,255,.1)}
+  table.vledger th:last-child{border-right:0}
+  table.vledger td{padding:14px;vertical-align:top;line-height:1.55;color:#3d4048;border-bottom:1px solid rgba(12,18,32,.09);border-right:1px solid rgba(12,18,32,.06)}
+  table.vledger td:last-child{border-right:0}
+  table.vledger tr:last-child td{border-bottom:0}
+  table.vledger tbody tr:nth-child(even) td{background:#FBFBFD}
+  .vl-n{font-family:"JetBrains Mono",monospace;font-weight:700;color:#9a9ca6;font-size:12px;width:34px}
+  .vl-area{font-weight:700;color:#15161A;min-width:120px}
+  .vl-when{font-family:"JetBrains Mono",monospace;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--blue-deep);font-weight:700;white-space:nowrap}
+
+  ul.tick{margin-top:14px;list-style:none;display:flex;flex-direction:column;gap:9px}
+  ul.tick li{position:relative;padding-left:26px;font-size:15px;color:var(--soft)}
+  ul.tick li b{color:var(--ink)}
+  ul.tick li::before{content:"";position:absolute;left:0;top:9px;width:11px;height:11px;border-radius:3px;border:1.6px solid var(--blue);background:var(--wash)}
+  ul.tick.x li::before{border-color:var(--jm);background:var(--jm-wash)}
+
+  .srcs{margin-top:18px;display:flex;flex-direction:column;gap:7px;font-size:13.5px}
+  .srcs a{color:var(--blue-deep);text-decoration:none;border-bottom:1px solid rgba(20,33,184,.28);word-break:break-all}
+  .srcs a:hover{border-bottom-color:var(--blue-deep)}
+
+  footer{padding:34px 0 70px;color:var(--faint);font-size:12px;font-family:"JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.05em;border-top:1px solid var(--line);margin-top:30px}
+  .ic{stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+  @media(max-width:720px){
+    .wrap{padding:0 18px}
+    .chapnav-in{padding:8px 16px}
+    section{padding:26px 0}
+    .bar{grid-template-columns:106px 1fr 58px;gap:9px;font-size:12.5px}
+    .srow{grid-template-columns:1fr 74px;gap:9px}
+    .srow .st{grid-column:1/-1;order:3}
+    table:not(.vledger){display:block;overflow-x:auto;white-space:nowrap}
+    .chapdiv{flex-direction:column;gap:4px;padding-top:34px}
+  }
+  /* Phones: the chapter rail was 11px type in a 30px tall target, under the 44px touch minimum.
+     It stays a horizontal scroller, the targets simply get full height and a legible size. */
+  @media (max-width:768px){
+    .chapnav-in{gap:2px;padding:4px 16px}
+    .chapnav a{font-size:12px;min-height:44px;display:inline-flex;align-items:center;padding:0 12px}
+  }
+  /* Phones: the mono labels are set between 9.5px and 11px for a desktop reading of these documents,
+     which is below comfortable on a 390px screen. They are lifted to a floor of 11.5px here, and the
+     hero's live links get a full touch target. Nothing above 768px changes. */
+  @media (max-width:768px){
+    thead th,table.vledger th{font-size:12px}
+    .tag,.vtag,.src,.vl-when,.card .tag,.quote .src{font-size:11.5px}
+    .livelinks .ll{min-height:44px;display:flex;flex-direction:column;justify-content:center}
+    .srcs{gap:0}
+    .srcs a{display:block;padding:11px 0}
+  }
+
+  /* Tables in these documents are built for a desktop reading. Below 900px any of them, not only
+     table.rv, becomes its own horizontal scroller so the page itself never scrolls sideways: the
+     seven column performance table was 770px of min-content inside a 712px column at 768. */
+  @media (max-width:900px){
+    table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}
+  }
+  /* and the small mono chip labels get an 11.5px floor on phones */
+  @media (max-width:768px){
+    .k,.sh,.sl,.slot,.who,.bs-k,.fn-k,.v,.s,small,code{font-size:11.5px}
+  }
+
+  /* Phones: a hard floor for every small label in these documents. The earlier floor used single class selectors and
+     lost to two class rules such as .spec small, and it missed the bare <k> element the plan uses for table keys.
+     Font size only, never SVG text, which is part of a drawn diagram. */
+  @media (max-width:768px){
+    body small, body k, body .k, body .sl, body .slot, body .who, body .bs-k, body .fn-k, body .sh, body .tag, body .vtag, body .src, body .vl-when, body thead th, body .mini-eb, body .swi .m .cr, body .ratio-row .g, body .vc .r.h > div, body .cat, body .own, body .chk .t, body .bshead, body .bshead span, body .pv .r.h, body .pv .r.h > div, body .tk .r.h, body .tk .r.h > div{font-size:11.5px!important}
+  }
+</style>
+</head>
+<body>
+<div class="bmws" style="--bmws-acc:#F91B2A"><div class="bmws-in"><div class="bmws-crumb"><b>Jom Makcik &middot; Website 1</b><span>Brand Method &middot; Admin Navigation</span></div><nav class="bmws-tabs"><a href="audit.html" class="on"><i>00</i>Web Audit</a><a href="competitors.html"><i>01</i>Competitors</a><a href="plan.html"><i>02</i>Web Plan</a><a href="design.html"><i>03</i>Design</a><a href="index.html"><i>04</i>Prototype Web 1</a><a href="review.html"><i>05</i>Review</a><a href="qa.html"><i>06</i>Q&amp;A</a></nav></div></div>
+
+<nav class="chapnav"><div class="chapnav-in">
+  <a href="#c00"><span class="ch-no">00</span>Verdict</a>
+  <a href="#c01"><span class="ch-no">01</span>The company</a>
+  <a href="#c02"><span class="ch-no">02</span>The platform</a>
+  <a href="#c03"><span class="ch-no">03</span>Speed</a>
+  <a href="#c04"><span class="ch-no">04</span>Accessibility</a>
+  <a href="#c05"><span class="ch-no">05</span>Search</a>
+  <a href="#c06"><span class="ch-no">06</span>The funnel</a>
+  <a href="#c07"><span class="ch-no">07</span>Brand</a>
+  <a href="#c08"><span class="ch-no">08</span>Proof</a>
+  <a href="#c09"><span class="ch-no">09</span>The lane</a>
+  <a href="#c10"><span class="ch-no">10</span>The build</a>
+  <a href="#c11"><span class="ch-no">11</span>Ledger</a>
+  <a href="#c12"><span class="ch-no">12</span>Method</a>
+</div></nav>
+
+<div class="wrap">
+  <header class="hero">
+    <span class="eyebrow">Website &amp; Brand Audit &middot; Brand Method</span>
+    <h1>Jom Makcik, <em>Website &amp; Brand Audit</em></h1>
+    <p class="lede">The most institutionally credentialed operator in Malaysian accessible mobility
+      is running the slowest, thinnest and least accessible website in its own category. Nothing here
+      is a taste argument. Every number below was measured on 9 September 2026 and can be rerun.</p>
+    <div class="vrow">
+      <div class="vchip">Audited <b>9 Sep 2026</b></div>
+      <div class="vchip">For <b>Dr Sazlina Kamaralzaman, CEO</b></div>
+      <div class="vchip">Meeting <b>Fri 11 Sep, 2pm</b></div>
+      <div class="vchip">Method <b>headless Chrome, Slow 4G, 4x CPU</b></div>
+    </div>
+
+    <div class="livelinks">
+      <span class="ll-k">The site as it stands today, open it beside this audit</span>
+      <a class="ll" href="https://jommakcik.my/" target="_blank" rel="noopener noreferrer">
+        <b>jommakcik.my</b><span>the public site, one page, audited in full</span></a>
+      <a class="ll" href="https://app.jommakcik.my/" target="_blank" rel="noopener noreferrer">
+        <b>app.jommakcik.my</b><span>the booking app the buttons lead to</span></a>
+      <a class="ll" href="https://www.youtube.com/watch?v=UBGWAKq6WVM" target="_blank" rel="noopener noreferrer">
+        <b>Wanita Menjaga Wanita</b><span>the company film, three minutes</span></a>
+    </div>
+
+    <div class="execsum">
+      <span class="k">Executive summary</span>
+      <p><b>The business is strong and the website is not carrying it.</b> Jom Makcik has PERKESO,
+        Jabatan Kebajikan Masyarakat, Yayasan Hasanah, AirAsia Foundation, UKM, UPM, MyAgeing, UTM,
+        UiTM, MAHSA Specialist Hospital and airasia ride on its collaborator wall, roughly 600 trained
+        women drivers, and a wheelchair accessible fleet that costs RM98,000 a vehicle. None of that
+        is legible to a person who lands on the site.</p>
+      <p><b>The site is a Canva design export.</b> That is a fact from the source code, not a guess.
+        It means the entire site is one page, rendered by JavaScript, with no headings, no alt text,
+        no blog, no schema, and no second URL. Search engines see roughly 550 words.</p>
+      <p><b>On a normal Malaysian phone connection the homepage takes 13.1 seconds to show its main
+        content and 64 seconds to finish loading.</b> The nearest commercial rival does it in 3.5
+        seconds. A volunteer run NGO does it in 1.9.</p>
+      <p><b>Every one of the 53 images on the mobile page is missing alt text, and the page contains
+        zero heading elements.</b> A screen reader user, which is to say a share of this exact
+        customer base, gets an unstructured wall. That is the single hardest thing in this document
+        to defend if a journalist or a funder ever runs a check.</p>
+      <p><b>The highest value service has the worst path to purchase.</b> AbiliCar, described by the
+        company itself as its most popular service, cannot be booked in Jom Makcik's own app. It is
+        pushed to a JotForm page that greets a wheelchair user with a Login button, a US flag, and
+        JotForm's own "Create your own App" advertisement.</p>
+      <p><b>Grab entered this category in December 2025 and published Jom Makcik's moat for them.</b>
+        GrabAssist carries foldable wheelchairs only, and Grab's drivers are not permitted to leave
+        the vehicle. Jom Makcik carries people who stay seated in their chair, and walks them to the
+        door. Nobody visiting jommakcik.my would learn either fact.</p>
+    </div>
+  </header>
+
+  <!-- 00 ================================================================ -->
+  <div class="chapdiv" id="c00"><div class="cd-no">00</div><div>
+    <h2 class="cd-h">The verdict</h2>
+    <div class="cd-sub">Nine lenses, scored as the site stands on 9 September 2026</div>
+  </div></div>
+
+  <section>
+    <div class="secmark">
+      <span class="secicon"><svg viewBox="0 0 24 24" class="ic"><path d="M12 3v18M3 12h18"/><circle cx="12" cy="12" r="9"/></svg></span>
+      <span class="sec-no">00.1 &middot; Scorecard</span>
+    </div>
+    <h3 class="sechead">Strong company, weak surface</h3>
+    <p class="sec-intro">Scores are out of 10 and reflect the current live site only, not the
+      business behind it. The gap between the two is the whole opportunity.</p>
+
+    <div class="scorewrap">
+      <div class="srow"><div class="sn">Proposition clarity<small>Do I understand what you do in five seconds</small></div><div class="st"><span class="sf a" style="width:60%"></span></div><div class="sv a">6.0</div></div>
+      <div class="srow"><div class="sn">Credibility on show<small>Are the credentials working for you</small></div><div class="st"><span class="sf r" style="width:30%"></span></div><div class="sv r">3.0</div></div>
+      <div class="srow"><div class="sn">Conversion path<small>Can I book the thing I came for</small></div><div class="st"><span class="sf r" style="width:25%"></span></div><div class="sv r">2.5</div></div>
+      <div class="srow"><div class="sn">Speed<small>Measured on Slow 4G with CPU throttle</small></div><div class="st"><span class="sf r" style="width:10%"></span></div><div class="sv r">1.0</div></div>
+      <div class="srow"><div class="sn">Accessibility<small>The category you sell in</small></div><div class="st"><span class="sf r" style="width:10%"></span></div><div class="sv r">1.0</div></div>
+      <div class="srow"><div class="sn">Search visibility<small>One page, one sitemap entry, no schema</small></div><div class="st"><span class="sf r" style="width:15%"></span></div><div class="sv r">1.5</div></div>
+      <div class="srow"><div class="sn">Brand consistency<small>Type, colour, logo, tone</small></div><div class="st"><span class="sf r" style="width:30%"></span></div><div class="sv r">3.0</div></div>
+      <div class="srow"><div class="sn">Content depth<small>550 words for the whole business</small></div><div class="st"><span class="sf r" style="width:20%"></span></div><div class="sv r">2.0</div></div>
+      <div class="srow"><div class="sn">Mobile experience<small>Where the traffic actually is</small></div><div class="st"><span class="sf r" style="width:25%"></span></div><div class="sv r">2.5</div></div>
+      <div class="srow" style="background:var(--jm-wash)"><div class="sn"><b>Overall</b><small>Weighted, rounded</small></div><div class="st"><span class="sf r" style="width:25%"></span></div><div class="sv r">2.5</div></div>
+    </div>
+
+    <div class="pin jm"><b>The one line for Friday.</b> Jom Makcik has spent seven years earning
+      trust from PERKESO, JKM, Khazanah's foundation and four universities, and then spends it at the
+      front door on a page that takes 13 seconds to appear and cannot be read by a screen reader.</div>
+
+    <div class="stats">
+      <div class="stat bad"><div class="num">13.1s</div><div class="lab">Largest Contentful Paint</div><div class="s">Google's "good" is under 2.5s</div></div>
+      <div class="stat bad"><div class="num">53 / 53</div><div class="lab">Images with no alt text</div><div class="s">Mobile render, WCAG 1.1.1 Level A</div></div>
+      <div class="stat bad"><div class="num">0</div><div class="lab">Heading elements on the page</div><div class="s">No h1, no h2, nothing</div></div>
+      <div class="stat bad"><div class="num">1</div><div class="lab">Indexable page</div><div class="s">Also the entire sitemap</div></div>
+      <div class="stat bad"><div class="num">12.2 MB</div><div class="lab">Mobile page weight</div><div class="s">Rivals sit at 2.3 to 2.5 MB</div></div>
+      <div class="stat bad"><div class="num">550</div><div class="lab">Words on the whole site</div><div class="s">For a four state operation</div></div>
+    </div>
+  </section>
+
+  <!-- 01 ================================================================ -->
+  <div class="chapdiv" id="c01"><div class="cd-no">01</div><div>
+    <h2 class="cd-h">The company the site is hiding</h2>
+    <div class="cd-sub">What exists, sourced, and where it appears on the page</div>
+  </div></div>
+
+  <section>
+    <div class="secmark">
+      <span class="secicon"><svg viewBox="0 0 24 24" class="ic"><path d="M4 20V9l8-5 8 5v11"/><path d="M9 20v-6h6v6"/></svg></span>
+      <span class="sec-no">01.1 &middot; The asset base</span>
+    </div>
+    <h3 class="sechead">Seven years of proof, presented as a logo wall</h3>
+    <p class="sec-intro">Every item below is real and public. The site displays most of them, but as
+      undifferentiated logos with no caption, no relationship stated, and no page to land on.</p>
+
+    <table>
+      <thead><tr><th>Asset</th><th>What it is</th><th>Where it appears on the site today</th></tr></thead>
+      <tbody>
+        <tr class="hl"><td class="dim">PERKESO (SOCSO)</td><td>Statutory social security body</td><td>Unlabelled logo in the Collaborators grid</td></tr>
+        <tr class="hl"><td class="dim">Jabatan Kebajikan Masyarakat</td><td>Department of Social Welfare</td><td>Unlabelled logo in the Collaborators grid</td></tr>
+        <tr><td class="dim">Yayasan Hasanah</td><td>Khazanah Nasional's foundation</td><td>Unlabelled logo, plus an Instagram embed in the hero</td></tr>
+        <tr><td class="dim">AirAsia Foundation</td><td>Programme funder, appears twice at two sizes</td><td>Body text under two training cards</td></tr>
+        <tr><td class="dim">UKM</td><td>Parent university, PEMULA@UKM spin off</td><td>Logo, and a YouTube embed in About</td></tr>
+        <tr><td class="dim">MyAgeing (UPM)</td><td>Malaysian Research Institute on Ageing</td><td>Logo in a training card</td></tr>
+        <tr><td class="dim">UTM, UiTM</td><td>Driver training partners</td><td>Logos</td></tr>
+        <tr><td class="dim">MAHSA Specialist Hospital, Hospital Pakar An-Nur</td><td>Healthcare destinations</td><td>Logos</td></tr>
+        <tr><td class="dim">airasia ride</td><td>Commercial ride hailing platform</td><td>Logo</td></tr>
+        <tr><td class="dim">managedcare, IMM CareHub, Oretha's</td><td>Care sector partners</td><td>Logos</td></tr>
+        <tr><td class="dim">~600 Adinita drivers</td><td>Trained women drivers, 75% revenue share</td><td><b>Nowhere.</b> "Adinita Login" is the only trace, unexplained</td></tr>
+        <tr><td class="dim">AbiliCar fleet</td><td>Honda N-Box, factory ramp, RM98,000 each</td><td>One line card, one outline icon</td></tr>
+        <tr><td class="dim">Four states served</td><td>Selangor, KL, Putrajaya, Negeri Sembilan</td><td><b>Nowhere.</b> No coverage map, no service area list</td></tr>
+      </tbody>
+    </table>
+
+    <div class="pin warn"><b>The Adinita problem.</b> "Adinita" comes from <i>adiwira wanita</i>,
+      female heroes. It is a genuinely good brand asset and the name of roughly 600 women who work
+      for this company. On the website it exists only as a login button, so a first time visitor
+      reads it as a typo or a piece of internal software.</div>
+
+    <h3 class="sub">The people, and why it matters here</h3>
+    <div class="grid g2">
+      <div class="card"><div class="tag">Founder &amp; CEO</div><h3>Dr Sazlina Kamaralzaman</h3>
+        <p>Medical lecturer in Rehabilitation Sciences at UKM's Faculty of Health Sciences. Medical
+        degree, RCSI 1997. MSc Rehabilitation Sciences, Nottingham, 2003. Lead consultant on the
+        Prevalence Study on Autism in Malaysia. Started the company because <b>her own patients kept
+        missing therapy for want of a ride.</b></p></div>
+      <div class="card"><div class="tag">Co-founder &amp; CFO</div><h3>Ms Siti Sarah Anuar</h3>
+        <p>Daughter, co-founder. The mother and daughter origin is one of the most repeatable stories
+        in the category and appears once, in a justified paragraph, below the fold.</p></div>
+    </div>
+    <p class="sec-intro">A clinician founder is the strongest possible trust signal in medical
+      transport. On the current site Dr Sazlina appears as a photograph with the caption
+      "Chief Executive Officer and Co-founder". Her clinical background, the reason to believe,
+      is not on the page at all.</p>
+  </section>
+
+  <!-- 02 ================================================================ -->
+  <div class="chapdiv" id="c02"><div class="cd-no">02</div><div>
+    <h2 class="cd-h">What the site is built on</h2>
+    <div class="cd-sub">A design tool export, and what that permanently prevents</div>
+  </div></div>
+
+  <section>
+    <div class="secmark">
+      <span class="secicon"><svg viewBox="0 0 24 24" class="ic"><path d="M4 6h16v12H4z"/><path d="M4 10h16M8 14h8"/></svg></span>
+      <span class="sec-no">02.1 &middot; The evidence</span>
+    </div>
+    <h3 class="sechead">This is a Canva export, not a website platform</h3>
+    <p class="sec-intro">Three lines from the page source settle it. This is not a criticism of the
+      person who built it: Canva is a fine way to get something live quickly, and it clearly did that
+      job. It is simply the wrong container for a business at this stage.</p>
+
+    <div class="quote">
+      <q>&lt;meta name="app-name" content="export_website"&gt;<br>
+        window['__canva_public_path__'] = '_assets/';<br>
+        window['__canva_website_bootstrap__']</q>
+      <span class="src">jommakcik.my, view source, 9 Sep 2026</span>
+    </div>
+
+    <div class="grid g2">
+      <div class="card jm"><div class="tag">Consequence</div><h3>No server rendered HTML</h3>
+        <p>The page is an empty <b>&lt;div id="root"&gt;</b> filled in by JavaScript. Any crawler,
+        preview bot or assistive tool that does not execute a megabyte of script sees nothing.</p></div>
+      <div class="card jm"><div class="tag">Consequence</div><h3>No heading tags, ever</h3>
+        <p>Canva emits absolutely positioned text boxes, not document structure. That is why the page
+        has zero h1 to h6 elements. It cannot be fixed inside Canva.</p></div>
+      <div class="card jm"><div class="tag">Consequence</div><h3>No alt text control</h3>
+        <p>All 53 images render without an alt attribute. There is no field in the export to set one.</p></div>
+      <div class="card jm"><div class="tag">Consequence</div><h3>No second page</h3>
+        <p>One URL, one sitemap entry. No service pages, no city pages, no articles, no case studies.
+        Nothing to rank, nothing to link to, nothing to send a specific person to.</p></div>
+      <div class="card jm"><div class="tag">Consequence</div><h3>No schema, no canonical</h3>
+        <p>No LocalBusiness, Service, FAQ or Review markup. Google has no structured way to learn that
+        this is a medical transport provider in Negeri Sembilan.</p></div>
+      <div class="card jm"><div class="tag">Consequence</div><h3>No image optimisation</h3>
+        <p>Every image ships as PNG or JPG at full size. The largest is a 737 KB PNG. No WebP, no
+        AVIF, no responsive sizes.</p></div>
+    </div>
+
+    <h3 class="sub">The infrastructure that is fine</h3>
+    <table>
+      <thead><tr><th>Layer</th><th>Finding</th><th>Verdict</th></tr></thead>
+      <tbody>
+        <tr><td class="dim">CDN</td><td>Cloudflare, KUL edge. TTFB 81 to 145 ms</td><td><span class="vtag hi">Good</span></td></tr>
+        <tr><td class="dim">Redirects</td><td>www and http both 301 to https canonical host</td><td><span class="vtag hi">Correct</span></td></tr>
+        <tr><td class="dim">Mail</td><td>Google Workspace on the domain</td><td><span class="vtag hi">Good</span></td></tr>
+        <tr><td class="dim">Security headers</td><td>X-Frame-Options, X-Content-Type-Options, Referrer-Policy present. No CSP</td><td><span class="vtag lo">Adequate</span></td></tr>
+        <tr><td class="dim">Booking app host</td><td>Separate origin on DigitalOcean, responds in 0.26 to 0.62 s</td><td><span class="vtag hi">Healthy</span></td></tr>
+        <tr><td class="dim">robots.txt</td><td>404, does not exist</td><td><span class="vtag lo">Missing</span></td></tr>
+      </tbody>
+    </table>
+    <p class="sec-intro">The plumbing is not the problem. Everything slow and broken on this site is
+      in the layer that was exported out of a design tool.</p>
+  </section>
+
+  <!-- 03 ================================================================ -->
+  <div class="chapdiv" id="c03"><div class="cd-no">03</div><div>
+    <h2 class="cd-h">Speed, measured</h2>
+    <div class="cd-sub">Same rig, same day, same throttle, against the live competitive set</div>
+  </div></div>
+
+  <section>
+    <div class="secmark">
+      <span class="secicon"><svg viewBox="0 0 24 24" class="ic"><circle cx="12" cy="13" r="8"/><path d="M12 13V8M9 2h6"/></svg></span>
+      <span class="sec-no">03.1 &middot; The bench</span>
+    </div>
+    <h3 class="sechead">Slowest in the category, by a wide margin</h3>
+    <p class="sec-intro">Headless Chrome, Pixel 5 emulation, <b>Slow 4G at 1.6 Mbps with 150 ms
+      latency and a 4x CPU throttle</b>. That is Google's own standard mobile test profile, and it is
+      a fair approximation of an adult child checking options on their phone outside a hospital.</p>
+
+    <table>
+      <thead><tr><th>Site</th><th>First paint</th><th>Main content (LCP)</th><th>Blocked time</th><th>Full load</th><th>Requests</th><th>Weight</th></tr></thead>
+      <tbody>
+        <tr class="hl"><td class="dim">jommakcik.my</td><td class="sc">7.55 s</td><td class="sc">13.09 s</td><td class="sc">5,801 ms</td><td class="sc">64.4 s</td><td>144</td><td>12.2 MB</td></tr>
+        <tr><td class="dim">loveonwheels.com.my</td><td>3.48 s</td><td>13.11 s</td><td>79 ms</td><td>17.0 s</td><td>37</td><td>2.5 MB</td></tr>
+        <tr><td class="dim">pearlcaremobility.com.my</td><td>2.24 s</td><td>12.82 s</td><td>32 ms</td><td>12.8 s</td><td>58</td><td>2.3 MB</td></tr>
+        <tr><td class="dim">mobiliti.org.my <span class="vtag lo">NGO</span></td><td>1.92 s</td><td>6.09 s</td><td>0 ms</td><td>12.7 s</td><td>30</td><td>2.3 MB</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="sub">Time to first paint, lower is better</h3>
+    <div class="bars">
+      <div class="bar is-jm"><span class="bn">Jom Makcik</span><span class="bt"><span class="bf" style="width:100%"></span></span><span class="bv">7.55 s</span></div>
+      <div class="bar"><span class="bn">Love On Wheels</span><span class="bt"><span class="bf" style="width:46%"></span></span><span class="bv">3.48 s</span></div>
+      <div class="bar"><span class="bn">Pearlcare</span><span class="bt"><span class="bf" style="width:30%"></span></span><span class="bv">2.24 s</span></div>
+      <div class="bar"><span class="bn">Mobiliti (NGO)</span><span class="bt"><span class="bf" style="width:25%"></span></span><span class="bv">1.92 s</span></div>
+    </div>
+
+    <h3 class="sub">Main thread blocked, lower is better</h3>
+    <div class="bars">
+      <div class="bar is-jm"><span class="bn">Jom Makcik</span><span class="bt"><span class="bf" style="width:100%"></span></span><span class="bv">5,801 ms</span></div>
+      <div class="bar"><span class="bn">Love On Wheels</span><span class="bt"><span class="bf" style="width:1.4%"></span></span><span class="bv">79 ms</span></div>
+      <div class="bar"><span class="bn">Pearlcare</span><span class="bt"><span class="bf" style="width:0.6%"></span></span><span class="bv">32 ms</span></div>
+      <div class="bar"><span class="bn">Mobiliti (NGO)</span><span class="bt"><span class="bf" style="width:0%"></span></span><span class="bv">0 ms</span></div>
+    </div>
+
+    <div class="pin jm"><b>Read that second chart again.</b> For nearly six seconds the phone is too
+      busy to respond to a tap. A person can see a button and press it and nothing happens. On a site
+      whose users include people with tremor, low vision and limited patience for technology, that is
+      not a performance metric, it is a service failure.</div>
+
+    <h3 class="sub">Where the weight is</h3>
+    <table>
+      <thead><tr><th>Resource</th><th>Desktop transfer</th><th>Note</th></tr></thead>
+      <tbody>
+        <tr class="hl"><td class="dim">Images</td><td class="sc">12.65 MB</td><td>All PNG and JPG. No WebP or AVIF. Largest single file 737 KB</td></tr>
+        <tr><td class="dim">Fonts</td><td class="sc">1.44 MB</td><td>Four woff2 files at roughly 190 KB each</td></tr>
+        <tr><td class="dim">JavaScript</td><td class="sc">1.19 MB</td><td>Canva runtime, one bundle alone is 821 KB</td></tr>
+        <tr><td class="dim">CSS</td><td class="sc">51 KB</td><td>Fine</td></tr>
+        <tr><td class="dim">Total</td><td class="sc">15.3 MB</td><td>17.9 MB decoded, 109 requests</td></tr>
+      </tbody>
+    </table>
+    <p class="sec-intro">Converting the images alone to modern formats at correct sizes would remove
+      roughly <b>10 MB</b>. On a metered prepaid plan, one visit to this homepage costs a visitor real
+      money.</p>
+
+    <div class="pin"><b>The one good number.</b> Cumulative Layout Shift is 0.00. Nothing jumps
+      while loading, because Canva positions every element absolutely. Worth keeping in any rebuild.</div>
+  </section>
+
+  <!-- 04 ================================================================ -->
+  <div class="chapdiv" id="c04"><div class="cd-no">04</div><div>
+    <h2 class="cd-h">Accessibility</h2>
+    <div class="cd-sub">The category the company sells in, and the section that matters most</div>
+  </div></div>
+
+  <section>
+    <div class="secmark">
+      <span class="secicon"><svg viewBox="0 0 24 24" class="ic"><circle cx="12" cy="5" r="2"/><path d="M5 9h14M12 9v6l4 5M12 15l-4 5"/></svg></span>
+      <span class="sec-no">04.1 &middot; The measurements</span>
+    </div>
+    <h3 class="sechead">An accessibility company with an inaccessible website</h3>
+    <p class="sec-intro">Measured in a real browser after full render, not from the source. These are
+      not close calls or matters of interpretation.</p>
+
+    <table>
+      <thead><tr><th>Check</th><th>Desktop</th><th>Mobile</th><th>Standard</th><th>Result</th></tr></thead>
+      <tbody>
+        <tr class="hl"><td class="dim">Heading elements</td><td class="sc">0</td><td class="sc">0</td><td>At least one h1</td><td><span class="vtag bad">Fail</span></td></tr>
+        <tr class="hl"><td class="dim">Images missing alt text</td><td class="sc">20 of 20</td><td class="sc">53 of 53</td><td>WCAG 1.1.1, Level A</td><td><span class="vtag bad">Fail</span></td></tr>
+        <tr><td class="dim">Tap targets under 44 px</td><td class="sc">11 of 22</td><td class="sc">17 of 23</td><td>WCAG 2.5.8</td><td><span class="vtag bad">Fail</span></td></tr>
+        <tr><td class="dim">Smallest CTA height</td><td class="sc">28 px</td><td class="sc">22 px</td><td>44 px minimum</td><td><span class="vtag bad">Fail</span></td></tr>
+        <tr><td class="dim">Mobile menu button</td><td>n/a</td><td class="sc">24 x 24 px</td><td>44 x 44 px</td><td><span class="vtag bad">Fail</span></td></tr>
+        <tr><td class="dim">Body copy size</td><td>21.3 px</td><td class="sc">12.8 px</td><td>16 px recommended</td><td><span class="vtag bad">Fail</span></td></tr>
+        <tr><td class="dim">Contact details size</td><td>10 px</td><td class="sc">12.8 px</td><td>16 px recommended</td><td><span class="vtag bad">Fail</span></td></tr>
+        <tr><td class="dim">aria-label attributes</td><td class="sc">0</td><td class="sc">1</td><td>Icon links need names</td><td><span class="vtag bad">Fail</span></td></tr>
+        <tr><td class="dim">Native button elements</td><td class="sc">0</td><td class="sc">1</td><td>Keyboard operable controls</td><td><span class="vtag bad">Fail</span></td></tr>
+        <tr><td class="dim">Page scrolls in a nested div</td><td>yes</td><td>yes</td><td>Document scroll</td><td><span class="vtag lo">Risk</span></td></tr>
+        <tr><td class="dim">Language declared</td><td colspan="2" class="sc">en-GB only</td><td>BM alternate</td><td><span class="vtag lo">Gap</span></td></tr>
+        <tr><td class="dim">Layout stability (CLS)</td><td colspan="2" class="sc">0.00</td><td>Under 0.1</td><td><span class="vtag hi">Pass</span></td></tr>
+      </tbody>
+    </table>
+
+    <div class="pin jm"><b>Say this out loud in the meeting.</b> Every image on the page that a
+      person with low vision would need described, all 53 of them, has no description. The page has no
+      headings, so a screen reader cannot skip to a section, cannot list the services, and cannot find
+      the phone number. The company sells dignity in transport and the website does not extend it.</div>
+
+    <h3 class="sub">Why this is commercial, not just ethical</h3>
+    <div class="goals2">
+      <div class="goal"><span class="gi">01</span><div><b>The buyer is often the passenger</b>
+        <p>Not every wheelchair user needs a screen reader, but a meaningful share of an ageing,
+        chronically ill customer base has reduced vision, tremor or cognitive load. 12.8 px text and a
+        24 px menu button exclude them from booking without help.</p></div></div>
+      <div class="goal"><span class="gi">02</span><div><b>Funders and government partners check</b>
+        <p>PERKESO, JKM and Yayasan Hasanah operate under accessibility expectations. An audit of the
+        website of their accessible transport partner is an easy, embarrassing check to fail.</p></div></div>
+      <div class="goal"><span class="gi">03</span><div><b>It is a story a journalist will write</b>
+        <p>Jom Makcik gets warm press. The same story runs cold the first time someone notices the
+        gap between the mission and the markup.</p></div></div>
+      <div class="goal"><span class="gi">04</span><div><b>It is the cheapest thing to fix</b>
+        <p>Headings, alt text, 16 px minimum type and 44 px targets are a rebuild default, not a
+        premium feature. Done properly once, it never has to be argued again.</p></div></div>
+    </div>
+  </section>
+
+  <!-- 05 ================================================================ -->
+  <div class="chapdiv" id="c05"><div class="cd-no">05</div><div>
+    <h2 class="cd-h">Search</h2>
+    <div class="cd-sub">One page competing against a rival running a content programme</div>
+  </div></div>
+
+  <section>
+    <div class="secmark">
+      <span class="secicon"><svg viewBox="0 0 24 24" class="ic"><circle cx="11" cy="11" r="7"/><path d="M16 16l5 5"/></svg></span>
+      <span class="sec-no">05.1 &middot; The technical position</span>
+    </div>
+    <h3 class="sechead">Invisible for every search that matters</h3>
+
+    <table>
+      <thead><tr><th>Signal</th><th>Current state</th><th>Effect</th></tr></thead>
+      <tbody>
+        <tr class="hl"><td class="dim">Indexable pages</td><td>1</td><td>One page cannot rank for driver, chaperone, WAV, dialysis, airport and four states at once</td></tr>
+        <tr><td class="dim">sitemap.xml</td><td>Exists, contains exactly one URL</td><td>Confirms the above to Google in writing</td></tr>
+        <tr><td class="dim">robots.txt</td><td>404</td><td>Minor, but a missing basic</td></tr>
+        <tr class="hl"><td class="dim">Title tag</td><td>"Jom Makcik"</td><td>No service, no city. A searcher scanning results has no reason to click</td></tr>
+        <tr><td class="dim">Meta description</td><td>Mentions companionship only</td><td>Never says wheelchair, WAV, dialysis, hospital or Nilai</td></tr>
+        <tr class="hl"><td class="dim">og:image</td><td><b>Missing</b></td><td>Every WhatsApp and Facebook share renders a blank grey card. On a business that spreads by referral, this is the expensive one</td></tr>
+        <tr><td class="dim">Canonical, og:url</td><td>Missing</td><td>Housekeeping</td></tr>
+        <tr class="hl"><td class="dim">Structured data</td><td><b>None</b></td><td>No LocalBusiness, Service, FAQ or Review markup. No rich result is possible</td></tr>
+        <tr><td class="dim">Headings</td><td>None</td><td>Google cannot read a topic hierarchy that does not exist</td></tr>
+        <tr><td class="dim">Word count</td><td>~550 for the entire site</td><td>Thin by any standard</td></tr>
+        <tr><td class="dim">Bahasa Melayu</td><td>None</td><td>Half the addressable market, including most drivers, reads BM first</td></tr>
+      </tbody>
+    </table>
+
+    <div class="pin warn"><b>What the competition is doing instead.</b> Love On Wheels runs
+      dedicated pages for wheelchair transport services, hospital transport and about, plus a blog of
+      accessible tourism guides by Malaysian state, plus syndicated posts on Medium. They are building
+      a search moat while jommakcik.my publishes one page.</div>
+
+    <h3 class="sub">Searches Jom Makcik should own and currently cannot</h3>
+    <div class="grid g3">
+      <div class="card"><div class="tag">Service</div><h3>wheelchair accessible van Nilai</h3><p>No page exists.</p></div>
+      <div class="card"><div class="tag">Service</div><h3>dialysis transport Selangor</h3><p>No page exists, despite a testimonial about exactly this.</p></div>
+      <div class="card"><div class="tag">Service</div><h3>lady driver for elderly mother</h3><p>No page exists.</p></div>
+      <div class="card"><div class="tag">Service</div><h3>teman ke hospital untuk warga emas</h3><p>No BM content at all.</p></div>
+      <div class="card"><div class="tag">Service</div><h3>WAV rental Malaysia price</h3><p>No pricing anywhere on the site.</p></div>
+      <div class="card"><div class="tag">Service</div><h3>hospital appointment escort KL</h3><p>The chaperone product has no page.</p></div>
+    </div>
+  </section>
+
+  <!-- 06 ================================================================ -->
+  <div class="chapdiv" id="c06"><div class="cd-no">06</div><div>
+    <h2 class="cd-h">The funnel</h2>
+    <div class="cd-sub">Four buttons, two audiences, four different names for two services</div>
+  </div></div>
+
+  <section>
+    <div class="secmark">
+      <span class="secicon"><svg viewBox="0 0 24 24" class="ic"><path d="M3 5h18l-7 8v6l-4 2v-8z"/></svg></span>
+      <span class="sec-no">06.1 &middot; The hero</span>
+    </div>
+    <h3 class="sechead">Half the front door is for people who already work here</h3>
+    <p class="sec-intro">The hero presents four buttons at near equal weight. Two of them make money.
+      Two of them serve existing users and staff.</p>
+
+    <table>
+      <thead><tr><th>Button</th><th>Goes to</th><th>Serves</th><th>Verdict</th></tr></thead>
+      <tbody>
+        <tr><td class="dim">Book driver or concierge services</td><td>app.jommakcik.my/cust_booking</td><td>New customer</td><td><span class="vtag lo">Revenue, buried among four</span></td></tr>
+        <tr class="hl"><td class="dim">Book Wheelchair accessible vehicle</td><td>app.jotform.com</td><td>New customer, highest value</td><td><span class="vtag bad">Broken experience, see below</span></td></tr>
+        <tr><td class="dim">Adinita Login</td><td>app.jommakcik.my/login</td><td>Drivers</td><td><span class="vtag bad">Should be a small footer link</span></td></tr>
+        <tr><td class="dim">Client Login</td><td>app.jommakcik.my/portal</td><td>Existing clients</td><td><span class="vtag bad">Should be a small header link</span></td></tr>
+      </tbody>
+    </table>
+    <p class="sec-intro">All four render with <b>underlined text inside the button</b>, the browser
+      default for a link. It reads as unfinished on the most important element on the page.</p>
+
+    <div class="secmark" style="margin-top:38px">
+      <span class="secicon"><svg viewBox="0 0 24 24" class="ic"><path d="M12 3v12M8 11l4 4 4-4"/><path d="M4 19h16"/></svg></span>
+      <span class="sec-no">06.2 &middot; The AbiliCar path</span>
+    </div>
+    <h3 class="sechead">The best service has the worst path to buy it</h3>
+    <p class="sec-intro">The company told Free Malaysia Today that AbiliCar is
+      <b>"our most popular service now"</b>. Here is what a customer meets when they click it.</p>
+
+    <div class="shots">
+      <div class="shot">
+        <img src="shots/jotform.webp" alt="The AbiliCar booking page on JotForm, showing a Login button, the ABILICAR logo twice, and a United States language picker">
+        <div class="cp"><b>The AbiliCar booking page</b>A Login button greets the customer. The
+          ABILICAR mark appears twice and shares nothing with the Jom Makcik logo. The language picker
+          reads "English (United States)" with a US flag. The page is titled "Quotation for wheelchair
+          accessible vehicle", so it is a quote request, not a booking.</div>
+      </div>
+      <div class="shot">
+        <img src="shots/m00.webp" alt="The Jom Makcik homepage on a phone, showing four stacked red buttons and an Instagram embed">
+        <div class="cp"><b>The mobile hero</b>Four stacked buttons of near equal weight, all with
+          underlined text. The menu is a 24 by 24 pixel grey icon. Below them, the page's main visual
+          is an Instagram embed showing another organisation's handle, cut off mid word.</div>
+      </div>
+    </div>
+
+    <ul class="tick x">
+      <li><b>AbiliCar cannot be booked in Jom Makcik's own app.</b> The Service Type dropdown at
+        app.jommakcik.my/cust_booking offers only Chaperone and Driver.</li>
+      <li><b>JotForm's own advertising sits in the footer of the client's booking page:</b>
+        "Create your own App".</li>
+      <li><b>Privacy Statement and Terms and Conditions exist on that JotForm page</b> and do not
+        exist anywhere on jommakcik.my.</li>
+      <li><b>The SSM number on that page is 202301022358.</b> The homepage prints 02301022358,
+        missing the leading digit.</li>
+    </ul>
+
+    <div class="secmark" style="margin-top:38px">
+      <span class="secicon"><svg viewBox="0 0 24 24" class="ic"><path d="M4 5h16v14H4z"/><path d="M4 9h16M9 13h7M9 16h4"/></svg></span>
+      <span class="sec-no">06.3 &middot; The contact form</span>
+    </div>
+    <h3 class="sechead">A form that cannot take a booking</h3>
+    <p class="sec-intro">The contact block is a JotForm iframe in default JotForm blue on a red brand,
+      with a purple blue Submit button. It collects Full Name, E-mail and Message.</p>
+    <ul class="tick x">
+      <li><b>No phone number field,</b> on a business that runs on WhatsApp and prints two WhatsApp
+        numbers directly above the form.</li>
+      <li><b>No service type, no date, no pickup point, no destination, no wheelchair question.</b>
+        Every enquiry arrives needing a full conversation to become a booking.</li>
+      <li>The form does not match the brand in colour, type or button style.</li>
+    </ul>
+
+    <div class="secmark" style="margin-top:38px">
+      <span class="secicon"><svg viewBox="0 0 24 24" class="ic"><path d="M12 8v5M12 16.5v.01"/><circle cx="12" cy="12" r="9"/></svg></span>
+      <span class="sec-no">06.4 &middot; Contradictions live on the site today</span>
+    </div>
+    <h3 class="sechead">Six places where the site argues with itself</h3>
+    <table>
+      <thead><tr><th>#</th><th>The site says</th><th>Contradicted by</th></tr></thead>
+      <tbody>
+        <tr class="hl"><td class="dim">1</td><td>"since 2023" under the logo</td><td>"founded in 2018" in About, on the same page</td></tr>
+        <tr class="hl"><td class="dim">2</td><td>SSM 02301022358</td><td>202301022358 on their own JotForm page</td></tr>
+        <tr class="hl"><td class="dim">3</td><td>"Weekdays 8am to 5pm only"</td><td>"Isnin to Jumaat 8am to 12am" in the booking app</td></tr>
+        <tr><td class="dim">4</td><td>"Book driver or concierge services"</td><td>"GET A QUOTE" on the three service cards</td></tr>
+        <tr><td class="dim">5</td><td>"Concierges" as the section title</td><td>"Chaperone" in the app, and in the testimonial label</td></tr>
+        <tr><td class="dim">6</td><td>"abilicar" in lower case</td><td>"ABILICAR" and "Abilicar" elsewhere</td></tr>
+      </tbody>
+    </table>
+    <div class="pin warn"><b>Number 3 is the expensive one.</b> "Weekdays only" is printed twice,
+      including directly beside the phone numbers at the point of conversion. Dialysis runs three
+      times a week and hospital discharges happen on Saturdays. If the real limit is softer than the
+      copy, the site is turning away business that the company would happily take.</div>
+  </section>
+
+  <!-- 07 ================================================================ -->
+  <div class="chapdiv" id="c07"><div class="cd-no">07</div><div>
+    <h2 class="cd-h">Brand and design</h2>
+    <div class="cd-sub">Seven typefaces, three reds, and a competitor's teal</div>
+  </div></div>
+
+  <section>
+    <div class="secmark">
+      <span class="secicon"><svg viewBox="0 0 24 24" class="ic"><path d="M4 20l8-16 8 16"/><path d="M7.5 14h9"/></svg></span>
+      <span class="sec-no">07.1 &middot; The system that is not one</span>
+    </div>
+    <h3 class="sechead">Every section looks like a different company</h3>
+
+    <div class="shots">
+      <div class="shot"><img src="shots/d01.webp" alt="Service cards section using four different typefaces, three shades of red and teal number circles">
+        <div class="cp"><b>The service cards</b>Three different reds side by side. Teal numbering
+          circles in Canva's own brand colour. Two solid yellow buttons and one outlined yellow button
+          in the same row. A condensed caps face used nowhere else. "GET A QUOTE" contradicting the
+          hero's "Book".</div></div>
+      <div class="shot"><img src="shots/d02.webp" alt="About section with fully justified body text and a raw YouTube embed">
+        <div class="cp"><b>About</b>Body copy fully justified, producing visible rivers of white
+          space. A raw YouTube player with its own chrome as the section's main image. "About us" set
+          small and bold while "Meet our team" is set large and light: no heading system.</div></div>
+      <div class="shot"><img src="shots/d05.webp" alt="Testimonials with no attribution above an unaligned wall of partner logos">
+        <div class="cp"><b>Testimonials and Collaborators</b>Three quotes with no name, no photo, no
+          location and no date. Below them, sixteen partner logos at sixteen sizes, mixed into the same
+          grid as photographs, with no explanation of a single relationship.</div></div>
+      <div class="shot"><img src="shots/d07.webp" alt="Contact section with an off-brand blue JotForm and stock social icons">
+        <div class="cp"><b>Contact</b>A JotForm in JotForm blue with a purple Submit button, on a red
+          brand. Stock multicoloured social badges at four different shapes. And then the page ends:
+          there is no footer, no copyright, no privacy policy, no terms.</div></div>
+    </div>
+
+    <h3 class="sub">The inventory</h3>
+    <table>
+      <thead><tr><th>Element</th><th>Found</th><th>Should be</th></tr></thead>
+      <tbody>
+        <tr class="hl"><td class="dim">Typefaces</td><td>Seven, plus JotForm's and YouTube's inside the embeds</td><td>Two, three at most</td></tr>
+        <tr class="hl"><td class="dim">Reds</td><td>Three panel fills: #F91B2A, #FF434F, #C60815</td><td>One primary, one dark, one tint</td></tr>
+        <tr class="hl"><td class="dim">Stray colour</td><td>#00C4CC on the 01/02/03 circles. That is <b>Canva's own brand teal</b>, almost certainly an untouched default</td><td>Removed</td></tr>
+        <tr><td class="dim">Buttons</td><td>Underlined text inside every CTA. Yellow solid and yellow outline in the same row</td><td>One button system</td></tr>
+        <tr><td class="dim">Hero visual</td><td>An Instagram embed showing "hasanah.socialenterprise" truncated, with "View profile", "89 likes" and "Add a comment"</td><td>The company's own photography</td></tr>
+        <tr><td class="dim">Training section</td><td>Three more raw social embeds with visible carousel arrows and "..." menus</td><td>Owned images with captions</td></tr>
+        <tr><td class="dim">Body copy</td><td>Fully justified</td><td>Ragged right</td></tr>
+        <tr><td class="dim">Team photography</td><td>Warm brown and cream, a palette used nowhere else. Inconsistent crops and name plate heights</td><td>One treatment</td></tr>
+        <tr><td class="dim">Social icons</td><td>Stock platform badges, four shapes, full colour</td><td>One monochrome set</td></tr>
+        <tr class="hl"><td class="dim">Footer</td><td><b>None.</b> No copyright, no privacy policy, no terms, no service areas</td><td>A real footer</td></tr>
+        <tr><td class="dim">Second brand</td><td>ABILICAR uses an unrelated black boxed wordmark on the JotForm page</td><td>A managed sub brand or one brand</td></tr>
+      </tbody>
+    </table>
+
+    <div class="pin jm"><b>The hero is advertising someone else.</b> The largest visual element
+      above the fold is an Instagram card carrying the handle of a funder, inside Instagram's own
+      interface, with the username cut off mid word. On the single most valuable piece of space the
+      company owns.</div>
+  </section>
+
+  <!-- 08 ================================================================ -->
+  <div class="chapdiv" id="c08"><div class="cd-no">08</div><div>
+    <h2 class="cd-h">Content and proof</h2>
+    <div class="cd-sub">The strongest evidence this company has is a sentence nobody will read</div>
+  </div></div>
+
+  <section>
+    <div class="secmark">
+      <span class="secicon"><svg viewBox="0 0 24 24" class="ic"><path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4M9 12h6M9 16h4"/></svg></span>
+      <span class="sec-no">08.1 &middot; The buried proof</span>
+    </div>
+    <h3 class="sechead">There is a number on this site that should be the headline</h3>
+
+    <div class="quote">
+      <q>I used to pay up to RM3000 per month for mobility vehicle service to go to my dialysis
+        centre. Now I pay less than half of what I paid before. Thank you Jom Makcik.</q>
+      <span class="src">jommakcik.my, testimonial, labelled only "Abilicar", no name, no date</span>
+    </div>
+
+    <p class="sec-intro">That is roughly <b>RM1,500 a month saved</b> on a recurring, non negotiable
+      medical journey, from a customer, in their own words. It sits in 12.8 px grey text, three
+      quarters of the way down a single page, attributed to nobody.</p>
+
+    <div class="grid g2">
+      <div class="card jm"><div class="tag">Problem</div><h3>No attribution</h3>
+        <p>No name, no initial, no town, no photograph, no date. An unverifiable quote is worth a
+        fraction of a verified one, and this category runs entirely on trust.</p></div>
+      <div class="card jm"><div class="tag">Problem</div><h3>No pricing anywhere</h3>
+        <p>The site never states a rate. The only number on the whole page is inside this quote.
+        A family comparing options cannot compare.</p></div>
+      <div class="card jm"><div class="tag">Problem</div><h3>Three testimonials, total</h3>
+        <p>For a company that has been running since 2018 across four states. There is no review
+        wall, no Google reviews embed, no case study, no before and after.</p></div>
+      <div class="card jm"><div class="tag">Problem</div><h3>550 words for everything</h3>
+        <p>No FAQ. Nothing on how a booking works, what a chaperone actually does, what happens if
+        the appointment overruns, whether the driver waits, or what a wheelchair user should expect.</p></div>
+    </div>
+
+    <h3 class="sub">The market statistic the site should lead with</h3>
+    <div class="stats">
+      <div class="stat"><div class="num">68%</div><div class="lab">of Malaysian seniors avoid medical appointments for lack of transport</div><div class="s">2023 survey, cited by Yayasan Hasanah, 24 Aug 2026</div></div>
+      <div class="stat"><div class="num">7.3% &rarr; 20%</div><div class="lab">Malaysians aged 65 and over, today and by 2040</div><div class="s">Yayasan Hasanah</div></div>
+      <div class="stat"><div class="num">40%</div><div class="lab">of seniors live with a chronic illness</div><div class="s">Yayasan Hasanah</div></div>
+      <div class="stat"><div class="num">1 in 3</div><div class="lab">elderly Malaysians report isolation</div><div class="s">Yayasan Hasanah</div></div>
+    </div>
+    <div class="pin"><b>Note where that came from.</b> Yayasan Hasanah is on Jom Makcik's own
+      collaborator wall, and the article naming Jom Makcik is the same article carrying the 68%
+      figure. The most powerful line available to this business was published by their own partner
+      three weeks ago and is not on their site.</div>
+  </section>
+
+  <!-- 09 ================================================================ -->
+  <div class="chapdiv" id="c09"><div class="cd-no">09</div><div>
+    <h2 class="cd-h">The lane</h2>
+    <div class="cd-sub">Grab arrived nine months ago and wrote the positioning for them</div>
+  </div></div>
+
+  <section>
+    <div class="secmark">
+      <span class="secicon"><svg viewBox="0 0 24 24" class="ic"><path d="M3 17h4l2-9h9l2 5v4h-2"/><circle cx="8" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg></span>
+      <span class="sec-no">09.1 &middot; The threat, and the gift inside it</span>
+    </div>
+    <h3 class="sechead">GrabAssist cannot do the two things Jom Makcik does</h3>
+    <p class="sec-intro">Grab launched GrabAssist in Malaysia in December 2025, Klang Valley, with
+      roughly 100 driver partners trained by certified care providers and advance booking from 75
+      minutes to 90 days. That is a serious entrant. Read what Grab publishes about its own limits.</p>
+
+    <div class="grid g2">
+      <div class="card dark"><div class="tag">Grab's own words</div><h3>Foldable only</h3>
+        <p>GrabAssist accommodates a <b>"foldable wheelchair or crutches"</b>. It uses Plus range cars
+        with a larger boot. It is not a wheelchair accessible vehicle. A person who cannot transfer
+        out of their chair cannot use it.</p></div>
+      <div class="card dark"><div class="tag">Grab's own words</div><h3>Drivers stay in the car</h3>
+        <p><b>"our driver-partners are unable to leave their vehicles unattended. If you require
+        assistance getting to the pickup point or after drop-off, we encourage you to arrange for
+        someone to assist you."</b></p></div>
+    </div>
+
+    <div class="pin jm"><b>That second quote is the entire chaperone product, described as a gap,
+      by the largest competitor in the market.</b> Jom Makcik's answer is a trained woman who walks
+      your mother in, sits through the appointment, and brings her home. The website never says so.</div>
+
+    <h3 class="sub">Where Jom Makcik actually stands</h3>
+    <table>
+      <thead><tr><th>Operator</th><th>Type</th><th>Non foldable wheelchair</th><th>Walks you in</th><th>Publishes price</th><th>Content programme</th></tr></thead>
+      <tbody>
+        <tr class="hl"><td class="dim">Jom Makcik</td><td>Social enterprise, 4 states</td><td><span class="vtag hi">Yes, AbiliCar</span></td><td><span class="vtag hi">Yes, chaperone</span></td><td><span class="vtag bad">No</span></td><td><span class="vtag bad">One page</span></td></tr>
+        <tr><td class="dim">GrabAssist</td><td>Platform, Klang Valley</td><td><span class="vtag bad">No</span></td><td><span class="vtag bad">No</span></td><td><span class="vtag bad">No</span></td><td>Grab's own</td></tr>
+        <tr><td class="dim">Love On Wheels</td><td>Commercial</td><td><span class="vtag hi">Yes</span></td><td>Unstated</td><td><span class="vtag bad">No</span></td><td><span class="vtag hi">Blog and state pages</span></td></tr>
+        <tr><td class="dim">Pearlcare Mobility</td><td>Commercial, PJ</td><td><span class="vtag hi">Yes</span></td><td><span class="vtag hi">Caregiver option</span></td><td><span class="vtag bad">No</span></td><td>Service pages</td></tr>
+        <tr><td class="dim">Mobiliti</td><td>NGO, Klang Valley</td><td><span class="vtag hi">Yes, hydraulic lift</span></td><td>Unstated</td><td><span class="vtag hi">RM17 one way</span></td><td>Association site</td></tr>
+      </tbody>
+    </table>
+    <p class="sec-intro">Two open lanes, and Jom Makcik is the only operator positioned to take both:
+      <b>the only provider that both carries a seated wheelchair user and sends a trained companion,
+      and the only commercial operator that could publish honest prices first.</b>
+      Full detail in the <a href="competitors.html" style="color:var(--blue-deep)">Competitors</a> board.</p>
+  </section>
+
+  <!-- 10 ================================================================ -->
+  <div class="chapdiv" id="c10"><div class="cd-no">10</div><div>
+    <h2 class="cd-h">What we would build</h2>
+    <div class="cd-sub">Staged, so the highest value fixes land first</div>
+  </div></div>
+
+  <section>
+    <div class="secmark">
+      <span class="secicon"><svg viewBox="0 0 24 24" class="ic"><path d="M4 19h16M6 19V9l6-5 6 5v10"/><path d="M10 19v-5h4v5"/></svg></span>
+      <span class="sec-no">10.1 &middot; The three stages</span>
+    </div>
+    <h3 class="sechead">Fix the leak, then build the machine</h3>
+
+    <div class="grid g3">
+      <div class="card"><div class="tag">Stage 1 &middot; days, not weeks</div><h3>Stop the bleeding</h3>
+        <p>Correct the SSM number and the 2018 versus 2023 contradiction. Settle the hours question
+        and say the true one everywhere. Add an og:image so shared links stop rendering blank. Demote
+        the two login buttons. Put WhatsApp above the fold on mobile as a tap to chat link, not text.</p></div>
+      <div class="card"><div class="tag">Stage 2 &middot; the rebuild</div><h3>A real site</h3>
+        <p>Off Canva. Proper HTML with headings and alt text, 16 px minimum type, 44 px targets, WebP
+        images, under 1 MB per page. A page each for AbiliCar, Lady Drivers, Chaperone, plus coverage,
+        pricing, FAQ, About, and a proof page for the institutional partners. Bahasa Melayu alongside
+        English. Schema markup. A footer with privacy and terms.</p></div>
+      <div class="card"><div class="tag">Stage 3 &middot; the engine</div><h3>Booking and content</h3>
+        <p>One booking flow that includes AbiliCar, captures phone, service, date, pickup, destination
+        and wheelchair type, and hands off to WhatsApp. Then the content programme that takes the
+        search ground Love On Wheels is currently taking uncontested.</p></div>
+    </div>
+
+    <h3 class="sub">The messaging spine we would build it on</h3>
+    <div class="goals2">
+      <div class="goal"><span class="gi">01</span><div><b>Lead with the 68%</b>
+        <p>Two thirds of Malaysian seniors miss medical appointments because they cannot get there.
+        That is the problem statement, and their own partner published it.</p></div></div>
+      <div class="goal"><span class="gi">02</span><div><b>Name the thing Grab cannot do</b>
+        <p>Stay in your own wheelchair. Have someone walk you in and wait. Say it plainly, in the
+        hero, where a comparison shopper will see it.</p></div></div>
+      <div class="goal"><span class="gi">03</span><div><b>Put the clinician front and centre</b>
+        <p>Founded by a rehabilitation medicine lecturer who watched her own patients miss therapy for
+        want of a ride. That is the reason to believe, and it is currently absent.</p></div></div>
+      <div class="goal"><span class="gi">04</span><div><b>Publish a price</b>
+        <p>Nobody commercial in this category does. First mover on honest pricing takes the
+        "no surprises" position on a recurring medical spend.</p></div></div>
+      <div class="goal"><span class="gi">05</span><div><b>Explain the credentials</b>
+        <p>One line each for PERKESO, JKM, Yayasan Hasanah, UKM and the hospitals. A logo with a
+        sentence is worth ten logos without one.</p></div></div>
+      <div class="goal"><span class="gi">06</span><div><b>Give the Adinita 600 a face</b>
+        <p>Six hundred trained women drivers is a headline, a recruitment engine and a safety
+        argument all at once. Right now it is a login button.</p></div></div>
+    </div>
+  </section>
+
+  <!-- 11 ================================================================ -->
+  <div class="chapdiv" id="c11"><div class="cd-no">11</div><div>
+    <h2 class="cd-h">The finding ledger</h2>
+    <div class="cd-sub">Every finding, its severity, the fix, and when it should happen</div>
+  </div></div>
+
+  <section>
+    <div class="vl-scroll">
+      <table class="vledger">
+        <thead><tr><th>#</th><th>Area</th><th>Finding</th><th>Fix</th><th>Severity</th><th>When</th></tr></thead>
+        <tbody>
+          <tr><td class="vl-n">01</td><td class="vl-area">Accessibility</td><td>53 of 53 images have no alt text; 0 heading elements on the page</td><td>Rebuild off Canva with real HTML structure and written alt text</td><td><span class="vtag bad">Critical</span></td><td class="vl-when">Stage 2</td></tr>
+          <tr><td class="vl-n">02</td><td class="vl-area">Speed</td><td>LCP 13.1 s and 5.8 s blocked on Slow 4G; 12.2 MB mobile page</td><td>Modern formats, correct sizes, drop the Canva runtime</td><td><span class="vtag bad">Critical</span></td><td class="vl-when">Stage 2</td></tr>
+          <tr><td class="vl-n">03</td><td class="vl-area">Funnel</td><td>AbiliCar, the most popular service, is not bookable in their own app and lands on a JotForm login screen with a US flag</td><td>One booking flow covering all three services</td><td><span class="vtag bad">Critical</span></td><td class="vl-when">Stage 3</td></tr>
+          <tr><td class="vl-n">04</td><td class="vl-area">Trust</td><td>SSM printed as 02301022358 on the homepage; correct number is 202301022358</td><td>Correct the digit</td><td><span class="vtag bad">Critical</span></td><td class="vl-when">Stage 1</td></tr>
+          <tr><td class="vl-n">05</td><td class="vl-area">Trust</td><td>"since 2023" contradicts "founded in 2018" on the same page</td><td>Pick the true framing: founded 2018, incorporated as Jom Makcik Sdn Bhd 2023</td><td><span class="vtag bad">High</span></td><td class="vl-when">Stage 1</td></tr>
+          <tr><td class="vl-n">06</td><td class="vl-area">Revenue</td><td>"Weekdays 8am to 5pm only" printed at the point of conversion, contradicted by the app's 8am to 12am</td><td>Confirm the real policy and state one version everywhere</td><td><span class="vtag bad">High</span></td><td class="vl-when">Stage 1</td></tr>
+          <tr><td class="vl-n">07</td><td class="vl-area">Search</td><td>og:image missing, so every shared link renders a blank card</td><td>Add og:image, og:url and canonical</td><td><span class="vtag bad">High</span></td><td class="vl-when">Stage 1</td></tr>
+          <tr><td class="vl-n">08</td><td class="vl-area">Funnel</td><td>Two of four hero buttons are staff and client logins</td><td>Demote both to small header and footer links</td><td><span class="vtag bad">High</span></td><td class="vl-when">Stage 1</td></tr>
+          <tr><td class="vl-n">09</td><td class="vl-area">Funnel</td><td>Contact form captures no phone number on a WhatsApp led business</td><td>Rebuild the form around phone, service, date, pickup, wheelchair type</td><td><span class="vtag bad">High</span></td><td class="vl-when">Stage 2</td></tr>
+          <tr><td class="vl-n">10</td><td class="vl-area">Search</td><td>One indexable page, one sitemap URL, no schema, no BM version</td><td>Service, coverage, pricing, FAQ and proof pages in EN and BM with LocalBusiness and Service markup</td><td><span class="vtag bad">High</span></td><td class="vl-when">Stage 2</td></tr>
+          <tr><td class="vl-n">11</td><td class="vl-area">Proof</td><td>The RM3,000 to under RM1,500 dialysis saving is unattributed 12.8 px text near the page bottom</td><td>Verify with the customer, attribute, and put it in the hero</td><td><span class="vtag bad">High</span></td><td class="vl-when">Stage 1</td></tr>
+          <tr><td class="vl-n">12</td><td class="vl-area">Proof</td><td>Sixteen institutional logos with no explanation of any relationship</td><td>One sentence per partner, on a proof page</td><td><span class="vtag lo">Medium</span></td><td class="vl-when">Stage 2</td></tr>
+          <tr><td class="vl-n">13</td><td class="vl-area">Brand</td><td>Hero's main visual is an Instagram embed showing a funder's truncated handle</td><td>Replace with owned photography of an actual journey</td><td><span class="vtag lo">Medium</span></td><td class="vl-when">Stage 2</td></tr>
+          <tr><td class="vl-n">14</td><td class="vl-area">Brand</td><td>Seven typefaces, three reds, and Canva's brand teal on the service numbers</td><td>Two typefaces, one red scale, remove the teal</td><td><span class="vtag lo">Medium</span></td><td class="vl-when">Stage 2</td></tr>
+          <tr><td class="vl-n">15</td><td class="vl-area">Brand</td><td>Underlined text inside every button; two button styles in one row</td><td>One button system</td><td><span class="vtag lo">Medium</span></td><td class="vl-when">Stage 2</td></tr>
+          <tr><td class="vl-n">16</td><td class="vl-area">Legal</td><td>No footer, no privacy policy, no terms on the website; both exist only on the JotForm page</td><td>Real footer with policy, terms, SSM, coverage and hours</td><td><span class="vtag lo">Medium</span></td><td class="vl-when">Stage 2</td></tr>
+          <tr><td class="vl-n">17</td><td class="vl-area">Mobile</td><td>12.8 px body copy, 22 px CTAs, 24 px menu button</td><td>16 px minimum, 44 px minimum targets</td><td><span class="vtag bad">High</span></td><td class="vl-when">Stage 2</td></tr>
+          <tr><td class="vl-n">18</td><td class="vl-area">Positioning</td><td>The site never states the two things GrabAssist cannot do</td><td>Put "stay in your own wheelchair" and "we walk you in" in the hero</td><td><span class="vtag bad">High</span></td><td class="vl-when">Stage 1</td></tr>
+          <tr><td class="vl-n">19</td><td class="vl-area">Positioning</td><td>Adinita, roughly 600 trained women drivers, appears only as a login label</td><td>A named programme page, with recruitment</td><td><span class="vtag lo">Medium</span></td><td class="vl-when">Stage 2</td></tr>
+          <tr><td class="vl-n">20</td><td class="vl-area">Positioning</td><td>Dr Sazlina's clinical background is not on the site</td><td>Founder story with the rehabilitation medicine credential</td><td><span class="vtag lo">Medium</span></td><td class="vl-when">Stage 2</td></tr>
+          <tr><td class="vl-n">21</td><td class="vl-area">Content</td><td>Roughly 550 words total; no FAQ, no coverage list, no explanation of how a booking works</td><td>Write the operating detail a worried family needs</td><td><span class="vtag lo">Medium</span></td><td class="vl-when">Stage 2</td></tr>
+          <tr><td class="vl-n">22</td><td class="vl-area">Pricing</td><td>No rate published anywhere, in a category where only the NGO publishes one</td><td>Publish indicative rates and take the transparency position</td><td><span class="vtag lo">Medium</span></td><td class="vl-when">Stage 3</td></tr>
+          <tr><td class="vl-n">23</td><td class="vl-area">Technical</td><td>robots.txt returns 404</td><td>Add it</td><td><span class="vtag lo">Low</span></td><td class="vl-when">Stage 1</td></tr>
+          <tr><td class="vl-n">24</td><td class="vl-area">Brand</td><td>ABILICAR runs a second, unrelated wordmark on the JotForm page</td><td>Decide: managed sub brand or one brand</td><td><span class="vtag lo">Low</span></td><td class="vl-when">Stage 2</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 12 ================================================================ -->
+  <div class="chapdiv" id="c12"><div class="cd-no">12</div><div>
+    <h2 class="cd-h">Method and sources</h2>
+    <div class="cd-sub">So every number here can be checked or rerun</div>
+  </div></div>
+
+  <section>
+    <h3 class="sub">How the numbers were produced</h3>
+    <ul class="tick">
+      <li><b>Performance and accessibility:</b> headless Chrome for Testing driven by Playwright, on
+        9 September 2026. Mobile profile 390 x 844, Pixel 5 user agent, network throttled to Slow 4G
+        (1.6 Mbps down, 750 Kbps up, 150 ms RTT) with a 4x CPU throttle. Desktop profile 1440 x 900 at
+        device pixel ratio 2, unthrottled. Metrics read from PerformanceObserver: LCP, CLS, long tasks
+        summed into Total Blocking Time.</li>
+      <li><b>Competitors measured on the identical rig, in the same session,</b> so the comparison is
+        like for like rather than a mix of published scores.</li>
+      <li><b>Structure counts</b> (headings, alt text, tap targets, font sizes) read from the live DOM
+        after full render, not from the source HTML.</li>
+      <li><b>Google PageSpeed Insights was quota blocked on the day,</b> so these are our own
+        measurements rather than a Lighthouse score. The method is stated so it can be repeated.</li>
+      <li><b>Company facts</b> are cited to named public sources below and marked where they come from
+        press rather than the company.</li>
+    </ul>
+
+    <h3 class="sub">Sources</h3>
+    <div class="srcs">
+      <a href="https://jommakcik.my/" target="_blank" rel="noopener">jommakcik.my, audited 9 September 2026</a>
+      <a href="https://app.jommakcik.my/cust_booking" target="_blank" rel="noopener">app.jommakcik.my/cust_booking, the driver and chaperone booking flow</a>
+      <a href="https://app.jotform.com/251275314992461" target="_blank" rel="noopener">app.jotform.com/251275314992461, the AbiliCar quotation page</a>
+      <a href="https://www.freemalaysiatoday.com/category/leisure/2025/01/11/jom-makcik-inspires-change-with-compassionate-rides" target="_blank" rel="noopener">Free Malaysia Today, 11 January 2025: driver count, Adinita, 75% share, RM98,000 AbiliCar, four states</a>
+      <a href="https://www.bernama.com/en/news.php?id=1781746" target="_blank" rel="noopener">Bernama: incorporation, early driver counts, 800 bookings a month, RM10,000 starting capital</a>
+      <a href="https://yayasanhasanah.org/2026/08/24/caring-for-our-elders-a-shared-responsibility/" target="_blank" rel="noopener">Yayasan Hasanah, 24 August 2026: the 68% transport figure and the ageing projections</a>
+      <a href="https://www.grab.com/my/grabassist/" target="_blank" rel="noopener">grab.com/my/grabassist: the foldable wheelchair limit and the drivers cannot leave the vehicle statement</a>
+      <a href="https://www.grab.com/my/press/others/grab-malaysia-expands-access-to-mobility-with-grabassist/" target="_blank" rel="noopener">Grab Malaysia press release: GrabAssist launch, Klang Valley, driver partner count</a>
+      <a href="https://loveonwheels.com.my/" target="_blank" rel="noopener">loveonwheels.com.my</a>
+      <a href="https://pearlcaremobility.com.my/services/" target="_blank" rel="noopener">pearlcaremobility.com.my</a>
+      <a href="https://mobiliti.org.my/the-transport-service/" target="_blank" rel="noopener">mobiliti.org.my: published fares and booking notice</a>
+      <a href="https://www.linkedin.com/company/jommakcik/" target="_blank" rel="noopener">Jom Makcik Sdn Bhd on LinkedIn</a>
+    </div>
+
+    <h3 class="sub">Terms used once, explained here</h3>
+    <table>
+      <thead><tr><th>Term</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td class="dim">LCP</td><td>Largest Contentful Paint. When the biggest thing on screen finishes drawing. Google treats under 2.5 s as good and over 4 s as poor</td></tr>
+        <tr><td class="dim">FCP</td><td>First Contentful Paint. When anything at all appears</td></tr>
+        <tr><td class="dim">TBT</td><td>Total Blocking Time. How long the phone was too busy to respond to a tap</td></tr>
+        <tr><td class="dim">CLS</td><td>Cumulative Layout Shift. How much the page jumps while loading. Jom Makcik scores a clean 0.00</td></tr>
+        <tr><td class="dim">Alt text</td><td>The written description of an image, read aloud by screen readers and used by Google</td></tr>
+        <tr><td class="dim">Schema markup</td><td>Machine readable tags telling Google this is a local business, a service, a review</td></tr>
+        <tr><td class="dim">og:image</td><td>The picture that appears when a link is shared on WhatsApp or Facebook. Missing here</td></tr>
+        <tr><td class="dim">WAV</td><td>Wheelchair Accessible Vehicle. A vehicle with a ramp or lift, so a passenger stays in their own chair</td></tr>
+        <tr><td class="dim">WCAG</td><td>The international web accessibility standard. Level A is the minimum bar</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <footer>Brand Method &middot; Jom Makcik website and brand audit &middot; measured 9 September 2026
+    &middot; prepared for Dr Sazlina Kamaralzaman &middot; meeting Friday 11 September, 2pm</footer>
+</div>
+</body>
+</html>

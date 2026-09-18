@@ -1,0 +1,32 @@
+{
+  "coverage_areas": [
+    {
+      "area": "Selangor",
+      "line": {
+        "en": "Whole state, door to door",
+        "bm": "Seluruh negeri, pintu ke pintu"
+      }
+    },
+    {
+      "area": "Kuala Lumpur",
+      "line": {
+        "en": "Whole city, door to door",
+        "bm": "Seluruh bandar, pintu ke pintu"
+      }
+    },
+    {
+      "area": "Putrajaya",
+      "line": {
+        "en": "Whole territory, door to door",
+        "bm": "Seluruh wilayah, pintu ke pintu"
+      }
+    },
+    {
+      "area": "Negeri Sembilan",
+      "line": {
+        "en": "Head office in Nilai, whole state",
+        "bm": "Ibu pejabat di Nilai, seluruh negeri"
+      }
+    }
+  ]
+}

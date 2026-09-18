@@ -1,0 +1,79 @@
+{
+  "pricing_rows": [
+    {
+      "name": {
+        "en": "AbiliCar",
+        "bm": "AbiliCar"
+      },
+      "detail": {
+        "en": "Wheelchair accessible, one way, within the Klang Valley",
+        "bm": "Mesra kerusi roda, sehala, dalam Lembah Klang"
+      },
+      "price": {
+        "en": "On request",
+        "bm": "Atas permintaan"
+      },
+      "icon": "assets/img/icons/svc-van.webp"
+    },
+    {
+      "name": {
+        "en": "Lady Driver",
+        "bm": "Pemandu Wanita"
+      },
+      "detail": {
+        "en": "Per trip, one way",
+        "bm": "Setiap perjalanan, sehala"
+      },
+      "price": {
+        "en": "On request",
+        "bm": "Atas permintaan"
+      },
+      "icon": "assets/img/icons/svc-driver.webp"
+    },
+    {
+      "name": {
+        "en": "Chaperone",
+        "bm": "Teman Iringan"
+      },
+      "detail": {
+        "en": "Per appointment, including waiting time",
+        "bm": "Setiap temujanji, termasuk masa menunggu"
+      },
+      "price": {
+        "en": "On request",
+        "bm": "Atas permintaan"
+      },
+      "icon": "assets/img/icons/svc-chaperone.webp"
+    },
+    {
+      "name": {
+        "en": "Dialysis plan",
+        "bm": "Pelan dialisis"
+      },
+      "detail": {
+        "en": "Three return journeys a week, billed monthly",
+        "bm": "Tiga perjalanan pergi balik seminggu, dibil bulanan"
+      },
+      "price": {
+        "en": "On request",
+        "bm": "Atas permintaan"
+      },
+      "icon": "assets/img/icons/pi-calendar.webp"
+    },
+    {
+      "name": {
+        "en": "Outside these areas",
+        "bm": "Di luar kawasan ini"
+      },
+      "detail": {
+        "en": "Quoted per journey",
+        "bm": "Sebut harga setiap perjalanan"
+      },
+      "price": {
+        "en": "On request",
+        "bm": "Atas permintaan"
+      },
+      "icon": "assets/img/icons/pi-route.webp"
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "film_chapters": [
+    {
+      "seconds": 32.0,
+      "label": {
+        "en": "The van arrives",
+        "bm": "Van tiba"
+      },
+      "thumbnail": "assets/img/film/ch01.webp"
+    },
+    {
+      "seconds": 67.0,
+      "label": {
+        "en": "A woman at the wheel",
+        "bm": "Wanita di belakang stereng"
+      },
+      "thumbnail": "assets/img/film/ch02.webp"
+    },
+    {
+      "seconds": 112.0,
+      "label": {
+        "en": "Walked to the door",
+        "bm": "Diiringi ke pintu"
+      },
+      "thumbnail": "assets/img/film/ch03.webp"
+    },
+    {
+      "seconds": 130.0,
+      "label": {
+        "en": "The ramp comes down",
+        "bm": "Tanjakan diturunkan"
+      },
+      "thumbnail": "assets/img/film/ch04.webp"
+    },
+    {
+      "seconds": 140.0,
+      "label": {
+        "en": "Secured, and away",
+        "bm": "Selamat, dan bergerak"
+      },
+      "thumbnail": "assets/img/film/ch05.webp"
+    }
+  ]
+}

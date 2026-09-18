@@ -1,0 +1,61 @@
+{
+  "testimonials": [
+    {
+      "service": {
+        "en": "Lady Driver",
+        "bm": "Pemandu Wanita"
+      },
+      "quote": {
+        "en": "“I feel comfortable and safe with a lady driver. She is punctual and helped ease my chores for the day. I encourage all ladies to use this service.”",
+        "bm": "“Saya rasa selesa dan selamat dengan pemandu wanita. Dia menepati masa dan membantu meringankan urusan saya hari itu. Saya menggalakkan semua wanita menggunakan perkhidmatan ini.”"
+      },
+      "who": {
+        "en": "A woman who booked a Lady Driver",
+        "bm": "Seorang wanita yang menempah Pemandu Wanita"
+      },
+      "published": {
+        "en": "Published on jommakcik.my",
+        "bm": "Disiarkan di jommakcik.my"
+      },
+      "photo": "assets/img/voices/voice-driver.webp"
+    },
+    {
+      "service": {
+        "en": "Chaperone",
+        "bm": "Teman Iringan"
+      },
+      "quote": {
+        "en": "“Arranged a companion to accompany my mother as none of the family members were at home. The companion was good, arrived on time at our place, and helped with the tasks required. Overall I am happy with the service provided.”",
+        "bm": "“Saya mengatur teman iringan untuk menemani ibu saya kerana tiada ahli keluarga di rumah. Teman iringan itu baik, tiba tepat pada masanya di tempat kami, dan membantu dengan tugas yang diperlukan. Secara keseluruhan saya berpuas hati dengan perkhidmatan ini.”"
+      },
+      "who": {
+        "en": "A daughter who arranged a chaperone for her mother",
+        "bm": "Seorang anak perempuan yang mengatur teman iringan untuk ibunya"
+      },
+      "published": {
+        "en": "Published on jommakcik.my",
+        "bm": "Disiarkan di jommakcik.my"
+      },
+      "photo": "assets/img/voices/voice-chaperone.webp"
+    },
+    {
+      "service": {
+        "en": "AbiliCar",
+        "bm": "AbiliCar"
+      },
+      "quote": {
+        "en": "“I used to pay up to RM3,000 a month for mobility vehicle service to go to my dialysis centre. Now I pay less than half of what I paid before. Thank you Jom Makcik.”",
+        "bm": "“Dahulu saya membayar sehingga RM3,000 sebulan untuk perkhidmatan kenderaan mobiliti ke pusat dialisis saya. Kini saya membayar kurang separuh daripada apa yang saya bayar dahulu. Terima kasih Jom Makcik.”"
+      },
+      "who": {
+        "en": "An AbiliCar customer on a dialysis plan",
+        "bm": "Pelanggan AbiliCar dengan pelan dialisis"
+      },
+      "published": {
+        "en": "Published on jommakcik.my",
+        "bm": "Disiarkan di jommakcik.my"
+      },
+      "photo": "assets/img/voices/voice-abilicar.webp"
+    }
+  ]
+}

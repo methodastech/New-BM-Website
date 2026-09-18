@@ -1,0 +1,32 @@
+{
+  "for_you": [
+    {
+      "line": {
+        "en": "Your parent cannot get out of her wheelchair, or should not have to.",
+        "bm": "Ibu atau bapa anda tidak boleh bangun dari kerusi roda, atau tidak patut dipaksa berbuat begitu."
+      },
+      "photo": "assets/img/foryou/fy1.webp"
+    },
+    {
+      "line": {
+        "en": "Someone has to walk her in, wait through the appointment, and bring her home.",
+        "bm": "Seseorang perlu mengiringinya masuk, menunggu sepanjang temujanji, dan membawanya pulang."
+      },
+      "photo": "assets/img/foryou/fy2.webp"
+    },
+    {
+      "line": {
+        "en": "The journey repeats: dialysis, physiotherapy, a clinic every week.",
+        "bm": "Perjalanan itu berulang: dialisis, fisioterapi, klinik setiap minggu."
+      },
+      "photo": "assets/img/foryou/fy3.webp"
+    },
+    {
+      "line": {
+        "en": "You would rather a woman at the wheel, for your mother, your daughter, or yourself.",
+        "bm": "Anda lebih selesa dengan wanita di belakang stereng, untuk ibu, anak perempuan, atau diri anda sendiri."
+      },
+      "photo": "assets/img/foryou/fy4.webp"
+    }
+  ]
+}

@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AL AiN IT Consultants · Website Plan · Brand Method</title>
+<link rel="icon" href="assets/img/logo-mark.webp" type="image/webp">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{--paper:#F7F9FC;--paper2:#FFFFFF;--ink:#0B1526;--soft:#45536B;--faint:#8593A9;--line:#E3E9F2;--line2:#D3DCE8;--org:#1B3FDB;--org-deep:#122FAE;--wash:#E9EEFD;--ok:#128A54;--warn:#C08A1D;--bad:#D7263D;--dark:#0A1630;}
+  *{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+  body{font-family:"Inter",system-ui,sans-serif;background:var(--paper);color:var(--ink);font-size:16px;line-height:1.62;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  .wrap{max-width:none;margin:0;padding:0 22px}.mono{font-family:"JetBrains Mono",monospace}
+  .eyebrow{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--org-deep);display:inline-flex;align-items:center;gap:10px;font-weight:600}
+  .hero{padding:50px 0 8px}.hero h1{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:clamp(32px,5vw,54px);line-height:1.06;letter-spacing:-.02em;margin:18px 0 0;max-width:26ch}.hero h1 em{font-style:normal;color:var(--org-deep)}
+  .hero .lede{font-size:clamp(17px,2vw,20px);color:var(--soft);max-width:68ch;margin:20px 0 0}
+  .vrow{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}.vchip{background:var(--paper2);border:1px solid var(--line);border-radius:999px;padding:8px 15px;font-size:13px;color:var(--soft)}.vchip b{color:var(--org-deep)}
+  section{padding:32px 0}
+  .chapdiv{display:flex;align-items:baseline;gap:18px;padding:42px 0 4px;border-top:1px solid var(--line);margin-top:10px}.cd-no{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:38px;color:var(--org);line-height:1}.cd-h{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:27px;letter-spacing:-.01em}.cd-sub{font-size:15px;color:var(--soft);margin-top:5px}
+  h3.sub{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:21px;margin:30px 0 0}
+  .sec-intro{font-size:16.5px;color:var(--soft);max-width:74ch;margin:15px 0 0}.sec-intro b{color:var(--ink)}
+  .grid{display:grid;gap:16px;margin-top:22px}.g2{grid-template-columns:repeat(auto-fit,minmax(290px,1fr))}.g3{grid-template-columns:repeat(auto-fit,minmax(225px,1fr))}
+  .card{background:var(--paper2);border:1px solid var(--line);border-radius:14px;padding:20px 21px}.card .tag{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--org-deep);font-weight:700}.card h3{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:18.5px;margin-top:8px}.card p{font-size:14px;color:var(--soft);margin-top:9px;line-height:1.55}.card p b{color:var(--ink)}
+  table{width:100%;border-collapse:separate;border-spacing:0;margin-top:18px;font-size:14px;background:var(--paper2);border:1px solid var(--line);border-radius:12px;overflow:hidden}th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}thead th{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#fff;background:var(--dark)}tr:last-child td{border-bottom:none}td.dim{font-weight:600}td.sc{font-family:"JetBrains Mono",monospace;color:var(--org-deep);font-weight:700;white-space:nowrap}td.gate{color:var(--bad);font-weight:600}
+  .tbl-scroll{overflow-x:auto;margin-top:18px}.tbl-scroll table{margin-top:0;min-width:760px}
+  .pin{margin-top:22px;border-left:3px solid var(--org);background:linear-gradient(90deg,rgba(27,63,219,.07),transparent);padding:15px 19px;border-radius:0 12px 12px 0;font-size:15px;display:block}.pin b{color:var(--org-deep)}.pin.warn{border-left-color:var(--warn);background:linear-gradient(90deg,rgba(192,138,29,.09),transparent)}.pin.warn b{color:#96690D}
+  .diagram{margin-top:18px;border:1px solid var(--line);border-radius:14px;background:var(--paper2);padding:18px}.diagram .cap{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--faint);margin-bottom:10px}.diagram svg{width:100%;height:auto;display:block}
+  .scene{display:flex;gap:18px;margin-top:22px;border:1px solid var(--line);border-radius:14px;background:var(--paper2);padding:20px 22px}
+  .scene .no{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:26px;color:var(--org);line-height:1;min-width:34px}
+  .scene h3{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:18.5px}
+  .scene .mech{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--org-deep);font-weight:700;margin-top:5px}
+  .scene p{font-size:14.5px;color:var(--soft);margin-top:9px;line-height:1.58}.scene p b{color:var(--ink)}
+  .scene p.ref{font-size:12.5px;color:var(--faint);margin-top:8px}
+  footer{padding:34px 0 70px;color:var(--faint);font-size:12px;font-family:"JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.05em;border-top:1px solid var(--line);margin-top:30px}
+</style>
+<style id="printFix">
+@media print{ body{background:#fff} svg *{opacity:1!important} table,tr,td,th,.card,.diagram,.scene{page-break-inside:avoid} h2,h3{page-break-after:avoid} .bmws{display:none!important} }
+</style>
+</head>
+<body>
+<link rel="stylesheet" href="assets/bmws.css?v=1">
+<style>.bmws{position:sticky;top:0;z-index:900}</style>
+<div class="bmws" style="--bmws-acc:#203088"><div class="bmws-in">
+  <div class="bmws-crumb"><b>AL AiN IT Consultants &middot; Web Workspace</b><span>Brand Method &middot; Admin Navigation</span></div>
+  <nav class="bmws-tabs" aria-label="Admin navigation">
+    <a href="audit.html"><i>00</i>Web Audit</a>
+    <a href="competitors.html"><i>01</i>Competitors</a>
+    <a class="on" href="plan.html"><i>02</i>Web Plan</a>
+    <a href="index.html"><i>03</i>Prototype Web 1</a>
+     <a href="review.html"><i>04</i>Review</a>
+  </nav>
+</div></div>
+
+<div class="wrap">
+
+<header class="hero">
+  <span class="eyebrow">AL AiN IT Consultants &middot; Website Plan &middot; 20 Aug 2026</span>
+  <h1>Publish the licence. Prove the lab. <em>Own the mandate.</em></h1>
+  <p class="lede">This plan turns the audit's findings into one buildable website: the 116-URL estate consolidated to roughly 25 pages on alaintesting.com.my, rebuilt around the proof a procurement panel actually scores: the SAMM 829 laboratory, the government IV&amp;V register listing, the client sectors, the named team, and the training lane finished into a funnel. Purpose, pages, audiences, content, engineering, migration and schedule: nothing is left unassigned, and every trust page is gated on client-owed facts rather than invented numbers.</p>
+  <div class="vrow">
+    <span class="vchip">Primary domain: <b>alaintesting.com.my</b></span>
+    <span class="vchip"><b>116 &rarr; ~25</b> URLs, everything else 301 or noindex</span>
+    <span class="vchip"><b>3</b> lanes: the lab, the bench, the academy</span>
+    <span class="vchip">Demand anchor: <b>PK2.1 IV&amp;V mandate + RMiT 10.8</b></span>
+  </div>
+</header>
+
+<section id="p01">
+  <div class="chapdiv"><div class="cd-no">01</div><div><div class="cd-h">What the evidence decided</div><div class="cd-sub">Written from measurements on 20 Aug morning, ahead of the 2:00pm meeting with the Lab Director</div></div></div>
+  <span class="pin"><b>Meeting held 20 Aug 2:00pm with Shahjerome Ambrose (Lab Director).</b> The minutes landed on 10 Sep and are recorded in the Meeting Notes tab. Every decision below was evidence-driven and stands unchanged; what the meeting added is in chapter 12.</span>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>Decision</th><th>The evidence behind it</th><th>What it binds in this plan</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">The licence leads everything</td><td>One of four labs on the government IV&amp;V register, the only independent one current, and it appears nowhere as text</td><td>The accreditation is the homepage headline, the title tag, and the first line of every tender boilerplate block</td></tr>
+      <tr><td class="dim">alaintesting.com.my stays the home</td><td>Domain has age and the register lists the company under it; nothing is gained by moving</td><td>Consolidation happens in place. alaintesting.com and alainit.com get registered and 301 in, closing the impersonation door</td></tr>
+      <tr><td class="dim">Trust is the build's whole job</td><td>The funnel's failing grades are first look and verify: gmail banner, grey logos, zero reviews, broken mobile</td><td>Every page is scoped to pass a vendor panel's background check</td></tr>
+      <tr><td class="dim">One service tree, not two</td><td>/services/ and /services-v2/ both live, splitting equity across duplicates</td><td>Chapter 07 carries the 301 map; the old tree dies</td></tr>
+      <tr><td class="dim">Numbers before design</td><td>The estate publishes zero figures while every rival publishes at least one</td><td>Chapter 08 gates the counters on the client's reconciled numbers</td></tr>
+      <tr><td class="dim">Training becomes the funnel</td><td>The only lane with testimonials and warmth, stopped one field short of converting</td><td>The academy lane ships with prices, dates, HRD Corp status and Course schema</td></tr>
+      <tr><td class="dim">The mandate content ships early</td><td>PK2.1, RMiT 10.8, e-invoice and Act 854 manufacture demand nobody on the board answers in either language</td><td>Chapter 07's compliance pages, EN and BM, are phase-one content</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="p02">
+  <div class="chapdiv"><div class="cd-no">02</div><div><div class="cd-h">The strategy the site carries</div><div class="cd-sub">Three jobs, in revenue order</div></div></div>
+  <div class="grid g3">
+    <div class="card"><span class="tag">Job 1 &middot; convince</span><h3>Pass the procurement check</h3><p>The buyer is a verifier by profession. The estate must hand them the licence number, the register listing, the scope sentence, the client sectors and the named team, in text, with dates, so the background check ends on our pages instead of failing there.</p></div>
+    <div class="card"><span class="tag">Job 2 &middot; capture</span><h3>Own the mandated queries</h3><p>IV&amp;V untuk projek kerajaan. RMiT testing requirements. E-invoice integration testing. Act 854 audit. Regulation manufactures these searches on a schedule, no rival answers them in BM, and the first credible estate to do so owns the lane.</p></div>
+    <div class="card"><span class="tag">Job 3 &middot; feed</span><h3>Make training the top of the funnel</h3><p>Every CTFL student is a future QA lead who shortlists vendors. The academy pays its own way, warms the brand, and seeds the industry with people who learned testing from AL AiN. The lane is finished, priced and scheduled, not rebuilt.</p></div>
+  </div>
+  <h3 class="sub">How this becomes the category's reference estate</h3>
+  <p class="sec-intro">The ambition, concretely: the only Malaysian testing estate that reads like what it sells. Every page structured as <b>claim, evidence, verdict</b>, the way the lab writes a test report. The capability-gap table is why the bar is reachable.</p>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>What rivals cannot do</th><th>Score today</th><th>Why not, today</th><th>What it costs them</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">State an independent ISO/IEC 17025 software testing lab on the government register</td><td class="sc">0 of 8 boarded</td><td>Only AL AiN holds it; Testbits holds TMMi, LGMS holds the security scope</td><td>The one differentiator money cannot shortcut, unclaimed</td></tr>
+      <tr><td class="dim">Answer the mandate queries in BM and EN</td><td class="sc">0 of 8</td><td>Global players have no BM lane, locals publish no content</td><td>Regulator-manufactured demand goes to nobody</td></tr>
+      <tr><td class="dim">Show named, dated Malaysian case studies</td><td class="sc">0 of 8</td><td>NDA caution and publishing habit both missing</td><td>Panels score every vendor on generic copy</td></tr>
+      <tr><td class="dim">Run training as a visible funnel with real intakes</td><td class="sc">1 of 8, partially</td><td>Testbits trains but hides logistics too</td><td>The warmest lane converts nobody</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="p03">
+  <div class="chapdiv"><div class="cd-no">03</div><div><div class="cd-h">The whole site, top to bottom</div><div class="cd-sub">Three lanes on one proof spine, every page specified</div></div></div>
+  <div class="diagram">
+    <div class="cap">D1 &middot; The consolidated sitemap. 116 URLs become ~25, in three lanes</div>
+    <svg viewBox="0 0 960 500" role="img" aria-label="Consolidated sitemap in three lanes">
+      <g font-family="Inter,system-ui,sans-serif">
+        <rect x="310" y="14" width="340" height="56" rx="12" fill="#0A1630"/>
+        <text x="480" y="38" text-anchor="middle" fill="#fff" font-size="16" font-weight="700">ALAINTESTING.COM.MY</text>
+        <text x="480" y="57" text-anchor="middle" fill="#8FA3C4" font-size="12">one tree &middot; one design system &middot; claim, evidence, verdict</text>
+        <path d="M370 70 L165 116" stroke="#122FAE" stroke-width="2.2" fill="none"/>
+        <path d="M480 70 L480 116" stroke="#122FAE" stroke-width="2.2" fill="none"/>
+        <path d="M590 70 L795 116" stroke="#122FAE" stroke-width="2.2" fill="none"/>
+        <rect x="30" y="116" width="280" height="56" rx="10" fill="#1B3FDB"/>
+        <text x="170" y="140" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">LANE 1 &middot; THE LAB</text>
+        <text x="170" y="159" text-anchor="middle" fill="#DCE5F2" font-size="11.5">enterprise &amp; government proof</text>
+        <rect x="340" y="116" width="280" height="56" rx="10" fill="#0A1630"/>
+        <text x="480" y="140" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">LANE 2 &middot; THE BENCH</text>
+        <text x="480" y="159" text-anchor="middle" fill="#8FA3C4" font-size="11.5">services &amp; resources</text>
+        <rect x="650" y="116" width="280" height="56" rx="10" fill="#1B3FDB"/>
+        <text x="790" y="140" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">LANE 3 &middot; THE ACADEMY</text>
+        <text x="790" y="159" text-anchor="middle" fill="#DCE5F2" font-size="11.5">training &amp; certification</text>
+        <g font-size="12">
+          <rect x="30" y="188" width="135" height="46" rx="8" fill="#FFFFFF" stroke="#1B3FDB" stroke-width="1.4"/><text x="97" y="207" text-anchor="middle" fill="#0B1526" font-weight="700">The Laboratory</text><text x="97" y="223" text-anchor="middle" fill="#45536B" font-size="10.5">SAMM 829, scope, register</text>
+          <rect x="175" y="188" width="135" height="46" rx="8" fill="#FFFFFF" stroke="#1B3FDB" stroke-width="1.4"/><text x="242" y="207" text-anchor="middle" fill="#0B1526" font-weight="700">IV&amp;V for gov</text><text x="242" y="223" text-anchor="middle" fill="#45536B" font-size="10.5">PK2.1, process, handbook</text>
+          <rect x="30" y="242" width="135" height="46" rx="8" fill="#FFFFFF" stroke="#1B3FDB" stroke-width="1.4"/><text x="97" y="261" text-anchor="middle" fill="#0B1526" font-weight="700">Banking &amp; insurance</text><text x="97" y="277" text-anchor="middle" fill="#45536B" font-size="10.5">RMiT duties, sector proof</text>
+          <rect x="175" y="242" width="135" height="46" rx="8" fill="#FFFFFF" stroke="#1B3FDB" stroke-width="1.4"/><text x="242" y="261" text-anchor="middle" fill="#0B1526" font-weight="700">Case studies</text><text x="242" y="277" text-anchor="middle" fill="#45536B" font-size="10.5">hub + template, dated</text>
+          <rect x="102" y="296" width="135" height="46" rx="8" fill="#FFFFFF" stroke="#1B3FDB" stroke-width="1.4"/><text x="169" y="315" text-anchor="middle" fill="#0B1526" font-weight="700">Compliance hub</text><text x="169" y="331" text-anchor="middle" fill="#45536B" font-size="10.5">RMiT, e-invoice, Act 854</text>
+          <rect x="340" y="188" width="135" height="46" rx="8" fill="#FFFFFF" stroke="#0A1630" stroke-width="1.4"/><text x="407" y="207" text-anchor="middle" fill="#0B1526" font-weight="700">Services hub</text><text x="407" y="223" text-anchor="middle" fill="#45536B" font-size="10.5">one tree, 7 services</text>
+          <rect x="485" y="188" width="135" height="46" rx="8" fill="#FFFFFF" stroke="#0A1630" stroke-width="1.4"/><text x="552" y="207" text-anchor="middle" fill="#0B1526" font-weight="700">Service template</text><text x="552" y="223" text-anchor="middle" fill="#45536B" font-size="10.5">method, tools, deliverables</text>
+          <rect x="340" y="242" width="135" height="46" rx="8" fill="#FFFFFF" stroke="#0A1630" stroke-width="1.4"/><text x="407" y="261" text-anchor="middle" fill="#0B1526" font-weight="700">Resource models</text><text x="407" y="277" text-anchor="middle" fill="#45536B" font-size="10.5">tiers, honest request path</text>
+          <rect x="485" y="242" width="135" height="46" rx="8" fill="#FFFFFF" stroke="#0A1630" stroke-width="1.4"/><text x="552" y="261" text-anchor="middle" fill="#0B1526" font-weight="700">Platform (gated)</text><text x="552" y="277" text-anchor="middle" fill="#45536B" font-size="10.5">named + demoed, or folded in</text>
+          <rect x="650" y="188" width="135" height="46" rx="8" fill="#FFFFFF" stroke="#1B3FDB" stroke-width="1.4"/><text x="717" y="207" text-anchor="middle" fill="#0B1526" font-weight="700">Academy hub</text><text x="717" y="223" text-anchor="middle" fill="#45536B" font-size="10.5">why train with a lab</text>
+          <rect x="795" y="188" width="135" height="46" rx="8" fill="#FFFFFF" stroke="#1B3FDB" stroke-width="1.4"/><text x="862" y="207" text-anchor="middle" fill="#0B1526" font-weight="700">CTFL course</text><text x="862" y="223" text-anchor="middle" fill="#45536B" font-size="10.5">price, dates, HRD Corp</text>
+          <rect x="650" y="242" width="135" height="46" rx="8" fill="#FFFFFF" stroke="#1B3FDB" stroke-width="1.4"/><text x="717" y="261" text-anchor="middle" fill="#0B1526" font-weight="700">IV&amp;V course</text><text x="717" y="277" text-anchor="middle" fill="#45536B" font-size="10.5">the only one of its kind</text>
+          <rect x="795" y="242" width="135" height="46" rx="8" fill="#FFFFFF" stroke="#1B3FDB" stroke-width="1.4"/><text x="862" y="261" text-anchor="middle" fill="#0B1526" font-weight="700">Student proof</text><text x="862" y="277" text-anchor="middle" fill="#45536B" font-size="10.5">the 6 testimonials, grown</text>
+        </g>
+        <g font-size="12">
+          <rect x="340" y="360" width="280" height="46" rx="8" fill="#FFFFFF" stroke="#D3DCE8"/><text x="480" y="379" text-anchor="middle" fill="#0B1526" font-weight="700">Home &middot; About &amp; team &middot; News &middot; Contact</text><text x="480" y="395" text-anchor="middle" fill="#45536B" font-size="10.5">the shared spine pages, one phone, one email</text>
+        </g>
+        <rect x="30" y="426" width="901" height="40" rx="10" fill="#E9EEFD"/>
+        <text x="480" y="451" text-anchor="middle" fill="#122FAE" font-size="12" font-weight="700" font-family="JetBrains Mono,monospace">PROOF SPINE ON EVERY PAGE: SAMM 829 &middot; IV&amp;V REGISTER &middot; MOF 210111 &middot; CLIENT SECTORS &middot; NAMED TEAM &middot; DATED EVIDENCE</text>
+        <text x="480" y="488" text-anchor="middle" fill="#8593A9" font-size="12" font-family="JetBrains Mono,monospace">OLD /SERVICES/ TREE 301s &middot; SCAFFOLDING NOINDEXED &middot; .COM AND ALAINIT.COM REGISTERED AND REDIRECTED IN</text>
+      </g>
+    </svg>
+  </div>
+  <h3 class="sub">Every page, specified</h3>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>Page</th><th>What it is for</th><th>Layout</th><th>Key components</th><th>Content rules</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">Home</td><td>Pass the background check in one scroll, route all three lanes</td><td>Chapter 05, scene by scene</td><td>Licence-led hero, live counters, client sector wall, case-study rail, compliance teasers, academy door</td><td>Only reconciled numbers. One phone, tappable. EN/BM switch in the header</td></tr>
+      <tr><td class="dim">The Laboratory</td><td>The SAMM 829 story told once, properly</td><td>Evidence page</td><td>Accreditation number, scope sentence, register listing, methods (risk-based, performance, static), what an accredited result means</td><td>Scope quoted from the schedule; the date question settled with the client</td></tr>
+      <tr><td class="dim">IV&amp;V for government</td><td>Be the page a ministry officer forwards</td><td>Long-form, proof-led</td><td>PK2.1 mandate explained, the handbook process, provider criteria, AL AiN's register entry, engagement steps</td><td>Quotes cited to MAMPU and JDN sources, BM version first-class</td></tr>
+      <tr><td class="dim">Banking &amp; insurance</td><td>Give the Head of QA a page to justify the shortlist</td><td>Sector page</td><td>RMiT 10.8 duties mapped to services, sector track record, independence argument, engagement models</td><td>Client names only with written permission; sectors and scale otherwise</td></tr>
+      <tr><td class="dim">Case studies hub + template</td><td>Prove delivery with dated evidence</td><td>Filterable grid + single</td><td>The Datasonic and JANM engagement first; each case: context, scope, method, findings class, outcome</td><td>Gated on per-case permission; anonymised sector cases where NDAs bind</td></tr>
+      <tr><td class="dim">Compliance hub (3 pages)</td><td>Own the mandated queries</td><td>Article-grade pages</td><td>RMiT testing duties; e-invoice integration testing; Act 854 audit cycles. Each ends in the relevant service</td><td>EN and BM pairs, hreflang, sources linked, dates shown</td></tr>
+      <tr><td class="dim">Services hub + 7 service pages</td><td>The bench, sold honestly</td><td>One tree</td><td>Manual, automation, performance, security, IV&amp;V, crowdsourced, documentation quality; each with method, tools, deliverables, FAQ</td><td>The 18 capability stubs fold in as sections, not URLs</td></tr>
+      <tr><td class="dim">Resource models</td><td>Replace the misleading "price estimation" URLs</td><td>Short + form</td><td>Junior, middle, senior tiers, engagement shapes, what happens after you ask, reply-time promise</td><td>Honest URL, honest labels; rates stay off-page by client choice, stated as such</td></tr>
+      <tr><td class="dim">Platform</td><td>Named product or folded away</td><td>Product page, conditional</td><td>Name, screenshots, demo video, module tour, who it is for</td><td class="gate">GATED: ships only if the client declares it a real product</td></tr>
+      <tr><td class="dim">Academy hub + 2 courses</td><td>The funnel, finished</td><td>Hub + course template</td><td>CTFL and IV&amp;V: syllabus, duration, price, intake dates, HRD Corp status, instructor, student proof, Course schema</td><td class="gate">GATED: prices, dates and claimability from the client</td></tr>
+      <tr><td class="dim">About &amp; team</td><td>Named humans, at last</td><td>Story down the page</td><td>Founding story, the Lab Director's 25 years, team with roles, certifications wall rebuilt as text + scans</td><td class="gate">GATED: bios, photos and the founding narrative</td></tr>
+      <tr><td class="dim">News</td><td>The freshness signal</td><td>Article grid</td><td>The 6 existing stories re-dated honestly, then a quarterly cadence</td><td>Real dates, named authors, no backdating</td></tr>
+      <tr><td class="dim">Contact</td><td>One route, no ambiguity</td><td>Short</td><td>One tappable phone, one email, one WhatsApp, office map, hours, reply promise</td><td>The gmail banner and plugin numbers retire permanently</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="p04">
+  <div class="chapdiv"><div class="cd-no">04</div><div><div class="cd-h">Audiences, from first touch to reply</div><div class="cd-sub">Four journeys, and the task each must complete</div></div></div>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>The task</th><th>Who needs it</th><th>Where it happens</th><th>Steps allowed</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">"Is this vendor eligible for our IV&amp;V tender?"</td><td>Ministry or agency ICT officer</td><td>IV&amp;V for government, The Laboratory</td><td class="sc">1 forwardable link</td></tr>
+      <tr><td class="dim">"Can they satisfy our RMiT testing obligations?"</td><td>Bank or insurer Head of QA, vendor management</td><td>Banking &amp; insurance, case studies, The Laboratory</td><td class="sc">2 clicks to an RFQ</td></tr>
+      <tr><td class="dim">"We need five testers next month"</td><td>Enterprise delivery manager</td><td>Resource models, services hub</td><td class="sc">1 form, reply promised</td></tr>
+      <tr><td class="dim">"I want my CTFL"</td><td>Working tester or graduate</td><td>Academy, CTFL course page</td><td class="sc">Price and date visible, enrol in 2 clicks</td></tr>
+    </tbody>
+  </table></div>
+  <div class="diagram">
+    <div class="cap">D2 &middot; The four journeys, entry to reply, drawn</div>
+    <svg viewBox="0 0 960 360" role="img" aria-label="Four audience journeys from entry to conversion">
+      <g font-family="Inter,system-ui,sans-serif" font-size="13">
+        <g font-size="13.5" font-weight="700" fill="#0B1526">
+          <text x="20" y="52">Ministry ICT officer</text>
+          <text x="20" y="132">Bank Head of QA</text>
+          <text x="20" y="212">Delivery manager</text>
+          <text x="20" y="292">Aspiring tester</text>
+        </g>
+        <g>
+          <rect x="230" y="30" width="150" height="36" rx="9" fill="#E9EEFD" stroke="#1B3FDB"/><text x="305" y="53" text-anchor="middle" fill="#122FAE">Tender shortlist</text>
+          <rect x="420" y="30" width="150" height="36" rx="9" fill="#FFFFFF" stroke="#D3DCE8"/><text x="495" y="53" text-anchor="middle" fill="#45536B">IV&amp;V page, register</text>
+          <rect x="610" y="30" width="150" height="36" rx="9" fill="#FFFFFF" stroke="#D3DCE8"/><text x="685" y="53" text-anchor="middle" fill="#45536B">Lab scope + case</text>
+          <rect x="800" y="30" width="140" height="36" rx="9" fill="#1B3FDB"/><text x="870" y="53" text-anchor="middle" fill="#fff" font-weight="700">RFQ received</text>
+          <rect x="230" y="110" width="150" height="36" rx="9" fill="#E9EEFD" stroke="#1B3FDB"/><text x="305" y="133" text-anchor="middle" fill="#122FAE">RMiT obligation</text>
+          <rect x="420" y="110" width="150" height="36" rx="9" fill="#FFFFFF" stroke="#D3DCE8"/><text x="495" y="133" text-anchor="middle" fill="#45536B">Sector page, duties map</text>
+          <rect x="610" y="110" width="150" height="36" rx="9" fill="#FFFFFF" stroke="#D3DCE8"/><text x="685" y="133" text-anchor="middle" fill="#45536B">Case study, sector</text>
+          <rect x="800" y="110" width="140" height="36" rx="9" fill="#1B3FDB"/><text x="870" y="133" text-anchor="middle" fill="#fff" font-weight="700">Meeting booked</text>
+          <rect x="230" y="190" width="150" height="36" rx="9" fill="#E9EEFD" stroke="#1B3FDB"/><text x="305" y="213" text-anchor="middle" fill="#122FAE">Urgent staffing need</text>
+          <rect x="420" y="190" width="150" height="36" rx="9" fill="#FFFFFF" stroke="#D3DCE8"/><text x="495" y="213" text-anchor="middle" fill="#45536B">Resource models</text>
+          <rect x="610" y="190" width="150" height="36" rx="9" fill="#FFFFFF" stroke="#D3DCE8"/><text x="685" y="213" text-anchor="middle" fill="#45536B">Tier + duration picked</text>
+          <rect x="800" y="190" width="140" height="36" rx="9" fill="#1B3FDB"/><text x="870" y="213" text-anchor="middle" fill="#fff" font-weight="700">Request sent</text>
+          <rect x="230" y="270" width="150" height="36" rx="9" fill="#E9EEFD" stroke="#1B3FDB"/><text x="305" y="293" text-anchor="middle" fill="#122FAE">Search / referral</text>
+          <rect x="420" y="270" width="150" height="36" rx="9" fill="#FFFFFF" stroke="#D3DCE8"/><text x="495" y="293" text-anchor="middle" fill="#45536B">CTFL page, price + date</text>
+          <rect x="610" y="270" width="150" height="36" rx="9" fill="#FFFFFF" stroke="#D3DCE8"/><text x="685" y="293" text-anchor="middle" fill="#45536B">Student testimonials</text>
+          <rect x="800" y="270" width="140" height="36" rx="9" fill="#1B3FDB"/><text x="870" y="293" text-anchor="middle" fill="#fff" font-weight="700">Enrolled</text>
+        </g>
+        <g stroke="#B9C4D6" stroke-width="1.8" fill="none">
+          <path d="M380 48 h40 M570 48 h40 M760 48 h40 M380 128 h40 M570 128 h40 M760 128 h40 M380 208 h40 M570 208 h40 M760 208 h40 M380 288 h40 M570 288 h40 M760 288 h40"/>
+        </g>
+        <text x="480" y="345" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="11" fill="#8593A9">EVERY JOURNEY ENDS IN A HUMAN REPLY &middot; THE PROMISE ON THE SITE IS ONE BUSINESS DAY, THEN IT IS HONOURED</text>
+      </g>
+    </svg>
+  </div>
+  <span class="pin"><b>The forwardability rule:</b> AL AiN's buyers move in committees. Every lane-one page must survive being pasted into a procurement WhatsApp group: a real og:image, a title that states the credential, and a first screen that makes the case without scrolling.</span>
+</section>
+
+<section id="p05">
+  <div class="chapdiv"><div class="cd-no">05</div><div><div class="cd-h">The home page, scene by scene</div><div class="cd-sub">One scroll that reads like a test report: claim, evidence, verdict</div></div></div>
+  <p class="sec-intro">The order is the panel's own: <b>the licence, the clients, the method, the people, the ask.</b> Motion is restrained and reversible: this estate persuades like an institution, not a campaign. Content is visible by default; a missed animation trigger never hides a section.</p>
+
+  <div class="scene"><div class="no">1</div><div>
+    <h3>The claim, licensed</h3>
+    <div class="mech">Full-bleed hero &middot; the register as the headline &middot; one sentence</div>
+    <p>No stock photography. The lab's own bench or a clean abstract of it. Headline: <b>Malaysia's independent software testing laboratory.</b> Subline: accredited to MS ISO/IEC 17025 (SAMM 829), listed on the government's IV&amp;V provider register. Two CTAs: request a quotation, and the government IV&amp;V lane. The gmail banner's slot in history is a lesson, not a component.</p>
+    <p class="ref">Rule: the accreditation statement binds to the same data file as every other page. One source, no drift.</p>
+  </div></div>
+
+  <div class="scene"><div class="no">2</div><div>
+    <h3>The numbers, finally</h3>
+    <div class="mech">Counter band &middot; reconciled figures &middot; dates shown</div>
+    <p>Years operating, engagements delivered, certified testers, training graduates: whatever the true figures are once the client reconciles them. Each counter carries its as-at date. If a number cannot be evidenced, it does not ship; a smaller true number beats a larger doubted one.</p>
+    <p class="ref">Gate: chapter 08, row 1. QualityKiosk's counter band is the format reference.</p>
+  </div></div>
+
+  <div class="scene"><div class="no">3</div><div>
+    <h3>The wall, in colour and in text</h3>
+    <div class="mech">Client sector wall &middot; logos restored &middot; names written out</div>
+    <p>The Bank Islam to MARA wall returns at full strength, each logo named in text beneath it, grouped by sector: banking, government, technology, regional. Where an NDA forbids the logo, the sector row states the engagement class instead. The Datasonic and JANM case study anchors the wall.</p>
+    <p class="ref">Gate: per-name permission, chapter 08, row 3.</p>
+  </div></div>
+
+  <div class="scene"><div class="no">4</div><div>
+    <h3>What the lab actually does</h3>
+    <div class="mech">Three-lane band &middot; lab, bench, academy &middot; one line each</div>
+    <p>Accredited laboratory testing for the work that must stand up in an audit. Testing services and embedded QA for the work that must ship. Training for the people who do both. Each lane routes to its hub; nobody has to guess which door is theirs.</p>
+    <p class="ref">Reference: the three-lane architecture, audit chapter 08.</p>
+  </div></div>
+
+  <div class="scene"><div class="no">5</div><div>
+    <h3>The mandate, explained before it is asked</h3>
+    <div class="mech">Compliance rail &middot; three cards that actually open</div>
+    <p>PK2.1 and what it means for a project director. RMiT 10.8 and what it means for a Head of QA. The e-invoice and Act 854 clocks. Three cards, three real pages behind them, EN and BM. This is the section that earns search traffic while the rest of the page earns trust.</p>
+    <p class="ref">The audit's job 3. Nobody on the competitor board does this.</p>
+  </div></div>
+
+  <div class="scene"><div class="no">6</div><div>
+    <h3>The people and the paper</h3>
+    <div class="mech">Team row &middot; the certificate wall rebuilt &middot; SSM in the open</div>
+    <p>The Lab Director's 25 years, named engineers with roles, the MOF registration, Micro Focus GOLD, HRD Corp, the SAMM certificate scanned properly and transcribed beside the image. The carousel of low-res scans becomes a documented wall a panel can cite.</p>
+    <p class="ref">Gate: bios, photos, high-res scans. Chapter 08, rows 4 and 5.</p>
+  </div></div>
+
+  <div class="scene"><div class="no">7</div><div>
+    <h3>The ask, three doors</h3>
+    <div class="mech">Split closer &middot; calm, no urgency theatre</div>
+    <p>Request a quotation with the one-business-day reply promise. Book the academy's next intake, date shown. Or call the one number, tappable. Footer carries the licence line, the address, the SSM number, and the reconciled facts one last time.</p>
+    <p class="ref">Every journey from chapter 04 terminates here or earlier.</p>
+  </div></div>
+
+  <span class="pin"><b>Copy voice for the whole estate:</b> the lab's own register: precise, dated, unhurried. Short declaratives. Numbers with as-at dates. No superlatives without evidence: "unparalleled" and "industry's top choice" retire, "accredited, listed, since 2015" replaces them. BM written as carefully as EN.</span>
+</section>
+
+<section id="p06">
+  <div class="chapdiv"><div class="cd-no">06</div><div><div class="cd-h">Engineering</div><div class="cd-sub">Institutional feel, campaign-grade hygiene, one data file</div></div></div>
+  <div class="grid g2">
+    <div class="card"><span class="tag">Stack</span><h3>Static-first, CMS-editable</h3><p>Hand-built pages for the lanes and the home, a light CMS surface for news, case studies and course intakes so the cadence habit survives handover. No page-builder tax: the 61-stylesheet, 75-script era ends at launch.</p></div>
+    <div class="card"><span class="tag">Budget</span><h3>The numbers the build must hit</h3><p>TTFB under 0.5s cached. HTML under 150KB per page. Fonts subset to the weights used, two families, not seventy-two files. First meaningful paint under 2.5s on a mid-range phone. The QA company's website passes a performance audit by construction.</p></div>
+    <div class="card"><span class="tag">Reliability</span><h3>Tested like they test</h3><p>Responsive verified at 375, 768 and 1440 before every release, headings as a document outline, alt text complete, tappable contact links, reduced-motion clean. The launch deliverable includes the estate's own test report, in their format, as a statement.</p></div>
+    <div class="card"><span class="tag">One data file</span><h3>Facts as configuration</h3><p>Licence line, register validity, counters, phone, email, address, course prices and intake dates live in one JSON the whole estate reads. When a date or figure moves, one edit updates every page, which is how the facts stay reconciled after we leave.</p></div>
+  </div>
+</section>
+
+<section id="p07">
+  <div class="chapdiv"><div class="cd-no">07</div><div><div class="cd-h">SEO, schema and the migration</div><div class="cd-sub">From 116 leaky URLs to ~25 that rank, with nothing lost</div></div></div>
+  <p class="sec-intro">Two moves, in risk order. <b>Move one, zero risk:</b> hygiene on the live site now: banner removed, meta description, og:image, tel: link, the two unregistered domains bought. <b>Move two, mapped:</b> the consolidation behind a full 301 map: the old /services/ tree, the price-estimation URLs, the capability stubs and the scaffolding all assigned a successor or a noindex, zero 404s tolerated.</p>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>Step</th><th>What happens</th><th>Proof it worked</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">1 &middot; Freeze &amp; crawl</td><td>Full crawl of all 116 URLs, titles and content archived before anything moves</td><td>The archive itself, delivered</td></tr>
+      <tr><td class="dim">2 &middot; Map</td><td>Every URL assigned a successor: old tree to new tree, stubs into their parent pages, scaffolding noindexed, staff stubs rebuilt or retired</td><td>The 301 map, client-visible</td></tr>
+      <tr><td class="dim">3 &middot; Head layer</td><td>Meta descriptions, og:images and one H1 per page, sitewide</td><td>Crawl shows 1 H1 and full heads on every URL</td></tr>
+      <tr><td class="dim">4 &middot; Schema layer</td><td>Organization with the accreditation, Service on the seven services, Course on both trainings, FAQ on compliance pages</td><td>Rich results test passes per template</td></tr>
+      <tr><td class="dim">5 &middot; Bilingual layer</td><td>EN/BM pairs with hreflang on the lab, IV&amp;V and compliance pages first</td><td>hreflang validated, both languages indexed</td></tr>
+      <tr><td class="dim">6 &middot; Namespace &amp; profiles</td><td>alaintesting.com and alainit.com registered and redirected; a real LinkedIn company page; Google Business Profile claimed, review flow started</td><td>Redirects live; profiles verified and linked</td></tr>
+      <tr><td class="dim">7 &middot; Launch &amp; verify</td><td>Redirects live, sitemap resubmitted, Search Console monitored</td><td>Zero 404s in the week-one and week-four crawls</td></tr>
+    </tbody>
+  </table></div>
+  <span class="pin"><b>Scope rule, stated now:</b> SEO fundamentals, schema, hreflang, redirects and speed are included in the build. Ongoing content beyond the launch set (three compliance pages, one flagship case study, the re-dated news) is a separate retainer, quoted when the client asks.</span>
+</section>
+
+<section id="p08">
+  <div class="chapdiv"><div class="cd-no">08</div><div><div class="cd-h">Content plan</div><div class="cd-sub">Every block, what it must say, whose facts, and what gates it</div></div></div>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>Page / block</th><th>What it must say</th><th>Facts from</th><th>Words by</th><th>Gate</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">The counters, everywhere</td><td>Years, engagements, testers, graduates: one reconciled set</td><td>Client reconciliation session</td><td>Brand Method</td><td class="gate">THE gate: real figures with as-at dates</td></tr>
+      <tr><td class="dim">The Laboratory page</td><td>SAMM 829, scope, register validity, what accredited means</td><td>JSM schedule + JDN register + client</td><td>Brand Method</td><td class="gate">Settle the 2023-vs-2025 accreditation date; high-res certificate scans</td></tr>
+      <tr><td class="dim">Client wall + sectors</td><td>Names in text, grouped by sector</td><td>Client permissions</td><td>Brand Method</td><td class="gate">Written yes per name; NDA cases anonymised to sector</td></tr>
+      <tr><td class="dim">Flagship case study</td><td>The Datasonic and JANM engagement: scope, method, outcome</td><td>Client records</td><td>Brand Method</td><td class="gate">Permission to name; the certificate already public on their site</td></tr>
+      <tr><td class="dim">About &amp; team</td><td>Founding story, Lab Director's 25 years, named team</td><td>Client interviews</td><td>Brand Method</td><td class="gate">Bios, photos, the 2015 founding narrative</td></tr>
+      <tr><td class="dim">IV&amp;V for government + compliance hub</td><td>PK2.1, the handbook, RMiT duties, e-invoice, Act 854</td><td>Published sources, already researched</td><td>Brand Method</td><td>None: research done, ready to write, EN and BM</td></tr>
+      <tr><td class="dim">Services tree</td><td>Seven services with method, tools, deliverables</td><td>Existing site content, restructured + client review</td><td>Brand Method</td><td>Technical review by the lab</td></tr>
+      <tr><td class="dim">Academy pages</td><td>Syllabus, price, intake dates, HRD Corp status</td><td>Client decision</td><td>Brand Method</td><td class="gate">Prices, dates, claimability confirmed</td></tr>
+      <tr><td class="dim">Platform page</td><td>Name, demo, screenshots, or nothing</td><td>Client decision</td><td>Brand Method</td><td class="gate">Product or internal tool: the first-meeting question</td></tr>
+      <tr><td class="dim">Contact truth</td><td>One phone, one email, one WhatsApp, hours, reply promise</td><td>Client decision</td><td>Brand Method</td><td class="gate">Which routes are canonical; the gmail and plugin numbers retire</td></tr>
+    </tbody>
+  </table></div>
+  <span class="pin warn"><b>Red gates are client-owed facts, requested at the first meeting:</b> the reconciled counters, the accreditation date answer, per-name client permissions, team materials, course logistics, the platform decision and the canonical contact routes. The build ships gated blocks marked "to be confirmed" honestly rather than with invented figures, exactly as this workspace's other clients get.</span>
+</section>
+
+<section id="p09">
+  <div class="chapdiv"><div class="cd-no">09</div><div><div class="cd-h">Look and feel</div><div class="cd-sub">The lab already owns a colour. The estate learns to wear it properly</div></div></div>
+  <div class="grid g3">
+    <div class="card"><span class="tag">Colour</span><h3>Laboratory blue, disciplined</h3><p>Their royal blue survives as the single accent on a paper-white base, with a deep navy for proof bands: the gradient-everything era ends. Restraint is the design argument: the page looks like an instrument, not a brochure.</p></div>
+    <div class="card"><span class="tag">Type</span><h3>Grotesk headlines, mono evidence</h3><p>A confident grotesk for headlines, a working sans for body, monospace for licence numbers, dates and scope lines, so evidence looks like evidence. Two families, subset. The four-family, seventy-two-file stack retires.</p></div>
+    <div class="card"><span class="tag">Imagery</span><h3>Their lab, not stock</h3><p>Real benches, real screens with real dashboards, the actual certificate photographed properly, the team as themselves. The stock woman at the analytics dashboard retires. Where photography is thin, precise diagrams of the testing process beat borrowed imagery.</p></div>
+  </div>
+</section>
+
+<section id="p10">
+  <div class="chapdiv"><div class="cd-no">10</div><div><div class="cd-h">Build plan and clock</div><div class="cd-sub">Staged so the hygiene lands this week and the proof compounds from week three</div></div></div>
+  <div class="diagram">
+    <div class="cap">D3 &middot; The build path &middot; marker as of 20 Aug 2026</div>
+    <svg viewBox="0 0 960 110" role="img" aria-label="Build path with current position">
+      <g font-family="JetBrains Mono,monospace" font-size="10.5">
+        <rect x="10"  y="20" width="150" height="52" rx="9" fill="#1B3FDB"/><text x="85" y="42" text-anchor="middle" fill="#fff" font-weight="700">NOW &middot; WK 0</text><text x="85" y="60" text-anchor="middle" fill="#DCE5F2">PITCH + FACTS GATE</text>
+        <rect x="170" y="20" width="150" height="52" rx="9" fill="#FFFFFF" stroke="#1B3FDB"/><text x="245" y="42" text-anchor="middle" fill="#122FAE" font-weight="700">WK 1</text><text x="245" y="60" text-anchor="middle" fill="#96690D">HYGIENE LIVE</text>
+        <rect x="330" y="20" width="150" height="52" rx="9" fill="#FFFFFF" stroke="#0A1630"/><text x="405" y="42" text-anchor="middle" fill="#0A1630" font-weight="700">WKS 2-5</text><text x="405" y="60" text-anchor="middle" fill="#45536B">PROOF LAYER BUILD</text>
+        <rect x="490" y="20" width="150" height="52" rx="9" fill="#FFFFFF" stroke="#0A1630"/><text x="565" y="42" text-anchor="middle" fill="#0A1630" font-weight="700">WKS 4-6</text><text x="565" y="60" text-anchor="middle" fill="#45536B">CONSOLIDATION + SCHEMA</text>
+        <rect x="650" y="20" width="150" height="52" rx="9" fill="#FFFFFF" stroke="#0A1630"/><text x="725" y="42" text-anchor="middle" fill="#0A1630" font-weight="700">WKS 6-8</text><text x="725" y="60" text-anchor="middle" fill="#45536B">BM LAYER + LAUNCH</text>
+        <rect x="810" y="14" width="140" height="64" rx="9" fill="#0A1630"/><text x="880" y="40" text-anchor="middle" fill="#fff" font-weight="700">AFTER</text><text x="880" y="58" text-anchor="middle" fill="#8FA3C4">CADENCE + REVIEWS</text>
+      </g>
+    </svg>
+  </div>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>When</th><th>What ships</th><th>Owner</th></tr></thead>
+    <tbody>
+      <tr><td class="sc">Week 0 &middot; now</td><td class="dim">This workspace walked in the pitch. The facts gate opens: reconciled numbers, permissions, the platform answer, course logistics</td><td>Brand Method + client</td></tr>
+      <tr><td class="sc">Week 1 &middot; hygiene</td><td class="dim">Gmail banner removed, mobile hero fixed, meta description, og:image, tel: link, alaintesting.com and alainit.com registered and redirected</td><td>Brand Method, zero-risk edits on the live site</td></tr>
+      <tr><td class="sc">Weeks 2-5 &middot; proof layer</td><td class="dim">Home, The Laboratory, IV&amp;V for government, Banking &amp; insurance, flagship case study, About &amp; team, Contact, News re-dated</td><td>Brand Method, gated facts from client</td></tr>
+      <tr><td class="sc">Weeks 4-6 &middot; consolidation</td><td class="dim">One services tree with the 301 map, resource models, academy pages, schema sitewide, sitemap pruned</td><td>Brand Method</td></tr>
+      <tr><td class="sc">Weeks 6-8 &middot; BM layer + launch</td><td class="dim">BM versions of the lab, IV&amp;V and compliance pages with hreflang, LinkedIn company page, Google Business Profile, launch with the estate's own test report</td><td>Both</td></tr>
+      <tr><td class="sc">After &middot; cadence</td><td class="dim">Quarterly articles, case studies as permissions land, course intakes, review requests after every delivery</td><td>Client, armed with the system</td></tr>
+    </tbody>
+  </table></div>
+  <span class="pin"><b>The clock in one line:</b> there is no subsidy deadline here, only tenders: every RFQ that closes while the estate is silent is gone forever, and the e-invoice relaxation ending 31 December 2026 is the nearest wave of forced buyers. The plan front-loads the week-one hygiene because the gmail banner is disqualifying vendors in real time.</span>
+</section>
+
+<section id="p11">
+  <div class="chapdiv"><div class="cd-no">11</div><div><div class="cd-h">Gap analysis and evidence</div><div class="cd-sub">What stands between today's estate and this plan, and where every figure came from</div></div></div>
+  <h3 class="sub">The gap, summarised</h3>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>#</th><th>Gap</th><th>Today</th><th>Planned</th><th>Closed by</th></tr></thead>
+    <tbody>
+      <tr><td class="sc">1</td><td class="dim">The licence</td><td>A badge in a header logo image</td><td>The headline, a dedicated page, the title tag, schema</td><td>Build, weeks 2-5</td></tr>
+      <tr><td class="sc">2</td><td class="dim">Proof</td><td>Grey logos, low-res scans, zero text, zero numbers</td><td>Named sector wall, flagship case study, dated counters</td><td>Facts gate + build</td></tr>
+      <tr><td class="sc">3</td><td class="dim">Estate hygiene</td><td>116 URLs, two service trees, public scaffolding, gmail banner, broken mobile</td><td>~25 URLs, one tree, clean sitemap, one contact truth</td><td>Week 1 + weeks 4-6</td></tr>
+      <tr><td class="sc">4</td><td class="dim">Mandate content</td><td>None, in either language</td><td>IV&amp;V, RMiT, e-invoice, Act 854 pages, EN and BM</td><td>Weeks 2-6</td></tr>
+      <tr><td class="sc">5</td><td class="dim">Training funnel</td><td>Courses with no price, dates or schema</td><td>Priced intakes, HRD Corp status, Course schema</td><td>Weeks 4-6, gated logistics</td></tr>
+      <tr><td class="sc">6</td><td class="dim">Search presence</td><td>~707 visits/mo estimate, no company LinkedIn, 8-like Facebook</td><td>Ranking mandate pages, claimed profiles, review flow</td><td>Weeks 6-8, compounds after</td></tr>
+      <tr><td class="sc">7</td><td class="dim">Performance</td><td>TTFB 2.34s, 476KB HTML, 72 font files</td><td>Under 0.5s cached, under 150KB, 2 subset families</td><td>By construction at launch</td></tr>
+    </tbody>
+  </table></div>
+  <h3 class="sub">Evidence, inherited</h3>
+  <p class="sec-intro">Every figure in this plan is measured or sourced in the <b>00 Web Audit</b> evidence table and the workspace research file (RESEARCH-20AUG.md): the sitemap inventory, the page metrics, the register listing, the PK2.1 and RMiT citations, the competitor claims and the salary bands. Known gaps carried forward: no analytics or Search Console access yet, the accreditation start-date conflict unresolved, client counts and permissions unconfirmed, the platform's status unknown. This plan invents none of the missing facts; it gates on them.</p>
+</section>
+
+<section id="p12">
+  <div class="chapdiv"><div class="cd-no">12</div><div><div class="cd-h">Addendum: what the meeting settled, and what the prototype adds</div><div class="cd-sub">Written 11 Sep 2026, after the 20 Aug minutes landed and Prototype Web 1 was built</div></div></div>
+  <span class="pin"><b>This chapter is the only part of the plan written after the meeting.</b> Chapters 01 to 11 stand as measured on 20 Aug. Nothing below contradicts them: the three lanes hold, and the licence still leads.</span>
+
+  <h3 class="sub">What the meeting settled</h3>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>The client's direction</th><th>Where it lands in this plan</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">Positioning is software testing and digital quality assurance, for government and enterprise buyers</td><td>Confirms chapter 02. No change to the lanes or the audiences.</td></tr>
+      <tr><td class="dim">AI supports delivery. It never leads the marketing</td><td>The AI material is one supporting block inside the bench lane, never a headline. The prototype states it in a single line: AI helps our testers work faster, it never signs the report.</td></tr>
+      <tr><td class="dim">He wants to sell fixed-scope modules</td><td>New. A commercial layer across all three lanes, described below. This is the largest addition the meeting made.</td></tr>
+      <tr><td class="dim">Website scope, pricing and structure left undecided</td><td>Prototype Web 1 exists to settle them by showing rather than describing. The proposal follows the client's reaction to it.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3 class="sub">The modules layer</h3>
+  <p>A module is a named piece of testing with a fixed scope, a fixed deliverable and one written price. It gives the lab and the bench the same thing the academy already had: something a buyer can choose and commit to without a discovery call first. The eight in the prototype were drawn from the accredited scope and the four mandates in chapter 04, so every one of them answers an obligation the buyer already carries.</p>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>#</th><th>Module</th><th>The obligation it answers</th><th>Lane</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">M01</td><td>IV&amp;V Readiness Review</td><td>MOF circular PK2.1, before a critical government tender</td><td>The lab</td></tr>
+      <tr><td class="dim">M02</td><td>Performance Test</td><td>Capacity evidence under the SAMM 829 scope</td><td>The lab</td></tr>
+      <tr><td class="dim">M03</td><td>Security Posture Assessment</td><td>BNM RMiT Appendix 5 and Act 854 cycles</td><td>The bench</td></tr>
+      <tr><td class="dim">M04</td><td>Static Test</td><td>Documentation quality against ISO/IEC/IEEE 29148 and 29119</td><td>The lab</td></tr>
+      <tr><td class="dim">M05</td><td>e-Invoice Integration Pack</td><td>LHDN MyInvois onboarding for ERP and POS</td><td>The bench</td></tr>
+      <tr><td class="dim">M06</td><td>RMiT Pre-deployment Pack</td><td>BNM RMiT paragraph 10.8, before a bank release</td><td>The bench</td></tr>
+      <tr><td class="dim">M07</td><td>Tender Technical Validation</td><td>Procurement panels scoring vendor claims</td><td>The lab</td></tr>
+      <tr><td class="dim">M08</td><td>Completion Verification</td><td>Final milestone sign-off before payment</td><td>The lab</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3 class="sub">What Prototype Web 1 demonstrates</h3>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>Decision shown</th><th>How it is shown</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">The licence leads</td><td>The accreditation is the first proof chip, the certificate wall is openable, and four public documents carry the claims.</td></tr>
+      <tr><td class="dim">Modules are purchasable</td><td>Each card carries three inclusions, a duration and a price, and opens a checkout with three payment routes. Proceeding shows a demo notice and takes nothing.</td></tr>
+      <tr><td class="dim">The mandate is the demand</td><td>A photographic band and four mandate cards sit before the services, so the reader meets the obligation before the offer.</td></tr>
+      <tr><td class="dim">The method is visible</td><td>A five step diagram runs from the brief to the signed report.</td></tr>
+      <tr><td class="dim">One page, honestly</td><td>Only Home is live. The other menu items are greyed and labelled as built in the full site, so nothing dead-ends.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3 class="sub">Still gated on the client</h3>
+  <p>Chapter 08 listed the facts the build cannot invent. The prototype marks each of them on the page rather than filling them in. Outstanding: the price band for each module, the official contact routes and office hours, course prices and intake dates, the Lab Director's portrait and his own words, written permission for each client name on the wall, and a native Bahasa proofread of every translated string. The eight figures on the module cards are demo placeholders and are labelled as such in two places.</p>
+</section>
+
+<footer>
+  <div>Brand Method &middot; AL AiN IT Consultants website plan &middot; built on the 20 Aug 2026 audit &middot; chapter 12 added 11 Sep 2026 after the minutes landed</div>
+</footer>
+
+</div>
+<script id="bmPdfName">(function(){var t0=document.title;var n=t0.replace(/\s*[··]\s*Brand Method\s*$/,'').replace(/[··]/g,'-').replace(/&amp;/g,'and').replace(/[^\w\- ]+/g,'').trim().replace(/\s+/g,'-').replace(/-+/g,'-');if(!n)n='Brand-Method-Document';window.addEventListener('beforeprint',function(){document.title=n});window.addEventListener('afterprint',function(){document.title=t0});})();</script>
+</body>
+</html>

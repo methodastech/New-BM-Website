@@ -1,0 +1,1523 @@
+<!doctype html>
+<html lang="en" data-bm-page="website-vsl" class="is-dev js"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nobody wants a website. They want enquiries. · Brand Method</title>
+<meta name="description" content="Watch how Brand Method finds where your site loses the buyers you already paid for, then builds a conversion site at a fixed price, live in as little as a week, backed by four written guarantees.">
+<meta name="theme-color" content="#2536F5">
+<link rel="icon" href="nobodywantsawebsite/favicon.svg" type="image/svg+xml">
+<!-- [ALIGN slug] build spec §1: canonical is the one URL, everything else 301s to it. -->
+<link rel="canonical" href="https://brandmethod.co/website-vsl/">
+<!-- [ALIGN 1.11] brief recommends paid-traffic-only. Flip to index,follow once the decision is made. -->
+<meta name="robots" content="noindex,follow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Brand Method">
+<meta property="og:title" content="Nobody wants a website. They want enquiries.">
+<meta property="og:description" content="A conversion site at a fixed price, live in as little as a week, backed by four written guarantees. Watch the short video, then book a free 30-minute call.">
+<meta property="og:url" content="https://brandmethod.co/website-vsl/">
+<meta property="og:image" content="https://brandmethod.co/assets/og-vsl.jpg">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Nobody wants a website. They want enquiries.">
+<meta name="twitter:description" content="A conversion site at a fixed price, live in as little as a week, backed by four written guarantees.">
+<meta name="twitter:image" content="https://brandmethod.co/assets/og-vsl.jpg">
+<link rel="preload" as="image" href="assets/nuramina-office-poster.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<script src="assets/bm-facts.js"></script>
+<script>
+/* PRODUCTION GATE: anything marked data-bm-internal is working chrome for the team.
+   It renders on localhost and never for a prospect. ?bm=dev forces it on, ?bm=live forces it off. */
+(function(){
+  var q=location.search, host=location.hostname;
+  var isDev=/[?&]bm=dev\b/.test(q)||(!/[?&]bm=live\b/.test(q)&&(host==='localhost'||host==='127.0.0.1'||host==='0.0.0.0'||host===''||location.protocol==='file:'));
+  window.__BM_DEV__=isDev;
+  document.documentElement.classList.add(isDev?'is-dev':'is-live');
+  if(isDev) return;
+  var kill=function(){document.querySelectorAll('[data-bm-internal]').forEach(function(n){n.remove();});};
+  kill(); document.addEventListener('DOMContentLoaded',kill);
+  /* GTM only on the live domain, so local QA never pollutes the account. Build spec §6.1. */
+  var id=(window.BM_FACTS&&window.BM_FACTS.gtmId)||''; if(!id) return;
+  window.dataLayer=window.dataLayer||[]; window.dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+  var s=document.createElement('script'); s.async=true; s.src='https://www.googletagmanager.com/gtm.js?id='+id; document.head.appendChild(s);
+})();
+</script>
+<style>
+/* ================================================================
+   TOKENS. Light base on :root, the same names re-scoped in .dark-band,
+   one spacing scale, nothing ad hoc. Build spec §3.3.
+   ================================================================ */
+:root{
+  --paper:#FFFFFF; --paper-2:#F6F7F8; --paper-3:#EEF0FF;
+  --ink:#15161A; --ink-soft:#54565d; --ink-faint:#8a8c86;
+  --line:rgba(37,54,245,.12); --line-soft:rgba(37,54,245,.07);
+  --bright:#2536F5; --bright-deep:#1421B8; --bright-glow:#7C86FF;
+  --lime:#93B30A; --lime-deep:#7E9A08;
+  --s1:8px; --s2:16px; --s3:24px; --s4:32px; --s5:48px; --s6:64px; --s7:80px; --s8:96px;
+  --gut:24px; --maxw:1200px; --measure:720px; --r:8px; --r2:6px; --rb:7px;
+  --barh:72px;
+}
+.dark-band{
+  --paper:#0B1030; --paper-2:#101641; --paper-3:#151C4F;
+  --ink:#FFFFFF; --ink-soft:rgba(255,255,255,.72); --ink-faint:rgba(255,255,255,.48);
+  --line:rgba(255,255,255,.14); --line-soft:rgba(255,255,255,.08);
+  --bright:#7C86FF; --bright-deep:#A9B0FF;
+}
+@media(min-width:1024px){:root{--gut:48px;}}
+@media(max-width:639px){:root{--s3:20px;--s4:24px;--s5:32px;--s6:40px;--s7:48px;--s8:56px;}}
+
+*{box-sizing:border-box;}
+[hidden]{display:none!important;} /* author display rules must never override the hidden attribute */
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"Inter",system-ui,sans-serif;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;padding-top:0;}
+img{max-width:100%;height:auto;display:block;}
+a{color:var(--bright);}
+button{font:inherit;}
+:focus-visible{outline:3px solid var(--bright);outline-offset:3px;}
+.mono{font-family:"JetBrains Mono",monospace;}
+.skip{position:absolute;left:8px;top:-60px;z-index:200;background:var(--bright);color:#fff;padding:10px 14px;font-family:"JetBrains Mono",monospace;font-size:12px;text-decoration:none;}
+.skip:focus{top:8px;}
+html.typing .bar{transform:translateY(110%);transition:transform .2s;}
+.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
+
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--gut);}
+.sec{padding:var(--s6) 0;}
+@media(min-width:1024px){.sec{padding:var(--s8) 0;}}
+.sec.soft{background:var(--paper-2);}
+.dark-band{background:var(--paper);color:var(--ink);}
+
+h1,h2,h3{font-family:"Fraunces",serif;font-weight:400;line-height:1.05;letter-spacing:-.01em;margin:0;color:var(--ink);}
+h1{font-size:clamp(36px,5.6vw,64px);}
+h2{font-size:clamp(28px,3.8vw,44px);margin-bottom:var(--s2);}
+h3{font-size:clamp(20px,2vw,24px);font-weight:600;line-height:1.15;}
+h1 em,h2 em{display:block!important;font-style:italic;color:var(--bright);}
+.kick{display:inline-flex;align-items:center;gap:8px;font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--bright-deep);margin-bottom:var(--s2);}
+.kick::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--bright);}
+.dark-band .kick{color:var(--bright);}
+.lede{font-size:clamp(17px,1.5vw,20px);color:var(--ink-soft);max-width:var(--measure);margin:0;}
+.head{max-width:820px;margin-bottom:var(--s5);}
+.head.center{margin-left:auto;margin-right:auto;text-align:center;}
+.head.center .lede{margin:0 auto;}
+p{margin:0 0 var(--s2);}
+.measure{max-width:var(--measure);}
+
+/* ---- the one CTA: lime, ink text, sharp, no arrow. Rule 13. Ink on lime is 7.5:1. ---- */
+.cta{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-family:"Inter",system-ui,sans-serif;font-weight:600;font-size:15px;line-height:1;color:#fff;background:var(--bright);border:1px solid transparent;border-radius:var(--rb);padding:16px 26px;cursor:pointer;text-decoration:none;white-space:nowrap;box-shadow:0 10px 26px -10px rgba(37,54,245,.45);transition:background .18s,transform .12s,box-shadow .18s;}
+.cta:hover{background:var(--bright-deep);box-shadow:0 12px 28px -10px rgba(37,54,245,.55);}
+.cta:active{transform:translateY(1px);}
+.cta:focus-visible{outline:2px solid var(--bright);outline-offset:3px;}
+.dark-band .cta{color:#1421B8;background:#fff;box-shadow:0 10px 26px -12px rgba(0,0,0,.5);}
+.dark-band .cta:hover{background:#EEF0FF;}
+.cta.wide{width:100%;}
+.sub-link{display:inline-flex;align-items:center;gap:8px;font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.04em;color:var(--ink-soft);text-decoration:none;}
+.sub-link:hover{color:var(--bright);}
+.sub-link svg{width:15px;height:15px;}
+.cta-row{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s2) var(--s3);margin-top:var(--s4);}
+.cta-note{font-family:"JetBrains Mono",monospace;font-size:11.5px;letter-spacing:.04em;color:var(--ink-faint);margin:var(--s2) 0 0;}
+.inline-cta{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--s2) var(--s3);margin-top:var(--s5);padding-top:var(--s3);border-top:1px solid var(--line);}
+.inline-cta p{margin:0;max-width:52ch;color:var(--ink-soft);}
+
+/* ---- 01 top bar. Desktop: sticky top, reference layout from the main sales page (pill centre, CTA + section dropdown right). Mobile: fixed bottom. ---- */
+.bar{position:sticky;top:0;z-index:80;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:18px;min-height:var(--barh);padding:12px 30px;background:rgba(255,255,255,.82);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);}
+.bar-logo{display:inline-flex;align-items:center;line-height:0;grid-column:1;justify-self:start;}
+.bar-logo img{height:34px;width:auto;}
+.bar-switch{display:inline-flex;align-items:center;grid-column:2;justify-self:center;gap:4px;background:rgba(37,54,245,.06);border:1px solid rgba(37,54,245,.18);border-radius:999px;padding:4px;font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.03em;}
+.bar-switch a{border-radius:999px;padding:9px 18px;text-decoration:none;white-space:nowrap;transition:background .18s,color .18s;}
+.bar-switch a.on{background:var(--bright);color:#fff;}
+.bar-switch a.off{color:var(--bright);}
+.bar-switch a.off:hover{background:rgba(37,54,245,.1);}
+.bar-offer{grid-column:2;justify-self:center;font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.04em;color:var(--ink-soft);text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:60vw;}
+html.is-dev .bar-offer{display:none;}
+.bar-acts{grid-column:3;justify-self:end;display:flex;align-items:center;gap:16px;}
+.bar .cta{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.02em;padding:11px 18px;box-shadow:none;}
+/* the one bare glyph in a bar of tinted pills. Same chip as .bar-ddbtn so the three controls read as a set. */
+.bar-wa{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;color:var(--bright);background:rgba(37,54,245,.06);border:1px solid rgba(37,54,245,.18);border-radius:999px;transition:background .18s,border-color .18s,color .18s;}
+.bar-wa svg{width:20px;height:20px;fill:currentColor;display:block;}
+.bar-wa:hover{background:rgba(37,54,245,.11);border-color:rgba(37,54,245,.32);color:var(--bright-deep);}
+.bar-dd{position:relative;}
+.bar-ddbtn{display:inline-flex;align-items:center;gap:7px;font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.03em;color:var(--bright);background:rgba(37,54,245,.06);border:1px solid rgba(37,54,245,.18);border-radius:999px;padding:9px 14px;cursor:pointer;white-space:nowrap;transition:background .18s,border-color .18s;}
+.bar-ddbtn:hover{background:rgba(37,54,245,.11);border-color:rgba(37,54,245,.32);}
+.bar-ddbtn svg{width:13px;height:13px;}
+.bar-ddmenu{position:absolute;top:calc(100% + 8px);right:0;min-width:200px;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 20px 46px -20px rgba(20,28,84,.4);padding:6px;display:none;flex-direction:column;z-index:90;}
+.bar-dd.open .bar-ddmenu{display:flex;}
+.bar-ddmenu a{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 13px;border-radius:8px;font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.02em;color:var(--ink-soft);text-decoration:none;white-space:nowrap;}
+.bar-ddmenu a:hover{background:rgba(37,54,245,.07);color:var(--bright);}
+.bar-ddmenu a.is-current{color:var(--bright);font-weight:700;}
+.bar-ddmenu a.is-current::after{content:"";width:7px;height:7px;border-radius:50%;background:var(--bright);flex:0 0 auto;}
+.bm-fab-dl{position:fixed;left:16px;bottom:16px;z-index:120;display:inline-flex;align-items:center;gap:8px;font-family:"JetBrains Mono",monospace;font-size:12px;font-weight:500;line-height:1;letter-spacing:.04em;color:#1421B8;background:rgba(255,255,255,.94);border:1px solid rgba(37,54,245,.28);border-radius:12px;padding:11px 15px;cursor:pointer;white-space:nowrap;box-shadow:0 14px 32px -16px rgba(20,33,140,.5);transition:background .18s,transform .18s;}
+.bm-fab-dl:hover{background:#fff;transform:translateY(-1px);}
+.bm-fab-dl svg{width:16px;height:16px;}
+@media(min-width:640px) and (max-width:1100px){
+  .bar{display:flex;flex-wrap:wrap;gap:10px 14px;padding:10px 16px;min-height:0;}
+  .bar-logo{order:1;}
+  .bar-logo img{height:28px;}
+  .bar-acts{order:2;margin-left:auto;gap:10px;}
+  .bar-switch{order:3;flex:1 0 100%;justify-content:center;}
+  .bar-switch a{padding:8px 12px;}
+  .bar-offer{order:3;flex:1 0 100%;max-width:none;}
+}
+.top-mobile{display:none;}
+@media(max-width:639px){
+  :root{--barh:56px;}
+  body{padding-top:0;padding-bottom:var(--barh);}
+  .bar{position:fixed;left:0;right:0;top:auto;bottom:0;min-height:0;height:var(--barh);padding:0 var(--s2);grid-template-columns:1fr auto;border-bottom:0;border-top:1px solid var(--line);background:rgba(255,255,255,.94);padding:0 var(--s2);}
+  .bar{grid-template-columns:1fr;}
+  .bar-logo,.bar-offer,.bar-switch,.bar-dd,.bm-fab-dl{display:none;}
+  .bar-acts{grid-column:1;width:100%;justify-self:stretch;gap:10px;}
+  .bar-acts .cta{flex:1;padding:12px 14px;font-size:14px;}
+  .bar-wa{flex:0 0 44px;width:44px;height:44px;}
+  .top-mobile{display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 var(--gut);border-bottom:1px solid var(--line-soft);}
+  .top-mobile img{height:26px;width:auto;}
+}
+
+/* ---- 02 VSL block ---- */
+.hero{padding:var(--s6) 0 var(--s5);position:relative;overflow:hidden;}
+@media(min-width:1024px){.hero{padding:var(--s7) 0 var(--s6);}}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 50% at 50% 0%,rgba(37,54,245,.09),transparent 70%);pointer-events:none;-webkit-mask-image:linear-gradient(to bottom,#000 55%,transparent 100%);mask-image:linear-gradient(to bottom,#000 55%,transparent 100%);}
+.hero .wrap{position:relative;}
+.hero-copy{text-align:center;max-width:880px;margin:0 auto var(--s4);}
+.hero-copy h1{max-width:100%;margin:0 auto var(--s2);}
+.hero-copy .lede{margin:0 auto;max-width:58ch;}
+.stage{position:relative;width:100%;max-width:900px;margin:0 auto;aspect-ratio:16/9;background:#0B1030;overflow:hidden;border-radius:var(--r);box-shadow:0 30px 70px -30px rgba(20,28,84,.45);}
+@media(max-width:639px){.stage{max-height:45vh;width:auto;max-width:100%;border-radius:var(--r2);}}
+.stage video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#0B1030;}
+.stage-over{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:linear-gradient(180deg,rgba(11,16,48,.08),rgba(11,16,48,.55));color:#fff;cursor:pointer;border:0;padding:0;width:100%;text-align:center;font:inherit;}
+.stage-over:hover .play{transform:scale(1.05);}
+.play{width:84px;height:84px;border-radius:50%;background:#fff;display:grid;place-items:center;transition:transform .2s;box-shadow:0 12px 30px rgba(0,0,0,.3);}
+.play svg{width:30px;height:30px;margin-left:5px;fill:var(--bright);}
+.play-lbl{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.5);}
+.stage-host{position:absolute;left:16px;bottom:14px;display:flex;align-items:center;gap:10px;color:#fff;text-align:left;pointer-events:none;}
+.stage-host img{width:38px;height:38px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,.7);}
+.stage-host b{display:block;font-size:14px;font-weight:600;line-height:1.2;}
+.stage-host small{display:block;font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.06em;color:rgba(255,255,255,.8);}
+.stage-cap{position:absolute;right:16px;bottom:16px;font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.85);border:1px solid rgba(255,255,255,.5);padding:5px 9px;border-radius:6px;pointer-events:none;}
+.stage.is-live .stage-over,.stage.is-live .stage-host,.stage.is-live .stage-cap{display:none;}
+.stage.is-pending .stage-over{cursor:default;}
+.stage.is-pending .play{display:none;}
+.stage.is-pending .play-lbl{font-size:13px;text-transform:none;letter-spacing:.02em;max-width:30ch;line-height:1.5;}
+.vsl-cta{max-width:900px;margin:var(--s3) auto 0;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:var(--s2);}
+.vsl-cta[hidden]{display:none;}
+.vsl-cta p{margin:0;font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.04em;color:var(--ink-soft);}
+.trust{display:flex;flex-wrap:wrap;justify-content:center;gap:var(--s1) var(--s3);list-style:none;margin:var(--s4) auto 0;padding:0;font-family:"JetBrains Mono",monospace;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);}
+.trust li{display:inline-flex;align-items:center;gap:7px;}
+.trust svg{width:14px;height:14px;stroke:var(--bright);fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;}
+.dev-note{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.02em;color:#B3261E;background:#FFF3F2;border:1px dashed #E5A9A4;padding:8px 12px;border-radius:8px;margin:var(--s2) auto 0;max-width:900px;}
+
+/* ---- 03 text fallback ---- */
+.fallback{padding:var(--s5) 0 var(--s6);}
+.short{display:grid;gap:var(--s4);padding:var(--s4);border:1px solid var(--line);border-radius:var(--r);background:linear-gradient(180deg,var(--paper) 0%,var(--paper-3) 100%);}
+@media(min-width:1024px){.short{grid-template-columns:1fr 1.3fr;gap:var(--s6);padding:var(--s5);align-items:start;}}
+.short-head h2{font-size:clamp(28px,3.2vw,40px);}
+.short-head .cta-row{margin-top:var(--s3);}
+.short-list{list-style:none;margin:0;padding:0;display:grid;gap:var(--s1);counter-reset:none;}
+.short-list li{display:grid;grid-template-columns:40px 1fr;gap:14px;align-items:start;padding:14px 16px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r2);}
+.short-list b{display:block;font-weight:600;color:var(--ink);margin-bottom:2px;}
+.short-list span{display:block;font-size:15px;line-height:1.5;color:var(--ink-soft);}
+.ico{display:grid;place-items:center;width:40px;height:40px;border-radius:var(--r2);background:var(--paper-3);flex:0 0 auto;}
+.ico svg{width:20px;height:20px;stroke:var(--bright);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.dark-band .ico{background:rgba(124,134,255,.14);}
+
+/* ---- 04 proof bar ---- */
+.proofbar{padding:var(--s6) 0;border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);}
+.proofbar-lbl{text-align:center;font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:var(--s4);}
+.marq{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);}
+.marq-track{display:flex;gap:54px;width:max-content;align-items:center;animation:marq 60s linear infinite;}
+.marq:hover .marq-track{animation-play-state:paused;}
+.logo{flex:0 0 auto;height:74px;width:auto;min-width:120px;padding:0 6px;display:flex;align-items:center;justify-content:center;}
+.logo img{max-height:46px;max-width:150px;width:auto;height:auto;object-fit:contain;display:block;opacity:.78;filter:saturate(.9);transition:opacity .2s,filter .2s;}
+/* per-brand optical sizing, ported verbatim from the nobodywantsawebsite sales page */
+.logo img[alt="Microsoft"]{max-height:144px;max-width:252px;}
+.logo img[alt="AirAsia"]{max-height:138px;max-width:225px;}
+.logo img[alt="McDonald's"]{max-height:129px;max-width:225px;}
+.logo img[alt="Starbucks"]{max-height:123px;max-width:225px;}
+.logo img[alt="Sheraton"]{max-height:117px;max-width:225px;}
+.logo img[alt="Spritzer"]{max-height:111px;max-width:252px;}
+.logo img[alt="Proton"]{max-height:144px;max-width:260px;}
+.logo img[alt="Kalbe"]{max-height:82px;max-width:165px;}
+.logo img[alt="Hasbro"]{max-height:96px;}
+.logo img[alt="Avisena Specialist Hospital"]{max-height:58px;}
+.logo img[alt="Tourism Malaysia"]{max-height:84px;max-width:214px;}
+.logo img[alt="Sunway Lagoon Malaysia"]{max-height:60px;max-width:170px;}
+.logo img[alt="Eskayvie"]{max-height:24px;}
+.logo img:hover{opacity:1;filter:none;}
+.marq-track:hover .logo img{opacity:.78;}
+@keyframes marq{to{transform:translateX(-50%);}}
+.cred span{color:var(--bright);}
+
+/* ---- 05 stakes ---- */
+.stakes{position:relative;overflow:hidden;}
+.stakes .wrap{position:relative;z-index:1;}
+.leak{position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none;opacity:.9;-webkit-mask-image:linear-gradient(to bottom,#000 60%,transparent 100%);mask-image:linear-gradient(to bottom,#000 60%,transparent 100%);}
+.stakes::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,16,48,.92) 0%,rgba(11,16,48,.7) 45%,rgba(11,16,48,.35) 100%);pointer-events:none;}
+.stakes .wrap{z-index:2;}
+.stakes-grid{display:grid;gap:var(--s2);}
+@media(min-width:640px){.stakes-grid{grid-template-columns:1fr 1fr;}}
+@media(min-width:1024px){.stakes-grid{grid-template-columns:repeat(3,1fr);gap:var(--s3);}}
+.stake{position:relative;padding:var(--s3);border:1px solid var(--line);border-radius:var(--r);background:rgba(16,22,65,.72);}
+.stake .tag{position:absolute;top:var(--s3);right:var(--s3);font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.12em;color:var(--ink-faint);}
+.stake .ico{width:44px;height:44px;border-radius:var(--r2);margin-bottom:var(--s2);}
+.stake .ico svg{width:22px;height:22px;}
+.stake h3{font-size:clamp(19px,1.6vw,22px);margin-bottom:8px;}
+.stake p{margin:0;color:var(--ink-soft);font-size:15px;line-height:1.55;}
+
+
+/* ---- 06 + 07 how it works ---- */
+.anchor{display:block;position:relative;top:calc(-1 * var(--barh) - 24px);height:0;visibility:hidden;}
+.how{list-style:none;margin:0;padding:0;display:grid;gap:var(--s2);counter-reset:none;position:relative;}
+@media(min-width:768px){.how{grid-template-columns:repeat(3,1fr);gap:var(--s3);}}
+.how-card{position:relative;padding:var(--s3);border:1px solid var(--line);border-radius:var(--r);background:var(--paper);display:flex;flex-direction:column;}
+.how-card:nth-child(2){background:var(--paper-3);border-color:rgba(37,54,245,.22);}
+.how-top{display:flex;align-items:baseline;gap:10px;margin-bottom:var(--s2);}
+.how-top .num{font-family:"Fraunces",serif;font-size:36px;line-height:1;color:var(--bright);}
+.how-top .ph{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--bright-deep);}
+.how-card .when{display:inline-block;align-self:flex-start;font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.08em;color:var(--ink-soft);background:var(--paper);border:1px solid var(--line);border-radius:var(--r2);padding:5px 10px;margin-bottom:var(--s2);}
+.how-card h3{font-size:clamp(19px,1.7vw,22px);margin-bottom:var(--s2);}
+.how-card ul{list-style:none;margin:0 0 var(--s2);padding:0;display:grid;gap:8px;}
+.how-card ul li{position:relative;padding-left:26px;font-size:15px;line-height:1.5;color:var(--ink);}
+.how-card ul li::before{content:"";position:absolute;left:0;top:3px;width:16px;height:16px;border-radius:50%;background:var(--bright) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l5 5 9-11'/%3E%3C/svg%3E") center/10px no-repeat;}
+.how-note{margin:auto 0 0;padding-top:var(--s2);border-top:1px solid var(--line);font-size:14px;color:var(--ink-soft);}
+
+/* ---- 08 what you get ---- */
+.gets{display:grid;gap:var(--s2);list-style:none;margin:0;padding:0;}
+@media(min-width:640px){.gets{grid-template-columns:1fr 1fr;}}
+@media(min-width:1024px){.gets{grid-template-columns:repeat(4,1fr);}}
+.gets li{position:relative;display:block;padding:var(--s3);border:1px solid var(--line);border-radius:var(--r);background:var(--paper);transition:border-color .2s,transform .2s;}
+.gets li:hover{border-color:var(--bright);transform:translateY(-2px);}
+.gets .q{position:absolute;top:var(--s3);right:var(--s3);font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.06em;color:var(--bright-deep);background:var(--paper-3);padding:5px 9px;border-radius:var(--r2);white-space:nowrap;}
+.gets b{display:block;font-weight:600;color:var(--ink);font-size:16px;line-height:1.3;margin:var(--s2) 0 6px;}
+.gets .d{display:block;font-size:14.5px;line-height:1.5;color:var(--ink-soft);}
+@media(max-width:1023px){.gets .q{position:static;display:inline-block;margin-bottom:var(--s2);}.gets .ico{margin-bottom:var(--s1);}.gets b{margin-top:0;}}
+
+/* ---- 09 for / not for ---- */
+.fit{display:grid;gap:var(--s4);}
+@media(min-width:768px){.fit{grid-template-columns:1fr 1fr;gap:var(--s5);}}
+.fit-col h3{margin-bottom:var(--s2);}
+.fit-col ul{list-style:none;margin:0;padding:0;}
+.fit-col li{position:relative;padding:12px 0 12px 32px;border-top:1px solid var(--line);color:var(--ink-soft);font-size:16px;}
+.fit-col li::before{position:absolute;left:0;top:14px;font-family:"JetBrains Mono",monospace;font-size:14px;font-weight:700;}
+.fit-col.yes li::before{content:"✓";color:var(--bright);}
+.fit-col.no li::before{content:"×";color:var(--ink-faint);}
+
+/* ---- 10 comparison. Separate borders so the Brand Method column can round off and read
+   as one raised card rather than a flat band bleeding off both ends of the table. ---- */
+.cmp-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 calc(var(--gut) * -1);padding:0 var(--gut) 4px;}
+.cmp{width:100%;min-width:760px;border-collapse:separate;border-spacing:0;font-size:15px;}
+.cmp th,.cmp td{text-align:left;vertical-align:top;padding:15px 18px;}
+.cmp thead th{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);font-weight:500;vertical-align:bottom;padding-bottom:13px;}
+.cmp tbody td{color:var(--ink-soft);line-height:1.5;border-top:1px solid var(--line-soft);}
+.cmp tbody tr:first-child td{border-top:1px solid var(--line);}
+.cmp tbody tr:last-child td{border-bottom:1px solid var(--line);}
+.cmp td:first-child,.cmp th:first-child{width:23%;padding-left:0;}
+.cmp td:first-child{font-weight:600;color:var(--ink);}
+/* the one column that is us: tinted, rounded top and bottom, hairlines softened inside it */
+.cmp .us{background:var(--paper-3);color:var(--ink);font-weight:500;}
+.cmp thead th.us{color:var(--bright-deep);text-align:center;border-radius:var(--r) var(--r) 0 0;padding-top:14px;padding-bottom:12px;}
+.cmp tbody tr:last-child td.us{border-radius:0 0 var(--r) var(--r);}
+.cmp tbody td.us{border-top-color:rgba(37,54,245,.10);border-bottom-color:transparent;}
+.cmp tbody tr:first-child td.us{border-top-color:rgba(37,54,245,.17);}
+.cmp th.us img{display:inline-block;height:19px;width:auto;}
+.cmp tbody tr:hover td{background:rgba(37,54,245,.022);}
+.cmp tbody tr:hover td.us{background:#E7EAFF;}
+
+/* ---- 11 proof block ---- */
+.results{display:grid;gap:var(--s3);margin-bottom:var(--s6);}
+/* Credentials strip, ported from .sp-stats on the nobodywantsawebsite sales page. */
+.creds{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;text-align:center;margin-bottom:var(--s5);}
+.creds>div{display:grid;grid-template-columns:auto auto;grid-template-areas:"ic num" "lbl lbl";justify-content:center;align-items:center;column-gap:15px;row-gap:0;}
+.cred-ic{grid-area:ic;display:inline-flex;align-items:center;justify-content:center;color:var(--bright);}
+.cred-ic svg{width:36px;height:36px;display:block;}
+.cred-num{grid-area:num;font-family:"Fraunces",serif;font-weight:400;font-size:clamp(34px,5vw,52px);line-height:1;color:var(--bright);}
+.cred-lbl{grid-area:lbl;font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);margin-top:11px;}
+@media(max-width:639px){
+  .creds{grid-template-columns:1fr 1fr;gap:30px 14px;}
+  .creds>div{grid-template-columns:1fr;grid-template-areas:"ic" "num" "lbl";justify-items:center;}
+  .cred-num{font-size:clamp(32px,10vw,44px);margin-top:9px;}
+  .cred-lbl{margin-top:5px;font-size:10.5px;}
+}
+@media(min-width:768px){.results{grid-template-columns:repeat(3,1fr);}}
+.result{padding:var(--s3);border:1px solid var(--line);border-radius:var(--r);background:var(--paper);}
+.result .num{font-family:"Fraunces",serif;font-size:clamp(40px,4.4vw,56px);line-height:1;color:var(--bright);margin-bottom:8px;}
+.result .what{font-weight:600;color:var(--ink);margin-bottom:6px;}
+.result .who{font-size:14px;color:var(--ink-soft);margin:0;}
+.result .base{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.06em;color:var(--ink-faint);margin-top:10px;display:block;}
+.viz{border:1px solid var(--line);border-radius:var(--r);padding:12px;background:var(--paper);}
+.viz-in{border:1px dashed rgba(37,54,245,.35);border-radius:10px;min-height:140px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;padding:var(--s3);color:var(--ink-soft);font-size:14px;}
+.viz-tag{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--bright-deep);}
+.tgrid{display:grid;grid-template-columns:1fr;gap:16px;align-items:stretch;}
+@media(min-width:768px){.tgrid{grid-template-columns:repeat(2,minmax(0,1fr));}}
+@media(min-width:1024px){.tgrid{grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s3);}}
+.tcard{display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:0 14px 40px -28px rgba(20,33,184,.18);}
+.tcard img{width:100%;aspect-ratio:2/1;object-fit:cover;transform:scale(1.06);transform-origin:center;}
+.tcard .tq{flex:1;padding:16px 18px 10px;font-family:"Fraunces",serif;font-size:15px;line-height:1.45;color:var(--ink);margin:0;}
+.tcard .tby{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 18px 16px;}
+.tcard .tby b{display:block;font-weight:600;font-size:15px;}
+.tcard .tby span{display:block;font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.06em;color:var(--ink-soft);}
+.tcard .tv{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.06em;color:var(--bright);text-decoration:none;white-space:nowrap;}
+.tcard .tv:hover{text-decoration:underline;}
+.tcard{position:relative;}
+.tpend{position:absolute;top:10px;left:10px;z-index:1;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:#B3261E;padding:5px 8px;border-radius:6px;}
+.founder{display:grid;gap:var(--s4);margin-top:var(--s5);padding-top:var(--s5);border-top:1px solid var(--line);}
+@media(min-width:1024px){.founder{grid-template-columns:1fr 1.4fr;gap:var(--s6);align-items:start;}}
+.founder .letter p{font-size:clamp(17px,1.4vw,19px);color:var(--ink-soft);}
+.founder .letter p.big{font-family:"Fraunces",serif;font-size:clamp(24px,2.6vw,34px);line-height:1.2;color:var(--ink);}
+.sig{margin-top:var(--s3);}
+.sig b{display:block;font-family:"Fraunces",serif;font-size:22px;font-weight:600;color:var(--ink);}
+.sig span{font-family:"JetBrains Mono",monospace;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);}
+.founder .viz-in{min-height:360px;}
+.founder.no-photo{grid-template-columns:1fr;max-width:780px;}
+.founder-media .viz{display:none;}
+.founder.no-photo .founder-media .photo{display:none;}
+.founder.no-photo .founder-media .viz{display:block;}
+.founder img.photo{border-radius:var(--r);width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 20%;}
+.sig-img{height:56px;width:auto;margin-bottom:6px;}
+
+/* ---- 12 entry offer, 13 pricing ---- */
+.entry{display:grid;gap:var(--s4);border:1.5px solid var(--bright);border-radius:var(--r);padding:var(--s4);background:var(--paper);}
+@media(min-width:1024px){.entry{grid-template-columns:1.3fr 1fr;gap:var(--s6);padding:var(--s5);}}
+.entry .tag{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--bright-deep);display:block;margin-bottom:12px;}
+.entry h3{font-size:clamp(26px,3vw,36px);font-weight:400;margin-bottom:12px;}
+.entry ul{list-style:none;margin:var(--s3) 0 0;padding:0;}
+.entry li{padding:10px 0 10px 28px;position:relative;border-top:1px solid var(--line);color:var(--ink-soft);font-size:15.5px;}
+.entry li::before{content:"✓";position:absolute;left:0;color:var(--bright);font-family:"JetBrains Mono",monospace;font-weight:700;}
+.entry-price{display:flex;flex-direction:column;justify-content:center;background:var(--paper-2);border-radius:var(--r);padding:var(--s4);}
+@media(max-width:1023px){.entry-price{padding:var(--s3);}}
+.entry-price .amt{font-family:"Fraunces",serif;font-size:clamp(34px,4vw,48px);line-height:1;color:var(--ink);margin-bottom:8px;}
+.entry-price .amt small{font-size:16px;font-family:"Inter",sans-serif;color:var(--ink-soft);}
+/* no price set yet: "Fixed fee confirmed on the call" is a sentence, not an amount, so it drops out of price scale */
+.entry-price .amt.is-tbc{font-size:clamp(24px,2.4vw,30px);line-height:1.15;}
+.entry-price .amt.is-tbc small{display:block;margin-top:6px;font-size:15px;line-height:1.4;}
+.entry-price .credit{font-size:15px;color:var(--ink-soft);margin-bottom:var(--s3);}
+.tiers{display:grid;gap:var(--s3);}
+@media(min-width:768px){.tiers{grid-template-columns:repeat(3,minmax(0,1fr));}}
+.tier .cta{white-space:normal;text-align:center;}
+.tier{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:var(--r);padding:var(--s4) var(--s3);background:var(--paper);}
+.tier.hot{border-color:var(--bright);box-shadow:0 24px 50px -30px rgba(37,54,245,.4);}
+.tier-ico{width:44px;height:44px;color:var(--bright);display:block;margin-bottom:var(--s2);}
+.tier .tag{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);display:block;margin-bottom:10px;}
+.tier.hot .tag{color:var(--bright-deep);}
+.tier h3{font-weight:600;margin-bottom:6px;}
+.tier .price{font-family:"Fraunces",serif;font-size:clamp(30px,3vw,38px);line-height:1;color:var(--ink);margin:6px 0 4px;}
+.tier .time{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);display:block;margin-bottom:var(--s2);}
+.tier p{color:var(--ink-soft);font-size:15px;}
+.tier ul{list-style:none;margin:0 0 var(--s3);padding:0;flex:1;}
+.tier li{padding:8px 0 8px 24px;position:relative;font-size:15px;color:var(--ink);border-top:1px solid var(--line-soft);}
+.tier li::before{content:"✓";position:absolute;left:0;color:var(--bright);font-family:"JetBrains Mono",monospace;font-weight:700;}
+.tier .cta{width:100%;}
+.tier .tier-g{margin:10px 0 0;font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);text-align:center;}
+.others{margin-top:var(--s4);padding-top:var(--s3);border-top:1px solid var(--line);}
+.others-head{display:grid;gap:6px;margin-bottom:var(--s3);}
+.others-lbl{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--bright-deep);}
+.others-note{margin:0;font-size:15px;color:var(--ink-soft);max-width:70ch;}
+.others-grid{display:grid;gap:var(--s2);}
+@media(min-width:768px){.others-grid{grid-template-columns:1fr 1fr;gap:var(--s3);}}
+.oe{display:flex;flex-direction:column;gap:12px;padding:var(--s3);border:1px solid var(--line);border-radius:var(--r);background:var(--paper);transition:border-color .18s,transform .18s;}
+.oe:hover{border-color:var(--bright);transform:translateY(-2px);}
+.oe-top{display:flex;align-items:center;gap:14px;}
+.oe-top .ico{width:44px;height:44px;}
+.oe-title{display:flex;flex-direction:column;gap:4px;min-width:0;}
+.oe-title h4{margin:0;font-family:"Fraunces",serif;font-weight:600;font-size:clamp(19px,1.6vw,22px);line-height:1.15;color:var(--ink);}
+.oe-chip{align-self:flex-start;font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.06em;color:var(--bright-deep);background:var(--paper-3);padding:4px 9px;border-radius:var(--r2);}
+.oe-desc{margin:0;font-size:15.5px;line-height:1.55;color:var(--ink-soft);}
+.oe-list{list-style:none;margin:0;padding:0;display:grid;gap:6px;}
+.oe-list li{position:relative;padding-left:24px;font-size:15px;line-height:1.5;color:var(--ink);}
+.oe-list li::before{content:"";position:absolute;left:0;top:4px;width:14px;height:14px;border-radius:50%;background:var(--bright) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l5 5 9-11'/%3E%3C/svg%3E") center/9px no-repeat;}
+.oe-link{margin-top:auto;padding-top:12px;border-top:1px solid var(--line);display:inline-flex;align-items:center;gap:8px;font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.04em;color:var(--bright);text-decoration:none;}
+.oe-link svg{width:14px;height:14px;transition:transform .18s;}
+.oe-link:hover svg{transform:translateX(3px);}
+.tiers-note{margin-top:var(--s3);font-size:14.5px;color:var(--ink-soft);max-width:70ch;}
+
+/* ---- 14 guarantees ---- */
+.g .n{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--bright);display:block;margin-bottom:10px;}
+.g h3{font-size:20px;margin-bottom:10px;}
+.g p{margin:0;font-size:15.5px;color:var(--ink-soft);}
+
+/* ---- 15 FAQ ---- */
+.faq{max-width:none;margin:0;}
+@media(min-width:1024px){.faq{columns:2;column-gap:var(--s6);}.faq-item{break-inside:avoid;}}
+.faq-item{border-top:1px solid var(--line);}
+.faq-item:last-child{border-bottom:1px solid var(--line);}
+.faq-q{width:100%;display:flex;align-items:center;justify-content:space-between;gap:var(--s2);text-align:left;background:none;border:0;padding:20px 0;cursor:pointer;font-family:"Fraunces",serif;font-size:clamp(18px,1.7vw,21px);color:var(--ink);}
+.faq-q svg{flex:0 0 auto;width:18px;height:18px;stroke:var(--bright);fill:none;stroke-width:2.2;stroke-linecap:round;transition:transform .2s;}
+.faq-q[aria-expanded="true"] svg{transform:rotate(45deg);}
+.faq-a{padding:0 0 22px;color:var(--ink-soft);font-size:15.5px;line-height:1.55;}
+.faq-a p{margin:0 0 10px;}
+.faq-a p:last-child{margin:0;}
+
+/* ---- 16 final CTA + form ---- */
+.book{display:grid;gap:var(--s5);}
+@media(min-width:1024px){.book{grid-template-columns:1fr 1.15fr;gap:var(--s7);align-items:center;}}
+.book-graphic{position:relative;width:120px;height:120px;margin-bottom:var(--s4);}
+.book-graphic svg{position:absolute;inset:0;width:100%;height:100%;}
+.book-graphic .bg-num{position:absolute;left:0;right:0;top:34px;text-align:center;font-family:"Fraunces",serif;font-size:34px;line-height:1;color:#fff;}
+.book-graphic .bg-lbl{position:absolute;left:0;right:0;top:70px;text-align:center;font-family:"JetBrains Mono",monospace;font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;line-height:1.3;color:rgba(255,255,255,.7);}
+.book-copy ul{list-style:none;margin:var(--s3) 0 0;padding:0;}
+.book-copy li{padding:10px 0 10px 28px;position:relative;border-top:1px solid var(--line);color:var(--ink-soft);font-size:15.5px;}
+.book-copy li::before{content:"✓";position:absolute;left:0;color:var(--bright);font-family:"JetBrains Mono",monospace;font-weight:700;}
+.book-form{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:var(--s4);}
+.dark-band .book-form{color:#15161A;}
+.book-form .bmf{max-width:none;}
+.consent{font-size:12.5px;color:var(--ink-faint);margin:var(--s2) 0 0;line-height:1.5;}
+.dark-band .book-form{--bmf-soft:rgba(255,255,255,.8);border-color:var(--line);}
+.dark-band .book-form .bmf{--bmf-soft:rgba(255,255,255,.8);}
+.dark-band .book-form .consent{color:var(--ink-soft);}
+.dark-band .book-form .consent a{color:var(--bright-deep);}
+.wa{margin-top:var(--s2);display:flex;align-items:center;gap:8px;font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.04em;color:var(--ink-soft);}
+.wa a{color:var(--bright);text-decoration:none;}
+.wa a:hover{text-decoration:underline;}
+
+/* ---- 17 playbook ---- */
+.pb{display:grid;gap:var(--s4);align-items:center;}
+@media(min-width:768px) and (max-width:1023px){.pb{grid-template-columns:260px 1fr;}.pb .pbf{grid-column:1/-1;}}
+@media(min-width:1024px){.pb{grid-template-columns:300px 1fr 380px;gap:var(--s6);}}
+.pb-copy .lede{font-size:16px;}
+.pb-copy h2{font-size:clamp(30px,3.2vw,40px);}
+@media(max-width:1023px){.pb .pb3d-stage{justify-content:flex-start;}}
+
+/* ---- 3D playbook (ported from brandmethod.co, prefixed pb3d-, house 6s loop) ---- */
+.pb3d-stage{position:relative;perspective:1500px;display:flex;justify-content:center;align-items:center;padding:18px 0;min-width:280px;}
+.pb3d-shadow{position:absolute;left:50%;bottom:-1%;width:50%;height:20px;transform:translateX(-50%);background:radial-gradient(ellipse,rgba(12,16,45,.15),transparent 70%);filter:blur(13px);}
+.pb3d{--bw:236px;--bh:314px;--bd:40px;position:relative;width:var(--bw);height:var(--bh);transform-style:preserve-3d;transform:rotateX(8deg) rotateY(-26deg);animation:pb3dFloat 6s ease-in-out infinite;will-change:transform;}
+.pb3d:hover{animation-play-state:paused;}
+.pb3d-face{position:absolute;left:50%;top:50%;backface-visibility:hidden;overflow:hidden;}
+.pb3d-front{width:var(--bw);height:var(--bh);transform:translate(-50%,-50%) translateZ(calc(var(--bd)/2));background:linear-gradient(155deg,#2a37ec 0%,#1822bd 50%,#0e1278 100%);border:1px solid rgba(255,255,255,.14);border-left:2px solid rgba(255,255,255,.32);box-shadow:0 18px 38px -30px rgba(12,16,45,.3),0 3px 9px -7px rgba(12,16,45,.16);display:flex;flex-direction:column;justify-content:space-between;padding:24px 22px;}
+.pb3d-front::after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);background-size:30px 30px;pointer-events:none;}
+.pb3d-front::before{content:"";position:absolute;top:0;left:-45%;width:42%;height:100%;background:linear-gradient(104deg,transparent,rgba(255,255,255,.18),transparent);transform:skewX(-12deg);opacity:0;z-index:3;pointer-events:none;}
+.pb3d:hover .pb3d-front::before{animation:pb3dShine 1.15s cubic-bezier(.2,.7,.2,1) forwards;}
+.pb3d-back{width:var(--bw);height:var(--bh);transform:translate(-50%,-50%) rotateY(180deg) translateZ(calc(var(--bd)/2));background:#0a0c1a;border:1px solid rgba(255,255,255,.06);}
+.pb3d-pages{width:var(--bd);height:calc(var(--bh) - 6px);transform:translate(-50%,-50%) rotateY(90deg) translateZ(calc(var(--bw)/2));background:repeating-linear-gradient(90deg,#b9bed6 0 1px,#e9ebf3 1px 3px);border-top:1px solid #aab0c8;border-bottom:1px solid #aab0c8;border-right:1px solid #c2c7dc;}
+.pb3d-spine{width:var(--bd);height:var(--bh);transform:translate(-50%,-50%) rotateY(-90deg) translateZ(calc(var(--bw)/2));background:linear-gradient(180deg,#141caa,#090c4d);display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.1);}
+.pb3d-spine span{writing-mode:vertical-rl;transform:rotate(180deg);font-family:"JetBrains Mono",monospace;font-size:8.5px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.85);white-space:nowrap;}
+.pb3d-topface{width:var(--bw);height:var(--bd);transform:translate(-50%,-50%) rotateX(90deg) translateZ(calc(var(--bh)/2));background:repeating-linear-gradient(90deg,#bcc1d8 0 1px,#eaecf4 1px 3px);border-top:1px solid #c4c9dd;}
+.pb3d-bottom{width:var(--bw);height:var(--bd);transform:translate(-50%,-50%) rotateX(-90deg) translateZ(calc(var(--bh)/2));background:repeating-linear-gradient(90deg,#a9aec6 0 1px,#dfe1ec 1px 3px);}
+@keyframes pb3dFloat{0%,100%{transform:rotateX(8deg) rotateY(-26deg) translateY(0)}50%{transform:rotateX(8deg) rotateY(-26deg) translateY(-12px)}}
+@keyframes pb3dShine{0%{left:-45%;opacity:0}18%{opacity:1}100%{left:125%;opacity:0}}
+.pb3d-top{position:relative;z-index:1;}
+.pb3d-logo{height:17px;width:auto;display:block;filter:brightness(0) invert(1);opacity:.92;}
+.pb3d-mid{position:relative;z-index:1;}
+.pb3d-title{font-family:"Fraunces",serif;font-weight:400;font-size:29px;line-height:1.04;color:#fff;letter-spacing:-.01em;}
+.pb3d-title em{color:#e2e6ff;font-style:italic;}
+.pb3d-rule{width:36px;height:2px;background:#fff;opacity:.85;margin:14px 0 0;}
+.pb3d-by{font-family:"JetBrains Mono",monospace;font-size:8.5px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.72);margin-top:14px;}
+.pb3d-foot{position:relative;z-index:1;font-family:"JetBrains Mono",monospace;font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.6);}
+.pb3d-stage--sm{min-width:0;padding:10px 0;}
+.pb3d-stage--sm .pb3d{--bw:172px;--bh:230px;--bd:30px;}
+.pb3d-stage--sm .pb3d-front{padding:18px 16px;}
+.pb3d-stage--sm .pb3d-title{font-size:21px;}
+.pb3d-stage--sm .pb3d-logo{height:13px;}
+@media(max-width:639px){.pb3d-stage{min-width:0;}.pb3d{--bw:200px;--bh:266px;--bd:34px;}}
+@media(prefers-reduced-motion:reduce){.pb3d{animation:none;}}
+.pb ul{list-style:none;margin:var(--s3) 0 0;padding:0;}
+.pb ul{display:grid;gap:0;}
+.pb li{padding:9px 0 9px 26px;position:relative;border-top:1px solid var(--line);color:var(--ink-soft);font-size:15px;}
+.pb li::before{content:"✓";position:absolute;left:0;color:var(--bright);font-family:"JetBrains Mono",monospace;font-weight:700;}
+.pbf{display:grid;gap:14px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:var(--s4);box-shadow:0 24px 50px -36px rgba(20,28,84,.25);}
+.pbf label{font-family:"JetBrains Mono",monospace;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);display:block;margin-bottom:6px;}
+.pbf input{width:100%;font:inherit;font-size:15px;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:var(--r2);padding:12px 14px;outline:none;}
+.pbf input:focus{border-color:var(--bright);box-shadow:0 0 0 3px rgba(37,54,245,.14);}
+.pbf .row{display:grid;gap:12px;}
+.pbf .row{grid-template-columns:1fr;gap:14px;}
+.pbf .cta{width:100%;}
+.pbf .err{font-size:12.5px;color:#B3261E;min-height:0;}
+.pbf .hp{position:absolute!important;left:-9999px!important;width:1px;height:1px;overflow:hidden;}
+.pbf .ok{display:none;padding:14px;border:1px solid var(--line);border-radius:var(--r2);background:var(--paper-3);color:var(--ink);font-size:15px;}
+.pbf.is-done .ok{display:block;}
+.pbf.is-done .row,.pbf.is-done .cta,.pbf.is-done .consent{display:none;}
+
+/* ---- 18 footer ---- */
+.foot{padding:var(--s5) 0;border-top:1px solid var(--line);}
+.foot-in{display:flex;flex-wrap:wrap;gap:var(--s2) var(--s4);align-items:center;justify-content:space-between;font-family:"JetBrains Mono",monospace;font-size:11.5px;letter-spacing:.04em;color:var(--ink-soft);}
+.foot-in a{color:var(--ink-soft);text-decoration:none;}
+.foot-in a:hover{color:var(--bright);}
+.foot-links{display:flex;flex-wrap:wrap;gap:var(--s2) var(--s3);}
+.foot-disc{margin-top:var(--s3);font-size:12.5px;color:var(--ink-faint);max-width:80ch;line-height:1.55;}
+
+/* ---- section visuals (Higgsfield stills, Sep 5 2026) ---- */
+.fit-pic,.gs-img,.how-img{margin:0;overflow:hidden;border-radius:var(--r);background:var(--paper-3);}
+.fit-pic img,.gs-img img,.how-img img{display:block;width:100%;height:100%;object-fit:cover;}
+.fit-pic{aspect-ratio:4/3;margin:0 0 var(--s3);}
+.fit-col.no .fit-pic img{filter:saturate(.75);}
+.gs{display:grid;gap:var(--s3);}
+@media(min-width:1024px){.gs{grid-template-columns:.9fr 1.1fr;gap:var(--s5);align-items:stretch;}}
+.gs-img{aspect-ratio:16/9;}
+@media(min-width:1024px){.gs-img{aspect-ratio:auto;min-height:100%;}}
+.gs-grid{display:grid;gap:var(--s2);}
+@media(min-width:640px){.gs-grid{grid-template-columns:1fr 1fr;}}
+.g{padding:var(--s3);border:1px solid var(--line);border-radius:var(--r);background:var(--paper);border-top:2px solid var(--bright);}
+.how-img{aspect-ratio:16/9;margin:calc(-1 * var(--s3)) calc(-1 * var(--s3)) var(--s3);border-radius:var(--r) var(--r) 0 0;}
+
+
+#sp-guarantees .head{max-width:none;}
+@media(min-width:1024px){#gu-h{font-size:clamp(28px,2.95vw,40px);}}
+#sp-book .bmf .bmf-submit{border-radius:var(--rb);background:#fff;color:#1421B8;box-shadow:0 10px 26px -12px rgba(0,0,0,.5);}
+#sp-book .bmf .bmf-submit:hover{background:#EEF0FF;}
+#sp-book .bmf input,#sp-book .bmf select,#sp-book .bmf textarea{border-radius:var(--rb);}
+
+/* ---- type normalisation: card and list copy 15.5/1.55, small mono 11px ---- */
+.stake p,.how-card ul li,.gets .d,.short-list span,.fit-col li,.g p,.entry li,.tier p,.tier li,.pb li,.book-copy li{font-size:15.5px;line-height:1.55;}
+.proofbar-lbl,.tier .tag{font-size:11px;}
+/* the guarantee is one sentence, so it scales down rather than wrapping to two lines */
+.tier .tier-g{font-size:clamp(8px,1.02vw,11px);letter-spacing:.04em;white-space:nowrap;}
+
+/* ---- exit intent (salvage, desktop only) ---- */
+.exit{position:fixed;inset:0;z-index:120;display:none;align-items:center;justify-content:center;padding:var(--s3);background:rgba(11,16,48,.55);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);}
+.exit.open{display:flex;}
+.exit-card{position:relative;width:min(780px,100%);background:#fff;border-radius:var(--r);padding:var(--s4);box-shadow:0 40px 90px -30px rgba(0,0,0,.5);display:grid;grid-template-columns:240px 1fr;gap:var(--s4);align-items:center;overflow:hidden;}
+@media(max-width:639px){.exit-card{grid-template-columns:1fr;}.exit-card .pb3d-stage{display:none;}}
+.exit-copy{min-width:0;}
+.exit-x{position:absolute;top:14px;right:14px;width:36px;height:36px;border:0;background:var(--paper-2);border-radius:var(--r2);cursor:pointer;font-size:18px;line-height:1;color:var(--ink-soft);}
+.exit-card h3{font-weight:400;font-size:26px;margin-bottom:8px;}
+.exit-card p{color:var(--ink-soft);font-size:15.5px;}
+
+/* ---- motion: visible by default, revealed when JS confirms. Rule 10. ---- */
+html.js [data-reveal]{opacity:0;transform:translateY(16px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1);}
+html.js [data-reveal].in{opacity:1;transform:none;}
+@media(prefers-reduced-motion:reduce){
+  html.js [data-reveal]{opacity:1;transform:none;transition:none;}
+  .marq-track{animation:none;flex-wrap:wrap;width:auto;justify-content:center;gap:var(--s3) var(--s4);}
+  .marq{-webkit-mask-image:none;mask-image:none;}
+  html{scroll-behavior:auto;}
+}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What exactly is this?","acceptedAnswer":{"@type":"Answer","text":"A conversion website: a site built around how your customers decide, with the copy, the forms, the WhatsApp routing and the tracking already in place. It is delivered at a fixed price, in one to two weeks, by the senior team you meet on the call."}},{"@type":"Question","name":"Who is it for?","acceptedAnswer":{"@type":"Answer","text":"Founders and owners of SMEs and mid-market businesses who already have traffic, enquiries or bookings and can feel them slipping away. If you are choosing on lowest price alone, or not ready to decide this quarter, we are probably not the right fit, and we will say so on the call."}},{"@type":"Question","name":"How much does it cost?","acceptedAnswer":{"@type":"Answer","text":"A Starter site is RM1,900. A Growth site is RM6,000. Apps and games start at RM14,000. Bigger systems are scoped on the call. Every price is fixed in writing before you pay, and the number quoted is the number paid."}},{"@type":"Question","name":"Why are you cheaper than the big agencies?","acceptedAnswer":{"@type":"Answer","text":"We cut the overhead, not the quality. Our own system handles the repetitive work, so your money goes to senior strategy and craft, not layers of account management and markup."}},{"@type":"Question","name":"How does the process work, and how fast?","acceptedAnswer":{"@type":"Answer","text":"Discovery on the free call, then strategy and build, then handover. Work starts within 24 hours of kickoff. A Starter site ships in about a week, a Growth site in two, a scoped app from about four. Bigger builds get a milestone timeline agreed at kickoff."}},{"@type":"Question","name":"How involved do I need to be?","acceptedAnswer":{"@type":"Answer","text":"A kickoff, a few approvals at the milestones, and a launch. We do the heavy lifting and keep you updated at every step, so you stay in control of the direction without it eating your week."}},{"@type":"Question","name":"Do I own everything?","acceptedAnswer":{"@type":"Answer","text":"Yes. Code, domain, content, brand files and customer data are yours from day one. No vendor lock, no platform that holds your leads where you cannot reach them. It is an asset on your books, not a subscription you are afraid to cancel."}},{"@type":"Question","name":"What makes you different?","acceptedAnswer":{"@type":"Answer","text":"Four commitments in writing: money back, seven-day delivery, fixed price and lifetime after-service. Across the agencies we have reviewed, none put anything comparable in a contract. Add a senior team that has done this for over a hundred brands since 2009."}},{"@type":"Question","name":"What if I am not ready yet?","acceptedAnswer":{"@type":"Answer","text":"Take the free call anyway. You leave with a map of where your enquiries leak and a number on what it costs, and you keep it. If you would rather read first, the Brand Growth Playbook at the bottom of this page is free."}},{"@type":"Question","name":"What happens after I click the button?","acceptedAnswer":{"@type":"Answer","text":"You fill in a short form, and we confirm a day and time over WhatsApp within one working day. The call is thirty minutes with a senior strategist. If it is a fit, you get a fixed-price plan with dates. If it is not, you keep the plan and there is zero pressure."}}]}</script><style id="bmf-css">.bmf{--bmf-line:rgba(37,54,245,.16);--bmf-bright:#2536F5;--bmf-ink:#15161A;--bmf-soft:#54565d;font-family:"Inter",system-ui,sans-serif;max-width:620px;margin:0 auto;text-align:left;}.bmf-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}@media(max-width:620px){.bmf-grid{grid-template-columns:1fr;}}.bmf-f{display:flex;flex-direction:column;gap:6px;}.bmf-f.wide{grid-column:1/-1;}.bmf label{font-family:"JetBrains Mono",monospace;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--bmf-soft);}.bmf input,.bmf select,.bmf textarea{font-family:inherit;font-size:15px;color:var(--bmf-ink);background:#fff;border:1px solid var(--bmf-line);border-radius:10px;padding:12px 14px;outline:none;width:100%;transition:border-color .16s,box-shadow .16s;}.bmf textarea{min-height:92px;resize:vertical;}.bmf input:focus,.bmf select:focus,.bmf textarea:focus{border-color:var(--bmf-bright);box-shadow:0 0 0 3px rgba(37,54,245,.14);}.bmf .bmf-err{font-size:12.5px;color:#B3261E;min-height:0;}.bmf [aria-invalid="true"]{border-color:#B3261E;}.bmf-hp{position:absolute!important;left:-9999px!important;width:1px;height:1px;overflow:hidden;}.bmf-submit{grid-column:1/-1;display:inline-flex;align-items:center;justify-content:center;gap:10px;font-family:"Inter",system-ui,sans-serif;font-size:15px;font-weight:600;color:#fff;background:var(--bmf-bright);border:0;border-radius:999px;padding:15px 26px;cursor:pointer;transition:background .18s,transform .12s;}.bmf-submit:hover{background:#1421B8;}.bmf-submit:active{transform:translateY(1px);}.bmf-submit[disabled]{opacity:.62;cursor:not-allowed;}.bmf-spin{width:14px;height:14px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:bmfspin .6s linear infinite;display:none;}.bmf.is-submitting .bmf-spin{display:inline-block;}@keyframes bmfspin{to{transform:rotate(360deg);}}.bmf-note{grid-column:1/-1;font-size:12.5px;color:var(--bmf-soft);margin:2px 0 0;}.bmf-note a{color:var(--bmf-bright);}.bmf-status{grid-column:1/-1;font-size:14px;border-radius:10px;padding:12px 14px;margin:0;display:none;}.bmf-status.show{display:block;}.bmf-status.err{background:rgba(179,38,30,.07);border:1px solid rgba(179,38,30,.26);color:#8f1f18;}@media (prefers-reduced-motion:reduce){.bmf-spin{animation:none;}}</style></head>
+<body>
+<a class="skip" href="#sp-hero">Skip to content</a>
+
+<!-- 01 STICKY BAR. Offer restatement + the one CTA. Fixed top on desktop, fixed bottom on phones. No scarcity: nothing here is generated from real capacity yet (brief §3.1). -->
+<nav class="bar" aria-label="Top">
+  <a class="bar-logo" href="https://brandmethod.co/" aria-label="Brand Method"><img decoding="async" src="brand-method-wordmark.png" alt="Brand Method" width="460" height="134"></a>
+  <div class="bar-switch" data-bm-internal="">
+    <a class="off" href="Brand-Method-Sales-Page.html">Sales page</a>
+    <a class="on" href="Brand-Method-VSL.html">VSL</a>
+    <a class="off" href="Brand-Method-Campaign.html">Promotion</a>
+    <a class="off" href="Brand-Method-Outreach.html">Outreach</a>
+    <a class="off" href="Brand-Method-Comms.html">Comms</a>
+    <a class="off" href="Brand-Method-Brief.html">Brief</a>
+  </div>
+  <div class="bar-offer">A conversion site at a fixed price, live in as little as a week. The first call is free.</div>
+  <div class="bar-acts">
+    <a class="bar-wa" href="https://wa.me/60162563030?text=Hi%20Brand%20Method%2C%20I%20am%20on%20the%20video%20page%20and%20would%20like%20to%20book%20the%20free%2030-minute%20call." target="_blank" rel="noopener" aria-label="WhatsApp Brand Method" data-cta-secondary=""><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 0 1 0 16.4c-1.5 0-2.9-.4-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3 4.4c-.2 0-.5 0-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.2 5 4.4 2.5 1 3 .8 3.5.7.5 0 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3l-2-1c-.3-.1-.5-.1-.7.1l-.9 1.1c-.2.2-.3.2-.6.1-.3-.2-1.2-.5-2.3-1.5-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.5-.6.3-.5c.1-.2 0-.4 0-.5l-.9-2.1c-.2-.6-.4-.5-.6-.5z"></path></svg></a>
+    <a class="cta" href="#sp-book" data-cta="" data-cta-position="1">Book your free 30-minute call</a>
+    <div class="bar-dd" data-bm-internal="">
+      <button class="bar-ddbtn" type="button" aria-haspopup="true" aria-expanded="false">Website SP <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button>
+      <div class="bar-ddmenu" role="menu">
+        <a role="menuitem" href="Brand-Method-Brand.html">Branding SP</a>
+        <a role="menuitem" href="Brand-Method-Sales-Page.html">Website SP</a>
+        <a role="menuitem" href="Brand-Method-SEO.html">SEO SP</a>
+        <a role="menuitem" href="Brand-Method-AI.html">AI SP</a>
+        <a role="menuitem" class="is-current" href="Brand-Method-VSL.html">Website SP · VSL page</a>
+        <a role="menuitem" href="Brand-Method-Brief.html">VSL brief</a>
+        <a role="menuitem" href="bm-assets.html">Brand assets</a>
+      </div>
+    </div>
+  </div>
+</nav>
+<button class="bm-fab-dl" type="button" id="bdDownload" data-bm-internal=""><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 11l5 5 5-5M4 20h16"></path></svg>Download HTML</button>
+
+<div class="top-mobile">
+  <a href="https://brandmethod.co/" aria-label="Brand Method"><img src="brand-method-wordmark.png" alt="Brand Method" width="88" height="26"></a>
+  
+</div>
+
+<main>
+
+<!-- 02 VSL BLOCK. Headline above the video, click to play, CTA revealed at the offer beat with a 20s fallback (bm-track.js). -->
+<header class="hero" id="sp-hero">
+  <div class="wrap">
+    <div class="hero-copy">
+      <span class="kick">Watch first</span>
+      <h1>Nobody wants a website. <em>They want enquiries.</em></h1>
+      <p class="lede">See where your site loses the buyers you already paid for, and the fixed-price site we build instead.</p>
+    </div>
+
+    <div class="stage is-pending" id="vslStage" data-src="assets/vsl.mp4" data-captions="assets/vsl.vtt">
+      <video id="vslVideo" class="vsl-video" preload="none" playsinline="" webkit-playsinline="" poster="assets/nuramina-office-poster.jpg" aria-label="Brand Method video sales letter"></video>
+      <button class="stage-over" id="vslPlay" type="button" aria-label="Play the video with sound" disabled="">
+        <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg></span>
+        <span class="play-lbl" id="vslLbl">The video is being cut. The short version is just below.</span>
+      </button>
+      <div class="stage-host" aria-hidden="true">
+        <img src="founder-on-stage.webp" alt="" loading="lazy" decoding="async">
+        <span><b>Brand Method</b><small>Kuala Lumpur</small></span>
+      </div>
+      <span class="stage-cap" aria-hidden="true" style="display: none;">CC</span>
+    </div>
+
+    <div class="vsl-cta" data-vsl-cta="" data-reveal-seconds="390" data-fallback-ms="20000" hidden="">
+      <a class="cta" href="#sp-book" data-cta="" data-cta-position="2">Book your free 30-minute call</a>
+      <p>Thirty minutes. No pitch. You keep the plan either way.</p>
+    </div>
+
+    <p class="dev-note" data-bm-internal="">Internal: drop the 16:9 cut at <b>assets/vsl.mp4</b> (captions at <b>assets/vsl.vtt</b>) and the player goes live on its own. Presenter provisional per brief [ALIGN 1.9]; the poster should be the presenter, face to camera. Delayed CTA reveals at 390s or 20s, whichever comes first.</p>
+
+    <ul class="trust" aria-label="Commitments">
+      <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-11"></path></svg>Fixed price</li>
+      <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-11"></path></svg>Money back if it is not what we agreed</li>
+      <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-11"></path></svg>You own everything</li>
+    </ul>
+  </div>
+</header>
+
+<!-- 03 TEXT FALLBACK. The whole argument in five bullets, for the 60 to 70 percent who never press play. -->
+<section class="fallback" id="sp-fallback" aria-labelledby="fb-h">
+  <div class="wrap">
+    <div class="short in" data-reveal="">
+      <div class="short-head">
+        <span class="kick">The short version</span>
+        <h2 id="fb-h">Prefer to read? <em>Five points, one minute.</em></h2>
+        <p class="lede">Everything the video says, without pressing play.</p>
+        <div class="cta-row">
+          <a class="cta" href="#sp-book" data-cta="" data-cta-position="3">Book your free 30-minute call</a>
+          <a class="sub-link" href="#sp-pricing"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12l7 7 7-7"></path></svg>See the prices first</a>
+        </div>
+      </div>
+      <ul class="short-list">
+        <li><i class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l6 7a6 6 0 1 1-12 0z"></path><path d="M15 14l4 4M19 14l-4 4"></path></svg></i><div><b>You are paying for visitors who leave.</b><span>A buyer lands on your site, cannot tell what to do next, and goes. That visit cost you money, and they will not be back.</span></div></li>
+        <li><i class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.1-2.1z"></path></svg></i><div><b>We fix the site so visitors become enquiries.</b><span>We find where buyers drop off, then rebuild the page around how they decide. Copy, forms and follow-up included.</span></div></li>
+        <li><i class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12l-8 8-9-9V4h7z"></path><circle cx="7.5" cy="7.5" r="1.5"></circle></svg></i><div><b>Fixed price. Live in about a week.</b><span>One senior team. You see the full price in writing before you pay anything.</span></div></li>
+        <li><i class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"></path><path d="M9 12l2 2 4-4"></path></svg></i><div><b>Full refund if it is not what we agreed.</b><span>Four written guarantees. Trusted by 100+ brands since 2009.</span></div></li>
+        <li><i class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg></i><div><b>Start with a free 30-minute call.</b><span>We show where your enquiries slip away and what it costs you each month. The plan is yours to keep, whether you hire us or not.</span></div></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 04 PROOF BAR. 13 real, non-repeating logos, one credential line from the registry. -->
+<section class="proofbar" id="sp-proof-bar" aria-label="Brands our senior team has worked on">
+      <ul class="sp-proof-sr" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;margin:0;padding:0;"><li>Microsoft</li><li>AirAsia</li><li>Maybank</li><li>Starbucks</li><li>Hasbro</li><li>Proton</li><li>Sunway Lagoon Malaysia</li><li>Tenaga Nasional</li><li>Eskayvie</li><li>Kalbe</li><li>Avisena Specialist Hospital</li><li>Hershey's</li><li>Tourism Malaysia</li></ul>
+  <div class="wrap">
+    <p class="proofbar-lbl">Brands our senior team has worked on, in-house and through partner agencies</p>
+  </div>
+  <div class="marq" aria-hidden="true">
+    <div class="marq-track" id="logoTrack">
+      <div class="logo"><img loading="eager" fetchpriority="low" decoding="async" src="nobodywantsawebsite/assets/logo-microsoft.webp" alt="Microsoft"></div>
+      <div class="logo"><img loading="eager" fetchpriority="low" decoding="async" src="nobodywantsawebsite/assets/logo-airasia.webp" alt="AirAsia"></div>
+      <div class="logo"><img loading="eager" fetchpriority="low" decoding="async" src="nobodywantsawebsite/assets/logo-mcdonalds.webp" alt="McDonald's"></div>
+      <div class="logo"><img loading="eager" fetchpriority="low" decoding="async" src="nobodywantsawebsite/assets/logo-starbucks.webp" alt="Starbucks"></div>
+      <div class="logo"><img loading="eager" fetchpriority="low" decoding="async" src="nobodywantsawebsite/assets/img-05-a403bc8d15.webp" alt="Hasbro"></div>
+      <div class="logo"><img loading="eager" fetchpriority="low" decoding="async" src="nobodywantsawebsite/assets/logo-proton.webp" alt="Proton"></div>
+      <div class="logo"><img loading="eager" fetchpriority="low" decoding="async" src="nobodywantsawebsite/assets/img-01-735a65cd04.webp" alt="Sunway Lagoon Malaysia"></div>
+      <div class="logo"><img loading="eager" fetchpriority="low" decoding="async" src="nobodywantsawebsite/assets/logo-sheraton.webp" alt="Sheraton"></div>
+      <div class="logo"><img loading="eager" fetchpriority="low" decoding="async" src="nobodywantsawebsite/assets/img-02-3e74c40a9d.webp" alt="Eskayvie"></div>
+      <div class="logo"><img loading="eager" fetchpriority="low" decoding="async" src="nobodywantsawebsite/assets/logo-kalbe.webp" alt="Kalbe"></div>
+      <div class="logo"><img loading="eager" fetchpriority="low" decoding="async" src="nobodywantsawebsite/assets/img-03-95beca0ca8.webp" alt="Avisena Specialist Hospital"></div>
+      <div class="logo"><img loading="eager" fetchpriority="low" decoding="async" src="nobodywantsawebsite/assets/logo-spritzer.webp" alt="Spritzer"></div>
+      <div class="logo"><img loading="eager" fetchpriority="low" decoding="async" src="nobodywantsawebsite/assets/img-04-cfe13e446a.webp" alt="Tourism Malaysia"></div>
+    
+      <div class="logo"><img loading="eager" fetchpriority="low" decoding="async" src="nobodywantsawebsite/assets/logo-microsoft.webp" alt="Microsoft"></div>
+      <div class="logo"><img loading="eager" fetchpriority="low" decoding="async" src="nobodywantsawebsite/assets/logo-airasia.webp" alt="AirAsia"></div>
+      <div class="logo"><img loading="eager" fetchpriority="low" decoding="async" src="nobodywantsawebsite/assets/logo-mcdonalds.webp" alt="McDonald's"></div>
+      <div class="logo"><img loading="eager" fetchpriority="low" decoding="async" src="nobodywantsawebsite/assets/logo-starbucks.webp" alt="Starbucks"></div>
+      <div class="logo"><img loading="eager" fetchpriority="low" decoding="async" src="nobodywantsawebsite/assets/img-05-a403bc8d15.webp" alt="Hasbro"></div>
+      <div class="logo"><img loading="eager" fetchpriority="low" decoding="async" src="nobodywantsawebsite/assets/logo-proton.webp" alt="Proton"></div>
+      <div class="logo"><img loading="eager" fetchpriority="low" decoding="async" src="nobodywantsawebsite/assets/img-01-735a65cd04.webp" alt="Sunway Lagoon Malaysia"></div>
+      <div class="logo"><img loading="eager" fetchpriority="low" decoding="async" src="nobodywantsawebsite/assets/logo-sheraton.webp" alt="Sheraton"></div>
+      <div class="logo"><img loading="eager" fetchpriority="low" decoding="async" src="nobodywantsawebsite/assets/img-02-3e74c40a9d.webp" alt="Eskayvie"></div>
+      <div class="logo"><img loading="eager" fetchpriority="low" decoding="async" src="nobodywantsawebsite/assets/logo-kalbe.webp" alt="Kalbe"></div>
+      <div class="logo"><img loading="eager" fetchpriority="low" decoding="async" src="nobodywantsawebsite/assets/img-03-95beca0ca8.webp" alt="Avisena Specialist Hospital"></div>
+      <div class="logo"><img loading="eager" fetchpriority="low" decoding="async" src="nobodywantsawebsite/assets/logo-spritzer.webp" alt="Spritzer"></div>
+      <div class="logo"><img loading="eager" fetchpriority="low" decoding="async" src="nobodywantsawebsite/assets/img-04-cfe13e446a.webp" alt="Tourism Malaysia"></div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 STAKES. Six consequences as cards, buyer's language, no solution offered here. -->
+<section class="sec dark-band stakes" id="sp-stakes" aria-labelledby="st-h">
+  <canvas class="leak" id="leakCanvas" aria-hidden="true" width="1631" height="1085"></canvas>
+  <div class="wrap">
+    <div class="head in" data-reveal="">
+      <span class="kick">What it is costing you</span>
+      <h2 id="st-h">A site that does not sell is not neutral. <em>It is expensive.</em></h2>
+      <p class="lede">None of this shows up on an invoice, which is exactly why it keeps happening.</p>
+    </div>
+    <div class="stakes-grid">
+      <div class="stake in" data-reveal=""><span class="tag">01</span><i class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 4H5v16h5"></path><path d="M14 8l4 4-4 4M18 12H9"></path></svg></i><h3>You pay for the visit, then lose the sale.</h3><p>A buyer lands, cannot see what to do, and leaves. No name, no number, nothing to chase.</p></div>
+      <div class="stake in" data-reveal=""><span class="tag">02</span><i class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10v4h3l6 4V6L7 10z"></path><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a8 8 0 0 1 0 11"></path></svg></i><h3>Ad money buys traffic that bounces.</h3><p>Every ringgit on Meta or Google sends visitors to a page that sends them straight back.</p></div>
+      <div class="stake in" data-reveal=""><span class="tag">03</span><i class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg></i><h3>The faster reply wins the job.</h3><p>The 9pm enquiry that waited until morning booked the competitor who answered in five minutes.</p></div>
+      <div class="stake in" data-reveal=""><span class="tag">04</span><i class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h7l9 9-7 7-9-9z"></path><circle cx="8" cy="8" r="1.5"></circle></svg></i><h3>No clear reason to pick you, so they pick on price.</h3><p>Without a clear position you get compared on the one thing you never wanted to compete on.</p></div>
+      <div class="stake in" data-reveal=""><span class="tag">05</span><i class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 0 1 14-5.3M20 12a8 8 0 0 1-14 5.3"></path><path d="M18 3v4h-4M6 21v-4h4"></path></svg></i><h3>No repeat customers, no referrals.</h3><p>A brand nobody can describe is a brand nobody recommends.</p></div>
+      <div class="stake in" data-reveal=""><span class="tag">06</span><i class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18l6-6 4 4 6-8"></path><path d="M15 8h5v5"></path></svg></i><h3>The gap grows every month.</h3><p>Each month the site stays broken is a month of enquiries you never get back, while the competitor who fixed theirs pulls ahead.</p></div>
+    </div>
+    <div class="inline-cta in" data-reveal="">
+      <p>Thirty minutes puts a monthly number on your leak. You keep that number whether you hire us or not.</p>
+      <a class="cta" href="#sp-book" data-cta="" data-cta-position="4">Book your free 30-minute call</a>
+    </div>
+  </div>
+</section>
+
+<!-- 06 + 07 HOW IT WORKS. The method and the plan in one three-card strip: phase, timing, three bullets each. -->
+<section class="sec" id="sp-mechanism" aria-labelledby="me-h">
+  <div class="wrap">
+    <div class="head in" data-reveal="">
+      <span class="kick">How it works</span>
+      <h2 id="me-h">Think. Build. Scale. <em>In that order.</em></h2>
+      <p class="lede">Most agencies start at build. That is why the pretty site does not sell. We start where the money is lost, and you know the price, the date and the deliverables before anything starts.</p>
+    </div>
+    <span id="sp-plan" class="anchor" aria-hidden="true"></span>
+    <ol class="how">
+      <li class="how-card in" data-reveal="">
+        <figure class="how-img"><img loading="lazy" decoding="async" src="nobodywantsawebsite/assets/team-sculpt-blue.webp" alt="A team around a lit table, working through the strategy together"></figure>
+        <div class="how-top"><span class="num">01</span><span class="ph">Think</span></div>
+        <span class="when">Day 0 · Free 30-minute call</span>
+        <h3>We diagnose before we design.</h3>
+        <ul>
+          <li>We listen: your business, your goals, the real problem</li>
+          <li>We map where buyers drop off, and why</li>
+          <li>You get a monthly number on what the leak costs</li>
+        </ul>
+        <p class="how-note">No pitch, no pressure. The plan is yours either way.</p>
+      </li>
+      <li class="how-card in" data-reveal="">
+        <figure class="how-img"><img loading="lazy" decoding="async" src="nobodywantsawebsite/assets/team-action.webp" alt="The team reviewing a website design on screen in the studio"></figure>
+        <div class="how-top"><span class="num">02</span><span class="ph">Build</span></div>
+        <span class="when">Week 1 to 2 · Strategy and build</span>
+        <h3>We build the complete system.</h3>
+        <ul>
+          <li>Positioning and messaging, so buyers can tell why you</li>
+          <li>The site, the forms and the follow-up, built as one</li>
+          <li>Fixed price agreed in writing before work starts</li>
+        </ul>
+        <p class="how-note">You see every milestone, never the detail.</p>
+      </li>
+      <li class="how-card in" data-reveal="">
+        <figure class="how-img"><img loading="lazy" decoding="async" src="nobodywantsawebsite/assets/rise-lift-blue.webp" alt="A figure riding a glass lift upward, the floor numbers climbing"></figure>
+        <div class="how-top"><span class="num">03</span><span class="ph">Scale</span></div>
+        <span class="when">Launch and after · Handover</span>
+        <h3>We hand over, then keep it improving.</h3>
+        <ul>
+          <li>Analytics and tracking installed and verified</li>
+          <li>Your team runs it from day one, you own it all</li>
+          <li>Numbers read every month, site keeps improving</li>
+        </ul>
+        <p class="how-note">We stay on as your partner for as long as you need.</p>
+      </li>
+    </ol>
+    <div class="inline-cta in" data-reveal="">
+      <p>Step one is free and takes half an hour. Steps two and three only happen if you want them to.</p>
+      <a class="cta" href="#sp-book" data-cta="" data-cta-position="5">Book your free 30-minute call</a>
+    </div>
+  </div>
+</section>
+
+<!-- 08 WHAT YOU GET. Eight tiles, each with a quantity chip, scoped to the website engagement. -->
+<section class="sec" id="sp-deliverables" aria-labelledby="de-h">
+  <div class="wrap">
+    <div class="head in" data-reveal="">
+      <span class="kick">What you get</span>
+      <h2 id="de-h">Numbers and formats, <em>not adjectives.</em></h2>
+      <p class="lede">Every quote lists the exact deliverables, scope and dates in writing before you pay. This is what a conversion site from us includes.</p>
+    </div>
+    <ul class="gets">
+      <li data-reveal="" class="in"><i class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="12" height="16" rx="1.5"></rect><path d="M8 21h12V8"></path><path d="M8 8h4M8 12h4"></path></svg></i><span class="q">5 to 10 pages</span><b>Pages mapped to how customers buy</b><span class="d">A one-pager or up to ten pages. Each has one job: land, convince, book.</span></li>
+      <li data-reveal="" class="in"><i class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l4-1 11-11-3-3L5 16z"></path><path d="M13 8l3 3"></path></svg></i><span class="q">100% written</span><b>All the copy, done for you</b><span class="d">Headlines, offers, proof and FAQs in your voice. You approve, you do not draft.</span></li>
+      <li data-reveal="" class="in"><i class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13h4l2 3h4l2-3h4"></path><path d="M4 13V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v7v5a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"></path></svg></i><span class="q">3 ways</span><b>Every lead captured</b><span class="d">Enquiry form to your inbox and CRM, WhatsApp routing and a booking flow. All tested end to end.</span></li>
+      <li data-reveal="" class="in"><i class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"></path></svg></i><span class="q">1 stack</span><b>Tracking installed and verified</b><span class="d">Analytics, Meta pixel and conversion events wired and checked, so every ringgit of ad spend can be traced.</span></li>
+      <li data-reveal="" class="in"><i class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z"></path><circle cx="12" cy="13" r="3.5"></circle></svg></i><span class="q">½ day</span><b>Photo and video shoot</b><span class="d">Real people, real premises, on the Growth engagement. No stock imagery.</span></li>
+      <li data-reveal="" class="in"><i class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19l3-3M14 4c3 0 5 2 5 5-1 4-5 8-9 9l-4-4c1-4 5-8 8-10z"></path><circle cx="14" cy="10" r="1.5"></circle></svg></i><span class="q">1 to 2 weeks</span><b>Live fast</b><span class="d">A Starter site in about a week, a Growth site in two. Work starts within 24 hours of kickoff.</span></li>
+      <li data-reveal="" class="in"><i class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="14" r="4"></circle><path d="M11 11l9-9M17 5l2 2M14 8l2 2"></path></svg></i><span class="q">100% yours</span><b>You own everything</b><span class="d">Code, domain, content, brand files and customer data, from day one. No lock-in.</span></li>
+      <li data-reveal="" class="in"><i class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="4"></circle><path d="M5.6 5.6l3.6 3.6M14.8 14.8l3.6 3.6M18.4 5.6l-3.6 3.6M9.2 14.8l-3.6 3.6"></path></svg></i><span class="q">For life</span><b>After-service that does not end</b><span class="d">Questions, tweaks and new assets covered for as long as the brand runs. Launch is the start.</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- 09 WHO THIS IS FOR / NOT FOR. The second column is what makes the first credible. -->
+<section class="sec soft" id="sp-fit" aria-labelledby="fi-h">
+  <div class="wrap">
+    <div class="head in" data-reveal="">
+      <span class="kick">Is this for you</span>
+      <h2 id="fi-h">We are not for everyone, <em>and that is the point.</em></h2>
+    </div>
+    <div class="fit">
+      <div class="fit-col yes in" data-reveal="">
+        <figure class="fit-pic"><img loading="lazy" decoding="async" src="nobodywantsawebsite/assets/fit-yes.webp" alt="A Malaysian founder presenting a live product dashboard on stage"></figure>
+        <h3>This is for you if</h3>
+        <ul>
+          <li>You already have traffic, enquiries or bookings, and you can feel them slipping away before they convert.</li>
+          <li>You are funded or scaling and want a senior partner who has shipped this over a hundred times, not the cheapest quote.</li>
+          <li>You want to own the asset outright: the code, the content and the customer data, with no lock-in.</li>
+          <li>You can decide this quarter, because every month it stays broken is money you do not get back.</li>
+        </ul>
+      </div>
+      <div class="fit-col no in" data-reveal="">
+        <figure class="fit-pic"><img loading="lazy" decoding="async" src="nobodywantsawebsite/assets/fit-no.webp" alt=""></figure>
+        <h3>Probably not a fit if</h3>
+        <ul>
+          <li>The lowest price wins for you, whatever the outcome.</li>
+          <li>You want a logo with nothing behind it: decoration with no strategy.</li>
+          <li>You are not ready to make a decision this quarter.</li>
+          <li>You want to hand it off and never look at it again.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 10 COMPARISON. Added by our master plan: the four ways to buy this, side by side. -->
+<section class="sec" id="sp-compare" aria-labelledby="cm-h">
+  <div class="wrap">
+    <div class="head in" data-reveal="">
+      <span class="kick">Honest comparison</span>
+      <h2 id="cm-h">Four ways to build this. <em>Three of them cost you.</em></h2>
+      <p class="lede">The six-figure agency, the freelancer, the DIY build that eats your nights, or a senior team at a fixed price.</p>
+    </div>
+    <div class="cmp-wrap in" data-reveal="">
+      <table class="cmp">
+        <thead><tr><th scope="col"><span class="sr">Criterion</span></th><th scope="col">Big agency</th><th scope="col">Freelancer</th><th scope="col">Do it yourself</th><th scope="col" class="us"><img decoding="async" src="brand-method-wordmark.png" alt="Brand Method" width="460" height="134"></th></tr></thead>
+        <tbody>
+          <tr><td>Who does the work</td><td>An account team. Juniors deliver.</td><td>One person, one skill set.</td><td>You, at night.</td><td class="us">The senior people you meet on the call.</td></tr>
+          <tr><td>Price</td><td>Six figures, then a retainer.</td><td>Low quote, then the extras.</td><td>Your time, which is not free.</td><td class="us">Fixed, quoted in writing before you pay.</td></tr>
+          <tr><td>When it starts</td><td>After weeks of onboarding.</td><td>When they are free.</td><td>Whenever you get to it.</td><td class="us">Within 24 hours of kickoff.</td></tr>
+          <tr><td>Who owns it</td><td>Often tied to their platform.</td><td>Usually you, if you ask.</td><td>You.</td><td class="us">You. Code, content, domain and data.</td></tr>
+          <tr><td>Guarantee in writing</td><td>Rarely.</td><td>No.</td><td>No.</td><td class="us">Four, and they are below the price.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- 11 PROOF BLOCK. Results lead (rendered only when cleared numbers exist), then testimonials, then the founder. -->
+<section class="sec soft" id="sp-proof" aria-labelledby="pr-h">
+  <div class="wrap">
+    <div class="head in" data-reveal="">
+      <span class="kick">Proof</span>
+      <h2 id="pr-h">Will it work for someone like you? <em>Ask the people it worked for.</em></h2>
+    </div>
+
+    <!-- Credentials strip, ported from the nobodywantsawebsite sales page. Firm-level facts only:
+         quantified per-client outcomes still gate on the RESULTS array below. -->
+    <div class="creds in" data-reveal="" aria-label="Track record">
+      <div><span class="cred-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 4.5-9 4.5-9-4.5z"/><path d="M3 12l9 4.5 9-4.5M3 16.5l9 4.5 9-4.5"/></svg></span><div class="cred-num">100+</div><div class="cred-lbl">Brands built</div></div>
+      <div><span class="cred-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4.5" width="17" height="16" rx="2.2"/><path d="M3.5 9h17M8 2.5v4M16 2.5v4"/><path d="M12 12.5v4M9.5 14.5h5"/></svg></span><div class="cred-num">17</div><div class="cred-lbl">Years, since 2009</div></div>
+      <div><span class="cred-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M13 2 4 13h6l-1 9 9-12h-6z"/></svg></span><div class="cred-num">7</div><div class="cred-lbl">Day fastest delivery</div></div>
+      <div><span class="cred-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.6l7.5 2.7v5.3c0 4.7-3.1 8.2-7.5 9.8-4.4-1.6-7.5-5.1-7.5-9.8V5.3z"/><path d="M8.7 12l2.3 2.3 4.3-4.6"/></svg></span><div class="cred-num">100%</div><div class="cred-lbl">Money-back</div></div>
+    </div>
+
+    <div id="resultsBlock" hidden="">
+      <div class="results" id="resultsGrid"></div>
+    </div>
+    <div class="results" data-bm-internal="">
+      <div class="viz"><div class="viz-in"><span class="viz-tag">Result slot 1 · [ALIGN 1.5]</span>Number, named client, timeframe, starting baseline. Renders for prospects only once RESULTS in this file has a cleared entry.</div></div>
+      <div class="viz"><div class="viz-in"><span class="viz-tag">Result slot 2 · [ALIGN 1.5]</span>Hard blocker in Brian's brief §4.1. Client clearance has the longest lead time. Start it first.</div></div>
+      <div class="viz"><div class="viz-in"><span class="viz-tag">Result slot 3 · [ALIGN 1.5]</span>A percentage without a baseline is not evidence. Every entry needs all four fields.</div></div>
+    </div>
+
+    <div class="tgrid">
+      <figure class="tcard in" data-reveal="">
+        <img src="nobodywantsawebsite/assets/testi-1.webp" alt="" loading="lazy" decoding="async" width="1080" height="607">
+        <blockquote class="tq">“Thanks to Brand Method team for the speedy delivery. We really appreciate the quick turnaround and the consistent quality of work.”</blockquote>
+        <figcaption class="tby"><div><b>Mr. Syukri</b><span>Founder, Eskayvie</span></div></figcaption>
+      </figure>
+      <figure class="tcard in" data-reveal="">
+        <img src="nobodywantsawebsite/assets/testi-2.webp" alt="" loading="lazy" decoding="async" width="1100" height="618">
+        <blockquote class="tq">“The final video was outstanding. I presented it during a conference in China, and it received strong praise from attendees including delegates from Singapore and China.”</blockquote>
+        <figcaption class="tby"><div><b>Mr. Azhan</b><span>Director, Waterbay</span></div></figcaption>
+      </figure>
+      <figure class="tcard in" data-reveal="">
+        <img src="nobodywantsawebsite/assets/testi-3.webp" alt="" loading="lazy" decoding="async" width="501" height="282">
+        <blockquote class="tq">“Brand Method is truly amazing to work with. We learned the full strategy behind branding. They help align our goals and always overdeliver on every task.”</blockquote>
+        <figcaption class="tby"><div><b>Noelle Bee</b><span>Founder, Hexamatic</span></div></figcaption>
+      </figure>
+      <figure class="tcard in" data-reveal="">
+        <img src="nobodywantsawebsite/assets/testi-4.webp" alt="" loading="lazy" decoding="async" width="501" height="281">
+        <blockquote class="tq">“It's been an exciting and happy journey. I never imagined our product could look this good. Everything was done with finesse and heart.”</blockquote>
+        <figcaption class="tby"><div><b>Amir Derakhsan</b><span>Founder, Spiroball</span></div></figcaption>
+      </figure>
+      <figure class="tcard in" data-reveal="">
+        <img src="nobodywantsawebsite/assets/testi-5.webp" alt="" loading="lazy" decoding="async" width="503" height="283">
+        <blockquote class="tq">“Brand Method is who I'd recommend anytime. Working with them feels refreshing and effortless. Everything is organised, planned well, and the results always exceed expectations.”</blockquote>
+        <figcaption class="tby"><div><b>Ben</b><span>Marketing, Valvoline Malaysia</span></div></figcaption>
+      </figure>
+      <figure class="tcard in" data-reveal="">
+        <img src="nobodywantsawebsite/assets/testi-6.webp" alt="" loading="lazy" decoding="async" width="1100" height="618">
+        <blockquote class="tq">“Working with Brand Method was honestly one of the best decisions we made for our brand. They really take the time to understand the business behind it.”</blockquote>
+        <figcaption class="tby"><div><b>Dr. Priya</b><span>Founder, Pinnacle Hair Clinic</span></div></figcaption>
+      </figure>
+      <figure class="tcard in" data-reveal="" data-pending="">
+        <img src="assets/testimonials/ext-ae1c82e3.jpg" alt="" loading="lazy" decoding="async" width="1100" height="618" onerror="this.remove()">
+        <span class="tpend" data-bm-internal="">Pending re-clearance</span>
+        <blockquote class="tq">“An incredible experience. Rebranding Cofeology gave me a fresh perspective, and I was involved in both the ideation and the execution. I recommend them. It is worth it.”</blockquote>
+        <figcaption class="tby"><div><b>Titan Azim Ahmad</b><span>Founder, Cofeology Cafe</span></div></figcaption>
+      </figure>
+      <figure class="tcard in" data-reveal="" data-pending="">
+        <img src="assets/testimonials/ext-09c35e9b.jpg" alt="" loading="lazy" decoding="async" width="1100" height="618" onerror="this.remove()">
+        <span class="tpend" data-bm-internal="">Pending re-clearance</span>
+        <blockquote class="tq">“A great team to work with. Amazing work, and they translate our ideas with ease. I appreciate the quick response time and how present they are during ideation.”</blockquote>
+        <figcaption class="tby"><div><b>Rose</b><span>Founder, Discover Early Years</span></div></figcaption>
+      </figure>
+      <figure class="tcard in" data-reveal="" data-pending="">
+        <img src="assets/testimonials/ext-d61f9c72.jpg" alt="" loading="lazy" decoding="async" width="1100" height="618" onerror="this.remove()">
+        <span class="tpend" data-bm-internal="">Pending re-clearance</span>
+        <blockquote class="tq">“Love you guys. Any time there is a problem I can rely on your magic. Breathtaking visuals, and the brand messaging has worked so well for us.”</blockquote>
+        <figcaption class="tby"><div><b>Thiruchandran</b><span>Founder, Kampung Gold</span></div></figcaption>
+      </figure>
+      <figure class="tcard in" data-reveal="" data-pending="">
+        <img src="assets/testimonials/ext-ea62d073.jpg" alt="" loading="lazy" decoding="async" width="1100" height="618" onerror="this.remove()">
+        <span class="tpend" data-bm-internal="">Pending re-clearance</span>
+        <blockquote class="tq">“Working with Brand Method is very promising. Flexibility is something we always wanted: we can discuss and change plans as customer feedback and the market respond, on our own terms. Brand Method delivered all of it, fast.”</blockquote>
+        <figcaption class="tby"><div><b>Leslie L</b><span>Director, Klaas Interior Design</span></div></figcaption>
+      </figure>
+      <figure class="tcard in" data-reveal="" data-pending="">
+        <img src="assets/testimonials/ext-65f55011.jpg" alt="" loading="lazy" decoding="async" width="1100" height="618" onerror="this.remove()">
+        <span class="tpend" data-bm-internal="">Pending re-clearance</span>
+        <blockquote class="tq">“Now the way is clear - I never thought that I would learn so much from Bazil. He is not just a designer, but a visionary strategist. Showing us that we can do so much more.”</blockquote>
+        <figcaption class="tby"><div><b>Suzana Aiman</b><span>Founder, Oryn Skincare</span></div></figcaption>
+      </figure>
+      <figure class="tcard in" data-reveal="" data-pending="">
+        <img src="assets/testimonials/ext-106ff99c.jpg" alt="" loading="lazy" decoding="async" width="1100" height="618" onerror="this.remove()">
+        <span class="tpend" data-bm-internal="">Pending re-clearance</span>
+        <blockquote class="tq">“The best designer I have worked with. Designs that crossed countries and made our products go viral. Superb.”</blockquote>
+        <figcaption class="tby"><div><b>Arzam Shawn</b><span>Founder, Ossem Juice</span></div></figcaption>
+      </figure>
+      <figure class="tcard in" data-reveal="" data-pending="">
+        <img src="assets/testimonials/ext-b143aca3.jpg" alt="" loading="lazy" decoding="async" width="1100" height="618" onerror="this.remove()">
+        <span class="tpend" data-bm-internal="">Pending re-clearance</span>
+        <blockquote class="tq">“Quick responds and fast update, we always had time to crosscheck work with our team. Having breathing room to take in the work at hand is super refreshing. Looking forward to the next project we will be working on.”</blockquote>
+        <figcaption class="tby"><div><b>Vincent W</b><span>Marketing, Starbucks Malaysia</span></div></figcaption>
+      </figure>
+<!-- retired: Glend H, Go Viewpoint. Shortest and most generic of the sixteen; 15 cards fill 5 rows of 3 with no orphan. -->
+      <figure class="tcard in" data-reveal="" data-pending="">
+        <img src="assets/testimonials/ext-5b2789bb.jpg" alt="" loading="lazy" decoding="async" width="1100" height="618" onerror="this.remove()">
+        <span class="tpend" data-bm-internal="">Pending re-clearance</span>
+        <blockquote class="tq">“I believe the Brand Method team has the capacity to be a top-tier agency in the region.”</blockquote>
+        <figcaption class="tby"><div><b>Shafeeq Z</b><span>Founder, Wonderspire</span></div></figcaption>
+      </figure>
+      <figure class="tcard in" data-reveal="" data-pending="">
+        <img src="assets/testimonials/ext-abeb928e.jpg" alt="" loading="lazy" decoding="async" width="1100" height="618" onerror="this.remove()">
+        <span class="tpend" data-bm-internal="">Pending re-clearance</span>
+        <blockquote class="tq">“Professionals. Don't be fooled by their friendliness. These guys are the real deal. Working with Bazil and the team is very motivating. Feels like we could do anything. What we thought we needed ages to reach, was just a few step ahead. Very very happy working with them.”</blockquote>
+        <figcaption class="tby"><div><b>Sarah</b><span>Founder, Yuth</span></div></figcaption>
+      </figure>
+    </div>
+    <p class="dev-note" data-bm-internal="">Internal: the six cleared cards render live. The ten cards marked "Pending re-clearance" are verbatim from the zieel.com archive (photos hotlinked from zieel.com, localise at deploy) and stay hidden on the live domain until their company name is added to CLEARED in the page script. Roles are missing on the archive ten and the brief asks for them. Every visible verification link returned 200 on 3 Sep 2026. Face-to-name check on all photos before launch.</p>
+
+    <div class="founder">
+      <div class="founder-media in" data-reveal="">
+        <!-- Real photo from the live site. Localise to assets/founder-on-stage.webp at deploy; see HANDOFF.md §9. -->
+        <img class="photo" src="founder-on-stage.webp" alt="Bazil, founder of Brand Method, speaking on stage" loading="lazy" decoding="async" width="800" height="1000" onerror="this.closest('.founder').classList.add('no-photo')">
+        <div class="viz" data-bm-internal=""><div class="viz-in"><span class="viz-tag">Founder photo · fallback slot</span>Shown only if brandmethod.co/founder-on-stage.webp fails to load. Localise the file at deploy.</div></div>
+      </div>
+      <div class="letter in" data-reveal="">
+        <span class="kick">From the founder</span>
+        <p class="big">Most agencies promise. We engineer.</p>
+        <p>Growing a business today can feel overwhelming. Maybe you have worked with agencies that promised the world, disappeared when it mattered, or left you cleaning up after them. We have seen it happen far too often, and it is exactly why Brand Method was built.</p>
+        <p>You are a founder who wants a brand that works. One that converts. One that people can trust. And to get that, you need more than nice designs or random creative work. You need a strategic partner. Someone who can guide you, structure your direction, and execute a clear plan built specifically for your business.</p>
+        <p>Because the real problem is not your effort. It is not your ambition. It is the noise. Too many vendors, too many opinions, and no single source of clarity. That noise costs you time, money and momentum.</p>
+        <p>We get this better than anyone. And that is why we take your brand seriously. With systems, clarity, and execution that actually move your business forward.</p>
+        <div class="sig"><img class="sig-img" src="assets/testimonials/ext-8209ad49.png" alt="" width="180" height="70" loading="lazy" decoding="async" onerror="this.remove()"><b id="founderName">Bazil</b><span>Chief Brand Strategist · Brand Method</span></div>
+      </div>
+    </div>
+    <div class="inline-cta in" data-reveal="">
+      <p>The people on this page had the same call you are about to book. Same senior team, same fixed price.</p>
+      <a class="cta" href="#sp-book" data-cta="" data-cta-position="6">Book your free 30-minute call</a>
+    </div>
+  </div>
+</section>
+
+<!-- 12 ENTRY OFFER. Added by our master plan: the pay-today rung. Price renders only when the registry has one. -->
+<section class="sec" id="sp-entry" aria-labelledby="en-h">
+  <div class="wrap">
+    <div class="entry in" data-reveal="">
+      <div>
+        <span class="tag">Start small · five working days</span>
+        <h3 id="en-h">The Leak Audit</h3>
+        <p class="lede">Where your current site loses money, with the fixes ranked by revenue impact. A fixed-scope diagnostic, delivered in five working days, so you know exactly what to fix before you commit to anything bigger.</p>
+        <ul>
+          <li>Every drop-off point on your site, mapped and ranked by what it costs you each month</li>
+          <li>The one highest-impact fix, specified so any team could build it</li>
+          <li>A written scope and fixed price for the full build, if you want one</li>
+          <li>Delivered as a document you keep, whoever does the work</li>
+        </ul>
+      </div>
+      <div class="entry-price">
+        <div class="amt is-tbc" id="entryAmt">Fixed fee<small>confirmed on the call</small></div>
+        <p class="credit" id="entryCredit">The fee is credited in full against the engagement if you go ahead.</p>
+        <a class="cta wide" href="#sp-book" data-cta="" data-cta-position="7">Book your free 30-minute call</a>
+        <p class="cta-note">Book the free call first. If the audit is the right next step, we confirm the fee and start within 24 hours.</p>
+        <p class="dev-note" data-bm-internal="">Internal: BM_FACTS.entryOffers.website.price is null. Set it and the price renders here, per Brian [ALIGN 1.2].</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 13 CORE OFFER + PRICE. Three tiers, every tier shows a price, consistent with pricing.html. -->
+<section class="sec soft" id="sp-pricing" aria-labelledby="pc-h">
+  <div class="wrap">
+    <div class="head in" data-reveal="">
+      <span class="kick">Engagements</span>
+      <h2 id="pc-h">Fixed scope. Fixed price. <em>No surprises.</em></h2>
+      <p class="lede">Every engagement has a defined scope, a fixed price and a delivery date, backed by the money-back guarantee. No inflated list price, no fake discount. We match the right one to your goal on the free call.</p>
+    </div>
+    <div class="tiers">
+      <div class="tier in" data-reveal="">
+        <svg class="tier-ico" viewBox="0 0 48 48" fill="none" aria-hidden="true"><rect x="6" y="8" width="36" height="32" rx="4.5" fill="currentColor" opacity=".06"></rect><rect x="6" y="8" width="36" height="32" rx="4.5" stroke="currentColor" stroke-width="2.2"></rect><path d="M6 16.5H42" stroke="currentColor" stroke-width="2.2"></path><circle cx="11" cy="12.3" r="1.3" fill="currentColor"></circle><circle cx="15.4" cy="12.3" r="1.3" fill="currentColor"></circle><circle cx="19.8" cy="12.3" r="1.3" fill="currentColor"></circle><rect x="11" y="21" width="15" height="7" rx="1.6" fill="currentColor" opacity=".2"></rect><path d="M11 32.5h11M11 36h7" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".45"></path><rect x="29.5" y="30.5" width="8.5" height="6" rx="1.7" fill="currentColor"></rect></svg>
+        <span class="tag">Live in a week</span>
+        <h3>Starter Website</h3>
+        <div class="price">RM1,900</div>
+        <span class="time">1 week</span>
+        <p>A conversion-ready site live in a week, so the traffic you already pay for stops bouncing off a page that does not sell.</p>
+        <ul><li>Up to 5 pages or a one-pager</li><li>Full copywriting included</li><li>Lead capture and WhatsApp routing</li><li>You own code, domain and content</li></ul>
+        <a class="cta" href="#sp-book" data-cta="" data-cta-position="8">Book your free 30-minute call</a>
+        <p class="tier-g">100% money-back if it is not what we agreed</p>
+      </div>
+      <div class="tier hot in" data-reveal="">
+        <svg class="tier-ico" viewBox="0 0 48 48" fill="none" aria-hidden="true"><rect x="6" y="8" width="36" height="32" rx="4.5" fill="currentColor" opacity=".06"></rect><rect x="6" y="8" width="36" height="32" rx="4.5" stroke="currentColor" stroke-width="2.2"></rect><path d="M12 31l8-8 6 5 10-11" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path><path d="M30 17h6v6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 35h24" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".45"></path></svg>
+        <span class="tag">Most booked</span>
+        <h3>Growth Website</h3>
+        <div class="price">RM6,000</div>
+        <span class="time">2 weeks</span>
+        <p>You pay for the visitors and watch most of them leave. This turns more of them into booked enquiries, built around how customers actually buy.</p>
+        <ul><li>Up to 10 pages</li><li>Lead funnels and analytics installed</li><li>Half-day photo and video shoot</li><li>You own code, domain, content and data</li></ul>
+        <a class="cta" href="#sp-book" data-cta="" data-cta-position="9">Book your free 30-minute call</a>
+        <p class="tier-g">100% money-back if it is not what we agreed</p>
+      </div>
+      <div class="tier in" data-reveal="">
+        <svg class="tier-ico" viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M8 20l3-9h26l3 9" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"></path><path d="M8 20a5 5 0 0 0 10 0 5 5 0 0 0 10 0 5 5 0 0 0 10 0" stroke="currentColor" stroke-width="2.2"></path><path d="M11 24v15h26V24" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"></path><rect x="11" y="24" width="26" height="15" fill="currentColor" opacity=".06"></rect><rect x="20" y="29" width="8" height="10" rx="1.5" fill="currentColor" opacity=".35"></rect></svg>
+        <span class="tag">The big build</span>
+        <h3>Corporate and E-commerce</h3>
+        <div class="price">RM12,000</div>
+        <span class="time">From 4 weeks</span>
+        <p>A 15-page-plus corporate site or a full online store, built on a custom design system so every page your team adds stays on brand and keeps converting.</p>
+        <ul><li>15+ pages, or a full store with checkout</li><li>Custom design system, every page consistent</li><li>Case study and news modules, multi-user CMS</li><li>CRM and lead capture wired into your pipeline</li><li>You own code, domain, content and data</li></ul>
+        <a class="cta" href="#sp-book" data-cta="" data-cta-position="10">Book your free 30-minute call</a>
+        <p class="tier-g">100% money-back if it is not what we agreed</p>
+      </div>
+    </div>
+    <div class="others in" data-reveal="">
+      <div class="others-head">
+        <span class="others-lbl">Other engagements</span>
+        <p class="others-note">Same rules as the website tiers: fixed price, set delivery date, and the money-back guarantee applies to all of them.</p>
+      </div>
+      <div class="others-grid">
+      <article class="oe in" data-reveal="">
+        <div class="oe-top"><i class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2"></rect><path d="M11 18h2"></path></svg></i><div class="oe-title"><h4>App build</h4><span class="oe-chip">From RM14,000 · MVP launch</span></div></div>
+        <p class="oe-desc">A product-grade app for real users, built by the same senior team that builds our sites.</p>
+        <ul class="oe-list"><li>iOS and Android from day one</li><li>UX-led: prototype approved before a line of code</li><li>Admin dashboard, secure logins, scalable backend</li></ul>
+        <a class="oe-link" href="https://brandmethod.co/#pricing" target="_blank" rel="noopener">See app pricing <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+      </article>
+      <article class="oe in" data-reveal="">
+        <div class="oe-top"><i class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l9 5-9 5-9-5z"></path><path d="M3 13l9 5 9-5"></path></svg></i><div class="oe-title"><h4>Custom app</h4><span class="oe-chip">From RM60,000 · Enterprise</span></div></div>
+        <p class="oe-desc">Native iOS and Android, or Flutter, for products with complex integrations and real-time features.</p>
+        <ul class="oe-list"><li>Payments, third-party APIs and live tracking</li><li>Enterprise-grade backend with compliance built in</li><li>Dedicated team: designer, developers, PM and QA</li></ul>
+        <a class="oe-link" href="https://brandmethod.co/#pricing" target="_blank" rel="noopener">See app pricing <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+      </article>
+      <article class="oe in" data-reveal="">
+        <div class="oe-top"><i class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.4 5.6L20 9l-4.4 4 1.3 6L12 16l-4.9 3 1.3-6L4 9l5.6-.4z"></path></svg></i><div class="oe-title"><h4>Brand strategy and identity</h4><span class="oe-chip">Scoped on the call</span></div></div>
+        <p class="oe-desc">Positioning, naming, messaging and a complete visual identity, so buyers can tell why you and not just what you cost.</p>
+        <ul class="oe-list"><li>Positioning and messaging system</li><li>Identity, brand manual and playbook</li><li>Your team runs it from day one</li></ul>
+        <a class="oe-link" href="https://brandmethod.co/#svc-brand" target="_blank" rel="noopener">See the brand engagement <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+      </article>
+      <article class="oe in" data-reveal="">
+        <div class="oe-top"><i class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="M16 16l5 5"></path><path d="M11 8v6M8 11h6"></path></svg></i><div class="oe-title"><h4>SEO and AI programmes</h4><span class="oe-chip">Scoped on the call</span></div></div>
+        <p class="oe-desc">Get found for the searches that buy, and put automation around the enquiries you already get.</p>
+        <ul class="oe-list"><li>Start with the Visibility Audit or the AI Opportunity Audit</li><li>Five working days each, fixed fee</li><li>Findings become a scoped programme, if you want one</li></ul>
+        <a class="oe-link" href="https://brandmethod.co/" target="_blank" rel="noopener">See all services <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+      </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 14 GUARANTEES. Four, in the live site's wording, fully visible, no hover, immediately after the price. -->
+<section class="sec" id="sp-guarantees" aria-labelledby="gu-h">
+  <div class="wrap">
+    <div class="head in" data-reveal="">
+      <h2 id="gu-h">Four commitments <em>no other agency puts in writing.</em></h2>
+      <p class="lede">The price above creates a fair question: what if it goes wrong. This is the answer, and it is in the contract.</p>
+    </div>
+    <div class="gs">
+      <figure class="gs-img"><img loading="lazy" decoding="async" src="nobodywantsawebsite/assets/craft-3d-render.webp" alt="A solid blue cube held steady inside three rings"></figure>
+      <div class="gs-grid">
+      <div class="g in" data-reveal=""><span class="n">01</span><h3>100% Money-Back</h3><p>If the final work does not match what we agreed, you pay nothing. No fine print, no negotiation. We carry the risk, not you.</p></div>
+      <div class="g in" data-reveal=""><span class="n">02</span><h3>7-Day Fastest Delivery</h3><p>We have built a system that compresses months of brand work into as little as seven days, without cutting the strategy that makes it last.</p></div>
+      <div class="g in" data-reveal=""><span class="n">03</span><h3>Fixed Price, No Surprises</h3><p>No scope creep, no surprise invoices, no awkward mid-project money talks. The number we quote is the number you pay.</p></div>
+      <div class="g in" data-reveal=""><span class="n">04</span><h3>Lifetime After-Service</h3><p>Launch is the start, not the end. Questions, tweaks and new assets stay covered for as long as your brand runs.</p></div>
+      </div>
+    </div>
+    <div class="inline-cta in" data-reveal="">
+      <p>If we miss what we agreed, you get your money back. That is the whole risk, and it is ours.</p>
+      <a class="cta" href="#sp-book" data-cta="" data-cta-position="11">Book your free 30-minute call</a>
+    </div>
+  </div>
+</section>
+
+<!-- 15 FAQ. Ten questions, treated as primary copy. -->
+<section class="sec soft" id="sp-faq" aria-labelledby="fq-h">
+  <div class="wrap">
+    <div class="head in" data-reveal="">
+      <span class="kick">Before you book</span>
+      <h2 id="fq-h">Common questions.</h2>
+    </div>
+    <div class="faq in" data-reveal="">
+      <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa1" id="fq1">What exactly is this?<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"></path></svg></button></h3><div class="faq-a" id="fa1" role="region" aria-labelledby="fq1" hidden=""><p>A conversion website: a site built around how your customers decide, with the copy, the forms, the WhatsApp routing and the tracking already in place. It is delivered at a fixed price, in one to two weeks, by the senior team you meet on the call.</p></div></div>
+      <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa2" id="fq2">Who is it for?<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"></path></svg></button></h3><div class="faq-a" id="fa2" role="region" aria-labelledby="fq2" hidden=""><p>Founders and owners of SMEs and mid-market businesses who already have traffic, enquiries or bookings and can feel them slipping away. If you are choosing on lowest price alone, or not ready to decide this quarter, we are probably not the right fit, and we will say so on the call.</p></div></div>
+      <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa3" id="fq3">How much does it cost?<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"></path></svg></button></h3><div class="faq-a" id="fa3" role="region" aria-labelledby="fq3" hidden=""><p>A Starter site is RM1,900. A Growth site is RM6,000. Apps and games start at RM14,000. Bigger systems are scoped on the call. Every price is fixed in writing before you pay, and the number quoted is the number paid.</p></div></div>
+      <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa4" id="fq4">Why are you cheaper than the big agencies?<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"></path></svg></button></h3><div class="faq-a" id="fa4" role="region" aria-labelledby="fq4" hidden=""><p>We cut the overhead, not the quality. Our own system handles the repetitive work, so your money goes to senior strategy and craft, not layers of account management and markup.</p></div></div>
+      <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa5" id="fq5">How does the process work, and how fast?<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"></path></svg></button></h3><div class="faq-a" id="fa5" role="region" aria-labelledby="fq5" hidden=""><p>Discovery on the free call, then strategy and build, then handover. Work starts within 24 hours of kickoff. A Starter site ships in about a week, a Growth site in two, a scoped app from about four. Bigger builds get a milestone timeline agreed at kickoff.</p></div></div>
+      <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa6" id="fq6">How involved do I need to be?<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"></path></svg></button></h3><div class="faq-a" id="fa6" role="region" aria-labelledby="fq6" hidden=""><p>A kickoff, a few approvals at the milestones, and a launch. We do the heavy lifting and keep you updated at every step, so you stay in control of the direction without it eating your week.</p></div></div>
+      <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa7" id="fq7">Do I own everything?<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"></path></svg></button></h3><div class="faq-a" id="fa7" role="region" aria-labelledby="fq7" hidden=""><p>Yes. Code, domain, content, brand files and customer data are yours from day one. No vendor lock, no platform that holds your leads where you cannot reach them. It is an asset on your books, not a subscription you are afraid to cancel.</p></div></div>
+      <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa8" id="fq8">What makes you different?<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"></path></svg></button></h3><div class="faq-a" id="fa8" role="region" aria-labelledby="fq8" hidden=""><p>Four commitments in writing: money back, seven-day delivery, fixed price and lifetime after-service. Across the agencies we have reviewed, none put anything comparable in a contract. Add a senior team that has done this for over a hundred brands since 2009.</p></div></div>
+      <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa9" id="fq9">What if I am not ready yet?<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"></path></svg></button></h3><div class="faq-a" id="fa9" role="region" aria-labelledby="fq9" hidden=""><p>Take the free call anyway. You leave with a map of where your enquiries leak and a number on what it costs, and you keep it. If you would rather read first, the Brand Growth Playbook at the bottom of this page is free.</p></div></div>
+      <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa10" id="fq10">What happens after I click the button?<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"></path></svg></button></h3><div class="faq-a" id="fa10" role="region" aria-labelledby="fq10" hidden=""><p>You fill in a short form, and we confirm a day and time over WhatsApp within one working day. The call is thirty minutes with a senior strategist. If it is a fit, you get a fixed-price plan with dates. If it is not, you keep the plan and there is zero pressure.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 16 FINAL CTA. Reassurance, then the form. Every CTA on the page lands here. -->
+<section class="sec dark-band" id="sp-book" aria-labelledby="bk-h">
+  <div class="wrap">
+    <div class="book">
+      <div class="book-copy in" data-reveal="">
+        <div class="book-graphic" aria-hidden="true"><svg viewBox="0 0 120 120"><circle cx="60.0" cy="10.0" r="2.6" fill="#A9B0FF"></circle><circle cx="68.7" cy="10.8" r="2.6" fill="#A9B0FF"></circle><circle cx="77.1" cy="13.0" r="2.6" fill="#A9B0FF"></circle><circle cx="85.0" cy="16.7" r="2.6" fill="#A9B0FF"></circle><circle cx="92.1" cy="21.7" r="2.6" fill="#A9B0FF"></circle><circle cx="98.3" cy="27.9" r="2.6" fill="#A9B0FF"></circle><circle cx="103.3" cy="35.0" r="2.6" fill="#A9B0FF"></circle><circle cx="107.0" cy="42.9" r="2.6" fill="#A9B0FF"></circle><circle cx="109.2" cy="51.3" r="2.6" fill="#A9B0FF"></circle><circle cx="110.0" cy="60.0" r="2.6" fill="#A9B0FF"></circle><circle cx="109.2" cy="68.7" r="2.6" fill="#A9B0FF"></circle><circle cx="107.0" cy="77.1" r="2.6" fill="#A9B0FF"></circle><circle cx="103.3" cy="85.0" r="2.6" fill="#A9B0FF"></circle><circle cx="98.3" cy="92.1" r="2.6" fill="#A9B0FF"></circle><circle cx="92.1" cy="98.3" r="2.6" fill="#A9B0FF"></circle><circle cx="85.0" cy="103.3" r="2.6" fill="#A9B0FF"></circle><circle cx="77.1" cy="107.0" r="2.6" fill="#A9B0FF"></circle><circle cx="68.7" cy="109.2" r="2.6" fill="#A9B0FF"></circle><circle cx="60.0" cy="110.0" r="1.6" fill="rgba(255,255,255,.28)"></circle><circle cx="51.3" cy="109.2" r="1.6" fill="rgba(255,255,255,.28)"></circle><circle cx="42.9" cy="107.0" r="1.6" fill="rgba(255,255,255,.28)"></circle><circle cx="35.0" cy="103.3" r="1.6" fill="rgba(255,255,255,.28)"></circle><circle cx="27.9" cy="98.3" r="1.6" fill="rgba(255,255,255,.28)"></circle><circle cx="21.7" cy="92.1" r="1.6" fill="rgba(255,255,255,.28)"></circle><circle cx="16.7" cy="85.0" r="1.6" fill="rgba(255,255,255,.28)"></circle><circle cx="13.0" cy="77.1" r="1.6" fill="rgba(255,255,255,.28)"></circle><circle cx="10.8" cy="68.7" r="1.6" fill="rgba(255,255,255,.28)"></circle><circle cx="10.0" cy="60.0" r="1.6" fill="rgba(255,255,255,.28)"></circle><circle cx="10.8" cy="51.3" r="1.6" fill="rgba(255,255,255,.28)"></circle><circle cx="13.0" cy="42.9" r="1.6" fill="rgba(255,255,255,.28)"></circle><circle cx="16.7" cy="35.0" r="1.6" fill="rgba(255,255,255,.28)"></circle><circle cx="21.7" cy="27.9" r="1.6" fill="rgba(255,255,255,.28)"></circle><circle cx="27.9" cy="21.7" r="1.6" fill="rgba(255,255,255,.28)"></circle><circle cx="35.0" cy="16.7" r="1.6" fill="rgba(255,255,255,.28)"></circle><circle cx="42.9" cy="13.0" r="1.6" fill="rgba(255,255,255,.28)"></circle><circle cx="51.3" cy="10.8" r="1.6" fill="rgba(255,255,255,.28)"></circle><path d="M60 60L60 18" stroke="#A9B0FF" stroke-width="2.4" stroke-linecap="round"></path><path d="M60 60L60 102" stroke="#A9B0FF" stroke-width="2.4" stroke-linecap="round" opacity=".55"></path><circle cx="60" cy="60" r="4" fill="#fff"></circle></svg><span class="bg-num">30</span><span class="bg-lbl">minutes<br>free</span></div>
+        <span class="kick">Book your call</span>
+        <h2 id="bk-h">One free call. <em>You keep the plan either way.</em></h2>
+        <p class="lede">Thirty minutes with a senior strategist. We map where your enquiries leak, put a monthly number on it, and hand you the fix, whether you hire us or not.</p>
+        <ul>
+          <li>No pitch, no pressure</li>
+          <li>A senior person, not a junior</li>
+          <li>One clear next step to leave with</li>
+          <li>Fixed price in writing if you want to go ahead</li>
+        </ul>
+        <div class="wa">Prefer to type? <a href="https://wa.me/60162563030?text=Hi%20Brand%20Method%2C%20I%20watched%20the%20video%20and%20would%20like%20to%20book%20the%20free%2030-minute%20call." target="_blank" rel="noopener" data-cta-secondary="">WhatsApp Amina: +60 16-256 3030</a></div>
+      </div>
+      <div class="book-form in" data-reveal="">
+        <div data-bm-form="" data-service="website" data-bm-form-mounted="1"><div class="bmf"><form class="bmf-grid" id="bmEnquiry-website" novalidate="" data-service="website" data-bm-managed="1" data-bm-tracked="1"><div class="bmf-f"><label for="bmf-name">Your name</label><input id="bmf-name" name="name" type="text" required="" autocomplete="name" placeholder="Full name"><p class="bmf-err" aria-live="polite" id="bmf-name-err"></p></div><div class="bmf-f"><label for="bmf-company">Company</label><input id="bmf-company" name="company" type="text" required="" autocomplete="organization" placeholder="Company name"><p class="bmf-err" aria-live="polite" id="bmf-company-err"></p></div><div class="bmf-f"><label for="bmf-email">Work email</label><input id="bmf-email" name="email" type="email" required="" autocomplete="email" placeholder="you@company.com"><p class="bmf-err" aria-live="polite" id="bmf-email-err"></p></div><div class="bmf-f"><label for="bmf-phone">Phone</label><input id="bmf-phone" name="phone" type="tel" required="" autocomplete="tel" placeholder="012 345 6789"><p class="bmf-err" aria-live="polite" id="bmf-phone-err"></p></div><div class="bmf-f"><label for="bmf-budget_band">Budget</label><select id="bmf-budget_band" name="budget_band" required=""><option value="">Closest band</option><option value="Not sure yet">Not sure yet</option><option value="Under RM10,000">Under RM10,000</option><option value="RM10,000 to RM30,000">RM10,000 to RM30,000</option><option value="RM30,000 to RM75,000">RM30,000 to RM75,000</option><option value="RM75,000+">RM75,000+</option></select><p class="bmf-err" aria-live="polite" id="bmf-budget_band-err"></p></div><div class="bmf-f"><label for="bmf-timeline">Timeline</label><select id="bmf-timeline" name="timeline" required=""><option value="">When to start</option><option value="Now">Now</option><option value="1 to 3 months">1 to 3 months</option><option value="3 to 6 months">3 to 6 months</option><option value="Just exploring">Just exploring</option></select><p class="bmf-err" aria-live="polite" id="bmf-timeline-err"></p></div><div class="bmf-f wide"><label for="bmf-situation">What is going on right now</label><textarea id="bmf-situation" name="situation" maxlength="1000" placeholder="Optional. The more specific, the more useful the call."></textarea><p class="bmf-err" aria-live="polite" id="bmf-situation-err"></p></div><div class="bmf-hp" aria-hidden="true"><label for="bmf-website">Leave this empty</label><input id="bmf-website" name="website_url" type="text" tabindex="-1" autocomplete="off"></div><p class="bmf-status err" role="alert"></p><button class="bmf-submit" type="submit"><span class="bmf-spin" aria-hidden="true"></span><span class="bmf-submit-label">Send and book the call</span></button><p class="bmf-note">We reply within one working day. No list, no drip, no reselling your details.</p><input type="hidden" name="utm_source" value=""><input type="hidden" name="utm_medium" value=""><input type="hidden" name="utm_campaign" value=""><input type="hidden" name="utm_content" value=""><input type="hidden" name="utm_term" value=""><input type="hidden" name="landing_page" value="http://localhost:3000/bm%20sales%20page/Brand-Method-Sales-Page.html"><input type="hidden" name="referrer" value="http://localhost:3000/"><input type="hidden" name="page_url" value="http://localhost:3000/bm%20sales%20page/Brand-Method-VSL.html"><input type="hidden" name="page_id" value="website-vsl"></form></div></div>
+        <noscript><p class="consent" style="font-size:15px;color:inherit">The form needs JavaScript. Email <a href="mailto:bazil@brandmethod.co">bazil@brandmethod.co</a> or WhatsApp <a href="https://wa.me/60162563030">+60 16-256 3030</a> with your name, company and what is going on, and we will book the call from there.</p></noscript>
+        <p class="consent">By sending this you agree to our <a href="privacy.html">Privacy Policy</a>. We collect your name, email, company and phone to reply to this enquiry and arrange the call. We do not sell or share them, and you can ask us to correct or delete them at any time at bazil@brandmethod.co. All fields except the message are required.</p>
+        <p class="consent" lang="ms">Dengan menghantar borang ini anda bersetuju dengan <a href="privacy.html">Dasar Privasi</a> kami. Nama, emel, syarikat dan telefon anda digunakan untuk membalas pertanyaan ini dan mengatur panggilan sahaja. Kami tidak menjual atau berkongsi data anda, dan anda boleh meminta pembetulan atau pemadaman pada bila-bila masa.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 17 PLAYBOOK CAPTURE. Salvage for the visitors who will not enquire today. Always after the primary CTA. -->
+<section class="sec" id="sp-playbook" aria-labelledby="pb-h">
+  <div class="wrap">
+    <div class="pb">
+      <div class="pb3d-stage" aria-hidden="true"><div class="pb3d-shadow"></div><div class="pb3d" data-pb3d="" style=""><div class="pb3d-face pb3d-front"><div class="pb3d-top"><img class="pb3d-logo" src="brand-method-wordmark.png" alt=""></div><div class="pb3d-mid"><div class="pb3d-title">The Brand Growth <em>Playbook</em></div><div class="pb3d-rule"></div><div class="pb3d-by">By Bazil Rozenan</div></div><div class="pb3d-foot">2026 Edition · 48 Pages · KL</div></div><div class="pb3d-face pb3d-back"></div><div class="pb3d-face pb3d-spine"><span>The Brand Growth Playbook</span></div><div class="pb3d-face pb3d-pages"></div><div class="pb3d-face pb3d-topface"></div><div class="pb3d-face pb3d-bottom"></div></div></div>
+      <div class="pb-copy in" data-reveal="">
+        <span class="kick">Not ready to talk</span>
+        <h2 id="pb-h">Read the Playbook first.</h2>
+        <p class="lede" style="font-size:16px">Forty-eight pages on why brands stall and what fixes each stage. Do not read it front to back. Find the section that matches where you are stuck.</p>
+        <ul>
+          <li>Nobody knows who you are</li>
+          <li>People know, but do not choose you</li>
+          <li>People choose you, but do not come back</li>
+        </ul>
+      </div>
+      <form class="pbf in" id="pbForm" data-reveal="" novalidate="" action="thank-you-playbook.html" method="get" data-bm-tracked="1">
+        <div class="row">
+          <div><label for="pbName">Name</label><input id="pbName" name="name" type="text" autocomplete="name" required="" minlength="2" maxlength="80"><div class="err" aria-live="polite"></div></div>
+          <div><label for="pbEmail">Email</label><input id="pbEmail" name="email" type="email" autocomplete="email" required="" inputmode="email"><div class="err" aria-live="polite"></div></div>
+        </div>
+        <label class="hp" aria-hidden="true">Website<input name="website" tabindex="-1" autocomplete="off"></label>
+        <input type="hidden" name="form_id" value="playbook">
+        <button class="cta" type="submit">Send me the Playbook</button>
+        <p class="consent">We use your name and email to send the Playbook and nothing else unless you ask. <a href="privacy.html">Privacy Policy</a>. <span lang="ms">Nama dan emel anda digunakan untuk menghantar Playbook sahaja.</span></p>
+        <div class="ok" role="status"></div>
+      <input type="hidden" name="utm_source" value=""><input type="hidden" name="utm_medium" value=""><input type="hidden" name="utm_campaign" value=""><input type="hidden" name="utm_content" value=""><input type="hidden" name="utm_term" value=""><input type="hidden" name="landing_page" value="http://localhost:3000/bm%20sales%20page/Brand-Method-Sales-Page.html"><input type="hidden" name="referrer" value="http://localhost:3000/"><input type="hidden" name="page_url" value="http://localhost:3000/bm%20sales%20page/Brand-Method-VSL.html"><input type="hidden" name="page_id" value="website-vsl"></form>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- 18 LEGAL FOOTER. Privacy, Terms, and the results disclaimer once results are shown. No link block, no leaks. -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-in">
+      <div>© 2026 Brand Method · Kuala Lumpur, Malaysia</div>
+      <div class="foot-links">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms</a>
+        <a href="mailto:bazil@brandmethod.co">bazil@brandmethod.co</a>
+      </div>
+    </div>
+    <p class="foot-disc" id="resultsDisc" hidden="">Results shown are those achieved by specific clients in specific circumstances. They are examples, not promises. Your results will depend on your market, your offer, your budget and your own execution.</p>
+  </div>
+</footer>
+
+<!-- EXIT INTENT. Desktop only, once per session, never before 20 seconds on page. -->
+<div class="exit" id="exit" role="dialog" aria-modal="true" aria-labelledby="exit-h" hidden="">
+  <div class="exit-card">
+    <button class="exit-x" type="button" id="exitX" aria-label="Close">×</button>
+    <div class="pb3d-stage pb3d-stage--sm" aria-hidden="true"><div class="pb3d-shadow"></div><div class="pb3d" data-pb3d=""><div class="pb3d-face pb3d-front"><div class="pb3d-top"><img class="pb3d-logo" src="brand-method-wordmark.png" alt=""></div><div class="pb3d-mid"><div class="pb3d-title">The Brand Growth <em>Playbook</em></div><div class="pb3d-rule"></div><div class="pb3d-by">By Bazil Rozenan</div></div><div class="pb3d-foot">2026 Edition · 48 Pages · KL</div></div><div class="pb3d-face pb3d-back"></div><div class="pb3d-face pb3d-spine"><span>The Brand Growth Playbook</span></div><div class="pb3d-face pb3d-pages"></div><div class="pb3d-face pb3d-topface"></div><div class="pb3d-face pb3d-bottom"></div></div></div>
+    <div class="exit-copy">
+      <span class="kick">Before you go</span>
+      <h3 id="exit-h">Take the Playbook with you.</h3>
+      <p>Forty-eight pages on why brands stall and what fixes each stage. Free, and we send nothing else unless you ask.</p>
+      <a class="cta" href="#sp-playbook" id="exitGo">Get the Playbook</a>
+    </div>
+  </div>
+</div>
+
+<script src="assets/bm-track.js" defer=""></script>
+<script src="assets/bm-form.js" defer=""></script>
+<script>
+(function(){
+  'use strict';
+  var d=document, F=window.BM_FACTS||{};
+  d.documentElement.classList.add('js');
+
+  /* ---- content that must never render false: results, verification links, entry price, founder name ---- */
+  /* Cleared quantified results go here. Each needs all four fields or it does not render. Brief §4.1. */
+  var RESULTS=[
+    /* { num:'4.1×', what:'more enquiries in 90 days', who:'Named client, industry', base:'Baseline: 40 enquiries a month' } */
+  ];
+  /* Verified 3 Sep 2026: every URL below returned 200. Kampung Gold's site is down and Go Viewpoint now
+     redirects to another company, so those two carry no link until a live one exists. */
+  var VERIFY_LINKS={
+    'Eskayvie':'https://www.eskayvie.com/',
+    'Waterbay':'https://waterbay.com.my/',
+    'Hexamatic':'https://hexamatics.com/',
+    'Spiroball':'https://www.facebook.com/spiroball',
+    'Valvoline Malaysia':'https://www.valvoline.com/',
+    'Pinnacle Hair Clinic':'https://www.pinnaclehairclinic.com/',
+    'Cofeology Cafe':'https://www.facebook.com/cofeologycafe',
+    'Discover Early Years':'https://www.discoverearlyyears.com/',
+    'Klaas Interior Design':'https://klaas.com.my/',
+    'Oryn Skincare':'https://orynskincare.com/',
+    'Ossem Juice':'https://ossemjuice.com/',
+    'Starbucks Malaysia':'https://www.facebook.com/StarbucksMalaysia/',
+    'Wonderspire':'https://wonderspire.com/',
+    'Yuth':'https://www.instagram.com/yuthformula/'
+  };
+  /* Archive testimonials were given to Zieel, the previous trading name. Brief §3.10: re-clear before use.
+     Add a company name here and its card goes live. */
+  var CLEARED=[];
+
+  var ok=RESULTS.filter(function(r){return r&&r.num&&r.what&&r.who&&r.base;});
+  if(ok.length>=1){
+    var grid=d.getElementById('resultsGrid');
+    ok.slice(0,3).forEach(function(r){
+      var el=d.createElement('div'); el.className='result';
+      el.innerHTML='<div class="num"></div><p class="what"></p><p class="who"></p><span class="base"></span>';
+      el.querySelector('.num').textContent=r.num; el.querySelector('.what').textContent=r.what;
+      el.querySelector('.who').textContent=r.who; el.querySelector('.base').textContent=r.base;
+      grid.appendChild(el);
+    });
+    d.getElementById('resultsBlock').hidden=false;
+    d.getElementById('resultsDisc').hidden=false;
+  }
+  [].forEach.call(d.querySelectorAll('.tcard'),function(c){
+    var co=c.querySelector('.tby span'); var a=c.querySelector('[data-verify]');
+    var name=co?co.textContent.trim():''; var url=VERIFY_LINKS[name];
+    if(a&&url){ a.href=url; a.hidden=false; a.textContent=(/facebook\.com/.test(url)?'Facebook':/instagram\.com/.test(url)?'Instagram':'Visit site')+' \u2197'; }
+    if(c.hasAttribute('data-pending')){
+      if(CLEARED.indexOf(name)>-1){ c.hidden=false; c.removeAttribute('data-pending'); }
+      else if(window.__BM_DEV__){ c.hidden=false; }
+    }
+  });
+  var eo=F.entryOffers&&F.entryOffers.website;
+  if(eo&&eo.price){
+    d.getElementById('entryAmt').classList.remove('is-tbc');
+    d.getElementById('entryAmt').innerHTML='<span></span> <small>fixed fee</small>';
+    d.getElementById('entryAmt').querySelector('span').textContent=(eo.currency||'RM')+Number(eo.price).toLocaleString('en-MY');
+  }
+  if(F.entryOfferCreditLine) d.getElementById('entryCredit').textContent=F.entryOfferCreditLine;
+  if(F.founderSurname) d.getElementById('founderName').textContent=(F.founderFirstName||'Bazil')+' '+F.founderSurname;
+
+  /* ---- 3D playbook: pointer tilt on hover devices, float-only on touch ---- */
+  if(window.matchMedia&&window.matchMedia('(hover:hover)').matches){
+    [].slice.call(d.querySelectorAll('[data-pb3d]')).forEach(function(book){
+      var stage=book.closest('.pb3d-stage')||book.parentNode;
+      stage.addEventListener('mousemove',function(e){
+        var r=stage.getBoundingClientRect();
+        var px=(e.clientX-r.left)/r.width, py=(e.clientY-r.top)/r.height;
+        var ry=-26+(px-0.5)*42, rx=8-(py-0.5)*22;
+        book.style.animation='none';
+        book.style.transform='rotateX('+rx.toFixed(1)+'deg) rotateY('+ry.toFixed(1)+'deg)';
+      });
+      stage.addEventListener('mouseleave',function(){ book.style.transform=''; book.style.animation=''; });
+    });
+  }
+
+  /* ---- top bar: section dropdown + Download HTML chip (dev only, removed by the production gate) ---- */
+  (function(){
+    var dd=d.querySelector('.bar-dd'); if(dd){
+      var btn=dd.querySelector('.bar-ddbtn');
+      btn.addEventListener('click',function(e){ e.stopPropagation(); var open=dd.classList.toggle('open'); btn.setAttribute('aria-expanded',open?'true':'false'); });
+      d.addEventListener('click',function(e){ if(!dd.contains(e.target)){ dd.classList.remove('open'); btn.setAttribute('aria-expanded','false'); } });
+      d.addEventListener('keydown',function(e){ if(e.key==='Escape'){ dd.classList.remove('open'); btn.setAttribute('aria-expanded','false'); } });
+    }
+    var dl=d.getElementById('bdDownload'); if(dl){
+      dl.addEventListener('click',function(){
+        var html='<!doctype html>\n'+d.documentElement.outerHTML;
+        var blob=new Blob([html],{type:'text/html;charset=utf-8'});
+        var a=d.createElement('a'); a.href=URL.createObjectURL(blob); a.download=(location.pathname.split('/').pop()||'Brand-Method-VSL.html');
+        d.body.appendChild(a); a.click(); setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); },800);
+      });
+    }
+  })();
+
+  /* ---- reveal on scroll: content visible by default, IO adds .in, failsafe restores everything ---- */
+  var nodes=[].slice.call(d.querySelectorAll('[data-reveal]'));
+  function showAll(){ nodes.forEach(function(n){n.classList.add('in');}); }
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} }); },{rootMargin:'0px 0px -8% 0px',threshold:.08});
+    nodes.forEach(function(n){ io.observe(n); });
+    setTimeout(showAll,3500);
+  } else { showAll(); }
+
+  /* ---- the leak: dot-native visual for the stakes band. 6s loop, gated to the viewport, static under reduced motion. ---- */
+  (function(){
+    var cv=d.getElementById('leakCanvas'); if(!cv||!cv.getContext) return;
+    var ctx=cv.getContext('2d'); if(!ctx) return;
+    var reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+    var DPR=Math.min(window.devicePixelRatio||1,2), W=0,H=0, N=240, P=[], raf=0, vis=false, t0=performance.now();
+    function fit(){ var r=cv.getBoundingClientRect(); if(r.width<10||r.height<10) return false; W=r.width;H=r.height; cv.width=Math.round(W*DPR); cv.height=Math.round(H*DPR); ctx.setTransform(DPR,0,0,DPR,0,0); return true; }
+    function seed(){ P=[]; for(var i=0;i<N;i++){ P.push({o:Math.random(), y:Math.random(), leak:Math.random()<.82, drop:.25+Math.random()*.5, s:1.2+Math.random()*1.6}); } }
+    function frame(now){
+      raf=0; if(!vis&&!reduce) return;
+      var T=((now-t0)%6000)/6000; /* 6s loop */
+      ctx.clearRect(0,0,W,H);
+      var y0=H*.22, y1=H*.78;
+      /* the funnel: two hairlines converging right */
+      ctx.strokeStyle='rgba(124,134,255,.28)'; ctx.lineWidth=1; ctx.setLineDash([2,6]);
+      ctx.beginPath(); ctx.moveTo(0,y0); ctx.lineTo(W,H*.42); ctx.moveTo(0,y1); ctx.lineTo(W,H*.58); ctx.stroke(); ctx.setLineDash([]);
+      for(var i=0;i<P.length;i++){
+        var p=P[i], u=(p.o+T)%1; /* 0..1 across the band */
+        var top=y0+(H*.42-y0)*u, bot=y1+(H*.58-y1)*u, y=top+(bot-top)*p.y, x=u*W, a=1;
+        if(p.leak&&u>p.drop){ var k=(u-p.drop)/(1-p.drop); y+= k*k*H*.5; a=Math.max(0,1-k*1.4); }
+        if(a<=0) continue;
+        ctx.globalAlpha=a*(p.leak?.55:.95);
+        ctx.fillStyle=p.leak?'#7C86FF':'#FFFFFF';
+        ctx.beginPath(); ctx.arc(x,y,p.s,0,6.283); ctx.fill();
+      }
+      ctx.globalAlpha=1;
+      if(!reduce) raf=requestAnimationFrame(frame);
+    }
+    function start(){ if(!raf) raf=requestAnimationFrame(frame); }
+    try{
+      if(!fit()) return; seed();
+      if('ResizeObserver' in window){ new ResizeObserver(function(){ if(fit()) { if(reduce) frame(t0); } }).observe(cv); }
+      if('IntersectionObserver' in window){ new IntersectionObserver(function(es){ vis=es[0].isIntersecting; if(vis) start(); }).observe(cv); } else { vis=true; start(); }
+      if(reduce) frame(t0);
+    }catch(e){}
+  })();
+
+  /* ---- logo marquee: duplicate once for a seamless loop ---- */
+  var track=d.getElementById('logoTrack');
+  if(track && !window.matchMedia('(prefers-reduced-motion:reduce)').matches){ track.innerHTML+=track.innerHTML; }
+
+  /* ---- VSL player: honest states. Probe the cut, play on intent, captions if present. ---- */
+  (function(){
+    var stage=d.getElementById('vslStage'), video=d.getElementById('vslVideo'), btn=d.getElementById('vslPlay'), lbl=d.getElementById('vslLbl');
+    if(!stage||!video) return;
+    var SRC=stage.getAttribute('data-src')||'', CAP=stage.getAttribute('data-captions')||'', pending=false, hasCap=false;
+    function markPending(){
+      pending=true; stage.classList.add('is-pending'); btn.disabled=true;
+      lbl.textContent='The video is being cut. The short version is just below.';
+      stage.querySelector('.stage-cap').style.display='none';
+    }
+    function head(url){ return fetch(url,{method:'HEAD'}).then(function(r){return r.ok;}).catch(function(){return false;}); }
+    if(!SRC) markPending();
+    else if(location.protocol!=='file:'){
+      head(SRC).then(function(ok){ if(!ok) markPending(); });
+      if(CAP) head(CAP).then(function(ok){ hasCap=ok; if(!ok) stage.querySelector('.stage-cap').style.display='none'; });
+    }
+    function go(){
+      if(pending) return;
+      if(!video.getAttribute('src')){
+        video.src=SRC; video.controls=true;
+        if(hasCap){ var t=d.createElement('track'); t.kind='captions'; t.srclang='en'; t.label='English'; t.src=CAP; t.default=true; video.appendChild(t); }
+        video.addEventListener('error',function(){ video.removeAttribute('src'); stage.classList.remove('is-live'); markPending(); },{once:true});
+      }
+      stage.classList.add('is-live'); video.muted=false;
+      try{ var p=video.play(); if(p&&p.catch) p.catch(function(){}); }catch(e){}
+    }
+    btn.addEventListener('click',go);
+    window.__vsl={ play:go, pending:function(){return pending;}, video:video };
+  })();
+
+  /* ---- on phones the bottom bar must never sit over a field the visitor is typing into (build spec §3.4) ---- */
+  d.addEventListener('focusin',function(e){ if(window.innerWidth<640&&e.target.matches&&e.target.matches('input,select,textarea')) d.documentElement.classList.add('typing'); });
+  d.addEventListener('focusout',function(){ setTimeout(function(){ if(!d.activeElement||!d.activeElement.matches('input,select,textarea')) d.documentElement.classList.remove('typing'); },80); });
+
+  /* ---- WhatsApp taps are a conversion path in Malaysia: fire an event, keep the tap native ---- */
+  [].forEach.call(d.querySelectorAll('[data-cta-secondary]'),function(a){
+    a.addEventListener('click',function(){ try{ window.dataLayer.push({event:'whatsapp_click',page_id:'website-vsl'}); }catch(x){} });
+  });
+
+  /* ---- FAQ accordion ---- */
+  [].forEach.call(d.querySelectorAll('.faq-q'),function(q){
+    q.addEventListener('click',function(){
+      var open=q.getAttribute('aria-expanded')==='true';
+      var panel=d.getElementById(q.getAttribute('aria-controls'));
+      q.setAttribute('aria-expanded',open?'false':'true'); if(panel) panel.hidden=open;
+    });
+  });
+
+  try{
+    var qa=[].map.call(d.querySelectorAll('.faq-item'),function(it){
+      return {'@type':'Question','name':it.querySelector('.faq-q').textContent.trim(),'acceptedAnswer':{'@type':'Answer','text':it.querySelector('.faq-a').textContent.trim()}};
+    });
+    var ld=d.createElement('script'); ld.type='application/ld+json';
+    ld.textContent=JSON.stringify({'@context':'https://schema.org','@type':'FAQPage','mainEntity':qa}); d.head.appendChild(ld);
+  }catch(e){}
+
+  /* ---- smooth anchor scroll that respects the fixed bar ---- */
+  d.addEventListener('click',function(e){
+    var a=e.target.closest&&e.target.closest('a[href^="#"]'); if(!a) return;
+    var id=a.getAttribute('href').slice(1); var t=id&&d.getElementById(id); if(!t) return;
+    e.preventDefault();
+    var barTop=window.innerWidth>=640?64:0;
+    var y=t.getBoundingClientRect().top+window.pageYOffset-barTop;
+    try{ window.scrollTo({top:y,behavior:'smooth'}); }catch(err){ window.scrollTo(0,y); }
+    if(id==='sp-book'){ setTimeout(function(){ var f=t.querySelector('input,select'); if(f&&window.innerWidth>=1024) f.focus({preventScroll:true}); },700); }
+    var ex=d.getElementById('exit'); if(ex&&ex.classList.contains('open')) closeExit();
+  });
+
+  /* ---- Playbook form: endpoint when set, honest handoff when not. Honeypot + 3s check. ---- */
+  (function(){
+    var f=d.getElementById('pbForm'); if(!f) return;
+    var t0=Date.now(), ok=f.querySelector('.ok');
+    function err(input,msg){ var e=input.parentNode.querySelector('.err'); if(e) e.textContent=msg; input.setAttribute('aria-invalid',msg?'true':'false'); return !msg; }
+    f.addEventListener('submit',function(e){
+      e.preventDefault();
+      var name=f.name, email=f.email;
+      var v1=err(name,name.value.trim().length>=2?'':'Please give your name.');
+      var v2=err(email,/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.value.trim())?'':'That email does not look right.');
+      if(!v1||!v2) return;
+      if(f.website.value||Date.now()-t0<3000) return; /* spam: drop silently */
+      var data={name:name.value.trim(),email:email.value.trim(),form_id:'playbook',page_url:location.href};
+      try{ (window.__bmTrack&&window.__bmTrack.utms)&&Object.assign(data,window.__bmTrack.utms()); }catch(x){}
+      var btn=f.querySelector('.cta'); btn.disabled=true; btn.textContent='Sending';
+      if(F.formEndpoint){
+        fetch(F.formEndpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})
+          .then(function(r){ if(!r.ok) throw r.status; location.href=F.thankYouPlaybook||'thank-you-playbook.html'; })
+          .catch(function(){ btn.disabled=false; btn.textContent='Try again'; err(email,'Could not send just now. Your details are still here, please try again.'); });
+      } else {
+        /* No endpoint yet: hand the request to WhatsApp with the details carried across, so no lead is lost. */
+        var msg='Hi Brand Method, please send me the Brand Growth Playbook.\nName: '+data.name+'\nEmail: '+data.email;
+        window.open('https://wa.me/'+(F.whatsappNumber||'60162563030')+'?text='+encodeURIComponent(msg),'_blank','noopener');
+        f.classList.add('is-done'); ok.textContent='Thanks '+data.name.split(' ')[0]+'. Send the WhatsApp message that just opened and the Playbook comes straight back to '+data.email+'.';
+        try{ window.dataLayer.push({event:'playbook_request',via:'whatsapp'}); }catch(x){}
+      }
+    });
+  })();
+
+  /* ---- exit intent: desktop, once per session, after 20s, never during the video ---- */
+  var ex=d.getElementById('exit');
+  function closeExit(){ ex.classList.remove('open'); ex.hidden=true; d.body.style.overflow=''; }
+  (function(){
+    if(!ex) return;
+    var fine=window.matchMedia('(hover:hover) and (pointer:fine)').matches; if(!fine) return;
+    var shown=false, armed=false; setTimeout(function(){armed=true;},20000);
+    try{ if(sessionStorage.getItem('bm.exit')) shown=true; }catch(e){}
+    d.addEventListener('mouseout',function(e){
+      if(shown||!armed||e.relatedTarget||e.clientY>8) return;
+      var v=d.getElementById('vslVideo'); if(v&&!v.paused) return;
+      shown=true; try{ sessionStorage.setItem('bm.exit','1'); }catch(x){}
+      ex.hidden=false; ex.classList.add('open'); d.body.style.overflow='hidden';
+      try{ window.dataLayer.push({event:'exit_intent_shown'}); }catch(x){}
+      d.getElementById('exitX').focus();
+    });
+    d.getElementById('exitX').addEventListener('click',closeExit);
+    ex.addEventListener('click',function(e){ if(e.target===ex) closeExit(); });
+    d.addEventListener('keydown',function(e){ if(e.key==='Escape'&&ex.classList.contains('open')) closeExit(); });
+  })();
+})();
+</script>
+
+
+</body></html>

@@ -1,0 +1,1027 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jom Makcik &middot; Web Plan &middot; Brand Method</title>
+<link rel="icon" type="image/webp" sizes="32x32" href="assets/img/favicon-32.webp">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/bmws.css?v=1">
+<style>
+  :root{
+    --paper:#F5F7FC;--paper2:#FCFDFF;--ink:#101626;--soft:#4A5468;--faint:#8A93A6;
+    --line:#E2E7F1;--line2:#D6DCEA;--blue:#2536F5;--blue-deep:#1421B8;--wash:#EEF1FE;
+    --ok:#1A8F5A;--warn:#C9941F;--red:#D7263D;--dark:#0E1424;--maxw:1080px;
+    --jm:#F91B2A;--jm-deep:#C60815;--jm-wash:#FFF1F2;--e1:cubic-bezier(.22,.8,.28,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+  body{font-family:"Inter",system-ui,sans-serif;background:var(--paper);color:var(--ink);font-size:16px;line-height:1.62;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+  .mono{font-family:"JetBrains Mono",monospace}
+  .bmws{position:sticky;top:0;z-index:80}
+
+  .chapnav{border-bottom:1px solid var(--line);background:rgba(245,247,252,.97);position:sticky;top:0;z-index:49;overflow-x:auto;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+  .chapnav-in{display:flex;gap:3px;padding:8px 28px;max-width:var(--maxw);margin:0 auto;white-space:nowrap}
+  .chapnav a{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--faint);text-decoration:none;padding:6px 10px;border-radius:8px}
+  .chapnav a:hover{color:var(--ink);background:var(--wash)}
+  .chapnav .ch-no{color:var(--blue-deep);font-weight:700;margin-right:6px}
+
+
+  .eyebrow{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--blue-deep);display:inline-flex;align-items:center;gap:10px;font-weight:600}
+  .eyebrow::before{content:"";width:28px;height:1px;background:var(--blue);display:inline-block}
+  .hero{padding:50px 0 8px}
+  .hero h1{font-family:"Fraunces",serif;font-weight:500;font-size:clamp(36px,5.6vw,62px);line-height:1.03;letter-spacing:-.02em;margin:18px 0 0}
+  .hero h1 em{font-style:italic;color:var(--jm-deep)}
+  .hero .lede{font-size:clamp(17px,2vw,20px);color:var(--soft);max-width:66ch;margin:20px 0 0}
+  .vrow{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+  .vchip{background:var(--paper2);border:1px solid var(--line);border-radius:999px;padding:8px 15px;font-size:13px;color:var(--soft)}
+  .vchip b{color:var(--ink)}
+  .execsum{margin-top:32px;border:1px solid var(--line);border-radius:16px;background:var(--paper2);padding:26px 28px}
+  .execsum .k{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--jm-deep);font-weight:700}
+  .execsum p{margin-top:12px;font-size:16.5px;color:var(--soft)}
+  .execsum p b{color:var(--ink)}
+  .execsum p+p{margin-top:11px}
+
+  section{padding:32px 0}
+  .chapdiv{display:flex;align-items:baseline;gap:18px;padding:46px 0 4px;border-top:1px solid var(--line);margin-top:10px}
+  .cd-no{font-family:"Fraunces",serif;font-weight:600;font-size:38px;color:var(--blue-deep);line-height:1}
+  h2.cd-h{font-family:"Fraunces",serif;font-weight:500;font-size:27px;letter-spacing:-.01em;margin:0}
+  .cd-sub{font-size:15px;color:var(--soft);margin-top:5px}
+  .secmark{display:flex;align-items:center;gap:13px;margin-top:6px}
+  .secicon{width:34px;height:34px;border-radius:9px;background:var(--dark);display:flex;align-items:center;justify-content:center;color:#9FB4FF;flex:none}
+  .secicon svg{width:17px;height:17px}
+  .sec-no{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--blue-deep);letter-spacing:.1em;text-transform:uppercase;font-weight:600}
+  h3.sechead{font-family:"Fraunces",serif;font-weight:500;font-size:clamp(25px,3.6vw,37px);line-height:1.08;letter-spacing:-.015em;margin:13px 0 0;max-width:26ch}
+  h3.sub{font-family:"Fraunces",serif;font-weight:500;font-size:22px;margin:30px 0 0}
+  .sec-intro{font-size:16.5px;color:var(--soft);max-width:74ch;margin:15px 0 0}
+  .sec-intro b,.sec-intro strong{color:var(--ink)}
+
+  .grid{display:grid;gap:16px;margin-top:22px}
+  .g2{grid-template-columns:repeat(auto-fit,minmax(290px,1fr))}
+  .g3{grid-template-columns:repeat(auto-fit,minmax(225px,1fr))}
+  .card{background:var(--paper2);border:1px solid var(--line);border-radius:14px;padding:20px 21px}
+  .card .tag{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--blue-deep);font-weight:700}
+  .card h3{font-family:"Fraunces",serif;font-weight:500;font-size:19px;margin-top:8px}
+  .card p{font-size:14px;color:var(--soft);margin-top:9px;line-height:1.55}
+  .card p b{color:var(--ink)}
+  .card.dark{background:var(--dark);border-color:#232a40;color:#D6DEF2}
+  .card.dark h3{color:#fff}.card.dark p{color:#AEB9D2}.card.dark .tag{color:#9FB4FF}.card.dark p b{color:#fff}
+  .card.jm{border-color:#F7C9CD;background:var(--jm-wash)}
+  .card.jm .tag{color:var(--jm-deep)}
+
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-top:22px}
+  .stat{border:1px solid var(--line);border-radius:13px;background:var(--paper2);padding:16px 18px}
+  .stat .num{font-family:"Fraunces",serif;font-size:28px;font-weight:500;color:var(--blue-deep);line-height:1.05}
+  .stat.bad .num{color:var(--jm-deep)}
+  .stat .lab{font-size:13px;font-weight:600;margin-top:8px}
+  .stat .s{font-size:12px;color:var(--faint);margin-top:3px}
+
+  .goals2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-top:22px}
+  .goal{display:flex;gap:13px;align-items:flex-start;border:1px solid var(--line);border-radius:13px;background:var(--paper2);padding:16px 18px}
+  .goal .gi{width:30px;height:30px;border-radius:8px;background:var(--wash);color:var(--blue-deep);display:flex;align-items:center;justify-content:center;flex:none;font-family:"JetBrains Mono",monospace;font-size:12px;font-weight:700}
+  .goal b{font-size:15px}.goal p{font-size:13.5px;color:var(--soft);margin-top:4px}
+
+  table{width:100%;border-collapse:separate;border-spacing:0;margin-top:18px;font-size:14px;background:var(--paper2);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  thead th{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#fff;background:var(--dark)}
+  tr:last-child td{border-bottom:none}
+  td.dim{font-weight:600;white-space:nowrap}
+  td.sc{font-family:"JetBrains Mono",monospace;color:var(--blue-deep);font-weight:700;white-space:nowrap}
+  tr.hl td{background:var(--jm-wash)}
+  tr.hl td.dim{color:var(--jm-deep)}
+
+  .vtag{font-family:"JetBrains Mono",monospace;font-size:9.5px;text-transform:uppercase;letter-spacing:.04em;padding:3px 8px;border-radius:6px;font-weight:700;display:inline-block}
+  .vtag.hi{background:rgba(26,143,90,.14);color:var(--ok)}
+  .vtag.lo{background:rgba(201,148,31,.16);color:#9a6f12}
+  .vtag.bad{background:rgba(215,38,61,.12);color:var(--red)}
+
+  .pin{margin-top:22px;border-left:3px solid var(--blue);background:linear-gradient(90deg,rgba(37,54,245,.06),transparent);padding:15px 19px;border-radius:0 12px 12px 0;font-size:15px}
+  .pin b{color:var(--blue-deep)}
+  .pin.warn{border-left-color:var(--warn);background:linear-gradient(90deg,rgba(201,148,31,.09),transparent)}
+  .pin.warn b{color:#9a6f12}
+  .pin.jm{border-left-color:var(--jm);background:linear-gradient(90deg,rgba(249,27,42,.07),transparent)}
+  .pin.jm b{color:var(--jm-deep)}
+
+  .quote{margin-top:22px;border:1px solid var(--line);border-radius:14px;background:var(--paper2);padding:22px 24px}
+  .quote q{font-family:"Fraunces",serif;font-size:20px;line-height:1.4;font-style:italic;color:var(--ink);display:block;overflow-wrap:anywhere;word-break:break-word}
+  .quote .src{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin-top:12px;display:block}
+
+  .bars{margin-top:22px;display:flex;flex-direction:column;gap:11px}
+  .bar{display:grid;grid-template-columns:150px 1fr 68px;gap:12px;align-items:center;font-size:13.5px}
+  .bar .bn{font-weight:600}
+  .bar .bt{height:15px;border-radius:4px;background:#E7ECF6;overflow:hidden;position:relative}
+  .bar .bf{height:100%;border-radius:4px;background:var(--blue);display:block}
+  .bar.is-jm .bf{background:var(--jm)}
+  .bar .bv{font-family:"JetBrains Mono",monospace;font-size:12px;font-weight:700;text-align:right;color:var(--soft)}
+  .bar.is-jm .bv{color:var(--jm-deep)}
+
+  .scorewrap{margin-top:22px;border:1px solid var(--line);border-radius:14px;background:var(--paper2);overflow:hidden}
+  .srow{display:grid;grid-template-columns:180px 1fr 92px;gap:14px;align-items:center;padding:13px 18px;border-bottom:1px solid var(--line)}
+  .srow:last-child{border-bottom:0}
+  .srow .sn{font-weight:600;font-size:14.5px}
+  .srow .sn small{display:block;font-weight:400;font-size:12.5px;color:var(--faint);margin-top:2px}
+  .srow .st{height:9px;border-radius:5px;background:#E7ECF6;overflow:hidden}
+  .srow .sf{height:100%;display:block;border-radius:5px}
+  .srow .sv{font-family:"JetBrains Mono",monospace;font-weight:700;font-size:14px;text-align:right}
+  .sv.g{color:var(--ok)}.sv.a{color:#9a6f12}.sv.r{color:var(--jm-deep)}
+  .sf.g{background:var(--ok)}.sf.a{background:var(--warn)}.sf.r{background:var(--jm)}
+
+  .shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:22px}
+  .shot{border:1px solid var(--line);border-radius:13px;background:var(--paper2);overflow:hidden}
+  .shot img{width:100%;height:auto;max-height:430px;object-fit:cover;object-position:top center;display:block;border-bottom:1px solid var(--line);background:#fff}
+  .shot .cp{padding:11px 14px;font-size:12.5px;color:var(--soft);line-height:1.5}
+  .shot .cp b{color:var(--ink);display:block;font-size:13px;margin-bottom:3px}
+
+  .vl-scroll{overflow-x:auto;border:1px solid var(--line2);border-radius:14px;background:#fff;margin-top:20px}
+  table.vledger{width:100%;border-collapse:separate;border-spacing:0;min-width:1000px;font-size:13.5px;border:0;border-radius:0;margin:0}
+  table.vledger th{text-align:left;padding:12px 14px;background:#0B1020;color:#fff;font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;font-weight:700;border-right:1px solid rgba(255,255,255,.1)}
+  table.vledger th:last-child{border-right:0}
+  table.vledger td{padding:14px;vertical-align:top;line-height:1.55;color:#3d4048;border-bottom:1px solid rgba(12,18,32,.09);border-right:1px solid rgba(12,18,32,.06)}
+  table.vledger td:last-child{border-right:0}
+  table.vledger tr:last-child td{border-bottom:0}
+  table.vledger tbody tr:nth-child(even) td{background:#FBFBFD}
+  .vl-n{font-family:"JetBrains Mono",monospace;font-weight:700;color:#9a9ca6;font-size:12px;width:34px}
+  .vl-area{font-weight:700;color:#15161A;min-width:120px}
+  .vl-when{font-family:"JetBrains Mono",monospace;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--blue-deep);font-weight:700;white-space:nowrap}
+
+  ul.tick{margin-top:14px;list-style:none;display:flex;flex-direction:column;gap:9px}
+  ul.tick li{position:relative;padding-left:26px;font-size:15px;color:var(--soft)}
+  ul.tick li b{color:var(--ink)}
+  ul.tick li::before{content:"";position:absolute;left:0;top:9px;width:11px;height:11px;border-radius:3px;border:1.6px solid var(--blue);background:var(--wash)}
+  ul.tick.x li::before{border-color:var(--jm);background:var(--jm-wash)}
+
+  .srcs{margin-top:18px;display:flex;flex-direction:column;gap:7px;font-size:13.5px}
+  .srcs a{color:var(--blue-deep);text-decoration:none;border-bottom:1px solid rgba(20,33,184,.28);word-break:break-all}
+  .srcs a:hover{border-bottom-color:var(--blue-deep)}
+
+  footer{padding:34px 0 70px;color:var(--faint);font-size:12px;font-family:"JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.05em;border-top:1px solid var(--line);margin-top:30px}
+  .ic{stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+  @media(max-width:720px){
+    .wrap{padding:0 18px}
+    .chapnav-in{padding:8px 16px}
+    section{padding:26px 0}
+    .bar{grid-template-columns:106px 1fr 58px;gap:9px;font-size:12.5px}
+    .srow{grid-template-columns:1fr 74px;gap:9px}
+    .srow .st{grid-column:1/-1;order:3}
+    table:not(.vledger){display:block;overflow-x:auto;white-space:nowrap}
+    .chapdiv{flex-direction:column;gap:4px;padding-top:34px}
+  }
+  /* Phones: the chapter rail was 11px type in a 30px tall target, under the 44px touch minimum.
+     It stays a horizontal scroller, the targets simply get full height and a legible size. */
+  @media (max-width:768px){
+    .chapnav-in{gap:2px;padding:4px 16px}
+    .chapnav a{font-size:12px;min-height:44px;display:inline-flex;align-items:center;padding:0 12px}
+  }
+  /* Phones: the mono labels are set between 9.5px and 11px for a desktop reading of these documents,
+     which is below comfortable on a 390px screen. They are lifted to a floor of 11.5px here, and the
+     hero's live links get a full touch target. Nothing above 768px changes. */
+  @media (max-width:768px){
+    thead th,table.vledger th{font-size:12px}
+    .tag,.vtag,.src,.vl-when,.card .tag,.quote .src{font-size:11.5px}
+    .livelinks .ll{min-height:44px;display:flex;flex-direction:column;justify-content:center}
+    .srcs{gap:0}
+    .srcs a{display:block;padding:11px 0}
+  }
+
+  /* Tables in these documents are built for a desktop reading. Below 900px any of them, not only
+     table.rv, becomes its own horizontal scroller so the page itself never scrolls sideways: the
+     seven column performance table was 770px of min-content inside a 712px column at 768. */
+  @media (max-width:900px){
+    table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}
+  }
+  /* and the small mono chip labels get an 11.5px floor on phones */
+  @media (max-width:768px){
+    .k,.sh,.sl,.slot,.who,.bs-k,.fn-k,.v,.s,small,code{font-size:11.5px}
+  }
+  /* Phones: a hard floor for every small label in these documents. The earlier floor used single class selectors and
+     lost to two class rules such as .spec small, and it missed the bare <k> element the plan uses for table keys.
+     Font size only, never SVG text, which is part of a drawn diagram. */
+  @media (max-width:768px){
+    body small, body k, body .k, body .sl, body .slot, body .who, body .bs-k, body .fn-k, body .sh, body .tag, body .vtag, body .src, body .vl-when, body thead th, body .mini-eb, body .swi .m .cr, body .ratio-row .g, body .vc .r.h > div, body .cat, body .own, body .chk .t, body .bshead, body .bshead span, body .pv .r.h, body .pv .r.h > div, body .tk .r.h, body .tk .r.h > div{font-size:11.5px!important}
+  }
+</style>
+<style>
+  /* sitemap tree */
+  .tree{margin-top:22px;border:1px solid var(--line);border-radius:16px;background:var(--paper2);padding:22px 24px}
+  .tnode{display:grid;grid-template-columns:210px 1fr;gap:10px 18px;padding:13px 0;border-bottom:1px solid var(--line);align-items:start}
+  .tnode:last-child{border-bottom:0}
+  .tnode .tn{font-weight:700;font-size:15px;color:var(--ink)}
+  .tnode .tn small{display:block;font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--faint);font-weight:700;margin-top:4px}
+  .tnode .td{font-size:14px;color:var(--soft);line-height:1.55}
+  .tnode .td b{color:var(--ink)}
+  .tnode.kid .tn{padding-left:20px;font-weight:600;font-size:14.5px;position:relative}
+  .tnode.kid .tn::before{content:"";position:absolute;left:4px;top:9px;width:9px;height:1.5px;background:var(--line2)}
+  .tnode.new{background:linear-gradient(90deg,rgba(249,27,42,.045),transparent)}
+  @media(max-width:640px){.tnode{grid-template-columns:1fr;gap:4px}.tnode.kid .tn{padding-left:14px}}
+
+  /* flow strip */
+  .flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(158px,1fr));gap:12px;margin-top:22px}
+  .fstep{border:1px solid var(--line);border-radius:13px;background:var(--paper2);padding:15px 16px;position:relative}
+  .fstep .fn{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--blue-deep);font-weight:700}
+  .fstep b{display:block;font-size:14.5px;margin-top:7px}
+  .fstep p{font-size:13px;color:var(--soft);margin-top:5px;line-height:1.5}
+  .fstep.end{background:var(--jm-wash);border-color:#F7C9CD}
+  .fstep.end .fn{color:var(--jm-deep)}
+
+  /* swatches */
+  .sw{display:grid;grid-template-columns:repeat(auto-fit,minmax(132px,1fr));gap:12px;margin-top:20px}
+  .swi{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--paper2)}
+  .swi .chip{height:62px;display:block}
+  .swi .m{padding:10px 12px;font-size:12.5px;line-height:1.45}
+  .swi .m b{display:block;font-size:13px}
+  .swi .m code{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--faint)}
+
+  /* type specimen */
+  .spec{margin-top:20px;border:1px solid var(--line);border-radius:14px;background:var(--paper2);padding:20px 22px}
+  .spec .sl{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--faint);font-weight:700}
+  .spec .s1{font-size:34px;font-weight:700;letter-spacing:-.02em;line-height:1.12;margin-top:6px}
+  .spec .s2{font-size:19px;font-weight:600;margin-top:16px}
+  .spec .s3{font-size:16px;color:var(--soft);margin-top:10px;max-width:60ch}
+  .spec .s4{font-family:"JetBrains Mono",monospace;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--blue-deep);font-weight:700;margin-top:16px}
+  .spec hr{border:0;border-top:1px solid var(--line);margin:18px 0}
+</style>
+
+<style>
+/* IAQ plan devices */
+.sec-n{font-family:"JetBrains Mono",monospace;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue-deep);font-weight:700;display:block;margin-bottom:7px}
+.si{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:22px 0 6px}
+.si>div{border:1px solid var(--line);border-radius:12px;background:var(--paper2);padding:15px 17px}
+.si k{display:flex;align-items:center;gap:8px;font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue-deep);font-weight:700}
+.si k s{width:8px;height:8px;border-radius:2px;background:var(--blue);display:inline-block;text-decoration:none}
+.si .c k s{background:var(--jm)}.si .c k{color:var(--jm-deep)}
+.si p{font-size:14px;color:var(--soft);margin-top:8px;line-height:1.55}.si p b{color:var(--ink)}
+.dwrap{margin-top:18px;border:1px solid var(--line);border-radius:14px;background:#fff;overflow:hidden;break-inside:avoid}
+.dhead{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;padding:12px 16px;background:var(--paper2);border-bottom:1px solid var(--line)}
+.dhead b{font-family:"JetBrains Mono",monospace;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue-deep);font-weight:700}
+.dhead span{font-size:14px;color:var(--soft)}
+.dbody{padding:18px}
+.dbody svg{width:100%;height:auto;display:block}
+.fx-h{font-family:"Fraunces",serif;font-weight:500;font-size:24px;margin:38px 0 8px;letter-spacing:-.01em}
+/* decisions and strategy tables */
+table.dec td:first-child{font-weight:700;color:var(--ink);white-space:nowrap}
+.bstable{margin-top:18px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--paper2)}
+.bshead{display:grid;grid-template-columns:1fr 1.6fr;background:var(--dark);color:#fff;font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase}
+.bshead span{padding:11px 16px}
+.bsrow{display:grid;grid-template-columns:1fr 1.6fr;border-top:1px solid var(--line)}
+.bsrow>div{padding:16px}
+.bs-idea{background:var(--wash)}
+.bs-k{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--blue-deep);font-weight:700;display:block;margin-bottom:6px}
+.bsrow p{font-size:14.5px;color:var(--soft);line-height:1.55}.bsrow p b{color:var(--ink)}
+/* the ladder */
+.ladder{margin-top:20px;display:flex;flex-direction:column;gap:10px}
+.rung{display:grid;grid-template-columns:52px 1fr 190px;gap:16px;align-items:center;border:1px solid var(--line);border-radius:12px;background:var(--paper2);padding:14px 18px}
+.rung .rn{font-family:"Fraunces",serif;font-size:26px;color:var(--faint);font-weight:500}
+.rung b{display:block;font-size:16px}.rung p{font-size:14px;color:var(--soft);margin-top:3px}
+.rung .who{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);text-align:right}
+.rung.us{background:var(--dark);border-color:var(--dark);color:#fff}.rung.us .rn{color:#FF9AA2}.rung.us p{color:#AEB9D2}.rung.us .who{color:#FF9AA2}
+/* audience loop */
+.fnwrap{padding:18px}
+.fnrow{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.fnstage{border:1px solid var(--line);border-radius:12px;background:var(--paper2);padding:14px 15px}
+.fn-k{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--blue-deep);font-weight:700;display:flex;gap:8px;align-items:center}
+.fn-k i{font-style:normal;background:var(--blue);color:#fff;border-radius:5px;padding:2px 6px;font-size:10px}
+.fnstage p{font-size:13.5px;color:var(--soft);margin-top:7px}
+.fnstage ul{list-style:none;margin-top:10px;display:flex;flex-direction:column;gap:5px}
+.fnstage li{font-size:13.5px;padding-left:14px;position:relative}
+.fnstage li::before{content:"";position:absolute;left:0;top:8px;width:6px;height:6px;border-radius:2px;background:var(--blue)}
+.fnsplit{text-align:center;font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin:16px 0 12px;position:relative}
+.fnsplit::before{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:var(--line)}
+.fnsplit span{background:#fff;padding:0 12px;position:relative}
+.fnouts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.fnout{border:1px solid var(--line);border-left:4px solid var(--o);border-radius:12px;background:var(--paper2);padding:14px 15px}
+.fno-k{font-weight:700;font-size:15px;color:var(--o)}
+.fnout p{font-size:13.5px;color:var(--soft);margin-top:6px}
+.fnout ul{list-style:none;margin-top:9px;display:flex;flex-direction:column;gap:5px}
+.fnout li{font-size:13.5px;padding-left:14px;position:relative}
+.fnout li::before{content:"";position:absolute;left:0;top:8px;width:6px;height:6px;border-radius:2px;background:var(--o)}
+/* route cards */
+.route{margin-top:16px;border:1px solid var(--line);border-radius:14px;background:var(--paper2);overflow:hidden}
+.route .rh{display:flex;align-items:baseline;gap:12px;padding:14px 18px;background:var(--wash);border-bottom:1px solid var(--line)}
+.route .rh b{font-family:"Fraunces",serif;font-size:20px;font-weight:500}
+.route .rh span{font-size:13px;color:var(--soft)}
+.route ol{counter-reset:r;list-style:none;display:grid;grid-template-columns:repeat(5,1fr);gap:0;padding:0}
+.route li{counter-increment:r;padding:14px 16px;border-right:1px solid var(--line);font-size:13.5px;color:var(--soft);position:relative}
+.route li:last-child{border-right:0}
+.route li::before{content:counter(r,decimal-leading-zero);display:block;font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.1em;color:var(--blue-deep);font-weight:700;margin-bottom:6px}
+.route li b{display:block;color:var(--ink);margin-bottom:3px}
+.route li.ask{background:rgba(249,27,42,.05)}.route li.ask::before{color:var(--jm-deep)}
+/* page briefs */
+.pb{margin-top:14px;border:1px solid var(--line);border-radius:14px;background:var(--paper2);overflow:hidden}
+.pb .ph{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:baseline;padding:14px 18px;border-bottom:1px solid var(--line)}
+.pb .ph b{font-family:"Fraunces",serif;font-size:20px;font-weight:500}
+.pb .ph code{font-family:"JetBrains Mono",monospace;font-size:11.5px;color:var(--faint)}
+.pb .pg{display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr;gap:0}
+.pb .pg>div{padding:14px 18px;border-right:1px solid var(--line);font-size:13.5px;color:var(--soft);line-height:1.55}
+.pb .pg>div:last-child{border-right:0}
+.pb .pg k{display:block;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue-deep);font-weight:700;margin-bottom:6px}
+.pb .pg ul{list-style:none;display:flex;flex-direction:column;gap:3px}
+.pb .pg li{padding-left:12px;position:relative}.pb .pg li::before{content:"";position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:2px;background:var(--blue)}
+.pb .pg .ask{color:var(--jm-deep);font-weight:700}
+.pb.new .ph b::after{content:"new";font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--jm-deep);background:var(--jm-wash);border:1px solid #F7C9CD;border-radius:5px;padding:2px 6px;margin-left:10px;vertical-align:middle}
+/* scored gap table */
+table.gap td.sc{font-size:15px}
+/* rules and acceptance */
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:18px}
+.rule{border:1px solid var(--line);border-radius:12px;background:var(--paper2);padding:14px 16px}
+.rule k{display:block;font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--blue-deep);font-weight:700}
+.rule b{display:block;margin-top:5px;font-size:15px}.rule p{font-size:13.5px;color:var(--soft);margin-top:4px}
+@media(max-width:900px){
+  .si,.fnrow,.fnouts{grid-template-columns:1fr}
+  .bshead,.bsrow{grid-template-columns:1fr}.bshead span:last-child{display:none}
+  .rung{grid-template-columns:44px 1fr}.rung .who{grid-column:2;text-align:left}
+  .route ol{grid-template-columns:1fr}.route li{border-right:0;border-bottom:1px solid var(--line)}
+  .pb .pg{grid-template-columns:1fr}.pb .pg>div{border-right:0;border-bottom:1px solid var(--line)}
+}
+</style>
+</head>
+<body>
+<div class="bmws" style="--bmws-acc:#F91B2A"><div class="bmws-in"><div class="bmws-crumb"><b>Jom Makcik &middot; Website 1</b><span>Brand Method &middot; Admin Navigation</span></div><nav class="bmws-tabs"><a href="audit.html"><i>00</i>Web Audit</a><a href="competitors.html"><i>01</i>Competitors</a><a href="plan.html" class="on"><i>02</i>Web Plan</a><a href="design.html"><i>03</i>Design</a><a href="index.html"><i>04</i>Prototype Web 1</a><a href="review.html"><i>05</i>Review</a><a href="qa.html"><i>06</i>Q&amp;A</a></nav></div></div>
+
+<nav class="chapnav"><div class="chapnav-in">
+  <a href="#c00"><span class="ch-no">00</span>Decided</a>
+  <a href="#c01"><span class="ch-no">01</span>Strategy</a>
+  <a href="#c02"><span class="ch-no">02</span>Best in class</a>
+  <a href="#c03"><span class="ch-no">03</span>The whole site</a>
+  <a href="#c04"><span class="ch-no">04</span>Audiences</a>
+  <a href="#c05"><span class="ch-no">05</span>Pages together</a>
+  <a href="#c06"><span class="ch-no">06</span>Look and feel</a>
+  <a href="#c07"><span class="ch-no">07</span>After launch</a>
+</div></nav>
+
+<div class="wrap">
+  <header class="hero">
+    <span class="eyebrow">Web Plan &middot; Brand Method</span>
+    <h1>How the new site <em>is built to work</em></h1>
+    <p class="lede">One Canva page becomes a fourteen page site with a spine. This document is the plan
+      the prototype was built from and the plan the full build will be held to: what was decided, the
+      argument, every page, every audience, how the pages link, how it looks, and what happens after
+      launch. Anything in the prototype that contradicts this document is the prototype's error.</p>
+    <div class="vrow">
+      <div class="vchip">Revised <b>10 Sep 2026</b></div>
+      <div class="vchip">For <b>Dr Sazlina Kamaralzaman, CEO</b></div>
+      <div class="vchip">Pages <b>14 in EN, 14 in BM</b></div>
+      <div class="vchip">Built as <b>Prototype Web 1</b>, tab 03</div>
+    </div>
+    <div class="execsum">
+      <span class="k">The plan in five lines</span>
+      <p><b>One page becomes a site with a spine.</b> Three service pages, a coverage set, proof, pricing, FAQ, About, the Adinita programme and a real footer. Each one is a door from search that the current single page cannot be.</p>
+      <p><b>One booking path replaces two systems and a dead end.</b> AbiliCar, Lady Driver and Chaperone book through one flow that captures a phone number and hands off to WhatsApp.</p>
+      <p><b>The credentials get sentences, not logos.</b> PERKESO, JKM, Yayasan Hasanah, UKM, UPM, UTM, UiTM and the hospitals each get one line explaining the relationship.</p>
+      <p><b>Accessibility is the build standard, not a feature.</b> 16 px body copy, 44 px targets, real headings, written alt text, keyboard operable, AA contrast.</p>
+      <p><b>Bahasa Melayu ships with English, not after it.</b> The buyer is often the adult child, but the passenger and most Adinita drivers read BM first.</p>
+    </div>
+  </header>
+
+  <!-- 00 ══════════════════════════════════════════════════════════ -->
+  <div class="chapdiv" id="c00"><div class="cd-no">00</div><div>
+    <h2 class="cd-h">What was decided in the 9 and 10 September review</h2>
+    <div class="cd-sub">Bazil walked the prototype live across two days. These decisions are locked into everything below.</div>
+  </div></div>
+  <section>
+    <p class="sec-intro">Every one of these was given as a direct instruction while looking at the prototype, and every one of them is now built. Anything below that contradicts this table is superseded by the table.</p>
+    <table class="dec">
+      <thead><tr><th>Decision</th><th>What it means for the build</th></tr></thead>
+      <tbody>
+        <tr><td>White base</td><td>Every section sits on white. The earlier cream was rejected as yellow, and the cool grey that replaced it was removed on 10 September on <q>no grey layout</q>. Cards carry a shadow, never a ground. Dark is allowed only for the banner film and nothing else.</td></tr>
+        <tr><td>The banner is the film</td><td>The whole hero is Jom Makcik's own three minute film, muted and looping five chosen scenes, cropped so no burnt in subtitles and no YouTube chrome are ever visible. The poster paints first; the film fades in after load and is skipped on phones and under reduced motion.</td></tr>
+        <tr><td>No lines</td><td>No decorative rules, dividers, or grid borders anywhere. Sections separate by whitespace and ground colour. Cards use soft shadow, not borders.</td></tr>
+        <tr><td>No eyebrows</td><td>No small uppercase label above a heading. Every section opens on its h2.</td></tr>
+        <tr><td>No monospace on the client site</td><td>Mono is confined to our admin bar. All small text is the body sans.</td></tr>
+        <tr><td>No dashes</td><td>No em dash, en dash or middot as a separator in visible copy, in either language.</td></tr>
+        <tr><td>Fonts match the logo</td><td>Poppins for headings, because it is the nearest match to the wordmark. Plus Jakarta Sans for everything else. Display weight 600, headings 500. Never heavier.</td></tr>
+        <tr><td>Horizontal lockup</td><td>Logo mark on the left, wordmark on the right. The stacked lockup on the current site is not suitable for web. The real artwork was cropped into two files rather than redrawn.</td></tr>
+        <tr><td>Header transparent over the film</td><td>The site header is invisible at the top of the page and turns white with a lift once the visitor scrolls.</td></tr>
+        <tr><td>Contact is not a page</td><td>Contact duplicated Book a ride, so it is gone from the nav. Services, Pricing, Coverage and About are pages of their own; in this version they sit in the nav greyed and unclickable until they are built.</td></tr>
+        <tr><td>Partner marquee, in colour</td><td>All fourteen partner logos, full colour, one uniform height, looping left to right, paused on hover.</td></tr>
+        <tr><td>Partner cards, flat</td><td>A horizontally flowing rail of flat grey cards, no borders, no notched corner. Logo, name, one sentence on the relationship.</td></tr>
+        <tr><td>Comparison order and visuals</td><td>Jom Makcik on the left, the standard assisted ride on the right, and both sides carry a generated documentary photograph: the ramp and the khaki field vest on our side, the awkward lift into a car boot on theirs.</td></tr>
+        <tr><td>The chop</td><td>A solid red circular stamp, bottom left of our comparison photo, with the real pin mark at its centre and the wordmark arced around it.</td></tr>
+        <tr><td>Team, once</td><td>The CEO is featured once, with a drawn signature under the quote. She is not repeated in the team grid. Portraits show the team in the khaki field vest, generated from their studio photographs until the shoot replaces them.</td></tr>
+        <tr><td>Stats plain</td><td>Four figures in red, one line captions, no icons, no dividers.</td></tr>
+        <tr><td>Footer white and large</td><td>A CTA band, four columns, social, then the Brand Method ribbon, exactly the IAQ and Tenthpin ribbon and spacing.</td></tr>
+        <tr><td>Tighter page, wider content</td><td>Section padding halved twice, then restored where he asked for air. Container widened to 1340 px with an 18 px gutter so the side margins are half what they were.</td></tr>
+        <tr><td>Home page only, for now</td><td>The prototype is the home page. The thirteen other pages in this plan are briefed here and shown as coming soon in the footer.</td></tr>
+      </tbody>
+    </table>
+    <div class="pin"><b>Also said, and kept:</b> the film section should look premium and let a visitor jump to a scene, the audit numbers must be measured not quoted, and the site must pass the standard the company sells. The audit tab records every number; this plan records every decision.</div>
+  </section>
+
+  <!-- 01 ══════════════════════════════════════════════════════════ -->
+  <div class="chapdiv" id="c01"><div class="cd-no">01</div><div>
+    <h2 class="cd-h">The strategy, and how the site is organised to carry it</h2>
+    <div class="cd-sub">A position that never reaches a page is a document, not a decision</div>
+  </div></div>
+  <section>
+    <div class="si">
+      <div class="a"><k><s></s>What this section is</k><p>The position Jom Makcik takes, and the exact places on the site where that position becomes visible.</p></div>
+      <div class="b"><k><s></s>Why it matters</k><p>Every operator in the competitor set has a position and none of them show it, which is why they all read the same. The current jommakcik.my is the same: seven years of institutional trust presented as an unlabelled logo wall.</p></div>
+      <div class="c"><k><s></s>What we want from it</k><p><b>Agreement on the argument</b> before Friday, so every later section can be checked against it rather than debated again.</p></div>
+    </div>
+    <div class="bstable">
+      <div class="bshead"><span>The brand decision</span><span>How the site expresses it, and where</span></div>
+      <div class="bsrow"><div class="bs-idea"><span class="bs-k">Positioning</span><p>The only operator in Malaysia that both carries a passenger seated in their own wheelchair and sends a trained woman who walks them in. Not a taxi with a bigger boot.</p></div><div class="bs-site"><p>The hero says it in six words, <b>Stay in your own wheelchair. We walk you in.</b> The comparison block then proves it against the largest competitor's own published limits. Nothing on the page asks the visitor to infer the difference.</p></div></div>
+      <div class="bsrow"><div class="bs-idea"><span class="bs-k">The reason to believe</span><p>Founded by a rehabilitation medicine lecturer whose own patients were missing therapy for want of a ride.</p></div><div class="bs-site"><p>The founder section: her quote, her signature, her credential. Today her clinical background is not on the site at all. It is the strongest trust signal in medical transport and it opens the About page.</p></div></div>
+      <div class="bsrow"><div class="bs-idea"><span class="bs-k">The proof</span><p>PERKESO, JKM, Yayasan Hasanah, AirAsia Foundation, UKM, UPM, UTM, UiTM, two specialist hospitals, roughly 600 trained drivers.</p></div><div class="bs-site"><p>Three placements. A colour marquee directly under the hero for recognition. A flat card rail on Home with one sentence per partner for meaning. A full Partners page for the referrer who needs to check.</p></div></div>
+      <div class="bsrow"><div class="bs-idea"><span class="bs-k">The market fact</span><p>68% of Malaysian seniors avoid medical appointments because they cannot get there. Published by Yayasan Hasanah, one of their own partners, three weeks ago.</p></div><div class="bs-site"><p>The first number in the stat band, and the opening line of the Dialysis and Hospital pages. The problem statement is theirs to own because their partner published it.</p></div></div>
+      <div class="bsrow"><div class="bs-idea"><span class="bs-k">The commercial wedge</span><p>Nobody commercial in this category publishes a price. Only the NGO does.</p></div><div class="bs-site"><p>A Pricing section on Home and a Pricing page, with written quotes promised before booking. Rates are shown as On request until Dr Sazlina confirms them; the structure is already built to hold real numbers.</p></div></div>
+      <div class="bsrow"><div class="bs-idea"><span class="bs-k">The workforce</span><p>Adinita: adiwira wanita, female heroes. Roughly 600 women on a 75% revenue share.</p></div><div class="bs-site"><p>Today a login button. On the new site a named programme page, Drive with us, that recruits as well as reassures, and a figure in the stat band on Home.</p></div></div>
+      <div class="bsrow"><div class="bs-idea"><span class="bs-k">The language</span><p>The buyer is often the adult child reading English; the passenger and most drivers read Malay first.</p></div><div class="bs-site"><p>Every string on every page in both languages, switched by the flag toggle in the header, remembered between visits, with the document language set correctly for screen readers.</p></div></div>
+    </div>
+    <div class="fx-h">How the site is organised to carry it</div>
+    <p class="sec-intro">Six navigation groups, each designed and signed off as a set. A new service, a new area or a new partner slots into its group on the same template with no rebuild.</p>
+    <table>
+      <thead><tr><th>Group</th><th>Carries</th><th>Pages</th><th>The one action</th></tr></thead>
+      <tbody>
+        <tr><td class="dim">Home</td><td>The position, the proof, the film, the price story</td><td>1</td><td>Book a ride</td></tr>
+        <tr><td class="dim">Services</td><td>What each product does, for whom, with a real photograph</td><td>5</td><td>Book this service</td></tr>
+        <tr><td class="dim">Coverage</td><td>Where the vans go, honestly, with the notice period</td><td>1 + 4 areas</td><td>Check my area, then book</td></tr>
+        <tr><td class="dim">Pricing</td><td>Indicative rates and the monthly dialysis figure</td><td>1</td><td>Get a written quote</td></tr>
+        <tr><td class="dim">About</td><td>The founder, the team, the partners, the Adinita programme</td><td>3</td><td>Book, or apply to drive</td></tr>
+        <tr><td class="dim">Help</td><td>FAQ, Book, Privacy, Terms</td><td>4</td><td>Book a ride</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 02 ══════════════════════════════════════════════════════════ -->
+  <div class="chapdiv" id="c02"><div class="cd-no">02</div><div>
+    <h2 class="cd-h">How this site becomes the best in its category</h2>
+    <div class="cd-sub">Not a claim, an argument, built on what six operators actually publish</div>
+  </div></div>
+  <section>
+    <div class="si">
+      <div class="a"><k><s></s>What this section is</k><p>The evidence that this approach beats the field: what six operators do, where every one of them stops, and the five moves that take the open ground.</p></div>
+      <div class="b"><k><s></s>Why it matters</k><p>Design decisions get overturned when nobody remembers why they were made. This is the reasoning that holds the rest of the plan together under pressure.</p></div>
+      <div class="c"><k><s></s>What we want from it</k><p><b>Confidence that the ambition is real</b>, and answers on the three conditions at the end, because two of them need Jom Makcik rather than us.</p></div>
+    </div>
+    <div class="fx-h">The gap, in four numbers</div>
+    <div class="stats">
+      <div class="stat"><div class="num">6</div><div class="lab">Operators profiled</div><div class="s">including the platform that arrived in December</div></div>
+      <div class="stat"><div class="num">1</div><div class="lab">Publishing a price</div><div class="s">and it is the non profit</div></div>
+      <div class="stat"><div class="num">1</div><div class="lab">Running a content programme</div><div class="s">Love On Wheels, uncontested</div></div>
+      <div class="stat"><div class="num">0</div><div class="lab">Explaining their partners</div><div class="s">every site shows logos, none say why</div></div>
+    </div>
+    <div class="pin jm"><b>The finding that makes this possible.</b> GrabAssist, the best funded entrant this market has ever had, publishes its own two limits: a foldable wheelchair only, and drivers who may not leave the vehicle. Those two sentences describe Jom Makcik's two products. The competitor wrote the positioning; the site only has to say it.</div>
+
+    <div class="fx-h">Where every competitor stops, and where this site goes</div>
+    <div class="ladder">
+      <div class="rung"><span class="rn">01</span><div><b>We exist</b><p>A page, a WhatsApp number, a few photos. The visitor learns the company is real and nothing else.</p></div><span class="who">most of the field, and jommakcik.my today</span></div>
+      <div class="rung"><span class="rn">02</span><div><b>We have a van with a lift</b><p>A fleet described, coverage listed, 24 hours claimed. Pearlcare and Love On Wheels live here.</p></div><span class="who">the commercial benchmark</span></div>
+      <div class="rung"><span class="rn">03</span><div><b>We write pages people search for</b><p>Service pages, hospital pages, a state by state blog. One operator does this and wins the search results by default.</p></div><span class="who">Love On Wheels</span></div>
+      <div class="rung"><span class="rn">04</span><div><b>We tell you the price</b><p>A fare on the page. One operator does it, and it is the association with five vans and four days notice.</p></div><span class="who">Mobiliti, the NGO</span></div>
+      <div class="rung us"><span class="rn">05</span><div><b>We say what the others cannot do, and prove who stands behind us</b><p>The competitor's own limits quoted on the page. Every partner explained in a sentence. A clinician founder named. A price promised in writing. All of it in two languages, at a speed and an accessibility standard nobody else in the category meets.</p></div><span class="who">this site</span></div>
+    </div>
+
+    <div class="fx-h">The five moves</div>
+    <div class="goals2">
+      <div class="goal"><span class="gi">01</span><div><b>Say the moat in the hero</b><p>Stay in your own wheelchair. We walk you in. Six words the largest competitor cannot use, placed where a comparison shopper reads first.</p></div></div>
+      <div class="goal"><span class="gi">02</span><div><b>Quote the competitor's limits, with a photograph of each</b><p>Their words about foldable chairs and drivers who stay in the car, beside a picture of what that looks like for a family, beside a picture of the ramp and the khaki field vest.</p></div></div>
+      <div class="goal"><span class="gi">03</span><div><b>Turn logos into sentences</b><p>Sixteen relationships, each explained once. PERKESO and JKM in particular, because a referrer needs to know whether that is a panel, a funder or a friend.</p></div></div>
+      <div class="goal"><span class="gi">04</span><div><b>Publish the price</b><p>Indicative rates and the monthly dialysis figure. Being the first commercial operator to do it takes the no surprises position on a recurring medical spend.</p></div></div>
+      <div class="goal"><span class="gi">05</span><div><b>Take the search ground</b><p>Fourteen pages in two languages, each titled with what a person actually types, against a single English page today.</p></div></div>
+    </div>
+    <div class="fx-h">Three conditions, two of them theirs</div>
+    <ul class="tick x">
+      <li><b>Real prices.</b> The pricing structure is built. It shows On request until Dr Sazlina confirms figures. Move four does not exist without them.</li>
+      <li><b>Partner wording.</b> PERKESO and JKM must approve one sentence each. Move three cannot go live on guesses.</li>
+      <li><b>Photography.</b> The prototype uses their existing photos plus two generated scenes. A half day shoot, the team in the khaki field vest beside a vehicle, replaces the generated frames and the generated portraits.</li>
+    </ul>
+  </section>
+
+  <!-- 03 ══════════════════════════════════════════════════════════ -->
+  <div class="chapdiv" id="c03"><div class="cd-no">03</div><div>
+    <h2 class="cd-h">The whole site, top to bottom</h2>
+    <div class="cd-sub">Every page on one map, then every page written out in full</div>
+  </div></div>
+  <section>
+    <div class="si">
+      <div class="a"><k><s></s>What this section is</k><p>Every page on one map, grouped by the main navigation, with sub pages under the page they belong to.</p></div>
+      <div class="b"><k><s></s>Why it matters</k><p>It is the only view that shows the whole site at once. Scope arguments end here, because a page either exists on this map or it does not.</p></div>
+      <div class="c"><k><s></s>What we want from it</k><p><b>Sign off on the shape</b>: fourteen pages, six groups, nothing more than two clicks from Home.</p></div>
+    </div>
+    <div class="dwrap">
+      <div class="dhead"><b>Diagram 01</b><span>Site structure, grouped by the main navigation &middot; every page is also served in Bahasa Melayu at the same address</span></div>
+      <div class="dbody">
+        <svg viewBox="0 0 1100 560" role="img" aria-label="Site tree. Home at the top. Six groups below it: Services with five pages, Coverage with a parent and four area pages, Pricing, About with three pages, Help with four pages. Every branch ends at Book a ride.">
+          <defs><style>
+            .nb{fill:#FCFDFF;stroke:#D6DCEA;stroke-width:1.3}
+            .nb.home{fill:#0E1424;stroke:#0E1424}.nb.grp{fill:#EEF1FE;stroke:#C9D0F5}.nb.ask{fill:#FFF1F2;stroke:#F7C9CD}
+            .nt{font-family:Inter,sans-serif;font-size:12.5px;fill:#101626;font-weight:600}
+            .nt.w{fill:#fff}.nt.sub{font-weight:400;fill:#4A5468;font-size:11.5px}
+            .ln{fill:none;stroke:#C9D0F5;stroke-width:1.5}
+          </style></defs>
+          <!-- home -->
+          <rect class="nb home" x="490" y="16" width="120" height="38" rx="8"/><text class="nt w" x="550" y="40" text-anchor="middle">Home</text>
+          <path class="ln" d="M550 54v22M110 76H990M110 76v18M330 76v18M550 76v18M770 76v18M990 76v18"/>
+          <!-- groups -->
+          <rect class="nb grp" x="50" y="94" width="120" height="34" rx="8"/><text class="nt" x="110" y="116" text-anchor="middle">Services</text>
+          <rect class="nb grp" x="270" y="94" width="120" height="34" rx="8"/><text class="nt" x="330" y="116" text-anchor="middle">Coverage</text>
+          <rect class="nb grp" x="490" y="94" width="120" height="34" rx="8"/><text class="nt" x="550" y="116" text-anchor="middle">Pricing</text>
+          <rect class="nb grp" x="710" y="94" width="120" height="34" rx="8"/><text class="nt" x="770" y="116" text-anchor="middle">About</text>
+          <rect class="nb grp" x="930" y="94" width="120" height="34" rx="8"/><text class="nt" x="990" y="116" text-anchor="middle">Help</text>
+          <!-- services children -->
+          <path class="ln" d="M110 128v24M110 152h0"/>
+          <g>
+            <rect class="nb" x="30" y="156" width="160" height="30" rx="7"/><text class="nt" x="110" y="175" text-anchor="middle">AbiliCar</text>
+            <rect class="nb" x="30" y="196" width="160" height="30" rx="7"/><text class="nt" x="110" y="215" text-anchor="middle">Lady Drivers</text>
+            <rect class="nb" x="30" y="236" width="160" height="30" rx="7"/><text class="nt" x="110" y="255" text-anchor="middle">Chaperone</text>
+            <rect class="nb" x="30" y="276" width="160" height="30" rx="7"/><text class="nt" x="110" y="295" text-anchor="middle">Dialysis transport</text>
+            <rect class="nb" x="30" y="316" width="160" height="30" rx="7"/><text class="nt" x="110" y="335" text-anchor="middle">Hospital and clinic</text>
+            <path class="ln" d="M110 186v10M110 226v10M110 266v10M110 306v10"/>
+          </g>
+          <!-- coverage children -->
+          <path class="ln" d="M330 128v28"/>
+          <g>
+            <rect class="nb" x="250" y="156" width="160" height="30" rx="7"/><text class="nt" x="330" y="175" text-anchor="middle">Where we go</text>
+            <path class="ln" d="M330 186v10"/>
+            <rect class="nb" x="250" y="196" width="160" height="30" rx="7"/><text class="nt sub" x="330" y="215" text-anchor="middle">Selangor</text>
+            <rect class="nb" x="250" y="236" width="160" height="30" rx="7"/><text class="nt sub" x="330" y="255" text-anchor="middle">Kuala Lumpur</text>
+            <rect class="nb" x="250" y="276" width="160" height="30" rx="7"/><text class="nt sub" x="330" y="295" text-anchor="middle">Putrajaya</text>
+            <rect class="nb" x="250" y="316" width="160" height="30" rx="7"/><text class="nt sub" x="330" y="335" text-anchor="middle">Negeri Sembilan</text>
+            <path class="ln" d="M330 226v10M330 266v10M330 306v10"/>
+          </g>
+          <!-- pricing -->
+          <path class="ln" d="M550 128v28"/>
+          <rect class="nb" x="470" y="156" width="160" height="30" rx="7"/><text class="nt" x="550" y="175" text-anchor="middle">Rates and quotes</text>
+          <!-- about children -->
+          <path class="ln" d="M770 128v28"/>
+          <g>
+            <rect class="nb" x="690" y="156" width="160" height="30" rx="7"/><text class="nt" x="770" y="175" text-anchor="middle">Our story</text>
+            <rect class="nb" x="690" y="196" width="160" height="30" rx="7"/><text class="nt" x="770" y="215" text-anchor="middle">Our partners</text>
+            <rect class="nb" x="690" y="236" width="160" height="30" rx="7"/><text class="nt" x="770" y="255" text-anchor="middle">Drive with us, Adinita</text>
+            <path class="ln" d="M770 186v10M770 226v10"/>
+          </g>
+          <!-- help children -->
+          <path class="ln" d="M990 128v28"/>
+          <g>
+            <rect class="nb" x="910" y="156" width="160" height="30" rx="7"/><text class="nt" x="990" y="175" text-anchor="middle">Questions</text>
+            <rect class="nb ask" x="910" y="196" width="160" height="30" rx="7"/><text class="nt" x="990" y="215" text-anchor="middle">Book a ride</text>
+            <rect class="nb" x="910" y="236" width="160" height="30" rx="7"/><text class="nt sub" x="990" y="255" text-anchor="middle">Privacy</text>
+            <rect class="nb" x="910" y="276" width="160" height="30" rx="7"/><text class="nt sub" x="990" y="295" text-anchor="middle">Terms</text>
+            <path class="ln" d="M990 186v10M990 226v10M990 266v10"/>
+          </g>
+          <!-- every branch ends at Book -->
+          <path class="ln" d="M110 346v40H990v-40M330 346v40M550 186v200M770 266v120" stroke-dasharray="4 5"/>
+          <rect class="nb ask" x="440" y="404" width="220" height="40" rx="9"/><text class="nt" x="550" y="429" text-anchor="middle">Every branch ends at Book a ride</text>
+          <text class="nt sub" x="550" y="482" text-anchor="middle">Book captures service, phone, passenger, date, pickup, destination, wheelchair type, assistance, recurrence</text>
+          <text class="nt sub" x="550" y="504" text-anchor="middle">then opens WhatsApp with the whole booking already written into the message</text>
+          <!-- legend -->
+          <rect class="nb grp" x="40" y="520" width="16" height="14" rx="3"/><text class="nt sub" x="64" y="531">navigation group</text>
+          <rect class="nb" x="200" y="520" width="16" height="14" rx="3"/><text class="nt sub" x="224" y="531">page</text>
+          <rect class="nb ask" x="300" y="520" width="16" height="14" rx="3"/><text class="nt sub" x="324" y="531">the one action</text>
+          <text class="nt sub" x="470" y="531">Both languages at every address. Logins live in the footer only.</text>
+        </svg>
+      </div>
+    </div>
+    <div class="pin"><b>Reading the tree:</b> nothing is more than two clicks from Home, and every branch ends at Book. The wide branch is Services, because the three products are how families self identify, so that is where the site puts its width. The two logins, driver and client, are footer links and never navigation.</div>
+
+    <div class="fx-h">Every page, written out in full</div>
+    <p class="sec-intro">The map is the fast way in. Below is the same fourteen pages written out so the section can be read straight through. Each page: what it is for, the sections on it, where it links, and the one thing it asks. Pages marked new do not exist on jommakcik.my in any form today.</p>
+
+    <div class="pb"><div class="ph"><b>Home</b><code>/</code></div><div class="pg">
+      <div><k>What it is for</k>The thirty second answer: what, for whom, where, roughly what it costs, and how to start. Built as Prototype Web 1.</div>
+      <div><k>Sections</k><ul><li>Film banner, six word headline</li><li>Four figures</li><li>Partner marquee</li><li>Two things a standard ride cannot do</li><li>Three services</li><li>Real journeys</li><li>The film, five chapters</li><li>Pricing and the dialysis story</li><li>Founder and team</li><li>Partner rail</li><li>Where we go</li><li>Questions</li><li>Book</li></ul></div>
+      <div><k>Links to</k><ul><li>Every service page</li><li>Coverage</li><li>Pricing</li><li>Our story</li><li>Questions</li></ul></div>
+      <div><k>The one action</k><span class="ask">Book a ride</span></div>
+    </div></div>
+
+    <div class="pb new"><div class="ph"><b>AbiliCar</b><code>/abilicar</code></div><div class="pg">
+      <div><k>What it is for</k>The highest value page. A Honda N-Box with a factory fitted ramp and Japanese restraints. The passenger never leaves their chair. Answers: will it take her chair, how does the ramp work, what does the driver do, what does it cost.</div>
+      <div><k>Sections</k><ul><li>Ramp photograph, wide</li><li>Who it is for, who it is not</li><li>What fits, dimensions</li><li>How a journey runs, step by step</li><li>Dialysis and hospital use</li><li>Indicative price</li><li>Questions specific to the chair</li></ul></div>
+      <div><k>Links to</k><ul><li>Dialysis transport</li><li>Hospital and clinic</li><li>Pricing</li><li>Coverage</li></ul></div>
+      <div><k>The one action</k><span class="ask">Book AbiliCar</span></div>
+    </div></div>
+
+    <div class="pb new"><div class="ph"><b>Lady Drivers</b><code>/lady-drivers</code></div><div class="pg">
+      <div><k>What it is for</k>Women driving women, children and elders. What Adinita means, how drivers are vetted, who trains them, what a mother can expect.</div>
+      <div><k>Sections</k><ul><li>Driver at the wheel, photograph</li><li>The Adinita programme in one paragraph</li><li>Vetting and training, UTM and UiTM</li><li>Typical journeys</li><li>Indicative price</li></ul></div>
+      <div><k>Links to</k><ul><li>Drive with us</li><li>Chaperone</li><li>Pricing</li></ul></div>
+      <div><k>The one action</k><span class="ask">Book a lady driver</span></div>
+    </div></div>
+
+    <div class="pb new"><div class="ph"><b>Chaperone</b><code>/chaperone</code></div><div class="pg">
+      <div><k>What it is for</k>The companion who walks in, waits through the appointment, handles the queue and the paperwork, and brings the passenger home. Answers the fear nobody says aloud: what if it overruns, what if she is left alone.</div>
+      <div><k>Sections</k><ul><li>Companion at the door, photograph</li><li>Exactly what a chaperone does, in order</li><li>What happens if the appointment overruns</li><li>The message you get when they are home</li><li>Indicative price</li></ul></div>
+      <div><k>Links to</k><ul><li>Hospital and clinic</li><li>AbiliCar</li><li>Pricing</li></ul></div>
+      <div><k>The one action</k><span class="ask">Book a chaperone</span></div>
+    </div></div>
+
+    <div class="pb new"><div class="ph"><b>Dialysis transport</b><code>/dialysis-transport</code></div><div class="pg">
+      <div><k>What it is for</k>Three journeys a week, every week. The highest lifetime value customer on the site. Opens on the 68% figure and the attributed testimonial.</div>
+      <div><k>Sections</k><ul><li>The recurring schedule explained</li><li>The verified RM3,000 to under half testimonial</li><li>Monthly plan and how billing works</li><li>Centres served</li></ul></div>
+      <div><k>Links to</k><ul><li>AbiliCar</li><li>Pricing</li><li>Coverage</li></ul></div>
+      <div><k>The one action</k><span class="ask">Set up a dialysis plan</span></div>
+    </div></div>
+
+    <div class="pb new"><div class="ph"><b>Hospital and clinic</b><code>/hospital-transport</code></div><div class="pg">
+      <div><k>What it is for</k>Appointments, discharges, follow ups. Names the hospitals already worked with, MAHSA Specialist and Hospital Pakar An-Nur. The page a discharge planner lands on.</div>
+      <div><k>Sections</k><ul><li>Discharge day, how it runs</li><li>Hospitals we work with</li><li>Chaperone add on</li><li>Notice and hours, honestly</li></ul></div>
+      <div><k>Links to</k><ul><li>Chaperone</li><li>Our partners</li><li>Book</li></ul></div>
+      <div><k>The one action</k><span class="ask">Book a hospital run</span></div>
+    </div></div>
+
+    <div class="pb new"><div class="ph"><b>Where we go</b><code>/coverage</code></div><div class="pg">
+      <div><k>What it is for</k>The four areas actually served, the honest edge of each, and the notice period. This is the ground Love On Wheels is taking uncontested with state by state content.</div>
+      <div><k>Sections</k><ul><li>Map of the four areas</li><li>One block per area with towns and hospitals</li><li>Beyond these areas, case by case</li><li>Notice period</li></ul></div>
+      <div><k>Links to</k><ul><li>Selangor, Kuala Lumpur, Putrajaya, Negeri Sembilan</li><li>Book</li></ul></div>
+      <div><k>The one action</k><span class="ask">Check my area, then book</span></div>
+    </div></div>
+
+    <div class="pb new"><div class="ph"><b>Four area pages</b><code>/coverage/selangor, /kuala-lumpur, /putrajaya, /negeri-sembilan</code></div><div class="pg">
+      <div><k>What it is for</k>One page each, so a search for wheelchair transport plus a place name lands on a page about that place. Same template, different towns, hospitals and dialysis centres.</div>
+      <div><k>Sections</k><ul><li>Towns served</li><li>Hospitals and dialysis centres in the area</li><li>Typical journey time from Nilai</li><li>Local testimonial when available</li></ul></div>
+      <div><k>Links to</k><ul><li>AbiliCar</li><li>Dialysis transport</li><li>Book</li></ul></div>
+      <div><k>The one action</k><span class="ask">Book in this area</span></div>
+    </div></div>
+
+    <div class="pb new"><div class="ph"><b>Rates and quotes</b><code>/pricing</code></div><div class="pg">
+      <div><k>What it is for</k>Indicative rates per service, what changes the price, and the monthly figure for a recurring dialysis schedule. No commercial operator in the category publishes one.</div>
+      <div><k>Sections</k><ul><li>Rates table, one row per service</li><li>What moves the price: distance, waiting, weekend</li><li>The dialysis monthly plan</li><li>How a written quote works</li></ul></div>
+      <div><k>Links to</k><ul><li>Each service page</li><li>Book</li></ul></div>
+      <div><k>The one action</k><span class="ask">Get a written quote</span></div>
+    </div></div>
+
+    <div class="pb new"><div class="ph"><b>Our story</b><code>/about</code></div><div class="pg">
+      <div><k>What it is for</k>The mother and daughter story, and the part currently missing: a rehabilitation medicine lecturer whose own patients were missing therapy. The team, once each.</div>
+      <div><k>Sections</k><ul><li>The founder, her credential, her quote and signature</li><li>2018 to now, a short timeline</li><li>The team</li><li>A UKM social enterprise, what that means</li></ul></div>
+      <div><k>Links to</k><ul><li>Our partners</li><li>Drive with us</li><li>Book</li></ul></div>
+      <div><k>The one action</k><span class="ask">Book a ride</span></div>
+    </div></div>
+
+    <div class="pb new"><div class="ph"><b>Our partners</b><code>/partners</code></div><div class="pg">
+      <div><k>What it is for</k>Sixteen logos become sixteen reasons to trust. One sentence each saying what the relationship actually is. Built for the referrer: the discharge planner, the PERKESO or JKM officer, the care home.</div>
+      <div><k>Sections</k><ul><li>Government and statutory</li><li>Foundations</li><li>Universities and research</li><li>Hospitals and care</li><li>Commercial</li></ul></div>
+      <div><k>Links to</k><ul><li>Hospital and clinic</li><li>Our story</li><li>Book</li></ul></div>
+      <div><k>The one action</k><span class="ask">Refer a patient</span></div>
+    </div></div>
+
+    <div class="pb new"><div class="ph"><b>Drive with us</b><code>/adinita</code></div><div class="pg">
+      <div><k>What it is for</k>Recruitment for the Adinita network. Supply is as much a constraint as demand. What it pays, what training is given, what the hours look like.</div>
+      <div><k>Sections</k><ul><li>What Adinita means</li><li>The 75% share, plainly</li><li>Training with UTM and UiTM</li><li>A day in the work</li><li>Who can apply</li></ul></div>
+      <div><k>Links to</k><ul><li>Lady Drivers</li><li>Our story</li></ul></div>
+      <div><k>The one action</k><span class="ask">Apply to drive</span></div>
+    </div></div>
+
+    <div class="pb new"><div class="ph"><b>Questions</b><code>/faq</code></div><div class="pg">
+      <div><k>What it is for</k>The things a family would rather not have to phone and ask. Marked up as FAQ schema so the answers can appear in search.</div>
+      <div><k>Sections</k><ul><li>Can you take her if she cannot leave the chair</li><li>How much notice</li><li>What if it runs late</li><li>Can family ride along</li><li>What exactly does a chaperone do</li><li>Are drivers checked</li><li>Outside hours</li></ul></div>
+      <div><k>Links to</k><ul><li>Each service page</li><li>Book</li></ul></div>
+      <div><k>The one action</k><span class="ask">Book a ride</span></div>
+    </div></div>
+
+    <div class="pb"><div class="ph"><b>Book a ride</b><code>/book</code></div><div class="pg">
+      <div><k>What it is for</k>One flow for all three services. Detailed in part 05. Replaces the JotForm quotation page and the app's driver only booking.</div>
+      <div><k>Sections</k><ul><li>Nine fields, in order</li><li>The WhatsApp handoff</li><li>Hours, answered in the flow</li></ul></div>
+      <div><k>Links to</k><ul><li>Questions</li><li>Pricing</li></ul></div>
+      <div><k>The one action</k><span class="ask">Send the booking</span></div>
+    </div></div>
+
+    <div class="pb new"><div class="ph"><b>Privacy and Terms</b><code>/privacy, /terms</code></div><div class="pg">
+      <div><k>What it is for</k>These exist today only on the JotForm page. They belong on the site, in both languages.</div>
+      <div><k>Sections</k><ul><li>What is collected at booking and why</li><li>Cancellation and waiting</li><li>Liability and insurance, plain language</li></ul></div>
+      <div><k>Links to</k><ul><li>Book</li></ul></div>
+      <div><k>The one action</k><span class="ask">none, reference only</span></div>
+    </div></div>
+  
+    <div class="fx-h">The 52 frameworks, checked against the home page</div>
+    <p class="sec-intro">Every framework in the Methodas catalogue, read in order, and where it lives on the prototype. 30 are on the home page or a planned page today, 3 wait on a fact only the company can give, 9 belong to a later page, 10 do not belong on this site at all and are excluded on purpose.</p>
+    <table>
+      <thead><tr><th>Framework</th><th>Where on the prototype</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td class="dim">01 Hero</td><td>Hero: promise, film link, three facts</td><td>Used</td></tr>
+        <tr><td class="dim">02 Origin story</td><td>Founder section, Dr Sazlina's own words</td><td>Used</td></tr>
+        <tr><td class="dim">03 Outcome, not feature</td><td>Hero line and the stat band</td><td>Used</td></tr>
+        <tr><td class="dim">04 Journal page</td><td>Not on the home page. Plan part 05, after launch</td><td>Later</td></tr>
+        <tr><td class="dim">05 Start a conversation</td><td>Footer band, WhatsApp first</td><td>Used</td></tr>
+        <tr><td class="dim">06 Our story so far</td><td>Founder section, since 2018 line</td><td>Used</td></tr>
+        <tr><td class="dim">07 Recognised, certified</td><td>Partner and agency logos, JKM and PERKESO named</td><td>Used</td></tr>
+        <tr><td class="dim">08 In the news</td><td>FMT profile exists. One line and a link on About</td><td>Later</td></tr>
+        <tr><td class="dim">09 Pain</td><td>Why section, the corridor at 4pm</td><td>Used</td></tr>
+        <tr><td class="dim">10 Before and after</td><td>Comparison, ours beside a standard ride</td><td>Used</td></tr>
+        <tr><td class="dim">11 Person behind the brand</td><td>Founder section with signature</td><td>Used</td></tr>
+        <tr><td class="dim">12 Three steps</td><td>Pricing, how a quote works</td><td>Used</td></tr>
+        <tr><td class="dim">13 Process</td><td>Film chapters, five stages of a journey</td><td>Used</td></tr>
+        <tr><td class="dim">14 Products and services</td><td>Three service tiles</td><td>Used</td></tr>
+        <tr><td class="dim">15 Pricing</td><td>Pricing table, prices On request</td><td>Used, prices are the client's</td></tr>
+        <tr><td class="dim">16 Comparison</td><td>Comparison, quoting the platform's published limits</td><td>Used</td></tr>
+        <tr><td class="dim">17 Subscription</td><td>Dialysis monthly row in pricing</td><td>Used, rate is the client's</td></tr>
+        <tr><td class="dim">18 Trial</td><td>A hospital run cannot be trialled. Not used</td><td>Not for this site</td></tr>
+        <tr><td class="dim">19 Proof</td><td>Stat band and the photo wall</td><td>Used</td></tr>
+        <tr><td class="dim">20 Testimonials</td><td>Three customer quotes the company already published, each with a photograph of the service described, in their own section</td><td>Used, names and faces need consent</td></tr>
+        <tr><td class="dim">21 Case study</td><td>One dialysis day told in four directed frames, gate to door and back, with the monthly arithmetic. The name is still hers to give</td><td>Used, name is a client fact</td></tr>
+        <tr><td class="dim">22 Guarantee</td><td>On time, same driver where possible, never transfers. Wording is the client's to give</td><td>Client fact</td></tr>
+        <tr><td class="dim">23 FAQ</td><td>Six questions, sticky heading, WhatsApp beside it</td><td>Used</td></tr>
+        <tr><td class="dim">24 This is for you if</td><td>Four yes lines and one honest no, after services</td><td>Added 11 Sep</td></tr>
+        <tr><td class="dim">25 Explainer video</td><td>The company's own film, banner and chapters</td><td>Used</td></tr>
+        <tr><td class="dim">26 Why we exist</td><td>Why section</td><td>Used</td></tr>
+        <tr><td class="dim">27 Mission and values</td><td>One paragraph in the founder section. Full on About</td><td>Used, partly</td></tr>
+        <tr><td class="dim">28 About: we started this</td><td>About page, plan part 03 site map</td><td>Later page</td></tr>
+        <tr><td class="dim">29 The moment it changed</td><td>About page</td><td>Later page</td></tr>
+        <tr><td class="dim">30 Values, not posters</td><td>About page</td><td>Later page</td></tr>
+        <tr><td class="dim">31 Humans behind the brand</td><td>Team portraits. Home shows the founder, About shows four</td><td>Used, partly</td></tr>
+        <tr><td class="dim">32 Ready to work with us</td><td>Footer band</td><td>Used</td></tr>
+        <tr><td class="dim">33 Hiring</td><td>Drive with us page. The company recruits women drivers</td><td>Later page</td></tr>
+        <tr><td class="dim">34 Journal listing</td><td>Not on the home page</td><td>Later</td></tr>
+        <tr><td class="dim">35 Social</td><td>Footer, three profiles</td><td>Used</td></tr>
+        <tr><td class="dim">36 Events</td><td>Not for this site</td><td>Not for this site</td></tr>
+        <tr><td class="dim">37 Work speaks</td><td>Photo wall, what the service looks like</td><td>Used</td></tr>
+        <tr><td class="dim">38 Free guide</td><td>A hospital visit checklist could earn a number. After launch</td><td>Later</td></tr>
+        <tr><td class="dim">39 Newsletter</td><td>Not for this site</td><td>Not for this site</td></tr>
+        <tr><td class="dim">40 Coming soon</td><td>Not for this site</td><td>Not for this site</td></tr>
+        <tr><td class="dim">41 Quiz</td><td>WhatsApp does this better for this audience</td><td>Not for this site</td></tr>
+        <tr><td class="dim">42 Exit intent</td><td>Never. No popups on a site for worried families</td><td>Never</td></tr>
+        <tr><td class="dim">43 Urgency</td><td>Never. Against the voice</td><td>Never</td></tr>
+        <tr><td class="dim">44 Contact page</td><td>Footer carries it. Contact page in the site map</td><td>Used</td></tr>
+        <tr><td class="dim">45 Booking</td><td>WhatsApp prefilled, phone, action bar</td><td>Used</td></tr>
+        <tr><td class="dim">46 Thank you</td><td>Inside WhatsApp, not a page</td><td>Not for this site</td></tr>
+        <tr><td class="dim">47 Support</td><td>FAQ side column, a person answers</td><td>Used</td></tr>
+        <tr><td class="dim">48 Referral</td><td>Hospital social workers. A referral page later, plan part 04</td><td>Later page</td></tr>
+        <tr><td class="dim">49 Locations and map</td><td>Coverage map with four flags</td><td>Used, rebuilt 11 Sep</td></tr>
+        <tr><td class="dim">50 App</td><td>app.jommakcik.my. Open decision, part 07</td><td>Open decision</td></tr>
+        <tr><td class="dim">51 Changelog</td><td>Not for this site</td><td>Not for this site</td></tr>
+        <tr><td class="dim">52 Resources and docs</td><td>Not for this site</td><td>Not for this site</td></tr>
+        
+      </tbody>
+    </table>
+</section>
+
+  <!-- 04 ══════════════════════════════════════════════════════════ -->
+  <div class="chapdiv" id="c04"><div class="cd-no">04</div><div>
+    <h2 class="cd-h">Four audiences, from the first search to the reply</h2>
+    <div class="cd-sub">A route starts with an event at the visitor's end, not on the homepage</div>
+  </div></div>
+  <section>
+    <div class="si">
+      <div class="a"><k><s></s>What this section is</k><p>The four audiences, from the channel that puts Jom Makcik in front of them, through the path they walk, to the one ask and what happens to those who do not act.</p></div>
+      <div class="b"><k><s></s>Why it matters</k><p>The site carries a family purchase, a recurring medical contract, a referral relationship and a recruitment programme at once. One generic funnel loses three audiences to serve one.</p></div>
+      <div class="c"><k><s></s>What we want from it</k><p><b>Confirmation that these are the four</b>, and one answer: which hospital and agency contacts actually refer today, so the referrer route is built on names rather than assumptions.</p></div>
+    </div>
+    <div class="dwrap">
+      <div class="dhead"><b>Diagram 02</b><span>The whole loop: where they come from, where they land, what they do, the ask, and what happens to the ones who do not act</span></div>
+      <div class="fnwrap">
+        <div class="fnrow">
+          <div class="fnstage"><div class="fn-k"><i>01</i>Where they come from</div><p>How Jom Makcik gets in front of them in the first place.</p><ul><li>Search, on need phrases: wheelchair transport, hantar mak ke hospital, dialysis van</li><li>A hospital discharge desk or a dialysis centre</li><li>A PERKESO or JKM officer</li><li>A shared WhatsApp link, family to family</li><li>The film and social clips</li><li>A driver telling a friend about Adinita</li></ul></div>
+          <div class="fnstage"><div class="fn-k"><i>02</i>Where they land</div><p>Rarely the homepage. Search and referrals drop people deep.</p><ul><li>AbiliCar</li><li>Dialysis transport</li><li>An area page</li><li>Our partners</li><li>Drive with us</li><li>Home, from the shared link</li></ul></div>
+          <div class="fnstage"><div class="fn-k"><i>03</i>What they do on the site</div><p>The route they walk, in the four routes below.</p><ul><li>Check whether her chair fits</li><li>Read the price</li><li>Read what a chaperone does</li><li>Check the area and the notice</li><li>Look for the partner they know</li><li>Watch a chapter of the film</li></ul></div>
+          <div class="fnstage"><div class="fn-k"><i>04</i>The ask</div><p>One action per route, never three competing buttons.</p><ul><li>Book a ride, into WhatsApp with the booking written</li><li>Set up a dialysis plan</li><li>Refer a patient</li><li>Apply to drive</li></ul></div>
+        </div>
+        <div class="fnsplit"><span>Then one of three things happens</span></div>
+        <div class="fnouts">
+          <div class="fnout" style="--o:#137A45"><div class="fno-k">They act</div><p>The WhatsApp message arrives with service, date, pickup, destination and wheelchair type already in it, so the office replies with a quote, not a question.</p><ul><li>Written quote the same day</li><li>Driver named the day before</li><li>Message home when the passenger is back inside</li></ul></div>
+          <div class="fnout" style="--o:#B07A12"><div class="fno-k">They are interested but not ready</div><p>The appointment is next month, or the family is still comparing. This group is early, not lost. The site has to leave them with something.</p><ul><li>The price range, so they can budget</li><li>The FAQ answers, so the fear is smaller</li><li>The film, so the company is remembered</li><li>A shareable page for the rest of the family</li></ul></div>
+          <div class="fnout" style="--o:#D7263D"><div class="fno-k">They leave</div><p>Usually because the page did not answer the one question they had. Every route below names that question so the page answers it first.</p><ul><li>Can you take her chair: answered on AbiliCar in the first screen</li><li>What does it cost: answered on Pricing and every service page</li><li>Where are you: answered on Coverage and in the hero</li></ul></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fx-h">The four routes</div>
+    <div class="route"><div class="rh"><b>The adult child</b><span>the majority, on a phone, often in a hospital corridor</span></div><ol>
+      <li><b>Event</b>Mother's appointment is next week and nobody can take the day off.</li>
+      <li><b>Channel</b>Searches wheelchair transport near me, or hantar mak ke hospital.</li>
+      <li><b>Lands on</b>AbiliCar or an area page.</li>
+      <li><b>Needs to see</b>Can you take a chair like hers, roughly what it costs, will someone stay with her.</li>
+      <li class="ask"><b>The ask</b>Book a ride, WhatsApp, within the hour.</li>
+    </ol></div>
+    <div class="route"><div class="rh"><b>The dialysis household</b><span>the highest lifetime value, three journeys a week, indefinitely</span></div><ol>
+      <li><b>Event</b>A new schedule, or the current arrangement has become too expensive.</li>
+      <li><b>Channel</b>The dialysis centre, or a search for dialysis transport with a place name.</li>
+      <li><b>Lands on</b>Dialysis transport or Pricing.</li>
+      <li><b>Needs to see</b>The monthly number, the reliability promise, the testimonial from someone like them.</li>
+      <li class="ask"><b>The ask</b>Set up a dialysis plan.</li>
+    </ol></div>
+    <div class="route"><div class="rh"><b>The referrer</b><span>a discharge planner, a case manager, a PERKESO or JKM officer, a care home</span></div><ol>
+      <li><b>Event</b>A patient needs transport they cannot arrange themselves, repeatedly.</li>
+      <li><b>Channel</b>Already knows the name from a partner, or from a previous patient.</li>
+      <li><b>Lands on</b>Our partners or Hospital and clinic.</li>
+      <li><b>Needs to see</b>That the company is real, insured, and institutionally known. The partner sentences do this.</li>
+      <li class="ask"><b>The ask</b>Refer a patient, with a direct line to the office.</li>
+    </ol></div>
+    <div class="route"><div class="rh"><b>The future Adinita</b><span>a woman looking for flexible, dignified work</span></div><ol>
+      <li><b>Event</b>Needs income that fits around family.</li>
+      <li><b>Channel</b>A driver friend, a social clip, the film.</li>
+      <li><b>Lands on</b>Drive with us.</li>
+      <li><b>Needs to see</b>What it pays, what training is given, what the hours look like.</li>
+      <li class="ask"><b>The ask</b>Apply to drive.</li>
+    </ol></div>
+  </section>
+
+  <!-- 05 ══════════════════════════════════════════════════════════ -->
+  <div class="chapdiv" id="c05"><div class="cd-no">05</div><div>
+    <h2 class="cd-h">How the pages work together</h2>
+    <div class="cd-sub">Interlinking is what turns a set of pages into a site</div>
+  </div></div>
+  <section>
+    <div class="si">
+      <div class="a"><k><s></s>What this section is</k><p>What a visitor cannot do on the site today, the five linking rules, the booking flow that every page ends at, and the acceptance criteria the build is held to.</p></div>
+      <div class="b"><k><s></s>Why it matters</k><p>Today the most popular service cannot be booked in the company's own app and lands on a JotForm login screen. The links and the flow are where the rebuild earns its money.</p></div>
+      <div class="c"><k><s></s>What we want from it</k><p><b>One decision from Dr Sazlina:</b> whether app.jommakcik.my can take AbiliCar bookings, or the new flow replaces it for customers and the app stays as the dispatch tool.</p></div>
+    </div>
+    <div class="fx-h">What a visitor cannot do on the site today</div>
+    <p class="sec-intro">Every row comes from the audit, not from opinion. The score is the lens the audit gave it. This is the list the rebuild has to close.</p>
+    <table class="gap">
+      <thead><tr><th>What they cannot do</th><th>Score</th><th>Why not, today</th><th>What it costs</th></tr></thead>
+      <tbody>
+        <tr><td class="dim">Book the most popular service in the company's own app</td><td class="sc">2/10</td><td>AbiliCar is not in the app's service list. It goes to a JotForm quotation page with a login button and a US flag.</td><td>The highest value service has the worst path to purchase.</td></tr>
+        <tr><td class="dim">Find out what anything costs</td><td class="sc">1/10</td><td>No rate anywhere. The only number is inside an unattributed testimonial.</td><td>A family budgeting monthly cannot compare, so they delay.</td></tr>
+        <tr><td class="dim">Read the site on a phone</td><td class="sc">2/10</td><td>12.8 px body copy, 22 px buttons, a 24 px menu icon, 12.2 MB, 13 second main content.</td><td>The customer base includes reduced vision and tremor. They leave.</td></tr>
+        <tr><td class="dim">Use a screen reader at all</td><td class="sc">1/10</td><td>Zero headings, 53 of 53 images without alt text.</td><td>An accessibility company excluding its own market.</td></tr>
+        <tr><td class="dim">Learn what any partner relationship is</td><td class="sc">3/10</td><td>Sixteen logos, no captions, no page.</td><td>The strongest credential set in the category proves nothing.</td></tr>
+        <tr><td class="dim">Find the site by searching for what it does</td><td class="sc">1/10</td><td>One page, one sitemap entry, no schema, no BM.</td><td>Love On Wheels wins every search by default.</td></tr>
+        <tr><td class="dim">Share a link that looks like anything</td><td class="sc">2/10</td><td>No og:image. Every WhatsApp share is a blank card.</td><td>A referral business whose referrals render grey.</td></tr>
+        <tr><td class="dim">Know whether the company is open</td><td class="sc">3/10</td><td>Weekdays 8 to 5 on the site, 8 to midnight in the app.</td><td>Dialysis runs three times a week. Discharges happen on Saturdays.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="fx-h">The five linking rules</div>
+    <div class="rules">
+      <div class="rule"><k>Rule 01</k><b>Every service page links to Pricing and Coverage</b><p>The two questions a family asks after "can you take her" are "what does it cost" and "do you come to us". Both answered one click away, always.</p></div>
+      <div class="rule"><k>Rule 02</k><b>Every page ends at Book</b><p>One ask per page, never two competing buttons. Book is the last thing on every page and the sticky action on every phone.</p></div>
+      <div class="rule"><k>Rule 03</k><b>Proof sits beside the ask, not in a separate section</b><p>A partner sentence, a figure or a testimonial appears within one screen of every booking button.</p></div>
+      <div class="rule"><k>Rule 04</k><b>Area pages link to the services that operate there</b><p>A search for a place lands on that place and can book from it without going back to Home.</p></div>
+      <div class="rule"><k>Rule 05</k><b>Logins are footer links, never navigation</b><p>Drivers and existing clients know where to look. New customers never see a login before a booking button.</p></div>
+    </div>
+
+    <div class="fx-h">The booking flow every page ends at</div>
+    <p class="sec-intro">Today's contact form asks for a name, an email and a message, and no phone number, on a business that runs on WhatsApp. These are the fields that turn an enquiry into a job, in this order, and AbiliCar is finally in the same flow as the other two services.</p>
+    <div class="flow">
+      <div class="fstep"><span class="fn">01</span><b>Which service</b><p>AbiliCar, Lady Driver or Chaperone. Sets everything downstream.</p></div>
+      <div class="fstep"><span class="fn">02</span><b>Phone number</b><p>The channel the business runs on. Absent from the current form.</p></div>
+      <div class="fstep"><span class="fn">03</span><b>Passenger and booker</b><p>Usually not the same person.</p></div>
+      <div class="fstep"><span class="fn">04</span><b>Date, time, return</b><p>Most journeys are round trips.</p></div>
+      <div class="fstep"><span class="fn">05</span><b>Pickup and destination</b><p>Distance drives the quote.</p></div>
+      <div class="fstep"><span class="fn">06</span><b>Wheelchair type</b><p>Folds, or stays in the chair. Decides the vehicle.</p></div>
+      <div class="fstep"><span class="fn">07</span><b>Assistance</b><p>Walk in and wait, or drop off only.</p></div>
+      <div class="fstep"><span class="fn">08</span><b>Recurring</b><p>Dialysis is three times a week.</p></div>
+      <div class="fstep end"><span class="fn">09</span><b>Send to WhatsApp</b><p>The whole booking written into the message. The customer presses send.</p></div>
+    </div>
+    <div class="pin warn"><b>The hours question is answered inside the flow.</b> If the real limit is weekdays, the date picker says so and offers the next slot. If the limit is softer than the current copy, the site stops turning away Saturday discharges.</div>
+
+    <div class="fx-h">Acceptance criteria the build is held to</div>
+    <table>
+      <thead><tr><th>Criterion</th><th>Measured how</th><th>Pass</th></tr></thead>
+      <tbody>
+        <tr><td class="dim">Speed</td><td>Slow 4G, 4x CPU, the same rig as the audit</td><td>LCP under 2.5 s, TBT under 200 ms, under 1 MB per page</td></tr>
+        <tr><td class="dim">Accessibility</td><td>Rendered DOM, every page, both languages</td><td>One h1, alt on every image, 44 px targets, AA contrast, keyboard operable, VoiceOver and TalkBack pass</td></tr>
+        <tr><td class="dim">Responsiveness</td><td>320 to 1920 px, nine widths</td><td>No horizontal scroll, menu reachable, a visible action at every width</td></tr>
+        <tr><td class="dim">Language</td><td>Toggle to BM and back, every page</td><td>Every string swaps, nothing lost, document language set</td></tr>
+        <tr><td class="dim">Booking</td><td>Send a test booking from every service page</td><td>WhatsApp opens with all nine fields written</td></tr>
+        <tr><td class="dim">Search</td><td>Sitemap, schema validator, share preview</td><td>28 URLs, LocalBusiness and Service schema valid, og:image on every share</td></tr>
+        <tr><td class="dim">Prototype parity</td><td>Prototype Web 1 checked against part 06</td><td>No rules, no eyebrows, no mono, no dashes, no boxes</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 06 ══════════════════════════════════════════════════════════ -->
+  <div class="chapdiv" id="c06"><div class="cd-no">06</div><div>
+    <h2 class="cd-h">How the site looks and feels</h2>
+    <div class="cd-sub">The design system as built in Prototype Web 1, and the rules it obeys</div>
+  </div></div>
+  <section>
+    <div class="si">
+      <div class="a"><k><s></s>What this section is</k><p>The design system settled and already live in the prototype: grid, spacing, components, colour, type, imagery and motion.</p></div>
+      <div class="b"><k><s></s>Why it matters</k><p>Fourteen pages built by different hands only look like one site if the system is agreed first. It is also where the premium bar is met or lost.</p></div>
+      <div class="c"><k><s></s>What we want from it</k><p><b>Sign off on the direction</b>, and a date for the photo shoot, because the generated portraits and scenes are holding measures.</p></div>
+    </div>
+
+    <div class="fx-h">The rules, from the review</div>
+    <div class="rules">
+      <div class="rule"><k>Ground</k><b>White throughout</b><p>Ink #0E1424 for text. No cream, no grey ground, no warm tint anywhere. Cards and photographs separate from the page with a soft shadow and one 4px radius. Dark is the banner film and nothing else.</p></div>
+      <div class="rule"><k>Lines</k><b>None</b><p>No rules between stats, no grid borders, no dividers. Whitespace, ground colour, and soft shadow separate things.</p></div>
+      <div class="rule"><k>Eyebrows</k><b>None</b><p>Sections open on the heading. No uppercase kicker above it.</p></div>
+      <div class="rule"><k>Type</k><b>Poppins and Plus Jakarta Sans</b><p>Poppins 600 for display, 500 for headings, because it matches the wordmark. Plus Jakarta Sans for all body and small text. No monospace on the client site.</p></div>
+      <div class="rule"><k>Colour</k><b>One red, disciplined</b><p>#F91B2A for the mark, figures and emphasis. #C60815 for buttons, so white text passes AA. #FFF3F4 as the only wash.</p></div>
+      <div class="rule"><k>Punctuation</k><b>No dashes as separators</b><p>Colons, commas and full stops. Applies in Malay too.</p></div>
+      <div class="rule"><k>Boxes</k><b>Only where a card carries an image</b><p>Service cards and the comparison are cards with shadow. FAQ, team and partner entries sit flat on the ground.</p></div>
+      <div class="rule"><k>Titles</k><b>One line when the words fit</b><p>No width cap on headings. A short title sits on one line.</p></div>
+    </div>
+
+    <div class="fx-h">The layout grid</div>
+    <table>
+      <thead><tr><th>Width</th><th>Container</th><th>Behaviour</th></tr></thead>
+      <tbody>
+        <tr><td class="dim">Desktop, 1025 px and up</td><td>1340 px maximum, 18 px gutter</td><td>Side margins deliberately half the earlier draft. Reading text never exceeds 60 characters.</td></tr>
+        <tr><td class="dim">Tablet, 821 to 1024 px</td><td>Full width, 18 px gutter</td><td>Header nav collapses to the menu, the action bar appears, three up rows become one, two up rows stay.</td></tr>
+        <tr><td class="dim">Phone, up to 820 px</td><td>Full width, 16 px gutter</td><td>One card per row, the wordmark hides below 560 px and the mark carries the brand, the film is replaced by its poster.</td></tr>
+      </tbody>
+    </table>
+    <div class="pin"><b>Spacing is a scale, not a judgement:</b> 4, 8, 12, 16, 24, 32, 48, 72. Every margin and padding in the build comes from that list. Section padding is 72 on desktop, 48 on tablet, 26 on phone, after two rounds of the client asking for it tighter and one asking for more air in specific places.</div>
+
+    <div class="fx-h">The component library, as built</div>
+    <table>
+      <thead><tr><th>Component</th><th>What it is for</th><th>Behaviour</th></tr></thead>
+      <tbody>
+        <tr><td class="dim">Film banner</td><td>The client's own film as the whole hero</td><td>Poster paints first. Five scenes loop silently, cropped past the subtitle band and YouTube's chrome. Fades through every scene change. Off on phones and under reduced motion. Hides itself if autoplay is refused.</td></tr>
+        <tr><td class="dim">Header</td><td>Brand, five section links, language, one button</td><td>Transparent over the film, white with a lift on scroll. Sits under the admin bar in the workspace. Menu closes on link tap, on Escape, and when the window widens.</td></tr>
+        <tr><td class="dim">Language toggle</td><td>EN and BM with flags</td><td>Swaps every string on the page, including cloned marquee and rail entries, sets the document language, remembers the choice.</td></tr>
+        <tr><td class="dim">Figures</td><td>Four numbers in red</td><td>One line captions, no icons, no rules.</td></tr>
+        <tr><td class="dim">Partner marquee</td><td>Recognition under the hero</td><td>Fourteen logos, full colour, one height, looping left to right, paused on hover, scrollable under reduced motion.</td></tr>
+        <tr><td class="dim">Comparison</td><td>Us beside the standard assisted ride</td><td>Photograph on each side, the solid red chop bottom left of ours, their published limits quoted on theirs.</td></tr>
+        <tr><td class="dim">Service card</td><td>One product, one photograph, one action</td><td>Icon badge overlapping the image edge, title, body, arrow that widens on hover.</td></tr>
+        <tr><td class="dim">Gallery</td><td>Real journeys</td><td>Five photographs, one large, captions on a gradient.</td></tr>
+        <tr><td class="dim">Film section</td><td>The full film, with sound</td><td>One player, five chapter buttons that seek the same player. A pulse ring on the play button is the one decorative motion on the page.</td></tr>
+        <tr><td class="dim">Pricing</td><td>Rates and the dialysis story</td><td>A rows table beside the quote panel. Rows show On request until real figures exist.</td></tr>
+        <tr><td class="dim">Founder</td><td>The reason to believe</td><td>Large quote, drawn signature, credential, square portrait. The team follows once, flat, in the khaki field vest.</td></tr>
+        <tr><td class="dim">Partner rail</td><td>Meaning, not recognition</td><td>Flat grey cards flowing left to right, logo, name, one sentence, no borders, no notch.</td></tr>
+        <tr><td class="dim">Where we go</td><td>Four areas</td><td>Four cards with a pin, the head office marked with a house.</td></tr>
+        <tr><td class="dim">Questions</td><td>Objections answered before the ask</td><td>Flat accordions, first one open.</td></tr>
+        <tr><td class="dim">Footer</td><td>The close</td><td>White. A CTA band with WhatsApp and Call, brand and tagline, three link columns, social, then the Brand Method ribbon with the IAQ spacing.</td></tr>
+        <tr><td class="dim">Action bar</td><td>Call and WhatsApp on phones and tablets</td><td>Fixed to the bottom at every width where the header button is hidden.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="fx-h">Imagery</div>
+    <p class="sec-intro">Every image on the prototype is theirs or made for them: the logo cropped into a horizontal lockup, eight service photographs, four portraits, fourteen partner logos, and two generated documentary scenes for the comparison. Nothing is stock.</p>
+    <div class="pin warn"><b>The open asset request.</b> The studio portraits are warm brown on a cream backdrop and read as a family studio, not a mobility service. The prototype shows them in the khaki field vest, generated from those photographs, as a holding measure. The brand needs a half day shoot: the team in the khaki field vest on a neutral ground beside a vehicle, the ramp in use with a real passenger, a chaperone walking someone in, and Dr Sazlina's real signature scanned.</div>
+
+    <div class="fx-h">Motion</div>
+    <ul class="tick">
+      <li><b>The banner film</b> is atmosphere, not content. The copy never depends on it.</li>
+      <li><b>The marquee and the partner rail</b> move at walking pace and pause on hover.</li>
+      <li><b>Cards lift</b> 5 px on hover with the image scaling 1.05. Nothing else moves.</li>
+      <li><b>The play button</b> carries a slow pulse ring, the one piece of decoration on the page.</li>
+      <li><b>The Brand Method ribbon</b> waves as cloth, gated by an IntersectionObserver.</li>
+      <li><b>Every one of these stops</b> under prefers-reduced-motion, and the rails become scrollable so nothing is clipped.</li>
+    </ul>
+  </section>
+
+  <!-- 07 ══════════════════════════════════════════════════════════ -->
+  <div class="chapdiv" id="c07"><div class="cd-no">07</div><div>
+    <h2 class="cd-h">What happens after launch</h2>
+    <div class="cd-sub">Templates that carry growth, handover, and the care model</div>
+  </div></div>
+  <section>
+    <div class="si">
+      <div class="a"><k><s></s>What this section is</k><p>What happens once the site is live: the three templates that carry growth, handover, training and the care model.</p></div>
+      <div class="b"><k><s></s>Why it matters</k><p>A site that cannot be extended without a rebuild starts decaying on launch day. Three templates mean a new area, a new service or a new partner is an entry, not a project.</p></div>
+      <div class="c"><k><s></s>What we want from it</k><p><b>Clarity on who owns what after handover</b>, since prices, hours and coverage need a named owner in the office or they go stale the way the current site did.</p></div>
+    </div>
+    <div class="dwrap">
+      <div class="dhead"><b>Diagram 03</b><span>One template, many pages &middot; what adding more looks like</span></div>
+      <div class="dbody">
+        <svg viewBox="0 0 1100 250" role="img" aria-label="Three templates: Service page, Area page and Partner entry. Each template fans out to the pages it produces now and the ones it could produce later.">
+          <defs><style>
+            .tb{fill:#EEF1FE;stroke:#C9D0F5;stroke-width:1.3}.pb2{fill:#FCFDFF;stroke:#D6DCEA;stroke-width:1.2}.fut{fill:#fff;stroke:#D6DCEA;stroke-dasharray:4 4}
+            .tt{font-family:Inter,sans-serif;font-size:12.5px;font-weight:600;fill:#101626}.ts{font-family:Inter,sans-serif;font-size:11.5px;fill:#4A5468}
+            .tl{fill:none;stroke:#C9D0F5;stroke-width:1.4}
+          
+</style></defs>
+          <rect class="tb" x="30" y="90" width="170" height="44" rx="9"/><text class="tt" x="115" y="109" text-anchor="middle">Service template</text><text class="ts" x="115" y="125" text-anchor="middle">photo, who, how, price, book</text>
+          <path class="tl" d="M200 112h40M240 40v144M240 40h30M240 76h30M240 112h30M240 148h30M240 184h30"/>
+          <rect class="pb2" x="270" y="28" width="150" height="24" rx="6"/><text class="ts" x="345" y="44" text-anchor="middle">AbiliCar</text>
+          <rect class="pb2" x="270" y="64" width="150" height="24" rx="6"/><text class="ts" x="345" y="80" text-anchor="middle">Lady Drivers</text>
+          <rect class="pb2" x="270" y="100" width="150" height="24" rx="6"/><text class="ts" x="345" y="116" text-anchor="middle">Chaperone</text>
+          <rect class="pb2" x="270" y="136" width="150" height="24" rx="6"/><text class="ts" x="345" y="152" text-anchor="middle">Dialysis, Hospital</text>
+          <rect class="fut" x="270" y="172" width="150" height="24" rx="6"/><text class="ts" x="345" y="188" text-anchor="middle">Airport, Events, later</text>
+
+          <rect class="tb" x="470" y="90" width="150" height="44" rx="9"/><text class="tt" x="545" y="109" text-anchor="middle">Area template</text><text class="ts" x="545" y="125" text-anchor="middle">towns, hospitals, book here</text>
+          <path class="tl" d="M620 112h30M650 58v108M650 58h30M650 94h30M650 130h30M650 166h30"/>
+          <rect class="pb2" x="680" y="46" width="130" height="24" rx="6"/><text class="ts" x="745" y="62" text-anchor="middle">Selangor, KL</text>
+          <rect class="pb2" x="680" y="82" width="130" height="24" rx="6"/><text class="ts" x="745" y="98" text-anchor="middle">Putrajaya, N. Sembilan</text>
+          <rect class="fut" x="680" y="118" width="130" height="24" rx="6"/><text class="ts" x="745" y="134" text-anchor="middle">Melaka, later</text>
+          <rect class="fut" x="680" y="154" width="130" height="24" rx="6"/><text class="ts" x="745" y="170" text-anchor="middle">Perak, later</text>
+
+          <rect class="tb" x="860" y="90" width="150" height="44" rx="9"/><text class="tt" x="935" y="109" text-anchor="middle">Partner entry</text><text class="ts" x="935" y="125" text-anchor="middle">logo, name, one sentence</text>
+          <path class="tl" d="M935 134v30"/>
+          <rect class="pb2" x="860" y="164" width="150" height="24" rx="6"/><text class="ts" x="935" y="180" text-anchor="middle">16 today, any number later</text>
+
+          <text class="ts" x="550" y="232" text-anchor="middle">Adding a page is filling in a template, not commissioning a design. Both languages every time.</text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="fx-h">At handover, what the office gets on day one</div>
+    <div class="goals2">
+      <div class="goal"><span class="gi">H1</span><div><b>A live walkthrough, recorded</b><p>One session with whoever runs the office. Changing a price, adding a partner, updating hours, done live. The recording stays with Jom Makcik for the next person.</p></div></div>
+      <div class="goal"><span class="gi">H2</span><div><b>Short guides, one job each</b><p>Change a rate. Add or remove an area. Add a testimonial with a name. Swap a photograph. Update the hours everywhere at once.</p></div></div>
+      <div class="goal"><span class="gi">H3</span><div><b>Keys in Jom Makcik's name</b><p>Domain, hosting, analytics and the Google Business Profile stay in the company's accounts. We work inside them, we do not hold them.</p></div></div>
+      <div class="goal"><span class="gi">H4</span><div><b>The audit rerun, in public</b><p>The same rig, run again after launch, with before and after published. It either improved or it did not, and the numbers say which.</p></div></div>
+      <div class="goal"><span class="gi">H5</span><div><b>React ready handoff</b><p>Built to the house handoff standard so an in house or agency developer can take it into React or Next.js without a rewrite.</p></div></div>
+      <div class="goal"><span class="gi">H6</span><div><b>Care, not silence</b><p>A named person to call when something breaks, and a check on the numbers each month rather than an invoice and a disappearance.</p></div></div>
+    </div>
+
+    <div class="fx-h">Decisions still open, and whose they are</div>
+    <table>
+      <thead><tr><th>Decision</th><th>Whose</th><th>Why it matters</th></tr></thead>
+      <tbody>
+        <tr><td class="dim">Real prices per service and the dialysis monthly</td><td>Dr Sazlina</td><td>The pricing structure is built and empty. It is the commercial wedge.</td></tr>
+        <tr><td class="dim">The true hours</td><td>Dr Sazlina</td><td>The site and the app disagree. The booking flow needs one answer.</td></tr>
+        <tr><td class="dim">PERKESO and JKM wording</td><td>Dr Sazlina, then the agencies</td><td>Referral, funding or panel status changes the whole positioning.</td></tr>
+        <tr><td class="dim">app.jommakcik.my and AbiliCar</td><td>Dr Sazlina and whoever built the app</td><td>Whether the new flow feeds the app or replaces it for customers.</td></tr>
+        <tr><td class="dim">The photo shoot</td><td>Jom Makcik, with our brief</td><td>Replaces the generated portraits and scenes.</td></tr>
+        <tr><td class="dim">Two or three customers willing to be named</td><td>Jom Makcik</td><td>Including the dialysis household already quoted anonymously.</td></tr>
+        <tr><td class="dim">Weekend service, yes or no</td><td>Dr Sazlina</td><td>The hero says weekdays, the app says Monday to Friday until midnight. A family with a Saturday dialysis slot needs one answer, and it goes into the hero, the footer, the FAQ and the schema in one edit. Review P10.</td></tr>
+        <tr><td class="dim">Which WhatsApp number is for what</td><td>Jom Makcik office</td><td>Two numbers are published with no roles. One line labels both. Review P12.</td></tr>
+        <tr><td class="dim">Answers to five questions</td><td>Dr Sazlina</td><td>How do I pay, what if I cancel, do you run on weekends, do you go to the airport or outstation, can I book for someone else. One sentence each becomes an FAQ row and a schema entry. Review P14.</td></tr>
+        <tr><td class="dim">Cancellation and payment terms</td><td>Dr Sazlina</td><td>A paragraph from the company becomes the Terms page and the FAQ answer. Review P33.</td></tr>
+        <tr><td class="dim">Four partner sentences</td><td>Jom Makcik, then the partners</td><td>IMM CareHub, managedcare, airasia ride and Oretha's have a logo and a pending line. One sentence each, in wording the partner accepts. Review P09 and P34.</td></tr>
+        <tr><td class="dim">Privacy notice sign off</td><td>Jom Makcik's lawyer or company secretary</td><td>A plain notice under the Personal Data Protection Act 2010 is drafted in both languages on the prototype. The retention line and any referral partners need confirming before launch. Review P32.</td></tr>
+      </tbody>
+    </table>
+    <div class="pin jm"><b>The measure of success is not a prettier website.</b> It is whether a worried adult child, standing in a hospital corridor at 4pm on a phone with two bars, can find Jom Makcik, understand in ten seconds that their mother can stay in her own chair and will not be left alone, and start a booking before the lift arrives.</div>
+  </section>
+
+  <footer>Brand Method &middot; Jom Makcik web plan &middot; revised 10 September 2026 &middot; prepared for Dr Sazlina Kamaralzaman &middot; meeting Friday 11 September, 2pm</footer>
+</div>
+</body>
+</html>

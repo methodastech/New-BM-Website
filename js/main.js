@@ -218,14 +218,14 @@ if (hamburger && mobileMenu) {
   });
 }
 
-const mobileServices = document.querySelector('.nav-mobile-services');
-const mobileServicesToggle = document.querySelector('.nav-mobile-services-toggle');
-if (mobileServices && mobileServicesToggle) {
-  mobileServicesToggle.addEventListener('click', () => {
-    const isOpen = mobileServices.classList.toggle('open');
-    mobileServicesToggle.setAttribute('aria-expanded', String(isOpen));
+document.querySelectorAll('.nav-mobile-services').forEach(group => {
+  const toggle = group.querySelector('.nav-mobile-services-toggle');
+  if (!toggle) return;
+  toggle.addEventListener('click', () => {
+    const isOpen = group.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', String(isOpen));
   });
-}
+});
 
 // Active nav link
 const currentPage = window.location.pathname.includes('/blog/')
@@ -239,7 +239,10 @@ const servicePages = [
   'content-creation.html',
   'website-apps.html'
 ];
-const activePage = servicePages.includes(currentPage) ? 'services.html' : currentPage;
+const workPages = ['work.html', 'portfolio.html', 'logo-gallery.html', 'mascot-gallery.html'];
+const activePage = servicePages.includes(currentPage) ? 'services.html'
+  : (workPages.includes(currentPage) || window.location.pathname.includes('/work/')) ? 'work.html'
+  : currentPage;
 document.querySelectorAll('.nav-links a, .nav-mobile a').forEach(link => {
   const href = link.getAttribute('href').split('/').pop();
   if (href === currentPage || href === activePage || (currentPage === '' && href === 'index.html')) {

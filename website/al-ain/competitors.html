@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AL AiN IT Consultants · Competitor Audit · Brand Method</title>
+<link rel="icon" href="assets/img/logo-mark.webp" type="image/webp">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{--paper:#F7F9FC;--paper2:#FFFFFF;--ink:#0B1526;--soft:#45536B;--faint:#8593A9;--line:#E3E9F2;--line2:#D3DCE8;--org:#1B3FDB;--org-deep:#122FAE;--wash:#E9EEFD;--ok:#128A54;--warn:#C08A1D;--bad:#D7263D;--dark:#0A1630;}
+  *{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+  body{font-family:"Inter",system-ui,sans-serif;background:var(--paper);color:var(--ink);font-size:16px;line-height:1.62;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  .wrap{max-width:none;margin:0;padding:0 22px}.mono{font-family:"JetBrains Mono",monospace}
+  .eyebrow{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--org-deep);display:inline-flex;align-items:center;gap:10px;font-weight:600}
+  .hero{padding:50px 0 8px}.hero h1{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:clamp(32px,5vw,54px);line-height:1.06;letter-spacing:-.02em;margin:18px 0 0;max-width:26ch}.hero h1 em{font-style:normal;color:var(--org-deep)}
+  .hero .lede{font-size:clamp(17px,2vw,20px);color:var(--soft);max-width:68ch;margin:20px 0 0}
+  .vrow{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}.vchip{background:var(--paper2);border:1px solid var(--line);border-radius:999px;padding:8px 15px;font-size:13px;color:var(--soft)}.vchip b{color:var(--org-deep)}
+  section{padding:32px 0}
+  .chapdiv{display:flex;align-items:baseline;gap:18px;padding:42px 0 4px;border-top:1px solid var(--line);margin-top:10px}.cd-no{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:38px;color:var(--org);line-height:1}.cd-h{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:27px;letter-spacing:-.01em}.cd-sub{font-size:15px;color:var(--soft);margin-top:5px}
+  h3.sub{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:21px;margin:30px 0 0}
+  .sec-intro{font-size:16.5px;color:var(--soft);max-width:76ch;margin:15px 0 0}.sec-intro b{color:var(--ink)}
+  .quote{font-family:"Space Grotesk",sans-serif;font-size:18px;color:var(--soft);border-left:3px solid var(--org);padding:6px 0 6px 18px;margin-top:16px}
+  table{width:100%;border-collapse:separate;border-spacing:0;margin-top:18px;font-size:14px;background:var(--paper2);border:1px solid var(--line);border-radius:12px;overflow:hidden}th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}thead th{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#fff;background:var(--dark)}tr:last-child td{border-bottom:none}td.dim{font-weight:600}td.sc2{font-family:"JetBrains Mono",monospace;color:var(--org-deep);font-weight:700;white-space:nowrap}
+  .tbl-scroll{overflow-x:auto;margin-top:18px}.tbl-scroll table{margin-top:0;min-width:820px}
+  .sc{display:inline-block;min-width:30px;text-align:center;font-family:"JetBrains Mono",monospace;font-size:11.5px;font-weight:700;border-radius:6px;padding:3px 8px;border:1px solid var(--line);white-space:nowrap}
+  .sc.hi{background:#E9F7EF;color:#0E7A3C;border-color:#BFE6CE}
+  .sc.mid{background:#FDF6E7;color:#8A5A05;border-color:#E7D3A4}
+  .sc.lo{background:#F1F4F8;color:#65708A;border-color:#D9E0EA}
+  .sc.bad{background:#FDECEA;color:#B3261E;border-color:#F0B6AE}
+  .pin{margin-top:22px;border-left:3px solid var(--org);background:linear-gradient(90deg,rgba(27,63,219,.07),transparent);padding:15px 19px;border-radius:0 12px 12px 0;font-size:15px;display:block}.pin b{color:var(--org-deep)}.pin.warn{border-left-color:var(--warn);background:linear-gradient(90deg,rgba(192,138,29,.09),transparent)}.pin.warn b{color:#96690D}
+  .shotboard{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-top:20px}
+  .shot{background:var(--paper2);border:1px solid var(--line);border-radius:14px;overflow:hidden}.shot img{width:100%;display:block;border-bottom:1px solid var(--line)}.shot .meta{padding:14px 16px}.shot .nm{font-weight:700;font-size:14.5px}.shot .u{font-family:"JetBrains Mono",monospace;font-size:10.5px;color:var(--org-deep);margin-top:2px}.shot .rd{font-size:13px;color:var(--soft);margin-top:7px;line-height:1.5}
+  .shot .mobwrap{display:flex;justify-content:center;align-items:flex-start;background:#EDF1F8;border-bottom:1px solid var(--line);padding:20px 0}.shot .mobwrap img{width:270px;max-width:78%;height:auto;border:1px solid var(--line2);border-radius:16px;box-shadow:0 14px 34px -20px rgba(10,22,48,.4);border-bottom:1px solid var(--line2)}
+  .card{background:var(--paper2);border:1px solid var(--line);border-radius:14px;padding:20px 21px}.card .tag{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--org-deep);font-weight:700}.card h3{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:18.5px;margin-top:8px}.card p{font-size:14px;color:var(--soft);margin-top:9px;line-height:1.55}.card p b{color:var(--ink)}
+  .grid{display:grid;gap:16px;margin-top:22px}.g2{grid-template-columns:repeat(auto-fit,minmax(290px,1fr))}
+  .diagram{margin-top:18px;border:1px solid var(--line);border-radius:14px;background:var(--paper2);padding:18px}.diagram .cap{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--faint);margin-bottom:10px}.diagram svg{width:100%;height:auto;display:block}
+  .moves{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:16px;margin-top:22px}
+  .movecard{background:var(--paper2);border:1px solid var(--line);border-radius:14px;padding:20px 21px}
+  .movecard .mv-k{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--org-deep);font-weight:700}
+  .movecard h3{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:17.5px;margin-top:8px;line-height:1.3}
+  .movecard p{font-size:14px;color:var(--soft);margin-top:9px;line-height:1.55}.movecard p b{color:var(--ink)}
+  .mv-src{margin-top:11px;font-size:12px;color:var(--faint);border-top:1px dashed var(--line2);padding-top:9px}
+  .rvs{display:flex;flex-direction:column;gap:20px;margin-top:22px}
+  .rv{border:1px solid var(--line2);border-radius:14px;background:var(--paper2);overflow:hidden}
+  .rv-h{display:flex;align-items:flex-start;gap:14px;padding:16px 20px 14px;background:#FAFBFD;border-bottom:1px solid var(--line)}
+  .rv-rk{flex:0 0 auto;width:30px;height:30px;border-radius:8px;background:var(--dark);color:#fff;font:700 12px "JetBrains Mono",monospace;display:flex;align-items:center;justify-content:center}
+  .rv-ttl{flex:1 1 auto;min-width:0}
+  .rv-ttl b{display:block;font-family:"Space Grotesk",sans-serif;font-size:17.5px;line-height:1.3;color:var(--ink)}
+  .rv-sub{margin-top:3px;font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--faint)}
+  .rv-th{flex:0 0 auto;display:flex;flex-direction:column;align-items:flex-end;gap:5px;text-align:right}
+  .rv-b{padding:16px 20px 18px}
+  .rv-facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:0 22px;margin-bottom:16px;border-top:1px solid var(--line)}
+  .rv-f{padding:11px 0;border-bottom:1px solid var(--line)}
+  .rv-f k{display:block;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--faint);margin-bottom:4px}
+  .rv-f span{display:block;font-size:13.5px;line-height:1.5;color:var(--ink)}
+  .rv-brand{margin-bottom:16px;padding:12px 15px;border-radius:10px;background:var(--paper);border:1px solid var(--line);font-size:13.5px;line-height:1.6;color:var(--soft)}
+  .rv-brand b{color:var(--ink)}
+  .rv-brand k{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--org-deep);font-weight:700;display:block;margin-bottom:5px}
+  .rv-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+  .rv-c k{display:block;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.07em;text-transform:uppercase;margin-bottom:6px;font-weight:700}
+  .rv-c.up k{color:#B3261E}
+  .rv-c.dn k{color:#0E7A3C}
+  .rv-c ul{margin:0;padding-left:17px}
+  .rv-c li{font-size:13.5px;line-height:1.55;color:var(--soft);margin-bottom:6px}
+  .rv-c li b{color:var(--ink)}
+  .rv-why{margin-top:15px;padding:12px 15px;border-radius:10px;background:var(--wash);border-left:3px solid var(--org);font-size:14px;line-height:1.55;color:var(--ink)}
+  .rv-why b{color:var(--org-deep)}
+  .rv-src{margin-top:11px;font-size:12px;line-height:1.5;color:var(--faint)}
+  .cgroup{margin-top:26px}
+  .cg-h{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+  .cg-h .cg-k{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.1em;color:var(--org-deep);font-weight:700}
+  .cg-h h3{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:19px}
+  .cg-h p{font-size:13.5px;color:var(--soft);flex-basis:100%;margin-top:4px}
+  .cfirms{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin-top:14px}
+  .cfirm{border:1px solid var(--line);border-radius:12px;background:var(--paper2);padding:14px 16px}
+  .cf-h{display:flex;align-items:baseline;justify-content:space-between;gap:8px;flex-wrap:wrap}
+  .cf-h b{font-size:14.5px}
+  .cf-hq{font-family:"JetBrains Mono",monospace;font-size:10px;color:var(--faint);text-transform:uppercase;letter-spacing:.04em}
+  .cf-sc{display:flex;gap:6px;margin-top:8px}
+  .cfirm p{font-size:13px;color:var(--soft);margin-top:8px;line-height:1.5}
+  @media(max-width:640px){.rv-h{flex-wrap:wrap}.rv-th{align-items:flex-start;text-align:left}}
+  footer{padding:34px 0 70px;color:var(--faint);font-size:12px;font-family:"JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.05em;border-top:1px solid var(--line);margin-top:30px}
+</style>
+<style id="printFix">
+@media print{ body{background:#fff} svg *{opacity:1!important} table,tr,td,th,.card,.diagram,.shot,.rv,.cfirm,.movecard{page-break-inside:avoid} h2,h3{page-break-after:avoid} .bmws{display:none!important} }
+</style>
+</head>
+<body>
+<link rel="stylesheet" href="assets/bmws.css?v=1">
+<style>.bmws{position:sticky;top:0;z-index:900}</style>
+<div class="bmws" style="--bmws-acc:#203088"><div class="bmws-in">
+  <div class="bmws-crumb"><b>AL AiN IT Consultants &middot; Web Workspace</b><span>Brand Method &middot; Admin Navigation</span></div>
+  <nav class="bmws-tabs" aria-label="Admin navigation">
+    <a href="audit.html"><i>00</i>Web Audit</a>
+    <a class="on" href="competitors.html"><i>01</i>Competitors</a>
+    <a href="plan.html"><i>02</i>Web Plan</a>
+    <a href="index.html"><i>03</i>Prototype Web 1</a>
+     <a href="review.html"><i>04</i>Review</a>
+  </nav>
+</div></div>
+
+<div class="wrap">
+
+<header class="hero">
+  <span class="eyebrow">AL AiN IT Consultants &middot; Competitor Audit &middot; Web and Brand Lens &middot; 20 Aug 2026</span>
+  <h1>The rivals publish their proof. The licence holder publishes <em>nothing</em>.</h1>
+  <p class="lede">Software testing is a proof business: the vendor who documents their credibility best wins the shortlist. This board reads the rivals a Malaysian bank, insurer or ministry actually weighs against AL AiN: who they are at entity level, what their brands are built on, the specific problem each one creates, and the specific opening each one leaves. Every live site was read on 20 August 2026, captures were taken with a real browser user agent and opened and looked at, and every company figure is either sourced or marked as that rival's own claim. The finding in one line: AL AiN holds the single rarest credential on this board and is the only company on it that publishes no numbers at all.</p>
+  <div class="vrow">
+    <span class="vchip"><b>TMMi Level 5</b> in Testbits' literal headline</span>
+    <span class="vchip"><b>300</b> clients and <b>12K</b> applications on QualityKiosk's homepage counters</span>
+    <span class="vchip"><b>RM45.55m</b> LGMS FY2024 revenue, Bursa Main Market</span>
+    <span class="vchip"><b>4</b> labs on the government IV&amp;V register, AL AiN the only independent one current</span>
+    <span class="vchip"><b>0</b> numbers of any kind published by AL AiN</span>
+  </div>
+</header>
+
+<section id="s01">
+  <div class="chapdiv"><div class="cd-no">01</div><div><div class="cd-h">The frame</div><div class="cd-sub">Two arenas, one mandate, four anchors the evidence already fixed</div></div></div>
+  <p class="quote">"IV&amp;V Providers who intend to participate in government projects must have accreditation in MS ISO/IEC 17025 related to software testing from Standards Malaysia or recognition from TMMi Foundation in TMMi Level 3 and above."</p>
+  <p class="sec-intro">That sentence, from MAMPU's own IV&amp;V Quick Guide, defines the game. The competition happens in <b>two arenas</b>. Arena one, <b>the shortlist</b>: directories, referrals and the credentials a procurement panel can verify in writing, where maturity levels, accreditations and client walls decide who gets invited. Arena two, <b>the delivery bench</b>: rates, headcount and domain depth, where scale players win on price and coverage. And behind both sits a mandate: MOF circular PK2.1 requires IV&amp;V on critical government systems, and BNM's RMiT makes rigorous testing an enforceable standard for every bank and insurer. Four anchors fix how this board is read.</p>
+  <div class="moves">
+    <div class="movecard"><span class="mv-k">Anchor &middot; verified</span><h3>AL AiN holds the rarest card</h3><p>The Digital Ministry's SQA Portal lists four ISO/IEC 17025 software testing labs eligible for government IV&amp;V. MIMOS lapsed December 2025, TÜV Austria is cybersecurity-scoped, PayNet serves the payments network. <b>AL AiN, valid to 5 June 2028, is the only independent commercial lab standing.</b> Nobody else on this board can say that.</p><div class="mv-src">Source: sqa.jdn.gov.my Syarikat Pembekal IV&amp;V, read live 20 Aug 2026</div></div>
+    <div class="movecard"><span class="mv-k">Anchor &middot; measured</span><h3>AL AiN publishes nothing</h3><p>Zero client counts, zero project counts, zero case studies, zero reviews, client logos as grey images with no names in text. Every serious rival on this board publishes at least one loud number. The rarest credential is held by the quietest company.</p><div class="mv-src">Source: 00 Web Audit, proof-layer findings, 20 Aug 2026</div></div>
+    <div class="movecard"><span class="mv-k">Anchor &middot; measured</span><h3>The shortlist runs on recycled data</h3><p>The "Top 10 QA agencies in Malaysia 2026" article that ranks AL AiN fifth recycles Clutch profile data, and its number one pick is a Vietnamese AI studio that does no testing. Directory reputation is this shallow, which means a strong owned estate beats it easily.</p><div class="mv-src">Source: blog.9cv9.com read 20 Aug; gilproductstudio.xyz read the same day</div></div>
+    <div class="movecard"><span class="mv-k">Anchor &middot; programme</span><h3>The demand is mandated, on a schedule</h3><p>PK2.1 mandates IV&amp;V for critical government systems. RMiT paragraph 10.8 (in force 28 Nov 2025) mandates pre-deployment testing for financial institutions, with annual accredited penetration tests. E-invoicing pulls every business above RM1m turnover into integration testing. Act 854 puts 11 NCII sectors on audit cycles.</p><div class="mv-src">Sources: MAMPU Quick Guide PDF; BNM pd-rmit-nov25.pdf; LHDN phase coverage; NACSA</div></div>
+  </div>
+</section>
+
+<section id="s02">
+  <div class="chapdiv"><div class="cd-no">02</div><div><div class="cd-h">Most important to least</div><div class="cd-sub">Ranked by threat to AL AiN's core lanes: government IV&amp;V, banking and insurance QA, training. Site scores are ours, threat is our read of commercial risk</div></div></div>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>#</th><th>Rival</th><th>Arena</th><th>Why they rank here</th><th>Their number</th><th>Site</th><th>Threat</th></tr></thead>
+    <tbody>
+      <tr><td class="sc2">1</td><td class="dim">Testbits</td><td>The mirror rival</td><td>Same model end to end: IV&amp;V, MOF-registered, outsourcing, ISTQB and TMMi training, and it leads with "TMMi Level 5" in the headline. Fresher site, active blog, June 2026 posts</td><td class="sc2">TMMi Level 5</td><td><span class="sc hi">7</span></td><td><span class="sc bad">9</span></td></tr>
+      <tr><td class="sc2">2</td><td class="dim">QualityKiosk</td><td>The banking QA heavyweight</td><td>25 years, 300 global clients, 12K applications, analyst-firm validation, tier-1 bank logos, Malaysia office. Sits exactly on AL AiN's banking and insurance domains</td><td class="sc2">300 clients &middot; 12K apps</td><td><span class="sc hi">8</span></td><td><span class="sc bad">8</span></td></tr>
+      <tr><td class="sc2">3</td><td class="dim">LGMS Berhad</td><td>The security lane owner</td><td>Bursa Main Market, RM45.55m FY2024 revenue, first CREST pentest provider, its own ISO/IEC 17025 story in the security scope. Takes the security-testing slice of any tender</td><td class="sc2">RM45.55m &middot; 0249</td><td><span class="sc hi">7</span></td><td><span class="sc mid">6</span></td></tr>
+      <tr><td class="sc2">4</td><td class="dim">ValueLabs</td><td>The enterprise absorber</td><td>7,000+ engineers, 300+ enterprise clients, delivery seat in the same Bukit Jalil tech park. Wins when QA rides inside a bigger outsourcing deal</td><td class="sc2">7,000+ engineers</td><td><span class="sc hi">7</span></td><td><span class="sc mid">6</span></td></tr>
+      <tr><td class="sc2">5</td><td class="dim">iCrest</td><td>The aging incumbent</td><td>Two decades in operation, TCoE language, premium price band per directories. Zero published proof and a visibly stale estate</td><td class="sc2">since 2006</td><td><span class="sc lo">4</span></td><td><span class="sc mid">5</span></td></tr>
+      <tr><td class="sc2">6</td><td class="dim">Idealogic</td><td>The paper twin</td><td>Same sub-US$25 band, deep non-functional menu on paper, IV&amp;V claimed in directories. Dated site, no certifications, no evidence</td><td class="sc2">&lt; $25/hr</td><td><span class="sc lo">3</span></td><td><span class="sc lo">4</span></td></tr>
+      <tr><td class="sc2">7</td><td class="dim">Firmus</td><td>Security specialist</td><td>CREST brand, full offensive stack, KL and Singapore. Security only, and its own homepage proof counters render as zero</td><td class="sc2">CREST &middot; est. 2008</td><td><span class="sc mid">6</span></td><td><span class="sc lo">3</span></td></tr>
+      <tr><td class="sc2">8</td><td class="dim">CyberSecurity Malaysia MySEF</td><td>The state evaluator</td><td>Government ISO/IEC 17025 evaluation facility under the MyCC scheme. Competes for the certification budget line, never the QA outsourcing scope</td><td class="sc2">MyCC scheme</td><td><span class="sc lo">n/s</span></td><td><span class="sc lo">2</span></td></tr>
+    </tbody>
+  </table></div>
+  <span class="pin"><b>The strategic read, one line:</b> Testbits out-brands AL AiN with a lesser credential, QualityKiosk out-proves it with scale, and nobody on the board holds AL AiN's actual card: the live independent lab on the government's own register. The estate's job is to make that card visible before Testbits' TMMi Level 5 becomes the category's default language.</span>
+</section>
+
+<section id="s03">
+  <div class="chapdiv"><div class="cd-no">03</div><div><div class="cd-h">What each one actually looks like</div><div class="cd-sub">The board, captured live at 1440 by 900, 20 Aug 2026, every capture opened and looked at</div></div></div>
+  <p class="sec-intro">AL AiN's own two faces first, because the comparison a procurement officer actually runs is side by side. Then the rivals as that officer met them on 20 August.</p>
+  <h3 class="sub">The house, both faces</h3>
+  <div class="shotboard">
+    <div class="shot"><img src="assets/site-alain-home.webp" alt="AL AiN homepage capture, desktop"><div class="meta"><div class="nm">AL AiN &middot; desktop</div><div class="u">alaintesting.com.my</div><div class="rd">Coherent blue identity, the SAMM mark in the header, real bank and ministry logos below the fold. Then the gmail banner, stock imagery and template copy spend the credibility the header earned.</div></div></div>
+    <div class="shot"><div class="mobwrap"><img src="assets/site-alain-home-mobile.webp" alt="AL AiN homepage capture at 375px with clipped text"></div><div class="meta"><div class="nm">AL AiN &middot; the same page at 375px, shown at phone size</div><div class="u">alaintesting.com.my &middot; mobile capture</div><div class="rd">This is their live site, not ours: the hero clips off both edges of a real phone viewport. On the board below, no rival ships a broken mobile render. The cross-platform testing company is the only one failing cross-platform.</div></div></div>
+  </div>
+  <h3 class="sub">The rivals</h3>
+  <div class="shotboard">
+    <div class="shot"><img src="assets/site-testbits.webp" alt="Testbits homepage capture"><div class="meta"><div class="nm">Testbits</div><div class="u">mytestbits.com</div><div class="rd">Hero carousel: "Reduce Defects Before Production Release", with TMMI and IV&amp;V as top-level nav items; the "TMMi Level 5" headline runs on a sibling slide, read live. The credential-led playbook AL AiN should be running with a better card.</div></div></div>
+    <div class="shot"><img src="assets/site-qualitykiosk.webp" alt="QualityKiosk homepage capture"><div class="meta"><div class="nm">QualityKiosk</div><div class="u">qualitykiosk.com</div><div class="rd">"Achieve zero defects and 99.9% uptime", counters for 25 years, 25 countries, 300 clients, 12K applications. Proof stated as arithmetic, exactly what a vendor panel wants to screenshot.</div></div></div>
+    <div class="shot"><img src="assets/archive-lgms-cloudflare.webp" alt="LGMS Cloudflare verification wall capture"><div class="meta"><div class="nm">LGMS Berhad</div><div class="u">lgms.global &middot; bot wall to crawlers</div><div class="rd">Headless readers meet a Cloudflare verification wall, archived here as found. Read in a real browser the same day: "Where Cyber Security Meets Absolute Integrity", Gartner recognition, investor relations in the nav. A Bursa-listed proof machine for the security scope.</div></div></div>
+    <div class="shot"><img src="assets/site-valuelabs.webp" alt="ValueLabs homepage capture"><div class="meta"><div class="nm">ValueLabs</div><div class="u">valuelabs.com</div><div class="rd">"Custom Agentic AI Solutions", 7,000+ engineers, 300+ clients. QA is one line in an AI-era enterprise pitch, delivered from the same tech park AL AiN sits in.</div></div></div>
+    <div class="shot"><img src="assets/site-icrest.webp" alt="iCrest homepage capture"><div class="meta"><div class="nm">iCrest</div><div class="u">icrest.com.my</div><div class="rd">"Crafting the Future with Technology", clean template, generic copy, weak CTAs, © 2023 footer. Twenty years of operation, none of it visible as proof. A warning, not a model.</div></div></div>
+    <div class="shot"><img src="assets/site-idealogic.webp" alt="Idealogic homepage capture showing an unresolved black preloader"><div class="meta"><div class="nm">Idealogic</div><div class="u">idealogic.com.my</div><div class="rd">What a crawler gets: a black preloader that never resolves inside a 30 second headless budget, under a nav where testing shares the stage with an "Ipoutry Program". Capability without curation, and a homepage that fails its own render test.</div></div></div>
+    <div class="shot"><img src="assets/site-firmus.webp" alt="Firmus homepage capture with an empty hero region"><div class="meta"><div class="nm">Firmus</div><div class="u">firmussec.com</div><div class="rd">The hero region arrives empty in a 30 second headless read, nav and brand only. Read live the same day: "Asia Pacific's Top Cybersecurity &amp; CREST Pentest Leader", with homepage stat counters rendering as zero. Even security specialists ship untested pages.</div></div></div>
+    <div class="shot"><img src="assets/site-mysef.webp" alt="MySEF page capture"><div class="meta"><div class="nm">CyberSecurity Malaysia &middot; MySEF</div><div class="u">mysef.cybersecurity.my</div><div class="rd">The government's own ISO/IEC 17025 evaluation facility, institutional and scheme-bound. The default certification path in public sector deals, and no threat to the QA outsourcing scope.</div></div></div>
+  </div>
+</section>
+
+<section id="s04">
+  <div class="chapdiv"><div class="cd-no">04</div><div><div class="cd-h">Real rivals, in full</div><div class="cd-sub">Entity-level profiles. For each: the facts, the brand read, the problem it creates for AL AiN, the opening it leaves, and the opportunity move</div></div></div>
+  <p class="sec-intro">Six profiles, ordered by threat. Figures are sourced where a source exists and labelled as the rival's own claim where it does not. Threat is Brand Method's assessment of commercial risk to AL AiN's three lanes, not published data. Where a figure could not be evidenced it is marked not verified rather than estimated.</p>
+
+  <div class="rvs">
+
+  <div class="rv"><div class="rv-h"><span class="rv-rk">01</span><span class="rv-ttl"><b>Testbits Sdn Bhd</b><span class="rv-sub">Shah Alam, Selangor &middot; founded 2017 &middot; mytestbits.com</span></span><span class="rv-th"><span class="sc bad">Threat 9</span><span class="sc hi">Site 7</span></span></div>
+  <div class="rv-b">
+    <div class="rv-facts">
+      <div class="rv-f"><k>Entity</k><span>Testbits Sdn Bhd, Kota Kemuning, Shah Alam. Founded 2017 per directory listings. 50 to 249 staff, US$25 to 49 per hour (Clutch band)</span></div>
+      <div class="rv-f"><k>Headline credential</k><span>"Empowering QA Excellence with TMMi Level 5 Standards" and "TMMi Level 5-certified testing services across industries", their own homepage, quoted</span></div>
+      <div class="rv-f"><k>Government standing</k><span>"MOF-registered provider of IV&amp;V services", stated on the site. TMMi Level 3+ is the alternate entry route into government IV&amp;V per MAMPU's guide, and Level 5 clears it</span></div>
+      <div class="rv-f"><k>Training arm</k><span>Accredited training for ISTQB, IREB and TMMi (site plus IREB profile). A working blog with June 2026 IV&amp;V posts</span></div>
+    </div>
+    <div class="rv-brand"><k>The brand, read</k><b>The credential worn as a headline.</b> Testbits took one maturity certification and built the entire brand voice on it: it opens the homepage, names the service model, and frames every CTA. No client names, no counts, no case studies anywhere, and it barely matters, because the one credential is doing all the talking. This is exactly the play AL AiN has available with a rarer card, executed by someone else first.</div>
+    <div class="rv-cols">
+      <div class="rv-c up"><k>The problem this creates for AL AiN</k><ul>
+        <li><b>Identical service map:</b> IV&amp;V, testing outsourcing, training. Every tender AL AiN sees, Testbits can answer.</li>
+        <li><b>Better credential marketing:</b> a panel that reads "TMMi Level 5" in a headline and finds AL AiN's SAMM badge only inside a header logo scores the wrong company higher.</li>
+        <li><b>A fresher estate:</b> active blog, modern build, working CTAs, against a site whose news is frozen at one date.</li>
+      </ul></div>
+      <div class="rv-c dn"><k>The opening they leave</k><ul>
+        <li><b>No lab.</b> TMMi certifies process maturity; it is not an ISO/IEC 17025 accredited laboratory, and Testbits is not on the JDN lab register.</li>
+        <li><b>Zero named clients and zero numbers</b> anywhere on the site. Their proof layer is one certificate deep.</li>
+        <li><b>No banking wall:</b> nothing equivalent to Bank Islam, MAMPU, MARA class logos, even as images.</li>
+      </ul></div>
+    </div>
+    <div class="rv-why"><b>The opportunity, in one move:</b> out-Testbits Testbits. Put "the only independent ISO/IEC 17025 accredited software testing lab on the government's IV&amp;V register, valid to 2028" where they put TMMi Level 5: in the headline, the title tag and the tender boilerplate. Their whole brand proves the tactic works; AL AiN simply holds the stronger card.</div>
+    <div class="rv-src">Sources: mytestbits.com read live 20 Aug 2026 (root blocks fetchers, read in browser); Clutch listing for band and headcount; IREB training-provider profile; MAMPU Quick Guide for the TMMi-vs-17025 entry routes. Founding year is a directory claim.</div>
+  </div></div>
+
+  <div class="rv"><div class="rv-h"><span class="rv-rk">02</span><span class="rv-ttl"><b>QualityKiosk Technologies</b><span class="rv-sub">Navi Mumbai, India &middot; founded 2000 &middot; Malaysia office &middot; qualitykiosk.com</span></span><span class="rv-th"><span class="sc bad">Threat 8</span><span class="sc hi">Site 8</span></span></div>
+  <div class="rv-b">
+    <div class="rv-facts">
+      <div class="rv-f"><k>Entity</k><span>QualityKiosk Technologies Pvt Ltd, founded 2000 by IIT-Kanpur graduates, quality engineering specialist, roughly 4,000 consultants per company materials. Operates in Malaysia among 25 countries</span></div>
+      <div class="rv-f"><k>Scale proof</k><span>Homepage counters: 25 years, 25 countries, 300 global clients, 12K applications assured, 1.2Mn automation scripts delivered</span></div>
+      <div class="rv-f"><k>External validation</k><span>Named a Leader in Everest Group's Quality Engineering Specialists PEAK Matrix 2025; cited in Gartner's Market Guide for QE services; Forrester coverage</span></div>
+      <div class="rv-f"><k>Clients named</k><span>HDFC, ICICI, SBI, DBS, Citibank, Prudential, Manulife, AIA, BTPN, per their materials: tier-1 banking and insurance, AL AiN's exact domains</span></div>
+    </div>
+    <div class="rv-brand"><k>The brand, read</k><b>Proof as arithmetic.</b> Everything on the estate converts credibility into a number or a named logo, then a third party (Everest, Gartner, Forrester) certifies the whole. The site sells outcomes ("zero defects, 99.9% uptime") rather than services, with platforms (qRace, Nimbus) as productised evidence. This is what the finished version of "we test for banks" looks like at global scale.</div>
+    <div class="rv-cols">
+      <div class="rv-c up"><k>The problem this creates for AL AiN</k><ul>
+        <li><b>They own banking QA credibility</b> in the region: a Malaysian bank comparing vendors finds named tier-1 logos against AL AiN's grey images.</li>
+        <li><b>Analyst validation</b> is a proof class AL AiN cannot buy at its size.</li>
+        <li><b>Platform story:</b> their products are named, demoed and cited; AL AiN's platform has no name on its own site.</li>
+      </ul></div>
+      <div class="rv-c dn"><k>The opening they leave</k><ul>
+        <li><b>No Malaysian government identity:</b> no MOF registration story, no IV&amp;V lane, no place on the JDN register, no BM-language estate.</li>
+        <li><b>India-first delivery</b> and enterprise pricing: mid-market Malaysian buyers and agencies with data-residency sensitivities are underserved.</li>
+        <li><b>No local lab:</b> for work that must cite an accredited Malaysian laboratory, they cannot answer.</li>
+      </ul></div>
+    </div>
+    <div class="rv-why"><b>The opportunity, in one move:</b> concede the global tier and own the sovereign one. "Accredited in Malaysia, listed by the Malaysian government, delivering from Bukit Jalil" is a lane QualityKiosk structurally cannot enter, and it is the lane where PK2.1 and data-sensitive banking work actually sit.</div>
+    <div class="rv-src">Sources: qualitykiosk.com read live 20 Aug 2026 (counters quoted from the homepage); Everest/Gartner mentions from their published materials; client names from company materials, not independently audited.</div>
+  </div></div>
+
+  <div class="rv"><div class="rv-h"><span class="rv-rk">03</span><span class="rv-ttl"><b>LGMS Berhad</b><span class="rv-sub">Subang Jaya &middot; operating since 2005 &middot; Bursa 0249 &middot; lgms.global</span></span><span class="rv-th"><span class="sc mid">Threat 6</span><span class="sc hi">Site 7</span></span></div>
+  <div class="rv-b">
+    <div class="rv-facts">
+      <div class="rv-f"><k>Entity</k><span>LGMS Berhad (LE Global Services), 202001039091, operating since 2005. ACE Market IPO 2022, transferred to Bursa Main Market early 2025, ticker 0249</span></div>
+      <div class="rv-f"><k>Financials</k><span>FY2024 revenue RM45.55m, up 28.06% year on year; Q1 FY2025 RM9.6m, up 12% (broker coverage)</span></div>
+      <div class="rv-f"><k>Credentials</k><span>Malaysia's first CREST-accredited penetration testing provider; claims the first privately owned ISO/IEC 17025 accredited lab in Malaysia (security scope); PCI QSA; Gartner DFIR Market Guide recognition two years running</span></div>
+      <div class="rv-f"><k>Positioning</k><span>"Where Cyber Security Meets Absolute Integrity" and "the largest ethical hacking group in the nation", their site, quoted</span></div>
+    </div>
+    <div class="rv-brand"><k>The brand, read</k><b>The listed specialist.</b> LGMS turned security testing into an investor-grade story: audited revenue, a Main Market ticker, Gartner citations and first-mover credentials, all stated loudly. It demonstrates that a Malaysian testing firm can build a public company on exactly the credibility mechanics AL AiN neglects.</div>
+    <div class="rv-cols">
+      <div class="rv-c up"><k>The problem this creates for AL AiN</k><ul>
+        <li><b>The security slice defects:</b> in any engagement where security testing is scoped separately, LGMS (or Firmus) takes it, shrinking AL AiN's ticket.</li>
+        <li><b>Lab-story dilution:</b> LGMS also says "first ISO/IEC 17025 lab", security scope. Two labs claiming firsts confuses the market unless AL AiN states its scope precisely: software testing, on the government IV&amp;V register.</li>
+      </ul></div>
+      <div class="rv-c dn"><k>The opening they leave</k><ul>
+        <li><b>They cannot bid the core:</b> functional QA, IV&amp;V, UAT, performance: outside their scope entirely.</li>
+        <li><b>Their price of credibility is public:</b> a listed company cannot serve the sub-RM100k engagement economically. The mid-market is open.</li>
+      </ul></div>
+    </div>
+    <div class="rv-why"><b>The opportunity, in one move:</b> partner logic, not combat. Position AL AiN as the functional and IV&amp;V lab that slots beside a CREST security firm on the same tender, and write the scope sentence ("accredited for software testing: functional, performance, static") so precisely that LGMS's security-scope claim stops overlapping.</div>
+    <div class="rv-src">Sources: lgms.global read in browser 20 Aug 2026 (Cloudflare-walled to fetchers); revenue and listing from broker and market-data coverage of LGMS 0249; credentials from their corporate materials.</div>
+  </div></div>
+
+  <div class="rv"><div class="rv-h"><span class="rv-rk">04</span><span class="rv-ttl"><b>ValueLabs (Malaysia)</b><span class="rv-sub">Hyderabad, India &middot; founded 1997 &middot; MY office in Technology Park Malaysia &middot; valuelabs.com</span></span><span class="rv-th"><span class="sc mid">Threat 6</span><span class="sc hi">Site 7</span></span></div>
+  <div class="rv-b">
+    <div class="rv-facts">
+      <div class="rv-f"><k>Entity</k><span>ValueLabs LLP, founded 1997, Hyderabad. ValueLabs Sdn Bhd sits in Technology Park Malaysia, Bukit Jalil, the same park as AL AiN. Clutch Malaysia: 1,000 to 9,999 staff, 4.3 of 5 from 3 reviews</span></div>
+      <div class="rv-f"><k>Scale proof</k><span>7,000+ AI-certified engineers, 300+ enterprise clients, 30 years, per their site</span></div>
+      <div class="rv-f"><k>Positioning</k><span>"Custom Agentic AI Solutions. Built for Your Enterprise. Co-created Live.", their homepage, quoted. Quality engineering rides inside via the AiDE platform</span></div>
+      <div class="rv-f"><k>Overlap</k><span>QE service line, test automation, cybersecurity. No IV&amp;V, no lab accreditation, no Malaysian training lane</span></div>
+    </div>
+    <div class="rv-brand"><k>The brand, read</k><b>The absorber.</b> ValueLabs does not sell testing; it sells enterprise transformation with testing inside. Its threat is structural: when a client buys the big deal, QA comes bundled and the specialist never gets a call. The AI-era rebrand also resets buyer expectations of what a testing vendor should sound like.</div>
+    <div class="rv-cols">
+      <div class="rv-c up"><k>The problem this creates for AL AiN</k><ul>
+        <li><b>Bundling:</b> enterprise accounts buy QA inside bigger outsourcing contracts AL AiN is not party to.</li>
+        <li><b>Neighbourhood optics:</b> a global 7,000-engineer firm delivers from the same tech park, at a similar directory rate band for commodity work.</li>
+      </ul></div>
+      <div class="rv-c dn"><k>The opening they leave</k><ul>
+        <li><b>Independence:</b> IV&amp;V exists precisely because the builder should not verify their own build. A bundled QA arm fails that test by definition; an independent accredited lab is the textbook answer.</li>
+        <li><b>No government procurement identity</b> in Malaysia, no BM estate, no MOF code.</li>
+      </ul></div>
+    </div>
+    <div class="rv-why"><b>The opportunity, in one move:</b> weaponise independence. The estate should say, in so many words: the vendor who built your system cannot be the one who certifies it. That sentence converts every bundled-QA deal into an AL AiN add-on rather than a loss.</div>
+    <div class="rv-src">Sources: valuelabs.com read 20 Aug 2026; Malaysia entity address from Clutch and directory listings; staff and client counts are the company's own claims.</div>
+  </div></div>
+
+  <div class="rv"><div class="rv-h"><span class="rv-rk">05</span><span class="rv-ttl"><b>iCrest Sdn Bhd</b><span class="rv-sub">Cyberjaya &middot; operating since 2006 &middot; icrest.com.my</span></span><span class="rv-th"><span class="sc mid">Threat 5</span><span class="sc lo">Site 4</span></span></div>
+  <div class="rv-b">
+    <div class="rv-facts">
+      <div class="rv-f"><k>Entity</k><span>iCrest Sdn Bhd, Cyberjaya. "Two decades in operation" per its own site; 2006 founding per directory listings. 50 to 249 staff, US$100 to 149 per hour (directory bands)</span></div>
+      <div class="rv-f"><k>Offer</k><span>Test planning, test management, manual and automated execution, functional, regression, performance, compatibility, and Testing Centre of Excellence services, inside a broader IT services house</span></div>
+      <div class="rv-f"><k>Proof published</k><span>None. No certifications, no client names, no counts on the pages read. Directory copy claims Fortune 500 and government clients, unverified on the site</span></div>
+      <div class="rv-f"><k>Estate state</k><span>Clean but generic template, weak "Read More" CTAs, stale blog, © 2023 footer</span></div>
+    </div>
+    <div class="rv-brand"><k>The brand, read</k><b>The incumbent that stopped telling its story.</b> Twenty years and a premium price band, presented through boilerplate a procurement panel cannot score. iCrest matters to this board less as a threat than as a prophecy: it is what AL AiN's estate becomes in five more years of silence.</div>
+    <div class="rv-cols">
+      <div class="rv-c up"><k>The problem this creates for AL AiN</k><ul>
+        <li><b>Relationship incumbency:</b> two decades of enterprise and government relationships do not need a website to renew.</li>
+        <li><b>The premium band</b> normalises higher testing rates, and iCrest captures that value with less credential than AL AiN holds.</li>
+      </ul></div>
+      <div class="rv-c dn"><k>The opening they leave</k><ul>
+        <li><b>Everything public-facing.</b> No credentials, no evidence, no conversion path: any modern proof-led estate beats it on sight.</li>
+        <li><b>No training lane, no security lane, no IV&amp;V articulation.</b></li>
+      </ul></div>
+    </div>
+    <div class="rv-why"><b>The opportunity, in one move:</b> win the tie-breaks. When a panel weighs an unproven incumbent against an accredited lab whose estate shows the licence, the case studies and the team, the newer relationship wins on paper, which is where panels decide.</div>
+    <div class="rv-src">Sources: icrest.com.my read live 20 Aug 2026; founding year, headcount and rate band from directory listings, labelled as such; Fortune 500 claim is directory copy, not site-verified.</div>
+  </div></div>
+
+  <div class="rv"><div class="rv-h"><span class="rv-rk">06</span><span class="rv-ttl"><b>Idealogic Technologies Sdn Bhd</b><span class="rv-sub">Kuala Lumpur &middot; idealogic.com.my</span></span><span class="rv-th"><span class="sc lo">Threat 4</span><span class="sc lo">Site 3</span></span></div>
+  <div class="rv-b">
+    <div class="rv-facts">
+      <div class="rv-f"><k>Entity</k><span>Idealogic Technologies Sdn Bhd, Kuala Lumpur. 50 to 249 staff, below US$25 per hour (directory bands). Founding year not published</span></div>
+      <div class="rv-f"><k>Offer</k><span>An "SS Testing Services Practice": functional, regression, automation, UAT, integration, unit, load, stress, spike, soak, compatibility, installation and security testing on paper; IV&amp;V claimed in directory listings</span></div>
+      <div class="rv-f"><k>Proof published</k><span>None. No certifications, no clients, no numbers</span></div>
+      <div class="rv-f"><k>Estate state</k><span>Dated and dense; the homepage title string also advertises poultry-industry software, evidence of an unfocused multi-practice shop</span></div>
+    </div>
+    <div class="rv-brand"><k>The brand, read</k><b>Capability without curation.</b> The testing menu is long and plausible and completely undifferentiated, sharing a stage with unrelated product lines. At the same sub-US$25 band as AL AiN, it is the noise a buyer must filter, and the reason a visible credential settles the choice fast.</div>
+    <div class="rv-cols">
+      <div class="rv-c up"><k>The problem this creates for AL AiN</k><ul>
+        <li><b>Price-band noise:</b> in a directory sort by rate, Idealogic sits beside AL AiN looking equivalent to an unfamiliar buyer.</li>
+      </ul></div>
+      <div class="rv-c dn"><k>The opening they leave</k><ul>
+        <li><b>Everything.</b> No credential, no proof, no focus. One visible SAMM 829 statement separates AL AiN from this tier permanently.</li>
+      </ul></div>
+    </div>
+    <div class="rv-why"><b>The opportunity, in one move:</b> make the credential the sort key. The moment AL AiN's estate leads with the lab and the register listing, the sub-US$25 tier splits into "the accredited one" and everyone else, and the price conversation changes shape.</div>
+    <div class="rv-src">Sources: idealogic.com.my QA page read 20 Aug 2026; bands and IV&amp;V claim from directory listings, labelled as such.</div>
+  </div></div>
+
+  </div>
+</section>
+
+<section id="s05">
+  <div class="chapdiv"><div class="cd-no">05</div><div><div class="cd-h">Who is who, and what to take from each</div><div class="cd-sub">The one-glance summary for the pitch room, grouped by role</div></div></div>
+  <div class="cgroup"><div class="cg-h"><span class="cg-k">01</span><h3>The mirror rivals</h3><p>Same buyers, same tenders, same service map. The direct fight, and it is winnable on credentials.</p></div><div class="cfirms">
+    <div class="cfirm"><div class="cf-h"><b>Testbits</b><span class="cf-hq">Shah Alam</span></div><div class="cf-sc"><span class="sc bad">Threat 9</span></div><p>TMMi Level 5 as the entire brand. No lab, no clients shown. Take: the credential-as-headline playbook.</p></div>
+    <div class="cfirm"><div class="cf-h"><b>Idealogic</b><span class="cf-hq">KL</span></div><div class="cf-sc"><span class="sc lo">Threat 4</span></div><p>Same price band, long menu, zero proof. Take: nothing. It defines the tier AL AiN must visibly leave.</p></div>
+    <div class="cfirm"><div class="cf-h"><b>iCrest</b><span class="cf-hq">Cyberjaya</span></div><div class="cf-sc"><span class="sc mid">Threat 5</span></div><p>Twenty-year incumbent gone silent. Take: the warning. Relationships decay; published proof compounds.</p></div>
+  </div></div>
+  <div class="cgroup"><div class="cg-h"><span class="cg-k">02</span><h3>The scale players</h3><p>Not out-scalable. Out-position them on sovereignty, independence and the register.</p></div><div class="cfirms">
+    <div class="cfirm"><div class="cf-h"><b>QualityKiosk</b><span class="cf-hq">India &middot; MY office</span></div><div class="cf-sc"><span class="sc bad">Threat 8</span></div><p>Banking QA heavyweight with analyst validation. Take: the counters-and-named-logos proof format.</p></div>
+    <div class="cfirm"><div class="cf-h"><b>ValueLabs</b><span class="cf-hq">India &middot; Bukit Jalil</span></div><div class="cf-sc"><span class="sc mid">Threat 6</span></div><p>QA bundled inside enterprise AI deals. Take: the independence argument writes itself against bundlers.</p></div>
+  </div></div>
+  <div class="cgroup"><div class="cg-h"><span class="cg-k">03</span><h3>The adjacent specialists and the state</h3><p>They own their slices. Partner or coexist; never fight on their ground.</p></div><div class="cfirms">
+    <div class="cfirm"><div class="cf-h"><b>LGMS Berhad</b><span class="cf-hq">Subang Jaya</span></div><div class="cf-sc"><span class="sc mid">Threat 6</span></div><p>Listed security lab, RM45.55m revenue. Take: precise scope language, and the proof that credibility mechanics build companies.</p></div>
+    <div class="cfirm"><div class="cf-h"><b>Firmus</b><span class="cf-hq">KL + SG</span></div><div class="cf-sc"><span class="sc lo">Threat 3</span></div><p>CREST pentest brand with broken homepage counters. Take: even specialists ship defects; QA the estate we build.</p></div>
+    <div class="cfirm"><div class="cf-h"><b>MySEF</b><span class="cf-hq">CyberSecurity Malaysia</span></div><div class="cf-sc"><span class="sc lo">Threat 2</span></div><p>The state's Common Criteria lab. Take: coexistence framing for public sector proposals.</p></div>
+  </div></div>
+  <span class="pin warn"><b>Dropped from the board, with evidence:</b> MIMOS (its ISO/IEC 17025 labs are hardware reliability and failure analysis; the software lab entry on the JDN register lapsed December 2025), SIRIM QAS (no software QA offer), Gil Product Studio (9cv9's number one is a Saigon AI studio with no testing services, which discredits that list), Hypernix (ERP-testing niche, watchlist), and the two-to-nine-person micro-shops below shortlist grade for a bank or ministry.</span>
+</section>
+
+<section id="s06">
+  <div class="chapdiv"><div class="cd-no">06</div><div><div class="cd-h">The brand problem and opportunity board</div><div class="cd-sub">Every rival reduced to three columns: the problem it creates, the opening it leaves, and the proof AL AiN owes before taking the opening</div></div></div>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>Rival</th><th>The brand problem it creates</th><th>The opening it leaves</th><th>The proof AL AiN owes first</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">Testbits</td><td>Owns the credential-headline space with TMMi Level 5</td><td>Holds no lab and shows no clients</td><td>SAMM 829 and the JDN register listing stated in the headline, title tag and boilerplate</td></tr>
+      <tr><td class="dim">QualityKiosk</td><td>Owns banking QA proof at scale</td><td>No Malaysian government identity, no local lab, no BM estate</td><td>Named sector case studies: the Datasonic and JANM engagement written up, client names cleared where NDAs permit</td></tr>
+      <tr><td class="dim">LGMS</td><td>Blurs the "first ISO 17025 lab" story from the security side</td><td>Cannot bid functional QA or IV&amp;V</td><td>One precise scope sentence: accredited for software testing (functional, performance, static), on the IV&amp;V register</td></tr>
+      <tr><td class="dim">ValueLabs</td><td>Absorbs QA into bundled enterprise deals</td><td>Bundled QA fails the independence test</td><td>An IV&amp;V explainer page arguing independence, citing PK2.1 and RMiT footnote 15</td></tr>
+      <tr><td class="dim">iCrest</td><td>Holds incumbent relationships at premium rates</td><td>Publishes nothing a panel can score</td><td>A scoreable estate: credentials, case studies, team, all in text with schema</td></tr>
+      <tr><td class="dim">Idealogic</td><td>Noise in the same price band</td><td>No credential at all</td><td>The visible licence, which ends the comparison</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="s07">
+  <div class="chapdiv"><div class="cd-no">07</div><div><div class="cd-h">Five things the estate must do</div><div class="cd-sub">Each one is something nobody on this board currently does, each one cites its evidence</div></div></div>
+  <div class="grid g2">
+    <div class="card"><span class="tag">Move 1 &middot; vs Testbits</span><h3>Lead with the register, not the badge</h3><p>Nobody on the board can write: "one of four labs on the government's IV&amp;V register, the only independent one current, valid to 2028." Testbits proved a single credential can carry a whole brand. AL AiN's credential is rarer and currently invisible. <b>Evidence: sqa.jdn.gov.my register, read 20 Aug 2026.</b></p></div>
+    <div class="card"><span class="tag">Move 2 &middot; vs QualityKiosk</span><h3>Publish the arithmetic</h3><p>Years operating, engagements delivered, testers certified, sectors served: whatever the true numbers are, state them as counters with dates. QualityKiosk's homepage shows the format; AL AiN owes the reconciled figures at the first meeting. <b>Evidence: their counters, read 20 Aug; AL AiN's zero, measured the same day.</b></p></div>
+    <div class="card"><span class="tag">Move 3 &middot; vs the bundlers</span><h3>Sell independence as the product</h3><p>The builder cannot certify their own build: that is why IV&amp;V exists, why PK2.1 mandates it, and why RMiT footnote 15 asks for independent QA on significant projects. One explainer page in EN and BM makes AL AiN the answer to a question regulation already asked. <b>Evidence: MAMPU Quick Guide; BNM RMiT PDF.</b></p></div>
+    <div class="card"><span class="tag">Move 4 &middot; vs iCrest's fate</span><h3>Ship a freshness engine</h3><p>iCrest shows what silence does to twenty years of equity. The estate needs dated case studies, a quarterly article habit, and training intakes with real dates, so the site proves the company is alive without anyone remembering to say so. <b>Evidence: iCrest © 2023 footer; AL AiN's single-date news page.</b></p></div>
+    <div class="card"><span class="tag">Move 5 &middot; the open lane</span><h3>Own the mandated queries in two languages</h3><p>Nobody on this board, local or global, publishes buyer-grade content on PK2.1 IV&amp;V requirements, RMiT testing duties, e-invoice integration testing or Act 854 audit cycles, in BM. The demand is regulator-manufactured and unclaimed. <b>Evidence: board-wide content review, 20 Aug 2026.</b></p></div>
+  </div>
+</section>
+
+<footer>
+  <div>Brand Method &middot; AL AiN IT Consultants competitor audit &middot; every site read live 20 Aug 2026 &middot; captures in assets/, archived, none deleted</div>
+</footer>
+
+</div>
+<script id="bmPdfName">(function(){var t0=document.title;var n=t0.replace(/\s*[··]\s*Brand Method\s*$/,'').replace(/[··]/g,'-').replace(/&amp;/g,'and').replace(/[^\w\- ]+/g,'').trim().replace(/\s+/g,'-').replace(/-+/g,'-');if(!n)n='Brand-Method-Document';window.addEventListener('beforeprint',function(){document.title=n});window.addEventListener('afterprint',function(){document.title=t0});})();</script>
+</body>
+</html>

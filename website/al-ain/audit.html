@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AL AiN IT Consultants · Website &amp; Digital Audit · Brand Method</title>
+<link rel="icon" href="assets/img/logo-mark.webp" type="image/webp">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{--paper:#F7F9FC;--paper2:#FFFFFF;--ink:#0B1526;--soft:#45536B;--faint:#8593A9;--line:#E3E9F2;--line2:#D3DCE8;--org:#1B3FDB;--org-deep:#122FAE;--wash:#E9EEFD;--ok:#128A54;--warn:#C08A1D;--bad:#D7263D;--dark:#0A1630;--amber:#E8A020;--maxw:none;}
+  *{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+  body{font-family:"Inter",system-ui,sans-serif;background:var(--paper);color:var(--ink);font-size:16px;line-height:1.62;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  .wrap{max-width:none;margin:0;padding:0 22px}.mono{font-family:"JetBrains Mono",monospace}
+  .eyebrow{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--org-deep);display:inline-flex;align-items:center;gap:10px;font-weight:600}
+  .hero{padding:50px 0 8px}.hero h1{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:clamp(34px,5.4vw,58px);line-height:1.05;letter-spacing:-.02em;margin:18px 0 0;max-width:24ch}.hero h1 em{font-style:normal;color:var(--org-deep)}
+  .hero .lede{font-size:clamp(17px,2vw,20px);color:var(--soft);max-width:68ch;margin:20px 0 0}
+  .vrow{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}.vchip{background:var(--paper2);border:1px solid var(--line);border-radius:999px;padding:8px 15px;font-size:13px;color:var(--soft)}.vchip b{color:var(--org-deep)}
+  .execsum{margin-top:32px;border:1px solid var(--line);border-radius:16px;background:var(--paper2);padding:26px 28px}
+  .execsum .tag{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--org-deep);font-weight:700}
+  .execsum p{margin-top:10px;font-size:15.5px;color:var(--soft)}.execsum p b{color:var(--ink)}
+  section{padding:32px 0}
+  .chapdiv{display:flex;align-items:baseline;gap:18px;padding:42px 0 4px;border-top:1px solid var(--line);margin-top:10px}.cd-no{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:38px;color:var(--org);line-height:1}.cd-h{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:27px;letter-spacing:-.01em}.cd-sub{font-size:15px;color:var(--soft);margin-top:5px}
+  h2{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:clamp(25px,3.6vw,37px);line-height:1.08;letter-spacing:-.015em;margin:13px 0 0;max-width:30ch}
+  h3.sub{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:21px;margin:30px 0 0}
+  .sec-intro{font-size:16.5px;color:var(--soft);max-width:74ch;margin:15px 0 0}.sec-intro b,.sec-intro strong{color:var(--ink)}.sec-intro em{font-style:normal;color:var(--org-deep)}
+  .grid{display:grid;gap:16px;margin-top:22px}.g2{grid-template-columns:repeat(auto-fit,minmax(290px,1fr))}.g3{grid-template-columns:repeat(auto-fit,minmax(225px,1fr))}
+  .card{background:var(--paper2);border:1px solid var(--line);border-radius:14px;padding:20px 21px}.card .tag{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--org-deep);font-weight:700}.card h3{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:18.5px;margin-top:8px}.card p{font-size:14px;color:var(--soft);margin-top:9px;line-height:1.55}.card p b{color:var(--ink)}
+  .card.dark{background:var(--dark);border-color:#1e2c4f;color:#DCE5F2}.card.dark h3{color:#fff}.card.dark p{color:#A9B8D0}.card.dark .tag{color:#7E9BFF}.card.dark p b{color:#fff}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-top:22px}.stat{border:1px solid var(--line);border-radius:13px;background:var(--paper2);padding:16px 18px}.stat .num{font-family:"Space Grotesk",sans-serif;font-size:27px;font-weight:700;color:var(--org-deep);line-height:1.05}.stat .lab{font-size:13px;font-weight:600;margin-top:8px}.stat .s{font-size:12px;color:var(--faint);margin-top:3px}
+  table{width:100%;border-collapse:separate;border-spacing:0;margin-top:18px;font-size:14px;background:var(--paper2);border:1px solid var(--line);border-radius:12px;overflow:hidden}th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}thead th{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#fff;background:var(--dark)}tr:last-child td{border-bottom:none}td.dim{font-weight:600;white-space:nowrap}td.sc{font-family:"JetBrains Mono",monospace;color:var(--org-deep);font-weight:700;white-space:nowrap}
+  .tbl-scroll{overflow-x:auto;margin-top:18px}.tbl-scroll table{margin-top:0;min-width:720px}
+  .vtag{font-family:"JetBrains Mono",monospace;font-size:9.5px;text-transform:uppercase;letter-spacing:.04em;padding:3px 8px;border-radius:6px;font-weight:700;white-space:nowrap}.vtag.hi{background:rgba(18,138,84,.14);color:var(--ok)}.vtag.lo{background:rgba(192,138,29,.16);color:#96690D}.vtag.bad{background:rgba(215,38,61,.12);color:var(--bad)}
+  .diagram{margin-top:18px;border:1px solid var(--line);border-radius:14px;background:var(--paper2);padding:18px}.diagram .cap{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--faint);margin-bottom:10px}.diagram svg{width:100%;height:auto;display:block}
+  .pin{margin-top:22px;border-left:3px solid var(--org);background:linear-gradient(90deg,rgba(27,63,219,.07),transparent);padding:15px 19px;border-radius:0 12px 12px 0;font-size:15px;display:block}.pin b{color:var(--org-deep)}.pin.warn{border-left-color:var(--warn);background:linear-gradient(90deg,rgba(192,138,29,.09),transparent)}.pin.warn b{color:#96690D}
+  .quote{font-family:"Space Grotesk",sans-serif;font-size:17px;color:var(--soft);border-left:3px solid var(--line2);padding:6px 0 6px 18px;margin-top:16px}
+  .shotband{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-top:20px}
+  .shot{background:var(--paper2);border:1px solid var(--line);border-radius:14px;overflow:hidden}.shot img{width:100%;display:block;border-bottom:1px solid var(--line)}.shot .meta{padding:14px 16px}.shot .nm{font-weight:700;font-size:14.5px}.shot .u{font-family:"JetBrains Mono",monospace;font-size:10.5px;color:var(--org-deep);margin-top:2px}.shot .rd{font-size:13px;color:var(--soft);margin-top:7px;line-height:1.5}
+  footer{padding:34px 0 70px;color:var(--faint);font-size:12px;font-family:"JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.05em;border-top:1px solid var(--line);margin-top:30px}
+</style>
+<style id="printFix">
+@media print{
+  body{background:#fff}
+  .reveal,.fade,.draw,[data-reveal],[data-r],.rv{opacity:1!important;transform:none!important;clip-path:none!important;filter:none!important}
+  svg *{opacity:1!important}
+  table,tr,td,th,figure,.card,.diagram,.shot{page-break-inside:avoid}
+  h2,h3{page-break-after:avoid}
+  .bmws{display:none!important}
+}
+</style>
+</head>
+<body>
+<link rel="stylesheet" href="assets/bmws.css?v=1">
+<style>.bmws{position:sticky;top:0;z-index:900}</style>
+<div class="bmws" style="--bmws-acc:#203088"><div class="bmws-in">
+  <div class="bmws-crumb"><b>AL AiN IT Consultants &middot; Web Workspace</b><span>Brand Method &middot; Admin Navigation</span></div>
+  <nav class="bmws-tabs" aria-label="Admin navigation">
+    <a class="on" href="audit.html"><i>00</i>Web Audit</a>
+    <a href="competitors.html"><i>01</i>Competitors</a>
+    <a href="plan.html"><i>02</i>Web Plan</a>
+    <a href="index.html"><i>03</i>Prototype Web 1</a>
+     <a href="review.html"><i>04</i>Review</a>
+  </nav>
+</div></div>
+
+<div class="wrap">
+
+<header class="hero">
+  <span class="eyebrow">AL AiN IT Consultants &middot; alaintesting.com.my &middot; Web Audit &middot; 20 Aug 2026</span>
+  <h1>The lab would pass any audit. The website would not pass <em>the lab's</em>.</h1>
+  <p class="lede">Every figure below was measured live on 20 August 2026, not estimated. The finding in one line: AL AiN holds one of the rarest credentials in Malaysian technology, a Standards Malaysia accredited ISO/IEC 17025 software testing laboratory, and serves a client wall that includes Bank Islam, MAMPU and MARA. Almost none of it exists as text a search engine or a procurement officer can read. What a buyer finds instead: a homepage banner routing enquiries to a numbered gmail address, a hero that clips off both edges of a phone screen, twelve H1 tags, zero structured data, and a news page whose every post carries the same date. The product is verification. The shopfront is unverifiable.</p>
+  <div class="vrow">
+    <span class="vchip"><b>1 of 4</b> labs on the government's official IV&amp;V provider list, the only independent one still current</span>
+    <span class="vchip"><b>SAMM 829</b> ISO/IEC 17025 lab, real, buried in a header logo</span>
+    <span class="vchip"><b>alaintester003@gmail.com</b> live on the homepage as the contact route</span>
+    <span class="vchip"><b>0</b> client reviews found anywhere: Clutch 0, one Indeed review from 2019</span>
+    <span class="vchip"><b>12</b> H1 tags, <b>0</b> schema blocks, no meta description, no og:image</span>
+    <span class="vchip"><b>375px</b> mobile hero clipped off both edges, captured</span>
+    <span class="vchip"><b>3.0 / 10</b> nine-lens estate score</span>
+  </div>
+  <div class="execsum">
+    <span class="tag">The 60 second verdict</span>
+    <p>AL AiN is <b>not a weak company with a weak website. It is a strong company with an invisible one.</b> The substance is real and externally verifiable: SAMM 829, an ISO/IEC 17025 lab for functional, performance and static software testing, listed on the Digital Ministry's official IV&amp;V provider register with validity to <b>5 June 2028</b>, one of four labs there and the only independent commercial one still current, MAMPU accreditation for government ICT projects, MOF registration under Kod Bidang 210111, a Micro Focus GOLD partnership, a Lab Director with 25 years in the field, their own test management platform, and completion paper from a Datasonic engagement for the Accountant General's Department. The website turns every one of those assets into a low-resolution image, a grey logo, or silence. Client names appear nowhere as text. The only testimonials on the site are training students. The freshest content is stamped July 2025 and the footer says 2023. Meanwhile the buyer this company needs, a bank, an insurer, a ministry, runs exactly the background check the site cannot pass. The fix is not a coat of paint. It is an estate rebuilt the way this company writes a test report: <b>claim, evidence, verdict, on every page.</b></p>
+  </div>
+</header>
+
+<section id="c01">
+  <div class="chapdiv"><div class="cd-no">01</div><div><div class="cd-h">The company before the site</div><div class="cd-sub">Who AL AiN actually is, and the six jobs a winning estate must do for them</div></div></div>
+  <p class="sec-intro">An audit that starts with the site judges aesthetics. This one starts with the company, so every score that follows is a score against revenue. <b>AL AiN IT Consultants Sdn Bhd, SSM 201501003616 (1128948-W)</b>, incorporated 2015, Level 2, Suite 9, IIC Resource Centre, Technology Park Malaysia, Bukit Jalil. An independent software testing house: manual, automation, performance and security testing, IV&amp;V, crowdsourced testing, CTFL and IV&amp;V training, and an in-house test management platform. Core domains, in their own words: banking, insurance, government deliverables and R&amp;D prototypes.</p>
+  <div class="grid g3">
+    <div class="card"><span class="tag">The commercial model</span><h3>Projects, benches and a lab</h3><p>Three revenue shapes: project-based testing engagements, embedded QA resources (Junior 1 to 3 years, Middle 3 to 8, Senior over 10, rentable by the day to the year), and accredited lab work. Directory listings place them under US$25 per hour with a US$5,000 minimum: <b>a premium lab selling at bench rates.</b></p></div>
+    <div class="card"><span class="tag">The demand engine</span><h3>Referrals and panels, not the web</h3><p>Traffic estimated at roughly 707 visits a month by the one directory that publishes a figure. Zero Clutch reviews, a Facebook page from 2024 with about 8 likes, a personal-style LinkedIn profile with 71 connections and no company page. Inference, stated plainly: <b>new business arrives through referrals and government panels, and the web contributes almost nothing.</b></p></div>
+    <div class="card"><span class="tag">The hidden asset</span><h3>A licence most rivals cannot buy</h3><p>The Digital Ministry's SQA Portal lists exactly <b>four</b> ISO/IEC 17025 software testing labs eligible for government IV&amp;V. MIMOS's entry lapsed December 2025, TÜV Austria's is cybersecurity-scoped, PayNet's serves the payments network. <b>AL AiN Test Laboratory, valid to 5 June 2028, is the only independent commercial one standing.</b> Add MAMPU accreditation, MOF Kod Bidang 210111, the Bank Islam to MARA client wall, and a signed Datasonic certificate for the Accountant General's Department. On the site, all of it lives as images. Not one client name is text.</p></div>
+  </div>
+  <h3 class="sub">Six things a winning AL AiN estate has to do</h3>
+  <div class="goals2" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-top:18px">
+    <div class="card"><span class="tag">Job 1</span><p><b>Pass the procurement check.</b> A bank's vendor team or a ministry's ICT unit googles the shortlist. What they find must read like the company that holds SAMM 829, not a template with a gmail banner.</p></div>
+    <div class="card"><span class="tag">Job 2</span><p><b>Turn the credentials into text.</b> Accreditation number, scope, client sectors, named engagements where permitted: written, dated, crawlable. Today the proof layer is invisible to both Google and screen readers.</p></div>
+    <div class="card"><span class="tag">Job 3</span><p><b>Own the mandated demand.</b> MOF circular PK2.1 requires IV&amp;V on critical government systems. RMiT paragraph 10.8 makes pre-deployment testing an enforceable standard for every bank and insurer. The Cybersecurity Act and the e-invoice mandate add more. The estate should be where regulation-driven buyers land.</p></div>
+    <div class="card"><span class="tag">Job 4</span><p><b>Sell the lab, not the bench.</b> An accredited laboratory result is a different product from a RM3,000-a-month junior tester. The estate must separate the two so the lab stops being priced like the bench.</p></div>
+    <div class="card"><span class="tag">Job 5</span><p><b>Make training the funnel.</b> Training is the only lane with testimonials and the only lane with human warmth. Every CTFL student is a future QA lead who shortlists vendors. Today the courses show no price, no dates, no enrolment path.</p></div>
+    <div class="card"><span class="tag">Job 6</span><p><b>Name the platform or shelve it.</b> Nine modules, no name, no screenshot, no demo. A YouTube playlist calls it "AL AiN Test Cloud" in beta. Either it becomes a named, demonstrable product or it stops diluting the services story.</p></div>
+  </div>
+  <span class="pin"><b>The rest of this audit scores the estate against these six jobs.</b> Every chapter names the job it serves.</span>
+</section>
+
+<section id="c02">
+  <div class="chapdiv"><div class="cd-no">02</div><div><div class="cd-h">What the estate actually is</div><div class="cd-sub">One domain, two site generations, and a sitemap that leaks the scaffolding</div></div></div>
+  <p class="sec-intro">The first surprise of this audit: alaintesting.com.my is not one website. The public sitemap exposes <b>116 URLs</b>, and inside them live <b>two generations of the same site</b>, an old /services/ tree and a new /services-v2/ tree, both indexed, both returning 200, plus the construction scaffolding: form design templates, checkout popups, preview pages, and the staff directory. The estate was never finished and never cleaned, and the XML admits it to anyone who looks.</p>
+  <div class="diagram">
+    <div class="cap">F1 &middot; The 116-URL estate, read from its own sitemap, 20 Aug 2026</div>
+    <svg viewBox="0 0 960 340" role="img" aria-label="Anatomy of the alaintesting.com.my sitemap">
+      <g font-family="Inter,system-ui,sans-serif" font-size="15">
+        <rect x="250" y="20"  width="330" height="34" rx="7" fill="#1B3FDB"/><text x="20" y="43" fill="#0B1526" font-weight="600">The real site, ~55 URLs</text><text x="596" y="43" fill="#45536B">services-v2, solutions, platform, training, about, news</text>
+        <rect x="250" y="66"  width="140" height="34" rx="7" fill="#0A1630"/><text x="20" y="89" fill="#0B1526" font-weight="600">The old site, still live</text><text x="406" y="89" fill="#45536B">/services/ tree beside /services-v2/, duplicates indexed, 200 OK</text>
+        <rect x="250" y="112" width="200" height="34" rx="7" fill="#C08A1D" opacity=".85"/><text x="20" y="135" fill="#0B1526" font-weight="600">Lead forms in disguise</text><text x="466" y="135" fill="#45536B">9 "price-cost-estimation" URLs, duplicated drafts, none showing a price</text>
+        <rect x="250" y="158" width="260" height="34" rx="7" fill="#D7263D" opacity=".75"/><text x="20" y="181" fill="#0B1526" font-weight="600">Scaffolding, public</text><text x="526" y="181" fill="#45536B">jet-popup checkouts, jet-menu items, /form-design-template/, /preview/, /4542-2/</text>
+        <rect x="250" y="204" width="110" height="34" rx="7" fill="#8593A9"/><text x="20" y="227" fill="#0B1526" font-weight="600">The staff directory</text><text x="376" y="227" fill="#45536B">8 tester profiles + occupation pages, incl. the Lab Director, as bare stubs</text>
+        <line x1="20" y1="258" x2="940" y2="258" stroke="#E3E9F2" stroke-width="1.5"/>
+        <text x="20" y="288" fill="#45536B" font-size="13.5">The homepage alone: <tspan font-weight="700" fill="#0B1526">476KB of HTML, 61 stylesheets, 75 script tags, 4 videos, 4 font families in every weight</tspan>.</text>
+        <text x="20" y="314" fill="#96690D" font-size="13.5" font-weight="600">And the namespace next door is unguarded: alaintesting.com and alainit.com are both unregistered, available to anyone, checked by whois on 20 Aug 2026.</text>
+      </g>
+    </svg>
+  </div>
+  <h3 class="sub">What the one live site ships, measured</h3>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>Measurement</th><th>alaintesting.com.my &middot; 20 Aug 2026</th><th>Read</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">Stack</td><td>WordPress, Elementor 3.25.11 with Elementor Pro 3.15.0, Crocoblock Jet suite (JetMenu, JetPopup, JetThemeCore), Forms by BitCode</td><td>A page-builder stack with mismatched plugin generations</td></tr>
+      <tr><td class="dim">Size on the wire</td><td class="sc">476KB HTML &middot; 147 requests &middot; 2.42MB transferred</td><td>Heavy for a page that shows six sections</td></tr>
+      <tr><td class="dim">Speed</td><td class="sc">TTFB 2.34s &middot; DOM interactive 3.08s &middot; load 3.20s</td><td>The server thinks for over two seconds before answering</td></tr>
+      <tr><td class="dim">SEO head</td><td class="sc">no meta description &middot; no og:image &middot; 0 ld+json &middot; 12 H1s</td><td>Invisible by configuration</td></tr>
+      <tr><td class="dim">Contact plumbing</td><td>Office phone as plain text, no tel: link, no mailto: anywhere. WhatsApp via a free chat plugin exposing two mobile numbers and a vendor backlink</td><td>Five contact routes, no hierarchy, one of them gmail</td></tr>
+      <tr><td class="dim">Mobile</td><td class="sc">Hero clipped off both edges at 375px</td><td>Captured, assets/site-alain-home-mobile.webp</td></tr>
+      <tr><td class="dim">Freshness signals</td><td>6 news posts, all stamped 8 Jul 2025 &middot; footer © 2023 &middot; "server maintenance" banner still live</td><td>Reads abandoned to buyers and crawlers alike</td></tr>
+    </tbody>
+  </table></div>
+  <span class="pin"><b>Why this matters for the pitch:</b> nothing above is a design opinion. Every row is the kind of defect AL AiN's own lab is paid to catch: duplicated builds, leaked scaffolding, an unguarded namespace, a broken render on the most common device class. The audit's framing writes itself, and it is respectful: the business outgrew the website, and the website never had a QA pass of its own.</span>
+</section>
+
+<section id="c03">
+  <div class="chapdiv"><div class="cd-no">03</div><div><div class="cd-h">What a procurement officer finds today</div><div class="cd-sub">The funnel walked end to end, from shortlist to RFQ</div></div></div>
+  <p class="sec-intro">AL AiN's buyer is not an impulse click. It is a bank's vendor management team, a ministry ICT unit, an insurer's Head of QA: people whose literal job is verification. Their path is known: <b>shortlist, first look, verify, compare, engage.</b> AL AiN's funnel fails earliest of any estate we have audited, at the first look, and never recovers.</p>
+  <div class="diagram">
+    <div class="cap">F2 &middot; The funnel, graded stage by stage, walked 20 Aug 2026</div>
+    <svg viewBox="0 0 960 330" role="img" aria-label="Funnel stages with grades">
+      <g font-family="Inter,system-ui,sans-serif">
+        <g font-size="15" font-weight="600" fill="#0B1526">
+          <text x="20" y="48">Shortlist &middot; directories, referrals</text>
+          <text x="20" y="108">First look &middot; the homepage</text>
+          <text x="20" y="168">Verify &middot; credentials, clients</text>
+          <text x="20" y="228">Compare &middot; against rivals</text>
+          <text x="20" y="288">Engage &middot; request a quotation</text>
+        </g>
+        <g font-size="13.5">
+          <rect x="290" y="28" width="650" height="32" rx="7" fill="rgba(192,138,29,.13)" stroke="#C08A1D"/><text x="306" y="49" fill="#96690D" font-weight="600">HOLDS, barely. Ranked #5 on 9cv9's 2026 top-10, recycled from a Clutch profile with zero reviews. Referrals do the real work.</text>
+          <rect x="290" y="88" width="650" height="32" rx="7" fill="rgba(215,38,61,.12)" stroke="#D7263D"/><text x="306" y="109" fill="#B3261E" font-weight="600">FAILS. A stock analytics photo, template copy, and a live banner telling the buyer to email alaintester003@gmail.com.</text>
+          <rect x="290" y="148" width="650" height="32" rx="7" fill="rgba(215,38,61,.12)" stroke="#D7263D"/><text x="306" y="169" fill="#B3261E" font-weight="600">FAILS. The SAMM badge is a tiny image, clients are grey logos with no names in text, the certificate wall is low-res scans.</text>
+          <rect x="290" y="208" width="650" height="32" rx="7" fill="rgba(192,138,29,.13)" stroke="#C08A1D"/><text x="306" y="229" fill="#96690D" font-weight="600">EXPOSED. Rivals publish TMMi levels, client counts and case studies. AL AiN publishes training testimonials and a beta video.</text>
+          <rect x="290" y="268" width="650" height="32" rx="7" fill="rgba(192,138,29,.13)" stroke="#C08A1D"/><text x="306" y="289" fill="#96690D" font-weight="600">LEAKS. Request Quotation works, but the phone is not tappable, prices are hidden behind misleading URLs, and the reply promise is nowhere.</text>
+        </g>
+      </g>
+    </svg>
+  </div>
+  <h3 class="sub">The same funnel, scored</h3>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>Touchpoint</th><th>Score</th><th>What is won or lost</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">Shortlist &middot; being findable</td><td class="sc">4 / 10</td><td>A top-5 directory rank exists, but it is recycled Clutch data. Roughly 707 visits a month says the web brings almost no one</td></tr>
+      <tr><td class="dim">First look &middot; the homepage</td><td class="sc">2 / 10</td><td>The gmail banner is the first thing a careful buyer reads. For a QA vendor it is disqualifying</td></tr>
+      <tr><td class="dim">Verify &middot; the trust check</td><td class="sc">2 / 10</td><td>The credentials are real and externally checkable, and the site makes a buyer do that work elsewhere</td></tr>
+      <tr><td class="dim">Compare &middot; rivals one search away</td><td class="sc">3 / 10</td><td>No case studies, no client names in text, no numbers. Rivals state theirs loudly</td></tr>
+      <tr><td class="dim">Engage &middot; the ask</td><td class="sc">4 / 10</td><td>Forms exist on every page, which is ahead of some. Nothing says who replies, or how fast, or what happens next</td></tr>
+    </tbody>
+  </table></div>
+  <span class="pin"><b>Job 1 is the whole game.</b> This company sells to verifiers. Every stage of its own funnel fails the verification it charges clients to perform. That is not an insult, it is the pitch: nobody alive is better placed to appreciate this fix than a Lab Director.</span>
+</section>
+
+<section id="c04">
+  <div class="chapdiv"><div class="cd-no">04</div><div><div class="cd-h">The shop window, looked at honestly</div><div class="cd-sub">Captures taken 20 Aug 2026, 1440 by 900 and 375 by 812, every capture opened and looked at</div></div></div>
+  <p class="sec-intro">Credit first: the site is not ugly. The blue gradient identity is coherent, the header carries the accreditation mark, and the section rhythm is sane on desktop. The failures are of substance and of QA: what the sections say, what the images cannot say, and what happens on a phone.</p>
+  <div class="shotband">
+    <div class="shot"><img src="assets/site-alain-home.webp" alt="alaintesting.com.my homepage capture, desktop"><div class="meta"><div class="nm">The homepage &middot; desktop</div><div class="u">captured 20 Aug 2026</div><div class="rd">Blue gradient hero, "Digital Quality Assurance And Software Testing", a stock photo of a woman at an analytics dashboard. Below the fold: the real client strip, Bank Islam to MARA, in washed-out grey.</div></div></div>
+    <div class="shot"><img src="assets/site-alain-home-mobile.webp" alt="alaintesting.com.my homepage capture at 375px, hero text clipped"><div class="meta"><div class="nm">The same homepage &middot; 375px</div><div class="u">captured 20 Aug 2026</div><div class="rd">The headline and paragraph physically clip off both edges of the viewport. A cross-platform testing company failing the most basic responsive render, on its own front door.</div></div></div>
+    <div class="shot"><img src="assets/site-alain-clients.webp" alt="Our Clients page capture with greyed logos"><div class="meta"><div class="nm">Our Clients &middot; where the proof hides</div><div class="u">captured 20 Aug 2026</div><div class="rd">Three logo walls: partners, government engagements, solution partners. MiGHT, Bank Islam, MAMPU, FIFGROUP, Merchantrade, MOF, HRD Corp, Testsigma, Micro Focus, MDEC. Every one an unnamed grey image; the page's only named humans are training students.</div></div></div>
+    <div class="shot"><img src="assets/site-alain-certs.webp" alt="Media and Certifications page capture"><div class="meta"><div class="nm">Media And Certifications</div><div class="u">captured 20 Aug 2026</div><div class="rd">The strongest evidence on the estate: MAMPU accreditation, MOF Kod Bidang 210111, Micro Focus GOLD, and a signed Datasonic completion certificate for the Accountant General's Department, presented as a low-res scan in a carousel nobody will page through.</div></div></div>
+  </div>
+  <div class="grid g2" style="margin-top:22px">
+    <div class="card"><span class="tag">Measured 20 Aug</span><h3>The gmail banner, verbatim</h3><p>"We are currently undergoing maintenance on our email server. Kindly direct your emails to us at <b>alaintester003@gmail.com</b>. We apologize for any inconvenience caused." The meeting invite that produced this audit came from a working @alaintesting.com.my mailbox, so the banner is stale. It has sat on the homepage telling banks to use a numbered gmail for an unknown number of months.</p></div>
+    <div class="card"><span class="tag">Measured 20 Aug</span><h3>Five contact routes, no hierarchy</h3><p>An office line as untappable text. A testing@ mailbox. The gmail fallback. Two personal WhatsApp numbers inside a free chat plugin that links back to its own vendor. A buyer choosing at random has a one in five chance of the route the company actually watches.</p></div>
+    <div class="card"><span class="tag">Claim audit</span><h3>Superlatives with no numbers</h3><p>"Unparalleled digital quality assurance", "the industry's top choice", "cutting-edge platform". The estate makes large claims and publishes not one figure: no project count, no defect statistics, no client count, no years-in-domain numbers. The one company on this board whose whole trade is evidence publishes none about itself.</p></div>
+    <div class="card dark"><span class="tag">The single highest-value fix</span><h3>Write the proof down, in text</h3><p>SAMM 829 with its scope and date. The client sectors, and names where NDAs permit. The Datasonic and JANM engagement as a written case study. The Lab Director's 25 years. One page, one afternoon of writing, and the verify step starts passing, because for the first time the evidence would be readable by the people and machines that check.</p></div>
+  </div>
+</section>
+
+<section id="c05">
+  <div class="chapdiv"><div class="cd-no">05</div><div><div class="cd-h">Technical SEO</div><div class="cd-sub">Invisible by configuration, duplicated by history, leaky by neglect</div></div></div>
+  <p class="sec-intro">The domain has age (2023 era in its current form), a working sitemap and a canonical tag. Everything above that baseline is missing, and two structural faults, the duplicated service trees and the leaked scaffolding, actively spend what little crawl equity exists.</p>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>Layer</th><th>State, measured 20 Aug</th><th>Consequence</th><th>Verdict</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">Meta description</td><td>Absent on the homepage</td><td>Google composes the snippet; the pitch line is left to chance</td><td><span class="vtag bad">Add</span></td></tr>
+      <tr><td class="dim">og:image / social cards</td><td>Absent</td><td>Every WhatsApp or LinkedIn share of the company unfurls blank</td><td><span class="vtag bad">Add</span></td></tr>
+      <tr><td class="dim">Structured data</td><td>0 ld+json blocks sitewide</td><td>No Organization, Service, Course or FAQ eligibility. The training lane alone forfeits Course rich results</td><td><span class="vtag bad">Add</span></td></tr>
+      <tr><td class="dim">Heading structure</td><td class="sc">12 H1s on the homepage; nav labels are H1s</td><td>Crawlers cannot tell the page's subject; accessibility tree is chaos</td><td><span class="vtag bad">Fix</span></td></tr>
+      <tr><td class="dim">Duplicated trees</td><td>/services/ live beside /services-v2/, same topics, both 200</td><td>Equity split across two copies of every service page</td><td><span class="vtag bad">301</span></td></tr>
+      <tr><td class="dim">Sitemap hygiene</td><td>jet-popups, form templates, previews, menu items all in the public XML</td><td>Crawl budget spent on scaffolding; the leaks read as abandonment</td><td><span class="vtag bad">Prune</span></td></tr>
+      <tr><td class="dim">Client names as text</td><td>Zero. All logos are images, most without alt</td><td>The single strongest ranking asset, "software testing for banks in Malaysia", unwritten</td><td><span class="vtag bad">Write</span></td></tr>
+      <tr><td class="dim">Staff profiles</td><td>8 public tester stubs incl. the Lab Director, one citing gmail "due to server maintenance"</td><td>Thin pages that leak internal structure without telling a story</td><td><span class="vtag lo">Rebuild or noindex</span></td></tr>
+      <tr><td class="dim">Namespace</td><td class="sc">alaintesting.com and alainit.com unregistered</td><td>Anyone, including a bad actor, can register the .com of an accredited lab today</td><td><span class="vtag bad">Register now</span></td></tr>
+      <tr><td class="dim">Canonical + sitemap</td><td>Present and declared</td><td>The baseline exists; everything else is buildable on it</td><td><span class="vtag hi">Keep</span></td></tr>
+    </tbody>
+  </table></div>
+  <span class="pin"><b>Job 3 in one sentence:</b> regulation is manufacturing testing demand on a schedule: MOF PK2.1 mandates IV&amp;V on critical government systems, the revised RMiT (in force 28 Nov 2025) makes rigorous pre-deployment testing an enforceable standard with annual accredited penetration tests, the e-invoice mandate pulls every business above RM1m turnover into integration testing through 2026, and Act 854 puts 11 NCII sectors on yearly risk assessments. AL AiN currently cannot be found for a single one of those queries, because the estate publishes no text about any of them.</span>
+</section>
+
+<section id="c06">
+  <div class="chapdiv"><div class="cd-no">06</div><div><div class="cd-h">Performance</div><div class="cd-sub">Slow to answer, heavy to render, measured</div></div></div>
+  <p class="sec-intro">The homepage takes <b>2.34 seconds to serve its first byte</b>, then delivers 476KB of HTML, 61 stylesheets, 75 scripts, four videos and four font families in every weight they ship: 147 requests and 2.42MB before the visitor reads a word. Elementor pages can be made fast; this one has simply never been through the optimisation its own copy promises clients.</p>
+  <div class="diagram">
+    <div class="cap">F3 &middot; Time and weight on the wire, measured 20 Aug 2026</div>
+    <svg viewBox="0 0 960 190" role="img" aria-label="Performance comparison bars">
+      <g font-family="Inter,system-ui,sans-serif" font-size="15">
+        <text x="20" y="46" fill="#0B1526" font-weight="600">A healthy TTFB budget</text>
+        <rect x="280" y="28" width="80" height="30" rx="7" fill="#128A54"/>
+        <text x="370" y="49" fill="#0F6B42" font-weight="700">~0.4s</text>
+        <text x="20" y="106" fill="#0B1526" font-weight="600">alaintesting.com.my TTFB</text>
+        <rect x="280" y="88" width="470" height="30" rx="7" fill="#1B3FDB"/>
+        <text x="760" y="109" fill="#122FAE" font-weight="700">2.34s</text>
+        <text x="20" y="166" fill="#0B1526" font-weight="600">HTML alone, one page</text>
+        <rect x="280" y="148" width="320" height="30" rx="7" fill="#122FAE"/>
+        <text x="610" y="169" fill="#122FAE" font-weight="700">476KB</text>
+      </g>
+    </svg>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="num">2.34s</div><div class="lab">TTFB</div><div class="s">uncached PHP on every hit</div></div>
+    <div class="stat"><div class="num">147</div><div class="lab">Requests</div><div class="s">2.42MB transferred</div></div>
+    <div class="stat"><div class="num">61 + 75</div><div class="lab">Stylesheets + scripts</div><div class="s">the Elementor and Jet stack, unpruned</div></div>
+    <div class="stat"><div class="num">72</div><div class="lab">Font files requested</div><div class="s">4 families, every weight and italic</div></div>
+  </div>
+  <span class="pin"><b>The fix is a checklist, not a rewrite:</b> page caching, font subsetting to the weights actually used, deferring the Jet scripts, and lazy video embeds would halve the load before a redesign is even discussed. In a rebuild, all of it comes free.</span>
+</section>
+
+<section id="c07">
+  <div class="chapdiv"><div class="cd-no">07</div><div><div class="cd-h">The content engines</div><div class="cd-sub">One engine that runs (training), one that idles (news), and one that was never switched on (proof)</div></div></div>
+  <p class="sec-intro">Three content systems exist. <b>Proof</b>: the client walls, the certificate carousel, the Datasonic paper, all trapped in images. <b>News</b>: six posts about hackathons, workshops and a badminton tournament, every one stamped 8 July 2025, evidence of a single migration day rather than a publishing habit. <b>Training</b>: the only lane that behaves like a business: syllabus, testimonials with names and states, an enrol button. The estate's one working engine is its side business.</p>
+  <div class="grid g3">
+    <div class="card"><span class="tag">Real, trapped</span><h3>The proof layer</h3><p>Bank Islam, MAMPU, MARA, MiGHT, Merchantrade, FIFGROUP, MOF, HRD Corp: real names, zero text. A signed government-adjacent completion certificate presented as a photograph. Rewritten as sector case studies with permission-checked names, this is the strongest conversion asset the company owns.</p></div>
+    <div class="card"><span class="tag">Idle</span><h3>The news lane</h3><p>The six posts prove the company does real things: public sector performance testing workshops, an IV&amp;V capability push, a test hackathon. As dated, tagged articles with named authors, these become the freshness signal a stale footer currently cancels.</p></div>
+    <div class="card"><span class="tag">Running</span><h3>The training lane</h3><p>CTFL at 40 hours with a real syllabus, IV&amp;V training, six named student testimonials: the only human warmth on the estate. No price, no schedule, no HRD Corp claimable badge, no Course schema. The funnel exists and stops one field short of converting.</p></div>
+  </div>
+  <span class="pin warn"><b>The platform finding, stated plainly:</b> nine modules, "the industry's top choice", and not one screenshot, name, price or demo. The YouTube playlist calls it "Beta - AL AiN Test Cloud". Shipping a named product page with a demo video, or removing the platform from the nav until it is ready, are both better than the current ghost.</span>
+</section>
+
+<section id="c08">
+  <div class="chapdiv"><div class="cd-no">08</div><div><div class="cd-h">The resolution</div><div class="cd-sub">An estate built like a test report: claim, evidence, verdict</div></div></div>
+  <p class="sec-intro">The estate does not need more pages: it has 116 and needs perhaps 25. It needs an <b>architecture that mirrors how this company already thinks</b>. Every page states a claim, shows the evidence, and ends in a verdict the buyer can act on. Three lanes, one spine of proof.</p>
+  <div class="diagram">
+    <div class="cap">F4 &middot; One domain, three lanes, one proof spine</div>
+    <svg viewBox="0 0 960 360" role="img" aria-label="Proposed three lane architecture">
+      <g font-family="Inter,system-ui,sans-serif">
+        <rect x="310" y="20" width="340" height="64" rx="12" fill="#0A1630"/>
+        <text x="480" y="47" text-anchor="middle" fill="#fff" font-size="17" font-weight="700">ALAINTESTING.COM.MY</text>
+        <text x="480" y="68" text-anchor="middle" fill="#8FA3C4" font-size="12.5">claim &middot; evidence &middot; verdict, on every page</text>
+        <path d="M370 84 L170 150" stroke="#122FAE" stroke-width="2.4" fill="none"/>
+        <path d="M480 84 L480 150" stroke="#122FAE" stroke-width="2.4" fill="none"/>
+        <path d="M590 84 L790 150" stroke="#122FAE" stroke-width="2.4" fill="none"/>
+        <rect x="30" y="150" width="285" height="130" rx="14" fill="#FFFFFF" stroke="#1B3FDB" stroke-width="2"/>
+        <text x="50" y="180" fill="#122FAE" font-size="12" font-weight="700" font-family="JetBrains Mono,monospace">LANE 1 &middot; THE LAB</text>
+        <text x="50" y="206" fill="#0B1526" font-size="15.5" font-weight="700">Enterprise &amp; government</text>
+        <text x="50" y="230" fill="#45536B" font-size="13">SAMM 829 written out, sector pages for</text>
+        <text x="50" y="249" fill="#45536B" font-size="13">banking, insurance, government, case</text>
+        <text x="50" y="268" fill="#45536B" font-size="13">studies, compliance demand pages.</text>
+        <rect x="338" y="150" width="285" height="130" rx="14" fill="#FFFFFF" stroke="#1B3FDB" stroke-width="2"/>
+        <text x="358" y="180" fill="#122FAE" font-size="12" font-weight="700" font-family="JetBrains Mono,monospace">LANE 2 &middot; THE BENCH</text>
+        <text x="358" y="206" fill="#0B1526" font-size="15.5" font-weight="700">Testing services &amp; resources</text>
+        <text x="358" y="230" fill="#45536B" font-size="13">The service catalogue rebuilt honest:</text>
+        <text x="358" y="249" fill="#45536B" font-size="13">one tree, real capability pages, resource</text>
+        <text x="358" y="268" fill="#45536B" font-size="13">tiers with a transparent request path.</text>
+        <rect x="646" y="150" width="285" height="130" rx="14" fill="#FFFFFF" stroke="#1B3FDB" stroke-width="2"/>
+        <text x="666" y="180" fill="#122FAE" font-size="12" font-weight="700" font-family="JetBrains Mono,monospace">LANE 3 &middot; THE ACADEMY</text>
+        <text x="666" y="206" fill="#0B1526" font-size="15.5" font-weight="700">Training &amp; certification</text>
+        <text x="666" y="230" fill="#45536B" font-size="13">CTFL and IV&amp;V with dates, prices, HRD</text>
+        <text x="666" y="249" fill="#45536B" font-size="13">Corp status, Course schema, student</text>
+        <text x="666" y="268" fill="#45536B" font-size="13">proof. The funnel that feeds lanes 1 and 2.</text>
+        <rect x="30" y="300" width="901" height="40" rx="10" fill="#E9EEFD"/>
+        <text x="480" y="325" text-anchor="middle" fill="#122FAE" font-size="12.5" font-weight="700" font-family="JetBrains Mono,monospace">THE PROOF SPINE: SAMM 829 &middot; MAMPU &middot; MOF 210111 &middot; CLIENT SECTORS &middot; CASE STUDIES &middot; NAMED TEAM &middot; IN TEXT, ON EVERY LANE</text>
+      </g>
+    </svg>
+  </div>
+  <span class="pin"><b>The platform decision belongs to the client:</b> if AL AiN Test Cloud is a real product, it becomes a fourth lane with a name, a demo and screenshots. If it is internal tooling, it becomes one proud paragraph inside the lab story. The current ghost position, promised everywhere and shown nowhere, is the only wrong answer.</span>
+</section>
+
+<section id="c09">
+  <div class="chapdiv"><div class="cd-no">09</div><div><div class="cd-h">The score, and how we got it</div><div class="cd-sub">Peers first, then nine lenses, then the priorities</div></div></div>
+  <h3 class="sub">The peer bridge, what each type does well</h3>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>Peer type</th><th>What they do well</th><th>What we can take</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">Credentialed specialists &middot; Testbits, iCrest</td><td>Maturity credentials stated loudly: TMMi levels, founding years, government track records in text</td><td>Write SAMM 829 and the MAMPU standing the way they write TMMi: as a headline, not a header logo</td></tr>
+      <tr><td class="dim">The regional player &middot; QualityKiosk</td><td>Sector pages for banking and insurance, client counts, case-study libraries</td><td>The sector-page format for Bank Islam-class proof, with numbers</td></tr>
+      <tr><td class="dim">The institutions &middot; MIMOS, CyberSecurity Malaysia, SIRIM</td><td>State gravity, formal schemes, directory listings</td><td>Not out-brandable. Position as the agile accredited private lab beside them</td></tr>
+      <tr><td class="dim">The generalist agencies on the top-10 list</td><td>Modern sites, fast forms, content cadence</td><td>Baseline web hygiene: the bar AL AiN must clear just to look contemporary</td></tr>
+    </tbody>
+  </table></div>
+  <p class="sec-intro">The full board, ranked with captures and cards, lives in the <b>01 Competitors</b> tab. The nine lenses below score the AL AiN estate as one property.</p>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>Lens</th><th>Score</th><th>Finding</th><th>Read</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">First impression</td><td class="sc">4 / 10</td><td>Coherent blue identity and a visible accreditation mark, undone by stock imagery, template copy and the gmail banner</td><td>Judgement lens, flagged as such</td></tr>
+      <tr><td class="dim">Conversion craft</td><td class="sc">3 / 10</td><td>Forms everywhere but no prices, no reply promise, no tappable phone, misleading "price estimation" URLs</td><td>Plumbing exists, persuasion does not</td></tr>
+      <tr><td class="dim">Trust &amp; consistency</td><td class="sc">3 / 10</td><td>Real credentials as images, gmail fallback live, © 2023 footer, news frozen at one date, zero client reviews anywhere</td><td>The lens that costs the most money</td></tr>
+      <tr><td class="dim">Story &amp; positioning</td><td class="sc">4 / 10</td><td>"Unparalleled" and "exceptional" with no numbers, no founding story, no named leadership beyond profile stubs</td><td>Judgement lens, flagged as such</td></tr>
+      <tr><td class="dim">Content depth</td><td class="sc">3 / 10</td><td>116 URLs, 18 capability stubs, 6 same-day news posts, 0 case studies</td><td>Volume without evidence</td></tr>
+      <tr><td class="dim">Technical SEO</td><td class="sc">2 / 10</td><td>No meta description, no og:image, 0 schema, 12 H1s, duplicated trees, leaked scaffolding, unregistered .com</td><td>Invisible by configuration</td></tr>
+      <tr><td class="dim">Performance</td><td class="sc">3 / 10</td><td>TTFB 2.34s, 476KB HTML, 147 requests, 72 font files</td><td>Never optimised, fully fixable</td></tr>
+      <tr><td class="dim">Accessibility</td><td class="sc">3 / 10</td><td>16 images missing alt, heading chaos, untappable phone, clipped mobile text; full pass not run</td><td>Partial evidence, stated as such</td></tr>
+      <tr><td class="dim">Search ownership</td><td class="sc">2 / 10</td><td>Roughly 707 visits a month per the one published estimate, no company LinkedIn page, an 8-like Facebook</td><td>The demand is referral-only today</td></tr>
+    </tbody>
+  </table></div>
+  <div class="stats">
+    <div class="stat"><div class="num">3.0 / 10</div><div class="lab">Composite, this audit</div><div class="s">27 points over 9 lenses, plain average, not weighted</div></div>
+    <div class="stat"><div class="num">SAMM 829</div><div class="lab">The asset the score ignores</div><div class="s">the substance is real; the estate just cannot say it</div></div>
+    <div class="stat"><div class="num">2 / 10</div><div class="lab">Technical SEO</div><div class="s">the cheapest lens to double</div></div>
+  </div>
+  <p class="sec-intro"><b>Method note, fact vs inference:</b> every figure in the table is measured or sourced in chapter 11. First impression and Story are judgement lenses, our professional read of measured facts, flagged as such. Accessibility is a partial read. The composite is the plain average of the nine. <b>The pattern in one line:</b> the company's real-world credentials score institutional, its digital estate scores abandoned, and the whole gap sits in publishing, not in substance.</p>
+  <h3 class="sub">Priorities</h3>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>Priority</th><th>What to resolve</th><th>Why now</th></tr></thead>
+    <tbody>
+      <tr><td class="sc">1 &middot; today</td><td class="dim">Remove the gmail banner; register alaintesting.com and alainit.com</td><td>One is disqualifying banks in real time, the other is an open door for impersonating an accredited lab. Both cost minutes</td></tr>
+      <tr><td class="sc">2 &middot; this week</td><td class="dim">Fix the mobile hero, add meta description, og:image, tel: link</td><td>Zero-build hygiene that changes what every referral sees when they check</td></tr>
+      <tr><td class="sc">3 &middot; weeks 1 to 3</td><td class="dim">The proof layer in text: SAMM 829 page, client sectors, the Datasonic and JANM case study, named leadership</td><td>The verify step starts passing; everything else compounds on top of it</td></tr>
+      <tr><td class="sc">4 &middot; weeks 2 to 5</td><td class="dim">The three-lane rebuild: lab, bench, academy, one service tree, schema throughout</td><td>The estate stops splitting its equity across two generations and 116 URLs</td></tr>
+      <tr><td class="sc">5 &middot; weeks 4 to 6</td><td class="dim">Compliance demand pages: RMiT, Cybersecurity Act, e-invoice testing</td><td>Regulation is manufacturing search demand on a schedule; first credible mover in BM and EN takes it</td></tr>
+      <tr><td class="sc">6 &middot; ongoing</td><td class="dim">Review engine and content cadence: Google reviews, dated articles, training intakes</td><td>Zero reviews after 11 years is a habit problem, and habits need a system, not a sprint</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="c10">
+  <div class="chapdiv"><div class="cd-no">10</div><div><div class="cd-h">The verdict ledger</div><div class="cd-sub">Every finding, what to do about it, and when</div></div></div>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>#</th><th>Area</th><th>What is good</th><th>What is bad</th><th>Verdict</th><th>The action</th><th>When</th></tr></thead>
+    <tbody>
+      <tr><td class="sc">01</td><td class="dim">Gmail banner</td><td>Honest, at least</td><td>Routes QA buyers to alaintester003@gmail.com; evidently stale</td><td><span class="vtag bad">Remove</span></td><td>Delete the banner; publish one canonical email</td><td class="sc">Today</td></tr>
+      <tr><td class="sc">02</td><td class="dim">Namespace</td><td>.com.my owned</td><td>alaintesting.com and alainit.com unregistered</td><td><span class="vtag bad">Register</span></td><td>Buy both, redirect to .com.my</td><td class="sc">Today</td></tr>
+      <tr><td class="sc">03</td><td class="dim">Mobile render</td><td>Desktop holds</td><td>Hero clipped at 375px, overflow masked on desktop</td><td><span class="vtag bad">Fix</span></td><td>Repair the hero now; rebuild kills the cause</td><td class="sc">Week 1</td></tr>
+      <tr><td class="sc">04</td><td class="dim">Proof layer</td><td>SAMM 829, MAMPU, MOF, real client wall</td><td>All images, no text, no names, no case studies</td><td><span class="vtag bad">Write</span></td><td>Accreditation page, sector pages, 1 flagship case study</td><td class="sc">Wks 1-3</td></tr>
+      <tr><td class="sc">05</td><td class="dim">Service trees</td><td>Real capability breadth</td><td>/services/ and /services-v2/ both live, equity split</td><td><span class="vtag lo">Merge</span></td><td>One tree, 301 map for the old one</td><td class="sc">Wks 2-4</td></tr>
+      <tr><td class="sc">06</td><td class="dim">Sitemap leaks</td><td>Sitemap exists</td><td>Popups, form templates, previews, stubs all public</td><td><span class="vtag bad">Prune</span></td><td>noindex and exclude non-content types</td><td class="sc">Week 2</td></tr>
+      <tr><td class="sc">07</td><td class="dim">SEO head</td><td>Canonical present</td><td>No meta description, no og:image, 0 schema, 12 H1s</td><td><span class="vtag bad">Add</span></td><td>Full head pass; Organization, Service, Course, FAQ schema</td><td class="sc">Wks 1-3</td></tr>
+      <tr><td class="sc">08</td><td class="dim">Performance</td><td>Nothing measured passes</td><td>TTFB 2.34s, 476KB HTML, 72 font files</td><td><span class="vtag bad">Fix</span></td><td>Cache, subset, defer; rebuild inherits the budget</td><td class="sc">Wks 1-4</td></tr>
+      <tr><td class="sc">09</td><td class="dim">Contact plumbing</td><td>WhatsApp intent exists</td><td>5 routes, no tel: link, plugin backlink, personal numbers</td><td><span class="vtag bad">Fix</span></td><td>One number, one email, one WhatsApp, reply promise stated</td><td class="sc">Week 1</td></tr>
+      <tr><td class="sc">10</td><td class="dim">Training lane</td><td>Syllabus, testimonials, the only warm lane</td><td>No price, no dates, no HRD Corp badge, no Course schema</td><td><span class="vtag hi">Finish</span></td><td>Intakes, pricing, claimability, schema; make it the funnel</td><td class="sc">Wks 2-4</td></tr>
+      <tr><td class="sc">11</td><td class="dim">Platform</td><td>Nine modules, beta video exists</td><td>No name, no screenshot, no demo, "top choice" claim</td><td><span class="vtag lo">Decide</span></td><td>Name it and demo it, or fold it into the lab story</td><td class="sc">Client call</td></tr>
+      <tr><td class="sc">12</td><td class="dim">Freshness</td><td>Real activity exists to publish</td><td>All news one date, © 2023, stale banner</td><td><span class="vtag bad">Cadence</span></td><td>Dated articles, auto year, a quarterly publishing habit</td><td class="sc">Ongoing</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="c11">
+  <div class="chapdiv"><div class="cd-no">11</div><div><div class="cd-h">Evidence</div><div class="cd-sub">Every load-bearing figure, where it came from, and when it was read</div></div></div>
+  <div class="tbl-scroll"><table>
+    <thead><tr><th>Claim</th><th>Figure</th><th>Source</th><th>Read</th></tr></thead>
+    <tbody>
+      <tr><td>Entity, registration</td><td class="sc">AL AiN IT Consultants Sdn Bhd &middot; 201501003616 (1128948-W) &middot; founded 2015</td><td>Site footer; external directory listings agree</td><td>20 Aug 2026</td></tr>
+      <tr><td>SAMM accreditation</td><td class="sc">SAMM 829 &middot; MS ISO/IEC 17025:2017 &middot; functional, performance and static software testing</td><td>Official JSM accreditation schedule, doc 3004200, read via archived snapshot of 19 Nov 2025; live JSM directory under maintenance on audit day</td><td>20 Aug 2026</td></tr>
+      <tr><td>Government IV&amp;V register</td><td class="sc">1 of 4 listed labs &middot; AL AIN TEST LABORATORY valid 31 May 2023 to 5 Jun 2028 &middot; MIMOS lapsed 2 Dec 2025</td><td>JDN SQA Portal, Syarikat Pembekal IV&amp;V page, read live</td><td>20 Aug 2026</td></tr>
+      <tr><td>IV&amp;V mandate + entry bar</td><td class="sc">PK2.1: critical and high impact gov systems need IV&amp;V &middot; providers must hold ISO/IEC 17025 (software testing) or TMMi L3+</td><td>MAMPU IV&amp;V Quick Guide v1.0 (Nov 2018), PDF read from the SQA Portal</td><td>20 Aug 2026</td></tr>
+      <tr><td>RMiT testing duty</td><td class="sc">Para 10.8 (S): rigorous system testing before deployment &middot; Appendix 5: annual accredited pentests, quarterly VA</td><td>BNM RMiT policy document, issued 28 Nov 2025, PDF read</td><td>20 Aug 2026</td></tr>
+      <tr><td>MAMPU + MOF standing</td><td class="sc">Accredited gov ICT testing provider &middot; MOF Kod Bidang 210111 &middot; Micro Focus GOLD</td><td>alaintesting.com.my/about/media-and-certifications/, their own statement</td><td>20 Aug 2026</td></tr>
+      <tr><td>Gmail banner</td><td class="sc">"…direct your emails to us at alaintester003@gmail.com…"</td><td>Homepage HTML, verbatim extract</td><td>20 Aug 2026</td></tr>
+      <tr><td>Page weight and speed</td><td class="sc">476KB HTML &middot; 147 requests &middot; 2.42MB &middot; TTFB 2.34s &middot; load 3.20s</td><td>curl timing + live browser performance API</td><td>20 Aug 2026</td></tr>
+      <tr><td>Head and headings</td><td class="sc">No meta description &middot; no og:image &middot; 0 ld+json &middot; 12 H1s &middot; 16 images without alt</td><td>Homepage HTML greps + live DOM counts</td><td>20 Aug 2026</td></tr>
+      <tr><td>Mobile clipping</td><td class="sc">Hero text cut at both edges, 375 by 812</td><td>Headless capture, assets/site-alain-home-mobile.webp, opened and looked at</td><td>20 Aug 2026</td></tr>
+      <tr><td>Estate inventory</td><td class="sc">116 sitemap URLs &middot; /services/ + /services-v2/ both 200 &middot; scaffolding public</td><td>wp-sitemap.xml parts + curl status checks per URL</td><td>20 Aug 2026</td></tr>
+      <tr><td>Contact plumbing</td><td class="sc">0 tel: &middot; 0 mailto: &middot; WhatsApp plugin exposing 60122825283 and 60123500522 + vendor backlink</td><td>Live DOM link inventory</td><td>20 Aug 2026</td></tr>
+      <tr><td>Client and partner walls</td><td class="sc">Bank Islam, MAMPU, MARA, MiGHT, Merchantrade, FIFGROUP, MOF, HRD Corp, Testsigma, Micro Focus, MDEC, ASK Pentest &middot; images only</td><td>/about/our-clients/ capture, logos identified visually</td><td>20 Aug 2026</td></tr>
+      <tr><td>Datasonic certificate</td><td class="sc">Work completion: SPA + Performance Test, ISPE Jabatan Akauntan Negara Malaysia, Dec 2022</td><td>Certificate scan on the certifications page, read from capture</td><td>20 Aug 2026</td></tr>
+      <tr><td>External reputation</td><td class="sc">Clutch 0 reviews &middot; under $25/hr &middot; $5,000 min &middot; 10 to 49 staff &middot; 9cv9 rank #5 of 10 (29 Jul 2026) &middot; ~707 visits/mo (pentest.fyi metric, low confidence)</td><td>clutch.co, blog.9cv9.com, pentest.fyi, all fetched</td><td>20 Aug 2026</td></tr>
+      <tr><td>Social presence</td><td class="sc">Facebook ~8 likes, 2024-era page &middot; LinkedIn personal-style profile, 71 connections, no company page found</td><td>Facebook page shell + search snippets; LinkedIn blocks direct reads, marked secondhand</td><td>20 Aug 2026</td></tr>
+      <tr><td>Namespace</td><td class="sc">alaintesting.com and alainit.com: whois "no match"</td><td>whois queries</td><td>20 Aug 2026</td></tr>
+    </tbody>
+  </table></div>
+  <p class="sec-intro"><b>Known gaps, stated outright:</b> we hold no analytics, Search Console or ad-account access, so real traffic and enquiry volumes are not in this audit; the 707 figure is a directory estimate and labelled so. LinkedIn and Facebook counts are search-snippet reads, login-walled at the source. The live SAMM status could not be re-confirmed on audit day because the JSM public directory was under maintenance; the accreditation schedule we cite is the official document as archived 19 November 2025. The JDN register shows lab validity from 31 May 2023 while the JSM schedule prints "accredited since 06 April 2025": the two official sources disagree on the start date, flagged here rather than resolved, and the client can settle it in one sentence. MOF and ePerolehan registration is their claim plus a portal we cannot search publicly. The certificate carousel was not paged through in full. Whether the platform is a sellable product or internal tooling is unknown and is a first-meeting question, not a guess.</p>
+</section>
+
+<footer>
+  <div>Brand Method &middot; AL AiN IT Consultants web audit &middot; all figures measured 20 Aug 2026 &middot; captures in assets/, archived, none deleted</div>
+</footer>
+
+</div>
+<script id="bmPdfName">(function(){var t0=document.title;var n=t0.replace(/\s*[··]\s*Brand Method\s*$/,'').replace(/[··]/g,'-').replace(/&amp;/g,'and').replace(/[^\w\- ]+/g,'').trim().replace(/\s+/g,'-').replace(/-+/g,'-');if(!n)n='Brand-Method-Document';window.addEventListener('beforeprint',function(){document.title=n});window.addEventListener('afterprint',function(){document.title=t0});})();</script>
+</body>
+</html>
