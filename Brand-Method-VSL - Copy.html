@@ -348,25 +348,10 @@ html.is-dev .bar-offer{display:none;}
 .tgrid{display:grid;grid-template-columns:1fr;gap:16px;align-items:stretch;}
 @media(min-width:768px){.tgrid{grid-template-columns:repeat(2,minmax(0,1fr));}}
 @media(min-width:1024px){.tgrid{grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s3);}}
-/* Testimonial marquee: cards duplicated once, track slides -50% for a seamless loop. */
-.tmarq{position:relative;overflow:hidden;padding:2px 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);}
-.ttrack{display:flex;width:max-content;padding:6px 0 12px;animation:tRoll 64s linear infinite;will-change:transform;}
-.tmarq:hover .ttrack,.tmarq:focus-within .ttrack{animation-play-state:paused;}
-@keyframes tRoll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
-.ttrack .tcard{flex:0 0 360px;width:360px;margin:0 20px 0 0;}
-@media(max-width:600px){.ttrack .tcard{flex-basis:290px;width:290px;margin-right:14px;}}
-.tcard .tstars{display:inline-flex;gap:3px;margin:16px 18px 0;}
-.tcard .tstars i{width:17px;height:17px;background:#00b67a;border-radius:3px;display:inline-flex;align-items:center;justify-content:center;}
-.tcard .tstars i::before{content:"★";color:#fff;font-size:11px;line-height:1;}
-.tcard .tstars+.tq{padding-top:10px;}
-.tcard .tav{flex:0 0 auto;width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#2536F5,#6f7bff);color:#fff;display:flex;align-items:center;justify-content:center;font-family:"Fraunces",serif;font-style:normal;font-weight:600;font-size:15px;box-shadow:0 6px 15px -7px rgba(37,54,245,.55);}
-.tcard .tby span{text-transform:uppercase;}
-.thint{text-align:center;font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);margin:10px 0 0;}
-@media(prefers-reduced-motion:reduce){.ttrack{animation:none;}.tmarq{overflow-x:auto;}.thint{display:none;}}
 .tcard{display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:0 14px 40px -28px rgba(20,33,184,.18);}
 .tcard img{width:100%;aspect-ratio:2/1;object-fit:cover;transform:scale(1.06);transform-origin:center;}
 .tcard .tq{flex:1;padding:16px 18px 10px;font-family:"Fraunces",serif;font-size:15px;line-height:1.45;color:var(--ink);margin:0;}
-.tcard .tby{display:flex;align-items:center;justify-content:flex-start;gap:12px;padding:0 18px 16px;}
+.tcard .tby{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 18px 16px;}
 .tcard .tby b{display:block;font-weight:600;font-size:15px;}
 .tcard .tby span{display:block;font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.06em;color:var(--ink-soft);}
 .tcard .tv{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.06em;color:var(--bright);text-decoration:none;white-space:nowrap;}
@@ -646,12 +631,16 @@ html.js [data-reveal].in{opacity:1;transform:none;}
       <p class="lede">See where your site loses the buyers you already paid for, and the fixed-price site we build instead.</p>
     </div>
 
-    <div class="stage" id="vslStage" data-src="showreel04.webm">
-      <video id="vslVideo" class="vsl-video" preload="none" playsinline="" webkit-playsinline="" poster="nobodywantsawebsite/assets/thumbnail-showreel02.webp" aria-label="Brand Method 2026 showreel"></video>
-      <button class="stage-over" id="vslPlay" type="button" aria-label="Play the showreel with sound">
+    <div class="stage is-pending" id="vslStage" data-src="assets/vsl.mp4" data-captions="assets/vsl.vtt">
+      <video id="vslVideo" class="vsl-video" preload="none" playsinline="" webkit-playsinline="" poster="assets/nuramina-office-poster.jpg" aria-label="Brand Method video sales letter"></video>
+      <button class="stage-over" id="vslPlay" type="button" aria-label="Play the video with sound" disabled="">
         <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg></span>
-        <span class="play-lbl" id="vslLbl">Sound on</span>
+        <span class="play-lbl" id="vslLbl">The video is being cut. The short version is just below.</span>
       </button>
+      <div class="stage-host" aria-hidden="true">
+        <img src="founder-on-stage.webp" alt="" loading="lazy" decoding="async">
+        <span><b>Brand Method</b><small>Kuala Lumpur</small></span>
+      </div>
       <span class="stage-cap" aria-hidden="true" style="display: none;">CC</span>
     </div>
 
@@ -660,6 +649,7 @@ html.js [data-reveal].in{opacity:1;transform:none;}
       <p>Thirty minutes. No pitch. You keep the plan either way.</p>
     </div>
 
+    <p class="dev-note" data-bm-internal="">Internal: drop the 16:9 cut at <b>assets/vsl.mp4</b> (captions at <b>assets/vsl.vtt</b>) and the player goes live on its own. Presenter provisional per brief [ALIGN 1.9]; the poster should be the presenter, face to camera. Delayed CTA reveals at 390s or 20s, whichever comes first.</p>
 
     <ul class="trust" aria-label="Commitments">
       <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-11"></path></svg>Fixed price</li>
@@ -912,83 +902,94 @@ html.js [data-reveal].in{opacity:1;transform:none;}
       <div class="viz"><div class="viz-in"><span class="viz-tag">Result slot 3 · [ALIGN 1.5]</span>A percentage without a baseline is not evidence. Every entry needs all four fields.</div></div>
     </div>
 
-    <div class="tmarq in" data-reveal="" aria-label="Client testimonials">
-      <div class="ttrack">
-        <figure class="tcard">
-          <img src="nobodywantsawebsite/assets/testi-1.webp" alt="" loading="lazy" decoding="async" width="1080" height="607">
-          <div class="tstars" role="img" aria-label="5 out of 5"><i></i><i></i><i></i><i></i><i></i></div>
-          <blockquote class="tq">“Thanks to Brand Method team for the speedy delivery. We really appreciate the quick turnaround and the consistent quality of work.”</blockquote>
-          <figcaption class="tby"><i class="tav" aria-hidden="true">SY</i><div><b>Mr. Syukri</b><span>Eskayvie</span></div></figcaption>
-        </figure>
-        <figure class="tcard">
-          <img src="nobodywantsawebsite/assets/testi-2.webp" alt="" loading="lazy" decoding="async" width="1100" height="618">
-          <div class="tstars" role="img" aria-label="5 out of 5"><i></i><i></i><i></i><i></i><i></i></div>
-          <blockquote class="tq">“The final video was outstanding. I presented it during a conference in China, and it received strong praise from attendees including delegates from Singapore and China.”</blockquote>
-          <figcaption class="tby"><i class="tav" aria-hidden="true">AZ</i><div><b>Mr. Azhan</b><span>Waterbay</span></div></figcaption>
-        </figure>
-        <figure class="tcard">
-          <img src="nobodywantsawebsite/assets/testi-3.webp" alt="" loading="lazy" decoding="async" width="501" height="282">
-          <div class="tstars" role="img" aria-label="5 out of 5"><i></i><i></i><i></i><i></i><i></i></div>
-          <blockquote class="tq">“Brand Method is truly amazing to work with. We learned the full strategy behind branding. They help align our goals and always overdeliver on every task.”</blockquote>
-          <figcaption class="tby"><i class="tav" aria-hidden="true">NB</i><div><b>Noelle Bee</b><span>Hexamatic</span></div></figcaption>
-        </figure>
-        <figure class="tcard">
-          <img src="nobodywantsawebsite/assets/testi-4.webp" alt="" loading="lazy" decoding="async" width="501" height="281">
-          <div class="tstars" role="img" aria-label="5 out of 5"><i></i><i></i><i></i><i></i><i></i></div>
-          <blockquote class="tq">“It's been an exciting and happy journey. I never imagined our product could look this good. Everything was done with finesse and heart.”</blockquote>
-          <figcaption class="tby"><i class="tav" aria-hidden="true">AD</i><div><b>Amir Derakhsan</b><span>Spiroball</span></div></figcaption>
-        </figure>
-        <figure class="tcard">
-          <img src="nobodywantsawebsite/assets/testi-5.webp" alt="" loading="lazy" decoding="async" width="503" height="283">
-          <div class="tstars" role="img" aria-label="5 out of 5"><i></i><i></i><i></i><i></i><i></i></div>
-          <blockquote class="tq">“Brand Method is who I'd recommend anytime. Working with them feels refreshing and effortless. Everything is organised, planned well, and the results always exceed expectations.”</blockquote>
-          <figcaption class="tby"><i class="tav" aria-hidden="true">BE</i><div><b>Ben</b><span>Valvoline Malaysia</span></div></figcaption>
-        </figure>
-        <figure class="tcard">
-          <img src="nobodywantsawebsite/assets/testi-6.webp" alt="" loading="lazy" decoding="async" width="1100" height="618">
-          <div class="tstars" role="img" aria-label="5 out of 5"><i></i><i></i><i></i><i></i><i></i></div>
-          <blockquote class="tq">“Working with Brand Method was honestly one of the best decisions we made for our brand. They really take the time to understand the business behind it.”</blockquote>
-          <figcaption class="tby"><i class="tav" aria-hidden="true">PR</i><div><b>Dr. Priya</b><span>Pinnacle Hair Clinic</span></div></figcaption>
-        </figure>
-        <figure class="tcard" aria-hidden="true">
-          <img src="nobodywantsawebsite/assets/testi-1.webp" alt="" loading="lazy" decoding="async" width="1080" height="607">
-          <div class="tstars" role="img" aria-label="5 out of 5"><i></i><i></i><i></i><i></i><i></i></div>
-          <blockquote class="tq">“Thanks to Brand Method team for the speedy delivery. We really appreciate the quick turnaround and the consistent quality of work.”</blockquote>
-          <figcaption class="tby"><i class="tav" aria-hidden="true">SY</i><div><b>Mr. Syukri</b><span>Eskayvie</span></div></figcaption>
-        </figure>
-        <figure class="tcard" aria-hidden="true">
-          <img src="nobodywantsawebsite/assets/testi-2.webp" alt="" loading="lazy" decoding="async" width="1100" height="618">
-          <div class="tstars" role="img" aria-label="5 out of 5"><i></i><i></i><i></i><i></i><i></i></div>
-          <blockquote class="tq">“The final video was outstanding. I presented it during a conference in China, and it received strong praise from attendees including delegates from Singapore and China.”</blockquote>
-          <figcaption class="tby"><i class="tav" aria-hidden="true">AZ</i><div><b>Mr. Azhan</b><span>Waterbay</span></div></figcaption>
-        </figure>
-        <figure class="tcard" aria-hidden="true">
-          <img src="nobodywantsawebsite/assets/testi-3.webp" alt="" loading="lazy" decoding="async" width="501" height="282">
-          <div class="tstars" role="img" aria-label="5 out of 5"><i></i><i></i><i></i><i></i><i></i></div>
-          <blockquote class="tq">“Brand Method is truly amazing to work with. We learned the full strategy behind branding. They help align our goals and always overdeliver on every task.”</blockquote>
-          <figcaption class="tby"><i class="tav" aria-hidden="true">NB</i><div><b>Noelle Bee</b><span>Hexamatic</span></div></figcaption>
-        </figure>
-        <figure class="tcard" aria-hidden="true">
-          <img src="nobodywantsawebsite/assets/testi-4.webp" alt="" loading="lazy" decoding="async" width="501" height="281">
-          <div class="tstars" role="img" aria-label="5 out of 5"><i></i><i></i><i></i><i></i><i></i></div>
-          <blockquote class="tq">“It's been an exciting and happy journey. I never imagined our product could look this good. Everything was done with finesse and heart.”</blockquote>
-          <figcaption class="tby"><i class="tav" aria-hidden="true">AD</i><div><b>Amir Derakhsan</b><span>Spiroball</span></div></figcaption>
-        </figure>
-        <figure class="tcard" aria-hidden="true">
-          <img src="nobodywantsawebsite/assets/testi-5.webp" alt="" loading="lazy" decoding="async" width="503" height="283">
-          <div class="tstars" role="img" aria-label="5 out of 5"><i></i><i></i><i></i><i></i><i></i></div>
-          <blockquote class="tq">“Brand Method is who I'd recommend anytime. Working with them feels refreshing and effortless. Everything is organised, planned well, and the results always exceed expectations.”</blockquote>
-          <figcaption class="tby"><i class="tav" aria-hidden="true">BE</i><div><b>Ben</b><span>Valvoline Malaysia</span></div></figcaption>
-        </figure>
-        <figure class="tcard" aria-hidden="true">
-          <img src="nobodywantsawebsite/assets/testi-6.webp" alt="" loading="lazy" decoding="async" width="1100" height="618">
-          <div class="tstars" role="img" aria-label="5 out of 5"><i></i><i></i><i></i><i></i><i></i></div>
-          <blockquote class="tq">“Working with Brand Method was honestly one of the best decisions we made for our brand. They really take the time to understand the business behind it.”</blockquote>
-          <figcaption class="tby"><i class="tav" aria-hidden="true">PR</i><div><b>Dr. Priya</b><span>Pinnacle Hair Clinic</span></div></figcaption>
-        </figure>
-      </div>
+    <div class="tgrid">
+      <figure class="tcard in" data-reveal="">
+        <img src="nobodywantsawebsite/assets/testi-1.webp" alt="" loading="lazy" decoding="async" width="1080" height="607">
+        <blockquote class="tq">“Thanks to Brand Method team for the speedy delivery. We really appreciate the quick turnaround and the consistent quality of work.”</blockquote>
+        <figcaption class="tby"><div><b>Mr. Syukri</b><span>Founder, Eskayvie</span></div></figcaption>
+      </figure>
+      <figure class="tcard in" data-reveal="">
+        <img src="nobodywantsawebsite/assets/testi-2.webp" alt="" loading="lazy" decoding="async" width="1100" height="618">
+        <blockquote class="tq">“The final video was outstanding. I presented it during a conference in China, and it received strong praise from attendees including delegates from Singapore and China.”</blockquote>
+        <figcaption class="tby"><div><b>Mr. Azhan</b><span>Director, Waterbay</span></div></figcaption>
+      </figure>
+      <figure class="tcard in" data-reveal="">
+        <img src="nobodywantsawebsite/assets/testi-3.webp" alt="" loading="lazy" decoding="async" width="501" height="282">
+        <blockquote class="tq">“Brand Method is truly amazing to work with. We learned the full strategy behind branding. They help align our goals and always overdeliver on every task.”</blockquote>
+        <figcaption class="tby"><div><b>Noelle Bee</b><span>Founder, Hexamatic</span></div></figcaption>
+      </figure>
+      <figure class="tcard in" data-reveal="">
+        <img src="nobodywantsawebsite/assets/testi-4.webp" alt="" loading="lazy" decoding="async" width="501" height="281">
+        <blockquote class="tq">“It's been an exciting and happy journey. I never imagined our product could look this good. Everything was done with finesse and heart.”</blockquote>
+        <figcaption class="tby"><div><b>Amir Derakhsan</b><span>Founder, Spiroball</span></div></figcaption>
+      </figure>
+      <figure class="tcard in" data-reveal="">
+        <img src="nobodywantsawebsite/assets/testi-5.webp" alt="" loading="lazy" decoding="async" width="503" height="283">
+        <blockquote class="tq">“Brand Method is who I'd recommend anytime. Working with them feels refreshing and effortless. Everything is organised, planned well, and the results always exceed expectations.”</blockquote>
+        <figcaption class="tby"><div><b>Ben</b><span>Marketing, Valvoline Malaysia</span></div></figcaption>
+      </figure>
+      <figure class="tcard in" data-reveal="">
+        <img src="nobodywantsawebsite/assets/testi-6.webp" alt="" loading="lazy" decoding="async" width="1100" height="618">
+        <blockquote class="tq">“Working with Brand Method was honestly one of the best decisions we made for our brand. They really take the time to understand the business behind it.”</blockquote>
+        <figcaption class="tby"><div><b>Dr. Priya</b><span>Founder, Pinnacle Hair Clinic</span></div></figcaption>
+      </figure>
+      <figure class="tcard in" data-reveal="" data-pending="">
+        <img src="assets/testimonials/ext-ae1c82e3.jpg" alt="" loading="lazy" decoding="async" width="1100" height="618" onerror="this.remove()">
+        <span class="tpend" data-bm-internal="">Pending re-clearance</span>
+        <blockquote class="tq">“An incredible experience. Rebranding Cofeology gave me a fresh perspective, and I was involved in both the ideation and the execution. I recommend them. It is worth it.”</blockquote>
+        <figcaption class="tby"><div><b>Titan Azim Ahmad</b><span>Founder, Cofeology Cafe</span></div></figcaption>
+      </figure>
+      <figure class="tcard in" data-reveal="" data-pending="">
+        <img src="assets/testimonials/ext-09c35e9b.jpg" alt="" loading="lazy" decoding="async" width="1100" height="618" onerror="this.remove()">
+        <span class="tpend" data-bm-internal="">Pending re-clearance</span>
+        <blockquote class="tq">“A great team to work with. Amazing work, and they translate our ideas with ease. I appreciate the quick response time and how present they are during ideation.”</blockquote>
+        <figcaption class="tby"><div><b>Rose</b><span>Founder, Discover Early Years</span></div></figcaption>
+      </figure>
+      <figure class="tcard in" data-reveal="" data-pending="">
+        <img src="assets/testimonials/ext-d61f9c72.jpg" alt="" loading="lazy" decoding="async" width="1100" height="618" onerror="this.remove()">
+        <span class="tpend" data-bm-internal="">Pending re-clearance</span>
+        <blockquote class="tq">“Love you guys. Any time there is a problem I can rely on your magic. Breathtaking visuals, and the brand messaging has worked so well for us.”</blockquote>
+        <figcaption class="tby"><div><b>Thiruchandran</b><span>Founder, Kampung Gold</span></div></figcaption>
+      </figure>
+      <figure class="tcard in" data-reveal="" data-pending="">
+        <img src="assets/testimonials/ext-ea62d073.jpg" alt="" loading="lazy" decoding="async" width="1100" height="618" onerror="this.remove()">
+        <span class="tpend" data-bm-internal="">Pending re-clearance</span>
+        <blockquote class="tq">“Working with Brand Method is very promising. Flexibility is something we always wanted: we can discuss and change plans as customer feedback and the market respond, on our own terms. Brand Method delivered all of it, fast.”</blockquote>
+        <figcaption class="tby"><div><b>Leslie L</b><span>Director, Klaas Interior Design</span></div></figcaption>
+      </figure>
+      <figure class="tcard in" data-reveal="" data-pending="">
+        <img src="assets/testimonials/ext-65f55011.jpg" alt="" loading="lazy" decoding="async" width="1100" height="618" onerror="this.remove()">
+        <span class="tpend" data-bm-internal="">Pending re-clearance</span>
+        <blockquote class="tq">“Now the way is clear - I never thought that I would learn so much from Bazil. He is not just a designer, but a visionary strategist. Showing us that we can do so much more.”</blockquote>
+        <figcaption class="tby"><div><b>Suzana Aiman</b><span>Founder, Oryn Skincare</span></div></figcaption>
+      </figure>
+      <figure class="tcard in" data-reveal="" data-pending="">
+        <img src="assets/testimonials/ext-106ff99c.jpg" alt="" loading="lazy" decoding="async" width="1100" height="618" onerror="this.remove()">
+        <span class="tpend" data-bm-internal="">Pending re-clearance</span>
+        <blockquote class="tq">“The best designer I have worked with. Designs that crossed countries and made our products go viral. Superb.”</blockquote>
+        <figcaption class="tby"><div><b>Arzam Shawn</b><span>Founder, Ossem Juice</span></div></figcaption>
+      </figure>
+      <figure class="tcard in" data-reveal="" data-pending="">
+        <img src="assets/testimonials/ext-b143aca3.jpg" alt="" loading="lazy" decoding="async" width="1100" height="618" onerror="this.remove()">
+        <span class="tpend" data-bm-internal="">Pending re-clearance</span>
+        <blockquote class="tq">“Quick responds and fast update, we always had time to crosscheck work with our team. Having breathing room to take in the work at hand is super refreshing. Looking forward to the next project we will be working on.”</blockquote>
+        <figcaption class="tby"><div><b>Vincent W</b><span>Marketing, Starbucks Malaysia</span></div></figcaption>
+      </figure>
+<!-- retired: Glend H, Go Viewpoint. Shortest and most generic of the sixteen; 15 cards fill 5 rows of 3 with no orphan. -->
+      <figure class="tcard in" data-reveal="" data-pending="">
+        <img src="assets/testimonials/ext-5b2789bb.jpg" alt="" loading="lazy" decoding="async" width="1100" height="618" onerror="this.remove()">
+        <span class="tpend" data-bm-internal="">Pending re-clearance</span>
+        <blockquote class="tq">“I believe the Brand Method team has the capacity to be a top-tier agency in the region.”</blockquote>
+        <figcaption class="tby"><div><b>Shafeeq Z</b><span>Founder, Wonderspire</span></div></figcaption>
+      </figure>
+      <figure class="tcard in" data-reveal="" data-pending="">
+        <img src="assets/testimonials/ext-abeb928e.jpg" alt="" loading="lazy" decoding="async" width="1100" height="618" onerror="this.remove()">
+        <span class="tpend" data-bm-internal="">Pending re-clearance</span>
+        <blockquote class="tq">“Professionals. Don't be fooled by their friendliness. These guys are the real deal. Working with Bazil and the team is very motivating. Feels like we could do anything. What we thought we needed ages to reach, was just a few step ahead. Very very happy working with them.”</blockquote>
+        <figcaption class="tby"><div><b>Sarah</b><span>Founder, Yuth</span></div></figcaption>
+      </figure>
     </div>
-    <p class="thint">Auto-scrolling · hover to pause</p>
+    <p class="dev-note" data-bm-internal="">Internal: the six cleared cards render live. The ten cards marked "Pending re-clearance" are verbatim from the zieel.com archive (photos hotlinked from zieel.com, localise at deploy) and stay hidden on the live domain until their company name is added to CLEARED in the page script. Roles are missing on the archive ten and the brief asks for them. Every visible verification link returned 200 on 3 Sep 2026. Face-to-name check on all photos before launch.</p>
 
     <div class="founder">
       <div class="founder-media in" data-reveal="">

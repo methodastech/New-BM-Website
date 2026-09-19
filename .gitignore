@@ -30,3 +30,4 @@ package-lock.json
 *.orig
 *.save
 index-backup-*.html
+/brandmethod-website 18-9/
