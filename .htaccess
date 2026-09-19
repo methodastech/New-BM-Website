@@ -29,3 +29,12 @@ RedirectMatch 404 /\.git
     Header always set Cache-Control "no-store, no-cache, must-revalidate"
   </FilesMatch>
 </IfModule>
+
+# --- the homepage lives at https://brandmethod.co/, never /index.html ---
+# THE_REQUEST checks what the browser asked for, so Apache serving index.html
+# for "/" internally does not trigger a redirect loop.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{THE_REQUEST} \s/index\.html[\s?] [NC]
+  RewriteRule ^index\.html$ / [R=301,L]
+</IfModule>

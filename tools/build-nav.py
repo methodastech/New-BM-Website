@@ -281,8 +281,8 @@ RUNTIME = r'''
 
   // search and the members area live on Home
   var sb = root.getElementById('bmxSearchBtn'), ss = root.getElementById('ssBtn');
-  if (sb) sb.addEventListener('click', function () { location.href = basePath + 'index.html#open-search'; });
-  if (ss) ss.addEventListener('click', function () { location.href = basePath + 'index.html#open-ss'; });
+  if (sb) sb.addEventListener('click', function () { location.href = '/#open-search'; });
+  if (ss) ss.addEventListener('click', function () { location.href = '/#open-ss'; });
 })();
 '''
 

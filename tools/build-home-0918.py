@@ -114,7 +114,7 @@ PAGES = {
     'svc-marketing': 'services/marketing-ads.html', 'svc-content': 'services/content-creation.html',
     'svc-web': 'services/website-apps.html', 'pricing': 'pricing.html', 'resources': 'resources.html',
     'contact': 'contact.html', 'logo-gallery': 'logo-gallery.html', 'mascot-gallery': 'mascot-gallery.html',
-    'tech-portfolio': 'portfolio.html', 'culture': 'culture.html', 'home': 'index.html',
+    'tech-portfolio': 'portfolio.html', 'culture': 'culture.html', 'home': '/',
 }
 # pages this script builds from the export: page id -> file, and its head
 BUILDS = {
