@@ -13,6 +13,8 @@
 <meta name="description" content="Brand Method is a strategy-led branding and marketing studio in Kuala Lumpur. We build brands people instantly understand, trust and choose."/>
 <meta name="theme-color" content="#080912"/>
 <link rel="canonical" href="https://brandmethod.co/"/>
+<script>/* the live host is nginx, so the .htaccess redirect never runs: tidy /index.html to / in the address bar */
+if(/^https?:$/.test(location.protocol)&&/\/index\.html$/.test(location.pathname)){try{history.replaceState(null,'',location.pathname.replace(/index\.html$/,'')+location.search+location.hash);}catch(e){}}</script>
 
 <meta property="og:type" content="website"/>
 <meta property="og:site_name" content="Brand Method"/>
