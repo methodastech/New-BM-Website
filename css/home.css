@@ -2018,8 +2018,8 @@ section[style*="clamp(40px,6vw,80px) 0 clamp(60px,8vw,100px)"]{padding:clamp(58p
 /* the loading screen: the wordmark only at the last moment. The source reveals it at
    480ms; here it stays dark until live-0916.js adds .bmx-late at 2000ms, 600ms before
    the warp out. */
-#loader .load-center{opacity:0!important;transform:scale(.94)!important;transition:opacity .5s ease,transform .9s var(--ease)!important}
-#loader.bmx-late .load-center{opacity:1!important;transform:scale(1)!important}
+/* 21 Sep: the late reveal now lives in each page's loader script (reveal at 700ms, on the
+   loader's own clock). A rule here arrived with this stylesheet mid-intro and hid the logo. */
 #loader.warpout .load-center{opacity:0!important;transform:scale(1.14)!important;transition:transform .7s var(--ease),opacity .45s ease!important}
 /* the search icon over the dark hero: white until the nav turns white */
 .nav .bmx-sbtn{color:rgba(255,255,255,.82)!important;opacity:1!important}
@@ -2571,3 +2571,50 @@ details.bmx-role .bmx-role-go::after{transition:opacity .3s}
 .bmdd-shell .bmdd-ic svg,.bmdd-shell .bmx-ddic svg{width:30px!important;height:30px!important}
 .bmdd-shell .bmdd-all{grid-template-columns:38px 1fr auto!important}
 .bmdd-shell .bmdd-all .bmx-ddic{width:38px!important;height:38px!important;display:grid!important;place-items:center!important}
+
+/* "Trusted by Market Leaders": one line on desktop, wraps on phones instead of running off */
+@media(max-width:640px){.bmx-trusted-h{white-space:normal!important;text-wrap:balance;padding:0 16px}}
+/* line breaks that only apply on phones */
+.bmx-mbr{display:none}
+@media(max-width:640px){.bmx-mbr{display:inline}}
+
+/* ===== mobile tidy (21 Sep) ===== */
+@media(max-width:640px){
+  /* testimonial controls: centred "< progress >" like the showreel slider, count underneath,
+     clear of the carousel's faded edges */
+  .tcar-ctrl{justify-content:center!important;gap:14px 0!important}
+  .tcar-nav{display:contents!important}
+  #tcarPrev{order:1;border:1px solid rgba(26,38,222,.16)!important}
+  .tcar-dots{order:2;flex:0 1 auto!important;margin:0 14px;flex-wrap:nowrap!important}
+  .tcar-dots>*{width:20px!important;min-width:0!important}
+  #tcarNext{order:3;border:1px solid rgba(26,38,222,.16)!important}
+  .tcar-btn+.tcar-btn{border-left:1px solid rgba(26,38,222,.16)!important}
+  .tcar-count{order:4;flex:0 0 100%!important;text-align:center;min-width:0!important}
+  /* Foundation / Build / Accelerate: centred when stacked */
+  .gr-step{text-align:center;display:flex;flex-direction:column;align-items:center}
+  .gr-ico{margin-left:auto;margin-right:auto}
+  .gr-steps{margin-left:auto!important;margin-right:auto!important}
+  /* newsletter: fields and Submit stacked full width; the button had no height of its own
+     once it wrapped, so it collapsed to a thin bar */
+  .signup-form{flex-direction:column;gap:10px}
+  .signup-form input{flex:none;width:100%;min-width:0}
+  .signup-form button{width:100%;min-height:52px;padding:0 28px}
+}
+
+/* page banners (logo gallery, portfolio, ...): the later two-column rule above beat the
+   900px one-column rule, so on phones the copy got a 46px column. Stack: copy, then field. */
+@media(max-width:900px){
+  .bmx-bnr{grid-template-columns:minmax(0,1fr)!important}
+  .bmx-bnr .page-hero-inner{grid-column:1!important;grid-row:1!important}
+  .bmx-bnr .bmx-field{grid-column:1!important;grid-row:2!important}
+}
+
+/* service pages: on phones the title started under the fixed header (30px top padding vs a
+   60-72px nav); clear the header plus a breath */
+@media(max-width:900px){.pg section.svc-hero{padding-top:108px!important}} /* beats the generic section:not(.pg) mobile padding */
+
+/* mobile menu: the sub-links were 60% blue-grey on navy, hard to read; and the panel sat at
+   the desktop nav height (80px) under a 60px phone header, leaving a strip of page showing */
+.nav-mobile .m-sub a{color:rgba(255,255,255,.86)!important}
+.nav-mobile .m-sub a:hover,.nav-mobile .m-sub a[aria-current="page"]{color:#fff!important}
+@media(max-width:900px){.nav-mobile{top:calc(60px + var(--bmx-bar,0px))!important}}
