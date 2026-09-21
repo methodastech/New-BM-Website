@@ -13,7 +13,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Brand Method">
 <meta property="og:title" content="Nobody wants a website. They want enquiries.">
-<meta property="og:description" content="A conversion site at a fixed price, live in as little as a week, backed by four written guarantees. Watch the short video, then book a free 30-minute call.">
+<meta property="og:description" content="A conversion site at a fixed price, live in as little as a week, backed by four written guarantees. Watch the short video, then book a free 20-minute call.">
 <meta property="og:url" content="https://brandmethod.co/website-vsl/">
 <meta property="og:image" content="https://brandmethod.co/assets/og-vsl.jpg">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
@@ -93,7 +93,7 @@ h2{font-size:clamp(28px,3.8vw,44px);margin-bottom:var(--s2);}
 h3{font-size:clamp(20px,2vw,24px);font-weight:600;line-height:1.15;}
 h1 em,h2 em{display:block!important;font-style:italic;color:var(--bright);}
 .kick{display:inline-flex;align-items:center;gap:8px;font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--bright-deep);margin-bottom:var(--s2);}
-.kick::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--bright);}
+.kick::before{display:none;} /* labels run without the dot */
 .dark-band .kick{color:var(--bright);}
 .lede{font-size:clamp(17px,1.5vw,20px);color:var(--ink-soft);max-width:var(--measure);margin:0;}
 .head{max-width:820px;margin-bottom:var(--s5);}
@@ -180,6 +180,7 @@ html.is-dev .bar-offer{display:none;}
 .hero-copy h1{max-width:100%;margin:0 auto var(--s2);}
 .hero-copy .lede{margin:0 auto;max-width:58ch;}
 .stage{position:relative;width:100%;max-width:900px;margin:0 auto;aspect-ratio:16/9;background:#0B1030;overflow:hidden;border-radius:var(--r);box-shadow:0 30px 70px -30px rgba(20,28,84,.45);}
+@media(min-width:640px){.hero .stage{max-width:none;}} /* video spans the same width as the cards below */
 @media(max-width:639px){.stage{max-height:45vh;width:auto;max-width:100%;border-radius:var(--r2);}}
 .stage video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#0B1030;}
 .stage-over{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:linear-gradient(180deg,rgba(11,16,48,.08),rgba(11,16,48,.55));color:#fff;cursor:pointer;border:0;padding:0;width:100%;text-align:center;font:inherit;}
@@ -350,11 +351,14 @@ html.is-dev .bar-offer{display:none;}
 @media(min-width:1024px){.tgrid{grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s3);}}
 /* Testimonial marquee: cards duplicated once, track slides -50% for a seamless loop. */
 .tmarq{position:relative;overflow:hidden;padding:2px 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);}
-.ttrack{display:flex;width:max-content;padding:6px 0 12px;animation:tRoll 64s linear infinite;will-change:transform;}
+.ttrack{display:flex;width:max-content;padding:6px 0 12px;animation:tRoll 160s linear infinite;will-change:transform;}
 .tmarq:hover .ttrack,.tmarq:focus-within .ttrack{animation-play-state:paused;}
 @keyframes tRoll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
 .ttrack .tcard{flex:0 0 360px;width:360px;margin:0 20px 0 0;}
 @media(max-width:600px){.ttrack .tcard{flex-basis:290px;width:290px;margin-right:14px;}}
+.tmarq{container-type:inline-size;}
+@media(min-width:1024px){.ttrack .tcard{flex-basis:calc((100cqw - 60px) / 4);width:calc((100cqw - 60px) / 4);}} /* four cards across on desktop */
+@media(min-width:720px) and (max-width:1023px){.ttrack .tcard{flex-basis:calc((100cqw - 40px) / 3);width:calc((100cqw - 40px) / 3);}}
 .tcard .tstars{display:inline-flex;gap:3px;margin:16px 18px 0;}
 .tcard .tstars i{width:17px;height:17px;background:#00b67a;border-radius:3px;display:inline-flex;align-items:center;justify-content:center;}
 .tcard .tstars i::before{content:"★";color:#fff;font-size:11px;line-height:1;}
@@ -465,6 +469,10 @@ html.is-dev .bar-offer{display:none;}
 @media(min-width:1024px){.book{grid-template-columns:1fr 1.15fr;gap:var(--s7);align-items:center;}}
 .book-graphic{position:relative;width:120px;height:120px;margin-bottom:var(--s4);}
 .book-graphic svg{position:absolute;inset:0;width:100%;height:100%;}
+.book-graphic .bg-on{opacity:0;}
+.book-graphic .bg-on{transition:opacity .45s ease;}.book-graphic .bg-on.on{opacity:1;}
+@keyframes bgDot{from{opacity:0;}to{opacity:1;}}
+@media(prefers-reduced-motion:reduce){.book-graphic .bg-on,.book-graphic.go .bg-on{animation:none;opacity:1;}}
 .book-graphic .bg-num{position:absolute;left:0;right:0;top:34px;text-align:center;font-family:"Fraunces",serif;font-size:34px;line-height:1;color:#fff;}
 .book-graphic .bg-lbl{position:absolute;left:0;right:0;top:70px;text-align:center;font-family:"JetBrains Mono",monospace;font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;line-height:1.3;color:rgba(255,255,255,.7);}
 .book-copy ul{list-style:none;margin:var(--s3) 0 0;padding:0;}
@@ -473,6 +481,7 @@ html.is-dev .bar-offer{display:none;}
 .book-form{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:var(--s4);}
 .dark-band .book-form{color:#15161A;}
 .book-form .bmf{max-width:none;}
+.entry-cal{padding:0;overflow:hidden;background:#fff;border:1px solid var(--line);justify-content:flex-start;}
 .consent{font-size:12.5px;color:var(--ink-faint);margin:var(--s2) 0 0;line-height:1.5;}
 .dark-band .book-form{--bmf-soft:rgba(255,255,255,.8);border-color:var(--line);}
 .dark-band .book-form .bmf{--bmf-soft:rgba(255,255,255,.8);}
@@ -595,7 +604,7 @@ html.js [data-reveal].in{opacity:1;transform:none;}
   html{scroll-behavior:auto;}
 }
 </style>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What exactly is this?","acceptedAnswer":{"@type":"Answer","text":"A conversion website: a site built around how your customers decide, with the copy, the forms, the WhatsApp routing and the tracking already in place. It is delivered at a fixed price, in one to two weeks, by the senior team you meet on the call."}},{"@type":"Question","name":"Who is it for?","acceptedAnswer":{"@type":"Answer","text":"Founders and owners of SMEs and mid-market businesses who already have traffic, enquiries or bookings and can feel them slipping away. If you are choosing on lowest price alone, or not ready to decide this quarter, we are probably not the right fit, and we will say so on the call."}},{"@type":"Question","name":"How much does it cost?","acceptedAnswer":{"@type":"Answer","text":"A Starter site is RM1,900. A Growth site is RM6,000. Apps and games start at RM14,000. Bigger systems are scoped on the call. Every price is fixed in writing before you pay, and the number quoted is the number paid."}},{"@type":"Question","name":"Why are you cheaper than the big agencies?","acceptedAnswer":{"@type":"Answer","text":"We cut the overhead, not the quality. Our own system handles the repetitive work, so your money goes to senior strategy and craft, not layers of account management and markup."}},{"@type":"Question","name":"How does the process work, and how fast?","acceptedAnswer":{"@type":"Answer","text":"Discovery on the free call, then strategy and build, then handover. Work starts within 24 hours of kickoff. A Starter site ships in about a week, a Growth site in two, a scoped app from about four. Bigger builds get a milestone timeline agreed at kickoff."}},{"@type":"Question","name":"How involved do I need to be?","acceptedAnswer":{"@type":"Answer","text":"A kickoff, a few approvals at the milestones, and a launch. We do the heavy lifting and keep you updated at every step, so you stay in control of the direction without it eating your week."}},{"@type":"Question","name":"Do I own everything?","acceptedAnswer":{"@type":"Answer","text":"Yes. Code, domain, content, brand files and customer data are yours from day one. No vendor lock, no platform that holds your leads where you cannot reach them. It is an asset on your books, not a subscription you are afraid to cancel."}},{"@type":"Question","name":"What makes you different?","acceptedAnswer":{"@type":"Answer","text":"Four commitments in writing: money back, seven-day delivery, fixed price and lifetime after-service. Across the agencies we have reviewed, none put anything comparable in a contract. Add a senior team that has done this for over a hundred brands since 2009."}},{"@type":"Question","name":"What if I am not ready yet?","acceptedAnswer":{"@type":"Answer","text":"Take the free call anyway. You leave with a map of where your enquiries leak and a number on what it costs, and you keep it. If you would rather read first, the Brand Growth Playbook at the bottom of this page is free."}},{"@type":"Question","name":"What happens after I click the button?","acceptedAnswer":{"@type":"Answer","text":"You fill in a short form, and we confirm a day and time over WhatsApp within one working day. The call is thirty minutes with a senior strategist. If it is a fit, you get a fixed-price plan with dates. If it is not, you keep the plan and there is zero pressure."}}]}</script><style id="bmf-css">.bmf{--bmf-line:rgba(37,54,245,.16);--bmf-bright:#2536F5;--bmf-ink:#15161A;--bmf-soft:#54565d;font-family:"Inter",system-ui,sans-serif;max-width:620px;margin:0 auto;text-align:left;}.bmf-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}@media(max-width:620px){.bmf-grid{grid-template-columns:1fr;}}.bmf-f{display:flex;flex-direction:column;gap:6px;}.bmf-f.wide{grid-column:1/-1;}.bmf label{font-family:"JetBrains Mono",monospace;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--bmf-soft);}.bmf input,.bmf select,.bmf textarea{font-family:inherit;font-size:15px;color:var(--bmf-ink);background:#fff;border:1px solid var(--bmf-line);border-radius:10px;padding:12px 14px;outline:none;width:100%;transition:border-color .16s,box-shadow .16s;}.bmf textarea{min-height:92px;resize:vertical;}.bmf input:focus,.bmf select:focus,.bmf textarea:focus{border-color:var(--bmf-bright);box-shadow:0 0 0 3px rgba(37,54,245,.14);}.bmf .bmf-err{font-size:12.5px;color:#B3261E;min-height:0;}.bmf [aria-invalid="true"]{border-color:#B3261E;}.bmf-hp{position:absolute!important;left:-9999px!important;width:1px;height:1px;overflow:hidden;}.bmf-submit{grid-column:1/-1;display:inline-flex;align-items:center;justify-content:center;gap:10px;font-family:"Inter",system-ui,sans-serif;font-size:15px;font-weight:600;color:#fff;background:var(--bmf-bright);border:0;border-radius:999px;padding:15px 26px;cursor:pointer;transition:background .18s,transform .12s;}.bmf-submit:hover{background:#1421B8;}.bmf-submit:active{transform:translateY(1px);}.bmf-submit[disabled]{opacity:.62;cursor:not-allowed;}.bmf-spin{width:14px;height:14px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:bmfspin .6s linear infinite;display:none;}.bmf.is-submitting .bmf-spin{display:inline-block;}@keyframes bmfspin{to{transform:rotate(360deg);}}.bmf-note{grid-column:1/-1;font-size:12.5px;color:var(--bmf-soft);margin:2px 0 0;}.bmf-note a{color:var(--bmf-bright);}.bmf-status{grid-column:1/-1;font-size:14px;border-radius:10px;padding:12px 14px;margin:0;display:none;}.bmf-status.show{display:block;}.bmf-status.err{background:rgba(179,38,30,.07);border:1px solid rgba(179,38,30,.26);color:#8f1f18;}@media (prefers-reduced-motion:reduce){.bmf-spin{animation:none;}}</style></head>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What exactly is this?","acceptedAnswer":{"@type":"Answer","text":"A conversion website: a site built around how your customers decide, with the copy, the forms, the WhatsApp routing and the tracking already in place. It is delivered at a fixed price, in one to two weeks, by the senior team you meet on the call."}},{"@type":"Question","name":"Who is it for?","acceptedAnswer":{"@type":"Answer","text":"Founders and owners of SMEs and mid-market businesses who already have traffic, enquiries or bookings and can feel them slipping away. If you are choosing on lowest price alone, or not ready to decide this quarter, we are probably not the right fit, and we will say so on the call."}},{"@type":"Question","name":"How much does it cost?","acceptedAnswer":{"@type":"Answer","text":"A Starter site is RM1,900. A Growth site is RM6,000. Apps and games start at RM14,000. Bigger systems are scoped on the call. Every price is fixed in writing before you pay, and the number quoted is the number paid."}},{"@type":"Question","name":"Why are you cheaper than the big agencies?","acceptedAnswer":{"@type":"Answer","text":"We cut the overhead, not the quality. Our own system handles the repetitive work, so your money goes to senior strategy and craft, not layers of account management and markup."}},{"@type":"Question","name":"How does the process work, and how fast?","acceptedAnswer":{"@type":"Answer","text":"Discovery on the free call, then strategy and build, then handover. Work starts within 24 hours of kickoff. A Starter site ships in about a week, a Growth site in two, a scoped app from about four. Bigger builds get a milestone timeline agreed at kickoff."}},{"@type":"Question","name":"How involved do I need to be?","acceptedAnswer":{"@type":"Answer","text":"A kickoff, a few approvals at the milestones, and a launch. We do the heavy lifting and keep you updated at every step, so you stay in control of the direction without it eating your week."}},{"@type":"Question","name":"Do I own everything?","acceptedAnswer":{"@type":"Answer","text":"Yes. Code, domain, content, brand files and customer data are yours from day one. No vendor lock, no platform that holds your leads where you cannot reach them. It is an asset on your books, not a subscription you are afraid to cancel."}},{"@type":"Question","name":"What makes you different?","acceptedAnswer":{"@type":"Answer","text":"Four commitments in writing: money back, seven-day delivery, fixed price and lifetime after-service. Across the agencies we have reviewed, none put anything comparable in a contract. Add a senior team that has done this for over a hundred brands since 2009."}},{"@type":"Question","name":"What if I am not ready yet?","acceptedAnswer":{"@type":"Answer","text":"Take the free call anyway. You leave with a map of where your enquiries leak and a number on what it costs, and you keep it. If you would rather read first, the Brand Growth Playbook at the bottom of this page is free."}},{"@type":"Question","name":"What happens after I click the button?","acceptedAnswer":{"@type":"Answer","text":"You fill in a short form, and we confirm a day and time over WhatsApp within one working day. The call is twenty minutes with a senior strategist. If it is a fit, you get a fixed-price plan with dates. If it is not, you keep the plan and there is zero pressure."}}]}</script><style id="bmf-css">.bmf{--bmf-line:rgba(37,54,245,.16);--bmf-bright:#2536F5;--bmf-ink:#15161A;--bmf-soft:#54565d;font-family:"Inter",system-ui,sans-serif;max-width:620px;margin:0 auto;text-align:left;}.bmf-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}@media(max-width:620px){.bmf-grid{grid-template-columns:1fr;}}.bmf-f{display:flex;flex-direction:column;gap:6px;}.bmf-f.wide{grid-column:1/-1;}.bmf label{font-family:"JetBrains Mono",monospace;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--bmf-soft);}.bmf input,.bmf select,.bmf textarea{font-family:inherit;font-size:15px;color:var(--bmf-ink);background:#fff;border:1px solid var(--bmf-line);border-radius:10px;padding:12px 14px;outline:none;width:100%;transition:border-color .16s,box-shadow .16s;}.bmf textarea{min-height:92px;resize:vertical;}.bmf input:focus,.bmf select:focus,.bmf textarea:focus{border-color:var(--bmf-bright);box-shadow:0 0 0 3px rgba(37,54,245,.14);}.bmf .bmf-err{font-size:12.5px;color:#B3261E;min-height:0;}.bmf [aria-invalid="true"]{border-color:#B3261E;}.bmf-hp{position:absolute!important;left:-9999px!important;width:1px;height:1px;overflow:hidden;}.bmf-submit{grid-column:1/-1;display:inline-flex;align-items:center;justify-content:center;gap:10px;font-family:"Inter",system-ui,sans-serif;font-size:15px;font-weight:600;color:#fff;background:var(--bmf-bright);border:0;border-radius:999px;padding:15px 26px;cursor:pointer;transition:background .18s,transform .12s;}.bmf-submit:hover{background:#1421B8;}.bmf-submit:active{transform:translateY(1px);}.bmf-submit[disabled]{opacity:.62;cursor:not-allowed;}.bmf-spin{width:14px;height:14px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:bmfspin .6s linear infinite;display:none;}.bmf.is-submitting .bmf-spin{display:inline-block;}@keyframes bmfspin{to{transform:rotate(360deg);}}.bmf-note{grid-column:1/-1;font-size:12.5px;color:var(--bmf-soft);margin:2px 0 0;}.bmf-note a{color:var(--bmf-bright);}.bmf-status{grid-column:1/-1;font-size:14px;border-radius:10px;padding:12px 14px;margin:0;display:none;}.bmf-status.show{display:block;}.bmf-status.err{background:rgba(179,38,30,.07);border:1px solid rgba(179,38,30,.26);color:#8f1f18;}@media (prefers-reduced-motion:reduce){.bmf-spin{animation:none;}}</style></head>
 <body>
 <a class="skip" href="#sp-hero">Skip to content</a>
 
@@ -612,8 +621,8 @@ html.js [data-reveal].in{opacity:1;transform:none;}
   </div>
   <div class="bar-offer">A conversion site at a fixed price, live in as little as a week. The first call is free.</div>
   <div class="bar-acts">
-    <a class="bar-wa" href="https://wa.me/60162563030?text=Hi%20Brand%20Method%2C%20I%20am%20on%20the%20video%20page%20and%20would%20like%20to%20book%20the%20free%2030-minute%20call." target="_blank" rel="noopener" aria-label="WhatsApp Brand Method" data-cta-secondary=""><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 0 1 0 16.4c-1.5 0-2.9-.4-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3 4.4c-.2 0-.5 0-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.2 5 4.4 2.5 1 3 .8 3.5.7.5 0 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3l-2-1c-.3-.1-.5-.1-.7.1l-.9 1.1c-.2.2-.3.2-.6.1-.3-.2-1.2-.5-2.3-1.5-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.5-.6.3-.5c.1-.2 0-.4 0-.5l-.9-2.1c-.2-.6-.4-.5-.6-.5z"></path></svg></a>
-    <a class="cta" href="#sp-book" data-cta="" data-cta-position="1">Book your free 30-minute call</a>
+    <a class="bar-wa" href="https://wa.me/60162563030?text=Hi%20Brand%20Method%2C%20I%20am%20on%20the%20video%20page%20and%20would%20like%20to%20book%20the%20free%2020-minute%20call." target="_blank" rel="noopener" aria-label="WhatsApp Brand Method" data-cta-secondary=""><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 0 1 0 16.4c-1.5 0-2.9-.4-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3 4.4c-.2 0-.5 0-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.2 5 4.4 2.5 1 3 .8 3.5.7.5 0 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3l-2-1c-.3-.1-.5-.1-.7.1l-.9 1.1c-.2.2-.3.2-.6.1-.3-.2-1.2-.5-2.3-1.5-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.5-.6.3-.5c.1-.2 0-.4 0-.5l-.9-2.1c-.2-.6-.4-.5-.6-.5z"></path></svg></a>
+    <a class="cta" href="#sp-book" data-cta="" data-cta-position="1">Book your free 20-minute call</a>
     <div class="bar-dd" data-bm-internal="">
       <button class="bar-ddbtn" type="button" aria-haspopup="true" aria-expanded="false">Website SP <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button>
       <div class="bar-ddmenu" role="menu">
@@ -656,8 +665,8 @@ html.js [data-reveal].in{opacity:1;transform:none;}
     </div>
 
     <div class="vsl-cta" data-vsl-cta="" data-reveal-seconds="390" data-fallback-ms="20000" hidden="">
-      <a class="cta" href="#sp-book" data-cta="" data-cta-position="2">Book your free 30-minute call</a>
-      <p>Thirty minutes. No pitch. You keep the plan either way.</p>
+      <a class="cta" href="#sp-book" data-cta="" data-cta-position="2">Book your free 20-minute call</a>
+      <p>Twenty minutes. No pitch. You keep the plan either way.</p>
     </div>
 
 
@@ -678,7 +687,7 @@ html.js [data-reveal].in{opacity:1;transform:none;}
         <h2 id="fb-h">Here’s how we help <em>your business grow.</em></h2>
         <p class="lede">No marketing jargon. Just what we help you fix.</p>
         <div class="cta-row">
-          <a class="cta" href="#sp-book" data-cta="" data-cta-position="3">Book your free 30-minute call</a>
+          <a class="cta" href="#sp-book" data-cta="" data-cta-position="3">Book your free 20-minute call</a>
           <a class="sub-link" href="#sp-pricing"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12l7 7 7-7"></path></svg>See our services &amp; pricing</a>
         </div>
       </div>
@@ -687,7 +696,7 @@ html.js [data-reveal].in{opacity:1;transform:none;}
         <li><i class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.1-2.1z"></path></svg></i><div><b>We make your business easier to understand.</b><span>We clarify your message, brand and website so people know what you do and why it matters.</span></div></li>
         <li><i class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12l-8 8-9-9V4h7z"></path><circle cx="7.5" cy="7.5" r="1.5"></circle></svg></i><div><b>We make it easier for customers to take the next step.</b><span>Whether that is making an enquiry, booking a call or buying from you.</span></div></li>
         <li><i class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"></path><path d="M9 12l2 2 4-4"></path></svg></i><div><b>You know what you’re getting before we start.</b><span>Clear scope, clear process and clear pricing. No unnecessary surprises.</span></div></li>
-        <li><i class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg></i><div><b>Start with a 30-minute conversation.</b><span>We’ll look at what may be holding your brand or website back and discuss what could improve.</span></div></li>
+        <li><i class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg></i><div><b>Start with a 20-minute conversation.</b><span>We’ll look at what may be holding your brand or website back and discuss what could improve.</span></div></li>
       </ul>
     </div>
   </div>
@@ -750,8 +759,8 @@ html.js [data-reveal].in{opacity:1;transform:none;}
       <div class="stake in" data-reveal=""><span class="tag">06</span><i class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18l6-6 4 4 6-8"></path><path d="M15 8h5v5"></path></svg></i><h3>The gap grows every month.</h3><p>Each month the site stays broken is a month of enquiries you never get back, while the competitor who fixed theirs pulls ahead.</p></div>
     </div>
     <div class="inline-cta in" data-reveal="">
-      <p>Thirty minutes puts a monthly number on your leak. You keep that number whether you hire us or not.</p>
-      <a class="cta" href="#sp-book" data-cta="" data-cta-position="4">Book your free 30-minute call</a>
+      <p>Twenty minutes puts a monthly number on your leak. You keep that number whether you hire us or not.</p>
+      <a class="cta" href="#sp-book" data-cta="" data-cta-position="4">Book your free 20-minute call</a>
     </div>
   </div>
 </section>
@@ -769,7 +778,7 @@ html.js [data-reveal].in{opacity:1;transform:none;}
       <li class="how-card in" data-reveal="">
         <figure class="how-img"><img loading="lazy" decoding="async" src="nobodywantsawebsite/assets/team-sculpt-blue.webp" alt="A team around a lit table, working through the strategy together"></figure>
         <div class="how-top"><span class="num">01</span><span class="ph">Think</span></div>
-        <span class="when">Day 0 · Free 30-minute call</span>
+        <span class="when">Day 0 · Free 20-minute call</span>
         <h3>We diagnose before we design.</h3>
         <ul>
           <li>We listen: your business, your goals, the real problem</li>
@@ -805,7 +814,7 @@ html.js [data-reveal].in{opacity:1;transform:none;}
     </ol>
     <div class="inline-cta in" data-reveal="">
       <p>Step one is free and takes half an hour. Steps two and three only happen if you want them to.</p>
-      <a class="cta" href="#sp-book" data-cta="" data-cta-position="5">Book your free 30-minute call</a>
+      <a class="cta" href="#sp-book" data-cta="" data-cta-position="5">Book your free 20-minute call</a>
     </div>
   </div>
 </section>
@@ -950,6 +959,60 @@ html.js [data-reveal].in{opacity:1;transform:none;}
           <blockquote class="tq">“Working with Brand Method was honestly one of the best decisions we made for our brand. They really take the time to understand the business behind it.”</blockquote>
           <figcaption class="tby"><i class="tav" aria-hidden="true">PR</i><div><b>Dr. Priya</b><span>Pinnacle Hair Clinic</span></div></figcaption>
         </figure>
+        <figure class="tcard">
+          <img src="nobodywantsawebsite/assets/testi-cofeology.webp" alt="" loading="lazy" decoding="async" width="517" height="365">
+          <div class="tstars" role="img" aria-label="5 out of 5"><i></i><i></i><i></i><i></i><i></i></div>
+          <blockquote class="tq">“An incredible experience. Rebranding Cofeology gave me a fresh perspective, and I was involved in both the ideation and the execution. I recommend them. It is worth it.”</blockquote>
+          <figcaption class="tby"><i class="tav" aria-hidden="true">TA</i><div><b>Titan Azim Ahmad</b><span>Cofeology Cafe</span></div></figcaption>
+        </figure>
+        <figure class="tcard">
+          <img src="nobodywantsawebsite/assets/testi-discover.webp" alt="" loading="lazy" decoding="async" width="518" height="364">
+          <div class="tstars" role="img" aria-label="5 out of 5"><i></i><i></i><i></i><i></i><i></i></div>
+          <blockquote class="tq">“A great team to work with. Amazing work, and they translate our ideas with ease. I appreciate the quick response time and how present they are during ideation.”</blockquote>
+          <figcaption class="tby"><i class="tav" aria-hidden="true">RO</i><div><b>Rose</b><span>Discover Early Years</span></div></figcaption>
+        </figure>
+        <figure class="tcard">
+          <img src="nobodywantsawebsite/assets/testi-kampung-gold.webp" alt="" loading="lazy" decoding="async" width="518" height="364">
+          <div class="tstars" role="img" aria-label="5 out of 5"><i></i><i></i><i></i><i></i><i></i></div>
+          <blockquote class="tq">“Love you guys. Any time there is a problem I can rely on your magic. Breathtaking visuals, and the brand messaging has worked so well for us.”</blockquote>
+          <figcaption class="tby"><i class="tav" aria-hidden="true">TH</i><div><b>Thiruchandran</b><span>Kampung Gold</span></div></figcaption>
+        </figure>
+        <figure class="tcard">
+          <img src="nobodywantsawebsite/assets/testi-klaas.webp" alt="" loading="lazy" decoding="async" width="518" height="364">
+          <div class="tstars" role="img" aria-label="5 out of 5"><i></i><i></i><i></i><i></i><i></i></div>
+          <blockquote class="tq">“Working with Brand Method is very promising. Flexibility is something we always wanted: we can discuss and change plans as customer feedback and the market respond, on our own terms. Brand Method delivered all of it, fast.”</blockquote>
+          <figcaption class="tby"><i class="tav" aria-hidden="true">LL</i><div><b>Leslie L</b><span>Klaas Interior Design</span></div></figcaption>
+        </figure>
+        <figure class="tcard">
+          <img src="nobodywantsawebsite/assets/testi-oryn.webp" alt="" loading="lazy" decoding="async" width="518" height="365">
+          <div class="tstars" role="img" aria-label="5 out of 5"><i></i><i></i><i></i><i></i><i></i></div>
+          <blockquote class="tq">“Now the way is clear - I never thought that I would learn so much from Bazil. He is not just a designer, but a visionary strategist. Showing us that we can do so much more.”</blockquote>
+          <figcaption class="tby"><i class="tav" aria-hidden="true">SA</i><div><b>Suzana Aiman</b><span>Oryn Skincare</span></div></figcaption>
+        </figure>
+        <figure class="tcard">
+          <img src="nobodywantsawebsite/assets/testi-ossem.webp" alt="" loading="lazy" decoding="async" width="518" height="365">
+          <div class="tstars" role="img" aria-label="5 out of 5"><i></i><i></i><i></i><i></i><i></i></div>
+          <blockquote class="tq">“The best designer I have worked with. Designs that crossed countries and made our products go viral. Superb.”</blockquote>
+          <figcaption class="tby"><i class="tav" aria-hidden="true">AS</i><div><b>Arzam Shawn</b><span>Ossem Juice</span></div></figcaption>
+        </figure>
+        <figure class="tcard">
+          <img src="nobodywantsawebsite/assets/testi-starbucks.webp" alt="" loading="lazy" decoding="async" width="518" height="364">
+          <div class="tstars" role="img" aria-label="5 out of 5"><i></i><i></i><i></i><i></i><i></i></div>
+          <blockquote class="tq">“Quick responds and fast update, we always had time to crosscheck work with our team. Having breathing room to take in the work at hand is super refreshing. Looking forward to the next project we will be working on.”</blockquote>
+          <figcaption class="tby"><i class="tav" aria-hidden="true">VW</i><div><b>Vincent W</b><span>Starbucks Malaysia</span></div></figcaption>
+        </figure>
+        <figure class="tcard">
+          <img src="nobodywantsawebsite/assets/testi-wonderspire.webp" alt="" loading="lazy" decoding="async" width="518" height="364">
+          <div class="tstars" role="img" aria-label="5 out of 5"><i></i><i></i><i></i><i></i><i></i></div>
+          <blockquote class="tq">“I believe the Brand Method team has the capacity to be a top-tier agency in the region.”</blockquote>
+          <figcaption class="tby"><i class="tav" aria-hidden="true">SZ</i><div><b>Shafeeq Z</b><span>Wonderspire</span></div></figcaption>
+        </figure>
+        <figure class="tcard">
+          <img src="nobodywantsawebsite/assets/testi-yuth.webp" alt="" loading="lazy" decoding="async" width="1080" height="760">
+          <div class="tstars" role="img" aria-label="5 out of 5"><i></i><i></i><i></i><i></i><i></i></div>
+          <blockquote class="tq">“Professionals. Don't be fooled by their friendliness. These guys are the real deal. Working with Bazil and the team is very motivating. Feels like we could do anything. What we thought we needed ages to reach, was just a few step ahead. Very very happy working with them.”</blockquote>
+          <figcaption class="tby"><i class="tav" aria-hidden="true">SA</i><div><b>Sarah</b><span>Yuth</span></div></figcaption>
+        </figure>
         <figure class="tcard" aria-hidden="true">
           <img src="nobodywantsawebsite/assets/testi-1.webp" alt="" loading="lazy" decoding="async" width="1080" height="607">
           <div class="tstars" role="img" aria-label="5 out of 5"><i></i><i></i><i></i><i></i><i></i></div>
@@ -986,6 +1049,60 @@ html.js [data-reveal].in{opacity:1;transform:none;}
           <blockquote class="tq">“Working with Brand Method was honestly one of the best decisions we made for our brand. They really take the time to understand the business behind it.”</blockquote>
           <figcaption class="tby"><i class="tav" aria-hidden="true">PR</i><div><b>Dr. Priya</b><span>Pinnacle Hair Clinic</span></div></figcaption>
         </figure>
+        <figure class="tcard" aria-hidden="true">
+          <img src="nobodywantsawebsite/assets/testi-cofeology.webp" alt="" loading="lazy" decoding="async" width="517" height="365">
+          <div class="tstars" role="img" aria-label="5 out of 5"><i></i><i></i><i></i><i></i><i></i></div>
+          <blockquote class="tq">“An incredible experience. Rebranding Cofeology gave me a fresh perspective, and I was involved in both the ideation and the execution. I recommend them. It is worth it.”</blockquote>
+          <figcaption class="tby"><i class="tav" aria-hidden="true">TA</i><div><b>Titan Azim Ahmad</b><span>Cofeology Cafe</span></div></figcaption>
+        </figure>
+        <figure class="tcard" aria-hidden="true">
+          <img src="nobodywantsawebsite/assets/testi-discover.webp" alt="" loading="lazy" decoding="async" width="518" height="364">
+          <div class="tstars" role="img" aria-label="5 out of 5"><i></i><i></i><i></i><i></i><i></i></div>
+          <blockquote class="tq">“A great team to work with. Amazing work, and they translate our ideas with ease. I appreciate the quick response time and how present they are during ideation.”</blockquote>
+          <figcaption class="tby"><i class="tav" aria-hidden="true">RO</i><div><b>Rose</b><span>Discover Early Years</span></div></figcaption>
+        </figure>
+        <figure class="tcard" aria-hidden="true">
+          <img src="nobodywantsawebsite/assets/testi-kampung-gold.webp" alt="" loading="lazy" decoding="async" width="518" height="364">
+          <div class="tstars" role="img" aria-label="5 out of 5"><i></i><i></i><i></i><i></i><i></i></div>
+          <blockquote class="tq">“Love you guys. Any time there is a problem I can rely on your magic. Breathtaking visuals, and the brand messaging has worked so well for us.”</blockquote>
+          <figcaption class="tby"><i class="tav" aria-hidden="true">TH</i><div><b>Thiruchandran</b><span>Kampung Gold</span></div></figcaption>
+        </figure>
+        <figure class="tcard" aria-hidden="true">
+          <img src="nobodywantsawebsite/assets/testi-klaas.webp" alt="" loading="lazy" decoding="async" width="518" height="364">
+          <div class="tstars" role="img" aria-label="5 out of 5"><i></i><i></i><i></i><i></i><i></i></div>
+          <blockquote class="tq">“Working with Brand Method is very promising. Flexibility is something we always wanted: we can discuss and change plans as customer feedback and the market respond, on our own terms. Brand Method delivered all of it, fast.”</blockquote>
+          <figcaption class="tby"><i class="tav" aria-hidden="true">LL</i><div><b>Leslie L</b><span>Klaas Interior Design</span></div></figcaption>
+        </figure>
+        <figure class="tcard" aria-hidden="true">
+          <img src="nobodywantsawebsite/assets/testi-oryn.webp" alt="" loading="lazy" decoding="async" width="518" height="365">
+          <div class="tstars" role="img" aria-label="5 out of 5"><i></i><i></i><i></i><i></i><i></i></div>
+          <blockquote class="tq">“Now the way is clear - I never thought that I would learn so much from Bazil. He is not just a designer, but a visionary strategist. Showing us that we can do so much more.”</blockquote>
+          <figcaption class="tby"><i class="tav" aria-hidden="true">SA</i><div><b>Suzana Aiman</b><span>Oryn Skincare</span></div></figcaption>
+        </figure>
+        <figure class="tcard" aria-hidden="true">
+          <img src="nobodywantsawebsite/assets/testi-ossem.webp" alt="" loading="lazy" decoding="async" width="518" height="365">
+          <div class="tstars" role="img" aria-label="5 out of 5"><i></i><i></i><i></i><i></i><i></i></div>
+          <blockquote class="tq">“The best designer I have worked with. Designs that crossed countries and made our products go viral. Superb.”</blockquote>
+          <figcaption class="tby"><i class="tav" aria-hidden="true">AS</i><div><b>Arzam Shawn</b><span>Ossem Juice</span></div></figcaption>
+        </figure>
+        <figure class="tcard" aria-hidden="true">
+          <img src="nobodywantsawebsite/assets/testi-starbucks.webp" alt="" loading="lazy" decoding="async" width="518" height="364">
+          <div class="tstars" role="img" aria-label="5 out of 5"><i></i><i></i><i></i><i></i><i></i></div>
+          <blockquote class="tq">“Quick responds and fast update, we always had time to crosscheck work with our team. Having breathing room to take in the work at hand is super refreshing. Looking forward to the next project we will be working on.”</blockquote>
+          <figcaption class="tby"><i class="tav" aria-hidden="true">VW</i><div><b>Vincent W</b><span>Starbucks Malaysia</span></div></figcaption>
+        </figure>
+        <figure class="tcard" aria-hidden="true">
+          <img src="nobodywantsawebsite/assets/testi-wonderspire.webp" alt="" loading="lazy" decoding="async" width="518" height="364">
+          <div class="tstars" role="img" aria-label="5 out of 5"><i></i><i></i><i></i><i></i><i></i></div>
+          <blockquote class="tq">“I believe the Brand Method team has the capacity to be a top-tier agency in the region.”</blockquote>
+          <figcaption class="tby"><i class="tav" aria-hidden="true">SZ</i><div><b>Shafeeq Z</b><span>Wonderspire</span></div></figcaption>
+        </figure>
+        <figure class="tcard" aria-hidden="true">
+          <img src="nobodywantsawebsite/assets/testi-yuth.webp" alt="" loading="lazy" decoding="async" width="1080" height="760">
+          <div class="tstars" role="img" aria-label="5 out of 5"><i></i><i></i><i></i><i></i><i></i></div>
+          <blockquote class="tq">“Professionals. Don't be fooled by their friendliness. These guys are the real deal. Working with Bazil and the team is very motivating. Feels like we could do anything. What we thought we needed ages to reach, was just a few step ahead. Very very happy working with them.”</blockquote>
+          <figcaption class="tby"><i class="tav" aria-hidden="true">SA</i><div><b>Sarah</b><span>Yuth</span></div></figcaption>
+        </figure>
       </div>
     </div>
     <p class="thint">Auto-scrolling · hover to pause</p>
@@ -1008,7 +1125,7 @@ html.js [data-reveal].in{opacity:1;transform:none;}
     </div>
     <div class="inline-cta in" data-reveal="">
       <p>The people on this page had the same call you are about to book. Same senior team, same fixed price.</p>
-      <a class="cta" href="#sp-book" data-cta="" data-cta-position="6">Book your free 30-minute call</a>
+      <a class="cta" href="#sp-book" data-cta="" data-cta-position="6">Book your free 20-minute call</a>
     </div>
   </div>
 </section>
@@ -1028,16 +1145,23 @@ html.js [data-reveal].in{opacity:1;transform:none;}
           <li>Delivered as a document you keep, whoever does the work</li>
         </ul>
       </div>
-      <div class="entry-price">
-        <div class="amt is-tbc" id="entryAmt">Fixed fee<small>confirmed on the call</small></div>
-        <p class="credit" id="entryCredit">The fee is credited in full against the engagement if you go ahead.</p>
-        <a class="cta wide" href="#sp-book" data-cta="" data-cta-position="7">Book your free 30-minute call</a>
-        <p class="cta-note">Book the free call first. If the audit is the right next step, we confirm the fee and start within 24 hours.</p>
-        <p class="dev-note" data-bm-internal="">Internal: BM_FACTS.entryOffers.website.price is null. Set it and the price renders here, per Brian [ALIGN 1.2].</p>
+      <div class="entry-price entry-cal">
+        <div class="calendly-inline-widget" data-url="https://calendly.com/bazil-brandmethod/20min?hide_gdpr_banner=1&amp;hide_landing_page_details=1&amp;primary_color=2536f5" style="min-width:300px;height:680px;"></div>
+        <noscript><p><a href="https://calendly.com/bazil-brandmethod/20min">Book on Calendly</a> or WhatsApp <a href="https://wa.me/60162563030">+60 16-256 3030</a>.</p></noscript>
       </div>
     </div>
   </div>
 </section>
+
+<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+<script>
+/* A completed Calendly booking counts as a lead: fire generate_lead, then go to thank-you.html. */
+window.addEventListener('message',function(e){
+  if(e.origin!=='https://calendly.com'||!e.data||e.data.event!=='calendly.event_scheduled') return;
+  try{ (window.dataLayer=window.dataLayer||[]).push({event:'generate_lead',form_id:'website-vsl',via:'calendly'}); }catch(x){}
+  location.href='thank-you.html';
+});
+</script>
 
 <!-- 13 CORE OFFER + PRICE. Three tiers, every tier shows a price, consistent with pricing.html. -->
 <section class="sec soft" id="sp-pricing" aria-labelledby="pc-h">
@@ -1056,7 +1180,7 @@ html.js [data-reveal].in{opacity:1;transform:none;}
         <span class="time">1 week</span>
         <p>A conversion-ready site live in a week, so the traffic you already pay for stops bouncing off a page that does not sell.</p>
         <ul><li>Up to 5 pages or a one-pager</li><li>Full copywriting included</li><li>Lead capture and WhatsApp routing</li><li>You own code, domain and content</li></ul>
-        <a class="cta" href="#sp-book" data-cta="" data-cta-position="8">Book your free 30-minute call</a>
+        <a class="cta" href="#sp-book" data-cta="" data-cta-position="8">Book your free 20-minute call</a>
         <p class="tier-g">100% money-back if it is not what we agreed</p>
       </div>
       <div class="tier hot in" data-reveal="">
@@ -1067,7 +1191,7 @@ html.js [data-reveal].in{opacity:1;transform:none;}
         <span class="time">2 weeks</span>
         <p>You pay for the visitors and watch most of them leave. This turns more of them into booked enquiries, built around how customers actually buy.</p>
         <ul><li>Up to 10 pages</li><li>Lead funnels and analytics installed</li><li>Half-day photo and video shoot</li><li>You own code, domain, content and data</li></ul>
-        <a class="cta" href="#sp-book" data-cta="" data-cta-position="9">Book your free 30-minute call</a>
+        <a class="cta" href="#sp-book" data-cta="" data-cta-position="9">Book your free 20-minute call</a>
         <p class="tier-g">100% money-back if it is not what we agreed</p>
       </div>
       <div class="tier in" data-reveal="">
@@ -1078,7 +1202,7 @@ html.js [data-reveal].in{opacity:1;transform:none;}
         <span class="time">From 4 weeks</span>
         <p>A 15-page-plus corporate site or a full online store, built on a custom design system so every page your team adds stays on brand and keeps converting.</p>
         <ul><li>15+ pages, or a full store with checkout</li><li>Custom design system, every page consistent</li><li>Case study and news modules, multi-user CMS</li><li>CRM and lead capture wired into your pipeline</li><li>You own code, domain, content and data</li></ul>
-        <a class="cta" href="#sp-book" data-cta="" data-cta-position="10">Book your free 30-minute call</a>
+        <a class="cta" href="#sp-book" data-cta="" data-cta-position="10">Book your free 20-minute call</a>
         <p class="tier-g">100% money-back if it is not what we agreed</p>
       </div>
     </div>
@@ -1121,11 +1245,11 @@ html.js [data-reveal].in{opacity:1;transform:none;}
 <section class="sec" id="sp-guarantees" aria-labelledby="gu-h">
   <div class="wrap">
     <div class="head in" data-reveal="">
-      <h2 id="gu-h">Four commitments <em>no other agency puts in writing.</em></h2>
-      <p class="lede">The price above creates a fair question: what if it goes wrong. This is the answer, and it is in the contract.</p>
+      <h2 id="gu-h">4 commitments <em>no other agency puts in writing.</em></h2>
+      <p class="lede">The price above creates a fair question: what if it goes wrong.<br>This is the answer, and it is in the contract.</p>
     </div>
     <div class="gs">
-      <figure class="gs-img"><img loading="lazy" decoding="async" src="nobodywantsawebsite/assets/craft-3d-render.webp" alt="A solid blue cube held steady inside three rings"></figure>
+      <figure class="gs-img"><img loading="lazy" decoding="async" src="nobodywantsawebsite/assets/team-sculpt-blue.webp" alt="The Brand Method senior team in discussion, rendered as sculpted blue figures around a glowing table" style="object-position:50% 40%"></figure>
       <div class="gs-grid">
       <div class="g in" data-reveal=""><span class="n">01</span><h3>100% Money-Back</h3><p>If the final work does not match what we agreed, you pay nothing. No fine print, no negotiation. We carry the risk, not you.</p></div>
       <div class="g in" data-reveal=""><span class="n">02</span><h3>7-Day Fastest Delivery</h3><p>We have built a system that compresses months of brand work into as little as seven days, without cutting the strategy that makes it last.</p></div>
@@ -1135,7 +1259,7 @@ html.js [data-reveal].in{opacity:1;transform:none;}
     </div>
     <div class="inline-cta in" data-reveal="">
       <p>If we miss what we agreed, you get your money back. That is the whole risk, and it is ours.</p>
-      <a class="cta" href="#sp-book" data-cta="" data-cta-position="11">Book your free 30-minute call</a>
+      <a class="cta" href="#sp-book" data-cta="" data-cta-position="11">Book your free 20-minute call</a>
     </div>
   </div>
 </section>
@@ -1155,9 +1279,9 @@ html.js [data-reveal].in{opacity:1;transform:none;}
       <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa5" id="fq5">How does the process work, and how fast?<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"></path></svg></button></h3><div class="faq-a" id="fa5" role="region" aria-labelledby="fq5" hidden=""><p>Discovery on the free call, then strategy and build, then handover. Work starts within 24 hours of kickoff. A Starter site ships in about a week, a Growth site in two, a scoped app from about four. Bigger builds get a milestone timeline agreed at kickoff.</p></div></div>
       <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa6" id="fq6">How involved do I need to be?<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"></path></svg></button></h3><div class="faq-a" id="fa6" role="region" aria-labelledby="fq6" hidden=""><p>A kickoff, a few approvals at the milestones, and a launch. We do the heavy lifting and keep you updated at every step, so you stay in control of the direction without it eating your week.</p></div></div>
       <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa7" id="fq7">Do I own everything?<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"></path></svg></button></h3><div class="faq-a" id="fa7" role="region" aria-labelledby="fq7" hidden=""><p>Yes. Code, domain, content, brand files and customer data are yours from day one. No vendor lock, no platform that holds your leads where you cannot reach them. It is an asset on your books, not a subscription you are afraid to cancel.</p></div></div>
-      <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa8" id="fq8">What makes you different?<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"></path></svg></button></h3><div class="faq-a" id="fa8" role="region" aria-labelledby="fq8" hidden=""><p>Four commitments in writing: money back, seven-day delivery, fixed price and lifetime after-service. Across the agencies we have reviewed, none put anything comparable in a contract. Add a senior team that has done this for over a hundred brands since 2009.</p></div></div>
+      <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa8" id="fq8">What makes you different?<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"></path></svg></button></h3><div class="faq-a" id="fa8" role="region" aria-labelledby="fq8" hidden=""><p>4 commitments in writing: money back, seven-day delivery, fixed price and lifetime after-service. Across the agencies we have reviewed, none put anything comparable in a contract. Add a senior team that has done this for over a hundred brands since 2009.</p></div></div>
       <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa9" id="fq9">What if I am not ready yet?<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"></path></svg></button></h3><div class="faq-a" id="fa9" role="region" aria-labelledby="fq9" hidden=""><p>Take the free call anyway. You leave with a map of where your enquiries leak and a number on what it costs, and you keep it. If you would rather read first, the Brand Growth Playbook at the bottom of this page is free.</p></div></div>
-      <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa10" id="fq10">What happens after I click the button?<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"></path></svg></button></h3><div class="faq-a" id="fa10" role="region" aria-labelledby="fq10" hidden=""><p>You fill in a short form, and we confirm a day and time over WhatsApp within one working day. The call is thirty minutes with a senior strategist. If it is a fit, you get a fixed-price plan with dates. If it is not, you keep the plan and there is zero pressure.</p></div></div>
+      <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa10" id="fq10">What happens after I click the button?<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"></path></svg></button></h3><div class="faq-a" id="fa10" role="region" aria-labelledby="fq10" hidden=""><p>You fill in a short form, and we confirm a day and time over WhatsApp within one working day. The call is twenty minutes with a senior strategist. If it is a fit, you get a fixed-price plan with dates. If it is not, you keep the plan and there is zero pressure.</p></div></div>
     </div>
   </div>
 </section>
@@ -1167,17 +1291,17 @@ html.js [data-reveal].in{opacity:1;transform:none;}
   <div class="wrap">
     <div class="book">
       <div class="book-copy in" data-reveal="">
-        <div class="book-graphic" aria-hidden="true"><svg viewBox="0 0 120 120"><circle cx="60.0" cy="10.0" r="2.6" fill="#A9B0FF"></circle><circle cx="68.7" cy="10.8" r="2.6" fill="#A9B0FF"></circle><circle cx="77.1" cy="13.0" r="2.6" fill="#A9B0FF"></circle><circle cx="85.0" cy="16.7" r="2.6" fill="#A9B0FF"></circle><circle cx="92.1" cy="21.7" r="2.6" fill="#A9B0FF"></circle><circle cx="98.3" cy="27.9" r="2.6" fill="#A9B0FF"></circle><circle cx="103.3" cy="35.0" r="2.6" fill="#A9B0FF"></circle><circle cx="107.0" cy="42.9" r="2.6" fill="#A9B0FF"></circle><circle cx="109.2" cy="51.3" r="2.6" fill="#A9B0FF"></circle><circle cx="110.0" cy="60.0" r="2.6" fill="#A9B0FF"></circle><circle cx="109.2" cy="68.7" r="2.6" fill="#A9B0FF"></circle><circle cx="107.0" cy="77.1" r="2.6" fill="#A9B0FF"></circle><circle cx="103.3" cy="85.0" r="2.6" fill="#A9B0FF"></circle><circle cx="98.3" cy="92.1" r="2.6" fill="#A9B0FF"></circle><circle cx="92.1" cy="98.3" r="2.6" fill="#A9B0FF"></circle><circle cx="85.0" cy="103.3" r="2.6" fill="#A9B0FF"></circle><circle cx="77.1" cy="107.0" r="2.6" fill="#A9B0FF"></circle><circle cx="68.7" cy="109.2" r="2.6" fill="#A9B0FF"></circle><circle cx="60.0" cy="110.0" r="1.6" fill="rgba(255,255,255,.28)"></circle><circle cx="51.3" cy="109.2" r="1.6" fill="rgba(255,255,255,.28)"></circle><circle cx="42.9" cy="107.0" r="1.6" fill="rgba(255,255,255,.28)"></circle><circle cx="35.0" cy="103.3" r="1.6" fill="rgba(255,255,255,.28)"></circle><circle cx="27.9" cy="98.3" r="1.6" fill="rgba(255,255,255,.28)"></circle><circle cx="21.7" cy="92.1" r="1.6" fill="rgba(255,255,255,.28)"></circle><circle cx="16.7" cy="85.0" r="1.6" fill="rgba(255,255,255,.28)"></circle><circle cx="13.0" cy="77.1" r="1.6" fill="rgba(255,255,255,.28)"></circle><circle cx="10.8" cy="68.7" r="1.6" fill="rgba(255,255,255,.28)"></circle><circle cx="10.0" cy="60.0" r="1.6" fill="rgba(255,255,255,.28)"></circle><circle cx="10.8" cy="51.3" r="1.6" fill="rgba(255,255,255,.28)"></circle><circle cx="13.0" cy="42.9" r="1.6" fill="rgba(255,255,255,.28)"></circle><circle cx="16.7" cy="35.0" r="1.6" fill="rgba(255,255,255,.28)"></circle><circle cx="21.7" cy="27.9" r="1.6" fill="rgba(255,255,255,.28)"></circle><circle cx="27.9" cy="21.7" r="1.6" fill="rgba(255,255,255,.28)"></circle><circle cx="35.0" cy="16.7" r="1.6" fill="rgba(255,255,255,.28)"></circle><circle cx="42.9" cy="13.0" r="1.6" fill="rgba(255,255,255,.28)"></circle><circle cx="51.3" cy="10.8" r="1.6" fill="rgba(255,255,255,.28)"></circle><path d="M60 60L60 18" stroke="#A9B0FF" stroke-width="2.4" stroke-linecap="round"></path><path d="M60 60L60 102" stroke="#A9B0FF" stroke-width="2.4" stroke-linecap="round" opacity=".55"></path><circle cx="60" cy="60" r="4" fill="#fff"></circle></svg><span class="bg-num">30</span><span class="bg-lbl">minutes<br>free</span></div>
+        <div class="book-graphic" aria-hidden="true"><svg viewBox="0 0 120 120"><circle cx="60.0" cy="10.0" r="1.6" fill="rgba(255,255,255,0.34)"></circle><circle cx="65.2" cy="10.3" r="1.1" fill="rgba(255,255,255,0.2)"></circle><circle cx="70.4" cy="11.1" r="1.1" fill="rgba(255,255,255,0.2)"></circle><circle cx="75.5" cy="12.4" r="1.1" fill="rgba(255,255,255,0.2)"></circle><circle cx="80.3" cy="14.3" r="1.1" fill="rgba(255,255,255,0.2)"></circle><circle cx="85.0" cy="16.7" r="1.6" fill="rgba(255,255,255,0.34)"></circle><circle cx="89.4" cy="19.5" r="1.1" fill="rgba(255,255,255,0.2)"></circle><circle cx="93.5" cy="22.8" r="1.1" fill="rgba(255,255,255,0.2)"></circle><circle cx="97.2" cy="26.5" r="1.1" fill="rgba(255,255,255,0.2)"></circle><circle cx="100.5" cy="30.6" r="1.1" fill="rgba(255,255,255,0.2)"></circle><circle cx="103.3" cy="35.0" r="1.6" fill="rgba(255,255,255,0.34)"></circle><circle cx="105.7" cy="39.7" r="1.1" fill="rgba(255,255,255,0.2)"></circle><circle cx="107.6" cy="44.5" r="1.1" fill="rgba(255,255,255,0.2)"></circle><circle cx="108.9" cy="49.6" r="1.1" fill="rgba(255,255,255,0.2)"></circle><circle cx="109.7" cy="54.8" r="1.1" fill="rgba(255,255,255,0.2)"></circle><circle cx="110.0" cy="60.0" r="1.6" fill="rgba(255,255,255,0.34)"></circle><circle cx="109.7" cy="65.2" r="1.1" fill="rgba(255,255,255,0.2)"></circle><circle cx="108.9" cy="70.4" r="1.1" fill="rgba(255,255,255,0.2)"></circle><circle cx="107.6" cy="75.5" r="1.1" fill="rgba(255,255,255,0.2)"></circle><circle cx="105.7" cy="80.3" r="1.1" fill="rgba(255,255,255,0.2)"></circle><circle cx="103.3" cy="85.0" r="1.6" fill="rgba(255,255,255,0.34)"></circle><circle cx="100.5" cy="89.4" r="1.1" fill="rgba(255,255,255,0.2)"></circle><circle cx="97.2" cy="93.5" r="1.1" fill="rgba(255,255,255,0.2)"></circle><circle cx="93.5" cy="97.2" r="1.1" fill="rgba(255,255,255,0.2)"></circle><circle cx="89.4" cy="100.5" r="1.1" fill="rgba(255,255,255,0.2)"></circle><circle cx="85.0" cy="103.3" r="1.6" fill="rgba(255,255,255,0.34)"></circle><circle cx="80.3" cy="105.7" r="1.1" fill="rgba(255,255,255,0.2)"></circle><circle cx="75.5" cy="107.6" r="1.1" fill="rgba(255,255,255,0.2)"></circle><circle cx="70.4" cy="108.9" r="1.1" fill="rgba(255,255,255,0.2)"></circle><circle cx="65.2" cy="109.7" r="1.1" fill="rgba(255,255,255,0.2)"></circle><circle cx="60.0" cy="110.0" r="1.6" fill="rgba(255,255,255,0.34)"></circle><circle cx="54.8" cy="109.7" r="1.1" fill="rgba(255,255,255,0.2)"></circle><circle cx="49.6" cy="108.9" r="1.1" fill="rgba(255,255,255,0.2)"></circle><circle cx="44.5" cy="107.6" r="1.1" fill="rgba(255,255,255,0.2)"></circle><circle cx="39.7" cy="105.7" r="1.1" fill="rgba(255,255,255,0.2)"></circle><circle cx="35.0" cy="103.3" r="1.6" fill="rgba(255,255,255,0.34)"></circle><circle cx="30.6" cy="100.5" r="1.1" fill="rgba(255,255,255,0.2)"></circle><circle cx="26.5" cy="97.2" r="1.1" fill="rgba(255,255,255,0.2)"></circle><circle cx="22.8" cy="93.5" r="1.1" fill="rgba(255,255,255,0.2)"></circle><circle cx="19.5" cy="89.4" r="1.1" fill="rgba(255,255,255,0.2)"></circle><circle cx="16.7" cy="85.0" r="1.6" fill="rgba(255,255,255,0.34)"></circle><circle cx="14.3" cy="80.3" r="1.1" fill="rgba(255,255,255,0.2)"></circle><circle cx="12.4" cy="75.5" r="1.1" fill="rgba(255,255,255,0.2)"></circle><circle cx="11.1" cy="70.4" r="1.1" fill="rgba(255,255,255,0.2)"></circle><circle cx="10.3" cy="65.2" r="1.1" fill="rgba(255,255,255,0.2)"></circle><circle cx="10.0" cy="60.0" r="1.6" fill="rgba(255,255,255,0.34)"></circle><circle cx="10.3" cy="54.8" r="1.1" fill="rgba(255,255,255,0.2)"></circle><circle cx="11.1" cy="49.6" r="1.1" fill="rgba(255,255,255,0.2)"></circle><circle cx="12.4" cy="44.5" r="1.1" fill="rgba(255,255,255,0.2)"></circle><circle cx="14.3" cy="39.7" r="1.1" fill="rgba(255,255,255,0.2)"></circle><circle cx="16.7" cy="35.0" r="1.6" fill="rgba(255,255,255,0.34)"></circle><circle cx="19.5" cy="30.6" r="1.1" fill="rgba(255,255,255,0.2)"></circle><circle cx="22.8" cy="26.5" r="1.1" fill="rgba(255,255,255,0.2)"></circle><circle cx="26.5" cy="22.8" r="1.1" fill="rgba(255,255,255,0.2)"></circle><circle cx="30.6" cy="19.5" r="1.1" fill="rgba(255,255,255,0.2)"></circle><circle cx="35.0" cy="16.7" r="1.6" fill="rgba(255,255,255,0.34)"></circle><circle cx="39.7" cy="14.3" r="1.1" fill="rgba(255,255,255,0.2)"></circle><circle cx="44.5" cy="12.4" r="1.1" fill="rgba(255,255,255,0.2)"></circle><circle cx="49.6" cy="11.1" r="1.1" fill="rgba(255,255,255,0.2)"></circle><circle cx="54.8" cy="10.3" r="1.1" fill="rgba(255,255,255,0.2)"></circle><circle class="bg-on" cx="60.0" cy="10.0" r="2.6" fill="#A9B0FF"></circle><circle class="bg-on" cx="65.2" cy="10.3" r="2.6" fill="#A9B0FF"></circle><circle class="bg-on" cx="70.4" cy="11.1" r="2.6" fill="#A9B0FF"></circle><circle class="bg-on" cx="75.5" cy="12.4" r="2.6" fill="#A9B0FF"></circle><circle class="bg-on" cx="80.3" cy="14.3" r="2.6" fill="#A9B0FF"></circle><circle class="bg-on" cx="85.0" cy="16.7" r="2.6" fill="#A9B0FF"></circle><circle class="bg-on" cx="89.4" cy="19.5" r="2.6" fill="#A9B0FF"></circle><circle class="bg-on" cx="93.5" cy="22.8" r="2.6" fill="#A9B0FF"></circle><circle class="bg-on" cx="97.2" cy="26.5" r="2.6" fill="#A9B0FF"></circle><circle class="bg-on" cx="100.5" cy="30.6" r="2.6" fill="#A9B0FF"></circle><circle class="bg-on" cx="103.3" cy="35.0" r="2.6" fill="#A9B0FF"></circle><circle class="bg-on" cx="105.7" cy="39.7" r="2.6" fill="#A9B0FF"></circle><circle class="bg-on" cx="107.6" cy="44.5" r="2.6" fill="#A9B0FF"></circle><circle class="bg-on" cx="108.9" cy="49.6" r="2.6" fill="#A9B0FF"></circle><circle class="bg-on" cx="109.7" cy="54.8" r="2.6" fill="#A9B0FF"></circle><circle class="bg-on" cx="110.0" cy="60.0" r="2.6" fill="#A9B0FF"></circle><circle class="bg-on" cx="109.7" cy="65.2" r="2.6" fill="#A9B0FF"></circle><circle class="bg-on" cx="108.9" cy="70.4" r="2.6" fill="#A9B0FF"></circle><circle class="bg-on" cx="107.6" cy="75.5" r="2.6" fill="#A9B0FF"></circle><circle class="bg-on" cx="105.7" cy="80.3" r="2.6" fill="#A9B0FF"></circle><circle class="bg-on" cx="103.3" cy="85.0" r="2.6" fill="#A9B0FF"></circle><circle class="bg-on" cx="100.5" cy="89.4" r="2.6" fill="#A9B0FF"></circle><circle class="bg-on" cx="97.2" cy="93.5" r="2.6" fill="#A9B0FF"></circle><circle class="bg-on" cx="93.5" cy="97.2" r="2.6" fill="#A9B0FF"></circle><circle class="bg-on" cx="89.4" cy="100.5" r="2.6" fill="#A9B0FF"></circle><circle class="bg-on" cx="85.0" cy="103.3" r="2.6" fill="#A9B0FF"></circle><circle class="bg-on" cx="80.3" cy="105.7" r="2.6" fill="#A9B0FF"></circle><circle class="bg-on" cx="75.5" cy="107.6" r="2.6" fill="#A9B0FF"></circle><circle class="bg-on" cx="70.4" cy="108.9" r="2.6" fill="#A9B0FF"></circle><circle class="bg-on" cx="65.2" cy="109.7" r="2.6" fill="#A9B0FF"></circle><circle class="bg-on" cx="60.0" cy="110.0" r="2.6" fill="#A9B0FF"></circle><circle class="bg-on" cx="54.8" cy="109.7" r="2.6" fill="#A9B0FF"></circle><circle class="bg-on" cx="49.6" cy="108.9" r="2.6" fill="#A9B0FF"></circle><circle class="bg-on" cx="44.5" cy="107.6" r="2.6" fill="#A9B0FF"></circle><circle class="bg-on" cx="39.7" cy="105.7" r="2.6" fill="#A9B0FF"></circle><circle class="bg-on" cx="35.0" cy="103.3" r="2.6" fill="#A9B0FF"></circle><circle class="bg-on" cx="30.6" cy="100.5" r="2.6" fill="#A9B0FF"></circle><circle class="bg-on" cx="26.5" cy="97.2" r="2.6" fill="#A9B0FF"></circle><circle class="bg-on" cx="22.8" cy="93.5" r="2.6" fill="#A9B0FF"></circle><circle class="bg-on" cx="19.5" cy="89.4" r="2.6" fill="#A9B0FF"></circle><circle class="bg-on" cx="16.7" cy="85.0" r="2.6" fill="#A9B0FF"></circle><circle class="bg-on" cx="14.3" cy="80.3" r="2.6" fill="#A9B0FF"></circle><circle class="bg-on" cx="12.4" cy="75.5" r="2.6" fill="#A9B0FF"></circle><circle class="bg-on" cx="11.1" cy="70.4" r="2.6" fill="#A9B0FF"></circle><circle class="bg-on" cx="10.3" cy="65.2" r="2.6" fill="#A9B0FF"></circle><circle class="bg-on" cx="10.0" cy="60.0" r="2.6" fill="#A9B0FF"></circle><circle class="bg-on" cx="10.3" cy="54.8" r="2.6" fill="#A9B0FF"></circle><circle class="bg-on" cx="11.1" cy="49.6" r="2.6" fill="#A9B0FF"></circle><circle class="bg-on" cx="12.4" cy="44.5" r="2.6" fill="#A9B0FF"></circle><circle class="bg-on" cx="14.3" cy="39.7" r="2.6" fill="#A9B0FF"></circle><circle class="bg-on" cx="16.7" cy="35.0" r="2.6" fill="#A9B0FF"></circle><circle class="bg-on" cx="19.5" cy="30.6" r="2.6" fill="#A9B0FF"></circle><circle class="bg-on" cx="22.8" cy="26.5" r="2.6" fill="#A9B0FF"></circle><circle class="bg-on" cx="26.5" cy="22.8" r="2.6" fill="#A9B0FF"></circle><circle class="bg-on" cx="30.6" cy="19.5" r="2.6" fill="#A9B0FF"></circle><circle class="bg-on" cx="35.0" cy="16.7" r="2.6" fill="#A9B0FF"></circle><circle class="bg-on" cx="39.7" cy="14.3" r="2.6" fill="#A9B0FF"></circle><circle class="bg-on" cx="44.5" cy="12.4" r="2.6" fill="#A9B0FF"></circle><circle class="bg-on" cx="49.6" cy="11.1" r="2.6" fill="#A9B0FF"></circle><circle class="bg-on" cx="54.8" cy="10.3" r="2.6" fill="#A9B0FF"></circle></svg><span class="bg-num">20</span><span class="bg-lbl">minutes<br>free</span></div>
         <span class="kick">Book your call</span>
         <h2 id="bk-h">One free call. <em>You keep the plan either way.</em></h2>
-        <p class="lede">Thirty minutes with a senior strategist. We map where your enquiries leak, put a monthly number on it, and hand you the fix, whether you hire us or not.</p>
+        <p class="lede">Twenty minutes with a senior strategist. We map where your enquiries leak, put a monthly number on it, and hand you the fix, whether you hire us or not.</p>
         <ul>
           <li>No pitch, no pressure</li>
           <li>A senior person, not a junior</li>
           <li>One clear next step to leave with</li>
           <li>Fixed price in writing if you want to go ahead</li>
         </ul>
-        <div class="wa">Prefer to type? <a href="https://wa.me/60162563030?text=Hi%20Brand%20Method%2C%20I%20watched%20the%20video%20and%20would%20like%20to%20book%20the%20free%2030-minute%20call." target="_blank" rel="noopener" data-cta-secondary="">WhatsApp Amina: +60 16-256 3030</a></div>
+        <div class="wa">Prefer to type? <a href="https://wa.me/60162563030?text=Hi%20Brand%20Method%2C%20I%20watched%20the%20video%20and%20would%20like%20to%20book%20the%20free%2020-minute%20call." target="_blank" rel="noopener" data-cta-secondary="">WhatsApp Amina: +60 16-256 3030</a></div>
       </div>
       <div class="book-form in" data-reveal="">
         <div data-bm-form="" data-service="website" data-bm-form-mounted="1"><div class="bmf"><form class="bmf-grid" id="bmEnquiry-website" novalidate="" data-service="website" data-bm-managed="1" data-bm-tracked="1"><div class="bmf-f"><label for="bmf-name">Your name</label><input id="bmf-name" name="name" type="text" required="" autocomplete="name" placeholder="Full name"><p class="bmf-err" aria-live="polite" id="bmf-name-err"></p></div><div class="bmf-f"><label for="bmf-company">Company</label><input id="bmf-company" name="company" type="text" required="" autocomplete="organization" placeholder="Company name"><p class="bmf-err" aria-live="polite" id="bmf-company-err"></p></div><div class="bmf-f"><label for="bmf-email">Work email</label><input id="bmf-email" name="email" type="email" required="" autocomplete="email" placeholder="you@company.com"><p class="bmf-err" aria-live="polite" id="bmf-email-err"></p></div><div class="bmf-f"><label for="bmf-phone">Phone</label><input id="bmf-phone" name="phone" type="tel" required="" autocomplete="tel" placeholder="012 345 6789"><p class="bmf-err" aria-live="polite" id="bmf-phone-err"></p></div><div class="bmf-f"><label for="bmf-budget_band">Budget</label><select id="bmf-budget_band" name="budget_band" required=""><option value="">Closest band</option><option value="Not sure yet">Not sure yet</option><option value="Under RM10,000">Under RM10,000</option><option value="RM10,000 to RM30,000">RM10,000 to RM30,000</option><option value="RM30,000 to RM75,000">RM30,000 to RM75,000</option><option value="RM75,000+">RM75,000+</option></select><p class="bmf-err" aria-live="polite" id="bmf-budget_band-err"></p></div><div class="bmf-f"><label for="bmf-timeline">Timeline</label><select id="bmf-timeline" name="timeline" required=""><option value="">When to start</option><option value="Now">Now</option><option value="1 to 3 months">1 to 3 months</option><option value="3 to 6 months">3 to 6 months</option><option value="Just exploring">Just exploring</option></select><p class="bmf-err" aria-live="polite" id="bmf-timeline-err"></p></div><div class="bmf-f wide"><label for="bmf-situation">What is going on right now</label><textarea id="bmf-situation" name="situation" maxlength="1000" placeholder="Optional. The more specific, the more useful the call."></textarea><p class="bmf-err" aria-live="polite" id="bmf-situation-err"></p></div><div class="bmf-hp" aria-hidden="true"><label for="bmf-website">Leave this empty</label><input id="bmf-website" name="website_url" type="text" tabindex="-1" autocomplete="off"></div><p class="bmf-status err" role="alert"></p><button class="bmf-submit" type="submit"><span class="bmf-spin" aria-hidden="true"></span><span class="bmf-submit-label">Send and book the call</span></button><p class="bmf-note">We reply within one working day. No list, no drip, no reselling your details.</p><input type="hidden" name="utm_source" value=""><input type="hidden" name="utm_medium" value=""><input type="hidden" name="utm_campaign" value=""><input type="hidden" name="utm_content" value=""><input type="hidden" name="utm_term" value=""><input type="hidden" name="landing_page" value="http://localhost:3000/bm%20sales%20page/Brand-Method-Sales-Page.html"><input type="hidden" name="referrer" value="http://localhost:3000/"><input type="hidden" name="page_url" value="http://localhost:3000/bm%20sales%20page/Brand-Method-VSL.html"><input type="hidden" name="page_id" value="website-vsl"></form></div></div>
@@ -1308,12 +1432,12 @@ html.js [data-reveal].in{opacity:1;transform:none;}
     }
   });
   var eo=F.entryOffers&&F.entryOffers.website;
-  if(eo&&eo.price){
+  if(eo&&eo.price&&d.getElementById('entryAmt')){
     d.getElementById('entryAmt').classList.remove('is-tbc');
     d.getElementById('entryAmt').innerHTML='<span></span> <small>fixed fee</small>';
     d.getElementById('entryAmt').querySelector('span').textContent=(eo.currency||'RM')+Number(eo.price).toLocaleString('en-MY');
   }
-  if(F.entryOfferCreditLine) d.getElementById('entryCredit').textContent=F.entryOfferCreditLine;
+  if(F.entryOfferCreditLine&&d.getElementById('entryCredit')) d.getElementById('entryCredit').textContent=F.entryOfferCreditLine;
   if(F.founderSurname) d.getElementById('founderName').textContent=(F.founderFirstName||'Bazil')+' '+F.founderSurname;
 
   /* ---- 3D playbook: pointer tilt on hover devices, float-only on touch ---- */
@@ -1518,6 +1642,79 @@ html.js [data-reveal].in{opacity:1;transform:none;}
   })();
 })();
 </script>
+<script id="bm-formsubmit">
+/* Enquiry form -> FormSubmit (same inbox as the site-wide lead hook). Validates, drops honeypot/instant bots,
+   refreshes page/UTM fields at send time, then redirects to thank-you.html. */
+(function(){
+  var ENDPOINT='https://formsubmit.co/ajax/bazil@brandmethod.co';
+  var f=document.getElementById('bmEnquiry-website'); if(!f) return;
+  var t0=Date.now(), btn=f.querySelector('.bmf-submit'), label=f.querySelector('.bmf-submit-label'), status=f.querySelector('.bmf-status');
+  var MSG={name:'Please give your name.',company:'Please add your company.',email:'That email does not look right.',
+    phone:'Please add a phone number.',budget_band:'Pick the closest band.',timeline:'Pick when you want to start.'};
+  function setErr(el,msg){ var e=document.getElementById(el.id+'-err'); if(e) e.textContent=msg||''; el.setAttribute('aria-invalid',msg?'true':'false'); return !msg; }
+  function show(msg){ status.textContent=msg; status.classList.toggle('show',!!msg); }
+  function valid(el){
+    var v=el.value.trim();
+    if(el.name==='email') return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+    if(el.name==='phone') return v.replace(/\D/g,'').length>=7;
+    return !el.required||v.length>0;
+  }
+  [].forEach.call(f.querySelectorAll('input[required],select[required]'),function(el){
+    el.addEventListener(el.tagName==='SELECT'?'change':'blur',function(){ setErr(el,valid(el)?'':MSG[el.name]); });
+  });
+  f.addEventListener('submit',function(e){
+    e.preventDefault(); show('');
+    var first=null;
+    [].forEach.call(f.querySelectorAll('input[required],select[required]'),function(el){
+      if(!setErr(el,valid(el)?'':MSG[el.name])&&!first) first=el;
+    });
+    if(first){ first.focus(); return; }
+    if(f.website_url.value||Date.now()-t0<3000) return; /* spam: drop silently */
+    /* The saved markup carries stale localhost values; overwrite with the real ones. */
+    var q=new URLSearchParams(location.search);
+    ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach(function(k){ if(f[k]) f[k].value=q.get(k)||''; });
+    if(f.page_url) f.page_url.value=location.href;
+    if(f.referrer) f.referrer.value=document.referrer;
+    if(f.landing_page){ try{ f.landing_page.value=sessionStorage.getItem('bm.landing')||location.href; }catch(x){ f.landing_page.value=location.href; } }
+    var fd=new FormData(f); fd.delete('website_url');
+    fd.append('_subject','New VSL enquiry: '+f.company.value.trim()+' ('+f.budget_band.value+')');
+    fd.append('_replyto',f.email.value.trim());
+    fd.append('_captcha','false');
+    fd.append('_template','table');
+    btn.disabled=true; label.textContent='Sending';
+    fetch(ENDPOINT,{method:'POST',body:fd,headers:{Accept:'application/json'}})
+      .then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); })
+      .then(function(){
+        try{ (window.dataLayer=window.dataLayer||[]).push({event:'generate_lead',form_id:'website-vsl',budget_band:f.budget_band.value}); }catch(x){}
+        location.href='thank-you.html';
+      })
+      .catch(function(){
+        btn.disabled=false; label.textContent='Send and book the call';
+        show('Could not send just now. Your details are still here, please try again or WhatsApp us.');
+      });
+  });
+  try{ if(!sessionStorage.getItem('bm.landing')) sessionStorage.setItem('bm.landing',location.href); }catch(x){}
+})();
+</script>
 
 
+<script>
+/* 20-minute dial: once in view, the purple ticks round the whole ring one dot per second,
+   like a clock hand, then clears and starts again. */
+(function(){
+  var g=document.querySelector('.book-graphic'); if(!g) return;
+  var dots=g.querySelectorAll('.bg-on'), N=dots.length, TICK=1000;
+  if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  function run(){
+    var k=0;
+    setInterval(function(){
+      if(k>=N){ for(var i=0;i<N;i++) dots[i].classList.remove('on'); k=0; return; }
+      dots[k++].classList.add('on');
+    },TICK);
+  }
+  if(!('IntersectionObserver' in window)){ run(); return; }
+  var io=new IntersectionObserver(function(es){ if(es[0].isIntersecting){ io.disconnect(); run(); } },{threshold:.6});
+  io.observe(g);
+})();
+</script>
 </body></html>

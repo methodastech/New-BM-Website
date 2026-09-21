@@ -28,6 +28,7 @@
 <meta name="twitter:title" content="Mascot Gallery | Brand Method">
 <meta name="twitter:description" content="A curated collection of Brand Method mascot characters, brand personalities, and playful visual assets.">
 <meta name="twitter:image" content="https://brandmethod.co/santa-images/santa-barbara-cafe-mascot-suit-design.webp">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&display=swap">
 <link rel="stylesheet" href="css/style.css?v=20260620d">
 <style>
 .mascot-gallery-page {
@@ -131,6 +132,40 @@
     min-height: 240px;
   }
 }
+.mg-bnr{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,40%);gap:clamp(24px,4vw,64px);align-items:center;}
+.mg-back{display:flex;width:max-content;align-items:center;gap:8px;font-family:var(--font-mono,monospace);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;margin-bottom:clamp(22px,3vw,34px);transition:color .25s;}
+.mg-back:hover{color:var(--accent);}
+.mg-back svg{transition:transform .25s var(--ease);}
+.mg-back:hover svg{transform:translateX(-3px);}
+.mg-h1{margin:0 0 20px;font-family:var(--font-display);font-size:clamp(38px,4.6vw,70px);font-weight:400;line-height:1.04;color:#111;}
+.mg-h1 em{font-style:italic;color:var(--accent);white-space:nowrap;}
+.mg-lead{max-width:48ch;margin:0;color:var(--muted);font-size:clamp(15px,1.15vw,18px);line-height:1.6;}
+.mg-field{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:12px;height:clamp(300px,34vw,440px);overflow:hidden;border:1px solid rgba(26,38,222,.12);padding:12px;background:#fff;}
+.mg-field::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,#fff 0%,rgba(255,255,255,0) 18%,rgba(255,255,255,0) 82%,#fff 100%);}
+.mg-lane{overflow:hidden;}
+.mg-lane-run{display:flex;flex-direction:column;gap:12px;}
+.mg-lane--a .mg-lane-run{animation:mgLaneUp 46s linear infinite;}
+.mg-lane--b .mg-lane-run{animation:mgLaneDown 54s linear infinite;}
+.mg-lane-run span{display:block;flex:none;aspect-ratio:4/3;overflow:hidden;background:#f2f4fb;}
+.mg-lane-run img{width:100%;height:100%;object-fit:cover;display:block;}
+@keyframes mgLaneUp{from{transform:translateY(0);}to{transform:translateY(-50%);}}
+@keyframes mgLaneDown{from{transform:translateY(-50%);}to{transform:translateY(0);}}
+.mg-field-tag{position:absolute;left:12px;bottom:12px;z-index:2;display:flex;align-items:center;gap:10px;padding:9px 13px;background:#fff;border:1px solid rgba(26,38,222,.14);font-family:'Inter',system-ui,sans-serif;font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);}
+.mg-field-tag b{font-weight:700;color:var(--accent);letter-spacing:.06em;}
+@media(prefers-reduced-motion:reduce){.mg-lane-run{animation:none!important;}}
+@media(max-width:900px){.mg-bnr{grid-template-columns:1fr;}.mg-field{height:clamp(220px,52vw,320px);}}
+.mg-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-top:56px;}
+.mg-card{display:flex;flex-direction:column;color:inherit;text-decoration:none;}
+.mg-img{display:block;overflow:hidden;background:#fff;border:1px solid var(--border);margin-bottom:18px;}
+.mg-img img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;transition:transform .5s var(--ease);}
+.mg-card:hover .mg-img img{transform:scale(1.04);}
+.mg-kind{font-family:var(--font-sans);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);}
+.mg-card h2{margin:8px 0 8px;font-family:var(--font-display);font-size:clamp(24px,2.2vw,30px);font-weight:400;line-height:1.12;color:#111;transition:color .2s;}
+.mg-card:hover h2{color:var(--accent);}
+.mg-card p{margin:0 0 14px;color:var(--muted);font-size:15px;line-height:1.55;}
+.mg-open{margin-top:auto;font-family:var(--font-sans);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);}
+@media (max-width: 900px){.mg-cards{grid-template-columns:repeat(2,minmax(0,1fr));}}
+@media (max-width: 560px){.mg-cards{grid-template-columns:1fr;gap:40px;}}
 </style>
 </head>
 <body>
@@ -142,17 +177,33 @@
   <div class="page-wrap">
     <section class="mascot-gallery-page">
       <div class="section-inner mascot-gallery-inner">
-        <a class="mascot-gallery-back reveal" href="work.html">Back to work</a>
-        <div class="mascot-gallery-hero">
-          <div class="mascot-gallery-copy reveal">
-            <h1>Mascot Gallery</h1>
-            <p>A curated collection of mascot characters, brand personalities, and playful visual assets.</p>
-            <p>This page is ready for your final mascot images and project entries. Once you send them, we can turn this into the full gallery.</p>
-            <span class="mascot-gallery-note">Gallery Coming Soon</span>
+        <div class="mg-bnr">
+          <div class="mg-bnr-copy">
+            <a class="mg-back reveal" href="work.html"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M11 18l-6-6 6-6"/></svg><span>Back to work</span></a>
+            <h1 class="mg-h1 reveal">Mascot <em>Gallery</em></h1>
+            <p class="mg-lead reveal">A curated collection of mascot characters, brand personalities, and playful visual assets.</p>
           </div>
-          <div class="mascot-gallery-media reveal reveal-delay-1">
-            <img src="santa-images/santa-barbara-cafe-mascot-suit-design.webp" alt="Mascot character gallery preview artwork" loading="lazy" decoding="async">
-          </div>
+          <div class="mg-field reveal" aria-hidden="true"><div class="mg-lane mg-lane--a"><div class="mg-lane-run"><span><img src="Image/mascot/web/santa/6.webp" alt="" loading="lazy" decoding="async"></span><span><img src="Image/mascot/web/andoh/1.webp" alt="" loading="lazy" decoding="async"></span><span><img src="Image/mascot/web/mindtropic/1.webp" alt="" loading="lazy" decoding="async"></span><span><img src="Image/mascot/web/santa/2.webp" alt="" loading="lazy" decoding="async"></span><span><img src="Image/mascot/web/andoh/4.webp" alt="" loading="lazy" decoding="async"></span><span><img src="Image/mascot/web/mindtropic/3.webp" alt="" loading="lazy" decoding="async"></span><span><img src="Image/mascot/web/santa/6.webp" alt="" loading="lazy" decoding="async"></span><span><img src="Image/mascot/web/andoh/1.webp" alt="" loading="lazy" decoding="async"></span><span><img src="Image/mascot/web/mindtropic/1.webp" alt="" loading="lazy" decoding="async"></span><span><img src="Image/mascot/web/santa/2.webp" alt="" loading="lazy" decoding="async"></span><span><img src="Image/mascot/web/andoh/4.webp" alt="" loading="lazy" decoding="async"></span><span><img src="Image/mascot/web/mindtropic/3.webp" alt="" loading="lazy" decoding="async"></span></div></div><div class="mg-lane mg-lane--b"><div class="mg-lane-run"><span><img src="Image/mascot/web/andoh/2.webp" alt="" loading="lazy" decoding="async"></span><span><img src="Image/mascot/web/santa/1.webp" alt="" loading="lazy" decoding="async"></span><span><img src="Image/mascot/web/mindtropic/2.webp" alt="" loading="lazy" decoding="async"></span><span><img src="Image/mascot/web/andoh/6.webp" alt="" loading="lazy" decoding="async"></span><span><img src="Image/mascot/web/santa/4.webp" alt="" loading="lazy" decoding="async"></span><span><img src="Image/mascot/web/andoh/5.webp" alt="" loading="lazy" decoding="async"></span><span><img src="Image/mascot/web/andoh/2.webp" alt="" loading="lazy" decoding="async"></span><span><img src="Image/mascot/web/santa/1.webp" alt="" loading="lazy" decoding="async"></span><span><img src="Image/mascot/web/mindtropic/2.webp" alt="" loading="lazy" decoding="async"></span><span><img src="Image/mascot/web/andoh/6.webp" alt="" loading="lazy" decoding="async"></span><span><img src="Image/mascot/web/santa/4.webp" alt="" loading="lazy" decoding="async"></span><span><img src="Image/mascot/web/andoh/5.webp" alt="" loading="lazy" decoding="async"></span></div></div><span class="mg-field-tag">Characters<b>3 sets</b></span></div>
+        </div>
+        <div class="mg-cards">
+          <a class="mg-card reveal" href="mascot-page/santa-barbara-polo.html">
+            <span class="mg-img"><img src="Image/mascot/web/santa/6.webp" alt="Santa Barbara Polo &amp; Racquet Club mascot" width="1600" height="900" loading="lazy" decoding="async"></span>
+            <h2>Santa Barbara Polo &amp; Racquet Club</h2>
+            <p>A horse mascot suit in four looks, from the riding kit to the casual club polo.</p>
+            <span class="mg-open">View project &rarr;</span>
+          </a>
+          <a class="mg-card reveal" href="mascot-page/andoh.html">
+            <span class="mg-img"><img src="Image/mascot/web/andoh/1.webp" alt="Andoh mascot" width="1600" height="900" loading="lazy" decoding="async"></span>
+            <h2>Andoh</h2>
+            <p>The default character plus five uniforms: ambulance vest, ambulance, DRT, RDS and volunteer.</p>
+            <span class="mg-open">View project &rarr;</span>
+          </a>
+          <a class="mg-card reveal" href="mascot-page/mindtropic.html">
+            <span class="mg-img"><img src="Image/mascot/web/mindtropic/1.webp" alt="Mindtropic mascot" width="1600" height="900" loading="lazy" decoding="async"></span>
+            <h2>Mindtropic</h2>
+            <p>An owl character with study, graduation and lifestyle poses, drawn front, back, side and top.</p>
+            <span class="mg-open">View project &rarr;</span>
+          </a>
         </div>
       </div>
     </section>

@@ -180,12 +180,11 @@
 /* ===== Hero video banner (live site) ===== */
 .bmx-hero-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.9;z-index:0}
 .bmx-hero-shade{position:absolute;inset:0;z-index:0;background:
-  radial-gradient(60% 78% at 0% 56%,rgba(108,136,255,.30) 0%,rgba(72,94,214,.14) 34%,rgba(6,8,20,0) 66%),
   linear-gradient(90deg,rgba(4,6,16,.90) 0%,rgba(4,6,16,.74) 32%,rgba(4,6,16,.34) 58%,rgba(4,6,16,.06) 82%,rgba(4,6,16,0) 100%),
   linear-gradient(0deg,rgba(4,6,16,.8) 0%,rgba(4,6,16,0) 34%),
   linear-gradient(180deg,rgba(4,6,16,.44) 0%,rgba(4,6,16,0) 22%)}
-/* keep the blue and violet gradient, drop the moving sheen and the camera textures */
-.bmx-hero-v .hero-video .orb{opacity:.3}
+/* no blue/violet glow, drop the moving sheen and the camera textures */
+.bmx-hero-v .hero-video .orb{display:none!important}
 .bmx-hero-v .hero-video .sheen,.bmx-hero-v .hero-video .scan,.bmx-hero-v .hero-video .grain{display:none!important}
 .bmx-hero-v .hero-grid{display:none!important}
 @media (prefers-reduced-motion:reduce){.bmx-hero-vid{display:none}}
@@ -829,7 +828,7 @@ footer li a:hover,.footer-col a:hover{padding-left:4px}
 /* ===== the closing CTA: the work itself, moving behind the words ===== */
 .cta-band{position:relative;overflow:hidden}
 .bmx-ctaviz{position:absolute;inset:0;z-index:0;display:flex;flex-direction:column;justify-content:center;gap:clamp(12px,1.6vw,22px);pointer-events:none;opacity:.5}
-.bmx-ctaviz::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 78% at 50% 50%,rgba(255,255,255,.96) 34%,rgba(255,255,255,.82) 62%,rgba(255,255,255,.66) 100%)}
+.bmx-ctaviz::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 78% at 50% 50%,rgba(255,255,255,.86) 34%,rgba(255,255,255,.62) 62%,rgba(255,255,255,.42) 100%)}
 .bmx-strip{overflow:hidden}
 .bmx-strip-run{display:flex;gap:clamp(12px,1.6vw,22px);width:max-content;animation:bmxStripL var(--d,80s) linear infinite}
 .bmx-strip--b .bmx-strip-run{animation-name:bmxStripR}
@@ -994,7 +993,7 @@ footer li a:hover,.footer-col a:hover{padding-left:4px}
 
 /* the closing CTA gets its air back */
 .cta-band{padding-top:clamp(44px,4.6vw,76px)!important;padding-bottom:clamp(44px,4.6vw,76px)!important}
-.bmx-ctaviz{opacity:.42}
+.bmx-ctaviz{opacity:.7}
 
 /* the panel is the screen and nothing else */
 .bmx-scr-bar,.bmx-scr-foot,.bmx-scr-f figcaption{display:none!important}
@@ -2509,3 +2508,66 @@ details.bmx-role .bmx-role-go::after{transition:opacity .3s}
 .bmx-ww{display:inline-block;opacity:var(--o,1);transition:opacity .25s linear;will-change:opacity}
 .bmx-wimg{transition:transform .6s var(--ease),box-shadow .6s var(--ease),rotate .6s var(--ease)}
 .bmx-std:hover .bmx-wimg{transform:scale(1.07) rotate(-1.5deg)!important;box-shadow:0 34px 60px -30px rgba(20,28,80,.55)}
+/* the chip flips on a press. The back face gets a solid fill (it was transparent, so the mirrored
+   front showed through) and each face is swapped with visibility at mid-turn instead of trusting
+   backface-visibility, which Firefox gets wrong inside preserve-3d. */
+.bmx-cart .o15.backp{display:flex!important;visibility:hidden;transition:visibility 0s .3s;
+  background:radial-gradient(rgba(var(--sc,251,224,138),.13) 1px,transparent 1.3px) 0 0/13px 13px,linear-gradient(165deg,var(--f1,#5A5320),var(--f3,#2A270F))!important}
+.bmx-cart .c15-body.flipped .o15.backp{visibility:visible}
+.bmx-cart .c15grid .o15f{backface-visibility:visible!important;transition:visibility 0s .3s}
+.bmx-cart .c15grid .c15-body.flipped .o15f{visibility:hidden}
+
+/* Methodas chip back face, matched to methodas.com: dark panel with a warm glow, the quote,
+   THE METHODAS WAY, and the spec line along the bottom. */
+.bmx-cart .c15grid .chip-c15 .o15.backp{
+  background:radial-gradient(90px 70px at 22% 14%,rgba(var(--gc,235,203,94),.22),transparent 70%),linear-gradient(170deg,#161b26,#0c1017 70%)!important;
+  border-color:rgba(var(--gc,235,203,94),.55)!important}
+.bmx-cart .c15grid .chip-c15 .o15.backp .bp-spec{display:block!important}
+.bmx-cart .c15grid .chip-c15 .o15.backp .bp-quote[data-mds-way]{display:block!important}
+/* back face: rounded like the Methodas chip, and the quote block stacks cleanly */
+.bmx-cart .c15grid .chip-c15 .o15.backp,.bmx-cart .c15grid .chip-c15 .o15.backp .bp-pcb{border-radius:16px!important}
+.bmx-cart .c15grid .chip-c15 .o15.backp .bp-frame{border-radius:8px!important}
+.bmx-cart .c15grid .chip-c15 .o15.backp .bp-quote{display:flex!important;flex-direction:column;gap:6px;height:auto!important;overflow:visible}
+.bmx-cart .c15grid .chip-c15 .o15.backp .bp-quote q{font-style:normal!important;line-height:1.4!important;position:static!important}
+.bmx-cart .c15grid .chip-c15 .o15.backp .bp-quote i{display:none!important}
+/* the flip swaps faces with visibility (above), so neither face may rely on backface-visibility:
+   Firefox hides the back face inside preserve-3d even when it faces the viewer */
+.bmx-cart .c15grid .chip-c15 .o15.backp,.bmx-cart .c15grid .chip-c15 .o15f{-webkit-backface-visibility:visible!important;backface-visibility:visible!important}
+/* CTA band: a third strip of client photos fills the band, and no dead space under it */
+.cta-band{margin-bottom:0!important}
+/* Methodas card sits inside the screen frame, not hanging off its left edge */
+@media(min-width:1101px){.bmx-scr>.bmx-chipimg,.bmx-chipstage .bmx-chipimg{left:18px!important}}
+/* nav Hire Us: no black flash. The hover panel and hover fill used near-black (#0f0f0f);
+   keep them in the brand blue so hovering or crossing the scroll point never goes black. */
+.nav-cta::before{background:var(--accent-dark,#0000aa)!important}
+.nav-cta:hover,.nav.scrolled .nav-cta{background:var(--accent)!important;color:#fff!important}
+/* a flipped chip stays turned when the pointer leaves it; before, .c15grid .c15-body reset it
+   to translateY(0), so the back face was seen from behind (mirrored text) */
+.bmx-cart .c15grid .chip-stage .c15-body.flipped{transform:rotateY(180deg)!important}
+.bmx-cart .c15grid .chip-stage:hover .c15-body.flipped{transform:translateY(-12px) rotateY(180deg)!important}
+/* section intros under "From foundation to acceleration" and "Risk on us, results on you": two lines on desktop */
+.gr-lead,.promise-sub{max-width:880px!important;margin-left:auto!important;margin-right:auto!important;text-wrap:balance}
+/* "All free · Audit | Wireframe plan | Written proposal" stays on one line */
+.bmx-freetags{flex-wrap:nowrap!important;white-space:nowrap}
+.bmx-freetags b{margin-right:10px!important;flex:none}
+.bmx-freetags span{padding:0 9px!important;flex:none}
+@media(max-width:600px){.bmx-freetags b{margin-right:8px!important}.bmx-freetags span{font-size:11px!important;padding:0 7px!important}}
+
+/* ===== one button hover, site wide (21 Sep) =====
+   Every filled button moves like the lead-magnet "Send me..." button: the fill deepens a
+   touch, it lifts 1px and a soft glow sits under it. Hire Us (.nav-cta, .cta-hire,
+   .bm-hire) keeps its own sweep. */
+.btn-primary:not(.bm-hire),.signup-form button,.pkg-cta,.fbk-btn,.btn-dark,.pb-form button{
+  transition:background-color .45s cubic-bezier(.22,1,.36,1),transform .45s cubic-bezier(.22,1,.36,1),box-shadow .45s cubic-bezier(.22,1,.36,1)!important}
+.btn-primary:not(.bm-hire)::before{display:none!important}
+.btn-primary:not(.bm-hire):hover .arr{transform:none!important}
+.btn-primary:not(.bm-hire):hover,.signup-form button:hover,.pkg-cta:hover,.fbk-btn:hover,.btn-dark:hover,
+.btn-primary:not(.bm-hire):focus-visible,.signup-form button:focus-visible,.pkg-cta:focus-visible,.fbk-btn:focus-visible,.btn-dark:focus-visible{
+  transform:translateY(-1px)!important;
+  box-shadow:inset 0 0 0 100vmax rgba(0,0,0,.07),0 10px 24px -14px rgba(26,38,222,.5)!important}
+.pb-form button[disabled],.signup-form button[disabled]{transform:none!important;box-shadow:none!important}
+
+/* nav dropdowns: every row icon, "All ..." included, one size and a step bigger, no tile */
+.bmdd-shell .bmdd-ic svg,.bmdd-shell .bmx-ddic svg{width:30px!important;height:30px!important}
+.bmdd-shell .bmdd-all{grid-template-columns:38px 1fr auto!important}
+.bmdd-shell .bmdd-all .bmx-ddic{width:38px!important;height:38px!important;display:grid!important;place-items:center!important}
