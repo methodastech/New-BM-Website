@@ -243,7 +243,7 @@
 .rmar::after{right:0;background:linear-gradient(270deg,#fff 12%,rgba(255,255,255,.72) 48%,rgba(255,255,255,0) 100%);-webkit-mask-image:linear-gradient(270deg,#000 40%,transparent);mask-image:linear-gradient(270deg,#000 40%,transparent)}
 
 /* ===== Footer lockup: same gutter as the columns, more air above the legal line ===== */
-.bm-logo{max-width:none!important}
+.bm-logo{max-width:1500px!important}
 .footer-lockup{margin-top:clamp(40px,5vw,64px)!important}
 .footer-bottom{margin-top:clamp(56px,6.5vw,104px)!important}
 

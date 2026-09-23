@@ -4630,14 +4630,25 @@
   </div>
 </footer>
 <!-- =====================================================================
-     WEB3FORMS ACCESS KEY  ←  PASTE YOUR KEY BETWEEN THE QUOTES BELOW
-     Get it free at web3forms.com (Create Form → copy the Access Key).
-     Until this is filled in, the booking + lead forms capture leads via
-     WhatsApp automatically. Once the key is set, they email the lead too
-     (and still fall back to WhatsApp if the email service is unreachable).
-     This is the ONLY place you need to change to go live.
+     FORMSUBMIT  ←  WHERE THE BOOKING + LEAD FORMS EMAIL TO
+     BM_FORM_ENDPOINT is the main inbox, BM_FORM_CC gets a copy (comma-separate
+     for more). If the endpoint is empty or FormSubmit is unreachable, the
+     forms fall back to a prefilled WhatsApp message so no lead is lost.
+     This is the ONLY place you need to change.
      ===================================================================== -->
-<script>window.BM_WEB3FORMS_KEY="3680decd-bace-4762-97d2-fec36fd3acc3";</script>
+<script>window.BM_FORM_ENDPOINT="https://formsubmit.co/ajax/bazil@brandmethod.co";window.BM_FORM_CC="amina@brandmethod.co,eyka@brandmethod.co,brian@brandmethod.co";
+/* Shared sender for both forms. FormSubmit returns success as the string "true"/"false". */
+window.bmSendLead=function(subject,fields){
+  var url=(window.BM_FORM_ENDPOINT||'').trim(); if(!url) return Promise.reject(new Error('no endpoint'));
+  var fd=new FormData();
+  fd.append('_subject',subject); fd.append('_template','table'); fd.append('_captcha','false');
+  if(window.BM_FORM_CC) fd.append('_cc',window.BM_FORM_CC);
+  if(fields.Email) fd.append('_replyto',fields.Email);
+  for(var k in fields) fd.append(k,fields[k]);
+  fd.append('Page',location.href);
+  return fetch(url,{method:'POST',body:fd,headers:{Accept:'application/json'}})
+    .then(function(r){return r.json();}).then(function(j){ if(!j||String(j.success)!=='true') throw new Error('failed'); return j; });
+};</script>
 <script>
 /* quick lead form: BOTH buttons require details. Book = email+phone+interest; WhatsApp = name+email+interest. Everything lands in a prefilled wa.me message. */
 (function(){
@@ -4659,19 +4670,10 @@
       +(ph.value?'\nPhone: '+ph.value.trim():'')
       +(it.value?'\nInterested in: '+it.value:'');
   }
-  /* Email the lead to us via Web3Forms. Returns a promise: resolves on success, rejects otherwise. */
+  /* Email the lead to us via FormSubmit. Returns a promise: resolves on success, rejects otherwise. */
   function emailLead(){
-    var KEY=(window.BM_WEB3FORMS_KEY||'').trim(); if(!KEY) return Promise.reject(new Error('no key'));
-    var fd=new FormData();
-    fd.append('access_key', KEY);
-    fd.append('subject','New free-call lead \u2014 sales page');
-    fd.append('from_name','Brand Method sales page');
-    fd.append('Name', nm.value.trim());
-    fd.append('Email', em.value.trim());
-    fd.append('Phone', ph.value.trim());
-    fd.append('Interested in', it.value);
-    return fetch('https://api.web3forms.com/submit',{method:'POST',body:fd,headers:{Accept:'application/json'}})
-      .then(function(r){return r.json();}).then(function(j){ if(!j||!j.success) throw new Error('failed'); return j; });
+    return window.bmSendLead('New free-call lead \u2014 sales page',{
+      'Name':nm.value.trim(),'Email':em.value.trim(),'Phone':ph.value.trim(),'Interested in':it.value});
   }
   var fBtn=f.querySelector('button[type=submit]'), fSent=false;
   f.addEventListener('submit',function(e){
@@ -4680,7 +4682,7 @@
     var badN=!nm.value.trim(), badE=!em.value||em.validity.typeMismatch, badP=!ph.value||ph.validity.patternMismatch, badI=!it.value;
     mark(nm,badN); mark(em,badE); mark(ph,badP); mark(it,badI);
     if(badN||badE||badP||badI){ if(note) note.textContent='Add your name, a valid email, phone and what you\u2019re interested in.'; (badN?nm:badE?em:badP?ph:it).focus(); return; }
-    var KEY=(window.BM_WEB3FORMS_KEY||'').trim();
+    var KEY=(window.BM_FORM_ENDPOINT||'').trim();
     if(!KEY){ openWa('Hi Brand Method, I\u2019d like the free 20-minute call.'+details()); return; }
     if(fBtn) fBtn.disabled=true; if(note) note.textContent='Sending\u2026';
     emailLead().then(function(){
@@ -4703,7 +4705,7 @@
     <script>
 /* Enhance the "interested in" <select> with a custom, accessible dropdown.
    The native <select> stays in the DOM as the source of truth, so all form
-   validation / Web3Forms / WhatsApp logic keeps working unchanged. */
+   validation / FormSubmit / WhatsApp logic keeps working unchanged. */
 (function(){
   var sel=document.getElementById('spLeadIntent'); if(!sel||sel.dataset.csInit) return;
   sel.dataset.csInit='1';
@@ -5105,14 +5107,11 @@
   function bkMark(el,bad){ if(el) el.classList[bad?'add':'remove']('sp-lead-err'); }
   [bkName,bkEmail,bkPhone].forEach(function(el){ if(el) el.addEventListener('input',function(){ bkMark(el,false); }); });
   if(bkIntent) bkIntent.addEventListener('change',function(){ bkMark(bkIntent,false); });
-  /* email the booking to us via Web3Forms \u2014 the actual submit action */
-  function bkEmailLead(){ var fd=new FormData();
-    fd.append('access_key',(window.BM_WEB3FORMS_KEY||'').trim());
-    fd.append('subject','New call booking \u2014 sales page'); fd.append('from_name','Brand Method sales page');
-    fd.append('Name',bkName.value.trim()); fd.append('Email',bkEmail.value.trim()); fd.append('Phone',bkPhone.value.trim());
-    fd.append('Interested in',bkIntent.value); fd.append('Preferred slot',(selDate||'')+' at '+(selTime||''));
-    return fetch('https://api.web3forms.com/submit',{method:'POST',body:fd,headers:{Accept:'application/json'}})
-      .then(function(r){return r.json();}).then(function(j){ if(!j||!j.success) throw new Error('failed'); return j; }); }
+  /* email the booking to us via FormSubmit \u2014 the actual submit action */
+  function bkEmailLead(){
+    return window.bmSendLead('New call booking \u2014 sales page',{
+      'Name':bkName.value.trim(),'Email':bkEmail.value.trim(),'Phone':bkPhone.value.trim(),
+      'Interested in':bkIntent.value,'Preferred slot':(selDate||'')+' at '+(selTime||'')}); }
   function bkWhatsApp(){ var msg='Hi Brand Method! I\u2019d like to book a free 20-minute strategy call on '+selDate+' at '+selTime+'.'
       +'\nName: '+bkName.value.trim()+'\nEmail: '+bkEmail.value.trim()+'\nPhone: '+bkPhone.value.trim()+'\nInterested in: '+bkIntent.value+'\n(Sent from the sales page.)';
     var url='https://wa.me/'+WA+'?text='+encodeURIComponent(msg), w=null; try{ w=window.open(url,'_blank'); }catch(_){} if(!w) location.href=url; }
@@ -5123,8 +5122,8 @@
     var badN=!bkName.value.trim(), badE=!bkEmail.value||bkEmail.validity.typeMismatch, badP=!bkPhone.value||bkPhone.validity.patternMismatch, badI=!bkIntent.value;
     bkMark(bkName,badN); bkMark(bkEmail,badE); bkMark(bkPhone,badP); bkMark(bkIntent,badI);
     if(badN||badE||badP||badI){ if(bhint) bhint.textContent='Add your name, email, phone and what you\u2019re interested in.'; (badN?bkName:badE?bkEmail:badP?bkPhone:bkIntent).focus(); return; }
-    var KEY=(window.BM_WEB3FORMS_KEY||'').trim();
-    if(!KEY){ /* no email key yet \u2014 confirm over WhatsApp so the lead is still captured */
+    var KEY=(window.BM_FORM_ENDPOINT||'').trim();
+    if(!KEY){ /* no email endpoint yet \u2014 confirm over WhatsApp so the lead is still captured */
       bkSent=true; btn.firstChild.textContent='Booked \u2713  ';
       if(bhint) bhint.textContent='Opening WhatsApp to confirm '+selDate+' at '+selTime+'\u2026'; bkWhatsApp(); return; }
     btn.disabled=true; btn.firstChild.textContent='Sending\u2026  '; if(bhint) bhint.textContent='Sending your booking\u2026';

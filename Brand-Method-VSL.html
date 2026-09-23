@@ -1679,6 +1679,7 @@ window.addEventListener('message',function(e){
     var fd=new FormData(f); fd.delete('website_url');
     fd.append('_subject','New VSL enquiry: '+f.company.value.trim()+' ('+f.budget_band.value+')');
     fd.append('_replyto',f.email.value.trim());
+    fd.append('_cc','amina@brandmethod.co,eyka@brandmethod.co,brian@brandmethod.co');
     fd.append('_captcha','false');
     fd.append('_template','table');
     btn.disabled=true; label.textContent='Sending';
