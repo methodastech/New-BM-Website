@@ -4688,6 +4688,7 @@ window.bmSendLead=function(subject,fields){
     emailLead().then(function(){
       fSent=true; if(fBtn) fBtn.textContent='Sent \u2713';
       if(note) note.textContent='Thanks '+nm.value.trim()+'! We\u2019ve got your details and will be in touch shortly.';
+      location.href='thank-you.html';
     }).catch(function(){
       if(fBtn) fBtn.disabled=false; if(note) note.textContent='Opening WhatsApp to confirm instead\u2026';
       openWa('Hi Brand Method, I\u2019d like the free 20-minute call.'+details());
@@ -5130,6 +5131,7 @@ window.bmSendLead=function(subject,fields){
     bkEmailLead().then(function(){
       bkSent=true; btn.firstChild.textContent='Booked \u2713  ';
       if(bhint) bhint.textContent='Thanks '+bkName.value.trim()+'! We\u2019ve got your request for '+selDate+' at '+selTime+' and will email you to confirm.';
+      location.href='thank-you.html';
     }).catch(function(){
       btn.disabled=false; if(bhint) bhint.textContent='Opening WhatsApp to confirm instead\u2026'; bkWhatsApp();
     }); });
