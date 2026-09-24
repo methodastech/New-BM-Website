@@ -2618,3 +2618,10 @@ details.bmx-role .bmx-role-go::after{transition:opacity .3s}
 .nav-mobile .m-sub a{color:rgba(255,255,255,.86)!important}
 .nav-mobile .m-sub a:hover,.nav-mobile .m-sub a[aria-current="page"]{color:#fff!important}
 @media(max-width:900px){.nav-mobile{top:calc(60px + var(--bmx-bar,0px))!important}}
+
+/* CTA band: denser three-row mosaic, matching the 25 Sep prototype */
+.bmx-ctaviz--mosaic{gap:10px!important;opacity:.6!important}
+.bmx-ctaviz--mosaic .bmx-strip-run{gap:10px!important}
+.bmx-ctaviz--mosaic .bmx-strip-run span{width:clamp(122px,12.5vw,196px)!important;aspect-ratio:4/3}
+.bmx-ctaviz--mosaic::after{background:radial-gradient(120% 82% at 50% 50%,rgba(255,255,255,.93) 26%,rgba(255,255,255,.86) 56%,rgba(255,255,255,.78) 100%)!important}
+@media(max-width:760px){.bmx-ctaviz--mosaic .bmx-strip-run span{width:clamp(96px,30vw,140px)!important}}
