@@ -1154,3 +1154,120 @@ document.addEventListener('click', function (e) {
   function on() { if (!t) { t = true; requestAnimationFrame(frame); } }
   addEventListener('scroll', on, { passive: true }); document.addEventListener('scroll', on, { passive: true, capture: true }); addEventListener('resize', on); addEventListener('hashchange', function () { setTimeout(frame, 80); }); frame();
 })();
+
+/* ===== About: "From confusion to dominance", one canvas animation inside each card (25 Sep prototype) =====
+   Second cut ("a bit wacky and not complete"): every form is drawn inside an inset frame so nothing
+   touches the card edge, threads are smooth and fade at their ends, glows stay inside, the bar rises
+   once with an ease and holds, and the three cards play in sequence (4.4 s each, held on hover). */
+(function () {
+  var cards = [].slice.call(document.querySelectorAll('.shift-flow .shift-node')); if (!cards.length) return;
+  var BLUE = '37,54,245', SKY = '90,169,255', HAZE = '118,128,168';
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var active = 0, hover = false, players = [];
+  function seeded(n) { var x = 1234 + n * 97; return function () { x = (x * 9301 + 49297) % 233280; return x / 233280; }; }
+  function ease(u) { return 1 - Math.pow(1 - u, 3); }
+  function setup(card, i) {
+    var cv = card.querySelector('canvas'); if (!cv) return;
+    var ctx = cv.getContext('2d'), W = 0, H = 0, DPR = 1, live = false, raf = null, t0 = performance.now(), ta = t0, k = 0;
+    var rnd = seeded(i + 1);
+    var dots = []; for (var q = 0; q < 64; q++) dots.push({ x: 0.06 + rnd() * 0.88, y: 0.08 + rnd() * 0.84, s: rnd() * 6.28, r: 1.3 + rnd() * 1.1 });
+    var threads = []; for (var th = 0; th < 3; th++) { var pts = []; for (var n = 0; n < 9; n++) pts.push({ x: 0.06 + n / 8 * 0.88, y: 0.2 + rnd() * 0.6, s: rnd() * 6.28 }); threads.push(pts); }
+    /* draw in the slot's own layout units (clientWidth ignores the page's wide-screen CSS zoom) and let the
+       stylesheet size the canvas; the bitmap follows the on-screen size, so it stays sharp at any zoom */
+    function size() { var p = cv.parentElement, r = p.getBoundingClientRect(); W = Math.max(120, p.clientWidth); H = Math.max(90, p.clientHeight); cv.width = Math.max(1, Math.round(r.width * Math.min(2, devicePixelRatio || 1))); cv.height = Math.max(1, Math.round(r.height * Math.min(2, devicePixelRatio || 1))); DPR = cv.width / W; }
+    function box() { var p = Math.round(Math.min(W, H) * 0.14); return { x: p, y: p, w: W - 2 * p, h: H - 2 * p }; }
+    function confusion(t, b) {
+      var j = 0;
+      threads.forEach(function (pts, n) {
+        var P = pts.map(function (p) { return [b.x + p.x * b.w, b.y + (p.y + Math.sin(t * 0.18 + p.s) * 0.05) * b.h]; });
+        var g = ctx.createLinearGradient(P[0][0], 0, P[P.length - 1][0], 0); g.addColorStop(0, 'rgba(' + HAZE + ',0)'); g.addColorStop(0.2, 'rgba(' + HAZE + ',.5)'); g.addColorStop(0.8, 'rgba(' + HAZE + ',.5)'); g.addColorStop(1, 'rgba(' + HAZE + ',0)');
+        ctx.strokeStyle = g; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(P[0][0], P[0][1]);
+        for (var m = 1; m < P.length - 1; m++) { var mx = (P[m][0] + P[m + 1][0]) / 2, my = (P[m][1] + P[m + 1][1]) / 2; ctx.quadraticCurveTo(P[m][0], P[m][1], mx, my); }
+        ctx.lineTo(P[P.length - 1][0], P[P.length - 1][1]); ctx.stroke();
+      });
+      dots.forEach(function (d, q) {
+        var x = b.x + (d.x + Math.sin(t * 0.12 + d.s) * 0.025) * b.w, y = b.y + (d.y + Math.cos(t * 0.1 + d.s * 1.3) * 0.025) * b.h;
+        var dx = (x - (b.x + b.w / 2)) / (b.w / 2), dy = (y - (b.y + b.h / 2)) / (b.h / 2), a = Math.max(0, 0.6 - 0.35 * (dx * dx + dy * dy));
+        ctx.fillStyle = q === 29 ? 'rgba(' + BLUE + ',.95)' : 'rgba(' + HAZE + ',' + a.toFixed(2) + ')'; ctx.beginPath(); ctx.arc(x, y, d.r, 0, 6.283); ctx.fill();
+        if (q === 29) { var gg = ctx.createRadialGradient(x, y, 0, x, y, 14); gg.addColorStop(0, 'rgba(' + BLUE + ',.35)'); gg.addColorStop(1, 'rgba(' + BLUE + ',0)'); ctx.fillStyle = gg; ctx.beginPath(); ctx.arc(x, y, 14, 0, 6.283); ctx.fill(); }
+      });
+    }
+    function method(t, b) {
+      var cx = b.x + b.w / 2, cy = b.y + b.h / 2, R = Math.min(b.w * 0.5, b.h * 0.46), P = [];
+      for (var q = 0; q < 6; q++) { var a = q / 6 * 6.283 - 1.5708 + Math.sin(t * 0.15) * 0.03; P.push([cx + Math.cos(a) * R, cy + Math.sin(a) * R * 0.94]); }
+      ctx.lineWidth = 1; ctx.strokeStyle = 'rgba(' + BLUE + ',.26)'; ctx.beginPath();
+      for (q = 0; q < 6; q++) { ctx.moveTo(P[q][0], P[q][1]); ctx.lineTo(P[(q + 1) % 6][0], P[(q + 1) % 6][1]); ctx.moveTo(cx, cy); ctx.lineTo(P[q][0], P[q][1]); } ctx.stroke();
+      var u = (t * 0.4) % 6, e = Math.floor(u), f = ease(u - e), A = P[e], B = P[(e + 1) % 6], lx = A[0] + (B[0] - A[0]) * f, ly = A[1] + (B[1] - A[1]) * f;
+      ctx.strokeStyle = 'rgba(' + BLUE + ',.8)'; ctx.lineWidth = 1.2; ctx.beginPath(); ctx.moveTo(A[0], A[1]); ctx.lineTo(lx, ly); ctx.stroke();
+      var g = ctx.createRadialGradient(lx, ly, 0, lx, ly, 16); g.addColorStop(0, 'rgba(' + BLUE + ',.5)'); g.addColorStop(1, 'rgba(' + BLUE + ',0)'); ctx.fillStyle = g; ctx.beginPath(); ctx.arc(lx, ly, 16, 0, 6.283); ctx.fill();
+      ctx.fillStyle = 'rgba(' + BLUE + ',1)'; ctx.beginPath(); ctx.arc(lx, ly, 2.2, 0, 6.283); ctx.fill();
+      P.forEach(function (p, q) { var on = q === e || q === (e + 1) % 6; ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(p[0], p[1], 6, 0, 6.283); ctx.fill(); ctx.lineWidth = 1.2; ctx.strokeStyle = 'rgba(' + BLUE + ',' + (on ? 1 : 0.5) + ')'; ctx.stroke(); ctx.fillStyle = 'rgba(' + BLUE + ',' + (on ? 1 : 0.35) + ')'; ctx.beginPath(); ctx.arc(p[0], p[1], 2.2, 0, 6.283); ctx.fill(); });
+      var cg = ctx.createRadialGradient(cx, cy, 0, cx, cy, 20); cg.addColorStop(0, 'rgba(' + BLUE + ',' + (0.25 + k * 0.2) + ')'); cg.addColorStop(1, 'rgba(' + BLUE + ',0)'); ctx.fillStyle = cg; ctx.beginPath(); ctx.arc(cx, cy, 20, 0, 6.283); ctx.fill();
+      ctx.fillStyle = 'rgba(' + BLUE + ',1)'; ctx.beginPath(); ctx.arc(cx, cy, 4 + Math.sin(t * 0.8) * 0.4, 0, 6.283); ctx.fill();
+      ctx.lineWidth = 1; ctx.strokeStyle = 'rgba(' + BLUE + ',.3)'; ctx.beginPath(); ctx.arc(cx, cy, 9 + Math.sin(t * 0.8) * 0.8, 0, 6.283); ctx.stroke();
+    }
+    function dominance(t, b, since) {
+      var base = b.y + b.h * 0.9, n = 4, gap = b.w * 0.07, bw = (b.w - gap * (n - 1)) / n, hs = [0.3, 1, 0.38, 0.26], rise = ease(Math.min(1, Math.max(0, (since - 0.3) / 2.4)));
+      ctx.lineWidth = 1; ctx.strokeStyle = 'rgba(' + HAZE + ',.35)'; ctx.beginPath(); ctx.moveTo(b.x, base + 0.5); ctx.lineTo(b.x + b.w, base + 0.5); ctx.stroke();
+      for (var q = 0; q < n; q++) {
+        var x = b.x + q * (bw + gap), h = hs[q] * b.h * 0.8 * (q === 1 ? rise : 1);
+        if (q === 1) {
+          var gl = ctx.createRadialGradient(x + bw / 2, base - h, 0, x + bw / 2, base - h, bw * 1.1); gl.addColorStop(0, 'rgba(' + SKY + ',' + (0.35 * rise) + ')'); gl.addColorStop(1, 'rgba(' + SKY + ',0)'); ctx.fillStyle = gl; ctx.beginPath(); ctx.arc(x + bw / 2, base - h, bw * 1.1, 0, 6.283); ctx.fill();
+          var g = ctx.createLinearGradient(0, base - h, 0, base); g.addColorStop(0, 'rgba(' + BLUE + ',1)'); g.addColorStop(1, 'rgba(' + BLUE + ',.8)'); ctx.fillStyle = g; ctx.fillRect(x, base - h, bw, h);
+          ctx.fillStyle = 'rgba(255,255,255,.35)'; ctx.fillRect(x, base - h, bw, 1);
+        } else { ctx.fillStyle = 'rgba(' + HAZE + ',.22)'; ctx.fillRect(x, base - h, bw, h); ctx.fillStyle = 'rgba(' + HAZE + ',.5)'; ctx.fillRect(x, base - h, bw, 1); }
+      }
+      /* the curve draws itself to the top of the blue bar, then the arrow */
+      var sx = b.x + bw * 0.5, sy = base - hs[0] * b.h * 0.8 - 4, ex = b.x + (bw + gap) + bw * 0.5, ey = base - b.h * 0.8 * rise - 10, seg = Math.max(0.001, rise);
+      ctx.strokeStyle = 'rgba(' + BLUE + ',.9)'; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(sx, sy);
+      for (var s = 1; s <= 24; s++) { var uu = s / 24 * seg, px = sx + (ex - sx) * uu, py = sy + (ey - sy) * (1 - Math.pow(1 - uu, 2.2)); ctx.lineTo(px, py); }
+      ctx.stroke();
+      if (rise > 0.98) { ctx.fillStyle = 'rgba(' + BLUE + ',1)'; ctx.beginPath(); ctx.moveTo(ex, ey - 7); ctx.lineTo(ex + 5, ey + 1); ctx.lineTo(ex - 5, ey + 1); ctx.closePath(); ctx.fill(); }
+    }
+    var draw = [confusion, method, dominance][i];
+    function frame(now) {
+      if (!live) return;
+      k += (((active === i) ? 1 : 0.4) - k) * 0.04;
+      var t = (now - t0) / 1000, b = box();
+      ctx.setTransform(DPR, 0, 0, DPR, 0, 0); ctx.clearRect(0, 0, W, H); draw(t, b, (now - ta) / 1000);
+      raf = requestAnimationFrame(frame);
+    }
+    function start() { if (live) return; size(); live = true; raf = requestAnimationFrame(frame); }
+    function stop() { live = false; if (raf) cancelAnimationFrame(raf); }
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { es.forEach(function (e) { e.isIntersecting ? start() : stop(); }); }, { threshold: 0.2 }).observe(card); else start();
+    addEventListener('resize', size);
+    players.push({ play: function () { ta = performance.now(); } });
+    if (reduce) { size(); ctx.setTransform(DPR, 0, 0, DPR, 0, 0); draw(2.4, box(), 9); }
+  }
+  cards.forEach(setup);
+  /* the sequence: the cards play in order, held on hover, a click plays that card */
+  function go(n) { active = (n + cards.length) % cards.length; cards.forEach(function (c, q) { c.classList.toggle('on', q === active); }); if (players[active]) players[active].play(); }
+  cards.forEach(function (c, q) { c.addEventListener('mouseenter', function () { hover = true; }); c.addEventListener('mouseleave', function () { hover = false; }); c.addEventListener('click', function () { go(q); }); });
+  go(0); if (!reduce) setInterval(function () { if (!hover) go(active + 1); }, 6500);
+})();
+
+/* ===== About: the history timeline, one chapter at a time (25 Sep prototype) =====
+   Chapters turn every 6.5 s while the section is in view, held on hover; the dots, the arrows and the
+   arrow keys pick a chapter. The rail's blue fill runs to the lit dot and the beam behind follows along. */
+(function () {
+  var tl = document.getElementById('history'); if (!tl || !tl.classList.contains('bmx-tl')) return;
+  var chs = [].slice.call(tl.querySelectorAll('.bmx-tl-ch')), dots = [].slice.call(tl.querySelectorAll('.bmx-tl-dot')), fill = tl.querySelector('.bmx-tl-fill'), count = tl.querySelector('.bmx-tl-count b'), cur = 0, timer = null, hold = false;
+  if (!chs.length) return;
+  function show(i) {
+    cur = (i + chs.length) % chs.length;
+    chs.forEach(function (c, k) { c.classList.toggle('on', k === cur); });
+    dots.forEach(function (d, k) { d.classList.toggle('on', k === cur); d.setAttribute('aria-selected', k === cur ? 'true' : 'false'); });
+    if (fill && dots[cur]) { var tr = tl.querySelector('.bmx-tl-track').getBoundingClientRect(), dr = dots[cur].getBoundingClientRect(); fill.style.width = Math.max(0, dr.left + dr.width / 2 - tr.left) + 'px'; }
+    if (count) count.textContent = cur + 1;
+    tl.style.setProperty('--bx', (62 + cur * 6) + '%');
+  }
+  function arm() { clearInterval(timer); timer = setInterval(function () { if (!hold) show(cur + 1); }, 6500); }
+  dots.forEach(function (d) { d.addEventListener('click', function () { show(+d.getAttribute('data-i')); arm(); }); });
+  var prev = tl.querySelector('.bmx-tl-prev'), next = tl.querySelector('.bmx-tl-next');
+  if (prev) prev.addEventListener('click', function () { show(cur - 1); arm(); });
+  if (next) next.addEventListener('click', function () { show(cur + 1); arm(); });
+  tl.addEventListener('mouseenter', function () { hold = true; }); tl.addEventListener('mouseleave', function () { hold = false; });
+  tl.addEventListener('keydown', function (e) { if (e.key === 'ArrowRight') { show(cur + 1); arm(); } if (e.key === 'ArrowLeft') { show(cur - 1); arm(); } });
+  if ('IntersectionObserver' in window) { new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { show(cur); arm(); } else clearInterval(timer); }); }, { threshold: 0.25 }).observe(tl); } else { show(0); arm(); }
+  addEventListener('resize', function () { show(cur); });
+})();

@@ -1,0 +1,374 @@
+/* Home, "Grow sales with the method behind 100+ brands": the two Methodas products side by side,
+   each a Methodas OS screen wired to its module chip. Ported from the 25 Sep prototype
+   (assets/bmx-live.css); the live module in each screen is a recording (Image/home/methodas-*-live.mp4). */
+@keyframes bmxBus{0%{stroke-dashoffset:8}72%,100%{stroke-dashoffset:-100}}
+@keyframes bmxLed{50%{opacity:.35}}
+@keyframes bmxm_cvBuild{ 0% { opacity: 0; transform: translateY(6px); } 7% { opacity: 1; transform: none; } 78% { opacity: 1; transform: none; } 88%, 100% { opacity: 0; transform: translateY(6px); } }
+@keyframes bmxm_cvNum{ 0%, 14% { opacity: 0; transform: scale(0.7); } 30%, 82% { opacity: 1; transform: scale(1); } 94%, 100% { opacity: 0; transform: scale(0.7); } }
+@keyframes bmxm_cvScan{ 0% { top: -6px; opacity: 0; } 4% { opacity: 1; } 50% { top: 52px; opacity: 1; } 54%, 100% { top: 52px; opacity: 0; } }
+@keyframes bmxm_ledBlink{ 0%, 58% { opacity: 1; } 68%, 86% { opacity: 0.28; } 96%, 100% { opacity: 1; } }
+@keyframes bmxm_mdsChipShade{ 0%, 100% { transform: translateX(-50%) scale(1); opacity: 1; } 50% { transform: translateX(-50%) scale(0.82); opacity: 0.7; } }
+@keyframes bmxm_os3World{ 0%, 100% { transform: rotateX(9deg) rotateY(-27deg); } 50% { transform: rotateX(8deg) rotateY(-9deg); } }
+@keyframes bmxm_plChart{ 0%, 20% { stroke-dashoffset: 130; } 60%, 86% { stroke-dashoffset: 0; } 94%, 100% { stroke-dashoffset: 130; } }
+@keyframes bmxm_plLn{ 0%, 6% { transform: scaleX(0); } 18%, 86% { transform: scaleX(1); } 94%, 100% { transform: scaleX(0); } }
+@keyframes bmxm_scnSheen{ 0%, 55% { left: -42%; } 95%, 100% { left: 125%; } }
+@media(max-width:1100px){
+  html body .bmx-scr-stage{aspect-ratio:1280/756!important}
+  html body .pb-form{min-width:0}
+  html body .pb-form input{min-width:0}
+}
+html body .bmx-lm{position:relative;background:#fff;padding:clamp(26px,2.6vw,40px) 0}
+.bmx-lm-head{max-width:1080px}
+html body .bmx-lm .section-title{margin:0;max-width:none;text-align:left;color:#0b1024; font-size:clamp(34px,3.6vw,52px);line-height:1.06}
+html body .bmx-lm .section-title em{color:var(--accent);white-space:nowrap}
+.bmx-lm-lead{margin:14px 0 0;font-family:var(--font-body);font-size:clamp(16px,1.2vw,18px);line-height:1.6;color:var(--muted)}
+.bmx-lm-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,3.4vw,56px);margin-top:clamp(34px,3.4vw,50px)}
+.bmx-lm-item{--lm:#7FA8FF;--lm-t:#1a26de;--lm-d:#1a26de;--lm-h:#141bb0;min-width:0;display:flex;flex-direction:column}
+.bmx-lm-item--fw{--lm:#2DD4BF;--lm-t:#0D9488;--lm-d:#0F766E;--lm-h:#0B5F58}
+.bmx-lm-stage{--band:56px;position:relative;aspect-ratio:auto;overflow:visible;background:none;padding-bottom:var(--band)}
+html body .bmx-lm-stage .bmx-scr{position:relative!important;right:auto!important;left:auto!important;top:auto!important;bottom:auto!important; transform:none!important;width:80%!important;max-width:none!important;margin:0 0 0 20%!important;display:block!important; background:linear-gradient(180deg,#171D30 0%,#0C101C 100%)!important;border:1px solid color-mix(in srgb,var(--lm) 55%,#0C101C)!important; border-radius:10px!important;padding:0 9px 9px!important; box-shadow:inset 0 1px 0 rgba(255,255,255,.14),inset 0 0 0 1px rgba(0,0,0,.35),0 1px 2px rgba(10,16,40,.1), 0 28px 54px -30px rgba(10,16,40,.5),0 0 36px -12px color-mix(in srgb,var(--lm) 50%,transparent)!important}
+.bmx-dev-bar{height:28px;display:flex;align-items:center;justify-content:space-between;padding:0 3px;font-family:var(--font-sans); font-size:8.5px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;line-height:1;color:rgba(221,233,255,.42)}
+.bmx-dev-bar .g{width:46px;height:4px;border-radius:2px;background:rgba(255,255,255,.1);box-shadow:inset 0 1px 1px rgba(0,0,0,.5)}
+.bmx-dev-bar .l{display:flex;align-items:center;gap:6px}
+.bmx-dev-bar .l b{width:6px;height:6px;border-radius:50%;background:var(--lm);box-shadow:0 0 8px var(--lm);animation:bmxLed 2.6s ease-in-out infinite}
+html body .bmx-lm-stage .bmx-scr-stage{position:relative;border-radius:4px!important;overflow:hidden;box-shadow:inset 0 0 0 1px rgba(255,255,255,.07)}
+html body .bmx-lm-stage .bmx-scr-stage::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none; background:linear-gradient(115deg,rgba(255,255,255,.07) 0%,rgba(255,255,255,0) 30%)}
+@media(prefers-reduced-motion:reduce){
+  .bmx-dev-bar .l b{animation:none}
+}
+html body .bmx-lm .bmx-scr-stage{aspect-ratio:16/10!important;min-height:0!important;flex:none!important}
+.bmx-lm-stage .bmx-mc{position:absolute;left:0;bottom:var(--band);width:30%;aspect-ratio:var(--mw)/var(--mh);z-index:3; filter:drop-shadow(0 1px 1.5px rgba(10,16,40,.16)) drop-shadow(0 16px 22px rgba(10,16,40,.18))}
+.bmx-lm-bus{position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible;pointer-events:none;z-index:2}
+.bmx-lm-bus .tr{fill:none;stroke:var(--lm);stroke-opacity:.75;stroke-width:1.25;stroke-linejoin:miter;shape-rendering:geometricPrecision}
+.bmx-lm-bus .pad{fill:#C9A24D}
+.bmx-lm-bus .port{fill:#0C101C;stroke:var(--lm);stroke-opacity:.7;stroke-width:1}
+.bmx-lm-bus .pl{fill:none;stroke:var(--lm-t);stroke-width:1.6;stroke-linecap:butt;stroke-dasharray:6 200;stroke-dashoffset:6;animation:bmxBus 3.6s cubic-bezier(.45,0,.55,1) infinite}
+@media(prefers-reduced-motion:reduce){
+  .bmx-lm-bus .pl{display:none}
+}
+.bmx-lm-stage .bmx-mc-in{position:absolute;left:0;top:0;width:calc(var(--mw) * 1px);height:calc(var(--mh) * 1px);transform:scale(var(--k,.7));transform-origin:0 0}
+.bmx-lm-stage .bmx-mc .mds-toolchip{margin:0!important;position:relative!important;inset:auto!important}
+.bmx-lm-tags{list-style:none;margin:clamp(20px,2vw,26px) 0 0;padding:0;display:flex;flex-wrap:wrap;gap:6px 24px}
+.bmx-lm-tags li{display:inline-flex;align-items:center;gap:7px;font-family:var(--font-sans);font-size:12px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--lm-d);line-height:1.4}
+.bmx-lm-tags svg{flex:none;width:17px;height:17px;color:var(--lm-t)}
+.bmx-lm-title{font-family:var(--font-display);font-weight:400;font-size:clamp(26px,2.3vw,34px);line-height:1.1;letter-spacing:-.015em;color:#0b1024;margin:10px 0 0}
+.bmx-lm-title em{font-style:italic;color:var(--lm-t);white-space:nowrap}
+.bmx-lm-promise{margin:12px 0 0;font-family:var(--font-body);font-size:16px;line-height:1.6;color:var(--muted);max-width:none}
+.bmx-lm-list{list-style:none;margin:22px 0 0;padding:0;display:grid;gap:13px}
+.bmx-lm-list li{display:flex;gap:12px;align-items:flex-start;font-family:var(--font-body);font-size:15px;line-height:1.5;color:var(--muted)}
+.bmx-lm-list svg{flex:none;width:22px;height:22px;margin-top:0;color:var(--lm-t)}
+.bmx-lm-list b{color:#0b1024;font-weight:600}
+html body .bmx-lm .pb-form{display:flex;flex-wrap:wrap;gap:10px;margin:0!important;max-width:none!important;justify-content:flex-start!important;align-items:stretch}
+html body .bmx-lm .pb-form input{flex:1 1 160px;min-width:0;height:52px;padding:0 16px;font-size:15px}
+html body .bmx-lm .pb-form button{display:inline-flex;align-items:center;justify-content:center;gap:9px;height:52px;padding:0 24px; background:var(--lm-t,var(--accent))!important;color:#fff!important;border:0;font-family:var(--font-sans);font-size:14px;font-weight:600;letter-spacing:.02em}
+html body .bmx-lm .pb-form button:hover{background:var(--lm-h,#141bb0)!important;transform:translateY(-1px)}
+html body .bmx-lm .bmx-lm-item--fw .pb-form button{background:var(--lm-d)!important}
+html body .bmx-lm .pb-form input:focus{border-color:var(--lm-t,var(--accent))!important}
+.bmx-lm-cta{margin-top:auto;padding-top:clamp(24px,2.4vw,32px)}
+html body .bmx-lm .pb-form button svg{width:15px;height:15px;flex:none}
+.bmx-lm-meta{margin:12px 0 0;display:flex;flex-wrap:wrap;gap:4px 20px;font-family:var(--font-sans);font-size:13.5px;line-height:1.5;color:rgba(15,18,40,.56)}
+.bmx-lm-meta a{color:var(--accent);font-weight:600;text-decoration:none}
+.bmx-lm-meta a:hover{text-decoration:underline}
+.bmx-lm .pb-form[data-bmx-state="done"]~.bmx-lm-meta span{display:none}
+.bmx-lm .pb-form[data-bmx-state="done"] .pb-status::before{background:var(--lm-t)}
+@media(max-width:900px){
+  html body .bmx-lm-grid{grid-template-columns:minmax(0,1fr);gap:44px}
+}
+@media(max-width:760px){
+  html body .bmx-lm .section-title{font-size:clamp(30px,8.4vw,38px)}
+  html body .bmx-lm-grid{gap:36px}
+  html body .bmx-lm-stage{--band:46px}
+  html body .bmx-lm-stage .bmx-scr{width:80%!important;margin-left:20%!important;padding:0 6px 6px!important;border-radius:8px!important}
+  .bmx-dev-bar{height:20px;font-size:7px;letter-spacing:.2em}
+  .bmx-dev-bar .g{width:30px;height:3px}
+  .bmx-lm-tags{gap:4px 16px;margin-top:16px}
+  .bmx-lm-tags li{font-size:11px;letter-spacing:.08em;gap:5px}
+  .bmx-lm-tags svg{width:15px;height:15px}
+  html body .bmx-lm-stage .bmx-mc{width:30%;left:0;bottom:var(--band)}
+  .bmx-lm-list{margin-top:16px;gap:10px}
+  .bmx-lm-list .bmx-lm-d{display:none}
+  html body .bmx-lm .pb-form input{flex:1 1 calc(50% - 5px);height:50px}
+  html body .bmx-lm .pb-form button{width:100%;height:50px}
+}
+html body .bmx-lm-stage .bmx-scr--live .bmx-scr-stage, html body .bmx-lm-stage .bmx-scr-if{background:#0A0E1A!important}
+:is(#bmx-mc-pb,#bmx-mc-fw){font-family:Switzer, "Neue Montreal", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;font-size:16px;line-height:25.6px;color:rgb(244, 247, 252);letter-spacing:normal;font-weight:400;font-style:normal;text-transform:none;-webkit-font-smoothing:antialiased;text-rendering:auto;font-feature-settings:normal;word-spacing:0px;text-align:start;white-space:normal;direction:ltr;--font-body:"DM Sans", "Segoe UI", sans-serif;--mds-sans:Switzer, "Neue Montreal", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(*){box-sizing: border-box;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(*){box-sizing: border-box;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(*){box-sizing: border-box;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(p){margin-top: 0px; margin-bottom: 1rem;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(b){font-weight: bolder;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(strong){font-weight: bolder;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(svg){vertical-align: middle;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(p){font-family: var(--font-body);}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(span){font-family: var(--font-body);}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where([role="button"]){cursor: pointer;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where([type="button"]){appearance: button;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-realchip){--hair2: rgba(154,167,188,.34); --bevel-sm: polygon(7px 0,100% 0,100% calc(100% - 7px),calc(100% - 7px) 100%,0 100%,0 7px);}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15-world){position: absolute; inset: 0px; transform-style: preserve-3d; transform: rotateX(8deg) rotateY(-15deg); transition: transform 0.6s cubic-bezier(0.22, 1, 0.3, 1);}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15-led){position: absolute; left: 50%; top: 50%; width: 5px; height: 5px; border-radius: 50%; transform: translate(-50%, -50%) translate(76px, -8px) translateZ(31px); background: radial-gradient(circle at 35% 30%, rgb(216, 255, 233), rgb(57, 193, 108) 60%, rgb(30, 142, 62)); box-shadow: rgba(57, 193, 108, 0.85) 0px 0px 9px 2.5px;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15-body){position: absolute; left: 50%; bottom: 36px; width: 178px; height: 334px; margin-left: -89px; transform-style: preserve-3d; transition: transform 0.65s cubic-bezier(0.22, 1.15, 0.3, 1);}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.chip-stage){position: relative; z-index: 1; height: 388px; width: 290px; display: grid; place-items: center; perspective: 1100px;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.chip-c15){position: relative; width: 232px; height: 332px; margin: 0px auto; transform-style: preserve-3d;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.os3-dock){position: absolute; left: 50%; bottom: 16px; width: 188px; height: 36px; transform-style: preserve-3d; transform: translateX(-50%);}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15-lip){position: absolute; left: 50%; top: 50%; width: 188px; height: 36px; border-radius: 8px; pointer-events: none; transform: translate(-50%, -50%) translateZ(34.5px); box-shadow: inset 0 2px 0 rgba(124,242,174,.2),inset 0 4px 7px rgba(0,0,0,.6),0 0 20px -3px rgba(var(--gc,57,193,108),.5); transition: box-shadow 0.5s;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15-led){position: absolute; top: 50%; left: 50%; width: 5.5px; height: 5.5px; border-radius: 50%; pointer-events: none; transform: translate(-50%, -50%) translate(80px, -9px) translateZ(35px); background: radial-gradient(circle at 35% 30%,#ffffff,var(--ac,#39C16C) 55%,var(--ac-d,#1E8E3E)); box-shadow: 0 0 9px 2.5px rgba(var(--gc,57,193,108),.85); transition: background 0.5s, box-shadow 0.5s;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15-body){position: absolute; left: 50%; bottom: 47px; width: 188px; height: 272px; margin-left: -94px; transform-style: preserve-3d; transform: translateY(0px); transition: transform 0.65s cubic-bezier(0.22, 1.15, 0.3, 1);}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.o15){position: absolute; left: 50%; top: 50%;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.bp-pcb){position: absolute; inset: 0px; border-radius: 16px; pointer-events: none; z-index: 0; background-image: ; background-position-x: ; background-position-y: ; background-repeat: ; background-attachment: ; background-origin: ; background-clip: ; background-color: ; background-size: 12px 12px;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.o15f){position: absolute; left: 50%; top: 50%; height: 272px; margin: 0px; border-radius: 16px; cursor: default; text-align: left; backface-visibility: hidden; border: 1.5px solid rgba(var(--sc,124,242,174),.42); background: linear-gradient(165deg,var(--bgtop,rgba(37,99,235,.42)),rgba(10,16,40,.8)); color: rgb(231, 236, 244); box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 0px inset; width: 188px !important; min-width: 0px !important; max-width: none !important; transform: translate(-50%, -50%) translateZ(7px) !important; animation: auto ease 0s 1 normal none running none !important; padding: 13px 13px 18px !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.o15-guard){position: absolute; left: 30px; right: 30px; bottom: -2px; height: 16px; border-radius: 6px 6px 3px 3px; z-index: 5; background: linear-gradient(rgb(17, 24, 43), rgb(7, 11, 22) 70%, rgb(4, 6, 13)); box-shadow: rgba(255, 255, 255, 0.14) 0px 1px 0px inset, rgba(0, 0, 0, 0.85) 0px -1px 0px inset, rgba(0, 0, 0, 0.5) 0px 0px 0px 1px, rgba(0, 0, 0, 0.4) 0px 2px 4px;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.o15-pcb){position: absolute; inset: 0px; border-radius: 16px; pointer-events: none; z-index: 0; background-image: ; background-position-x: ; background-position-y: ; background-repeat: ; background-attachment: ; background-origin: ; background-clip: ; background-color: ; background-size: 12px 12px;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.osm-mock){position: relative; height: 70px; border-radius: 5px; margin-top: 2px; overflow: hidden; background: linear-gradient(170deg,var(--f1,#1E7A4C) 0%,var(--f2,#11543A) 60%,var(--f3,#0C3D2A) 100%); box-shadow: 0 0 0 2.5px #0A0F1E,0 0 0 3.5px var(--fg,rgba(124,242,174,.22)),0 4px 10px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.16),inset 0 0 0 1px rgba(0,0,0,.3);}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.osm-pills){display: flex; gap: 6px; margin: 8px 0px 0px;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.hc-grip){position: absolute; top: 7px; left: 50%; transform: translateX(-50%); width: 27%; height: 7px; border-radius: 4px; z-index: 4; pointer-events: none; background: linear-gradient(rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.06)); box-shadow: rgba(255, 255, 255, 0.25) 0px 1px 0px inset, rgba(0, 0, 0, 0.5) 0px 1px 1px;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.hc-titlerow){display: flex; align-items: center; gap: 8px; margin-top: 6px; margin-bottom: 0.35rem;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.hc-glare){position: absolute; inset: 0px; border-radius: inherit; pointer-events: none; z-index: 3; background: radial-gradient(240px 170px at 50% -30%, rgba(255, 255, 255, 0.13), transparent 62%), radial-gradient(3px at 13px 13px, rgba(255, 255, 255, 0.3) 0px, rgba(255, 255, 255, 0.3) 0.8px, rgba(0, 0, 0, 0.55) 1.4px, rgba(0, 0, 0, 0.55) 2.6px, transparent 3.2px), radial-gradient(3px at calc(100% - 13px) calc(100% - 13px), rgba(255, 255, 255, 0.3) 0px, rgba(255, 255, 255, 0.3) 0.8px, rgba(0, 0, 0, 0.55) 1.4px, rgba(0, 0, 0, 0.55) 2.6px, transparent 3.2px), radial-gradient(3px at 13px calc(100% - 13px), rgba(255, 255, 255, 0.3) 0px, rgba(255, 255, 255, 0.3) 0.8px, rgba(0, 0, 0, 0.55) 1.4px, rgba(0, 0, 0, 0.55) 2.6px, transparent 3.2px);}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mt-lock){display: inline-flex; align-items: center; margin-top: 8px;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid){position: relative; min-width: 0px;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.hc-ic){clip-path: none !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.hc-grip){clip-path: none !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15-clip){clip-path: none !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15-lip){clip-path: none !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.front){clip-path: none !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.bp-frame){clip-path: none !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(*){font-family: var(--mds-sans) !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(*){font-style: normal !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.hc-glare){display: none !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.osm-glass){display: none !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where([class*="glare"]){display: none !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.hc-ic){background: none !important; border: 0px !important; box-shadow: none !important; width: auto !important; height: auto !important; padding: 0px !important; border-radius: 0px !important; margin-right: 7px !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(p){font-family: var(--mds-sans) !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(p){font-weight: 400 !important; letter-spacing: normal !important; line-height: 1.5 !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(p){font-size: 17px !important; line-height: 1.55 !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(i){clip-path: none !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.hc-ic svg){filter: drop-shadow(0 0 6px color-mix(in srgb,var(--ac,#7FA8FF) 45%,transparent)); width: 17px !important; height: 17px !important; stroke: var(--ac,#7FA8FF) !important; color: var(--ac,#7FA8FF) !important; opacity: 1 !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.hc-titlerow strong){font-weight: 600 !important; letter-spacing: 0px !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where([type="button"]:not(:disabled)){cursor: pointer;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .chip-c15){transform: scale(1.1);}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .c15-world){position: absolute; inset: 0px; transform-style: preserve-3d; animation: 9s ease-in-out 0s infinite normal none running bmxm_os3World;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .d3){position: absolute; left: 50%; top: 50%;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .c15-clip){position: absolute; top: 50%; left: 50%; width: 10px; height: 17px; border-radius: 3px 3px 5px 5px; pointer-events: none; background: linear-gradient(rgb(28, 39, 64), rgb(10, 15, 28)); box-shadow: rgba(255, 255, 255, 0.2) 0px 1px 0px inset, rgba(0, 0, 0, 0.7) 0px -1px 0px inset, rgba(0, 0, 0, 0.6) 0px 2px 3px;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.o15.backp){width: 188px; height: 272px; border-radius: 16px; transform: translate(-50%, -50%) rotateY(180deg) translateZ(7px); background-image: ; background-position-x: ; background-position-y: ; background-repeat: ; background-attachment: ; background-origin: ; background-clip: ; background-color: ; background-size: 13px 13px, 100% 100%; border: 1.5px solid rgba(var(--sc,124,242,174),.28); box-shadow: rgba(255, 255, 255, 0.1) 0px 2px 0px inset, rgba(0, 0, 0, 0.4) 0px -3px 0px inset; backface-visibility: hidden; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start; gap: 5px; padding: 32px 19px 16px; text-align: left; overflow: hidden;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .o15-pcb){position: absolute; inset: 0px; border-radius: 16px; pointer-events: none; z-index: 0; background-image: ; background-position-x: ; background-position-y: ; background-repeat: ; background-attachment: ; background-origin: ; background-clip: ; background-color: ; background-size: 12px 12px;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .bp-pip){position: absolute; top: 10px; left: 19px; font-family: "Space Mono", monospace; font-size: 6.6px; letter-spacing: 0.18em; color: rgba(160, 180, 220, 0.6);}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .bp-mark){display: flex; align-items: center; gap: 7px; position: relative; z-index: 2; margin-top: 2px;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .bp-sn){text-decoration: none; white-space: nowrap; font-family: "Space Mono", monospace; font-size: 6.4px; letter-spacing: 0.18em; color: rgba(160, 180, 220, 0.65);}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .bp-desc){font-family: "Plus Jakarta Sans", sans-serif; font-size: 9px; line-height: 1.55; color: rgb(198, 210, 236); margin: 0px;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .bp-quote){margin-top: 9px; padding: 0px; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; background: none; box-shadow: none; border-radius: 0px; text-align: left;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .bp-frame){position: absolute; inset: 13px 13px 27px; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 4px; pointer-events: none;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .bp-fid){position: absolute; width: 9px; height: 9px; border: 1px solid rgba(231, 199, 101, 0.5); border-radius: 50%; pointer-events: none;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .bp-fid)::before{content: ""; position: absolute; left: 50%; top: 50%; width: 3.5px; height: 3.5px; transform: translate(-50%, -50%); border-radius: 50%; background: rgba(231, 199, 101, 0.55);}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .bp-spec){position: absolute; left: 19px; bottom: 17px; text-decoration: none; font-family: "Space Mono", monospace; font-size: 6px; letter-spacing: 0.16em; color: rgba(160, 180, 220, 0.55);}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .bp-dm){position: absolute; right: 16px; bottom: 15px; width: 13px; height: 13px; color: rgba(214, 226, 255, 0.5);}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .o15-guard)::before{content: ""; position: absolute; left: 7px; right: 7px; bottom: 2.5px; height: 7px; border-radius: 2px; background: repeating-linear-gradient(90deg, rgb(255, 243, 194) 0px, rgb(255, 243, 194) 1.2px, rgb(235, 203, 94) 1.2px, rgb(235, 203, 94) 4.5px, rgb(168, 127, 24) 4.5px, rgb(168, 127, 24) 6px, rgb(10, 14, 26) 6px, rgb(10, 14, 26) 10px); box-shadow: rgba(255, 255, 255, 0.25) 0px 1px 1px inset; opacity: 0; transition: opacity 0.35s 0.12s;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .o15-guard)::after{content: ""; position: absolute; left: 0px; right: 0px; top: 0px; height: 3px; border-radius: 4px 4px 0px 0px; background: linear-gradient(rgba(255, 255, 255, 0.16), transparent);}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .osm-glass){position: absolute; inset: 0px; border-radius: 5px; pointer-events: none; z-index: 4; background: repeating-linear-gradient(rgba(255, 255, 255, 0.043) 0px, rgba(255, 255, 255, 0.043) 1px, transparent 1px, transparent 3px), radial-gradient(130% 95% at 82% -12%, rgba(255, 255, 255, 0.15), transparent 56%); box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 22px inset;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .osm-glass)::after{content: ""; position: absolute; top: -20%; bottom: -20%; left: -42%; width: 30%; transform: skewX(-16deg); background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.16), transparent); animation: 5.5s ease-in-out 0s infinite normal none running bmxm_scnSheen;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .hc-light){position: absolute; top: 6px; right: 11px; width: 14px; height: 14px; font-size: 0px; z-index: 4; pointer-events: none; background: linear-gradient(rgb(22, 28, 40), rgb(10, 14, 22)); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 99px; padding: 3px 8px 3px 6px; box-shadow: rgba(255, 255, 255, 0.16) 0px 1px 0px inset, rgba(0, 0, 0, 0.55) 0px -1px 0px inset; transform: scale(0.8);}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .hc-etch){position: absolute; top: 8px; right: 27px; z-index: 4; pointer-events: none; font-style: normal; white-space: nowrap; font-family: "Space Mono", monospace; font-size: 5.8px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(0, 0, 0, 0.55); text-shadow: rgba(141, 228, 178, 0.28) 0px 1px 0px;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .hc-ic){flex: 0 0 auto; width: 33px; height: 33px; border-radius: 9px; display: grid; place-items: center; background: linear-gradient(140deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.05)); border: 1px solid rgba(255, 255, 255, 0.28); box-shadow: rgba(0, 0, 0, 0.6) 0px 4px 10px -4px, rgba(255, 255, 255, 0.2) 0px 1px 0px inset;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .o15-go){display: block;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .th-play){--ac-l: #FBE6A6; --ac: #EBCB5E; --ac-d: #B8901C; --gc: 235,203,94; --sc: 251,224,138; --f1: #5A5320; --f2: #3E3A14; --f3: #2A270F; --fg: rgba(235,203,94,.26); --bgtop: rgba(235,203,94,.20); --e1: #2A2108; --e2: #B08A1E; --bk1: #2E2710; --bk2: #161106;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .th-conv){--ac-l: #FDC78C; --ac: #F59E0B; --ac-d: #B45309; --gc: 245,158,11; --sc: 253,186,116; --f1: #5A3A14; --f2: #3E280D; --f3: #2A1B09; --fg: rgba(245,158,11,.26); --bgtop: rgba(245,158,11,.20); --e1: #2A1808; --e2: #B86A12; --bk1: #2E1C0C; --bk2: #160C04;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .mt-full){color: var(--ac,#2563EB);}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.scr-play .pl-deck){position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 96px; height: 54px;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .chip-stage){position: relative; transition: transform 0.45s cubic-bezier(0.22, 1.15, 0.3, 1);}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .chip-stage){cursor: pointer;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.scr-conv .cv-site){position: absolute; left: 12px; top: 9px; width: 96px; height: 52px; display: flex; flex-direction: column; gap: 3px; padding: 3px; box-sizing: border-box; border-radius: 3px; background: rgba(0, 0, 0, 0.28); box-shadow: rgba(45, 212, 191, 0.25) 0px 0px 0px 1px inset; overflow: hidden;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.scr-conv .cv-nav){flex: 0 0 auto; height: 4px; border-radius: 1px; background: rgba(45, 212, 191, 0.35);}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.scr-conv .cv-s){position: relative; flex: 0 0 auto; border-radius: 1.5px; background: rgba(45, 212, 191, 0.14); box-shadow: rgba(45, 212, 191, 0.28) 0px 0px 0px 1px inset; opacity: 0; transform: translateY(6px); animation-duration: 6s; animation-timing-function: ease-out; animation-iteration-count: infinite; animation-direction: normal; animation-fill-mode: none; animation-play-state: running; animation-name: bmxm_cvBuild; animation-timeline: auto; animation-range: normal; animation-delay: var(--d,0s);}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.scr-conv .cv-scan){position: absolute; left: 0px; right: 0px; top: -6px; height: 6px; pointer-events: none; background: linear-gradient(rgba(204, 251, 241, 0), rgba(204, 251, 241, 0.6), rgba(204, 251, 241, 0)); animation: 6s linear 0s infinite normal none running bmxm_cvScan;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.scr-conv .cv-lab){position: absolute; right: 12px; bottom: 38px; font: 700 6px / 1 "Space Mono", ui-monospace, monospace; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(204, 251, 241, 0.72);}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .bp-quote q){display: block; quotes: "“" "”"; font-family: "Plus Jakarta Sans", sans-serif; font-style: italic; font-size: 9.2px; line-height: 1.5; color: rgb(243, 228, 176); text-align: left;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .bp-quote i){display: block; margin-top: 4px; font-style: normal; font-family: Outfit, sans-serif; font-weight: 800; font-size: 5.8px; letter-spacing: 0.26em; color: rgba(159, 232, 184, 0.75); text-align: left;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .osm-pills span){font-family: Outfit, sans-serif; font-weight: 800; font-size: 7px; letter-spacing: 0.18em; white-space: nowrap; padding: 3px 8px; border-radius: 3px; border: 1px solid rgba(var(--sc,124,242,174),.6); color: var(--ac-l,#9FE8B8); background: rgba(var(--gc,57,193,108),.16); box-shadow: 0 0 12px -4px rgba(var(--gc,57,193,108),.7);}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .hc-light b){position: absolute; inset: 3px; width: auto; height: auto; border-radius: 50%; background: radial-gradient(circle at 35% 30%,#ffffff,var(--ac,#39C16C) 55%,var(--ac-d,#1f7a44)); animation: 1.8s ease-in-out 0s infinite normal none running bmxm_ledBlink; box-shadow: 0 0 0 2px rgba(0,0,0,.55),0 0 10px 2px rgba(var(--gc,57,193,108),.85);}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .hc-ic svg){width: 16px; height: 16px; stroke: rgb(255, 255, 255); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; opacity: 0.95;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .hc-titlerow strong){font-family: Outfit, sans-serif; font-weight: 800; font-size: 14px; letter-spacing: -0.01em; color: rgb(255, 255, 255); display: block; margin: 0px;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .o15f p){font-size: 9px; line-height: 1.45; margin: 5px 0px 0px; color: rgba(231, 236, 244, 0.78);}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.lib-vis){clip-path: none !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-realchip .c15-body){margin-left: -89px !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-realchip .chip-c15){margin: 0px auto !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-realchip .c15-body){margin-left: -94px !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-realchip .bp-mark){margin-top: 2px !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-realchip .bp-quote){margin-top: 9px !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-realchip .osm-mock){margin-top: 2px !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-realchip .osm-pills){margin: 8px 0px 0px !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-realchip .hc-titlerow){margin-top: 6px !important; margin-bottom: 0.35rem !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .o15f){padding-top: 8px !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .o15f){display: flex !important; flex-direction: column !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-realchip .bp-quote i){margin-top: 4px !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-realchip .o15f p){margin: 5px 0px 0px !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .d3.front){width: 188px; height: 36px; border-radius: 8px; transform: translate(-50%, -50%) translateZ(34px); background: linear-gradient(rgb(13, 18, 32), rgb(7, 10, 18)); box-shadow: rgba(124, 242, 174, 0.16) 0px 1px 0px inset, rgba(0, 0, 0, 0.7) 0px -2px 5px inset, rgba(0, 0, 0, 0.5) 0px 0px 0px 1px inset;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .d3.front)::after{content: "SYSTEM SOCKET · OS BUS"; position: absolute; left: 0px; right: 0px; top: 50%; transform: translateY(-50%); text-align: center; font-family: "Space Mono", monospace; font-size: 7px; letter-spacing: 0.22em; color: rgba(124, 242, 174, 0.55);}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .d3.right){width: 68px; height: 36px; transform: translate(-50%, -50%) rotateY(90deg) translateZ(94px); background: linear-gradient(90deg, rgb(6, 9, 16), rgb(14, 21, 32)); box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 0px 1px inset;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .d3.top){width: 188px; height: 68px; border-radius: 8px; transform: translate(-50%, -50%) rotateX(90deg) translateZ(-18px); background: linear-gradient(rgb(10, 15, 25), rgb(6, 8, 16)); box-shadow: rgba(0, 0, 0, 0.9) 0px 22px 32px -14px;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .d3.top)::before{content: ""; position: absolute; left: 14px; right: 14px; top: 50%; height: 8px; margin-top: -4px; border-radius: 3px; background: linear-gradient(90deg, transparent, rgba(124, 242, 174, 0.28), transparent);}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .d3.top)::after{content: ""; position: absolute; left: 20px; right: 20px; top: 50%; height: 3px; margin-top: -1.5px; border-radius: 99px; background: linear-gradient(90deg, transparent, rgba(124, 242, 174, 0.55), transparent); box-shadow: rgba(57, 193, 108, 0.5) 0px 0px 12px 2px;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .c15-clip.l){transform: translate(-50%, -50%) translate(-77px, -21px) translateZ(35px);}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .c15-clip.r){transform: translate(-50%, -50%) translate(77px, -21px) translateZ(35px);}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .chip-stage:hover .c15-led){background: rgb(34, 48, 77); box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 0px 1px;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .chip-stage:hover .c15-body){transform: translateY(-56px) translateZ(28px) rotateY(20deg);}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .o15.backp)::after{content: ""; position: absolute; left: 26%; top: 16%; width: 120px; height: 120px; transform: translate(-50%, -50%); border-radius: 50%; pointer-events: none; background: radial-gradient(circle,rgba(var(--gc,57,193,108),.16),transparent 70%);}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .bp-fid.a){top: 19px; right: 17px;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .bp-fid.b){bottom: 44px; right: 17px; left: auto;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .chip-stage:hover .o15-guard)::before{opacity: 1;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .scr-play .pl-card){position: absolute; inset: 0px; border-radius: 5px; background: linear-gradient(160deg, rgb(240, 244, 252), rgb(210, 219, 238)); box-shadow: rgba(0, 0, 0, 0.45) 0px 2px 6px;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .scr-play .pl-title){position: absolute; left: 8px; top: 7px; width: 46px; height: 6px; border-radius: 99px; background: linear-gradient(90deg, rgb(127, 168, 255), rgb(63, 111, 224)); box-shadow: rgba(127, 168, 255, 0.5) 0px 0px 5px;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .scr-play .pl-ln){position: absolute; left: 8px; height: 3.6px; border-radius: 99px; background: rgba(62, 82, 132, 0.4); transform-origin: left center; transform: scaleX(0); animation: 5s ease-in-out 0s infinite normal none running bmxm_plLn;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .scr-play .pl-chart){position: absolute; left: 8px; bottom: 6px; width: 80px; height: 18px; overflow: visible;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .scr-conv .cv-num){position: absolute; right: 12px; bottom: 7px; font-family: Outfit, sans-serif; font-weight: 900; font-size: 31px; line-height: 1; color: rgb(204, 251, 241); text-shadow: rgba(45, 212, 191, 0.55) 0px 2px 10px; animation: 5.6s ease-in-out 0s infinite normal none running bmxm_cvNum;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .chip-stage .chip-c15){cursor: pointer;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .chip-stage .c15-body){cursor: pointer;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.scr-conv .cv-s.s1){height: 11px; background: linear-gradient(90deg, rgba(167, 243, 230, 0.55), rgba(45, 212, 191, 0.22));}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.scr-conv .cv-s.s2){height: 7px; background: repeating-linear-gradient(90deg, rgba(45, 212, 191, 0.36) 0px, rgba(45, 212, 191, 0.36) 26px, transparent 26px, transparent 30px);}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.scr-conv .cv-s.s3){height: 5px;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.scr-conv .cv-s.s4){height: 8px; background: repeating-linear-gradient(90deg, rgba(45, 212, 191, 0.3) 0px, rgba(45, 212, 191, 0.3) 42px, transparent 42px, transparent 48px);}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.scr-conv .cv-s.s5){height: 5px; background: rgba(167, 243, 230, 0.5);}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.scr-conv .cv-s.s6){height: 4px;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .mt-lock svg.mt-full){width: 120px; height: auto; display: block;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .scr-play .pl-chart polyline){fill: none; stroke: rgb(95, 140, 245); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(rgba(127, 168, 255, 0.7) 0px 0px 3px); stroke-dasharray: 130; stroke-dashoffset: 130; animation: 5s ease-in-out 0s infinite normal none running bmxm_plChart;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-realchip .d3.top)::before{margin-top: -4px !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-realchip .d3.top)::after{margin-top: -1.5px !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-toolchip .mds-realchip .hc-ic){width: 17.2px !important; height: 17.2px !important; min-width: 0px !important; background: none !important; border: 0px !important; box-shadow: none !important; border-radius: 0px !important; padding: 0px !important; margin: 0px !important; display: inline-grid !important; place-items: center !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-toolchip .mds-realchip .o15f){font-size: 13.3333px !important; padding: 8px 13px 20px !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-toolchip .mds-realchip .hc-etch){font-size: 5.8px !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-toolchip .mds-realchip .osm-pills){display: none !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-toolchip .mds-realchip .os3-dock){display: none !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .o15f .osm-mock){margin-top: 0px !important; margin-bottom: 0.4rem !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .o15f .osm-mock){margin-bottom: 0.72rem !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .o15f .hc-titlerow){margin-top: 0.42rem !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.chip-stage .o15f .hc-etch){right: 33px !important; top: 8.75px !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-toolchip .mds-realchip .hc-etch){right: 33px !important; top: 8.75px !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.chip-c15 .hc-titlerow .hc-ic){width: 18px !important; height: 18px !important; display: inline-grid !important; place-items: center !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.chip-c15 .o15f .hc-titlerow){max-width: 100% !important; min-width: 0px !important; align-items: flex-start !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .o15.backp){border-radius: 16px !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-toolchip .mds-realchip .hc-ic svg){width: 17px !important; height: 17px !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-toolchip .mds-realchip .o15f p){font-size: 11.5px !important; line-height: 16px !important; margin: 7px 0px 0px !important; display: block !important; -webkit-line-clamp: unset !important; overflow: visible !important; max-height: none !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.chip-c15 .o15f .hc-titlerow strong){white-space: normal !important; overflow-wrap: anywhere !important; min-width: 0px !important; flex: 1 1 auto !important; line-height: 1.15 !important; display: block !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .chip-stage:hover .chip-c15 .c15-lip){box-shadow: rgba(124, 242, 174, 0.08) 0px 2px 0px inset, rgba(0, 0, 0, 0.6) 0px 4px 7px inset;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .o15.edge.r){width: 14px; height: 242px; border-radius: 7px; transform: translate(-50%, -50%) rotateY(90deg) translateZ(94px); background: linear-gradient(90deg,var(--e1,#0A1240) 0%,var(--e2,#3D58B8) 46%,var(--e2,#3D58B8) 54%,var(--e1,#16235F) 100%); box-shadow: inset 0 0 0 1px rgba(0,0,25,.45),inset -1.5px 0 2.5px rgba(var(--sc,124,242,174),.3);}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .o15.edge.l){width: 14px; height: 242px; border-radius: 7px; transform: translate(-50%, -50%) rotateY(-90deg) translateZ(94px); background: linear-gradient(90deg,var(--e1,#0A1240) 0%,var(--e2,#2E4496) 50%,var(--e1,#101C58) 100%); box-shadow: inset 0 0 0 1px rgba(0,0,25,.45),inset 1.5px 0 2.5px rgba(var(--sc,124,242,174),.22);}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .o15.edge.t){width: 158px; height: 14px; border-radius: 7px; transform: translate(-50%, -50%) rotateX(90deg) translateZ(136px); background: linear-gradient(180deg,var(--e1,#0A1240) 0%,var(--e2,#3D58B8) 50%,var(--e1,#0A1240) 100%); box-shadow: inset 0 0 0 1px rgba(0,0,25,.45),inset 0 -1.5px 2.5px rgba(var(--sc,124,242,174),.2);}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .o15.edge.b){width: 158px; height: 14px; border-radius: 5px; transform: translate(-50%, -50%) rotateX(90deg) translateZ(-136px); background: rgb(7, 11, 22); box-shadow: rgba(0, 0, 0, 0.7) 0px 0px 0px 1px inset, rgba(0, 0, 0, 0.9) 0px 2px 3px inset;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .o15.edge.b)::before{content: ""; position: absolute; inset: 3.5px 10px; border-radius: 2px; background: repeating-linear-gradient(90deg, rgb(235, 203, 94) 0px, rgb(235, 203, 94) 5px, rgb(143, 110, 20) 5px, rgb(143, 110, 20) 7px, rgb(7, 11, 22) 7px, rgb(7, 11, 22) 11px);}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .o15.edge.b)::after{content: ""; position: absolute; left: 6px; right: 6px; top: 1px; height: 1.5px; background: rgba(255, 255, 255, 0.14); border-radius: 99px;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .o15.backp .bp-sn){margin-top: -2px;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .o15.backp .bp-desc){margin-top: 7px; text-align: left;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.o15.backp .bp-mark.mt-lock){margin: 2px 0px 3px;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .scr-play .pl-card.s3){transform: translate(7px, 7px) rotate(3deg); opacity: 0.32;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .scr-play .pl-card.s2){transform: translate(4px, 4px) rotate(1.4deg); opacity: 0.6;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .scr-play .pl-card.s1){background: linear-gradient(160deg, rgb(247, 249, 253), rgb(222, 229, 243)); box-shadow: rgba(0, 0, 0, 0.5) 0px 3px 8px, rgba(255, 255, 255, 0.6) 0px 1px 0px inset;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .scr-play .pl-ln.a){top: 19px; width: 64px; animation-delay: 0.5s;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .scr-play .pl-ln.b){top: 27px; width: 50px; animation-delay: 1s;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-realchip .o15.backp .bp-sn){margin-top: -2px !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-realchip .o15.backp .bp-desc){margin-top: 7px !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-toolchip .mds-realchip .o15f .hc-ic){width: 17.2px !important; height: 17.2px !important; min-width: 0px !important; background: none !important; border: 0px !important; box-shadow: none !important; border-radius: 0px !important; padding: 0px !important; margin: 0px !important; display: inline-grid !important; place-items: center !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-toolchip .mds-realchip .o15f .osm-mock){margin: 18px 0px 11px !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-toolchip .mds-realchip .o15f .hc-titlerow){margin: 0px 0px 3px !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .o15f .mt-lock.o15-go){margin-top: auto !important; padding-top: 0.5rem !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.chip-c15 .o15f .hc-titlerow .hc-ic){flex: 0 0 auto !important; margin-top: 1px !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-toolchip .mds-realchip .o15f .hc-titlerow strong){font-size: 15px !important; line-height: 18.3px !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.chip-c15 .hc-titlerow .hc-ic svg[data-mds-sg]){fill: none !important; stroke: none !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.chip-c15 .hc-titlerow .hc-ic svg[data-mds-li]){width: 18px !important; height: 18px !important; fill: none !important; stroke: currentcolor !important; stroke-width: 1.7 !important; stroke-linecap: round !important; stroke-linejoin: round !important; overflow: visible !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.chip-c15 .hc-titlerow .hc-ic svg[data-mds-li] *){fill: none !important; stroke: currentcolor !important; stroke-width: 1.7 !important; transform: none !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.chip-c15 .hc-titlerow .hc-ic svg[data-mds-sg] g){fill: currentcolor !important; stroke: none !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.chip-c15 .hc-titlerow .hc-ic svg[data-mds-sg] g){transform-box: view-box; transform-origin: 12px 12px; transform: scale(1.42);}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.hc-titlerow .hc-ic svg[data-mds-li] g[data-li] rect){display: inline !important; fill: none !important; stroke: currentcolor !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-realchip .o15.backp .bp-mark.mt-lock){margin: 2px 0px 3px !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.chip-c15 .hc-titlerow .hc-ic svg[data-mds-sg] rect:first-child){stroke: currentcolor !important; stroke-width: 2 !important; fill: rgb(11, 15, 22) !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.chip-c15 .hc-titlerow .hc-ic svg[data-mds-sg] rect:first-child){display: none !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.chip-c15 .hc-titlerow .hc-ic svg[data-mds-sg][data-mds-li] g[data-li] > rect:first-child){display: inline !important; fill: none !important; stroke: currentcolor !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-chipvis){perspective: 700px; display: flex !important; align-items: center !important; justify-content: center !important; min-height: 128px !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-chipvis){position: relative !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-chipvis)::after{content: ""; position: absolute; left: 50%; bottom: 14px; width: 130px; height: 14px; transform: translateX(-50%); background: radial-gradient(50% 50%, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0) 72%); animation: 6s ease-in-out 0s infinite normal none running bmxm_mdsChipShade;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-chipvis){min-height: 266px !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-chipvis){perspective: none; min-height: 0px !important; padding: 10px 0px 4px !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-chipvis)::after{display: none !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-realchip){display: flex; justify-content: center;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-realchip){height: 280px; overflow: visible;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-realchip){perspective: 1200px;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-chipvis){height: auto !important; min-height: 0px !important; overflow: visible !important; padding: 0px !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-realchip){height: 440px !important; perspective: 1200px;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-realchip){zoom: 1 !important; height: auto !important; min-height: 0px !important; display: flex !important; align-items: flex-start !important; justify-content: center !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-chipvis){background: none !important; border: 0px !important; box-shadow: none !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-chipvis){width: 100% !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-realchip){width: 100% !important; zoom: 1.45 !important; height: auto !important; min-height: 0px !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-modchip){height: auto !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-modchip){cursor: pointer !important; outline: none !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.lib-vis)::after{font-family: var(--mds-sans) !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.lib-vis){clip-path: none !important; border-radius: 2px !important; border-width: 1px !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-realchip .chip-stage){zoom: 0.78; pointer-events: none;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-realchip .chip-stage){position: relative; width: 232px; height: 344px; pointer-events: none; transform: scale(0.78); transform-origin: center top;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-realchip .chip-stage){transform-style: preserve-3d;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-realchip .c15-world){transform-style: preserve-3d;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-realchip .c15-body){transform-style: preserve-3d;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-realchip .chip-stage){zoom: 1 !important; transform: none !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-realchip .o15f){font-size: 9px !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-realchip .hc-etch){font-size: 5.5px !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-realchip .bp-desc){font-size: 8.5px !important; line-height: 1.55 !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-realchip .bp-pip){font-size: 6px !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-realchip .bp-sn){font-size: 6px !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-realchip .os3-dock){display: block !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-realchip .chip-stage){zoom: 1 !important; margin: 0px auto !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-realchip .o15-guard){display: block !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-realchip .hc-ic){background: none !important; border: 0px !important; box-shadow: none !important; width: auto !important; height: auto !important; padding: 0px !important; border-radius: 0px !important; margin-right: 7px !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-realchip .o15f){padding-top: 8px !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-realchip .hc-titlerow){margin-top: 0.18rem !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-realchip .o15f){padding-bottom: 6px !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-modchip){grid-row: 1 / span 2 !important; position: static !important; width: 232px !important; display: flex !important; flex-direction: column !important; align-items: center !important; zoom: 0.9 !important; pointer-events: none !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-modchip .mds-realchip){zoom: 1 !important; width: 232px !important; height: auto !important; min-height: 0px !important; display: flex !important; justify-content: center !important; perspective: 1000px !important; margin: 0px !important; filter: none !important; opacity: 1 !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-modchip .chip-stage){zoom: 1 !important; transform: none !important; margin: 0px !important; position: relative !important; z-index: 5 !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-modchip .c15-world){transform: none !important; animation: auto ease 0s 1 normal none running none !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-modchip .chip-c15){transform: none !important; height: 262px !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-modchip .c15-body){transform: none !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-modchip .os3-dock){display: none !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-modchip .osm-pills){display: none !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-modchip .o15f){font-size: 13.3333px !important; padding: 8px 13px 20px !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-modchip .hc-ic){width: 17.2px !important; height: 17.2px !important; margin: 0px !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-modchip .o15-guard)::before{left: 0px !important; right: 0px !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-modchip){zoom: 0.92 !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-modchip){width: 232px !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-realchip .o15f){display: flex !important; flex-direction: column !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-modchip .o15-guard)::before{opacity: 1 !important; transform: none !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-modchip .o15-guard){opacity: 1 !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-modchip){place-self: center !important; margin: 0px auto !important; width: 232px !important; display: flex !important; justify-content: center !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-modchip .mds-realchip){margin: 0px auto !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-modchip){grid-row: auto !important; place-self: center !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-modchip .mds-realchip){height: 277px !important; min-height: 0px !important; overflow: visible !important; display: block !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-modchip .chip-stage){height: 217px !important; margin: 60px auto 0px !important; overflow: visible !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-modchip .hc-etch){font-size: 5.8px !important; line-height: normal !important; letter-spacing: 1.276px !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-modchip .hc-etch){right: 33px !important; top: 8.75px !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-modchip .mds-chipvis){margin: 0px !important; padding: 0px !important; height: auto !important; min-height: 0px !important; display: block !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-modchip .mds-realchip){display: flow-root !important; margin: 0px !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-modchip){zoom: 1.1 !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-modchip){position: relative !important; z-index: 4 !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-modchip .o15f){box-shadow: rgba(255, 255, 255, 0.09) 0px 1px 0px inset, rgba(0, 0, 0, 0.55) 0px -1px 0px inset, rgba(255, 255, 255, 0.04) 1px 0px 0px inset !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-modchip .c15-body){transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-modchip:focus-visible .chip-stage){outline: none !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-modchip .chip-stage){transform-origin: center center !important; transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-realchip .o15f p){font-size: 9px !important; line-height: 1.45 !important; margin: 5px 0px 0px !important; color: rgba(231, 236, 244, 0.78) !important; display: block !important; -webkit-line-clamp: unset !important; overflow: visible !important; max-height: none !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-realchip .hc-titlerow strong){font-size: 14px !important; letter-spacing: -0.01em !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-realchip .hc-ic svg){filter: drop-shadow(0 0 6px color-mix(in srgb,var(--ac,#7FA8FF) 45%,transparent)); width: 17px !important; height: 17px !important; stroke: var(--ac,#7FA8FF) !important; color: var(--ac,#7FA8FF) !important; opacity: 1 !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-realchip .hc-titlerow strong){font-weight: 600 !important; letter-spacing: 0px !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-realchip .o15f p){display: block !important; -webkit-line-clamp: unset !important; overflow: visible !important; max-height: none !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-realchip .hc-titlerow strong){white-space: nowrap;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-modchip .o15f p){font-size: 11.5px !important; line-height: 16px !important; margin: 7px 0px 0px !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-realchip .hc-titlerow strong){font-weight: 600 !important; letter-spacing: 0px !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-modchip .o15f p){display: block !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-realchip .o15f .osm-mock){margin-top: 0px !important; margin-bottom: 0.4rem !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-realchip .o15f .osm-mock){margin-bottom: 0.72rem !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-realchip .o15f .hc-titlerow){margin-top: 0.42rem !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-modchip .o15f .osm-mock){margin: 18px 0px 11px !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-modchip .o15f .hc-titlerow){margin: 0px 0px 3px !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-modchip .o15f .o15-guard){left: 8px !important; right: 8px !important; width: auto !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-realchip .o15.backp){border-radius: 16px !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-modchip .o15f .hc-titlerow strong){font-size: 15px !important; line-height: 18.3px !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-realchip .o15f .mt-lock.o15-go){margin-top: auto !important; padding-top: 0.5rem !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.mds-modchip .o15f .osm-mock .osm-glass){background: linear-gradient(118deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.04) 28%, transparent 46%, transparent 70%, rgba(255, 255, 255, 0.05) 100%) !important; opacity: 1 !important;}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.th-play), :is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .th-play){--ac-l:#C6D7FF;--ac:#7FA8FF;--ac-d:#3F6FE0;--gc:127,168,255;--sc:190,211,255;--f1:#24407E;--f2:#182E5C;--f3:#101F40;--fg:rgba(127,168,255,.26);--bgtop:rgba(127,168,255,.20);--e1:#0B1733;--e2:#3F6BC8;--bk1:#122446;--bk2:#08101F}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.th-conv), :is(#bmx-mc-pb,#bmx-mc-fw) :where(.c15grid .th-conv){--ac-l:#A7F3E6;--ac:#2DD4BF;--ac-d:#0D9488;--gc:45,212,191;--sc:153,246,228;--f1:#0F5E57;--f2:#0B443F;--f3:#07302C;--fg:rgba(45,212,191,.26);--bgtop:rgba(45,212,191,.20);--e1:#06261F;--e2:#14937F;--bk1:#0B302A;--bk2:#051512}
+:is(#bmx-mc-pb,#bmx-mc-fw) :where(.o15f){background-color:#070A10!important}
+
+/* the recording fills the screen the way the live frame did */
+.bmx-lm .bmx-scr-stage .bm-scr-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;display:block}

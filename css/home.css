@@ -1665,7 +1665,7 @@ section[style*="clamp(40px,6vw,80px) 0 clamp(60px,8vw,100px)"]{padding:clamp(58p
    back out of the card box (it sat short at the top). */
 .gcard{aspect-ratio:5/7!important;outline:0}
 .gcard-inner{transition:transform .85s cubic-bezier(.2,.75,.2,1)!important}
-.gcard:hover .gcard-inner,.gcard.is-flipped .gcard-inner,.gcard:focus-visible .gcard-inner{transform:translateY(-10px) rotateY(180deg)}
+.gcard:hover .gcard-inner,.gcard.is-flipped .gcard-inner,.gcard:focus-visible .gcard-inner{transform:rotateY(180deg)}
 @media(hover:none){.gcard:hover:not(.is-flipped) .gcard-inner{transform:none}}
 .gcard-face{border-radius:0!important;padding:clamp(16px,1.6vw,22px)!important;transition:box-shadow .6s var(--ease)}
 .gcard-front{box-shadow:0 2px 0 rgba(20,28,80,.02),0 10px 26px -18px rgba(20,28,80,.18)}
@@ -2625,3 +2625,184 @@ details.bmx-role .bmx-role-go::after{transition:opacity .3s}
 .bmx-ctaviz--mosaic .bmx-strip-run span{width:clamp(122px,12.5vw,196px)!important;aspect-ratio:4/3}
 .bmx-ctaviz--mosaic::after{background:radial-gradient(120% 82% at 50% 50%,rgba(255,255,255,.93) 26%,rgba(255,255,255,.86) 56%,rgba(255,255,255,.78) 100%)!important}
 @media(max-width:760px){.bmx-ctaviz--mosaic .bmx-strip-run span{width:clamp(96px,30vw,140px)!important}}
+
+/* work grid: label reads white on every picture with a soft ground under it, the picture
+   breathes on hover and the category rules itself underneath, matching the 25 Sep prototype */
+html body .wkx-thumb{transform:none!important;box-shadow:none!important}
+html body .wkx-thumb::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(0deg,rgba(5,8,20,.68) 0%,rgba(5,8,20,.20) 19%,rgba(5,8,20,0) 40%);
+  opacity:.78;transition:opacity .55s var(--ease)}
+html body .wkx-card:hover .wkx-thumb::after,html body .wkx-card:focus-visible .wkx-thumb::after{opacity:1}
+html body .wkx-card:hover .wkx-thumb,html body .wkx-card:focus-visible .wkx-thumb{border-color:color-mix(in srgb,var(--ac) 38%,var(--border))}
+html body .wkx-view{color:#fff!important;opacity:1;transform:none}
+html body .wkx-view svg{transition:transform .45s var(--ease)}
+html body .wkx-card:hover .wkx-view svg{transform:translateX(5px)}
+html body .wkx-thumb .bmx-fill{transition:transform 1.1s var(--ease)}
+html body .wkx-card:hover .wkx-thumb .bmx-fill{transform:scale(1.045)}
+html body .wkx-cat{position:relative;display:inline-block}
+html body .wkx-cat::after{content:"";position:absolute;left:0;right:0;bottom:-7px;height:2px;
+  background:var(--ac,var(--accent));transform:scaleX(0);transform-origin:0 50%;transition:transform .6s var(--ease)}
+html body .wkx-card:hover .wkx-cat::after,html body .wkx-card:focus-visible .wkx-cat::after{transform:scaleX(1)}
+@media(prefers-reduced-motion:reduce){html body .wkx-thumb .bmx-fill,html body .wkx-cat::after,html body .wkx-view svg{transition:none}}
+
+/* ===== guarantee cards, matching the 25 Sep prototype ===== */
+/* the guarantee cards: two by two on phones, sized like playing cards */
+@media(max-width:760px){
+  html body .promise .gcard-grid{grid-template-columns:1fr 1fr!important;max-width:none!important;gap:10px!important}
+  html body .promise .gcard{aspect-ratio:3/4!important}
+  html body .gcard-face{padding:14px 11px!important}
+  html body .gcard-ic{margin-bottom:10px!important}
+  html body .gcard-ic svg{width:34px!important;height:34px!important}
+  html body .gcard-tag{font-size:10px!important;margin-bottom:5px!important}
+  html body .gcard-title{font-size:15px!important;line-height:1.2!important;margin-bottom:5px!important}
+  html body .gcard-desc{font-size:12.5px!important;line-height:1.4!important}
+  html body .gcard-hint{bottom:10px!important;font-size:10px!important}
+  html body .gcard-corner.tl{top:9px!important;left:10px!important}
+  html body .gcard-corner.br{bottom:9px!important;right:10px!important}
+}
+/* the card backs, cleaner: solid brand blue, the pattern only at the edges and fading
+   out before the words, one fine frame, the brand star above the promise, no plaque */
+html body .promise .gcard-grid>.gcard:nth-child(n) .gcard-back{background-color:var(--accent)!important;
+  background-image:radial-gradient(120% 80% at 50% 0%,rgba(255,255,255,.16),rgba(255,255,255,0) 62%)!important;background-size:100% 100%!important;background-repeat:no-repeat!important}
+html body .promise .gcard-grid>.gcard .gcard-back::before{content:""!important;position:absolute!important;inset:0!important;right:0!important;bottom:0!important;width:auto!important;height:auto!important;aspect-ratio:auto!important;
+  border:0!important;opacity:1!important;background-color:transparent!important;background-size:34px 34px!important;background-repeat:repeat!important;background-position:center!important;pointer-events:none;
+  -webkit-mask-image:radial-gradient(ellipse 62% 56% at 50% 50%,transparent 58%,#000 100%);mask-image:radial-gradient(ellipse 62% 56% at 50% 50%,transparent 58%,#000 100%)}
+html body .promise .gcard-grid>.gcard:nth-child(1) .gcard-back::before{background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'><path d='M20 4 36 20 20 36 4 20z' fill='none' stroke='%23fff' stroke-opacity='.34'/></svg>")!important}
+html body .promise .gcard-grid>.gcard:nth-child(2) .gcard-back::before{background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'><path d='M0 30 20 10l20 20' fill='none' stroke='%23fff' stroke-opacity='.34'/></svg>")!important}
+html body .promise .gcard-grid>.gcard:nth-child(3) .gcard-back::before{background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'><circle cx='20' cy='20' r='12' fill='none' stroke='%23fff' stroke-opacity='.34'/></svg>")!important}
+html body .promise .gcard-grid>.gcard:nth-child(4) .gcard-back::before{background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'><path d='M0 20c7-12 13-12 20 0s13 12 20 0' fill='none' stroke='%23fff' stroke-opacity='.34'/></svg>")!important}
+html body .promise .gcard-grid>.gcard .gcard-back::after{content:""!important;position:absolute!important;inset:10px!important;right:10px!important;bottom:10px!important;width:auto!important;height:auto!important;aspect-ratio:auto!important;
+  border:1px solid rgba(255,255,255,.36)!important;background:none!important;background-image:none!important;opacity:1!important;pointer-events:none}
+html body .gcard-plaque{background:none!important;border:0!important;box-shadow:none!important;padding:0 clamp(14px,1.6vw,22px)!important;max-width:100%!important}
+html body .gcard-plaque::before{content:"\2726";display:block;font-size:15px;line-height:1;color:rgba(255,255,255,.8);margin-bottom:12px}
+html body .gcard-plaque .gcard-back-tag{display:block!important;font-size:11px!important;letter-spacing:.14em!important;color:rgba(255,255,255,.8)!important;margin-bottom:12px!important}
+html body .gcard-plaque .gcard-back-text{font-size:clamp(13.5px,1.05vw,15px)!important;line-height:1.55!important;color:#fff!important;max-width:24ch!important;margin:0 auto!important}
+@media(max-width:760px){
+  html body .gcard-plaque{padding:0 4px!important}
+  html body .gcard-plaque::before{font-size:12px;margin-bottom:8px}
+  html body .gcard-plaque .gcard-back-tag{font-size:9.5px!important;margin-bottom:8px!important}
+  html body .gcard-plaque .gcard-back-text{font-size:12px!important;line-height:1.42!important}
+  html body .promise .gcard-grid>.gcard .gcard-back::after{inset:7px!important;right:7px!important;bottom:7px!important}
+}
+/* the infinity on card 4: bigger, drawn at the same line weight as the other three
+   (the stroke scales with the icon, so it is set to 1.5 x 44/56 and 1.5 x 34/42) */
+html body .promise .gcard-grid>.gcard:nth-child(4) .gcard-ic svg{width:56px!important;height:56px!important;stroke-width:1.18!important}
+@media(max-width:760px){html body .promise .gcard-grid>.gcard:nth-child(4) .gcard-ic svg{width:42px!important;height:42px!important;stroke-width:1.21!important}}
+/* a smoother flip, turned in place */
+.promise .gcard-inner{transition:transform .85s cubic-bezier(.2,.8,.2,1)!important}
+/* the guarantee cards: the shadow belongs to the face that is turned to you, never to the outer
+   box (a box shadow behind a rotating card reads as a grey slab). Bazil, 23 Sep: "fix the shadow" */
+html body .promise .gcard:hover,html body .promise .gcard.is-flipped{box-shadow:none!important;transform:none!important}
+html body .promise .gcard-face{box-shadow:0 1px 2px rgba(18,22,55,.05),0 14px 28px -20px rgba(18,22,55,.24)!important;
+  transition:box-shadow .6s var(--ease)}
+html body .promise .gcard:hover .gcard-front,html body .promise .gcard.is-flipped .gcard-front{
+  box-shadow:0 2px 7px rgba(18,22,55,.07),0 32px 62px -36px rgba(18,22,55,.32)!important}
+html body .promise .gcard:hover .gcard-back,html body .promise .gcard.is-flipped .gcard-back{
+  box-shadow:0 2px 8px rgba(26,38,222,.16),0 36px 70px -36px rgba(26,38,222,.5)!important}
+/* the category label is dropped from the card face; the title carries it */
+html body .promise .gcard-tag{display:none!important}
+/* ===== 24 Sep (Bazil, guarantee section: "a bit more vertical spacing") =====
+   The head sits further off the cards and the lead a touch further off the title. Phones keep their rhythm. */
+html body .promise .promise-head{margin-bottom:clamp(56px,5.6vw,76px)!important}
+html body .promise .promise-head p{margin-top:18px!important}
+@media(max-width:640px){html body .promise .promise-head{margin-bottom:44px!important}html body .promise .promise-head p{margin-top:14px!important}}
+/* ===== about: confusion to dominance, matching the 25 Sep prototype =====
+   The three cards carry their own canvas animation (js/home.js), as flat tiles: paper ground, no border,
+   no shadow, one light line along the top edge. The active card of the sequence takes the blue tint.
+   No small uppercase labels (section tag, card stage); the stats row loses its icon rings and rail. */
+html body .shift-sec .section-tag,html body .shift-node .shift-stage{display:none!important}
+html body .shift-node{padding-top:0!important;overflow:hidden;background:#F6F8FC!important;box-shadow:none!important;border:0!important;
+  position:relative;cursor:pointer;transition:background .35s var(--ease),box-shadow .35s var(--ease)}
+html body .shift-node:hover{transform:none;box-shadow:none!important}
+html body .shift-node::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,transparent,rgba(26,38,222,.55) 50%,transparent);z-index:2}
+html body .shift-node.on{background:#eef1ff!important}
+.bmx-shift-cv{display:block;height:196px;margin:0 0 14px;width:100%;background:none}
+.bmx-shift-cv canvas{display:block;width:100%;height:100%}
+html body .shift-node .shift-t,html body .shift-node .shift-d{padding-left:22px;padding-right:22px}
+html body .shift-node .shift-d{padding-bottom:26px}
+html body .shift-arrow{width:28px;height:28px;flex:0 0 28px;display:grid;place-items:center;align-self:center;color:rgba(26,38,222,.35)}
+html body .shift-arrow svg{width:22px;height:22px;display:block}
+html body .shift-proof{margin-top:clamp(72px,8vw,120px)!important}
+html body .shift-sec .bstat-ic{width:auto!important;height:auto!important;margin:0 auto 14px!important;background:none!important;
+  border:0!important;border-radius:0!important;box-shadow:none!important}
+html body .shift-sec .bstat-ic svg{width:30px!important;height:30px!important;stroke-width:1.5}
+html body .shift-sec .bstat-rail{display:none!important}
+html body .shift-sec .bstats{border-top:0!important}
+html body .shift-sec .bstat::before,html body .shift-sec .bstat::after{display:none!important}
+/* ===== about: the history timeline, matching the 25 Sep prototype =====
+   "Sixteen years, six chapters": one chapter at a time (js/home.js turns them every 6.5 s, held on hover,
+   dots and arrows to pick one). Left, the year as a display numeral with its caption on the baseline, the
+   italic title, the copy and "For you"; right, the photo with a blue top edge and a framed second photo
+   over its corner. A soft beam behind follows the chapter. Chapter 1 carries .on in the markup. */
+@property --bx{syntax:'<percentage>';inherits:true;initial-value:70%}
+.bmx-tl{--bx:70%;position:relative;padding:clamp(64px,7vw,120px) 0 clamp(44px,5vw,80px);background:#fff;color:#0f1228;overflow:hidden}
+.bmx-tl-beam{position:absolute;inset:0;pointer-events:none;transition:--bx 1.4s var(--ease);background:radial-gradient(46% 54% at var(--bx) 34%,rgba(90,169,255,.20),rgba(221,233,255,.12) 46%,transparent 74%),linear-gradient(180deg,#fff 0%,#fff 70%,#F6F8FC 100%)}
+.bmx-tl .section-inner{position:relative;z-index:1}
+.bmx-tl-head{max-width:none;margin:0 0 clamp(26px,3vw,48px);text-align:left}
+html body .bmx-tl-head .section-title{color:#0f1228;margin:14px 0 0}
+.bmx-tl-lead{font-family:var(--font-sans);font-weight:300;font-size:clamp(14px,1.05vw,16px);letter-spacing:0;color:rgba(15,18,40,.6);line-height:1.6;margin:10px 0 0;max-width:46ch}
+/* the chapter label above the year is dropped; the one bracket label left is "For you", inline, in blue */
+.bmx-tl-br{display:inline-flex;gap:14px;font-family:var(--font-sans);font-weight:600;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.bmx-tl-br span:last-child{color:var(--accent)}
+html body .bmx-tl-copy>.bmx-tl-br{display:none!important}
+html body .bmx-tl-v .bmx-tl-br{display:inline;text-transform:none;letter-spacing:0;font-size:inherit;font-weight:600;color:#0f1228;margin-right:6px}
+.bmx-tl-stage{position:relative;min-height:560px}
+.bmx-tl-ch{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity .5s var(--ease),visibility 0s .5s}
+.bmx-tl-ch.on{position:relative;opacity:1;visibility:visible;transition:opacity .5s var(--ease),visibility 0s}
+.bmx-tl-grid{display:grid;grid-template-columns:minmax(0,46%) minmax(0,1fr);gap:clamp(28px,4vw,72px);align-items:center}
+.bmx-tl-copy{position:relative}
+.bmx-tl-big{position:relative;margin:10px 0 6px;display:flex;align-items:baseline;gap:.18em;white-space:nowrap}
+.bmx-tl-num{font-family:var(--font-display);font-weight:400;font-size:clamp(72px,8.5vw,128px);line-height:.9;letter-spacing:-.02em;color:#0f1228}
+.bmx-tl-unit{font-family:var(--font-sans);font-weight:300;font-size:clamp(12px,1vw,14px);letter-spacing:.02em;color:rgba(15,18,40,.55);transform:translateY(-.4em)}
+.bmx-tl-t{font-family:var(--font-display);font-style:italic;font-weight:400;font-size:clamp(28px,2.8vw,42px);line-height:1.1;letter-spacing:-.01em;color:#0f1228;margin:14px 0 14px;max-width:18ch}
+.bmx-tl-p{font-family:var(--font-sans);font-weight:300;font-size:clamp(15px,1.1vw,17px);line-height:1.7;color:#2a2d45;margin:0 0 22px;max-width:50ch}
+.bmx-tl-v{font-family:var(--font-sans);font-weight:300;font-size:14.5px;line-height:1.6;color:rgba(15,18,40,.62);margin:0;max-width:50ch}
+.bmx-tl-pics{position:relative;aspect-ratio:5/4}
+.bmx-tl-pic{position:absolute;margin:0;overflow:hidden;background:#F6F8FC}
+.bmx-tl-pic img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.08);transition:transform 10s linear}
+.bmx-tl-ch.on .bmx-tl-pic img{transform:scale(1)}
+.bmx-tl-pic:first-child{left:0;top:0;width:82%;height:86%}
+.bmx-tl-pic--2{right:0;bottom:0;width:42%;height:44%;border:8px solid #fff;z-index:3}
+.bmx-tl-pic:first-child::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,7,14,0) 62%,rgba(5,7,14,.62) 100%);pointer-events:none}
+.bmx-tl-edge{position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,transparent,rgba(26,38,222,.9) 40%,rgba(90,169,255,.9) 70%,transparent);z-index:2}
+.bmx-tl-sweep{position:absolute;top:-20%;bottom:-20%;width:38%;left:-50%;background:linear-gradient(90deg,transparent,rgba(90,169,255,.16) 45%,rgba(255,255,255,.22) 50%,rgba(90,169,255,.16) 55%,transparent);transform:skewX(-14deg);mix-blend-mode:screen;pointer-events:none;z-index:1;animation:bmxTlSweep 6s ease-in-out infinite}
+@keyframes bmxTlSweep{0%{left:-50%}60%{left:120%}100%{left:120%}}
+.bmx-tl-mc{position:absolute;right:16px;bottom:14px;z-index:3;text-align:right;font-family:var(--font-sans);font-weight:300;font-size:11px;line-height:1.5;color:rgba(255,255,255,.85);text-transform:lowercase}
+/* focus pull: type arrives out of blur, 1.2 s, blur 14 px to 0; the photos slide in after it */
+.bmx-tl-ch .bmx-tl-big,.bmx-tl-ch .bmx-tl-t,.bmx-tl-ch .bmx-tl-p,.bmx-tl-ch .bmx-tl-v{opacity:0;filter:blur(14px);transition:opacity 1.2s var(--ease),filter 1.2s var(--ease)}
+.bmx-tl-ch.on .bmx-tl-big{opacity:1;filter:blur(0);transition-delay:.12s}
+.bmx-tl-ch.on .bmx-tl-t{opacity:1;filter:blur(0);transition-delay:.24s}
+.bmx-tl-ch.on .bmx-tl-p{opacity:1;filter:blur(0);transition-delay:.34s}
+.bmx-tl-ch.on .bmx-tl-v{opacity:1;filter:blur(0);transition-delay:.44s}
+.bmx-tl-ch .bmx-tl-pic:first-child{opacity:0;transform:translateX(18px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.bmx-tl-ch .bmx-tl-pic--2{opacity:0;transform:translateY(18px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.bmx-tl-ch.on .bmx-tl-pic:first-child{opacity:1;transform:none;transition-delay:.1s}
+.bmx-tl-ch.on .bmx-tl-pic--2{opacity:1;transform:none;transition-delay:.4s}
+/* the rail: a quiet hairline, six points, the year in the display face, the lit mark a soft blue square */
+.bmx-tl-rail{display:grid;grid-template-columns:1fr;gap:28px;align-items:center;margin-top:clamp(44px,5vw,80px);position:relative}
+.bmx-tl-track{position:relative;display:flex;justify-content:space-between;align-items:flex-start;padding:0 24px;height:84px}
+.bmx-tl-line{position:absolute;left:0;right:0;top:8px;height:1px;background:rgba(15,18,40,.12)}
+.bmx-tl-fill{position:absolute;left:0;top:8px;height:1px;width:0;background:linear-gradient(90deg,rgba(26,38,222,.2),#1A26DE);transition:width .7s var(--ease)}
+.bmx-tl-dot{appearance:none;border:0;background:none;padding:0;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:14px;position:relative;width:120px;outline:0}
+.bmx-tl-dot i{display:block;width:17px;height:17px;position:relative}
+.bmx-tl-dot i::before{content:"";position:absolute;left:50%;top:50%;width:7px;height:7px;margin:-3.5px 0 0 -3.5px;background:rgba(15,18,40,.22);transition:background .3s var(--ease),box-shadow .3s var(--ease)}
+.bmx-tl-dot i::after{content:"";position:absolute;inset:0;background:radial-gradient(circle,rgba(47,107,255,.35),rgba(47,107,255,0) 70%);opacity:0;transition:opacity .3s var(--ease)}
+.bmx-tl-dot.on i::before{background:#1A26DE;box-shadow:0 0 0 4px rgba(26,38,222,.12)}
+.bmx-tl-dot.on i::after{opacity:1;animation:bmxTlPulse 2.4s ease-in-out infinite}
+@keyframes bmxTlPulse{0%,100%{transform:scale(1);opacity:.55}50%{transform:scale(1.9);opacity:1}}
+.bmx-tl-dot b{font-family:var(--font-display);font-weight:400;font-size:24px;letter-spacing:-.01em;color:rgba(15,18,40,.5);line-height:1;transition:color .3s var(--ease)}
+.bmx-tl-dot.on b,.bmx-tl-dot:hover b{color:#0f1228}
+.bmx-tl-dot span{font-family:var(--font-sans);font-weight:300;font-size:12px;letter-spacing:.02em;color:rgba(15,18,40,.5);white-space:nowrap;transition:color .3s var(--ease);margin-top:-6px}
+.bmx-tl-dot:hover span{color:#0f1228}
+.bmx-tl-dot.on span{color:#1A26DE}
+.bmx-tl-nav{grid-column:1/-1;display:flex;justify-content:center;align-items:center;gap:26px;margin-top:14px}
+.bmx-tl-nav button{appearance:none;border:0;background:none;color:rgba(15,18,40,.5);width:40px;height:40px;cursor:pointer;font-size:22px;font-weight:200;display:grid;place-items:center;transition:color .25s var(--ease);outline:0}
+.bmx-tl-nav button:hover{color:#1A26DE}
+.bmx-tl-nav button:focus-visible,.bmx-tl-dot:focus-visible{outline:1px solid #1A26DE;outline-offset:2px}
+.bmx-tl-count{font-family:var(--font-sans);font-weight:300;font-size:12.5px;letter-spacing:.02em;color:rgba(15,18,40,.55)}
+.bmx-tl-count b{color:#0f1228;font-weight:400}
+/* the fixed WhatsApp and scroll-top buttons sit bottom right; the rail keeps clear of them on wide screens */
+@media(min-width:1100px){.bmx-tl-rail{padding-right:120px}.bmx-tl-nav{margin-right:-120px}} /* the arrows sit on the page's centre, not the padded rail's */
+@media(prefers-reduced-motion:reduce){.bmx-tl-sweep,.bmx-tl-dot.on i::after{animation:none}.bmx-tl-ch *{transition:none!important}}
+@media(max-width:900px){.bmx-tl-stage{min-height:0}.bmx-tl-grid{grid-template-columns:1fr;gap:20px}.bmx-tl-pics{order:-1;aspect-ratio:4/3}
+  .bmx-tl-track{overflow-x:auto;justify-content:flex-start;gap:12px;scrollbar-width:none}.bmx-tl-dot{flex:none}.bmx-tl-dot span{white-space:normal;text-align:center}}
