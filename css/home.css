@@ -86,6 +86,20 @@
 .bmx-reel .bmx-video{z-index:1;background:#070810}
 .bmx-reel .play{z-index:3;transition:opacity .35s var(--ease),transform .3s var(--ease)}
 .bmx-reel.is-playing .play{opacity:0;pointer-events:none}
+/* video seek bar (built in home.js): shows once the video has been played */
+.bmx-seek{position:absolute;left:0;right:0;bottom:0;z-index:4;display:flex;align-items:center;gap:clamp(10px,1.2vw,14px);padding:26px clamp(14px,1.6vw,22px) 12px;background:linear-gradient(180deg,transparent,rgba(5,8,18,.62));opacity:0;pointer-events:none;cursor:default;transition:opacity .3s var(--ease)}
+.has-played>.bmx-seek{opacity:1;pointer-events:auto}
+.has-played.rvid .rvid-meta{opacity:0;pointer-events:none}
+.bmx-seek-t{position:relative;flex:1;height:18px;display:flex;align-items:center;cursor:pointer;touch-action:none;outline:0}
+.bmx-seek-t::before,.bmx-seek-f{content:'';position:absolute;left:0;height:3px;border-radius:3px;transition:height .2s var(--ease)}
+.bmx-seek-t::before{right:0;background:rgba(255,255,255,.3)}
+.bmx-seek-f{width:0;background:#fff}
+.bmx-seek-k{position:absolute;top:50%;left:0;width:13px;height:13px;border-radius:50%;background:#fff;box-shadow:0 0 0 3px var(--accent);transform:translate(-50%,-50%) scale(0);transition:transform .2s var(--ease)}
+.bmx-seek:hover .bmx-seek-t::before,.bmx-seek:hover .bmx-seek-f,.bmx-seek.drag .bmx-seek-t::before,.bmx-seek.drag .bmx-seek-f{height:5px}
+.bmx-seek:hover .bmx-seek-k,.bmx-seek.drag .bmx-seek-k,.bmx-seek-t:focus-visible .bmx-seek-k{transform:translate(-50%,-50%) scale(1)}
+.bmx-seek-t:focus-visible::before{box-shadow:0 0 0 2px var(--accent)}
+.bmx-seek-time{font-family:var(--font-mono);font-size:11px;letter-spacing:.04em;color:rgba(255,255,255,.88);font-variant-numeric:tabular-nums;white-space:nowrap}
+@media(hover:none){.bmx-seek-k{transform:translate(-50%,-50%) scale(1)}.bmx-seek-t{height:26px}}
 .clients-section{padding:clamp(36px,4vw,60px) 0 clamp(30px,3.5vw,48px)!important}
 .clients-heading{margin-bottom:clamp(32px,3.4vw,48px)!important}
 .bmx-wall{gap:clamp(42px,5vw,76px)}

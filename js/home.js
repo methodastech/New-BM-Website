@@ -117,6 +117,37 @@ function bmxArmOnApproach(el, margin, run) {
     box.addEventListener('click',toggle);
     box.addEventListener('keydown',function(e){if(e.target===box&&(e.key==='Enter'||e.key===' ')){e.preventDefault();toggle()}});
     v.addEventListener('ended',function(){box.classList.remove('is-playing')});
+    seekBar(box,v);
+  }
+
+  /* Seek bar: progress, elapsed / total time, click or drag to jump, arrow keys step 5s */
+  function fmt(s){s=Math.max(0,Math.floor(s||0));var m=Math.floor(s/60),r=s%60;return m+':'+(r<10?'0':'')+r}
+  function seekBar(box,v){
+    var bar=document.createElement('div');
+    bar.className='bmx-seek';
+    bar.innerHTML='<span class="bmx-seek-t" role="slider" tabindex="0" aria-label="Seek video" aria-valuemin="0" aria-valuemax="0" aria-valuenow="0"><i class="bmx-seek-f"></i><i class="bmx-seek-k"></i></span><span class="bmx-seek-time">0:00 / 0:00</span>';
+    box.appendChild(bar);
+    var t=bar.querySelector('.bmx-seek-t'),f=bar.querySelector('.bmx-seek-f'),k=bar.querySelector('.bmx-seek-k'),tm=bar.querySelector('.bmx-seek-time'),raf=0,drag=false;
+    function dur(){return isFinite(v.duration)?v.duration:0}
+    function draw(){
+      var d=dur(),c=v.currentTime||0,p=d?Math.min(100,c/d*100):0;
+      f.style.width=p+'%'; k.style.left=p+'%';
+      tm.textContent=fmt(c)+' / '+fmt(d);
+      t.setAttribute('aria-valuemax',Math.floor(d)); t.setAttribute('aria-valuenow',Math.floor(c)); t.setAttribute('aria-valuetext',fmt(c)+' of '+fmt(d));
+    }
+    function loop(){draw();raf=v.paused?0:requestAnimationFrame(loop)}
+    function jump(x){var r=t.getBoundingClientRect(),d=dur();if(!d||!r.width)return;v.currentTime=Math.min(1,Math.max(0,(x-r.left)/r.width))*d;draw()}
+    v.addEventListener('play',function(){box.classList.add('has-played');if(!raf)raf=requestAnimationFrame(loop)});
+    ['loadedmetadata','durationchange','timeupdate','seeked'].forEach(function(ev){v.addEventListener(ev,draw)});
+    /* keep bar interactions from toggling play/pause on the box */
+    ['click','pointerdown'].forEach(function(ev){bar.addEventListener(ev,function(e){e.stopPropagation()})});
+    t.addEventListener('pointerdown',function(e){drag=true;bar.classList.add('drag');try{t.setPointerCapture(e.pointerId)}catch(_){}jump(e.clientX)});
+    t.addEventListener('pointermove',function(e){if(drag)jump(e.clientX)});
+    ['pointerup','pointercancel'].forEach(function(ev){t.addEventListener(ev,function(){drag=false;bar.classList.remove('drag')})});
+    t.addEventListener('keydown',function(e){
+      var d=dur(),s={ArrowLeft:-5,ArrowRight:5,Home:-1e9,End:1e9}[e.key]; if(!d||s===undefined)return;
+      e.preventDefault(); v.currentTime=Math.min(d,Math.max(0,v.currentTime+s)); draw();
+    });
   }
   document.querySelectorAll('.rvid,.bmx-reel').forEach(wire);
 })();
