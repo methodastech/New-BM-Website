@@ -93,18 +93,50 @@ if (scrollTopFloat) {
     });
   }
 
-  document.querySelectorAll('.article-newsletter-form').forEach(form => {
-    form.addEventListener('submit', event => {
+  // Newsletter: the email goes to Brevo through api/newsletter/subscribe.php, and the
+  // thank-you only shows once the server has confirmed it.
+  document.querySelectorAll('.article-newsletter-form, form[data-newsletter]').forEach(form => {
+    // honeypot: hidden from people, bots fill it in
+    const trap = document.createElement('input');
+    trap.type = 'text';
+    trap.name = 'company';
+    trap.tabIndex = -1;
+    trap.autocomplete = 'off';
+    trap.setAttribute('aria-hidden', 'true');
+    trap.style.cssText = 'position:absolute;left:-9999px;width:1px;height:1px;opacity:0';
+    form.appendChild(trap);
+
+    form.addEventListener('submit', async event => {
       event.preventDefault();
       const input = form.querySelector('input[type="email"]');
+      const button = form.querySelector('button[type="submit"]');
       const status = form.parentElement.querySelector('.article-newsletter-status');
       if (!input || !status || !input.checkValidity()) {
         input?.reportValidity();
         return;
       }
-      status.textContent = 'Thank you. We will keep you posted.';
-      status.classList.add('is-visible');
-      form.reset();
+      const say = (text, isError) => {
+        status.textContent = text;
+        status.classList.add('is-visible');
+        status.classList.toggle('is-error', !!isError);
+      };
+      const label = button ? button.textContent : '';
+      if (button) { button.disabled = true; button.textContent = 'Subscribing…'; }
+      try {
+        const res = await fetch('/api/newsletter/subscribe.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: input.value.trim(), company: trap.value, source: location.pathname.replace(/^\//, '') })
+        });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok || !data.ok) throw new Error(data.error || 'Something went wrong. Please try again.');
+        say(data.confirm ? 'Almost done. Check your inbox and click the link to confirm.' : 'You are subscribed. Thank you.');
+        form.reset();
+      } catch (err) {
+        say(err.message && !/fetch|network|JSON/i.test(err.message) ? err.message : 'Something went wrong. Please try again.', true);
+      } finally {
+        if (button) { button.disabled = false; button.textContent = label; }
+      }
     });
   });
 })();

@@ -5105,6 +5105,15 @@ footer {
   display: flex;
 }
 
+.article-newsletter-status.is-error {
+  color: #c62828;
+}
+
+.article-newsletter-form button[disabled] {
+  opacity: .6;
+  cursor: progress;
+}
+
 .article-share-title {
   font-family: var(--font-display);
   font-size: clamp(24px, 1.7vw, 30px);

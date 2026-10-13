@@ -3505,14 +3505,36 @@ window.__bmxLeadSubmit=function(lead){
         return;
       }
       var btn=form.querySelector('button'); if(btn){btn.disabled=true}
-      var note=document.createElement('div');
-      note.style.cssText='font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-top:14px';
-      note.textContent='Thank you. We will be in touch shortly.';
-      var old=form.parentNode.querySelector('.form-ok'); if(old) old.remove();
-      note.className='form-ok'; form.appendChild(note);
+      function show(text,isError){
+        var note=document.createElement('div');
+        note.style.cssText='font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;margin-top:14px;color:'+(isError?'#ff5a5a':'var(--accent)');
+        note.textContent=text;
+        var old=form.parentNode.querySelector('.form-ok'); if(old) old.remove();
+        note.className='form-ok'; form.appendChild(note);
+      }
+      // the newsletter signup goes to Brevo (api/newsletter/subscribe.php); thanks only once it is stored
+      if(form.classList.contains('signup-form')){
+        var first=form.querySelector('input[type=text]');
+        fetch('/api/newsletter/subscribe.php',{method:'POST',headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({email:email?email.value.trim():'',name:first?first.value.trim():'',company:(form.querySelector('input[name=company]')||{}).value||'',source:'home'})})
+          .then(function(r){return r.json().catch(function(){return {}}).then(function(d){ if(!r.ok||!d.ok) throw new Error(d.error||''); return d; })})
+          .then(function(d){
+            show(d.confirm?'Almost done. Check your inbox to confirm.':'You are subscribed. Thank you.');
+            form.querySelectorAll('input').forEach(function(i){ if(i.name!=='company'){i.value='';i.style.borderColor=''} });
+          })
+          .catch(function(err){ show(err.message||'Something went wrong. Please try again.',true); })
+          .then(function(){ if(btn) btn.disabled=false; });
+        return;
+      }
+      show('Thank you. We will be in touch shortly.');
       form.querySelectorAll('input,textarea').forEach(function(i){i.value='';i.style.borderColor=''});
       setTimeout(function(){ if(btn) btn.disabled=false; },1200);
     });
+    if(form.classList.contains('signup-form')){
+      var trap=document.createElement('input'); trap.type='text'; trap.name='company'; trap.tabIndex=-1; trap.autocomplete='off';
+      trap.setAttribute('aria-hidden','true'); trap.style.cssText='position:absolute;left:-9999px;width:1px;height:1px;opacity:0';
+      form.appendChild(trap);
+    }
   }
   document.querySelectorAll('.signup-form,.contact-form').forEach(attach);
 })();
