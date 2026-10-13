@@ -24,9 +24,9 @@ const FPS = 25, SECTION_S = 4.2, SPEED = 90, MAX_SECTIONS = 9;
 // h: the panel's desktop shape at that width (Home measures 1.07:1 and 0.90:1); poster: the still
 // Home shows until the video plays
 const JOBS = [
-  { page: 'methodas_brand_education_standard.html', out: 'methodas_brand_education_preview.mp4', mode: 'click', h: 972,
+  { page: 'methodas_brand_education_standard.html', out: 'video/methodas_brand_education_preview.mp4', mode: 'click', h: 972,
     poster: 'Image/home/methodas-brand-education-poster.webp' },
-  { page: 'methodas_52_frameworks.html', out: 'methodas_52_frameworks_preview.mp4', mode: 'scroll', h: 1150,
+  { page: 'methodas_52_frameworks.html', out: 'video/methodas_52_frameworks_preview.mp4', mode: 'scroll', h: 1150,
     poster: 'Image/home/methodas-52-frameworks-poster.webp' },
 ];
 

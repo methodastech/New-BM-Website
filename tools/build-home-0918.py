@@ -29,10 +29,10 @@ OUT_JS = 'js/home.js'
 ASSETS = {
     'assets/bmx-live.css': OUT_CSS,
     'assets/bmx-live.js': OUT_JS,
-    'assets/live/video/hero-success-story-compile.mp4': 'Success Story Compile 1.mp4',
+    'assets/live/video/hero-success-story-compile.mp4': 'video/Success Story Compile 1.mp4',
     # posters are stills from the repo's own videos (a video with no poster shows black until it loads)
     'assets/home/hero/hero-poster.webp': 'Image/home/hero-poster.webp',
-    'assets/home/video/showreel05.mp4': 'showreel04.webm',
+    'assets/home/video/showreel05.mp4': 'video/showreel04.webm',
     'assets/live/video/thumbnail-showreel02.webp': 'nobodywantsawebsite/assets/thumbnail-showreel02.webp',
     # the results block plays the James Tan testimonial, as on the old Home
     'assets/home/video/success-story.mp4': 'BM Testimony.webm',
@@ -41,12 +41,12 @@ ASSETS = {
     'assets/home/photos/signed-founder.png': 'signed-founder.png',
     'assets/home/photos/creative-team-uiux-design-discussion.webp': 'Image/creative-team-uiux-design-discussion.webp',
     'assets/home/photos/show-board-brand-strategy-workshop.webp': 'Image/show-board-brand-strategy-workshop.webp',
-    'assets/home/photos/client-amir-spiroball.webp': 'Testimonial Image/Spiroball.webp',
-    'assets/home/photos/client-azhan-waterbay.webp': 'Testimonial Image/Waterbay.webp',
-    'assets/home/photos/client-ben-valvoline.webp': 'Testimonial Image/Valvoline.webp',
-    'assets/home/photos/client-noelle-hexamatic.webp': 'Testimonial Image/Hexamatic.webp',
-    'assets/home/photos/client-priya-pinnacle.webp': 'Testimonial Image/Pinnacle.webp',
-    'assets/home/photos/client-syukri-eskayvie.webp': 'Testimonial Image/Eskayvie Syukri.webp',
+    'assets/home/photos/client-amir-spiroball.webp': 'Image/Testimonial Image/Spiroball.webp',
+    'assets/home/photos/client-azhan-waterbay.webp': 'Image/Testimonial Image/Waterbay.webp',
+    'assets/home/photos/client-ben-valvoline.webp': 'Image/Testimonial Image/Valvoline.webp',
+    'assets/home/photos/client-noelle-hexamatic.webp': 'Image/Testimonial Image/Hexamatic.webp',
+    'assets/home/photos/client-priya-pinnacle.webp': 'Image/Testimonial Image/Pinnacle.webp',
+    'assets/home/photos/client-syukri-eskayvie.webp': 'Image/Testimonial Image/Eskayvie Syukri.webp',
     'assets/home/photos/industry-innovation.webp': 'work/Innovation.webp',
     'assets/home/photos/industry-tech.webp': 'work/Tech.webp',
     'assets/opt/home/photos/industry-fintech.webp': 'work/Fintech.webp',
@@ -60,22 +60,22 @@ ASSETS = {
     'assets/live/inside/methodas-52.html': 'methodas_52_frameworks.html',
     # Work hub mascot card: the design's generated loop and banner are not in the repo; the suit render is
     'assets/home/mascot/mascot-loop.mp4': None,
-    'assets/home/photos/mascot-suit-banner.jpg': 'santa-images/santa-barbara-cafe-mascot-suit-design.webp',
+    'assets/home/photos/mascot-suit-banner.jpg': 'Image/work6/santa-images/santa-barbara-cafe-mascot-suit-design.webp',
     # the Contact page's 3D map library: Contact is its own page on this site
     'assets/vendor/maplibre-gl.css': None,
     'assets/vendor/maplibre-gl.js': None,
 }
 CLIENT_LOGOS = {
-    'aicb': 'logo/AICB.png', 'airasia': 'New Logo/Airasia.png', 'bumi-armada': 'New Logo/Bumi Armada.png',
-    'burgerking': 'New Logo/burgerking-logo.png', 'camel-active': 'New Logo/camel-active-logo.png',
-    'duit': 'New Logo/duit-logo.png', 'eskayvie': 'New Logo/Eskayvie.png', 'fiana': 'New Logo/fiana-logo.png',
-    'hasbro': 'New Logo/hasbro-logo.png', 'ikram': 'New Logo/Ikram.png', 'jb-cocoa': 'New Logo/JB Cocoa.png',
-    'kalbe': 'New Logo/Kalbe.png', 'kexxel': 'New Logo/Kexxel.png', 'maybank': 'New Logo/Maybank.png',
-    'mcdonalds': 'New Logo/Mcdonalds.png', 'mhb': 'New Logo/MHB.png', 'microsoft': 'New Logo/Microsoft.png',
-    'milna': 'New Logo/Milna.png', 'proton': 'New Logo/proton-logo.png', 'santa-barbara': 'New Logo/Santa Barbara.png',
-    'sheraton': 'New Logo/Sheraton.png', 'spritzer': 'New Logo/spritzer-logo.png', 'starbucks': 'New Logo/Starbucks.png',
-    'sunway': 'New Logo/Sunway.png', 'taylors': 'New Logo/taylors-logo.png',
-    'universiti-malaya': 'New Logo/universiti-malaya-logo.png', 'upm': 'New Logo/upm-logo.png',
+    'aicb': 'Image/New Logo/AICB.png', 'airasia': 'Image/New Logo/Airasia.png', 'bumi-armada': 'Image/New Logo/Bumi Armada.png',
+    'burgerking': 'Image/New Logo/burgerking-logo.png', 'camel-active': 'Image/New Logo/camel-active-logo.png',
+    'duit': 'Image/New Logo/duit-logo.png', 'eskayvie': 'Image/New Logo/Eskayvie.png', 'fiana': 'Image/New Logo/fiana-logo.png',
+    'hasbro': 'Image/New Logo/hasbro-logo.png', 'ikram': 'Image/New Logo/Ikram.png', 'jb-cocoa': 'Image/New Logo/JB Cocoa.png',
+    'kalbe': 'Image/New Logo/Kalbe.png', 'kexxel': 'Image/New Logo/Kexxel.png', 'maybank': 'Image/New Logo/Maybank.png',
+    'mcdonalds': 'Image/New Logo/Mcdonalds.png', 'mhb': 'Image/New Logo/MHB.png', 'microsoft': 'Image/New Logo/Microsoft.png',
+    'milna': 'Image/New Logo/Milna.png', 'proton': 'Image/New Logo/proton-logo.png', 'santa-barbara': 'Image/New Logo/Santa Barbara.png',
+    'sheraton': 'Image/New Logo/Sheraton.png', 'spritzer': 'Image/New Logo/spritzer-logo.png', 'starbucks': 'Image/New Logo/Starbucks.png',
+    'sunway': 'Image/New Logo/Sunway.png', 'taylors': 'Image/New Logo/taylors-logo.png',
+    'universiti-malaya': 'Image/New Logo/universiti-malaya-logo.png', 'upm': 'Image/New Logo/upm-logo.png',
 }
 # About: the design's compressed team photos are the repo's Key Members originals
 TEAM = {'azim': 'Azim.png', 'azwan': 'Azwan.webp', 'bazil': 'Bazil.webp', 'brian': 'Brian.webp', 'diha': 'Diha.webp',
@@ -85,17 +85,17 @@ for k, v in TEAM.items():
     ASSETS['assets/live/_opt/%s.jpg' % k] = 'Key Members/' + v
 ASSETS['assets/live/_opt/fifteen-years.jpg'] = '15 Years.webp'
 ASSETS['assets/opt/live/services/BrandMethod - Brand Strategy.webp'] = 'services/BrandMethod - Brand Strategy.webp'
-ASSETS['assets/live/Testimonial Image/sdfdsdffdsdfs.webp'] = 'Testimonial Image/sdfdsdffdsdfs.webp'
+ASSETS['assets/live/Testimonial Image/sdfdsdffdsdfs.webp'] = 'Image/Testimonial Image/sdfdsdffdsdfs.webp'
 for k, v in CLIENT_LOGOS.items():
     ASSETS['assets/home/clients-norm/%s.png' % k] = v
 # folders that exist in the repo under the same file names
 SAME_DIR = {
     'assets/live/Image/': 'Image/',
-    'assets/live/logo-gallery-images/': 'logo-gallery-images/',
+    'assets/live/logo-gallery-images/': 'Image/logo-gallery-images/',
     'assets/live/work-images/': 'work-images/',
-    'assets/live/santa-images/': 'santa-images/',
-    'assets/live/dahmakan-images/': 'dahmakan-images/',
-    'assets/live/jbcocoa-images/': 'jbcocoa-images/',
+    'assets/live/santa-images/': 'Image/work6/santa-images/',
+    'assets/live/dahmakan-images/': 'Image/work6/dahmakan-images/',
+    'assets/live/jbcocoa-images/': 'Image/work6/jbcocoa-images/',
     'assets/live/services/': 'services/',
     # the design's two service loops are MP4s of the repo's services/*.gif, made once with ffmpeg
     'assets/home/svc/': 'services/',
@@ -402,7 +402,7 @@ STEPS_CSS = ('@keyframes bmStepA{0%,47%{opacity:1;transform:none}49%,97%{opacity
 
 # James Tan's review from the old Home, as the first card in the reviews carousel
 JAMES_TAN_CARD = (
-    '<div class="rtc"><div class="rtc-media"><img class="bmx-fill" src="Testimonial%20Image/Teask.webp" '
+    '<div class="rtc"><div class="rtc-media"><img class="bmx-fill" src="Image/Testimonial%20Image/Teask.webp" '
     'alt="James Tan, founder and CEO of Teask" loading="lazy" decoding="async"></div><div class="rtc-body">'
     '<span class="rtc-qmark">&#8220;</span><p class="rtc-quote">What other companies took six months to do, '
     'Brand Method did in two weeks, with extreme professionalism. The one thing I love about them is their '
@@ -424,9 +424,9 @@ SEAM_CSS = '#pg-home .clients-section{position:relative;z-index:5}'
 # The lead magnet panels play a recording of each Methodas page (tools/record-methodas-previews.js)
 # instead of loading the live page into an iframe.
 PREVIEW_VIDEOS = {
-    'methodas_brand_education_standard.html': ('methodas_brand_education_preview.mp4',
+    'methodas_brand_education_standard.html': ('video/methodas_brand_education_preview.mp4',
                                                'Image/home/methodas-brand-education-poster.webp'),
-    'methodas_52_frameworks.html': ('methodas_52_frameworks_preview.mp4',
+    'methodas_52_frameworks.html': ('video/methodas_52_frameworks_preview.mp4',
                                     'Image/home/methodas-52-frameworks-poster.webp'),
 }
 PREVIEW_CSS = ('.bmx-scr-stage .bm-scr-vid{position:absolute;inset:0;width:100%;height:100%;'
