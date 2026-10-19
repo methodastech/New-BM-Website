@@ -117,6 +117,15 @@ p{margin:0 0 var(--s2);}
 .cta-note{font-family:"JetBrains Mono",monospace;font-size:11.5px;letter-spacing:.04em;color:var(--ink-faint);margin:var(--s2) 0 0;}
 .inline-cta{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--s2) var(--s3);margin-top:var(--s5);padding-top:var(--s3);border-top:1px solid var(--line);}
 .inline-cta p{margin:0;max-width:52ch;color:var(--ink-soft);}
+/* WhatsApp beside every booking CTA so the prospect picks the channel. Outline, so the call stays the primary ask. */
+.cta-pair{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s2);}
+.cta-wa{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-family:"Inter",system-ui,sans-serif;font-weight:600;font-size:15px;line-height:1;color:var(--bright);background:transparent;border:1px solid var(--bright);border-radius:var(--rb);padding:15px 22px;text-decoration:none;white-space:nowrap;transition:background .18s,color .18s,border-color .18s;}
+.cta-wa svg{width:17px;height:17px;fill:currentColor;flex:none;}
+.cta-wa:hover{background:rgba(37,54,245,.06);color:var(--bright-deep);border-color:var(--bright-deep);}
+.cta-wa:focus-visible{outline:2px solid var(--bright);outline-offset:3px;}
+.dark-band .cta-wa{color:#fff;border-color:rgba(255,255,255,.5);}
+.dark-band .cta-wa:hover{background:rgba(255,255,255,.08);color:#fff;border-color:#fff;}
+@media(max-width:639px){.cta-pair{width:100%;}.cta-pair>a{flex:1 1 100%;}}
 
 /* ---- 01 top bar. Desktop: sticky top, reference layout from the main sales page (pill centre, CTA + section dropdown right). Mobile: fixed bottom. ---- */
 .bar{position:sticky;top:0;z-index:80;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:18px;min-height:var(--barh);padding:12px 30px;background:rgba(255,255,255,.82);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);}
@@ -199,6 +208,7 @@ html.is-dev .bar-offer{display:none;}
 .stage.is-pending .play-lbl{font-size:13px;text-transform:none;letter-spacing:.02em;max-width:30ch;line-height:1.5;}
 .vsl-cta{max-width:900px;margin:var(--s3) auto 0;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:var(--s2);}
 .vsl-cta[hidden]{display:none;}
+.vsl-cta .cta-pair{justify-content:center;}
 .vsl-cta p{margin:0;font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.04em;color:var(--ink-soft);}
 .trust{display:flex;flex-wrap:wrap;justify-content:center;gap:var(--s1) var(--s3);list-style:none;margin:var(--s4) auto 0;padding:0;font-family:"JetBrains Mono",monospace;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);}
 .trust li{display:inline-flex;align-items:center;gap:7px;}
@@ -424,6 +434,7 @@ html.is-dev .bar-offer{display:none;}
 .tier li{padding:8px 0 8px 24px;position:relative;font-size:15px;color:var(--ink);border-top:1px solid var(--line-soft);}
 .tier li::before{content:"✓";position:absolute;left:0;color:var(--bright);font-family:"JetBrains Mono",monospace;font-weight:700;}
 .tier .cta{width:100%;}
+.tier .cta-wa{width:100%;margin-top:10px;}
 .tier .tier-g{margin:10px 0 0;font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);text-align:center;}
 .others{margin-top:var(--s4);padding-top:var(--s3);border-top:1px solid var(--line);}
 .others-head{display:grid;gap:6px;margin-bottom:var(--s3);}
@@ -606,6 +617,7 @@ html.js [data-reveal].in{opacity:1;transform:none;}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What exactly is this?","acceptedAnswer":{"@type":"Answer","text":"A conversion website: a site built around how your customers decide, with the copy, the forms, the WhatsApp routing and the tracking already in place. It is delivered at a fixed price, in one to two weeks, by the senior team you meet on the call."}},{"@type":"Question","name":"Who is it for?","acceptedAnswer":{"@type":"Answer","text":"Founders and owners of SMEs and mid-market businesses who already have traffic, enquiries or bookings and can feel them slipping away. If you are choosing on lowest price alone, or not ready to decide this quarter, we are probably not the right fit, and we will say so on the call."}},{"@type":"Question","name":"How much does it cost?","acceptedAnswer":{"@type":"Answer","text":"A Starter site is RM1,900. A Growth site is RM6,000. Apps and games start at RM14,000. Bigger systems are scoped on the call. Every price is fixed in writing before you pay, and the number quoted is the number paid."}},{"@type":"Question","name":"Why are you cheaper than the big agencies?","acceptedAnswer":{"@type":"Answer","text":"We cut the overhead, not the quality. Our own system handles the repetitive work, so your money goes to senior strategy and craft, not layers of account management and markup."}},{"@type":"Question","name":"How does the process work, and how fast?","acceptedAnswer":{"@type":"Answer","text":"Discovery on the free call, then strategy and build, then handover. Work starts within 24 hours of kickoff. A Starter site ships in about a week, a Growth site in two, a scoped app from about four. Bigger builds get a milestone timeline agreed at kickoff."}},{"@type":"Question","name":"How involved do I need to be?","acceptedAnswer":{"@type":"Answer","text":"A kickoff, a few approvals at the milestones, and a launch. We do the heavy lifting and keep you updated at every step, so you stay in control of the direction without it eating your week."}},{"@type":"Question","name":"Do I own everything?","acceptedAnswer":{"@type":"Answer","text":"Yes. Code, domain, content, brand files and customer data are yours from day one. No vendor lock, no platform that holds your leads where you cannot reach them. It is an asset on your books, not a subscription you are afraid to cancel."}},{"@type":"Question","name":"What makes you different?","acceptedAnswer":{"@type":"Answer","text":"Four commitments in writing: money back, seven-day delivery, fixed price and lifetime after-service. Across the agencies we have reviewed, none put anything comparable in a contract. Add a senior team that has done this for over a hundred brands since 2009."}},{"@type":"Question","name":"What if I am not ready yet?","acceptedAnswer":{"@type":"Answer","text":"Take the free call anyway. You leave with a map of where your enquiries leak and a number on what it costs, and you keep it. If you would rather read first, the Brand Growth Playbook at the bottom of this page is free."}},{"@type":"Question","name":"What happens after I click the button?","acceptedAnswer":{"@type":"Answer","text":"You fill in a short form, and we confirm a day and time over WhatsApp within one working day. The call is twenty minutes with a senior strategist. If it is a fit, you get a fixed-price plan with dates. If it is not, you keep the plan and there is zero pressure."}}]}</script><style id="bmf-css">.bmf{--bmf-line:rgba(37,54,245,.16);--bmf-bright:#2536F5;--bmf-ink:#15161A;--bmf-soft:#54565d;font-family:"Inter",system-ui,sans-serif;max-width:620px;margin:0 auto;text-align:left;}.bmf-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}@media(max-width:620px){.bmf-grid{grid-template-columns:1fr;}}.bmf-f{display:flex;flex-direction:column;gap:6px;}.bmf-f.wide{grid-column:1/-1;}.bmf label{font-family:"JetBrains Mono",monospace;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--bmf-soft);}.bmf input,.bmf select,.bmf textarea{font-family:inherit;font-size:15px;color:var(--bmf-ink);background:#fff;border:1px solid var(--bmf-line);border-radius:10px;padding:12px 14px;outline:none;width:100%;transition:border-color .16s,box-shadow .16s;}.bmf textarea{min-height:92px;resize:vertical;}.bmf input:focus,.bmf select:focus,.bmf textarea:focus{border-color:var(--bmf-bright);box-shadow:0 0 0 3px rgba(37,54,245,.14);}.bmf .bmf-err{font-size:12.5px;color:#B3261E;min-height:0;}.bmf [aria-invalid="true"]{border-color:#B3261E;}.bmf-hp{position:absolute!important;left:-9999px!important;width:1px;height:1px;overflow:hidden;}.bmf-submit{grid-column:1/-1;display:inline-flex;align-items:center;justify-content:center;gap:10px;font-family:"Inter",system-ui,sans-serif;font-size:15px;font-weight:600;color:#fff;background:var(--bmf-bright);border:0;border-radius:999px;padding:15px 26px;cursor:pointer;transition:background .18s,transform .12s;}.bmf-submit:hover{background:#1421B8;}.bmf-submit:active{transform:translateY(1px);}.bmf-submit[disabled]{opacity:.62;cursor:not-allowed;}.bmf-spin{width:14px;height:14px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:bmfspin .6s linear infinite;display:none;}.bmf.is-submitting .bmf-spin{display:inline-block;}@keyframes bmfspin{to{transform:rotate(360deg);}}.bmf-note{grid-column:1/-1;font-size:12.5px;color:var(--bmf-soft);margin:2px 0 0;}.bmf-note a{color:var(--bmf-bright);}.bmf-status{grid-column:1/-1;font-size:14px;border-radius:10px;padding:12px 14px;margin:0;display:none;}.bmf-status.show{display:block;}.bmf-status.err{background:rgba(179,38,30,.07);border:1px solid rgba(179,38,30,.26);color:#8f1f18;}@media (prefers-reduced-motion:reduce){.bmf-spin{animation:none;}}</style></head>
 <body><!-- Google Tag Manager (noscript) --><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NJ9RQN4S" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><!-- End Google Tag Manager (noscript) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><symbol id="ic-wa" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"></path></symbol></svg>
 <a class="skip" href="#sp-hero">Skip to content</a>
 
 <!-- 01 STICKY BAR. Offer restatement + the one CTA. Fixed top on desktop, fixed bottom on phones. No scarcity: nothing here is generated from real capacity yet (brief §3.1). -->
@@ -621,7 +633,7 @@ html.js [data-reveal].in{opacity:1;transform:none;}
   </div>
   <div class="bar-offer">A conversion site at a fixed price, live in as little as a week. The first call is free.</div>
   <div class="bar-acts">
-    <a class="bar-wa" href="https://wa.me/60162563030?text=Hi%20Brand%20Method%2C%20I%20am%20on%20the%20video%20page%20and%20would%20like%20to%20book%20the%20free%2020-minute%20call." target="_blank" rel="noopener" aria-label="WhatsApp Brand Method" data-cta-secondary=""><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 0 1 0 16.4c-1.5 0-2.9-.4-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3 4.4c-.2 0-.5 0-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.2 5 4.4 2.5 1 3 .8 3.5.7.5 0 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3l-2-1c-.3-.1-.5-.1-.7.1l-.9 1.1c-.2.2-.3.2-.6.1-.3-.2-1.2-.5-2.3-1.5-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.5-.6.3-.5c.1-.2 0-.4 0-.5l-.9-2.1c-.2-.6-.4-.5-.6-.5z"></path></svg></a>
+    <a class="bar-wa" data-wa-position="bar" href="https://wa.me/60162563030?text=Hi%20Brand%20Method%2C%20I%20am%20on%20the%20video%20page%20and%20would%20like%20to%20book%20the%20free%2020-minute%20call." target="_blank" rel="noopener" aria-label="WhatsApp Brand Method" data-cta-secondary=""><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"></path></svg></a>
     <a class="cta" href="#sp-book" data-cta="" data-cta-position="1">Book your free 20-minute call</a>
     <div class="bar-dd" data-bm-internal="">
       <button class="bar-ddbtn" type="button" aria-haspopup="true" aria-expanded="false">Website SP <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button>
@@ -665,7 +677,10 @@ html.js [data-reveal].in{opacity:1;transform:none;}
     </div>
 
     <div class="vsl-cta" data-vsl-cta="" data-reveal-seconds="390" data-fallback-ms="20000" hidden="">
-      <a class="cta" href="#sp-book" data-cta="" data-cta-position="2">Book your free 20-minute call</a>
+      <div class="cta-pair">
+        <a class="cta" href="#sp-book" data-cta="" data-cta-position="2">Book your free 20-minute call</a>
+        <a class="cta-wa" href="https://wa.me/60162563030?text=Hi%20Brand%20Method%2C%20I%20am%20on%20the%20video%20page%20and%20would%20like%20to%20book%20the%20free%2020-minute%20call." target="_blank" rel="noopener" data-cta-secondary="" data-wa-position="2"><svg aria-hidden="true"><use href="#ic-wa"></use></svg>Chat on WhatsApp</a>
+      </div>
       <p>Twenty minutes. No pitch. You keep the plan either way.</p>
     </div>
 
@@ -688,6 +703,7 @@ html.js [data-reveal].in{opacity:1;transform:none;}
         <p class="lede">No marketing jargon. Just what we help you fix.</p>
         <div class="cta-row">
           <a class="cta" href="#sp-book" data-cta="" data-cta-position="3">Book your free 20-minute call</a>
+          <a class="cta-wa" href="https://wa.me/60162563030?text=Hi%20Brand%20Method%2C%20I%20am%20on%20the%20video%20page%20and%20would%20like%20to%20book%20the%20free%2020-minute%20call." target="_blank" rel="noopener" data-cta-secondary="" data-wa-position="3"><svg aria-hidden="true"><use href="#ic-wa"></use></svg>Chat on WhatsApp</a>
           <a class="sub-link" href="#sp-pricing"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12l7 7 7-7"></path></svg>See our services &amp; pricing</a>
         </div>
       </div>
@@ -760,7 +776,10 @@ html.js [data-reveal].in{opacity:1;transform:none;}
     </div>
     <div class="inline-cta in" data-reveal="">
       <p>Twenty minutes puts a monthly number on your leak. You keep that number whether you hire us or not.</p>
-      <a class="cta" href="#sp-book" data-cta="" data-cta-position="4">Book your free 20-minute call</a>
+      <div class="cta-pair">
+        <a class="cta" href="#sp-book" data-cta="" data-cta-position="4">Book your free 20-minute call</a>
+        <a class="cta-wa" href="https://wa.me/60162563030?text=Hi%20Brand%20Method%2C%20I%20am%20on%20the%20video%20page%20and%20would%20like%20to%20book%20the%20free%2020-minute%20call." target="_blank" rel="noopener" data-cta-secondary="" data-wa-position="4"><svg aria-hidden="true"><use href="#ic-wa"></use></svg>Chat on WhatsApp</a>
+      </div>
     </div>
   </div>
 </section>
@@ -814,7 +833,10 @@ html.js [data-reveal].in{opacity:1;transform:none;}
     </ol>
     <div class="inline-cta in" data-reveal="">
       <p>Step one is free and takes half an hour. Steps two and three only happen if you want them to.</p>
-      <a class="cta" href="#sp-book" data-cta="" data-cta-position="5">Book your free 20-minute call</a>
+      <div class="cta-pair">
+        <a class="cta" href="#sp-book" data-cta="" data-cta-position="5">Book your free 20-minute call</a>
+        <a class="cta-wa" href="https://wa.me/60162563030?text=Hi%20Brand%20Method%2C%20I%20am%20on%20the%20video%20page%20and%20would%20like%20to%20book%20the%20free%2020-minute%20call." target="_blank" rel="noopener" data-cta-secondary="" data-wa-position="5"><svg aria-hidden="true"><use href="#ic-wa"></use></svg>Chat on WhatsApp</a>
+      </div>
     </div>
   </div>
 </section>
@@ -914,11 +936,6 @@ html.js [data-reveal].in{opacity:1;transform:none;}
 
     <div id="resultsBlock" hidden="">
       <div class="results" id="resultsGrid"></div>
-    </div>
-    <div class="results" data-bm-internal="">
-      <div class="viz"><div class="viz-in"><span class="viz-tag">Result slot 1 · [ALIGN 1.5]</span>Number, named client, timeframe, starting baseline. Renders for prospects only once RESULTS in this file has a cleared entry.</div></div>
-      <div class="viz"><div class="viz-in"><span class="viz-tag">Result slot 2 · [ALIGN 1.5]</span>Hard blocker in Brian's brief §4.1. Client clearance has the longest lead time. Start it first.</div></div>
-      <div class="viz"><div class="viz-in"><span class="viz-tag">Result slot 3 · [ALIGN 1.5]</span>A percentage without a baseline is not evidence. Every entry needs all four fields.</div></div>
     </div>
 
     <div class="tmarq in" data-reveal="" aria-label="Client testimonials">
@@ -1125,7 +1142,10 @@ html.js [data-reveal].in{opacity:1;transform:none;}
     </div>
     <div class="inline-cta in" data-reveal="">
       <p>The people on this page had the same call you are about to book. Same senior team, same fixed price.</p>
-      <a class="cta" href="#sp-book" data-cta="" data-cta-position="6">Book your free 20-minute call</a>
+      <div class="cta-pair">
+        <a class="cta" href="#sp-book" data-cta="" data-cta-position="6">Book your free 20-minute call</a>
+        <a class="cta-wa" href="https://wa.me/60162563030?text=Hi%20Brand%20Method%2C%20I%20am%20on%20the%20video%20page%20and%20would%20like%20to%20book%20the%20free%2020-minute%20call." target="_blank" rel="noopener" data-cta-secondary="" data-wa-position="6"><svg aria-hidden="true"><use href="#ic-wa"></use></svg>Chat on WhatsApp</a>
+      </div>
     </div>
   </div>
 </section>
@@ -1181,6 +1201,7 @@ window.addEventListener('message',function(e){
         <p>A conversion-ready site live in a week, so the traffic you already pay for stops bouncing off a page that does not sell.</p>
         <ul><li>Up to 5 pages or a one-pager</li><li>Full copywriting included</li><li>Lead capture and WhatsApp routing</li><li>You own code, domain and content</li></ul>
         <a class="cta" href="#sp-book" data-cta="" data-cta-position="8">Book your free 20-minute call</a>
+        <a class="cta-wa" href="https://wa.me/60162563030?text=Hi%20Brand%20Method%2C%20I%20am%20on%20the%20video%20page%20and%20would%20like%20to%20book%20the%20free%2020-minute%20call." target="_blank" rel="noopener" data-cta-secondary="" data-wa-position="8"><svg aria-hidden="true"><use href="#ic-wa"></use></svg>Chat on WhatsApp</a>
         <p class="tier-g">100% money-back if it is not what we agreed</p>
       </div>
       <div class="tier hot in" data-reveal="">
@@ -1192,6 +1213,7 @@ window.addEventListener('message',function(e){
         <p>You pay for the visitors and watch most of them leave. This turns more of them into booked enquiries, built around how customers actually buy.</p>
         <ul><li>Up to 10 pages</li><li>Lead funnels and analytics installed</li><li>Half-day photo and video shoot</li><li>You own code, domain, content and data</li></ul>
         <a class="cta" href="#sp-book" data-cta="" data-cta-position="9">Book your free 20-minute call</a>
+        <a class="cta-wa" href="https://wa.me/60162563030?text=Hi%20Brand%20Method%2C%20I%20am%20on%20the%20video%20page%20and%20would%20like%20to%20book%20the%20free%2020-minute%20call." target="_blank" rel="noopener" data-cta-secondary="" data-wa-position="9"><svg aria-hidden="true"><use href="#ic-wa"></use></svg>Chat on WhatsApp</a>
         <p class="tier-g">100% money-back if it is not what we agreed</p>
       </div>
       <div class="tier in" data-reveal="">
@@ -1203,6 +1225,7 @@ window.addEventListener('message',function(e){
         <p>A 15-page-plus corporate site or a full online store, built on a custom design system so every page your team adds stays on brand and keeps converting.</p>
         <ul><li>15+ pages, or a full store with checkout</li><li>Custom design system, every page consistent</li><li>Case study and news modules, multi-user CMS</li><li>CRM and lead capture wired into your pipeline</li><li>You own code, domain, content and data</li></ul>
         <a class="cta" href="#sp-book" data-cta="" data-cta-position="10">Book your free 20-minute call</a>
+        <a class="cta-wa" href="https://wa.me/60162563030?text=Hi%20Brand%20Method%2C%20I%20am%20on%20the%20video%20page%20and%20would%20like%20to%20book%20the%20free%2020-minute%20call." target="_blank" rel="noopener" data-cta-secondary="" data-wa-position="10"><svg aria-hidden="true"><use href="#ic-wa"></use></svg>Chat on WhatsApp</a>
         <p class="tier-g">100% money-back if it is not what we agreed</p>
       </div>
     </div>
@@ -1259,7 +1282,10 @@ window.addEventListener('message',function(e){
     </div>
     <div class="inline-cta in" data-reveal="">
       <p>If we miss what we agreed, you get your money back. That is the whole risk, and it is ours.</p>
-      <a class="cta" href="#sp-book" data-cta="" data-cta-position="11">Book your free 20-minute call</a>
+      <div class="cta-pair">
+        <a class="cta" href="#sp-book" data-cta="" data-cta-position="11">Book your free 20-minute call</a>
+        <a class="cta-wa" href="https://wa.me/60162563030?text=Hi%20Brand%20Method%2C%20I%20am%20on%20the%20video%20page%20and%20would%20like%20to%20book%20the%20free%2020-minute%20call." target="_blank" rel="noopener" data-cta-secondary="" data-wa-position="11"><svg aria-hidden="true"><use href="#ic-wa"></use></svg>Chat on WhatsApp</a>
+      </div>
     </div>
   </div>
 </section>
@@ -1301,7 +1327,7 @@ window.addEventListener('message',function(e){
           <li>One clear next step to leave with</li>
           <li>Fixed price in writing if you want to go ahead</li>
         </ul>
-        <div class="wa">Prefer to type? <a href="https://wa.me/60162563030?text=Hi%20Brand%20Method%2C%20I%20watched%20the%20video%20and%20would%20like%20to%20book%20the%20free%2020-minute%20call." target="_blank" rel="noopener" data-cta-secondary="">WhatsApp Amina: +60 16-256 3030</a></div>
+        <div class="wa">Prefer to type? <a href="https://wa.me/60162563030?text=Hi%20Brand%20Method%2C%20I%20watched%20the%20video%20and%20would%20like%20to%20book%20the%20free%2020-minute%20call." target="_blank" rel="noopener" data-cta-secondary="" data-wa-position="form">WhatsApp Amina: +60 16-256 3030</a></div>
       </div>
       <div class="book-form in" data-reveal="">
         <div data-bm-form="" data-service="website" data-bm-form-mounted="1"><div class="bmf"><form class="bmf-grid" id="bmEnquiry-website" novalidate="" data-service="website" data-bm-managed="1" data-bm-tracked="1"><div class="bmf-f"><label for="bmf-name">Your name</label><input id="bmf-name" name="name" type="text" required="" autocomplete="name" placeholder="Full name"><p class="bmf-err" aria-live="polite" id="bmf-name-err"></p></div><div class="bmf-f"><label for="bmf-company">Company</label><input id="bmf-company" name="company" type="text" required="" autocomplete="organization" placeholder="Company name"><p class="bmf-err" aria-live="polite" id="bmf-company-err"></p></div><div class="bmf-f"><label for="bmf-email">Work email</label><input id="bmf-email" name="email" type="email" required="" autocomplete="email" placeholder="you@company.com"><p class="bmf-err" aria-live="polite" id="bmf-email-err"></p></div><div class="bmf-f"><label for="bmf-phone">Phone</label><input id="bmf-phone" name="phone" type="tel" required="" autocomplete="tel" placeholder="012 345 6789"><p class="bmf-err" aria-live="polite" id="bmf-phone-err"></p></div><div class="bmf-f"><label for="bmf-budget_band">Budget</label><select id="bmf-budget_band" name="budget_band" required=""><option value="">Closest band</option><option value="Not sure yet">Not sure yet</option><option value="Under RM10,000">Under RM10,000</option><option value="RM10,000 to RM30,000">RM10,000 to RM30,000</option><option value="RM30,000 to RM75,000">RM30,000 to RM75,000</option><option value="RM75,000+">RM75,000+</option></select><p class="bmf-err" aria-live="polite" id="bmf-budget_band-err"></p></div><div class="bmf-f"><label for="bmf-timeline">Timeline</label><select id="bmf-timeline" name="timeline" required=""><option value="">When to start</option><option value="Now">Now</option><option value="1 to 3 months">1 to 3 months</option><option value="3 to 6 months">3 to 6 months</option><option value="Just exploring">Just exploring</option></select><p class="bmf-err" aria-live="polite" id="bmf-timeline-err"></p></div><div class="bmf-f wide"><label for="bmf-situation">What is going on right now</label><textarea id="bmf-situation" name="situation" maxlength="1000" placeholder="Optional. The more specific, the more useful the call."></textarea><p class="bmf-err" aria-live="polite" id="bmf-situation-err"></p></div><div class="bmf-hp" aria-hidden="true"><label for="bmf-website">Leave this empty</label><input id="bmf-website" name="website_url" type="text" tabindex="-1" autocomplete="off"></div><p class="bmf-status err" role="alert"></p><button class="bmf-submit" type="submit"><span class="bmf-spin" aria-hidden="true"></span><span class="bmf-submit-label">Send and book the call</span></button><p class="bmf-note">We reply within one working day. No list, no drip, no reselling your details.</p><input type="hidden" name="utm_source" value=""><input type="hidden" name="utm_medium" value=""><input type="hidden" name="utm_campaign" value=""><input type="hidden" name="utm_content" value=""><input type="hidden" name="utm_term" value=""><input type="hidden" name="landing_page" value="http://localhost:3000/bm%20sales%20page/Brand-Method-Sales-Page.html"><input type="hidden" name="referrer" value="http://localhost:3000/"><input type="hidden" name="page_url" value="http://localhost:3000/bm%20sales%20page/Brand-Method-VSL.html"><input type="hidden" name="page_id" value="website-vsl"></form></div></div>
@@ -1559,7 +1585,7 @@ window.addEventListener('message',function(e){
 
   /* ---- WhatsApp taps are a conversion path in Malaysia: fire an event, keep the tap native ---- */
   [].forEach.call(d.querySelectorAll('[data-cta-secondary]'),function(a){
-    a.addEventListener('click',function(){ try{ window.dataLayer.push({event:'whatsapp_click',page_id:'website-vsl'}); }catch(x){} });
+    a.addEventListener('click',function(){ try{ window.dataLayer.push({event:'whatsapp_click',page_id:'website-vsl',cta_position:a.getAttribute('data-wa-position')}); }catch(x){} });
   });
 
   /* ---- FAQ accordion ---- */
