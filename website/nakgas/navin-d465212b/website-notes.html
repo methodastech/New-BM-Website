@@ -1,0 +1,516 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Cache-Control" content="no-store">
+<meta name="robots" content="noindex">
+<title>VIN Industries · NakGas · Website · Page map and notes · Brand Method</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Geist:wght@400;500;600&family=Unbounded:wght@800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="bmws.css"><link rel="stylesheet" href="assets/brand.css"><link rel="stylesheet" href="gsdoc.css"><link rel="stylesheet" href="gsshell.css">
+<link rel="icon" href="assets/app-icon.svg">
+<style>
+/* Website page only. Part 1 follows the document rules. Part 2 is the client's site, so inside the frame
+   it may use rounded corners and the brand's display face. Still no gradients and no shadows. */
+ol.land{margin:12px 0;padding-left:20px;font-size:14px}
+ol.land li{margin:6px 0}
+
+/* the frame around the mockup */
+.frame{border:1px solid var(--gs-ink);margin:20px 0 8px;background:var(--gs-base)}
+.frame-bar{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;background:var(--gs-ink);color:#fff;padding:8px 14px;font-size:12.5px}
+.frame-bar b{font-weight:600}
+.frame-bar .url{color:#B9C0D0}
+.frame-bar .ctl{margin-left:auto;display:flex;gap:2px}
+.frame-bar button{font:500 12.5px/1 var(--gs-body);border:0;background:transparent;color:#B9C0D0;padding:6px 10px;cursor:pointer}
+.frame-bar button[aria-pressed="true"]{background:#fff;color:var(--gs-ink)}
+.frame.phone .gsw{max-width:390px;margin:0 auto;border-left:1px solid var(--gs-line);border-right:1px solid var(--gs-line)}
+
+/* the mockup: the brand's own site */
+.gsw{container-type:inline-size;container-name:site;background:#fff;color:var(--gs-ink);font:400 16px/1.6 var(--gs-body);overflow:hidden}
+.gsw[data-lang="ms"] [lang="en"],.gsw[data-lang="en"] [lang="ms"]{display:none!important}
+.gsw .in{max-width:1080px;margin:0 auto;padding:0 32px}
+.gsw p{max-width:60ch;margin:0}
+.gsw h2,.gsw h3,.gsw h4{font-family:var(--gs-display);color:var(--gs-ink);max-width:none}
+.gsw h2{font-weight:800;font-size:54px;line-height:1.04;letter-spacing:-.03em;margin:10px 0 16px}
+.gsw h3{font-weight:800;font-size:36px;line-height:1.1;letter-spacing:-.025em;margin:8px 0 14px}
+.gsw h4{font-weight:700;font-size:18px;line-height:1.3;letter-spacing:-.01em;margin:0 0 6px}
+.gsw .eyebrow{font-size:13px;font-weight:600;color:var(--gs-flame-d);letter-spacing:.02em}
+.gsw .lead{font-size:18px;color:var(--gs-steel)}
+.gsw .band{padding:72px 0}
+.gsw .band.base{background:var(--gs-base)}
+.gsw .top{display:flex;align-items:center;gap:20px;padding:18px 0}
+.gsw .top svg{height:30px;width:auto;display:block}
+.gsw .top nav{display:flex;gap:4px;margin-left:auto}
+.gsw .top nav a{font-size:14px;font-weight:500;color:var(--gs-steel);text-decoration:none;padding:6px 10px;border-radius:8px}
+.gsw .top nav a:hover{color:var(--gs-ink);background:var(--gs-base)}
+.gsw .lang{display:flex;border:1px solid var(--gs-line);border-radius:10px;padding:2px;flex:none}
+.gsw .lang button{font:600 12.5px/1 var(--gs-body);border:0;background:transparent;color:var(--gs-steel);padding:7px 10px;border-radius:8px;cursor:pointer}
+.gsw .lang button[aria-pressed="true"]{background:var(--gs-ink);color:#fff}
+.gsw .btn{display:inline-flex;align-items:center;font:600 14px/1 var(--gs-body);background:var(--gs-flame-d);color:#fff;border-radius:10px;padding:11px 16px;text-decoration:none;flex:none}
+.gsw .hero{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:48px;align-items:center;padding:48px 0 72px;border-bottom:0}
+.gsw .stores{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.gsw .store{display:inline-flex;flex-direction:column;justify-content:center;min-width:164px;background:var(--gs-ink);color:#fff;border-radius:10px;padding:9px 18px;line-height:1.15;text-decoration:none}
+.gsw .store small{font-size:11.5px;font-weight:500;color:#C9CEDA}
+.gsw .store b{font:700 18px/1.2 var(--gs-display);letter-spacing:-.01em}
+.gsw .trust{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:22px;font-size:13.5px;color:var(--gs-steel)}
+.gsw .trust span::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--gs-flame);margin-right:8px;vertical-align:middle}
+.gsw .order{border:1px solid var(--gs-line);border-radius:14px;background:#fff;padding:20px}
+.gsw .order .oh{display:flex;align-items:center;gap:10px;font-weight:600;font-size:14px}
+.gsw .order .oh svg{width:22px;height:22px}
+.gsw .order .msg{font:700 20px/1.3 var(--gs-display);letter-spacing:-.01em;margin:14px 0 16px}
+.gsw .order ol{list-style:none;margin:0;padding:0}
+.gsw .order li{display:flex;align-items:center;gap:12px;padding:9px 0;border-top:1px solid var(--gs-line);font-size:14.5px}
+.gsw .order li i{width:12px;height:12px;border-radius:50%;border:2px solid var(--gs-line);flex:none}
+.gsw .order li.done i{background:var(--gs-ok);border-color:var(--gs-ok)}
+.gsw .order li.now i{background:var(--gs-flame);border-color:var(--gs-flame)}
+.gsw .order li.now{font-weight:600}
+.gsw .order li.next{color:var(--gs-mist)}
+.gsw .order .of{margin-top:12px;padding-top:12px;border-top:1px solid var(--gs-line);font-size:13.5px;color:var(--gs-steel)}
+.gsw .steps3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:32px}
+.gsw .step{background:#fff;border:1px solid var(--gs-line);border-radius:14px;padding:24px}
+.gsw .step .num{font:800 34px/1 var(--gs-display);color:var(--gs-flame);margin-bottom:14px}
+.gsw .step p{font-size:15px;color:var(--gs-steel)}
+.gsw .two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:start}
+.gsw .receipt{border:1px solid var(--gs-line);border-radius:14px;background:#fff;padding:8px 22px}
+.gsw .rl{display:flex;justify-content:space-between;gap:16px;padding:14px 0;border-top:1px solid var(--gs-line);font-size:15px}
+.gsw .rl:first-child{border-top:0}
+.gsw .rl small{display:block;font-size:12.5px;color:var(--gs-steel)}
+.gsw .rl .amt{font-variant-numeric:tabular-nums;font-weight:600;white-space:nowrap}
+.gsw .rl.tot{border-top:1px solid var(--gs-ink);font:800 20px/1.3 var(--gs-display)}
+.gsw .rnote{font-size:13.5px;color:var(--gs-steel);margin-top:12px}
+.gsw .why{list-style:none;margin:24px 0 0;padding:0}
+.gsw .why li{padding:14px 0;border-top:1px solid var(--gs-line);font-size:15px;color:var(--gs-steel)}
+.gsw .why li b{display:block;color:var(--gs-ink);font:700 17px/1.3 var(--gs-display);margin-bottom:2px}
+.gsw .join{border:1px solid var(--gs-line);border-radius:14px;background:#fff;padding:24px}
+.gsw .join .fg{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 14px;margin-top:16px}
+.gsw .join label{display:block;font-size:13px;font-weight:600;color:var(--gs-ink)}
+.gsw .join input[type=text],.gsw .join input[type=tel],.gsw .join input[type=date],.gsw .join input[type=file]{display:block;width:100%;margin-top:5px;font:400 15px/1.3 var(--gs-body);color:var(--gs-ink);border:1px solid var(--gs-line);border-radius:10px;padding:10px 12px;background:#fff}
+.gsw .join input[type=file]{font-size:13px;padding:8px}
+.gsw .join .full{grid-column:1/-1}
+.gsw .join .radios{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.gsw .join .radios label{display:flex;align-items:center;gap:6px;font-weight:500;border:1px solid var(--gs-line);border-radius:10px;padding:8px 12px}
+.gsw .join .consent{display:flex;gap:10px;align-items:flex-start;font-weight:400;color:var(--gs-steel);line-height:1.45}
+.gsw .join .consent input{margin-top:3px}
+.gsw .join .btn{border:0;cursor:pointer;margin-top:16px}
+.gsw .areas{list-style:none;margin:24px 0 0;padding:0;max-width:640px}
+.gsw .areas li{display:flex;justify-content:space-between;gap:16px;padding:14px 0;border-top:1px solid var(--gs-line);font-weight:600}
+.gsw .areas li span{font-weight:500;color:var(--gs-steel);text-align:right}
+.gsw .areas li.first span{color:var(--gs-flame-d);font-weight:600}
+.gsw .soon{display:grid;grid-template-columns:auto minmax(0,1fr);gap:32px;align-items:center}
+.gsw .soon svg{width:96px;height:96px}
+.gsw .soon .now{margin-top:14px;font-size:14.5px;color:var(--gs-steel)}
+.gsw .faq{margin-top:24px;max-width:780px}
+.gsw .faq details{border-top:1px solid var(--gs-line)}
+.gsw .faq details:last-child{border-bottom:1px solid var(--gs-line)}
+.gsw .faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px;padding:18px 0;font:700 17px/1.35 var(--gs-display)}
+.gsw .faq summary::-webkit-details-marker{display:none}
+.gsw .faq summary::after{content:"+";color:var(--gs-flame);font-weight:700}
+.gsw .faq details[open] summary::after{content:"\2212"}
+.gsw .faq details p{padding:0 0 18px;color:var(--gs-steel);font-size:15px}
+.gsw .cta{background:var(--gs-flame);color:#fff;padding:56px 0}
+.gsw .cta h3{color:#fff;margin:0}
+.gsw .cta .stores{margin-top:20px}
+.gsw .cta .store{background:#fff;color:var(--gs-ink)}
+.gsw .cta .store small{color:var(--gs-steel)}
+.gsw footer{background:var(--gs-base);padding:40px 0;font-size:13.5px;color:var(--gs-steel)}
+.gsw footer .fr{display:flex;flex-wrap:wrap;gap:24px;align-items:center;justify-content:space-between}
+.gsw footer svg{height:26px;width:auto;display:block}
+.gsw footer nav{display:flex;flex-wrap:wrap;gap:6px 18px}
+.gsw footer nav a{color:var(--gs-ink);text-decoration:none;font-weight:500}
+.gsw footer .legal{margin-top:20px;padding-top:16px;border-top:1px solid var(--gs-line);display:flex;flex-wrap:wrap;gap:6px 24px}
+@container site (max-width:820px){
+  .gsw .top nav{display:none}
+  .gsw .top .lang{margin-left:auto}
+  .gsw .hero,.gsw .two{grid-template-columns:1fr;gap:32px}
+  .gsw .steps3{grid-template-columns:1fr}
+  .gsw h2{font-size:40px}
+  .gsw h3{font-size:30px}
+  .gsw .band{padding:56px 0}
+}
+@container site (max-width:480px){
+  .gsw .in{padding:0 20px}
+  .gsw .top .btn{display:none}
+  .gsw h2{font-size:34px}
+  .gsw h3{font-size:27px}
+  .gsw .lead{font-size:16px}
+  .gsw .join{padding:18px}
+  .gsw .join .fg{grid-template-columns:1fr}
+  .gsw .store{flex:1 1 140px;min-width:0}
+  .gsw .soon{grid-template-columns:1fr;gap:16px}
+  .gsw .soon svg{width:64px;height:64px}
+}
+</style>
+<style>html.inframe .bmws{display:none}html.inframe .nav{top:0}</style>
+<script>if(window.top!==window)document.documentElement.classList.add("inframe");</script>
+</head>
+<body class="">
+<div class="bmws" style="--bmws-acc:#2536F5"><div class="bmws-in"><div class="bmws-crumb"><b>VIN Industries &middot; NakGas</b><span>Brand Method &middot; Super Admin Navigation</span></div><nav class="bmws-tabs" aria-label="Brand Method admin navigation"><a href="audit.html">App Audit</a><a href="competitors.html">Competitors</a><a href="plan.html">Plan</a><a href="brand.html">Brand Creation</a><a href="design.html">Design</a><a href="final-brand.html">Final Brand</a><a href="app.html">The App</a><a href="website.html" class="on">Website</a><a href="deck.html">Investor Deck</a><a href="codex.html">Codex</a><a href="map.html">Overview</a></nav></div></div>
+<nav class="nav" aria-label="Sections"><div class="nav-in"><a href="#sitemap">Site map</a><a href="#form">Dealer form</a><a href="#mockup">Mockup</a><a href="#notes">Notes on the mockup</a></div></nav>
+
+<main class="wrap">
+<header class="hero">
+  <div class="brandrow"><svg class="lockup" width="126" height="40" role="img" aria-label="nakgas" viewBox="0 0 169.6 59.8"><g class="fl" transform="translate(-3.50 3.54) scale(0.7037)"><path class="fl-o" d="M37 3.5C40.2 9.6 47.2 18.6 50.6 29.8C54.6 42.6 48.4 59.4 32.6 59.4C17.2 59.4 11 47 13.9 35.2C16.4 25 27.6 16.4 37 3.5Z" fill="#0CA66A"/><path class="fl-i" d="M32.6 31C35.2 36.4 40.4 40.6 40.4 46C40.4 50.6 36.8 53.2 32.6 53.2C28.4 53.2 24.8 50.6 24.8 46C24.8 40.6 30 36.4 32.6 31Z" fill="#8FDDB8"/></g><g transform="translate(41.58 45.34)"><path d="M1.94 0V-18.58H8.55V-17.37Q10.6 -18.96 13.6 -18.96Q15.58 -18.96 17.18 -18.03Q18.77 -17.1 19.68 -15.52Q20.6 -13.95 20.6 -12.01V0H13.98V-10.49Q13.98 -11.78 13.21 -12.52Q12.43 -13.26 11.29 -13.26Q10.11 -13.26 9.33 -12.52Q8.55 -11.78 8.55 -10.49V0ZM30.32 0.38Q27.74 0.38 25.73 -0.87Q23.71 -2.13 22.57 -4.31Q21.43 -6.5 21.43 -9.27Q21.43 -12.08 22.57 -14.27Q23.71 -16.45 25.73 -17.71Q27.74 -18.96 30.32 -18.96Q31.73 -18.96 32.97 -18.52Q34.2 -18.09 35.11 -17.29V-18.58H41.61V0H35.11V-1.25Q34.2 -0.49 32.97 -0.06Q31.73 0.38 30.32 0.38ZM31.73 -5.51Q33.36 -5.51 34.37 -6.55Q35.38 -7.6 35.38 -9.31Q35.38 -10.94 34.37 -12.01Q33.36 -13.07 31.77 -13.07Q30.17 -13.07 29.15 -12.01Q28.12 -10.94 28.12 -9.31Q28.12 -7.64 29.15 -6.57Q30.17 -5.51 31.73 -5.51ZM43.97 0V-27.7H50.58V-10.53L55.86 -18.58H63.12L56.81 -9.88L63.5 0H55.9L50.58 -8.82V0Z" fill="#0B1530"/><path d="M71.44 -0.68Q68.86 -0.68 66.86 -1.9Q64.87 -3.12 63.73 -5.19Q62.59 -7.26 62.59 -9.84Q62.59 -12.39 63.73 -14.46Q64.87 -16.53 66.86 -17.75Q68.86 -18.96 71.44 -18.96Q74.02 -18.96 75.85 -17.63V-18.58H82.35V-1.29Q82.35 1.67 80.96 3.86Q79.57 6.04 77.18 7.24Q74.78 8.44 71.74 8.44Q68.63 8.44 66.27 7.39Q63.92 6.35 62.59 4.45L66.58 0.49Q67.53 1.56 68.67 2.13Q69.81 2.7 71.44 2.7Q73.42 2.7 74.57 1.73Q75.73 0.76 75.73 -1.06V-1.9Q73.91 -0.68 71.44 -0.68ZM72.66 -6.42Q74.25 -6.42 75.18 -7.43Q76.11 -8.44 76.11 -9.84Q76.11 -11.21 75.18 -12.24Q74.25 -13.26 72.69 -13.26Q71.14 -13.26 70.2 -12.22Q69.27 -11.17 69.27 -9.84Q69.27 -8.51 70.19 -7.47Q71.1 -6.42 72.66 -6.42ZM92.42 0.38Q89.83 0.38 87.82 -0.87Q85.8 -2.13 84.66 -4.31Q83.52 -6.5 83.52 -9.27Q83.52 -12.08 84.66 -14.27Q85.8 -16.45 87.82 -17.71Q89.83 -18.96 92.42 -18.96Q93.82 -18.96 95.06 -18.52Q96.29 -18.09 97.2 -17.29V-18.58H103.7V0H97.2V-1.25Q96.29 -0.49 95.06 -0.06Q93.82 0.38 92.42 0.38ZM93.82 -5.51Q95.46 -5.51 96.46 -6.55Q97.47 -7.6 97.47 -9.31Q97.47 -10.94 96.46 -12.01Q95.46 -13.07 93.86 -13.07Q92.26 -13.07 91.24 -12.01Q90.21 -10.94 90.21 -9.31Q90.21 -7.64 91.24 -6.57Q92.26 -5.51 93.82 -5.51ZM113.13 0.53Q110.58 0.53 108.15 -0.44Q105.72 -1.41 104.27 -2.96L107.88 -6.65Q108.79 -5.7 110.07 -5.17Q111.34 -4.64 112.78 -4.64Q114.49 -4.64 114.49 -5.51Q114.49 -6.12 113.87 -6.44Q113.24 -6.76 112.23 -7.01Q111.23 -7.26 110.11 -7.6Q108.98 -7.94 108 -8.57Q107.01 -9.2 106.36 -10.28Q105.72 -11.36 105.72 -13.11Q105.72 -14.86 106.69 -16.23Q107.65 -17.59 109.4 -18.37Q111.15 -19.15 113.51 -19.15Q115.9 -19.15 118.07 -18.34Q120.23 -17.52 121.56 -15.88L117.91 -12.2Q117 -13.22 115.9 -13.62Q114.8 -14.02 113.89 -14.02Q112.25 -14.02 112.25 -13.11Q112.25 -12.58 112.88 -12.29Q113.51 -12.01 114.49 -11.76Q115.48 -11.51 116.6 -11.13Q117.72 -10.75 118.71 -10.09Q119.7 -9.42 120.33 -8.3Q120.95 -7.18 120.95 -5.47Q120.95 -2.7 118.83 -1.08Q116.7 0.53 113.13 0.53Z" fill="#0CA66A"/></g></svg></div>
+  <div class="kicker">Website &middot; Brand Method</div>
+  <h1>NakGas, <em>the website</em></h1>
+  <p class="lede">Two parts. Part 1 is the site map: every page of the 3 to 5 page site, its job, and the dealer form with every field and where it lands in the admin portal. Part 2 is the landing page drawn in the brand, in Bahasa Malaysia and English, so Navin can see the site before it is built.</p>
+  <div class="chips">
+    <span class="chip blue">3 to 5 pages plus the dealer form</span>
+    <span class="chip">7 pages in the map</span>
+    <span class="chip">Bahasa Malaysia and English</span>
+    <span class="chip">Built in Weeks 2 and 3</span>
+    <span class="chip low">Mockup only, nothing live</span>
+  </div>
+  <p class="status"><b>Status, Tue 6 Oct 2026.</b> Scoped in our proposal of Tue 29 Sep at RM4,000 before SST. Design starts in Week 2 once the identity is signed off; live at the end of Week 3. The domain is not registered: nakgas.my and nakgas.com.my were available on 20 Oct (MYNIC RDAP), and nakgas.com was unregistered the same day (Verisign RDAP).</p>
+</header>
+
+<section class="sec" id="sitemap">
+  <h2>Part 1: the site map</h2>
+  <p class="sub">Five pages carry the site, the dealer form sits on its own page as scoped, and the privacy policy is the legal page both app stores ask for. Every page exists in Bahasa Malaysia and English.</p>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>#</th><th>Page</th><th>Path</th><th>Job</th><th>What it carries</th><th>Main action</th><th>Counts</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td class="strong">Landing</td><td>/ &nbsp;&middot;&nbsp; /en/</td><td>Say what it is in one look and get the download</td><td>The tagline, a short app-in-motion video cut from the build&rsquo;s own screens (no filming), three steps, the honest bill, a dealer teaser, the smart regulator to come, a short FAQ</td><td>Download the app</td><td>Page 1</td></tr>
+      <tr><td>2</td><td class="strong">How it works</td><td>/cara-ia-berfungsi &nbsp;&middot;&nbsp; /en/how-it-works</td><td>Answer every question before the first order</td><td>New or swap, sizes, the 45 second accept, the four statuses, photo proof, cash or online, the bill line by line, high-rise addresses, cancellation rules, gas safety tips</td><td>Download the app</td><td>Page 2</td></tr>
+      <tr><td>3</td><td class="strong">About</td><td>/tentang-kami &nbsp;&middot;&nbsp; /en/about</td><td>Say who is behind it and why</td><td>Why NakGas exists, the flame story (green, with the blue variation of a clean burn), VIN Industries and its founder, Johor Bahru first</td><td>Download, or contact</td><td>Page 3</td></tr>
+      <tr><td>4</td><td class="strong">Contact</td><td>/hubungi &nbsp;&middot;&nbsp; /en/contact</td><td>Reach a person</td><td>Customer help, dealer enquiries, business details (to confirm), a short contact form</td><td>Send a message</td><td>Page 4</td></tr>
+      <tr><td>5</td><td class="strong">Download the app</td><td>/muat-turun &nbsp;&middot;&nbsp; /en/download</td><td>One link for every QR code, post and sticker</td><td>App Store and Google Play buttons; a phone is sent straight to its own store; a QR code on desktop</td><td>Open the store</td><td>Page 5</td></tr>
+      <tr><td>6</td><td class="strong">For dealers</td><td>/pengedar &nbsp;&middot;&nbsp; /en/dealers</td><td>Sign up licensed dealers</td><td>Why join (no commission, more orders, fewer calls, payments on record), how a dealer&rsquo;s day works in the app, the onboarding form</td><td>Send application</td><td>The form, scoped on top</td></tr>
+      <tr><td>7</td><td class="strong">Privacy policy</td><td>/privasi &nbsp;&middot;&nbsp; /en/privacy</td><td>Meet PDPA 2010 and the store rules</td><td>What is collected and why, how long it is kept, the person&rsquo;s rights, the consent on the form and in the apps</td><td>None</td><td>Legal page</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src"><span class="chip inf">Our read</span> Bahasa Malaysia at the root and English under /en/ lets each language be found in search. If the count must stay at five, Download the app can live as a section of the landing page with one short redirect link for QR codes. Both to confirm in Week 2.</p>
+
+  <h3>On every page</h3>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>Element</th><th>What it does</th></tr></thead>
+    <tbody>
+      <tr><td class="strong">Header</td><td>The lockup, the page links, the BM / EN switch, a Download button</td></tr>
+      <tr><td class="strong">Language</td><td>Bahasa Malaysia first; the switch keeps the reader on the same page in the other language and remembers the choice</td></tr>
+      <tr><td class="strong">Footer</td><td>Page links, the line on the KPDN controlled price, privacy policy, VIN Industries as the owner (legal entity to confirm)</td></tr>
+      <tr><td class="strong">Analytics</td><td>Page views, store button clicks, dealer applications sent; a consent notice for analytics cookies</td></tr>
+      <tr><td class="strong">Search</td><td>A title and description per page in both languages, a sitemap file, the two language versions linked to each other</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section class="sec" id="form">
+  <h2>The dealer form, and where it lands</h2>
+  <p class="sub">The For dealers page carries the onboarding form. It posts into Admin &rsaquo; Approvals, the same queue the supplier app feeds. Bank details are not asked here.</p>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>Field</th><th>Type</th><th>Required</th><th>Why</th><th>Lands in Admin as</th></tr></thead>
+    <tbody>
+      <tr><td class="strong">Business name, as on SSM</td><td>Text</td><td>Yes</td><td>Must match the licence and the SSM record</td><td>Supplier name</td></tr>
+      <tr><td class="strong">SSM registration number</td><td>Text</td><td>Yes</td><td>Identifies the business</td><td>Compliance: SSM</td></tr>
+      <tr><td class="strong">KPDN licence number</td><td>Text</td><td>Yes</td><td>The licence to sell LPG</td><td>Compliance: KPDN licence</td></tr>
+      <tr><td class="strong">Licence expiry date</td><td>Date</td><td>Yes</td><td>The expiry is tracked and flagged</td><td>Licence expiry, flagged ahead of time</td></tr>
+      <tr><td class="strong">Licence copy</td><td>File, PDF or photo</td><td>Yes</td><td>An admin checks the document</td><td>Compliance documents</td></tr>
+      <tr><td class="strong">Contact name</td><td>Text</td><td>Yes</td><td>Who the admin speaks to</td><td>Contact</td></tr>
+      <tr><td class="strong">Mobile number</td><td>Phone</td><td>Yes</td><td>Becomes the supplier app login after approval</td><td>Login number for the SMS invite</td></tr>
+      <tr><td class="strong">Email</td><td>Email</td><td>No</td><td>Statements and notices</td><td>Contact</td></tr>
+      <tr><td class="strong">Business address</td><td>Text</td><td>Yes</td><td>The base the delivery radius is drawn from</td><td>Branch address, a pin on the heat map</td></tr>
+      <tr><td class="strong">Town or area</td><td>Choice</td><td>Yes</td><td>Checks the launch region</td><td>Area filter</td></tr>
+      <tr><td class="strong">Operation: shop, truck or both</td><td>Choice</td><td>Yes</td><td>Sets the role in the supplier app</td><td>Role: shop operator or driver operator</td></tr>
+      <tr><td class="strong">Trucks and drivers</td><td>Number</td><td>No</td><td>Fleet size</td><td>Fleet, completed in the app</td></tr>
+      <tr><td class="strong">LPG brands and sizes carried</td><td>Multiple choice</td><td>Yes</td><td>Orders go only to dealers with the right stock</td><td>Stock, completed in the app</td></tr>
+      <tr><td class="strong">Consent</td><td>Tick box</td><td>Yes</td><td>PDPA consent to process the details and to be contacted</td><td>Consent record with the time</td></tr>
+    </tbody>
+  </table></div>
+  <div class="grid g2">
+    <div>
+      <h3>What happens after Send</h3>
+      <ol class="land">
+        <li>The application lands in Admin &rsaquo; Approvals as New, source Website, with the time.</li>
+        <li>An admin checks the KPDN licence: number, expiry, and that the name matches SSM.</li>
+        <li>Approved: the dealer gets an SMS invite to the supplier app, logs in with the same mobile number, and the record moves to Suppliers.</li>
+        <li>In the app the dealer adds the bank account, drivers and trucks, stock and the delivery radius, then can go online.</li>
+        <li>Rejected: the reason is recorded and sent to the dealer.</li>
+      </ol>
+    </div>
+    <div>
+      <h3>Not settled</h3>
+      <div class="note low">
+        <ul class="clean">
+          <li>How the team is told a new application has arrived. Owner: Navin.</li>
+          <li>Whether KPDN offers a licence lookup or the check stays by document. Owner: Navin.</li>
+          <li><span class="chip inf">Our read</span> A duplicate check on the mobile number and the SSM number stops one dealer applying twice.</li>
+          <li><span class="chip inf">Our read</span> Bank details stay inside the supplier app, after approval, rather than on a public web form.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="mockup">
+  <h2>Part 2: the landing page, drawn</h2>
+  <p class="sub">The landing page in the NakGas brand. Use the BM / EN switch in its header to swap every line of copy, and the width switch on the frame to see it at phone width. Light on purpose: it shows the content and the order of the page, not the final art.</p>
+
+  <div class="frame" id="frame">
+    <div class="frame-bar"><b>Mockup, not live</b><span class="url">nakgas.my &middot; domain to confirm</span><span class="ctl" role="group" aria-label="Frame width"><button type="button" data-w="desk" aria-pressed="true">Desktop</button><button type="button" data-w="phone" aria-pressed="false">Phone</button></span></div>
+
+    <div class="gsw" id="gsw" data-lang="ms">
+      <div class="in">
+        <div class="top">
+          <svg xmlns="http://www.w3.org/2000/svg" role="img" aria-label="nakgas" viewBox="0 0 169.6 59.8"><g class="fl" transform="translate(-3.50 3.54) scale(0.7037)"><path class="fl-o" d="M37 3.5C40.2 9.6 47.2 18.6 50.6 29.8C54.6 42.6 48.4 59.4 32.6 59.4C17.2 59.4 11 47 13.9 35.2C16.4 25 27.6 16.4 37 3.5Z" fill="#0CA66A"/><path class="fl-i" d="M32.6 31C35.2 36.4 40.4 40.6 40.4 46C40.4 50.6 36.8 53.2 32.6 53.2C28.4 53.2 24.8 50.6 24.8 46C24.8 40.6 30 36.4 32.6 31Z" fill="#8FDDB8"/></g><g transform="translate(41.58 45.34)"><path d="M1.94 0V-18.58H8.55V-17.37Q10.6 -18.96 13.6 -18.96Q15.58 -18.96 17.18 -18.03Q18.77 -17.1 19.68 -15.52Q20.6 -13.95 20.6 -12.01V0H13.98V-10.49Q13.98 -11.78 13.21 -12.52Q12.43 -13.26 11.29 -13.26Q10.11 -13.26 9.33 -12.52Q8.55 -11.78 8.55 -10.49V0ZM30.32 0.38Q27.74 0.38 25.73 -0.87Q23.71 -2.13 22.57 -4.31Q21.43 -6.5 21.43 -9.27Q21.43 -12.08 22.57 -14.27Q23.71 -16.45 25.73 -17.71Q27.74 -18.96 30.32 -18.96Q31.73 -18.96 32.97 -18.52Q34.2 -18.09 35.11 -17.29V-18.58H41.61V0H35.11V-1.25Q34.2 -0.49 32.97 -0.06Q31.73 0.38 30.32 0.38ZM31.73 -5.51Q33.36 -5.51 34.37 -6.55Q35.38 -7.6 35.38 -9.31Q35.38 -10.94 34.37 -12.01Q33.36 -13.07 31.77 -13.07Q30.17 -13.07 29.15 -12.01Q28.12 -10.94 28.12 -9.31Q28.12 -7.64 29.15 -6.57Q30.17 -5.51 31.73 -5.51ZM43.97 0V-27.7H50.58V-10.53L55.86 -18.58H63.12L56.81 -9.88L63.5 0H55.9L50.58 -8.82V0Z" fill="#0B1530"/><path d="M71.44 -0.68Q68.86 -0.68 66.86 -1.9Q64.87 -3.12 63.73 -5.19Q62.59 -7.26 62.59 -9.84Q62.59 -12.39 63.73 -14.46Q64.87 -16.53 66.86 -17.75Q68.86 -18.96 71.44 -18.96Q74.02 -18.96 75.85 -17.63V-18.58H82.35V-1.29Q82.35 1.67 80.96 3.86Q79.57 6.04 77.18 7.24Q74.78 8.44 71.74 8.44Q68.63 8.44 66.27 7.39Q63.92 6.35 62.59 4.45L66.58 0.49Q67.53 1.56 68.67 2.13Q69.81 2.7 71.44 2.7Q73.42 2.7 74.57 1.73Q75.73 0.76 75.73 -1.06V-1.9Q73.91 -0.68 71.44 -0.68ZM72.66 -6.42Q74.25 -6.42 75.18 -7.43Q76.11 -8.44 76.11 -9.84Q76.11 -11.21 75.18 -12.24Q74.25 -13.26 72.69 -13.26Q71.14 -13.26 70.2 -12.22Q69.27 -11.17 69.27 -9.84Q69.27 -8.51 70.19 -7.47Q71.1 -6.42 72.66 -6.42ZM92.42 0.38Q89.83 0.38 87.82 -0.87Q85.8 -2.13 84.66 -4.31Q83.52 -6.5 83.52 -9.27Q83.52 -12.08 84.66 -14.27Q85.8 -16.45 87.82 -17.71Q89.83 -18.96 92.42 -18.96Q93.82 -18.96 95.06 -18.52Q96.29 -18.09 97.2 -17.29V-18.58H103.7V0H97.2V-1.25Q96.29 -0.49 95.06 -0.06Q93.82 0.38 92.42 0.38ZM93.82 -5.51Q95.46 -5.51 96.46 -6.55Q97.47 -7.6 97.47 -9.31Q97.47 -10.94 96.46 -12.01Q95.46 -13.07 93.86 -13.07Q92.26 -13.07 91.24 -12.01Q90.21 -10.94 90.21 -9.31Q90.21 -7.64 91.24 -6.57Q92.26 -5.51 93.82 -5.51ZM113.13 0.53Q110.58 0.53 108.15 -0.44Q105.72 -1.41 104.27 -2.96L107.88 -6.65Q108.79 -5.7 110.07 -5.17Q111.34 -4.64 112.78 -4.64Q114.49 -4.64 114.49 -5.51Q114.49 -6.12 113.87 -6.44Q113.24 -6.76 112.23 -7.01Q111.23 -7.26 110.11 -7.6Q108.98 -7.94 108 -8.57Q107.01 -9.2 106.36 -10.28Q105.72 -11.36 105.72 -13.11Q105.72 -14.86 106.69 -16.23Q107.65 -17.59 109.4 -18.37Q111.15 -19.15 113.51 -19.15Q115.9 -19.15 118.07 -18.34Q120.23 -17.52 121.56 -15.88L117.91 -12.2Q117 -13.22 115.9 -13.62Q114.8 -14.02 113.89 -14.02Q112.25 -14.02 112.25 -13.11Q112.25 -12.58 112.88 -12.29Q113.51 -12.01 114.49 -11.76Q115.48 -11.51 116.6 -11.13Q117.72 -10.75 118.71 -10.09Q119.7 -9.42 120.33 -8.3Q120.95 -7.18 120.95 -5.47Q120.95 -2.7 118.83 -1.08Q116.7 0.53 113.13 0.53Z" fill="#0CA66A"/></g></svg>
+          <nav aria-label="Site">
+            <a href="#gsw-how"><span lang="ms">Cara ia berfungsi</span><span lang="en">How it works</span></a>
+            <a href="#gsw-bill"><span lang="ms">Harga</span><span lang="en">Price</span></a>
+            <a href="#gsw-dealers"><span lang="ms">Untuk pengedar</span><span lang="en">For dealers</span></a>
+            <a href="#gsw-areas"><span lang="ms">Kawasan</span><span lang="en">Areas</span></a>
+            <a href="#gsw-faq"><span lang="ms">Soalan lazim</span><span lang="en">FAQ</span></a>
+          </nav>
+          <div class="lang" role="group" aria-label="Bahasa / Language"><button type="button" data-setlang="ms" aria-pressed="true">BM</button><button type="button" data-setlang="en" aria-pressed="false">EN</button></div>
+          <a class="btn" href="#gsw-get"><span lang="ms">Muat turun</span><span lang="en">Download</span></a>
+        </div>
+
+        <div class="hero">
+          <div>
+            <div class="eyebrow"><span lang="ms">Penghantaran gas memasak LPG</span><span lang="en">Gas sampai. Tak payah call.</span></div>
+            <h2><span lang="ms">Gas sampai. Tak payah call.</span><span lang="en">Your gas, without the phone call.</span></h2>
+            <p class="lead" lang="ms">Pesan tong gas daripada pengedar berlesen yang paling dekat dengan anda. Harga kawalan KPDN dipaparkan dahulu, satu fi kecil sahaja, dan tak perlu lagi telefon sana sini.</p>
+            <p class="lead" lang="en">Order a gas cylinder from the licensed dealer nearest you. The KPDN controlled price shown first, one small fee, and no more calling around.</p>
+            <div class="stores">
+              <span class="store"><small><span lang="ms">Muat turun di</span><span lang="en">Download on the</span></small><b>App Store</b></span>
+              <span class="store"><small><span lang="ms">Dapatkan di</span><span lang="en">Get it on</span></small><b>Google Play</b></span>
+            </div>
+            <div class="trust">
+              <span><span lang="ms">Pengedar berlesen KPDN</span><span lang="en">KPDN licensed dealers</span></span>
+              <span><span lang="ms">Bayar tunai atau dalam talian</span><span lang="en">Pay cash or online</span></span>
+              <span><span lang="ms">Bukti gambar setiap penghantaran</span><span lang="en">Photo proof on every delivery</span></span>
+            </div>
+          </div>
+          <div class="order" aria-label="Order status example">
+            <div class="oh"><svg aria-hidden="true" viewBox="0 0 64 64"><g class="fl" transform="translate(0.00 0.00) scale(1.0000)"><path class="fl-o" d="M37 3.5C40.2 9.6 47.2 18.6 50.6 29.8C54.6 42.6 48.4 59.4 32.6 59.4C17.2 59.4 11 47 13.9 35.2C16.4 25 27.6 16.4 37 3.5Z" fill="#0CA66A"/><path class="fl-i" d="M32.6 31C35.2 36.4 40.4 40.6 40.4 46C40.4 50.6 36.8 53.2 32.6 53.2C28.4 53.2 24.8 50.6 24.8 46C24.8 40.6 30 36.4 32.6 31Z" fill="#8FDDB8"/></g></svg><span lang="ms">Pesanan anda</span><span lang="en">Your order</span></div>
+            <div class="msg"><span lang="ms">Pesanan diterima. Abang gas sedang dalam perjalanan.</span><span lang="en">Order received. Your dealer is on the way.</span></div>
+            <ol>
+              <li class="done"><i></i><span lang="ms">Pesanan disahkan</span><span lang="en">Confirmed</span></li>
+              <li class="done"><i></i><span lang="ms">Pengedar ditetapkan</span><span lang="en">Dealer assigned</span></li>
+              <li class="now"><i></i><span lang="ms">Dalam perjalanan</span><span lang="en">Out for delivery</span></li>
+              <li class="next"><i></i><span lang="ms">Sampai</span><span lang="en">Delivered</span></li>
+            </ol>
+            <div class="of"><span lang="ms">1 &times; 14 kg &middot; Tunai semasa penghantaran &middot; RM33.50</span><span lang="en">1 &times; 14 kg &middot; Cash on delivery &middot; RM33.50</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="band base" id="gsw-how">
+        <div class="in">
+          <div class="eyebrow"><span lang="ms">Cara ia berfungsi</span><span lang="en">How it works</span></div>
+          <h3><span lang="ms">Tiga langkah. Tiada panggilan.</span><span lang="en">Three steps. No calls.</span></h3>
+          <div class="steps3">
+            <div class="step"><div class="num">1</div><h4><span lang="ms">Pesan</span><span lang="en">Order</span></h4>
+              <p lang="ms">Pilih tong baharu atau tukar tong, saiz, kuantiti dan masa. Dua ketikan sahaja.</p>
+              <p lang="en">Choose new or swap, the size, how many and when. Two taps.</p></div>
+            <div class="step"><div class="num">2</div><h4><span lang="ms">Pengedar terdekat terima</span><span lang="en">The nearest dealer accepts</span></h4>
+              <p lang="ms">Pengedar berlesen yang paling dekat ada 45 saat untuk menerima. Jika tidak, pesanan terus pergi ke pengedar seterusnya.</p>
+              <p lang="en">The nearest licensed dealer has 45 seconds to accept. If not, the order goes straight to the next one.</p></div>
+            <div class="step"><div class="num">3</div><h4><span lang="ms">Gas sampai</span><span lang="en">Your gas arrives</span></h4>
+              <p lang="ms">Ikuti status pesanan anda. Pengedar mengambil gambar semasa penghantaran, dan resit terus masuk ke telefon anda.</p>
+              <p lang="en">Follow each status. The dealer takes a photo at delivery, and the receipt goes straight to your phone.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="band" id="gsw-bill">
+        <div class="in two">
+          <div>
+            <div class="eyebrow"><span lang="ms">Harga</span><span lang="en">Price</span></div>
+            <h3><span lang="ms">Bil yang jujur. Harga kawalan dahulu.</span><span lang="en">An honest bill. The controlled price first.</span></h3>
+            <p class="lead" lang="ms">Harga gas LPG ditetapkan oleh KPDN, jadi ia sentiasa baris pertama. Caj penghantaran dan fi platform ditunjukkan berasingan, sebelum anda membayar.</p>
+            <p class="lead" lang="en">The LPG price is set by KPDN, so it is always the first line. The delivery fee and the platform fee are shown separately, before you pay.</p>
+          </div>
+          <div>
+            <div class="receipt">
+              <div class="rl"><span><span lang="ms">Gas LPG 14 kg, harga kawalan KPDN</span><span lang="en">LPG 14 kg, KPDN controlled price</span><small><span lang="ms">RM1.90 sekilogram, ditetapkan oleh kerajaan</span><span lang="en">RM1.90 a kilo, set by the government</span></small></span><span class="amt">RM26.60</span></div>
+              <div class="rl"><span><span lang="ms">Caj penghantaran</span><span lang="en">Delivery fee</span></span><span class="amt">RM3.40</span></div>
+              <div class="rl"><span><span lang="ms">Fi platform &amp; pemprosesan</span><span lang="en">Platform &amp; processing fee</span><small><span lang="ms">Sekali bagi setiap pesanan</span><span lang="en">Once per order</span></small></span><span class="amt">RM3.50</span></div>
+              <div class="rl tot"><span><span lang="ms">Jumlah</span><span lang="en">Total</span></span><span class="amt">RM33.50</span></div>
+            </div>
+            <p class="rnote" lang="ms">Contoh untuk satu tong 14 kg di Johor Bahru. Fi platform dikenakan sekali bagi setiap pesanan, bukan bagi setiap tong: dua tong dalam satu pesanan berjumlah RM63.50.</p>
+            <p class="rnote" lang="en">Example for one 14 kg cylinder in Johor Bahru. The platform fee is charged once per order, not per cylinder: two cylinders in one order come to RM63.50.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="band base" id="gsw-dealers">
+        <div class="in two">
+          <div>
+            <div class="eyebrow"><span lang="ms">Untuk pengedar</span><span lang="en">For dealers</span></div>
+            <h3><span lang="ms">Anda sudah hantar gas. Kami bawa lebih banyak pesanan.</span><span lang="en">You already deliver gas. We bring you more orders.</span></h3>
+            <ul class="why">
+              <li><b><span lang="ms">Tiada komisen.</span><span lang="en">No commission.</span></b><span lang="ms">Anda simpan harga gas dan caj penghantaran anda. Fi platform dibayar oleh pelanggan.</span><span lang="en">You keep the gas price and your delivery fee. The customer pays the platform fee.</span></li>
+              <li><b><span lang="ms">Lebih banyak pesanan.</span><span lang="en">More orders.</span></b><span lang="ms">Pesanan dari kawasan anda terus masuk ke telefon anda, yang paling dekat dahulu.</span><span lang="en">Orders from your area come straight to your phone, nearest first.</span></li>
+              <li><b><span lang="ms">Kurang panggilan.</span><span lang="en">Fewer calls.</span></b><span lang="ms">Alamat, tingkat, lif dan nombor unit sudah tertulis sebelum anda bertolak.</span><span lang="en">Address, floor, lift and unit are written down before you set off.</span></li>
+              <li><b><span lang="ms">Bayaran tercatat.</span><span lang="en">Payments on record.</span></b><span lang="ms">Pesanan tunai dan dalam talian direkodkan dalam satu dompet, berserta sejarah bayaran.</span><span lang="en">Cash and online orders recorded in one wallet, with every payout listed.</span></li>
+            </ul>
+          </div>
+          <form class="join" action="#" onsubmit="return false" aria-label="Dealer application, mockup">
+            <h4><span lang="ms">Sertai sebagai pengedar</span><span lang="en">Join as a dealer</span></h4>
+            <p class="rnote" lang="ms">Kami semak lesen KPDN anda, kemudian hantar jemputan ke aplikasi pengedar melalui SMS.</p>
+            <p class="rnote" lang="en">We check your KPDN licence, then send an invite to the dealer app by SMS.</p>
+            <div class="fg">
+              <label class="full" for="j1"><span lang="ms">Nama perniagaan (seperti dalam SSM)</span><span lang="en">Business name (as on SSM)</span><input type="text" id="j1" autocomplete="off"></label>
+              <label for="j2"><span lang="ms">No. pendaftaran SSM</span><span lang="en">SSM registration number</span><input type="text" id="j2" autocomplete="off"></label>
+              <label for="j3"><span lang="ms">No. lesen KPDN</span><span lang="en">KPDN licence number</span><input type="text" id="j3" autocomplete="off"></label>
+              <label for="j4"><span lang="ms">Tarikh tamat lesen</span><span lang="en">Licence expiry date</span><input type="date" id="j4"></label>
+              <label for="j5"><span lang="ms">Salinan lesen (PDF atau gambar)</span><span lang="en">Licence copy (PDF or photo)</span><input type="file" id="j5" accept=".pdf,image/*"></label>
+              <label for="j6"><span lang="ms">Nama untuk dihubungi</span><span lang="en">Contact name</span><input type="text" id="j6" autocomplete="off"></label>
+              <label for="j7"><span lang="ms">No. telefon bimbit</span><span lang="en">Mobile number</span><input type="tel" id="j7" autocomplete="off"></label>
+              <label class="full" for="j8"><span lang="ms">Bandar atau kawasan</span><span lang="en">Town or area</span><input type="text" id="j8" autocomplete="off"></label>
+              <div class="full"><label><span lang="ms">Jenis operasi</span><span lang="en">Operation</span></label>
+                <div class="radios">
+                  <label><input type="radio" name="op" value="shop"><span lang="ms">Kedai</span><span lang="en">Shop</span></label>
+                  <label><input type="radio" name="op" value="truck"><span lang="ms">Lori</span><span lang="en">Truck</span></label>
+                  <label><input type="radio" name="op" value="both"><span lang="ms">Kedua-duanya</span><span lang="en">Both</span></label>
+                </div></div>
+              <label class="full consent"><input type="checkbox"><span><span lang="ms">Saya bersetuju dengan Dasar Privasi dan untuk dihubungi oleh NakGas.</span><span lang="en">I agree to the Privacy Policy and to be contacted by NakGas.</span></span></label>
+            </div>
+            <button type="button" class="btn"><span lang="ms">Hantar permohonan</span><span lang="en">Send application</span></button>
+          </form>
+        </div>
+      </div>
+
+      <div class="band" id="gsw-areas">
+        <div class="in">
+          <div class="eyebrow"><span lang="ms">Kawasan</span><span lang="en">Areas</span></div>
+          <h3><span lang="ms">Bermula di Johor Bahru.</span><span lang="en">Starting in Johor Bahru.</span></h3>
+          <p class="lead" lang="ms">NakGas bermula dengan pengedar di Johor Bahru, dan berkembang ke kawasan lain apabila lebih ramai pengedar tempatan menyertai.</p>
+          <p class="lead" lang="en">NakGas starts with dealers in Johor Bahru, and grows to more areas as more local dealers join.</p>
+          <ul class="areas">
+            <li class="first">Johor Bahru <span><span lang="ms">Pertama</span><span lang="en">First</span></span></li>
+            <li><span lang="ms">Bandar lain di Johor</span><span lang="en">The rest of Johor</span> <span><span lang="ms">Seterusnya</span><span lang="en">Next</span></span></li>
+            <li><span lang="ms">Seluruh Malaysia</span><span lang="en">All of Malaysia</span> <span><span lang="ms">Apabila pengedar menyertai</span><span lang="en">As dealers join</span></span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="band base">
+        <div class="in soon">
+          <svg aria-hidden="true" viewBox="0 0 64 64"><g class="fl" transform="translate(0.00 0.00) scale(1.0000)"><path class="fl-o" d="M37 3.5C40.2 9.6 47.2 18.6 50.6 29.8C54.6 42.6 48.4 59.4 32.6 59.4C17.2 59.4 11 47 13.9 35.2C16.4 25 27.6 16.4 37 3.5Z" fill="#0CA66A"/><path class="fl-i" d="M32.6 31C35.2 36.4 40.4 40.6 40.4 46C40.4 50.6 36.8 53.2 32.6 53.2C28.4 53.2 24.8 50.6 24.8 46C24.8 40.6 30 36.4 32.6 31Z" fill="#8FDDB8"/></g></svg>
+          <div>
+            <div class="eyebrow"><span lang="ms">Akan datang</span><span lang="en">Coming next</span></div>
+            <h3><span lang="ms">Regulator gas pintar.</span><span lang="en">The smart regulator.</span></h3>
+            <p class="lead" lang="ms">Ibu kita tahu gas hampir habis dengan melihat warna api. Regulator pintar akan memberitahu baki gas anda sebelum api berubah, dan mengingatkan anda untuk memesan.</p>
+            <p class="lead" lang="en">Our mothers knew the gas was low from the colour of the flame. A smart regulator will tell you how much gas is left before the flame changes, and remind you to order.</p>
+            <p class="now" lang="ms">Buat masa ini, aplikasi mengingatkan anda mengikut tempoh pesanan anda sendiri, kira-kira setiap 28 hingga 30 hari. Anda boleh mengubahnya.</p>
+            <p class="now" lang="en">For now, the app reminds you on your own ordering rhythm, about every 28 to 30 days. You can change it.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="band" id="gsw-faq">
+        <div class="in">
+          <div class="eyebrow"><span lang="ms">Soalan lazim</span><span lang="en">FAQ</span></div>
+          <h3><span lang="ms">Soalan yang selalu ditanya.</span><span lang="en">Questions people ask.</span></h3>
+          <div class="faq">
+            <details><summary><span lang="ms">Berapakah harga gas?</span><span lang="en">How much is the gas?</span></summary>
+              <p lang="ms">Tong gas LPG 14 kg dijual pada harga kawalan KPDN, RM26.60 (RM1.90 sekilogram). Caj penghantaran dan fi platform ditunjukkan sebagai baris berasingan sebelum anda membayar.</p>
+              <p lang="en">A 14 kg LPG cylinder is sold at the KPDN controlled price, RM26.60 (RM1.90 a kilo). The delivery fee and the platform fee are shown as separate lines before you pay.</p></details>
+            <details><summary><span lang="ms">Siapakah yang menghantar gas?</span><span lang="en">Who delivers the gas?</span></summary>
+              <p lang="ms">Pengedar gas berlesen KPDN di kawasan anda, yang memang menghantar gas setiap hari. Anda akan nampak nama pengedar dan nombor plat lori.</p>
+              <p lang="en">A KPDN licensed dealer in your area, the ones already delivering gas every day. You see the dealer&rsquo;s name and the truck plate.</p></details>
+            <details><summary><span lang="ms">Boleh bayar tunai?</span><span lang="en">Can I pay cash?</span></summary>
+              <p lang="ms">Boleh. Bayar tunai semasa gas sampai, atau bayar dalam talian melalui FPX, kad atau e-dompet.</p>
+              <p lang="en">Yes. Pay cash when the gas arrives, or pay online by FPX, card or e-wallet.</p></details>
+            <details><summary><span lang="ms">Saya tinggal di bangunan tinggi. Boleh hantar?</span><span lang="en">I live in a high-rise. Can you deliver?</span></summary>
+              <p lang="ms">Boleh. Simpan alamat anda bersama tingkat, lif dan nombor unit, supaya pengedar tahu sebelum sampai. Caj penghantaran untuk bangunan tinggi mungkin berbeza.</p>
+              <p lang="en">Yes. Save your address with the floor, lift and unit, so the dealer knows before arriving. The delivery fee for a high-rise may differ.</p></details>
+            <details><summary><span lang="ms">Boleh tukar tong kosong?</span><span lang="en">Can I swap my empty cylinder?</span></summary>
+              <p lang="ms">Boleh. Pilih Tukar tong, dan pengedar akan mengambil tong kosong anda. Jika belum ada tong, pilih Tong baharu; harganya ditunjukkan sebelum anda membayar.</p>
+              <p lang="en">Yes. Choose Swap and the dealer takes your empty cylinder. No cylinder yet: choose New cylinder, and its price is shown before you pay.</p></details>
+            <details><summary><span lang="ms">Bagaimana jika tiada pengedar yang menerima?</span><span lang="en">What if no dealer accepts?</span></summary>
+              <p lang="ms">Pesanan anda dihantar kepada pengedar terdekat yang seterusnya. Jika empat pengedar menolak, pasukan kami mengambil alih pesanan anda dan menguruskannya sendiri.</p>
+              <p lang="en">Your order goes to the next nearest dealer. If four dealers decline, our team takes over your order and handles it directly.</p></details>
+          </div>
+        </div>
+      </div>
+
+      <div class="cta" id="gsw-get">
+        <div class="in">
+          <h3><span lang="ms">Pesanan gas seterusnya, tanpa panggilan.</span><span lang="en">Your next gas order, without a call.</span></h3>
+          <div class="stores">
+            <span class="store"><small><span lang="ms">Muat turun di</span><span lang="en">Download on the</span></small><b>App Store</b></span>
+            <span class="store"><small><span lang="ms">Dapatkan di</span><span lang="en">Get it on</span></small><b>Google Play</b></span>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="in">
+          <div class="fr">
+            <svg xmlns="http://www.w3.org/2000/svg" role="img" aria-label="nakgas" viewBox="0 0 169.6 59.8"><g class="fl" transform="translate(-3.50 3.54) scale(0.7037)"><path class="fl-o" d="M37 3.5C40.2 9.6 47.2 18.6 50.6 29.8C54.6 42.6 48.4 59.4 32.6 59.4C17.2 59.4 11 47 13.9 35.2C16.4 25 27.6 16.4 37 3.5Z" fill="#0CA66A"/><path class="fl-i" d="M32.6 31C35.2 36.4 40.4 40.6 40.4 46C40.4 50.6 36.8 53.2 32.6 53.2C28.4 53.2 24.8 50.6 24.8 46C24.8 40.6 30 36.4 32.6 31Z" fill="#8FDDB8"/></g><g transform="translate(41.58 45.34)"><path d="M1.94 0V-18.58H8.55V-17.37Q10.6 -18.96 13.6 -18.96Q15.58 -18.96 17.18 -18.03Q18.77 -17.1 19.68 -15.52Q20.6 -13.95 20.6 -12.01V0H13.98V-10.49Q13.98 -11.78 13.21 -12.52Q12.43 -13.26 11.29 -13.26Q10.11 -13.26 9.33 -12.52Q8.55 -11.78 8.55 -10.49V0ZM30.32 0.38Q27.74 0.38 25.73 -0.87Q23.71 -2.13 22.57 -4.31Q21.43 -6.5 21.43 -9.27Q21.43 -12.08 22.57 -14.27Q23.71 -16.45 25.73 -17.71Q27.74 -18.96 30.32 -18.96Q31.73 -18.96 32.97 -18.52Q34.2 -18.09 35.11 -17.29V-18.58H41.61V0H35.11V-1.25Q34.2 -0.49 32.97 -0.06Q31.73 0.38 30.32 0.38ZM31.73 -5.51Q33.36 -5.51 34.37 -6.55Q35.38 -7.6 35.38 -9.31Q35.38 -10.94 34.37 -12.01Q33.36 -13.07 31.77 -13.07Q30.17 -13.07 29.15 -12.01Q28.12 -10.94 28.12 -9.31Q28.12 -7.64 29.15 -6.57Q30.17 -5.51 31.73 -5.51ZM43.97 0V-27.7H50.58V-10.53L55.86 -18.58H63.12L56.81 -9.88L63.5 0H55.9L50.58 -8.82V0Z" fill="#0B1530"/><path d="M71.44 -0.68Q68.86 -0.68 66.86 -1.9Q64.87 -3.12 63.73 -5.19Q62.59 -7.26 62.59 -9.84Q62.59 -12.39 63.73 -14.46Q64.87 -16.53 66.86 -17.75Q68.86 -18.96 71.44 -18.96Q74.02 -18.96 75.85 -17.63V-18.58H82.35V-1.29Q82.35 1.67 80.96 3.86Q79.57 6.04 77.18 7.24Q74.78 8.44 71.74 8.44Q68.63 8.44 66.27 7.39Q63.92 6.35 62.59 4.45L66.58 0.49Q67.53 1.56 68.67 2.13Q69.81 2.7 71.44 2.7Q73.42 2.7 74.57 1.73Q75.73 0.76 75.73 -1.06V-1.9Q73.91 -0.68 71.44 -0.68ZM72.66 -6.42Q74.25 -6.42 75.18 -7.43Q76.11 -8.44 76.11 -9.84Q76.11 -11.21 75.18 -12.24Q74.25 -13.26 72.69 -13.26Q71.14 -13.26 70.2 -12.22Q69.27 -11.17 69.27 -9.84Q69.27 -8.51 70.19 -7.47Q71.1 -6.42 72.66 -6.42ZM92.42 0.38Q89.83 0.38 87.82 -0.87Q85.8 -2.13 84.66 -4.31Q83.52 -6.5 83.52 -9.27Q83.52 -12.08 84.66 -14.27Q85.8 -16.45 87.82 -17.71Q89.83 -18.96 92.42 -18.96Q93.82 -18.96 95.06 -18.52Q96.29 -18.09 97.2 -17.29V-18.58H103.7V0H97.2V-1.25Q96.29 -0.49 95.06 -0.06Q93.82 0.38 92.42 0.38ZM93.82 -5.51Q95.46 -5.51 96.46 -6.55Q97.47 -7.6 97.47 -9.31Q97.47 -10.94 96.46 -12.01Q95.46 -13.07 93.86 -13.07Q92.26 -13.07 91.24 -12.01Q90.21 -10.94 90.21 -9.31Q90.21 -7.64 91.24 -6.57Q92.26 -5.51 93.82 -5.51ZM113.13 0.53Q110.58 0.53 108.15 -0.44Q105.72 -1.41 104.27 -2.96L107.88 -6.65Q108.79 -5.7 110.07 -5.17Q111.34 -4.64 112.78 -4.64Q114.49 -4.64 114.49 -5.51Q114.49 -6.12 113.87 -6.44Q113.24 -6.76 112.23 -7.01Q111.23 -7.26 110.11 -7.6Q108.98 -7.94 108 -8.57Q107.01 -9.2 106.36 -10.28Q105.72 -11.36 105.72 -13.11Q105.72 -14.86 106.69 -16.23Q107.65 -17.59 109.4 -18.37Q111.15 -19.15 113.51 -19.15Q115.9 -19.15 118.07 -18.34Q120.23 -17.52 121.56 -15.88L117.91 -12.2Q117 -13.22 115.9 -13.62Q114.8 -14.02 113.89 -14.02Q112.25 -14.02 112.25 -13.11Q112.25 -12.58 112.88 -12.29Q113.51 -12.01 114.49 -11.76Q115.48 -11.51 116.6 -11.13Q117.72 -10.75 118.71 -10.09Q119.7 -9.42 120.33 -8.3Q120.95 -7.18 120.95 -5.47Q120.95 -2.7 118.83 -1.08Q116.7 0.53 113.13 0.53Z" fill="#0CA66A"/></g></svg>
+            <nav aria-label="Footer">
+              <a href="#gsw-how"><span lang="ms">Cara ia berfungsi</span><span lang="en">How it works</span></a>
+              <a href="#gsw-dealers"><span lang="ms">Untuk pengedar</span><span lang="en">For dealers</span></a>
+              <a href="#gsw"><span lang="ms">Tentang kami</span><span lang="en">About</span></a>
+              <a href="#gsw"><span lang="ms">Hubungi kami</span><span lang="en">Contact</span></a>
+              <a href="#gsw"><span lang="ms">Dasar privasi</span><span lang="en">Privacy policy</span></a>
+            </nav>
+          </div>
+          <div class="legal">
+            <span><span lang="ms">Harga gas LPG mengikut harga kawalan KPDN.</span><span lang="en">LPG prices follow the KPDN controlled price.</span></span>
+            <span><span lang="ms">&copy; 2026 NakGas, sebuah produk VIN Industries.</span><span lang="en">&copy; 2026 NakGas, a VIN Industries product.</span></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+  <p class="src">The frame is a drawing of the page, not the built site. The form does not send. The app-in-motion video on the real landing page is cut from the build&rsquo;s own screens and is not drawn here.</p>
+</section>
+
+<section class="sec" id="notes">
+  <h2>Notes on the mockup</h2>
+  <p class="sub">What on the drawing is settled, and what is a placeholder until someone confirms it.</p>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>On the mockup</th><th>Where it stands</th><th>Owner</th></tr></thead>
+    <tbody>
+      <tr><td class="strong">The name and the lockup</td><td>NakGas is our recommendation of Tue 20 Oct, after Gas Sekarang on Tue 6 Oct and Gaslah on Mon 12 Oct. Checked 20 Oct: nakgas.my and nakgas.com.my available (MYNIC RDAP), nakgas.com not registered (Verisign RDAP), no app named NakGas on the Malaysian App Store or Google Play. The lockup on the drawing is the green flame, decided the same day. MyIPO and social handles not yet checked</td><td>Navin decides; Brand Method checks</td></tr>
+      <tr><td class="strong">The address in the frame</td><td>nakgas.my, available on 20 Oct (MYNIC RDAP), as is nakgas.com.my; nakgas.com not registered on 20 Oct (Verisign RDAP, whois no match). Not bought</td><td>Navin</td></tr>
+      <tr><td class="strong">The store buttons</td><td>Plain text here by rule. The live site uses the official App Store and Google Play badges under each company&rsquo;s badge guidelines, once the apps are approved</td><td>Brand Method, at launch</td></tr>
+      <tr><td class="strong">The fee, RM3.50</td><td>Option B, Navin&rsquo;s leaning; waits on the price audit. Option A would show RM3.00 and a RM33.00 total</td><td>Bazil, then Navin</td></tr>
+      <tr><td class="strong">The delivery fee, RM3.40</td><td>What a JB dealer adds by phone today. Set per dealer and area; the high-rise tier is open</td><td>Navin</td></tr>
+      <tr><td class="strong">Johor Bahru first</td><td>Our read of his base and his distributors</td><td>Navin</td></tr>
+      <tr><td class="strong">The dealer form</td><td>Shortened for the drawing. The full field list is in Part 1</td><td>Brand Method</td></tr>
+      <tr><td class="strong">&ldquo;Our team takes over&rdquo;</td><td>Matches the engine: Admin after four declines. What the team then does for the customer is open</td><td>Navin</td></tr>
+      <tr><td class="strong">VIN Industries in the footer</td><td>The working name. Legal entity and SSM number to confirm</td><td>Navin</td></tr>
+      <tr><td class="strong">The Bahasa Malaysia copy</td><td>Written plain and short. <span class="chip inf">Our read</span> A native read by Navin or Diha before it goes live</td><td>Navin, Diha</td></tr>
+    </tbody>
+  </table></div>
+</section>
+</main>
+
+<footer class="foot">Brand Method &middot; NakGas website for VIN Industries &middot; written Tue 6 Oct 2026, the name changed to Gaslah Mon 12 Oct 2026 and to NakGas Tue 20 Oct 2026. Sources: the calls of Mon 28 Sep and Thu 1 Oct 2026, the proposal of Tue 29 Sep. Confidential under the NDA; not for any portfolio.</footer>
+<script>
+(function(){
+  var site=document.getElementById('gsw');
+  if(!site) return;
+  var btns=[].slice.call(site.querySelectorAll('[data-setlang]'));
+  function setLang(l){
+    site.setAttribute('data-lang',l);
+    btns.forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-setlang')===l ? 'true' : 'false'); });
+    try{ localStorage.setItem('gs-site-lang',l); }catch(e){}
+  }
+  btns.forEach(function(b){ b.addEventListener('click',function(){ setLang(b.getAttribute('data-setlang')); }); });
+  var saved=null;
+  try{ saved=localStorage.getItem('gs-site-lang'); }catch(e){}
+  setLang(saved==='en' ? 'en' : 'ms');
+
+  var frame=document.getElementById('frame');
+  var wb=[].slice.call(document.querySelectorAll('[data-w]'));
+  wb.forEach(function(b){ b.addEventListener('click',function(){
+    frame.classList.toggle('phone', b.getAttribute('data-w')==='phone');
+    wb.forEach(function(x){ x.setAttribute('aria-pressed', x===b ? 'true' : 'false'); });
+  }); });
+
+  /* in-mockup links scroll inside the page without leaving it */
+  [].slice.call(site.querySelectorAll('a[href^="#gsw"]')).forEach(function(a){
+    a.addEventListener('click',function(e){
+      var t=document.getElementById(a.getAttribute('href').slice(1));
+      if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth',block:'start'}); }
+    });
+  });
+})();
+</script>
+<script src="assets/gs.js"></script>
+</body>
+</html>

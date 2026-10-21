@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NakGas · How the app works</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="assets/app-icon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Instrument+Sans:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/brand.css">
+<link rel="stylesheet" href="assets/gs-ui.css">
+<link rel="stylesheet" href="assets/gs-bench.css">
+</head>
+<body>
+
+<div id="split">
+  <aside id="left">
+    <div class="ctl">
+      <span class="seg wide" id="segProd" role="radiogroup" aria-label="Product"><button data-p="c">Customer app</button><button data-p="d">Dealer app</button><button data-p="a">Admin portal</button></span>
+      <div class="row2">
+        <span class="seg wide" id="segLang" role="radiogroup" aria-label="Language"><button data-l="bm" class="on">BM</button><button data-l="en">EN</button></span>
+        <button id="restart" class="zbtn fit" title="Back to the phone home screen">Restart</button>
+      </div>
+    </div>
+    <div id="phone"><div class="rail"></div><i class="hwL"></i><i class="hwL2"></i><div id="scr" class="ph-scr dev"><div id="scrn"></div><div class="toast" id="toast" role="status" aria-live="polite"></div></div><div class="isl"></div></div>
+    <div class="cap"><b>iPhone 18 Pro</b> · 6.3 in · 402 × 874 pt<br>Tap NakGas to open · sample data</div>
+    <div class="qi" id="qi" aria-label="Quick info"></div>
+  </aside>
+
+  <div id="right">
+<div class="head">
+  <h1>The app flow</h1>
+  <span class="seg" id="segView" role="tablist" aria-label="View"><button data-view="flow" class="on">Flow</button><button data-view="screens">Screens</button></span>
+  <button class="ksearch" id="kOpen" aria-label="Search screens and actions"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg><span>Search screens and actions</span><kbd>⌘K</kbd></button>
+  <nav class="legend" id="legend" aria-label="Flow lanes"></nav>
+  <span class="spacer">
+    <button class="zbtn fit" id="zAll" aria-pressed="false">Shortcuts · off</button>
+    <button class="zbtn" id="zOut" aria-label="Zoom out">−</button>
+    <button class="zbtn" id="zIn" aria-label="Zoom in">+</button>
+    <button class="zbtn fit" id="zFit">Fit</button>
+  </span>
+</div>
+  <div id="stage">
+    <div id="world"><svg id="wires"></svg><div id="elabels"></div><div id="nodes"></div></div>
+    <div id="gallery" aria-label="All screens"></div>
+    <div id="detail" role="dialog" aria-label="Screen detail">
+      <button class="dx" id="dX" aria-label="Close">×</button>
+      <div class="dk" id="dK"></div><b id="dT"></b><p id="dP"></p><div class="st" id="dS"></div><div class="pr" id="dR"></div>
+    </div>
+    <div id="foot" data-foot>Three products, one phone · sample data · fee shown: option B, RM3.50, pending the price audit</div>
+  </div>
+  </div>
+</div>
+
+<div id="cmdk" hidden><div class="ck-box" role="dialog" aria-label="Search"><div class="ck-in"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg><input id="ckQ" type="text" placeholder="Jump to a screen, switch product, language or view" autocomplete="off" spellcheck="false"></div><div class="ck-list" id="ckL"></div><div class="ck-foot"><span><kbd>↑</kbd><kbd>↓</kbd> move</span><span><kbd>↵</kbd> open</span><span class="r"><kbd>esc</kbd> close</span></div></div></div>
+
+<script src="assets/ios-icons.js"></script>
+<script src="assets/app-proto.js"></script>
+<script src="assets/gs-bench.js"></script>
+</body>
+</html>

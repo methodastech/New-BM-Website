@@ -118,7 +118,7 @@ export default function ProjectDetail() {
           </div>
           <div style={{ display: 'grid', gap: '10px' }}>
             <a className="fpc" style={{ '--panel': 'rgba(15,23,40,.82)' }} href="mailto:info@iaqtechnology.com.my"><span className="ref">Email</span><h3 style={{ fontSize: '17px' }}>info@iaqtechnology.com.my</h3></a>
-            <a className="fpc" style={{ '--panel': 'rgba(15,23,40,.82)' }} href="tel:+60351248319"><span className="ref">Phone</span><h3 style={{ fontSize: '17px' }}>+603 5124 8319</h3></a>
+            <a className="fpc" style={{ '--panel': 'rgba(15,23,40,.82)' }} href="tel:+60312345678"><span className="ref">Phone</span><h3 style={{ fontSize: '17px' }}>+603 1234 5678</h3></a>
             <div className="fpc" style={{ '--panel': 'rgba(15,23,40,.82)', cursor: 'default' }}><span className="ref">HQ &middot; Shah Alam</span><h3 style={{ fontSize: '15px', lineHeight: 1.45, fontWeight: 500 }}>No.12, Jalan Sungai Jeluh 32/192, Kawasan Perindustrian Kemuning, Seksyen 32, 40460 Shah Alam, Selangor</h3></div>
           </div>
         </div>

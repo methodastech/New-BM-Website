@@ -1,0 +1,632 @@
+/* NakGas workbench chrome: the MyHero super admin workbench format (Apps/MyHero/MyHero.html), copied by line range on 9 Oct 2026 and themed for NakGas in gs-bench-theme below. Do not hand-edit the copied blocks; edit the theme. */
+
+/* ===== from MyHero.html lines 18 to 84: base, head, split, seg, cap, device ===== */
+  /* Flat ramp on the admin chrome; the app inside the phone carries MyHero's own teal. */
+  :root{--paper:#FFFFFF;--panel:#F5F7FA;--line:#E3E7EF;--soft:#56607A;--ink:#0B1020;--acc:#2536F5;--accd:#1B2AC7;--accl:#E8EAFE}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%}
+  body{font-family:"Inter",system-ui,sans-serif;background:var(--paper);color:var(--ink);
+   -webkit-font-smoothing:antialiased;overflow:hidden;display:flex;flex-direction:column}
+  .bmws{flex:none}
+  button{font-family:inherit;color:inherit}
+
+  /* ---- header band, same grammar as the map ---- */
+  .head{flex:none;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;
+   padding:14px clamp(14px,3vw,30px) 12px;border-bottom:1px solid var(--line)}
+  .head h1{font-family:"Instrument Sans",Inter,sans-serif;font-size:20px;font-weight:600;letter-spacing:-.022em}
+  .head .k{font-family:"Geist","Instrument Sans",Inter,system-ui,sans-serif;font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:#8A93A6}
+  .head .spacer{margin-left:auto;display:flex;gap:6px;align-items:center}
+  .zbtn{width:32px;height:32px;border:1px solid var(--line);background:var(--paper);border-radius:0;
+   font-family:"Geist","Instrument Sans",Inter,system-ui,sans-serif;font-size:14px;color:var(--ink);cursor:pointer;transition:background .15s}
+  .zbtn:hover{background:var(--panel)}
+  .zbtn.fit{width:auto;padding:0 12px;font-size:10px;letter-spacing:.1em;text-transform:uppercase}
+  .legend{display:flex;gap:5px;flex-wrap:wrap;align-items:center}
+  .legend button{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);
+   background:var(--paper);border-radius:0;padding:6px 11px;font-size:11px;font-weight:500;letter-spacing:-.005em;color:var(--ink);cursor:pointer;transition:background .15s,border-color .15s,box-shadow .15s}
+  .legend button i{font-style:normal;width:15px;height:15px;color:var(--c);flex:none;display:inline-flex;align-items:center;justify-content:center}
+  .legend button i svg{width:15px;height:15px;stroke-width:1.9}
+  .legend button:hover{background:var(--panel);border-color:var(--c)}
+  .legend button.on{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+
+  /* ---- the split: phone left, plane right ---- */
+  #split{flex:1;display:flex;min-height:0}
+  #left{flex:none;width:452px;border-right:1px solid var(--line);overflow-y:auto;overflow-x:hidden;background:var(--panel);
+   display:flex;flex-direction:column;align-items:center;padding:12px 14px 18px;gap:10px}
+  .ctl{width:100%;display:grid;grid-template-columns:auto 1fr;gap:8px 14px;align-items:center;padding-bottom:4px}
+  .ctl .seg.wide{display:grid;grid-auto-flow:column;grid-auto-columns:1fr}
+  .ctl .seg.wide button{text-align:center}
+  .ctl .rowx{display:flex;align-items:center;justify-content:space-between;gap:8px}
+  #right{flex:1;min-width:0;display:flex;flex-direction:column}
+  .seg{display:inline-flex;border:1px solid var(--line);border-radius:0;background:var(--paper);padding:2px;gap:2px}
+  .seg button{border:0;background:transparent;border-radius:0;padding:5px 9px;font-family:"Geist","Instrument Sans",Inter,system-ui,sans-serif;
+   font-size:9.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--soft);cursor:pointer}
+  .seg button.on{background:var(--ink);color:var(--paper)}
+  .ctl .lab{font-family:"Geist","Instrument Sans",Inter,system-ui,sans-serif;font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:#8A93A6}
+  .ctl .grp{display:inline-flex;align-items:center;gap:4px}
+  .cap{font-family:"Geist","Instrument Sans",Inter,system-ui,sans-serif;font-size:8.4px;letter-spacing:.06em;text-transform:uppercase;color:var(--soft);text-align:center;line-height:1.7}
+
+  /* the phone: an aspect-locked holder its content fills (house rule 31) */
+  /* THE DEVICE · iPhone 18 Pro, drawn to measure at 5.5 px per mm.
+     Real body 71.9 x 150.0 mm, display 66.6 x 144.7 mm (6.27 in, 402 x 874 pt), so bezel plus band is 2.67 mm a side:
+     8 px of black glass, 6.5 px of titanium. Display corners 62 pt = 56.5 px, body corners follow concentrically.
+     Island is the 17 Pro pill (126 x 37 pt) made about 35% narrower, as Apple shipped it: 75 x 34 px, 14 pt from the top. */
+  #phone{flex:none;position:relative;width:382px;height:812px;margin:7px;border-radius:64.5px;background:#000;padding:8px;
+   box-shadow:0 0 0 6.5px #C7C5C0,0 0 0 7.25px #8E8C87,0 20px 40px -14px rgba(10,12,18,.26),0 56px 84px -44px rgba(10,12,18,.34)}
+  /* light across the band: bright top left, falling away bottom right */
+  .rail{position:absolute;inset:-6.5px;border-radius:71px;z-index:0;pointer-events:none;border:6.5px solid transparent;
+   background:linear-gradient(140deg,rgba(255,255,255,.75) 0%,rgba(255,255,255,.1) 28%,rgba(0,0,0,.04) 62%,rgba(0,0,0,.22) 100%) border-box;
+   -webkit-mask:linear-gradient(#000 0 0) padding-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+  /* hardware, at its real positions: Action and the volume pair on the left, power on the right, Camera Control flush in the band */
+  #phone .hwL,#phone .hwL2,#phone .hwL2::after,#phone::before{position:absolute;width:2.6px;background:linear-gradient(180deg,#D4D2CD,#A9A7A2);box-shadow:0 0 0 .75px #8E8C87}
+  #phone .hwL{left:-9.6px;top:156px;height:50px;border-radius:1.5px 0 0 1.5px}
+  #phone .hwL2{left:-9.6px;top:236px;height:69px;border-radius:1.5px 0 0 1.5px}
+  #phone .hwL2::after{content:'';left:0;top:91px;height:69px;border-radius:1.5px 0 0 1.5px}
+  #phone::before{content:'';right:-9.6px;top:252px;height:105px;border-radius:0 1.5px 1.5px 0;z-index:1}
+  #phone::after{content:'';position:absolute;right:-5.2px;top:500px;width:2.6px;height:94px;border-radius:2px;background:#A3A19C;box-shadow:inset 0 0 0 .75px rgba(0,0,0,.18);z-index:2}
+  .isl{position:absolute;top:21px;left:50%;transform:translateX(-50%);width:75px;height:34px;border-radius:999px;background:#000;z-index:3}
+  .isl::after{content:'';position:absolute;right:9px;top:50%;transform:translateY(-50%);width:10px;height:10px;border-radius:50%;
+   background:radial-gradient(circle at 36% 32%,#26324A 0%,#0B0F17 58%,#04060A 100%);box-shadow:0 0 0 1px #0E1118}
+  #scr{position:absolute;inset:8px;border-radius:56.5px;overflow:hidden;background:#F6F9FC;display:flex;flex-direction:column;color:#1E2124;z-index:1}
+
+
+/* ===== from MyHero.html lines 552 to 573: home screen ===== */
+  /* the phone before the app: an iPhone home screen, drawn, not pasted */
+  .dev{min-height:100%;margin:0 -16px -24px;padding:4px 14px 12px;display:flex;flex-direction:column}
+  .wdg{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:2px 6px 0;padding:14px 16px;border-radius:22px;background:rgba(255,255,255,.2);backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(255,255,255,.28);color:#fff;min-height:104px}
+  .wdg .t{font-size:13.5px;font-weight:600;text-shadow:0 1px 2px rgba(0,0,0,.25)}
+  .wdg .d{font-family:"Space Grotesk",sans-serif;font-size:38px;font-weight:600;letter-spacing:-.03em;line-height:1;margin-top:2px}
+  .wdg .s{font-size:12.5px;opacity:.9;margin-top:6px}
+  .wdg svg{width:52px;height:52px;flex:none}
+  .ai{display:grid;grid-template-columns:repeat(4,1fr);gap:16px 6px;margin-top:20px;padding:0 4px}
+  .ai button{border:0;background:transparent;display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;padding:0}
+  .ai i{width:60px;height:60px;display:block;clip-path:path('M0 27.18C0 5.58 5.58 0 27.18 0h5.64C54.42 0 60 5.58 60 27.18v5.64C60 54.42 54.42 60 32.82 60h-5.64C5.58 60 0 54.42 0 32.82V27.18z');font-style:normal;position:relative}
+  .ai i svg{width:60px;height:60px;display:block}
+  .ai span{font-size:11.5px;font-weight:500;color:#fff;line-height:1.1;text-shadow:0 1px 3px rgba(0,0,0,.45)}
+  .ai .hero{position:relative}
+  .ai .hero::before{content:'';position:absolute;top:-5px;left:calc(50% - 35px);width:70px;height:70px;border-radius:22px;border:2px solid rgba(255,255,255,.9);animation:pulse 1.7s ease-out infinite;pointer-events:none}
+  .ai .hero span{font-weight:700}
+  @keyframes pulse{0%{transform:scale(.9);opacity:.9}70%{transform:scale(1.18);opacity:0}100%{transform:scale(1.18);opacity:0}}
+  .pgd{display:flex;justify-content:center;gap:7px;margin:18px 0 10px}
+  .pgd i{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.45)}.pgd i:first-child{background:#fff}
+  .dev .tip{margin-top:auto;text-align:center;font-family:"Geist","Instrument Sans",Inter,system-ui,sans-serif;font-size:9.4px;letter-spacing:.06em;text-transform:uppercase;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.45);padding:10px 0 8px}
+  .dock{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;background:rgba(255,255,255,.26);backdrop-filter:blur(18px) saturate(1.5);border:1px solid rgba(255,255,255,.3);border-radius:30px;padding:12px 12px;margin:0 2px}
+  .dock .ai{margin:0;gap:0;padding:0;display:contents}
+  @media(prefers-reduced-motion:reduce){.ai .hero::before{animation:none}}
+
+/* ===== from MyHero.html lines 574 to 628: screens view and gallery ===== */
+  /* ---- the screens view: every screen at a readable size, grouped by lane. Built for the developer reading the build. ---- */
+  #segView{margin-left:4px}
+  #gallery{display:none;position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;background:var(--panel);padding:8px clamp(18px,2.4vw,32px) 72px;cursor:default;scrollbar-width:thin}
+  body.gal #gallery{display:block}
+  body.gal #mini,body.gal #foot,body.gal #detail,body.gal .head .spacer{display:none!important}
+  body.gal #world{visibility:hidden;pointer-events:none}
+  .gsec{padding-top:34px}
+  .gsec>header{display:flex;align-items:center;gap:12px;padding-bottom:12px;border-bottom:1px solid var(--line);margin-bottom:24px;position:sticky;top:-8px;background:var(--panel);z-index:2;padding-top:12px}
+  .gsec>header i{width:20px;height:20px;color:var(--c);display:inline-flex;font-style:normal}
+  .gsec>header i svg{width:20px;height:20px}
+  .gsec>header h2{font-family:"Instrument Sans",Inter,sans-serif;font-size:19px;font-weight:600;letter-spacing:-.02em}
+  .gsec>header span{margin-left:auto;font-family:"Geist","Instrument Sans",Inter,system-ui,sans-serif;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:#8A93A6}
+  .ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(212px,1fr));gap:34px 22px;justify-items:center}
+  .gcard{border:0;background:transparent;padding:0;cursor:pointer;text-align:left;width:212px;font-family:inherit}
+  .gph{width:208px;height:411px;border-radius:26px;background:#0A0C10;padding:3px;position:relative;
+   box-shadow:0 0 0 1px rgba(255,255,255,.08) inset,0 1px 2px rgba(9,12,20,.14),0 22px 36px -22px rgba(9,12,20,.42);transition:transform .25s cubic-bezier(.16,1,.3,1),box-shadow .25s}
+  .gcard:hover .gph{transform:translateY(-4px);box-shadow:0 0 0 1px rgba(255,255,255,.08) inset,0 2px 4px rgba(9,12,20,.16),0 34px 46px -24px rgba(9,12,20,.5)}
+  .gcard.cur .gph{box-shadow:0 0 0 3px var(--panel),0 0 0 5px var(--c),0 22px 36px -22px rgba(9,12,20,.42)}
+  .gcard:focus-visible .gph{outline:2px solid var(--ink);outline-offset:4px}
+  .gscr{width:202px;height:405px;border-radius:23px;overflow:hidden;position:relative;background:#F6F9FC}
+  .gscr::before{content:'';position:absolute;top:6px;left:50%;transform:translateX(-50%);width:56px;height:16px;border-radius:99px;background:#000;z-index:3}
+  .gscr .tin{width:370px;height:742px;transform:scale(.546);transform-origin:0 0;display:flex;flex-direction:column;
+   font-size:16.5px;line-height:1.55;pointer-events:none;text-align:left;user-select:none}
+  .gscr .tin .bd{overflow:hidden}
+  /* .dev is a layout rule for the inner wrapper. The screen holders also carry the class for the wallpaper, and on them the
+     negative margins pushed the screen 16px out through the bezel. This was the real cause of the phone never looking right. */
+  .tin.dev,#scr.dev{margin:0;padding:0;min-height:0}
+  .gcard b{display:flex;align-items:center;gap:7px;font-size:13.5px;font-weight:600;letter-spacing:-.005em;margin-top:13px;color:var(--ink);padding:0 4px}
+  .gcard b em{font-style:normal;font-family:"Geist","Instrument Sans",Inter,system-ui,sans-serif;font-size:9px;letter-spacing:.04em;text-transform:uppercase;color:var(--soft);border:1px solid var(--line);border-radius:6px;padding:1px 5px;background:var(--paper)}
+  .gcard small{display:none;font-size:12px;line-height:1.4;color:var(--soft);margin-top:3px;padding:0 4px}
+  @media(prefers-reduced-motion:reduce){.gph{transition:none}}
+  :root{--wf:#A4A9B4;--wfd:#5B6272}
+  /* the home screen, as a real iPhone looks in Apple's own press shots: a dark wallpaper of large crisp sweeping shapes, after the iOS default,
+     in the brand's own rose, sky and cape red, white labels, white status bar, glass dock and search. The wallpaper is one inline SVG. */
+  #scr.dev,.tin.dev{background:#0A1226;--mh-wall:url("data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20402%20874%22%20preserveAspectRatio=%22xMidYMid%20slice%22%3E%3Cdefs%3E%3ClinearGradient%20id=%22bg%22%20x1=%220%22%20y1=%220%22%20x2=%221%22%20y2=%221%22%3E%3Cstop%20offset=%220%22%20stop-color=%22%2334101C%22/%3E%3Cstop%20offset=%22.45%22%20stop-color=%22%231A0D1E%22/%3E%3Cstop%20offset=%221%22%20stop-color=%22%23060F24%22/%3E%3C/linearGradient%3E%3ClinearGradient%20id=%22rose%22%20x1=%220%22%20y1=%220%22%20x2=%221%22%20y2=%221%22%3E%3Cstop%20offset=%220%22%20stop-color=%22%238A2C47%22/%3E%3Cstop%20offset=%22.55%22%20stop-color=%22%23C7607F%22/%3E%3Cstop%20offset=%221%22%20stop-color=%22%23E79AAE%22/%3E%3C/linearGradient%3E%3ClinearGradient%20id=%22sky%22%20x1=%221%22%20y1=%220%22%20x2=%220%22%20y2=%221%22%3E%3Cstop%20offset=%220%22%20stop-color=%22%23F2F7FF%22/%3E%3Cstop%20offset=%22.35%22%20stop-color=%22%239CC6FF%22/%3E%3Cstop%20offset=%22.7%22%20stop-color=%22%232E73F0%22/%3E%3Cstop%20offset=%221%22%20stop-color=%22%2312338C%22/%3E%3C/linearGradient%3E%3ClinearGradient%20id=%22navy%22%20x1=%221%22%20y1=%220%22%20x2=%220%22%20y2=%221%22%3E%3Cstop%20offset=%220%22%20stop-color=%22%2312284F%22/%3E%3Cstop%20offset=%221%22%20stop-color=%22%23060D1F%22/%3E%3C/linearGradient%3E%3ClinearGradient%20id=%22red%22%20x1=%220%22%20y1=%220%22%20x2=%221%22%20y2=%221%22%3E%3Cstop%20offset=%220%22%20stop-color=%22%237A1420%22/%3E%3Cstop%20offset=%221%22%20stop-color=%22%23E0433F%22/%3E%3C/linearGradient%3E%3Cfilter%20id=%22s%22%20x=%22-10%25%22%20y=%22-10%25%22%20width=%22120%25%22%20height=%22120%25%22%3E%3CfeGaussianBlur%20stdDeviation=%221.2%22/%3E%3C/filter%3E%3Cfilter%20id=%22sh%22%20x=%22-30%25%22%20y=%22-30%25%22%20width=%22160%25%22%20height=%22160%25%22%3E%3CfeGaussianBlur%20stdDeviation=%2222%22/%3E%3C/filter%3E%3C/defs%3E%3Crect%20width=%22402%22%20height=%22874%22%20fill=%22url(%23bg)%22/%3E%3Cg%20filter=%22url(%23s)%22%3E%3Cpath%20d=%22M96%200H402V360C352%20262%20262%20118%2096%200Z%22%20fill=%22url(%23rose)%22/%3E%3Cpath%20d=%22M0%20610C70%20566%20122%20480%20158%20376%20150%20540%2096%20690%200%20790Z%22%20fill=%22url(%23red)%22/%3E%3Cpath%20d=%22M402%20138C296%20184%20208%20322%20170%20512%20150%20610%20118%20700%2044%20790%20214%20730%20344%20590%20402%20392Z%22%20fill=%22url(%23sky)%22/%3E%3C/g%3E%3Cpath%20d=%22M402%20250C322%20296%20250%20420%20216%20560%20196%20644%20150%20730%2084%20806%20236%20776%20352%20660%20402%20540Z%22%20fill=%22%23000%22%20opacity=%22.35%22%20filter=%22url(%23sh)%22/%3E%3Cg%20filter=%22url(%23s)%22%3E%3Cpath%20d=%22M402%20262C324%20306%20254%20428%20220%20566%20200%20650%20154%20736%2088%20812%2060%20846%2030%20874%200%20874H402Z%22%20fill=%22url(%23navy)%22/%3E%3C/g%3E%3C/svg%3E") center/cover no-repeat}
+  .dev .wdg{background:linear-gradient(180deg,#2C7BE0 0%,#5FAEF4 100%);backdrop-filter:none;border:0;color:#fff;box-shadow:0 14px 30px -16px rgba(0,0,0,.6)}
+  .dev .wdg .t,.dev .wdg .d,.dev .wdg .s{text-shadow:none}.dev .wdg .d{font-family:"Geist",sans-serif;font-weight:300;font-size:42px}
+  .dev .wdg svg path{fill:#fff}
+  .dev .wdg .s{opacity:.92}
+  .dev .ai i{filter:drop-shadow(0 6px 10px rgba(0,0,0,.35))}
+  .dev .ai span{color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.5);font-weight:500}
+  .dev .ai .hero::before{border-color:rgba(255,255,255,.85);border-width:1.5px}
+  .dev .pgd{margin:14px 0 8px}
+  .dev .pgd i{display:none}
+  .dev .pgd::before{content:'Search';font-size:12.5px;font-weight:500;color:#fff;background-color:rgba(255,255,255,.18);backdrop-filter:blur(18px) saturate(1.6);-webkit-backdrop-filter:blur(18px) saturate(1.6);padding:6px 14px 6px 28px;border-radius:99px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.16);
+   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2.4' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='6.5'/%3E%3Cpath d='M16 16l4.5 4.5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-size:12px;background-position:11px 50%}
+  .dev,.dev .ai span,.dev .wdg{font-family:-apple-system,"SF Pro Text","Helvetica Neue",Inter,sans-serif!important}
+  .dev .tip{visibility:hidden}
+  .dev .dock{background:rgba(255,255,255,.18);backdrop-filter:blur(26px) saturate(1.7);-webkit-backdrop-filter:blur(26px) saturate(1.7);border:0;box-shadow:inset 0 0 0 1px rgba(255,255,255,.16),0 12px 28px -16px rgba(0,0,0,.6)}
+  /* gallery frames: the same device, in miniature */
+  .gph{background:#000;padding:3px;box-shadow:0 0 0 2px #C7C5C0,0 0 0 2.6px #8E8C87,0 8px 16px -14px rgba(10,12,18,.2)}
+  .gcard:hover .gph{box-shadow:0 0 0 2px #C7C5C0,0 0 0 2.6px #8E8C87,0 16px 26px -18px rgba(10,12,18,.3);transform:translateY(-4px)}
+  .gcard.cur .gph{box-shadow:0 0 0 2px #C7C5C0,0 0 0 2.6px #8E8C87,0 0 0 5px var(--panel),0 0 0 7px var(--ink)}
+  .gscr{box-shadow:none}
+  .gscr::before{background:#000;box-shadow:none;width:42px;height:17px;top:7px}
+
+/* ===== from MyHero.html lines 629 to 644: chrome type ===== */
+  /* ---- chrome type and selection, 2026: one sans family, soft track, the selected option is a raised white block ---- */
+  body,.head h1,.gsec>header h2{font-family:"Geist","Instrument Sans",Inter,system-ui,sans-serif}
+  .head h1{font-weight:600;letter-spacing:-.03em}
+  .seg{border:0;background:#ECEEF2;padding:3px;gap:0}
+  .seg button{font-size:11px;font-weight:500;text-transform:none;letter-spacing:0;color:#6A7080;padding:6px 12px;transition:background .18s,color .18s,box-shadow .18s}
+  .seg button:hover{color:var(--ink)}
+  .seg button.on{background:#fff;color:var(--ink);font-weight:600;box-shadow:0 1px 2px rgba(10,12,18,.10),0 3px 8px -3px rgba(10,12,18,.14)}
+  .ctl .lab{font-size:11.5px;text-transform:none;letter-spacing:0;font-weight:500;color:#6A7080}
+  .zbtn{border:0;background:#ECEEF2;color:var(--ink)}.zbtn:hover{background:#E2E5EA}
+  .zbtn.fit{font-size:11px;text-transform:none;letter-spacing:0;font-weight:500}
+  .legend{gap:4px}
+  .legend button{border:0;background:#F1F2F5;font-size:12px;font-weight:500;padding:7px 12px}
+  .legend button:hover{background:#E6E8EC}
+  .legend button i,.legend button i svg{color:var(--ink)}
+  .head .k,.cap,#foot{text-transform:none;letter-spacing:0;font-size:11.5px}
+  .gsec>header span{text-transform:none;letter-spacing:0;font-size:12px}
+
+/* ===== from MyHero.html lines 645 to 755: flow canvas, detail, foot, mini, alignment, shell ===== */
+  /* ---- the flow on the right: every screen a thumbnail, every press a labelled line ---- */
+  #stage{flex:1;position:relative;overflow:hidden;background:var(--paper);cursor:grab;touch-action:none;min-width:0}
+  #stage.drag{cursor:grabbing}
+  #world{position:absolute;left:0;top:0;transform-origin:0 0}
+  #world.anim{transition:transform .55s cubic-bezier(.16,1,.3,1)}
+  @media(prefers-reduced-motion:reduce){#world.anim{transition:none}}
+  #wires{position:absolute;left:0;top:0;overflow:visible;pointer-events:none}
+  #wires path{fill:none;stroke:#BFC8D2;stroke-width:1.6;marker-end:url(#ah);stroke-linejoin:round}
+  #wires path.sec{stroke-dasharray:5 5;stroke:#C9D1DA;display:none}
+  body.all .sec,.sec.show,.sec.hot{display:block}
+  #wires path.hot{stroke:var(--hue);stroke-width:2.2;marker-end:url(#ahh)}
+  #elabels{position:absolute;left:0;top:0}
+  .el{position:absolute;transform:translate(-50%,-50%);font-family:"Geist","Instrument Sans",Inter,system-ui,sans-serif;font-size:8.6px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink);
+   background:#fff;border:1px solid var(--line);border-radius:6px;padding:2px 6px;white-space:nowrap;pointer-events:none;line-height:1.5}
+  .el.pri{transform:translate(-50%,-100%)}
+  .el.vert{transform:translate(0,-50%)}
+  .el.sec{color:var(--soft);border-style:dashed;display:none}
+  .el.hot{border-color:var(--hue);color:var(--hue);font-weight:700;z-index:2}
+  .node{position:absolute;transform:translate(-50%,-50%)}
+  .lt{position:absolute;transform:translate(0,-100%);margin-top:-6px;font-family:"Geist","Instrument Sans",Inter,system-ui,sans-serif;font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:var(--c);
+   border-left:2px solid var(--c);padding-left:6px;line-height:1;white-space:nowrap;pointer-events:none}
+  .fn{width:132px;cursor:pointer;text-align:center;padding:0;outline:0}
+  .fn:focus-visible .thumb{outline:2px solid var(--ink);outline-offset:3px}
+  .fn .thumb{width:104px;height:208px;margin:0 auto;overflow:hidden;border-radius:14px;border:1px solid var(--line);background:#F6F9FC;
+   box-shadow:0 8px 20px -14px rgba(30,33,36,.5);position:relative;transition:box-shadow .15s,border-color .15s}
+  .fn:hover .thumb{border-color:var(--c)}
+  .fn.cur .thumb{box-shadow:0 0 0 3px var(--accl),0 0 0 5px var(--c)}
+  .fn .tin{width:370px;height:740px;transform:scale(.28);transform-origin:0 0;display:flex;flex-direction:column;background:#F6F9FC;
+   font-size:16.5px;line-height:1.45;pointer-events:none;text-align:left;color:#1E2124;user-select:none}
+  .fn .tin .bd{overflow:hidden}
+  .fn>b{display:block;font-size:11.4px;font-weight:600;line-height:1.25;margin-top:7px;color:var(--ink)}
+  .fn>b em{font-style:normal;font-family:"Geist","Instrument Sans",Inter,system-ui,sans-serif;font-size:7.6px;letter-spacing:.04em;text-transform:uppercase;color:var(--soft);border:1px solid var(--line);border-radius:5px;padding:1px 4px;margin-left:4px;vertical-align:1px}
+  .fn>small{display:block;font-family:"Geist","Instrument Sans",Inter,system-ui,sans-serif;font-size:7.8px;letter-spacing:.06em;text-transform:uppercase;color:var(--c);margin-top:3px}
+  #detail{position:absolute;left:clamp(14px,3vw,30px);bottom:16px;z-index:5;width:min(340px,calc(100% - 40px));
+   border:1px solid var(--line);border-left:3px solid var(--dc,#1E2124);border-radius:4px 12px 12px 4px;
+   background:var(--paper);padding:12px 14px;display:none;max-height:60%;overflow:auto}
+  #detail.on{display:block}
+  #detail .dk{font-family:"Geist","Instrument Sans",Inter,system-ui,sans-serif;font-size:8.4px;letter-spacing:.06em;text-transform:uppercase;color:var(--dc,#6E6E6E)}
+  #detail b{font-family:"Space Grotesk",sans-serif;font-size:14px;display:block;margin:3px 0 4px}
+  #detail p{font-size:11.8px;line-height:1.55;color:var(--soft)}
+  #detail .st{margin-top:8px;display:flex;flex-wrap:wrap;gap:4px}
+  #detail .st span{font-family:"Geist","Instrument Sans",Inter,system-ui,sans-serif;font-size:8px;letter-spacing:.04em;text-transform:uppercase;color:var(--soft);border:1px solid var(--line);border-radius:5px;padding:2px 6px}
+  #detail .pr{margin-top:10px;border-top:1px solid var(--line);padding-top:8px}
+  #detail .pr .h{font-family:"Geist","Instrument Sans",Inter,system-ui,sans-serif;font-size:8px;letter-spacing:.06em;text-transform:uppercase;color:var(--soft);margin-bottom:4px}
+  #detail .pr div{display:flex;align-items:baseline;gap:8px;font-size:11.5px;padding:3px 0;border-top:1px solid #F1F3F5;cursor:pointer}
+  #detail .pr div:first-of-type{border-top:0}
+  #detail .pr div:hover{color:var(--dc)}
+  #detail .pr span{font-family:"Geist","Instrument Sans",Inter,system-ui,sans-serif;font-size:8.4px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink);background:var(--panel);border-radius:5px;padding:1px 6px;white-space:nowrap}
+  #detail .pr i{font-style:normal;color:var(--soft)}
+  #detail .dx{position:absolute;top:8px;right:8px;width:24px;height:24px;border:1px solid var(--line);
+   border-radius:7px;background:var(--paper);color:var(--soft);font-size:13px;line-height:1;cursor:pointer}
+  #detail .dx:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+  #foot{position:absolute;right:clamp(14px,3vw,30px);bottom:16px;z-index:5;
+   font-family:"Geist","Instrument Sans",Inter,system-ui,sans-serif;font-size:8.4px;letter-spacing:.06em;text-transform:uppercase;color:var(--soft);text-align:right}
+  #mini{position:absolute;right:clamp(14px,3vw,30px);bottom:62px;z-index:5;width:150px;height:150px;
+   border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.92);cursor:pointer;overflow:hidden}
+  #mini .mdot{position:absolute;width:5px;height:8px;border-radius:2px;background:var(--c,#6E6E6E)}
+  #mini .mcore{background:var(--ink)}
+  #mini #mview{position:absolute;border:1.5px solid var(--ink);border-radius:2px;background:rgba(30,33,36,.05)}
+  @media(prefers-reduced-motion:no-preference){
+   .node{animation:in .5s cubic-bezier(.16,1,.3,1) both;animation-delay:var(--d,0s)}
+   @keyframes in{from{opacity:0;transform:translate(-50%,-46%)}to{opacity:1;transform:translate(-50%,-50%)}}
+  }
+  /* ---- canvas, 2026. Taken from the references one by one: dot-grid ground and white node cards (node editors), one accent on the
+     selected route with moving dashes (fleet maps), floating detail card top right, zoom stack bottom right, status strip bottom left. ---- */
+  #stage{background-color:#EEF0F3;background-image:radial-gradient(#CDD2DA 1px,transparent 1.3px);background-size:22px 22px}
+  .fn .thumb{border:0;border-radius:16px;box-shadow:0 0 0 1px rgba(10,12,18,.06),0 6px 14px -12px rgba(10,12,18,.18);transition:transform .28s cubic-bezier(.16,1,.3,1),box-shadow .28s}
+  .fn:hover .thumb{transform:translateY(-5px) scale(1.025);box-shadow:0 0 0 1px rgba(10,12,18,.09),0 14px 24px -16px rgba(10,12,18,.28)}
+  .fn.cur .thumb{box-shadow:0 0 0 2px var(--ink),0 12px 22px -16px rgba(10,12,18,.26)}
+  .fn>small{color:#8A8F9A}
+  #wires path{stroke:#C2C7CF;stroke-width:1.4}
+  #wires path.hot,#wires path.sel{stroke:#08818C;stroke-width:2.2;stroke-dasharray:7 7;animation:flowdash .8s linear infinite;display:block;marker-end:url(#ahh)}
+  @keyframes flowdash{to{stroke-dashoffset:-14}}
+  @media(prefers-reduced-motion:reduce){#wires path.hot,#wires path.sel{animation:none}.fn .thumb{transition:none}}
+  .el{border:0;border-radius:0;background:#fff;box-shadow:0 1px 2px rgba(10,12,18,.1);font-size:9.5px;text-transform:none;letter-spacing:0;font-weight:500;padding:3px 7px}
+  .el.hot,.el.sel{background:#08818C;color:#fff;border:0;display:block;z-index:2}
+  .lt{border-left:0;padding-left:0;color:#6A7080;text-transform:none;letter-spacing:0;font-size:11px;font-weight:600}
+  #detail{left:auto;right:16px;top:16px;bottom:auto;border:0;border-radius:0;background:#fff;box-shadow:0 1px 2px rgba(10,12,18,.06),0 28px 56px -28px rgba(10,12,18,.35)}
+  #foot{left:16px;right:auto;bottom:16px;text-align:left;background:#fff;color:#5A5E68;padding:9px 13px;box-shadow:0 1px 2px rgba(10,12,18,.08);max-width:min(560px,calc(100% - 100px))}
+  #mini{display:none!important}
+  .zstack{position:absolute;right:16px;bottom:16px;z-index:6;display:flex;flex-direction:column;background:#fff;box-shadow:0 1px 2px rgba(10,12,18,.08),0 14px 28px -18px rgba(10,12,18,.35)}
+  .zstack .zbtn{width:40px;height:40px;background:#fff;font-size:16px}.zstack .zbtn:hover{background:#F1F2F5}
+  .zstack .zbtn.fit{width:40px;padding:0;font-size:10.5px}
+  body.gal .zstack{display:none}
+  /* ---- ALIGNMENT. One 24px gutter runs the whole page: admin title, control labels, page title, chips and gallery all start on
+     it, and the admin tabs, the Shortcuts toggle and the gallery end on it. Floats sit 16px in. Spacing steps are 8, 16, 24. ---- */
+  #left{width:456px;padding:24px 24px 16px;gap:16px}
+  #phone{margin:8px auto 0}
+  .ctl{gap:8px 16px;padding-bottom:0;margin:0 auto}
+  .ctl .lab{min-width:56px}
+  .ctl .seg button{padding:7px 4px;text-align:center}
+
+  .cap{line-height:1.6;margin-top:0}
+  .cap b{color:var(--ink);font-weight:600}
+  .head{padding:24px 24px 16px;gap:8px 16px;align-items:center;border-bottom:0}
+  .head h1{font-size:22px;line-height:32px}
+  .head .k{color:#8A8F9A}
+  .head .spacer{order:3;margin-left:auto}
+  .head .legend{order:4;flex-basis:100%;gap:8px;margin-top:8px}
+  #gallery{padding:0 24px 72px}
+  .gsec{padding-top:24px}
+  .gsec:first-child{padding-top:8px}
+  .gsec>header{margin-bottom:24px;border-bottom:0;padding-bottom:8px}
+  .ggrid{gap:32px 24px;justify-items:start;grid-template-columns:repeat(auto-fill,minmax(214px,1fr))}
+  .gcard b{margin-top:16px;padding:0 2px}
+  #detail{right:16px;top:16px}#foot{left:16px;bottom:16px}.zstack{right:16px;bottom:16px}
+  /* ---- SHELL, 2026. The page is a soft ground with inset panels, not bars and columns ruled off from each other.
+     Layers float: the bar, the device panel and the work panel are separate blocks with air between them. ---- */
+  body{background:#E7E9ED;padding:8px;gap:8px}
+  .bmws{box-shadow:0 1px 2px rgba(10,12,18,.2)}
+  #split{gap:0;box-shadow:0 1px 2px rgba(10,12,18,.05)}
+
+/* ===== from MyHero.html lines 756 to 878: panels, type, seg thumb, legend, search, floats, motion, cmdk, controls, dropdown, lane row, legibility ===== */
+  /* the device panel and the work panel are one block; a half-step of tint tells them apart, not a gap or a rule */
+  #left{background:#F8F9FA;border-right:0;scrollbar-width:none}
+  #left::-webkit-scrollbar{width:0}
+  #right{background:#fff;overflow:hidden}
+  #gallery{background:#fff}.gsec>header{background:#fff}
+  #stage{background-color:#F4F5F7}
+  /* type: bigger, tighter, fewer weights */
+  .head{padding:24px 24px 12px}
+  .head h1{font-size:28px;line-height:36px;font-weight:600;letter-spacing:-.04em}
+  .head h1 em{font-style:normal;font-weight:400;color:#A3A7B0;margin-left:10px;font-variant-numeric:tabular-nums}
+  .gsec>header h2{font-size:17px;letter-spacing:-.025em}
+  /* segmented controls: one white thumb that slides to the choice */
+  .seg{position:relative;background:#EEF0F3}
+  .seg .th{position:absolute;top:3px;bottom:3px;left:0;width:0;background:#fff;pointer-events:none;
+   box-shadow:0 1px 2px rgba(10,12,18,.12),0 4px 10px -4px rgba(10,12,18,.18);transition:transform .32s cubic-bezier(.3,.8,.2,1),width .32s cubic-bezier(.3,.8,.2,1)}
+  .seg button{position:relative;z-index:1}
+  .seg button.on{background:transparent;box-shadow:none}
+  /* lane chips become a quiet toolbar: no fills until you touch them */
+  .head .legend{gap:2px;margin:8px -10px 0}
+  .legend button{background:transparent;padding:7px 10px;color:#4A4F5A;transition:background .15s,color .15s}
+  .legend button:hover{background:#EEF0F3;color:var(--ink)}
+  .legend button i,.legend button i svg{color:currentColor}
+  /* search trigger */
+  .ksearch{display:inline-flex;align-items:center;gap:8px;height:34px;padding:0 8px 0 10px;border:0;background:#EEF0F3;color:#7A7F8A;font:500 12.5px/1 "Geist",Inter,sans-serif;cursor:pointer;min-width:260px;transition:background .15s,color .15s}
+  .ksearch:hover{background:#E4E7EB;color:var(--ink)}
+  .ksearch svg{width:14px;height:14px;flex:none}
+  .ksearch span{flex:1;text-align:left}
+  kbd{font:500 10.5px/1 "Geist",Inter,sans-serif;background:#fff;color:#5A5E68;padding:4px 6px;box-shadow:0 1px 1px rgba(10,12,18,.12)}
+  .head .spacer{margin-left:0}.ksearch{margin-left:auto}
+  .zbtn.fit{height:34px}
+  /* floats are frosted, so the canvas shows through them */
+  #detail,#foot,.zstack,.zstack .zbtn{background:rgba(255,255,255,.78)}
+  #detail,#foot,.zstack{backdrop-filter:blur(18px) saturate(1.5);-webkit-backdrop-filter:blur(18px) saturate(1.5)}
+  .zstack .zbtn{background:transparent}.zstack .zbtn:hover{background:rgba(10,12,18,.06)}
+  /* motion: views cross in, cards rise in order, nothing moves if the user asked for stillness */
+  @keyframes viewin{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  @keyframes cardin{from{opacity:0;transform:translateY(14px) scale(.985)}to{opacity:1;transform:none}}
+  body.gal #gallery{animation:viewin .4s cubic-bezier(.16,1,.3,1)}
+  body:not(.gal) #world{animation:viewin .4s cubic-bezier(.16,1,.3,1)}
+  .gcard{animation:cardin .55s cubic-bezier(.16,1,.3,1) both;animation-delay:calc(var(--i,0)*22ms)}
+  #phone{transition:transform .5s cubic-bezier(.16,1,.3,1)}
+  @media(prefers-reduced-motion:reduce){body.gal #gallery,body:not(.gal) #world,.gcard{animation:none}.seg .th{transition:none}}
+  /* command palette */
+  #cmdk{position:fixed;inset:0;z-index:100;background:rgba(10,12,18,.32);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:flex;align-items:flex-start;justify-content:center;padding-top:14vh;animation:ckbg .18s ease}
+  #cmdk[hidden]{display:none}
+  @keyframes ckbg{from{opacity:0}to{opacity:1}}
+  @keyframes ckin{from{opacity:0;transform:translateY(-8px) scale(.98)}to{opacity:1;transform:none}}
+  .ck-box{width:min(620px,calc(100vw - 32px));background:rgba(255,255,255,.94);backdrop-filter:blur(24px) saturate(1.6);box-shadow:0 1px 2px rgba(10,12,18,.1),0 40px 80px -24px rgba(10,12,18,.5);animation:ckin .22s cubic-bezier(.16,1,.3,1)}
+  .ck-in{display:flex;align-items:center;gap:12px;padding:0 18px;height:56px;color:#7A7F8A}
+  .ck-in svg{width:18px;height:18px;flex:none}
+  .ck-in input{flex:1;border:0;outline:0;background:transparent;font:500 16px/1 "Geist",Inter,sans-serif;letter-spacing:-.01em;color:var(--ink)}
+  .ck-in input::placeholder{color:#A3A7B0;font-weight:400}
+  .ck-list{max-height:min(420px,52vh);overflow-y:auto;padding:4px 8px 8px;scrollbar-width:thin}
+  .ck-grp{font:500 11px/1 "Geist",Inter,sans-serif;color:#A3A7B0;padding:12px 10px 6px}
+  .ck-it{display:flex;align-items:center;gap:12px;width:100%;border:0;background:transparent;padding:9px 10px;font:500 14px/1.2 "Geist",Inter,sans-serif;letter-spacing:-.005em;color:var(--ink);text-align:left;cursor:pointer}
+  .ck-it svg{width:16px;height:16px;flex:none;color:#7A7F8A}
+  .ck-it small{margin-left:auto;font-size:12px;font-weight:400;color:#A3A7B0}
+  .ck-it.act{background:#0A0C12;color:#fff}.ck-it.act svg,.ck-it.act small{color:rgba(255,255,255,.62)}
+  .ck-empty{padding:28px 10px;text-align:center;color:#A3A7B0;font-size:13.5px}
+  .ck-foot{display:flex;gap:16px;align-items:center;padding:10px 18px;background:rgba(10,12,18,.04);font:400 11.5px/1 "Geist",Inter,sans-serif;color:#7A7F8A}
+  .ck-foot .r{margin-left:auto}.ck-foot kbd{margin-right:3px}
+  /* ---- CONTROLS, two rows. Row one is the direction, on four columns. Row two sits on the same four columns:
+     State (a dropdown, two columns), Language, Restart. The rows line up with the title row and the lane row on the right. ---- */
+  [hidden]{display:none!important}
+  .ctl{display:flex;flex-direction:column;align-items:stretch;gap:16px;position:relative;z-index:10}
+  .ctl .seg.wide{width:100%;height:36px}
+  .ctl .row2{display:grid;grid-template-columns:repeat(4,1fr);padding:0 3px;height:34px}
+  .ctl .row2>*{min-width:0}
+  .ctl .dd{grid-column:span 2;margin:0 3px 0 -3px}
+  .ctl .row2 .seg{margin:0 3px;height:34px;width:auto}
+  .ctl #restart{margin:0 -3px 0 3px;width:auto;height:34px;padding:0;background:#EEF0F3;font-size:11px;font-weight:500}
+  .ctl #restart:hover{background:#E2E5EA}
+  .ctl .seg button{padding:0 4px;height:100%;text-align:center}
+  /* dropdown */
+  .dd{position:relative}
+  .dd>button{display:flex;align-items:center;gap:6px;width:100%;height:34px;border:0;background:#EEF0F3;padding:0 10px;font:500 11.5px/1 "Geist",Inter,sans-serif;color:var(--ink);cursor:pointer;transition:background .15s}
+  .dd>button:hover,.dd.open>button{background:#E2E5EA}
+  .dd>button small{font-size:11.5px;font-weight:400;color:#7A7F8A}
+  .dd>button b{font-weight:600;flex:1;text-align:left;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .dd>button svg{width:12px;height:12px;flex:none;color:#7A7F8A;transition:transform .2s}
+  .dd.open>button svg{transform:rotate(180deg)}
+  .dd menu{display:none;position:absolute;left:0;top:calc(100% + 4px);min-width:100%;z-index:30;margin:0;padding:4px;list-style:none;background:rgba(255,255,255,.96);backdrop-filter:blur(18px);
+   box-shadow:0 1px 2px rgba(10,12,18,.1),0 18px 36px -14px rgba(10,12,18,.35);animation:ckin .16s cubic-bezier(.16,1,.3,1)}
+  .dd.open menu{display:block}.dd.r menu{left:auto;right:0}
+  .dd menu button{display:flex;align-items:center;gap:8px;width:100%;border:0;background:transparent;padding:8px 10px;font:500 12.5px/1 "Geist",Inter,sans-serif;color:var(--ink);text-align:left;cursor:pointer;white-space:nowrap}
+  .dd menu button:hover,.dd menu button:focus-visible{background:#EEF0F3;outline:0}
+  .dd menu button i{width:14px;height:14px;flex:none;display:inline-flex;font-style:normal}
+  .dd menu button i svg{width:14px;height:14px}
+  .dd menu button.cur{font-weight:600}
+  .dd menu button.cur::after{content:'';margin-left:auto;width:6px;height:6px;background:var(--ink)}
+  /* lane row: one line always. What does not fit moves into More. */
+  .head .legend{flex-wrap:nowrap;overflow:visible;height:34px;align-items:center}
+  .legend>button{height:34px;flex:none}
+  .legend .dd>button{background:transparent;width:auto;padding:0 10px;font-size:12px}
+  .legend .dd>button:hover,.legend .dd.open>button{background:#EEF0F3}
+  .ksearch{flex:0 1 300px;min-width:44px;overflow:hidden}.ksearch span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+  /* ---- FLOW LEGIBILITY. Labels hold their size on screen whatever the zoom (--iz is 1 / zoom), and the map shows less as you pull back:
+     close = every press label; middle = screen names only; far = lane names only. ---- */
+  #elabels{z-index:3}
+  .fn>small{display:none}
+  .fn>b{position:relative;left:50%;transform:translateX(-50%);width:max-content;max-width:250px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+   font-size:max(11.4px,calc(12px*var(--iz,1)));margin-top:calc(7px*var(--iz,1))}
+  .fn>b em{display:none}
+  .el{font-size:calc(10.5px*min(var(--iz,1),1.45));padding:calc(3px*min(var(--iz,1),1.45)) calc(7px*min(var(--iz,1),1.45))}
+  .lt{font-size:calc(12px*var(--iz,1));margin-top:calc(-8px*var(--iz,1));color:#3A3F4A;font-weight:600;white-space:nowrap}
+  #stage[data-lod="mid"] .el:not(.hot):not(.sel),#stage[data-lod="lo"] .el:not(.hot):not(.sel){display:none}
+  #stage[data-lod="mid"] .el.hot,#stage[data-lod="mid"] .el.sel,#stage[data-lod="lo"] .el.hot,#stage[data-lod="lo"] .el.sel{font-size:calc(10.5px*var(--iz,1));padding:calc(3px*var(--iz,1)) calc(7px*var(--iz,1))}
+  #stage[data-lod="lo"] .lt .q,#stage[data-lod="mid"] .lt .q{display:none}
+  .lt .q{font-weight:400;color:#7A7F8A}
+  #stage[data-lod="lo"] .fn>b{display:none}
+  #stage[data-lod="lo"] .fn.cur>b{display:block;max-width:none;background:#0A0C12;color:#fff;padding:calc(3px*var(--iz,1)) calc(8px*var(--iz,1));z-index:4}
+  #stage[data-lod="lo"] .lt{font-size:calc(13px*var(--iz,1));background:#fff;color:#0A0C12;padding:calc(3px*var(--iz,1)) calc(8px*var(--iz,1));box-shadow:0 1px 2px rgba(10,12,18,.12);z-index:4}
+  /* ===== from MyHero.html lines 1044 to 1070: quick info ===== */
+  /* quick info under the phone. Chrome rules: sharp, no lines, sentence case. White blocks on the rail tint, 6px apart. */
+  #left>.cap{display:none}
+  .qi{display:flex;flex-direction:column;gap:6px;margin:2px auto 0}
+  .qb{background:#fff;padding:10px 12px}
+  .qb small{display:block;font-size:10.5px;color:#8A8F9A;font-weight:500}
+  .qs header{display:flex;align-items:center;gap:7px}
+  .qs header i{width:15px;height:15px;display:inline-flex;flex:none;color:#0A0C12}.qs header i svg{width:15px;height:15px}
+  .qs header b{font-size:13.5px;font-weight:600;letter-spacing:-.015em;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .qtag{font-size:10px;font-weight:600;background:#EEF0F3;padding:3px 6px;white-space:nowrap}
+  .qm2{font-size:11px;color:#7A7F8A;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .qp blockquote{margin:2px 0 0;font-size:12.5px;line-height:1.35;font-weight:600;letter-spacing:-.01em;color:#0A0C12}
+  .qg{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:8px}
+  .qi.compact .qg{display:none}
+  .qg span{background:#F4F5F7;padding:5px 7px;font-size:11px;line-height:1.25;color:#0A0C12;font-weight:500;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .qg small{font-size:9.5px}
+  .qr{display:flex;align-items:center;gap:9px;border:0;width:100%;cursor:pointer;font:inherit;color:inherit;text-align:left;transition:background .15s}
+  .qr:hover{background:#F1F2F5}
+  .qm{width:28px;height:28px;flex:none}.qm svg{width:28px;height:28px;display:block}
+  .qdn{flex:1;min-width:0}.qdn b{display:block;font-size:12.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .qsw{display:flex;gap:3px;margin-top:5px}.qsw i{width:14px;height:10px;display:block;box-shadow:inset 0 0 0 1px rgba(10,12,18,.08)}
+  .qr img{width:38px;height:38px;object-fit:contain;mix-blend-mode:multiply;flex:none}
+  .qgo{font-size:11.5px;font-weight:600;white-space:nowrap}
+  /* positioning block in the Brand view */
+  .kpos{background:#0A0C12;color:#fff;padding:24px 26px}
+  .kpos small{font-size:12px;color:#9A9DA6}
+  .kpos blockquote{margin:6px 0 14px;font-size:26px;line-height:1.2;font-weight:600;letter-spacing:-.03em;max-width:760px}
+  .kpos p{font-size:13.5px;color:#C9CBD1;line-height:1.55;max-width:760px}.kpos p+p{margin-top:4px}.kpos p b{color:#fff;font-weight:600}
+
+/* ===== from MyHero.html lines 2140 to 2185: stage, flow board, frames, lane focus, polish ===== */
+  body.stage #split{display:block;padding:0;margin:0}
+  body.stage #left{width:auto;max-width:none;padding:0;margin:0;border:0;background:transparent;overflow:visible;height:auto}
+  body.stage #phone{margin:10px!important;transform:none!important}
+  /* ---- FLOW BOARD, 4 October 2026. Every lane is a framed block with its name inside the frame, the ground is plain white,
+     press labels sit on their wire, and a lane chip lights its lane on hover and holds it on press. ---- */
+  #stage{background-color:#F4F5F7;background-image:radial-gradient(#CDD2DA 1px,transparent 1.3px);background-size:22px 22px;user-select:none;-webkit-user-select:none}
+  #detail{user-select:text;-webkit-user-select:text}
+  #frames{position:absolute;left:0;top:0}
+  .fr{position:absolute;background:rgba(255,255,255,.65);box-shadow:none;transition:opacity .2s,background .2s,box-shadow .2s}
+  .fr h3{position:absolute;left:22px;top:0;height:56px;margin:0;display:flex;align-items:center;font:600 calc(13px*min(var(--iz,1),3.6))/1 "Geist",Inter,system-ui,sans-serif;letter-spacing:-.01em;color:#0A0C12;white-space:nowrap;pointer-events:none}
+  .fr h3 .q{font-weight:400;color:#8A8F9A;white-space:pre}
+  #stage[data-lod="lo"] .fr h3 .q{display:none}
+  .fn{transition:opacity .2s}
+  .fn>b{max-width:236px;font-weight:500}
+  #wires path{stroke:#AEB4BE}
+  /* a screen hangs from its top edge, so the thumbnail stays on its wire whatever size the name under it is drawn at */
+  .node.fn{transform:translateX(-50%);animation-name:fnin}
+  @keyframes fnin{from{opacity:0;transform:translate(-50%,8px)}to{opacity:1;transform:translate(-50%,0)}}
+  .el,.el.pri,.el.vert,.el.sec{transform:translate(-50%,calc(-50% + var(--k,0)*112%));white-space:normal;width:max-content;max-width:128px;text-align:center;line-height:1.25;
+   font-size:calc(10.5px*min(var(--iz,1),1.3));padding:calc(3px*min(var(--iz,1),1.3)) calc(7px*min(var(--iz,1),1.3));box-shadow:0 1px 3px rgba(10,12,18,.16);transition:opacity .2s}
+  #stage[data-lod="mid"] .el,#stage[data-lod="lo"] .el{max-width:none;white-space:nowrap}
+  #stage.lf .fn:not(.lon){opacity:.3}
+  #stage.lf .fr:not(.lon){opacity:.45}
+  #stage.lf .fr.lon{background:#E2F3F5}
+  #stage.lf #wires path:not(.lon){opacity:.2}
+  #stage.lf #wires path.lon{display:block;stroke:#08818C;stroke-width:2;marker-end:url(#ahh)}
+  #stage.lf .el:not(.lon):not(.hot):not(.sel){opacity:0}
+  #stage.lf[data-lod="hi"] .el.lon{display:block}
+  .legend button{outline:0}
+  .legend button:focus-visible{background:#EEF0F3;color:var(--ink)}
+  .legend button.on,.legend button.on:hover,.legend button.on:focus-visible{background:#0A0C12;color:#fff}
+  #foot{font-size:11.5px;letter-spacing:0;text-transform:none;line-height:1.5;padding:8px 12px}
+  .qg span{white-space:normal;overflow:visible}
+  /* 4 Oct, second pass: counts in the frame names, wires that hold their weight when pulled back, frames you can press to come
+     close, the chip of the lane you are in, the zoom figure, no browser focus rings on the chrome, one card under the phone. */
+  .fr h3{height:64px;font-size:calc(13px*min(var(--iz,1),3.8))}
+  .fr h3 em{font-style:normal;font-weight:400;color:#A3A7B0;margin-left:.45em;font-variant-numeric:tabular-nums}
+  #stage:not([data-lod="hi"]) .fr,#stage[data-lod="lo"] .fn{cursor:zoom-in}
+  #stage:not([data-lod="hi"]):not(.lf) .fr:hover{background:#fff;box-shadow:0 1px 2px rgba(10,12,18,.06),0 18px 36px -18px rgba(10,12,18,.28)}
+  #wires path{stroke-width:calc(1.4px*min(var(--iz,1),2.6))}
+  #wires path.hot,#wires path.sel,#stage.lf #wires path.lon{stroke-width:calc(2.1px*min(var(--iz,1),2.6))}
+  .legend button.here{background:#EEF0F3;color:var(--ink)}
+  .zstack #zPct{height:28px;display:flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:500;color:#7A7F8A;font-variant-numeric:tabular-nums}
+  .seg button,.zbtn,.ksearch,.dd>button,.qb,.legend button,#detail .dx{outline:0}
+  .seg button:focus-visible{color:var(--ink)}
+  .qd{margin:8px 0 0;font-size:12px;line-height:1.45;color:#4A4F5A;min-height:calc(5*1.45em)}
+/* ===== gs-bench-theme: NakGas on top of the copied chrome (9 Oct 2026). Edit here, never above. ===== */
+:root{--acc:#0CA66A;--accd:#08854C;--accl:#E9F7F0}
+body{font-family:"Geist",Inter,system-ui,sans-serif}
+/* the phone screen is the prototype's .ph-scr, fitted into the measured device */
+#scr.ph-scr{position:absolute;inset:8px;width:auto;height:auto;border-radius:56.5px;overflow:hidden;background:var(--gs-base);color:var(--gs-ink);font:400 15px/1.5 var(--gs-body);display:block}
+#scr.ph-scr.dark{background:#0B0D12;color:#fff}
+#scr .scr{border-radius:0}
+#scr .toast{top:64px}
+/* the phone before the app: a NakGas wallpaper, deep night blue with the flame's own blue sweeping through */
+#scr.dev,.tin.dev{background:radial-gradient(120% 70% at 18% 8%,#0CA66A 0%,rgba(12,166,106,0) 56%),radial-gradient(90% 60% at 92% 92%,#1550F5 0%,rgba(21,80,245,0) 60%),linear-gradient(180deg,#07233A 0%,#06112E 100%)!important}
+.dev .sb{color:#fff;flex:0 0 auto;height:54px;display:flex;justify-content:space-between;align-items:center;padding:8px 32px 0 42px;font:600 16px/1 var(--gs-body)}
+.dev-in{flex:1;display:flex;flex-direction:column;padding:4px 14px 12px;min-height:0}
+.dev .ai i{background:#000}
+.dev .ai button:focus{outline:0}
+/* thumbnails: the real screens, scaled. Phone 366 x 796 at .284 = 104 x 226; admin 1200 x 760 at .2 = 240 x 152 */
+.fn .thumb{width:104px;height:226px}
+.fn .thumb.dk{width:240px;height:152px;border-radius:6px}
+.fn.dkn{width:260px}
+.fn .tin.ph-scr,.gscr .tin.ph-scr{position:relative;width:366px;height:796px;border-radius:0;overflow:hidden;background:var(--gs-base);color:var(--gs-ink);font:400 15px/1.5 var(--gs-body);transform-origin:0 0;display:block}
+.fn .tin.ph-scr{transform:scale(.284)}
+.fn .tin.dkt,.gscr .tin.dkt{position:relative;width:1200px;height:760px;transform-origin:0 0;display:block;pointer-events:none}
+.fn .tin.dkt{transform:scale(.2)}
+.tin.ph-scr.dark{background:#0B0D12;color:#fff}
+.tin .scr{position:absolute;inset:0}
+.tin .ph-hi,.tin .ph-isl{display:none}
+.tin.dev .scr{border-radius:0}
+.gph{height:445px}.gscr{height:439px}
+.gscr .tin.ph-scr{transform:scale(.552)}
+.gcard.dk{width:100%;max-width:600px}
+.gcard.dk .gph{width:100%;height:auto;border-radius:10px;padding:0;background:transparent;box-shadow:0 0 0 1px #C7C5C0}
+.gcard.dk:hover .gph{transform:none;box-shadow:0 0 0 1px #C7C5C0,0 16px 26px -18px rgba(10,12,18,.3)}
+.gcard.dk.cur .gph{box-shadow:0 0 0 1px #C7C5C0,0 0 0 5px var(--panel),0 0 0 7px var(--ink)}
+.gscr.dk{width:100%;height:auto;aspect-ratio:1200/760;border-radius:9px;overflow:hidden;position:relative}
+.gscr.dk::before{display:none}
+.gscr.dk .tin.dkt{transform:scale(.5)}
+.ggrid.dkg{grid-template-columns:repeat(auto-fill,minmax(600px,1fr));justify-items:start}
+.gcard small{display:block}
+/* the admin portal is a web product: the device becomes a browser frame and the column widens so it reads */
+body.adm #left{width:min(66vw,1300px)!important}
+body.adm #phone{width:1200px;height:760px;border-radius:12px;padding:0;background:#fff;box-shadow:0 0 0 1px #A9B1BF,0 20px 40px -14px rgba(10,12,18,.26),0 56px 84px -44px rgba(10,12,18,.34)}
+body.adm #phone .rail,body.adm #phone .hwL,body.adm #phone .hwL2,body.adm #phone .isl,body.adm #phone::before,body.adm #phone::after{display:none}
+body.adm #scr.ph-scr{inset:0;border-radius:12px;font:400 14px/1.5 var(--gs-body)}
+body.adm #scr .dk{border:0;border-radius:12px}
+/* wires and chips carry the flame blue, not another product's teal */
+#wires path.hot,#wires path.sel,#stage.lf #wires path.lon{stroke:#0CA66A}
+.el.hot,.el.sel{background:#0CA66A}
+#stage.lf .fr.lon{background:#E9F7F0}
+#wires marker#ahh path{fill:#0CA66A}
+/* controls: product on three columns, then language and restart on the same four */
+.ctl .row2 .seg{grid-column:span 2}
+.ctl #restart{grid-column:span 2}
+/* quick info: the Try row carries the demo presses of the screen */
+.qtry{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:10px}
+.qtry span{font-size:11px;color:#7A7F8A;margin-right:2px}
+.qtry .zbtn{height:28px;font-size:11px;padding:0 10px}
+.qd{min-height:0}
+/* stage mode: the phone alone, for captures and the website */
+body.stage{padding:0;background:#fff}
+body.stage .bmws,body.stage #right,body.stage .ctl,body.stage .cap,body.stage #qi,body.stage #cmdk{display:none!important}
+body.stage #phone{zoom:1!important;margin:10px!important}
+body.stage #left{width:auto!important;display:block}
+/* the detail float reads in Geist like the rest of the chrome */
+#detail b{font-family:"Geist",Inter,system-ui,sans-serif;font-size:14px;font-weight:600;letter-spacing:-.01em}
+/* ===== 13 Oct 2026, premium pass (Zieel: "better visual modern icons, structure more premium, easy to understand,
+   always same level"). Filled icons on tiles, product titles on the board, one bezel on every phone, solid white lane
+   frames, phones top aligned in Screens. Backup of the file before this block: .bak-20261013/gs-bench.css ===== */
+.lti{--s:22px;width:var(--s);height:var(--s);flex:none;display:inline-flex;align-items:center;justify-content:center;font-style:normal;
+ border-radius:calc(var(--s)*.28);background:linear-gradient(180deg,color-mix(in srgb,var(--c) 74%,#fff) 0%,var(--c) 92%);
+ box-shadow:inset 0 1px 0 rgba(255,255,255,.3),inset 0 -1px 0 rgba(0,0,0,.12),0 1px 2px rgba(10,12,18,.16)}
+.lti svg{width:60%;height:60%;fill:#fff;display:block}
+.lti svg .c{fill:var(--c)}
+.legend button i.lti,.qs header i.lti,.gsec>header i.lti,.dd menu i.lti,.fr h3 i.lti{width:var(--s);height:var(--s);color:#fff}
+.legend button i.lti svg,.qs header i.lti svg,.gsec>header i.lti svg,.dd menu i.lti svg,.fr h3 i.lti svg{width:60%;height:60%;stroke:none}
+.legend button{gap:8px;padding:6px 12px 6px 6px}
+.legend button.on i.lti{box-shadow:0 0 0 1.5px rgba(255,255,255,.55)}
+/* the view switch: Boards reads like Flow and Screens */
+.seg .segl{display:inline-flex;align-items:center;padding:6px 12px;font-size:11px;font-weight:500;color:#6A7080;text-decoration:none;position:relative;z-index:1}
+.seg .segl:hover{color:var(--ink)}
+/* lane frames: solid white with a soft lift, the tile and name in the header */
+#frames .fr{background:#fff;box-shadow:0 1px 2px rgba(10,12,18,.05),0 18px 40px -26px rgba(10,12,18,.24)}
+#frames .fr h3{gap:calc(10px*min(var(--iz,1),2.6))}
+.fr h3 i.lti{width:calc(22px*min(var(--iz,1),2.6));height:calc(22px*min(var(--iz,1),2.6))}
+.fr h3 .ft{display:inline-flex;align-items:baseline;white-space:nowrap}
+#stage:not([data-lod="hi"]):not(.lf) .fr:hover{background:#fff;box-shadow:0 1px 2px rgba(10,12,18,.06),0 24px 48px -24px rgba(10,12,18,.34)}
+/* product titles above each product */
+.pt{position:absolute;transform:translateY(-100%);padding-bottom:calc(16px*min(var(--iz,1),3));display:flex;align-items:baseline;gap:calc(10px*min(var(--iz,1),3.4));white-space:nowrap;pointer-events:none}
+.pt b{font:600 calc(20px*min(var(--iz,1),3.4))/1.1 "Geist",Inter,system-ui,sans-serif;letter-spacing:-.03em;color:#0A0C12}
+.pt span{font:500 calc(13px*min(var(--iz,1),3.4))/1 "Geist",Inter,system-ui,sans-serif;color:#8A8F9A;font-variant-numeric:tabular-nums}
+#stage.lf .pt{opacity:.4}
+/* every phone on the board wears the same bezel and island, so they line up and read as phones when pulled back */
+.fn .thumb:not(.dk){width:110px;height:232px;padding:3px;background:#0B0D12;border-radius:19px;position:relative;
+ box-shadow:0 0 0 1px rgba(10,12,18,.06),0 12px 20px -14px rgba(10,12,18,.42)}
+.fn .thumb:not(.dk)::after{content:'';position:absolute;top:7px;left:50%;transform:translateX(-50%);width:26px;height:7px;border-radius:9px;background:#000;z-index:3}
+.fn .tin.ph-scr{border-radius:56px}
+.fn:hover .thumb:not(.dk){box-shadow:0 0 0 1px rgba(10,12,18,.08),0 18px 28px -16px rgba(10,12,18,.48)}
+.fn.cur .thumb:not(.dk){box-shadow:0 0 0 3px #fff,0 0 0 5px #0CA66A,0 12px 20px -14px rgba(10,12,18,.42)}
+.fn .thumb.dk{box-shadow:0 0 0 1px #C9CED8,0 12px 20px -14px rgba(10,12,18,.32)}
+#wires path{stroke:#98A1B0}
+#wires marker#ah path{fill:#98A1B0}
+/* Screens: a card is a button, and a button centres what it holds; stack from the top so every phone in a row sits level */
+.gcard{display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;align-self:start}
+.gcard>b,.gcard>small{align-self:stretch}
+.gsec>header{gap:14px;align-items:center;padding-top:16px;padding-bottom:14px}
+.gsec>header .gh{display:flex;flex-direction:column;gap:2px;min-width:0}
+.gsec>header .gh small{font-size:11.5px;line-height:1.2;font-weight:500;color:#8A8F9A}
+.gsec>header .gh h2{font-size:19px;line-height:1.15}
+.gsec>header p{margin:0 0 0 14px;font-size:13px;line-height:1.35;color:#5A6070;max-width:420px}
+.gsec>header>span{margin-left:auto;white-space:nowrap}
+@media(max-width:1100px){.gsec>header p{display:none}}
+#frames .fr h3{height:84px}
+#foot b{font-weight:600;color:#0A0C12}
+#foot span{color:#8A8F9A;margin-left:6px}
+/* the head stays on one row down to 1200 wide: search gives way first */
+.head .ksearch{flex:1 1 200px;max-width:300px}
+#foot{white-space:nowrap;max-width:calc(100% - 110px);overflow:hidden;text-overflow:ellipsis}
+@media(max-width:1360px){#foot span{display:none}}
+/* the dealer camera screen has its own .fr (the viewfinder frame): the board frame rules must never reach it */
+.vf .fr{background:transparent!important;box-shadow:none!important}
+/* the detail float's kicker is .dk, the same class as the admin desktop frame (1200 x 760) in gs-ui.css: undo that here */
+#detail .dk{position:static;width:auto;height:auto;display:block;background:none;border:0;border-radius:0;overflow:visible;font:500 11px/1.3 "Geist",Inter,system-ui,sans-serif;letter-spacing:0;text-transform:none;color:#8A8F9A;padding-right:30px}
+#detail p{font-size:12.5px}
+/* .pr is also the prototype's price row (a flex row): in the detail float it is a plain list of presses, no rules */
+#detail .pr{display:block;border-top:0;margin-top:12px;padding-top:0}
+#detail .pr .h{font:500 11px/1.3 "Geist",Inter,system-ui,sans-serif;letter-spacing:0;text-transform:none;color:#8A8F9A;margin-bottom:6px}
+#detail .pr div{display:flex;align-items:center;gap:8px;border-top:0;padding:5px 6px;margin:0 -6px;font-size:12.5px;line-height:1.3}
+#detail .pr div:hover{background:#F1F3F7;color:#0A0C12}
+#detail .pr span{font:600 11px/1.2 "Geist",Inter,system-ui,sans-serif;letter-spacing:0;text-transform:none;background:#E9F7F0;color:#08854C;border-radius:6px;padding:3px 7px}
+#detail .st:empty{display:none}
+#detail{background:rgba(255,255,255,.97);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+/* phones, 14 Oct 2026: the bench was laid out for 1000px and up (a 456px phone column), so a 390px screen scrolled sideways
+   and the board had no width. Under 700px it stacks: the live phone fits the width, the board sits under it at a usable
+   height. Stage mode (the website's frame) keeps its own rules. */
+@media (max-width:700px){
+  html:has(body:not(.stage)),body:not(.stage){height:auto}
+  body:not(.stage){overflow-x:hidden;overflow-y:auto;display:block}
+  body:not(.stage) #split{display:block}
+  body:not(.stage) #left{width:auto!important;padding:16px 12px;border-right:0;overflow:visible}
+  body:not(.stage) #right{height:86vh;height:86svh;min-height:520px;margin-top:8px}
+  body:not(.stage) .bmws-tabs{overflow-x:auto;scrollbar-width:none}
+}
+
+/* 20 Oct: Zieel, "a bit of curved corner at the box": the lane frames and the product title wear a soft corner */
+#frames .fr{border-radius:14px}
+#stage.lf .fr.lon,#stage:not([data-lod="hi"]):not(.lf) .fr:hover{border-radius:14px}
+/* 20 Oct, second pass (Zieel: "still not done"): the corner holds its size on screen whatever the zoom, and the press labels,
+   the detail float and the hint box share it */
+#frames .fr,#stage.lf .fr.lon,#stage:not([data-lod="hi"]):not(.lf) .fr:hover{border-radius:calc(16px*min(var(--iz,1),4))}
+.el,.el.pri,.el.vert,.el.sec{border-radius:calc(7px*min(var(--iz,1),1.3))}
+#detail{border-radius:14px}
+#foot{border-radius:12px}
+.qb{border-radius:12px}
+.pt b{padding:0}
+
+/* 20 Oct, Zieel: "round corner too much": a subtle corner, 8px on screen, less when the board is pulled back */
+#frames .fr,#stage.lf .fr.lon,#stage:not([data-lod="hi"]):not(.lf) .fr:hover{border-radius:calc(8px*min(var(--iz,1),2))}
+.el,.el.pri,.el.vert,.el.sec{border-radius:calc(5px*min(var(--iz,1),1.3))}
+#detail{border-radius:10px}
+#foot{border-radius:8px}
+.qb{border-radius:8px}

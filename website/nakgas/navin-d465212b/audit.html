@@ -1,0 +1,603 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VIN Industries · NakGas · App Audit · Brand Method</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Geist:wght@400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="bmws.css"><link rel="stylesheet" href="assets/brand.css"><link rel="stylesheet" href="gsmhdoc.css">
+<link rel="icon" href="assets/app-icon.svg">
+<style>
+/* App audit only. Light on purpose: hairlines, one accent, no fills beyond the base tint. */
+.read{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:28px 0 8px}
+.read .card h4{font-size:16px;margin-bottom:4px}
+.steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border:1px solid var(--gs-line);margin:16px 0;padding:0}
+.steps li{list-style:none;padding:16px;border-right:1px solid var(--gs-line);font-size:14px;color:var(--gs-steel)}
+.steps li:last-child{border-right:0}
+.steps li b{display:block;color:var(--gs-ink);font-size:15px;margin:4px 0 6px}
+.steps .n{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--gs-flame-d)}
+.sbar{position:relative;height:8px;background:var(--gs-base);border:1px solid var(--gs-line);min-width:120px;margin-top:6px}
+.sbar i{position:absolute;left:0;top:0;bottom:0;background:var(--gs-flame)}
+.sbar s{position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--gs-ink);text-decoration:none}
+.legend{display:flex;flex-wrap:wrap;gap:16px;font-size:13px;color:var(--gs-steel);margin:8px 0}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{display:inline-block;width:14px;height:8px;background:var(--gs-flame)}
+.legend s{display:inline-block;width:2px;height:12px;background:var(--gs-ink)}
+.big{font:700 44px/1 var(--gs-body);letter-spacing:-.03em}
+.big small{font-size:16px;font-weight:500;color:var(--gs-steel);letter-spacing:0}
+.tbl td.n{font-weight:600;white-space:nowrap}
+.tbl td .chip{white-space:nowrap}
+.srcs{columns:2;column-gap:40px;margin:12px 0;padding-left:18px}
+.srcs li{break-inside:avoid;font-size:13.5px;margin:0 0 8px}
+.srcs li span{color:var(--gs-steel)}
+h3.grp{margin-top:36px}
+@media (max-width:1000px){.read{grid-template-columns:1fr}.steps{grid-template-columns:1fr}.steps li{border-right:0;border-bottom:1px solid var(--gs-line)}.steps li:last-child{border-bottom:0}.srcs{columns:1}}
+</style>
+</head>
+<body>
+<div class="bmws" style="--bmws-acc:#2536F5"><div class="bmws-in"><div class="bmws-crumb"><b>VIN Industries &middot; NakGas</b><span>Brand Method &middot; Super Admin Navigation</span></div><nav class="bmws-tabs" aria-label="Brand Method admin navigation"><a href="audit.html" class="on">App Audit</a><a href="competitors.html">Competitors</a><a href="plan.html">Plan</a><a href="brand.html">Brand Creation</a><a href="design.html">Design</a><a href="final-brand.html">Final Brand</a><a href="app.html">The App</a><a href="website.html">Website</a><a href="deck.html">Investor Deck</a><a href="codex.html">Codex</a><a href="map.html">Overview</a></nav></div></div>
+
+<nav class="nav" aria-label="Chapters"><div class="nav-in"><a href="#background">Background</a><a href="#goal">Goal</a><a href="#model">The model</a><a href="#market">Market and price</a><a href="#money">Money</a><a href="#product">Product on paper</a><a href="#audiences">Audiences</a><a href="#trust">Trust and compliance</a><a href="#readiness">Readiness</a><a href="#gaps">Gaps</a><a href="#verdict">Verdict</a><a href="#ledger">Every finding</a><a href="#sources">Sources</a></div></nav>
+
+<main class="wrap">
+
+<header class="hero">
+  <div class="brandrow"><svg class="lockup" width="126" height="40" role="img" aria-label="nakgas" viewBox="0 0 169.6 59.8"><g class="fl" transform="translate(-3.50 3.54) scale(0.7037)"><path class="fl-o" d="M37 3.5C40.2 9.6 47.2 18.6 50.6 29.8C54.6 42.6 48.4 59.4 32.6 59.4C17.2 59.4 11 47 13.9 35.2C16.4 25 27.6 16.4 37 3.5Z" fill="#0CA66A"/><path class="fl-i" d="M32.6 31C35.2 36.4 40.4 40.6 40.4 46C40.4 50.6 36.8 53.2 32.6 53.2C28.4 53.2 24.8 50.6 24.8 46C24.8 40.6 30 36.4 32.6 31Z" fill="#8FDDB8"/></g><g transform="translate(41.58 45.34)"><path d="M1.94 0V-18.58H8.55V-17.37Q10.6 -18.96 13.6 -18.96Q15.58 -18.96 17.18 -18.03Q18.77 -17.1 19.68 -15.52Q20.6 -13.95 20.6 -12.01V0H13.98V-10.49Q13.98 -11.78 13.21 -12.52Q12.43 -13.26 11.29 -13.26Q10.11 -13.26 9.33 -12.52Q8.55 -11.78 8.55 -10.49V0ZM30.32 0.38Q27.74 0.38 25.73 -0.87Q23.71 -2.13 22.57 -4.31Q21.43 -6.5 21.43 -9.27Q21.43 -12.08 22.57 -14.27Q23.71 -16.45 25.73 -17.71Q27.74 -18.96 30.32 -18.96Q31.73 -18.96 32.97 -18.52Q34.2 -18.09 35.11 -17.29V-18.58H41.61V0H35.11V-1.25Q34.2 -0.49 32.97 -0.06Q31.73 0.38 30.32 0.38ZM31.73 -5.51Q33.36 -5.51 34.37 -6.55Q35.38 -7.6 35.38 -9.31Q35.38 -10.94 34.37 -12.01Q33.36 -13.07 31.77 -13.07Q30.17 -13.07 29.15 -12.01Q28.12 -10.94 28.12 -9.31Q28.12 -7.64 29.15 -6.57Q30.17 -5.51 31.73 -5.51ZM43.97 0V-27.7H50.58V-10.53L55.86 -18.58H63.12L56.81 -9.88L63.5 0H55.9L50.58 -8.82V0Z" fill="#0B1530"/><path d="M71.44 -0.68Q68.86 -0.68 66.86 -1.9Q64.87 -3.12 63.73 -5.19Q62.59 -7.26 62.59 -9.84Q62.59 -12.39 63.73 -14.46Q64.87 -16.53 66.86 -17.75Q68.86 -18.96 71.44 -18.96Q74.02 -18.96 75.85 -17.63V-18.58H82.35V-1.29Q82.35 1.67 80.96 3.86Q79.57 6.04 77.18 7.24Q74.78 8.44 71.74 8.44Q68.63 8.44 66.27 7.39Q63.92 6.35 62.59 4.45L66.58 0.49Q67.53 1.56 68.67 2.13Q69.81 2.7 71.44 2.7Q73.42 2.7 74.57 1.73Q75.73 0.76 75.73 -1.06V-1.9Q73.91 -0.68 71.44 -0.68ZM72.66 -6.42Q74.25 -6.42 75.18 -7.43Q76.11 -8.44 76.11 -9.84Q76.11 -11.21 75.18 -12.24Q74.25 -13.26 72.69 -13.26Q71.14 -13.26 70.2 -12.22Q69.27 -11.17 69.27 -9.84Q69.27 -8.51 70.19 -7.47Q71.1 -6.42 72.66 -6.42ZM92.42 0.38Q89.83 0.38 87.82 -0.87Q85.8 -2.13 84.66 -4.31Q83.52 -6.5 83.52 -9.27Q83.52 -12.08 84.66 -14.27Q85.8 -16.45 87.82 -17.71Q89.83 -18.96 92.42 -18.96Q93.82 -18.96 95.06 -18.52Q96.29 -18.09 97.2 -17.29V-18.58H103.7V0H97.2V-1.25Q96.29 -0.49 95.06 -0.06Q93.82 0.38 92.42 0.38ZM93.82 -5.51Q95.46 -5.51 96.46 -6.55Q97.47 -7.6 97.47 -9.31Q97.47 -10.94 96.46 -12.01Q95.46 -13.07 93.86 -13.07Q92.26 -13.07 91.24 -12.01Q90.21 -10.94 90.21 -9.31Q90.21 -7.64 91.24 -6.57Q92.26 -5.51 93.82 -5.51ZM113.13 0.53Q110.58 0.53 108.15 -0.44Q105.72 -1.41 104.27 -2.96L107.88 -6.65Q108.79 -5.7 110.07 -5.17Q111.34 -4.64 112.78 -4.64Q114.49 -4.64 114.49 -5.51Q114.49 -6.12 113.87 -6.44Q113.24 -6.76 112.23 -7.01Q111.23 -7.26 110.11 -7.6Q108.98 -7.94 108 -8.57Q107.01 -9.2 106.36 -10.28Q105.72 -11.36 105.72 -13.11Q105.72 -14.86 106.69 -16.23Q107.65 -17.59 109.4 -18.37Q111.15 -19.15 113.51 -19.15Q115.9 -19.15 118.07 -18.34Q120.23 -17.52 121.56 -15.88L117.91 -12.2Q117 -13.22 115.9 -13.62Q114.8 -14.02 113.89 -14.02Q112.25 -14.02 112.25 -13.11Q112.25 -12.58 112.88 -12.29Q113.51 -12.01 114.49 -11.76Q115.48 -11.51 116.6 -11.13Q117.72 -10.75 118.71 -10.09Q119.7 -9.42 120.33 -8.3Q120.95 -7.18 120.95 -5.47Q120.95 -2.7 118.83 -1.08Q116.7 0.53 113.13 0.53Z" fill="#0CA66A"/></g></svg></div>
+  <div class="kicker">App audit &middot; Brand Method</div>
+  <h1>NakGas, <em>app and market</em> audit</h1>
+  <p class="lede">An LPG cooking gas delivery app for Malaysian households, run on the licensed dealers who already deliver by phone. This page condenses the market and product audit of 29 September, updates it for the call of 1 October, and refreshes every web fact on Tuesday 6 October 2026. A fact carries its source and date. A judgement is marked <b>Our read</b>.</p>
+  <div class="chips">
+    <span class="chip">Audit of 29 Sep: 24 findings</span>
+    <span class="chip">Call of 1 Oct: 55 minutes</span>
+    <span class="chip blue">Web facts read Tue 6 Oct 2026</span>
+    <span class="chip">33 findings in the ledger</span>
+    <span class="chip">Readiness 4.9 of 10, was 4.2</span>
+  </div>
+  <p class="status"><b>Status, Tue 6 Oct 2026.</b> Scope and price are unchanged: RM48,000 before SST, five weeks from the Monday after the deposit clears. The kickoff planned for Mon 5 Oct did not happen because the RM60,000 first round is in discussion, not in. Nothing from Navin in the WhatsApp group since 1 Oct (checked 6 Oct, 2:30pm). The name NakGas is our recommendation of Tue 20 Oct, after Gas Sekarang on 6 Oct and Gaslah on 12 Oct, and still his to confirm. The flame turned green with a blue variation the same day. The full audit of 29 Sep stays at audit-gasnow.html; the call notes at meeting-notes.html.</p>
+  <div class="read">
+    <div class="card"><div class="k">What changed on 1 Oct</div><h4>The model is settled</h4><p>No riders. The dealers who already deliver take the order. Suppliers pay nothing. The customer pays one fee per order. Three of the four money questions of 29 Sep now have an answer; the fee figure does not.</p></div>
+    <div class="card"><div class="k">What holds the launch</div><h4>Money and paperwork, not code</h4><p>The first round is not in, the company that signs is not confirmed, and Apple needs 15 to 20 days once it is. None of these is a build task.</p></div>
+    <div class="card"><div class="k">Our read</div><h4>The same dealer, in the phone</h4><p>Every app rival we found in the Peninsula runs its own or freelance riders, or does not say where it delivers. None states Johor coverage (read 6 Oct). The opening is real, and one rival with the dealer model is already live as a web app.</p></div>
+  </div>
+</header>
+
+<!-- BACKGROUND -->
+<section class="sec" id="background">
+  <h2>Background</h2>
+  <p class="sub">Who is behind NakGas, what he already has, and how we got here.</p>
+  <div class="grid g4">
+    <div class="card"><div class="k">The founder</div><h4>Navindran A/L Ravichandran, "Navin"</h4><p>Ex Volvo Trucks, southern region operations. An operations person on his first technology venture (call, 28 Sep).</p></div>
+    <div class="card"><div class="k">The company</div><h4>VIN Industries, a working name</h4><p>No company of that exact name found on 27 Sep. The admin deck footer reads "Gas Now Sdn. Bhd.". The NDA carries his NRIC. Entity and SSM number: to confirm.</p></div>
+    <div class="card"><div class="k">The venture</div><h4>GasNow, then Gas Sekarang, then Gaslah, now NakGas</h4><p>LPG cooking gas cylinders delivered to households across Malaysia by licensed dealers. One product in Phase One: the cylinder, new or swap.</p></div>
+    <div class="card"><div class="k">The base</div><h4>Johor Bahru</h4><p>He lives and works in Johor Bahru (Medini), where his distributors are. The target is national.</p></div>
+  </div>
+
+  <h3>What he has, as of 6 Oct</h3>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>Document</th><th>Size or state</th><th>What it settles</th><th>What it leaves open</th></tr></thead>
+    <tbody>
+      <tr><td class="strong">Customer app deck</td><td>24 pages</td><td>Flows, roles, 13 wireframed screens</td><td>Still says commission per cylinder (p.2) and "Live Delivery Tracking" (p.5)</td></tr>
+      <tr><td class="strong">Supplier app deck</td><td>16 pages</td><td>Shop and truck operators, daily settlement</td><td>Still shows the supplier receiving "RM30 less RM1.50" (p.11)</td></tr>
+      <tr><td class="strong">Admin portal deck</td><td>201 pages</td><td>Ten modules, named roles, two-factor login, rewards rule</td><td>Enterprise depth; RM1.50 default commission (p.162)</td></tr>
+      <tr><td class="strong">His current developer's scope</td><td>v1.0, then v1.1; 54 features; no price inside</td><td>v1.1 added multilingual support after our call of 28 Sep</td><td>Still defers the supplier heat map to Phase Two. Navin had not sent his comments on v1.1 by 1 Oct, so that engagement is still open</td></tr>
+      <tr><td class="strong">NDA</td><td>His document</td><td>Signed by Bazil, emailed 29 Sep</td><td>Clause 12: no portfolio use of the app</td></tr>
+      <tr><td class="strong">Logo</td><td>AI made: a green flame and a "GAS Now" wordmark</td><td>A starting point</td><td>Sits inside a deck template; no artwork file; colour codes said to exist, not received</td></tr>
+      <tr><td class="strong">Text mockup</td><td>Made with a free AI tool</td><td>His own picture of the flow (1 Oct)</td><td>Not something an investor can tap through. Our free prototype answers this (The App tab)</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>How we got here</h3>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>Date</th><th>What happened</th></tr></thead>
+    <tbody>
+      <tr><td class="n">Mon 28 Sep</td><td>Discovery call, 1 hour 30 minutes. Model, order engine, budget and the five week plan set out.</td></tr>
+      <tr><td class="n">Tue 29 Sep</td><td>Market and product audit (24 findings, 33 sources) and the RM48,000 proposal prepared. NDA signed by Bazil and emailed.</td></tr>
+      <tr><td class="n">Thu 1 Oct</td><td>Alignment call, 55 minutes. Navin had read the audit and the proposal. No riders, suppliers pay nothing, multilingual in, fee deferred to our price audit, rename raised, funding not yet in.</td></tr>
+      <tr><td class="n">Mon 5 Oct</td><td>Planned kickoff did not happen. Diha sent the Cradle CIP Spark link at 4:30pm.</td></tr>
+      <tr><td class="n">Tue 6 Oct</td><td>Bazil: build the full app workspace and choose the name. Gas Sekarang chosen, to confirm with Navin.</td></tr>
+      <tr><td class="n">Mon 12 Oct</td><td>Bazil: a name &ldquo;shorter more memorable, u can choose&rdquo;. Gaslah chosen by Brand Method, to confirm with Navin.</td></tr>
+      <tr><td class="n">Tue 20 Oct</td><td>Bazil: &ldquo;change the name all to NakGas&rdquo;, and a green flame with the blue kept as a variation. NakGas chosen, the flame green with a blue variation, to confirm with Navin.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- GOAL -->
+<section class="sec" id="goal">
+  <h2>Goal</h2>
+  <p class="sub">Six jobs a household gas app has to do, and where each one stands today.</p>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>#</th><th>The job</th><th>Why it matters</th><th>Where it stands, 6 Oct</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td class="n">1</td><td class="strong">Show the fair price first</td><td>RM26.60 for 14 kg is fixed by law. Trust starts on the first line of the bill.</td><td>The KPDN controlled price is the first line of every bill; one platform fee per order.</td><td><span class="chip ok">Designed</span></td></tr>
+      <tr><td class="n">2</td><td class="strong">Beat the phone call</td><td>The dealer's own number already gets RM30.00 all in and same day in his patch.</td><td>Two taps, 45 seconds to accept, a reorder reminder. It costs the customer RM3.00 or RM3.50 more than the call.</td><td><span class="chip low">To prove</span></td></tr>
+      <tr><td class="n">3</td><td class="strong">Win the dealers</td><td>No dealers online, no orders.</td><td>Suppliers pay nothing (Navin, 1 Oct): Johor Bahru distributors had refused to pay anything.</td><td><span class="chip ok">Decided</span></td></tr>
+      <tr><td class="n">4</td><td class="strong">Speak Malay first</td><td>69.4% of the population is Bumiputera (Census 2020); many drivers read Malay first.</td><td>Bahasa Malaysia and English in both apps, picker on first open, switch in Settings.</td><td><span class="chip ok">In scope</span></td></tr>
+      <tr><td class="n">5</td><td class="strong">Stay compliant</td><td>LPG is a scheduled controlled item; price, licence and data law all apply.</td><td>Licence upload and expiry tracked; the rule on expiry, the order cap and PDPA consent still to set.</td><td><span class="chip low">To build</span></td></tr>
+      <tr><td class="n">6</td><td class="strong">Be investor ready</td><td>The RM60,000 round and Cradle need a working flow and a founder story.</td><td>Free prototype flow in this workspace (The App). The brand strategy sample link is owed by Bazil since 1 Oct.</td><td><span class="chip low">In progress</span></td></tr>
+    </tbody>
+  </table></div>
+  <div class="note blue"><b>Our read: what winning looks like in twelve months.</b> One region where most licensed dealers are on the app and accept inside 45 seconds; households who reorder from the reminder rather than from a sticker; a bill that reads the same as the KPDN rule; and a funded Phase Two that knows the gas balance before the flame changes.</div>
+</section>
+
+<!-- MODEL -->
+<section class="sec" id="model">
+  <h2>The model</h2>
+  <p class="sub">The dealers who already deliver, no riders of our own, and an order engine that always ends.</p>
+  <div class="grid g3">
+    <div class="card"><div class="k">Fact &middot; Navin, 1 Oct</div><h4>No riders</h4><p>Rivals run their own drivers or "agents" in the Klang Valley. NakGas keeps none: the dealer who delivers by phone today takes the order and delivers it himself.</p></div>
+    <div class="card"><div class="k">Fact &middot; Navin, 1 Oct</div><h4>Dealers pay nothing</h4><p>No commission and no fee to the supplier. It is the bait that gets them on board.</p></div>
+    <div class="card"><div class="k">Fact &middot; call, 28 Sep</div><h4>The customer never chooses</h4><p>The platform assigns the nearest available licensed shop or truck. Not a marketplace.</p></div>
+  </div>
+
+  <h3>One order through the engine</h3>
+  <ol class="steps">
+    <li><span class="n">Step 1</span><b>Customer orders</b>Saved address flagged landed or high-rise, size, quantity, new or swap, now or scheduled.</li>
+    <li><span class="n">Step 2</span><b>Nearest dealer</b>The nearest available shop or truck within its radius and with stock.</li>
+    <li><span class="n">Step 3</span><b>45 seconds</b>The dealer sees a countdown and accepts or declines.</li>
+    <li><span class="n">Step 4</span><b>Next nearest</b>On a decline or a timeout the order moves on.</li>
+    <li><span class="n">Step 5</span><b>Admin after four</b>Four declines in a row and the order escalates to Admin.</li>
+  </ol>
+  <p class="src">Sources: call of 28 Sep, 00:58:31 to 01:07:54; his developer's scope v1.1, CR-09 and features 19 to 23. The scope wrote 45 to 60 seconds; we fix 45 seconds, editable in Admin settings.</p>
+
+  <h3>Who does what</h3>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>Role</th><th>Who they are</th><th>What they do in NakGas</th></tr></thead>
+    <tbody>
+      <tr><td class="strong">Customer</td><td>A household, iOS or Android</td><td>Orders, pays online or cash on delivery, tracks four statuses, sees the dealer's name and truck plate (never the phone number) and the photo at the door, rates, reorders.</td></tr>
+      <tr><td class="strong">Shop operator</td><td>A licensed retailer with stock</td><td>Goes online, accepts in 45 seconds, dispatches one of his saved drivers.</td></tr>
+      <tr><td class="strong">Driver operator</td><td>A truck already on the road</td><td>Accepts and drives straight to the door, takes the photo, marks cash collected.</td></tr>
+      <tr><td class="strong">Distributor</td><td>Runs 20 to 40 trucks a day under its own licence (28 Sep)</td><td>Onboards its fleet: drivers and trucks as separate records, stock by brand and size, radius.</td></tr>
+      <tr><td class="strong">Admin</td><td>Super admin and scoped sub-admins</td><td>Approves dealers and their KPDN licences, watches orders and escalations, runs finance, promo codes, reports and the static heat map.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note"><b>Radius.</b> On 28 Sep Navin put the viable trip at about two kilometres for a small delivery charge (01:01:33). One live rival rejects addresses more than 2.5 km from its dealer (GasXpress site code, read 6 Oct). <b>Tracking.</b> Status pings with the driver's confirmation, not a live map, in Phase One.</div>
+  <div class="note blue"><b>Our read.</b> The engine is the product and it is not the risk. The risk is whether drivers who work for distributors keep the supplier app open. With no riders of our own there is no fallback fleet: if the nearest truck is offline, the nearest available may be far away.</div>
+</section>
+
+<!-- MARKET -->
+<section class="sec" id="market">
+  <h2>Market and price</h2>
+  <p class="sub">A price fixed by law, a subsidy that stays, brands that change at the state line, and orders still taken by phone.</p>
+  <div class="grid g4">
+    <div class="card"><div class="stat">RM26.60</div><p>14 kg household cylinder, RM1.90 a kilogram. KPDN, reported 8 Apr 2026; same in Sabah and Sarawak.</p></div>
+    <div class="card"><div class="stat">RM3.4bn</div><p>LPG subsidy paid in 2024, up from RM3.1 billion in 2023 (Bernama, 29 May 2025).</p></div>
+    <div class="card"><div class="stat">about RM40</div><p>Subsidy on every 14 kg cylinder (minister, Utusan, 22 Nov 2025).</p></div>
+    <div class="card"><div class="stat">8.2m</div><p>Households in Malaysia, 1.8 million in Selangor (DOSM, Census 2020).</p></div>
+  </div>
+
+  <h3>The controlled price</h3>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>Cylinder</th><th class="r">Price</th><th class="r">Per kg</th><th>Note</th></tr></thead>
+    <tbody>
+      <tr><td>10 kg, household</td><td class="r">RM19.00</td><td class="r">RM1.90</td><td>Subsidised, domestic use only</td></tr>
+      <tr><td>12 kg, household</td><td class="r">RM22.80</td><td class="r">RM1.90</td><td>Subsidised, domestic use only</td></tr>
+      <tr><td class="strong">14 kg, household</td><td class="r strong">RM26.60</td><td class="r">RM1.90</td><td>Unchanged since 2015; the size on every bill in this workspace</td></tr>
+      <tr><td>14 kg, commercial</td><td class="r">about RM84</td><td class="r">about RM6.00</td><td>Not subsidised. About RM70 from 1 May 2025 plus RM14 in April 2026. <span class="chip inf">Our read</span> adds the two reports</td></tr>
+      <tr><td>50 kg, commercial (C50)</td><td class="r">about RM190</td><td class="r">about RM3.80</td><td>Not price controlled; KPDN monitoring (Buletin TV3, Apr 2026). Phase Two for us</td></tr>
+      <tr><td>First 14 kg, Gas PETRONAS</td><td class="r">RM106.60</td><td class="r"></td><td>RM80 cylinder deposit plus RM26.60 gas in the Peninsula; RM90 deposit in Sabah and Sarawak</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note"><b>Fact.</b> A trader may add a separate, reasonable transport charge for home delivery (eCentral, 14 Apr 2026). Selling the cylinder itself above RM26.60 is an offence: a trader selling 14 kg at RM34 was served notice in June 2024 (RTM, 18 Jun 2024); fines run to RM100,000 or 3 years for a person and RM500,000 for a company under the Price Control and Anti-Profiteering Act 2011. <b>Fact.</b> The market price follows the Saudi contract price, which jumped in April 2026 (propane US$750 a tonne, Argaam, 31 Mar 2026); the household price did not move. The minister ruled out removing the subsidy (FMT, 29 May 2025).</div>
+
+  <h3>Who fills the cylinder</h3>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>Brand</th><th>Owner</th><th>Household sizes</th><th>How it sells today</th><th>Johor link</th></tr></thead>
+    <tbody>
+      <tr><td class="strong">Gas PETRONAS</td><td>PETRONAS Dagangan Berhad</td><td>12 and 14 kg</td><td>Dealers, about 278 stations, Home Delivery by hotline 1300 88 8427</td><td>Pasir Gudang filling site; Home Delivery lists Johor Bahru and 35 other Johor towns (read 1 Oct)</td></tr>
+      <tr><td class="strong">Petron Gasul</td><td>Petron Malaysia</td><td>12 and 14 kg</td><td>Cash and carry at about 700 stations; hotline 1300 22 8211</td><td>Not stated</td></tr>
+      <tr><td class="strong">BHPetrogas</td><td>BHPetrol</td><td>12 and 14 kg</td><td>Hotline 1300-88-3553 and dealers, same or next day</td><td>Pasir Gudang filling site</td></tr>
+      <tr><td class="strong">MiraGas</td><td>NGC Energy, Oman</td><td>10 and 14 kg, yellow</td><td>Peninsular dealers</td><td>Pasir Gudang, not verified</td></tr>
+      <tr><td class="strong">MyGaz</td><td>Siamgas, Thailand</td><td>Yellow</td><td>Dealers in Sabah and the Peninsula; left Sarawak 1 Dec 2023</td><td>Not published</td></tr>
+      <tr><td class="strong">Solar Gas</td><td>KUB Malaysia</td><td>12 kg blue, 14 kg gold</td><td>Hotline 1-700-81-7427 and dealers</td><td>Filling plant in Tebrau, Johor Bahru</td></tr>
+      <tr><td class="strong">Petros</td><td>PetrosNiaga: Petroleum Sarawak 51%, PETRONAS Dagangan 49%</td><td>14 kg, red</td><td>Sole Sarawak distributor since 1 Dec 2023</td><td>None</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">Brand sites, annual reports and the press, read 29 Sep and 1 Oct 2026. No brand publishes a market share. An empty cell is a gap in our reading, not proof of absence.</p>
+
+  <h3>How gas is ordered today</h3>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>Channel</th><th>How it works</th><th>Where</th><th>Source</th></tr></thead>
+    <tbody>
+      <tr><td class="strong">The dealer's number</td><td>A sticker on the cylinder or a saved WhatsApp. Call, he comes. RM30.00 all in for 14 kg in Johor Bahru</td><td>Everywhere, one dealer's patch at a time</td><td>Navin, 1 Oct. JB dealers found 1 Oct: New Town Trading (Ulu Tiram), Guna Trading (since 1981), Uncle Lim Gas Delivery (near Gelang Patah). None publishes a tariff</td></tr>
+      <tr><td class="strong">Brand hotlines</td><td>Gas PETRONAS Home Delivery: a chosen date and slot, an authorised dealer delivers. BHPetrogas: same or next day</td><td>Selected areas by dealer zone</td><td>mymesra.com.my, read 6 Oct; bhpetrol.com.my, read 29 Sep</td></tr>
+      <tr><td class="strong">Station counter</td><td>Petron stations sell Gasul cash and carry; PETRONAS stations sell Gas PETRONAS</td><td>Stations</td><td>Petron and PETRONAS Dagangan sites, read 1 Oct</td></tr>
+      <tr><td class="strong">Apps and web apps</td><td>Gasbee, Click MyGas, GasXpress, Gas2u; Sara-X in Sarawak</td><td>Mostly the Klang Valley; none states Johor</td><td>Read 6 Oct; full detail on the <a href="competitors.html">Competitors</a> page</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note blue"><b>Our read.</b> Johor Bahru is a supply town: four of the seven brands fill within about 30 km of the city, Gas PETRONAS already delivers there by hotline, and we found no app that states Johor coverage. Launch in Johor Bahru first, his base and his distributors, is our read; it is still his to confirm.</div>
+</section>
+
+<!-- MONEY -->
+<section class="sec" id="money">
+  <h2>Money</h2>
+  <p class="sub">What the customer pays on one order, what the dealer gets, and what the platform keeps.</p>
+  <div class="grid g4">
+    <div class="card"><div class="k">Rule &middot; KPDN</div><h4>Unbundled lines</h4><p>Gas at the controlled price, then delivery, then any other fee, each shown on its own line.</p></div>
+    <div class="card"><div class="k">Rule &middot; Navin, 1 Oct</div><h4>Suppliers pay nothing</h4><p>No commission. The dealer keeps the gas price and his delivery fee.</p></div>
+    <div class="card"><div class="k">Rule &middot; Navin, 1 Oct</div><h4>Per order, not per cylinder</h4><p>One platform fee on the order, whatever the quantity.</p></div>
+    <div class="card"><div class="k">Open &middot; F25</div><h4>RM3.00 or RM3.50</h4><p>"Needs further discussion", pending our price audit. That audit is the <a href="competitors.html#checkout">Competitors</a> page.</p></div>
+  </div>
+
+  <h3>The bill, one 14 kg cylinder, Johor Bahru</h3>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>Line</th><th class="r">Amount</th><th>Who keeps it</th><th>Note</th></tr></thead>
+    <tbody>
+      <tr><td>LPG 14 kg, KPDN controlled price</td><td class="r">RM26.60</td><td>Dealer</td><td>Fixed by law</td></tr>
+      <tr><td>Delivery fee</td><td class="r">RM3.40</td><td>Dealer</td><td>What a JB dealer adds by phone today (RM30.00 all in). Set per dealer and area; high-rise tiers to confirm</td></tr>
+      <tr><td>Platform &amp; processing fee, per order</td><td class="r">RM3.50</td><td>Platform, less the gateway</td><td>Option B, Navin's leaning. Option A is RM3.00 with the gateway absorbed</td></tr>
+      <tr class="total"><td>Total</td><td class="r">RM33.50</td><td></td><td>Option A: RM33.00</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Option A against option B</h3>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th></th><th class="r">Option A</th><th class="r">Option B</th></tr></thead>
+    <tbody>
+      <tr><td>Line on the bill</td><td class="r">Platform fee</td><td class="r">Platform &amp; processing fee</td></tr>
+      <tr><td>Fee per order</td><td class="r">RM3.00</td><td class="r">RM3.50</td></tr>
+      <tr><td>Total, one 14 kg, JB</td><td class="r">RM33.00</td><td class="r">RM33.50</td></tr>
+      <tr><td>Gateway at about 2%</td><td class="r">about RM0.66, absorbed</td><td class="r">about RM0.67</td></tr>
+      <tr class="total"><td>Kept by the platform</td><td class="r">about RM2.34</td><td class="r">about RM2.83</td></tr>
+      <tr><td>Above the RM30.00 phone price</td><td class="r">RM3.00</td><td class="r">RM3.50</td></tr>
+      <tr><td>Below Navin's ceiling of RM39 to RM40</td><td class="r">RM6.00 to RM7.00</td><td class="r">RM5.50 to RM6.50</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">Figures: Navin, 1 Oct. Gateway: Razorpay Curlec, RM99 one time, then about 2% on the highest channel (his figures, to confirm against the gateway's own rate card). His own framing of B: RM3.00 platform kept whole, 50 sen for the gateway, about 17 sen absorbed.</p>
+
+  <h3>Worked examples</h3>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>Order</th><th class="r">Gas</th><th class="r">Delivery</th><th class="r">Fee</th><th class="r">Total</th><th class="r">Gateway, about 2%</th><th class="r">Kept</th></tr></thead>
+    <tbody>
+      <tr><td>One 14 kg, landed, option B</td><td class="r">RM26.60</td><td class="r">RM3.40</td><td class="r">RM3.50</td><td class="r strong">RM33.50</td><td class="r">RM0.67</td><td class="r">RM2.83</td></tr>
+      <tr><td>One 14 kg, landed, option A</td><td class="r">RM26.60</td><td class="r">RM3.40</td><td class="r">RM3.00</td><td class="r strong">RM33.00</td><td class="r">RM0.66</td><td class="r">RM2.34</td></tr>
+      <tr><td>Two 14 kg, option B</td><td class="r">RM53.20</td><td class="r">RM6.80</td><td class="r">RM3.50</td><td class="r strong">RM63.50</td><td class="r">RM1.27</td><td class="r">RM2.23</td></tr>
+      <tr><td>Three 14 kg, option B</td><td class="r">RM79.80</td><td class="r">RM10.20</td><td class="r">RM3.50</td><td class="r strong">RM93.50</td><td class="r">RM1.87</td><td class="r">RM1.63</td></tr>
+      <tr><td>One 14 kg, cash on delivery, option B</td><td class="r">RM26.60</td><td class="r">RM3.40</td><td class="r">RM3.50</td><td class="r strong">RM33.50</td><td class="r">none</td><td class="r">RM3.50, held by the dealer</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">Delivery is charged per cylinder, as in the brief's two cylinder example (RM6.80). The gateway percentage is Navin's highest channel figure, so these are worst cases.</p>
+  <div class="note blue"><b>Our read, three things the arithmetic shows.</b>
+    <ol class="clean">
+      <li>The fee is per order but the gateway is a percentage of the whole basket, so a bigger order keeps less: about RM1.63 at three cylinders under option B.</li>
+      <li>On cash on delivery the customer hands the dealer RM33.50, platform fee included. Suppliers pay nothing, yet the platform still has to collect its RM3.50 from the dealer, by netting it off his online payouts or by invoice. The settlement rule has to be written before the wallet is built (F29).</li>
+      <li>At about RM2.83 kept, every 1,000 orders a month is about RM2,830 a month before servers, SMS, support and promotion. No demand figure exists yet, so this is arithmetic, not a forecast (F28).</li>
+    </ol>
+  </div>
+  <div class="note"><b>Fact, read 6 Oct.</b> Rivals charge the supply side: Gasbee's merchant page says dealers "only share a small commission on completed orders"; GasXpress's site code carries a configurable platform commission on the dealer. Navin's decks still describe a commission too (supplier deck p.11, admin deck p.162): they need updating to "suppliers pay nothing".</div>
+</section>
+
+<!-- PRODUCT -->
+<section class="sec" id="product">
+  <h2>Product on paper</h2>
+  <p class="sub">His three decks, his current developer's scope, and where they now agree with what we build.</p>
+  <div class="grid g4">
+    <div class="card"><div class="stat">24</div><p>Customer app deck pages</p></div>
+    <div class="card"><div class="stat">16</div><p>Supplier app deck pages</p></div>
+    <div class="card"><div class="stat">201</div><p>Admin portal deck pages: 83% of the 241</p></div>
+    <div class="card"><div class="stat">54</div><p>Features in his developer's scope v1.1</p></div>
+  </div>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>Area</th><th>His decks</th><th>His developer's scope</th><th>The calls</th><th>Ours, Phase One</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td class="strong">Languages</td><td>A language setting (admin p.165)</td><td>v1.0 English only; v1.1 multilingual</td><td>1 Oct: picker on first open, switch in Settings</td><td>Bahasa Malaysia and English in both apps; admin in English</td><td><span class="chip ok">Settled</span></td></tr>
+      <tr><td class="strong">Supplier heat map</td><td>Map of active deliveries</td><td>Phase Two, still in v1.1</td><td>28 Sep: yes. 1 Oct: Navin frustrated it is deferred</td><td>Static map with radius circles</td><td><span class="chip ok">Ours: in</span></td></tr>
+      <tr><td class="strong">Commission</td><td>Three versions (p.2, p.11, p.162)</td><td>COD commission from the supplier wallet</td><td>1 Oct: suppliers pay nothing</td><td>None</td><td><span class="chip ok">Settled</span></td></tr>
+      <tr><td class="strong">Customer fee</td><td></td><td>Flat RM3.00</td><td>1 Oct: per order, RM3.00 or RM3.50</td><td>Admin-editable; the prototype shows option B</td><td><span class="chip bad">Open</span></td></tr>
+      <tr><td class="strong">Gateway fee</td><td></td><td>Passed on or absorbed: TBD</td><td>Inside the fee</td><td>One Malaysian gateway plus COD</td><td><span class="chip low">Partly</span></td></tr>
+      <tr><td class="strong">Delivery fee</td><td>Landed and high-rise types, no value (admin p.161)</td><td>Tiers; RM3.40 landed example</td><td>RM3.40 in JB</td><td>Set per dealer and area</td><td><span class="chip low">Partly</span></td></tr>
+      <tr><td class="strong">Tracking</td><td>"Live Delivery Tracking" (customer p.5)</td><td>Status based; live map TBD</td><td>Status pings</td><td>Four statuses, no live map</td><td><span class="chip ok">Settled</span></td></tr>
+      <tr><td class="strong">Order engine</td><td>Nearest truck or shop</td><td>45 to 60 seconds, four declines</td><td>45 seconds, needs a stop</td><td>45 seconds, four declines, then Admin</td><td><span class="chip ok">Settled</span></td></tr>
+      <tr><td class="strong">Proof of delivery</td><td>Confirm delivery screens</td><td>Supplier photo only</td><td>Photo proof</td><td>Mandatory photo, shown to the customer</td><td><span class="chip ok">Settled</span></td></tr>
+      <tr><td class="strong">Admin depth</td><td>Ten modules, named roles, full audit logs</td><td>Core modules; audit logs Phase Two</td><td>MVP first</td><td>Core plus the heat map; the deck becomes the Phase Two backlog</td><td><span class="chip ok">Settled</span></td></tr>
+      <tr><td class="strong">Rewards</td><td>1 point per order, 50 for a free swap</td><td>Promo code or points; first 1,000 users</td><td>Rewards, points, promo codes</td><td>Ledger built; first redemption to set</td><td><span class="chip bad">Open</span></td></tr>
+      <tr><td class="strong">Reorder reminder</td><td></td><td></td><td>Phase Two: IoT regulators and predictive reorder</td><td>A reminder from the customer's own rhythm, every 28 to 30 days by default</td><td><span class="chip ok">Ours: in</span></td></tr>
+      <tr><td class="strong">Website</td><td></td><td>Static landing page</td><td>3 to 5 pages plus the supplier form</td><td>3 to 5 pages, bilingual, form into the approvals queue</td><td><span class="chip ok">Settled</span></td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">Deck pages and feature numbers are his documents'. Calls: 28 Sep and 1 Oct 2026.</p>
+  <div class="note low"><b>Open.</b> His developer's engagement is still open: Navin had not sent his comments on v1.1 by 1 Oct (F27). One team should hold one scope. Whether that engagement is stood down is his decision.</div>
+</section>
+
+<!-- AUDIENCES -->
+<section class="sec" id="audiences">
+  <h2>Audiences</h2>
+  <p class="sub">Who opens it, who delivers through it, who runs it, and who funds it.</p>
+
+  <h3>Households, by type</h3>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>Household</th><th>The first question</th><th>Where NakGas answers it</th><th>Read</th></tr></thead>
+    <tbody>
+      <tr><td class="strong">Landed family home</td><td>Is it my usual dealer, at the usual price?</td><td>A licensed local dealer delivers; gas at RM26.60 first, RM3.40 delivery in the JB example</td><td><span class="chip ok">Core</span></td></tr>
+      <tr><td class="strong">High-rise with a lift</td><td>Will someone bring it up to my unit?</td><td>Address flagged high-rise with floor, lift and unit; the fee tier is not yet set</td><td><span class="chip low">Fee open</span></td></tr>
+      <tr><td class="strong">Walk-up flat, no lift</td><td>Who carries 14 kg up the stairs, and for how much?</td><td>Not yet set. A retired rival charged RM3.00 extra for high-rise in 2021; a live one adds a stair surcharge set by the dealer</td><td><span class="chip low">Decide</span></td></tr>
+      <tr><td class="strong">Older households</td><td>Can I read it, and who is at my door?</td><td>Malay first, body text never below 14px, dealer name and truck plate shown, photo at the door</td><td><span class="chip low">To prove</span></td></tr>
+      <tr><td class="strong">New movers and renters</td><td>Who do I even call here?</td><td>The first order needs no dealer's number</td><td><span class="chip inf">Our read: the wedge</span></td></tr>
+      <tr><td class="strong">Small food businesses</td><td>Commercial cylinders and C50</td><td>Phase Two. Ask domestic or business at sign-up so subsidised cylinders stay domestic</td><td><span class="chip">Later</span></td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">Census 2020 (DOSM): 8.2 million households; population 69.4% Bumiputera, 23.2% Chinese, 6.7% Indian (Malaysiakini, 14 Feb 2022). No Johor household count was read for this page.</p>
+
+  <h3>Dealers and distributors</h3>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>Who</th><th>What they want</th><th>What NakGas offers</th><th>The risk</th></tr></thead>
+    <tbody>
+      <tr><td class="strong">Shop dealer</td><td>More orders without more staff or a new bill to pay</td><td>Free to join, orders from nearby homes, KPDN licence shown as a trust mark</td><td>Will he answer in 45 seconds while serving at the counter?</td></tr>
+      <tr><td class="strong">Distributor</td><td>Full trucks and paid routes</td><td>Orders routed to trucks already on the road; payment routed to the distributor</td><td>JB distributors already refused to pay; they will judge us on order volume</td></tr>
+      <tr><td class="strong">Driver</td><td>No extra work</td><td>Four screens: online, accept, photo, done; Malay first</td><td>Seasoned drivers may not open an app (Bazil, 28 Sep). The WhatsApp or Telegram fallback is Phase Two</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Admin and investors</h3>
+  <div class="grid g2">
+    <div class="card"><div class="k">Admin</div><h4>Who answers at nine at night</h4><p>A super admin and scoped sub-admins. Every escalation after four declines lands here. Nobody is rostered yet (F22).</p></div>
+    <div class="card"><div class="k">Investors</div><h4>What they look at first</h4><p>The RM60,000 first round is in discussion. Cradle CIP Spark looks at the app flow and the founder (Bazil, 1 Oct). Angels: prefer those with a tax reason, not those who want control (Bazil, 1 Oct).</p></div>
+  </div>
+  <div class="note blue"><b>Our read.</b> "Every household in Malaysia" is too wide to launch at. Win one dealer's patch in Johor Bahru first: the homes already on his round, then the neighbours who do not have his number.</div>
+</section>
+
+<!-- TRUST -->
+<section class="sec" id="trust">
+  <h2>Trust and compliance</h2>
+  <p class="sub">KPDN licences, the price law, safety at the door, and the personal data a dispatch app holds.</p>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>Area</th><th>The rule</th><th>Source and date</th><th>What NakGas does</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td class="strong">Dealer licence</td><td>LPG is a scheduled controlled item (Control of Supplies Act 1961). Retail licence RM10 a year, wholesale RM25 a year; SSM, council licence, supplier letter, Fire and Rescue letter</td><td>KPDN licence guide, read 29 Sep</td><td>Licence uploaded at onboarding, expiry date tracked</td><td><span class="chip low">Rule to set</span></td></tr>
+      <tr><td class="strong">Licence expiry</td><td>A lapsed licence is an enforcement case with our name on the receipt</td><td>Audit F06, 29 Sep</td><td><span class="chip inf">Our read</span> 30 day warning to Admin and the dealer; off the queue on the day it lapses</td><td><span class="chip low">To build</span></td></tr>
+      <tr><td class="strong">Price</td><td>RM26.60 is the ceiling for the cylinder; fines to RM500,000 for a company</td><td>PCAAP Act 2011; RTM, 18 Jun 2024</td><td>KPDN line first; delivery and fee on their own lines</td><td><span class="chip ok">Designed</span></td></tr>
+      <tr><td class="strong">Quantity</td><td>Storing more than 42 kg, three 14 kg cylinders, needs a permit</td><td>KPDN permit guideline, Regulation 18, 2021</td><td><span class="chip inf">Our read</span> cap a household order at three. One live rival already caps at three, citing KPDN (GasXpress, read 6 Oct)</td><td><span class="chip low">Adopt</span></td></tr>
+      <tr><td class="strong">Subsidy misuse</td><td>Since 1 May 2025 businesses using more than 42 kg must buy commercial cylinders</td><td>The Star, 1 Jun 2025</td><td>Ask domestic or business at sign-up</td><td><span class="chip low">To build</span></td></tr>
+      <tr><td class="strong">Safety at the door</td><td>Sealed cylinder, matching size on a swap, regulator and hose in good order</td><td>Rival practice, read 6 Oct</td><td>Safety tips in the app. GasXpress offers free regulator fitting and a soap-bubble leak test on request: worth making a dealer standard</td><td><span class="chip low">To decide</span></td></tr>
+      <tr><td class="strong">Photo proof</td><td>No photo, no credit</td><td>Scope and the 28 Sep call</td><td>Mandatory photo; the customer sees it</td><td><span class="chip ok">Designed</span></td></tr>
+      <tr><td class="strong">Dealer privacy</td><td>Supplier numbers never shown, so orders stay on the platform</td><td>Call, 28 Sep, 01:09:43</td><td>Name and truck plate only</td><td><span class="chip ok">Designed</span></td></tr>
+      <tr><td class="strong">Personal data</td><td>PDPA amendments in force in stages to 1 Jun 2025: breach notice to the Commissioner within 72 hours; a data protection officer for large or systematic processing</td><td>ASEAN Briefing, 25 Apr 2025</td><td>Consent at first login in both apps; retention rules for driver locations and photos; DPO decision before launch</td><td><span class="chip bad">Open</span></td></tr>
+      <tr><td class="strong">Complaints</td><td>The public line: KPDN WhatsApp 019-848 8000, call centre 1-800-886-800</td><td>Bernama, 7 Apr 2026</td><td>A help route inside each order so complaints reach us first</td><td><span class="chip low">To build</span></td></tr>
+    </tbody>
+  </table></div>
+  <div class="note"><b>Our read, to confirm with KPDN in writing.</b> NakGas holds no stock and sells no cylinder, so it should not need a licence of its own. The dealers hold the licences; the platform checks them.</div>
+</section>
+
+<!-- READINESS -->
+<section class="sec" id="readiness">
+  <h2>Readiness</h2>
+  <p class="sub">What exists, what does not, and what has a lead time. Checked Tue 6 Oct 2026 unless dated otherwise.</p>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>Item</th><th>State</th><th>Evidence and date</th><th>Next</th></tr></thead>
+    <tbody>
+      <tr><td class="strong">Legal entity and SSM</td><td><span class="chip bad">To confirm</span></td><td>Working name only; "Gas Now Sdn. Bhd." on a deck footer; NRIC on the NDA</td><td>Confirm or incorporate. Apple, the gateway and Cradle all need it</td></tr>
+      <tr><td class="strong">Name</td><td><span class="chip low">Recommended</span></td><td>Navin asked for "something very Malaysian" on 1 Oct; Gas Sekarang chosen 6 Oct; Gaslah 12 Oct; NakGas chosen 20 Oct on Bazil&rsquo;s instruction: the words a household says when the cylinder runs out</td><td>Confirm with Navin</td></tr>
+      <tr><td class="strong">Domains</td><td><span class="chip ok">Free</span></td><td>MYNIC RDAP, 20 Oct: nakgas.my and nakgas.com.my available. Verisign RDAP, 20 Oct: nakgas.com not registered; whois shows no match</td><td>Register all three the day he confirms the name</td></tr>
+      <tr><td class="strong">Store name</td><td><span class="chip ok">No clash found</span></td><td>App Store Malaysia, 20 Oct: &ldquo;nakgas&rdquo; returns no app, &ldquo;nak gas&rdquo; returns one unrelated game. Google Play Malaysia, 20 Oct: no app named NakGas in the results. A search, not a clearance</td><td>Recheck at submission</td></tr>
+      <tr><td class="strong">Trademark</td><td><span class="chip bad">Not run</span></td><td>No MyIPO search yet</td><td>Search the software and delivery classes</td></tr>
+      <tr><td class="strong">Social handles</td><td><span class="chip bad">Not checked</span></td><td>Navin is wary of opening pages before the back end is ready (1 Oct)</td><td>Reserve the handles and keep them dark</td></tr>
+      <tr><td class="strong">Apple Developer</td><td><span class="chip bad">Not opened</span></td><td>15 to 20 days to approve (his developer's scope); an organisation account needs the company</td><td>Open the day the deposit clears</td></tr>
+      <tr><td class="strong">Google Play Console</td><td><span class="chip bad">Not opened</span></td><td>About 10 days</td><td>Same day as Apple</td></tr>
+      <tr><td class="strong">Payment gateway</td><td><span class="chip low">Candidate</span></td><td>Razorpay Curlec found by Navin: RM99 one time, about 2% (1 Oct, his figures)</td><td>Get the rate card per channel; open in the company's name</td></tr>
+      <tr><td class="strong">SMS OTP, push, maps, hosting</td><td><span class="chip bad">Not opened</span></td><td>Providers TBD in his developer's scope</td><td>Eyka to confirm the stack</td></tr>
+      <tr><td class="strong">First round, RM60,000</td><td><span class="chip bad">Not in</span></td><td>"In discussion, not yet in" (1 Oct)</td><td>Week 1 starts the Monday after the deposit clears</td></tr>
+      <tr><td class="strong">Cradle CIP Spark</td><td><span class="chip low">Link sent</span></td><td>cradle.com.my, read 6 Oct: up to RM150,000 over up to 18 months; at least 60% on development; company under 5 years old, accumulated revenue under RM3 million, owns its IP, no other company holding 25% or more; individuals apply as a team of at least 2; 2 to 4 months from pitch to approval; a functional prototype or MVP by the end</td><td>Register on Cradle's Grant Management System; Diha passes a contact after</td></tr>
+      <tr><td class="strong">Later Cradle round</td><td><span class="chip">To confirm</span></td><td>About RM600,000, mentioned by Bazil on 1 Oct; programme name and amount not verified</td><td>Bazil to name the programme</td></tr>
+      <tr><td class="strong">Investor prototype</td><td><span class="chip low">In progress</span></td><td>Offered free by Bazil on 1 Oct</td><td>The App tab of this workspace</td></tr>
+      <tr><td class="strong">Brand strategy sample</td><td><span class="chip bad">Owed</span></td><td>Bazil to send a sample link (1 Oct)</td><td>Send with the prototype</td></tr>
+      <tr><td class="strong">NDA</td><td><span class="chip ok">Done</span></td><td>Signed by Bazil, emailed 29 Sep</td><td></td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>The plan, in relative weeks</h3>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>When</th><th>Work</th></tr></thead>
+    <tbody>
+      <tr><td class="n">Now, free</td><td>The investor prototype flow and the brand strategy sample; Cradle registration</td></tr>
+      <tr><td class="n">Gate</td><td>Funding lands, quotation signed, 50% deposit; Apple, Google Play, gateway, SMS OTP and hosting opened in the company's name</td></tr>
+      <tr><td class="n">Week 1</td><td>Brand strategy sprint and the light identity; UI/UX flows and wireframes; back end, data model and order engine start</td></tr>
+      <tr><td class="n">Week 2</td><td>UI/UX high fidelity and prototype signed off; first usable build on a test link</td></tr>
+      <tr><td class="n">Week 3</td><td>Website design and build; app features; payment 2 at 70 to 80% delivered</td></tr>
+      <tr><td class="n">Week 4</td><td>Website live; app feature complete on beta</td></tr>
+      <tr><td class="n">Week 5</td><td>Bug testing, store submission, admin training, handover; payment 3</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">Payments 50 / 30 / 20 of RM51,840 (RM48,000 plus 8% SST): RM25,920 on signature, RM15,552 at the end of Week 3, RM10,368 at handover. Store approval time belongs to Apple and Google.</p>
+</section>
+
+<!-- GAPS -->
+<section class="sec" id="gaps">
+  <h2>Gaps</h2>
+  <p class="sub">Everything still open, most severe first, each with the fix and who holds it.</p>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>#</th><th>Gap</th><th>Severity</th><th>The fix</th><th>Owner</th><th>Findings</th></tr></thead>
+    <tbody>
+      <tr><td class="n">1</td><td class="strong">The first round is not in</td><td><span class="chip bad">High</span></td><td>Put the free prototype and the brand strategy sample in front of investors now; register on Cradle; start Week 1 the Monday after the deposit clears</td><td>Navin, Bazil, Diha</td><td>F26</td></tr>
+      <tr><td class="n">2</td><td class="strong">No company confirmed</td><td><span class="chip bad">High</span></td><td>Confirm the entity and SSM number, or incorporate. Every account and the Cradle application hang from it</td><td>Navin</td><td>F16</td></tr>
+      <tr><td class="n">3</td><td class="strong">The fee figure</td><td><span class="chip bad">High</span></td><td>Decide RM3.00 or RM3.50 against the checkout comparison; our read is on the <a href="competitors.html#checkout">Competitors</a> page</td><td>Navin, Bazil</td><td>F25, F08</td></tr>
+      <tr><td class="n">4</td><td class="strong">Apple and the other accounts</td><td><span class="chip bad">High</span></td><td>Open Apple, Google Play and the gateway on the gate day with a checklist of what each needs</td><td>Navin</td><td>F18</td></tr>
+      <tr><td class="n">5</td><td class="strong">Driver adoption</td><td><span class="chip bad">High</span></td><td>Four driver screens in Malay; pilot one distributor's fleet; show the acceptance rate on the dashboard from day one</td><td>BM, Navin</td><td>F21</td></tr>
+      <tr><td class="n">6</td><td class="strong">Licence expiry has no consequence</td><td><span class="chip bad">High</span></td><td>Expiry date on the record, a 30 day warning, off the queue on the day it lapses</td><td>BM</td><td>F06</td></tr>
+      <tr><td class="n">7</td><td class="strong">The same model is already live</td><td><span class="chip bad">High</span></td><td>GasXpress runs dealers and a 2.5 km radius as a web app. Find its coverage; sign Johor dealers first; lead with "your dealer, free to join"</td><td>Bazil, Navin</td><td>F33</td></tr>
+      <tr><td class="n">8</td><td class="strong">No domain or handles</td><td><span class="chip bad">High</span></td><td>Register nakgas.my, nakgas.com.my and nakgas.com the day the name is confirmed; reserve the handles</td><td>Navin</td><td>F14</td></tr>
+      <tr><td class="n">9</td><td class="strong">The name is not confirmed</td><td><span class="chip low">Medium</span></td><td>Show Navin the Final Brand page; then MyIPO search and handles</td><td>Bazil</td><td>F30, F15</td></tr>
+      <tr><td class="n">10</td><td class="strong">Delivery fee tiers</td><td><span class="chip low">Medium</span></td><td>Each dealer sets landed and high-rise fees in his profile inside an admin cap; collect the first five JB dealers' phone prices</td><td>Navin</td><td>F09</td></tr>
+      <tr><td class="n">11</td><td class="strong">Cash on delivery and the fee</td><td><span class="chip low">Medium</span></td><td>Write the settlement rule: COD platform fees netted off online payouts, invoiced weekly where there are none</td><td>BM, Navin</td><td>F29</td></tr>
+      <tr><td class="n">12</td><td class="strong">His developer's engagement</td><td><span class="chip low">Medium</span></td><td>Stand it down in writing, or keep it and split the scope</td><td>Navin</td><td>F27</td></tr>
+      <tr><td class="n">13</td><td class="strong">Support and escalation</td><td><span class="chip low">Medium</span></td><td>One SLA per delivery type; "help with this order" to Admin; an on-call rota with a push to the person on it</td><td>Navin, BM</td><td>F20, F22</td></tr>
+      <tr><td class="n">14</td><td class="strong">PDPA</td><td><span class="chip low">Medium</span></td><td>Consent at first login, retention rules, DPO decision</td><td>BM, Navin</td><td>F23</td></tr>
+      <tr><td class="n">15</td><td class="strong">Order cap and domestic check</td><td><span class="chip low">Medium</span></td><td>Three cylinders a household order; domestic or business at sign-up</td><td>BM</td><td>F31</td></tr>
+      <tr><td class="n">16</td><td class="strong">The reward takes four years</td><td><span class="chip">Low</span></td><td>First redemption reachable in a quarter; launch offer decided in the strategy week</td><td>Bazil, Navin</td><td>F12</td></tr>
+      <tr><td class="n">17</td><td class="strong">His decks disagree with the decisions</td><td><span class="chip">Low</span></td><td>Update commission and live tracking wording before design starts</td><td>Navin</td><td>F07, F10</td></tr>
+      <tr><td class="n">18</td><td class="strong">Two requests not yet stated</td><td><span class="chip">Low</span></td><td>Ask for them in writing before the quotation is reissued</td><td>Diha</td><td>F32</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- VERDICT -->
+<section class="sec" id="verdict">
+  <h2>Verdict</h2>
+  <p class="sub">Nine lenses, scored out of 10 as things stand. The idea is not scored; what exists is.</p>
+  <div class="legend"><span><i></i>6 Oct 2026</span><span><s></s>29 Sep 2026</span><span class="chip inf">Our read throughout</span></div>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>Lens</th><th class="r">29 Sep</th><th class="r">6 Oct</th><th style="width:22%">Score</th><th>Why it moved, or did not</th></tr></thead>
+    <tbody>
+      <tr><td class="strong">Problem clarity</td><td class="r">8.0</td><td class="r strong">8.5</td><td><div class="sbar"><i style="width:85%"></i><s style="left:80%"></s></div></td><td>The 1 Oct call made the job sharper: the dealer's own trucks, no riders</td></tr>
+      <tr><td class="strong">Market evidence</td><td class="r">5.5</td><td class="r strong">6.0</td><td><div class="sbar"><i style="width:60%"></i><s style="left:55%"></s></div></td><td>A real JB phone price (RM30.00) and Navin's own rival test; still no demand data</td></tr>
+      <tr><td class="strong">Competitive position</td><td class="r">4.0</td><td class="r strong">5.5</td><td><div class="sbar"><i style="width:55%"></i><s style="left:40%"></s></div></td><td>The difference is now written down; a same-model rival is live, so not higher</td></tr>
+      <tr><td class="strong">Product definition</td><td class="r">6.0</td><td class="r strong">7.0</td><td><div class="sbar"><i style="width:70%"></i><s style="left:60%"></s></div></td><td>Languages, heat map and commission settled; the fee and tiers are not</td></tr>
+      <tr><td class="strong">Commercial model</td><td class="r">3.0</td><td class="r strong">5.0</td><td><div class="sbar"><i style="width:50%"></i><s style="left:30%"></s></div></td><td>One model instead of four; the figure, COD settlement and margin per order still open</td></tr>
+      <tr><td class="strong">Brand and identity</td><td class="r">3.0</td><td class="r strong">4.5</td><td><div class="sbar"><i style="width:45%"></i><s style="left:30%"></s></div></td><td>A name and a green flame system with a blue variation drafted; not yet his</td></tr>
+      <tr><td class="strong">Digital presence</td><td class="r">1.0</td><td class="r strong">1.0</td><td><div class="sbar"><i style="width:10%"></i><s style="left:10%"></s></div></td><td>Nothing live; the domains are free</td></tr>
+      <tr><td class="strong">Regulatory readiness</td><td class="r">5.0</td><td class="r strong">5.0</td><td><div class="sbar"><i style="width:50%"></i><s style="left:50%"></s></div></td><td>Licences designed in; expiry rule, order cap and PDPA not yet</td></tr>
+      <tr><td class="strong">Launch readiness</td><td class="r">2.5</td><td class="r strong">2.0</td><td><div class="sbar"><i style="width:20%"></i><s style="left:25%"></s></div></td><td>Funding not in, kickoff missed, entity and accounts still unopened</td></tr>
+      <tr class="total"><td>Overall, unweighted</td><td class="r">4.2</td><td class="r">4.9</td><td></td><td>The average of the nine</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note blue"><b>The one line.</b> NakGas now knows exactly how it works and who pays; it does not yet have the money, the company or the fee figure to start. Proceed: fund it with the free prototype and Cradle, settle the fee from the checkout comparison, and sign Johor dealers before the rival with the same model gets there.</div>
+</section>
+
+<!-- LEDGER -->
+<section class="sec" id="ledger">
+  <h2>Every finding</h2>
+  <p class="sub">The 24 findings of 29 Sep with their status today, and nine new ones from the 1 Oct call and the 6 Oct reads.</p>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>#</th><th>Finding</th><th>Evidence and date</th><th>Severity</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td class="n">F01</td><td>The gas price is fixed by law; the fee and the wait are the offer</td><td>RM26.60, RM1.90 a kg (RinggitPlus, 8 Apr 2026)</td><td><span class="chip bad">High</span></td><td><span class="chip">Holds</span></td></tr>
+      <tr><td class="n">F02</td><td>Apps have tried the Klang Valley since 2016; none dominates</td><td>Rival sites and listings, 29 Sep; refreshed 6 Oct: Gasbee paused for testing, Click MyGas still "launching soon"</td><td><span class="chip low">Medium</span></td><td><span class="chip">Holds, refreshed</span></td></tr>
+      <tr><td class="n">F03</td><td>The competitor named on the call could not be verified</td><td>Navin confirmed Gasbee, 1 Oct</td><td><span class="chip">Low</span></td><td><span class="chip ok">Closed 1 Oct</span></td></tr>
+      <tr><td class="n">F04</td><td>The bar to beat is the dealer's own number: RM30.00 all in by phone in JB</td><td>Navin, 1 Oct; brand hotlines, 29 Sep</td><td><span class="chip bad">High</span></td><td><span class="chip">Holds</span></td></tr>
+      <tr><td class="n">F05</td><td>"Across Malaysia" is several markets</td><td>Petros sole Sarawak distributor since Dec 2023 (TVS, 18 Nov 2024)</td><td><span class="chip low">Medium</span></td><td><span class="chip low">JB first, to confirm</span></td></tr>
+      <tr><td class="n">F06</td><td>Licence expiry has no consequence in the specification</td><td>Scope feature 32; KPDN licence guide</td><td><span class="chip bad">High</span></td><td><span class="chip low">Rule to build</span></td></tr>
+      <tr><td class="n">F07</td><td>What the platform earns had four answers</td><td>1 Oct: suppliers pay nothing, customer pays per order</td><td><span class="chip bad">High</span></td><td><span class="chip ok">Closed 1 Oct</span></td></tr>
+      <tr><td class="n">F08</td><td>Nobody had decided who pays the gateway fee</td><td>1 Oct: it sits inside the fee</td><td><span class="chip low">Medium</span></td><td><span class="chip low">Partly, see F25</span></td></tr>
+      <tr><td class="n">F09</td><td>Delivery fee tiers have no figures</td><td>RM3.40 JB landed (1 Oct); high-rise not set</td><td><span class="chip low">Medium</span></td><td><span class="chip low">Partly</span></td></tr>
+      <tr><td class="n">F10</td><td>Two decks still say live tracking</td><td>Customer deck p.5</td><td><span class="chip">Low</span></td><td><span class="chip bad">Open</span></td></tr>
+      <tr><td class="n">F11</td><td>The admin deck specifies an enterprise portal</td><td>201 pages, ten modules</td><td><span class="chip">Low</span></td><td><span class="chip ok">Closed in scope</span></td></tr>
+      <tr><td class="n">F12</td><td>The reward takes about four years to earn</td><td>Admin deck p.131 and p.164</td><td><span class="chip">Low</span></td><td><span class="chip bad">Open</span></td></tr>
+      <tr><td class="n">F13</td><td>No payment gateway provider chosen</td><td>Curlec found by Navin, 1 Oct</td><td><span class="chip low">Medium</span></td><td><span class="chip low">Partly</span></td></tr>
+      <tr><td class="n">F14</td><td>No website, domain or social account</td><td>MYNIC and Verisign RDAP, 20 Oct: nakgas.my, nakgas.com.my and nakgas.com all free</td><td><span class="chip bad">High</span></td><td><span class="chip bad">Open</span></td></tr>
+      <tr><td class="n">F15</td><td>"Gas Now" is already an app name abroad</td><td>Google Play and App Store, 29 Sep</td><td><span class="chip low">Medium</span></td><td><span class="chip">Superseded by F30</span></td></tr>
+      <tr><td class="n">F16</td><td>No company confirmed for the accounts</td><td>Deck footer, NDA, 28 Sep; unchanged 6 Oct</td><td><span class="chip bad">High</span></td><td><span class="chip bad">Open</span></td></tr>
+      <tr><td class="n">F17</td><td>A mark, not yet a brand</td><td>AI-made green flame; our identity drafted 6 Oct, named Gaslah 12 Oct and NakGas since 20 Oct; our own green flame with a blue variation since 20 Oct</td><td><span class="chip low">Medium</span></td><td><span class="chip low">In progress</span></td></tr>
+      <tr><td class="n">F18</td><td>Apple takes 15 to 20 days to approve</td><td>His developer's scope, Section 8</td><td><span class="chip bad">High</span></td><td><span class="chip bad">Open, at the gate</span></td></tr>
+      <tr><td class="n">F19</td><td>English only, for a Malay-first market</td><td>Scope v1.1 multilingual; ours Malay and English</td><td><span class="chip low">Medium</span></td><td><span class="chip ok">Closed 1 Oct</span></td></tr>
+      <tr><td class="n">F20</td><td>Support is a phone number and the SLA is unwritten</td><td>Call, 28 Sep, 01:09:43</td><td><span class="chip low">Medium</span></td><td><span class="chip bad">Open</span></td></tr>
+      <tr><td class="n">F21</td><td>The drivers do not work for the platform</td><td>Call, 28 Sep; 1 Oct: no riders at all</td><td><span class="chip bad">High</span></td><td><span class="chip bad">Open</span></td></tr>
+      <tr><td class="n">F22</td><td>Escalations land on an Admin nobody has rostered</td><td>Scope CR-09</td><td><span class="chip low">Medium</span></td><td><span class="chip bad">Open</span></td></tr>
+      <tr><td class="n">F23</td><td>Addresses, numbers and driver locations under the amended PDPA</td><td>ASEAN Briefing, 25 Apr 2025</td><td><span class="chip low">Medium</span></td><td><span class="chip bad">Open</span></td></tr>
+      <tr><td class="n">F24</td><td>The NDA needed completing</td><td>Signed by Bazil, emailed 29 Sep</td><td><span class="chip">Low</span></td><td><span class="chip ok">Closed 29 Sep</span></td></tr>
+      <tr><td class="n">F25</td><td>The platform fee is RM3.00 or RM3.50, undecided</td><td>Call, 1 Oct: "needs further discussion"</td><td><span class="chip bad">High</span></td><td><span class="chip bad">Open</span></td></tr>
+      <tr><td class="n">F26</td><td>The RM60,000 first round is not in; kickoff waits</td><td>Call, 1 Oct; no group update by 6 Oct</td><td><span class="chip bad">High</span></td><td><span class="chip bad">Open</span></td></tr>
+      <tr><td class="n">F27</td><td>His developer's engagement is still open</td><td>Call, 1 Oct: comments on v1.1 not sent</td><td><span class="chip low">Medium</span></td><td><span class="chip bad">Open</span></td></tr>
+      <tr><td class="n">F28</td><td>The platform earns only the customer fee: about RM2.34 to RM2.83 an order</td><td>Arithmetic on the 1 Oct figures</td><td><span class="chip low">Medium</span></td><td><span class="chip inf">Our read</span></td></tr>
+      <tr><td class="n">F29</td><td>Cash on delivery leaves the platform fee with the dealer</td><td>COD in scope; suppliers pay nothing (1 Oct)</td><td><span class="chip low">Medium</span></td><td><span class="chip bad">Open</span></td></tr>
+      <tr><td class="n">F30</td><td>NakGas is recommended, not confirmed; MyIPO and handles unchecked</td><td>Bazil, 20 Oct; MYNIC, Verisign, App Store and Google Play searches, 20 Oct</td><td><span class="chip low">Medium</span></td><td><span class="chip bad">Open</span></td></tr>
+      <tr><td class="n">F31</td><td>A household order should stop at three cylinders</td><td>KPDN permit above 42 kg; GasXpress caps at three, read 6 Oct</td><td><span class="chip low">Medium</span></td><td><span class="chip inf">Our read: adopt</span></td></tr>
+      <tr><td class="n">F32</td><td>Navin has two more requests, not yet stated</td><td>Call, 1 Oct</td><td><span class="chip">Low</span></td><td><span class="chip bad">Open</span></td></tr>
+      <tr><td class="n">F33</td><td>A rival with the same dealer model is live as a web app, and another builds predictive reorder</td><td>gasxpress.com.my (registered 28 Aug 2026) and gas2u.my, site code read 6 Oct</td><td><span class="chip bad">High</span></td><td><span class="chip bad">New 6 Oct</span></td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- SOURCES -->
+<section class="sec" id="sources">
+  <h2>Sources</h2>
+  <p class="sub">Every source of the 29 Sep audit with its date, plus what was read on 6 Oct and the name checks of 20 Oct. Facts about Navin's venture come from the calls of 28 Sep and 1 Oct, his three decks and his developer's scope.</p>
+  <div class="note"><b>Method.</b> The 29 Sep audit read each source on the date given. On 6 Oct every rival site and store listing was reread: sites in their own code where the page renders by script, store listings for Malaysia, domains through MYNIC's registry. No app was installed, no account was created and no order was placed. Not verified: LPG market shares, dealer margins, the 2025 and 2026 LPG subsidy, deposits other than Gas PETRONAS's, any Johor delivery tariff, whether NakGas needs a KPDN licence, his own colour codes. No trademark search was run.</div>
+
+  <h3 class="grp">Checked on 20 Oct 2026, for the name NakGas</h3>
+  <ul class="srcs">
+    <li><b>MYNIC RDAP: nakgas.my and nakgas.com.my</b> <span>20 Oct: both available</span></li>
+    <li><b>Verisign RDAP and whois: nakgas.com</b> <span>20 Oct: not registered (RDAP 404, whois &ldquo;No match&rdquo;)</span></li>
+    <li><b>App Store, Malaysia, iTunes search API</b> <span>20 Oct: &ldquo;nakgas&rdquo; returns no app; &ldquo;nak gas&rdquo; returns one unrelated game</span></li>
+    <li><b>Google Play, Malaysia</b> <span>20 Oct: no app named NakGas in the search results</span></li>
+    <li><b>Still to check</b> <span>MyIPO trademark; social handles</span></li>
+  </ul>
+
+  <h3 class="grp">New on 6 Oct 2026</h3>
+  <ul class="srcs">
+    <li><a href="https://cradle.com.my/cip-spark/">Cradle: CIP Spark</a> <span>read 6 Oct: amount, duration, eligibility, 60% development, 2 to 4 months</span></li>
+    <li><a href="https://rdap.mynicregistry.my/rdap/domain/gassekarang.my">MYNIC RDAP: gassekarang.my</a> <span>6 Oct: available for registration</span></li>
+    <li><a href="https://rdap.mynicregistry.my/rdap/domain/gassekarang.com.my">MYNIC RDAP: gassekarang.com.my</a> <span>6 Oct: available for registration</span></li>
+    <li><a href="https://gasbee.com.my/">gasbee.com.my</a> <span>read 6 Oct: testing phase notice, merchant commission</span></li>
+    <li><a href="https://gasxpress.com.my/">gasxpress.com.my</a> <span>read 6 Oct: dealer model, 2.5 km, three cylinder cap, fee lines</span></li>
+    <li><a href="https://gas2u.my/">gas2u.my</a> <span>read 6 Oct: predictive reorder, NFC-verified delivery</span></li>
+    <li><a href="https://www.mymesra.com.my/products/cooking-gas/gas-petronas-home-delivery">Gas PETRONAS Home Delivery</a> <span>reread 6 Oct: hotline, slot, authorised dealers</span></li>
+    <li><a href="https://clickmygas.com/">clickmygas.com</a> <span>read 6 Oct: launching soon, 45 minutes, first 3 deliveries free</span></li>
+  </ul>
+  <p class="small muted">The full list of rival sources read on 6 Oct is on the <a href="competitors.html#sources">Competitors</a> page.</p>
+
+  <h3 class="grp">Price, subsidy and law</h3>
+  <ul class="srcs">
+    <li><a href="https://ringgitplus.com/ms/blog/berita-kewangan-peribadi/harga-gas-lpg-naik-jangan-panik-dulu-kpdn-tampil-beri-penjelasan.html">RinggitPlus, 8 Apr 2026</a> <span>KPDN's explanation: RM1.90 a kg, RM19.00, RM22.80, RM26.60</span></li>
+    <li><a href="https://ecentral.my/harga-tong-gas/">eCentral, updated 14 Apr 2026</a> <span>controlled prices; delivery charged separately</span></li>
+    <li><a href="https://www.malaymail.com/news/malaysia/2026/04/08/kpdn-summons-company-over-viral-lpg-price-hike-claim/215500">Malay Mail, 8 Apr 2026</a> <span>household cylinders unchanged in the commercial rise</span></li>
+    <li><a href="https://berita.rtm.gov.my/kes/senarai-berita-kes/senarai-artikel/peniaga-tular-jual-lpg-lebih-harga-kawalan-dikenakan-tindakan-kpdn/">RTM, 18 Jun 2024</a> <span>a trader selling 14 kg at RM34, section 21 notice</span></li>
+    <li><a href="https://bernama.com/bm/news.php?id=2428941">Bernama, 29 May 2025</a> <span>RM3.4 billion subsidy in 2024, RM3.1 billion in 2023</span></li>
+    <li><a href="https://www.freemalaysiatoday.com/category/nation/2025/05/29/no-removal-of-lpg-subsidy-says-minister">FMT, 29 May 2025</a> <span>no removal of the LPG subsidy</span></li>
+    <li><a href="https://www.utusan.com.my/berita/2025/11/harga-tong-gas-lpg-14kg-kekal-rm26-60/">Utusan, 22 Nov 2025</a> <span>14 kg stays RM26.60; about RM40 subsidy a cylinder</span></li>
+    <li><a href="https://www.sarawaktribune.com/14kg-lpg-price-kept-at-rm26-60/">Sarawak Tribune, 30 Nov 2023</a> <span>RM26.60 in Sarawak</span></li>
+    <li><a href="https://www.thestar.com.my/news/nation/2025/06/01/get-ready-to-pay-more-at-eateries">The Star, 1 Jun 2025</a> <span>commercial 14 kg about RM70 from 1 May 2025</span></li>
+    <li><a href="https://www.buletintv3.my/nasional/kpdn-pantau-kenaikan-harga-gas-lpg-komersial-50kg-cecah-rm190/">Buletin TV3, Apr 2026</a> <span>commercial 50 kg reaches RM190</span></li>
+    <li><a href="https://www.argaam.com/en/reports/propane-butane-prices/57043">Argaam, 31 Mar 2026</a> <span>April Saudi contract price, propane US$750</span></li>
+    <li><a href="https://www.paultan.org/2023/10/12/">Paul Tan, 12 Oct 2023</a> <span>the Auditor-General on how the subsidy is paid</span></li>
+    <li><a href="https://belanjawan.mof.gov.my/pdf/belanjawan2026/revenue/section3.pdf">Ministry of Finance, Fiscal Outlook 2026</a> <span>total subsidies RM49.0 billion</span></li>
+    <li><a href="https://www.bernama.com/en/news.php?id=2542280">Bernama, 7 Apr 2026</a> <span>the commercial rise, KPDN complaint lines</span></li>
+    <li><a href="https://www.kpdn.gov.my/images/muat-turun/borang-D/BORANG-PERMOHONAN-CSA.pdf">KPDN licence guide</a> <span>read 29 Sep: retail, wholesale and manufacturing licences, LPG included</span></li>
+    <li><a href="https://www.kpdn.gov.my/images/muat-turun/borang-P/GARIS%20PANDUAN%20PERMOHONAN%20PERMIT%20BARANG%20KAWALAN%20BERJADUAL%20DAN%20PERMIT%20KHAS.pdf">KPDN permit guideline</a> <span>read 29 Sep: LPG above 42 kg, Regulation 18</span></li>
+  </ul>
+
+  <h3 class="grp">Brands and companies</h3>
+  <ul class="srcs">
+    <li><a href="https://www.mymesra.com.my/products/cooking-gas/gas-petronas">PETRONAS Dagangan: Gas PETRONAS</a> <span>read 29 Sep</span></li>
+    <li><a href="https://www.mymesra.com.my/integrated-report-2025">PETRONAS Dagangan, Integrated Report 2025</a> <span>read 1 Oct</span></li>
+    <li><a href="https://www.mymesra.com.my/products/cooking-gas/gas-petronas-station">PETRONAS Dagangan: Gas PETRONAS at stations</a> <span>read 1 Oct: RM80 and RM90 deposits</span></li>
+    <li><a href="https://www.mymesra.com.my/for-business/commercial-and-industrial-lpg/lpg-terminals-and-offices-address">PETRONAS Dagangan: LPG terminals</a> <span>read 1 Oct: Pasir Gudang</span></li>
+    <li><a href="https://techtrp.com/news/2023/01/17/petronas-gas-to-terminate-cooking-gas-delivery-app-by-the-end-of-this-month/">TechTRP, 17 Jan 2023</a> <span>the Gas PETRONAS app closed on 31 Jan 2023</span></li>
+    <li><a href="https://www.petron.com.my/what-we-offer/products/liquefied-petroleum-gas/">Petron Malaysia: Gasul</a> <span>read 29 Sep</span></li>
+    <li><a href="https://www.petron.com.my/what-we-offer/services/gasul-at-service-station/">Petron Malaysia: Gasul at stations since 2018</a> <span>read 29 Sep</span></li>
+    <li><a href="https://www.petron.com.my/newsroom/petron-concludes-2025-with-rm246-million-net-profit/">Petron Malaysia, 25 Feb 2026</a> <span>2025 results</span></li>
+    <li><a href="https://www.bhpetrol.com.my/bhp-blog/gas-habis-ini-cara-mudah-untuk-pesan-bhpetrogas-lpg/">BHPetrol: how to order BHPetrogas</a> <span>read 29 Sep: hotline, same or next day</span></li>
+    <li><a href="https://www.bhpetrol.com.my/products-services/bhpetrogas-lpg/">BHPetrol: BHPetrogas</a> <span>read 1 Oct: Pasir Gudang and Pulau Indah</span></li>
+    <li><a href="https://theedgemalaysia.com/node/717432">The Edge, 1 Jul 2026</a> <span>BHPetrol ownership</span></li>
+    <li><a href="https://miragas.com.my/">NGC Energy: MiraGas</a> <span>read 29 Sep</span></li>
+    <li><a href="https://www.thestar.com.my/business/business-news/2012/11/12/ngc-completes-acquisition-of-lpg-business-from-shell">The Star, 12 Nov 2012</a> <span>NGC buys Shell's Peninsular LPG business</span></li>
+    <li><a href="https://www.themalaysianinsight.com/s/475375">The Malaysian Insight, 8 Dec 2023</a> <span>MyGaz, Siamgas, Petrosniaga in Sarawak</span></li>
+    <li><a href="https://www.siamgas.com/wp-content/uploads/SGP_Presentation_3Q25.pdf">Siamgas, 3Q25 investor deck</a> <span>MyGaz Malaysia volumes</span></li>
+    <li><a href="https://www.solargas.com.my/products">Solar Gas: products</a> <span>read 1 Oct: cylinder colours</span></li>
+    <li><a href="https://www.insage.com.my/BursaNews/Attachment/202510/20251001/KUB-AN20251001A1-1.pdf">KUB Malaysia, Annual Report 2025</a> <span>Solar Gas volume, Tebrau plant</span></li>
+    <li><a href="https://www.tvsarawak.my/2024/11/18/petrosniaga-sole-distributor-of-subsidized-lpg-in-sarawak/">TVS, 18 Nov 2024</a> <span>PetrosNiaga, sole Sarawak distributor</span></li>
+  </ul>
+
+  <h3 class="grp">Delivery services, as read on 29 Sep</h3>
+  <ul class="srcs">
+    <li><a href="https://play.google.com/store/apps/details?id=com.gasbee.app&amp;hl=en">Google Play: Gasbee</a> <span>reread 6 Oct</span></li>
+    <li><a href="https://play.google.com/store/apps/details?id=com.cookinggas.my">Google Play: Gas2u</a> <span>29 Sep: six areas. 6 Oct: the page showed Google Play's "not found"</span></li>
+    <li><a href="https://play.google.com/store/apps/details?id=matrix.mygas">Google Play: Click MyGas</a> <span>reread 6 Oct</span></li>
+    <li><a href="https://klfoodie.com/beligas-cooking-gas-malaysia/">KL Foodie, 21 Jan 2021</a> <span>BeliGas prices, RM3.00 high-rise surcharge</span></li>
+    <li><a href="https://www.malaysiakini.com/announcement/637617">Malaysiakini, 30 Sep 2022</a> <span>BeliGas rebrands to EDAR</span></li>
+    <li><a href="https://edar.com/">edar.com</a> <span>29 Sep and 6 Oct: a parked page</span></li>
+    <li><a href="https://vulcanpost.com/573746/grabgas-malaysia-startup-cooking-gas-delivery/">Vulcan Post, 26 Apr 2016</a> <span>GrabGas, RM28 to RM33 a cylinder</span></li>
+  </ul>
+
+  <h3 class="grp">Households, data and names</h3>
+  <ul class="srcs">
+    <li><a href="https://www.dosm.gov.my/portal-main/release-content/key-findings-population-and-housing-census-of-malaysia-2020-administrative-district">DOSM, Census 2020</a> <span>8.2 million households</span></li>
+    <li><a href="https://www.malaysiakini.com/news/610656">Malaysiakini, 14 Feb 2022</a> <span>Bumiputera 69.4%, Chinese 23.2%, Indian 6.7%</span></li>
+    <li><a href="https://www.aseanbriefing.com/news/malaysia-tightens-data-protection-from-june-2025/">ASEAN Briefing, 25 Apr 2025</a> <span>PDPA amendments, 72 hours, DPO</span></li>
+    <li><a href="https://www.pdp.gov.my/ppdpv1/en/akta/personal-data-protection-amendment-act-2024/">PDP Department: Amendment Act 2024</a> <span>read 29 Sep</span></li>
+    <li><a href="https://rdap.mynicregistry.my/rdap/domain/gasnow.my">MYNIC RDAP: gasnow.my</a> <span>29 Sep and 6 Oct: available</span></li>
+    <li><a href="https://play.google.com/store/apps/details?id=com.toj.gasnow">Google Play: "Gas Now, Prices comparator"</a> <span>read 29 Sep</span></li>
+    <li><a href="https://apps.apple.com/lu/app/gas-now-gas-price-comparator/id681463839">App Store: "Gas Now, Gas price comparator"</a> <span>read 29 Sep</span></li>
+    <li><a href="https://play.google.com/store/apps/details?id=com.gasnownow.customerapp">Google Play: "Gasnownow Customer App"</a> <span>read 29 Sep</span></li>
+  </ul>
+</section>
+
+</main>
+<footer class="foot">Brand Method &middot; VIN Industries &middot; NakGas &middot; App Audit &middot; Internal, for Navin only &middot; Tue 6 October 2026, the name changed to Gaslah Mon 12 October 2026 and to NakGas Tue 20 October 2026</footer>
+<script src="assets/gs.js"></script>
+<script>
+/* the chapter strip and the dividers, computed from the page order: the number is never typed by hand */
+(function(){var secs=[].slice.call(document.querySelectorAll('main.wrap > section.sec'));var links=[].slice.call(document.querySelectorAll('.nav-in a'));var lab={};links.forEach(function(a,i){lab[a.getAttribute('href').slice(1)]=a.textContent;a.insertAdjacentHTML('afterbegin','<span class="ch-no">'+(i+1)+'</span>');});
+secs.forEach(function(s,i){var h=s.querySelector(':scope>h2');if(!h)return;var d=document.createElement('div');d.className='chapdiv';d.id='ch'+(i+1);var t=lab[s.id]||h.textContent;d.innerHTML='<span class="cd-no">'+(i+1)+'</span><div><div class="cd-h">'+t+'</div><div class="cd-sub">Chapter '+(i+1)+' of '+secs.length+'</div></div>';s.parentNode.insertBefore(d,s);if(h.textContent.trim()===t.trim())h.classList.add('dup');});
+function spy(){var y=innerHeight*.35,cur=null;secs.forEach(function(s){if(s.getBoundingClientRect().top<y)cur=s.id});links.forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+cur)})}addEventListener('scroll',spy,{passive:true});spy();})();
+</script>
+</body>
+</html>

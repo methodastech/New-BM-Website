@@ -57,7 +57,7 @@ export default function Contact() {
 
         <div className="ic-stack">
           <div className="icard"><div className="k">Email</div><div className="v"><a href="mailto:info@iaqtechnology.com.my">info@iaqtechnology.com.my</a></div></div>
-          <div className="icard"><div className="k">Phone</div><div className="v"><a href="tel:+60351248319">+603 5124 8319</a></div></div>
+          <div className="icard"><div className="k">Phone</div><div className="v"><a href="tel:+60312345678">+603 1234 5678</a></div></div>
           <div className="icard hq"><div className="k">HQ &middot; Shah Alam</div><div className="v">No.12, Jalan Sungai Jeluh 32/192, Kawasan Perindustrian Kemuning, Seksyen 32, 40460 Shah Alam, Selangor</div>
             <div className="hours"><span>Mon to Fri &middot; 9:00 to 18:00</span><span>GMT +8</span></div>
           </div>

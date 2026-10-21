@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Cache-Control" content="no-store">
+<title>VIN Industries · NakGas · Codex · Brand Method</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="assets/app-icon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="bmws.css">
+<link rel="stylesheet" href="assets/brand.css">
+<link rel="stylesheet" href="gsrail.css">
+<style>
+  .rx{display:grid;grid-template-columns:230px minmax(0,1fr);gap:8px;margin-top:20px}
+  .rx-list{display:flex;flex-direction:column;gap:2px}
+  .rx-list button{display:flex;align-items:center;gap:10px;background:var(--panel);border:0;padding:11px 12px;font:500 14px/1.2 var(--body);color:var(--ink);cursor:pointer;text-align:left}
+  .rx-list button svg{flex:none}
+  .rx-list button:hover{background:#E9F7F0}
+  .rx-list button.on{background:var(--ink);color:#fff}
+  .rx-list button.lit{background:#E9F7F0}
+  .rx-card{background:var(--panel);padding:20px 22px}
+  .rx-card h4{font:700 22px/1.15 var(--disp);letter-spacing:-.02em}
+  .rx-card .what{font-size:15px;color:#34405A;margin-top:8px;max-width:64ch}
+  .rx-card dl{display:grid;grid-template-columns:130px minmax(0,1fr);gap:10px 16px;margin-top:16px;font-size:13.5px}
+  .rx-card dt{color:var(--steel);font-weight:600}
+  .rx-card dd{color:#34405A}
+  .rx-card .chips{display:flex;flex-wrap:wrap;gap:4px}
+  .rx-card .chips span,.rx-card .chips button{font:500 12px/1 var(--data);background:var(--paper);padding:5px 8px;border:0;color:var(--ink)}
+  .rx-card .chips button{cursor:pointer;font-family:var(--body);font-weight:600}
+  .rx-card .chips button:hover{background:#E9F7F0}
+  .qs3{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:22px}
+  .qs3 li{background:var(--panel);padding:18px}
+  .qs3 .n{font:700 28px/1 var(--disp);color:var(--sky)}
+  .qs3 b{display:block;font:600 18px/1.25 var(--disp);letter-spacing:-.015em;margin-top:10px}
+  .qs3 .l{display:inline-block;margin-top:8px;font:600 11px/1 var(--body);background:var(--paper);padding:4px 7px;color:var(--steel)}
+  .qs3 p{font-size:13.5px;color:#34405A;margin-top:10px}
+  .lanes{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px;margin-top:18px}
+  .lane{background:var(--panel);padding:14px}
+  .lane b{display:flex;justify-content:space-between;font:600 15px/1.2 var(--disp)}
+  .lane b span{font:600 11px/1.6 var(--data);color:var(--steel)}
+  .lane p{font-size:12.5px;color:var(--steel);margin-top:4px}
+  .lane ul{list-style:none;margin-top:8px;display:flex;flex-wrap:wrap;gap:4px}
+  .lane li{font:500 11.5px/1 var(--data);background:var(--paper);padding:5px 7px}
+  .path{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;margin-top:18px;counter-reset:p}
+  .path > div{background:var(--panel);padding:14px;counter-increment:p;position:relative}
+  .path > div::before{content:counter(p);font:700 20px/1 var(--disp);color:var(--sky)}
+  .path b{display:block;font:600 14px/1.25 var(--disp);margin-top:8px}
+  .path p{font-size:12.5px;color:#34405A;margin-top:6px}
+  .ph{font:600 11px/1 var(--body);padding:3px 6px;background:var(--paper);color:var(--steel);white-space:nowrap}
+  .ph.p1{background:#E6F9F5;color:#0F584C}
+  .ph.p2{background:#E9F7F0;color:#08854C}
+  .glos dt{font:600 14px/1.3 var(--body);margin-top:14px}
+  .glos dt small{font:500 11px/1 var(--data);color:var(--mist);margin-left:8px}
+  .glos dd{font-size:13.5px;color:#34405A;margin-top:2px;max-width:76ch}
+  .gl-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-top:8px}
+  .gl-grid h4{font:600 13px/1 var(--body);color:var(--steel);margin-top:16px}
+  @media(max-width:1100px){.path{grid-template-columns:repeat(3,minmax(0,1fr))}.qs3{grid-template-columns:1fr}.gl-grid{grid-template-columns:1fr}}
+  @media(max-width:760px){.rx{grid-template-columns:1fr}.rx-list{flex-direction:row;flex-wrap:wrap}.path{grid-template-columns:1fr 1fr}.rx-card dl{grid-template-columns:1fr}}
+
+  .scr-row img{aspect-ratio:366/796;height:auto}
+  .kind .top i svg{stroke:#0B1530}
+</style>
+</head>
+<body>
+<div class="bmws" style="--bmws-acc:#2536F5"><div class="bmws-in"><div class="bmws-crumb"><b>VIN Industries &middot; NakGas</b><span>Brand Method &middot; Super Admin Navigation</span></div><nav class="bmws-tabs" aria-label="Brand Method admin navigation"><a href="audit.html">App Audit</a><a href="competitors.html">Competitors</a><a href="plan.html">Plan</a><a href="brand.html">Brand Creation</a><a href="design.html">Design</a><a href="final-brand.html">Final Brand</a><a href="app.html">The App</a><a href="website.html">Website</a><a href="deck.html">Investor Deck</a><a href="codex.html" class="on">Codex</a><a href="map.html">Overview</a></nav></div></div>
+
+<div class="dz">
+<aside class="rail" aria-label="Codex sections">
+  <div class="rail-t"><b>The NakGas Codex</b><span>Three readers, one page</span></div>
+  <ol id="railList"></ol>
+</aside>
+
+<main class="page">
+<header class="hero">
+  <div>
+    <span class="k">Codex · NakGas, easy to read</span>
+    <h1>The Codex. <em>NakGas, easy to read.</em></h1>
+    <p class="lede">Three sections for three readers. Section 1 is for anyone: a household, a dealer at the counter, an investor with ten minutes. Section 2 is for professionals: dealers, KPDN, the developer, anyone reviewing a delivery platform. Section 3 is how the app shows it, screen by screen. How it looks lives on the <a href="design.html">Design</a> tab; the screens run live on <a href="app.html">The App</a>.</p>
+    <div class="meta">
+      <div><small>Product</small><b>NakGas · LPG cylinder delivery</b></div>
+      <div><small>Founder</small><b>Navindran "Navin", VIN Industries</b></div>
+      <div><small>Build</small><b>Before Week 1 · prototype only · funding in discussion</b></div>
+      <div><small>The app</small><b>33 screens · 81 presses · three products</b></div>
+      <div><small>Updated</small><b>13 October 2026</b></div>
+    </div>
+    <div class="dl"><a class="p" href="NakGas-Codex.pdf" download="NakGas-Codex.pdf">Download the whole Codex</a><button class="s" type="button" onclick="print()">Print</button><small id="pdfMeta">PDF · 34 pages, one section per page · A4 landscape · updated 21 October 2026 · internal, for Navin only</small></div>
+  </div>
+  <nav class="index" aria-label="Start here">
+    <b class="t">Start here</b>
+    <a class="qx" href="#questions"><i>?</i>Questions for Navin<em>11</em></a>
+    <a href="#everyone"><i>1</i>For everyone</a>
+    <a href="#pros"><i>2</i>For professionals</a>
+    <a href="#inapp"><i>3</i>In the app</a>
+    <a href="#checked"><i>✓</i>Checked against the documents</a>
+    <a href="#background"><i>·</i>Background</a>
+  </nav>
+</header>
+
+<section class="sec" id="key" data-t="How to read it" data-n="·">
+  <div class="sh"><span class="no"></span><h2>How to read every picture: <em>the six kinds of thing.</em></h2>
+    <p class="lede">One icon per kind, the same everywhere on this page. Summary tells them apart; Detailed adds what each one holds and the plain comparison, on the Think line.</p></div>
+  <div class="seg" role="group" aria-label="Key detail"><button type="button" data-v="sum">Summary</button><button type="button" data-v="det" class="on">Detailed</button></div>
+  <div class="kinds" id="kinds"></div>
+</section>
+
+<section class="sec" id="questions" data-t="Questions for Navin" data-n="?">
+  <div class="sh"><span class="no">?</span><h2>Eleven questions for Navin, <em>with our answer on each.</em></h2>
+    <p class="lede">Nothing in the prototype waits on them: each one has a sample value marked "to confirm". Under each question: what was done meanwhile, and the answer Brand Method would give if the call were ours. The first five close the launch; the rest close the product.</p></div>
+  <div class="qs" id="qs"></div>
+</section>
+
+<section class="sec" id="everyone" data-t="For everyone" data-n="1">
+  <div class="part" style="padding-top:0"><span class="big">1</span><div>
+    <h2>For everyone. <em>What NakGas does, in plain words.</em></h2>
+    <p class="lede">NakGas is the gas dealer you already trust, now in your phone. You order a cylinder in two taps, the nearest licensed dealer accepts within 45 seconds, the price the government sets is the first line of your bill, and you never call around again. No app words needed.</p></div></div>
+
+  <div class="plain" id="plain"></div>
+
+  <div class="sub" id="p1-month" data-t="A month with NakGas"><h3>A month with NakGas</h3>
+    <p>Aisyah lives in Taman Molek, Johor Bahru, in a landed house, and cooks every evening. This is one ordinary month, told with the prototype's own sample order.</p>
+    <ol class="steps">
+      <li><b>Day 1, 6:40pm</b>The flame is low. She opens the app, picks Bahasa Malaysia, types her number, enters the six digit code, saves the address. Order gas: swap, 14 kg, one cylinder, now.</li>
+      <li><b>6:41pm</b>The bill before she pays: RM26.60 the controlled price, RM3.40 delivery, RM3.50 one platform fee. RM33.50, cash at the door.</li>
+      <li><b>6:41pm</b>The nearest dealer with stock has 45 seconds. Kedai Gas Seri Molek accepts in six. She sees the dealer's name and the truck plate, never a phone number.</li>
+      <li><b>7:25pm</b>Confirmed, dealer assigned, out for delivery, delivered. The driver photographs the cylinder at her gate; the photo and the receipt stay in her order.</li>
+      <li><b>Day 2</b>Four stars and a tag, "on time". The next reminder is set from her own rhythm, about 28 days.</li>
+      <li><b>Day 26</b>"Time to reorder?" lands on the lock screen. Day 27: Reorder, then Pay. Two taps. The same dealer is the nearest again.</li>
+    </ol>
+    <span class="src"><b>Built from</b> the prototype's screens, Customer app · the bill from the call of 1 Oct 2026 · the reminder is a simple scheduled push in Phase One</span>
+  </div>
+
+  <div class="sub" id="p1-tabs" data-t="The four tabs"><h3>The four tabs, one after another</h3>
+    <div class="cards" id="tabsCards"></div>
+  </div>
+
+  <div class="sub" id="p1-pictures" data-t="The app today"><h3>The app today, screen by screen</h3>
+    <p>The prototype as it runs today, before Week 1. Every screen is live on <a href="app.html">The App</a> tab, in Bahasa Malaysia and English.</p>
+    <div class="scr-row" id="todayRow"></div>
+  </div>
+
+  <div class="sub" id="p1-who" data-t="Who does what"><h3>Who does what around one order</h3>
+    <div class="tbw"><table class="tb">
+      <tr><th style="width:18%">Person</th><th style="width:40%">What they do</th><th>What they never do</th></tr>
+      <tr><td>The customer</td><td>Orders, pays online or in cash, rates the delivery, keeps the receipts and the photo proof.</td><td>Choose a dealer, or see a driver's phone number. The platform assigns the nearest.</td></tr>
+      <tr><td>The dealer, shop operator</td><td>Goes online, accepts or declines within 45 seconds, keeps stock and the delivery radius current, sees the wallet.</td><td>Pay a commission. The gas price and the delivery fee are the dealer's in full.</td></tr>
+      <tr><td>The driver</td><td>Confirms each status, takes the photo at the door, marks cash collected.</td><td>Close an order without the photo. The proof is mandatory.</td></tr>
+      <tr><td>The admin</td><td>Approves new dealers, watches licence expiry, assigns an order declined four times, settles payouts weekly, sets the fee and the radius.</td><td>Change the controlled price. KPDN sets it; the app prints it.</td></tr>
+      <tr><td>KPDN</td><td>Licenses the dealers and sets the controlled price: RM1.90 a kilo, RM26.60 for 14 kg, from 8 Apr 2026.</td><td>Appear in the app. Its rules shape every bill and every onboarding.</td></tr>
+    </table></div>
+    <span class="src"><b>Source</b> the prototype (order engine, dealer onboarding, admin approvals) · the call of 1 Oct 2026 (no commission) · the audit, Trust and compliance</span>
+  </div>
+
+  <div class="sub" id="p1-faq" data-t="Questions customers ask"><h3>Questions customers ask, answered</h3>
+    <div class="faq">
+      <details><summary>Who delivers my gas?</summary><p>The KPDN licensed dealer nearest you with stock. You see the dealer's name and the truck plate, never a personal phone number.</p></details>
+      <details><summary>What does it cost?</summary><p>The gas is the KPDN controlled price, RM26.60 for a 14 kg cylinder. The delivery fee is set by the dealer and shown first. One platform fee is charged per order, not per cylinder. All of it before you pay.</p></details>
+      <details><summary>Can I pay cash?</summary><p>Yes. Cash on delivery, or FPX, card and e-wallet in the app.</p></details>
+      <details><summary>I live in a high-rise. What changes?</summary><p>Your address stores the floor, the lift and the unit, so the driver knows before setting off. Any extra charge is the dealer's and shown before you pay. The tiers are still to confirm.</p></details>
+      <details><summary>Can I cancel?</summary><p>Yes, before the dealer sets off. The cancellation rules sit in Profile.</p></details>
+      <details><summary>Is it in Bahasa Malaysia?</summary><p>Yes. You choose Bahasa Malaysia or English on the first screen, and can change it in Settings. The dealer app has both; the admin portal is in English.</p></details>
+      <details><summary>What about safety?</summary><p>Safety tips sit in Profile and on Home. A healthy flame burns blue; the smart regulator that reads the gas balance is Phase Two, not in this build.</p></details>
+    </div>
+    <span class="src"><b>Source</b> the prototype (checkout, address, profile, help) · the brief of 6 Oct 2026</span>
+  </div>
+</section>
+
+<section class="sec" id="pros" data-t="For professionals" data-n="2">
+  <div class="part" style="padding-top:0"><span class="big">2</span><div>
+    <h2>For professionals. <em>How dealers, regulators and investors read it.</em></h2>
+    <p class="lede">A dealer, a KPDN officer, an investor or the developer does not ask what the app looks like. They ask three questions, in this order, and place a delivery platform by its answers.</p></div></div>
+
+  <ol class="qs3">
+    <li><span class="n">1</span><b>Is the bill legal?</b><span class="l">Price</span><p>KPDN requires the lines unbundled. Every bill prints the controlled price first (RM26.60 for 14 kg, set 8 Apr 2026), then the dealer's delivery fee, then one platform and processing fee per order. Nothing is folded into the gas price, and the customer sees all three before paying. The fee itself, RM3.00 or RM3.50, waits on the price audit.</p></li>
+    <li><span class="n">2</span><b>Who carries the money?</b><span class="l">Model</span><p>No commission: the gas price and the delivery fee are the dealer's in full. The platform fee is the platform's, once per order. Online payment runs through one Malaysian gateway on the company's account, about 2 percent on the highest channel, about 67 sen on RM33.50. Cash orders are marked collected by the driver and the fee is netted against the dealer's wallet: our read, to confirm. Payouts weekly, a sample cadence.</p></li>
+    <li><span class="n">3</span><b>Will dealers accept?</b><span class="l">Supply</span><p>The order goes to the nearest available shop or truck with stock, with 45 seconds to accept. A decline or a timeout moves it to the next nearest; four in a row escalate to an admin who assigns by hand. Dealers join with a KPDN licence, SSM and a bank account; the licence expiry is tracked and flagged, and an expired licence receives no offers. Seasoned drivers who will not use an app are the known risk: the messaging fallback is a Phase Two option.</p></li>
+  </ol>
+
+  <div class="sub" id="p2-map" data-t="How it connects"><h3>Everything NakGas does, and how it connects</h3>
+    <p>Pick a module. Its people, what it holds, when it is built and the screens that carry it come up, and the modules it feeds are marked.</p>
+    <div class="rx"><div class="rx-list" id="rxList"></div><div class="rx-card" id="rxCard"></div></div>
+  </div>
+
+  <div class="sub" id="p2-chart" data-t="The same, on one chart"><h3>The same, on one chart</h3>
+    <div class="tbw"><table class="tb" id="modTable"></table></div>
+  </div>
+
+  <div class="sub" id="p2-path" data-t="The order path"><h3>The order path, as the engine runs it</h3>
+    <div class="path">
+      <div><b>Order</b><p>Swap or new, size, quantity, now or a slot. The bill shown before payment.</p></div>
+      <div><b>Offer</b><p>The nearest available dealer with stock gets 45 seconds. Location is read only while the dealer is online.</p></div>
+      <div><b>Accept</b><p>Accept, or decline and the next nearest is offered. Four declines in a row: an admin assigns.</p></div>
+      <div><b>Deliver</b><p>Status pings from the driver's confirmations: confirmed, assigned, out for delivery, delivered. No live GPS for the customer in Phase One.</p></div>
+      <div><b>Prove</b><p>A photo at the door, mandatory. Cash marked collected. The receipt to the customer.</p></div>
+      <div><b>Settle</b><p>The wallet: gas and delivery to the dealer, the fee to the platform, cash orders netted. Weekly payouts approved in admin.</p></div>
+    </div>
+    <span class="src"><b>Source</b> the SOW v1.1 and Navin's decks (the engine) · the call of 28 Sep 2026 (time based status, not live GPS) · the prototype</span>
+  </div>
+
+  <div class="sub" id="p2-next" data-t="What waits for Phase Two"><h3>What waits for Phase Two</h3>
+    <p>Not priced, not in the five weeks. The data model is built ready for them.</p>
+    <div class="cards">
+      <div class="card"><i>Phase Two</i><b>The smart regulator</b><p>Weight based or regulator based, through Tuya: the gas balance read before the flame changes, and a predictive reorder. Device and safety questions open.</p></div>
+      <div class="card"><i>Phase Two</i><b>A live map for the customer</b><p>The driver on a map instead of four statuses. The dealer app already captures location while online.</p></div>
+      <div class="card"><i>Phase Two</i><b>Drivers without the app</b><p>A WhatsApp or Telegram accept flow for drivers who will not install anything, if adoption shows the need.</p></div>
+    </div>
+    <span class="src"><b>Source</b> the brief of 6 Oct 2026, Phase Two · the call of 28 Sep 2026 (the messaging fallback)</span>
+  </div>
+
+  <div class="sub" id="p2-vs" data-t="Against the other ways"><h3>Who does what, against the other ways to get gas</h3>
+    <div class="tbw"><table class="tb">
+      <tr><th style="width:22%">Capability</th><th>NakGas</th><th>Phone the dealer</th><th>A brand's own app</th><th>A marketplace app</th></tr>
+      <tr><td>Who delivers</td><td>The nearest licensed dealer, assigned</td><td>Whoever picks up</td><td>That brand's network</td><td>Whoever lists</td></tr>
+      <tr><td>Controlled price first</td><td>Yes, by design</td><td>Rarely itemised</td><td>Usually</td><td>Varies by seller</td></tr>
+      <tr><td>Commission on the dealer</td><td>None; a fee on the order</td><td>None</td><td>n/a</td><td>Typically a percentage</td></tr>
+      <tr><td>Any brand, any dealer</td><td>Yes, by stock</td><td>Yes</td><td>One brand</td><td>Yes</td></tr>
+      <tr><td>Photo proof and receipt</td><td>Yes, mandatory</td><td>No</td><td>Sometimes</td><td>Sometimes</td></tr>
+      <tr><td>Reorder reminder</td><td>Yes, from your rhythm</td><td>Your memory</td><td>Sometimes</td><td>No</td></tr>
+      <tr><td>Bahasa Malaysia and English</td><td>Yes, every screen</td><td>n/a</td><td>Varies</td><td>Varies</td></tr>
+    </table></div>
+    <div class="note"><b>The gap.</b> Nobody holds licensed-dealer-assigned and no-commission at once. The real competitor is the phone number on the fridge, and the dealer's own WhatsApp. Directional reads, 29 Sep and 6 Oct 2026, named rivals on the <a href="competitors.html">Competitors</a> tab.</div>
+    <span class="src"><b>Source</b> Competitors tab (the checkout comparison) · the audit, Market and price</span>
+  </div>
+</section>
+
+<section class="sec" id="inapp" data-t="In the app" data-n="3">
+  <div class="part" style="padding-top:0"><span class="big">3</span><div>
+    <h2>In the app. <em>How it shows it, screen by screen.</em></h2>
+    <p class="lede">The same order on every screen: what the person needs, the answer, the detail, one action. 33 screens and 81 presses across three products, drawn on <a href="app.html">The App</a> tab, where every line is a press and its label is the thing you tap.</p></div></div>
+
+  <div class="sub" id="p3-order" data-t="The order a customer meets it in"><h3>The order a customer meets it in</h3>
+    <ol class="steps" id="firstRun"></ol>
+    <p>A returning customer skips all of it: the splash opens on Home, with the usual order and the reminder waiting.</p>
+  </div>
+
+  <div class="sub" id="p3-groups" data-t="The groups"><h3>The groups <small>33 screens</small></h3>
+    <div class="lanes" id="lanes"></div>
+  </div>
+
+  <div class="sub" id="p3-names" data-t="One goal per screen"><h3>One name each, one goal per screen</h3>
+    <p>Every screen answers one question. Phase One is the five week build; Phase Two is marked where a screen only teases it.</p>
+    <div class="tbw"><table class="tb" id="screenTable"></table></div>
+  </div>
+
+  <div class="sub" id="p3-dealer" data-t="The dealer's day"><h3>The dealer's day, on the second phone</h3>
+    <div class="scr-row" id="dealerRow"></div>
+  </div>
+
+  <div class="sub" id="p3-store" data-t="In the store"><h3>In the store listing</h3>
+    <p>Our order for the six frames, one promise each, shown with today's screens. "Gas sampai. Tak payah call." carries the listing.</p>
+    <div class="scr-row" id="storeRow"></div>
+  </div>
+</section>
+
+<section class="sec" id="checked" data-t="Checked" data-n="✓">
+  <div class="sh"><span class="no">✓</span><h2>Navin's own documents, <em>checked line by line.</em></h2>
+    <p class="lede">What each document promises, and what the prototype does today. Facts are dated; reads are marked as reads.</p></div>
+
+  <div class="sub" id="ck-decks" data-t="The decks and the SOW"><h3>The three PRD decks and the developer's SOW v1.1</h3>
+    <div class="tbw"><table class="tb">
+      <tr><th style="width:24%">The document says</th><th>The prototype today</th><th style="width:12%">Match</th></tr>
+      <tr><td>Customer app: OTP login, addresses, order, itemised checkout, gateway plus cash, tracking, history, ratings, rewards</td><td>All seventeen screens drawn, in both languages, with the itemised bill and the four statuses.</td><td><span class="flag ok">Yes</span></td></tr>
+      <tr><td>Supplier app: one login for shop and driver, 45 second accept, fleet, stock, radius, photo proof, wallet</td><td>Ten screens drawn, the countdown live, the photo mandatory, the wallet with no commission.</td><td><span class="flag ok">Yes</span></td></tr>
+      <tr><td>Admin: dashboard, orders, suppliers, approvals, finance, promos, reports, settings</td><td>Five screens drawn, with the escalation, the approvals queue and the fee setting. Customers, reports and settings are rows, not screens yet.</td><td><span class="flag">Partly</span></td></tr>
+      <tr><td>Static supplier heat map</td><td>In ours, Phase One; the SOW v1.1 deferred it. Drawn on the admin map screen.</td><td><span class="flag ok">Yes</span></td></tr>
+      <tr><td>IoT regulator and predictive reorder</td><td>Phase Two, teased on one screen, not priced.</td><td><span class="flag open">Phase Two</span></td></tr>
+    </table></div>
+    <span class="src"><b>Source</b> Navin's decks (customer 24 pages, supplier 16, admin 201) and the SOW v1.1, read 28 and 29 Sep 2026 · confidential, described only here</span>
+  </div>
+
+  <div class="sub" id="ck-call" data-t="The calls"><h3>The calls of 28 Sep and 1 Oct</h3>
+    <div class="tbw"><table class="tb">
+      <tr><th style="width:18%">Decided</th><th>What the prototype does today</th><th style="width:12%">Match</th></tr>
+      <tr><td>Customer never chooses a dealer</td><td>The engine assigns the nearest; no dealer list anywhere in the customer app.</td><td><span class="flag ok">Yes</span></td></tr>
+      <tr><td>Time based status, not live GPS</td><td>Four statuses from the driver's confirmations; the live map is Phase Two.</td><td><span class="flag ok">Yes</span></td></tr>
+      <tr><td>Suppliers pay no commission (1 Oct)</td><td>The wallet shows the gas price and the delivery fee in full; the fee is the customer's line.</td><td><span class="flag ok">Yes</span></td></tr>
+      <tr><td>The fee: RM3.00 or RM3.50, deferred to the price audit (1 Oct)</td><td>Option B shown and labelled; the admin can switch to A. The audit is the Competitors tab.</td><td><span class="flag open">Open</span></td></tr>
+      <tr><td>Funding RM60,000 first round, in discussion (1 Oct)</td><td>Week 1 is the Monday after the deposit; no calendar date in any page.</td><td><span class="flag held">Gated</span></td></tr>
+      <tr><td>"Something very Malaysian" for the name (1 Oct)</td><td>NakGas, set 20 Oct on Bazil&rsquo;s instruction, after Gas Sekarang (our reading of his Gas Karang, 6 Oct) and Gaslah (12 Oct); to confirm with him.</td><td><span class="flag">To confirm</span></td></tr>
+    </table></div>
+    <span class="src"><b>Source</b> Gemini notes and transcripts of 28 Sep (1h30m) and 1 Oct 2026 (55 min), read 29 Sep and 6 Oct</span>
+  </div>
+
+  <div class="sub" id="ck-proposal" data-t="The proposal"><h3>The proposal of 29 Sep and the audit</h3>
+    <div class="tbw"><table class="tb">
+      <tr><th style="width:18%">Item</th><th>Where it stands</th><th style="width:12%">Status</th></tr>
+      <tr><td>RM48,000 before SST, RM51,840 payable, 50 / 30 / 20</td><td>Unchanged on 1 Oct. Payment 2 at the end of Week 3, payment 3 at handover.</td><td><span class="flag ok">Holds</span></td></tr>
+      <tr><td>Five weeks to handover</td><td>Relative now: Week 1 starts the Monday after the deposit clears.</td><td><span class="flag held">Gated</span></td></tr>
+      <tr><td>UI/UX of every screen, a clickable prototype</td><td>The prototype exists before Week 1, free, as the investor sample. High fidelity and sign-off are Week 2.</td><td><span class="flag">In progress</span></td></tr>
+      <tr><td>Brand strategy, complimentary, and the light identity</td><td>Brand Creation, Design and Final Brand tabs drawn; the name and the flame to confirm with Navin.</td><td><span class="flag">To confirm</span></td></tr>
+      <tr><td>The audit: 33 findings, readiness 4.9 of 10</td><td>The model is settled; money and paperwork are what hold the launch.</td><td><span class="flag open">Open</span></td></tr>
+      <tr><td>NDA clause 12: no portfolio use</td><td>This workspace is internal and for Navin only. Nothing of it in any Brand Method portfolio.</td><td><span class="flag ok">Kept</span></td></tr>
+    </table></div>
+    <span class="src"><b>Source</b> proposal and quotation of 29 Sep 2026 · App Audit tab, 6 Oct 2026 · NDA signed 29 Sep</span>
+  </div>
+</section>
+
+<section class="sec" id="background" data-t="Background" data-n="·">
+  <div class="sh"><span class="no"></span><h2>Background</h2>
+    <p class="lede">The lane to own, the reading rules this page follows, every term placed by layer, and what is applied and what comes next.</p></div>
+
+  <div class="sub" id="bg-lane" data-t="The lane to own"><h3>The lane to own</h3>
+    <div class="dd">
+      <div class="use"><b>Own this now</b><ul><li>The household cylinder, 14 kg, swap or new, in one district at a time: Johor Bahru first.</li><li>The licensed dealers already on the road, with no commission, so supply says yes.</li><li>The controlled price printed first, as the law requires, said plainly wherever a customer decides.</li><li>The reminder: never caught mid-cook, first by rhythm, later by the regulator.</li></ul></div>
+      <div class="avoid"><b>Resist this</b><ul><li>Everything for everyone: commercial C50, hardware sales, every state at once.</li><li>Competing with a brand's own app on price: the price is the law's, the service is ours.</li><li>A live map, a loyalty programme and a smart device before the first thousand orders.</li><li>Drivers forced into an app they will not open: watch adoption, keep the fallback ready.</li></ul></div>
+    </div>
+    <span class="src"><b>Source</b> Brand Creation tab (positioning) · Competitors tab (where NakGas wins) · the audit, Verdict</span>
+  </div>
+
+  <div class="sub" id="bg-rules" data-t="The reading rules"><h3>The reading rules</h3>
+    <ul class="rules">
+      <li><b>Plain words first.</b> The meaning, then the number, then the unit.</li>
+      <li><b>Every short form written out.</b> On first use, with the short form after it.</li>
+      <li><b>Facts are dated, reads are marked as reads.</b> The controlled price is a fact; a fee option is a read until the audit.</li>
+      <li><b>Nothing invented.</b> A fact not in the briefs is written "to confirm", never guessed.</li>
+    </ul>
+  </div>
+
+  <div class="sub" id="bg-terms" data-t="The terms, by layer"><h3>The terms, placed by layer</h3>
+    <div class="gl-grid">
+      <dl class="glos"><h4>Gas</h4>
+        <dt>LPG</dt><dd>Liquefied petroleum gas: the cooking gas in the cylinder.</dd>
+        <dt>14 kg</dt><dd>The household cylinder, the hero of Phase One. 12 kg depends on the brand; C50 is commercial, Phase Two.</dd>
+        <dt>Swap, new</dt><dd>Swap: hand over the empty, pay for the gas. New: a first cylinder, its price set by the dealer and added at checkout.</dd>
+        <dt>Controlled price</dt><dd>RM1.90 a kilo, RM26.60 for 14 kg, set by KPDN on 8 Apr 2026, Peninsular, confirmed for Sabah and Sarawak in the audit.</dd>
+        <dt>Regulator</dt><dd>The valve on the cylinder. The smart one, Phase Two, reads the balance.</dd>
+        <dt>Api biru</dt><dd>The blue flame: a healthy burn, the brand's idea, kept since 20 Oct as the blue variation inside the green mark.</dd>
+      </dl>
+      <dl class="glos"><h4>Rules and money</h4>
+        <dt>KPDN</dt><dd>Kementerian Perdagangan Dalam Negeri dan Kos Sara Hidup: licenses dealers, sets the controlled price, requires unbundled bills.</dd>
+        <dt>SSM</dt><dd>Suruhanjaya Syarikat Malaysia: the business registration a dealer shows at onboarding.</dd>
+        <dt>PDPA</dt><dd>Personal Data Protection Act 2010: consent before details are kept, on the form and in both apps.</dd>
+        <dt>FPX, e-wallet, COD</dt><dd>Online banking, a wallet app, or cash on delivery: the three ways to pay, through one Malaysian gateway or at the door.</dd>
+        <dt>Platform fee</dt><dd>The one line per order that is the platform's: RM3.00 or RM3.50, pending the price audit.</dd>
+        <dt>SST, GMV</dt><dd>Sales and service tax, 8 percent on the build price. Gross merchandise value: everything sold through the platform, on the admin dashboard.</dd>
+      </dl>
+      <dl class="glos"><h4>Build and operations</h4>
+        <dt>Phase One</dt><dd>The five week build: three products, the website, the order engine, the heat map.</dd>
+        <dt>Phase Two</dt><dd>Not priced: the smart regulator, live map, messaging fallback, C50, Chinese and Tamil.</dd>
+        <dt>Week 1</dt><dd>The Monday after the deposit clears. No calendar date exists until then.</dd>
+        <dt>OTP</dt><dd>One-time password: the six digit code by SMS that logs a customer or a dealer in. No password.</dd>
+        <dt>Radius, escalation</dt><dd>How far a dealer delivers; what happens after four declines in a row: an admin assigns.</dd>
+        <dt>Settlement</dt><dd>The weekly payout to dealers from the wallet, cash orders netted, approved in admin.</dd>
+      </dl>
+    </div>
+  </div>
+
+  <div class="sub" id="bg-status" data-t="Applied, and next"><h3>Applied, and next</h3>
+    <div class="dd">
+      <div class="use"><b>Applied</b><ul><li>The prototype: 33 screens across three products, both languages, the engine and the bill live.</li><li>The flame mark, redrawn 9 Oct, in every file and on the phone's home screen.</li><li>The website, built in both languages with the real screens, on the Website tab.</li><li>This Codex: the product explained for three readers.</li></ul></div>
+      <div class="use"><b>Next</b><ul><li>Navin's answers to the eleven questions above, the name first.</li><li>The deposit, then Week 1: the brand sprint and the UI/UX sign-off in Week 2.</li><li>The price audit closes the fee; the admin setting follows it.</li><li>The dealer form wired into the approvals queue; the privacy policy written.</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">Brand Method · NakGas Codex v1 · 9 October 2026, name updated 13 October 2026 and 20 October 2026 · structure after the IAQ and MyHero Codex · the design system is on the Design tab · internal, for Navin only, never a portfolio piece</footer>
+</main>
+</div>
+
+<script src="assets/app-proto.js"></script>
+<script>
+(function(){
+  var INK='#0B1530';
+  function $(s,r){return (r||document).querySelector(s)}
+  function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))}
+  var G=window.GS;
+  function ic(k,c,w){return G?G.ic(k,w||20).replace('stroke="currentColor"','stroke="'+(c||'currentColor')+'"'):''}
+
+  /* ---- the six kinds ---- */
+  var KINDS=[
+    ['user','Person','Five','Who is around one order.',['Customer','Dealer, shop operator','Driver','Admin','KPDN'],'The people on one delivery.'],
+    ['cyl','Product','Three','What is ordered.',['14 kg household, swap or new','12 kg, selected brands','C50 commercial, Phase Two'],'The cylinder at the door.'],
+    ['orders','Order','Four states','What the engine moves.',['Confirmed','Dealer assigned','Out for delivery','Delivered'],'One job, four pings.'],
+    ['cash','Money','Three lines','What the bill shows.',['Controlled price RM26.60','Delivery fee, the dealer\u2019s','Platform fee, once per order'],'The law\u2019s line first, the fee last.'],
+    ['pin','Place','Two kinds','Where it goes.',['Landed house','High-rise: floor, lift, unit'],'What the driver knows before the road.'],
+    ['cal','Phase','Two','When it is built.',['Phase One \u00b7 five weeks','Phase Two \u00b7 not priced'],'The build calendar, relative to the deposit.']
+  ];
+  $('#kinds').innerHTML=KINDS.map(function(k){return '<div class="kind"><div class="top"><i>'+ic(k[0],INK,18)+'</i><b>'+k[1]+'</b></div><span class="n">'+k[2]+'</span><p>'+k[3]+'</p><ul>'+k[4].map(function(x){return '<li>'+x+'</li>'}).join('')+'</ul><div class="think"><b>Think:</b> '+k[5]+'</div></div>'}).join('');
+
+  /* ---- questions ---- */
+  var QS=[
+    ['Is NakGas the name?','Brand Method set it on 20 Oct 2026 on Bazil&rsquo;s instruction (&ldquo;change the name all to NakGas&rdquo;), after Gas Sekarang on 6 Oct and Gaslah on 12 Oct. Checked 20 Oct: nakgas.my and nakgas.com.my available (MYNIC RDAP); nakgas.com not registered (Verisign RDAP, whois no match); App Store Malaysia: &ldquo;nakgas&rdquo; returns no app and &ldquo;nak gas&rdquo; one unrelated game; Google Play Malaysia: no app named NakGas. The flame turned green with its mint inner cone the same day; the all-blue set stays as a variation.','Yes. &ldquo;Nak gas&rdquo; is what a household says the moment the cylinder runs out: I want gas. The name is the moment of need and the app is the answer, in six letters. MyIPO, the handles and Navin&rsquo;s yes are the next checks.'],
+    ['Which fee: RM3.00 with the gateway absorbed, or RM3.50?','The prototype shows RM3.50 as one "Platform & processing fee"; the admin can switch to RM3.00. The Competitors tab is the price audit.','RM3.50, labelled honestly, once per order. RM0.50 covers the gateway and the label says so; the customer still pays under RM34 for a cylinder.'],
+    ['What are the delivery fee tiers for high-rise addresses?','The address screen captures floor, lift and unit; the admin settings hold a landed and a high-rise rate per area, blank.','Let each dealer set a landed and a high-rise rate for its area, both shown before payment. One rule, no surprises at the door.'],
+    ['Johor Bahru first, then where?','Every sample address and the supplier map are Johor Bahru.','Johor Bahru, one district at a time, dealers before customers. The second city only when a district runs itself.'],
+    ['When does the deposit land?','Week 1 is the Monday after it clears; no page carries a calendar date. The Apple Developer account takes 15 to 20 days to approve.','The day the deposit lands, open the Apple, Google, gateway and SMS accounts in the company\u2019s name. The store clock starts then, not in Week 5.'],
+    ['Which brands are carried, and may their names and logos appear?','PETRONAS, Petron and MyGaz are sample chips in the prototype; no logo is drawn.','Brand names as text until the rights are in writing. The app sells the dealer\u2019s stock, not a brand.'],
+    ['What are the rewards and referral values?','Placeholders: points and a referral link with sample numbers.','Decide after the fee. One simple rule, such as points on the gas line, and a first-thousand promo with an end date.'],
+    ['Which legal entity signs and owns the stores?','"VIN Industries" is the working name; no company by that exact name was found in public sources (27 Sep). The NDA carries his NRIC.','The registered entity, exactly, on the quotation and on both store accounts. Nothing is submitted in a personal name.'],
+    ['Is 12 kg in, and at what price?','Shown as "selected brands" and disabled; the price is to confirm.','In, where the brand offers it, at the dealer\u2019s price shown before payment. The hero stays 14 kg.'],
+    ['Which smart regulator, and when?','Phase Two, teased on one screen; weight based or regulator based through Tuya; safety questions open.','After the first thousand orders. Bench test two devices with a dealer first; the data model is ready either way.'],
+    ['What if drivers will not use the app?','The dealer app is drawn with the photo proof and the cash mark; the messaging fallback is a Phase Two option.','Keep the app: the photo and the cash mark need it. Watch adoption in the first month and build the WhatsApp accept flow only if the numbers say so.']
+  ];
+  $('#qs').innerHTML=QS.map(function(q){return '<div class="q"><span class="who">Question for Navin</span><b>'+q[0]+'</b><p class="mw"><span>Meanwhile</span> '+q[1]+'</p><p class="ans"><span>Our answer</span> '+q[2]+'</p></div>'}).join('');
+
+  /* ---- part 1: plain cards and tabs ---- */
+  $('#plain').innerHTML=[['flame','Order in two taps.','Your usual cylinder, reordered from the home screen: Reorder, then Pay.','Home \u00b7 Order'],['cash','The fair price, shown first.','The KPDN controlled price is the first line of every bill, then the delivery fee, then one small fee.','Checkout'],['truck','Your usual dealer, not a stranger.','Licensed local dealers deliver, the ones already on the road. You see a name and a plate, never a number.','Delivery'],['bell','Never caught mid-cook.','A reminder from your own rhythm now; the smart regulator that reads the balance in Phase Two.','Reminder']].map(function(p,i){return '<div><span class="nn">'+(i+1)+'</span><i class="ic">'+ic(p[0],INK,22)+'</i><b>'+p[1]+'</b><p>'+p[2]+'</p><small>'+p[3]+'</small></div>'}).join('');
+  $('#tabsCards').innerHTML=[['home','Home','The usual order, the reorder reminder, the address and one Order button.'],['orders','Orders','History with one tap reorder, the receipts and the photo proof, the next reminder on top.'],['gift','Rewards','Points and the referral link. Values to confirm.'],['user','Profile','Language, the reminder rhythm, order updates, help and safety tips, cancellation rules, privacy.']].map(function(t){return '<div class="card"><i>'+ic(t[0],INK,18)+'</i><b>'+t[1]+'</b><p>'+t[2]+'</p></div>'}).join('');
+
+  /* ---- part 2: the module explorer ---- */
+  var M=[
+    {k:'engine',n:'Order engine',ic:'flame',what:'Finds the nearest available shop or truck with stock, offers the order for 45 seconds, moves it on, escalates after four declines.',who:'The platform; a dealer accepts; an admin steps in on escalation.',holds:'The offer trail per order: who was offered, when, accepted or declined, timed out.',built:'Phase One \u00b7 the core of the five weeks',scr:['c-find','d-incoming','a-orders'],to:['track','wallet']},
+    {k:'checkout',n:'Checkout and the bill',ic:'cash',what:'Swap or new, size, quantity, now or a slot, then the three lines and the way to pay.',who:'The customer; KPDN sets the first line; the admin sets the fee.',holds:'The bill per order, the promo or points used, the payment method.',built:'Phase One \u00b7 fee option pending the price audit',scr:['c-order','c-when','c-checkout','c-pay'],to:['engine','rewards']},
+    {k:'track',n:'Tracking and proof',ic:'truck',what:'Four statuses from the driver\u2019s confirmations, the dealer\u2019s name and plate, the photo at the door, the receipt.',who:'The driver confirms; the customer watches.',holds:'Status times, the photo, the receipt, the rating.',built:'Phase One \u00b7 live map in Phase Two',scr:['c-track','c-done','c-rate','d-status','d-photo'],to:['wallet','reminder']},
+    {k:'onboard',n:'Dealer onboarding and compliance',ic:'shield',what:'KPDN licence with its expiry, SSM, bank account, radius, then admin approval and an SMS invite.',who:'The dealer applies; an admin approves; KPDN licenses.',holds:'Documents, expiry dates, roles, the approval record.',built:'Phase One \u00b7 the website form posts into it',scr:['d-login','d-onboard','a-suppliers'],to:['engine','map']},
+    {k:'wallet',n:'Wallet and settlements',ic:'wallet',what:'Gas and delivery to the dealer in full, the fee to the platform, cash orders netted, weekly payouts.',who:'The dealer sees it; an admin approves payouts.',holds:'Earnings per order, cash collected, payout history.',built:'Phase One \u00b7 multi-step approvals in Phase Two',scr:['d-cash','d-wallet','a-settle'],to:[]},
+    {k:'map',n:'Admin dashboard and map',ic:'map',what:'Orders today, live, late, escalated, GMV and fees; the static heat map with radius circles; licence flags.',who:'The super admin and scoped sub-admins.',holds:'The day\u2019s counts, the escalations, the map of dealers.',built:'Phase One',scr:['a-dash','a-map'],to:['engine']},
+    {k:'rewards',n:'Rewards and promos',ic:'gift',what:'One promo code or points per order, a referral link, the first-thousand promo.',who:'The customer uses them; an admin sets them.',holds:'Points, codes, referrals. Values to confirm.',built:'Phase One \u00b7 values to confirm',scr:['c-rewards','a-settle'],to:['checkout']},
+    {k:'reminder',n:'Reminders',ic:'bell',what:'A scheduled push from the customer\u2019s own rhythm, about 28 days, adjustable; one tap to reorder.',who:'The customer; the platform schedules it.',holds:'The rhythm, the next date, the last order.',built:'Phase One simple \u00b7 predictive from the regulator in Phase Two',scr:['c-home','c-profile','c-iot'],to:['checkout']}
+  ];
+  var byK={};M.forEach(function(m){byK[m.k]=m});
+  M.forEach(function(m){m.from=M.filter(function(x){return x.to.indexOf(m.k)>=0}).map(function(x){return x.k})});
+  $('#rxList').innerHTML=M.map(function(m){return '<button type="button" data-k="'+m.k+'">'+ic(m.ic,'currentColor',18)+m.n+'</button>'}).join('');
+  function show(k){var m=byK[k];$$('#rxList button').forEach(function(b){var bk=b.getAttribute('data-k');b.classList.toggle('on',bk===k);b.classList.toggle('lit',bk!==k&&(m.to.indexOf(bk)>=0||m.from.indexOf(bk)>=0))});
+    var link=function(a){return a.length?'<div class="chips">'+a.map(function(x){return '<button type="button" data-go="'+x+'">'+byK[x].n+'</button>'}).join('')+'</div>':'<span style="color:#8A93A6">Nothing: this is where the money stops.</span>'};
+    $('#rxCard').innerHTML='<h4>'+m.n+'</h4><p class="what">'+m.what+'</p><dl><dt>Who</dt><dd>'+m.who+'</dd><dt>What it holds</dt><dd>'+m.holds+'</dd><dt>Built</dt><dd>'+m.built+'</dd><dt>Screens</dt><dd><div class="chips">'+m.scr.map(function(s){return '<a href="app.html#'+s+'">'+s+'</a>'}).join('')+'</div></dd><dt>Feeds</dt><dd>'+link(m.to)+'</dd><dt>Fed by</dt><dd>'+(m.from.length?link(m.from):'<span style="color:#8A93A6">The customer.</span>')+'</dd></dl>';
+    $$('#rxCard [data-go]').forEach(function(b){b.onclick=function(e){e.preventDefault();e.stopPropagation();show(b.getAttribute('data-go'))}})}
+  $$('#rxList button').forEach(function(b){b.onclick=function(){show(b.getAttribute('data-k'))}});
+  show('engine');
+  $('#modTable').innerHTML='<tr><th style="width:18%">Module</th><th style="width:30%">Who</th><th style="width:26%">Built</th><th>Feeds</th></tr>'+M.map(function(m){return '<tr><td>'+m.n+'</td><td>'+m.who+'</td><td>'+m.built+'</td><td>'+(m.to.map(function(x){return byK[x].n}).join(', ')||'The dealer\u2019s bank')+'</td></tr>'}).join('');
+
+  /* ---- part 3 ---- */
+  $('#firstRun').innerHTML=[['The icon','One tap on the home screen.'],['Splash','The flame, the name, the promise. Tap to start.'],['Language','Bahasa Malaysia or English, once.'],['Phone and the code','A number, six digits by SMS. No password.'],['Address','Landed or high-rise, with floor, lift and unit.'],['Home','The usual order, the reminder, one Order button.']].map(function(s,i){return '<li><b>'+(i+1)+' \u00b7 '+s[0]+'</b>'+s[1]+'</li>'}).join('');
+  var L=(G?[['Start','First open',G.LIST.c.slice(0,4).map(function(x){return x[0]})],['Home','The hub',['c-home']],['Order','Two taps to the bill',['c-order','c-when','c-checkout','c-pay']],['Delivery','45 seconds, then the road',['c-find','c-track','c-done','c-rate']],['Account','The tabs',['c-orders','c-rewards','c-profile','c-iot']],['Dealer app','Licence to settlement',G.LIST.d.map(function(x){return x[0]})],['Admin portal','Web, English',G.LIST.a.map(function(x){return x[0]})]]:[]);
+  var total=1;L.forEach(function(l){total+=l[2].length});
+  $('#lanes').innerHTML=L.map(function(l){return '<div class="lane"><b>'+l[0]+'<span>'+l[2].length+'</span></b><p>'+l[1]+'</p><ul>'+l[2].map(function(s){return '<li><a href="app.html#'+s+'" style="text-decoration:none;color:inherit">'+s+'</a></li>'}).join('')+'</ul></div>'}).join('')+'<p style="grid-column:1/-1;font-size:12.5px;color:#56607A">'+total+' screens in seven groups, counting the phone\u2019s home screen, read from the prototype\u2019s own data.</p>';
+  var S=[['device','The phone, before the app','']];
+  if(G)['c','d','a'].forEach(function(p){G.LIST[p].forEach(function(x){S.push([x[0],x[1]+': '+x[2].split('. ')[0].replace(/\.$/,''),x[0]==='c-iot'?'2':'1'])})});
+  $('#screenTable').innerHTML='<tr><th style="width:22%">Screen</th><th>Its one goal</th><th style="width:14%">Built</th></tr>'+S.map(function(s){var p=s[2]==='1'?'<span class="ph p1">Phase One</span>':s[2]==='2'?'<span class="ph p2">Phase Two</span>':'<span class="ph">The phone</span>';return '<tr><td class="d"><a href="app.html#'+s[0]+'" style="text-decoration:none;color:inherit">'+s[0]+'</a></td><td>'+s[1]+'</td><td>'+p+'</td></tr>'}).join('');
+
+  /* ---- key: summary or detailed ---- */
+  $$('.seg button').forEach(function(b){b.onclick=function(){$$('.seg button').forEach(function(x){x.classList.toggle('on',x===b)});$('#kinds').classList.toggle('sum',b.getAttribute('data-v')==='sum')}});
+
+  /* ---- real screens, captured from the prototype (assets/screens, 9 Oct) ---- */
+  function shots(el,list){$(el).innerHTML=list.map(function(x){return '<figure><a href="app.html#'+x[0]+'"><img src="assets/screens/'+x[0]+'.webp" alt="NakGas, '+x[1]+' screen" width="264" height="574" decoding="async" loading="lazy"></a><figcaption><b>'+x[1]+'</b>'+x[2]+'</figcaption></figure>'}).join('')}
+  shots('#todayRow',[['c-splash','Splash','The flame, the name, the promise.'],['c-home','Home','The usual order, the reminder, one button.'],['c-checkout','Checkout','The controlled price first, then the fee.'],['c-find','Finding a dealer','45 seconds for the nearest, then the next.'],['c-track','Tracking','Four statuses, a name and a plate.'],['c-done','Delivered','The photo at the door and the receipt.']]);
+  shots('#dealerRow',[['d-login','Login and role','One app for the shop and the driver.'],['d-onboard','Onboarding','KPDN licence, SSM, bank, radius.'],['d-home','Home','Online, today\u2019s earnings, stock.'],['d-incoming','Incoming order','A live 45 second countdown.'],['d-photo','Photo proof','Mandatory before the job closes.'],['d-wallet','Wallet','No commission, weekly payouts.']]);
+  shots('#storeRow',[['c-home','1 \u00b7 Gas sampai. Tak payah call.','Two taps to your usual cylinder.'],['c-checkout','2 \u00b7 The fair price, first','The controlled price on every bill.'],['c-find','3 \u00b7 The nearest dealer, in 45 seconds','Licensed, already on the road.'],['c-track','4 \u00b7 Follow it to the door','A name and a plate, never a number.'],['c-done','5 \u00b7 Proof and the receipt','A photo at delivery, every time.'],['c-orders','6 \u00b7 Never caught mid-cook','The reminder from your rhythm.']]);
+
+  addEventListener('beforeprint',function(){$$('details').forEach(function(d){d.open=true})});
+
+  /* ---- the rail ---- */
+  var secs=$$('.sec[data-t]'),rl=$('#railList');
+  rl.innerHTML=secs.map(function(s){var subs=$$('.sub[data-t]',s);return '<li data-id="'+s.id+'"><a href="#'+s.id+'"><i>'+s.getAttribute('data-n')+'</i>'+s.getAttribute('data-t')+'</a>'+(subs.length?'<ol>'+subs.map(function(u){return '<li><a href="#'+u.id+'" data-sub="'+u.id+'">'+u.getAttribute('data-t')+'</a></li>'}).join('')+'</ol>':'')+'</li>'}).join('');
+  var items=$$('#railList > li');
+  function spy(){var cur=secs[0].id,y=innerHeight*.3;secs.forEach(function(s){if(s.getBoundingClientRect().top<y)cur=s.id});items.forEach(function(li){li.classList.toggle('on',li.getAttribute('data-id')===cur)});var sub=null;$$('.sec#'+cur+' .sub[data-t]').forEach(function(u){if(u.getBoundingClientRect().top<y)sub=u.id});$$('#railList a[data-sub]').forEach(function(a){a.classList.toggle('on',a.getAttribute('data-sub')===sub)})}
+  addEventListener('scroll',spy,{passive:true});spy();
+})();
+</script>
+</body>
+</html>

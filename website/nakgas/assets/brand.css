@@ -1,0 +1,21 @@
+/* NakGas brand tokens. One file, linked by every page in this workspace and by the prototype.
+   Change a value here, never in a page. Decided 6 Oct 2026 (see _BRIEF.md, "The brand"). */
+:root{
+  --gs-flame:#0CA66A;      /* the flame green (20 Oct 2026): the one accent. Mark, display accents, active state. 3.1:1 on white, so never small text and never under white text */
+  --gs-flame-d:#08854C;    /* the deep green: primary buttons with white text (4.7:1), links and inline labels on white */
+  --gs-core:#8FDDB8;       /* the mint inner cone of the flame (20 Oct, the first logo in green); the all-blue variation uses #1550F5 with #8DB0FF */
+  --gs-wash:#E9F7F0;       /* tint behind a selected row or an info note */
+  --gs-ink:#0B1530;        /* headlines, body, numerals */
+  --gs-steel:#4F5B76;      /* secondary copy */
+  --gs-mist:#657088;       /* small print, disabled: darkened 6 Oct from #8A93A8 (3.1:1) to pass AA, 4.6:1 on white */
+  --gs-line:#E2E6EE;       /* every hairline */
+  --gs-base:#F5F7FA;       /* canvas */
+  --gs-surface:#FFFFFF;    /* cards, sheets */
+  --gs-low:#E8890C;        /* signal: gas running low, a late order. Fills and dots only, never text (2.6:1) */
+  --gs-low-text:#8A4F00;   /* the low signal as text or a lone icon: passes AA */
+  --gs-ok:#12805A;         /* signal: delivered, verified */
+  --gs-bad:#C4292E;        /* signal: cancelled, failed */
+  --gs-wordmark:"Unbounded","Plus Jakarta Sans",Inter,system-ui,sans-serif; /* the wordmark only, 20 Oct: Unbounded 800 (Rubik and Outfit before), drawn as outlines in the svg files; live text only in the site header and the app header */
+  --gs-display:"Plus Jakarta Sans",Inter,system-ui,sans-serif;
+  --gs-body:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
+}

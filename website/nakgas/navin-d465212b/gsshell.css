@@ -1,0 +1,34 @@
+/* NakGas: byte copy of Apps/MyHero/shell.css (10 Oct 2026), the shell every document page wears: soft ground, the bar and the page as inset blocks. Loaded after gsdoc.css on Overview, Boards and the website notes. */
+/* The document pages wear the same shell as the workbench: a soft ground, the admin bar and the page as separate
+   inset blocks with 8px of air, sharp corners, no rules, sentence-case labels, no numerals in the section bar.
+   Loaded after each page's own styles. Rounded shapes stay only on product artwork (app icons, device screens). */
+html{background:#E7E9ED}
+body{background:#E7E9ED!important;padding:8px}
+.bmws{position:sticky;top:8px;z-index:60;box-shadow:0 1px 2px rgba(10,12,18,.2)}
+body::before{content:'';position:fixed;left:0;right:0;top:0;height:8px;background:#E7E9ED;z-index:61}
+
+/* the page itself is one white panel */
+.wrap{background:#fff;margin-top:8px!important;max-width:none!important;padding-left:max(24px,calc((100% - 1120px)/2))!important;padding-right:max(24px,calc((100% - 1120px)/2))!important;box-shadow:0 1px 2px rgba(10,12,18,.05)}
+
+/* section bar: part of the shell, no numerals, no rule, filled hover */
+.nav{position:sticky;top:64px;z-index:55;margin-top:8px;background:#fff!important;border:0!important;box-shadow:0 1px 2px rgba(10,12,18,.06)}
+.nav + .wrap{margin-top:8px!important}
+.nav-in{max-width:none!important;padding:8px 24px!important;gap:2px!important}
+.nav a{font-size:12.5px!important;font-weight:500;letter-spacing:0!important;text-transform:none!important;border-radius:0!important;padding:8px 12px!important;color:#4A4F5A!important}
+.nav a:hover{background:#EEF0F3!important;color:#0A0C12!important}
+.nav .ch-no{display:none!important}
+
+/* one shape language: sharp. One label voice: sentence case, no tracking. No rules under things. */
+.wrap *:not(svg):not(svg *):not(.gal *){border-radius:0!important}
+.wrap table,.wrap .card,.wrap .stat,.wrap .list,.wrap .execsum,.wrap .vchip,.wrap .spec,.wrap .demo,.wrap .ex,.wrap .sw div,.wrap .lgg div,.wrap .icg figure,.wrap .meta span,.wrap .flow,.wrap .ratio{border-color:transparent!important;box-shadow:none!important}
+.wrap .card,.wrap .stat,.wrap .list,.wrap .execsum,.wrap .vchip,.wrap .spec,.wrap .demo,.wrap .lgg div,.wrap .icg figure,.wrap .meta span,.wrap .sw div{background:#F4F5F7!important}
+.wrap .ex,.wrap .tiles .t{background:#fff!important;border-color:transparent!important}
+.wrap *{letter-spacing:normal}
+.wrap h1,.wrap h2,.wrap h3{letter-spacing:-.025em}
+.wrap *{text-transform:none!important}
+.wrap table,.wrap th,.wrap td{border-radius:0!important}
+.shead,.phead,.toc,.toc a,section,.pil header,.gsec>header{border-color:transparent!important}
+/* product artwork keeps its real shape */
+.iog i,.lgg svg{border-radius:initial!important}
+@media(max-width:700px){body{padding:0}.bmws{top:0}body::before{display:none}.nav{top:48px}}
+@media print{body{padding:0;background:#fff!important}.wrap{box-shadow:none}}

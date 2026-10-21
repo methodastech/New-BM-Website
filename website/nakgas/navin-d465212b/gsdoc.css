@@ -1,0 +1,82 @@
+/* Workspace document pages (audit, competitors, plan, brand, design, final brand, website notes, overview).
+   House rules: Inter only, no monospace anywhere, square corners, hairlines over boxes, no gradients, no
+   left colour bars, icons bare, one section title size. The super admin bar CSS is bmws.css (byte copy of
+   Apps/MyHero/bmws.css: never edit it here). */
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#fff;color:var(--gs-ink);font:400 15px/1.6 var(--gs-body);-webkit-font-smoothing:antialiased}
+a{color:var(--gs-flame-d)}
+.bmws{position:sticky;top:0;z-index:60}
+/* section bar under the admin bar: white, sentence case, no numerals, no scrollbar */
+.nav{position:sticky;top:var(--bh,58px);z-index:50;background:rgba(255,255,255,.97);border-bottom:1px solid var(--gs-line);overflow-x:auto;scrollbar-width:none}
+.nav::-webkit-scrollbar{height:0}
+.nav-in{display:flex;gap:2px;padding:8px 48px;white-space:nowrap}
+.nav a{font-size:13px;font-weight:500;color:var(--gs-steel);text-decoration:none;padding:6px 10px}
+.nav a:hover,.nav a.on{color:var(--gs-ink);background:var(--gs-base)}
+.wrap{padding:0 48px 96px}
+/* hero */
+.hero{padding:56px 0 40px;border-bottom:1px solid var(--gs-line)}
+.hero .brandrow{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.hero .brandrow img{height:40px;width:auto}
+.lockup{display:block;height:40px;width:auto;max-width:100%}
+.kicker{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--gs-steel)}
+h1{font:700 44px/1.08 var(--gs-body);letter-spacing:-.025em;margin:10px 0 16px;max-width:22ch}
+h1 em,h2 em{font-style:normal;color:var(--gs-flame)}
+.lede{font-size:18px;line-height:1.55;color:var(--gs-steel);max-width:72ch;margin:0}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:20px}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;line-height:1.3;padding:4px 8px;border:1px solid var(--gs-line);background:var(--gs-base);color:var(--gs-ink);border-radius:3px;white-space:nowrap}
+.chip.blue{background:var(--gs-wash);border-color:#B9E3CF;color:var(--gs-flame-d)}
+.chip.low{background:#FFF4E5;border-color:#F6D19B;color:#8A4F00}
+.chip.ok{background:#E8F5EF;border-color:#B5DEC9;color:#0B5E41}
+.chip.bad{background:#FDECEC;border-color:#F3C1C2;color:#8F1D21}
+.chip.fact{background:#fff}
+.chip.inf{background:#fff;border-style:dashed}
+.status{margin-top:20px;font-size:14px;color:var(--gs-steel);max-width:90ch}
+.status b{color:var(--gs-ink)}
+/* sections: one title size */
+.sec{padding:56px 0 8px;border-bottom:1px solid var(--gs-line)}
+.sec:last-of-type{border-bottom:0}
+.sec>h2,h2{font:700 30px/1.15 var(--gs-body);letter-spacing:-.02em;margin:0 0 10px;max-width:40ch}
+.sec>.sub{font-size:16px;color:var(--gs-steel);max-width:80ch;margin:0 0 28px}
+h3{font:600 18px/1.3 var(--gs-body);letter-spacing:-.01em;margin:28px 0 10px}
+h4{font:600 15px/1.35 var(--gs-body);margin:0 0 6px}
+p{max-width:80ch}
+.muted{color:var(--gs-steel)}
+.small{font-size:13px}
+/* grids and cards: square, hairline, no shadow */
+.grid{display:grid;gap:12px;margin:16px 0}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.card{border:1px solid var(--gs-line);background:#fff;padding:20px}
+.card.wash{background:var(--gs-base)}
+.card p{margin:6px 0 0;font-size:14px;color:var(--gs-steel)}
+.card .k{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--gs-steel);margin-bottom:8px}
+.stat{font:700 32px/1.05 var(--gs-body);letter-spacing:-.02em}
+.stat small{font-size:14px;font-weight:500;color:var(--gs-steel);letter-spacing:0}
+/* tables */
+.tbl-wrap{overflow-x:auto;margin:16px 0}
+table.tbl{width:100%;border-collapse:collapse;font-size:14px}
+.tbl th{text-align:left;font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--gs-steel);padding:10px 12px;border-bottom:1px solid var(--gs-ink);white-space:nowrap}
+.tbl td{padding:12px;border-bottom:1px solid var(--gs-line);vertical-align:top}
+.tbl td.r,.tbl th.r{text-align:right;font-variant-numeric:tabular-nums}
+.tbl tr.total td{font-weight:700;border-bottom:1px solid var(--gs-ink)}
+.tbl .strong{font-weight:600}
+/* notes */
+.note{border:1px solid var(--gs-line);background:var(--gs-base);padding:16px 20px;margin:16px 0;font-size:14px;max-width:100ch}
+.note.blue{background:var(--gs-wash);border-color:#B9E3CF}
+.note.low{background:#FFF8EE;border-color:#F6D19B}
+.note b{color:var(--gs-ink)}
+ul.clean,ol.clean{margin:8px 0;padding-left:20px}
+ul.clean li,ol.clean li{margin:4px 0}
+.src{font-size:12.5px;color:var(--gs-mist);margin-top:8px}
+figure{margin:16px 0}
+figcaption{font-size:13px;color:var(--gs-steel);margin-top:8px}
+.foot{padding:40px 48px;border-top:1px solid var(--gs-line);font-size:13px;color:var(--gs-mist)}
+@media (max-width:1000px){.g4{grid-template-columns:repeat(2,minmax(0,1fr))}.g3{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){
+  .wrap,.foot{padding-left:16px;padding-right:16px}.nav-in{padding:8px 16px}
+  h1{font-size:32px}.sec>h2,h2{font-size:24px}.lede{font-size:16px}
+  .g2,.g3,.g4{grid-template-columns:1fr}
+}
+@media print{.bmws,.nav{display:none!important}.sec{break-inside:avoid-page}}

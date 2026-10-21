@@ -1,0 +1,430 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VIN Industries · NakGas · Brand Creation · Brand Method</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="bmws.css"><link rel="stylesheet" href="assets/brand.css"><link rel="stylesheet" href="gsrail.css">
+<link rel="icon" href="assets/app-icon.svg">
+<style>
+/* Brand Creation only: the strategy, light. Document chrome stays square and hairline (gsdoc.css).
+   Brand lines (positioning, tagline, the name) are set in the brand's own display face, Plus Jakarta Sans. */
+.lockup{height:40px;width:auto;display:block}
+h1 em{white-space:nowrap}
+.bl{font:700 30px/1.22 var(--gs-display);letter-spacing:-.02em;color:var(--gs-ink);max-width:36ch;margin:6px 0 8px}
+.bl.s{font-size:22px;max-width:52ch}
+.bl em{font-style:normal;color:var(--gs-flame)}
+.bm{font-size:16px;line-height:1.55;color:var(--gs-steel);max-width:84ch;margin:0 0 6px}
+.bm b{color:var(--gs-ink);font-weight:600}
+.lab{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 0}
+.tbl td .chip{white-space:nowrap}
+.tbl td.k{font-weight:600;white-space:nowrap}
+.tbl td.blk{white-space:normal;width:34%;min-width:240px}
+.src,.foot{color:var(--gs-steel)}
+.tbl td.w{min-width:220px}
+.tbl .bmc{color:var(--gs-ink)}
+.tbl .enc{color:var(--gs-steel)}
+.card h4{font-size:16px}
+.card .lab{margin-top:14px}
+.person h4{font-size:17px;margin:0}
+.person .who{font-size:13.5px;color:var(--gs-steel);margin:2px 0 14px}
+.kv{display:grid;grid-template-columns:118px minmax(0,1fr);gap:9px 14px;font-size:14px;margin:0}
+.kv dt{font-weight:600;color:var(--gs-ink)}
+.kv dd{margin:0;color:var(--gs-steel)}
+.beats{list-style:none;margin:16px 0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border-top:1px solid var(--gs-ink)}
+.beats li{padding:16px 18px 20px 0;margin-right:18px;border-bottom:1px solid var(--gs-line)}
+.beats .n{font-size:13px;font-weight:600;color:var(--gs-flame-d)}
+.beats b{display:block;font:700 18px/1.3 var(--gs-display);letter-spacing:-.01em;margin:6px 0 8px}
+.beats p{font-size:14px;color:var(--gs-steel);margin:0 0 10px}
+.value{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--gs-line);margin:20px 0}
+.value>div{padding:20px;border-right:1px solid var(--gs-line)}
+.value>div:last-child{border-right:0;background:var(--gs-wash)}
+.value .k{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--gs-steel);margin-bottom:8px}
+.value .stat s{color:var(--gs-steel);font-weight:600;text-decoration-thickness:2px}
+.value p{font-size:13.5px;color:var(--gs-steel);margin:6px 0 0}
+.items{font-size:13px;color:var(--gs-steel);margin-top:4px}
+.dd{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:16px 0}
+.dd ul{margin:8px 0 0;padding-left:18px;font-size:14px}
+.dd li{margin:6px 0}
+.tag{font:700 44px/1.08 var(--gs-display);letter-spacing:-.025em;margin:8px 0 6px}
+.tag+.bm{font-size:18px}
+@media (max-width:1000px){.beats{grid-template-columns:1fr 1fr}.value{grid-template-columns:1fr 1fr}.value>div:nth-child(2){border-right:0}.value>div:nth-child(-n+2){border-bottom:1px solid var(--gs-line)}}
+@media (max-width:640px){.bl{font-size:23px}.tag{font-size:32px}.beats,.value,.dd{grid-template-columns:1fr}.value>div{border-right:0;border-bottom:1px solid var(--gs-line)}.kv{grid-template-columns:1fr}.kv dd{margin-bottom:6px}}
+</style>
+</head>
+<body>
+<div class="bmws" style="--bmws-acc:#2536F5"><div class="bmws-in"><div class="bmws-crumb"><b>VIN Industries &middot; NakGas</b><span>Brand Method &middot; Super Admin Navigation</span></div><nav class="bmws-tabs" aria-label="Brand Method admin navigation"><a href="audit.html">App Audit</a><a href="competitors.html">Competitors</a><a href="plan.html">Plan</a><a href="brand.html" class="on">Brand Creation</a><a href="design.html">Design</a><a href="final-brand.html">Final Brand</a><a href="app.html">The App</a><a href="website.html">Website</a><a href="deck.html">Investor Deck</a><a href="codex.html">Codex</a><a href="map.html">Overview</a></nav></div></div>
+
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="flame" viewBox="0 0 64 64"><g class="fl" transform="translate(0.00 0.00) scale(1.0000)"><path class="fl-o" d="M37 3.5C40.2 9.6 47.2 18.6 50.6 29.8C54.6 42.6 48.4 59.4 32.6 59.4C17.2 59.4 11 47 13.9 35.2C16.4 25 27.6 16.4 37 3.5Z" fill="#0CA66A"/><path class="fl-i" d="M32.6 31C35.2 36.4 40.4 40.6 40.4 46C40.4 50.6 36.8 53.2 32.6 53.2C28.4 53.2 24.8 50.6 24.8 46C24.8 40.6 30 36.4 32.6 31Z" fill="#8FDDB8"/></g></symbol>
+</defs></svg>
+
+<div class="dz">
+<aside class="rail" aria-label="Sections">
+  <div class="rail-t"><b>The NakGas brand</b><span id="railSub"></span></div>
+  <a class="rail-dl" href="NakGas-Brand.pdf" download="NakGas-Brand.pdf"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></svg>Download this page, PDF</a>
+  <div class="rail-s" role="search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg><input id="railQ" type="search" placeholder="Search this page" aria-label="Search this page" autocomplete="off" spellcheck="false"></div>
+  <ol class="rail-res" id="railRes" hidden></ol>
+  <ol id="railList"></ol>
+</aside>
+
+<main class="page">
+
+<header class="hero">
+  <div>
+    <span class="k"></span>
+    <h1>The brand behind <em>NakGas</em></h1>
+    <p class="lede">Who it is for, what it promises, how it speaks, and why it carries this name. Written by Brand Method on Tue 6 Oct 2026 from the two calls with Navin (Mon 28 Sep and Thu 1 Oct) and the market audit. The last section is the investor sample Navin asked for: what the full brand strategy covers and what it is worth.</p>
+    <div class="chips"><span class="chip blue">Brand Method recommendation, 6 Oct 2026</span><span class="chip low">To confirm with Navin</span><span class="chip fact">Fact: source and date given</span><span class="chip inf">Our read: an inference, labelled</span></div>
+    <p class="status"><b>Status.</b> The idea, the colours, the type and the logo were decided by Brand Method on 6 Oct 2026 at Bazil&rsquo;s instruction. The name changed on 12 Oct 2026 from Gas Sekarang to Gaslah, and on 20 Oct 2026 from Gaslah to NakGas on Bazil&rsquo;s instruction; the flame turned green with its mint inner cone the same day. None is confirmed by Navin yet. This page is the light version; the full strategy (47 brand items and 16 business items) runs as a one-week sprint in Week 1 of the build. The system is on <a href="design.html">Design</a>, the brand on one page on <a href="final-brand.html">Final Brand</a>.</p>
+    <div class="dl"><a class="p" href="final-brand.html">Open the Final Brand</a><a class="s" href="design.html">Open the Design tab</a><a class="s" href="NakGas-Brand.pdf" download="NakGas-Brand.pdf">Download this page</a><button class="s" type="button" onclick="print()">Print</button><small id="pdfMeta">PDF · 26 pages, one section per page · A4 landscape · updated 21 October 2026 · internal, for Navin only</small></div>
+  </div>
+  <nav class="index" aria-label="The strategy, in order">
+    <b class="t">The strategy, in order</b>
+    <a href="#problem"><i>1</i>The problem</a><a href="#insight"><i>2</i>The insight</a><a href="#positioning"><i>3</i>Positioning</a><a href="#audiences"><i>4</i>Audiences</a><a href="#promise"><i>5</i>Promise and proof</a><a href="#personality"><i>6</i>Personality</a><a href="#voice"><i>7</i>Voice</a><a href="#name"><i>8</i>The name</a><a href="#tagline"><i>9</i>Tagline and lines</a><a href="#story"><i>10</i>Investor story</a><a href="#covers"><i>11</i>What the strategy covers</a>
+  </nav>
+</header>
+
+<section class="sec" id="problem" data-t="The problem" data-n="1">
+  <div class="sh"><span class="no">1</span><h2>The problem: ordering gas is still a phone call</h2><p class="lede">LPG is a controlled item in Malaysia and the price of the gas is fixed by law. What is not fixed is everything around it: finding someone, reaching them, and knowing what you paid for.</p></div>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>What happens today</th><th>What it costs the household</th><th>Source</th></tr></thead>
+    <tbody>
+      <tr><td>You find a number: a sticker on the cylinder, a neighbour, a search online</td><td>Time, and no way to tell who is licensed</td><td><span class="chip fact">Fact</span> Navin, call of 28 Sep 2026</td></tr>
+      <tr><td>You call and wait. If the dealer does not pick up, you call the next one</td><td>The cooking stops while you wait</td><td><span class="chip fact">Fact</span> Navin, 28 Sep</td></tr>
+      <tr><td>The price is what you are told on the phone</td><td>No proof that RM26.60 is the gas and the rest is delivery</td><td><span class="chip fact">Fact</span> KPDN controlled price RM26.60 for 14 kg (RM1.90 a kg), set 8 Apr 2026. A Johor Bahru dealer charges RM30.00 all in by phone (Navin, 1 Oct)</td></tr>
+      <tr><td>The tank runs out mid-cook. Only experience warns you</td><td>A meal, and a rushed call</td><td><span class="chip fact">Fact</span> Navin, call of 1 Oct 2026</td></tr>
+      <tr><td>The apps that exist run their own riders or agents, mostly in the Klang Valley</td><td>Outside the central region the choice is mostly the phone</td><td><span class="chip fact">Fact</span> Navin, 1 Oct; audit chapter 2. <span class="chip inf">Our read</span> on the second column</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note blue"><b>Our read.</b> The real rival is not another app. It is the dealer&rsquo;s phone number on a sticker. NakGas wins the day ordering is easier than calling, at a price the customer can check.</div>
+</section>
+
+<section class="sec" id="insight" data-t="The insight" data-n="2">
+  <div class="sh"><span class="no">2</span><h2>The insight: the flame already tells you</h2><p class="lede">Three things we heard on the calls, and what we read into them.</p></div>
+  <div class="grid g3">
+    <div class="card"><h4>The blue flame</h4><p>A clean LPG flame burns blue. Navin, 1 Oct: &ldquo;not all of us are like our mothers who know, the colour of the gas fire.&rdquo; Our mothers read the flame to know the tank is going. Most of us cannot.</p><p>NakGas does that reading for you: first a reminder from your own order rhythm, later (Phase Two) a smart regulator that knows the balance before the flame changes.</p><p>Since 20 Oct the mark is the first flame in green, emerald with a mint inner cone, and the blue burn stays as a variation set, so the idea stays in the files.</p><div class="lab"><span class="chip fact">Fact: the flame, his words</span><span class="chip inf">Our read: the role</span></div></div>
+    <div class="card"><h4>The phone call habit</h4><p>Today the order is a phone call: find the number, ring, wait, hope the price is right (Navin, 28 Sep).</p><p>The habit to replace is the call, not the dealer. That is where the tagline comes from: <b>Gas sampai. Tak payah call.</b></p><div class="lab"><span class="chip fact">Fact: how it works today</span><span class="chip inf">Our read: what to replace</span></div></div>
+    <div class="card"><h4>The dealers already on the road</h4><p>Licensed dealers already deliver at one price. Johor Bahru distributors refused to pay any commission, so suppliers pay nothing: it is what brings them on board (Navin, 1 Oct).</p><p>The supply is there. What is missing is the order book. NakGas is that order book, free for the dealer.</p><div class="lab"><span class="chip fact">Fact: no commission</span><span class="chip inf">Our read: the order book</span></div></div>
+  </div>
+  <div class="sub" id="insight-1" data-t="The insight in one line">
+  <h3>The insight in one line</h3>
+  <p class="bl">People do not want a new gas company. They want <em>their usual gas</em>, without having to ask for it.</p>
+  <p class="bm"><b>Orang tak perlukan syarikat gas baharu. Mereka mahukan gas yang biasa, tanpa perlu menelefon sesiapa.</b></p>
+  <div class="lab"><span class="chip inf">Our read</span></div>
+
+  </div></section>
+
+<section class="sec" id="positioning" data-t="Positioning" data-n="3">
+  <div class="sh"><span class="no">3</span><h2>Positioning</h2><p class="lede">One line, in both languages, then the frame it is built on.</p></div>
+  <p class="bl">The gas dealer you already trust, now in your phone: the controlled price first, one small fee, and <em>no more calling around</em>.</p>
+  <p class="bm"><b>Pengedar gas yang anda percaya, kini dalam telefon anda: harga kawalan dahulu, satu fi kecil, dan tak perlu lagi telefon sana sini.</b></p>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>Frame</th><th>NakGas</th></tr></thead>
+    <tbody>
+      <tr><td class="k">For</td><td>Households in Malaysia that cook with LPG, starting in Johor Bahru (launch region: our read of Navin&rsquo;s base, to confirm)</td></tr>
+      <tr><td class="k">Who</td><td>Run out without warning and still order by phone</td></tr>
+      <tr><td class="k">NakGas is</td><td>The ordering app for the licensed dealers already on the road</td></tr>
+      <tr><td class="k">That</td><td>Shows the KPDN price first, adds one fee per order, and sends the order to the nearest dealer with stock, who has 45 seconds to accept</td></tr>
+      <tr><td class="k">Unlike</td><td>The central-region apps that run their own riders or agents</td></tr>
+      <tr><td class="k">Because</td><td>The dealers deliver already, pay no commission, and every one has a KPDN licence on file with its expiry tracked</td></tr>
+    </tbody>
+  </table></div>
+  <div class="dd">
+    <div class="card"><h4>What NakGas is not</h4><ul>
+      <li>Not a gas company. It sells no gas of its own.</li>
+      <li>Not a rider fleet. The dealer delivers, as today.</li>
+      <li>Not a discount app. &ldquo;Cheapest&rdquo; is never the claim: the gas price is fixed by law.</li>
+      <li>Not a cartoon. The market already has a yellow cartoon bee.</li>
+    </ul></div>
+    <div class="card"><h4>Short description, for the stores, the website and the Cradle form</h4>
+      <p style="color:var(--gs-ink)">NakGas lets you order LPG cooking gas from licensed local dealers in two taps. The KPDN controlled price comes first, then one small platform fee. You see the dealer&rsquo;s name and truck before they arrive. Pay online or cash on delivery.</p>
+      <p>NakGas membolehkan anda memesan gas memasak LPG daripada pengedar tempatan berlesen dengan dua ketikan. Harga kawalan KPDN dipaparkan dahulu, diikuti satu fi platform yang kecil. Anda tahu nama pengedar dan nombor lori sebelum mereka tiba. Bayar dalam talian atau tunai semasa penghantaran.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="audiences" data-t="Audiences" data-n="4">
+  <div class="sh"><span class="no">4</span><h2>Audiences: four people</h2><p class="lede">Illustrative people, written from the two calls and the audit. They are not research participants: each is tested against real users in the beta.</p></div>
+  <div class="grid g2">
+    <div class="card person"><h4>Nadia, 34</h4><p class="who">Working mother, 21st floor of a condominium in Johor Bahru</p><dl class="kv">
+      <dt>Need</dt><dd>Gas delivered to her unit at a time she chooses, without calling from the office.</dd>
+      <dt>Fear</dt><dd>Running out with dinner on the stove. A stranger at the door. A surprise charge for the lift.</dd>
+      <dt>What wins her</dt><dd>A scheduled delivery, the dealer&rsquo;s name and truck plate before arrival, every fee shown before she pays, a photo when it is delivered.</dd>
+      <dt>In the app</dt><dd>High-rise address (floor, lift, unit), scheduled order, status steps, photo proof.</dd></dl></div>
+    <div class="card person"><h4>Pakcik Hamid, 67</h4><p class="who">Retired, a terrace house in Skudai</p><dl class="kv">
+      <dt>Need</dt><dd>The dealer and the price he knows, in Malay, paying cash.</dd>
+      <dt>Fear</dt><dd>Apps that take money he cannot see. Being pushed to pay online. Small text.</dd>
+      <dt>What wins him</dt><dd>Bahasa Malaysia from the first screen, cash on delivery, two taps, and a reminder so he never has to remember. His daughter can set it up for him.</dd>
+      <dt>In the app</dt><dd>Language picker, cash on delivery, one-tap reorder, reorder reminder.</dd></dl></div>
+    <div class="card person"><h4>Arun and Mei Ling, both 27</h4><p class="who">A young couple renting an apartment in Iskandar Puteri</p><dl class="kv">
+      <dt>Need</dt><dd>A licensed dealer near a home they just moved into, and a price they can check.</dd>
+      <dt>Fear</dt><dd>Being overcharged because they are new. An unsafe cylinder or a leaking hose.</dd>
+      <dt>What wins them</dt><dd>The KPDN price on the first line, licensed dealers only, safety tips in Help, e-wallet payment, a referral reward.</dd>
+      <dt>In the app</dt><dd>KPDN-verified dealer, itemised bill, online payment, help and safety tips, referral link.</dd></dl></div>
+    <div class="card person"><h4>Mr Lim, 52</h4><p class="who">A licensed dealer with a shop and two lorries in Johor Bahru, delivering by phone today</p><dl class="kv">
+      <dt>Need</dt><dd>More orders on the routes his lorries already drive, without paying a cut.</dd>
+      <dt>Fear</dt><dd>A platform that takes commission. Drivers who will not use an app. Disputes over a delivery. Late payment.</dd>
+      <dt>What wins him</dt><dd>No commission (Navin, 1 Oct), orders only inside his radius, 45 seconds to accept or pass, photo proof that settles disputes, a settlement history he can read.</dd>
+      <dt>In the app</dt><dd>Online switch, the 45 second countdown, stock and radius, photo proof, wallet and settlements. Phase Two: a WhatsApp accept flow for drivers who will not use an app.</dd></dl></div>
+  </div>
+</section>
+
+<section class="sec" id="promise" data-t="Promise and proof" data-n="5">
+  <div class="sh"><span class="no">5</span><h2>Promise and proof</h2><p class="lede">Every promise has a proof inside the product. If a promise has no screen behind it, it is not made.</p></div>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>Promise</th><th>Proof in the product</th><th>Where it shows</th></tr></thead>
+    <tbody>
+      <tr><td class="k">The fair price, shown first</td><td>The KPDN controlled price is the first line of every bill, as the law requires. One platform fee per order, not per cylinder</td><td>Checkout, receipt</td></tr>
+      <tr><td class="k">Your usual dealer, not a stranger</td><td>Licensed local dealers deliver, the ones already on the road. KPDN licence checked and its expiry tracked</td><td>Dealer card, supplier onboarding, admin compliance</td></tr>
+      <tr><td class="k">No more calling around</td><td>Order in two taps. The nearest available dealer has 45 seconds to accept, then the next</td><td>Home, order flow, the supplier countdown</td></tr>
+      <tr><td class="k">Never caught mid-cook</td><td>A reorder reminder from your own order rhythm now. The smart regulator in Phase Two</td><td>Push reminder; Phase Two</td></tr>
+    </tbody>
+  </table></div>
+  <div class="sub" id="promise-1" data-t="The bill, worked: one 14 kg cylinder, Johor Bahru">
+  <h3>The bill, worked: one 14 kg cylinder, Johor Bahru</h3>
+  <div class="tbl-wrap" style="max-width:760px"><table class="tbl">
+    <thead><tr><th>Line</th><th class="r">Amount</th><th>Note</th></tr></thead>
+    <tbody>
+      <tr><td>LPG 14 kg, KPDN controlled price</td><td class="r">RM26.60</td><td>Fixed by law</td></tr>
+      <tr><td>Delivery fee</td><td class="r">RM3.40</td><td>What a Johor Bahru dealer adds by phone today. Set per dealer and area; high-rise tiers to confirm</td></tr>
+      <tr><td>Platform and processing fee, per order</td><td class="r">RM3.50</td><td><span class="chip low">Open</span> Navin&rsquo;s leaning. RM3.00 is the other option. Waits on Brand Method&rsquo;s price audit</td></tr>
+      <tr class="total"><td>Total</td><td class="r">RM33.50</td><td>Two cylinders in one order: RM63.50</td></tr>
+    </tbody>
+  </table></div>
+
+  </div></section>
+
+<section class="sec" id="personality" data-t="Personality" data-n="6">
+  <div class="sh"><span class="no">6</span><h2>Personality</h2><p class="lede">Five traits. Each has a line it must not cross. Calm, clear, a bit of local warmth: not cartoonish, not a corporate oil major.</p></div>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>Trait</th><th>We are</th><th>We are not</th><th>Sounds like</th></tr></thead>
+    <tbody>
+      <tr><td class="k">Neighbourly</td><td>Warm, local, on first-name terms with the dealer</td><td>Over-familiar or cute</td><td class="w">Pesanan diterima. Abang gas sedang dalam perjalanan.</td></tr>
+      <tr><td class="k">Honest</td><td>Price first, every fee named</td><td>Salesy: no &ldquo;best&rdquo;, no &ldquo;cheapest&rdquo;</td><td class="w">Harga kawalan KPDN: RM26.60.</td></tr>
+      <tr><td class="k">Dependable</td><td>Always says what happens next</td><td>Vague: no &ldquo;soon&rdquo;, no &ldquo;shortly&rdquo;</td><td class="w">Jika pengedar ini tidak menerima dalam 45 saat, pesanan dihantar kepada pengedar terdekat seterusnya.</td></tr>
+      <tr><td class="k">Quick</td><td>Two taps, short sentences</td><td>Rushed or pushy</td><td class="w">Pesan semula dengan satu ketikan.</td></tr>
+      <tr><td class="k">Malaysian</td><td>Bahasa Malaysia first, the words people use: tong gas, abang gas, tukar tong</td><td>Mixed languages inside one sentence, or a tourist&rsquo;s idea of Malaysia</td><td class="w">Tukar tong kosong, atau beli tong baharu?</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section class="sec" id="voice" data-t="Voice" data-n="7">
+  <div class="sh"><span class="no">7</span><h2>Voice: ten moments in both languages</h2><p class="lede">Bahasa Malaysia first in the Malay interface, plain English in the English one. One language per sentence; the tagline is the only exception. Short sentences, exact numbers. The names and the truck plate below are illustrative.</p></div>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>Moment</th><th>Bahasa Malaysia</th><th>English</th></tr></thead>
+    <tbody>
+      <tr><td class="k">First open</td><td class="bmc">Pilih bahasa anda. Anda boleh menukarnya bila-bila masa di Tetapan.</td><td class="enc">Choose your language. You can change it any time in Settings.</td></tr>
+      <tr><td class="k">Order type</td><td class="bmc">Tukar tong kosong, atau beli tong baharu?</td><td class="enc">Swap an empty cylinder, or buy a new one?</td></tr>
+      <tr><td class="k">Address</td><td class="bmc">Rumah bertanah atau kediaman bertingkat? Untuk kediaman bertingkat, nyatakan tingkat, lif dan nombor unit.</td><td class="enc">Landed house or high-rise? For a high-rise, add the floor, the lift and the unit number.</td></tr>
+      <tr><td class="k">Checkout</td><td class="bmc">Harga kawalan KPDN dahulu. Kemudian caj penghantaran dan satu fi platform &amp; pemprosesan bagi setiap pesanan.</td><td class="enc">The KPDN controlled price comes first. Then the delivery fee and one platform &amp; processing fee per order.</td></tr>
+      <tr><td class="k">Finding a dealer</td><td class="bmc">Kami sedang menghantar pesanan anda kepada pengedar berlesen yang terdekat.</td><td class="enc">We are sending your order to the nearest licensed dealer.</td></tr>
+      <tr><td class="k">Dealer on the way</td><td class="bmc">Pesanan diterima. Abang gas sedang dalam perjalanan. Rahman, lori JTX 4821.</td><td class="enc">Order received. Your dealer is on the way. Rahman, truck JTX 4821.</td></tr>
+      <tr><td class="k">Delivered</td><td class="bmc">Gas sudah sampai. Lihat foto bukti penghantaran.</td><td class="enc">Your gas has arrived. See the delivery photo.</td></tr>
+      <tr><td class="k">Reorder reminder</td><td class="bmc">Tong anda biasanya habis sekitar hari ke-28. Pesan sekarang?</td><td class="enc">Your cylinder usually runs out around day 28. Order now?</td></tr>
+      <tr><td class="k">No dealer accepts</td><td class="bmc">Pengedar terdekat sedang sibuk. Pasukan kami sedang mencarikan pengedar untuk anda.</td><td class="enc">The nearest dealers are busy. Our team is finding one for you.</td></tr>
+      <tr><td class="k">Dealer app, new order</td><td class="bmc">Pesanan baharu, 1.8 km dari anda. Terima dalam 45 saat.</td><td class="enc">New order, 1.8 km away. Accept within 45 seconds.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="dd">
+    <div class="card"><h4>Do</h4><ul>
+      <li>Name the law&rsquo;s price as the law&rsquo;s: &ldquo;harga kawalan KPDN&rdquo;.</li>
+      <li>Say what happens next, with the number: 45 saat, RM3.50, hari ke-28.</li>
+      <li>Use the words people use: tong gas, abang gas, tukar tong, isi semula.</li>
+      <li>Keep one language per sentence. The tagline is the one exception.</li>
+      <li>Write &ldquo;NakGas&rdquo; as one word with a capital N and a capital G in copy.</li>
+    </ul></div>
+    <div class="card"><h4>Don&rsquo;t</h4><ul>
+      <li>Claim &ldquo;termurah&rdquo; or &ldquo;terbaik&rdquo; (cheapest, best). The gas price is fixed by law.</li>
+      <li>Use emojis, exclamation marks or hype in the interface.</li>
+      <li>Mix languages inside a sentence, as in &ldquo;Order you dah confirm&rdquo;.</li>
+      <li>Show the dealer&rsquo;s phone number. The app replaces the call.</li>
+      <li>Blame the dealer when an order is late. Say what we are doing about it.</li>
+    </ul></div>
+  </div>
+  <p class="src">Every Malay string is checked by a native speaker on Navin&rsquo;s side before the build freezes the copy.</p>
+</section>
+
+<section class="sec" id="name" data-t="The name" data-n="8">
+  <div class="sh"><span class="no">8</span><h2>The name: NakGas</h2><p class="lede">&ldquo;Nak gas&rdquo; is what a household says the moment the cylinder runs out: I want gas, we need gas. The name is the moment of need, and the app is the answer. Six letters, two syllables. Set on Tue 20 Oct 2026.</p></div>
+  <p class="bl">NakGas. <em>I want gas.</em></p>
+  <div class="grid g4">
+    <div class="card"><h4>It is the moment of need</h4><p>Every document Navin has written says GasNow. Gas Sekarang (6 Oct) and Gaslah (12 Oct) said when. NakGas says what the household actually says when the cylinder dies: nak gas. The need is the name; the app is the answer.</p><div class="lab"><span class="chip inf">Our read</span></div></div>
+    <div class="card"><h4>It is short</h4><p>Six letters, two syllables, one word, easy to say and to remember. On 20 Oct Bazil wrote &ldquo;change the name all to NakGas&rdquo;.</p><div class="lab"><span class="chip fact">Fact: his instruction, 20 Oct</span></div></div>
+    <div class="card"><h4>It is very Malaysian</h4><p>&ldquo;Nak&rdquo; is the most everyday Malay word for want; nobody has to be taught it. On 1 Oct Navin asked for &ldquo;something very Malaysian&rdquo;.</p><div class="lab"><span class="chip fact">Fact: his ask, 1 Oct</span><span class="chip inf">Our read: the meaning</span></div></div>
+    <div class="card"><h4>GasNow is weak to own</h4><p>gasnow.com has been registered by someone else since 2010, and &ldquo;Gas Now&rdquo; is already an app name abroad (audit, finding F15).</p><div class="lab"><span class="chip fact">Fact: audit, 29 Sep 2026</span></div></div>
+  </div>
+  <div class="sub" id="name-1" data-t="How it is written">
+  <h3>How it is written</h3>
+  <div class="tbl-wrap" style="max-width:900px"><table class="tbl">
+    <thead><tr><th>Where</th><th>Form</th></tr></thead>
+    <tbody>
+      <tr><td>In copy, both languages, and the home screen label: one word, capital N and capital G</td><td class="k">NakGas</td></tr>
+      <tr><td>In the wordmark (drawn, never retyped): &ldquo;nak&rdquo; in ink, &ldquo;gas&rdquo; in flame green</td><td class="k">nakgas</td></tr>
+      <tr><td>Handles and file names</td><td class="k">nakgas</td></tr>
+    </tbody>
+  </table></div>
+  </div>
+  <div class="sub" id="name-2" data-t="The shortlist">
+  <h3>The shortlist</h3>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>Name</th><th>What it says</th><th>What we found, and when</th><th>Verdict</th></tr></thead>
+    <tbody>
+      <tr><td class="k">NakGas</td><td>&ldquo;I want gas&rdquo;, the moment of need, in six letters</td><td>20 Oct: nakgas.my and nakgas.com.my available (MYNIC RDAP); nakgas.com not registered (Verisign RDAP, whois no match); App Store Malaysia: &ldquo;nakgas&rdquo; returns no app, &ldquo;nak gas&rdquo; one unrelated game; Google Play Malaysia: no app named NakGas</td><td><span class="chip blue">Chosen 20 Oct, to confirm</span></td></tr>
+      <tr><td class="k">Gaslah</td><td>&ldquo;Go on, now&rdquo;, in six letters</td><td>12 Oct: no app called Gaslah on the Malaysian App Store; no Gaslah gas delivery on the web; gaslah.my and gaslah.com.my available (MYNIC); gaslah.com held by an unrelated Arabic site, registered 1 Jul 2026</td><td><span class="chip">Chosen 12 Oct, replaced 20 Oct</span></td></tr>
+      <tr><td class="k">GasNow</td><td>The working name. Clear in English</td><td>6 Oct: gasnow.com registered by someone else since 2010; &ldquo;Gas Now&rdquo; is an app name in two stores abroad (F15)</td><td><span class="chip">Kept as the meaning</span></td></tr>
+      <tr><td class="k">Gas Sekarang</td><td>Malay for Gas Now; &ldquo;gas&rdquo; also reads as go</td><td>6 Oct: gassekarang.com unregistered (Verisign); gassekarang.my and .com.my available (MYNIC); no app of that name in the App Store or Google Play</td><td><span class="chip">Chosen 6 Oct, replaced 12 Oct</span></td></tr>
+      <tr><td class="k">MyGas</td><td>&ldquo;My gas&rdquo;</td><td>12 Oct: Click MyGas and its rider app are a direct rival on the App Store; MyGaz is an LPG brand; mygas.com, .my and .com.my registered</td><td><span class="chip bad">Rejected 12 Oct</span></td></tr>
+      <tr><td class="k">MaiGas</td><td>Sounds like &ldquo;my gas&rdquo;</td><td>12 Oct: sounds the same as MyGas and MyGaz; maigas.com.my is Maigas Engineering, a Malaysian engineering company</td><td><span class="chip bad">Rejected 12 Oct</span></td></tr>
+      <tr><td class="k">Gasku</td><td>&ldquo;My gas&rdquo;, in Malay</td><td>12 Oct: gasku.com registered 10 Jun 2026</td><td><span class="chip bad">Rejected 12 Oct</span></td></tr>
+      <tr><td class="k">Jom Gas</td><td>&ldquo;Jom&rdquo;, let&rsquo;s go</td><td>12 Oct: free, but &ldquo;jom&rdquo; is crowded</td><td><span class="chip bad">Rejected 12 Oct</span></td></tr>
+      <tr><td class="k">GasKita</td><td>&ldquo;Our gas&rdquo;</td><td>6 Oct: gaskita.com is a slot gambling site</td><td><span class="chip bad">Rejected 6 Oct</span></td></tr>
+      <tr><td class="k">AbangGas</td><td>The man who brings the gas</td><td>6 Oct: abanggas.com is an Indonesian gas and water delivery platform working with local agents: the same concept</td><td><span class="chip bad">Rejected 6 Oct</span></td></tr>
+      <tr><td class="k">TongGas</td><td>&ldquo;Gas cylinder&rdquo;</td><td>6 Oct: the word for the product, not a brand anyone can own</td><td><span class="chip bad">Rejected 6 Oct</span></td></tr>
+    </tbody>
+  </table></div>
+  </div>
+  <div class="sub" id="name-3" data-t="Checks, done and open">
+  <h3>Checks, done and open</h3>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>Check</th><th>State</th><th>Note</th></tr></thead>
+    <tbody>
+      <tr><td class="k">nakgas.my and nakgas.com.my</td><td><span class="chip ok">Done 20 Oct: available</span></td><td>MYNIC RDAP reports both available. Register both on the same day, before the name is announced anywhere</td></tr>
+      <tr><td class="k">nakgas.com</td><td><span class="chip ok">Done 20 Oct: free</span></td><td>Not registered: Verisign RDAP returns 404 and whois shows no match. Register it with the .my pair</td></tr>
+      <tr><td class="k">App Store</td><td><span class="chip ok">Done 20 Oct: no clash</span></td><td>iTunes search API, Malaysia: &ldquo;nakgas&rdquo; returns no app; &ldquo;nak gas&rdquo; returns one unrelated game</td></tr>
+      <tr><td class="k">Google Play</td><td><span class="chip ok">Done 20 Oct: no clash</span></td><td>No app named NakGas in the Malaysian search results</td></tr>
+      <tr><td class="k">MyIPO trademark search</td><td><span class="chip low">Open</span></td><td>Not run. Classes for the app and for delivery services to confirm</td></tr>
+      <tr><td class="k">Social handles</td><td><span class="chip low">Open</span></td><td>nakgas on Instagram, Facebook and TikTok: reserve all on the same day as the domains</td></tr>
+      <tr><td class="k">Navin&rsquo;s yes</td><td><span class="chip low">Open</span></td><td>The name is Brand Method&rsquo;s choice on Bazil&rsquo;s instruction. Navin has not confirmed it</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note low"><b>How the name got here.</b> On 1 Oct Navin asked for &ldquo;something very Malaysian&rdquo; and offered a name the call notes wrote as &ldquo;Gas Karang&rdquo;. In spoken Malay &ldquo;karang&rdquo; can mean &ldquo;later&rdquo;, the opposite of the promise, so we read it as Gas Sekarang, the Malay for GasNow, and named the brand that on 6 Oct 2026. On 12 Oct 2026 Bazil asked for a name &ldquo;shorter more memorable, u can choose&rdquo;, and Brand Method chose Gaslah. On 20 Oct 2026 Bazil wrote &ldquo;change the name all to NakGas&rdquo; and asked for a green flame with the blue kept, so the flame is green now with the blue variation of a clean burn as its core. The flame idea is unchanged. Still to confirm with Navin.</div>
+
+  </div></section>
+
+<section class="sec" id="tagline" data-t="Tagline and lines" data-n="9">
+  <div class="sh"><span class="no">9</span><h2>Tagline and lines</h2><p class="lede">The tagline is the one place Bahasa Malaysia and English meet on purpose: &ldquo;call&rdquo; is the word Malaysians use for phoning.</p></div>
+  <p class="tag">Gas sampai. Tak payah <span style="color:var(--gs-flame)">call.</span></p>
+  <p class="bm">Your gas, without the phone call.</p>
+  <div class="sub" id="tagline-1" data-t="Lines for the app, the website and the dealers">
+  <h3>Lines for the app, the website and the dealers</h3>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>Bahasa Malaysia</th><th>English</th><th>Where it is used</th></tr></thead>
+    <tbody>
+      <tr><td class="bmc">Harga KPDN di baris pertama.</td><td class="enc">The KPDN price on the first line.</td><td>Checkout, website</td></tr>
+      <tr><td class="bmc">Abang gas yang sama, tanpa perlu menelefon.</td><td class="enc">The same dealer, without the phone call.</td><td>Website, store listing</td></tr>
+      <tr><td class="bmc">Kami ingatkan sebelum tong anda habis.</td><td class="enc">We remind you before your cylinder runs out.</td><td>Reminder settings, website</td></tr>
+      <tr><td class="bmc">Dua ketikan. Gas sampai.</td><td class="enc">Two taps. Gas arrives.</td><td>Store screenshots</td></tr>
+      <tr><td class="bmc">Pesanan datang kepada anda. Tiada komisen.</td><td class="enc">Orders come to you. No commission.</td><td>Dealer onboarding, the supplier page, the shop sticker</td></tr>
+      <tr><td class="bmc">Tahu baki gas sebelum api berubah.</td><td class="enc">Know what is left before the flame changes.</td><td>Phase Two, the investor deck</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">Candidate lines for Navin. The tagline is our recommendation; the rest can change without touching the identity.</p>
+
+  </div></section>
+
+<section class="sec" id="story" data-t="Investor story" data-n="10">
+  <div class="sh"><span class="no">10</span><h2>The story for investors, in five beats</h2><p class="lede">The order to tell it in, for the RM60,000 round and for Cradle. No market size is claimed here: none has been sourced yet.</p></div>
+  <ol class="beats">
+    <li><span class="n">1</span><b>Every kitchen runs on a cylinder</b><p>LPG is a controlled item: KPDN fixes RM26.60 for a 14 kg household cylinder. Our mothers read the flame to know when it is running out.</p><span class="chip fact">Fact: KPDN, 8 Apr 2026; Navin, 1 Oct</span></li>
+    <li><span class="n">2</span><b>Ordering it is still a phone call</b><p>Find a number, call, wait, hope the price is right. The apps that exist run their own riders, mostly in the Klang Valley.</p><span class="chip fact">Fact: calls of 28 Sep and 1 Oct; audit</span></li>
+    <li><span class="n">3</span><b>The dealers are already on the road</b><p>Licensed dealers deliver every day at one price. NakGas gives them the orders and takes no commission, which is why they join.</p><span class="chip inf">Our read: why they join</span></li>
+    <li><span class="n">4</span><b>Two taps and a fair bill</b><p>The KPDN price first, one small fee per order, the nearest dealer has 45 seconds to accept, a photo when it is delivered. The fee per order is the revenue.</p><span class="chip low">Fee RM3.00 or RM3.50: open</span></li>
+    <li><span class="n">5</span><b>Johor first, then the flame itself</b><p>Launch where Navin&rsquo;s distributors are; the order engine works wherever a licensed dealer does. Phase Two: a smart regulator that knows the balance before the flame changes.</p><span class="chip inf">Our read; Phase Two not priced</span></li>
+  </ol>
+</section>
+
+<section class="sec" id="covers" data-t="What the strategy covers" data-n="11">
+  <div class="sh"><span class="no">11</span><h2>What the brand strategy covers, and what it is worth</h2><p class="lede">The sample Navin asked for on 1 Oct, to show investors, and the one Bazil promised to send. Bazil on the same call: brand strategy &ldquo;establishes market constraints and messaging consistency&rdquo;. It comes free in Navin&rsquo;s package.</p></div>
+  <div class="value">
+    <div><div class="k">Brand items</div><div class="stat">47 <small>in 11 blocks</small></div><p>The full brand strategy, block by block, below.</p></div>
+    <div><div class="k">Business items</div><div class="stat">16</div><p>The business strategy set: model, ladders, flywheel, positioning, KPIs.</p></div>
+    <div><div class="k">Value</div><div class="stat"><s>RM20,000</s></div><p><b style="color:var(--gs-ink)">RM10,000</b> at the founding rate this quarter, 50% off the list.</p></div>
+    <div><div class="k">For VIN Industries</div><div class="stat">RM0 <small>complimentary</small></div><p>Inside the RM48,000 package. A one-week sprint in Week 1; the list timeline is about five weeks.</p></div>
+  </div>
+  <p class="src">Items and prices: Brand Method price list, Brand Strategy &middot; Full, read 6 Oct 2026. Package: Bazil, 29 Sep 2026.</p>
+
+  <div class="sub" id="covers-1" data-t="The brand strategy: 11 blocks, 47 items">
+  <h3>The brand strategy: 11 blocks, 47 items</h3>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>Block</th><th class="r">Items</th><th>What it settles for NakGas</th><th>A first sample</th></tr></thead>
+    <tbody>
+      <tr><td class="k blk">0 Brand Introduction<div class="items">Introduction to branding, the branding process, niche down, brand communication</div></td><td class="r">4</td><td>Who NakGas is for first, narrow enough to win: LPG households on the routes of licensed dealers, Johor Bahru first</td><td><a href="#audiences">Audiences</a></td></tr>
+      <tr><td class="k blk">1 Brand Check + Basics<div class="items">Brand check guide, marketing channels guide, niche build</div></td><td class="r">3</td><td>The name checked before launch, and which channels open first and when (Navin is wary of opening pages before the back end is ready)</td><td><a href="#name">The name, checks</a></td></tr>
+      <tr><td class="k blk">2 Brand Position<div class="items">Brand position, the brand liner</div></td><td class="r">2</td><td>Where NakGas sits against the rider apps and the phone, and the one line that says it</td><td><a href="#positioning">Positioning</a></td></tr>
+      <tr><td class="k blk">3 Brand Voice + Character<div class="items">Brand voice, brand character, brand personality</div></td><td class="r">3</td><td>How every screen, push message and receipt speaks, in Bahasa Malaysia and English</td><td><a href="#personality">Personality</a>, <a href="#voice">Voice</a></td></tr>
+      <tr><td class="k blk">4 Brand Pitch<div class="items">The brand pitch framework, the brand pitch itself</div></td><td class="r">2</td><td>The pitch for investors, for Cradle and for dealers, from one framework</td><td><a href="#story">Investor story</a></td></tr>
+      <tr><td class="k blk">5 The Brand Story<div class="items">Journey diagram, audience hero, problem, guide, plan, call to action, success achievement, failure avoidance, image and transformation, image statement, story summary</div></td><td class="r">11</td><td>The customer&rsquo;s journey from &ldquo;the tank is low&rdquo; to &ldquo;the gas has arrived&rdquo;, used for onboarding, the website and the launch video</td><td><a href="#problem">The problem</a>, <a href="#insight">The insight</a></td></tr>
+      <tr><td class="k blk">6 Facts, Survey + Tests<div class="items">Fairy tale test, combination strategy, hook, interesting fact, case study, brand purpose and goal, paradigm shift, lead generator</div></td><td class="r">8</td><td>The hooks and facts for launch content, and the lead generator for the first 1,000 users (mechanic still open)</td><td>In the sprint</td></tr>
+      <tr><td class="k blk">7 Brand Description<div class="items">The brand described in full</div></td><td class="r">1</td><td>One description reused everywhere: the stores, the website, the Cradle form</td><td><a href="#positioning">Short description</a></td></tr>
+      <tr><td class="k blk">8 Verbal + Visual Identity<div class="items">The verbal system, the visual direction</div></td><td class="r">2</td><td>The words and the look the identity is built on: the green flame, one accent, two typefaces</td><td><a href="design.html">Design</a></td></tr>
+      <tr><td class="k blk">9 Brand Essence<div class="items">Our story, vision and mission, tagline and slogan, culture and values, brand USP</div></td><td class="r">5</td><td>The tagline, the reason to choose NakGas, and the vision Navin presents</td><td><a href="#tagline">Tagline and lines</a></td></tr>
+      <tr><td class="k blk">10 Success vs Failure<div class="items">Success reason, success achievement, failure reason, failure avoidance, technical on success, technical on failure</div></td><td class="r">6</td><td>What the customer wins (never caught mid-cook) and avoids (the rushed call), written into reminders and copy</td><td><a href="#promise">Promise and proof</a></td></tr>
+      <tr class="total"><td>Total</td><td class="r">47</td><td colspan="2"></td></tr>
+    </tbody>
+  </table></div>
+
+  </div>
+  <div class="sub" id="covers-2" data-t="The business strategy set: 16 items">
+  <h3>The business strategy set: 16 items</h3>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>Item</th><th>What it settles for NakGas</th><th>Item</th><th>What it settles for NakGas</th></tr></thead>
+    <tbody>
+      <tr><td class="k">Core business model</td><td>One fee per order, suppliers pay no commission; RM3.00 or RM3.50 still open</td><td class="k">Growth model and revenue pathways</td><td>The fee now; Phase Two hardware, smart regulators and commercial C50 later</td></tr>
+      <tr><td class="k">Value ladder</td><td>Free download, first order, reminder and reorder, rewards and referral, then the smart regulator</td><td class="k">Multi-persona messaging</td><td>One message each for households, dealers and investors, from one position</td></tr>
+      <tr><td class="k">Branding ladder</td><td>The steps from &ldquo;I tried it&rdquo; to &ldquo;I told my neighbour&rdquo;</td><td class="k">KPI dashboard</td><td>Orders a day, acceptance inside 45 seconds, reorder rate, fee kept per order, dealers online</td></tr>
+      <tr><td class="k">Product and service flywheel</td><td>More dealers, faster acceptance, more orders, more dealers</td><td class="k">Products and services</td><td>Customer app, supplier app, admin portal, website; the regulator in Phase Two</td></tr>
+      <tr><td class="k">Positioning matrix and map</td><td>Where NakGas sits on price shown and on coverage, against every rival</td><td class="k">Target profile</td><td>The first households and the first dealers, by area</td></tr>
+      <tr><td class="k">Market landscape</td><td>The rivals and the LPG brands in each region (audit chapters 2 and 3)</td><td class="k">Quality vs cost</td><td>The fee against what the customer gets, under Navin&rsquo;s ceiling: never near RM39 to RM40 a cylinder</td></tr>
+      <tr><td class="k">Hedgehog concept</td><td>The one thing to be best at: the order book for licensed dealers</td><td class="k">Offer architecture</td><td>The launch offer, rewards and referral, one promo per order</td></tr>
+      <tr><td class="k">Ecosystem summary</td><td>Households, dealers, drivers, KPDN, the LPG brands, the gateway, Cradle</td><td class="k">Value proposition</td><td>For households: the fair price and no calling. For dealers: orders and no commission</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src"><span class="chip inf">Our read</span> The second and fourth columns are what each item will settle once the sprint runs. They are not yet decided.</p>
+
+  <div class="dd">
+    <div class="card"><h4>What it does for the build</h4><ul>
+      <li>Decisions are made once: who first, the fee, the words. They are not reopened in every screen review.</li>
+      <li>The UI/UX and the website are built on agreed messages, so fewer screens are redrawn.</li>
+      <li>The investor and Cradle story comes out of it ready to present.</li>
+    </ul><div class="lab"><span class="chip fact">Bazil, 1 Oct: it saves UI/UX and build cost</span><span class="chip inf">Our read: how</span></div></div>
+    <div class="card"><h4>What lands in Navin&rsquo;s hands</h4><ul>
+      <li>The Brand Strategy Book: all 11 blocks, 47 items.</li>
+      <li>The Brand Strategy Cards: the working deck for his team.</li>
+      <li>The messaging framework: what to say, to whom, in what order.</li>
+      <li>The business strategy set: 16 items.</li>
+      <li>The workshop recording, so anyone who joins later gets the same briefing.</li>
+    </ul></div>
+  </div>
+
+  </div></section>
+
+</main>
+</div>
+
+<footer class="foot">Brand Method &middot; VIN Industries &middot; NakGas &middot; Brand Creation &middot; written Tue 6 Oct 2026, the name changed to Gaslah Mon 12 Oct 2026 and to NakGas Tue 20 Oct 2026. Sources: the calls of Mon 28 Sep and Thu 1 Oct 2026, the market audit of Tue 29 Sep, the Brand Method price list read 6 Oct, Bazil&rsquo;s instructions of 12 and 20 Oct and the name checks of 20 Oct. Internal, for Navin only. Confidential under the NDA; not for any portfolio.</footer>
+<script src="assets/app-proto.js"></script>
+<script>
+/* the rail, the index numbers and the search, computed from the page order (the MyHero Design tab pattern) */
+(function(){function $(q,r){return (r||document).querySelector(q)}function $$(q,r){return [].slice.call((r||document).querySelectorAll(q))}
+var IC={"problem": "bell", "insight": "flame", "positioning": "pin", "audiences": "users", "promise": "check", "personality": "star", "voice": "chat", "name": "globe", "tagline": "share", "story": "chart", "covers": "file", "meaning": "flame", "asks": "help", "logo": "flame", "colour": "star", "type": "file", "icons": "box", "components": "dash", "screens": "camera", "dodont": "shield", "key": "check"},G=window.GS;function ric(id){return G&&IC[id]?G.ic(IC[id],15):''}
+var secs=$$('.page > .sec[data-t]'),rl=$('#railList');
+rl.innerHTML=secs.map(function(s){var subs=$$('.sub[data-t]',s);return '<li data-id="'+s.id+'"><a href="#'+s.id+'">'+ric(s.id)+'<span>'+s.getAttribute('data-t')+'</span><i>'+s.getAttribute('data-n')+'</i></a>'+(subs.length?'<ol>'+subs.map(function(u){return '<li><a href="#'+u.id+'" data-sub="'+u.id+'">'+u.getAttribute('data-t')+'</a></li>'}).join('')+'</ol>':'')+'</li>'}).join('');
+rl.insertAdjacentHTML('beforeend','<li class="ext"><a href="final-brand.html"><span>Final Brand</span><i>&rarr;</i></a></li><li class="ext"><a href="codex.html"><span>Codex</span><i>&rarr;</i></a></li>');
+var sub=$('#railSub');if(sub)sub.textContent=secs.length+' sections';
+var items=$$('#railList > li[data-id]');
+function spy(){var cur=secs[0].id,y=innerHeight*.3;secs.forEach(function(s){if(s.getBoundingClientRect().top<y)cur=s.id});items.forEach(function(li){li.classList.toggle('on',li.getAttribute('data-id')===cur)});var su=null;$$('.sec#'+cur+' .sub[data-t]').forEach(function(u){if(u.getBoundingClientRect().top<y)su=u.id});$$('#railList a[data-sub]').forEach(function(a){a.classList.toggle('on',a.getAttribute('data-sub')===su)});var on=$('#railList > li.on'),box=$('.rail');if(on&&box&&innerWidth>980){var r=on.getBoundingClientRect(),bb=box.getBoundingClientRect();if(r.top<bb.top+56||r.bottom>bb.bottom-56)box.scrollTop+=r.top-bb.top-bb.height/3}}
+addEventListener('scroll',spy,{passive:true});spy();
+var IDX=[];secs.forEach(function(sc){var st=sc.getAttribute('data-t');IDX.push({t:st,g:'Section '+sc.getAttribute('data-n'),h:'#'+sc.id,k:(st+' '+((sc.querySelector('.lede')||{}).textContent||'')).toLowerCase()});$$('.sub[data-t]',sc).forEach(function(u){IDX.push({t:u.getAttribute('data-t'),g:st,h:'#'+u.id,k:(u.getAttribute('data-t')+' '+u.textContent.slice(0,400)).toLowerCase()})})});
+var rq=$('#railQ'),rr=$('#railRes');if(rq)rq.addEventListener('input',function(){var w=rq.value.toLowerCase().split(/\s+/).filter(Boolean);if(!w.length){rr.hidden=true;rr.innerHTML='';return}var hit=IDX.filter(function(x){return w.every(function(q){return x.k.indexOf(q)>-1})}).slice(0,14);rr.hidden=false;rr.innerHTML=hit.length?hit.map(function(x){return '<li><a href="'+x.h+'">'+x.t+'<small>'+x.g+'</small></a></li>'}).join(''):'<li><a>Nothing found<small>Try one word</small></a></li>'});
+if(rr)rr.addEventListener('click',function(e){if(e.target.closest('a[href]')){rq.value='';rr.hidden=true;rr.innerHTML=''}});
+secs.forEach(function(sx,i){var p=secs[i-1],n=secs[i+1],d=document.createElement('div');d.className='nxt';d.innerHTML=(p?'<a class="pv" href="#'+p.id+'">Back: '+p.getAttribute('data-t')+'</a>':'<span></span>')+(n?'<a class="nx" href="#'+n.id+'">Next: '+n.getAttribute('data-n')+' · '+n.getAttribute('data-t')+'</a>':'<a class="nx" href="#'+secs[0].id+'">Back to the start</a>');sx.appendChild(d)});
+})();
+</script>
+<script src="assets/gs.js"></script>
+</body>
+</html>

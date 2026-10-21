@@ -1,0 +1,114 @@
+/* NakGas · Final Brand. Byte copy of the Apps/MyHero/final-brand.html stylesheet (the MyHero Final Brand format:
+   a numbered jump strip, the brand on one white page, numbered sections, panels with captions, zebra tables), retinted
+   on 10 Oct 2026, with a layer at the end that dresses the NakGas markup (.grid of .pan panels with .cap, .tbl,
+   .note, .chip, .card). Edit the layer, never the copy. Retinted to the NakGas flame green on 20 Oct 2026: #1550F5 to #0CA66A, #0F3CC4 to #08854C, #E8EEFF to #E9F7F0. */
+  :root{--paper:#fff;--panel:#F5F7FA;--ink:#0B1530;--soft:#4F5B76;--mist:#8A93A8;--pool:#0CA66A;--deep:#08854C;--cape:#0CA66A}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth;scroll-padding-top:120px}
+  body{font-family:Inter,system-ui,sans-serif;background:var(--paper);color:var(--ink);-webkit-font-smoothing:antialiased;line-height:1.5}
+  .bmws{position:sticky;top:0;z-index:20}
+  .jump{position:sticky;top:57px;z-index:19;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);display:flex;gap:2px;padding:8px clamp(18px,3vw,40px);overflow:auto;scrollbar-width:none}
+  .jump::-webkit-scrollbar{height:0}
+  .jump a{font-family:"Geist",Inter,sans-serif;font-size:13px;font-weight:500;color:var(--soft);text-decoration:none;padding:7px 12px;white-space:nowrap}
+  .jump a:hover,.jump a.on{background:var(--panel);color:var(--ink)}
+  .wrap{max-width:1320px;margin:0 auto;padding:0 clamp(18px,3vw,40px) 90px}
+  h1,h2,h3,.st b{font-family:"Geist",Inter,system-ui,sans-serif}
+  .top{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:40px;align-items:center;padding:40px 0 20px}
+  .top h1{font-size:clamp(30px,3.8vw,46px);font-weight:600;letter-spacing:-.03em;line-height:1.04}
+  .top p{color:var(--soft);font-size:16px;max-width:46ch;margin-top:14px}
+  .st{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+  .st span{font-family:"Geist",Inter,sans-serif;font-size:12.5px;font-weight:500;padding:6px 10px;background:var(--panel);color:var(--soft)}
+  .st span.go{background:#E9F7F0;color:#08854C}
+  .st span.wait{background:#FFF1D6;color:#7A5300}
+  .top .hero{background:var(--panel);display:flex;align-items:center;justify-content:center;padding:44px;min-height:340px}
+  .top .hero img{max-width:100%;max-height:260px;display:block}
+  section{padding-top:64px}
+  section>header{display:flex;align-items:baseline;gap:14px;margin-bottom:6px}
+  section>header b{font-family:"Geist",Inter,sans-serif;font-size:24px;font-weight:600;color:var(--deep);letter-spacing:-.02em}
+  h2{font-size:24px;font-weight:600;letter-spacing:-.025em}
+  section>p{color:var(--soft);font-size:15px;max-width:76ch}
+  .g{display:grid;gap:12px;margin-top:20px}
+  .g2{grid-template-columns:repeat(2,minmax(0,1fr))}.g3{grid-template-columns:repeat(3,minmax(0,1fr))}.g4{grid-template-columns:repeat(4,minmax(0,1fr))}.g5{grid-template-columns:repeat(5,minmax(0,1fr))}
+  .g-lead{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr) minmax(0,1.5fr)}
+  figure{background:var(--panel);display:flex;flex-direction:column}
+  figure .im{flex:1;display:flex;align-items:center;justify-content:center;padding:28px;min-height:230px}
+  figure .im img{display:block;max-width:100%;max-height:250px}
+  figure.dk .im{background:#0CA66A}
+  figure.nk .im{background:#0B1530}
+  figure.sm .im{min-height:150px}figure.sm .im img{max-height:84px}
+  figure.tall .im img{max-height:330px}
+  figure.ph .im{padding:22px}figure.ph .im img{max-height:520px}
+  figcaption{padding:12px 16px 15px;font-size:13px;line-height:1.45;color:var(--soft)}
+  figcaption b{display:block;font-family:"Geist",Inter,sans-serif;font-size:14.5px;font-weight:600;color:var(--ink);letter-spacing:-.01em}
+  .lad{display:flex;align-items:flex-end;gap:12px;margin-top:10px}
+  .lad span{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:11px;color:var(--mist)}
+  .bars{display:flex;flex-direction:column;gap:10px;margin-top:20px}
+  .bars img{display:block;width:100%}
+  .sw{display:flex;flex-direction:column;min-height:190px;padding:16px;justify-content:flex-end;color:#fff}
+  .sw b{font-family:"Geist",Inter,sans-serif;font-size:16px;font-weight:600;letter-spacing:-.01em}
+  .sw code{font-family:"Geist",Inter,sans-serif;font-size:13px;opacity:.86}
+  .sw small{font-size:12.5px;line-height:1.4;margin-top:8px;opacity:.9}
+  .sw.lt{color:var(--ink)}
+  .ty{background:var(--panel);padding:22px 22px 20px;display:flex;flex-direction:column;gap:10px;min-height:210px}
+  .ty .s{font-size:44px;line-height:1.05;color:var(--ink);margin-top:auto}
+  .ty b{font-family:"Geist",Inter,sans-serif;font-size:14.5px;font-weight:600}
+  .ty small{font-size:13px;color:var(--soft);line-height:1.45}
+  .ty .s img{height:54px;display:block}
+  .ch figure .im{padding:0;min-height:0}.ch figure .im img{max-height:none;width:100%}
+  figure.wide .im{padding:0;min-height:0}figure.wide .im img{max-height:none;width:100%}
+  .faces figure .im{min-height:0;padding:14px}.faces figure .im img{max-height:150px}
+  .ph5 figure .im{padding:16px;min-height:0}.ph5 figure .im img{max-height:380px}
+  .g1{grid-template-columns:1fr}
+  .rules{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:20px}
+  .rules div{background:var(--panel);padding:22px}
+  .rules h3{font-size:16px;font-weight:600;letter-spacing:-.01em;margin-bottom:10px;display:flex;align-items:center;gap:9px}
+  .rules h3 i{display:block;width:10px;height:10px;background:var(--deep)}
+  .rules .no h3 i{background:var(--cape)}
+  .rules li{list-style:none;font-size:14px;color:var(--soft);padding:6px 0 6px 0;line-height:1.45}
+  .rules li b{color:var(--ink);font-weight:600}
+  table{width:100%;border-collapse:collapse;margin-top:20px;font-size:14px}
+  th{text-align:left;font-family:"Geist",Inter,sans-serif;font-weight:600;font-size:12.5px;color:var(--mist);padding:0 14px 8px}
+  td{padding:11px 14px;vertical-align:top;color:var(--soft)}
+  tbody tr:nth-child(odd) td{background:var(--panel)}
+  td:first-child{color:var(--ink);font-weight:600;white-space:nowrap}
+  td a{color:var(--deep);text-decoration:none;font-weight:500;margin-right:12px;white-space:nowrap}
+  td a:hover{color:var(--ink)}
+  .tag{display:inline-block;font-family:"Geist",Inter,sans-serif;font-size:12px;font-weight:600;padding:3px 8px;background:#FFF1D6;color:#7A5300}
+  .tag.ok{background:#E9F7F0;color:#08854C}
+  @media(max-width:1020px){.top{grid-template-columns:1fr}.g3,.g4,.g5,.g-lead{grid-template-columns:repeat(2,minmax(0,1fr))}.rules{grid-template-columns:1fr}}
+  @media(max-width:640px){.g2,.g3,.g4,.g5,.g-lead{grid-template-columns:1fr}table{display:block;overflow:auto}}
+
+/* ===== NakGas markup on this format (10 Oct 2026) ===== */
+.top h1 em{font-style:normal;color:var(--deep)}
+.top .lede{color:var(--soft);font-size:16px;max-width:46ch;margin-top:14px}
+.top .hero svg{max-width:100%;height:auto}
+.grid{display:grid;gap:12px;margin-top:20px}
+.grid.g2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid.g3{grid-template-columns:repeat(3,minmax(0,1fr))}.grid.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.grid>div{background:var(--panel);display:flex;flex-direction:column;min-width:0}
+.grid>div>.pan{flex:1}
+.pan{border:0;background:var(--panel);display:flex;align-items:center;justify-content:center;padding:28px;min-height:210px}
+.pan.base{background:var(--panel)}
+.pan.blue{background:var(--pool);border-color:var(--pool)}
+.pan.ink{background:#0B1530}
+.cap{padding:12px 16px 15px;font-size:13px;line-height:1.45;color:var(--soft);margin:0}
+.cap b{display:block;font-family:"Geist",Inter,sans-serif;font-size:14.5px;font-weight:600;color:var(--ink);letter-spacing:-.01em}
+.card{background:var(--panel);padding:18px}
+.card .k{display:block;font-family:"Geist",Inter,sans-serif;font-size:12px;font-weight:600;color:var(--deep);margin-bottom:8px}
+.card h4{font-family:"Geist",Inter,sans-serif;font-size:15.5px;font-weight:600;letter-spacing:-.01em;margin:0}
+.card p{font-size:14px;color:var(--soft);margin-top:6px}
+.tbl-wrap{overflow-x:auto}
+.tbl td.strong,.tbl .strong{color:var(--ink);font-weight:600}
+.tbl td.r,.tbl th.r{text-align:right;font-variant-numeric:tabular-nums}
+.note{background:var(--panel);padding:14px 16px;margin-top:16px;font-size:14px;color:var(--soft);max-width:80ch}
+.note.blue{background:#E9F7F0}.note.low{background:#FFF1D6}.note b{color:var(--ink)}
+.chip{display:inline-block;font-family:"Geist",Inter,sans-serif;font-size:12px;font-weight:600;padding:3px 8px;background:var(--panel);color:var(--soft)}
+.chip.blue{background:#E9F7F0;color:var(--deep)}.chip.low{background:#FFF1D6;color:#7A5300}.chip.ok{background:#E8F5EF;color:#0B5E41}.chip.bad{background:#FDECEC;color:#8F1D21}
+.stat{font-family:"Geist",Inter,sans-serif;font-size:30px;font-weight:600;letter-spacing:-.02em}
+.stat small{font-size:13px;font-weight:500;color:var(--soft);letter-spacing:0}
+h3{font-family:"Geist",Inter,sans-serif;font-size:17px;font-weight:600;letter-spacing:-.015em;margin:28px 0 10px}
+h4{font-family:"Geist",Inter,sans-serif;font-size:15px;font-weight:600;margin:0 0 6px}
+.muted{color:var(--soft)}.small{font-size:13px}
+section>p.lede,section>.sub{color:var(--soft);font-size:15px;max-width:76ch}
+.foot{padding:48px 0 0;font-size:12.5px;color:var(--mist)}
+@media(max-width:1020px){.grid.g3,.grid.g4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:640px){.grid.g2,.grid.g3,.grid.g4{grid-template-columns:1fr}}

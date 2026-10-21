@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VIN Industries · NakGas · Competitors · Brand Method</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Geist:wght@400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="bmws.css"><link rel="stylesheet" href="assets/brand.css"><link rel="stylesheet" href="gsmhdoc.css">
+<link rel="icon" href="assets/app-icon.svg">
+<style>
+/* Competitors only. Light: hairlines, one accent for NakGas, signal colours only where they mean something. */
+.read{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:28px 0 8px}
+.read .card h4{font-size:16px;margin-bottom:4px}
+.tbl.wide{font-size:13px}
+.tbl.wide td{min-width:120px}
+.tbl.wide td:first-child{min-width:150px}
+.tbl tr.us td{background:var(--gs-wash)}
+.tbl td .chip{white-space:nowrap}
+.tbl td.n{font-weight:600;white-space:nowrap}
+.big{font:700 56px/1 var(--gs-body);letter-spacing:-.03em;color:var(--gs-ink)}
+.big small{font-size:16px;font-weight:500;color:var(--gs-steel);letter-spacing:0}
+/* price bars: RM0 to RM40 */
+.bars{margin:20px 0;border-top:1px solid var(--gs-line)}
+.bars .row{display:grid;grid-template-columns:220px 1fr 130px;gap:16px;align-items:center;padding:10px 0;border-bottom:1px solid var(--gs-line);font-size:14px}
+.bars .lab b{display:block;font-weight:600}
+.bars .lab span{font-size:12.5px;color:var(--gs-steel)}
+.bars .track{position:relative;height:14px;background:var(--gs-base)}
+.bars .track i{position:absolute;top:0;bottom:0;background:var(--gs-mist)}
+.bars .row.us .track i{background:var(--gs-flame)}
+.bars .row.phone .track i{background:var(--gs-ink)}
+.bars .track .reg{position:absolute;top:-6px;bottom:-6px;width:0;border-left:1px dashed var(--gs-ink)}
+.bars .track .ceil{position:absolute;top:-6px;bottom:-6px;background:#FDECEC;border-left:1px solid var(--gs-bad);border-right:1px solid var(--gs-bad)}
+.bars .val{text-align:right;font-weight:600;font-variant-numeric:tabular-nums}
+.bars .scale{display:grid;grid-template-columns:220px 1fr 130px;gap:16px;font-size:12px;color:var(--gs-mist);padding-top:6px}
+.bars .scale div{display:flex;justify-content:space-between}
+/* the 2 by 2 */
+.quad{display:grid;grid-template-columns:28px 1fr 1fr;grid-template-rows:auto auto 28px;margin:20px 0}
+.quad .ylab{grid-row:1 / span 2;writing-mode:vertical-rl;transform:rotate(180deg);font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--gs-steel);display:flex;justify-content:space-around;align-items:center}
+.quad .xlab{grid-column:2 / span 2;display:flex;justify-content:space-around;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--gs-steel);align-items:center}
+.quad .q{border:1px solid var(--gs-line);padding:16px 18px;min-height:200px;margin:-1px 0 0 -1px}
+.quad .q h4{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--gs-steel);margin:0 0 10px}
+.quad .q ul{margin:0;padding:0;list-style:none}
+.quad .q li{margin:0 0 10px;font-size:13.5px;color:var(--gs-steel)}
+.quad .q li b{color:var(--gs-ink);font-weight:600}
+.quad .q li.us b{color:var(--gs-flame-d)}
+.quad .q li.gone b{color:var(--gs-mist);text-decoration:line-through}
+.quad .q.empty{background:var(--gs-base)}
+.quad .q.home{background:var(--gs-wash)}
+.srcs{columns:2;column-gap:40px;margin:12px 0;padding-left:18px}
+.srcs li{break-inside:avoid;font-size:13.5px;margin:0 0 8px}
+.srcs li span{color:var(--gs-steel)}
+@media (max-width:1000px){.read{grid-template-columns:repeat(2,minmax(0,1fr))}.srcs{columns:1}}
+@media (max-width:760px){
+  .read{grid-template-columns:1fr}
+  .bars .row,.bars .scale{grid-template-columns:1fr;gap:6px}.bars .val{text-align:left}.bars .scale>span{display:none}
+  .quad{grid-template-columns:1fr;grid-template-rows:auto}.quad .ylab,.quad .xlab{display:none}.quad .q{margin:0 0 -1px 0;min-height:0}
+}
+</style>
+<style id="comp-13oct">
+.find{margin:10px 0 18px;padding-left:22px;display:grid;gap:10px}
+.find li{line-height:1.55}
+.rival{margin:26px 0 34px}
+.rv-h{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:8px}
+.rv-h h3{margin:0}
+.rival .grid{margin-top:12px}
+.rival .card ul{margin:6px 0 0;padding-left:18px}
+.rival .src{font-size:12.5px;color:var(--gs-mist);margin-top:8px}
+.mk{display:inline-block;padding:2px 8px;border-radius:999px;font-size:12px;font-weight:600;white-space:nowrap}
+.mk.y{background:#E3F5EC;color:#0E6B4B}.mk.n{background:#FDECEC;color:#A32329}.mk.q{background:#F1F3F7;color:#5A647C}
+</style>
+</head>
+<body>
+<div class="bmws" style="--bmws-acc:#2536F5"><div class="bmws-in"><div class="bmws-crumb"><b>VIN Industries &middot; NakGas</b><span>Brand Method &middot; Super Admin Navigation</span></div><nav class="bmws-tabs" aria-label="Brand Method admin navigation"><a href="audit.html">App Audit</a><a href="competitors.html" class="on">Competitors</a><a href="plan.html">Plan</a><a href="brand.html">Brand Creation</a><a href="design.html">Design</a><a href="final-brand.html">Final Brand</a><a href="app.html">The App</a><a href="website.html">Website</a><a href="deck.html">Investor Deck</a><a href="codex.html">Codex</a><a href="map.html">Overview</a></nav></div></div>
+
+<nav class="nav" aria-label="Chapters"><div class="nav-in"><a href="#changed">What changed</a><a href="#real">The real rival</a><a href="#johor">Johor Bahru</a><a href="#market">Market and rules</a><a href="#forms">Dealer forms</a><a href="#now">Every rival now</a><a href="#profiles">In depth</a><a href="#brands">The brands</a><a href="#features">Feature by feature</a><a href="#rivals">The 6 Oct read</a><a href="#checkout">The checkout</a><a href="#map">The map</a><a href="#well">What they do well</a><a href="#wins">Wins and exposure</a><a href="#learn">Copy and avoid</a><a href="#check">Still to check</a><a href="#sources">Sources</a></div></nav>
+
+<main class="wrap">
+
+<header class="hero">
+  <div class="brandrow"><svg class="lockup" width="210" height="70" role="img" aria-label="nakgas" viewBox="0 0 169.6 59.8"><g class="fl" transform="translate(-3.50 3.54) scale(0.7037)"><path class="fl-o" d="M37 3.5C40.2 9.6 47.2 18.6 50.6 29.8C54.6 42.6 48.4 59.4 32.6 59.4C17.2 59.4 11 47 13.9 35.2C16.4 25 27.6 16.4 37 3.5Z" fill="#0CA66A"/><path class="fl-i" d="M32.6 31C35.2 36.4 40.4 40.6 40.4 46C40.4 50.6 36.8 53.2 32.6 53.2C28.4 53.2 24.8 50.6 24.8 46C24.8 40.6 30 36.4 32.6 31Z" fill="#8FDDB8"/></g><g transform="translate(41.58 45.34)"><path d="M1.94 0V-18.58H8.55V-17.37Q10.6 -18.96 13.6 -18.96Q15.58 -18.96 17.18 -18.03Q18.77 -17.1 19.68 -15.52Q20.6 -13.95 20.6 -12.01V0H13.98V-10.49Q13.98 -11.78 13.21 -12.52Q12.43 -13.26 11.29 -13.26Q10.11 -13.26 9.33 -12.52Q8.55 -11.78 8.55 -10.49V0ZM30.32 0.38Q27.74 0.38 25.73 -0.87Q23.71 -2.13 22.57 -4.31Q21.43 -6.5 21.43 -9.27Q21.43 -12.08 22.57 -14.27Q23.71 -16.45 25.73 -17.71Q27.74 -18.96 30.32 -18.96Q31.73 -18.96 32.97 -18.52Q34.2 -18.09 35.11 -17.29V-18.58H41.61V0H35.11V-1.25Q34.2 -0.49 32.97 -0.06Q31.73 0.38 30.32 0.38ZM31.73 -5.51Q33.36 -5.51 34.37 -6.55Q35.38 -7.6 35.38 -9.31Q35.38 -10.94 34.37 -12.01Q33.36 -13.07 31.77 -13.07Q30.17 -13.07 29.15 -12.01Q28.12 -10.94 28.12 -9.31Q28.12 -7.64 29.15 -6.57Q30.17 -5.51 31.73 -5.51ZM43.97 0V-27.7H50.58V-10.53L55.86 -18.58H63.12L56.81 -9.88L63.5 0H55.9L50.58 -8.82V0Z" fill="#0B1530"/><path d="M71.44 -0.68Q68.86 -0.68 66.86 -1.9Q64.87 -3.12 63.73 -5.19Q62.59 -7.26 62.59 -9.84Q62.59 -12.39 63.73 -14.46Q64.87 -16.53 66.86 -17.75Q68.86 -18.96 71.44 -18.96Q74.02 -18.96 75.85 -17.63V-18.58H82.35V-1.29Q82.35 1.67 80.96 3.86Q79.57 6.04 77.18 7.24Q74.78 8.44 71.74 8.44Q68.63 8.44 66.27 7.39Q63.92 6.35 62.59 4.45L66.58 0.49Q67.53 1.56 68.67 2.13Q69.81 2.7 71.44 2.7Q73.42 2.7 74.57 1.73Q75.73 0.76 75.73 -1.06V-1.9Q73.91 -0.68 71.44 -0.68ZM72.66 -6.42Q74.25 -6.42 75.18 -7.43Q76.11 -8.44 76.11 -9.84Q76.11 -11.21 75.18 -12.24Q74.25 -13.26 72.69 -13.26Q71.14 -13.26 70.2 -12.22Q69.27 -11.17 69.27 -9.84Q69.27 -8.51 70.19 -7.47Q71.1 -6.42 72.66 -6.42ZM92.42 0.38Q89.83 0.38 87.82 -0.87Q85.8 -2.13 84.66 -4.31Q83.52 -6.5 83.52 -9.27Q83.52 -12.08 84.66 -14.27Q85.8 -16.45 87.82 -17.71Q89.83 -18.96 92.42 -18.96Q93.82 -18.96 95.06 -18.52Q96.29 -18.09 97.2 -17.29V-18.58H103.7V0H97.2V-1.25Q96.29 -0.49 95.06 -0.06Q93.82 0.38 92.42 0.38ZM93.82 -5.51Q95.46 -5.51 96.46 -6.55Q97.47 -7.6 97.47 -9.31Q97.47 -10.94 96.46 -12.01Q95.46 -13.07 93.86 -13.07Q92.26 -13.07 91.24 -12.01Q90.21 -10.94 90.21 -9.31Q90.21 -7.64 91.24 -6.57Q92.26 -5.51 93.82 -5.51ZM113.13 0.53Q110.58 0.53 108.15 -0.44Q105.72 -1.41 104.27 -2.96L107.88 -6.65Q108.79 -5.7 110.07 -5.17Q111.34 -4.64 112.78 -4.64Q114.49 -4.64 114.49 -5.51Q114.49 -6.12 113.87 -6.44Q113.24 -6.76 112.23 -7.01Q111.23 -7.26 110.11 -7.6Q108.98 -7.94 108 -8.57Q107.01 -9.2 106.36 -10.28Q105.72 -11.36 105.72 -13.11Q105.72 -14.86 106.69 -16.23Q107.65 -17.59 109.4 -18.37Q111.15 -19.15 113.51 -19.15Q115.9 -19.15 118.07 -18.34Q120.23 -17.52 121.56 -15.88L117.91 -12.2Q117 -13.22 115.9 -13.62Q114.8 -14.02 113.89 -14.02Q112.25 -14.02 112.25 -13.11Q112.25 -12.58 112.88 -12.29Q113.51 -12.01 114.49 -11.76Q115.48 -11.51 116.6 -11.13Q117.72 -10.75 118.71 -10.09Q119.7 -9.42 120.33 -8.3Q120.95 -7.18 120.95 -5.47Q120.95 -2.7 118.83 -1.08Q116.7 0.53 113.13 0.53Z" fill="#0CA66A"/></g></svg></div>
+  <div class="kicker">Competitors &middot; Brand Method</div>
+  <h1>Who a household compares <em>NakGas</em> to</h1>
+  <p class="lede">Every way a Malaysian home gets a cooking gas cylinder today, first read on its own site, store listing or code on Tuesday 6 October 2026 and read again in full on Tuesday 13 October. This page is also the price comparison audit and the competitor checkout check Bazil promised Navin on 1 October: for one 14 kg cylinder, the lines each rival shows, and the total where one is published.</p>
+  <div class="chips">
+    <span class="chip">17 rivals and channels read</span>
+    <span class="chip blue">Web facts read Tue 13 Oct 2026</span>
+    <span class="chip">Gasbee checkout: Navin's test, 1 Oct</span>
+    <span class="chip">No app installed, no order placed</span>
+    <span class="chip inf">Judgements marked Our read</span>
+  </div>
+  <p class="status"><b>How this was read.</b> Each rival's own website, and where the page draws itself by script, the text inside its code; each Google Play and App Store listing for Malaysia; domain registration dates from MYNIC's registry. A store page that fails to load is reported as exactly that: it is not taken as proof an app is gone. Totals behind a login are marked "not published" and listed in <a href="#check">Still to check</a>.</p>
+  <div class="read">
+    <div class="card"><div class="k">The real rival</div><h4>A phone number on a sticker</h4><p>RM30.00 all in for 14 kg in Johor Bahru, no app, no fee. Every app has to be worth more than that call.</p></div>
+    <div class="card"><div class="k">The field, 13 Oct</div><h4>Klang Valley start-ups</h4><p>Click MyGas is live in six Klang Valley areas with 23 suppliers. Gasbee says it is testing. No multi-brand app serves Johor; ACGAS, one brand, lists JB.</p></div>
+    <div class="card"><div class="k">The surprise</div><h4>The same model is live</h4><p>GasXpress, registered 28 Aug 2026, routes orders to licensed dealers. It has 4, all in the Klang Valley, each covering 2 to 5 km.</p></div>
+    <div class="card"><div class="k">Our read</div><h4>Option B, one line, RM3.50</h4><p>No live rival publishes an all-in total for one cylinder. The comparison that matters is RM33.50 against the RM30.00 phone call.</p></div>
+  </div>
+</header>
+
+<!-- THE REAL RIVAL -->
+
+<section class="sec" id="changed">
+  <h2>What changed</h2>
+  <p class="sub">Every rival re-read on Tue 13 Oct 2026, on its own site, store listing, code or public data feed. Seven things move the picture.</p>
+<ol class="find"><li><b>No multi-brand app serves Johor Bahru.</b> Play Store and App Store searches in English and Malay, and the dealer feeds of the two dealer-model rivals, found no app that delivers every brand in JB. The nearest GasXpress dealer is 290 km away (its own dealer feed, queried from a JB point).</li><li><b>Gas PETRONAS Home Delivery is a phone number now.</b> Its "Order Now" button dials 1300 88 8427. The GPHD app ended on 31 Jan 2023 (TechTRP, 17 Jan 2023) and is in neither store.</li><li><b>Click MyGas went live.</b> "Launching soon" on 6 Oct; on 13 Oct it says it delivers now in six Klang Valley areas. Its public coverage feed lists 23 dealer suppliers and 15 freelance riders, 22 riders active.</li><li><b>Gasbee says it is testing.</b> One read of its site code on 13 Oct found deliveries paused until testing is complete; a second read the same day did not find the notice, so its status is unverified. The Play listing takes payment: 3.5 stars from 8 ratings, 500+ installs.</li><li><b>A brand-owned app now lists Johor Bahru.</b> ACGAS (Astana City Group) released an iOS ordering app on 25 Nov 2025; its dealer page lists Johor Bahru, Pasir Gudang, Tebrau, Iskandar Puteri and Kulai as operational. One brand, composite cylinders, 1K+ Android installs, prices not shown.</li><li><b>The dealer-model rival is small.</b> GasXpress lists 4 dealers, all in the Klang Valley, each delivering 2 to 5 km. Its admin defaults would put one landed 14 kg at RM43.10 if they are live.</li><li><b>No cylinder brand has an ordering app.</b> PETRONAS, Petron, Solar Gas, BHPetrogas, MiraGas and MyGaz all sell home delivery through a hotline and a dealer list. Their apps, where they exist, are loyalty apps.</li></ol><div class="note blue"><b>Our read.</b> NakGas&rsquo;s opening is wider than it looked on 6 Oct: the incumbent closed its app, the multi-brand app rivals are Klang Valley start-ups with a handful of suppliers each, and Johor Bahru still orders by phone. ACGAS is the one to watch in JB: a single brand, but licensed, with an app and a celebrity budget.</div>
+</section>
+<section class="sec" id="real">
+  <h2>The real rival</h2>
+  <p class="sub">The dealer's phone number, on a sticker on the cylinder or saved in WhatsApp.</p>
+  <div class="grid g2">
+    <div class="card wash">
+      <div class="k">Fact &middot; Navin, 1 Oct 2026</div>
+      <div class="big">RM30.00 <small>all in, by phone, Johor Bahru</small></div>
+      <p>RM26.60 for the gas at the KPDN controlled price plus RM3.40 for delivery. No app, no platform fee, cash at the door.</p>
+    </div>
+    <div class="card">
+      <div class="k">Fact &middot; found 1 Oct 2026</div>
+      <h4>Johor Bahru dealers who deliver</h4>
+      <p>New Town Trading (Ulu Tiram), Guna Trading (since 1981), Uncle Lim Gas Delivery (near Gelang Patah). None publishes a delivery tariff. Gas PETRONAS Home Delivery covers Johor Bahru and 35 other Johor towns by hotline (read 1 Oct).</p>
+    </div>
+  </div>
+  <div class="grid g2">
+    <div class="card"><div class="k">What the call does well</div>
+      <ul class="clean">
+        <li>A person the household knows, often for years</li>
+        <li>No app, no sign-up, no card: cash at the door</li>
+        <li>Fast inside his own patch, and he knows the road and the stairs</li>
+        <li>The cheapest all-in figure we have: RM30.00</li>
+      </ul></div>
+    <div class="card"><div class="k">What the call does badly</div>
+      <ul class="clean">
+        <li>Find the number first: the sticker peels, the chat scrolls away, a new home has none</li>
+        <li>Call around when he is closed, out of stock or not answering</li>
+        <li>No price shown before he arrives; no receipt, no photo</li>
+        <li>No warning before the gas runs out mid-cook</li>
+      </ul></div>
+  </div>
+  <div class="note"><b>Fact, a dealer's own problem.</b> A 2022 project at Universiti Tun Hussein Onn Malaysia (Batu Pahat, Johor) built an ordering and delivery app for an LPG dealer, Chuan Huat LPG Sdn. Bhd., because customers who phoned in an order did not know when it would arrive when staff were busy or stock ran out (AITCS Vol. 3 No. 1, online 31 May 2022).</div>
+  <div class="note blue"><b>Our read.</b> NakGas does not replace the dealer. It replaces the sticker: the same licensed dealer, found without a number, at the law's price, with a photo at the door and a reminder before the flame goes yellow. The RM3.00 or RM3.50 on top has to buy exactly that, every time.</div>
+</section>
+<section class="sec" id="johor">
+  <h2>Johor Bahru</h2>
+  <p class="sub">Where NakGas launches. Who delivers cooking gas to a JB household today, and how many dealers each brand already has in Johor.</p>
+<div class="tbl-wrap"><table class="tbl"><thead><tr><th>Service</th><th>What it is, read 13 Oct</th><th>How you order</th><th>Price shown</th></tr></thead><tbody><tr><td class="strong">Gas PETRONAS Home Delivery</td><td>Covers Johor Bahru and about 36 Johor areas by dealer zone (archived list, 6 Dec 2024), including Kulai, Masai, Permas Jaya, Indahpura, Mutiara Rini, Setia Indah</td><td>Phone, 1300 88 8427</td><td>Not published. App era: RM3.20 delivery for 14 kg, RM29.80 total</td></tr><tr><td class="strong">ACGAS Mobile App</td><td>Astana City Group; composite cylinders with an RFID chip; dealer page (undated) lists JB, Pasir Gudang, Tebrau, Iskandar Puteri, Kulai and Pulai as operational</td><td>iOS and Android app, dealer app</td><td>Not published</td></tr><tr><td class="strong">New Town Trading (JB) Sdn Bhd, Ulu Tiram</td><td>14 delivery fleets daily; homes only in postcodes 81100 and 81800; 24 to 72 hours, urgent same day on request; recruits LPG delivery agents</td><td>WhatsApp, web form, 07-862 4511</td><td>Not published</td></tr><tr><td class="strong">Guna Trading Sdn Bhd, Johor Jaya</td><td>Solar Gas dealer since 1981, mainly restaurants and factories; scheduled routes across 23 JB areas</td><td>07-351 5017</td><td>Not published</td></tr><tr><td class="strong">SPESH (Sin Heng Sdn Bhd), Masai</td><td>Solar Gas dealer since 1979; has stopped house delivery and refers callers on</td><td>WhatsApp, businesses</td><td>Not published</td></tr><tr><td class="strong">Uncle Lim Gas Delivery</td><td>Facebook page, 448 followers; Gelang Patah, Nusajaya, Perling, Tun Aminah; latest visible post 2019; a review says calls go unanswered</td><td>010-292 9029</td><td>Not published</td></tr><tr><td class="strong">The dealer&rsquo;s own number</td><td>The sticker on the cylinder, or a WhatsApp chat</td><td>Phone</td><td>RM30.00 all in (Navin, 1 Oct): RM26.60 gas plus RM3.40 delivery</td></tr></tbody></table></div><h3>Dealers already in Johor, by brand</h3><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Brand</th><th>Dealers or outlets in Johor</th><th>Source, read 13 Oct</th></tr></thead><tbody><tr><td class="strong">Gas PETRONAS</td><td>29 dealers in Johor, 10 in the JB trading area (of 284 nationwide); about 278 stations sell cylinders</td><td>mymesra dealer locator feed</td></tr><tr><td class="strong">Petron Gasul</td><td>About 40 of about 222 stations selling Gasul have Johor postcodes</td><td>Petron station list, 5 Nov 2025</td></tr><tr><td class="strong">MiraGas</td><td>About 21 of about 101 dealer addresses; a filling plant at Pasir Gudang</td><td>NGC Energy locate-us page</td></tr><tr><td class="strong">BHPetrogas</td><td>9 of 37 listed dealers, New Town Trading among them; a terminal at Pasir Gudang</td><td>BHPetrol dealer list</td></tr><tr><td class="strong">Solar Gas</td><td>No dealer list online; bottling plants at West Port and Johor Bahru</td><td>solargas.com.my</td></tr><tr><td class="strong">MyGaz</td><td>Not found; no working website</td><td>DNS check</td></tr><tr><td class="strong">ACGAS</td><td>Johor main supplier and 6 JB areas listed as operational</td><td>acgas.com.my dealership page</td></tr></tbody></table></div><div class="note blue"><b>Our read.</b> The supply is all within reach of JB, and the dealers are already on the road. What no one in JB offers is a way to order without calling: no published price, no tracking, no photo proof. Home delivery is shrinking at the old dealers (SPESH stopped, New Town covers two postcodes), which leaves households without a reliable number.</div>
+</section>
+
+<section class="sec" id="market">
+  <h2>Market and rules</h2>
+  <p class="sub">The price, the subsidy, the rules and the size of Johor Bahru. Read on 13 Oct 2026; the source is beside each line.</p>
+<div class="tbl-wrap"><table class="tbl"><thead><tr><th>Fact</th><th>Value</th><th>Source</th></tr></thead><tbody><tr><td class="strong">Household price</td><td>10 kg RM19.00, 12 kg RM22.80, 14 kg RM26.60, delivery not included</td><td>ihsanmadani.gov.my (KPDN)</td></tr><tr><td class="strong">Since when</td><td>RM1.90 a kg (RM26.60 for 14 kg) from 4 Dec 2010; the current maximum price order (No. 4 of 2015) took effect 1 Jul 2015</td><td>Malaysiakini, 3 Dec 2010; Warta Oriental, 22 Aug 2025</td></tr><tr><td class="strong">Still unchanged</td><td>14 kg stays RM26.60; the government pays almost RM40 a cylinder</td><td>Utusan, 22 Nov 2025</td></tr><tr><td class="strong">April 2026</td><td>Commercial cylinders up (C14C RM14, C50 RM50); household cylinders unchanged</td><td>The Star, 8 Apr 2026</td></tr><tr><td class="strong">Who sets it</td><td>The Controller, with the Minister, by gazetted order (Act 723 s.4); that power may include delivery charges, today&rsquo;s cap excludes delivery</td><td>Act 723; KPDNHEP via Harian Metro, 15 Jul 2019</td></tr><tr><td class="strong">Subsidy</td><td>2023 RM3.10bn; 2024 about RM3.4bn (minister) or RM3.71bn (Auditor-General); 2025 RM2.63bn</td><td>Bernama, 29 May 2025; FMT, 5 Oct 2026</td></tr><tr><td class="strong">Targeting</td><td>"No targeting for now" (Aug 2025); digital monitoring planned; Budget 2027 speech has no LPG mention</td><td>Warta Oriental; The Edge</td></tr><tr><td class="strong">Households, Johor Bahru district</td><td>460,700 (2020 census), about 490,000 in 2026 (our arithmetic at the 2020 ratio)</td><td>DOSM census 2020; OpenDOSM</td></tr><tr><td class="strong">Households, Johor</td><td>1,130,600 (2024)</td><td>OpenDOSM</td></tr><tr><td class="strong">Piped gas homes</td><td>21,690 nationwide (31 Dec 2025): nearly every home that cooks on gas uses a cylinder (our read)</td><td>Gas Malaysia Annual Report 2025</td></tr><tr><td class="strong">Dealer licence</td><td>SSM, council licence, a supplier letter and a Fire Department letter; over 42 kg needs a controlled goods permit</td><td>KPDN CSA guide; Bernama</td></tr><tr><td class="strong">Price display</td><td>Price Marking Order 2020: price lists or tags required</td><td>KPDN FAQ</td></tr><tr><td class="strong">Penalties, Act 723</td><td>Company up to RM500,000 (RM1m repeat); individual up to RM100,000 or 3 years</td><td>Act 723 s.18</td></tr><tr><td class="strong">Dealer margins</td><td>Not published; only the caps at each level</td><td>Not found</td></tr></tbody></table></div><div class="note blue"><b>Our read.</b> About 490,000 JB households cook on cylinders at one fixed price, so NakGas competes on the fee and the ease, never on the gas. The price display rule backs showing the KPDN price and the fee before payment.</div>
+</section>
+
+<section class="sec" id="forms">
+  <h2>Dealer forms</h2>
+  <p class="sub">The status quo is moving: dealers add web forms and WhatsApp buttons. Read on 13 Oct 2026.</p>
+<div class="tbl-wrap"><table class="tbl"><thead><tr><th>Dealer</th><th>What it does</th><th>Source</th></tr></thead><tbody><tr><td class="strong">GPC (Sarawak) Sdn Bhd, Petros dealer</td><td>A 3-step web form that sends the order to WhatsApp; domain created 19 Jun 2026</td><td>gpc-sarawak.com</td></tr><tr><td class="strong">SPESH (Sin Heng), Masai, JB</td><td>A WhatsApp order form; has stopped house delivery</td><td>speshsb.com.my</td></tr><tr><td class="strong">Lim Trading, Pandan Jaya, KL</td><td>Web store asks brand, size, home type, lift, floor 1 to 15 and swap brand</td><td>deliverygas.my</td></tr><tr><td class="strong">Keng Ming Trading, Masai, JB</td><td>Had an online order page; the domain has lapsed</td><td>MYNIC RDAP</td></tr><tr><td class="strong">Lazada</td><td>A new 14 kg PETRONAS cylinder with delivery at RM140.00</td><td>Lazada listing</td></tr></tbody></table></div><div class="note blue"><b>Our read.</b> Dealers already ask for the lift and the floor, the high-rise detail NakGas collects. A dealer with a form still has no tracking, no reminder and no payment; NakGas gives a dealer all three without building a site.</div>
+</section>
+
+
+<!-- EVERY RIVAL -->
+
+<section class="sec" id="now">
+  <h2>Every rival now</h2>
+  <p class="sub">Status, model, reach and what each shows a customer, read on 13 Oct 2026. Scroll the table sideways on a small screen.</p>
+<div class="tbl-wrap"><table class="tbl"><thead><tr><th>Rival</th><th>Status</th><th>Model</th><th>Where</th><th>Apps and ratings</th><th>Promise</th><th>Payment</th><th>Johor</th></tr></thead><tbody><tr><td class="strong">Gas PETRONAS Home Delivery</td><td><span class="chip blue">Phone only</span></td><td>Authorised Gas PETRONAS dealers</td><td>Selected areas nationwide</td><td>App ended 31 Jan 2023; none in the stores</td><td>Chosen date and slot</td><td>Not stated today; cash in the app era</td><td>Yes, by phone</td></tr><tr><td class="strong">Click MyGas</td><td><span class="chip ok">Live</span></td><td>Dealer suppliers plus freelance riders</td><td>6 Klang Valley areas, plus Klang in its feed</td><td>iOS 0 ratings; Android 4.2 from 5, 100+ installs; rider app 50+</td><td>As quick as 45 minutes</td><td>Cashless only: e-wallets, FPX, cards, DuitNow</td><td>No</td></tr><tr><td class="strong">Gasbee</td><td><span class="chip low">Paused</span></td><td>Merchants pay commission; Gasbee riders</td><td>Not stated; Shah Alam and Klang signs</td><td>Android 3.5 from 8, 500+ installs; no iOS</td><td>Delivery within minutes</td><td>Online in the app</td><td>No</td></tr><tr><td class="strong">GasXpress</td><td><span class="chip ok">Live</span> (web)</td><td>Licensed dealers and their riders</td><td>4 dealers, Klang Valley, 2 to 5 km each</td><td>Web app only, no store listing</td><td>1 to 3 hours; urgent 30 to 60 minutes</td><td>ToyyibPay, FPX, cards; no cash found</td><td>No, nearest 290 km</td></tr><tr><td class="strong">Gas2u, gas2u.my</td><td><span class="chip low">Demo</span></td><td>Vendors set prices, pay commission</td><td>Not stated</td><td>Web app; old Android app gone (2017 to 2022)</td><td>Not stated</td><td>Cash, transfer, Curlec, wallet</td><td>No</td></tr><tr><td class="strong">Gas2u, gas2u.com.my</td><td><span class="chip low">Demo</span></td><td>Customer and supplier sign-up</td><td>Not stated</td><td>Web only</td><td>Not stated</td><td>Not stated</td><td>No</td></tr><tr><td class="strong">BeliGas, later EDAR</td><td><span class="chip bad">Retired</span></td><td>Own branches and riders</td><td>Peaked at 312 areas, four states (2022)</td><td>EDAR app delisted, last reviews 2024</td><td>Was: one hour, same day, pre-order</td><td>Was cash on delivery</td><td>Never</td></tr><tr><td class="strong">ACGAS Mobile App</td><td><span class="chip ok">Live</span></td><td>One brand, its own licensed dealers</td><td>119 areas operational across the Peninsula (its page, undated)</td><td>Android 1K+; iOS since 25 Nov 2025, 0 ratings; dealer app</td><td>Not stated</td><td>Not stated</td><td>Yes, 6 areas listed</td></tr><tr><td class="strong">GrabGas, later HaloGas</td><td><span class="chip bad">Retired</span></td><td>Independent drivers matched by GPS</td><td>Klang Valley; claimed 8 states (2019)</td><td>Web, then Facebook; domain expired by Apr 2024</td><td>Was: 1 to 3 working days, then within 2 hours</td><td>Was cash on delivery</td><td>Not found</td></tr><tr><td class="strong">SuriNow</td><td><span class="chip">Concept</span></td><td>A slide deck: app, web inventory, helpdesk</td><td>None</td><td>No listing, no domain</td><td>Not applicable</td><td>Not applicable</td><td>No</td></tr><tr><td class="strong">NakGas, the plan</td><td>Prototype</td><td>Licensed dealers already delivering; dealers pay no commission</td><td>National by design, Johor Bahru first</td><td>iOS and Android customer and dealer apps, web admin</td><td>Nearest dealer accepts in 45 seconds; status to the door</td><td>FPX, cards, e-wallets, cash</td><td>Launch city</td></tr></tbody></table></div>
+</section>
+
+<section class="sec" id="profiles">
+  <h2>In depth</h2>
+  <p class="sub">Each rival on one card: the facts with their source, then our read of its strengths and weaknesses. Read on 13 Oct 2026.</p>
+<div class="rival"><div class="rv-h"><h3>Gas PETRONAS Home Delivery</h3><span class="chip blue">Phone only</span></div><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Fact</th><th>Value</th><th>Source</th></tr></thead><tbody><tr><td class="strong">Owner</td><td>PETRONAS Dagangan Berhad, 198201008499 (88222-D)</td><td>mymesra.com.my</td></tr><tr><td class="strong">How you order</td><td>The "Order Now" button dials 1300 88 8427; edits and cancellations through Mesralink 1-300-88-8181</td><td>GPHD page code, EN and BM</td></tr><tr><td class="strong">The app</td><td>Launched about Apr 2021, ended 31 Jan 2023; iOS and an Android build by PDB; in neither store today</td><td>TechTRP, 17 Jan 2023; APKPure; iTunes lookup</td></tr><tr><td class="strong">Dealers</td><td>284 in the locator feed (231 Dealer, 52 Premier); Johor 29, JB trading area 10</td><td>mymesra dealers.json</td></tr><tr><td class="strong">Price</td><td>Gas RM26.60. Delivery fee not published today. App era: RM3.20 for 14 kg (RM29.80); RM80 deposit on a first cylinder</td><td>Wayback FAQ, 21 Jun 2024</td></tr><tr><td class="strong">Fee history</td><td>In Oct 2018 PDB announced RM8.40 delivery for 14 kg, then withdrew it after public feedback</td><td>FMT, 31 Oct 2018</td></tr><tr><td class="strong">Promise</td><td>Today: a chosen date and slot. App era: Mon to Sat, 9am to 6pm, same day in 30 minutes to 4 hours if ordered by 3pm</td><td>GPHD page; Wayback FAQ</td></tr><tr><td class="strong">Extras</td><td>Mesra points; any brand&rsquo;s empty accepted at 278 stations; SIRIM hose and regulator guidance</td><td>mymesra</td></tr></tbody></table></div><div class="grid g2"><div class="card"><h4>Strengths <span class="chip inf">Our read</span></h4><ul><li>The best-known brand, 284 dealers and 278 stations</li><li>Already covers JB and about 36 Johor areas</li><li>A delivery fee that held at RM3.20 for years</li></ul></div><div class="card"><h4>Weaknesses <span class="chip inf">Our read</span></h4><ul><li>No app: a 1300 number and a slot</li><li>Fee, slots and payment not published</li><li>Only Gas PETRONAS cylinders</li><li>Closed its own app after under two years</li></ul></div></div><p class="src">Read 13 Oct 2026: mymesra.com.my GPHD pages and dealer feed; Wayback snapshots of the FAQ (21 Jun 2024) and coverage (6 Dec 2024); TechTRP; FMT.</p></div><div class="rival"><div class="rv-h"><h3>Click MyGas</h3><span class="chip ok">Live</span></div><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Fact</th><th>Value</th><th>Source</th></tr></thead><tbody><tr><td class="strong">Owner</td><td>Matrix Future Technologies Sdn Bhd, SSM 1417217-U (from a job listing, not checked against SSM); i-City, Shah Alam</td><td>Site, store listings, Maukerja</td></tr><tr><td class="strong">On the stores</td><td>Android since 22 Jul 2021: 4.2 from 5 ratings, 100+ installs, updated 26 Sep 2026. iOS since 11 Nov 2021: v2.0.26, 0 ratings. Rider app: Android 50+, iOS 0 ratings</td><td>Play, iTunes lookup</td></tr><tr><td class="strong">Network</td><td>23 dealer suppliers and 15 freelance riders on record, 22 riders active, 7 areas with suppliers (feed at 03:09 UTC, 13 Oct)</td><td>/coverage-data feed</td></tr><tr><td class="strong">Coverage</td><td>Puchong, Subang Jaya, Petaling Jaya, Shah Alam, Seri Kembangan, Bangi; Klang in the feed. No Johor</td><td>Site</td></tr><tr><td class="strong">Price and offer</td><td>RM26.60 shown as the KPDN price; delivery fee not published; free delivery on the first 3 orders; code CMG2026 for RM6 off a first order until 31 Oct 2026</td><td>Site code</td></tr><tr><td class="strong">Promise</td><td>As quick as 45 minutes; footer claims a 45 minute average and 1,300+ orders</td><td>Site code</td></tr><tr><td class="strong">Payment</td><td>Cashless only: GrabPay, Touch &rsquo;n Go, ShopeePay, Boost, FPX, Visa, Mastercard, DuitNow</td><td>Site code</td></tr><tr><td class="strong">Features</td><td>Live rider tracking, map pin, loyalty points, order history, rating, AI chat on the site; copy in English, Malay, Chinese, Tamil. No scheduling, no photo proof, no cash</td><td>Site code</td></tr><tr><td class="strong">Recruitment</td><td>Riders: licence B2, D or DA, verified in 24 hours, weekly payout. Suppliers: SSM, KPDN registration, permit licence</td><td>Sign-up pages</td></tr><tr><td class="strong">Social</td><td>Facebook 182 followers; TikTok 222</td><td>Page metadata</td></tr></tbody></table></div><div class="grid g2"><div class="card"><h4>Strengths <span class="chip inf">Our read</span></h4><ul><li>The clearest public offer: 45 minutes, the KPDN price, free delivery on 3 orders</li><li>Every cashless method, four languages</li><li>Rider and supplier recruitment built</li></ul></div><div class="card"><h4>Weaknesses <span class="chip inf">Our read</span></h4><ul><li>Tiny network: 23 suppliers, 22 active riders</li><li>Five years on the stores, 100+ installs</li><li>No cash, no scheduling, no Johor</li><li>Freelance riders, not the dealers&rsquo; own trucks</li></ul></div></div><p class="src">Read 13 Oct 2026: clickmygas.com and its code, /coverage-data, sign-up pages, App Store and Google Play listings, Facebook and TikTok.</p></div><div class="rival"><div class="rv-h"><h3>Gasbee</h3><span class="chip low">Paused</span></div><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Fact</th><th>Value</th><th>Source</th></tr></thead><tbody><tr><td class="strong">Operator</td><td>Brand "Gasbee"; its own company not named. Apps built and published by Synchronetwork Sdn Bhd (SSM 1194790-K), a Shah Alam agency, under an agreement of 9 Sep 2026</td><td>Gasbee site; Synchronetwork blog, 9 Sep 2026</td></tr><tr><td class="strong">Status</td><td>Site code: deliveries "temporarily unavailable until testing is complete"</td><td>gasbee.com.my code</td></tr><tr><td class="strong">On the stores</td><td>Android 3.5 from 8 ratings, 500+ installs, updated 6 Oct 2026; rider app 5+ installs; no iOS</td><td>Play, iTunes</td></tr><tr><td class="strong">Model</td><td>Local suppliers join as merchants, no setup fee, a commission on completed orders (rate not published); a Gasbee rider delivers</td><td>Merchant page</td></tr><tr><td class="strong">Price</td><td>Not published. Navin&rsquo;s test (1 Oct): gas, delivery, service and RM1.50 processing lines; RM139.10 for a basket of unknown contents</td><td>Navin, 1 Oct</td></tr><tr><td class="strong">Claims</td><td>10K+ orders, 100+ business clients, 24/7 support (stated hours 7am to 10pm)</td><td>Site</td></tr><tr><td class="strong">Reviews (paraphrased)</td><td>Sep 2026: a delivery booked for 2:30am never came, then the reviewer learnt it was in testing. Aug 2026: order pending 5+ hours, one far merchant</td><td>Google Play reviews</td></tr><tr><td class="strong">Social</td><td>TikTok 2 followers, Instagram 0; Facebook link opens a personal profile</td><td>Browser check</td></tr></tbody></table></div><div class="grid g2"><div class="card"><h4>Strengths <span class="chip inf">Our read</span></h4><ul><li>One app for refills, new cylinders, accessories and bulk</li><li>A mascot people remember</li><li>Malay store copy</li></ul></div><div class="card"><h4>Weaknesses <span class="chip inf">Our read</span></h4><ul><li>Paused while taking payment</li><li>Claims far beyond 500+ installs</li><li>No coverage, no price, no iOS</li><li>Company behind it not named</li></ul></div></div><p class="src">Read 13 Oct 2026: gasbee.com.my and its code, Google Play listings and reviews, synchronet.com.my, MYNIC RDAP, social pages.</p></div><div class="rival"><div class="rv-h"><h3>GasXpress</h3><span class="chip ok">Live</span> (web)</div><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Fact</th><th>Value</th><th>Source</th></tr></thead><tbody><tr><td class="strong">Owner</td><td>Domain registrant "Sevensky innovations"; registered 28 Aug 2026; SSM not found</td><td>MYNIC RDAP</td></tr><tr><td class="strong">Dealers</td><td>4: Puchong (2 km), Petaling Jaya (2 km), Subang Perdana (5 km), Sungai Buloh (2 km). Nearest to JB: 290 km</td><td>/api/dealers/nearby, queried from JB and KL</td></tr><tr><td class="strong">Model</td><td>The same as NakGas: licensed dealers accept, then assign their own riders or broadcast to riders. Dealers need SSM and admin approval</td><td>Site code</td></tr><tr><td class="strong">Fee defaults</td><td>Landed RM10, high-rise RM15, service RM5.00, processing RM1.50, cross-brand swap RM5.00, a 10% platform fee on the dealer. Live values not verified</td><td>Admin pricing screen in the code</td></tr><tr><td class="strong">Our arithmetic</td><td>RM26.60 + RM10.00 + RM5.00 + RM1.50 = RM43.10 for one landed 14 kg, if the defaults are live</td><td><span class="chip inf">Our read</span></td></tr><tr><td class="strong">Rules</td><td>Three cylinders a household order, citing KPDN; stair surcharge without a lift; free cancellation until the dealer accepts</td><td>Site code</td></tr><tr><td class="strong">Promise</td><td>1 to 3 hours; urgent 30 to 60 minutes; scheduled pre-order</td><td>Site code</td></tr><tr><td class="strong">Features</td><td>Live GPS tracking, photo proof, ratings, vouchers, Malay and English, safety guide, free regulator fitting; paid banner slots</td><td>Site code</td></tr></tbody></table></div><div class="grid g2"><div class="card"><h4>Strengths <span class="chip inf">Our read</span></h4><ul><li>Our model, already built, with the rules read carefully</li><li>Urgent mode and photo proof</li><li>An advertising income line</li></ul></div><div class="card"><h4>Weaknesses <span class="chip inf">Our read</span></h4><ul><li>Four dealers, Klang Valley only</li><li>No store app, no cash found</li><li>Up to four fee lines: RM43.10 on its defaults</li><li>An unverified "Petronas reporting partner" role in its code</li></ul></div></div><p class="src">Read 13 Oct 2026: gasxpress.com.my, its manifest, main script and public API (brands, dealers), MYNIC RDAP.</p></div><div class="rival"><div class="rv-h"><h3>Gas2u, three separate things</h3><span class="chip low">Demo</span></div><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Fact</th><th>Value</th><th>Source</th></tr></thead><tbody><tr><td class="strong">The old Android app</td><td>com.cookinggas.my, 2017 to 2022, now a 404; of its last 200 reviews, 147 are one star (sign-up bugs, "no agents available", orders never delivered)</td><td>Google Play review feed</td></tr><tr><td class="strong">gas2u.my</td><td>Registered 10 May 2026 to DWISHA VENTURES SDN. BHD.; a web app with an empty catalogue and demo data tools; vendors set prices and pay commission; predicts when gas runs dry, NFC or QR check at the door, photo proof; English, Malay, Chinese</td><td>MYNIC RDAP; site code</td></tr><tr><td class="strong">gas2u.com.my</td><td>Registered 17 Jul 2026 to YUDEE GLOBAL VENTURES; Malay log-in with customer and supplier sign-up; no terms or price pages</td><td>MYNIC RDAP; site</td></tr><tr><td class="strong">Link between them</td><td>Different registrants; nothing ties either to the 2017 operator</td><td><span class="chip inf">Our read</span></td></tr></tbody></table></div><div class="grid g2"><div class="card"><h4>Strengths <span class="chip inf">Our read</span></h4><ul><li>On paper the most advanced idea: predicted run-out and a door check</li><li>Three languages, cash kept</li></ul></div><div class="card"><h4>Weaknesses <span class="chip inf">Our read</span></h4><ul><li>No stock, still a demo</li><li>Five years of one-star reviews under the name</li><li>Allows 100 cylinders an order against the household cap of 3</li></ul></div></div><p class="src">Read 13 Oct 2026: Google Play listing and reviews, gas2u.my and its code, gas2u.com.my, MYNIC RDAP.</p></div><div class="rival"><div class="rv-h"><h3>ACGAS Mobile App</h3><span class="chip ok">Live</span></div><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Fact</th><th>Value</th><th>Source</th></tr></thead><tbody><tr><td class="strong">Owner</td><td>Astana City Group Sdn Bhd (1186707-U); iOS seller Digital Unggul Sdn Bhd</td><td>acgas.com.my; App Store</td></tr><tr><td class="strong">Licence</td><td>Says it was licensed by the Ministry of Finance for subsidised household LPG in Nov 2018 (company claim)</td><td>acgas.com.my/about-us</td></tr><tr><td class="strong">Product</td><td>Composite cylinders with an RFID chip in each; SIRIM and DOSH approval claimed</td><td>Product and FAQ pages</td></tr><tr><td class="strong">Apps</td><td>Customer app: Android 1K+, updated 22 May 2026; iOS released 25 Nov 2025, 0 ratings. Dealer app updated 2 May 2026</td><td>Google Play; App Store</td></tr><tr><td class="strong">Coverage</td><td>119 areas operational and 36 in progress; JB, Pasir Gudang, Tebrau, Iskandar Puteri, Kulai, Pulai operational. Page undated</td><td>acgas.com.my/dealership-2</td></tr><tr><td class="strong">2026 push</td><td>Ambassadors Rosyam Nor and Erra Fazira; aims for 10% of the LPG market in 5 to 10 years; a plant partnership near RM100m</td><td>The Sun, 6 Feb 2026</td></tr><tr><td class="strong">Price</td><td>Not published</td><td>Site and listings</td></tr></tbody></table></div><div class="grid g2"><div class="card"><h4>Strengths <span class="chip inf">Our read</span></h4><ul><li>Licensed supply with its own app and dealer app</li><li>Lists NakGas&rsquo;s launch city</li><li>A national marketing budget</li></ul></div><div class="card"><h4>Weaknesses <span class="chip inf">Our read</span></h4><ul><li>One brand only; a household likely has to switch cylinder (inference)</li><li>Low installs, no ratings, no prices</li><li>Site footer still says 2016</li></ul></div></div><p class="src">Read 13 Oct 2026: acgas.com.my, Google Play, App Store, The Sun.</p></div><div class="rival"><div class="rv-h"><h3>GrabGas, later HaloGas</h3><span class="chip bad">Retired</span></div><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Fact</th><th>Value</th><th>Source</th></tr></thead><tbody><tr><td class="strong">Company and founders</td><td>Grabgas Technology, later GrabX Technology Sdn Bhd, Petaling Jaya; Sean Hoo, Jeson Lee, Gabriel Lim</td><td>DNA, Jun 2016; Vulcan Post, Sep 2016</td></tr><tr><td class="strong">Start</td><td>Operations from Oct 2015; Petaling Jaya, 1 to 3 working days, about RM28 to RM32</td><td>Vulcan Post; Wayback, Apr 2016</td></tr><tr><td class="strong">Trouble</td><td>Digi withdrew a planned investment on 8 Sep 2016 over inconsistent data; a former developer disputed the order counts</td><td>DNA, 8 Sep 2016; Vulcan Post, Aug 2016</td></tr><tr><td class="strong">Rename</td><td>Became HaloGas in Apr 2017 after a legal letter demanding a new name; lost an investment deal, a partnership and staff</td><td>Vulcan Post, 13 Apr 2017</td></tr><tr><td class="strong">Claims</td><td>80,000 users, 300+ delivery partners, 8 states (founder, 2019, self-reported)</td><td>Medium, 12 Aug 2019</td></tr><tr><td class="strong">End</td><td>Last full site Jun 2021; domain expired by Apr 2024; no closure statement found</td><td>Wayback; WHOIS</td></tr></tbody></table></div><div class="grid g2"><div class="card"><h4>Strengths <span class="chip inf">Our read</span></h4><ul><li>Proved the demand: new homeowners, students, young parents with no dealer contact</li><li>Drivers wanted the work</li></ul></div><div class="card"><h4>Weaknesses <span class="chip inf">Our read</span></h4><ul><li>Gig drivers, no revenue in 2016, its own numbers doubted</li><li>A name that leaned on a bigger brand had to go</li></ul></div></div><p class="src">Read 13 Oct 2026: Vulcan Post, Digital News Asia, e27, Medium, Wayback, WHOIS.</p></div><div class="rival"><div class="rv-h"><h3>BeliGas, later EDAR</h3><span class="chip bad">Retired</span></div><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Fact</th><th>Value</th><th>Source</th></tr></thead><tbody><tr><td class="strong">Company</td><td>GASSTN Sdn Bhd; founder Suthan Mookaiah; app launched June 2020</td><td>Kosmo, Nov 2020; NST, Mar 2021</td></tr><tr><td class="strong">Reach</td><td>123 Klang Valley areas (Nov 2020), 312 areas across KL, Selangor, Penang and Negeri Sembilan (Sep 2022); never Johor</td><td>Kosmo; Malaysiakini, 30 Sep 2022</td></tr><tr><td class="strong">Price</td><td>Jan 2021: RM25.60 day-ahead, RM26.60 same day, RM29.60 within an hour, RM38.60 at night; RM3.00 high-rise surcharge. 2024 reviewer: RM5 same day, RM8 express, RM15 night</td><td>KL Foodie, 21 Jan 2021; Play reviews</td></tr><tr><td class="strong">End</td><td>Became EDAR in 2022, moved to wholesale; app delisted; reviews in 2024 asked whether it had shut; beligas.my is now an unrelated blog</td><td>Play reviews; site checks</td></tr></tbody></table></div><div class="grid g2"><div class="card"><h4>Strengths <span class="chip inf">Our read</span></h4><ul><li>A price for every speed, the high-rise surcharge stated up front</li><li>At its peak, four states</li></ul></div><div class="card"><h4>Weaknesses <span class="chip inf">Our read</span></h4><ul><li>Drifted to wholesale</li><li>Fees climbed to RM5 to RM15</li><li>Gone by 2024</li></ul></div></div><p class="src">Read 13 Oct 2026: Kosmo, NST, Malaysiakini, KL Foodie, Vulcan Post (sponsored), Google Play reviews.</p></div>
+</section>
+
+<section class="sec" id="brands">
+  <h2>The brands</h2>
+  <p class="sub">The brands sell the gas. None of them has an app to order a cylinder to the door: every order still starts with a call.</p>
+<div class="tbl-wrap"><table class="tbl"><thead><tr><th>Brand</th><th>Owner</th><th>How you get a cylinder delivered</th><th>App</th><th>Source, read 13 Oct</th></tr></thead><tbody><tr><td class="strong">Gas PETRONAS</td><td>PETRONAS Dagangan Berhad</td><td>GPHD hotline 1300 88 8427, or a dealer; 278 stations</td><td>Mesra loyalty; GPHD app ended 2023</td><td>mymesra.com.my</td></tr><tr><td class="strong">Petron Gasul</td><td>Petron Malaysia Refining &amp; Marketing Bhd</td><td>Local Petron dealers; e-wallet payment through GHL since 28 Jul 2020; about 222 stations</td><td>Petron Malaysia, loyalty only (2.18 from 1,179 ratings)</td><td>petron.com.my</td></tr><tr><td class="strong">Solar Gas</td><td>Solar Gas Sdn Bhd, under JAG Capital Berhad (formerly KUB Malaysia, renamed 10 Nov 2025)</td><td>Dealers; hotline 1-700-81-7427, WhatsApp; its own site quotes a JB housewife who simply calls the dealer</td><td>None</td><td>solargas.com.my; NST, 6 Nov 2025</td></tr><tr><td class="strong">BHPetrogas</td><td>BHPetrol</td><td>Hotline 1300-88-3553 or a dealer; same or next day, payment varies by dealer</td><td>BHPetrol eCard, loyalty only</td><td>bhpetrol.com.my</td></tr><tr><td class="strong">MiraGas</td><td>NGC Energy (Oman)</td><td>A web form pairs you with the nearest dealer; hotline 1 300 88 5808; "Mira Man" crews</td><td>None</td><td>ngcenergy.com.my</td></tr><tr><td class="strong">MyGaz</td><td>MyGaz Sdn Bhd (70% Siamgas, Thailand)</td><td>Not found; no working website</td><td>None found</td><td>DNS check; Dayak Daily</td></tr></tbody></table></div><div class="note blue"><b>Our read.</b> The brands are suppliers to NakGas&rsquo;s dealers, not rivals. NakGas carries every brand a dealer stocks; the customer picks the brand, the nearest dealer with it accepts.</div>
+</section>
+
+<section class="sec" id="features">
+  <h2>Feature by feature</h2>
+  <p class="sub">What a household and a dealer get from each. Yes means seen on 13 Oct in the product or its code; Not found means we looked and could not see it.</p>
+<div class="tbl-wrap"><table class="tbl"><thead><tr><th>Feature</th><th>NakGas plan</th><th>GPHD</th><th>Click MyGas</th><th>Gasbee</th><th>GasXpress</th><th>Dealer by phone</th></tr></thead><tbody><tr><td class="strong">Order in an app</td><td><span class="mk y">Yes</span></td><td><span class="mk n">No</span></td><td><span class="mk y">Yes</span></td><td><span class="mk y">Yes</span> (paused)</td><td>Web app</td><td><span class="mk n">No</span></td></tr><tr><td class="strong">Delivers in Johor Bahru</td><td><span class="mk y">Yes</span> (launch)</td><td><span class="mk y">Yes</span></td><td><span class="mk n">No</span></td><td><span class="mk n">No</span></td><td><span class="mk n">No</span></td><td><span class="mk y">Yes</span></td></tr><tr><td class="strong">KPDN price shown first</td><td><span class="mk y">Yes</span></td><td>On the page</td><td><span class="mk y">Yes</span></td><td><span class="mk q">Not found</span></td><td><span class="mk y">Yes</span></td><td><span class="mk n">No</span></td></tr><tr><td class="strong">Delivery fee shown before paying</td><td><span class="mk y">Yes</span></td><td><span class="mk q">Not found</span></td><td><span class="mk q">Not found</span></td><td><span class="mk y">Yes</span></td><td><span class="mk y">Yes</span></td><td>On the call</td></tr><tr><td class="strong">One fee line only</td><td><span class="mk y">Yes</span></td><td><span class="mk q">Not found</span></td><td><span class="mk y">Yes</span></td><td><span class="mk n">No</span></td><td><span class="mk n">No</span></td><td><span class="mk y">Yes</span></td></tr><tr><td class="strong">Scheduled delivery</td><td><span class="mk y">Yes</span></td><td><span class="mk y">Yes</span></td><td><span class="mk n">No</span></td><td>Same-day slots</td><td><span class="mk y">Yes</span></td><td>On the call</td></tr><tr><td class="strong">Live map tracking</td><td>Status, map in Phase Two</td><td><span class="mk n">No</span></td><td><span class="mk y">Yes</span></td><td><span class="mk y">Yes</span></td><td><span class="mk y">Yes</span></td><td><span class="mk n">No</span></td></tr><tr><td class="strong">Photo proof at the door</td><td><span class="mk y">Yes</span></td><td><span class="mk n">No</span></td><td><span class="mk n">No</span></td><td><span class="mk q">Not found</span></td><td><span class="mk y">Yes</span></td><td><span class="mk n">No</span></td></tr><tr><td class="strong">Reorder reminder</td><td><span class="mk y">Yes</span></td><td><span class="mk n">No</span></td><td><span class="mk n">No</span></td><td><span class="mk n">No</span></td><td><span class="mk n">No</span></td><td><span class="mk n">No</span></td></tr><tr><td class="strong">Cash on delivery</td><td><span class="mk y">Yes</span></td><td>App era</td><td><span class="mk n">No</span></td><td><span class="mk q">Not found</span></td><td><span class="mk n">No</span></td><td><span class="mk y">Yes</span></td></tr><tr><td class="strong">FPX, cards, e-wallets</td><td><span class="mk y">Yes</span></td><td><span class="mk q">Not found</span></td><td><span class="mk y">Yes</span></td><td><span class="mk y">Yes</span></td><td><span class="mk y">Yes</span></td><td><span class="mk n">No</span></td></tr><tr><td class="strong">Bahasa Malaysia and English</td><td><span class="mk y">Yes</span></td><td><span class="mk y">Yes</span></td><td><span class="mk y">Yes</span> (four languages)</td><td>Malay store copy</td><td><span class="mk y">Yes</span></td><td><span class="mk y">Yes</span></td></tr><tr><td class="strong">High-rise address fields</td><td><span class="mk y">Yes</span></td><td><span class="mk q">Not found</span></td><td><span class="mk q">Not found</span></td><td><span class="mk q">Not found</span></td><td>Stair surcharge</td><td>On the call</td></tr><tr><td class="strong">Existing licensed dealers deliver</td><td><span class="mk y">Yes</span></td><td><span class="mk y">Yes</span></td><td>Plus freelance riders</td><td>Merchants plus riders</td><td><span class="mk y">Yes</span></td><td><span class="mk y">Yes</span></td></tr><tr><td class="strong">Dealers pay no commission</td><td><span class="mk y">Yes</span></td><td><span class="mk q">Not found</span></td><td><span class="mk q">Not found</span></td><td><span class="mk n">No</span></td><td><span class="mk n">No</span> (10% default)</td><td>Not applicable</td></tr><tr><td class="strong">iOS and Android store apps</td><td><span class="mk y">Yes</span></td><td><span class="mk n">No</span></td><td><span class="mk y">Yes</span></td><td>Android only</td><td><span class="mk n">No</span></td><td>Not applicable</td></tr></tbody></table></div>
+</section>
+<section class="sec" id="rivals">
+  <h2>The 6 Oct read</h2>
+  <p class="sub">Each one read on Tue 6 Oct 2026 unless the date in the last column says otherwise. Scroll the table sideways on a small screen.</p>
+  <div class="tbl-wrap"><table class="tbl wide">
+    <thead><tr><th>Name</th><th>Model</th><th>Region</th><th>Platforms</th><th>Delivery promise</th><th>Fees and promos</th><th>Checkout lines</th><th>Look</th><th>Status</th><th>Source, read date</th></tr></thead>
+    <tbody>
+      <tr class="us"><td class="strong">NakGas, the plan</td><td>Existing licensed dealers and their trucks; no riders; suppliers pay nothing</td><td>National by design; Johor Bahru first (our read, to confirm)</td><td>iOS and Android apps, supplier app, web admin</td><td>45 seconds for a dealer to accept; now or scheduled</td><td>Platform fee per order, RM3.00 or RM3.50</td><td>Gas RM26.60, delivery, one platform fee, total</td><td>Flame green on white</td><td><span class="chip blue">Not built</span></td><td>Calls of 28 Sep and 1 Oct; brief of 6 Oct</td></tr>
+      <tr><td class="strong">The dealer's number</td><td>The dealer delivers himself</td><td>Everywhere, one patch at a time</td><td>Phone, WhatsApp</td><td>Not published; same day in his area (our read)</td><td>RM3.40 delivery in JB</td><td>None: one price said aloud, RM30.00</td><td>A sticker on the cylinder</td><td><span class="chip ok">Live</span></td><td>Navin, 1 Oct</td></tr>
+      <tr><td class="strong">Gas PETRONAS Home Delivery</td><td>Authorised LPG dealers, trained to its standards</td><td>"Selected areas across Malaysia", by dealer zone</td><td>Hotline 1300 88 8427; the page refers to "the available home delivery platform" without naming one. Its own iOS app closed on 31 Jan 2023</td><td>A chosen date and time slot, within operating hours</td><td>Not published</td><td>Not published</td><td>PETRONAS teal green, corporate</td><td><span class="chip ok">Live</span></td><td>mymesra.com.my, 6 Oct; TechTRP, 17 Jan 2023</td></tr>
+      <tr><td class="strong">Other brand hotlines</td><td>Dealers behind a brand number</td><td>Dealer networks</td><td>BHPetrogas 1300-88-3553; Solar Gas 1-700-81-7427; Petron 1300 22 8211</td><td>BHPetrogas: same or next day in most areas</td><td>Not published</td><td>Not published</td><td>Each brand's cylinder colour</td><td><span class="chip ok">Live</span></td><td>Brand sites, 29 Sep and 1 Oct</td></tr>
+      <tr><td class="strong">Gasbee</td><td>"Gasbee rider" delivers; local suppliers join as merchants and "share a small commission on completed orders"</td><td>Address in Shah Alam, Selangor; areas not stated</td><td>Android (500+ downloads, 3.3 stars from 7 reviews, updated 5 Oct 2026); iOS "coming soon". Developer: Synchronetwork Sdn Bhd</td><td>"From order to delivery in minutes", live tracking</td><td>RM1.50 processing fee in Navin's test; no promo on the site</td><td>Four: gas subtotal, delivery fee, service fee, processing fee RM1.50. Navin's basket: RM139.10, contents not stated</td><td>Yellow, a cartoon bee</td><td><span class="chip low">Paused</span> Site notice: "currently in its testing phase", deliveries "temporarily unavailable", payments taken</td><td>gasbee.com.my and Google Play, 6 Oct; Navin, 1 Oct</td></tr>
+      <tr><td class="strong">Click MyGas</td><td>Dealers and agents supply; independent riders ("Rider Bebas") pick up and deliver. Registration free for both</td><td>Klang Valley</td><td>iOS (listed since 11 Nov 2021, no ratings); Android (100+ downloads, 4.2 stars from 5 reviews); a separate rider app. Developer: Matrix Future Technologies Sdn Bhd</td><td>"As little as 45 minutes", live map</td><td>Gas "Fixed price by KPDNKK"; delivery fee "Varies by supplier"; free delivery on the first 3 orders, terms apply</td><td>Subtotal, delivery fee, total. Cashless only: e-wallets including Touch 'n Go, ShopeePay and Boost, FPX, cards, DuitNow</td><td>Not assessed: the site draws itself by script</td><td><span class="chip low">Launching soon</span></td><td>clickmygas.com code, App Store and Google Play, 6 Oct</td></tr>
+      <tr><td class="strong">GasXpress</td><td>Licensed local dealers accept the order, then their drivers on duty in the zone take it; the first to accept gets it</td><td>Not stated; rejects addresses more than 2.5 km from the dealer</td><td>Installable web app; no store listing found in a search. Domain registered 28 Aug 2026</td><td>Normal, urgent or pre-order, with a time slot; live GPS</td><td>Dealer sets landed and flat or condo rates; stair surcharge where there is no lift; RM5.00 cross-brand swap surcharge</td><td>Items, delivery charge, service charge, processing fee, total. Amounts not published. ToyyibPay (FPX, cards), Touch 'n Go</td><td>Dark navy and green, from its code</td><td><span class="chip low">Live site, coverage unknown</span></td><td>gasxpress.com.my code and MYNIC RDAP, 6 Oct</td></tr>
+      <tr><td class="strong">Gas2u, also written GasToYou</td><td>On 29 Sep: "become our agent" drivers; Navin, 1 Oct: own agents. gas2u.my: vendors set prices, bike for up to 4 cylinders, truck above</td><td>On 29 Sep: KL, Cheras, Ampang, Kajang, Bangi, Shah Alam</td><td>The Google Play listing read on 29 Sep showed Google Play's "not found" page on 6 Oct, which is not proof it is gone. gas2u.my is a web app (registered 10 May 2026); gas2u.com.my a Malay login for customers and dealers (registered 17 Jul 2026)</td><td>gas2u.my: predicts when the cylinder runs dry; NFC tag checked at the door</td><td>Not published</td><td>Not published; gas2u.my lists Curlec, card or cash on delivery</td><td>Not assessed</td><td><span class="chip">Not verified</span> Whether the three belong to one company is not known</td><td>Google Play, 29 Sep and 6 Oct; gas2u.my and gas2u.com.my, 6 Oct</td></tr>
+      <tr><td class="strong">Sara-X</td><td>A Sarawak home services app: A/C servicing, cleaning, LPG home delivery, grass cutting, wiring</td><td>Sarawak</td><td>iOS (since 21 Jan 2023, updated 27 Mar 2026); Android (500+ downloads). Danapuri Sdn Bhd</td><td>Not stated</td><td>Not published</td><td>Not published; pays by S Pay e-wallet</td><td>Not assessed</td><td><span class="chip ok">Listed</span></td><td>App Store and Google Play, 6 Oct</td></tr>
+      <tr><td class="strong">BeliGas, later EDAR</td><td>Its own delivery operation and warehouses; about 6,000 cylinders a month by January 2021</td><td>Klang Valley; 312 areas in KL, Selangor, Penang and Negeri Sembilan by 2022</td><td>Android app and website</td><td>Pre-order, same day, one hour, night</td><td>RM25.60 to RM38.60 for 14 kg, delivery included; RM3.00 high-rise surcharge</td><td>One all-in price by promise, plus the surcharge</td><td>Not assessed</td><td><span class="chip">Retired</span> Rebranded EDAR, 30 Sep 2022; edar.com parked; beligas.com sends visitors to an unrelated site (6 Oct)</td><td>KL Foodie and Vulcan Post, 21 Jan 2021; Malaysiakini, 30 Sep 2022</td></tr>
+      <tr><td class="strong">GrabGas</td><td>App and GPS matched households to LPG drivers; cash on delivery</td><td>Petaling Jaya</td><td>App, 2015</td><td>Not recorded</td><td>RM28 to RM33 a cylinder, delivery included, by area and driver</td><td>One all-in price</td><td>Not assessed</td><td><span class="chip">Retired, our read</span> No site or store listing found 6 Oct</td><td>Vulcan Post, 26 Apr 2016</td></tr>
+      <tr><td class="strong">SuriNow</td><td>A web and mobile app "to simplify ordering of tong gas": customers, admin, helpdesk</td><td>Not stated</td><td>Described in a shared presentation only</td><td>Not stated</td><td>Not stated</td><td>Not stated</td><td>Not assessed</td><td><span class="chip">Project, not a service</span> No site or store listing found 6 Oct</td><td>ChatSlide shared deck, 6 Oct</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note"><b>Checked, not counted as rivals.</b> Setel's Deliver2Me brings Gas PETRONAS to your car at selected stations, not to your door; its help article returned "not found" on 6 Oct, so its current status is not verified. Same-name apps abroad, so nobody confuses them: "Gas2U" on Google Play is a Saudi app; "Gas express" sells 6, 13 and 50 kg cylinders elsewhere; AbangGas is an Indonesian gas and water delivery platform.</div>
+</section>
+
+<!-- CHECKOUT -->
+<section class="sec" id="checkout">
+  <h2>The checkout compared</h2>
+  <p class="sub">One 14 kg household cylinder, landed home. The lines each rival shows, and the total only where it is published. Nothing here is estimated to fill a gap.</p>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>Service</th><th>Gas</th><th>Delivery</th><th>Other lines</th><th class="r">Total, one 14 kg</th><th>Source</th></tr></thead>
+    <tbody>
+      <tr><td class="strong">The dealer, by phone, JB</td><td>RM26.60</td><td>RM3.40</td><td>None</td><td class="r strong">RM30.00</td><td>Navin, 1 Oct</td></tr>
+      <tr><td class="strong">Gas PETRONAS Home Delivery</td><td>Not published</td><td>Not published</td><td>Not published</td><td class="r">Not published</td><td>mymesra.com.my, 6 Oct</td></tr>
+      <tr><td class="strong">Gasbee</td><td>A gas subtotal</td><td>A delivery fee, amount not stated</td><td>A service fee, amount not stated; a processing fee, RM1.50</td><td class="r">Not published for one cylinder. Navin's basket: RM139.10, contents not stated</td><td>Navin's test, 1 Oct</td></tr>
+      <tr><td class="strong">Click MyGas</td><td>"Fixed price by KPDNKK"</td><td>"Varies by supplier"; free on the first 3 orders</td><td>None shown on the site</td><td class="r">Not published</td><td>clickmygas.com code, 6 Oct</td></tr>
+      <tr><td class="strong">GasXpress</td><td>The controlled price</td><td>Set by the dealer: landed, or flat and condo; stair surcharge without a lift</td><td>Service charge and processing fee, amounts not published; RM5.00 for a cross-brand swap</td><td class="r">Not published</td><td>gasxpress.com.my code, 6 Oct</td></tr>
+      <tr><td class="strong">BeliGas, 2021, retired</td><td colspan="2">Included in one price</td><td>RM3.00 high-rise surcharge</td><td class="r">RM25.60 to RM38.60, by promise</td><td>KL Foodie, 21 Jan 2021</td></tr>
+      <tr><td class="strong">GrabGas, 2016, retired</td><td colspan="2">Included in one price</td><td>None recorded</td><td class="r">RM28 to RM33</td><td>Vulcan Post, 26 Apr 2016</td></tr>
+      <tr class="us"><td class="strong">NakGas, option A</td><td>RM26.60</td><td>RM3.40</td><td>Platform fee RM3.00, gateway absorbed</td><td class="r strong">RM33.00</td><td>Navin, 1 Oct</td></tr>
+      <tr class="us"><td class="strong">NakGas, option B</td><td>RM26.60</td><td>RM3.40</td><td>Platform &amp; processing fee RM3.50</td><td class="r strong">RM33.50</td><td>Navin, 1 Oct, his leaning</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">Gasbee's basket cannot be split per cylinder without its contents: a guess at the number of cylinders would move the delivery and service figures, so none is made. GasXpress's policy page shows "Kadar Asas: RM 15.00" beside a stair surcharge line; from the code alone it cannot be told whether that is a live tariff or sample text, so it is not used.</p>
+
+  <h3>The published totals, side by side</h3>
+  <div class="bars" role="img" aria-label="Published totals for one 14 kg cylinder on a scale of RM0 to RM40">
+    <div class="row phone"><div class="lab"><b>Dealer by phone, JB</b><span>Navin, 1 Oct 2026</span></div><div class="track"><i style="left:0;width:75%"></i><span class="ceil" style="left:97.5%;width:2.5%"></span><span class="reg" style="left:66.5%"></span></div><div class="val">RM30.00</div></div>
+    <div class="row us"><div class="lab"><b>NakGas, option A</b><span>RM3.00 platform fee</span></div><div class="track"><i style="left:0;width:82.5%"></i><span class="ceil" style="left:97.5%;width:2.5%"></span><span class="reg" style="left:66.5%"></span></div><div class="val">RM33.00</div></div>
+    <div class="row us"><div class="lab"><b>NakGas, option B</b><span>RM3.50 platform &amp; processing fee</span></div><div class="track"><i style="left:0;width:83.75%"></i><span class="ceil" style="left:97.5%;width:2.5%"></span><span class="reg" style="left:66.5%"></span></div><div class="val">RM33.50</div></div>
+    <div class="row"><div class="lab"><b>BeliGas, 2021</b><span>Retired; by promise</span></div><div class="track"><i style="left:64%;width:32.5%"></i><span class="ceil" style="left:97.5%;width:2.5%"></span><span class="reg" style="left:66.5%"></span></div><div class="val">RM25.60 to RM38.60</div></div>
+    <div class="row"><div class="lab"><b>GrabGas, 2016</b><span>Retired; by area</span></div><div class="track"><i style="left:70%;width:12.5%"></i><span class="ceil" style="left:97.5%;width:2.5%"></span><span class="reg" style="left:66.5%"></span></div><div class="val">RM28 to RM33</div></div>
+    <div class="row"><div class="lab"><b>Gasbee, Click MyGas, GasXpress, Gas PETRONAS</b><span>Live, but no total published</span></div><div class="track"><span class="ceil" style="left:97.5%;width:2.5%"></span><span class="reg" style="left:66.5%"></span></div><div class="val">Not published</div></div>
+    <div class="scale"><span></span><div><span>RM0</span><span>RM10</span><span>RM20</span><span>RM30</span><span>RM40</span></div><span></span></div>
+  </div>
+  <p class="src">Dashed line: RM26.60, the controlled gas price. Red band: RM39 to RM40, the figure Navin does not want a customer to reach (1 Oct). Grey bars are retired services.</p>
+
+  <h3>How many lines the customer reads</h3>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>Service</th><th class="r">Lines before the total</th><th>Which</th></tr></thead>
+    <tbody>
+      <tr><td>Dealer by phone</td><td class="r">0</td><td>One spoken price</td></tr>
+      <tr><td>Click MyGas</td><td class="r">2</td><td>Subtotal, delivery fee</td></tr>
+      <tr class="us"><td>NakGas</td><td class="r">3</td><td>Gas at the KPDN price, delivery fee, one platform fee</td></tr>
+      <tr><td>Gasbee</td><td class="r">4</td><td>Gas subtotal, delivery fee, service fee, processing fee</td></tr>
+      <tr><td>GasXpress</td><td class="r">up to 4, plus surcharges</td><td>Items, delivery charge, service charge, processing fee; cross-brand and stair surcharges</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Two cylinders in one order</h3>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>Service</th><th class="r">Gas</th><th class="r">Delivery</th><th class="r">Fee</th><th class="r">Total</th></tr></thead>
+    <tbody>
+      <tr><td>Dealer by phone, JB</td><td class="r">RM53.20</td><td class="r">RM6.80</td><td class="r">none</td><td class="r strong">RM60.00</td></tr>
+      <tr class="us"><td>NakGas, option A</td><td class="r">RM53.20</td><td class="r">RM6.80</td><td class="r">RM3.00</td><td class="r strong">RM63.00</td></tr>
+      <tr class="us"><td>NakGas, option B</td><td class="r">RM53.20</td><td class="r">RM6.80</td><td class="r">RM3.50</td><td class="r strong">RM63.50</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">The phone row assumes the dealer charges RM3.40 per cylinder, as the brief's two cylinder example does. <span class="chip inf">Our read</span> Because the fee is per order, the gap to the phone call narrows per cylinder: RM3.50 on one, RM1.75 a cylinder on two.</p>
+
+  <div class="note blue"><b>Our read on the fee: option B, one line, RM3.50.</b>
+    <ol class="clean">
+      <li><b>One line, not two.</b> Gasbee shows a service fee and a processing fee; GasXpress can show both. "Platform &amp; processing fee" says the same in one line, next to the KPDN price the law wants shown.</li>
+      <li><b>The extra 50 sen pays for the gateway.</b> About RM2.83 kept against about RM2.34: about 21% more per order, for RM0.50 the customer barely sees.</li>
+      <li><b>The total stays well clear of Navin's ceiling.</b> RM33.50 is RM5.50 to RM6.50 under RM39 to RM40.</li>
+      <li><b>No live rival undercuts it in public.</b> No live service publishes an all-in total for one cylinder. The only published totals are retired. The comparison a household actually makes is RM33.50 against the RM30.00 call.</li>
+      <li><b>Launch hook.</b> Click MyGas promises free delivery on the first 3 orders. NakGas cannot waive the dealer's delivery fee, but it can waive its own platform fee on a household's first 3 orders. The cost is the RM3.50 not earned, plus about 60 sen of gateway on each of those online orders.</li>
+    </ol>
+    Option A would be the better call if the first Johor dealers' delivery fees come in well above RM3.40, or if Navin wants "RM3 fee" as a headline. Either way the decision is Navin's; the figure stays editable in Admin.
+  </div>
+</section>
+
+<!-- THE MAP -->
+<section class="sec" id="map">
+  <h2>The map</h2>
+  <p class="sub">Two questions sort every rival: who carries the cylinder, and how far the service means to reach.</p>
+  <div class="quad" role="img" aria-label="Two by two: own or freelance riders against existing dealers, one region against national">
+    <div class="ylab"><span>Existing dealers</span><span>Own or freelance riders</span></div>
+    <div class="q">
+      <h4>Riders &middot; one region</h4>
+      <ul>
+        <li><b>Gasbee</b> Own riders plus commission-paying merchants; Shah Alam address; deliveries paused for testing.</li>
+        <li><b>Click MyGas</b> Freelance riders collect from dealers; Klang Valley only; launching soon.</li>
+        <li><b>Gas2u</b> Agents in six Klang Valley areas (29 Sep); bike or truck in its newer web app.</li>
+        <li class="gone"><b>BeliGas</b> Own branches; Klang Valley, later four states; retired 2022.</li>
+        <li class="gone"><b>GrabGas</b> Matched drivers in Petaling Jaya; retired.</li>
+      </ul>
+    </div>
+    <div class="q empty">
+      <h4>Riders &middot; national</h4>
+      <ul>
+        <li><b>Nobody</b> No service has tried national reach on its own riders. Our read: the cost of a national rider fleet for a RM3 fee is why.</li>
+      </ul>
+    </div>
+    <div class="q">
+      <h4>Dealers &middot; one region</h4>
+      <ul>
+        <li><b>GasXpress</b> Licensed dealers within 2.5 km; region not stated, so placed here until its coverage is known.</li>
+        <li><b>Sara-X</b> Certified providers in Sarawak; LPG is one service among several.</li>
+      </ul>
+    </div>
+    <div class="q home">
+      <h4>Dealers &middot; national</h4>
+      <ul>
+        <li class="us"><b>NakGas</b> The dealers already delivering, national by design, Johor Bahru first.</li>
+        <li><b>Gas PETRONAS Home Delivery</b> Authorised dealers in selected areas across Malaysia, by hotline.</li>
+        <li><b>Brand hotlines</b> BHPetrogas, Solar Gas, Petron: dealers behind a number.</li>
+        <li><b>The dealer's number</b> Everywhere, one patch at a time, no platform.</li>
+      </ul>
+    </div>
+    <div></div>
+    <div class="xlab" style="grid-column:2 / span 2"><span>One region</span><span>National</span></div>
+  </div>
+  <div class="note blue"><b>Our read.</b> NakGas's square is the incumbents' square: dealers, nationwide. The difference from Gas PETRONAS Home Delivery is that it carries every brand's dealers, shows the price and the fee before you order, and needs no call. The one rival that shares the dealer model, GasXpress, has not said where it delivers.</div>
+</section>
+
+<!-- WHAT THEY DO WELL -->
+<section class="sec" id="well">
+  <h2>What they do well</h2>
+  <p class="sub">Credit where it is due. Each of these is something NakGas should match or answer.</p>
+  <div class="grid g3">
+    <div class="card"><div class="k">The dealer's number</div><h4>Trust and the cheapest total</h4><p>A known face, cash, RM30.00 all in, and he knows which flats have no lift.</p></div>
+    <div class="card"><div class="k">Gas PETRONAS Home Delivery</div><h4>A brand and a slot</h4><p>The best-known cylinder brand, a chosen date and time slot, dealers trained to its safety standards.</p></div>
+    <div class="card"><div class="k">Gasbee</div><h4>One app for everything gas</h4><p>Refill, new cylinder, regulators and hoses, and bulk for businesses in one place; a Malay store description; a mascot Navin remembered.</p></div>
+    <div class="card"><div class="k">Click MyGas</div><h4>The clearest public promise</h4><p>45 minutes, free delivery on the first 3 orders, the KPDN price named on its site, wide cashless payment, copy in English, Malay, Tamil and Chinese in its site code, and a separate rider app.</p></div>
+    <div class="card"><div class="k">GasXpress</div><h4>The most careful reading of the rules</h4><p>Three cylinder cap citing KPDN, landed and high-rise rates, cross-brand swaps priced up front, photo proof, a refund policy in Malay, a named data protection contact, free regulator fitting and leak test on request.</p></div>
+    <div class="card"><div class="k">Gas2u, gas2u.my</div><h4>Phase Two, today</h4><p>Predicts when a cylinder runs dry and checks an NFC tag at the door: the reorder idea Navin wants from IoT, attempted without hardware.</p></div>
+    <div class="card"><div class="k">BeliGas, retired</div><h4>Priced by promise</h4><p>Pre-order, same day, one hour, night: a clear ladder, and the high-rise surcharge stated, not discovered at the door.</p></div>
+    <div class="card"><div class="k">Sara-X</div><h4>Local and bundled</h4><p>LPG next to A/C and cleaning in one Sarawak app, paid by the state's own e-wallet.</p></div>
+    <div class="card"><div class="k">All of them</div><h4>Live tracking</h4><p>Gasbee, Click MyGas and GasXpress all show the rider on a map. NakGas's Phase One shows status, not a map.</p></div>
+  </div>
+</section>
+
+<!-- WINS AND EXPOSURE -->
+<section class="sec" id="wins">
+  <h2>Where NakGas wins, and where it is exposed</h2>
+  <p class="sub">Each point with the evidence behind it. The judgement is ours.</p>
+  <div class="grid g2">
+    <div>
+      <h3>Where it wins</h3>
+      <div class="tbl-wrap"><table class="tbl">
+        <thead><tr><th>Point</th><th>Evidence</th></tr></thead>
+        <tbody>
+          <tr><td class="strong">Dealers pay nothing</td><td>Gasbee merchants share a commission; GasXpress's code carries a dealer commission. NakGas: none (Navin, 1 Oct)</td></tr>
+          <tr><td class="strong">No riders to recruit</td><td>The trucks are already on the road; JB distributors run 20 to 40 a day (28 Sep)</td></tr>
+          <tr><td class="strong">Johor first, where no app says it delivers</td><td>No app rival states Johor coverage (6 Oct); only Gas PETRONAS Home Delivery covers JB, by hotline; four brands fill near JB (1 Oct)</td></tr>
+          <tr><td class="strong">One fee line</td><td>Three lines before the total, against Gasbee's four</td></tr>
+          <tr><td class="strong">Cash on delivery</td><td>Click MyGas is cashless only; many households and dealers still use cash</td></tr>
+          <tr><td class="strong">Malay first, by design</td><td>Both apps in Bahasa Malaysia and English from the first screen</td></tr>
+          <tr><td class="strong">A reminder before it runs out</td><td>From the household's own rhythm, every 28 to 30 days by default</td></tr>
+          <tr><td class="strong">Licence checked, expiry tracked</td><td>KPDN licence on every dealer record</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+    <div>
+      <h3>Where it is exposed</h3>
+      <div class="tbl-wrap"><table class="tbl">
+        <thead><tr><th>Point</th><th>Evidence</th></tr></thead>
+        <tbody>
+          <tr><td class="strong">It costs more than the call</td><td>RM33.00 or RM33.50 against RM30.00</td></tr>
+          <tr><td class="strong">Dealers must keep the app open</td><td>No fallback fleet if the nearest truck is offline</td></tr>
+          <tr><td class="strong">No live map</td><td>Three rivals show the rider on a map; Phase One shows status</td></tr>
+          <tr><td class="strong">No time promise yet</td><td>Click MyGas says 45 minutes; our SLA is unwritten (audit F20)</td></tr>
+          <tr><td class="strong">The same model is live</td><td>GasXpress, registered 28 Aug 2026, dealers within 2.5 km</td></tr>
+          <tr><td class="strong">Predictive reorder is being built elsewhere</td><td>gas2u.my, registered 10 May 2026</td></tr>
+          <tr><td class="strong">Later to market</td><td>Funding not in; Click MyGas has been on the App Store since 2021</td></tr>
+          <tr><td class="strong">No name cleared, no domain or listing yet</td><td>NakGas still to confirm with Navin; nakgas.my, nakgas.com.my and nakgas.com free on 20 Oct (MYNIC and Verisign RDAP); no NakGas app on the Malaysian App Store or Google Play, 20 Oct</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+</section>
+<section class="sec" id="learn">
+  <h2>Copy and avoid</h2>
+  <p class="sub">The lessons for the build, each from something a rival does or did. <span class="chip inf">Our read</span></p>
+<div class="grid g2"><div class="card"><h4>Copy</h4><ul><li>Click MyGas&rsquo;s plain promise and the KPDN price named on the page</li><li>GasXpress&rsquo;s reading of the rules: three cylinders a household, swap charges priced up front, refunds in plain Malay</li><li>BeliGas&rsquo;s honesty about the high-rise surcharge, stated before the door</li><li>Gas PETRONAS&rsquo;s chosen date and slot for scheduled orders</li><li>Gas2u&rsquo;s idea of predicting the run-out, done first from the customer&rsquo;s own rhythm</li></ul></div><div class="card"><h4>Avoid</h4><ul><li>Taking payment while deliveries are paused (Gasbee)</li><li>Claims the installs cannot carry (Gasbee&rsquo;s 10K+ orders against 500+ installs)</li><li>Four fee lines that end above the phone price (GasXpress defaults, RM43.10)</li><li>Cashless only, which turns away households and dealers who use cash (Click MyGas)</li><li>A launch with no stated coverage, which leaves customers waiting on an order nobody can take (Gas2u, Gasbee)</li><li>Closing the app before it has users; build the dealer side first so the first orders land (GPHD)</li></ul></div></div>
+</section>
+
+
+<!-- STILL TO CHECK -->
+<section class="sec" id="check">
+  <h2>What we still have to check</h2>
+  <p class="sub">Everything on this page that is "not published" or "not verified", turned into a task.</p>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>#</th><th>Check</th><th>How</th><th>Who</th><th>Why it matters</th></tr></thead>
+    <tbody>
+      <tr><td class="n">1</td><td class="strong">Navin's Gasbee screenshot</td><td>Ask for the RM139.10 checkout screen: items, quantities, each line</td><td>Diha</td><td>Turns his test into a per-cylinder comparison</td></tr>
+      <tr><td class="n">2</td><td class="strong">A real Gasbee checkout</td><td>On Android, one 14 kg to a Shah Alam and a JB address, up to the last screen before paying</td><td>Bazil</td><td>Amounts for its delivery and service fees; deliveries are paused, so the checkout may still show lines</td></tr>
+      <tr><td class="n">3</td><td class="strong">A real Click MyGas checkout</td><td>iOS or Android, one 14 kg, first order and a later order</td><td>Bazil</td><td>Whether delivery is truly free on the first 3, and the fee after</td></tr>
+      <tr><td class="n">4</td><td class="strong">GasXpress coverage and fees</td><td>Open the web app with a JB address; read whether a dealer appears and what each line costs</td><td>Bazil</td><td>The only live rival with our model</td></tr>
+      <tr><td class="n">5</td><td class="strong">Gas PETRONAS Home Delivery from JB</td><td>Call 1300 88 8427: delivery charge, slot, cash or card</td><td>Diha</td><td>The incumbent's price in our launch city</td></tr>
+      <tr><td class="n">6</td><td class="strong">Three JB dealers</td><td>Call New Town Trading, Guna Trading, Uncle Lim: landed and high-rise prices</td><td>Navin</td><td>Sets the delivery fee tiers (audit F09)</td></tr>
+      <tr><td class="n">7</td><td class="strong">Gas2u, three places</td><td>Search the Play Store on a phone in Malaysia; check whether the app, gas2u.my and gas2u.com.my share a company</td><td>Bazil</td><td>Whether one rival is moving to predictive reorder</td></tr>
+      <tr><td class="n">8</td><td class="strong">Store listings</td><td>Gasbee on iOS; any GasXpress listing; Click MyGas launch date</td><td>Bazil</td><td>Who is live where, at launch</td></tr>
+      <tr><td class="n">9</td><td class="strong">Recheck every row</td><td>The week the build starts</td><td>BM</td><td>Two rivals are early and one is paused; this page dates fast</td></tr>
+      <tr><td class="n">10</td><td class="strong">The name NakGas</td><td>MyIPO trademark search in the software and delivery classes; the nakgas handles on Instagram, Facebook and TikTok</td><td>Brand Method</td><td>Domains and store names were clear on 20 Oct; the trademark and the handles are the two checks left</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- SOURCES -->
+<section class="sec" id="sources">
+  <h2>Sources</h2>
+  <p class="sub">Read on the date given. Market and brand sources are on the <a href="audit.html#sources">App Audit</a> page.</p>
+  <ul class="srcs">
+    <li>Navin, call of Thu 1 Oct 2026 <span>RM30.00 by phone in JB; Gasbee test, four lines, RM1.50, RM139.10; RM39 to RM40 ceiling; options A and B</span></li>
+    <li><a href="https://www.mymesra.com.my/products/cooking-gas/gas-petronas-home-delivery">Gas PETRONAS Home Delivery</a> <span>read 6 Oct</span></li>
+    <li><a href="https://techtrp.com/news/2023/01/17/petronas-gas-to-terminate-cooking-gas-delivery-app-by-the-end-of-this-month/">TechTRP, 17 Jan 2023</a> <span>Gas PETRONAS app closed 31 Jan 2023</span></li>
+    <li><a href="https://www.bhpetrol.com.my/bhp-blog/gas-habis-ini-cara-mudah-untuk-pesan-bhpetrogas-lpg/">BHPetrol: ordering BHPetrogas</a> <span>read 29 Sep</span></li>
+    <li><a href="https://www.solargas.com.my/products">Solar Gas</a> <span>read 1 Oct</span></li>
+    <li><a href="https://www.petron.com.my/what-we-offer/products/liquefied-petroleum-gas/">Petron Gasul</a> <span>read 29 Sep</span></li>
+    <li><a href="https://gasbee.com.my/">gasbee.com.my</a> <span>read 6 Oct: testing notice, merchant commission, riders</span></li>
+    <li><a href="https://play.google.com/store/apps/details?id=com.gasbee.app&amp;hl=en">Google Play: Gasbee</a> <span>read 6 Oct</span></li>
+    <li><a href="https://clickmygas.com/">clickmygas.com</a> <span>site code read 6 Oct</span></li>
+    <li><a href="https://apps.apple.com/my/app/click-mygas/id1594526984">App Store: Click MyGas</a> <span>read 6 Oct</span></li>
+    <li><a href="https://play.google.com/store/apps/details?id=matrix.mygas">Google Play: Click MyGas</a> <span>read 6 Oct</span></li>
+    <li><a href="https://play.google.com/store/apps/details?id=matrix.mygasrider">Google Play: Click MyGas Rider</a> <span>read 6 Oct</span></li>
+    <li><a href="https://gasxpress.com.my/">gasxpress.com.my</a> <span>site code read 6 Oct</span></li>
+    <li><a href="https://rdap.mynicregistry.my/rdap/domain/gasxpress.com.my">MYNIC RDAP: gasxpress.com.my</a> <span>6 Oct: registered 28 Aug 2026</span></li>
+    <li><a href="https://play.google.com/store/apps/details?id=com.cookinggas.my">Google Play: Gas2u</a> <span>29 Sep: six areas; 6 Oct: "not found" page</span></li>
+    <li><a href="https://gas2u.my/">gas2u.my</a> <span>site code read 6 Oct</span></li>
+    <li><a href="https://rdap.mynicregistry.my/rdap/domain/gas2u.my">MYNIC RDAP: gas2u.my</a> <span>6 Oct: registered 10 May 2026</span></li>
+    <li><a href="https://gas2u.com.my/login">gas2u.com.my</a> <span>read 6 Oct; registered 17 Jul 2026 (MYNIC RDAP)</span></li>
+    <li><a href="https://apps.apple.com/my/app/sara-x/id1665859411">App Store: Sara-X</a> <span>read 6 Oct</span></li>
+    <li><a href="https://play.google.com/store/apps/details?id=com.danapuri.sarax">Google Play: SaraX</a> <span>read 6 Oct</span></li>
+    <li><a href="https://klfoodie.com/beligas-cooking-gas-malaysia/">KL Foodie, 21 Jan 2021</a> <span>BeliGas prices and the RM3.00 surcharge</span></li>
+    <li><a href="https://vulcanpost.com/730844/beligas-malaysia-affordable-lpg-gas-delivery">Vulcan Post, 21 Jan 2021</a> <span>BeliGas: 123 areas, four delivery prices, RM3 high-rise surcharge, about 6,000 cylinders a month; written in partnership with BeliGas; read 6 Oct</span></li>
+    <li><a href="https://www.malaysiakini.com/announcement/637617">Malaysiakini, 30 Sep 2022</a> <span>BeliGas rebrands to EDAR</span></li>
+    <li><a href="https://edar.com/">edar.com</a> <span>6 Oct: a parked page</span></li>
+    <li><a href="https://vulcanpost.com/573746/grabgas-malaysia-startup-cooking-gas-delivery/">Vulcan Post, 26 Apr 2016</a> <span>GrabGas</span></li>
+    <li><a href="https://www.chatslide.ai/shared/surinow-a-web-and-mobile-application-to-sim-shbbzy">SuriNow, shared presentation</a> <span>read 6 Oct; no date on the page</span></li>
+    <li><a href="https://doi.org/10.30880/aitcs.2022.03.01.052">UTHM, AITCS Vol. 3 No. 1</a> <span>online 31 May 2022: an ordering app for Chuan Huat LPG Sdn. Bhd.</span></li>
+  </ul>
+</section>
+
+</main>
+<footer class="foot">Brand Method &middot; VIN Industries &middot; NakGas &middot; Competitors &middot; Internal, for Navin only &middot; Tue 6 October 2026, the name NakGas since Tue 20 October 2026</footer>
+<script src="assets/gs.js"></script>
+<script>
+/* the chapter strip and the dividers, computed from the page order: the number is never typed by hand */
+(function(){var secs=[].slice.call(document.querySelectorAll('main.wrap > section.sec'));var links=[].slice.call(document.querySelectorAll('.nav-in a'));var lab={};links.forEach(function(a,i){lab[a.getAttribute('href').slice(1)]=a.textContent;a.insertAdjacentHTML('afterbegin','<span class="ch-no">'+(i+1)+'</span>');});
+secs.forEach(function(s,i){var h=s.querySelector(':scope>h2');if(!h)return;var d=document.createElement('div');d.className='chapdiv';d.id='ch'+(i+1);var t=lab[s.id]||h.textContent;d.innerHTML='<span class="cd-no">'+(i+1)+'</span><div><div class="cd-h">'+t+'</div><div class="cd-sub">Chapter '+(i+1)+' of '+secs.length+'</div></div>';s.parentNode.insertBefore(d,s);if(h.textContent.trim()===t.trim())h.classList.add('dup');});
+function spy(){var y=innerHeight*.35,cur=null;secs.forEach(function(s){if(s.getBoundingClientRect().top<y)cur=s.id});links.forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+cur)})}addEventListener('scroll',spy,{passive:true});spy();})();
+</script>
+</body>
+</html>
