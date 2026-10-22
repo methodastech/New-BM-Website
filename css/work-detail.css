@@ -591,3 +591,74 @@
     font-size: clamp(48px, 1.9vw, 66px);
   }
 }
+
+/* three images in a row, and the colour palette (used by the 2026 branding case studies) */
+@media (min-width: 900px) {
+  .portfolio-editorial-stack--trio {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: start;
+  }
+}
+.portfolio-palette {
+  margin: 8px 0;
+}
+.portfolio-palette h2 {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 14px;
+}
+.portfolio-palette-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+}
+.portfolio-swatch {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 4px;
+  min-height: clamp(120px, 14vw, 220px);
+  padding: 16px;
+  background: var(--c);
+  font-family: var(--font-sans);
+}
+.portfolio-swatch.is-light {
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+.portfolio-swatch b {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.portfolio-swatch i {
+  font-style: normal;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  opacity: 0.75;
+}
+
+/* website mockup: desktop screenshot with the phone screen over its corner */
+.portfolio-detail--editorial .portfolio-site {
+  position: relative;
+  background: var(--g, #142644);
+  padding: 5% 16% 5% 5%;
+}
+.portfolio-detail--editorial .portfolio-site img {
+  display: block;
+  box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.6);
+}
+.portfolio-detail--editorial .portfolio-site .portfolio-site-phone {
+  position: absolute;
+  right: 4%;
+  bottom: 0;
+  width: 19%;
+  height: auto;
+  border: 6px solid #0b0d12;
+  border-bottom: 0;
+  border-radius: 22px 22px 0 0;
+  background: #fff;
+}
