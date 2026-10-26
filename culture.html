@@ -6159,4 +6159,26 @@ span[class*="ph-label"],
                 <path transform="translate(1311.2,140) scale(0.0865,-0.0865)" d="M280-11Q193-11 130.25 17.25Q67.5 45.5 16 103.5L117.5 205Q151.5 165.5 193 144Q234.5 122.5 290 122.5Q339.5 122.5 367.25 140.75Q395 159 395 191Q395 219.5 377 237.75Q359 256 329.5 269Q300 282 264.5 293.75Q229 305.5 193.75 321.25Q158.5 337 129 360.25Q99.5 383.5 81.5 419.25Q63.5 455 63.5 508.5Q63.5 574 95.25 620.75Q127 667.5 183 692.25Q239 717 311.5 717Q386 717 447.5 690.75Q509 664.5 548.5 620L446.5 518.5Q415 551.5 382.25 567.5Q349.5 583.5 309 583.5Q267.5 583.5 243.5 568Q219.5 552.5 219.5 523.5Q219.5 497 237.5 480.5Q255.5 464 285 451.75Q314.5 439.5 350 427.5Q385.5 415.5 420.75 399.75Q456 384 485.5 359.5Q515 335 533 297.5Q551 260 551 205Q551 103.5 479 46.25Q407-11 280-11Z"></path></g></g></svg><link id="bm-live-0916" rel="stylesheet" href="css/home.css" onload="document.documentElement.classList.remove('bm-wait')" onerror="document.documentElement.classList.remove('bm-wait')">
 <script id="bm-live-0916-js" src="js/home.js" defer></script>
 <style id="bm-home-fix">@media(min-width:1500px){:root{--bmz:1.06}}@media(min-width:1700px){:root{--bmz:1.12}}@media(min-width:1900px){:root{--bmz:1.18}}@media(min-width:2100px){:root{--bmz:1.24}}@media(min-width:2400px){:root{--bmz:1.34}}@media(min-width:2700px){:root{--bmz:1.44}}@media(min-width:3000px){:root{--bmz:1.56}}@media(min-width:3400px){:root{--bmz:1.7}}@media(min-width:3800px){:root{--bmz:1.86}}@media(min-width:4600px){:root{--bmz:2.1}}@media(min-width:5600px){:root{--bmz:2.5}}@media(min-width:7000px){:root{--bmz:3}}html:root{--bmx-bar:0px}body main{margin-top:0!important}#pg-home .hero.bmx-hero-v{min-height:calc(100vh / var(--bmz,1) + 2px)!important;min-height:calc(100svh / var(--bmz,1) + 2px)!important}</style>
+<style id="cul-word-navline">
+/* Culture manifesto: on desktop its edges follow the nav bar (full width, the same side padding as .nav-inner),
+   so the first word lines up under the logo instead of sitting in a centred 1160px column */
+@media (min-width:981px){
+  .bmx-cul-word .page-hero-inner{max-width:none!important;margin:0!important;padding-left:clamp(20px,4vw,48px)!important;padding-right:clamp(20px,4vw,48px)!important}
+}
+</style>
+<script>
+/* Culture manifesto: its left edge sits on the nav logo's line and its right edge on the Hire Us button's, measured
+   live because the nav's inset changes with the screen width (--max-w steps at 1600/1920/2560). Desktop only. */
+(function(){
+  var inner=document.querySelector('.bmx-cul-word .page-hero-inner'); if(!inner) return;
+  function vis(sel){ var l=document.querySelectorAll(sel); for(var i=0;i<l.length;i++){ var r=l[i].getBoundingClientRect(); if(r.width>0&&r.height>0) return r; } return null; }
+  function fit(){
+    if(innerWidth<981){ inner.style.removeProperty('padding-left'); inner.style.removeProperty('padding-right'); return; }
+    var logo=vis('.nav .nav-logo'), cta=vis('.nav .nav-cta'), box=inner.getBoundingClientRect(); if(!logo||!cta) return;
+    inner.style.setProperty('padding-left',Math.max(0,Math.round(logo.left-box.left))+'px','important');
+    inner.style.setProperty('padding-right',Math.max(0,Math.round(box.right-cta.right))+'px','important');
+  }
+  addEventListener('load',fit); addEventListener('resize',fit); setTimeout(fit,600);
+})();
+</script>
 </body></html>
