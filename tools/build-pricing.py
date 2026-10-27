@@ -1,9 +1,9 @@
 """Build pricing.html from the designer's standalone Services & Pricing file.
 
-    python tools/build-pricing.py "C:/Users/user/Downloads/BrandMethod-Services.html"
+    python tools/build-pricing.py "C:/Users/user/Downloads/BrandMethod-Services latest.html"
 
 The design file is used as-is, except:
-  - its loading screen (#bm-preload: logo, progress bar, percentage) is removed;
+  - its loading screen is removed (#bm-preload up to Oct 2026, #bm-topload since);
   - the site head is kept from the current pricing.html: GTM, favicons, title,
     description, canonical, Open Graph / Twitter tags and the JSON-LD schema;
   - the site nav and footer come from js/layout.js (nav in a shadow root, footer
@@ -85,10 +85,15 @@ def main():
     cur = open(OUT, encoding='utf-8').read()
 
     s = src
-    s = cut(s, r'<style id="bm-preload-css">.*?</style>\s*', 'the loader CSS')
-    s = cut(s, r'<div id="bm-preload"[^>]*>.*?<div class="bmpl-cap">.*?</div>\s*</div>\s*', 'the loader markup')
-    s = cut(s, r'<script id="bm-preload-js">.*?</script>\s*', 'the loader script')
-    if 'bm-preload' in s.replace("getElementById('bm-preload')", ''):
+    if 'bm-preload-css' in s:  # up to Oct 2026: logo, progress bar and percentage
+        s = cut(s, r'<style id="bm-preload-css">.*?</style>\s*', 'the loader CSS')
+        s = cut(s, r'<div id="bm-preload"[^>]*>.*?<div class="bmpl-cap">.*?</div>\s*</div>\s*', 'the loader markup')
+        s = cut(s, r'<script id="bm-preload-js">.*?</script>\s*', 'the loader script')
+    else:  # from 27 Oct 2026: a white cover with a thin bar, right after <body>
+        s = cut(s, r'<style id="bm-topload-css">.*?</style>', 'the loader CSS')
+        s = cut(s, r'<div id="bm-topload"[^>]*><i></i></div>', 'the loader markup')
+        s = cut(s, r"<script>\(function\(\)\{ function done\(\)\{ var e=document\.getElementById\('bm-topload'\).*?</script>", 'the loader script')
+    if 'bm-preload' in s.replace("getElementById('bm-preload')", '') or 'bm-topload' in s:
         sys.exit('loader leftovers still in the page')
 
     # site head in place of the design's title and inline favicon
