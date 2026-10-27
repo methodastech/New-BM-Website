@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brand Method office tour</title>
+<meta name="description" content="A short 3D tour to Brand Method's office at the Resource Centre, MRANTI Park, Bukit Jalil.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Inter:wght@400;500;600;700&display=swap">
+  <script type="module" crossorigin src="../../assets/bm-tour-BlQA7a04.js"></script>
+  <link rel="modulepreload" crossorigin href="../../assets/modulepreload-polyfill-B5Qt9EMX.js">
+  <link rel="modulepreload" crossorigin href="../../assets/preload-helper-PPVm8Dsz.js">
+  <link rel="modulepreload" crossorigin href="../../assets/meshopt_decoder.module-C4qfCMFG.js">
+  <link rel="stylesheet" crossorigin href="../../assets/bm-tour-1cMZfpK7.css">
+</head>
+<body>
+<!--
+  BRAND METHOD STUDIO TOUR (Azwan, 2026-10-25): the MRANTI Park 3D (projects/mranti-site/scene3d.ts) as a guided tour
+  of the Resource Centre's corner of the park, for the contact page of brandmethod.co. Made to sit in an iframe: the
+  page is the stage alone, white to its edges, so it melts into the white page round it. See main.ts.
+-->
+<main class="stage" id="stage" aria-label="A 3D tour to the Brand Method office at MRANTI Park">
+  <canvas id="scene" aria-hidden="true"></canvas>
+  <div class="pins" id="pins" aria-hidden="true"></div>
+
+  <div class="poster" id="poster">
+    <div class="loader" role="progressbar" aria-label="Loading the 3D tour" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="loader">
+      <span class="loader-tag">Loading the tour</span>
+      <b class="loader-pct" id="loader-pct">0%</b>
+      <div class="loader-bar"><i id="loader-bar"></i></div>
+      <p class="loader-msg" id="loader-msg">Getting ready</p>
+    </div>
+  </div>
+
+  <!-- the voiceover's switch: the tour starts silent (browsers allow sound only after a tap) -->
+  <button class="sound" id="sound" type="button" aria-pressed="false" aria-label="Play the voiceover">
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+      <path d="M2 6h3l4-3v10l-4-3H2z" fill="currentColor" stroke="none"/>
+      <path class="wave" d="M11.5 5.5a3.5 3.5 0 0 1 0 5M13.2 3.8a6 6 0 0 1 0 8.4"/>
+      <path class="mute" d="M11 6l4 4M15 6l-4 4"/>
+    </svg>
+    <span id="sound-label">Sound on</span>
+  </button>
+
+  <!-- where the tour is, for screen readers only: nothing is drawn over the picture but the callouts -->
+  <p class="sr-only" id="said" aria-live="polite"></p>
+</main>
+</body>
+</html>

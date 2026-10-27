@@ -33,18 +33,17 @@
 /* "A simple way to start" (27 Oct): three quiet steps in one hairline panel. No numbers and no heavy bars; the order
    reads from left to right, helped by a small chevron on each divider. Scoped here: .approach-* is shared site-wide. */
 .contact-steps-section .contact-next-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin-top:48px;padding:0;background:#fff;border:1px solid rgba(15,24,56,.08);box-shadow:0 34px 70px -56px rgba(15,24,56,.35);overflow:visible}
-.contact-steps-section .approach-item{min-height:0;background:transparent;border:0;border-left:1px solid rgba(15,24,56,.07);box-shadow:none;overflow:visible;transition:background-color .5s ease}
+.contact-steps-section .approach-item{min-height:0;background:transparent;border:0;border-left:1px solid rgba(15,24,56,.07);box-shadow:none;overflow:visible;transition:none}
 .contact-steps-section .approach-item:first-child{border-left:0}
 .contact-steps-section .approach-item::before{content:none}
 .contact-steps-section .approach-item+.approach-item::before{content:"";position:absolute;z-index:2;left:-5px;top:calc(clamp(30px,3.2vw,46px) + 18px);width:8px;height:8px;border:0;border-top:1px solid rgba(0,0,255,.35);border-right:1px solid rgba(0,0,255,.35);border-radius:0;background:#fff;box-shadow:none;transform:rotate(45deg)}
-.contact-steps-section .approach-item::after{top:-1px;height:2px;transform:scaleX(0);transform-origin:left;transition:transform .7s cubic-bezier(.2,.8,.2,1)}
-.contact-steps-section .approach-item:hover{background:#FAFBFF}
-.contact-steps-section .approach-item:hover::after{transform:none}
+/* not links, so nothing reacts to the pointer */
+.contact-steps-section .approach-item::after{content:none}
+.contact-steps-section .approach-item:hover{background:transparent;transform:none;box-shadow:none}
 .contact-steps-section .approach-body{padding:clamp(30px,3.2vw,46px) clamp(26px,2.8vw,42px) clamp(34px,3.4vw,50px)}
 .contact-steps-section .approach-card-header{flex-direction:row;align-items:center;gap:16px;margin-bottom:18px}
-.contact-steps-section .approach-icon{width:44px;height:44px;min-width:44px;background:transparent;border:1px solid rgba(0,0,255,.18);box-shadow:none;transition:background-color .5s ease,border-color .5s ease,color .5s ease}
+.contact-steps-section .approach-icon{width:44px;height:44px;min-width:44px;background:transparent;border:1px solid rgba(0,0,255,.18);box-shadow:none;transition:none}
 .contact-steps-section .approach-icon svg{width:20px;height:20px;stroke-width:1.5}
-.contact-steps-section .approach-item:hover .approach-icon{background:var(--accent);border-color:var(--accent);color:#fff}
 .contact-steps-section .approach-item h3{font-family:var(--font-display);font-size:clamp(26px,2.2vw,32px);font-weight:400;line-height:1.1;letter-spacing:-.01em;text-transform:none;color:#0f0f0f;padding-bottom:0}
 .contact-steps-section .approach-item h3::after{content:none}
 .contact-steps-section .approach-item p{max-width:34ch;font-size:15.5px;line-height:1.7;color:#55585f}
@@ -57,7 +56,6 @@
   .contact-steps-section .approach-card-header{justify-content:flex-start;align-items:center}
   .contact-steps-section .contact-next-steps .approach-item p{margin-left:0;margin-right:0;text-align:left !important}
 }
-@media (prefers-reduced-motion:reduce){.contact-steps-section .approach-item,.contact-steps-section .approach-item::after,.contact-steps-section .approach-icon{transition:none}}
 </style>
 <style id="contact-where">
 /* Where we are: heading and address on one line, the 3D tour below at full width (its own background is see-through) */
@@ -230,12 +228,9 @@
         <a href="https://www.google.com/maps/search/?api=1&amp;query=MRANTI+Park+Bukit+Jalil+Kuala+Lumpur" target="_blank" rel="noopener">Open in Google Maps &rarr;</a>
       </div>
     </div>
-    <!-- The 3D tour goes back here once studio-tour/ is on the live site (it is git-ignored for now; without it
-         the frame shows a copy of the website):
     <div class="contact-where-tour reveal reveal-delay-2">
       <iframe src="studio-tour/projects/bm-tour/index.html" title="A 3D tour from MRANTI Park to the Brand Method office" loading="lazy" allow="autoplay; fullscreen"></iframe>
     </div>
-    -->
   </div>
 </section>
 
