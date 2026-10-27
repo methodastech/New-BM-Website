@@ -29,6 +29,49 @@
 <meta name="twitter:description" content="Ready to build a brand that dominates? Let&#39;s talk. Contact Brand Method, Malaysia&#39;s #1 branding and marketing agency.">
 <meta name="twitter:image" content="https://brandmethod.co/Image/resources/brandmethod-os-framework.png">
 <link rel="stylesheet" href="css/style.css?v=20260620d">
+<style id="contact-steps-quiet">
+/* "A simple way to start" (27 Oct): three quiet steps in one hairline panel. No numbers and no heavy bars; the order
+   reads from left to right, helped by a small chevron on each divider. Scoped here: .approach-* is shared site-wide. */
+.contact-steps-section .contact-next-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin-top:48px;padding:0;background:#fff;border:1px solid rgba(15,24,56,.08);box-shadow:0 34px 70px -56px rgba(15,24,56,.35);overflow:visible}
+.contact-steps-section .approach-item{min-height:0;background:transparent;border:0;border-left:1px solid rgba(15,24,56,.07);box-shadow:none;overflow:visible;transition:background-color .5s ease}
+.contact-steps-section .approach-item:first-child{border-left:0}
+.contact-steps-section .approach-item::before{content:none}
+.contact-steps-section .approach-item+.approach-item::before{content:"";position:absolute;z-index:2;left:-5px;top:calc(clamp(30px,3.2vw,46px) + 18px);width:8px;height:8px;border:0;border-top:1px solid rgba(0,0,255,.35);border-right:1px solid rgba(0,0,255,.35);border-radius:0;background:#fff;box-shadow:none;transform:rotate(45deg)}
+.contact-steps-section .approach-item::after{top:-1px;height:2px;transform:scaleX(0);transform-origin:left;transition:transform .7s cubic-bezier(.2,.8,.2,1)}
+.contact-steps-section .approach-item:hover{background:#FAFBFF}
+.contact-steps-section .approach-item:hover::after{transform:none}
+.contact-steps-section .approach-body{padding:clamp(30px,3.2vw,46px) clamp(26px,2.8vw,42px) clamp(34px,3.4vw,50px)}
+.contact-steps-section .approach-card-header{flex-direction:row;align-items:center;gap:16px;margin-bottom:18px}
+.contact-steps-section .approach-icon{width:44px;height:44px;min-width:44px;background:transparent;border:1px solid rgba(0,0,255,.18);box-shadow:none;transition:background-color .5s ease,border-color .5s ease,color .5s ease}
+.contact-steps-section .approach-icon svg{width:20px;height:20px;stroke-width:1.5}
+.contact-steps-section .approach-item:hover .approach-icon{background:var(--accent);border-color:var(--accent);color:#fff}
+.contact-steps-section .approach-item h3{font-family:var(--font-display);font-size:clamp(26px,2.2vw,32px);font-weight:400;line-height:1.1;letter-spacing:-.01em;text-transform:none;color:#0f0f0f;padding-bottom:0}
+.contact-steps-section .approach-item h3::after{content:none}
+.contact-steps-section .approach-item p{max-width:34ch;font-size:15.5px;line-height:1.7;color:#55585f}
+@media (max-width:768px){
+  .contact-steps-section .contact-next-steps{display:grid;grid-template-columns:minmax(0,1fr);margin-top:36px;padding:0;overflow:visible;scroll-snap-type:none}
+  .contact-steps-section .approach-item{flex:none;border-left:0;border-top:1px solid rgba(15,24,56,.07)}
+  .contact-steps-section .approach-item:first-child{border-top:0}
+  .contact-steps-section .approach-item+.approach-item::before{left:42px;top:-5px;transform:rotate(135deg)}
+  .contact-steps-section .approach-body{padding:26px 24px 28px;align-items:flex-start;text-align:left}
+  .contact-steps-section .approach-card-header{justify-content:flex-start;align-items:center}
+  .contact-steps-section .contact-next-steps .approach-item p{margin-left:0;margin-right:0;text-align:left !important}
+}
+@media (prefers-reduced-motion:reduce){.contact-steps-section .approach-item,.contact-steps-section .approach-item::after,.contact-steps-section .approach-icon{transition:none}}
+</style>
+<style id="contact-where">
+/* Where we are: heading and address on one line, the 3D tour below at full width (its own background is see-through) */
+.contact-where-section{padding:92px 20px;background:#fff}
+.contact-where-head{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap}
+.contact-where-head .section-title{margin:0}
+.contact-where-addr{max-width:360px}
+.contact-where-addr p{margin:0 0 10px;font-size:15.5px;line-height:1.65;color:#55585f}
+.contact-where-addr a{font-family:var(--font-sans);font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);text-decoration:none}
+.contact-where-addr a:hover{text-decoration:underline}
+.contact-where-tour{margin-top:40px;border:1px solid rgba(15,24,56,.08);overflow:hidden}
+.contact-where-tour iframe{display:block;width:100%;height:clamp(460px,46vw,680px);border:0;background:transparent}
+@media (max-width:768px){.contact-where-section{padding:70px 20px}.contact-where-tour{margin-top:28px}.contact-where-tour iframe{height:520px}}
+</style>
 </head>
 <body class="contact-page">
   <!-- Google Tag Manager (noscript) -->
@@ -50,7 +93,6 @@
   <div class="section-inner">
     <div class="contact-hero-grid">
       <div class="contact-info">
-        <div class="section-tag reveal">Start a Project</div>
         <h1 class="contact-title reveal reveal-delay-1">Tell us where your<br><span class="contact-title-line">brand needs to <em>go next</em></span></h1>
         <p class="contact-lead reveal reveal-delay-2">Share the challenge, the ambition, or the messy middle. We will help you shape it into a clear direction, then map the smartest way forward.</p>
 
@@ -67,7 +109,6 @@
       <div id="brief" class="contact-form-wrap reveal reveal-delay-1">
         <div class="contact-form-card">
           <div class="contact-form-heading">
-            <span>Project Brief</span>
             <h2>Send us the details</h2>
             <p>A few clear answers are enough. We will take it from there.</p>
           </div>
@@ -134,7 +175,6 @@
 
 <section class="contact-steps-section">
   <div class="section-inner">
-    <div class="section-tag reveal">What Happens Next</div>
     <h2 class="section-title reveal reveal-delay-1">A simple way to start</h2>
     <div class="contact-next-steps">
       <div class="approach-item reveal">
@@ -144,7 +184,6 @@
             <svg viewBox="0 0 24 24"><path d="M4 6.5h16"></path><path d="M4 12h10"></path><path d="M4 17.5h8"></path><path d="M18.5 15.5l1.5 1.5-3.5 3.5H15v-1.5z"></path></svg>
             </span>
             <div class="approach-card-meta">
-              <span class="approach-num">01</span>
               <h3>Read</h3>
             </div>
           </div>
@@ -158,7 +197,6 @@
             <svg viewBox="0 0 24 24"><path d="M12 3l8 4-8 4-8-4 8-4z"></path><path d="M4 12l8 4 8-4"></path><path d="M4 17l8 4 8-4"></path></svg>
             </span>
             <div class="approach-card-meta">
-              <span class="approach-num">02</span>
               <h3>Clarify</h3>
             </div>
           </div>
@@ -172,7 +210,6 @@
             <svg viewBox="0 0 24 24"><path d="M4 17l6-6 4 4 6-8"></path><path d="M15 7h5v5"></path></svg>
             </span>
             <div class="approach-card-meta">
-              <span class="approach-num">03</span>
               <h3>Map</h3>
             </div>
           </div>
@@ -183,12 +220,27 @@
   </div>
 </section>
 
+<!-- WHERE WE ARE: the 3D tour from MRANTI Park to the office (studio-tour/, built by Azwan 25 Oct 2026; see studio-tour/README.txt) -->
+<section id="where" class="contact-where-section">
+  <div class="section-inner">
+    <div class="contact-where-head">
+      <h2 class="section-title reveal">Where <em>we are</em></h2>
+      <div class="contact-where-addr reveal reveal-delay-1">
+        <p>MRANTI Park, Office 25, Level 1,<br>Taman Teknologi MRANTI, Bukit Jalil,<br>57000 Kuala Lumpur</p>
+        <a href="https://www.google.com/maps/search/?api=1&amp;query=MRANTI+Park+Bukit+Jalil+Kuala+Lumpur" target="_blank" rel="noopener">Open in Google Maps &rarr;</a>
+      </div>
+    </div>
+    <div class="contact-where-tour reveal reveal-delay-2">
+      <iframe src="studio-tour/projects/bm-tour/index.html" title="A 3D tour from MRANTI Park to the Brand Method office" loading="lazy" allow="autoplay; fullscreen"></iframe>
+    </div>
+  </div>
+</section>
+
 <!-- ACADEMY SECTION -->
 <section id="academy" class="contact-academy-section">
   <div class="section-inner">
     <div class="contact-academy-panel">
       <div>
-        <div class="section-tag reveal">Methodas Academy</div>
         <h2 class="section-title reveal reveal-delay-1">Learn the <em>Brand Method</em> framework</h2>
         <p class="reveal reveal-delay-2">Our academy teaches founders, marketers, and creatives the strategic frameworks we use with our clients. Join the waiting list to be first in line when we open enrolment.</p>
       </div>
