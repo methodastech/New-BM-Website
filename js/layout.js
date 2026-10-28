@@ -30,6 +30,12 @@ const logoSVG = (width, height) => `
 
   var nav = root.getElementById('nav');
   nav.classList.add('scrolled');   // the light bar: every page but Home opens on a light hero
+  // Contact: the frosted bar turns grey over the dark banner photo, so it is solid white there
+  if (document.body.classList.contains('contact-page')) {
+    var solid = document.createElement('style');
+    solid.textContent = '.nav.scrolled .nav-bg{background:#fff!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}';
+    root.appendChild(solid);
+  }
 
   // which item is lit
   var path = location.pathname, file = path.split('/').pop() || 'index.html';

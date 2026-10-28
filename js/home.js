@@ -1278,11 +1278,12 @@ document.addEventListener('click', function (e) {
 })();
 
 /* ===== About: the history timeline, one chapter at a time (25 Sep prototype) =====
-   Chapters turn every 6.5 s while the section is in view, held on hover; the dots, the arrows and the
+   Chapters turn every 6.5 s while the section is in view (no hold on hover: the section fills the screen, so the
+   cursor is nearly always on it and it never moved; 28 Oct 2026); the dots, the arrows and the
    arrow keys pick a chapter. The rail's blue fill runs to the lit dot and the beam behind follows along. */
 (function () {
   var tl = document.getElementById('history'); if (!tl || !tl.classList.contains('bmx-tl')) return;
-  var chs = [].slice.call(tl.querySelectorAll('.bmx-tl-ch')), dots = [].slice.call(tl.querySelectorAll('.bmx-tl-dot')), fill = tl.querySelector('.bmx-tl-fill'), count = tl.querySelector('.bmx-tl-count b'), cur = 0, timer = null, hold = false;
+  var chs = [].slice.call(tl.querySelectorAll('.bmx-tl-ch')), dots = [].slice.call(tl.querySelectorAll('.bmx-tl-dot')), fill = tl.querySelector('.bmx-tl-fill'), count = tl.querySelector('.bmx-tl-count b'), cur = 0, timer = null;
   if (!chs.length) return;
   function show(i) {
     cur = (i + chs.length) % chs.length;
@@ -1292,12 +1293,11 @@ document.addEventListener('click', function (e) {
     if (count) count.textContent = cur + 1;
     tl.style.setProperty('--bx', (62 + cur * 6) + '%');
   }
-  function arm() { clearInterval(timer); timer = setInterval(function () { if (!hold) show(cur + 1); }, 6500); }
+  function arm() { clearInterval(timer); timer = setInterval(function () { show(cur + 1); }, 6500); }
   dots.forEach(function (d) { d.addEventListener('click', function () { show(+d.getAttribute('data-i')); arm(); }); });
   var prev = tl.querySelector('.bmx-tl-prev'), next = tl.querySelector('.bmx-tl-next');
   if (prev) prev.addEventListener('click', function () { show(cur - 1); arm(); });
   if (next) next.addEventListener('click', function () { show(cur + 1); arm(); });
-  tl.addEventListener('mouseenter', function () { hold = true; }); tl.addEventListener('mouseleave', function () { hold = false; });
   tl.addEventListener('keydown', function (e) { if (e.key === 'ArrowRight') { show(cur + 1); arm(); } if (e.key === 'ArrowLeft') { show(cur - 1); arm(); } });
   if ('IntersectionObserver' in window) { new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { show(cur); arm(); } else clearInterval(timer); }); }, { threshold: 0.25 }).observe(tl); } else { show(0); arm(); }
   addEventListener('resize', function () { show(cur); });

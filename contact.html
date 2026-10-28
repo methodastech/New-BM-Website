@@ -58,7 +58,7 @@
 }
 </style>
 <style id="contact-where">
-/* Where we are: heading and address on one line, the 3D tour below at full width (its own background is see-through) */
+/* Where we are: heading and address on one line, the tour video below at full width */
 .contact-where-section{padding:92px 20px;background:#fff}
 .contact-where-head{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap}
 .contact-where-head .section-title{margin:0}
@@ -67,9 +67,80 @@
 .contact-where-addr a{font-family:var(--font-sans);font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);text-decoration:none}
 .contact-where-addr a:hover{text-decoration:underline}
 .contact-where-tour{margin-top:40px;border:1px solid rgba(15,24,56,.08);overflow:hidden}
-.contact-where-tour iframe{display:block;width:100%;height:clamp(460px,46vw,680px);border:0;background:transparent}
-@media (max-width:768px){.contact-where-section{padding:70px 20px}.contact-where-tour{margin-top:28px}.contact-where-tour iframe{height:520px}}
+.contact-where-tour video{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;background:#eef0f5}
+@media (max-width:768px){.contact-where-section{padding:70px 20px}.contact-where-tour{margin-top:28px}}
 </style>
+<style id="contact-hero-art">
+/* Hero art direction (28 Oct): the MRANTI building, home of the studio, drawn as engraving line art with the curved
+   MRANTI facade in blue scanlines (Image/contact-mranti-line.webp, transparent). It fills the empty space under the
+   headline and runs behind the form; a fine dot grid replaces the square grid. */
+.contact-hero-section{position:relative;background:radial-gradient(circle,rgba(15,24,56,.13) 1px,transparent 1.3px) 0 0/22px 22px,#fff !important}
+.contact-hero-section .contact-info>*{position:relative;z-index:1}
+.contact-hero-section .contact-form-wrap{z-index:2}
+.contact-hero-section .contact-art{position:absolute;left:-7%;bottom:0;z-index:0;width:min(92%,1640px);margin:0;pointer-events:none}  /* the blue MRANTI facade stays clear of the form */
+.contact-hero-section .contact-art img{display:block;width:100%;height:auto}
+@media (max-width:1024px){  /* the hero stacks here (css/style.css), so the art sits in the flow, under the buttons */
+  .contact-hero-section .contact-art{position:relative;left:auto;width:calc(100% + 40px);margin:36px -20px 0}
+}
+@media (max-width:768px){  /* phones: larger, centred on the blue MRANTI facade; the sides fall outside the page */
+  .contact-hero-section .contact-art{width:170%;margin:28px 0 0 -38%}
+}
+</style>
+<style id="contact-hero-art-b">
+/* 28 Oct: the drawn "B" under construction (Image/contact-hero-b.webp, made in ChatGPT) as the hero background, in
+   place of the MRANTI line art (Image/contact-mranti-line.webp: swap the img src back and delete this block).
+   The file is the ChatGPT picture (1536 x 1024) made transparent (ink only, no paper, so no box edges on any screen)
+   and with its hills continued 40% further to the right (2150 px wide), so on wide screens the landscape runs on
+   under the form. --aw is the width of the original picture part: the full width up to 1440px, then 62% of the
+   screen. It hangs from the buttons: top:auto keeps it where it would sit in the flow, and the negative margin (the
+   scaffolding starts at 37% of its height = 24.67% of --aw) lifts its empty sky above them. The hero keeps room under
+   the buttons for the B, the stairs and the arches (0.3 x --aw); the bottom fades to white. */
+.contact-hero-section{--aw:min(100%,max(1440px,62vw));padding-top:48px;overflow:clip}
+.contact-hero-section .contact-art{top:auto;bottom:auto;left:0;width:calc(var(--aw) * 1.4);margin:calc(var(--aw) * -0.2467 + 40px) 0 0}
+.contact-hero-section .contact-art img{-webkit-mask-image:linear-gradient(to right,#000 86%,transparent);mask-image:linear-gradient(to right,#000 86%,transparent)}
+.contact-hero-section .contact-info::after{content:"";display:block;height:calc(min(100vw,max(1440px,62vw)) * 0.3)}
+.contact-hero-section::after{content:"";position:absolute;left:0;right:0;bottom:0;height:140px;background:linear-gradient(rgba(255,255,255,0),#fff);z-index:1;pointer-events:none}
+@media (max-width:1024px){.contact-hero-section .contact-art{width:calc((100% + 40px) * 1.4);margin:calc((100% + 40px) * -0.2467 + 24px) -20px 0}
+  .contact-hero-section .contact-art img{-webkit-mask-image:none;mask-image:none}
+  .contact-hero-section::after,.contact-hero-section .contact-info::after{content:none}}
+@media (max-width:768px){.contact-hero-section .contact-art{width:calc(100% + 40px);margin:calc((100% + 40px) * -0.352 + 16px) -20px 0}  /* the B starts 37% down the 1.05 crop */
+  .contact-hero-section .contact-art img{aspect-ratio:1.05;object-fit:cover;object-position:0 70%}}
+</style>
+<style id="contact-intro">
+/* Opening line in place of the old photo banner: type only, on the same dotted paper as the hero below */
+.contact-intro-section{padding:88px 20px 8px;background:radial-gradient(circle,rgba(15,24,56,.13) 1px,transparent 1.3px) 0 0/22px 22px,#fff}
+.contact-intro-title{font-family:var(--font-display);font-size:clamp(46px,6.6vw,132px);font-weight:400;line-height:1;letter-spacing:-.02em;margin:0 0 36px;color:var(--white)}  /* the theme's --white is the dark ink */
+.contact-intro-title em{font-style:italic;color:var(--accent)}
+.contact-intro-lead{max-width:900px;margin:0;font-size:clamp(17px,1.35vw,24px);line-height:1.7;color:#55585f}
+@media (max-width:768px){.contact-intro-section{padding:56px 20px 0}.contact-intro-title{margin-bottom:22px}}
+</style>
+<style id="contact-navline">
+/* Desktop: every section's edges follow the nav bar (logo on the left, Hire Us on the right) instead of a centred
+   column, so zoomed out or on a wide screen the page still lines up under the menu. The padding is measured below. */
+@media (min-width:1025px){.contact-page .page-wrap>section>.section-inner{max-width:none}
+  /* on very wide screens the form stops growing and keeps to the right edge, under Hire Us */
+  .contact-hero-section .contact-form-wrap{width:100%;max-width:820px;justify-self:end}}
+</style>
+<script>
+/* The nav lives in a shadow root (js/layout.js); its inset changes with the screen width, so it is measured live */
+(function(){
+  function fit(){
+    var h=document.getElementById('bm-nav-host'), r=h&&h.shadowRoot, logo=r&&r.querySelector('.nav-logo'), cta=r&&r.querySelector('.nav-right .nav-cta');
+    var inners=[].slice.call(document.querySelectorAll('.contact-page .page-wrap>section>.section-inner'));
+    if(innerWidth<1025||!logo||!cta){
+      inners.forEach(function(el){el.style.removeProperty('padding-left');el.style.removeProperty('padding-right');});
+      return;
+    }
+    var L=logo.getBoundingClientRect().left, R=cta.getBoundingClientRect().right;
+    inners.forEach(function(el){
+      var b=el.getBoundingClientRect();
+      el.style.setProperty('padding-left',Math.max(0,Math.round(L-b.left))+'px');
+      el.style.setProperty('padding-right',Math.max(0,Math.round(b.right-R))+'px');
+    });
+  }
+  addEventListener('DOMContentLoaded',fit); addEventListener('load',fit); addEventListener('resize',fit); setTimeout(fit,600);
+})();
+</script>
 </head>
 <body class="contact-page">
   <!-- Google Tag Manager (noscript) -->
@@ -78,20 +149,18 @@
   <!-- End Google Tag Manager (noscript) -->
 <div class="page-wrap">
 
-<div class="contact-banner">
-  <img class="contact-banner-img" src="Image/contact-header.jpg" alt="Bazil Zieel, Brand Method founder, speaking on stage to an audience" decoding="async">
-  <div class="contact-banner-overlay"></div>
-  <div class="contact-banner-copy">
-    <p class="contact-banner-quote">Build Brands People Instantly<br>Understand, Trust &amp; Choose</p>
-    <div class="contact-banner-rule"></div>
+<section class="contact-intro-section">
+  <div class="section-inner">
+    <h1 class="contact-intro-title reveal">Let&rsquo;s start the <em>conversation</em></h1>
+    <p class="contact-intro-lead reveal reveal-delay-1">Tell us about your brand and what you are trying to build. We reply fast, and the first call is thirty minutes of clarity with no commitment.</p>
   </div>
-</div>
+</section>
 
 <section class="contact-hero-section">
   <div class="section-inner">
     <div class="contact-hero-grid">
       <div class="contact-info">
-        <h1 class="contact-title reveal reveal-delay-1">Tell us where your<br><span class="contact-title-line">brand needs to <em>go next</em></span></h1>
+        <h2 class="contact-title reveal reveal-delay-1">Tell us where your<br><span class="contact-title-line">brand needs to <em>go next</em></span></h2>
         <p class="contact-lead reveal reveal-delay-2">Share the challenge, the ambition, or the messy middle. We will help you shape it into a clear direction, then map the smartest way forward.</p>
 
         <div class="contact-actions reveal reveal-delay-3">
@@ -101,6 +170,8 @@
           </a>
           <a href="mailto:hello@brandmethod.co" class="btn-ghost">Email Instead</a>
         </div>
+
+        <figure class="contact-art" aria-hidden="true"><img src="Image/contact-hero-b.webp" alt="" width="2150" height="1024" decoding="async"></figure>
 
       </div>
 
@@ -218,7 +289,7 @@
   </div>
 </section>
 
-<!-- WHERE WE ARE: the 3D tour from MRANTI Park to the office (studio-tour/, built by Azwan 25 Oct 2026; see studio-tour/README.txt) -->
+<!-- WHERE WE ARE: a looping video of the drive from MRANTI Park to the office (recorded from Azwan's 3D tour in studio-tour/) -->
 <section id="where" class="contact-where-section">
   <div class="section-inner">
     <div class="contact-where-head">
@@ -229,7 +300,10 @@
       </div>
     </div>
     <div class="contact-where-tour reveal reveal-delay-2">
-      <iframe src="studio-tour/projects/bm-tour/index.html" title="A 3D tour from MRANTI Park to the Brand Method office" loading="lazy" allow="autoplay; fullscreen"></iframe>
+      <video autoplay muted loop playsinline preload="metadata" poster="Image/bm-tour-poster.jpg" aria-label="A tour from MRANTI Park to the Brand Method office">
+        <source src="video/bm-tour-loop.webm" type="video/webm">
+        <source src="video/bm-tour-loop-1080p-small.mp4" type="video/mp4">
+      </video>
     </div>
   </div>
 </section>
@@ -251,7 +325,7 @@
 </section>
 
 </div>
-<script src="js/layout.js?v=4"></script>
+<script src="js/layout.js?v=5"></script>
 <script src="js/main.js"></script>
 <!-- prefill the enquiry form from ?service= & ?package= (e.g. coming from a pricing "Get started") -->
 <script id="contact-prefill-js">
