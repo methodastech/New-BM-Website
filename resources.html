@@ -431,6 +431,7 @@
 
 .resources-subscribe-card {
   margin-top: 40px;
+  grid-column: 1 / -1;
 }
 
 .resources-subscribe-card form {
@@ -498,6 +499,7 @@
 
   .blog-search-wrap {
     width: 100%;
+    max-width: none;
   }
 
   .blog-grid {
@@ -551,7 +553,8 @@
   }
 }
 
-/* Side gutters follow the nav (20px phone, ~32px tablet, 48px desktop); the search box and the cards share one edge */
+/* Side edges follow the nav: --nav-l / --nav-r are the logo's left and Hire Us's right edge, measured below (the nav
+   centres itself on very wide screens); before that runs, the nav's own padding (20px phone, ~32px tablet, 48px desktop) */
 .resources-masthead {
   padding-left: 0;
   padding-right: 0;
@@ -559,10 +562,10 @@
 
 .resources-topbar,
 .resources-news-layout {
-  width: calc(100% - 2 * clamp(20px, 4vw, 48px));
-  max-width: var(--max-w);
-  margin-left: auto;
-  margin-right: auto;
+  width: auto;
+  max-width: none;
+  margin-left: var(--nav-l, clamp(20px, 4vw, 48px));
+  margin-right: var(--nav-r, clamp(20px, 4vw, 48px));
 }
 </style>
 </head>
@@ -573,7 +576,21 @@
   <!-- End Google Tag Manager (noscript) -->
 <div class="page-wrap">
 
-<div id="bm-res-banner"></div><script src="js/resources-banner.js"></script>
+<div id="bm-res-banner"></div><script src="js/resources-banner.js?v=20261030b"></script>
+<script>
+/* The nav lives in a shadow root (js/layout.js) and centres itself on wide screens, so its edges are measured live */
+(function(){
+  function fit(){
+    var h=document.getElementById('bm-nav-host'), r=h&&h.shadowRoot, logo=r&&r.querySelector('.nav-logo'), cta=r&&r.querySelector('.nav-right .nav-cta');
+    var s=document.documentElement.style;
+    if(!logo||!cta||!logo.getBoundingClientRect().width||!cta.getBoundingClientRect().width){  /* phones hide Hire Us: keep the CSS padding */
+      s.removeProperty('--nav-l');s.removeProperty('--nav-r');return;}
+    s.setProperty('--nav-l',Math.round(logo.getBoundingClientRect().left)+'px');
+    s.setProperty('--nav-r',Math.round(document.documentElement.clientWidth-cta.getBoundingClientRect().right)+'px');
+  }
+  addEventListener('DOMContentLoaded',fit); addEventListener('load',fit); addEventListener('resize',fit); setTimeout(fit,600);
+})();
+</script>
 <div class="resources-news-page">
   <section class="resources-masthead">
     <div class="resources-topbar">
@@ -1011,15 +1028,6 @@
         </div>
         <p class="blog-empty" id="blogEmpty">No resources found for that search.</p>
 
-        <div class="resources-subscribe-card reveal">
-          <h2>Get new strategy breakdowns first</h2>
-          <p>Fresh brand, marketing, and growth resources land here regularly. Subscribe if you want the newest frameworks before the next publish wave.</p>
-          <form data-newsletter>
-            <input type="email" name="email" placeholder="your@email.com" aria-label="Email address" required>
-            <button type="submit" class="btn-primary">Subscribe</button>
-          </form>
-          <div class="article-newsletter-status" role="status" aria-live="polite"></div>
-        </div>
       </div>
 
       <aside class="resources-sidebar">
@@ -1059,6 +1067,17 @@
           <cite>&mdash; Brand Method</cite>
         </div>
       </aside>
+
+      <!-- full width under both columns, so it reaches the right edge like the rest of the page -->
+      <div class="resources-subscribe-card reveal">
+        <h2>Get new strategy breakdowns first</h2>
+        <p>Fresh brand, marketing, and growth resources land here regularly. Subscribe if you want the newest frameworks before the next publish wave.</p>
+        <form data-newsletter>
+          <input type="email" name="email" placeholder="your@email.com" aria-label="Email address" required>
+          <button type="submit" class="btn-primary">Subscribe</button>
+        </form>
+        <div class="article-newsletter-status" role="status" aria-live="polite"></div>
+      </div>
     </div>
   </section>
 </div>

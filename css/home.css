@@ -1317,6 +1317,8 @@ footer li a:hover,.footer-col a:hover{padding-left:4px}
 @media(min-width:2100px){:root{--max-w:1880px}}
 @media(min-width:2700px){:root{--max-w:2040px}}
 @media(max-width:600px){.section-inner,.bmx-bnr{padding-left:20px!important;padding-right:20px!important}}
+/* a banner already carries the gutter, so the container inside it adds none (the text lines up with the logo) */
+.bmx-bnr .section-inner{padding-left:0!important;padding-right:0!important}
 /* the success card: the ring closes, then the tick lands */
 .bmxb-ring{stroke-dasharray:214;animation:bmxRing 6s var(--ease) infinite}
 @keyframes bmxRing{0%{stroke-dashoffset:214}34%,88%{stroke-dashoffset:0}100%{stroke-dashoffset:214}}
