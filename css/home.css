@@ -1311,12 +1311,12 @@ footer li a:hover,.footer-col a:hover{padding-left:4px}
 .bmx-wall .lw-row{padding:2px 0}
 @media(max-width:640px){.bmx-wall{gap:36px}.clients-section{padding:34px 0 30px!important}}
 
-/* ===== side gutters come in, and the container gets more of the screen ===== */
-.section-inner,.bmx-bnr{padding-left:clamp(16px,2.4vw,34px)!important;padding-right:clamp(16px,2.4vw,34px)!important}
+/* ===== side gutters match the nav (logo and Hire Us edges): 20px phone, ~32px tablet, 48px desktop ===== */
+.section-inner,.bmx-bnr{padding-left:clamp(20px,4vw,48px)!important;padding-right:clamp(20px,4vw,48px)!important}
 @media(min-width:1700px){:root{--max-w:1640px}}
 @media(min-width:2100px){:root{--max-w:1880px}}
 @media(min-width:2700px){:root{--max-w:2040px}}
-@media(max-width:600px){.section-inner,.bmx-bnr{padding-left:16px!important;padding-right:16px!important}}
+@media(max-width:600px){.section-inner,.bmx-bnr{padding-left:20px!important;padding-right:20px!important}}
 /* the success card: the ring closes, then the tick lands */
 .bmxb-ring{stroke-dasharray:214;animation:bmxRing 6s var(--ease) infinite}
 @keyframes bmxRing{0%{stroke-dashoffset:214}34%,88%{stroke-dashoffset:0}100%{stroke-dashoffset:214}}
@@ -2819,7 +2819,8 @@ html body .bmx-tl-v .bmx-tl-br{display:inline;text-transform:none;letter-spacing
 @media(min-width:1100px){.bmx-tl-rail{padding-right:120px}.bmx-tl-nav{margin-right:-120px}} /* the arrows sit on the page's centre, not the padded rail's */
 @media(prefers-reduced-motion:reduce){.bmx-tl-sweep,.bmx-tl-dot.on i::after{animation:none}.bmx-tl-ch *{transition:none!important}}
 @media(max-width:900px){.bmx-tl-stage{min-height:0}.bmx-tl-grid{grid-template-columns:1fr;gap:20px}.bmx-tl-pics{order:-1;aspect-ratio:4/3}
-  .bmx-tl-track{overflow-x:auto;justify-content:flex-start;gap:12px;scrollbar-width:none}.bmx-tl-dot{flex:none}.bmx-tl-dot span{white-space:normal;text-align:center}}
+  .bmx-tl-track{overflow-x:auto;justify-content:flex-start;gap:4px;scrollbar-width:none;height:auto;padding:0 0 4px;scroll-snap-type:x mandatory}.bmx-tl-track::-webkit-scrollbar{display:none}
+  .bmx-tl-dot{flex:none;width:104px;scroll-snap-align:center}.bmx-tl-dot span{white-space:normal;text-align:center;line-height:1.3;min-height:2.6em}}
 
 /* services menu rows: six phases (black), pricing (white) — tools/nav-services-menu.py */
 html body .bmdd-row .bmdd-ic{background:color-mix(in srgb,var(--c,#1a26de) 12%,#fff)!important;color:var(--c,#1a26de)!important}html body .bmdd-row .bmdd-ic svg{width:20px!important;height:20px!important}html body .bmdd-row:hover .bmdd-ic{background:var(--c,#1a26de)!important;color:#fff!important}html body .bmdd-row--dark .bmdd-ic{background:#0f1228!important;color:#fff!important}html body .bmdd-row--dark:hover .bmdd-ic{background:#1A26DE!important}html body .bmdd-row--light .bmdd-ic{background:#fff!important;color:#0f1228!important;box-shadow:inset 0 0 0 1px rgba(15,18,40,.16)}html body .bmdd-row--light:hover .bmdd-ic{background:#0f1228!important;color:#fff!important}html body .bmdd-row--dark{margin-bottom:6px}html body .bmdd-row--light{margin-top:6px}

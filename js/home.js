@@ -1289,7 +1289,13 @@ document.addEventListener('click', function (e) {
     cur = (i + chs.length) % chs.length;
     chs.forEach(function (c, k) { c.classList.toggle('on', k === cur); });
     dots.forEach(function (d, k) { d.classList.toggle('on', k === cur); d.setAttribute('aria-selected', k === cur ? 'true' : 'false'); });
-    if (fill && dots[cur]) { var tr = tl.querySelector('.bmx-tl-track').getBoundingClientRect(), dr = dots[cur].getBoundingClientRect(); fill.style.width = Math.max(0, dr.left + dr.width / 2 - tr.left) + 'px'; }
+    var track = tl.querySelector('.bmx-tl-track'), dot = dots[cur], line = tl.querySelector('.bmx-tl-line');
+    if (track && dot) {
+      // offsets, not screen rects: on phones the rail scrolls sideways, and the line and fill run its full length
+      if (line) line.style.width = track.scrollWidth + 'px';
+      if (fill) fill.style.width = Math.max(0, dot.offsetLeft + dot.offsetWidth / 2) + 'px';
+      if (track.scrollWidth > track.clientWidth) track.scrollTo({ left: dot.offsetLeft - (track.clientWidth - dot.offsetWidth) / 2, behavior: 'smooth' });
+    }
     if (count) count.textContent = cur + 1;
     tl.style.setProperty('--bx', (62 + cur * 6) + '%');
   }

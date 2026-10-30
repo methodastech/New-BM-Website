@@ -18561,6 +18561,8 @@ html{overflow-x:hidden}
 .bm-counter .bmc-dot{width:8px;height:8px;border-radius:0;background:rgba(255,255,255,.42);transition:all .25s;cursor:pointer;border:none;padding:0}
 .bm-counter .bmc-dot:hover{background:rgba(255,255,255,.75);transform:scale(1.25)}
 .bm-counter .bmc-dot.on{background:#fff;width:22px;border-radius:0}
+/* touch: a taller invisible hit area; the arrows beside the dots stay the main control */
+@media(pointer:coarse){.bm-counter .bmc-dot{position:relative}.bm-counter .bmc-dot::before{content:"";position:absolute;left:-3px;right:-3px;top:-14px;bottom:-14px}}
 .bm-counter .bmc-ar{width:32px;height:32px;border-radius:0;border:none;background:rgba(255,255,255,.22);color:#fff;font-size:16px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;font-family:inherit;transition:background .2s,transform .15s;padding:0}
 .bm-counter .bmc-ar:hover{background:rgba(255,255,255,.4)}
 .bm-counter .bmc-ar:active{transform:scale(.9)}
@@ -23848,6 +23850,8 @@ body.bm-tab-svc .bm-usd-note{margin:18px 0 14px!important}
 .bmph-cta button.alt{background:#fff;color:#15161A;border-color:#D8DBE6}
 .bmph-cta button:hover{background:#1A26DE;border-color:#1A26DE;color:#fff}
 .bmph{padding-top:clamp(56px,8vw,120px)!important;padding-bottom:clamp(36px,5vw,72px)!important;border-bottom:1px solid #E6E8F0}
+/* phones and tablets: the hero clears the fixed 60px nav with the same breathing room as About and Contact */
+@media(max-width:1024px){.bmph{padding-top:calc(60px + clamp(56px,9vw,80px))!important}}
 .bmph-inner{max-width:none!important}
 </style>
 
@@ -24960,7 +24964,7 @@ html body .bj2-c.bj2-active .bj2-c-head:not(#x):not(#y) .bpv{transform:translate
   }
 })();</script>
 <style id="bm-site-shell">.wa-float,.scroll-top-float{display:none!important}footer.bmf a{text-decoration:none}</style>
-<script src="js/layout.js?v=3"></script>
+<script src="js/layout.js?v=5"></script>
 <style id="bm-pricing-tweaks">
 /* Bespoke tier: tinted violet header like the other tiers, not the black panel */
 html body .svc-block .svc-panels .svc-panel.bespoke:nth-child(n) .panel-pic-top[class*="-pic"],html body .svc-block .svc-panels .svc-panel.bespoke:nth-child(n):hover .panel-pic-top[class*="-pic"]{background:#F1EBFE !important;border-bottom-color:#DDD3FB !important}

@@ -28,47 +28,76 @@
 <meta name="twitter:title" content="Contact | Brand Method">
 <meta name="twitter:description" content="Ready to build a brand that dominates? Let&#39;s talk. Contact Brand Method, Malaysia&#39;s #1 branding and marketing agency.">
 <meta name="twitter:image" content="https://brandmethod.co/Image/resources/brandmethod-os-framework.png">
-<link rel="stylesheet" href="css/style.css?v=20260620d">
-<style id="contact-steps-quiet">
-/* "A simple way to start" (27 Oct): three quiet steps in one hairline panel. No numbers and no heavy bars; the order
-   reads from left to right, helped by a small chevron on each divider. Scoped here: .approach-* is shared site-wide. */
-.contact-steps-section .contact-next-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin-top:48px;padding:0;background:#fff;border:1px solid rgba(15,24,56,.08);box-shadow:0 34px 70px -56px rgba(15,24,56,.35);overflow:visible}
-.contact-steps-section .approach-item{min-height:0;background:transparent;border:0;border-left:1px solid rgba(15,24,56,.07);box-shadow:none;overflow:visible;transition:none}
-.contact-steps-section .approach-item:first-child{border-left:0}
-.contact-steps-section .approach-item::before{content:none}
-.contact-steps-section .approach-item+.approach-item::before{content:"";position:absolute;z-index:2;left:-5px;top:calc(clamp(30px,3.2vw,46px) + 18px);width:8px;height:8px;border:0;border-top:1px solid rgba(0,0,255,.35);border-right:1px solid rgba(0,0,255,.35);border-radius:0;background:#fff;box-shadow:none;transform:rotate(45deg)}
-/* not links, so nothing reacts to the pointer */
-.contact-steps-section .approach-item::after{content:none}
-.contact-steps-section .approach-item:hover{background:transparent;transform:none;box-shadow:none}
-.contact-steps-section .approach-body{padding:clamp(30px,3.2vw,46px) clamp(26px,2.8vw,42px) clamp(34px,3.4vw,50px)}
-.contact-steps-section .approach-card-header{flex-direction:row;align-items:center;gap:16px;margin-bottom:18px}
-.contact-steps-section .approach-icon{width:44px;height:44px;min-width:44px;background:transparent;border:1px solid rgba(0,0,255,.18);box-shadow:none;transition:none}
-.contact-steps-section .approach-icon svg{width:20px;height:20px;stroke-width:1.5}
-.contact-steps-section .approach-item h3{font-family:var(--font-display);font-size:clamp(26px,2.2vw,32px);font-weight:400;line-height:1.1;letter-spacing:-.01em;text-transform:none;color:#0f0f0f;padding-bottom:0}
-.contact-steps-section .approach-item h3::after{content:none}
-.contact-steps-section .approach-item p{max-width:34ch;font-size:15.5px;line-height:1.7;color:#55585f}
-@media (max-width:768px){
-  .contact-steps-section .contact-next-steps{display:grid;grid-template-columns:minmax(0,1fr);margin-top:36px;padding:0;overflow:visible;scroll-snap-type:none}
-  .contact-steps-section .approach-item{flex:none;border-left:0;border-top:1px solid rgba(15,24,56,.07)}
-  .contact-steps-section .approach-item:first-child{border-top:0}
-  .contact-steps-section .approach-item+.approach-item::before{left:42px;top:-5px;transform:rotate(135deg)}
-  .contact-steps-section .approach-body{padding:26px 24px 28px;align-items:flex-start;text-align:left}
-  .contact-steps-section .approach-card-header{justify-content:flex-start;align-items:center}
-  .contact-steps-section .contact-next-steps .approach-item p{margin-left:0;margin-right:0;text-align:left !important}
+<link rel="stylesheet" href="css/style.css?v=20261030a">
+<style id="contact-steps">
+/* "A simple way to start" (29 Oct): three illustrated steps. Each opens on a large panel of dot paper where a fine line
+   drawing draws itself in, then keeps a slow loop: the brief being read, a lens focusing, a route reaching its pin.
+   Class names avoid the old .contact-step rules in style.css. */
+.contact-steps-section{padding:128px 20px 120px;background:#fff;border-top:1px solid rgba(15,24,56,.06)}
+.start-head{max-width:760px;margin:0 auto 64px;text-align:center}
+.start-head .section-title{margin:0 0 18px}
+.start-head p{max-width:52ch;margin:0 auto;font-size:17px;line-height:1.7;color:#5b5e66}
+.start-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,1.8vw,32px);margin:0;padding:0;list-style:none}
+.start-canvas{display:grid;place-items:center;aspect-ratio:4/3;background:radial-gradient(circle,rgba(15,24,56,.09) 1px,transparent 1.3px) 0 0/18px 18px,#f6f7fa}
+.start-card h3{margin:30px 0 12px;font-family:var(--font-display);font-size:clamp(28px,2.3vw,38px);font-weight:400;line-height:1.05;letter-spacing:-.015em;color:var(--white)}
+.start-card p{max-width:36ch;margin:0;font-size:16px;line-height:1.75;color:#5b5e66}
+.start-icon{width:38%;height:auto;overflow:visible;fill:none;stroke:#14161f;stroke-width:.5;stroke-linecap:round;stroke-linejoin:round}
+.start-icon .soft{stroke:rgba(15,24,56,.28)}
+.start-icon .blue{stroke:var(--accent);stroke-width:.7}
+.start-icon .dot{fill:var(--accent);stroke:none}
+/* draw in once the step is on screen, then the slow loop */
+.start-icon .d{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.8s var(--ease) .45s}
+.start-card.visible .start-icon .d{stroke-dashoffset:0}
+.start-icon .late{opacity:0;transition:opacity .8s ease 1.6s}
+.start-card.visible .start-icon .late{opacity:1}
+.ico-read .scan{stroke-dasharray:.28 1.5;stroke-dashoffset:.28}
+.start-card.visible .ico-read .scan{animation:startScan 3.6s ease-in-out 2s infinite}
+.start-card.visible .ico-read .scan:nth-of-type(2){animation-delay:3.2s}
+.start-card.visible .ico-read .scan:nth-of-type(3){animation-delay:4.4s}
+@keyframes startScan{0%{stroke-dashoffset:.28}45%,100%{stroke-dashoffset:-1.05}}
+.ico-clarify .ring{transform-origin:32px 32px;stroke-dasharray:1.2 2.6}
+.start-card.visible .ico-clarify .ring{animation:startSpin 24s linear infinite}
+.ico-clarify .lens{transform-origin:32px 32px}
+.start-card.visible .ico-clarify .lens{animation:startFocus 4.8s ease-in-out 2s infinite}
+@keyframes startSpin{to{transform:rotate(360deg)}}
+@keyframes startFocus{0%,100%{transform:scale(1)}50%{transform:scale(.72)}}
+.ico-map .route{stroke-dasharray:1.2 2}
+.start-card.visible .ico-map .route{animation:startRoute 2.4s linear infinite}
+.ico-map .halo{transform-origin:52px 18px}
+.start-card.visible .ico-map .halo{animation:startHalo 2.8s ease-out 2s infinite}
+@keyframes startRoute{to{stroke-dashoffset:-6.4}}
+@keyframes startHalo{0%{transform:scale(.6);opacity:.9}100%{transform:scale(2.2);opacity:0}}
+@media (max-width:900px){
+  .contact-steps-section{padding:84px 20px 80px}
+  .start-head{margin-bottom:40px;text-align:left}
+  .start-head p{margin:0}
+  .start-grid{grid-template-columns:minmax(0,1fr);gap:48px}
+  .start-canvas{aspect-ratio:16/10}
+  .start-icon{width:30%}
+  .start-card h3{margin-top:22px}
 }
+@media (prefers-reduced-motion:reduce){
+  .start-icon *{animation:none!important;transition:none!important;stroke-dashoffset:0!important;opacity:1!important}}
 </style>
 <style id="contact-where">
-/* Where we are: heading and address on one line, the tour video below at full width */
-.contact-where-section{padding:92px 20px;background:#fff}
-.contact-where-head{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap}
-.contact-where-head .section-title{margin:0}
-.contact-where-addr{max-width:360px}
-.contact-where-addr p{margin:0 0 10px;font-size:15.5px;line-height:1.65;color:#55585f}
-.contact-where-addr a{font-family:var(--font-sans);font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);text-decoration:none}
-.contact-where-addr a:hover{text-decoration:underline}
-.contact-where-tour{margin-top:40px;border:1px solid rgba(15,24,56,.08);overflow:hidden}
-.contact-where-tour video{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;background:#eef0f5}
-@media (max-width:768px){.contact-where-section{padding:70px 20px}.contact-where-tour{margin-top:28px}}
+/* Where we are: a split. Left, the heading, one line on the visit and the address as a labelled list with the
+   directions button, centred against the video on the right. Stacks under 1025px. */
+.contact-where-section{padding:clamp(80px,8vw,150px) 20px;background:#fff}
+.contact-where-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,8fr);gap:clamp(40px,5vw,96px);align-items:center}
+.contact-where-copy{display:flex;flex-direction:column;gap:clamp(32px,3vw,44px);min-width:0}
+.contact-where-copy .section-title{margin:0}
+.contact-where-lead{margin:22px 0 0;max-width:40ch;font-size:clamp(15.5px,1.1vw,18px);line-height:1.7;color:#55585f}
+.contact-where-list{margin:0;padding:0;border-top:1px solid rgba(15,24,56,.12)}
+.contact-where-row{display:grid;grid-template-columns:104px minmax(0,1fr);gap:20px;padding:20px 0;border-bottom:1px solid rgba(15,24,56,.12)}
+.contact-where-row dt{font-family:var(--font-mono);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(15,18,40,.5);padding-top:4px}
+.contact-where-row dd{margin:0;font-size:clamp(15.5px,1.1vw,17.5px);line-height:1.6;color:#15161a}
+.contact-where-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.contact-where-tour{position:relative;margin:0;overflow:hidden;background:#eef0f5;box-shadow:0 40px 90px -50px rgba(15,24,90,.45)}
+.contact-where-tour video{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover}
+@media (max-width:1024px){.contact-where-grid{grid-template-columns:1fr}.contact-where-tour video{aspect-ratio:16/9;height:auto}}
+@media (max-width:768px){.contact-where-section{padding:72px 20px}.contact-where-row{grid-template-columns:84px minmax(0,1fr);gap:14px;padding:16px 0}
+  .contact-where-actions>*{flex:1 1 auto;text-align:center;justify-content:center}}
+@media (max-width:480px){.contact-where-row{grid-template-columns:1fr;gap:8px}.contact-where-row dt{padding-top:0}}
 </style>
 <style id="contact-hero-art">
 /* Hero art direction (28 Oct): the MRANTI building, home of the studio, drawn as engraving line art with the curved
@@ -95,7 +124,7 @@
    screen. It hangs from the buttons: top:auto keeps it where it would sit in the flow, and the negative margin (the
    scaffolding starts at 37% of its height = 24.67% of --aw) lifts its empty sky above them. The hero keeps room under
    the buttons for the B, the stairs and the arches (0.3 x --aw); the bottom fades to white. */
-.contact-hero-section{--aw:min(100%,max(1440px,62vw));padding-top:48px;overflow:clip}
+.contact-hero-section{--aw:min(100%,max(1440px,62vw));padding-top:clamp(56px,7vw,140px);overflow:clip}
 .contact-hero-section .contact-art{top:auto;bottom:auto;left:0;width:calc(var(--aw) * 1.4);margin:calc(var(--aw) * -0.2467 + 40px) 0 0}
 .contact-hero-section .contact-art img{-webkit-mask-image:linear-gradient(to right,#000 86%,transparent);mask-image:linear-gradient(to right,#000 86%,transparent)}
 .contact-hero-section .contact-info::after{content:"";display:block;height:calc(min(100vw,max(1440px,62vw)) * 0.3)}
@@ -113,10 +142,16 @@
 .contact-intro-title em{font-style:italic;color:var(--accent)}
 .contact-intro-lead{max-width:900px;margin:0;font-size:clamp(17px,1.35vw,24px);line-height:1.7;color:#55585f}
 @media (max-width:768px){.contact-intro-section{padding:56px 20px 0}.contact-intro-title{margin-bottom:22px}}
+/* The hero line under the page title is a section heading: same size as the other h2s, never bigger than the h1.
+   On phones and tablets it wraps naturally, so "your" does not end up alone on a line. */
+@media (max-width:1024px){.contact-title{font-size:clamp(36px,5vw,64px);line-height:1.05;text-wrap:balance}.contact-title em{white-space:nowrap}.contact-title br{display:none}.contact-title-line{white-space:normal}}
+@media (max-width:480px){.contact-title{font-size:clamp(34px,11vw,46px)}}
 </style>
 <style id="contact-navline">
 /* Desktop: every section's edges follow the nav bar (logo on the left, Hire Us on the right) instead of a centred
    column, so zoomed out or on a wide screen the page still lines up under the menu. The padding is measured below. */
+/* Phones and tablets: the same side padding as the nav (20px on phones, ~32px on tablets) */
+@media (max-width:1024px){.contact-page .page-wrap>section{padding-left:clamp(20px,4vw,48px);padding-right:clamp(20px,4vw,48px)}}
 @media (min-width:1025px){.contact-page .page-wrap>section>.section-inner{max-width:none}
   /* on very wide screens the form stops growing and keeps to the right edge, under Hire Us */
   .contact-hero-section .contact-form-wrap{width:100%;max-width:820px;justify-self:end}}
@@ -160,7 +195,7 @@
   <div class="section-inner">
     <div class="contact-hero-grid">
       <div class="contact-info">
-        <h2 class="contact-title reveal reveal-delay-1">Tell us where your<br><span class="contact-title-line">brand needs to <em>go next</em></span></h2>
+        <h2 class="contact-title reveal reveal-delay-1">Tell us where your <br><span class="contact-title-line">brand needs to <em>go next</em></span></h2>
         <p class="contact-lead reveal reveal-delay-2">Share the challenge, the ambition, or the messy middle. We will help you shape it into a clear direction, then map the smartest way forward.</p>
 
         <div class="contact-actions reveal reveal-delay-3">
@@ -232,7 +267,7 @@
                 <label>Tell us about your project</label>
                 <textarea name="Project Details" placeholder="Briefly describe your business, your challenge, and what you want to achieve..."></textarea>
               </div>
-              <button type="submit" class="btn-primary contact-submit">Send Message -></button>
+              <button type="submit" class="btn-primary contact-submit">Send Message →</button>
               <p class="form-inline-message" aria-live="polite"></p>
             </form>
           </div>
@@ -244,66 +279,75 @@
 
 <section class="contact-steps-section">
   <div class="section-inner">
-    <h2 class="section-title reveal reveal-delay-1">A simple way to start</h2>
-    <div class="contact-next-steps">
-      <div class="approach-item reveal">
-        <div class="approach-body">
-          <div class="approach-card-header">
-            <span class="approach-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M4 6.5h16"></path><path d="M4 12h10"></path><path d="M4 17.5h8"></path><path d="M18.5 15.5l1.5 1.5-3.5 3.5H15v-1.5z"></path></svg>
-            </span>
-            <div class="approach-card-meta">
-              <h3>Read</h3>
-            </div>
-          </div>
-          <p>We read the brief and look for the real business problem behind the request.</p>
-        </div>
-      </div>
-      <div class="approach-item reveal reveal-delay-1">
-        <div class="approach-body">
-          <div class="approach-card-header">
-            <span class="approach-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M12 3l8 4-8 4-8-4 8-4z"></path><path d="M4 12l8 4 8-4"></path><path d="M4 17l8 4 8-4"></path></svg>
-            </span>
-            <div class="approach-card-meta">
-              <h3>Clarify</h3>
-            </div>
-          </div>
-          <p>If the scope is not obvious yet, we clarify direction by asking the sharp questions first.</p>
-        </div>
-      </div>
-      <div class="approach-item reveal reveal-delay-2">
-        <div class="approach-body">
-          <div class="approach-card-header">
-            <span class="approach-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M4 17l6-6 4 4 6-8"></path><path d="M15 7h5v5"></path></svg>
-            </span>
-            <div class="approach-card-meta">
-              <h3>Map</h3>
-            </div>
-          </div>
-          <p>We map the next move so you get a practical recommendation on the right way to start.</p>
-        </div>
-      </div>
+    <div class="start-head">
+      <h2 class="section-title reveal">A simple way <em>to start</em></h2>
+      <p class="reveal reveal-delay-1">Three steps between your brief and a clear first move.</p>
     </div>
+    <ol class="start-grid">
+      <li class="start-card reveal">
+        <div class="start-canvas">
+          <svg class="start-icon ico-read" viewBox="0 0 64 64" aria-hidden="true">
+            <path class="d" pathLength="1" d="M15 7h24l11 11v39H15z"/><path class="d" pathLength="1" d="M39 7v11h11"/>
+            <path class="d soft" pathLength="1" d="M22 29h21"/><path class="d soft" pathLength="1" d="M22 37h21"/><path class="d soft" pathLength="1" d="M22 45h13"/>
+            <g class="late"><path class="scan blue" pathLength="1" d="M22 29h21"/><path class="scan blue" pathLength="1" d="M22 37h21"/><path class="scan blue" pathLength="1" d="M22 45h13"/></g>
+          </svg>
+        </div>
+        <h3>Read</h3>
+        <p>We read the brief and look for the real business problem behind the request.</p>
+      </li>
+      <li class="start-card reveal reveal-delay-1">
+        <div class="start-canvas">
+          <svg class="start-icon ico-clarify" viewBox="0 0 64 64" aria-hidden="true">
+            <circle class="ring soft late" cx="32" cy="32" r="25"/>
+            <path class="d" pathLength="1" d="M32 3v8M32 53v8M3 32h8M53 32h8"/>
+            <circle class="d lens" pathLength="1" cx="32" cy="32" r="14"/>
+            <circle class="dot late" cx="32" cy="32" r="2.6"/>
+          </svg>
+        </div>
+        <h3>Clarify</h3>
+        <p>If the scope is not obvious yet, we clarify direction by asking the sharp questions first.</p>
+      </li>
+      <li class="start-card reveal reveal-delay-2">
+        <div class="start-canvas">
+          <svg class="start-icon ico-map" viewBox="0 0 64 64" aria-hidden="true">
+            <path class="d soft" pathLength="1" d="M5 13l17-6 20 6 17-6v44l-17 6-20-6-17 6z"/><path class="d soft" pathLength="1" d="M22 7v44M42 13v44"/>
+            <path class="route late" d="M12 47c8 0 10-12 18-12s8-17 22-17"/>
+            <circle class="d" pathLength="1" cx="12" cy="47" r="2.4"/>
+            <circle class="halo blue late" cx="52" cy="18" r="4"/><circle class="dot late" cx="52" cy="18" r="3"/>
+          </svg>
+        </div>
+        <h3>Map</h3>
+        <p>We map the next move so you get a practical recommendation on the right way to start.</p>
+      </li>
+    </ol>
   </div>
 </section>
 
 <!-- WHERE WE ARE: a looping video of the drive from MRANTI Park to the office (recorded from Azwan's 3D tour in studio-tour/) -->
 <section id="where" class="contact-where-section">
   <div class="section-inner">
-    <div class="contact-where-head">
-      <h2 class="section-title reveal">Where <em>we are</em></h2>
-      <div class="contact-where-addr reveal reveal-delay-1">
-        <p>MRANTI Park, Office 25, Level 1,<br>Taman Teknologi MRANTI, Bukit Jalil,<br>57000 Kuala Lumpur</p>
-        <a href="https://www.google.com/maps/search/?api=1&amp;query=MRANTI+Park+Bukit+Jalil+Kuala+Lumpur" target="_blank" rel="noopener">Open in Google Maps &rarr;</a>
+    <div class="contact-where-grid">
+      <div class="contact-where-copy">
+        <div>
+          <h2 class="section-title reveal">Where <em>we are</em></h2>
+          <p class="contact-where-lead reveal reveal-delay-1">Our studio is in MRANTI Park, Bukit Jalil. The video shows the way in, from the park to our office.</p>
+        </div>
+        <div class="reveal reveal-delay-2">
+          <dl class="contact-where-list">
+            <div class="contact-where-row"><dt>Address</dt><dd>Office 25, Level 1, MRANTI Park<br>Taman Teknologi MRANTI, Bukit Jalil<br>57000 Kuala Lumpur</dd></div>
+          </dl>
+          <div class="contact-where-actions">
+            <a class="btn-primary" href="https://www.google.com/maps/search/?api=1&amp;query=MRANTI+Park+Bukit+Jalil+Kuala+Lumpur" target="_blank" rel="noopener">Get directions &rarr;</a>
+            <a class="btn-ghost" href="https://wa.me/60162563030?text=Hi%20Brand%20Method%2C%20I%27d%20like%20to%20visit%20the%20studio" target="_blank" rel="noopener">WhatsApp us</a>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="contact-where-tour reveal reveal-delay-2">
-      <video autoplay muted loop playsinline preload="metadata" poster="Image/bm-tour-poster.jpg" aria-label="A tour from MRANTI Park to the Brand Method office">
-        <source src="video/bm-tour-loop.webm" type="video/webm">
-        <source src="video/bm-tour-loop-1080p-small.mp4" type="video/mp4">
-      </video>
+      <figure class="contact-where-tour reveal reveal-delay-2">
+        <video autoplay muted loop playsinline preload="metadata" poster="Image/bm-tour-poster.jpg" aria-label="A tour from MRANTI Park to the Brand Method office">
+          <source src="video/bm-tour-loop.webm" type="video/webm">
+          <source src="video/bm-tour-loop-1080p-small.mp4" type="video/mp4">
+        </video>
+      </figure>
     </div>
   </div>
 </section>

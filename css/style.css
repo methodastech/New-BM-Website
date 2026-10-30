@@ -5275,6 +5275,13 @@ footer {
   }
 }
 
+/* Below the two-column layout the sidebar follows the article, so readers reach the first paragraph straight away */
+@media (max-width: 1023px) {
+  .article-sidebar {
+    margin: 56px 0 0;
+  }
+}
+
 @media (max-width: 768px) {
   .article-wrap {
     padding: 112px 0 72px;
@@ -9885,6 +9892,8 @@ footer {
 .svc-acc-links{display:flex;flex-wrap:wrap;gap:24px;align-items:center}
 .svc-acc-cta.alt{color:var(--muted)}
 .svc-acc-cta.alt:hover{color:var(--c);border-color:var(--c)}
+/* the small mono text links keep their look but get a thumb-sized hit area (44px) on touch screens */
+@media (pointer:coarse){.svc-acc-cta,.link-ul{position:relative}.svc-acc-cta::before,.link-ul::before{content:"";position:absolute;left:-6px;right:-6px;top:50%;height:44px;transform:translateY(-50%)}}
 @media(max-width:680px){.svc-acc-pkgs .price-grid{grid-template-columns:1fr}}
 :root{
   --hx-dur: 0.85s;
