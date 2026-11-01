@@ -235,6 +235,10 @@ html body .pg[id^="pg-case-"] .wk6-chead{padding-top:calc(var(--wk6-navb,72px) +
 /* Mascot Gallery: the cast frame at the design's height (its rule is site-wide there, so it is set here for this page) */
 html body #pg-mascot-gallery .bmx-bnr .bmx-field{height:clamp(220px,24vw,340px)!important}
 @media (max-width:767px){html body #pg-mascot-gallery .bmx-bnr .bmx-field{height:clamp(180px,46vw,260px)!important}}
+/* the cast film fills its frame in every browser: Firefox keeps a positioned video at its own 4:3 shape unless its size
+   is given, which left the frame's background showing as a band on each side */
+html body #pg-mascot-gallery .wk6-castv{position:absolute;inset:0;overflow:hidden}
+html body #pg-mascot-gallery .wk6-castv video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%;display:block}
 '''
 
 
@@ -317,7 +321,7 @@ def into_shell(shell, shell_pid, section, pid, out, title=None, desc=None):
     return s
 
 
-VERSION = '20261031a'
+VERSION = '20261101a'
 
 
 def case_meta(pid, section):
