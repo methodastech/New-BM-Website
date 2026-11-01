@@ -1,0 +1,967 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>Heart Media · Yacht Style Arabia and Leadersclass · Meeting Notes · BM only</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F4F5F2; --card:#fff; --ink:#15161A; --soft:#54565d; --faint:#8a8c86;
+    --line:#E4E3DA; --line-soft:#ECEBE3; --bright:#2536F5; --bright-deep:#1E2AC0; --wash:#EEF0FE;
+    --green:#0F7A3D; --green-bg:#EAF7EF; --green-line:#BFE5CD;
+    --amber:#8a6d1a; --amber-bg:#FBF5E4; --amber-line:#EADFB9;
+    --red:#B4231A; --red-bg:#FBEEEC; --red-line:#EFC9C4;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Inter",system-ui,sans-serif;background:var(--paper);color:var(--ink);line-height:1.55;}
+  .wrap{max-width:1080px;margin:0 auto;padding:clamp(20px,4vw,44px) clamp(16px,3.4vw,40px) 80px;}
+  .kicker{font-family:Inter,sans-serif;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--bright-deep);}
+  h1{font-family:"Fraunces",serif;font-weight:500;font-size:clamp(28px,4.4vw,44px);line-height:1.05;letter-spacing:-.015em;margin:10px 0 12px;}
+  .lede{color:var(--soft);font-size:15.5px;max-width:70ch;}
+
+  /* session index */
+  .sindex{margin-top:22px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;}
+  .sindex .lab{font-family:Inter,sans-serif;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);}
+  .srow{display:flex;flex-wrap:wrap;gap:9px;margin-top:12px;}
+  .schip{display:inline-flex;align-items:center;gap:10px;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:9px 14px;text-decoration:none;transition:border-color .15s,background .15s;}
+  .schip:hover{border-color:var(--bright);background:var(--wash);}
+  .schip b{font-family:Inter,sans-serif;font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--bright-deep);}
+  .schip span{font-size:13px;color:var(--ink);}
+  .schip i{font-style:normal;font-size:12px;color:var(--faint);}
+  .schip.next{border-style:dashed;color:var(--faint);}
+  .schip.next b{color:var(--faint);}
+
+  .empty{background:var(--card);border:1px dashed #C9CCDC;border-radius:16px;padding:clamp(22px,4vw,38px);text-align:center;margin-top:22px;}
+  .empty b{display:block;font-family:"Fraunces",serif;font-weight:500;font-size:21px;color:var(--ink);}
+  .empty span{display:block;font-size:14px;color:var(--soft);margin-top:8px;max-width:60ch;margin-left:auto;margin-right:auto;}
+
+  /* session block */
+  .session{margin-top:clamp(30px,4.5vw,52px);}
+  .shead{background:var(--ink);color:#fff;border-radius:16px;padding:clamp(16px,2.4vw,24px);}
+  .shead .n{font-family:Inter,sans-serif;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#9FB0FF;}
+  .shead h2{font-family:"Fraunces",serif;font-weight:500;font-size:clamp(21px,3vw,27px);letter-spacing:-.015em;margin:7px 0 0;}
+  .shead .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:13px;}
+  .shead .meta span{font-family:Inter,sans-serif;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#C7CEDF;background:rgba(255,255,255,.10);border-radius:99px;padding:6px 12px;}
+
+  .sec{margin-top:20px;}
+  .sec-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:13px;}
+  .sec-head .n{font-family:Inter,sans-serif;font-size:10px;font-weight:700;letter-spacing:.18em;color:var(--bright);}
+  .sec-head h3{font-family:"Fraunces",serif;font-weight:500;font-size:20px;letter-spacing:-.01em;}
+  .sec-head .dim{font-family:Inter,sans-serif;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);}
+
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:clamp(16px,2.4vw,26px);}
+  .panel p{color:var(--soft);font-size:14.5px;}
+  .panel p + p{margin-top:10px;}
+  .panel b{color:var(--ink);}
+  .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px;}
+
+  .people{display:grid;grid-template-columns:repeat(auto-fit,minmax(225px,1fr));gap:12px;}
+  .person{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 15px;}
+  .person b{display:block;font-size:14px;color:var(--ink);}
+  .person span{display:block;font-size:12.5px;color:var(--faint);margin-top:2px;}
+  .person i{display:inline-block;font-style:normal;font-family:Inter,sans-serif;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--bright-deep);background:var(--wash);border-radius:99px;padding:3px 8px;margin-top:7px;}
+
+  .dec{border-radius:14px;padding:16px 18px;border:1px solid var(--line);background:var(--card);}
+  .dec.ok{background:var(--green-bg);border-color:var(--green-line);}
+  .dec.open{background:var(--amber-bg);border-color:var(--amber-line);}
+  .dec .lab{font-family:Inter,sans-serif;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;}
+  .dec.ok .lab{color:var(--green);} .dec.open .lab{color:var(--amber);}
+  .dec ul{list-style:none;margin-top:12px;}
+  .dec li{padding:9px 0;border-top:1px solid rgba(0,0,0,.07);font-size:14px;color:var(--soft);}
+  .dec li:first-child{border-top:none;}
+  .dec li b{color:var(--ink);display:block;font-size:14.5px;}
+
+  .owner{margin-top:14px;}
+  .owner-h{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+  .owner-h .who{font-family:Inter,sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--bright-deep);background:var(--wash);border:1px solid #D7DCFB;border-radius:99px;padding:6px 13px;}
+  .owner-h .cnt{font-family:Inter,sans-serif;font-size:10px;color:var(--faint);}
+  .task{display:flex;gap:12px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 15px;margin-top:8px;cursor:pointer;transition:border-color .15s;}
+  .task:hover{border-color:var(--bright);}
+  .task input{appearance:none;flex:0 0 auto;width:17px;height:17px;border:2px solid var(--bright);border-radius:5px;margin-top:2px;cursor:pointer;position:relative;background:#fff;}
+  .task input:checked{background:var(--bright);}
+  .task input:checked::after{content:"";position:absolute;left:4.5px;top:1px;width:4px;height:9px;border:solid #fff;border-width:0 2.4px 2.4px 0;transform:rotate(45deg);}
+  .task .tx{display:block;min-width:0;}
+  .task .tt,.task .td{display:block;}
+  .task .tt{font-size:14.5px;font-weight:600;color:var(--ink);}
+  .task .td{font-size:13.5px;color:var(--soft);margin-top:2px;}
+  .task.done .tt,.task.done .td{text-decoration:line-through;color:var(--faint);}
+  .progress{display:flex;align-items:center;gap:12px;margin-top:13px;}
+  .bar{flex:1;height:7px;background:var(--line-soft);border-radius:99px;overflow:hidden;}
+  .bar i{display:block;height:100%;width:0;background:var(--bright);border-radius:99px;transition:width .3s;}
+  .pct{font-family:Inter,sans-serif;font-size:11px;font-weight:700;color:var(--soft);}
+
+  .log{list-style:none;}
+  .log li{position:relative;padding:0 0 20px 30px;border-left:2px solid var(--line);}
+  .log li:last-child{border-left-color:transparent;padding-bottom:0;}
+  .log li::before{content:"";position:absolute;left:-6px;top:5px;width:10px;height:10px;border-radius:99px;background:var(--bright);border:2px solid var(--paper);}
+  .log .t{font-family:Inter,sans-serif;font-size:10px;font-weight:700;letter-spacing:.08em;color:var(--bright-deep);}
+  .log .h{font-size:14.5px;font-weight:700;color:var(--ink);margin-top:2px;}
+  .log .b{font-size:14px;color:var(--soft);margin-top:3px;}
+
+  .flag{display:flex;gap:12px;align-items:flex-start;border-radius:14px;padding:15px 17px;margin-top:12px;background:var(--amber-bg);border:1px solid var(--amber-line);}
+  .flag.red{background:var(--red-bg);border-color:var(--red-line);}
+  .flag .ic{flex:0 0 auto;width:20px;height:20px;color:var(--amber);display:grid;place-items:center;margin-top:0;}
+  .flag.red .ic{color:var(--red);}
+  .flag b{display:block;font-size:14.5px;color:var(--ink);}
+  .flag span{font-size:13.5px;color:var(--soft);}
+
+  .howto{margin-top:clamp(30px,4vw,48px);background:var(--wash);border:1px solid #D7DCFB;border-radius:16px;padding:clamp(16px,2.4vw,24px);}
+  .howto .lab{font-family:Inter,sans-serif;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--bright-deep);}
+  .howto h3{font-family:"Fraunces",serif;font-weight:500;font-size:19px;margin:7px 0 8px;}
+  .howto p{font-size:14px;color:var(--soft);}
+  .howto code{font-family:Inter,sans-serif;font-size:12.5px;background:#fff;border:1px solid #D7DCFB;border-radius:6px;padding:1px 6px;color:var(--bright-deep);}
+
+  #bmBack{display:none;position:fixed;top:14px;right:16px;z-index:9999;font:600 12.5px "Inter",system-ui,sans-serif;color:#1E73E8;background:rgba(255,255,255,.97);border:1px solid #D4D5CC;border-radius:100px;padding:8px 15px;cursor:pointer;box-shadow:0 8px 22px -10px rgba(20,24,55,.45);align-items:center;gap:6px;}
+  body.bm-standalone #bmBack{display:inline-flex;}
+  /* tables, from the VIN edition of this engine: prices heard on the call */
+  .tbl{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;}
+  .tbl-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  table{width:100%;border-collapse:collapse;font-size:14px;min-width:560px;}
+  th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line-soft);vertical-align:top;}
+  thead th{font-family:Inter,sans-serif;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);background:var(--paper);}
+  tbody tr:last-child td{border-bottom:none;}
+  td.k{font-weight:600;color:var(--ink);white-space:nowrap;width:180px;}
+  td{color:var(--soft);}
+  td b{color:var(--ink);}
+  .tag{display:inline-block;font-family:Inter,sans-serif;font-size:9.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border-radius:4px;padding:2px 7px;margin-left:6px;vertical-align:1px;}
+  .tag.ok{background:var(--green-bg);color:var(--green);}
+  .tag.tc{background:var(--amber-bg);color:var(--amber);}
+  .note{margin-top:12px;font-size:13px;color:var(--faint);}
+  .note b{color:var(--soft);}
+  .srcnote{margin-top:12px;font-size:13px;color:var(--soft);background:var(--card);border:1px dashed #C9CCDC;border-radius:12px;padding:11px 14px;}
+  .srcnote b{color:var(--ink);}
+  .dec.facts li b{display:inline;font-size:14px;}
+  .dec.facts li b::after{content:" ";}
+  .task .due{font-family:Inter,sans-serif;font-size:11px;font-weight:700;color:var(--bright-deep);margin-left:8px;}
+
+  /* BM only: the follow up pack. Removed from the client bundle, see the script after it */
+  .fup{margin-top:clamp(30px,4.5vw,52px);border:2px solid var(--red-line);border-radius:18px;padding:clamp(14px,2.4vw,24px);background:#FFFBFA;}
+  .fup-h .lab{display:inline-block;font-family:Inter,sans-serif;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--red);background:var(--red-bg);border:1px solid var(--red-line);border-radius:99px;padding:5px 11px;}
+  .fup-h h2{font-family:"Fraunces",serif;font-weight:500;font-size:clamp(21px,3vw,27px);letter-spacing:-.015em;margin:10px 0 6px;}
+  .fup-h p{font-size:14px;color:var(--soft);max-width:78ch;}
+  .fup .sec{margin-top:24px;}
+  .draft{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;}
+  .draft-top{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;padding:11px 15px;background:var(--paper);border-bottom:1px solid var(--line-soft);font-size:12.5px;color:var(--soft);}
+  .draft-top b{color:var(--ink);}
+  .stamp{font-family:Inter,sans-serif;font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--red);background:var(--red-bg);border:1px solid var(--red-line);border-radius:4px;padding:3px 8px;}
+  .draft-body{padding:14px 16px;font-size:14px;line-height:1.6;color:var(--ink);white-space:pre-line;}
+  .draft-foot{padding:10px 16px;border-top:1px solid var(--line-soft);font-size:12.5px;color:var(--faint);}
+  .draft-foot b{color:var(--soft);}
+  .fup td.k{white-space:normal;width:170px;}
+  .fup table td.url{font-family:Inter,sans-serif;font-size:12px;}
+  .fup table td.url b{font-family:"Inter",system-ui,sans-serif;font-size:13.5px;}
+
+  @media (max-width:768px){
+    .sec-head .n,.sec-head .dim,.shead .n,.shead .meta span,.sindex .lab,.dec .lab,.owner-h .cnt,.person i,thead th,.tag,.task .due,.stamp,.fup-h .lab{font-size:11.5px;}
+    td.k{white-space:normal;width:auto;}
+  }
+  @media print{
+    *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    body{background:#fff;font-size:13px}
+    .wrap{padding:0}
+    .howto,#bmBack,.progress,.schip.next{display:none}
+    .tbl-scroll{overflow:visible}
+    table{min-width:0;font-size:11.5px}
+    th,td{padding:7px 9px}
+    td.k{white-space:normal;width:auto}
+    tr,.person,.dec li,.task,.panel p,.draft,.flag{break-inside:avoid;page-break-inside:avoid}
+    .sec-head,.shead,.fup-h{break-after:avoid;page-break-after:avoid}
+    .session{margin-top:18px}
+    .fup{break-before:page;page-break-before:always}
+  }
+  /* client bundle: the BM only pack never shows, even before the script runs; the team pack keeps it */
+  html:has(meta[name="bm-bundle"]:not([content="team"])) .bm-internal{display:none!important;}
+</style>
+<style id="bm-a4">@page{size:A4;margin:14mm}</style>
+</head>
+<body>
+<div class="wrap">
+  <span class="kicker">Heart Media Group x Brand Method · BM only until Bazil confirms</span>
+  <h1>Meeting notes.</h1>
+  <p class="lede">The running record for this account. Every session is dated and kept in full, newest at the top: the summary, the people, the decisions and the actions. No dialogue and no transcript. Action ticks save in this browser.</p>
+  <div class="flag red" id="srcflag" style="margin:18px 0 6px"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5 21.5 20h-19z"/><path d="M12 10v4.5"/><path d="M12 17.2v.1"/></svg></span><span><b>Sessions 02 and 03 are the client’s own emails. Session 01 is thin notes, unverified by the client.</b><span>Session 03 is quoted from Gael Burlot’s email of Tue 6 Oct 2026, 9:34am, and our reply. Session 02 is quoted from Olivier Burlot’s email of Mon 5 Oct 2026, 10:48am. For session 01 the only sources are Bazil’s own Apple Notes from the meeting (Thu 1 Oct 2026, 3:05pm) and what he dictated to Claude later the same day, as recorded in docs/yachtstyle/_BRIEF.md and docs/leadersclass/_BRIEF.md. There is no recording and no transcript of the meeting. This page stays BM only until Bazil confirms the notes are accurate.</span></span></div>
+  <div id="app"></div>
+
+  <div class="bm-internal">
+  <section class="fup" id="followup" data-chip="Internal flags" data-chip-sub="for Bazil, and the source notes word for word" aria-label="Internal flags, BM only">
+    <div class="fup-h">
+      <span class="lab">BM only · internal · never in a client bundle</span>
+      <h2>Internal flags from session 01</h2>
+      <p>What Bazil settles before anything from this meeting is used in a client document, and the source notes as he wrote them. Nothing here has been sent.</p>
+    </div>
+
+    <div class="sec">
+      <div class="sec-head"><span class="n">A</span><h3>Settle before the pack goes</h3><span class="dim">Bazil decides · not in the client notes</span></div>
+      <div class="flag red"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5 21.5 20h-19z"/><path d="M12 10v4.5"/><path d="M12 17.2v.1"/></svg></span><span><b>Nothing in these notes is confirmed by the client</b><span>The notes are Bazil’s own, short, and written straight after the meeting. Read them and correct what is wrong: who attended, what was agreed, who decides, and which lines belong to Yacht Style and which to Leadersclass.</span></span></div>
+      <div class="flag red"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5 21.5 20h-19z"/><path d="M12 10v4.5"/><path d="M12 17.2v.1"/></svg></span><span><b>No price, scope or deadline is recorded from the meeting</b><span>The Yacht Style Arabia prices are Bazil’s. On the evening of 1 Oct he set RM10,000 and RM20,000 before SST, after calling Claude’s first suggestion of RM25,000 and RM60,000 expensive. On Mon 5 Oct he raised them to RM15,000 and RM25,000, because the price includes the CMS. Nothing on file shows Olivier has seen a figure. The dates in the proposal are our assumption, not dates agreed in the room.</span></span></div>
+      <div class="flag"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.5"/><path d="M12 7.8v.1"/></svg></span><span><b>Stephan: surname, role and address</b><span>The note gives a first name only, and an address written as stephan@leaderclass.com, without the s. The live domain is leadersclass.com. Confirm all three before any email or document names him.</span></span></div>
+      <div class="flag"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.5"/><path d="M12 7.8v.1"/></svg></span><span><b>UniEnrol, their own reference for Leadersclass</b><span>Sent after the meeting. Bazil’s private view of it stays out of every client document. In client copy it is the reference to improve on: more real information for students.</span></span></div>
+      <div class="flag"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.5"/><path d="M12 7.8v.1"/></svg></span><span><b>The legal entity</b><span>Which company signs and pays is not known: Heart Media, Lux Inc Media, which yachtstyle.co names as publisher, or an ITP entity. The proposal and the quotation address Heart Media Group, attention Mr Olivier Burlot.</span></span></div>
+      <div class="flag"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.5"/><path d="M12 7.8v.1"/></svg></span><span><b>The first Heart Media website enquiry</b><span>Whether the first project, the group or LUXUO website, is still live or whether these two enquiries replace it is not known. It is not priced anywhere.</span></span></div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-head"><span class="n">B</span><h3>The source notes, word for word</h3><span class="dim">Bazil’s Apple Notes · 1 Oct 2026, 3:05pm · typos kept</span></div>
+      <div class="tbl"><div class="tbl-scroll"><table>
+        <thead><tr><th>Point</th><th>What the note says</th><th>How these notes read it</th></tr></thead>
+        <tbody>
+          <tr><td class="k">Heading of the note</td><td>“yactch style”</td><td>The note is headed Yacht Style and then mostly covers Leadersclass. Which lines belong to which project is unverified.</td></tr>
+          <tr><td class="k">Case studies</td><td>“they want to know case studies success failre how naza gets there and so on”</td><td>Case studies of how leaders and companies got there, successes and failures both. Naza was the example named.</td></tr>
+          <tr><td class="k">Newsletter</td><td>“newsltter great”</td><td>A newsletter is part of it, or theirs was praised. Unclear which.</td></tr>
+          <tr><td class="k">The brand</td><td>“leadersclass ( the brand)”</td><td>Leadersclass is the brand name.</td></tr>
+          <tr><td class="k">Ambition</td><td>“bway nbigger thatn what we saw”, “mmedia exciting.”</td><td>The ambition is far larger than the holding page; they want media that excites. May bear on Yacht Style as well.</td></tr>
+          <tr><td class="k">The app</td><td>“if for app a bit more simple in that website”, “70-80% or so look”</td><td>There is an app as well as a website. The app is simpler and shares roughly 70 to 80 percent of the site’s look.</td></tr>
+          <tr><td class="k">Swipe</td><td>“swipe media , like tinder,”</td><td>The app’s core interaction: swipe through stories.</td></tr>
+          <tr><td class="k">Money</td><td>“monatization”</td><td>How it earns is an open topic.</td></tr>
+          <tr><td class="k">People</td><td>“stephan”, “oliver”, “stephan@leaderclass.com”</td><td>Two people: Stephan and Olivier. The address is written without the s; the live domain is leadersclass.com, so the address is unverified.</td></tr>
+          <tr><td class="k">Failure</td><td>“failure”</td><td>Failure stories are a deliberate part of the editorial idea.</td></tr>
+          <tr><td class="k">Working style</td><td>“proactive, snappy”</td><td>How they want us to work.</td></tr>
+          <tr><td class="k">Media people</td><td>“hwat is bes media gorup”, “they are media pepople”</td><td>They asked what the best media groups do. They are media people and will judge the work as such.</td></tr>
+        </tbody>
+      </table></div></div>
+      <p class="note"><b>Source:</b> the full note is kept in docs/leadersclass/_BRIEF.md, with Bazil’s dictation of the same day in that file and in docs/yachtstyle/_BRIEF.md. The readings in the third column are Claude’s, corrected once by Bazil on 1 Oct: Leadersclass is media for students and people planning study and careers, not leadership media for executives.</p>
+    </div>
+  </section>
+  </div>
+
+  <div class="howto">
+    <span class="lab">After the next meeting</span>
+    <h3>Adding a session takes one entry.</h3>
+    <p>Open this file, find the <code>SESSIONS</code> array at the bottom, and paste a new object at the <b>top</b> of it. Newest session first. Every field is optional except <code>n</code>, <code>date</code> and <code>topic</code>. The session index, the numbering and the action tracker rebuild themselves. Notes carry the summary, the people, the decisions and the actions only: no dialogue, no transcript log.</p>
+  </div>
+</div>
+
+<button id="bmBack" type="button" aria-label="Back">&larr; Back</button>
+
+<script>
+/* the BM only follow up pack leaves the page in the client bundle (or any bundle that is not the team pack),
+   before anything paints below it. The client bundle builder also strips the bm-internal block from the source. */
+(function(){ var m=document.querySelector('meta[name="bm-bundle"]'); if(m && m.getAttribute('content')!=='team'){ [].slice.call(document.querySelectorAll('.bm-internal')).forEach(function(n){ n.parentNode.removeChild(n); }); } })();
+</script>
+<script>
+/* =====================================================================
+   MEETING NOTES DATA
+   Newest session FIRST. Add the next meeting as a new object at the top.
+   Meeting notes carry summary, people, decisions and actions. Never dialogue.
+
+   {
+     n:'02', date:'Tue 6 Oct 2026', time:'10:00am GMT+8', topic:'Short title',   // n, date, topic REQUIRED
+     source:'Where these notes come from',
+     attendees:[{name:'', role:'', tag:'Client'}],
+     summary:['line one', 'line two'],                  // supports <b> tags
+     decisions:{ aligned:[{t:'Title', d:'Detail'}], open:[{t:'', d:''}] },
+     prices:[{k:'Item', v:'What was said', s:'ok'}],   // s: ok = matches the list, tc = to confirm
+     pricesTitle:'', pricesCol:'', pricesDim:'', openDim:'',   // optional labels; defaults: Prices said on the call, Said on the call, not in the notes
+     actions:[ {owner:'Bazil', items:[{k:'s2a1', t:'Task', due:'Thu 8 Oct', d:'Detail'}]} ],
+     flags:[ {red:true, t:'Watch this', d:'Why it matters'} ],   // BM view only
+     log:[]                                             // house rule since 15 Sep: leave empty
+   }
+   ===================================================================== */
+var SESSIONS = [
+  {
+    "n": "03",
+    "date": "Tue 6 Oct 2026",
+    "time": "9:34am and 2:18pm GMT+8 · by email",
+    "topic": "Gael Burlot acknowledges the pack and names The World of Yachts as the main competitor in the Gulf",
+    "source": "<b>Source:</b> an email from Gael Burlot of Tue 6 Oct 2026, 9:34am, to Bazil Rozenan, copied to Fardiha, Olivier and one more, and our reply of 2:18pm. Bazil pasted screenshots of both and of theworldofyachts.com about 2:20pm. <b>These are the client’s own words.</b> A line marked <span class=\"tag tc\">Reading</span> is our reading, not his.",
+    "peopleDim": "as shown on the email",
+    "factsTitle": "What the email says",
+    "factsDim": "quoted from the email",
+    "heardLab": "Written in the email",
+    "attendees": [
+      {
+        "name": "Gael Burlot",
+        "role": "CEO, Lux Inc Media Group (Yacht Style, Palace, LUXUO) · Hong Kong, Singapore, Malaysia, Thailand, Vietnam, UAE · +65 8575 1214 (WhatsApp, WeChat), +66 9 6965 6190 (Line) · the sender, from his signature",
+        "tag": "Client · Lux Inc Media"
+      },
+      {
+        "name": "Olivier Burlot",
+        "role": "Heart Media Group · copied",
+        "tag": "Client · Heart Media"
+      },
+      {
+        "name": "Bazil Rozenan",
+        "role": "Brand Method · addressed, and signs our reply",
+        "tag": "Brand Method"
+      },
+      {
+        "name": "Fardiha Syahana Saharudin",
+        "role": "Brand Method · copied",
+        "tag": "Brand Method"
+      }
+    ],
+    "summary": [
+      "Gael wrote: “Thank you for your feedback regarding YACHT STYLE Arabia, we'll take a look at it.” We read “feedback” as our pack of 5 Oct, the proposal and the workspace link <span class=\"tag tc\">Reading</span>.",
+      "<b>The competitor:</b> “please review main competitor on site in the Gulf: THE WORLD OF YACHTS”, theworldofyachts.com.",
+      "<b>Who Gael is:</b> his signature settles it. Gael Burlot, CEO of Lux Inc Media Group, the publisher of Yacht Style, Palace and LUXUO, in six markets. The 5 Oct notes had this as our inference.",
+      "<b>Our reply, 2:18pm:</b> thanks for the reference, and that we will update our audit file. It opens “Good afternoon mr Fael”, a typo for Gael.",
+      "<b>Same day:</b> the Peer &amp; Competitor Audit gained a first chapter, the 6 Oct update, from a fresh read of theworldofyachts.com. It was already ranked first of 18 on 1 Oct."
+    ],
+    "decisions": {
+      "aligned": [
+        {
+          "t": "The World of Yachts is the title to beat in the Gulf.",
+          "d": "The client’s view, and our ranking of 1 Oct. The four references Olivier sent stay the design direction."
+        },
+        {
+          "t": "The pack is with them.",
+          "d": "No answer yet on the price or the timeframe: “we'll take a look at it”."
+        }
+      ],
+      "open": [
+        {
+          "t": "Price and timeframe",
+          "d": "Choice A RM15,000 or Choice B RM25,000, both with the editorial CMS. Not answered."
+        },
+        {
+          "t": "Compete or work alongside",
+          "d": "Gael calls it the main competitor. Its role as publisher of the official Dubai and Qatar show magazines, by its own account, still matters for the November shows."
+        },
+        {
+          "t": "Who publishes Yacht Style Arabia",
+          "d": "Lux Inc Media Group, Heart Media or ITP Dubai. Not stated anywhere yet."
+        },
+        {
+          "t": "Aung",
+          "d": "Copied on 5 Oct. Still not known."
+        }
+      ]
+    },
+    "actions": [
+      {
+        "owner": "Bazil",
+        "items": [
+          {
+            "k": "ys3a",
+            "t": "Follow up on the quote if nothing comes",
+            "due": "Thu 8 Oct, our suggestion",
+            "d": "One line to Olivier and Gael, from bazil@brandmethod.co. The text is shown to Bazil first."
+          },
+          {
+            "k": "ys3b",
+            "t": "Address him as Gael",
+            "due": "Next reply",
+            "d": "Our reply of 6 Oct opened “mr Fael”."
+          }
+        ]
+      },
+      {
+        "owner": "Diha",
+        "items": [
+          {
+            "k": "ys3c",
+            "t": "Redeploy the workspace link with the updated audit",
+            "due": "After the client download is rebuilt",
+            "d": "The live link, yatch-style-arabia-workspace.netlify.app, still carries the 5 Oct audit until it is redeployed."
+          }
+        ]
+      },
+      {
+        "owner": "Claude",
+        "items": [
+          {
+            "k": "ys3d",
+            "t": "Update the audit with The World of Yachts",
+            "due": "Done Tue 6 Oct 2026",
+            "d": "New first chapter in the Peer &amp; Competitor Audit: 13 dated observations, captures, the brief line by line against it. Dated notes in the Brand &amp; Website Audit and the Codex."
+          }
+        ]
+      }
+    ],
+    "flags": [
+      {
+        "red": false,
+        "t": "“Feedback” is our reading",
+        "d": "He may mean the pack of 5 Oct or a separate note. WhatsApp shows Bazil asked Diha to email Olivier the links at 5:25pm on 5 Oct."
+      }
+    ],
+    "log": []
+  },
+  {
+    "n": "02",
+    "date": "Mon 5 Oct 2026",
+    "time": "10:48am GMT+8 · by email",
+    "topic": "Olivier Burlot answers by email on Yacht Style Arabia, and asks for a quote and a timeframe",
+    "source": "<b>Source:</b> an email from olivier@heart-media.com of Mon 5 Oct 2026, 10:48am, to Bazil Rozenan and Fardiha Syahana Saharudin, copied to Gael and Aung. Bazil pasted the text and a screenshot the same morning. It answers three questions from our follow-up email, under the heading Yacht Style Arabia / YSA. <b>These are the client’s own words.</b> A line marked <span class=\"tag tc\">Reading</span> is our reading, not his.",
+    "peopleDim": "as addressed on the email",
+    "factsTitle": "What the email says",
+    "factsDim": "quoted from the email",
+    "heardLab": "Written in the email",
+    "attendees": [
+      {
+        "name": "Olivier Burlot",
+        "role": "Heart Media Group · signs as CEO, Heart Media Group, LUXUO · the sender · olivier@heart-media.com",
+        "tag": "Client · Heart Media"
+      },
+      {
+        "name": "Gael",
+        "role": "Copied on the email · probably Gael Burlot, CEO and Publisher of Lux Inc Media, named on yachtstyle.co/contact · our inference, not stated in the email",
+        "tag": "Client side · unverified"
+      },
+      {
+        "name": "Aung",
+        "role": "Copied on the email · surname and role not known",
+        "tag": "Client side · unverified"
+      },
+      {
+        "name": "Bazil Rozenan",
+        "role": "Brand Method · addressed on the email",
+        "tag": "Brand Method"
+      },
+      {
+        "name": "Fardiha Syahana Saharudin",
+        "role": "Brand Method · addressed on the email",
+        "tag": "Brand Method"
+      }
+    ],
+    "summary": [
+      "Olivier answered our follow-up email on <b>Yacht Style Arabia</b>, which he shortens to <b>YSA</b>, and closed with: “Thank you to revert with a quote + timeframe”. He offers to answer further questions.",
+      "<b>The reader:</b> “YSA has an upscale audience, current yacht owners and people interested in the acquisition of a yacht. They are affluent / 40YO ++.”",
+      "<b>Search:</b> “We need to ensure that the YSA website is SEO / GEO friendly.” We read GEO as generative engine optimisation, being cited by AI answer engines <span class=\"tag tc\">Reading</span>.",
+      "<b>Publishing:</b> “One to two articles will be uploaded on a daily basis.”",
+      "<b>Brand guidelines:</b> no document and no logo files were sent. His answer: “See the current Yacht Style website at www.yachtstyle.co”.",
+      "<b>Reference websites:</b> boatinternational.com, oceanmagazine.com.au, superyachttimes.com and robbreport.com.",
+      "The email covers Yacht Style Arabia only. It says nothing on Leadersclass, the group website or the NDA."
+    ],
+    "pricesTitle": "The quote and the timeframe he asked for",
+    "pricesCol": "Price before 8% SST · list price · with SST",
+    "pricesDim": "the proposal of 5 Oct · prices set by Bazil that day",
+    "openDim": "not in the email",
+    "decisions": {
+      "aligned": [
+        {
+          "t": "The reader.",
+          "d": "Upscale: current yacht owners and people interested in acquiring a yacht, affluent, aged forty and over. His words."
+        },
+        {
+          "t": "SEO and GEO friendly.",
+          "d": "A stated requirement for the Arabia site. The proposal now carries a Search and AI group in section 4.1, inside both prices."
+        },
+        {
+          "t": "One to two articles a day.",
+          "d": "The publishing pace. yachtstyle.co ran at about nine stories a week between 16 Jul and 1 Oct 2026, by our count."
+        },
+        {
+          "t": "The brand comes from yachtstyle.co.",
+          "d": "No guideline document and no logo files were sent. We take the identity from the live site and ask for the masthead as a vector file."
+        },
+        {
+          "t": "Four reference sites.",
+          "d": "Boat International, Ocean Magazine (Australia), SuperYacht Times and Robb Report. Studied on 5 Oct for the Website Plan and the Peer & Competitor Audit."
+        },
+        {
+          "t": "A quote and a timeframe.",
+          "d": "Asked for in writing. The proposal answers both. Timeline, Bazil, 5 Oct: Choice A is complete in two weeks with one more week of testing and amendments; Choice B is complete in three weeks with a fourth week of amendments and fixes."
+        }
+      ],
+      "open": [
+        {
+          "t": "What GEO means to him",
+          "d": "Generative engine optimisation is our reading. The proposal also covers geographic targeting, so it holds either way."
+        },
+        {
+          "t": "Languages",
+          "d": "The email does not mention Arabic. The proposal carries English and Arabic with true right to left inside both prices."
+        },
+        {
+          "t": "Who publishes daily",
+          "d": "How many editors, where they sit, and whether each story runs in both languages."
+        },
+        {
+          "t": "The platform",
+          "d": "Whether the site must sit on a platform set by ITP Media Group."
+        },
+        {
+          "t": "Launch date",
+          "d": "Not given. The Dubai International Boat Show runs 25 to 29 Nov 2026, per the Logbook on yachtstyle.co."
+        },
+        {
+          "t": "Who approves, and Gael and Aung",
+          "d": "Their roles on this project are not stated."
+        },
+        {
+          "t": "The legal entity",
+          "d": "Which company signs and pays is still not known."
+        },
+        {
+          "t": "Leadersclass, the group website and the NDA",
+          "d": "Not covered by this email."
+        }
+      ]
+    },
+    "prices": [
+      {
+        "k": "Yacht Style Arabia · Choice A · The Edition",
+        "v": "<b>RM15,000</b> · RM16,200 with SST: the Growth Website, RM10,000 at the founding rate (list RM20,000), and the editorial CMS in English and Arabic, RM5,000 at the founding rate (original RM10,000). Original price RM30,000, 50% off. Brand Strategy · Core, worth RM2,500, included at no charge. <b>Complete in two weeks</b>, Fri 23 Oct, then one more week of testing and amendments: live Fri 30 Oct 2026."
+      },
+      {
+        "k": "Yacht Style Arabia · Choice B · The Flagship, recommended",
+        "v": "<b>RM25,000</b> · RM27,000 with SST: the Corporate Website, RM20,000 at the founding rate (list RM40,000), and the editorial CMS in English and Arabic, RM5,000 at the founding rate (original RM10,000). Original price RM50,000, 50% off. Brand Strategy · Full, worth RM10,000, and the web identity and CI, worth RM4,000, included at no charge. <b>Complete in three weeks</b>, Fri 30 Oct, then a fourth week of amendments and fixes: live Fri 6 Nov 2026."
+      },
+      {
+        "k": "Inside both prices since 5 Oct",
+        "v": "The Search and AI group: SEO foundation, structured data, sitemaps, feeds, AI crawler policy and a readiness report. The checklist is 79 boxes on Choice A and 118 on Choice B."
+      },
+      {
+        "k": "Outside the fee",
+        "v": "Search & Visibility after launch, SEO + AIO Foundation, RM3,500 a month, minimum three months, as on our list."
+      },
+      {
+        "k": "Schedule",
+        "v": "Assumes a decision and the first payment by <b>Fri 9 Oct</b> and kickoff <b>Mon 12 Oct 2026</b>. Every date moves day for day with acceptance."
+      }
+    ],
+    "pricesNote": "<b>Bazil raised both prices on Mon 5 Oct at 12:20pm,</b> from RM10,000 and RM20,000 to RM15,000 and RM25,000, because the price includes the CMS: the extra RM5,000 is the editorial CMS in English and Arabic, its own line. At 12:45pm he asked for the original price without the 50% discount: RM30,000 and RM50,000 struck, 50% off on both. They are in the proposal as revised on 5 Oct and in quotation BM-Q-2026-YACHTSTYLE-WEB01, both valid to Wed 4 Nov 2026. Nothing has been sent to the client yet.",
+    "actions": [
+      {
+        "owner": "Bazil",
+        "items": [
+          {
+            "k": "ys2a",
+            "t": "Approve and send the quote and the timeframe",
+            "due": "He asked on Mon 5 Oct",
+            "d": "The proposal and the client download, with one covering reply to his email. The exact text and files are shown to Bazil first. Email from bazil@brandmethod.co only."
+          },
+          {
+            "k": "ys2b",
+            "t": "Decide whether the quotation goes with the proposal",
+            "due": "With the send",
+            "d": "He asked for a quote. By house rule the quotation follows acceptance; the proposal already carries every price."
+          },
+          {
+            "k": "ys2c",
+            "t": "Decide whether the question sheet goes",
+            "due": "With the send, or after",
+            "d": "Built on 5 Oct with his answers filled in. It asks what is still open: languages, the daily team, the platform, the launch date, who approves and who signs."
+          },
+          {
+            "k": "ys2d",
+            "t": "Read the new BEFORE SENDING lines",
+            "due": "Before the send",
+            "d": "The new prices and the RM5,000 editorial CMS line, GEO as generative engine optimisation, twelve new boxes inside the fee, the Search & Visibility add on, and a decision date four days away."
+          }
+        ]
+      },
+      {
+        "owner": "Heart Media Group · Olivier",
+        "items": [
+          {
+            "k": "ys2e",
+            "t": "Decide on Yacht Style Arabia: Choice A or B, one named approver, the first payment",
+            "due": "By Fri 9 Oct 2026, assumed",
+            "d": "The proposal’s own assumption. It moves the Mon 12 Oct kickoff day for day."
+          },
+          {
+            "k": "ys2f",
+            "t": "Send the Yacht Style masthead as a vector file",
+            "due": "At kickoff",
+            "d": "The one brand file we cannot take from the live site."
+          }
+        ]
+      },
+      {
+        "owner": "Claude · BM internal",
+        "items": [
+          {
+            "k": "ys2g",
+            "t": "Pack revised to answer the email",
+            "due": "Done Mon 5 Oct 2026",
+            "d": "Proposal, quotation, timeline, kickstart, Website Plan, Codex, the two audits and the workspace record. The draft website is being updated by Bazil separately."
+          },
+          {
+            "k": "ys2h",
+            "t": "Question sheets for Yacht Style Arabia and Leadersclass",
+            "due": "Done Mon 5 Oct 2026",
+            "d": "Each with a Word file ready to open in Google Docs. Neither has been sent."
+          }
+        ]
+      }
+    ],
+    "flags": [
+      {
+        "red": false,
+        "t": "GEO is our reading",
+        "d": "He wrote three letters. Generative engine optimisation fits a 2026 brief for a publisher, and it is what our price list sells as AIO. The proposal covers the geographic reading as well."
+      }
+    ],
+    "log": []
+  },
+  {
+    "n": "01",
+    "date": "Thu 1 Oct 2026",
+    "time": "2:00pm GMT+8 · MRANTI Park",
+    "topic": "Heart Media Group: two enquiries, Yacht Style Arabia and Leadersclass",
+    "source": "<b>Source:</b> Bazil’s own Apple Notes from the meeting (1 Oct 2026, 3:05pm) and his dictation to Claude later the same day, as recorded in docs/yachtstyle/_BRIEF.md and docs/leadersclass/_BRIEF.md. <b>Thin, and unverified by the client.</b> A line marked <span class=\"tag tc\">Reading</span> is our reading of a short note, not a fact. Nothing here has been confirmed by Heart Media Group.",
+    "peopleDim": "as named in Bazil’s notes · no attendee list on file",
+    "factsTitle": "Decisions and facts noted",
+    "factsDim": "per Bazil’s notes and dictation",
+    "heardLab": "Noted from the meeting",
+    "attendees": [
+      {
+        "name": "Olivier Burlot",
+        "role": "Heart Media Group · Chief Executive Officer, and ITP Vice President, per the brief · owner of both enquiries · olivier@heart-media.com",
+        "tag": "Client · Heart Media"
+      },
+      {
+        "name": "Stephan",
+        "role": "Surname and role not on file · named in Bazil’s note beside Leadersclass · the address in the note, stephan@leaderclass.com, is unverified",
+        "tag": "Client side · unverified"
+      },
+      {
+        "name": "Bazil",
+        "role": "Brand Method · Muhammad Bazil bin Che Rozenan, Brand Strategist · took the notes",
+        "tag": "Brand Method"
+      }
+    ],
+    "summary": [
+      "One meeting, <b>two enquiries</b> from the same owner, Olivier Burlot of Heart Media Group: <b>Yacht Style Arabia</b> and <b>Leadersclass</b>. Per Bazil, these are the two enquiries they have at the moment.",
+      "<b>Yacht Style Arabia:</b> a new website for the Arabia title, on a <b>new domain for Dubai</b>, for Arab readers, on the model of yachtstyle.co. The current website is <b>not</b> being redone. As Bazil described the job afterwards, it has to be one of the best websites in the world in the yacht business: premium, and able to convert.",
+      "<b>Pen Marine</b> was mentioned as one of their clients. What Pen Marine is to them is not on file.",
+      "<b>Leadersclass:</b> a media brand for students and people planning study and careers: where to go, how to study abroad, how to get a PhD. Because they are a media company, the media side of the site has to be strong. Also noted: case studies of success and failure, a newsletter, and an app that is simpler than the website, shares about 70 to 80 percent of its look and works by swipe, like Tinder <span class=\"tag tc\">Reading</span>.",
+      "How they want us to work: <b>proactive and snappy</b>. They are media people and asked what the best media groups do <span class=\"tag tc\">Reading</span>.",
+      "No scope, price, deadline or decision maker is recorded in the notes for either enquiry. Heart Media Group will send more details on Leadersclass; that enquiry stands by until they arrive."
+    ],
+    "pricesTitle": "Prices in the proposal",
+    "pricesCol": "Price before 8% SST · list price · with SST",
+    "pricesDim": "set after the meeting, by Bazil",
+    "openDim": "not in the notes",
+    "decisions": {
+      "aligned": [
+        {
+          "t": "Two enquiries.",
+          "d": "Yacht Style Arabia and Leadersclass, both from Olivier Burlot. Per Bazil, 1 Oct."
+        },
+        {
+          "t": "Yacht Style Arabia, not yachtstyle.co.",
+          "d": "The job is a new website for the Arabia title. The current website is not being redone."
+        },
+        {
+          "t": "A new domain for Dubai.",
+          "d": "For Arab readers, on the model of yachtstyle.co. Checked on 1 Oct: yachtstylearabia.com was registered that day and shows a parking page."
+        },
+        {
+          "t": "The standard.",
+          "d": "One of the best websites in the world in the yacht business, premium, and able to convert. Bazil’s description of the job, dictated on 1 Oct."
+        },
+        {
+          "t": "Pen Marine.",
+          "d": "Mentioned as one of their clients."
+        },
+        {
+          "t": "Leadersclass is the brand.",
+          "d": "A media site where students find out where to go, how to study abroad and how to get a PhD. Per Bazil’s dictation of 1 Oct."
+        },
+        {
+          "t": "The media side matters most.",
+          "d": "They are a media company, so the media part of the Leadersclass site has to be strong. Per Bazil’s dictation."
+        },
+        {
+          "t": "Case studies, success and failure.",
+          "d": "They want case studies of how leaders and companies got there, failures included. Naza was the example named <span class=\"tag tc\">Reading</span>."
+        },
+        {
+          "t": "Newsletter.",
+          "d": "Noted in two words. Whether a newsletter is part of Leadersclass, or theirs was praised, is unclear <span class=\"tag tc\">Reading</span>."
+        },
+        {
+          "t": "An app as well as a website.",
+          "d": "Simpler than the website, about 70 to 80 percent of its look, with swipe media like Tinder <span class=\"tag tc\">Reading</span>."
+        },
+        {
+          "t": "Monetisation.",
+          "d": "Noted as a topic. Nothing is recorded on how."
+        },
+        {
+          "t": "Working style.",
+          "d": "Proactive and snappy. They are media people and asked what the best media groups do <span class=\"tag tc\">Reading</span>."
+        },
+        {
+          "t": "More to come on Leadersclass.",
+          "d": "They will send more details. After the meeting they sent unienrol.com as their own example of the field."
+        }
+      ],
+      "open": [
+        {
+          "t": "What was agreed",
+          "d": "Scope, budget frame and deadline, for either enquiry."
+        },
+        {
+          "t": "Who decides",
+          "d": "Olivier, Wilson Lim, or ITP in Dubai."
+        },
+        {
+          "t": "Who attended",
+          "d": "No attendee list is on file. Stephan’s surname, role and correct address are not known."
+        },
+        {
+          "t": "Languages on Yacht Style Arabia",
+          "d": "Arabic and English, or English only. The proposal assumes both, with true right to left, inside both prices."
+        },
+        {
+          "t": "What the Arabia site carries",
+          "d": "A magazine site only, or also listings, charter, events, an e-magazine and advertiser pages."
+        },
+        {
+          "t": "Content",
+          "d": "Who supplies content and photography, and whether the yachtstyle.co archive moves across."
+        },
+        {
+          "t": "Pen Marine",
+          "d": "Advertiser, listing client or sponsor."
+        },
+        {
+          "t": "Launch date",
+          "d": "Whether a show, such as the Dubai International Boat Show, sets it."
+        },
+        {
+          "t": "The first Heart Media website project",
+          "d": "Whether the group or LUXUO website is still live, or these two enquiries replace it."
+        },
+        {
+          "t": "The legal entity",
+          "d": "Which company signs and pays."
+        },
+        {
+          "t": "Leadersclass scope",
+          "d": "The website, the app, the brand, or all three; who owns it; the market; the budget and the date."
+        }
+      ]
+    },
+    "prices": [
+      {
+        "k": "Yacht Style Arabia · Choice A · The Edition",
+        "v": "<b>RM15,000</b> · RM16,200 with SST: the Growth Website, RM10,000 at the founding rate (list RM20,000), and the editorial CMS in English and Arabic, RM5,000 at the founding rate (original RM10,000). Original price RM30,000, 50% off. Brand Strategy · Core, worth RM2,500, included at no charge. <b>Complete in two weeks</b>, Fri 23 Oct, then one more week of testing and amendments: live Fri 30 Oct 2026."
+      },
+      {
+        "k": "Yacht Style Arabia · Choice B · The Flagship, recommended",
+        "v": "<b>RM25,000</b> · RM27,000 with SST: the Corporate Website, RM20,000 at the founding rate (list RM40,000), and the editorial CMS in English and Arabic, RM5,000 at the founding rate (original RM10,000). Original price RM50,000, 50% off. Brand Strategy · Full, worth RM10,000, and the web identity and CI, worth RM4,000, included at no charge. <b>Complete in three weeks</b>, Fri 30 Oct, then a fourth week of amendments and fixes: live Fri 6 Nov 2026."
+      },
+      {
+        "k": "Billing",
+        "v": "50 / 30 / 20 on either choice. With SST: Choice A RM8,100, RM4,860, RM3,240; Choice B RM13,500, RM8,100, RM5,400."
+      },
+      {
+        "k": "Schedule",
+        "v": "Assumes a decision and the first payment by <b>Fri 9 Oct</b> and kickoff <b>Mon 12 Oct 2026</b>. Every date moves day for day with acceptance."
+      },
+      {
+        "k": "Leadersclass",
+        "v": "No price and no proposal until their details arrive."
+      }
+    ],
+    "pricesNote": "<b>No price is recorded in the notes of the meeting.</b> The Yacht Style Arabia prices were set by Bazil on the evening of 1 Oct, raised by him on 5 Oct to the figures shown here, and are in the proposal and in quotation BM-Q-2026-YACHTSTYLE-WEB01, valid to Wed 4 Nov 2026 since the revision of 5 Oct. Both are at the founding rate, before 8% SST unless marked: the price shown is the real price and the original price is double.",
+    "actions": [
+      {
+        "owner": "Bazil",
+        "items": [
+          {
+            "k": "ys1a",
+            "t": "Confirm these notes",
+            "due": "Before anything is sent",
+            "d": "Correct what is wrong and fill what is missing: who attended, what was agreed, who decides. Until then this page is BM only."
+          },
+          {
+            "k": "ys1b",
+            "t": "Check the Yacht Style Arabia pack and approve the send",
+            "due": "Proposal valid to Wed 4 Nov 2026",
+            "d": "He asked to check the pack first so it can go straight away. Each file and its covering text go out only on his yes, by email from bazil@brandmethod.co."
+          },
+          {
+            "k": "ys1c",
+            "t": "Confirm the legal entity, and Stephan’s surname, role and address",
+            "due": "With the send",
+            "d": "Which company signs and pays, and the correct address for Stephan before anything is sent to him."
+          }
+        ]
+      },
+      {
+        "owner": "Heart Media Group · Olivier and Stephan",
+        "items": [
+          {
+            "k": "ys1d",
+            "t": "Send the further details on Leadersclass",
+            "due": "No date set",
+            "d": "Promised, per Bazil. The Leadersclass proposal waits for them."
+          },
+          {
+            "k": "ys1e",
+            "t": "Decide on Yacht Style Arabia: Choice A or B, one named approver, the first payment",
+            "due": "By Fri 9 Oct 2026, assumed",
+            "d": "The proposal’s own assumption, not a date agreed in the meeting. It moves the Mon 12 Oct kickoff day for day."
+          }
+        ]
+      },
+      {
+        "owner": "Claude · BM internal",
+        "items": [
+          {
+            "k": "ys1f",
+            "t": "Yacht Style Arabia pack, in this workspace",
+            "due": "Built 1 and 2 Oct 2026",
+            "d": "Current website, audit, competitor audit, website plan, proposal and timeline. The quotation, the kickstart and these notes are BM only."
+          },
+          {
+            "k": "ys1g",
+            "t": "Leadersclass: market and competitor audit built, then standby",
+            "due": "Until their details arrive",
+            "d": "No proposal is written from the thin notes."
+          }
+        ]
+      }
+    ],
+    "flags": [
+      {
+        "red": true,
+        "t": "Thin notes, unverified by the client",
+        "d": "Bazil’s own Apple Notes and dictation are the only sources. Lines marked Reading are our reading of a few words. Anything that decides money or scope is checked with Bazil before it goes in a client document."
+      }
+    ],
+    "log": []
+  }
+];
+
+(function(){
+  'use strict';
+  var KEY='bm_notes_yachtstyle_v1', state={};
+  try{ state=JSON.parse(localStorage.getItem(KEY)||'{}'); }catch(e){ state={}; }
+  var app=document.getElementById('app');
+
+  function esc(x){ return x==null?'':String(x); }
+  function tagFor(s){
+    if(s==='ok') return '<span class="tag ok">Matches the list</span>';
+    if(s==='tc') return '<span class="tag tc">To confirm</span>';
+    return '';
+  }
+
+  if(!SESSIONS.length){
+    app.innerHTML='<div class="empty"><b>No sessions logged yet.</b>'
+      +'<span>This account is set up and ready. After the next call, add the first entry to the '
+      +'<code>SESSIONS</code> array at the bottom of this file and it appears here, dated and tracked.</span></div>';
+    return;
+  }
+
+  var CLIENT_BUNDLE=!!document.querySelector('meta[name="bm-bundle"]'); /* flags and the discussion log are BM view only */
+  var html='';
+
+  /* ---- session index ---- */
+  html+='<div class="sindex"><span class="lab">Sessions on record &middot; '+SESSIONS.length+'</span><div class="srow">';
+  SESSIONS.forEach(function(s){
+    html+='<a class="schip" href="#s'+esc(s.n)+'"><b>'+esc(s.n)+'</b><span>'+esc(s.date)+'</span><i>'+esc(s.topic)+'</i></a>';
+  });
+  var fu=document.getElementById('followup'); /* chip text lives on the BM only block itself, so it leaves with it */
+  if(fu) html+='<a class="schip" href="#followup"><b>BM</b><span>'+(fu.getAttribute('data-chip')||'Follow up pack')+'</span><i>'+(fu.getAttribute('data-chip-sub')||'drafts, references, profile')+'</i></a>';
+  if(!CLIENT_BUNDLE) html+='<span class="schip next"><b>NEXT</b><span>add the next session at the top of SESSIONS</span></span>';
+  html+='</div></div>';
+
+  /* ---- sessions ---- */
+  SESSIONS.forEach(function(s){
+    var sec=0;
+    function head(title,dim){ sec+=1; return '<div class="sec-head"><span class="n">'+(sec<10?'0'+sec:sec)+'</span><h3>'+title+'</h3>'+(dim?'<span class="dim">'+dim+'</span>':'')+'</div>'; }
+
+    html+='<section class="session" id="s'+esc(s.n)+'">';
+    html+='<div class="shead"><span class="n">Session '+esc(s.n)+'</span><h2>'+esc(s.topic)+'</h2><div class="meta">';
+    html+='<span>'+esc(s.date)+'</span>';
+    if(s.time) html+='<span>'+esc(s.time)+'</span>';
+    if(s.attendees&&s.attendees.length) html+='<span>'+s.attendees.length+' on the notes</span>';
+    html+='</div></div>';
+
+    if(s.summary&&s.summary.length){
+      html+='<div class="sec">'+head('Summary')+'<div class="panel">';
+      s.summary.forEach(function(p){ html+='<p>'+p+'</p>'; });
+      html+='</div>';
+      if(s.source) html+='<p class="srcnote">'+s.source+'</p>';
+      html+='</div>';
+    }
+
+    if(s.attendees&&s.attendees.length){
+      html+='<div class="sec">'+head('People',s.peopleDim||'as listed on the notes')+'<div class="people">';
+      s.attendees.forEach(function(a){
+        html+='<div class="person"><b>'+esc(a.name)+'</b><span>'+esc(a.role)+'</span>'+(a.tag?'<i>'+esc(a.tag)+'</i>':'')+'</div>';
+      });
+      html+='</div></div>';
+    }
+
+    if(s.decisions&&(s.decisions.aligned||[]).length){
+      html+='<div class="sec">'+head(s.factsTitle||'Decisions and facts heard',s.factsDim||'per the notes')+'<div class="dec ok facts"><span class="lab"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-1px"><circle cx="12" cy="12" r="9.5"/><path d="m7.5 12.3 3 3 6-6.3"/></svg> '+(s.heardLab||'Heard on the call')+'</span><ul>';
+      s.decisions.aligned.forEach(function(d){ html+='<li><b>'+esc(d.t)+'</b>'+esc(d.d)+'</li>'; });
+      html+='</ul></div></div>';
+    }
+
+    if(s.prices&&s.prices.length){
+      html+='<div class="sec">'+head(s.pricesTitle||'Prices said on the call',s.pricesDim)+'<div class="tbl"><div class="tbl-scroll"><table><thead><tr><th>Item</th><th>'+(s.pricesCol||'Said on the call')+'</th></tr></thead><tbody>';
+      s.prices.forEach(function(r){ html+='<tr><td class="k">'+esc(r.k)+'</td><td>'+r.v+tagFor(r.s)+'</td></tr>'; });
+      html+='</tbody></table></div></div>'+(s.pricesNote?'<p class="note">'+s.pricesNote+'</p>':'')+'</div>';
+    }
+
+    if(s.decisions&&(s.decisions.open||[]).length){
+      html+='<div class="sec">'+head('Open questions',s.openDim||'not in the notes')+'<div class="dec open"><span class="lab"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-1px"><circle cx="12" cy="12" r="9.5"/><path d="M12 7v5l3 2"/></svg> Still open</span><ul>';
+      s.decisions.open.forEach(function(d){ html+='<li><b>'+esc(d.t)+'</b>'+esc(d.d)+'</li>'; });
+      html+='</ul></div></div>';
+    }
+
+    var acts=(s.actions||[]).filter(function(g){ return !(CLIENT_BUNDLE&&/BM internal/.test(g.owner)); }); /* BM internal owners never reach the client copy */
+    if(acts.length){ s=Object.assign({},s,{actions:acts});
+      var total=0; s.actions.forEach(function(g){ total+=g.items.length; });
+      html+='<div class="sec">'+head('Actions',total+' items &middot; owner and due &middot; ticks save in this browser');
+      html+='<div class="progress" data-sess="'+esc(s.n)+'"><div class="bar"><i></i></div><span class="pct"></span></div>';
+      s.actions.forEach(function(g){
+        html+='<div class="owner"><div class="owner-h"><span class="who">'+esc(g.owner)+'</span><span class="cnt">'+g.items.length+' item'+(g.items.length===1?'':'s')+'</span></div>';
+        g.items.forEach(function(it){
+          html+='<label class="task" data-sess="'+esc(s.n)+'"><input type="checkbox" data-k="'+esc(it.k)+'">'
+             +'<span class="tx"><span class="tt">'+it.t+(it.due?'<span class="due">'+esc(it.due)+'</span>':'')+'</span>'+(it.d?'<span class="td">'+it.d+'</span>':'')+'</span></label>';
+        });
+        html+='</div>';
+      });
+      html+='</div>';
+    }
+
+    if(!CLIENT_BUNDLE&&s.flags&&s.flags.length){
+      s.flags.forEach(function(f){
+        html+='<div class="flag'+(f.red?' red':'')+'"><span class="ic">'+(f.red?'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5 21.5 20h-19z"/><path d="M12 10v4.5"/><path d="M12 17.2v.1"/></svg>':'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.5"/><path d="M12 7.8v.1"/></svg>')+'</span><span><b>'+esc(f.t)+'</b><span>'+f.d+'</span></span></div>';
+      });
+    }
+
+    if(!CLIENT_BUNDLE&&s.log&&s.log.length){
+      html+='<div class="sec">'+head('Discussion log','in order')+'<div class="panel"><ul class="log">';
+      s.log.forEach(function(l){
+        html+='<li><span class="t">'+esc(l.t)+'</span><span class="h">'+esc(l.h)+'</span><span class="b">'+l.b+'</span></li>';
+      });
+      html+='</ul></div></div>';
+    }
+
+    html+='</section>';
+  });
+
+  app.innerHTML=html;
+
+  /* ---- action tracking ---- */
+  var boxes=[].slice.call(app.querySelectorAll('.task input'));
+  function paint(){
+    [].slice.call(app.querySelectorAll('.progress')).forEach(function(p){
+      var sess=p.getAttribute('data-sess');
+      var mine=boxes.filter(function(b){ return b.closest('.task').getAttribute('data-sess')===sess; });
+      var done=mine.filter(function(b){ return b.checked; }).length;
+      p.querySelector('.bar i').style.width=(mine.length?Math.round(done/mine.length*100):0)+'%';
+      p.querySelector('.pct').textContent=done+' of '+mine.length+' done';
+    });
+    boxes.forEach(function(b){ b.closest('.task').classList.toggle('done',b.checked); });
+  }
+  boxes.forEach(function(b){
+    var k=b.getAttribute('data-k');
+    b.checked=!!state[k];
+    b.addEventListener('change',function(){
+      state[k]=b.checked;
+      try{ localStorage.setItem(KEY,JSON.stringify(state)); }catch(e){}
+      paint();
+    });
+  });
+  paint();
+})();
+if(window.top===window.self){ document.body.classList.add('bm-standalone'); var bb=document.getElementById('bmBack'); if(bb) bb.addEventListener('click',function(){ if(history.length>1) history.back(); else location.href='../../index.html'; }); }
+</script>
+<script id="bmPdfName">(function(){var t0=document.title;var n=t0.replace(/\s*[··]\s*Brand Method\s*$/,'').replace(/[··]/g,'-').replace(/&amp;/g,'and').replace(/[^\w\- ]+/g,'').trim().replace(/\s+/g,'-').replace(/-+/g,'-');if(!n)n='Brand-Method-Document';window.addEventListener('beforeprint',function(){document.title=n});window.addEventListener('afterprint',function(){document.title=t0});})();</script>
+</body>
+</html>

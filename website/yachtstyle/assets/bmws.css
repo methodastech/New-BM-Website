@@ -1,0 +1,201 @@
+/* Yacht Style Arabia, 28 Oct 2026: this sheet is the Lirunex workspace sheet (Websites/lirunex website/assets/bmws.css, token lx1028e)
+   with the Yacht Style block at the end. Bazil: "do the same way with yacht", "follow the same format to put things together".
+   Keep the two in step: change the Lirunex sheet, then copy it here and keep the block below. The 22 Sep MyHero sheet this replaces
+   is in _backup-2026-10-28-bar/assets/bmws.css. */
+
+/* The super admin bar, one look on every Brand Method surface. Linked, never
+   inlined: the moment a page keeps its own copy the bar drifts, which is how
+   Baik Khayr ended up with a 10px light bar while every other build ran a
+   13px dark one. Positioning (fixed or sticky) stays with each page.
+
+   20 Sep 2026, modern minimalist pass: the tab group lost its container and
+   its 00/01/02 numerals. 21 Sep: monochrome and sharp. No numerals, no accent colour, no radius,
+   no underlines or rules. The current page is a white block with ink text. Sentence-case
+   Instrument Sans on the tabs, mono for the numerals and the context label. */
+
+.bmws{background:#0A0B0E;color:#F2F2F3;line-height:1.6}
+.bmws-in{display:flex;align-items:center;justify-content:space-between;padding:12px 24px;max-width:none;margin:0;gap:24px;flex-wrap:nowrap}
+
+/* left: the build on line one, whose bar this is on line two */
+.bmws-crumb{display:flex;flex-direction:column;gap:2px;line-height:1.2;white-space:nowrap;min-width:0;overflow:hidden}
+.bmws-crumb b{font-family:"Geist","Instrument Sans",Inter,system-ui,sans-serif;font-size:15px;font-weight:600;color:#fff;letter-spacing:-.012em;overflow:hidden;text-overflow:ellipsis}
+.bmws-crumb span{font-family:"Geist","Geist","Instrument Sans",Inter,system-ui,sans-serif;font-size:11px;font-weight:500;letter-spacing:0;text-transform:none;color:#7C7F88;overflow:hidden;text-overflow:ellipsis}
+
+/* right: numbered tabs. The page you are on is a filled block. No underlines, no rules, no borders. */
+.bmws-tabs{display:flex;align-items:center;gap:2px;border:0;background:none;padding:0;margin-left:auto;min-width:0;flex:0 1 auto;overflow:auto;scrollbar-width:none}
+.bmws-tabs::-webkit-scrollbar{height:0}
+.bmws-tabs a{font-family:"Geist","Instrument Sans",Inter,system-ui,sans-serif;font-size:13.5px;font-weight:500;letter-spacing:-.005em;color:#8C8F98;text-decoration:none;padding:8px 14px;border-radius:0;white-space:nowrap;display:inline-flex;align-items:baseline;gap:8px;transition:color .2s,background .2s}
+.bmws-tabs a i{display:none}
+.bmws-tabs a:hover{background:rgba(255,255,255,.08);color:#fff}
+.bmws-tabs a.on{background:#fff;color:#0A0C12;font-weight:600;box-shadow:0 1px 2px rgba(0,0,0,.4)}
+.bmws-tabs a.rej{color:#55585F}
+.bmws-tabs a.rej:hover{color:#80838B}
+.bmws-tabs a.rej.on{background:rgba(255,255,255,.14);color:#B4B6BC}
+.bmws-tabs a em{font-style:normal;font-family:"Geist","Geist","Instrument Sans",Inter,system-ui,sans-serif;font-size:9px;letter-spacing:.06em;padding:2px 6px;border-radius:0;background:rgba(255,255,255,.08);color:#8C8F98;line-height:1.3}
+
+@media (max-width:1120px){
+  .bmws-crumb{max-width:230px}
+  .bmws-crumb b{font-size:13.5px}
+  .bmws-tabs a{font-size:12.5px;padding:7px 9px;gap:6px}
+  .bmws-in{padding:9px 14px;gap:16px}
+}
+@media (max-width:820px){.bmws-crumb span{display:none}}
+@media (max-width:640px){.bmws-crumb{display:none}}
+@media print{.bmws{display:none}}
+
+/* A page opened inside a side bar shell carries ?shell and hides its own bar, and anything pinned under the bar moves up
+   (the chapter nav kept a 61 px gap above it, 27 Oct). */
+.lx-inshell .bmws{display:none!important}
+.lx-inshell .chapnav{top:0!important}
+/* 20 Oct 2026: on wide screens the crumb gives way (ellipsis) before the tabs do, so no tab ever scrolls out of sight */
+@media (min-width:1200px){.bmws-tabs{flex-shrink:0}}
+
+/* 27 Oct 2026, late (Bazil: "the ui ux sucks please do it professionally", "should be like audit tabs for the rest", "proposal is
+   suppose to be far left", "then a separation", "and then the actual work"): the bar holds the five groups only, one tab each; every
+   group's pages are in its side bar. Proposal, a hairline, then Audit, Client, Web P1, Portal P1X. The house standard stays:
+   monochrome, sharp, the current page a white block with ink text. Nothing under 13 px. */
+.bmws-in{padding:12px 24px;gap:32px}
+.bmws-crumb span{font-size:13px}
+.bmws-tabs{gap:4px}
+.bmws-tabs a{font-size:14px;font-weight:500;line-height:20px;color:#A3A6AE;padding:8px 16px;align-items:center}
+.bmws-tabs a:hover{background:rgba(255,255,255,.08);color:#fff}
+.bmws-tabs a.on,.bmws-tabs a.on:hover{background:#fff;color:#0A0C12;font-weight:600;box-shadow:none}
+.bmws-tabs a:focus{outline:none}
+.bmws-tabs a:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.bmws-sep{flex:none;width:1px;height:20px;background:rgba(255,255,255,.16);margin:0 14px}
+@media (max-width:1120px){.bmws-in{padding:9px 14px;gap:16px}.bmws-tabs a{font-size:13px;padding:7px 12px}.bmws-sep{margin:0 8px}}
+/* 27 Oct 2026, late (Bazil: the crumb names the whole admin over the brand line, and "we add a brand icon at the left whatever similar
+   to the project"): the crumb is the client's mark on a square tile, then the two lines. */
+.bmws-crumb{flex-direction:row;align-items:center;gap:12px}
+.bmws-ic{flex:none;display:grid;place-items:center;width:36px;height:36px;background:#0F2027;box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)}
+.bmws-ic svg{display:block;width:24px;height:auto}
+.bmws-ct{display:flex;flex-direction:column;gap:2px;min-width:0;overflow:hidden}
+
+/* 28 Oct 2026, round 3 (Bazil: "have icons for each"): every group tab carries an 18 px line icon before its name, the family of the
+   side bars (lirunex_sidebar.py); muted at rest, full on hover and on the current tab. Tabs take the 3 px corner of the side bar rows. */
+.bmws-tabs a{gap:8px;border-radius:3px}
+.bmws-tabs a .bmws-ti{flex:none;width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;opacity:.78;transition:opacity .2s}
+.bmws-tabs a .bmws-ti *{vector-effect:non-scaling-stroke}
+.bmws-tabs a:hover .bmws-ti,.bmws-tabs a.on .bmws-ti{opacity:1}
+@media (max-width:1120px){.bmws-tabs a{gap:6px}}
+
+/* 28 Oct 2026, round 4 (Bazil: "have 2 lines i think better", "easy for people to go through", "how to make the ui better"): each tab
+   is its name over a short status line, the tabs read as 3 groups (the brand, the offer, the builds) with hairline dividers, and the
+   current tab is quiet: a lifted grey fill, white words and icon, and a 2 px white rule on its bottom edge (never a left stripe), in
+   place of the solid white block. Unselected tabs are 66% white. The crumb: a 32 px tile with 3 px corners, its 2 lines set to the
+   tile's top and bottom. Under 1280 px the status lines go; under 1000 px each tab is its icon, its name on the bar's own tooltip.
+   Nothing under 13 px; the bar never wraps. */
+.bmws-in{min-height:66px;padding:8px 24px;gap:28px}
+.bmws-crumb{gap:12px;align-items:center}
+.bmws-ic{width:32px;height:32px;border-radius:3px}
+.bmws-ic svg{width:21px}
+.bmws-ct{height:32px;justify-content:space-between;gap:0}
+.bmws-crumb b{font-size:15px;line-height:17px}
+.bmws-crumb span{font-size:13px;line-height:15px;color:rgba(255,255,255,.6)}
+.bmws-tabs{gap:4px}
+.bmws-tabs a{position:relative;align-items:center;gap:9px;padding:7px 14px 8px;border-radius:3px;color:rgba(255,255,255,.66);font-weight:500;line-height:20px;transition:color .15s,background .15s}
+.bmws-tabs a .bmws-ti{opacity:1}
+.bmws-tabs a:has(.bmws-tl){align-items:flex-start}
+.bmws-tabs a:has(.bmws-tl) .bmws-ti{margin-top:0}
+.bmws-tl{display:flex;flex-direction:column;gap:1px;min-width:0}
+.bmws-tl b{font-size:14px;line-height:18px;font-weight:500;color:inherit;letter-spacing:-.003em}
+.bmws-tl small{font-size:13px;line-height:16px;font-weight:400;color:rgba(255,255,255,.55)}
+.bmws-tabs a:hover{background:rgba(255,255,255,.05);color:rgba(255,255,255,.92)}
+.bmws-tabs a.on,.bmws-tabs a.on:hover{background:rgba(255,255,255,.09);color:#fff;font-weight:500;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
+.bmws-tabs a.on .bmws-tl b{font-weight:600}
+.bmws-tabs a:focus{outline:none}
+.bmws-tabs a:focus-visible{outline:none;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.7)}
+.bmws-tabs a.on:focus-visible{box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.7)}
+.bmws-sep{height:28px;margin:0 10px;background:rgba(255,255,255,.14)}
+.bmws-tip{position:fixed;left:0;top:0;z-index:400;pointer-events:none;opacity:0;transition:opacity .12s;background:#fff;color:#0A0B0E;border-radius:3px;
+  font:500 13px/18px Inter,system-ui,sans-serif;padding:5px 9px;white-space:nowrap;box-shadow:0 6px 18px rgba(0,0,0,.35)}
+.bmws-tip.on{opacity:1}
+@media (max-width:1279px){.bmws-tl small{display:none}.bmws-tabs a,.bmws-tabs a:has(.bmws-tl){align-items:center;padding:9px 12px}.bmws-in{gap:20px}.bmws-sep{margin:0 6px}}
+@media (max-width:1120px){.bmws-in{padding:8px 16px}.bmws-tabs a,.bmws-tabs a:has(.bmws-tl){padding:9px 10px}.bmws-tl b{font-size:14px}}
+@media (max-width:999px){.bmws-tl{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .bmws-tabs a,.bmws-tabs a:has(.bmws-tl){width:40px;height:40px;padding:0;justify-content:center;align-items:center}.bmws-tabs a>span:not(.bmws-tl){display:none}}
+@media (prefers-reduced-motion:reduce){.bmws-tabs a,.bmws-tip{transition:none}}
+@media (max-width:1120px){.bmws-crumb{max-width:270px}.bmws-tabs a,.bmws-tabs a:has(.bmws-tl){padding:9px 8px;gap:7px}.bmws-in{gap:16px}}
+/* 28 Oct 2026, round 4, later (Bazil: "would subtle colours in the super admin be helpful", then "do what needs to be done"): colour
+   only where it carries meaning. A small dot before a status line: Active a soft green, Old version a neutral grey; the other tabs
+   carry none. The current tab itself stays monochrome. */
+.bmws-tabs a[href="web.html"] .bmws-tl small::before,.bmws-tabs a[href="portals.html"] .bmws-tl small::before{content:"";display:inline-block;width:6px;height:6px;
+  border-radius:50%;margin:0 6px 0 0;vertical-align:1px;background:rgba(63,217,181,.8)}
+.bmws-tabs a[href="portals.html"] .bmws-tl small::before{background:rgba(255,255,255,.38)}
+/* 28 Oct 2026, round 4, Proposal (Bazil: "proposal, try to make it look different from the rest"): Proposal is the deliverable, the pack
+   Lirunex receives, so it reads as a different kind of item from the 4 workspace tabs. At rest it is an outlined pill: a 1 px white
+   hairline at 40% inside its 3 px corners, its icon in full white and its name in the heavier weight. Selected, it fills to the same
+   lifted grey as the others and keeps its hairline. Monochrome; inset rings only, so the tab keeps the bar's height and baseline. */
+.bmws-tabs a[href="pack.html"]{box-shadow:inset 0 0 0 1px rgba(255,255,255,.4);color:rgba(255,255,255,.84)}
+.bmws-tabs a[href="pack.html"] .bmws-ti{color:#fff}
+.bmws-tabs a[href="pack.html"] .bmws-tl b{font-weight:600}
+.bmws-tabs a[href="pack.html"]:hover{background:rgba(255,255,255,.05);box-shadow:inset 0 0 0 1px rgba(255,255,255,.56);color:#fff}
+.bmws-tabs a[href="pack.html"].on,.bmws-tabs a[href="pack.html"].on:hover{background:rgba(255,255,255,.09);box-shadow:inset 0 0 0 1px rgba(255,255,255,.4);color:#fff}
+.bmws-tabs a[href="pack.html"]:focus-visible,.bmws-tabs a[href="pack.html"].on:focus-visible{box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.7)}
+
+/* ---- Yacht Style Arabia (28 Oct 2026) ----
+   One face on every page: Inter, which every Yacht Style page and shell already loads (the site pages load no Geist, so the Lirunex
+   stack fell to Inter there and to Geist on the workspace pages: two looks).
+   The Arabic edition sets letter-spacing:0!important on everything in the body (ysa.css); the bar keeps its own, so it reads the
+   same in both languages.
+   The crumb's tile: the prototype's gold Y on the Yacht Style navy (favicon.svg).
+   The pages under proto/ link the tabs as ../web.html and ../pack.html, so the Active dot and the Proposal tab (its icon and weight here, its light black block below) key on both.
+   The workspace pages pin their chapter nav under the bar at 61 px (51 px under 900 px), the old bar's height; the bar is 66 px
+   at every width now. */
+.bmws-crumb b,.bmws-crumb span,.bmws-tabs a,.bmws-tl b,.bmws-tl small,.bmws-tip{font-family:Inter,system-ui,-apple-system,sans-serif}
+html[lang="ar"] .bmws .bmws-crumb b{letter-spacing:-.012em!important}
+html[lang="ar"] .bmws .bmws-tl b{letter-spacing:-.003em!important}
+html[lang="ar"] .bmws .bmws-crumb span,html[lang="ar"] .bmws .bmws-tabs a,html[lang="ar"] .bmws .bmws-tl small{letter-spacing:0!important}
+.bmws-ic{background:#0A1B2D;box-shadow:inset 0 0 0 1px rgba(255,255,255,.14)}
+.bmws-ic svg{width:20px;height:20px}
+.bmws-tabs a[href="../web.html"] .bmws-tl small::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;margin:0 6px 0 0;
+  vertical-align:1px;background:rgba(63,217,181,.8)}
+html:not(.lx-inshell) .chapnav{top:66px}
+/* The Lirunex sheet assumes the page sets border-box; without it .bmws-in draws 82 px tall (found on the Leadersclass port,
+   28 Oct). Every Yacht Style page sets it today; this keeps the bar 66 px on any page that does not. Four tabs fit at every width
+   (measured 999 to 1280 px, 28 Oct); the 1000 px rules at the end are there for the crumb and for parity with Lirunex. */
+.bmws,.bmws *,.bmws *::before,.bmws *::after{box-sizing:border-box}
+.bmws-tabs a[href="../pack.html"] .bmws-ti{color:#fff}
+.bmws-tabs a[href="../pack.html"] .bmws-tl b{font-weight:600}
+
+/* 28 Oct 2026, later (Bazil: "i think the proposal pack should be light black instead of having outline"): Proposal is a light
+   black block with no outline, a step lighter on hover and when open, its words white. Appended to the Lirunex, Leadersclass and
+   Yacht Style sheets together so the bar stays identical on every site; [href$="pack.html"] also covers Yacht pages that link
+   ../pack.html. Overrides the outlined Proposal rules above. */
+.bmws-tabs a[href$="pack.html"]{background:rgba(255,255,255,.1);box-shadow:none;color:#fff}
+.bmws-tabs a[href$="pack.html"] .bmws-tl small{color:rgba(255,255,255,.62)}
+.bmws-tabs a[href$="pack.html"]:hover{background:rgba(255,255,255,.14);box-shadow:none;color:#fff}
+.bmws-tabs a[href$="pack.html"].on,.bmws-tabs a[href$="pack.html"].on:hover{background:rgba(255,255,255,.18);box-shadow:none;color:#fff}
+.bmws-tabs a[href$="pack.html"]:focus-visible,.bmws-tabs a[href$="pack.html"].on:focus-visible{box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.7)}
+
+/* 28 Oct 2026, late (an independent check of this port against Lirunex and Leadersclass): three gaps closed so the bar matches.
+   The Lirunex 1000 to 1059 px rule, missing from the copy made at 20:58 (the Lirunex sheet gained it at 21:02); the crumb keeping
+   its words from 999 to 1120 px (the tabs keep their width from 1000 px and the crumb takes the rest, as on Leadersclass; the
+   brand line was cut by 132 px while the four tabs left room); and the Y tile staying on phones (the sheet's older
+   ".bmws-crumb span{display:none}" under 820 px also caught the tile, which is a span, and under 640 px the whole crumb went, leaving
+   the left half of the bar empty). */
+@media (min-width:1000px) and (max-width:1059px){.bmws-crumb{max-width:241px}.bmws-in{gap:12px}.bmws-sep{margin:0 4px}
+  .bmws-tabs a,.bmws-tabs a:has(.bmws-tl){padding:9px 6px;gap:6px}}
+@media (min-width:1000px){.bmws-tabs{flex-shrink:0}.bmws-crumb{flex:1 1 auto;max-width:none}}
+@media (max-width:820px){.bmws-crumb .bmws-ic{display:grid}}
+@media (max-width:640px){.bmws-crumb{display:flex}.bmws-ct{display:none}}
+
+/* 28 Oct 2026, night (Bazil: "make the proposal section a bit special, dark back instead and further away from the others, and don't
+   use grey as default"; then "should the selected one have green tint selection, transparent, instead as background"): Proposal is
+   a pure black block on the bar's near-black ground, wider inside, pushed 22 px clear of its divider and the divider 22 px clear of
+   the brand tabs, so it sits alone. No grey at rest; on hover a faint white ring inside the black. The current tab of the other 4 is
+   a transparent green tint, the Active dot's own green, with a thin ring of the same green inside; Proposal when open keeps its
+   black and takes the green ring. Overrides the light black Proposal block and the grey current tab above. */
+.bmws-tabs a.on,.bmws-tabs a.on:hover{background:rgba(63,217,181,.12);box-shadow:inset 0 0 0 1px rgba(63,217,181,.22);color:#fff}
+.bmws-tabs a.on:focus-visible{box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.7)}
+.bmws-tabs a[href$="pack.html"],.bmws-tabs a[href$="pack.html"]:hover{background:#000;box-shadow:none;color:#fff;margin-right:22px;padding:7px 18px 8px}
+.bmws-tabs a[href$="pack.html"]:hover{box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)}
+.bmws-tabs a[href$="pack.html"]+.bmws-sep{margin:0 22px 0 0}
+.bmws-tabs a[href$="pack.html"].on,.bmws-tabs a[href$="pack.html"].on:hover{background:#000;box-shadow:inset 0 0 0 1px rgba(63,217,181,.45)}
+.bmws-tabs a[href$="pack.html"]:focus-visible,.bmws-tabs a[href$="pack.html"].on:focus-visible{box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.7)}
+@media (max-width:1279px){.bmws-tabs a[href$="pack.html"],.bmws-tabs a[href$="pack.html"]:hover{margin-right:12px;padding:9px 14px}.bmws-tabs a[href$="pack.html"]+.bmws-sep{margin:0 12px 0 0}}
+/* Under 1120 px the strip has no slack (measured 9 to 23 px of overflow at 1000 and 1060 with the gaps kept), so the gaps go and
+   the black block alone sets Proposal apart. */
+@media (max-width:1120px){.bmws-tabs a[href$="pack.html"],.bmws-tabs a[href$="pack.html"]:hover{margin-right:0;padding:9px 8px}.bmws-tabs a[href$="pack.html"]+.bmws-sep{margin:0 6px}}
+@media (max-width:1059px){.bmws-tabs a[href$="pack.html"],.bmws-tabs a[href$="pack.html"]:hover{padding:9px 6px}.bmws-tabs a[href$="pack.html"]+.bmws-sep{margin:0 4px}}
+@media (max-width:999px){.bmws-tabs a[href$="pack.html"],.bmws-tabs a[href$="pack.html"]:hover{margin-right:0;padding:0}.bmws-tabs a[href$="pack.html"]+.bmws-sep{margin:0 6px}}

@@ -1,0 +1,1091 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="bm-internal" content="1">
+<link rel="icon" href="data:,">
+<title>Yacht Style Arabia · Website · Quotation &amp; Invoice</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#ECEDE7;--paper-2:#F4F4EF;--ink:#15161A;--ink-soft:#54565d;--ink-faint:#8a8c86;
+    --line:#D4D5CC;--line-soft:#E4E5DD;--bright:#2536F5;--bright-deep:#1421B8;--dim:#9A9C94;
+    --ok:#1A8F5A;--ok-soft:#E7F3EC;--amber:#B07A12;--amber-soft:#F6EFDD;--due:#1E73E8;--head:#2f3038;--alt:#5B37B0;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:"Inter",system-ui,sans-serif;background:var(--paper);color:var(--ink);-webkit-font-smoothing:antialiased;line-height:1.5;
+    background-image:radial-gradient(rgba(21,22,26,.04) .6px,transparent .7px);background-size:22px 22px;min-height:100%;}
+  html,body{min-height:100%;}
+
+  .qbar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+    padding:13px 20px;background:rgba(236,237,231,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
+  .qbar .eyebrow{font-family:"Inter",system-ui,sans-serif;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--bright-deep);}
+  .qseg{display:inline-flex;background:#fff;border:1px solid var(--line);border-radius:100px;padding:3px;gap:2px;}
+  .qseg button{font:600 13px "Inter",sans-serif;color:var(--ink-soft);background:none;border:0;border-radius:100px;padding:7px 16px;cursor:pointer;transition:.15s;}
+  .qseg button.on{background:var(--bright);color:#fff;box-shadow:0 6px 16px -8px rgba(37,54,245,.8);}
+  .qbtn{margin-left:auto;display:inline-flex;align-items:center;gap:8px;font:600 13px "Inter",sans-serif;color:#fff;background:var(--ink);border:0;border-radius:10px;padding:9px 16px;cursor:pointer;}
+  .qbtn:hover{background:#000;}
+  .qbtn svg{width:15px;height:15px;}
+
+  .stage{padding:22px 18px 60px;}
+  .sheet{max-width:none;margin:0;background:transparent;border:0;border-radius:0;box-shadow:none;padding:0;}
+  .sheet[hidden]{display:none;}
+  .page{position:relative;width:210mm;min-height:297mm;margin:0 auto 16px;padding:17mm 15mm 16mm;background:#fff;border:1px solid var(--line);border-radius:3px;box-shadow:0 20px 54px -30px rgba(20,24,55,.5);display:flex;flex-direction:column;overflow:hidden;}
+  .page-body{flex:1 1 auto;min-height:0;}
+  .page-num{position:absolute;left:15mm;right:15mm;bottom:7mm;display:flex;justify-content:space-between;align-items:center;font-family:"Inter",system-ui,sans-serif;font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);border-top:1px solid var(--line-soft);padding-top:5px;}
+
+  .blogo{position:relative;display:inline-block;line-height:0;}
+  .blogo .wm{display:block;height:38px;width:auto;}
+
+  /* ---- INVOICE ---- */
+  .inv-top{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;padding-bottom:20px;border-bottom:2px solid var(--ink);}
+  .inv-co{margin-top:14px;font-size:12.5px;line-height:1.7;color:var(--ink);}
+  .inv-co b{font-size:13.5px;}
+  .inv-co .web{margin-top:10px;color:var(--ink-soft);}
+  .inv-right{text-align:right;flex:0 0 auto;}
+  .inv-right .t{font-family:"Fraunces",serif;font-weight:500;font-size:30px;line-height:1;letter-spacing:.02em;color:var(--ink);}
+  .inv-right .no{font-family:"Inter",system-ui,sans-serif;font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-soft);margin-top:10px;}
+  .bd-l{font-family:"Inter",system-ui,sans-serif;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);margin-top:18px;}
+  .bd-v{font-family:"Fraunces",serif;font-weight:600;font-size:22px;margin-top:4px;}
+  .inv-parties{display:flex;justify-content:space-between;gap:24px;margin-top:40px;}
+  .inv-billto{font-size:13px;line-height:1.65;max-width:60%;}
+  .inv-billto b{font-size:14px;}
+  .inv-billto .muted{color:var(--ink-soft);}
+  .inv-meta{flex:0 0 auto;font-size:13px;min-width:240px;}
+  .inv-meta .row{display:flex;justify-content:space-between;gap:24px;padding:3px 0;}
+  .inv-meta .row .k{font-weight:600;}
+  .inv-subject{margin-top:26px;font-size:13px;}
+  .inv-subject .k{color:var(--ink-soft);}
+  .inv-subject .v{margin-top:4px;}
+  table.zt{width:100%;border-collapse:collapse;margin-top:18px;}
+  table.zt thead th{background:transparent;color:var(--ink-faint);font-family:"Inter",system-ui,sans-serif;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-align:left;padding:0 10px 9px;border-bottom:2px solid var(--ink);}
+  table.zt thead th.n{width:38px;text-align:left;} table.zt thead th.r{text-align:right;}
+  table.zt tbody td{padding:13px 10px;vertical-align:top;font-size:13.5px;border-bottom:1px solid var(--line-soft);}
+  table.zt tbody td.r{text-align:right;font-family:"Inter",system-ui,sans-serif;font-variant-numeric:tabular-nums;white-space:nowrap;}
+  table.zt .it-title{font-weight:600;font-size:14px;}
+  table.zt .sec{margin-top:11px;}
+  .ztotals{margin-top:6px;margin-left:auto;width:340px;max-width:100%;}
+  .ztotals .row{display:flex;justify-content:space-between;padding:7px 10px;font-size:13.5px;}
+  .ztotals .row.sst{color:var(--ink-soft);}
+  .ztotals .row.total{font-weight:600;}
+  .ztotals .row.bal{margin-top:4px;padding-top:12px;border-top:2px solid var(--ink);font-family:"Fraunces",serif;font-weight:600;font-size:19px;}
+  .ztotals .num{font-family:"Inter",system-ui,sans-serif;font-variant-numeric:tabular-nums;}
+  .thanks{margin-top:30px;font-size:13.5px;}
+  .pay-terms{margin-top:22px;font-size:13px;line-height:1.7;}
+  .pay-terms .lbl{font-weight:700;}
+  .bank-lines{margin-top:4px;font-family:"Inter",sans-serif;font-size:13px;line-height:1.85;}
+  .placeholder{color:var(--amber);background:var(--amber-soft);border-radius:4px;padding:1px 6px;font-size:12.5px;}
+  .zfoot{margin-top:40px;padding-top:14px;border-top:1px solid var(--line);font-size:11px;color:var(--ink-faint);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+  .ck-grp{font-family:"Inter",system-ui,sans-serif;font-size:9.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--bright-deep);margin:11px 0 4px;}
+  .ck-ul{list-style:none;margin:0;padding:0;}
+  .ck-ul .ckli{position:relative;padding-left:19px!important;margin:2px 0;font-size:12px;line-height:1.55;color:var(--ink-soft);}
+  .ck-ul .ckli .ckprint{position:absolute;left:0;top:3px;width:11px;height:11px;border:1.2px solid #7E8AA6;border-radius:2px;}
+  table.zt .ck-ul{columns:2;column-gap:18px;}
+  table.zt .ck-ul .ckli{break-inside:avoid;}
+
+  /* ---- QUOTATION ---- */
+  .doc-head{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;padding-bottom:20px;border-bottom:2px solid var(--ink);}
+  .doc-head .meta{font-size:12px;color:var(--ink-soft);margin-top:10px;line-height:1.5;}
+  .doc-type{text-align:right;flex:0 0 auto;}
+  .doc-type .lbl{font-family:"Fraunces",serif;font-weight:500;font-size:30px;letter-spacing:.02em;line-height:1;}
+  .doc-type .sub{font-family:"Inter",system-ui,sans-serif;font-size:11px;color:var(--ink-soft);margin-top:10px;line-height:1.75;text-transform:uppercase;letter-spacing:.04em;}
+  .doc-type .sub b{color:var(--ink);}
+  .kv3{display:grid;grid-template-columns:1.1fr 1.1fr .9fr;gap:22px;margin-top:22px;}
+  .party .k{font-family:"Inter",system-ui,sans-serif;font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:6px;}
+  .party .v{font-size:13.5px;line-height:1.6;}
+  .party .v b{font-size:14.5px;} .party .v .muted{color:var(--ink-soft);}
+  table.lines{width:100%;border-collapse:collapse;margin-top:24px;}
+  table.lines th{font-family:"Inter",system-ui,sans-serif;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);text-align:left;padding:0 10px 9px;border-bottom:1px solid var(--line);}
+  table.lines th.r,table.lines td.r{text-align:right;}
+  table.lines td{padding:8px 10px;vertical-align:top;border-bottom:1px solid var(--line-soft);font-size:13.5px;}
+  table.lines td .desc{font-weight:600;font-size:14.5px;}
+  table.lines td .pk{margin-top:1px;font-size:12px;color:var(--ink-soft);line-height:1.5;}
+  table.lines td .pk b{color:var(--ink);font-weight:600;}
+  table.lines td .scope{margin-top:5px;color:var(--ink-soft);font-size:12px;line-height:1.6;}
+  table.lines td .scope span{display:inline-block;margin:1px 12px 1px 0;white-space:nowrap;}
+  table.lines td .scope span{position:relative;padding-left:17px;}
+  table.lines td .scope span::before{content:"";position:absolute;left:0;top:3px;width:11px;height:11px;border:1.5px solid var(--bright);border-radius:2px;background:#fff;box-sizing:border-box;}
+  table.lines td .scope span::after{content:"";position:absolute;left:3px;top:5.5px;width:5px;height:2.5px;border-left:1.6px solid var(--bright);border-bottom:1.6px solid var(--bright);transform:rotate(-45deg);}
+  .num{font-family:"Inter",system-ui,sans-serif;font-variant-numeric:tabular-nums;white-space:nowrap;}
+  .lp{color:var(--ink-faint);text-decoration:line-through;}
+  .offchip{display:inline-block;font-family:"Inter",system-ui,sans-serif;font-size:10px;font-weight:700;letter-spacing:.04em;color:#0E7A4A;background:#E4F4EC;border:1px solid rgba(26,143,90,.3);border-radius:6px;padding:2px 6px;white-space:nowrap;}
+  .nolist{font-family:"Inter",system-ui,sans-serif;font-size:9.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-faint);white-space:nowrap;}
+  .frrow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:8px;}
+  .frchip{display:inline-block;font-family:"Inter",system-ui,sans-serif;font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;font-weight:700;color:var(--ink-soft);background:#F4F5FA;border:1px solid var(--line);border-radius:100px;padding:3px 9px;white-space:nowrap;}
+  .totals{margin-top:16px;margin-left:auto;width:340px;max-width:100%;}
+  .totals .row{display:flex;justify-content:space-between;padding:5px 10px;font-size:13.5px;}
+  .totals .row.lst{color:var(--ink-faint);font-size:12px;}
+  .totals .row.sub,.totals .row.sst{color:var(--ink-soft);}
+  .totals .row.disc{color:#0E7A4A;font-weight:600;background:#E9F5EE;border-radius:4px;}
+  .totals .row.grand{margin-top:4px;border-top:2px solid var(--ink);font-family:"Fraunces",serif;font-weight:600;font-size:19px;padding-top:12px;}
+  .sect{margin-top:28px;}
+  .sect .h{font-family:"Inter",system-ui,sans-serif;font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--bright-deep);font-weight:700;margin-bottom:12px;}
+  .sect .h small{display:block;color:var(--ink-faint);font-weight:500;letter-spacing:.02em;text-transform:none;font-size:11.5px;margin-top:4px;}
+  .mstab{width:100%;border-collapse:collapse;}
+  .mstab td,.mstab th{padding:11px 12px;font-size:13px;border-bottom:1px solid var(--line-soft);text-align:left;vertical-align:top;}
+  .mstab th{font-family:"Inter",system-ui,sans-serif;font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-faint);}
+  .mstab td.r,.mstab th.r{text-align:right;}
+  .mstab.pay td{padding:6px 10px;font-size:12.5px;}
+  .mstab.pay td .sub2{display:inline;margin:0 0 0 6px;font-size:11px;color:var(--ink-faint);font-family:"Inter",system-ui,sans-serif;}
+  table.mstab.dates td{padding:5px 10px;font-size:12px;line-height:1.4;}
+  table.mstab.dates td.r{white-space:nowrap;}
+  .twocol{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:6px;}
+  ul.tick,ul.cross{list-style:none;}
+  ul.tick li,ul.cross li{position:relative;padding:3px 0 3px 20px;font-size:12px;line-height:1.45;}
+  ul.tick li::before{content:"";position:absolute;left:0;top:5px;width:11px;height:11px;border:1.5px solid var(--bright);border-radius:2px;background:#fff;box-sizing:border-box;}
+  ul.tick li::after{content:"";position:absolute;left:3px;top:7.5px;width:5px;height:2.5px;border-left:1.6px solid var(--bright);border-bottom:1.6px solid var(--bright);transform:rotate(-45deg);}
+  ul.cross li{color:var(--ink-soft);}
+  ul.cross li::before{content:"\2715";position:absolute;left:0;top:3px;color:var(--dim);font-weight:700;}
+  ul.plus{list-style:none;} ul.plus li{position:relative;padding:3px 0 3px 20px;font-size:12px;line-height:1.45;}
+  ul.plus li::before{content:"+";position:absolute;left:2px;top:2px;color:var(--bright-deep);font-weight:700;}
+  .accept{margin-top:8px;border:1px solid rgba(37,54,245,.25);background:linear-gradient(180deg,#F3F5FF,#fff);border-radius:13px;padding:16px 20px;font-size:13.5px;line-height:1.6;}
+  .accept b{color:var(--bright-deep);}
+  ul.terms{list-style:none;margin-top:2px;counter-reset:t;}
+  ul.terms li{position:relative;padding:6px 0 6px 26px;font-size:12.5px;color:var(--ink-soft);line-height:1.6;}
+  ul.terms li::before{counter-increment:t;content:counter(t);position:absolute;left:0;top:6px;font-family:"Inter",system-ui,sans-serif;font-size:10px;font-weight:700;color:var(--bright-deep);background:rgba(37,54,245,.08);border-radius:5px;width:17px;height:17px;display:flex;align-items:center;justify-content:center;}
+  ul.terms li b{color:var(--ink);}
+  .sign{display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-top:32px;}
+  .sign .line{border-top:1.5px solid var(--ink);padding-top:8px;font-size:12px;color:var(--ink-soft);}
+  .sign .line b{display:block;color:var(--ink);font-size:13px;margin-bottom:2px;}
+  .qfoot{margin-top:26px;padding-top:14px;border-top:1px solid var(--line);font-size:11px;color:var(--ink-faint);text-align:center;line-height:1.7;}
+  .stage .note{font-size:12px;color:var(--amber);background:var(--amber-soft);border:1px solid rgba(176,122,18,.25);border-radius:10px;padding:10px 14px;margin:0 auto 16px;max-width:840px;}
+  .stage .note b{color:#8a5e0d;}
+  .stage .note ol{margin:6px 0 0 18px;} .stage .note li{margin:3px 0;}
+
+  .msum{margin-top:18px;border:1.5px solid var(--bright);border-radius:13px;padding:11px 14px;background:linear-gradient(180deg,#F3F5FF,#fff);}
+  .msum .mh{font-family:"Inter",system-ui,sans-serif;font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--bright-deep);}
+  .msum .mg{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:14px;margin-top:8px;}
+  .msum .mk{font-size:10.5px;color:var(--ink-faint);text-transform:uppercase;letter-spacing:.06em;font-family:"Inter",system-ui,sans-serif;}
+  .msum .mv{font-size:13px;line-height:1.45;margin-top:3px;}
+  .msum .mv b{font-family:"Fraunces",serif;font-size:17px;font-weight:600;}
+  .msum .mv s{color:var(--ink-faint);}
+  .msum .ml{margin-top:7px;padding-top:6px;border-top:1px solid var(--line-soft);font-size:12.5px;line-height:1.5;}
+  .choice-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-top:20px;padding-bottom:6px;border-bottom:2px solid var(--ink);}
+  .choice-h .ct{font-family:"Fraunces",serif;font-size:20px;font-weight:600;}
+  .choice-h .cs{font-family:"Inter",system-ui,sans-serif;font-size:10px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;border-radius:6px;padding:3px 8px;white-space:nowrap;}
+  .choice-h .cs.rec{background:#EEF0FF;color:var(--bright-deep);}
+  .choice-h .cs.alt{background:#F1ECFB;color:var(--alt);}
+  .choice-h.a .ct{color:var(--alt);}
+  .choice-h + table.lines{margin-top:6px;}
+  table.cmp{width:100%;border-collapse:collapse;margin-top:8px;}
+  table.cmp th{font-family:"Inter",system-ui,sans-serif;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);text-align:left;padding:0 10px 7px;border-bottom:1px solid var(--line);}
+  table.cmp th.a{color:var(--alt);} table.cmp th.b{color:var(--bright-deep);}
+  table.cmp td{padding:5px 10px;font-size:11.5px;line-height:1.42;border-bottom:1px solid var(--line-soft);vertical-align:top;}
+  table.cmp td.k{font-weight:600;white-space:nowrap;}
+  table.cmp td.b{background:rgba(37,54,245,.06);}
+  .notintotal{display:inline-block;margin-left:8px;font-family:"Inter",system-ui,sans-serif;font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--amber);background:var(--amber-soft);border-radius:5px;padding:2px 7px;font-weight:700;}
+  .inclchip{display:inline-block;font-family:"Inter",system-ui,sans-serif;font-size:10px;font-weight:700;letter-spacing:.04em;color:var(--bright-deep);background:#EEF0FF;border-radius:6px;padding:2px 6px;white-space:nowrap;}
+  .tc{display:inline-block;font-family:"Inter",system-ui,sans-serif;font-size:9px;letter-spacing:.06em;text-transform:uppercase;font-weight:700;color:#7a5410;background:rgba(194,138,33,.14);border-radius:5px;padding:2px 6px;white-space:nowrap;vertical-align:middle;}
+  table.opt{width:100%;border-collapse:collapse;margin-top:6px;}
+  table.opt th{font-family:"Inter",system-ui,sans-serif;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);text-align:right;padding:0 10px 8px;border-bottom:1px solid var(--line);}
+  table.opt th.l,table.opt td.l{text-align:left;}
+  table.opt td{padding:7px 10px;font-size:12px;border-bottom:1px solid var(--line-soft);text-align:right;vertical-align:top;line-height:1.45;}
+  table.opt td.l b{color:var(--ink);}
+  .bline{margin-top:8px;font-size:12px;color:var(--ink-soft);line-height:1.55;border-left:3px solid var(--bright);padding:6px 10px;background:#F3F5FF;border-radius:0 8px 8px 0;}
+  .bline b{color:var(--bright-deep);}
+  .bline.a{border-left-color:var(--alt);background:#F7F4FD;} .bline.a b{color:var(--alt);}
+  .sect.tight .twocol ul li{padding:3px 0 3px 20px;font-size:12px;line-height:1.45;}
+  .dsub{font-family:"Inter",system-ui,sans-serif;font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;font-weight:700;color:var(--ink-soft);margin:14px 0 4px;}
+  .dsub.b{color:var(--alt);}
+  /* the Download PDF button stays clear of the fixed Back button */
+  body.bm-standalone .qbar{padding-right:112px;}
+  /* invoice page 1 stays inside one A4 card */
+  .inv-parties{margin-top:26px;}
+  .inv-subject{margin-top:18px;}
+  table.zt tbody td{padding:11px 10px;}
+  .ztotals .row{padding:5px 10px;}
+  .ztotals .row.bal{padding-top:9px;}
+
+  @media screen and (max-width:840px){
+    .page{width:auto;min-height:0;padding:26px 22px 30px;border-radius:8px;}
+    .page-num{left:22px;right:22px;}
+  }
+  @media screen and (max-width:700px){
+    .page{padding:24px 18px 30px;}
+    .inv-top,.inv-parties,.doc-head{flex-direction:column;}
+    .inv-right,.doc-type{text-align:left;}
+    .inv-meta{min-width:0;width:100%;}
+    .kv3,.twocol,.sign,.msum .mg{grid-template-columns:1fr;}
+    .totals,.ztotals{width:100%;}
+    table.zt .ck-ul{columns:1;}
+    table.cmp td.k{white-space:normal;}
+    .choice-h{flex-direction:column;align-items:flex-start;}
+    table.lines,table.cmp,table.opt,table.mstab,table.zt{display:block;overflow-x:auto;}
+    table.lines td .scope span{white-space:normal;}
+    .inv-meta .row{gap:12px;}
+  }
+  /* phone and tablet: the page number line sits below the content, not over it */
+  @media screen and (max-width:840px){ .page{padding-bottom:64px;} }
+  @media print{
+    @page{size:A4;margin:0;}
+    html,body{background:#fff;background-image:none;}
+    .qbar,#bmBack,.stage .note{display:none!important;}
+    .stage{padding:0;}
+    .sheet{box-shadow:none;border:none;border-radius:0;max-width:none;margin:0;padding:0;}
+    .sheet[hidden]{display:none!important;}
+    .page{width:210mm;min-height:297mm;margin:0;border:0;border-radius:0;box-shadow:none;page-break-after:always;break-after:page;}
+    .page:last-child{page-break-after:auto;break-after:auto;}
+    table.cmp td.b,.inclchip,.tc,.notintotal,.msum,.accept,.bline,.offchip,.frchip,.totals .row.disc{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  }
+
+  /* Shell additions: the first block on a page starts at the top; plain list cells; where payments go */
+  .page-body > :first-child{margin-top:0!important;}
+  table.lines tr.hasscope td{border-bottom:0;padding-bottom:0;}
+  table.lines tr.scr td{padding-top:0;padding-bottom:9px;}
+  table.lines tr.scr .scope{margin-top:4px;}
+  .plist{font-family:"Inter",system-ui,sans-serif;font-variant-numeric:tabular-nums;color:var(--ink-soft);white-space:nowrap;}
+  .totals .row.lst .plain{color:var(--ink-faint);}
+  .bankbox{border:1px solid var(--line);border-radius:13px;padding:6px 16px;}
+  .bankbox .row{display:flex;justify-content:space-between;gap:20px;padding:7px 0;font-size:13px;border-bottom:1px solid var(--line-soft);}
+  .bankbox .row:last-child{border-bottom:0;}
+  .bankbox .row .k{color:var(--ink-soft);}
+  .bankbox .row .v{text-align:right;font-weight:600;}
+  .accept .ax{display:block;margin-top:4px;}
+  @media screen and (max-width:700px){ .bankbox .row{flex-direction:column;gap:2px;} .bankbox .row .v{text-align:left;} }
+
+</style>
+</head>
+<body class="show-quotation">
+
+<div class="qbar">
+  <span class="eyebrow">Heart Media Group · Yacht Style Arabia · Website · Billing · BM only</span>
+  <div class="qseg" role="tablist">
+    <button id="tabQ" class="on" type="button">Quotation</button>
+    <button id="tabI" type="button">Invoice</button>
+  </div>
+  <button class="qbtn" id="dl" type="button">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16"/></svg>
+    Download PDF
+  </button>
+</div>
+
+<div class="stage">
+  <div class="note"><b>BEFORE SENDING.</b> Internal note for Bazil. It does not appear in the Save as PDF, and this quotation is BM only: never in the client download. Every line, price and date mirrors the proposal as revised on Mon 5 Oct 2026, after Olivier&rsquo;s email asking for a quote and a timeframe: the dates are those of 1 Oct, the checklist is now 79 and 118 boxes, and the validity runs to Wed 4 Nov. The prices are your decision of Mon 5 Oct, 12:20pm, &ldquo;do rm15k or 25k because it includes the cms&rdquo;. Choice A · The Edition: Growth Website RM10,000 (list RM20,000) and the editorial CMS in English and Arabic RM5,000 (original RM10,000), RM15,000 + SST RM1,200 = RM16,200, original RM30,000, with Brand Strategy · Core, worth RM2,500, at no charge. Choice B · The Flagship, recommended: Corporate Website RM20,000 (list RM40,000) and the editorial CMS RM5,000 (original RM10,000), RM25,000 + SST RM2,000 = RM27,000, original RM50,000, with Brand Strategy · Full, worth RM10,000, and the web identity and CI, worth RM4,000, at no charge. The Invoice view bills the Choice B 50% to begin: RM12,500 + RM1,000 = RM13,500. Check these:
+    <ol>
+      <li><b>The timeline is your rule of 5 Oct:</b> A is two weeks to complete and one more week of testing and amendments, live Fri 30 Oct; B is three weeks to complete and a fourth week of amendments and fixes, live Fri 6 Nov. The 30% is due when the complete site is on staging: Fri 23 Oct on A, Fri 30 Oct on B.</li>
+      <li><b>He asked for a quote on 5 Oct.</b> By house rule this quotation goes out after acceptance and the proposal carries the prices. If you want him to have it now, it matches the proposal line for line: your call. It is never in the client download.</li>
+      <li><b>Search &amp; Visibility is a new line outside the fee</b>, RM3,500 a month before SST for a minimum of three months, as the price list has it, with a tick in the acceptance block. Remove it in both documents if you would rather raise it later.</li>
+      <li><b>The legal entity is unconfirmed.</b> Quoted to Heart Media Group, attention Mr Olivier Burlot, as the proposal cover does. yachtstyle.co names Lux Inc Media as the publisher and takes subscriptions as Lux Inc Media Pte. Ltd. (our audit, 1 Oct), and the group is now part of ITP Media Group. The registered name and address are a placeholder on both views until he tells us which company signs and pays.</li>
+      <li><b>No price was agreed in the meeting of 1 Oct.</b> The two prices are your decision of 5 Oct: the 1 Oct figures plus RM5,000 for the editorial CMS. On your instruction of 12:45pm every line is at the founding rate with its original price double, RM10,000 for the editorial CMS, so the originals are RM30,000 and RM50,000 and the discount row reads 50% on both. The editorial CMS is not on the published price list. The meeting notes on file are thin and unverified by the client.</li>
+      <li><b>SST on an exported service.</b> The client is in Singapore and the group is in Dubai. Whether 8% SST applies needs the tax agent. Shown here as the price list shows it.</li>
+      <li><b>The RM4,000 web identity and CI is your figure</b>, not on the list. It carries no struck price and shows as worth RM4,000 with a zero charge.</li>
+      <li><b>The deadline guarantee</b> is in the terms as section 07 of the proposal has it: a full refund of the website fee if we miss the committed date. Delete it in both documents if you do not want it on a bilingual build.</li>
+      <li><b>The shoot is substituted</b> by preparation of their supplied photography and film, as section 3.1 of the proposal says.</li>
+      <li><b>Website Care</b> is three optional plans, as section 3.2 of the proposal: Choice A at the band for 10 pages or less, Choice B at 11 to 40 pages, before SST, annual at ten months. Not in the totals.</li>
+      <li><b>Invoice number and issue date</b> are assigned in Zoho. Zoho invoices do not itemise SST, this quotation does, so match the Zoho invoice to it.</li>
+    </ol>
+  </div>
+  <section class="sheet" id="quotation"></section>
+  <section class="sheet" id="invoice" hidden></section>
+</div>
+
+<button id="bmBack" type="button" aria-label="Back">&larr; Back</button>
+<style>
+#bmBack{display:none;position:fixed;top:14px;right:16px;z-index:9999;font:600 12.5px "Inter",system-ui,sans-serif;color:#1E73E8;background:rgba(255,255,255,.97);border:1px solid #D4D5CC;border-radius:100px;padding:8px 15px;cursor:pointer;box-shadow:0 8px 22px -10px rgba(20,24,55,.45);align-items:center;gap:6px;}
+#bmBack:hover{border-color:#1E73E8;}
+body.bm-standalone #bmBack{display:inline-flex;}
+</style>
+
+<script>
+/* ============ BILLING DATA, single source of truth ============
+   Built by scratchpad/build_yachtstyle_quotation.py from docs/yachtstyle/proposal-website.html, fourth version, 5 Oct 2026.
+   Edit the builder, not this file. Company and bank details are section 08 of the proposal. 8% SST itemised.
+   The Invoice view bills the recommended Choice B payment to begin; invoice number and date are assigned in Zoho. */
+var DOC={
+ "company": {
+  "name": "BrandMethod Sdn. Bhd.",
+  "reg": "1553794-X",
+  "addr": [
+   "Office 25, Level 1 Mranti Teknologi Park,",
+   "57000 Bukit Jalil, Kuala Lumpur",
+   "Malaysia"
+  ],
+  "web": "brandmethod.co",
+  "email": "bazil@brandmethod.co"
+ },
+ "client": {
+  "name": "Heart Media Group",
+  "attn": "Attn: Mr Olivier Burlot, Chief Executive Officer",
+  "addr": [
+   "Singapore",
+   "[Registered entity and address to confirm]"
+  ],
+  "email": "olivier@heart-media.com"
+ },
+ "bank": {
+  "payee": "BrandMethod Sdn. Bhd. (1553794-X)",
+  "addr": "Office 25, Level 1 Mranti Teknologi Park, 57000 Bukit Jalil, Kuala Lumpur",
+  "bank": "Maybank Berhad",
+  "acc": "5644 8143 9069",
+  "name": "BrandMethod Sdn. Bhd.",
+  "swift": "MBBEMYKL",
+  "billing": "admin@brandmethod.co"
+ },
+ "sstRate": 0.08,
+ "quote": {
+  "no": "BM-Q-2026-YACHTSTYLE-WEB01",
+  "date": "2026-10-05",
+  "valid": "2026-11-04"
+ },
+ "payRef": "Yacht Style Arabia · Website",
+ "project": "Yacht Style Arabia · Website · yachtstylearabia.com",
+ "projectSub": "A new title site for Dubai and for Arab readers, in English and Arabic with true right to left, on the model of yachtstyle.co, which stays exactly as it is. Kickoff Mon 12 Oct 2026, assumed. Choice A: complete in two weeks, Fri 23 Oct 2026, then one week of testing and amendments, live Fri 30 Oct 2026. Choice B: complete in three weeks, Fri 30 Oct 2026, then a fourth week of amendments and fixes, live Fri 6 Nov 2026.",
+ "summaryLine": "<b>Both choices:<\/b> our founding rate, 50% off the original price, before 8% SST, for the website and the editorial CMS in English and Arabic; billed 50 / 30 / 20 by milestone. Both begin with the brand strategy at no charge, and both carry the SEO and GEO foundation inside the price. Choice B alone carries the full strategy, the web identity and CI for the Arabia title, the custom design system and the multi-user CMS with roles. Lines outside the fee, on page {{OUT}}, are not in the totals.",
+ "acceptLine": "Tick your choice, sign on page {{SIGN}} and send the <b>written acceptance by Fri 9 Oct 2026<\/b>, naming the one person who approves on your side.",
+ "acceptTail": "both including 8% SST, to the account on page {{PAY}}. That books the team and the kickoff of Mon 12 Oct 2026.",
+ "choices": [
+  {
+   "key": "A",
+   "name": "Choice A · The Edition",
+   "tag": "The ten page title site",
+   "pkg": "Growth Website and the editorial CMS in English and Arabic, with Brand Strategy · Core included",
+   "rec": false,
+   "span": "2 weeks to build, 1 to test, live Fri 30 Oct",
+   "list": 30000,
+   "listNote": "Original price, Growth Website and editorial CMS",
+   "listStrike": true,
+   "discNote": "founding rate",
+   "chips": [
+    [
+     "50% OFF",
+     "off"
+    ],
+    [
+     "Founding rate, original RM30,000",
+     "fr"
+    ],
+    [
+     "RM17,500 of work for RM15,000",
+     "fr"
+    ]
+   ],
+   "split": [
+    {
+     "pct": 50,
+     "label": "To begin",
+     "due": "Written acceptance, by Fri 9 Oct 2026"
+    },
+    {
+     "pct": 30,
+     "label": "Site complete",
+     "due": "The complete site on staging in both languages, Fri 23 Oct 2026, the end of week 2"
+    },
+    {
+     "pct": 20,
+     "label": "On delivery",
+     "due": "Live on yachtstylearabia.com and handover accepted, Fri 30 Oct 2026, the end of week 3"
+    }
+   ],
+   "payNote": "Nothing is billed before its gate is passed: 50% to begin, 30% when the complete site is on staging, 20% when it is live. Net + SST = amount.",
+   "expect": {
+    "subtotal": 15000,
+    "sst": 1200,
+    "total": 16200,
+    "pay": [
+     8100,
+     4860,
+     3240
+    ]
+   },
+   "headNote": "The ten page title site, built on the existing Yacht Style look and a core strategy, in English and Arabic with true right to left. Complete in two weeks, Fri 23 Oct. Then one week of testing and amendments: live Fri 30 Oct.",
+   "lines": [
+    {
+     "d": "Growth Website",
+     "pk": "Up to ten pages, in English and Arabic · Mon 12 to Fri 30 Oct 2026 · complete Fri 23 Oct, live Fri 30 Oct · 79 boxes in the checklist, section 4.1 of the proposal",
+     "list": 20000,
+     "net": 10000,
+     "scope": [
+      "Discovery, sitemap and content model",
+      "Design preview and page designs",
+      "Arabic typography, right to left layouts",
+      "Your photography and film prepared",
+      "Ten pages",
+      "Complete site on staging, both languages",
+      "One week of testing and amendments",
+      "SEO and GEO foundation: structured data, sitemaps, feeds",
+      "AI crawler policy, readiness report",
+      "Newsletter forms, email marketing integration",
+      "Lead magnet, WhatsApp, enquiry routing",
+      "Site search, advertiser placements, video embeds",
+      "Analytics, Search Console, consent notice",
+      "Two feedback rounds, testing, launch",
+      "Handover session and editor guide"
+     ]
+    },
+    {
+     "d": "Editorial CMS, English and Arabic",
+     "pk": "The publishing system for a daily title, in both languages with true right to left · founding rate, original RM10,000",
+     "list": 10000,
+     "net": 5000,
+     "scope": [
+      "Dashboard built for one to two stories a day",
+      "English and Arabic editions",
+      "True right to left layout",
+      "Language switch, paired stories",
+      "Bilingual search and metadata",
+      "Arabic interface"
+     ]
+    },
+    {
+     "d": "Brand Strategy · Core",
+     "pk": "Included at no charge · worth RM2,500 on our list at the founding rate (list RM5,000) · intake and kickoff session, brand introduction, position, voice and description, the Brand Strategy Document and a walkthrough recording",
+     "net": 0,
+     "chip": "Included",
+     "listText": "Worth RM2,500"
+    },
+    {
+     "d": "Brand Strategy · Full, web identity and CI, custom design system, multi-user CMS with roles",
+     "pk": "Not included in Choice A. All are in Choice B",
+     "net": null,
+     "chip": "Not included"
+    }
+   ]
+  },
+  {
+   "key": "B",
+   "name": "Choice B · The Flagship",
+   "tag": "",
+   "pkg": "Corporate Website / E-commerce and the editorial CMS in English and Arabic, with Brand Strategy · Full and the web identity and CI included",
+   "rec": true,
+   "span": "3 weeks to build, 1 to fix, live Fri 6 Nov",
+   "list": 50000,
+   "listNote": "Original price, Corporate Website / E-commerce and editorial CMS",
+   "listStrike": true,
+   "discNote": "founding rate",
+   "chips": [
+    [
+     "50% OFF",
+     "off"
+    ],
+    [
+     "Founding rate, original RM50,000",
+     "fr"
+    ],
+    [
+     "RM39,000 of work for RM25,000",
+     "fr"
+    ]
+   ],
+   "split": [
+    {
+     "pct": 50,
+     "label": "To begin",
+     "due": "Written acceptance, by Fri 9 Oct 2026"
+    },
+    {
+     "pct": 30,
+     "label": "Site complete",
+     "due": "The complete site on staging in both languages, Fri 30 Oct 2026, the end of week 3"
+    },
+    {
+     "pct": 20,
+     "label": "On delivery",
+     "due": "Live on yachtstylearabia.com and handover accepted, Fri 6 Nov 2026, the end of week 4"
+    }
+   ],
+   "payNote": "The same gates as Choice A, one week later: 50% to begin, 30% when the complete site is on staging, 20% when it is live. Net + SST = amount.",
+   "expect": {
+    "subtotal": 25000,
+    "sst": 2000,
+    "total": 27000,
+    "pay": [
+     13500,
+     8100,
+     5400
+    ]
+   },
+   "headNote": "The recommendation. The larger site, with the full brand and business strategy, a web identity of its own in Latin and Arabic script, a custom design system and a multi-user CMS with roles. Complete in three weeks: identity directions Fri 16 Oct, the complete site Fri 30 Oct. Then a fourth week of amendments and fixes: live Fri 6 Nov.",
+   "lines": [
+    {
+     "d": "Corporate Website / E-commerce",
+     "pk": "15 pages and more, in English and Arabic · Mon 12 Oct to Fri 6 Nov 2026 · complete Fri 30 Oct, live Fri 6 Nov · 118 boxes in the checklist, section 4.1 of the proposal",
+     "list": 40000,
+     "net": 20000,
+     "scope": [
+      "Everything in Choice A",
+      "Nine further pages",
+      "Wireframes of the key pages",
+      "Custom design system",
+      "Author and topic pages as sources",
+      "CRM integration",
+      "Training at launch"
+     ]
+    },
+    {
+     "d": "Editorial CMS, English and Arabic",
+     "pk": "The publishing system for a daily title, in both languages with true right to left · founding rate, original RM10,000",
+     "list": 10000,
+     "net": 5000,
+     "scope": [
+      "Multi-user CMS with roles",
+      "Scheduled publishing",
+      "Home page curation",
+      "Advertiser slot management",
+      "English and Arabic editions, true right to left",
+      "Language switch, paired stories",
+      "Bilingual search and metadata"
+     ]
+    },
+    {
+     "d": "Brand Strategy · Full",
+     "pk": "Included at no charge · worth RM10,000 on our list at the founding rate (list RM20,000) · strategy workshops with your leadership, the Full Brand Strategy Book, all 11 blocks, 47 items, the business strategy set, 16 items, the Brand Strategy Cards and the messaging framework",
+     "net": 0,
+     "chip": "Included",
+     "listText": "Worth RM10,000"
+    },
+    {
+     "d": "Web identity and CI for the Arabia title",
+     "pk": "Included at no charge · worth RM4,000, not on our list · identity design and design elements: identity directions, the wordmark in Latin and Arabic script, palette, type system including Arabic, design elements and patterns, site icon and share images, usage rules for web, the identity guide and files",
+     "net": 0,
+     "chip": "Included",
+     "listText": "Worth RM4,000"
+    }
+   ]
+  }
+ ],
+ "value": {
+  "A": [
+   [
+    "Growth Website",
+    10000
+   ],
+   [
+    "editorial CMS in English and Arabic",
+    5000
+   ],
+   [
+    "Brand Strategy · Core, included, worth",
+    2500
+   ]
+  ],
+  "B": [
+   [
+    "Corporate Website / E-commerce",
+    20000
+   ],
+   [
+    "editorial CMS in English and Arabic",
+    5000
+   ],
+   [
+    "Brand Strategy · Full, included, worth",
+    10000
+   ],
+   [
+    "web identity and CI for the Arabia title, included, worth",
+    4000
+   ]
+  ],
+  "expect": {
+   "A": 17500,
+   "B": 39000
+  }
+ },
+ "compare": [
+  [
+   "Website tier on our list",
+   "Growth Website",
+   "Corporate Website / E-commerce"
+  ],
+  [
+   "Original price",
+   "RM30,000",
+   "RM50,000"
+  ],
+  [
+   "Website, founding rate",
+   "RM10,000 (list RM20,000)",
+   "RM20,000 (list RM40,000)"
+  ],
+  [
+   "Editorial CMS, English and Arabic, founding rate",
+   "RM5,000 (original RM10,000)",
+   "RM5,000 (original RM10,000)"
+  ],
+  [
+   "Price before SST",
+   "RM15,000",
+   "RM25,000"
+  ],
+  [
+   "Included at no charge",
+   "Brand Strategy · Core, worth RM2,500 on our list (list RM5,000)",
+   "Brand Strategy · Full, worth RM10,000 on our list (list RM20,000), and the web identity and CI for the Arabia title, worth RM4,000: identity design and design elements"
+  ],
+  [
+   "SST 8%",
+   "RM1,200",
+   "RM2,000"
+  ],
+  [
+   "Total with SST",
+   "RM16,200",
+   "RM27,000"
+  ],
+  [
+   "Billing 50 / 30 / 20, with SST",
+   "RM8,100 · RM4,860 · RM3,240",
+   "RM13,500 · RM8,100 · RM5,400"
+  ],
+  [
+   "The site",
+   "Up to ten pages: home, section, article, review, magazine and subscribe, advertise, about, contact, search and newsletter. Lead generation, email marketing integration, analytics, the SEO and GEO foundation, a self-editing dashboard built for daily publishing",
+   "15 pages and more: the same ten and nine further pages. A custom design system, a multi-user CMS with roles and scheduling, author and topic pages, CRM and integrations, training at launch"
+  ],
+  [
+   "Boxes in the checklist",
+   "79",
+   "118"
+  ],
+  [
+   "Schedule",
+   "Three weeks. Weeks 1 and 2: the site built, complete Fri 23 Oct. Week 3: testing and amendments, live Fri 30 Oct",
+   "Four weeks. Weeks 1 to 3: the site built, complete Fri 30 Oct. Week 4: amendments and fixes, live Fri 6 Nov"
+  ],
+  [
+   "Package value",
+   "RM17,500 of work for RM15,000",
+   "RM39,000 of work for RM25,000"
+  ],
+  [
+   "To begin, with SST",
+   "RM8,100",
+   "RM13,500"
+  ]
+ ],
+ "includedA": [
+  "Brand Strategy · Core, at no charge: intake and kickoff session, brand introduction, brand position, brand voice, brand description, the Brand Strategy Document and a walkthrough recording",
+  "Discovery and sitemap: kickoff session, content checklist, sitemap locked, content model, technical plan",
+  "Design: the design preview, page designs at desktop, tablet and phone widths, Arabic typography, right to left layouts, your photography and film prepared",
+  "Ten pages: home, section, article, review, magazine and subscribe, advertise, about, contact, search results and newsletter, with privacy and cookie text from the text you supply",
+  "Complete site on a staging address, in both languages, with real content, Fri 23 Oct, the end of week 2",
+  "Publishing: self-editing dashboard, article editor, draft and preview, media library, sections, tags and menus, latest lists that update themselves, built for one to two stories a day",
+  "Editorial CMS, English and Arabic, RM5,000: both editions, true right to left layout, Arabic type, dates and numerals, mixed direction text, language switch, paired stories, Arabic interface, bilingual search and bilingual metadata",
+  "Search and AI answers, SEO and GEO: SEO foundation, article structured data, publisher and breadcrumb data, XML and news sitemaps, feeds, one address per story, answer ready stories, AI crawler policy, the search and AI readiness report",
+  "Lead generation and integrations: newsletter opt-in forms, email marketing integration, lead magnet, WhatsApp, enquiry routing, site search, advertiser placements, video embeds, share cards, Google Analytics, Search Console, cookie and consent notice",
+  "Week 3, testing, amendments and launch: two feedback rounds, launch content loaded, cross device testing, speed, search and accessibility checks, domain connected, live on yachtstylearabia.com, Fri 30 Oct",
+  "Training and handover: handover session, editor guide, everything in your name on final payment"
+ ],
+ "addsB": [
+  "Brand Strategy · Full, at no charge: the Core items, and strategy workshop sessions, brand check and basics, verbal and visual identity, brand pitch, brand story, brand essence, success vs failure, facts, survey and test, the business strategy set, the Full Brand Strategy Book, the Brand Strategy Cards and the messaging framework",
+  "Web identity and CI for the Arabia title, at no charge: identity directions, wordmark in Latin and Arabic script, palette, type system including Arabic, design elements and patterns, site icon and share images, usage rules for web, the identity guide and files",
+  "Wireframes of the key pages, two revision rounds, approved before visual design",
+  "Custom design system: one reusable component library",
+  "Nine further pages: video, interview, author, tag, charter, events, partners, terms and page not found",
+  "Multi-user CMS, roles, scheduled publishing, home page curation and advertiser slot management",
+  "Author pages as sources and topic pages as entry points, for search and AI answers",
+  "CRM integration",
+  "Complete site Fri 30 Oct, the end of week 3. Week 4: amendments and fixes, live Fri 6 Nov"
+ ],
+ "sameScopeNote": "",
+ "outside": [
+  {
+   "name": "Later stages",
+   "what": "Each a module added to the live site when you want it, quoted before it starts: the yacht and builder directory, charter and brokerage enquiry paths with an enquiry log, marina and show guides, an issue reader and archive in the browser, a video hub, partner stories, the migration of an archive from yachtstyle.co, and a tested performance gate",
+   "net": null,
+   "cell": "Quoted per stage",
+   "cell2": ""
+  },
+  {
+   "name": "The photo and video shoot",
+   "what": "Our Growth Website includes a half day shoot, which applies to shoots in the Klang Valley. Here it is replaced by preparation of the photography and film you supply: grading, cropping and compression for the page",
+   "net": null,
+   "cell": "Replaced, no charge",
+   "cell2": ""
+  },
+  {
+   "name": "Content",
+   "what": "Stories, photography, film and all Arabic copy are supplied by you. We lay them in and we do not translate",
+   "net": null,
+   "cell": "Yours",
+   "cell2": ""
+  },
+  {
+   "name": "Hosting and the domain",
+   "what": "Both are yours and stay in your name. The domain is already registered. We recommend the hosting, deploy to it and hand over the keys",
+   "net": null,
+   "cell": "At cost, paid by you",
+   "cell2": ""
+  },
+  {
+   "name": "Website Care · Stability",
+   "what": "Maintenance, optional, after launch. Daily human check, security patches, SSL, malware scans, uptime every 5 minutes, monthly off-server backup restored by us, bug fixes, monthly report. Response within 3 working days",
+   "net": null,
+   "cell": "A RM190 · B RM390 a month",
+   "cell2": "annual A RM1,900 · B RM3,900"
+  },
+  {
+   "name": "Website Care · Growth",
+   "what": "Optional, after launch. Stability, plus weekly backups, database monitoring, hardening review, same day fix when the site is down, speed work, monthly health check, small content updates. Response within 2 working days",
+   "net": null,
+   "cell": "A RM390 · B RM690 a month",
+   "cell2": "annual A RM3,900 · B RM6,900"
+  },
+  {
+   "name": "Website Care · Strategic, recommended",
+   "what": "Optional, after launch. Growth, plus Pak Jaga checking every 60 seconds, nightly restore test, expiry warnings, monthly design improvements, campaign pages, a named person and a quarterly roadmap call. Dedicated response",
+   "net": null,
+   "cell": "A RM790 · B RM1,290 a month",
+   "cell2": "annual A RM7,900 · B RM12,900"
+  },
+  {
+   "name": "Search and AI visibility after launch",
+   "what": "The site is built ready for search and for AI answers. The monthly work is a separate service on our list, Search & Visibility, SEO + AIO Foundation: the keyword and topic map, on-page work, a ranking article each month and the AI citation groundwork, minimum three months",
+   "net": 3500,
+   "unit": "a month"
+  },
+  {
+   "name": "Identity beyond the web",
+   "what": "The identity in Choice B is for screen. A printed brand book, stationery and a masthead for print are a separate job",
+   "net": null,
+   "cell": "Quoted separately",
+   "cell2": ""
+  },
+  {
+   "name": "Third party licences",
+   "what": "Typeface licences, your mailing tool, any paid plugin or service, bought in your name",
+   "net": null,
+   "cell": "At the vendor’s price",
+   "cell2": ""
+  },
+  {
+   "name": "yachtstyle.co, other titles and group websites",
+   "what": "This quotation covers Yacht Style Arabia only. The current site is not changed",
+   "net": null,
+   "cell": "Separate proposals",
+   "cell2": ""
+  }
+ ],
+ "outsideNote": "From section 3.1 of the proposal. Prices before 8% SST, with SST shown.",
+ "dates": [
+  [
+   "The proposal and this quotation, revised after your email",
+   "Mon 5 Oct"
+  ],
+  [
+   "Decision: Choice A or B, one named approver, written acceptance · 50% to begin",
+   "by Fri 9 Oct"
+  ],
+  [
+   "Kickoff · the strategy session on A, the strategy workshops on B",
+   "Mon 12 Oct"
+  ],
+  [
+   "Launch content in both languages, the remainder",
+   "by Wed 14 Oct"
+  ],
+  [
+   "Choice A · design preview and page designs approved",
+   "Fri 16 Oct"
+  ],
+  [
+   "Choice B · identity directions presented",
+   "Fri 16 Oct"
+  ],
+  [
+   "The mailing platform, the analytics account, the inboxes and the WhatsApp number",
+   "Mon 19 Oct"
+  ],
+  [
+   "Choice A · complete site on staging, end of week 2 · 30%",
+   "Fri 23 Oct"
+  ],
+  [
+   "Choice B · every page designed and approved",
+   "Fri 23 Oct"
+  ],
+  [
+   "Choice A · week 3, testing and amendments · live, handover accepted · 20%",
+   "Fri 30 Oct"
+  ],
+  [
+   "Choice B · complete site on staging, end of week 3 · 30%",
+   "Fri 30 Oct"
+  ],
+  [
+   "Choice B · week 4, amendments and fixes · live, handover accepted · 20%",
+   "Fri 6 Nov"
+  ],
+  [
+   "This quotation is valid to",
+   "Wed 4 Nov"
+  ]
+ ],
+ "datesNote": "The same dates as section 04 of the proposal. Assumes a kickoff on Mon 12 Oct 2026. The date is our assumption and every date moves day for day with your acceptance.",
+ "acceptExtra": [
+  "Add, maintenance after launch (Website Care): &#9744; Stability &#9744; Growth &#9744; Strategic &#9744; Monthly &#9744; Annual",
+  "&#9744; Search &amp; Visibility after launch: SEO + AIO Foundation, RM3,500 a month, minimum three months"
+ ],
+ "terms": [
+  "Validity: 30 days from 5 October 2026, to Wed 4 November 2026. The founding rate and the items included at no charge hold for that period.",
+  "Start: work begins on written acceptance and receipt of the first payment. The kickoff of Mon 12 Oct is assumed and moves day for day with acceptance.",
+  "Prices and SST: all prices are in Malaysian Ringgit at our founding rate, before 8% SST unless SST is shown. SST is its own line on each invoice.",
+  "Billing: 50 / 30 / 20 on either choice. Each invoice after the first is issued only when its gate in section 4.1 of the proposal is delivered and accepted.",
+  "Included at no charge: the brand strategy, and on Choice B the web identity and CI, are part of this engagement only. They carry no cash value and are not deducted if left unused.",
+  "Feedback: two structured rounds, one at the design stage and one on the complete site in the final week, before launch. Work asked for after a written approval is quoted separately.",
+  "Your inputs: the schedule assumes the inputs in section 4.2 of the proposal on their dates and consolidated feedback within two working days. Late inputs move every date day for day.",
+  "Deadline guarantee: as on our price list, if we miss the committed delivery date you receive a full refund of the website fee. The date is committed in writing at kickoff and holds when the inputs in section 4.2 of the proposal arrive on time.",
+  "Content: you confirm that you hold the rights to the text, photography and film you supply.",
+  "Third party costs: hosting, the domain, typeface licences, your mailing platform and any paid service are billed at cost or paid by you direct to the vendor.",
+  "Ownership: the code, the content, the strategy, the identity files and all accounts transfer to you in full on final payment.",
+  "Confidentiality: both parties keep shared information confidential. Governed by the laws of Malaysia.",
+  "Scope, the calendar and the tick checklist live in the proposal for Yacht Style Arabia of 5 October 2026. The two documents are read together."
+ ],
+ "invoice": {
+  "choice": "B",
+  "splitIndex": 0,
+  "terms": "50% to begin",
+  "dueText": "Fri 9 Oct 2026",
+  "subject": "Heart Media Group · Yacht Style Arabia · Choice B · Corporate Website · 50% to begin",
+  "rowTitle": "Choice B · The Flagship · Corporate Website / E-commerce · 50% to begin",
+  "rowSub": "Corporate Website / E-commerce, RM20,000 before SST at the founding rate (list RM40,000), 15 pages and more, and the editorial CMS in English and Arabic, RM5,000 (original RM10,000), with Brand Strategy · Full and the web identity and CI for the Arabia title included at no charge, complete Fri 30 Oct 2026 and live Fri 6 Nov 2026. This invoice: 50% of the fee.",
+  "scope": [
+   "Brand Strategy · Full, included",
+   "Web identity and CI for the Arabia title, included",
+   "Sitemap, wireframes, custom design system",
+   "15 pages and more, in English and Arabic, true right to left",
+   "Multi-user CMS with roles",
+   "Lead generation, integrations, CRM",
+   "Testing, launch on yachtstylearabia.com",
+   "Handover session, editor guide, training"
+  ],
+  "payTerms": "Choice B: 50% to begin, on written acceptance, by Fri 9 Oct 2026. The 30% when the complete site is on staging (MYR8,100.00, Fri 30 Oct 2026) and the 20% on delivery (MYR5,400.00, Fri 6 Nov 2026), each including 8% SST, are invoiced separately.",
+  "expect": {
+   "net": 12500,
+   "sst": 1000,
+   "amount": 13500
+  }
+ },
+ "layout": [
+  [
+   "head",
+   "value"
+  ],
+  [
+   "compare"
+  ],
+  [
+   "A"
+  ],
+  [
+   "B"
+  ],
+  [
+   "payA",
+   "payB",
+   "accept"
+  ],
+  [
+   "included"
+  ],
+  [
+   "outside"
+  ],
+  [
+   "terms"
+  ],
+  [
+   "dates",
+   "bank",
+   "sign"
+  ]
+ ]
+};
+/* =============================================================== */
+
+(function(){
+  var rate=DOC.sstRate;
+  function r2(n){ return Math.round(n*100)/100; }
+  function n2(n){ return Number(n).toLocaleString('en-MY',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+  function rm0(n){ return 'RM'+Number(n).toLocaleString('en-MY',{maximumFractionDigits:0}); }
+  function rmx(n){ return (Math.round(n)===n)?rm0(n):'RM'+n2(n); }
+  function myr(n){ return 'MYR'+n2(n); }
+  function dLong(s){ var p=s.split('-'); return new Date(+p[0],+p[1]-1,+p[2]).toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'}); }
+  function esc(s){ return (''+s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  function ph(s){ return esc(s).replace(/\[([^\]]+)\]/g,'<span class="placeholder">[$1]</span>'); }
+  function err(m){ if(window.console) console.error('Yacht Style Arabia quotation '+DOC.quote.no+': '+m); }
+
+  /* ---- sums per choice, computed from the lines and checked against the proposal ---- */
+  DOC.choices.forEach(function(c){
+    c.subtotal=r2(c.lines.reduce(function(a,l){return a+(l.net||0);},0));
+    c.sst=r2(c.subtotal*rate); c.total=r2(c.subtotal+c.sst);
+    c.pay=c.split.map(function(sp){ var net=r2(c.subtotal*sp.pct/100); var sst=r2(net*rate); return {pct:sp.pct,label:sp.label,due:sp.due,net:net,sst:sst,amount:r2(net+sst)}; });
+    c.paySum=r2(c.pay.reduce(function(a,p){return a+p.amount;},0));
+    c.payNet=r2(c.pay.reduce(function(a,p){return a+p.net;},0));
+    c.paySst=r2(c.pay.reduce(function(a,p){return a+p.sst;},0));
+    c.listSum=r2(c.lines.reduce(function(a,l){ return a+(l.list||l.listValue||0); },0));
+    var e=c.expect;
+    var ok=c.subtotal===e.subtotal&&c.sst===e.sst&&c.total===e.total&&c.pay.length===e.pay.length
+      &&c.pay.every(function(p,i){return p.amount===e.pay[i];})&&c.paySum===c.total&&c.payNet===c.subtotal&&c.paySst===c.sst
+      &&c.split.reduce(function(a,s){return a+s.pct;},0)===100&&c.listSum===c.list;
+    if(!ok) err(c.name+' figures do not match the proposal');
+    c.lines.forEach(function(l){ if(l.list && l.net*2!==l.list) err(l.d+': the struck list price is not double the real price'); });
+  });
+  var A=DOC.choices[0], B=DOC.choices[1];
+  /* package value, section 6.1 of the proposal: the fee plus the worth of what is included at no charge */
+  var V=DOC.value; function vsum(rows){ return rows.reduce(function(a,r){return a+r[1];},0); }
+  var VA=vsum(V.A), VB=vsum(V.B);
+  if(VA!==V.expect.A||VB!==V.expect.B||V.A[0][1]+V.A[1][1]!==A.subtotal||V.B[0][1]+V.B[1][1]!==B.subtotal) err('the package value does not match section 6.1 of the proposal');
+  var I=DOC.invoice, invC=DOC.choices.filter(function(c){return c.key===I.choice;})[0], bill=invC.pay[I.splitIndex];
+  if(bill.net!==I.expect.net||bill.sst!==I.expect.sst||bill.amount!==I.expect.amount) err('the invoice does not match the proposal');
+  window.__BM_CHECK={
+    A:{subtotal:A.subtotal,sst:A.sst,total:A.total,list:A.listSum,pay:A.pay.map(function(p){return p.amount;}),payNet:A.pay.map(function(p){return p.net;}),paySst:A.pay.map(function(p){return p.sst;})},
+    B:{subtotal:B.subtotal,sst:B.sst,total:B.total,list:B.listSum,pay:B.pay.map(function(p){return p.amount;}),payNet:B.pay.map(function(p){return p.net;}),paySst:B.pay.map(function(p){return p.sst;})},
+    invoice:{net:bill.net,sst:bill.sst,amount:bill.amount},
+    value:{A:VA,B:VB}
+  };
+
+  function logo(){ return '<span class="blogo"><img class="wm" src="../bm-logo-blue.png" alt="Brand Method"></span>'; }
+  function coName(){ return esc(DOC.company.name)+' ('+esc(DOC.company.reg)+')'; }
+  function coAddr(){ return DOC.company.addr.map(esc).join('<br>'); }
+  function page(inner,n,tot,label){ return '<div class="page"><div class="page-body">'+inner+'</div><div class="page-num"><span>'+esc(label)+'</span><span>Page '+n+' / '+tot+'</span></div></div>'; }
+  function pages(list,label){ return list.map(function(inner,i){ return page(inner,i+1,list.length,label); }).join(''); }
+  function billTo(){ var c=DOC.client; return '<b>'+esc(c.name)+'</b><br><span class="muted">'+esc(c.attn)+'</span><br><span class="muted">'+c.addr.map(ph).join('<br>')+'</span><br><span class="muted">'+esc(c.email)+'</span>'; }
+  function bankLines(){ var k=DOC.bank; return 'Bank = '+esc(k.bank)+'<br>Name = '+esc(k.name)+'<br>Account Number = '+esc(k.acc)+'<br>Swift code = '+esc(k.swift)+'<br>Payment reference = '+esc(DOC.payRef)+'<br>Billing email = '+esc(k.billing); }
+
+  /* ---------------- INVOICE (Choice B, payment to begin) ---------------- */
+  function invoiceHTML(){
+    var scope='<ul class="ck-ul" style="margin-top:8px">'+I.scope.map(function(x){ return '<li class="ckli"><span class="ckprint"></span>'+esc(x)+'</li>'; }).join('')+'</ul>';
+    var rows='<tr><td>1</td><td><span class="it-title">'+esc(I.rowTitle)+'</span>'
+      +'<div class="sec" style="color:var(--ink-soft);margin-top:4px">'+esc(I.rowSub)+'</div></td>'
+      +'<td class="r">1.00</td><td class="r">'+n2(bill.net)+'</td><td class="r">'+n2(bill.net)+'</td></tr>';
+    var lbl='Invoice · '+I.terms+' · '+DOC.quote.no;
+    var p1='<div class="inv-top"><div><div>'+logo()+'</div>'
+        +'<div class="inv-co"><b>'+coName()+'</b><br>'+coAddr()+'<div class="web">'+esc(DOC.company.web)+'</div></div></div>'
+      +'<div class="inv-right"><div class="t">Invoice</div><div class="no"># '+ph('[Invoice number to confirm in Zoho]')+'</div>'
+        +'<div class="bd-l">Balance Due</div><div class="bd-v">'+myr(bill.amount)+'</div></div></div>'
+      +'<div class="inv-parties"><div class="inv-billto">'+billTo()+'</div>'
+        +'<div class="inv-meta"><div class="row"><span class="k">Invoice Date :</span><span>'+ph('[Issue date to confirm]')+'</span></div>'
+          +'<div class="row"><span class="k">Terms :</span><span>'+esc(I.terms)+'</span></div>'
+          +'<div class="row"><span class="k">Due Date :</span><span>'+esc(I.dueText)+'</span></div>'
+          +'<div class="row"><span class="k">Quotation :</span><span>'+esc(DOC.quote.no)+'</span></div></div></div>'
+      +'<div class="inv-subject"><span class="k">Subject :</span><div class="v">'+esc(I.subject)+'</div></div>'
+      +'<table class="zt"><thead><tr><th class="n">#</th><th>Description</th><th class="r">Qty</th><th class="r">Rate</th><th class="r">Amount</th></tr></thead><tbody>'+rows+'</tbody></table>'
+      +'<div class="ztotals"><div class="row"><span>Sub Total</span><span class="num">'+n2(bill.net)+'</span></div>'
+        +'<div class="row sst"><span>SST 8%</span><span class="num">'+n2(bill.sst)+'</span></div>'
+        +'<div class="row total"><span>Total</span><span class="num">'+myr(bill.amount)+'</span></div>'
+        +'<div class="row bal"><span>Balance Due</span><span class="num">'+myr(bill.amount)+'</span></div></div>';
+    var p2='<div class="sect" style="margin-top:0"><div class="h">Scope of this payment to begin</div>'+scope+'</div>'
+      +'<div class="thanks" style="margin-top:22px">Thanks for your business.</div>'
+      +'<div class="pay-terms"><span class="lbl">Payment Terms:</span><br>'+esc(I.payTerms)+'<br><br>'
+        +'<span class="lbl">Bank Account Details:</span>'
+        +'<div class="bank-lines">'+bankLines()+'</div></div>'
+      +'<div class="zfoot"><span>'+coName()+' · '+esc(DOC.company.web)+'</span><span>Reference draft for the official Zoho invoice.</span></div>';
+    return pages([p1,p2],lbl);
+  }
+
+  /* ---------------- QUOTATION ---------------- */
+  function linesHTML(c){
+    var rows=c.lines.map(function(l){
+      var scope=l.scope?'<div class="scope">'+l.scope.map(function(s){return '<span>'+esc(s)+'</span>';}).join('')+'</div>':'';
+      var listCell, rateCell, amtCell;
+      if(l.net===null){ listCell=''; rateCell='<span class="tc" style="color:var(--ink-soft);background:#EFEFEA">'+esc(l.chip)+'</span>'; amtCell='<span class="num" style="color:var(--ink-faint)">RM0</span>'; }
+      else if(l.net===0){ listCell=l.listText?'<span class="plist">'+esc(l.listText)+'</span>':''; rateCell='<span class="inclchip">'+esc(l.chip)+'</span>'; amtCell='<span class="num">RM0</span>'; }
+      else if(l.list){ listCell='<span class="num lp">'+rm0(l.list)+'</span>'; rateCell='<span class="offchip">'+Math.round(100*(1-l.net/l.list))+'% OFF</span>'; amtCell='<span class="num">'+rmx(l.net)+'</span>'; }
+      else { listCell='<span class="plist">'+esc(l.listText)+'</span>'; rateCell='<span class="nolist">'+esc(l.rateNote)+'</span>'; amtCell='<span class="num">'+rmx(l.net)+'</span>'; }
+      return '<tr'+(scope?' class="hasscope"':'')+'><td><div class="desc">'+esc(l.d)+'</div><div class="pk">'+esc(l.pk)+'</div></td><td class="r">'+listCell+'</td><td class="r">'+rateCell+'</td><td class="r">'+amtCell+'</td></tr>'
+        +(scope?'<tr class="scr"><td colspan="4">'+scope+'</td></tr>':'');
+    }).join('');
+    var lst=c.listStrike?'<span class="num lp">'+rm0(c.list)+'</span>':'<span class="num plain">'+rm0(c.list)+'</span>';
+    return '<table class="lines"><thead><tr><th>Description</th><th class="r">List price</th><th class="r">Rate</th><th class="r">Amount</th></tr></thead><tbody>'+rows+'</tbody></table>'
+      +'<div class="totals"><div class="row lst"><span>'+esc(c.listNote)+'</span>'+lst+'</div>'
+        +(c.listStrike&&c.list>c.subtotal?'<div class="row disc"><span>Discount, '+Math.round(100*(c.list-c.subtotal)/c.list)+'% &middot; '+esc(c.discNote||'founding rate, applied once')+'</span><span class="num">'+rmx(c.list-c.subtotal)+' off</span></div>':'')
+        +'<div class="row sub"><span>Subtotal, before SST</span><span class="num">'+rmx(c.subtotal)+'</span></div>'
+        +'<div class="row sst"><span>SST 8%</span><span class="num">'+rmx(c.sst)+'</span></div>'
+        +'<div class="row grand"><span>Total, '+esc(c.name.split(' · ')[0])+'</span><span class="num">'+rmx(c.total)+'</span></div></div>';
+  }
+  function choiceHead(c){ return '<div class="choice-h'+(c.rec?'':' a')+'"><span class="ct">'+esc(c.name)+'</span><span class="cs '+(c.rec?'rec':'alt')+'">'+(c.rec?'Recommended':(c.tag||'Choice A'))+'</span></div>'
+      +'<div style="font-size:12px;color:var(--ink-soft);margin-top:5px"><b style="color:var(--ink)">'+esc(c.pkg)+'.</b> '+esc(c.headNote)+' '+rmx(c.subtotal)+' before 8% SST, '+rmx(c.total)+' with SST.</div>'
+      +'<div class="frrow">'+c.chips.map(function(ch){ return '<span class="'+(ch[1]==='off'?'offchip':'frchip')+'">'+esc(ch[0])+'</span>'; }).join('')+'</div>'; }
+  function payTable(c){
+    var rows=c.pay.map(function(x){
+      return '<tr><td><b>'+x.pct+'%</b></td><td>'+esc(x.label)+'<span class="sub2">'+esc(x.due)+'</span></td>'
+        +'<td class="r num">'+rmx(x.net)+' + '+rmx(x.sst)+' = <b>'+rmx(x.amount)+'</b></td></tr>';
+    }).join('');
+    return '<table class="mstab pay"><thead><tr><th style="width:60px">Share</th><th>Milestone</th><th class="r">Net + SST = amount</th></tr></thead><tbody>'+rows+'</tbody>'
+      +'<tfoot><tr><td colspan="2" style="font-weight:600;border-top:2px solid var(--ink);padding-top:9px">'+esc(c.name)+' total</td><td class="r num" style="font-weight:700;border-top:2px solid var(--ink);padding-top:9px">'+rmx(c.subtotal)+' + '+rmx(c.sst)+' = '+rmx(c.total)+'</td></tr></tfoot></table>';
+  }
+  function optTable(rows){
+    return '<table class="opt"><thead><tr><th class="l">Line</th><th class="l">What it is</th><th>Before SST</th><th>With SST</th></tr></thead><tbody>'
+      +rows.map(function(r){
+        var cell;
+        if(r.net===null){ cell='<td>'+esc(r.cell)+'</td><td>'+esc(r.cell2||'')+'</td>'; }
+        else { var pre=r.from?'From ':'', suf=r.unit?' '+esc(r.unit):''; cell='<td class="num">'+pre+rmx(r.net)+suf+'</td><td class="num">'+pre+rmx(r2(r.net*(1+rate)))+suf+'</td>'; }
+        return '<tr><td class="l"><b>'+esc(r.name)+'</b></td><td class="l">'+esc(r.what)+'</td>'+cell+'</tr>'; }).join('')
+      +'</tbody></table>';
+  }
+  function datesTable(list){ return '<table class="mstab dates"><tbody>'+list.map(function(r){ return '<tr><td>'+ph(r[0])+'</td><td class="r">'+esc(r[1])+'</td></tr>'; }).join('')+'</tbody></table>'; }
+  function tline(rows,s){ return rows.map(function(r){ return esc(r[0])+' '+rm0(r[1]); }).join(', ')+': '+rm0(s.net)+' before SST, SST '+rm0(s.sst)+', '+rm0(s.total)+' with SST.'; }
+
+  function quotationHTML(){
+    var lbl='Quotation · '+DOC.quote.no;
+    var blocks={};
+    blocks.head='<div class="doc-head"><div>'+logo()+'<div class="meta"><b>'+coName()+'</b><br>'+coAddr()+'<br>'+esc(DOC.company.web)+'</div></div>'
+      +'<div class="doc-type"><div class="lbl">Quotation</div><div class="sub"><b>'+esc(DOC.quote.no)+'</b><br>Issued '+dLong(DOC.quote.date)+'<br>Valid until Wed '+dLong(DOC.quote.valid)+'<br>MYR</div></div></div>'
+      +'<div class="kv3"><div class="party"><div class="k">Quoted to</div><div class="v">'+billTo()+'</div></div>'
+        +'<div class="party"><div class="k">Project</div><div class="v"><b>'+esc(DOC.project)+'</b><br><span class="muted">'+esc(DOC.projectSub)+'</span></div></div>'
+        +'<div class="party"><div class="k">Prepared by</div><div class="v"><b>Brand Method</b><br><span class="muted">Muhammad Bazil bin Che Rozenan<br>Brand Strategist<br>'+esc(DOC.company.email)+'<br>'+esc(DOC.company.web)+'</span></div></div></div>'
+      +'<div class="msum"><div class="mh">Summary</div><div class="mg">'
+        +'<div><div class="mk">Recommended</div><div class="mv"><b>'+esc(B.name)+'</b><br>'+esc(B.pkg)+', '+esc(B.span)+'</div></div>'
+        +'<div><div class="mk">Total with SST</div><div class="mv"><b>'+rmx(B.total)+'</b><br>'+rmx(B.subtotal)+' + SST '+rmx(B.sst)+(B.listStrike?' · list <s>'+rm0(B.list)+'</s>':' · item prices '+rm0(B.list))+'</div></div>'
+        +'<div><div class="mk">The other choice</div><div class="mv"><b style="color:var(--alt)">'+rmx(A.total)+'</b><br>'+esc(A.name)+', with SST</div></div></div>'
+        +'<div class="ml">'+DOC.summaryLine+'</div></div>';
+    function vline(rows){ return rows.map(function(r){ return esc(r[0])+' '+rm0(r[1]); }).join(', '); }
+    blocks.value='<div class="sect"><div class="h">Package value<small>The same figures as section 6.1 of the proposal: the website at the founding rate, the editorial CMS, and the worth of what is included at no charge.</small></div>'
+        +'<div class="bline"><b>'+esc(B.name)+', recommended:</b> '+vline(V.B)+'. '+rm0(VB)+' of work for '+rm0(B.subtotal)+', '+rmx(B.total)+' with SST.</div>'
+        +'<div class="bline a"><b>'+esc(A.name)+':</b> '+vline(V.A)+'. '+rm0(VA)+' of work for '+rm0(A.subtotal)+', '+rmx(A.total)+' with SST.</div></div>';
+    blocks.compare='<div class="sect"><div class="h">The two choices at a glance</div>'
+        +'<table class="cmp"><thead><tr><th></th><th class="a">'+esc(A.name)+'</th><th class="b">'+esc(B.name)+' · recommended</th></tr></thead><tbody>'
+        +DOC.compare.map(function(r){ return '<tr><td class="k">'+esc(r[0])+'</td><td>'+esc(r[1])+'</td><td class="b">'+esc(r[2])+'</td></tr>'; }).join('')+'</tbody></table></div>';
+    blocks.A=choiceHead(A)+linesHTML(A);
+    blocks.B=choiceHead(B)+linesHTML(B);
+    blocks.payA='<div class="sect"><div class="h">Payment schedule · '+esc(A.name)+'<small>'+esc(A.payNote)+'</small></div>'+payTable(A)+'</div>';
+    blocks.payB='<div class="sect"><div class="h">Payment schedule · '+esc(B.name)+' · recommended<small>'+esc(B.payNote)+'</small></div>'+payTable(B)+'</div>';
+    blocks.included='<div class="sect tight"><div class="h">What is included</div><div class="twocol"><div><div class="party"><div class="k">'+esc(A.name)+' · included</div></div><ul class="tick">'+DOC.includedA.map(function(s){return '<li>'+esc(s)+'</li>';}).join('')+'</ul></div>'
+        +(DOC.addsB.length?'<div><div class="party"><div class="k">'+esc(B.name)+' · everything in A, plus</div></div><ul class="plus">'+DOC.addsB.map(function(s){return '<li>'+esc(s)+'</li>';}).join('')+'</ul></div>':'<div><div class="party"><div class="k">'+esc(DOC.sameScopeNote||'')+'</div></div></div>')+'</div></div>';
+    blocks.outside='<div class="sect"><div class="h">Lines outside the fee <span class="notintotal">Not included in either total</span><small>'+esc(DOC.outsideNote)+'</small></div>'+optTable(DOC.outside)+'</div>';
+    blocks.dates='<div class="sect"><div class="h">Key dates · both choices<small>'+esc(DOC.datesNote)+'</small></div>'+datesTable(DOC.dates)+'</div>';
+    blocks.accept='<div class="sect"><div class="h">How to accept</div><div class="accept">'+DOC.acceptLine+' To begin: <b>'+rmx(B.pay[0].amount)+'</b> on '+esc(B.name)+' (recommended) or <b>'+rmx(A.pay[0].amount)+'</b> on '+esc(A.name)+', '+DOC.acceptTail
+        +'<span class="ax">&#9744; '+esc(B.name)+', '+rmx(B.total)+' with SST (recommended) &nbsp; &#9744; '+esc(A.name)+', '+rmx(A.total)+' with SST</span>'
+        +DOC.acceptExtra.map(function(x){ return '<span class="ax">'+x+'</span>'; }).join('')+'</div></div>';
+    blocks.terms='<div class="sect"><div class="h">Terms</div><ul class="terms">'+DOC.terms.map(function(t){return '<li>'+ph(t)+'</li>';}).join('')+'</ul></div>';
+    var k=DOC.bank;
+    blocks.bank='<div class="sect"><div class="h">Where payments go<small>The same account as section 08 of the proposal.</small></div><div class="bankbox">'
+        +[['All payments payable to',k.payee],['Address',k.addr],['Bank',k.bank],['Account Number',k.acc],['Account Name',k.name],['Swift Code',k.swift],['Payment Reference',DOC.payRef],['Billing Email',k.billing]]
+          .map(function(r){ return '<div class="row"><span class="k">'+esc(r[0])+'</span><span class="v">'+esc(r[1])+'</span></div>'; }).join('')+'</div></div>';
+    blocks.sign='<div class="sect"><div class="h">Approve to begin</div><div class="sign" style="margin-top:22px"><div class="line"><b>For '+esc(DOC.company.name)+'</b>Muhammad Bazil bin Che Rozenan · Signature · Date</div><div class="line"><b>Accepted by the client</b>Name and company · Position · Signature · Date and company stamp</div></div></div>'
+      +'<div class="qfoot">'+coName()+' · '+coAddr().replace(/<br>/g,' ')+' · '+esc(DOC.company.web)+'<br>Thank you for considering Brand Method.</div>';
+
+    var where={}; DOC.layout.forEach(function(pg,i){ pg.forEach(function(b){ where[b]=i+1; }); });
+    var keyOf={SIGN:'sign',PAY:'bank',OUT:'outside',TERMS:'terms'};
+    var list=DOC.layout.map(function(pg){ return pg.map(function(b){ if(!(b in blocks)) err('unknown block '+b); return blocks[b]; }).join(''); });
+    Object.keys(blocks).forEach(function(b){ if(!(b in where)) err('block '+b+' is not placed on any page'); });
+    list=list.map(function(h){ return h.replace(/\{\{(\w+)\}\}/g,function(m,key){ return where[keyOf[key]]||m; }); });
+    return pages(list,lbl);
+  }
+
+  document.getElementById('quotation').innerHTML=quotationHTML();
+  document.getElementById('invoice').innerHTML=invoiceHTML();
+
+  var tabQ=document.getElementById('tabQ'), tabI=document.getElementById('tabI');
+  var qEl=document.getElementById('quotation'), iEl=document.getElementById('invoice');
+  function show(which){
+    var q=which==='q';
+    tabQ.classList.toggle('on',q); tabI.classList.toggle('on',!q);
+    qEl.hidden=!q; iEl.hidden=q;
+    document.body.classList.toggle('show-quotation',q); document.body.classList.toggle('show-invoice',!q);
+  }
+  tabQ.addEventListener('click',function(){show('q');});
+  tabI.addEventListener('click',function(){show('i');});
+  document.getElementById('dl').addEventListener('click',function(){ window.print(); });
+
+  if(window.top===window.self){ document.body.classList.add('bm-standalone'); var bb=document.getElementById('bmBack'); if(bb) bb.addEventListener('click',function(){ if(history.length>1) history.back(); else location.href='../../index.html'; }); }
+})();
+
+</script>
+<script id="bmPdfName">(function(){var t0=document.title;var n=t0.replace(/\s*[··]\s*Brand Method\s*$/,'').replace(/[··]/g,'-').replace(/&amp;/g,'and').replace(/[^\w\- ]+/g,'').trim().replace(/\s+/g,'-').replace(/-+/g,'-');if(!n)n='Brand-Method-Document';window.addEventListener('beforeprint',function(){document.title=n});window.addEventListener('afterprint',function(){document.title=t0});})();</script>
+</body>
+</html>

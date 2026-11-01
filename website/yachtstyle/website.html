@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yacht Style &middot; Current Website &middot; Brand Method</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&family=Geist:wght@400;500;600;700&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F5F7FC;--paper2:#FCFDFF;--ink:#101626;--soft:#4A5468;--faint:#8A93A6;
+    --line:#E2E7F1;--line2:#D6DCEA;--blue:#2536F5;--blue-deep:#1421B8;--wash:#EEF1FE;
+    --ok:#1A8F5A;--warn:#C9941F;--red:#D7263D;--dark:#0E1424;--maxw:none;
+    --jm:#0E5A8A;--jm-deep:#0A4163;--jm-wash:#E7EEF3;--e1:cubic-bezier(.22,.8,.28,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+  body{font-family:"Inter",system-ui,sans-serif;background:var(--paper);color:var(--ink);font-size:16px;line-height:1.62;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+  .mono{font-family:Inter,system-ui,sans-serif}
+  .bmws{position:sticky;top:0;z-index:80}
+
+  .chapnav{border-bottom:1px solid var(--line);background:rgba(245,247,252,.97);position:sticky;top:0;z-index:49;overflow-x:auto;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+  .chapnav-in{display:flex;gap:3px;padding:8px 28px;max-width:var(--maxw);margin:0 auto;white-space:nowrap}
+  .chapnav a{font-family:Inter,system-ui,sans-serif;font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--faint);text-decoration:none;padding:6px 10px;border-radius:8px}
+  .chapnav a:hover{color:var(--ink);background:var(--wash)}
+  .chapnav .ch-no{color:var(--blue-deep);font-weight:700;margin-right:6px}
+
+
+  .eyebrow{font-family:Inter,system-ui,sans-serif;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--blue-deep);display:inline-flex;align-items:center;gap:10px;font-weight:600}
+  .eyebrow::before{content:"";width:28px;height:1px;background:var(--blue);display:inline-block}
+  .hero{padding:50px 0 8px}
+  .hero h1{font-family:"Fraunces",serif;font-weight:500;font-size:clamp(36px,5.6vw,62px);line-height:1.03;letter-spacing:-.02em;margin:18px 0 0}
+  .hero h1 em{font-style:italic;color:var(--jm-deep)}
+  .hero .lede{font-size:clamp(17px,2vw,20px);color:var(--soft);max-width:66ch;margin:20px 0 0}
+  .vrow{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+  .livelinks{margin-top:22px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .livelinks .ll-k{grid-column:1/-1;font-size:12.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--soft)}
+  .livelinks .ll{display:block;padding:14px 16px;background:var(--paper2);border:1px solid var(--line);border-radius:10px;text-decoration:none;transition:border-color .2s,background .2s}
+  .livelinks .ll:hover{border-color:var(--blue-deep);background:#fff}
+  .livelinks .ll b{display:block;font-size:15px;color:var(--blue-deep)}
+  .livelinks .ll span{display:block;margin-top:4px;font-size:13px;color:var(--soft);line-height:1.45}
+  @media(max-width:820px){.livelinks{grid-template-columns:1fr}}
+  .vchip{background:var(--paper2);border:1px solid var(--line);border-radius:999px;padding:8px 15px;font-size:13px;color:var(--soft)}
+  .vchip b{color:var(--ink)}
+  .execsum{margin-top:32px;border:1px solid var(--line);border-radius:16px;background:var(--paper2);padding:26px 28px}
+  .execsum .k{font-family:Inter,system-ui,sans-serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--jm-deep);font-weight:700}
+  .execsum p{margin-top:12px;font-size:16.5px;color:var(--soft)}
+  .execsum p b{color:var(--ink)}
+  .execsum p+p{margin-top:11px}
+
+  section{padding:32px 0}
+  .chapdiv{display:flex;align-items:baseline;gap:18px;padding:46px 0 4px;border-top:1px solid var(--line);margin-top:10px}
+  .cd-no{font-family:"Fraunces",serif;font-weight:600;font-size:38px;color:var(--blue-deep);line-height:1}
+  h2.cd-h{font-family:"Fraunces",serif;font-weight:500;font-size:27px;letter-spacing:-.01em;margin:0}
+  .cd-sub{font-size:15px;color:var(--soft);margin-top:5px}
+  .secmark{display:flex;align-items:center;gap:13px;margin-top:6px}
+  .secicon{width:34px;height:34px;border-radius:9px;background:var(--dark);display:flex;align-items:center;justify-content:center;color:#9FB4FF;flex:none}
+  .secicon svg{width:17px;height:17px}
+  .sec-no{font-family:Inter,system-ui,sans-serif;font-size:12px;color:var(--blue-deep);letter-spacing:.1em;text-transform:uppercase;font-weight:600}
+  h3.sechead{font-family:"Fraunces",serif;font-weight:500;font-size:clamp(25px,3.6vw,37px);line-height:1.08;letter-spacing:-.015em;margin:13px 0 0;max-width:26ch}
+  h3.sub{font-family:"Fraunces",serif;font-weight:500;font-size:22px;margin:30px 0 0}
+  .sec-intro{font-size:16.5px;color:var(--soft);max-width:74ch;margin:15px 0 0}
+  .sec-intro b,.sec-intro strong{color:var(--ink)}
+
+  .grid{display:grid;gap:16px;margin-top:22px}
+  .g2{grid-template-columns:repeat(auto-fit,minmax(290px,1fr))}
+  .g3{grid-template-columns:repeat(auto-fit,minmax(225px,1fr))}
+  .card{background:var(--paper2);border:1px solid var(--line);border-radius:14px;padding:20px 21px}
+  .card .tag{font-family:Inter,system-ui,sans-serif;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--blue-deep);font-weight:700}
+  .card h3{font-family:"Fraunces",serif;font-weight:500;font-size:19px;margin-top:8px}
+  .card p{font-size:14px;color:var(--soft);margin-top:9px;line-height:1.55}
+  .card p b{color:var(--ink)}
+  .card.dark{background:var(--dark);border-color:#232a40;color:#D6DEF2}
+  .card.dark h3{color:#fff}.card.dark p{color:#AEB9D2}.card.dark .tag{color:#9FB4FF}.card.dark p b{color:#fff}
+  .card.jm{border-color:#F7C9CD;background:var(--jm-wash)}
+  .card.jm .tag{color:var(--jm-deep)}
+
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-top:22px}
+  .stat{border:1px solid var(--line);border-radius:13px;background:var(--paper2);padding:16px 18px}
+  .stat .num{font-family:"Fraunces",serif;font-size:28px;font-weight:500;color:var(--blue-deep);line-height:1.05}
+  .stat.bad .num{color:var(--jm-deep)}
+  .stat .lab{font-size:13px;font-weight:600;margin-top:8px}
+  .stat .s{font-size:12px;color:var(--faint);margin-top:3px}
+
+  .goals2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-top:22px}
+  .goal{display:flex;gap:13px;align-items:flex-start;border:1px solid var(--line);border-radius:13px;background:var(--paper2);padding:16px 18px}
+  .goal .gi{width:30px;height:30px;border-radius:8px;background:var(--wash);color:var(--blue-deep);display:flex;align-items:center;justify-content:center;flex:none;font-family:Inter,system-ui,sans-serif;font-size:12px;font-weight:700}
+  .goal b{font-size:15px}.goal p{font-size:13.5px;color:var(--soft);margin-top:4px}
+
+  table{width:100%;border-collapse:separate;border-spacing:0;margin-top:18px;font-size:14px;background:var(--paper2);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  thead th{font-family:Inter,system-ui,sans-serif;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#fff;background:var(--dark)}
+  tr:last-child td{border-bottom:none}
+  td.dim{font-weight:600;white-space:nowrap}
+  td.sc{font-family:Inter,system-ui,sans-serif;color:var(--blue-deep);font-weight:700;white-space:nowrap}
+  tr.hl td{background:var(--jm-wash)}
+  tr.hl td.dim{color:var(--jm-deep)}
+
+  .vtag{font-family:Inter,system-ui,sans-serif;font-size:9.5px;text-transform:uppercase;letter-spacing:.04em;padding:3px 8px;border-radius:6px;font-weight:700;display:inline-block}
+  .vtag.hi{background:rgba(26,143,90,.14);color:var(--ok)}
+  .vtag.lo{background:rgba(201,148,31,.16);color:#9a6f12}
+  .vtag.bad{background:rgba(215,38,61,.12);color:var(--red)}
+
+  .pin{margin-top:22px;border-left:3px solid var(--blue);background:linear-gradient(90deg,rgba(37,54,245,.06),transparent);padding:15px 19px;border-radius:0 12px 12px 0;font-size:15px}
+  .pin b{color:var(--blue-deep)}
+  .pin.warn{border-left-color:var(--warn);background:linear-gradient(90deg,rgba(201,148,31,.09),transparent)}
+  .pin.warn b{color:#9a6f12}
+  .pin.jm{border-left-color:var(--jm);background:linear-gradient(90deg,rgba(249,27,42,.07),transparent)}
+  .pin.jm b{color:var(--jm-deep)}
+
+  .quote{margin-top:22px;border:1px solid var(--line);border-radius:14px;background:var(--paper2);padding:22px 24px}
+  .quote q{font-family:"Fraunces",serif;font-size:20px;line-height:1.4;font-style:italic;color:var(--ink);display:block;overflow-wrap:anywhere;word-break:break-word}
+  .quote .src{font-family:Inter,system-ui,sans-serif;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin-top:12px;display:block}
+
+  .bars{margin-top:22px;display:flex;flex-direction:column;gap:11px}
+  .bar{display:grid;grid-template-columns:150px 1fr 68px;gap:12px;align-items:center;font-size:13.5px}
+  .bar .bn{font-weight:600}
+  .bar .bt{height:15px;border-radius:4px;background:#E7ECF6;overflow:hidden;position:relative}
+  .bar .bf{height:100%;border-radius:4px;background:var(--blue);display:block}
+  .bar.is-jm .bf{background:var(--jm)}
+  .bar .bv{font-family:Inter,system-ui,sans-serif;font-size:12px;font-weight:700;text-align:right;color:var(--soft)}
+  .bar.is-jm .bv{color:var(--jm-deep)}
+
+  .scorewrap{margin-top:22px;border:1px solid var(--line);border-radius:14px;background:var(--paper2);overflow:hidden}
+  .srow{display:grid;grid-template-columns:180px 1fr 92px;gap:14px;align-items:center;padding:13px 18px;border-bottom:1px solid var(--line)}
+  .srow:last-child{border-bottom:0}
+  .srow .sn{font-weight:600;font-size:14.5px}
+  .srow .sn small{display:block;font-weight:400;font-size:12.5px;color:var(--faint);margin-top:2px}
+  .srow .st{height:9px;border-radius:5px;background:#E7ECF6;overflow:hidden}
+  .srow .sf{height:100%;display:block;border-radius:5px}
+  .srow .sv{font-family:Inter,system-ui,sans-serif;font-weight:700;font-size:14px;text-align:right}
+  .sv.g{color:var(--ok)}.sv.a{color:#9a6f12}.sv.r{color:var(--jm-deep)}
+  .sf.g{background:var(--ok)}.sf.a{background:var(--warn)}.sf.r{background:var(--jm)}
+
+  .shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:22px}
+  .shot{border:1px solid var(--line);border-radius:13px;background:var(--paper2);overflow:hidden}
+  .shot img{width:100%;height:auto;max-height:430px;object-fit:cover;object-position:top center;display:block;border-bottom:1px solid var(--line);background:#fff}
+  .shot .cp{padding:11px 14px;font-size:12.5px;color:var(--soft);line-height:1.5}
+  .shot .cp b{color:var(--ink);display:block;font-size:13px;margin-bottom:3px}
+
+  .vl-scroll{overflow-x:auto;border:1px solid var(--line2);border-radius:14px;background:#fff;margin-top:20px}
+  table.vledger{width:100%;border-collapse:separate;border-spacing:0;min-width:1000px;font-size:13.5px;border:0;border-radius:0;margin:0}
+  table.vledger th{text-align:left;padding:12px 14px;background:#0B1020;color:#fff;font-family:Inter,system-ui,sans-serif;font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;font-weight:700;border-right:1px solid rgba(255,255,255,.1)}
+  table.vledger th:last-child{border-right:0}
+  table.vledger td{padding:14px;vertical-align:top;line-height:1.55;color:#3d4048;border-bottom:1px solid rgba(12,18,32,.09);border-right:1px solid rgba(12,18,32,.06)}
+  table.vledger td:last-child{border-right:0}
+  table.vledger tr:last-child td{border-bottom:0}
+  table.vledger tbody tr:nth-child(even) td{background:#FBFBFD}
+  .vl-n{font-family:Inter,system-ui,sans-serif;font-weight:700;color:#9a9ca6;font-size:12px;width:34px}
+  .vl-area{font-weight:700;color:#15161A;min-width:120px}
+  .vl-when{font-family:Inter,system-ui,sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--blue-deep);font-weight:700;white-space:nowrap}
+
+  ul.tick{margin-top:14px;list-style:none;display:flex;flex-direction:column;gap:9px}
+  ul.tick li{position:relative;padding-left:26px;font-size:15px;color:var(--soft)}
+  ul.tick li b{color:var(--ink)}
+  ul.tick li::before{content:"";position:absolute;left:0;top:9px;width:11px;height:11px;border-radius:3px;border:1.6px solid var(--blue);background:var(--wash)}
+  ul.tick.x li::before{border-color:var(--jm);background:var(--jm-wash)}
+
+  .srcs{margin-top:18px;display:flex;flex-direction:column;gap:7px;font-size:13.5px}
+  .srcs a{color:var(--blue-deep);text-decoration:none;border-bottom:1px solid rgba(20,33,184,.28);word-break:break-all}
+  .srcs a:hover{border-bottom-color:var(--blue-deep)}
+
+  footer{padding:34px 0 70px;color:var(--faint);font-size:12px;font-family:Inter,system-ui,sans-serif;text-transform:uppercase;letter-spacing:.05em;border-top:1px solid var(--line);margin-top:30px}
+  .ic{stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+  @media(max-width:720px){
+    .wrap{padding:0 18px}
+    .chapnav-in{padding:8px 16px}
+    section{padding:26px 0}
+    .bar{grid-template-columns:106px 1fr 58px;gap:9px;font-size:12.5px}
+    .srow{grid-template-columns:1fr 74px;gap:9px}
+    .srow .st{grid-column:1/-1;order:3}
+    table:not(.vledger){display:block;overflow-x:auto;white-space:nowrap}
+    .chapdiv{flex-direction:column;gap:4px;padding-top:34px}
+  }
+  /* Phones: the chapter rail was 11px type in a 30px tall target, under the 44px touch minimum.
+     It stays a horizontal scroller, the targets simply get full height and a legible size. */
+  @media (max-width:768px){
+    .chapnav-in{gap:2px;padding:4px 16px}
+    .chapnav a{font-size:12px;min-height:44px;display:inline-flex;align-items:center;padding:0 12px}
+  }
+  /* Phones: the mono labels are set between 9.5px and 11px for a desktop reading of these documents,
+     which is below comfortable on a 390px screen. They are lifted to a floor of 11.5px here, and the
+     hero's live links get a full touch target. Nothing above 768px changes. */
+  @media (max-width:768px){
+    thead th,table.vledger th{font-size:12px}
+    .tag,.vtag,.src,.vl-when,.card .tag,.quote .src{font-size:11.5px}
+    .livelinks .ll{min-height:44px;display:flex;flex-direction:column;justify-content:center}
+    .srcs{gap:0}
+    .srcs a{display:block;padding:11px 0}
+  }
+
+  /* Tables in these documents are built for a desktop reading. Below 900px any of them, not only
+     table.rv, becomes its own horizontal scroller so the page itself never scrolls sideways: the
+     seven column performance table was 770px of min-content inside a 712px column at 768. */
+  @media (max-width:900px){
+    table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}
+  }
+  /* and the small mono chip labels get an 11.5px floor on phones */
+  @media (max-width:768px){
+    .k,.sh,.sl,.slot,.who,.bs-k,.fn-k,.v,.s,small,code{font-size:11.5px}
+  }
+
+  /* Phones: a hard floor for every small label in these documents. The earlier floor used single class selectors and
+     lost to two class rules such as .spec small, and it missed the bare <k> element the plan uses for table keys.
+     Font size only, never SVG text, which is part of a drawn diagram. */
+  @media (max-width:768px){
+    body small, body k, body .k, body .sl, body .slot, body .who, body .bs-k, body .fn-k, body .sh, body .tag, body .vtag, body .src, body .vl-when, body thead th, body .mini-eb, body .swi .m .cr, body .ratio-row .g, body .vc .r.h > div, body .cat, body .own, body .chk .t, body .bshead, body .bshead span, body .pv .r.h, body .pv .r.h > div, body .tk .r.h, body .tk .r.h > div{font-size:11.5px!important}
+  }
+
+  .qa{border:1px solid var(--line);border-radius:12px;background:var(--paper2);padding:16px 18px;margin-top:12px}
+  .qa .qn{font-family:Inter,system-ui,sans-serif;font-size:11px;font-weight:700;color:var(--blue-deep);letter-spacing:.05em}
+  .qa h4{font-family:"Fraunces",serif;font-weight:500;font-size:19px;line-height:1.3;margin:4px 0 8px;color:var(--ink)}
+  .qa .bm{font-size:14px;color:var(--soft);margin-top:4px}
+  .qa .bm b{color:var(--ink)}
+  .qa .my{font-size:14px;color:var(--blue-deep);margin-top:6px;font-style:italic}
+  .qa.star{border-color:var(--blue);box-shadow:0 0 0 1px var(--blue) inset}
+  .agenda{width:100%;border-collapse:collapse;margin-top:18px;font-size:15px}
+  .agenda td{border-top:1px solid var(--line);padding:11px 10px;vertical-align:top}
+  .agenda td:first-child{font-family:Inter,system-ui,sans-serif;font-size:12px;font-weight:700;color:var(--blue-deep);white-space:nowrap;width:92px}
+  .fact{display:inline-block;font-family:Inter,system-ui,sans-serif;font-size:10px;font-weight:700;letter-spacing:.05em;padding:2px 7px;border-radius:4px;background:#E6F4EC;color:#14683F;margin-right:6px;vertical-align:1px}
+  .infer{display:inline-block;font-family:Inter,system-ui,sans-serif;font-size:10px;font-weight:700;letter-spacing:.05em;padding:2px 7px;border-radius:4px;background:#FFF3D6;color:#8A5A00;margin-right:6px;vertical-align:1px}
+  .unk{display:inline-block;font-family:Inter,system-ui,sans-serif;font-size:10px;font-weight:700;letter-spacing:.05em;padding:2px 7px;border-radius:4px;background:#FDE7EA;color:#A3162A;margin-right:6px;vertical-align:1px}
+  .fullshot{border:1px solid var(--line);border-radius:13px;overflow:hidden;background:#fff;margin-top:20px}
+  .fullshot .scroll{max-height:620px;overflow-y:auto}
+  .fullshot img{display:block;width:100%;height:auto}
+  .fullshot .cp{padding:12px 16px;font-size:14px;color:var(--soft);border-top:1px solid var(--line)}
+  .fullshot .cp b{color:var(--ink);display:block}
+  .two{display:grid;grid-template-columns:2.4fr 1fr;gap:14px;align-items:start}
+  @media(max-width:820px){.two{grid-template-columns:1fr}}
+  .linkgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px;margin-top:18px}
+  .linkgrid a{display:block;border:1px solid var(--line);border-radius:10px;background:var(--paper2);padding:11px 14px;text-decoration:none;color:var(--ink);font-size:14px}
+  .linkgrid a b{display:block;color:var(--blue-deep);font-size:14.5px;overflow-wrap:anywhere}
+  .linkgrid a span{color:var(--soft);font-size:13px}
+  .linkgrid a:hover{border-color:var(--blue)}
+  .shots{grid-template-columns:repeat(auto-fit,minmax(330px,1fr))}
+  /* 22 Sep 2026, Bazil: the super admin bar and the section bar copy the MyHero design (Apps/MyHero/bmws.css and shell.css).
+     Design only: markup, links and behaviour are unchanged. assets/bmws.css is a byte-identical copy of the MyHero file. */
+  .bmws{position:sticky;top:0;z-index:80;box-shadow:0 1px 2px rgba(10,12,18,.2)}
+  .chapnav{background:#fff;border-bottom:0;box-shadow:0 1px 2px rgba(10,12,18,.06);-webkit-backdrop-filter:none;backdrop-filter:none;scrollbar-width:none}
+  .chapnav::-webkit-scrollbar{height:0}
+  .chapnav-in{max-width:none;padding:8px 24px;gap:2px}
+  .chapnav a{font-family:"Geist","Instrument Sans",Inter,system-ui,sans-serif;font-size:12.5px;font-weight:500;letter-spacing:0;text-transform:none;border-radius:0;padding:8px 12px;color:#4A4F5A}
+  .chapnav a:hover{background:#EEF0F3;color:#0A0C12}
+  .chapnav .ch-no{display:none}
+  @media print{.bmws,.chapnav{display:none!important}.fullshot .scroll{max-height:none;overflow:visible}}
+
+  .hero h1 em{white-space:nowrap}
+  .chapnav{top:61px}
+  .chapdiv,.vl-sec{scroll-margin-top:118px}
+  @media(max-width:900px){.chapnav{top:51px}.chapdiv,.vl-sec{scroll-margin-top:104px}}
+  @media(max-width:560px){.hero h1 em{white-space:normal}}
+  .wrap{max-width:none;padding:0 28px}
+  @media(max-width:720px){.wrap{padding:0 16px}}
+  .execsum h2{font-family:"Fraunces",serif;font-weight:500;font-size:clamp(24px,3.2vw,34px);line-height:1.1;letter-spacing:-.015em;margin:12px 0 0;max-width:30ch}
+  table.plain{width:100%;border-collapse:separate;border-spacing:0;margin-top:18px;font-size:14px;background:var(--paper2);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  td.sc{white-space:normal;min-width:120px}
+  td.dim{white-space:normal;min-width:130px}
+  .vtag{white-space:nowrap}
+  .rec{display:inline-block;font-family:Inter,system-ui,sans-serif;font-size:10px;font-weight:700;letter-spacing:.05em;padding:2px 7px;border-radius:4px;background:#E7EEF3;color:#0A4163;margin-right:6px;vertical-align:1px}
+  .vl-sec{padding:32px 0 6px}
+  .vl-k{display:block;font-family:Inter,system-ui,sans-serif;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--jm-deep);margin-bottom:10px;font-weight:700}
+  .vl-h2{font-family:"Fraunces",serif;font-size:clamp(26px,3.2vw,40px);line-height:1.12;margin:0 0 12px;font-weight:500}
+  .vl-lede{font-size:16px;line-height:1.6;color:var(--soft);max-width:74ch;margin:0 0 8px}
+  .vl-legend{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 6px}
+  .vl-lg{display:inline-flex;align-items:center;gap:7px;padding:5px 11px}
+  .vl-area small{display:block;margin-top:4px;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:#9a9ca6;font-weight:700}
+  .vl-good{color:#126B45;min-width:200px}
+  .vl-bad{color:#B3261E;min-width:230px}
+  .vl-ev{min-width:200px;font-size:13px}
+  .vl-act{min-width:280px}
+  .vl-act b{color:#15161A}
+  td.vl-when{font-family:Inter,system-ui,sans-serif;font-size:11px;letter-spacing:.04em;color:#6B7280;white-space:nowrap;text-transform:none;font-weight:600}
+  .vd{display:inline-block;font-family:Inter,system-ui,sans-serif;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:4px 9px;border-radius:999px;border:1px solid;white-space:nowrap}
+  .vd.fix{background:#FEF4E2;border-color:#EFD09B;color:#8A5B08}
+  .vd.rem{background:#FDECEA;border-color:#F0B6AE;color:#B3261E}
+  .vd.edit{background:#EEF1FE;border-color:#C3CBF7;color:#1421B8}
+  .vd.keep{background:#E4F4EC;border-color:#A8D9C0;color:#126B45}
+  .vd.build{background:#F3EAFE;border-color:#D6C2F3;color:#5B21B6}
+  .vl-foot{margin-top:16px;padding:14px 16px;border-radius:12px;background:#F5F6FA;border-left:3px solid var(--jm-deep);font-size:14px;line-height:1.6;color:#3d4048}
+  .scorebig{display:flex;gap:26px;align-items:center;flex-wrap:wrap;margin-top:18px;border:1px solid var(--line);border-radius:14px;background:var(--paper2);padding:20px 22px}
+  .scorebig .n{font-family:"Fraunces",serif;font-size:64px;font-weight:500;color:var(--jm-deep);line-height:1}
+  .scorebig .n small{font-size:22px;color:var(--faint)}
+  .scorebig .t{flex:1;min-width:240px;font-size:14.5px;color:var(--soft)}
+  .scorebig .t b{color:var(--ink)}
+  .notcap{margin-top:18px;border:1px dashed var(--line2);border-radius:12px;padding:14px 18px;font-size:14px;color:var(--soft);background:var(--paper2)}
+  .notcap b{color:var(--ink)}
+  footer.docfoot{padding:30px 0 60px;color:var(--faint);font-size:12px;border-top:1px solid var(--line);margin-top:30px;letter-spacing:.04em;text-transform:uppercase}
+  @media print{.vl-scroll{overflow:visible}table.vledger{min-width:0}}
+</style>
+</head>
+<body>
+<nav class="chapnav"><div class="chapnav-in"><a href="#c00"><span class="ch-no">00</span>Live links</a><a href="#c01"><span class="ch-no">01</span>Home page</a><a href="#c02"><span class="ch-no">02</span>Sections</a><a href="#c03"><span class="ch-no">03</span>Articles</a><a href="#c04"><span class="ch-no">04</span>Not captured</a><a href="#c05"><span class="ch-no">05</span>The audit</a></div></nav>
+<div class="wrap">
+
+  <header class="hero">
+    <span class="eyebrow">Current Website &middot; Brand Method</span>
+    <h1>Yacht Style, <em>as it stands</em></h1>
+    <p class="lede">Every Yacht Style web address and channel in one place, with captures of the key pages of yachtstyle.co taken on
+      1 October 2026. Yacht Style Arabia will be a new site on its own domain. This page records what exists today, so the audit
+      and the plan can always be read against what was measured.</p>
+    <div class="vrow">
+      <div class="vchip">Captured <b>1 Oct 2026</b></div>
+      <div class="vchip">Current site <b>yachtstyle.co</b></div>
+      <div class="vchip">New domain <b>yachtstylearabia.com</b>, registered 1 Oct 2026</div>
+      <div class="vchip">Layout <b>1440 px</b> desktop</div>
+    </div>
+    <div class="livelinks">
+      <span class="ll-k">Open the live site beside this page</span>
+      <a class="ll" href="https://yachtstyle.co/" target="_blank" rel="noopener noreferrer"><b>yachtstyle.co</b><span>the current Yacht Style site</span></a>
+      <a class="ll" href="https://yachtstyle.co/news/" target="_blank" rel="noopener noreferrer"><b>yachtstyle.co/news</b><span>the page sent with the brief</span></a>
+      <a class="ll" href="audit.html"><b>Brand &amp; Website Audit</b><span>what we measured, and the findings</span></a>
+    </div>
+  </header>
+
+<div class="chapdiv" id="c00"><div class="cd-no">00</div><div><h2 class="cd-h">Live links</h2><div class="cd-sub">Every address, one click each. Each opens in a new tab</div></div></div>
+<section><div class="secmark"><span class="secicon"><svg viewBox="0 0 24 24" class="ic"><path d="M12 3v18M3 12h18"/><circle cx="12" cy="12" r="9"/></svg></span><span class="sec-no">00.1 &middot; The site</span></div><h3 class="sechead">yachtstyle.co, section by section</h3><p class="sec-intro">The main menu has eleven items. Marinas opens twelve regional pages. All read on 1 October 2026.</p><div class="linkgrid"><a href="https://yachtstyle.co/" target="_blank" rel="noopener noreferrer"><b>yachtstyle.co</b><span>Home: slider, news, reviews, leaders, videos, charter, lifestyle, destination, marinas, specials, logbook, Instagram</span></a><a href="https://yachtstyle.co/news/" target="_blank" rel="noopener noreferrer"><b>News</b><span>The page sent with the brief. 2,543 posts in this category</span></a><a href="https://yachtstyle.co/reviews/" target="_blank" rel="noopener noreferrer"><b>Reviews</b><span>Feature length yacht reviews, 222 posts</span></a><a href="https://yachtstyle.co/leaders/" target="_blank" rel="noopener noreferrer"><b>Leaders</b><span>Interviews and columns, 275 posts</span></a><a href="https://yachtstyle.co/videos/" target="_blank" rel="noopener noreferrer"><b>Videos</b><span>YouTube films embedded on the page</span></a><a href="https://yachtstyle.co/charter/" target="_blank" rel="noopener noreferrer"><b>Charter</b><span>Charter stories, 64 posts. No booking or enquiry path</span></a><a href="https://yachtstyle.co/lifestyle/" target="_blank" rel="noopener noreferrer"><b>Lifestyle</b><span>Watches, hotels, travel, 398 posts</span></a><a href="https://yachtstyle.co/destination/" target="_blank" rel="noopener noreferrer"><b>Destination</b><span>Cruising grounds, 15 posts</span></a><a href="https://yachtstyle.co/marinas/" target="_blank" rel="noopener noreferrer"><b>Marinas</b><span>Directory of marinas in twelve Asian regions</span></a><a href="https://yachtstyle.co/malaysia/" target="_blank" rel="noopener noreferrer"><b>Marinas, Malaysia</b><span>One of the twelve regional directory pages</span></a><a href="https://yachtstyle.co/specials/" target="_blank" rel="noopener noreferrer"><b>Specials</b><span>Awards, Top 100 Superyachts, Asia&rsquo;s Yachting Leaders, catamaran specials, as downloads</span></a><a href="https://yachtstyle.co/logbook/" target="_blank" rel="noopener noreferrer"><b>Logbook</b><span>Calendar of 120 shows, regattas and industry events</span></a></div><div class="secmark"><span class="secicon"><svg viewBox="0 0 24 24" class="ic"><path d="M12 3v18M3 12h18"/><circle cx="12" cy="12" r="9"/></svg></span><span class="sec-no">00.2 &middot; Magazine, subscriptions and sales</span></div><h3 class="sechead">Where a reader subscribes and an advertiser asks</h3><div class="linkgrid"><a href="https://yachtstyle.co/yacht-style-issue-91/" target="_blank" rel="noopener noreferrer"><b>Issue 91, page-turn reader</b><span>The newest issue, announced 3 September 2026. One page per issue back to issue 59</span></a><a href="https://www.magzter.com/SG/Lux-Inc-Media/Yacht-Style/Sports/" target="_blank" rel="noopener noreferrer"><b>Magzter</b><span>The e-magazine, publisher name Lux Inc Media</span></a><a href="https://yachtstyle.co/subscribe/" target="_blank" rel="noopener noreferrer"><b>Subscribe</b><span>Print subscription in eight currencies, by card, PayPal or bank transfer</span></a><a href="https://yachtstyle.co/shop/" target="_blank" rel="noopener noreferrer"><b>Shop</b><span>One product: Subscribe now</span></a><a href="https://yachtstyle.co/newsletter/" target="_blank" rel="noopener noreferrer"><b>Newsletter</b><span>Sign up form: name, email, phone, country</span></a><a href="https://yachtstyle.co/about/" target="_blank" rel="noopener noreferrer"><b>About</b><span>The title in its own words</span></a><a href="https://yachtstyle.co/advertising/" target="_blank" rel="noopener noreferrer"><b>Advertising</b><span>Media kit by email to the publisher</span></a><a href="https://yachtstyle.co/contact/" target="_blank" rel="noopener noreferrer"><b>Contact</b><span>Form, publisher and managing editor</span></a><a href="https://yachtstyle.co/for-sale/" target="_blank" rel="noopener noreferrer"><b>For Sale</b><span>Shows &ldquo;Coming soon&rdquo;</span></a><a href="https://yachtstyle.co/sitemap_index.xml" target="_blank" rel="noopener noreferrer"><b>Sitemap</b><span>3,523 posts, 79 pages, 9 categories</span></a></div><div class="secmark"><span class="secicon"><svg viewBox="0 0 24 24" class="ic"><path d="M12 3v18M3 12h18"/><circle cx="12" cy="12" r="9"/></svg></span><span class="sec-no">00.3 &middot; Channels</span></div><h3 class="sechead">Social, video and the e-magazine</h3><div class="vl-scroll"><table class="vledger"><thead><tr><th>Channel</th><th>Address</th><th>What we read</th><th>Read</th></tr></thead><tbody><tr><td>Instagram</td><td><a href="https://www.instagram.com/yacht.style/" target="_blank" rel="noopener noreferrer">@yacht.style</a></td><td>52K followers. <span class="unk">UNVERIFIED</span> on 1 Oct: the figure is from our reading of 30 Sep 2026</td><td>30 Sep 2026</td></tr><tr><td>Facebook</td><td><a href="https://www.facebook.com/YachtStyle.co/" target="_blank" rel="noopener noreferrer">facebook.com/YachtStyle.co</a></td><td>Linked from the header and footer. Follower count not read (login wall)</td><td>1 Oct 2026</td></tr><tr><td>YouTube</td><td><a href="https://www.youtube.com/channel/UCQUhyTl-EUx0ViMXY5oVb1g" target="_blank" rel="noopener noreferrer">Yacht Style channel</a></td><td>608 subscribers</td><td>1 Oct 2026</td></tr><tr><td>Magzter</td><td><a href="https://www.magzter.com/SG/Lux-Inc-Media/Yacht-Style/Sports/" target="_blank" rel="noopener noreferrer">magzter.com, Yacht Style</a></td><td>Linked from the header. The page refused our fetch (HTTP 403), not captured</td><td>1 Oct 2026</td></tr><tr><td>Newsletter</td><td><a href="https://yachtstyle.co/newsletter/" target="_blank" rel="noopener noreferrer">yachtstyle.co/newsletter</a></td><td>Sign up form on its own page and in the footer. No archive of past issues</td><td>1 Oct 2026</td></tr><tr><td>News feed</td><td><a href="https://yachtstyle.co/feed/" target="_blank" rel="noopener noreferrer">yachtstyle.co/feed</a></td><td>RSS feed, live</td><td>1 Oct 2026</td></tr><tr><td>LinkedIn</td><td>Not linked from yachtstyle.co</td><td>The header and footer carry Facebook, YouTube and Instagram only</td><td>1 Oct 2026</td></tr></tbody></table></div><div class="secmark"><span class="secicon"><svg viewBox="0 0 24 24" class="ic"><path d="M12 3v18M3 12h18"/><circle cx="12" cy="12" r="9"/></svg></span><span class="sec-no">00.4 &middot; Arabia and the Middle East today</span></div><h3 class="sechead">What exists for the new edition</h3><div class="vl-scroll"><table class="vledger"><thead><tr><th>What</th><th>Address</th><th>Status on 1 October 2026</th></tr></thead><tbody><tr><td>The new domain</td><td><a href="http://yachtstylearabia.com/" target="_blank" rel="noopener noreferrer">yachtstylearabia.com</a></td><td><span class="fact">FACT</span> Registered 1 Oct 2026, 03:55 UTC, at GoDaddy. Name servers NS53 and NS54.DOMAINCONTROL.COM. It resolves to the registrar&rsquo;s parking page. Nothing is live yet and it has no HTTPS certificate</td></tr><tr><td>An Arabia section on yachtstyle.co</td><td>None</td><td><span class="fact">FACT</span> No menu item, category, tag or page for Arabia, the Gulf or the Middle East. yachtstyle.co/tag/dubai returns page not found</td></tr><tr><td>Gulf stories in the archive</td><td><a href="https://yachtstyle.co/?s=dubai" target="_blank" rel="noopener noreferrer">yachtstyle.co, search &ldquo;dubai&rdquo;</a></td><td><span class="fact">FACT</span> 224 of 3,525 posts match &ldquo;Dubai&rdquo;, 180 match &ldquo;Middle East&rdquo;, 39 &ldquo;Saudi&rdquo;, 38 &ldquo;Abu Dhabi&rdquo;, 24 &ldquo;Qatar&rdquo;</td></tr><tr><td>The newest Gulf story</td><td><a href="https://yachtstyle.co/uae-yachting-alliance-formed/" target="_blank" rel="noopener noreferrer">UAE Yachting Alliance unites three emirates</a></td><td><span class="fact">FACT</span> Published 1 October 2026, in News</td></tr><tr><td>The acquisition story</td><td><a href="https://yachtstyle.co/dubai-based-itp-media-group-acquires-heart-media-group-in-major-asia-expansion/" target="_blank" rel="noopener noreferrer">ITP Media Group Acquires Yacht Style</a></td><td><span class="fact">FACT</span> Published 8 September 2026</td></tr><tr><td>Gulf shows in the Logbook</td><td><a href="https://yachtstyle.co/logbook/" target="_blank" rel="noopener noreferrer">yachtstyle.co/logbook</a></td><td><span class="fact">FACT</span> The Pre-Owned Boat Show, Dubai, 31 Oct to 2 Nov; Qatar Boat Show, 4 to 7 Nov; Abu Dhabi International Boat Show, 19 to 22 Nov; and a Dubai International Boat Show banner, 25 to 29 Nov 2026</td></tr><tr><td>Gulf marinas</td><td>None</td><td><span class="fact">FACT</span> The marina directory covers twelve regions, all in East and Southeast Asia</td></tr><tr><td>Arabic</td><td>None</td><td><span class="fact">FACT</span> The site declares US English, has no Arabic page and no right to left layout</td></tr></tbody></table></div><div class="secmark"><span class="secicon"><svg viewBox="0 0 24 24" class="ic"><path d="M12 3v18M3 12h18"/><circle cx="12" cy="12" r="9"/></svg></span><span class="sec-no">00.5 &middot; The group</span></div><h3 class="sechead">Where Yacht Style appears on its parents&rsquo; sites</h3><div class="linkgrid"><a href="https://heart-media.com/" target="_blank" rel="noopener noreferrer"><b>heart-media.com</b><span>Lists YACHT STYLE under Publications: &ldquo;32,000 copies circulated&rdquo;. Its link goes to a LUXUO category, not to yachtstyle.co</span></a><a href="https://www.luxuo.com/category/motoring/yachting" target="_blank" rel="noopener noreferrer"><b>luxuo.com, Yachts</b><span>The sister site&rsquo;s yachting category, where Yacht Style stories are republished</span></a><a href="https://www.itp.com/brands/yacht-style/" target="_blank" rel="noopener noreferrer"><b>itp.com, Yacht Style</b><span>ITP Media Group&rsquo;s brand page. It returned a browser check to our tools on 1 Oct, not captured</span></a><a href="https://www.prnewswire.com/news-releases/itp-media-group-secures-major-acquisition-of-apacs-heart-media-group-sparking-international-expansion-across-asia-302868168.html" target="_blank" rel="noopener noreferrer"><b>The ITP announcement</b><span>PR Newswire, 3 September 2026. Yacht Style is named among the titles</span></a></div></section>
+<div class="chapdiv" id="c01"><div class="cd-no">01</div><div><h2 class="cd-h">The home page</h2><div class="cd-sub">yachtstyle.co at a 1440 pixel layout, top to bottom. The page is 14,750 pixels tall</div></div></div>
+<section><div class="shots"><div class="shot"><img src="shots/ys-home.jpg" alt="First screen of yachtstyle.co" loading="lazy"><div class="cp"><b>First screen</b>A dark header with an advertiser banner, the masthead, four issue covers, the menu, then a leaderboard and the image slider.</div></div><div class="shot"><img src="shots/ys-home-news.jpg" alt="News block on the home page" loading="lazy"><div class="cp"><b>News</b>Four stories, a More News button, and advertiser banners down the right.</div></div><div class="shot"><img src="shots/ys-home-videos.jpg" alt="Videos and Charter on the home page" loading="lazy"><div class="cp"><b>Videos, then Charter</b>A YouTube film, then the Charter block.</div></div><div class="shot"><img src="shots/ys-home-marinas.jpg" alt="Marinas tiles and Specials" loading="lazy"><div class="cp"><b>Marinas, then Specials</b>Eleven region tiles, then the Yacht Style Awards 2026 special.</div></div><div class="shot"><img src="shots/ys-home-specials.jpg" alt="Specials on the home page" loading="lazy"><div class="cp"><b>Specials</b>Each special is a magazine spread image with download links for each year.</div></div><div class="shot"><img src="shots/ys-home-logbook.jpg" alt="The Logbook on the home page" loading="lazy"><div class="cp"><b>Logbook</b>The events calendar, with the Dubai, Qatar and Abu Dhabi shows of November 2026.</div></div><div class="shot"><img src="shots/ys-home-footer.jpg" alt="The footer" loading="lazy"><div class="cp"><b>Instagram and footer</b>The Instagram grid, the newsletter form, About, Advertising, Contact, Subscribe.</div></div></div></section>
+<div class="chapdiv" id="c02"><div class="cd-no">02</div><div><h2 class="cd-h">The sections</h2><div class="cd-sub">Each main menu item, first screen</div></div></div>
+<section><div class="shots"><div class="shot"><img src="shots/ys-news.jpg" alt="News" loading="lazy"><div class="cp"><b>News</b>yachtstyle.co/news, the page sent with the brief. A leaderboard, then a grid of stories.</div></div><div class="shot"><img src="shots/ys-reviews.jpg" alt="Reviews" loading="lazy"><div class="cp"><b>Reviews</b>Captured before the card images had loaded.</div></div><div class="shot"><img src="shots/ys-leaders.jpg" alt="Leaders" loading="lazy"><div class="cp"><b>Leaders</b>Interviews and columns.</div></div><div class="shot"><img src="shots/ys-videos.jpg" alt="Videos" loading="lazy"><div class="cp"><b>Videos</b>The newest film from the YouTube channel.</div></div><div class="shot"><img src="shots/ys-charter.jpg" alt="Charter" loading="lazy"><div class="cp"><b>Charter</b>Stories about charter. A dealer banner above.</div></div><div class="shot"><img src="shots/ys-marinas.jpg" alt="Marinas" loading="lazy"><div class="cp"><b>Marinas</b>The hub page. The region tiles animate into place.</div></div><div class="shot"><img src="shots/ys-marinas-malaysia.jpg" alt="Marinas, Malaysia" loading="lazy"><div class="cp"><b>Marinas, Malaysia</b>One card per marina: website, telephone, address, berths, services.</div></div><div class="shot"><img src="shots/ys-specials.jpg" alt="Specials" loading="lazy"><div class="cp"><b>Specials</b>Captured in a narrower window, before the spread images had loaded.</div></div><div class="shot"><img src="shots/ys-logbook.jpg" alt="Logbook" loading="lazy"><div class="cp"><b>Logbook</b>A Dubai International Boat Show banner above the calendar. Captured in a narrower window.</div></div></div></section>
+<div class="chapdiv" id="c03"><div class="cd-no">03</div><div><h2 class="cd-h">Articles and the magazine</h2><div class="cd-sub">A review, the acquisition story, a Gulf story and the issue reader</div></div></div>
+<section><div class="shots"><div class="shot"><img src="shots/ys-article-review.jpg" alt="A review article" loading="lazy"><div class="cp"><b>A review</b>Azimut makes big splash with Seadeck 9, 17 September 2026. Captured before the lead image had loaded.</div></div><div class="shot"><img src="shots/ys-article-review-body.jpg" alt="The body of the review" loading="lazy"><div class="cp"><b>The body of the review</b>One column of text with captioned photographs.</div></div><div class="shot"><img src="shots/ys-article-itp.jpg" alt="The ITP article" loading="lazy"><div class="cp"><b>The acquisition story</b>Dubai-based ITP Media Group Acquires Yacht Style in Major Asia Expansion, 8 September 2026.</div></div><div class="shot"><img src="shots/ys-article-uae.jpg" alt="A Gulf story" loading="lazy"><div class="cp"><b>A Gulf story</b>UAE Yachting Alliance unites three emirates, 1 October 2026.</div></div><div class="shot"><img src="shots/ys-issue-91.jpg" alt="Issue 91 reader page" loading="lazy"><div class="cp"><b>Issue 91</b>The reader page, captured before the page-turn reader had opened. The Instagram grid shows below it.</div></div></div></section>
+<div class="chapdiv" id="c04"><div class="cd-no">04</div><div><h2 class="cd-h">Not captured</h2><div class="cd-sub">What this page does not show yet, and why</div></div></div>
+<section><div class="pin warn"><b>How the captures were made.</b> yachtstyle.co shows a &ldquo;Confirm you are human&rdquo; check to automated browsers. We did not tick it. The captures above were taken in an ordinary desktop Chromium window at a 1440 pixel layout and saved 800 pixels wide, on 1 October 2026 between 16:19 and 16:26, Kuala Lumpur time. The window was then minimised and stopped painting, so the remaining captures were not taken.</div><div class="vl-scroll"><table class="vledger"><thead><tr><th>Not captured</th><th>Detail</th></tr></thead><tbody><tr><td>Every phone capture at 390 pixels</td><td>home, menu open, news, an article, marinas, logbook, subscribe</td></tr><tr><td>About, Advertising, Contact, Subscribe, Newsletter, For Sale, Shop, search results</td><td>read in full as page source and quoted in the audit, not captured as images</td></tr><tr><td>The footer Subscribe link</td><td>yachtstyle.co/subscribe-2 returns page not found; checked by fetch, not captured</td></tr><tr><td>itp.com brand page, Magzter</td><td>both refused our fetch; no check was bypassed</td></tr><tr><td>Instagram, Facebook, YouTube, the parked yachtstylearabia.com page</td><td>not captured</td></tr></tbody></table></div><div class="notcap"><b>Phone behaviour was still measured.</b> In the same browser, with the viewport set to 390 pixels, we read the computed layout: the header takes 314 to 337 pixels before any content, the home page is 22,265 pixels tall, a menu button appears, and no page we tested scrolls sideways. The audit, chapter 03.6, carries the detail.</div></section>
+<div class="chapdiv" id="c05"><div class="cd-no">05</div><div><h2 class="cd-h">Read it with the audit</h2><div class="cd-sub">Where each part of this page is discussed</div></div></div>
+<section><div class="linkgrid"><a href="audit.html#c00"><b>The verdict</b><span>What Yacht Style is, in 60 seconds, with the scorecard</span></a><a href="audit.html#c01"><b>01 &middot; Background</b><span>Publisher, formats, editions, audience, owners</span></a><a href="audit.html#c02"><b>02 &middot; Goal</b><span>What a best in the world Yacht Style Arabia site has to do</span></a><a href="audit.html#c03"><b>03 &middot; The Website Scan</b><span>Measured forensics and the nine lenses</span></a><a href="audit.html#c05"><b>05 &middot; The Model</b><span>How the title earns, and who advertises</span></a><a href="audit.html#c06"><b>06 &middot; Arabia today</b><span>What exists for the Gulf on 1 October 2026</span></a><a href="audit.html#c07"><b>07 &middot; What Arabia needs</b><span>Our recommendation</span></a><a href="audit.html#c08"><b>08 &middot; Questions</b><span>What only the client can answer</span></a><a href="audit.html#verdict-ledger"><b>The verdict ledger</b><span>Every finding with its evidence and its fix</span></a><a href="competitors.html"><b>Peer &amp; Competitor Audit</b><span>The titles and sites Yacht Style Arabia will be compared with</span></a></div></section>
+<footer class="docfoot">Brand Method &middot; Current Website for Yacht Style &middot; Captured 1 October 2026 &middot; Confidential</footer>
+</div>
+</body>
+</html>

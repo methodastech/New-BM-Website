@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Proposal &middot; Yacht Style Arabia &middot; Brand Method</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=Inter:wght@400;500;600&display=swap">
+<style>
+  :root{--sbw:var(--sbw-open,256px);--bh:66px}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{font-family:Inter,system-ui,sans-serif;color:#0B1826;background:#0A0B0E;-webkit-font-smoothing:antialiased;overflow:hidden}
+  .bmws{position:fixed;top:0;left:0;right:0;z-index:60}
+  .sb{position:fixed;left:0;top:var(--bh);bottom:0;width:var(--sbw);z-index:50}
+  .doc{position:fixed;top:var(--bh);right:0;bottom:0;left:var(--sbw);background:#fff}
+  .doc iframe{display:block;width:100%;height:100%;border:0;background:#fff}
+  @media(min-width:1100px){html.sb-off{--sbw:56px}}
+  @media(max-width:1099px){
+    .sb{bottom:auto;right:0;width:auto}
+    .doc{left:0;top:calc(var(--bh) + 50px)}
+  }
+
+/* ---- the workspace side bar, one look on every page (lirunex_sidebar.py, 28 Oct 2026, round 2) ---- */
+.sb{display:flex;flex-direction:column;padding:0;background:#0A0B0E;color:#fff;color-scheme:dark;border:0;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.07),inset -1px 0 0 rgba(255,255,255,.07);font-family:Inter,system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+.sb-top{flex:none;display:grid;grid-template-columns:minmax(0,1fr) 32px;column-gap:8px;align-items:start;padding:12px 10px 14px 18px}
+.sb-id{min-width:0;padding-top:6px}
+.sb-id b{display:block;font:600 14px/20px "Inter Tight",Inter,system-ui,sans-serif;letter-spacing:-.006em;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sb-sub{grid-column:1/-1;margin:4px 8px 0 0;font:400 13px/18px Inter,system-ui,sans-serif;letter-spacing:0;color:rgba(255,255,255,.48);
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.sb-tg{display:grid;place-items:center;width:32px;height:32px;margin:0;padding:0;border:0;border-radius:3px;background:none;color:rgba(255,255,255,.46);cursor:pointer;transition:color .15s,background .15s}
+.sb-tg:hover{color:#fff;background:rgba(255,255,255,.07)}
+.sb-tg .ic{width:18px;height:18px}
+.sb-tg .ic-open{display:none}
+.sb-nav{flex:1;min-height:0;overflow-x:hidden;overflow-y:auto;padding:0 10px 14px;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.14) transparent}
+.sb-nav ol{list-style:none;margin:0;padding:0}
+.sb-part{display:block;margin:0;padding:16px 8px 4px;font:500 13px/18px Inter,system-ui,sans-serif;letter-spacing:0;color:rgba(255,255,255,.46)}
+.sb-part:first-child{padding-top:2px}
+.sb .si{display:flex;align-items:flex-start;gap:10px;width:100%;min-height:32px;margin:0 0 1px;padding:6px 8px;border:0;border-radius:3px;background:none;text-align:left;
+  font:500 14px/20px Inter,system-ui,sans-serif;letter-spacing:-.003em;color:rgba(255,255,255,.62);text-decoration:none;cursor:pointer;position:relative;transition:color .12s,background .12s}
+.sb .si .ic{width:18px;height:18px;margin-top:1px;color:rgba(255,255,255,.44);transition:color .12s}
+.sb .si:hover{color:rgba(255,255,255,.92);background:rgba(255,255,255,.045)}
+.sb .si:hover .ic{color:rgba(255,255,255,.72)}
+.sb .si.on,.sb .si[aria-current]:not([aria-current="false"]){color:#fff;background:rgba(255,255,255,.085)}
+.sb .si.on .ic,.sb .si[aria-current]:not([aria-current="false"]) .ic{color:#fff}
+.sb .si .lb{flex:1;min-width:0}
+.sb .si .ct{flex:none;margin-left:auto;min-width:20px;height:auto;padding:0;text-align:right;font:500 13px/20px Inter,system-ui,sans-serif;font-variant-numeric:tabular-nums;color:rgba(255,255,255,.46);background:none}
+.sb .si .ct.alert{min-width:22px;padding:0 6px;border-radius:3px;text-align:center;background:#fff;color:#0A0B0E;font-weight:600}
+.sb .ic{flex:none;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;opacity:1}
+.sb .ic *{vector-effect:non-scaling-stroke}
+.sb-foot{flex:none;padding:8px 10px 12px;box-shadow:inset 0 1px 0 rgba(255,255,255,.06)}
+.sb-note{margin:0;padding:6px 8px 6px;font:400 14px/21px Inter,system-ui,sans-serif;color:rgba(255,255,255,.5)}
+/* focus: nothing on a click; a quiet ring on the keyboard, inside the rounded row */
+.sb a:focus,.sb button:focus,.sb-rz:focus,.split-rz:focus{outline:none}
+.sb a:focus-visible,.sb button:focus-visible{outline:none;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.55)}
+html[data-lx-input="pointer"] .sb a:focus-visible,html[data-lx-input="pointer"] .sb button:focus-visible{box-shadow:none}
+/* the resize handles: a hairline that shows on hover, brighter while dragging or focused */
+.sb-rz,.split-rz{position:absolute;top:0;bottom:0;width:10px;z-index:6;cursor:col-resize;touch-action:none;background:none}
+.sb-rz{right:-5px}
+.split-rz{left:-5px}
+.sb-rz::after,.split-rz::after{content:"";position:absolute;top:0;bottom:0;left:4px;width:2px;background:transparent;transition:background .15s .08s}
+.sb-rz:hover::after,.split-rz:hover::after{background:rgba(255,255,255,.24)}
+.sb-rz.drag::after,.split-rz.drag::after,.sb-rz:focus-visible::after,.split-rz:focus-visible::after{background:rgba(255,255,255,.7);transition:none}
+html.lx-dragging,html.lx-dragging *{cursor:col-resize!important;-webkit-user-select:none!important;user-select:none!important}
+html.lx-dragging iframe{pointer-events:none!important}
+/* the name of a folded item, and of the hide control, on a tooltip (placed by the script, so the rail never clips it) */
+.sb-tip{position:fixed;left:0;top:0;z-index:300;pointer-events:none;opacity:0;transition:opacity .12s;background:#fff;color:#0A0B0E;border-radius:3px;
+  font:500 13px/18px Inter,system-ui,sans-serif;padding:5px 9px;white-space:nowrap;box-shadow:0 6px 18px rgba(0,0,0,.35)}
+.sb-tip.on{opacity:1}
+/* round 4: the page level. A page's own side bar inside a shell: charcoal a step above the shell's black, 224 px by default, a smaller
+   header that reads as the section's name, compact rows. Highlighting is monochrome on both levels (Bazil, later the same day): the
+   current item is a neutral lifted fill with white words and a white icon; the levels differ by ground, width and density. */
+html.lx-inshell{--sbw-open:224px}
+html.lx-inshell .sb{background:#17191E;box-shadow:inset 0 1px 0 rgba(255,255,255,.06),inset -1px 0 0 rgba(255,255,255,.08)}
+html.lx-inshell .sb-top{padding:12px 10px 8px 16px}
+html.lx-inshell .sb-id{padding-top:7px}
+html.lx-inshell .sb-id b{font:600 13px/18px Inter,system-ui,sans-serif;letter-spacing:0;color:rgba(255,255,255,.62)}
+html.lx-inshell .sb-tg{color:rgba(255,255,255,.42)}
+html.lx-inshell .sb-note{color:rgba(255,255,255,.46)}
+html.lx-inshell .sb-foot{box-shadow:inset 0 1px 0 rgba(255,255,255,.07)}
+@media (min-width:1100px){
+  html.lx-inshell .sb-nav{padding:0 8px 12px}
+  html.lx-inshell .sb .si{min-height:30px;gap:9px;padding:5px 8px;font-size:13.5px;color:rgba(255,255,255,.64)}
+  html.lx-inshell .sb .si .ic{width:16px;height:16px;margin-top:2px;color:rgba(255,255,255,.44)}
+  html.lx-inshell .sb .si:hover{background:rgba(255,255,255,.05)}
+}
+html.lx-inshell .sb .si.on,html.lx-inshell .sb .si[aria-current]:not([aria-current="false"]){color:#fff;background:rgba(255,255,255,.1)}
+html.lx-inshell .sb .si.on .ic,html.lx-inshell .sb .si[aria-current]:not([aria-current="false"]) .ic{color:#fff}
+@media (min-width:1100px){
+  html.sb-off .sb-top{grid-template-columns:32px;padding:12px}
+  html.sb-off .sb-tg .ic-close{display:none}
+  html.sb-off .sb-tg .ic-open{display:block}
+  html.sb-off .sb-id,html.sb-off .sb-sub,html.sb-off .sb .si .ct,html.sb-off .sb-note,html.sb-off .sb-rz{display:none}
+  html.sb-off .sb-part{visibility:hidden;height:10px;padding:0;overflow:hidden}
+  html.sb-off .sb-part:first-child{height:0}
+  html.sb-off .sb .si{width:36px;justify-content:center;gap:0;padding:7px 0;min-height:34px}
+  html.sb-off .sb .si .ic{margin-top:0}
+  html.sb-off .sb .lb{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  html.sb-off .sb-nav{scrollbar-width:none}
+  html.sb-off .sb-nav::-webkit-scrollbar{width:0}
+  html.sb-off .sb-foot:not(:has(.si)){display:none}
+}
+@media (max-width:1099px){
+  .sb{box-shadow:inset 0 1px 0 rgba(255,255,255,.07),inset 0 -1px 0 rgba(255,255,255,.07)}
+  .sb-top,.sb-foot,.sb-rz{display:none}
+  .sb-nav{flex:none;display:flex;align-items:center;gap:2px;overflow-x:auto;overflow-y:hidden;padding:8px 12px;scrollbar-width:none}
+  .sb-nav::-webkit-scrollbar{height:0}
+  .sb-nav ol,.sb-nav li:not(.sb-part){display:contents}
+  .sb-part,.sb-part:first-child{flex:none;padding:0 6px 0 14px;white-space:nowrap}
+  .sb-part:first-child{padding-left:4px}
+  .sb .si{width:auto;flex:none;margin:0;white-space:nowrap;padding:6px 12px 6px 10px;min-height:34px;align-items:center}
+  .sb .si .ic{margin-top:0}
+  .sb .si .lb{flex:none}
+  .sb .si .ct{margin-left:4px}
+}
+/* an editor page's panel and preview, once the split has been moved */
+@media (min-width:1001px){.work.split{grid-template-columns:var(--pw,440px) minmax(0,1fr)}}
+@media (max-width:1000px){.split-rz{display:none}}
+@media (prefers-reduced-motion:reduce){.sb *,.sb-tip{transition:none!important}}
+</style>
+</head>
+<body>
+<aside class="sb" id="sb" aria-label="Proposal"><div class="sb-top"><div class="sb-id"><b>Proposal</b></div><button class="sb-tg" type="button" aria-controls="sb" aria-expanded="true" aria-label="Hide side bar"><svg class="ic ic-close" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/><path d="M16 15l-3-3 3-3"/></svg><svg class="ic ic-open" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/><path d="M13 9l3 3-3 3"/></svg></button><p class="sb-sub" title="Every document of the pack, in reading order">Every document of the pack, in reading order</p></div><nav class="sb-nav" aria-label="Proposal pages"><ol><li class="sb-part">For Yacht Style Arabia</li><li><a class="it si" href="#proposal" data-k="proposal" data-f="proposal-website.html" data-pack><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg><span class="lb">Proposal, website</span></a></li><li><a class="it si" href="#timeline" data-k="timeline" data-f="timeline.html" data-pack><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg><span class="lb">Timeline</span></a></li><li><a class="it si" href="#questionnaire" data-k="questionnaire" data-f="questionnaire.html" data-pack><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg><span class="lb">Questionnaire</span></a></li><li class="sb-part">Brand Method only</li><li><a class="it si" href="#quote" data-k="quote" data-f="quotation-website.html" data-pack><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1z"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 17.5v-11"/></svg><span class="lb">Quotation, website</span></a></li><li><a class="it si" href="#kickstart" data-k="kickstart" data-f="kickstart.html" data-pack><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg><span class="lb">Kickstart</span></a></li><li><a class="it si" href="#notes" data-k="notes" data-f="meeting-notes.html" data-pack><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 2v4"/><path d="M12 2v4"/><path d="M16 2v4"/><rect x="4" y="4" width="16" height="18" rx="2"/><path d="M8 10h6"/><path d="M8 14h8"/><path d="M8 18h5"/></svg><span class="lb">Meeting notes</span></a></li></ol></nav><div class="sb-foot"><a class="own si" href="/pack/proposal-website.html?own=1" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 3h6v6"/><path d="M10 14L21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg><span class="lb">Open this page on its own</span></a></div><div class="sb-rz" role="separator" aria-orientation="vertical" aria-controls="sb" aria-label="Side bar width" tabindex="0" aria-valuemin="200" aria-valuemax="420" aria-valuenow="256" title="Drag to resize. Double click to reset."></div></aside>
+<main class="doc"><iframe title="Proposal" src="about:blank"></iframe></main>
+<script>
+(function(){/* round 4: a page without a side bar of its own (the web flow) still gets the workspace tooltip on its icon-only controls and
+  the keyboard-only focus ring; a page with a side bar gets both from the script below */
+  if(document.querySelector('.sb-tg'))return;var root=document.documentElement;
+  function inp(e){root.setAttribute('data-lx-input',e.type==='keydown'?'key':'pointer');}
+  document.addEventListener('pointerdown',inp,true);document.addEventListener('keydown',function(e){if(!e.metaKey&&!e.ctrlKey&&!e.altKey)inp(e);},true);
+  var tip=document.createElement('div');tip.className='sb-tip';tip.setAttribute('aria-hidden','true');document.body.appendChild(tip);var tcur=null;
+  function hide(){tip.classList.remove('on');}
+  function tipOn(el){var r=el.getBoundingClientRect();if(!r.width)return;tip.textContent=el.getAttribute('data-tip');tip.classList.add('on');
+    var x=Math.round(r.left+r.width/2-tip.offsetWidth/2),y=Math.round(r.bottom+6);if(y+tip.offsetHeight>innerHeight-4)y=Math.round(r.top-6-tip.offsetHeight);
+    tip.style.left=Math.max(4,Math.min(innerWidth-tip.offsetWidth-4,x))+'px';tip.style.top=y+'px';}
+  document.addEventListener('pointerover',function(e){var el=e.target&&e.target.closest?e.target.closest('[data-tip]'):null;if(el===tcur)return;tcur=el;if(el)tipOn(el);else hide();});
+  document.addEventListener('focusin',function(e){var el=e.target&&e.target.closest?e.target.closest('[data-tip]'):null;if(el&&el.matches(':focus-visible')){tcur=el;tipOn(el);}});
+  document.addEventListener('focusout',function(e){if(tcur&&e.target===tcur){tcur=null;hide();}});
+  addEventListener('scroll',function(){if(tcur){tcur=null;hide();}},true);addEventListener('resize',hide);
+})();
+(function(){
+  var root=document.documentElement,tg=document.querySelector('.sb-tg');if(!tg)return;
+  var sb=tg.closest('.sb'),rz=sb.querySelector('.sb-rz');
+  var inShell=root.classList.contains('lx-inshell')||/[?&]shell\b/.test(location.search);
+  var page=((location.pathname.split('/').pop()||'index.html').replace(/\.html?$/,'')||'index')+(/[?&]seo\b/.test(location.search)?'-seo':'');
+  var BASE=(inShell?'lx-sb-in:':'lx-sb:')+page,KEY=BASE,WKEY='lx-sbw:'+page,MIN=200,MAX=420,DEF=inShell?224:256;
+  function get(k){try{return localStorage.getItem(k);}catch(e){return null;}}
+  function put(k,v){try{if(v==null)localStorage.removeItem(k);else localStorage.setItem(k,v);}catch(e){}}
+  function wide(){return innerWidth>1099;}
+  function off(){return root.classList.contains('sb-off');}
+  function fire(){try{dispatchEvent(new Event('resize'));}catch(e){}}
+  var tip=document.createElement('div');tip.className='sb-tip';tip.setAttribute('aria-hidden','true');document.body.appendChild(tip);
+  function set(o,keep){root.classList.toggle('sb-off',o);tg.setAttribute('aria-expanded',o?'false':'true');tg.setAttribute('aria-label',o?'Show side bar':'Hide side bar');
+    if(rz)rz.tabIndex=o?-1:0;if(keep)put(KEY,o?'1':'0');fire();}
+  /* which choice applies: the page's own, or (in a shell) the one for framed pages that bring their own side bar */
+  function kind(k,dflt){KEY=BASE+(k?':'+k:'');var v=get(KEY);set(v===null?!!dflt:v==='1',false);}
+  kind('',false);
+  function name(el){return el===tg?tg.getAttribute('aria-label'):(((el.querySelector('.lb')||el).textContent)||'').trim();}
+  function show(el){if(!wide()||(el!==tg&&!off()))return hide();var r=el.getBoundingClientRect();if(!r.width)return hide();tip.textContent=name(el);
+    if(el===tg&&!off()){tip.style.left=Math.round(Math.max(4,r.right-tip.offsetWidth))+'px';tip.style.top=Math.round(r.bottom+6)+'px';}
+    else{tip.style.left=Math.round(r.right+8)+'px';tip.style.top=Math.round(r.top+(r.height-tip.offsetHeight)/2)+'px';}
+    tip.classList.add('on');}
+  function hide(){tip.classList.remove('on');}
+  var cur=null;
+  function pick(e){return e.target&&e.target.closest?e.target.closest('.sb-tg,.si'):null;}
+  sb.addEventListener('pointerover',function(e){var el=pick(e);if(el!==cur){cur=el;if(el)show(el);else hide();}});
+  sb.addEventListener('pointerleave',function(){cur=null;hide();});
+  sb.addEventListener('focusin',function(e){var el=pick(e);if(el&&el.matches&&el.matches(':focus-visible'))show(el);});
+  sb.addEventListener('focusout',hide);
+  sb.addEventListener('scroll',hide,true);
+  tg.addEventListener('click',function(){set(!off(),true);if(cur===tg||document.activeElement===tg&&tg.matches(':focus-visible'))show(tg);else hide();});
+  addEventListener('resize',hide);
+  /* round 4: the workspace's own tooltip on any control with data-tip (an icon-only toolbar button), never the browser's title box */
+  var tcur=null;
+  function tipOn(el){var r=el.getBoundingClientRect();if(!r.width)return;tip.textContent=el.getAttribute('data-tip');tip.classList.add('on');
+    var x=Math.round(r.left+r.width/2-tip.offsetWidth/2),y=Math.round(r.bottom+6);if(y+tip.offsetHeight>innerHeight-4)y=Math.round(r.top-6-tip.offsetHeight);
+    tip.style.left=Math.max(4,Math.min(innerWidth-tip.offsetWidth-4,x))+'px';tip.style.top=y+'px';}
+  document.addEventListener('pointerover',function(e){var el=e.target&&e.target.closest?e.target.closest('[data-tip]'):null;if(el===tcur)return;tcur=el;if(el)tipOn(el);else if(!cur)hide();});
+  document.addEventListener('focusin',function(e){var el=e.target&&e.target.closest?e.target.closest('[data-tip]'):null;if(el&&el.matches(':focus-visible')){tcur=el;tipOn(el);}});
+  document.addEventListener('focusout',function(e){if(tcur&&e.target===tcur){tcur=null;hide();}});
+  document.addEventListener('click',function(e){var el=e.target&&e.target.closest?e.target.closest('[data-tip]'):null;if(el&&el===tcur)setTimeout(function(){if(tcur===el)tipOn(el);},0);});
+  addEventListener('scroll',function(){if(tcur){tcur=null;hide();}},true);
+  /* a handle: drag with a mouse, a pen or a finger; the frames stop catching the pointer while it moves */
+  function drag(h,start,move,end){h.addEventListener('pointerdown',function(e){if(e.pointerType==='mouse'&&e.button!==0)return;e.preventDefault();
+    var x0=e.clientX,s0=start();root.classList.add('lx-dragging');h.classList.add('drag');try{h.setPointerCapture(e.pointerId);}catch(x){}
+    function mv(ev){move(s0,ev.clientX-x0);}
+    function up(){h.removeEventListener('pointermove',mv);h.removeEventListener('pointerup',up);h.removeEventListener('pointercancel',up);root.classList.remove('lx-dragging');h.classList.remove('drag');end();}
+    h.addEventListener('pointermove',mv);h.addEventListener('pointerup',up);h.addEventListener('pointercancel',up);});}
+  function keys(h,now,to,reset,min,max){h.addEventListener('keydown',function(e){var k=e.key,st=e.shiftKey?32:8,v=null;
+    if(k==='ArrowLeft')v=now()-st;else if(k==='ArrowRight')v=now()+st;else if(k==='Home')v=min();else if(k==='End')v=max();else if(k==='Enter'||k===' '){reset();e.preventDefault();return;}
+    if(v!==null){e.preventDefault();to(v,true);}});
+    h.addEventListener('dblclick',function(e){e.preventDefault();reset();});}
+  /* the side bar's width */
+  var W=DEF;
+  function setW(w,keep){W=Math.max(MIN,Math.min(MAX,Math.round(w)));root.style.setProperty('--sbw-open',W+'px');if(rz)rz.setAttribute('aria-valuenow',W);if(keep)put(WKEY,String(W));}
+  var w0=parseInt(get(WKEY),10);if(w0>0)setW(w0,false);else if(rz)rz.setAttribute('aria-valuenow',DEF);
+  /* round 4: a focus ring for the keyboard only; a press with a mouse, a pen or a finger never shows one */
+  function inp(e){root.setAttribute('data-lx-input',e.type==='keydown'?'key':'pointer');}
+  document.addEventListener('pointerdown',inp,true);
+  document.addEventListener('keydown',function(e){if(!e.metaKey&&!e.ctrlKey&&!e.altKey)inp(e);},true);
+  if(rz){drag(rz,function(){return sb.getBoundingClientRect().width;},function(s,dx){setW(s+dx,false);},function(){put(WKEY,String(W));fire();});
+    keys(rz,function(){return W;},function(v,k){setW(v,k);fire();},function(){setW(DEF,false);put(WKEY,null);root.style.removeProperty('--sbw-open');fire();},function(){return MIN;},function(){return MAX;});}
+  /* the panel and the preview of an editor page */
+  var work=document.querySelector('.work[data-split]'),sp=work&&work.querySelector('.split-rz'),panel=work&&work.querySelector('.panel'),SKEY='lx-split:'+page,SMIN=360,P=0;
+  function lim(){return Math.max(SMIN,work.getBoundingClientRect().width-SMIN);}
+  function setP(p,keep){P=Math.round(p);var q=Math.max(SMIN,Math.min(lim(),P));work.style.setProperty('--pw',q+'px');work.classList.add('split');
+    sp.setAttribute('aria-valuenow',q);sp.setAttribute('aria-valuemax',Math.round(lim()));if(keep){P=q;put(SKEY,String(q));}}
+  if(sp){var p0=parseInt(get(SKEY),10);if(p0>0)setP(p0,false);
+    addEventListener('resize',function(){if(work.classList.contains('split'))setP(P,false);});
+    drag(sp,function(){return panel.getBoundingClientRect().width;},function(s,dx){setP(s+dx,false);P=Math.max(SMIN,Math.min(lim(),P));},function(){put(SKEY,String(P));fire();});
+    keys(sp,function(){return panel.getBoundingClientRect().width;},function(v,k){setP(v,k);fire();},function(){P=0;work.classList.remove('split');work.style.removeProperty('--pw');put(SKEY,null);fire();},function(){return SMIN;},lim);}
+  window.__sb={set:set,off:off,kind:kind,key:function(){return KEY;},width:function(){return W;},setWidth:setW};
+})();
+
+(function(){
+  var bar=document.querySelector('.bmws'),root=document.documentElement;
+  function bh(){root.style.setProperty('--bh',(bar?bar.offsetHeight:66)+'px')}
+  bh();addEventListener('resize',bh);addEventListener('load',bh);
+  if(window.ResizeObserver&&bar)new ResizeObserver(bh).observe(bar);
+  var items=[].slice.call(document.querySelectorAll('.sb-nav a.it')),fr=document.querySelector('.doc iframe'),own=document.querySelector('.sb a.own');
+  var inPortal=/\/docs\/yachtstyle\/site\//.test(location.pathname);
+  function url(a){var f=a.getAttribute('data-f');return a.hasAttribute('data-pack')?(inPortal?'../':'/pack/')+f:f}
+  function go(hash,push){
+    var i=hash.indexOf('/'),key=i<0?hash:hash.slice(0,i),inner=i<0?'':hash.slice(i+1);
+    var a=items.filter(function(x){return x.getAttribute('data-k')===key})[0];if(!a){a=items[0];inner='';}
+    items.forEach(function(x){x.classList.toggle('on',x===a);if(x===a)x.setAttribute('aria-current','page');else x.removeAttribute('aria-current')});
+    var u=url(a),q=u.indexOf('?')>-1?'&':'?',src=u+q+'shell=1'+(inner?'#'+inner:'');
+    if(fr.getAttribute('data-u')!==src){fr.setAttribute('data-u',src);fr.src=src}
+    if(own)own.href=u+q+'own=1'+(inner?'#'+inner:'');
+    document.title=a.textContent.trim()+' · Yacht Style Arabia · Brand Method';
+    var k=a.getAttribute('data-k')+(inner?'/'+inner:'');
+    if(push&&location.hash!=='#'+k)history.pushState(null,'','#'+k);
+    var me=(location.pathname.split('/').pop()||'index.html');
+    [].slice.call(document.querySelectorAll('.bmws-tabs a')).forEach(function(t){var on=t.getAttribute('href')===me;t.classList.toggle('on',on);if(on)t.setAttribute('aria-current','page');else t.removeAttribute('aria-current');});
+    if(a.scrollIntoView&&innerWidth<1100)a.scrollIntoView({block:'nearest',inline:'center'});
+    if(window.__sb)__sb.kind(a.hasAttribute('data-own')?'framed':'',a.hasAttribute('data-own'));
+  }
+  items.forEach(function(a){a.addEventListener('click',function(e){if(e.metaKey||e.ctrlKey||e.shiftKey)return;e.preventDefault();go(a.getAttribute('data-k'),true)})});
+  addEventListener('popstate',function(){go(location.hash.slice(1),false)});
+  addEventListener('hashchange',function(){go(location.hash.slice(1),false)});
+  go(location.hash.slice(1),false);
+})();
+</script>
+</body>
+</html>

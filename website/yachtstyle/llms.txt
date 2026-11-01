@@ -1,0 +1,24 @@
+# Yacht Style Arabia
+
+> Yachting in the Arabian Gulf and the Red Sea: news, reviews, people and places, in English and Arabic. Published by Lux Inc Media Group.
+
+This file is a sample from the prototype. It shows what the live site will tell answer tools. The addresses follow the working pattern in the site plan and are confirmed at kickoff.
+
+## Sections
+
+- [News](https://yachtstylearabia.com/en/news/): launches, marinas, shows and deals
+- [Reviews](https://yachtstylearabia.com/en/reviews/): yacht reviews with length, builder and year
+- [Leaders](https://yachtstylearabia.com/en/leaders/): interviews and columns with owners, builders and advisers
+- [Marinas and destinations](https://yachtstylearabia.com/en/marinas/): places from the Gulf to the Red Sea
+- [Charter](https://yachtstylearabia.com/en/charter/): charter stories and the charter desk
+- [Boat shows](https://yachtstylearabia.com/en/events/): the regional and international calendar
+
+## Languages
+
+- English: https://yachtstylearabia.com/en/
+- Arabic: https://yachtstylearabia.com/ar/
+
+## About
+
+- Publisher: Lux Inc Media Group
+- Parent title: Yacht Style, https://yachtstyle.co/

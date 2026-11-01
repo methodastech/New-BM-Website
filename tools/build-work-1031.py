@@ -52,7 +52,7 @@ PAGES = {
     'logo-gallery': 'logo-gallery.html', 'mascot-gallery': 'mascot-gallery.html', 'tech-portfolio': 'portfolio.html',
     'archive': 'archive.html',
 }
-BUILDS_LIVE = '16 live builds'  # the Tech portfolio count after the user's 31 Oct edit
+BUILDS_LIVE = '17 live builds'  # the Tech portfolio count after the user's 31 Oct edit
 
 
 def die(msg):
@@ -232,6 +232,9 @@ LOCAL_CSS = '''/* --- site adjustments --- */
 /* case pages: the design's nav is clear at the top of a page, so its "Back to work" may sit under it; this site's
    nav is solid white, so the case header starts under the nav (--wk6-navb is its measured bottom, js/work6.js) */
 html body .pg[id^="pg-case-"] .wk6-chead{padding-top:calc(var(--wk6-navb,72px) + clamp(16px,2.4vw,34px))!important}
+/* Mascot Gallery: the cast frame at the design's height (its rule is site-wide there, so it is set here for this page) */
+html body #pg-mascot-gallery .bmx-bnr .bmx-field{height:clamp(220px,24vw,340px)!important}
+@media (max-width:767px){html body #pg-mascot-gallery .bmx-bnr .bmx-field{height:clamp(180px,46vw,260px)!important}}
 '''
 
 
@@ -287,6 +290,8 @@ def once(s, old, new, label):
 def into_shell(shell, shell_pid, section, pid, out, title=None, desc=None):
     a, b = page_section(shell, shell_pid)
     s = shell[:a] + section + shell[b:]
+    # the 7 Oct mascot layout (a 16:9 cast frame, the old card grid): the design's rules replace it
+    s = re.sub(r'<style id="mg-layout-1013">.*?</style>', '', s, count=1, flags=re.S)
     if pid != shell_pid:
         s = once(s, 'var _start=%s;' % json.dumps(shell_pid), 'var _start=%s;' % json.dumps(pid), 'router start')
     # the page bridge's own id (the mascot page's still said logo-gallery, from the page it was cloned from)
@@ -353,7 +358,8 @@ def main():
         die('Tech portfolio pane not found')
     our_pane = ours[pm_ours.start():element_end(ours, pm_ours.start(), 'div')]
     w = w[:pm_new.start()] + our_pane + w[element_end(w, pm_new.start(), 'div'):]
-    w = re.sub(r'(<span class="bmx-pc">)\d+ live builds(</span>)', r'\g<1>%s\2' % BUILDS_LIVE, w)
+    # the hub panel and the grid's "More of the work" tile
+    w = re.sub(r'(<span class="(?:bmx-pc|wk6-more-c)">)\d+ live builds(</span>)', r'\g<1>%s\2' % BUILDS_LIVE, w)
     # the Tech portfolio panel's strip of screenshots: the builds the user removed on 31 Oct stay out
     w = re.sub(r'<span><img src="Image/portfolio/(?:contenthub|brandstrategy)-ss\.webp"[^>]*></span>', '', w)
     outputs['work.html'] = into_shell(work_shell, 'work', w, 'work', 'work.html')
