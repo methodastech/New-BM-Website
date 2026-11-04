@@ -1,12 +1,13 @@
 """Port the 30 Oct design of the Work section into the site: the Work hub and Branding grid,
 the Archive, the 24 case pages and the Mascot Gallery.
 
-The design export ("brandmethod-website" in Downloads, 30 Oct) is the single-page app every
+The design export ("brandmethod-website" in Downloads/brand method logo, 3 Nov) is the single-page app every
 page here was first built from (tools/build-home-0918.py). Rebuilding these pages from it
 would undo the hand fixes made since, so this script keeps each page's current file as the
 shell (head, nav, footer, router) and swaps in only the page's own <section class="pg">:
 
     work.html            <- #pg-work (our Tech portfolio pane is kept: the user's 16 builds)
+    logo-gallery.html    <- #pg-logo-gallery
     mascot-gallery.html  <- #pg-mascot-gallery
     archive.html         <- #pg-archive              (shell: mascot-gallery.html)
     work/work-<slug>.html <- #pg-case-<slug>, 24 pages (shell: mascot-gallery.html)
@@ -28,7 +29,7 @@ import sys
 from urllib.parse import unquote
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SRC_DIR = os.path.join(os.path.expanduser('~'), 'Downloads', 'brandmethod-website')
+SRC_DIR = os.path.join(os.path.expanduser('~'), 'Downloads', 'brand method logo', 'brandmethod-website')
 WRITE = '--write' in sys.argv
 
 # export asset folder -> repo folder (same file names below them)
@@ -52,7 +53,7 @@ PAGES = {
     'logo-gallery': 'logo-gallery.html', 'mascot-gallery': 'mascot-gallery.html', 'tech-portfolio': 'portfolio.html',
     'archive': 'archive.html',
 }
-BUILDS_LIVE = '17 live builds'  # the Tech portfolio count after the user's 31 Oct edit
+BUILDS_LIVE = '18 live builds'  # the Tech portfolio count after the user's 31 Oct edit
 
 
 def die(msg):
@@ -321,7 +322,7 @@ def into_shell(shell, shell_pid, section, pid, out, title=None, desc=None):
     return s
 
 
-VERSION = '20261101a'
+VERSION = '20261103a'
 
 
 def case_meta(pid, section):
@@ -370,6 +371,9 @@ def main():
 
     outputs['mascot-gallery.html'] = into_shell(mascot_shell, 'mascot-gallery', section('mascot-gallery', 'mascot-gallery.html'),
                                                 'mascot-gallery', 'mascot-gallery.html')
+    logo_shell = read(os.path.join(ROOT, 'logo-gallery.html'))
+    outputs['logo-gallery.html'] = into_shell(logo_shell, 'logo-gallery', section('logo-gallery', 'logo-gallery.html'),
+                                              'logo-gallery', 'logo-gallery.html')
     outputs['archive.html'] = into_shell(mascot_shell, 'mascot-gallery', section('archive', 'archive.html'), 'archive',
                                          'archive.html', 'Project Archive | Brand Method',
                                          'Earlier Brand Method branding projects, kept on record.')

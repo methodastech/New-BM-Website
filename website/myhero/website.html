@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Cache-Control" content="no-store">
+<title>Dr. Amira · MyHero · Website · Brand Method</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="bmws.css?v=20261018">
+<style>
+  /* The website lives in Websites/myhero website and is shown here live through the site symlink,
+     so this tab always shows the current build. The second bar switches Website 3 in English and Bahasa Malaysia and the viewport width. */
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%}
+  body{font-family:"Geist",Inter,system-ui,sans-serif;background:#E7E9ED;color:#0A0C12;padding:8px;display:flex;flex-direction:column;gap:8px;overflow:hidden;-webkit-font-smoothing:antialiased}
+  .bmws{flex:none;box-shadow:0 1px 2px rgba(10,12,18,.2)}
+  .stage{flex:1;display:flex;justify-content:center;background:#fff;box-shadow:0 1px 2px rgba(10,12,18,.05);min-height:0;overflow:auto}
+  iframe{width:100%;height:100%;border:0;background:#fff;transition:width .3s}
+  .snav{flex:none;background:#fff;display:flex;align-items:center;gap:24px;padding:8px 24px;box-shadow:0 1px 2px rgba(10,12,18,.05)}
+  .snav-tabs{display:flex;gap:2px}
+  .snav-tabs button{font:500 13.5px/1 "Geist",Inter,system-ui,sans-serif;letter-spacing:-.005em;border:0;border-radius:0;background:transparent;color:#5A5F6B;padding:10px 16px;cursor:pointer;white-space:nowrap;transition:background .2s,color .2s}
+  .snav-tabs button:hover{background:#EEF0F3;color:#0A0C12}
+  .snav-tabs button.on{background:#0A0C12;color:#fff;font-weight:600}
+  .snav-tabs button small{font-size:11.5px;font-weight:500;color:#9A9EA8;margin-left:8px}
+  .snav-tabs button.on small{color:#9EA2AC}
+  .sizes{display:flex;gap:2px;background:#EEF0F3;padding:3px;margin-left:auto;flex:none}
+  .sizes button{font:500 12.5px/1 "Geist",Inter,system-ui,sans-serif;border:0;border-radius:0;background:transparent;color:#5A5F6B;padding:8px 11px;cursor:pointer}
+  .sizes button.on{background:#fff;color:#0A0C12;box-shadow:0 1px 2px rgba(10,12,18,.12)}
+  .snav button:focus{outline:none}
+  .snav button:focus-visible{outline:2px solid #2536F5;outline-offset:1px}
+  .stage.phone{background:#DADDE3;padding:16px 0}
+  .stage.phone iframe{width:390px;height:100%;box-shadow:0 20px 40px -24px rgba(10,12,18,.5)}
+  .stage.tab iframe{width:820px}
+  @media(max-width:700px){.sizes{display:none}.snav{padding:8px 14px}.snav-tabs button small{display:none}}
+  @media(max-width:700px){body{padding:0;gap:0}}
+</style>
+</head>
+<body>
+<div class="bmws" style="--bmws-acc:#2536F5"><div class="bmws-in"><div class="bmws-crumb"><b>Dr. Amira &middot; MyHero</b><span>Brand Method &middot; Super Admin Navigation</span></div><nav class="bmws-tabs" aria-label="Brand Method admin navigation"><a href="map.html"><i>1</i>Overview</a><a href="audit.html"><i>2</i>App Audit</a><a href="competitors.html"><i>3</i>Competitors</a><a href="plan.html"><i>4</i>Plan</a><a href="brand.html"><i>5</i>Brand Creation</a><a href="design.html"><i>6</i>Design</a><a href="MyHero.html"><i>7</i>The App</a><a href="website.html" class="on" aria-current="page"><i>8</i>Website</a></nav></div></div><script>(function(){function f(){var c=getComputedStyle(document.body),s=document.documentElement.style;s.setProperty("--bpt",c.paddingTop);s.setProperty("--bpl",c.paddingLeft);s.setProperty("--bpr",c.paddingRight);}f();addEventListener("resize",f);})();</script>
+<nav class="snav" aria-label="Website versions">
+  <div class="snav-tabs">
+    <button class="on" data-src="site/index.html">Website 3<small>Live</small></button>
+    <button data-src="site/bm.html">Website 3<small>Live, Bahasa Malaysia</small></button>
+  </div>
+  <div class="sizes" aria-label="Viewport">
+    <button class="on" data-c="">Desktop</button><button data-c="tab">Tablet</button><button data-c="phone">Phone</button>
+  </div>
+</nav>
+<div class="stage" id="stage"><iframe id="f" src="site/index.html" title="MyHero website" loading="eager"></iframe></div>
+<script>
+(function(){
+  var f=document.getElementById('f'),stage=document.getElementById('stage');
+  var tabs=[].slice.call(document.querySelectorAll('.snav-tabs button')),sizes=[].slice.call(document.querySelectorAll('.sizes button'));
+  function pick(b){tabs.forEach(function(x){x.classList.toggle('on',x===b)});if(f.getAttribute('src')!==b.dataset.src)f.src=b.dataset.src;try{localStorage.setItem('mh-site-v',b.dataset.src)}catch(e){}}
+  tabs.forEach(function(b){b.addEventListener('click',function(){pick(b)})});
+  try{var v=localStorage.getItem('mh-site-v');tabs.forEach(function(b){if(b.dataset.src===v)pick(b)})}catch(e){}
+  sizes.forEach(function(b){b.addEventListener('click',function(){
+    sizes.forEach(function(x){x.classList.toggle('on',x===b)});
+    stage.className='stage'+(b.dataset.c?' '+b.dataset.c:'');
+  })});
+})();
+</script>
+</body>
+</html>

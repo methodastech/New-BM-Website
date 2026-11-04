@@ -1,0 +1,536 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/svg+xml" href="assets/brand/corner-badge-icon.svg">
+<title>APEX — The 2026 Grid · Demo</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="A study in speed. The machines, the drivers and the grid of the 2026 Formula 1 season.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="assets/car.avif" type="image/avif">
+<link rel="stylesheet" href="https://unpkg.com/lenis@1.1.13/dist/lenis.css">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/pages.css">
+<link rel="preconnect" href="https://api.jolpi.ca">
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+} }
+</script>
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js">
+<script>try{if(sessionStorage.getItem('apex:logo'))document.documentElement.classList.add('logo-quick')}catch(e){}</script>
+</head>
+<body data-page="home">
+
+<div class="curtain" aria-hidden="true">
+  <div class="ll">
+    <svg class="ll__badge" viewBox="0 0 200 200" width="200" height="200">
+      <defs><clipPath id="llClip"><circle cx="100" cy="100" r="86"/></clipPath></defs>
+      <circle class="ll__ring" cx="100" cy="100" r="95" pathLength="1"/>
+      <g clip-path="url(#llClip)">
+        <path class="ll__band" d="M60 240L60 160A100 100 0 0 1 160 60L240 60L240 110L160 110A50 50 0 0 0 110 160L110 240Z"/>
+        <path class="ll__edge ll__edge--o" pathLength="1" d="M60 240L60 160A100 100 0 0 1 160 60L240 60"/>
+        <path class="ll__edge ll__edge--i" pathLength="1" d="M110 240L110 160A50 50 0 0 1 160 110L240 110"/>
+        <path class="ll__line" pathLength="1" d="M66 240L66 205C66 172 90 158 124.6 124.6C158 90 172 66 205 66L240 66"/>
+        <path class="ll__car" pathLength="1" d="M66 240L66 205C66 172 90 158 124.6 124.6C158 90 172 66 205 66L240 66"/>
+      </g>
+      <circle class="ll__ripple" cx="124.6" cy="124.6" r="8.5"/>
+      <circle class="ll__apex" cx="124.6" cy="124.6" r="8.5"/>
+    </svg>
+    <div class="ll__word"><span>A</span><span>p</span><span>e</span><span>x</span><b>F</b><b>1</b></div>
+    <div class="ll__timing">
+      <div class="ll__sectors"><i></i><i></i><i></i></div>
+      <span class="ll__lap" data-ll-lap>0:00.000</span>
+    </div>
+  </div>
+</div>
+
+<!-- SVG car, defined once and reused -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="bodyGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2a2a2f"/><stop offset="1" stop-color="#111113"/>
+    </linearGradient>
+    <symbol id="car-silhouette" viewBox="0 0 1280 340">
+      <path d="M128 212 L120 104 C120 95 126 90 136 90 L216 90 L211 212 Z"/>
+      <path d="M168 214 C240 206 330 192 420 176 C500 160 565 126 606 104 L618 98 L652 98 C664 100 672 118 676 142 L690 150 C720 150 760 152 790 158 C880 172 990 192 1100 216 C1170 232 1220 244 1246 252 C1250 256 1248 262 1240 262 L1050 254 L900 262 L720 278 L340 280 L200 272 C180 262 170 240 168 214 Z"/>
+      <path d="M1060 290 L1254 290 L1254 262 L1062 283 Z"/>
+      <circle cx="270" cy="224" r="76"/><circle cx="1000" cy="224" r="76"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="grain" aria-hidden="true"></div>
+<canvas id="streaks" aria-hidden="true"></canvas>
+<div class="cursor" aria-hidden="true"><span></span></div>
+
+<!-- Preloader -->
+<div class="loader" role="status" aria-label="Loading">
+  <canvas id="pit" aria-hidden="true"></canvas>
+  <div class="pit__vignette" aria-hidden="true"></div>
+  <div class="pit__hud" aria-hidden="true">
+    <div class="pit__tl mono">
+      <span class="dot"></span> APXGP · Box 07
+      <small>Limiter 80 km/h</small>
+    </div>
+    <div class="pit__tr mono">Loading <b data-load>000</b>%</div>
+    <div class="pit__timer">
+      <span class="mono">Stationary</span>
+      <div class="pit__time"><b data-pit>0.00</b><i>s</i></div>
+    </div>
+    <div class="pit__wheels mono">
+      <div class="pit__compound">Soft <i>→</i> Hard</div>
+      <ul>
+        <li data-w="FL">FL<i></i></li><li data-w="FR">FR<i></i></li>
+        <li data-w="RL">RL<i></i></li><li data-w="RR">RR<i></i></li>
+      </ul>
+    </div>
+  </div>
+  <button class="pit__skip mono" type="button">Skip intro</button>
+  <div class="loader__bar"><i></i></div>
+</div>
+
+<!-- Nav -->
+<header class="nav">
+  <a href="#top" class="nav__logo" data-magnetic aria-label="APEX F1 — home"><img class="nav__mark" src="assets/brand/corner-badge-dark.svg" alt="APEX F1" width="705" height="240"></a>
+  <nav class="nav__links" aria-label="Main">
+    <a href="index.html" data-nav="home">Home</a>
+    <a href="calendar.html" data-nav="calendar">Calendar</a>
+    <a href="standings.html" data-nav="standings">Standings</a>
+    <a href="drivers.html" data-nav="drivers">Drivers</a>
+    <a href="teams.html" data-nav="teams">Teams</a>
+    <a href="garage.html" data-nav="garage">Garage</a>
+  </nav>
+  <div class="nav__right">
+    <div class="nav__meta mono"><span class="dot"></span> Lap <span data-lapcount>01</span>/24</div>
+    <button class="nav__burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu"><span></span><span></span></button>
+  </div>
+</header>
+<div class="menu" id="menu" aria-hidden="true">
+  <nav class="menu__links" aria-label="Menu">
+    <a href="index.html" data-nav="home">Home</a>
+    <a href="calendar.html" data-nav="calendar">Calendar</a>
+    <a href="standings.html" data-nav="standings">Standings</a>
+    <a href="drivers.html" data-nav="drivers">Drivers</a>
+    <a href="teams.html" data-nav="teams">Teams</a>
+    <a href="garage.html" data-nav="garage">Garage</a>
+  </nav>
+  <p class="menu__meta mono" data-nextrace>Season 2026</p>
+</div>
+
+<!-- Track progress with a tiny car -->
+<div class="track" aria-hidden="true">
+  <div class="track__line"><i></i></div>
+  <svg class="track__car" viewBox="0 0 1280 340"><use href="#car-silhouette"/></svg>
+</div>
+
+<main id="top">
+
+  <!-- 1. HERO -->
+  <section class="hero" aria-label="Introduction">
+    <div class="hero__stage">
+      <div class="hero__far" data-depth="0.2">
+        <span class="hero__ghost">VELOCITÀ</span>
+      </div>
+      <div class="hero__car" data-depth="0.6">
+        <img src="assets/car.avif" alt="A red and white Formula 1 car under studio light" width="3392" height="1908" fetchpriority="high">
+        <div class="hero__sweep"></div>
+      </div>
+      <div class="hero__vignette"></div>
+      <div class="hero__near" data-depth="1">
+        <span class="spec mono" style="--x:62%;--y:30%">Halo · Ti-6Al-4V</span>
+        <span class="spec mono" style="--x:80%;--y:68%">Front wing · active</span>
+        <span class="spec mono" style="--x:24%;--y:76%">18″ · Pirelli P Zero</span>
+      </div>
+    </div>
+
+    <div class="hero__copy">
+      <h1 class="hero__title">
+        <span class="line"><span>The art of</span></span>
+        <span class="line"><span><em>going</em> faster.</span></span>
+      </h1>
+    </div>
+
+    <div class="hero__foot">
+      <div>
+        <p class="hero__lede">New rules. New power. Eleven teams and twenty-two drivers chasing the same thousandth of a second.</p>
+        <a class="pole-chip mono" href="race.html" data-pole-chip hidden><span class="dot"></span> Latest pole · <b data-f="driver">—</b> <b data-f="time"></b> · <span data-f="gp"></span></a>
+      </div>
+      <a href="#machine" class="cta" data-magnetic><span>Scroll to begin</span><i aria-hidden="true">↓</i></a>
+    </div>
+  </section>
+
+  <!-- 2. MANIFESTO -->
+  <section class="manifesto">
+    <p class="manifesto__text" data-highlight>
+      Formula 1 is engineering written at three hundred and fifty kilometres an hour. Every curve of carbon, every kilojoule of harvested energy, every decision on the pit wall exists for one reason: to arrive first.
+    </p>
+  </section>
+
+  <!-- 3. ANATOMY: SVG car draws itself, then drives -->
+  <section class="anatomy" id="machine" aria-label="Anatomy of the 2026 car">
+    <div class="anatomy__pin">
+      <div class="anatomy__head">
+        <h2 class="h2" data-split>Anatomy of a <em>2026</em> car.</h2>
+      </div>
+
+      <div class="anatomy__car">
+        <svg class="blueprint" viewBox="0 0 1280 340" role="img" aria-label="Side profile line drawing of a Formula 1 car">
+          <g class="bp-grid" aria-hidden="true">
+            <path d="M0 300 H1280"/>
+            <path d="M270 40 V320 M1000 40 V320" stroke-dasharray="3 6"/>
+          </g>
+          <ellipse class="bp-shadow" cx="660" cy="302" rx="560" ry="9"/>
+          <g class="car-body">
+            <path class="d fillable" d="M128 212 L120 104 C120 95 126 90 136 90 L216 90 L211 212 Z"/>
+            <path class="d" d="M122 104 L216 100 M124 122 C150 118 190 117 214 115"/>
+            <path class="d" d="M190 212 L206 238 M148 238 L218 233 M172 272 L224 252"/>
+            <path class="d fillable" d="M168 214 C240 206 330 192 420 176 C500 160 565 126 606 104 L618 98 L652 98 C664 100 672 118 676 142 L690 150 C720 150 760 152 790 158 C880 172 990 192 1100 216 C1170 232 1220 244 1246 252 C1250 256 1248 262 1240 262 C1180 262 1110 258 1050 254 L900 262 C840 268 780 274 720 278 L340 280 L200 272 C180 262 170 240 168 214 Z"/>
+            <path class="d fillable dark" d="M482 274 C470 248 482 222 532 214 C592 206 650 203 700 205 L709 211 L707 244 C640 252 560 262 482 274 Z"/>
+            <path class="d accent" d="M300 200 C420 182 520 150 602 110"/>
+            <path class="d accent" d="M800 166 C900 184 1000 202 1110 226"/>
+            <path class="d" d="M624 112 L644 112"/>
+            <path class="d" d="M300 290 L930 286 L934 280"/>
+            <circle class="d fillable helmet" cx="712" cy="140" r="21"/>
+            <path class="d accent" d="M703 135 Q722 128 734 139"/>
+            <path class="d halo" d="M652 132 C700 122 760 122 788 136 C798 142 804 152 806 162"/>
+            <path class="d fillable" d="M1060 290 L1250 290 L1252 281 C1200 279 1120 279 1062 283 Z"/>
+            <path class="d" d="M1092 277 C1150 271 1210 269 1248 269 M1134 268 C1180 265 1220 265 1248 265"/>
+            <path class="d fillable dark" d="M1238 292 L1254 292 L1254 262 L1244 264 Z"/>
+            <path class="d" d="M880 200 L1000 214 M890 252 L1000 236 M905 254 L998 208 M360 206 L270 216 M350 252 L270 234"/>
+            <g class="wheel" transform="translate(270 224)">
+              <g class="wheel__spin">
+                <circle class="d tyre" r="76"/><circle class="d faint" r="70"/>
+                <circle class="d accent stripe" r="62"/>
+                <circle class="d" r="50"/>
+                <path class="d faint" d="M0 -16 L0 -48 M14 8 L41 24 M-14 8 L-41 24 M14 -8 L41 -24 M-14 -8 L-41 -24 M0 16 L0 48"/>
+                <circle class="hub" r="8"/>
+              </g>
+            </g>
+            <g class="wheel" transform="translate(1000 224)">
+              <g class="wheel__spin">
+                <circle class="d tyre" r="76"/><circle class="d faint" r="70"/>
+                <circle class="d accent stripe" r="62"/>
+                <circle class="d" r="50"/>
+                <path class="d faint" d="M0 -16 L0 -48 M14 8 L41 24 M-14 8 L-41 24 M14 -8 L41 -24 M-14 -8 L-41 -24 M0 16 L0 48"/>
+                <circle class="hub" r="8"/>
+              </g>
+            </g>
+          </g>
+        </svg>
+
+        <!-- callouts positioned in % of the drawing -->
+        <div class="callout" style="--x:13%;--y:22%" data-at="0.30"><b class="mono">A</b><span>Active rear wing<small>Opens on straights, closes for corners</small></span></div>
+        <div class="callout" style="--x:57%;--y:30%" data-at="0.45"><b class="mono">B</b><span>Halo<small>Survives the weight of a London bus</small></span></div>
+        <div class="callout" style="--x:42%;--y:66%" data-at="0.58"><b class="mono">C</b><span>Power unit<small>~50% electric · 350 kW MGU-K</small></span></div>
+        <div class="callout" style="--x:90%;--y:72%" data-at="0.70"><b class="mono">D</b><span>Front wing<small>Narrower, with movable flaps</small></span></div>
+      </div>
+
+      <div class="anatomy__foot mono">
+        <span>Wheelbase <b>3,400 mm</b></span>
+        <span>Width <b>1,900 mm</b></span>
+        <span>Min. mass <b>768 kg</b></span>
+        <span class="anatomy__speed">Speed <b data-speed>000</b> km/h</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. NUMBERS -->
+  <section class="numbers" aria-label="2026 regulations in numbers">
+    <div class="numbers__grid">
+      <div class="num"><div class="num__v"><span data-count="100">100</span><sup>%</sup></div><p>Sustainable fuel. Every drop, from the first lap of the season.</p></div>
+      <div class="num"><div class="num__v"><span data-count="350">350</span><sup>kW</sup></div><p>From the electric motor — almost triple the outgoing cars.</p></div>
+      <div class="num"><div class="num__v">−<span data-count="30">30</span><sup>kg</sup></div><p>Lighter than before. Shorter, narrower, more agile in the slow corners.</p></div>
+      <div class="num"><div class="num__v"><span data-count="11">11</span></div><p>Teams on the grid, with Cadillac joining as the eleventh.</p></div>
+    </div>
+  </section>
+
+  <!-- 4b. LIVE SEASON -->
+  <section class="live" aria-label="The season, live">
+    <div class="live__head">
+      <h2 class="h2" data-split>The season, <em>live.</em></h2>
+      <p class="source mono">Updated after every session · Jolpica F1</p>
+    </div>
+    <div class="live__grid">
+      <a class="live__card" href="race.html" data-live="pole">
+        <span class="mono">Latest pole</span>
+        <div class="live__big" data-f="time">—</div>
+        <div class="live__name" data-f="driver">Loading…</div>
+        <div class="live__meta mono" data-f="meta"></div>
+      </a>
+      <a class="live__card" href="standings.html" data-live="leader">
+        <span class="mono">Championship leader</span>
+        <div class="live__big" data-f="pts">—</div>
+        <div class="live__name" data-f="driver">Loading…</div>
+        <div class="live__meta mono" data-f="meta"></div>
+      </a>
+      <a class="live__card" href="calendar.html" data-live="next">
+        <span class="mono">Next race</span>
+        <div class="live__map" data-f="map"></div>
+        <div class="countdown">
+          <div><b data-cd="d">00</b><span>Days</span></div><div><b data-cd="h">00</b><span>Hrs</span></div><div><b data-cd="m">00</b><span>Min</span></div>
+        </div>
+        <div class="live__name" data-f="gp">Loading…</div>
+        <div class="live__meta mono" data-f="meta"></div>
+      </a>
+    </div>
+  </section>
+
+  <!-- 6. GRID: horizontal helmets -->
+  <section class="grid" id="grid" aria-label="The 2026 grid">
+    <div class="grid__pin">
+      <div class="grid__head">
+        <h2 class="h2" data-split>Twenty-two <em>helmets.</em></h2>
+        <p class="grid__count mono"><span data-team-index>01</span> / 11 <a class="grid__all" href="teams.html">All teams →</a></p>
+      </div>
+      <div class="grid__track">
+        <!-- cards are rendered by main.js from TEAMS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- 6b. DRIVE TO SURVIVE -->
+  <section class="dts" id="dts" aria-labelledby="dts-title">
+    <div class="dts__frame">
+      <video class="dts__video" muted loop playsinline preload="metadata" poster="assets/video/dts-poster.jpg" aria-hidden="true">
+        <source src="assets/video/dts-loop.mp4" type="video/mp4">
+      </video>
+      <div class="dts__shade" aria-hidden="true"></div>
+    </div>
+    <div class="dts__content">
+      <p class="dts__kicker mono"><span class="dts__n" aria-hidden="true">N</span> Netflix · Season 8 · Now streaming</p>
+      <h2 class="dts__title" id="dts-title">
+        <img src="assets/video/dts-logo.webp" alt="Formula 1: Drive to Survive" width="1130" height="320" loading="lazy" decoding="async">
+      </h2>
+      <p class="dts__lede">The paddock with the cameras rolling. Rivalries, radio messages and the moments the broadcast never shows — season eight follows every team through the new era.</p>
+      <div class="dts__actions">
+        <a class="cta cta--solid" href="https://www.netflix.com/title/80204890" target="_blank" rel="noopener" data-magnetic><span>Watch on Netflix</span><i aria-hidden="true">↗</i></a>
+        <button class="cta dts__play" type="button" data-magnetic><span>Play trailer</span><i aria-hidden="true">▶</i></button>
+      </div>
+    </div>
+    <div class="dts__meta mono" aria-hidden="true">
+      <span>F1 · Drive to Survive</span><span>S8 · First look</span>
+    </div>
+  </section>
+
+  <!-- 7. LIGHTS OUT -->
+  <section class="start" id="start" aria-label="Race start">
+    <div class="start__pin">
+      <div class="lights" aria-hidden="true">
+        <div class="light"><i></i><i></i></div>
+        <div class="light"><i></i><i></i></div>
+        <div class="light"><i></i><i></i></div>
+        <div class="light"><i></i><i></i></div>
+        <div class="light"><i></i><i></i></div>
+      </div>
+      <h2 class="start__title"><span class="line"><span>Lights out</span></span><span class="line"><span><em>and away we go.</em></span></span></h2>
+      <svg class="start__car" viewBox="0 0 1280 340" aria-hidden="true"><use href="#car-silhouette"/></svg>
+    </div>
+  </section>
+
+</main>
+
+<!-- trailer lightbox -->
+<div class="lightbox" role="dialog" aria-modal="true" aria-label="Drive to Survive season 8 trailer" hidden>
+  <button class="lightbox__close mono" type="button">Close ✕</button>
+  <video class="lightbox__video" controls playsinline preload="none" poster="assets/video/dts-poster.jpg">
+    <source src="assets/video/dts-trailer.webm" type="video/webm">
+  </video>
+</div>
+
+<footer class="foot">
+  <div class="foot__glow" aria-hidden="true"></div>
+
+  <section class="fx" aria-label="Next race" data-foot-next>
+    <div class="fx__copy">
+      <p class="fx__k mono"><span class="dot"></span><span data-fx="k">Next race</span></p>
+      <h2 class="fx__title" data-fx="title">The next <em>Grand Prix</em></h2>
+      <p class="fx__meta mono" data-fx="meta"></p>
+      <div class="fx__cd" aria-live="off">
+        <div><b data-cd="d">00</b><span>Days</span></div><i>:</i>
+        <div><b data-cd="h">00</b><span>Hrs</span></div><i>:</i>
+        <div><b data-cd="m">00</b><span>Min</span></div><i>:</i>
+        <div><b data-cd="s">00</b><span>Sec</span></div>
+      </div>
+      <div class="fx__actions">
+        <a class="cta" href="calendar.html" data-fx="guide" data-magnetic><span>Weekend guide</span><i aria-hidden="true">→</i></a>
+        <a class="fx__link mono" href="calendar.html">Full calendar</a>
+      </div>
+    </div>
+    <figure class="fx__map" data-fx="map"></figure>
+  </section>
+
+  <div class="foot__flag" aria-hidden="true"></div>
+
+  <div class="foot__mid">
+    <div class="foot__brand">
+      <a href="index.html" aria-label="APEX F1 — home"><img src="assets/brand/corner-badge-dark.svg" alt="APEX F1" width="705" height="240"></a>
+      <p>An independent study of Formula 1. Live data, race replays, strategy and radio — every round of the season.</p>
+    </div>
+    <nav class="foot__col" aria-label="Explore">
+      <h3 class="mono">Explore</h3>
+      <a href="index.html"><span class="mono">01</span>Home<i>→</i></a>
+      <a href="calendar.html"><span class="mono">02</span>Calendar<i>→</i></a>
+      <a href="standings.html"><span class="mono">03</span>Standings<i>→</i></a>
+      <a href="drivers.html"><span class="mono">04</span>Drivers<i>→</i></a>
+      <a href="teams.html"><span class="mono">05</span>Teams<i>→</i></a>
+      <a href="garage.html"><span class="mono">06</span>Garage · 3D<i>→</i></a>
+    </nav>
+    <nav class="foot__col" aria-label="Season">
+      <h3 class="mono">Season</h3>
+      <a href="race.html"><span class="mono">07</span>Latest race<i>→</i></a>
+      <a href="standings.html?view=constructors"><span class="mono">08</span>Constructors<i>→</i></a>
+      <a href="brand.html"><span class="mono">09</span>Brand<i>→</i></a>
+    </nav>
+    <nav class="foot__col foot__col--data" aria-label="Data sources">
+      <h3 class="mono">Data</h3>
+      <a href="https://github.com/jolpica/jolpica-f1" target="_blank" rel="noopener">Jolpica F1<i>↗</i></a>
+      <a href="https://openf1.org" target="_blank" rel="noopener">OpenF1<i>↗</i></a>
+      <a href="https://open-meteo.com" target="_blank" rel="noopener">Open-Meteo<i>↗</i></a>
+      <a href="https://github.com/bacinger/f1-circuits" target="_blank" rel="noopener">F1 circuits<i>↗</i></a>
+    </nav>
+  </div>
+
+  <div class="foot__word" aria-hidden="true"><span>APEX</span><em>F1</em></div>
+
+  <div class="foot__bar mono">
+    <span>© <span data-year>2026</span> APEX F1</span>
+    <span class="foot__legal">Fan project · not affiliated with Formula 1, the FIA or any team</span>
+    <a class="foot__replay" href="index.html?intro" title="Watch the pit-stop intro again"><i aria-hidden="true">↻</i> Replay intro</a>
+    <span class="foot__clock">Local <b data-clock>--:--</b></span>
+    <a class="foot__top" href="#top" data-top aria-label="Back to top"><i aria-hidden="true">↑</i></a>
+  </div>
+<!-- Demo by Brand Method -->
+<div class="bm-footrib" role="img" aria-label="Demo by BrandMethod.co">
+  <canvas id="bmRibCv" width="460" height="110" aria-hidden="true"></canvas>
+  <span class="bm-footrib-fb" hidden>Demo · BrandMethod.co</span>
+</div>
+<style id="bm-footrib-css">
+.bm-footrib{display:flex;justify-content:center;padding:1.6rem 0 .4rem;pointer-events:none}
+.bm-footrib canvas{width:min(460px,96vw);height:auto;display:block}
+.bm-footrib-fb{font-family:var(--mono,monospace);font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:#fff;background:linear-gradient(90deg,#1421B8,#2536F5);padding:.5rem 1.4rem;clip-path:polygon(10px 0,calc(100% - 10px) 0,100% 50%,calc(100% - 10px) 100%,10px 100%,0 50%)}
+.bm-footrib-fb[hidden]{display:none!important}
+.bm-footrib{width:100%;box-sizing:border-box;position:relative;z-index:2}
+.bm-footrib canvas{margin:0 auto}
+@media (max-width:600px){.bm-footrib{padding:1.2rem 0 .2rem}.bm-footrib canvas{width:min(300px,78vw)}}
+</style>
+<script>
+window.__bmFootRib=function(){
+  var cv=document.getElementById('bmRibCv'),fb=document.querySelector('.bm-footrib-fb');
+  var ctx;try{ctx=cv&&cv.getContext('2d');}catch(e){}
+  if(!ctx){if(cv)cv.style.display='none';if(fb)fb.hidden=false;return;}
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W=460,H=110,dpr=Math.min(window.devicePixelRatio||1,2);
+  cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
+  var X0=40,X1=420,BH=32,BY=40,running=false,looping=false,t=0;
+  /* the signature: utility label, the star, then BRAND METHOD spaced as two words */
+  var SEGS=[
+    {t:'DEMO BY',f:'600 12px Inter,sans-serif',sp:3.6,a:1,dy:0,gap:8},
+    {star:true,w:13,gap:9},
+    {t:'BRAND',f:'600 12px Inter,sans-serif',sp:3.6,a:0.98,dy:0},
+    {t:'METHOD.CO',f:'600 12px Inter,sans-serif',sp:3.6,a:0.98,dy:0}
+  ];
+  var GLYPHS=null;
+  function buildGlyphs(){
+    GLYPHS=[];
+    SEGS.forEach(function(s){
+      if(s.star){GLYPHS.push({star:true,w:s.w});if(s.gap)GLYPHS.push({gap:s.gap});return;}
+      if(!s.t){if(s.gap)GLYPHS.push({gap:s.gap});return;}
+      ctx.font=s.f;
+      for(var i=0;i<s.t.length;i++){
+        var ch=s.t[i];
+        if(ch===' '){GLYPHS.push({gap:6.5});continue;}
+        GLYPHS.push({ch:ch,f:s.f,a:s.a,dy:s.dy||0,w:ctx.measureText(ch).width+s.sp});
+      }
+      if(s.gap)GLYPHS.push({gap:s.gap});
+    });
+  }
+  function wave(x,tt){return 4.0*Math.sin(x*0.0135+tt*0.0011)+2.4*Math.sin(x*0.029-tt*0.00068)+1.2*Math.sin(x*0.055+tt*0.0016);}
+  function slope(x,tt){return (wave(x+2,tt)-wave(x-2,tt))/4;}
+  function lerp(a,b,p){return a+(b-a)*p;}
+  function shade(p){
+    var r=Math.round(lerp(18,86,p)),g=Math.round(lerp(28,116,p)),b=Math.round(lerp(158,255,p));
+    return 'rgb('+r+','+g+','+b+')';
+  }
+  function tail(xEdge,dir,tt){
+    var y=BY+wave(xEdge,tt)*0.7+9;
+    var x2=xEdge-dir*40;
+    ctx.beginPath();
+    ctx.moveTo(xEdge,y);
+    ctx.lineTo(x2,y+7);
+    ctx.lineTo(x2+dir*13,y+7+BH/2);
+    ctx.lineTo(x2,y+7+BH);
+    ctx.lineTo(xEdge,y+BH);
+    ctx.closePath();
+    ctx.fillStyle='#101C96';ctx.fill();
+    ctx.fillStyle='rgba(0,0,0,.22)';ctx.fill();
+  }
+  function draw(tt){
+    if(!GLYPHS)buildGlyphs();
+    ctx.clearRect(0,0,W,H);
+    tail(X0+6,1,tt);tail(X1-6,-1,tt);
+    for(var x=X0;x<=X1;x+=2){
+      var y=BY+wave(x,tt),s=slope(x,tt);
+      var p=Math.max(0,Math.min(1,0.52+s*5.5+0.14*Math.sin(x*0.006-tt*0.00042)));
+      ctx.fillStyle=shade(p);
+      ctx.fillRect(x-1,y,2.4,BH);
+    }
+    ctx.beginPath();
+    for(var x=X0;x<=X1;x+=4){var y=BY+wave(x,tt);(x===X0)?ctx.moveTo(x,y+0.6):ctx.lineTo(x,y+0.6);}
+    ctx.strokeStyle='rgba(255,255,255,.28)';ctx.lineWidth=1.1;ctx.stroke();
+    ctx.beginPath();
+    for(var x=X0;x<=X1;x+=4){var y=BY+wave(x,tt)+BH;(x===X0)?ctx.moveTo(x,y-0.6):ctx.lineTo(x,y-0.6);}
+    ctx.strokeStyle='rgba(0,10,60,.4)';ctx.lineWidth=1.2;ctx.stroke();
+    /* the signature rides the fabric */
+    ctx.textAlign='left';ctx.textBaseline='middle';
+    var total=0;GLYPHS.forEach(function(g){total+=g.w||g.gap||0;});
+    var xs=(X0+X1)/2-total/2;
+    GLYPHS.forEach(function(g){
+      if(g.gap){xs+=g.gap;return;}
+      var cxx=xs+(g.w||0)/2;
+      var y=BY+wave(cxx,tt)+BH/2+0.5,a=Math.atan(slope(cxx,tt));
+      ctx.save();ctx.translate(cxx,y);ctx.rotate(a);
+      if(g.star){
+        ctx.strokeStyle='rgba(255,255,255,.97)';ctx.lineWidth=1.5;ctx.lineCap='round';
+        for(var sp=0;sp<4;sp++){var an=sp*Math.PI/4;
+          ctx.beginPath();ctx.moveTo(-Math.cos(an)*4.6,-Math.sin(an)*4.6);ctx.lineTo(Math.cos(an)*4.6,Math.sin(an)*4.6);ctx.stroke();}
+      } else {
+        ctx.font=g.f;
+        ctx.fillStyle='rgba(2,8,40,.4)';ctx.fillText(g.ch,-((g.w||0)/2)+0.7,(g.dy||0)+1.1);
+        ctx.fillStyle='rgba(255,255,255,'+g.a+')';ctx.fillText(g.ch,-((g.w||0)/2),(g.dy||0));
+      }
+      ctx.restore();
+      xs+=g.w||0;
+    });
+  }
+  function frame(){if(!running){looping=false;return;}looping=true;t+=16;draw(t);requestAnimationFrame(frame);}
+  function boot(){
+    draw(0);
+    if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){GLYPHS=null;draw(t);});
+    if(reduce)return;
+    if(window.IntersectionObserver){
+      new IntersectionObserver(function(es){es.forEach(function(en){running=en.isIntersecting;if(running&&!looping)requestAnimationFrame(frame);});}).observe(cv);
+    }else{running=true;requestAnimationFrame(frame);}
+    document.addEventListener('visibilitychange',function(){if(document.hidden){running=false;}else{var r=cv.getBoundingClientRect();if(r.top<innerHeight&&r.bottom>0){running=true;if(!looping)requestAnimationFrame(frame);}}});
+  }
+  boot();
+};
+window.__bmFootRib();
+</script>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="js/core/circuits.js"></script>
+<script src="js/core/f1api.js"></script>
+<script src="js/core/common.js"></script>
+<script src="js/pages/main.js"></script>
+<script src="js/pages/home.js"></script>
+<script type="module" src="js/3d/pitstop.js"></script>
+</body>
+</html>

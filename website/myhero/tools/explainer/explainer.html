@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>MyHero explainer storyboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+/* MyHero explainer, third cut (23 Oct 2026): friendlier, clearer, about ninety five seconds. 1280 by 720 storyboard;
+   window.seek(t) sets every layer for time t so the renderer can step through it. Ten scenes, one idea each:
+   0 hello, 1 the problem, 2 snap, 3 understand, 4 medicines, 5 hand over, 6 after the visit, 7 family, 8 your rules,
+   9 close. The doctor is the clean keyed clip (doc2/d00..d60 at 12 fps) and waves with the drawn wave frames.
+   Real screens take a tap and move on; callouts land on the words that name them. No burned subtitles: the captions
+   track carries the words. Motion: ease-out entrances, short stagger, back-eased pops, 400 ms crossfades. */
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1280px;height:720px;overflow:hidden;background:#fff}
+body{font-family:"Nunito",sans-serif;color:#4A5763;position:relative}
+.sc{position:absolute;inset:0;opacity:0;visibility:hidden}
+h1,h2{font-family:"Fredoka",sans-serif;color:#1B2430;font-weight:600;letter-spacing:-.012em;line-height:1.04}
+h1{font-size:84px}h2{font-size:72px}
+em{font-style:normal;color:#00A3B8}
+.lead{font-size:30px;line-height:1.4;font-weight:700;color:#4A5763;max-width:520px;margin-top:20px}
+.L{position:absolute;will-change:transform,opacity}
+.wash{position:absolute;inset:0;background:#F4FBFC}
+.pool{position:absolute;inset:0;background:#00A3B8}
+.step{display:inline-block;font:800 20px/1 "Nunito",sans-serif;color:#00A3B8;background:#E3F7FA;padding:12px 18px;border-radius:12px;letter-spacing:.02em}
+.step+h2{margin-top:18px}
+.dev{width:300px;padding:10px;border-radius:57px;background:#D5D9DE;box-shadow:inset 0 0 0 1px #F4F6F8,inset 0 0 0 2.5px #B3B9C0,0 36px 56px -30px rgba(20,40,46,.5)}
+.dev .scr{position:relative;border-radius:15.3%/7.1%;overflow:hidden;aspect-ratio:1020/2214;background:#F6FAFB;box-shadow:0 0 0 4px #0E1114}
+.dev .scr img{position:absolute;inset:0;display:block;width:100%;height:100%}
+.dev .scr img+img{transform:translateX(100%)}
+.tap{position:absolute;width:44px;height:44px;margin:-22px 0 0 -22px;border-radius:50%;background:rgba(255,59,92,.28);box-shadow:0 0 0 3px rgba(255,59,92,.55);opacity:0}
+.chip{display:inline-block;background:#00A3B8;color:#fff;font:800 24px "Nunito",sans-serif;padding:14px 20px;border-radius:14px;box-shadow:0 12px 24px -12px rgba(0,163,184,.9);white-space:nowrap}
+.card{background:#fff;border-radius:20px;padding:18px 24px;box-shadow:0 3px 0 #E7EDF0,0 28px 44px -26px rgba(8,64,72,.45);white-space:nowrap}
+.card b{display:block;font:600 28px "Fredoka",sans-serif;color:#1B2430}
+.card small{display:block;font:800 18px "Nunito",sans-serif;color:#00A3B8;margin-top:4px}
+.card.red small{color:#E0213F}
+.src{display:flex;align-items:center;gap:18px;background:#fff;border-radius:18px;padding:14px 22px;box-shadow:0 3px 0 #E7EDF0;width:500px}
+.src .bl-spot{width:56px;height:56px;flex:none;color:#00A3B8;padding:14px;border-radius:16px;background:#E3F7FA}
+.src b{font:600 29px "Fredoka",sans-serif;color:#1B2430}
+.rule{display:flex;align-items:center;gap:20px;background:#fff;border-radius:20px;padding:18px 26px;box-shadow:0 3px 0 #E7EDF0;width:600px}
+.rule .bl-spot{width:64px;height:64px;flex:none;color:#00A3B8;padding:16px;border-radius:18px;background:#E3F7FA}
+.rule b{font:600 31px "Fredoka",sans-serif;color:#1B2430}
+.lbl{display:inline-block;font:800 22px "Nunito",sans-serif;color:#1B2430;background:#fff;padding:12px 20px;border-radius:14px;box-shadow:0 3px 0 #E7EDF0;white-space:nowrap}
+.lbl.on{color:#fff;background:#00A3B8;box-shadow:0 3px 0 #08818C}
+.bub{background:#fff;border-radius:22px;padding:18px 24px;font:800 28px/1.3 "Nunito",sans-serif;color:#1B2430;box-shadow:0 3px 0 #E7EDF0,0 24px 40px -24px rgba(8,64,72,.4);max-width:430px}
+.bub:after{content:"";position:absolute;left:-14px;top:34px;border:12px solid transparent;border-right-color:#fff;border-left:0}
+.store{display:inline-flex;align-items:center;gap:12px;min-height:60px;padding:10px 22px 10px 16px;border-radius:14px;background:#fff;color:#1B2430;box-shadow:0 5px 0 rgba(0,0,0,.18)}
+.store svg{width:30px;height:30px;flex:none}
+.store span{display:grid;line-height:1.1}
+.store small{font:700 13px "Nunito",sans-serif;color:#6B7783}
+.store b{font:600 22px/1.15 "Fredoka",sans-serif}
+.doc{position:absolute;bottom:0;transform-origin:50% 100%}
+.doc img{display:block;height:100%;width:auto}
+.doc .wv{position:absolute;left:0;top:0;height:100%;width:auto;opacity:0}
+.hearts{position:absolute;width:0;height:0}
+.hearts i{position:absolute;left:-12px;top:-12px;width:24px;height:24px;opacity:0;background:center/contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 22'%3E%3Cpath d='M12 21.2 2.9 12.4A5.6 5.6 0 0 1 12 4.9a5.6 5.6 0 0 1 9.1 7.5Z' fill='%23FF3B5C'/%3E%3C/svg%3E")}
+.flags{display:flex;gap:10px}
+.flags .bl-spot{width:64px;height:64px;border-radius:16px;overflow:hidden;box-shadow:0 0 0 2px #E7EDF0}
+</style></head><body>
+<!-- 0 hello -->
+<div class="sc" id="s0"><div class="wash"></div>
+  <div class="L doc" id="t-doc" style="left:70px;height:600px"><img class="clip" src="../../assets/web22/figure-a.webp"><img class="wv bl" src="../../assets/web22/figure-a-blink.webp"></div>
+  <div class="L bub" id="t-bub" style="left:560px;top:84px">Hi, I'm MyHero.</div>
+  <div class="L" id="t-wm" style="left:600px;top:212px"><img src="../../assets/logo/wordmark-red.svg" style="height:92px"></div>
+  <div class="L" id="t-h" style="left:600px;top:340px"><h1 style="font-size:66px">Your whole health<br>record, <em>in one app.</em></h1><p class="lead">Explained in plain words.</p></div>
+</div>
+<!-- 1 the problem -->
+<div class="sc" id="s1">
+  <img class="L" id="p-ph" src="../../assets/v3/ph-papers.webp" style="left:70px;top:80px;width:500px;height:560px;object-fit:cover;border-radius:26px;box-shadow:0 36px 56px -34px rgba(8,64,72,.5)">
+  <div class="L" id="p-h" style="left:640px;top:90px"><h2>Your history<br><em>is scattered.</em></h2></div>
+  <div class="L src" id="p-1" style="left:640px;top:290px"><i data-spot="chat"></i><b>Photos in a chat</b></div>
+  <div class="L src" id="p-2" style="left:640px;top:380px"><i data-spot="doc"></i><b>Paper in a drawer</b></div>
+  <div class="L src" id="p-3" style="left:640px;top:470px"><i data-spot="globe"></i><b>Three clinic portals</b></div>
+  <div class="L src" id="p-4" style="left:640px;top:560px"><i data-spot="clock"></i><b>Ten minutes in the room</b></div>
+</div>
+<!-- 2 snap -->
+<div class="sc" id="s2"><div class="wash"></div>
+  <div class="L" id="a-h" style="left:80px;top:84px"><span class="step">STEP 1</span><h2>Snap it <em>once.</em></h2><p class="lead">Every value read, shown to you to check, and filed.</p></div>
+  <div class="L lbl" id="a-l1" style="left:80px;top:352px">Lab report</div>
+  <div class="L lbl" id="a-l2" style="left:252px;top:352px">Prescription</div>
+  <div class="L lbl" id="a-l3" style="left:446px;top:352px">Discharge note</div>
+  <img class="L" id="a-il" src="../../assets/web17/intro-1.webp" style="left:50px;top:440px;width:480px">
+  <div class="L dev" id="a-dev" style="left:800px;top:60px"><div class="scr"><img src="../../assets/web22/scr-scan.webp"><img src="../../assets/web22/scr-scan-done.webp"></div><span class="tap" id="a-tap" style="left:50%;top:91%"></span></div>
+  <div class="L card" id="a-card" style="left:600px;top:572px"><b>Filed under Lab results</b><small>Elite Care Clinic · 12 Sep</small></div>
+</div>
+<!-- 3 understand -->
+<div class="sc" id="s3">
+  <div class="L dev" id="b-dev" style="left:150px;top:60px"><div class="scr"><img src="../../assets/web22/scr-trackers.webp"><img src="../../assets/web22/scr-tracker-detail.webp"></div><span class="tap" id="b-tap" style="left:34%;top:25%"></span></div>
+  <div class="L card" id="b-card" style="left:424px;top:132px"><b>128/82 · In range</b><small>Down 10 in 6 weeks</small></div>
+  <div class="L card" id="b-card2" style="left:424px;top:556px"><b>HbA1c 6.8 %</b><small>Near target</small></div>
+  <div class="L" id="b-h" style="left:640px;top:84px"><span class="step">STEP 2</span><h2>Understand <em>it.</em></h2><p class="lead">Each reading in its own tracker, with the range marked.</p></div>
+  <img class="L" id="b-il" src="../../assets/web17/intro-2.webp" style="left:680px;top:410px;width:540px">
+</div>
+<!-- 4 medicines -->
+<div class="sc" id="s4"><div class="wash"></div>
+  <div class="L" id="m-h" style="left:80px;top:110px"><h2>Your medicines,<br><em>kept.</em></h2><p class="lead">Dose times, with food or without, and a warning before they run out.</p></div>
+  <img class="L" id="m-fig" src="../../assets/web22/figure-a.webp" style="left:60px;top:380px;height:340px">
+  <img class="L" id="m-il" src="../../assets/web17/intro-4.webp" style="left:290px;top:420px;width:340px">
+  <div class="L dev" id="m-dev" style="left:800px;top:60px"><div class="scr"><img src="../../assets/web22/scr-medications.webp"></div></div>
+  <div class="L card" id="m-c1" style="left:600px;top:200px"><b>Metformin 500 mg</b><small>After meals · 08:00 and 20:00</small></div>
+  <div class="L card red" id="m-c2" style="left:640px;top:560px"><b>Refill by 10 Oct</b><small>26 tablets left</small></div>
+</div>
+<!-- 5 hand over -->
+<div class="sc" id="s5">
+  <div class="L dev" id="c-dev" style="left:150px;top:60px"><div class="scr"><img src="../../assets/web22/scr-summary.webp"><img src="../../assets/web22/scr-summary-preview.webp"></div><span class="tap" id="c-tap" style="left:82%;top:17%"></span></div>
+  <div class="L card" id="c-card" style="left:424px;top:556px"><b>Shared with Dr. Amira</b><small>Ends in 24 hours</small></div>
+  <div class="L" id="c-h" style="left:640px;top:84px"><span class="step">STEP 3</span><h2>Hand it <em>over.</em></h2><p class="lead">Your summary, on one page, for any doctor.</p></div>
+  <div class="L lbl" id="c-l1" style="left:640px;top:352px">Profile</div>
+  <div class="L lbl" id="c-l2" style="left:768px;top:352px">Medicines</div>
+  <div class="L lbl" id="c-l3" style="left:930px;top:352px">Latest readings</div>
+  <div class="L lbl" id="c-l4" style="left:640px;top:420px">Recent visits</div>
+  <div class="L lbl" id="c-l5" style="left:640px;top:520px">Link</div>
+  <div class="L lbl" id="c-l6" style="left:730px;top:520px">Code</div>
+  <div class="L lbl" id="c-l7" style="left:826px;top:520px">Print</div>
+  <img class="L" id="c-il" src="../../assets/web17/intro-3.webp" style="left:940px;top:400px;width:300px">
+</div>
+<!-- 6 after the visit -->
+<div class="sc" id="s6"><div class="wash"></div>
+  <div class="L" id="v-h" style="left:80px;top:84px"><h2>After the <em>visit.</em></h2><p class="lead" style="margin-top:12px">Record what the doctor said, while it is fresh.</p></div>
+  <div class="L src" id="v-1" style="left:80px;top:262px"><i data-spot="help"></i><b>Four quick questions</b></div>
+  <div class="L src" id="v-2" style="left:80px;top:352px"><i data-spot="rec"></i><b>Or a voice note, kept on your phone</b></div>
+  <img class="L" id="v-il" src="../../assets/web17/intro-5.webp" style="left:130px;top:440px;width:300px">
+  <div class="L dev" id="v-dev" style="left:800px;top:60px"><div class="scr"><img src="../../assets/web22/scr-visit-detail.webp"></div></div>
+</div>
+<!-- 7 family -->
+<div class="sc" id="s7">
+  <img class="L" id="g-doc" src="../../assets/web17/figure-heart.webp" style="left:90px;top:90px;height:600px">
+  <div class="L" id="g-h" style="left:600px;top:110px"><h2>For the family,<br><em>too.</em></h2></div>
+  <div class="L rule" id="g-1" style="left:600px;top:400px"><i data-spot="users"></i><b>A parent's record beside yours</b></div>
+  <div class="L rule" id="g-2" style="left:600px;top:504px"><i data-spot="lock"></i><b>With their permission</b></div>
+</div>
+<!-- 8 your rules -->
+<div class="sc" id="s8"><div class="wash"></div>
+  <div class="L" id="e-h" style="left:80px;top:110px"><h2>Your record,<br><em>your rules.</em></h2></div>
+  <div class="L rule" id="e-1" style="left:80px;top:350px"><i data-spot="shield"></i><b>Yours. Never sold.</b></div>
+  <div class="L rule" id="e-2" style="left:80px;top:454px"><i data-spot="share"></i><b>Shared only when you say so</b></div>
+  <div class="L rule" id="e-3" style="left:80px;top:558px"><i data-spot="doc"></i><b>Download or delete, any time</b></div>
+  <img class="L" id="e-doc" src="../../assets/web17/figure-thumbs.webp" style="left:760px;top:80px;height:620px">
+</div>
+<!-- 9 close -->
+<div class="sc" id="s9"><div class="pool"></div>
+  <div class="L doc" id="f-doc" style="left:80px;height:600px"><img class="clip" src="../../assets/web22/figure-a.webp"><img class="wv bl" src="../../assets/web22/figure-a-blink.webp"></div>
+  <div class="L" id="f-wm" style="left:600px;top:120px"><img src="../../assets/logo/wordmark-white-plain.svg" style="height:92px"></div>
+  <div class="L" id="f-h" style="left:600px;top:250px"><h1 style="color:#fff">Never walk in<br>unsure.</h1><p class="lead" style="color:#fff;font-size:30px">Early access at myhero.my</p></div>
+  <div class="L" id="f-st" style="left:600px;top:560px;display:flex;gap:12px"><span class="store"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M16.4 12.6c0-2.4 2-3.6 2.1-3.7-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-2.9.9-3.7.9-.8 0-1.9-.9-3.2-.8-1.6 0-3.1 1-4 2.4-1.7 3-.4 7.4 1.2 9.8.8 1.2 1.8 2.5 3 2.4 1.2 0 1.7-.8 3.1-.8 1.5 0 1.9.8 3.2.8 1.3 0 2.2-1.2 3-2.4.9-1.4 1.3-2.7 1.3-2.8 0 0-2.5-1-2.5-3.9zM14 5.4c.7-.8 1.1-1.9 1-3-1 0-2.1.6-2.8 1.4-.6.7-1.2 1.8-1 2.9 1.1.1 2.1-.5 2.8-1.3z"/></svg><span><small>Soon on the</small><b>App Store</b></span></span><span class="store"><svg viewBox="0 0 24 24"><path fill="#34A853" d="M3.6 2.3l10.5 10.4L3.6 23.1c-.4-.2-.6-.7-.6-1.2V3.5c0-.5.2-.9.6-1.2z"/><path fill="#FBBC04" d="M17.6 9.2l-3.5 3.5 3.5 3.5 4-2.3c1.1-.6 1.1-1.8 0-2.4z"/><path fill="#4285F4" d="M14.1 12.7l3.5 3.5-12.4 7.1c-.6.3-1.2.3-1.6-.2z"/><path fill="#EA4335" d="M3.6 2.3c.4-.4 1-.5 1.6-.2l12.4 7.1-3.5 3.5z"/></svg><span><small>Soon on</small><b>Google Play</b></span></span></div>
+</div>
+<script src="../../assets/web22/icons.js"></script>
+<script>
+document.querySelectorAll('[data-spot]').forEach(function(el){if(window.blSpot){el.outerHTML=window.blSpot(el.getAttribute('data-spot'))}});
+/* the doctor's 61 clip frames, preloaded so a src swap paints at once */
+/* the doctor is the crisp drawn figure; she blinks (figure-a-blink) and waves (wave-2..6) on cue */
+/* scene starts (s); written by build.py from the voice lengths */
+var SCENES=[0.0,7.12,17.61,30.89,45.04,52.75,67.33,74.29,80.6,88.68];
+var END=96.71;
+/* layer: [delay s, kind]  kinds: up, left, pop */
+var LAYERS={'t-doc':[0.1,'up'],'t-bub':[0.4,'pop'],'t-wm':[1.6,'up'],'t-h':[2.0,'up'],
+ 'p-ph':[0.1,'up'],'p-h':[0.3,'up'],'p-1':[2.9,'left'],'p-2':[4.1,'left'],'p-3':[5.3,'left'],'p-4':[6.6,'left'],
+ 'a-h':[0.1,'up'],'a-l1':[3.0,'pop'],'a-l2':[3.9,'pop'],'a-l3':[4.8,'pop'],'a-il':[0.5,'up'],'a-dev':[0.3,'up'],'a-card':[10.0,'pop'],
+ 'b-dev':[0.1,'up'],'b-h':[0.3,'up'],'b-il':[0.7,'up'],'b-card':[6.2,'pop'],'b-card2':[8.4,'pop'],
+ 'm-h':[0.1,'up'],'m-fig':[0.4,'up'],'m-il':[0.7,'up'],'m-dev':[0.3,'up'],'m-c1':[2.4,'pop'],'m-c2':[4.5,'pop'],
+ 'c-dev':[0.1,'up'],'c-h':[0.3,'up'],'c-l1':[4.7,'pop'],'c-l2':[5.3,'pop'],'c-l3':[5.9,'pop'],'c-l4':[6.7,'pop'],'c-l5':[9.1,'pop'],'c-l6':[9.6,'pop'],'c-l7':[10.1,'pop'],'c-il':[0.7,'up'],'c-card':[11.2,'pop'],
+ 'v-h':[0.1,'up'],'v-dev':[0.3,'up'],'v-il':[0.9,'up'],'v-1':[3.0,'left'],'v-2':[4.3,'left'],
+ 'g-doc':[0.1,'up'],'g-h':[0.3,'up'],'g-1':[1.0,'left'],'g-2':[2.6,'left'],
+ 'e-h':[0.1,'up'],'e-1':[0.8,'left'],'e-2':[2.5,'left'],'e-3':[4.3,'left'],'e-doc':[0.4,'up'],
+ 'f-doc':[0.1,'up'],'f-wm':[0.5,'up'],'f-h':[0.7,'up'],'f-st':[2.8,'pop']};
+/* phone interactions: [scene, tap id, tap time, swap time] */
+var TAPS=[[2,'a-tap',6.4,6.8],[3,'b-tap',4.6,5.0],[5,'c-tap',8.4,8.8]];
+/* the wave: drawn frames 2..6 as a sequence at 9 fps from a start time, then back to the clip */
+var WAVES={'t-doc':[99,[]],'f-doc':[99,[]]};  /* the drawn wave frames are out (23 Oct: 'no side by side animation') */
+function clamp(x){return Math.min(1,Math.max(0,x))}
+function out3(x){x=clamp(x);return 1-Math.pow(1-x,3)}
+function out5(x){x=clamp(x);return 1-Math.pow(1-x,5)}
+function back(x){x=clamp(x);var c=1.5;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)}
+window.seek=function(t){
+  var si=0;for(var i=0;i<SCENES.length;i++)if(t>=SCENES[i])si=i;
+  var st=SCENES[si],local=t-st,next=si+1<SCENES.length?SCENES[si+1]:END;
+  document.querySelectorAll('.sc').forEach(function(s,j){var on=j===si;
+    if(on){var fi=si===0?1:out3(local/.4),fo=t>next-.4?1-out3((t-(next-.4))/.4):1;s.style.opacity=Math.min(fi,fo);s.style.visibility='visible'}else{s.style.opacity=0;s.style.visibility='hidden'}});
+  var sc=document.getElementById('s'+si);
+  sc.querySelectorAll('.L').forEach(function(el){var cfg=LAYERS[el.id]||[0,'up'];var k=(local-cfg[0])/.6;var e=out5(k);var tf='';
+    if(cfg[1]==='up'){el.style.opacity=e;tf='translateY('+((1-e)*36)+'px)'}
+    else if(cfg[1]==='left'){el.style.opacity=e;tf='translateX('+((1-e)*-36)+'px)'}
+    else{el.style.opacity=clamp(k*2);tf='scale('+(0.7+0.3*back(k))+')'}
+    if(el.classList.contains('dev')&&k>1)tf='translateY('+(Math.sin((local-cfg[0])*1.1)*3).toFixed(2)+'px)';
+    if(el.classList.contains('doc')&&k>1)tf='translateY('+(Math.sin(local*1.4)*3).toFixed(2)+'px)';
+    el.style.transform=tf});
+  /* the doctor: clip frames at 12 fps, the wave over them once per scene, hearts after the hello wave */
+  sc.querySelectorAll('.doc').forEach(function(d){var clip=d.querySelector('.clip');var bl=d.querySelector('.bl');
+    var w=WAVES[d.id];var wvs=d.querySelectorAll('.wv:not(.bl)');var k=Math.floor((local-w[0])*9);var seq=w[1];var idx=(local>=w[0]&&k<seq.length)?seq[k]:0;
+    wvs.forEach(function(f,j){f.style.opacity=idx===j+2?1:0});var blink=!idx&&((local%3.7)>3.45);bl.style.opacity=blink?1:0;clip.style.opacity=idx?0:1;
+    var hs=d.querySelectorAll('.hearts i');hs.forEach(function(h,j){var hk=(local-(w[0]+1.3)-j*0.45)/1.7;var o=hk<0?0:(hk<.15?hk/.15:1-clamp((hk-.15)/.85));h.style.opacity=o;h.style.transform='translate('+((j-1)*16*clamp(hk))+'px,'+(-96*clamp(hk))+'px) scale('+(0.5+0.5*clamp(hk*3))+')'})});
+  /* the chips light up as they are named: on for a beat, then settle */
+  sc.querySelectorAll('.lbl').forEach(function(el){var cfg=LAYERS[el.id]||[0,'pop'];var age=local-cfg[0];el.classList.toggle('on',age>=0&&age<1.1)});
+  /* taps and screen changes */
+  TAPS.forEach(function(tp){if(tp[0]!==si)return;var tap=document.getElementById(tp[1]);var k=(local-tp[2])/.55;
+    tap.style.opacity=k<0?0:(1-clamp(k))*.9;tap.style.transform='scale('+(0.4+1.4*clamp(k))+')';
+    var imgs=tap.parentNode.querySelectorAll('.scr img');var s2=out3((local-tp[3])/.45);
+    imgs[0].style.transform='translateX('+(-100*s2)+'%)';imgs[1].style.transform='translateX('+(100-100*s2)+'%)'});
+};
+seek(0);
+</script>
+</body></html>

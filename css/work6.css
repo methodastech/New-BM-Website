@@ -30,7 +30,7 @@
 @keyframes wk6mBreath2{0%,100%{transform:scale(1,1)}50%{transform:scale(1.004,1.012)}}
 @keyframes wk6mPush{from{transform:scale(1)}to{transform:scale(1.045)}}
 @keyframes wk6mDayPose{0%{opacity:0;z-index:2}5%{opacity:1;z-index:2}5.01%{z-index:1}26%{opacity:1;z-index:1}26.1%,100%{opacity:0;z-index:1}}
-@keyframes wk6mDay{0%,21%{background:#FFE6D3}25%,46%{background:#F1EAFD}50%,71%{background:#DCC9F7}75%,96%{background:#2C2257}100%{background:#FFE6D3}}
+@keyframes wk6mDay{0%,21%{background:#F4F8E3}25%,46%{background:#EEF5D8}50%,71%{background:#F3E4CF}75%,96%{background:#22331A}100%{background:#F4F8E3}}
 @keyframes wk6mSky{0%{left:10%;top:38%;background:#FFB25E;box-shadow:0 0 40px 10px rgba(255,178,94,.45)}
   21%{left:24%;top:16%;background:#FFC85E;box-shadow:0 0 40px 10px rgba(255,200,94,.45)}
   25%,46%{left:45%;top:8%;background:#FFD860;box-shadow:0 0 44px 12px rgba(255,216,96,.5)}
@@ -507,10 +507,13 @@ html body .svx-ovhero.has-film .wk6-svh--film>img{object-position:30% 20%}
 .wk6m-card--guud .wk6m-fig,.wk6m-card--guud .wk6m-shadow{z-index:1}
 .wk6m-card--guud .wk6m-fig--n4 .wk6m-pose,.wk6m-card--guud .wk6m-pose{animation-name:wk6mDayPose;animation-duration:16s;
   animation-delay:calc(var(--p,0) * 4s);animation-timing-function:ease-in-out}
-.wk6m-card--guud .wk6m-z i{color:#E9E2FF}
+.wk6m-card--guud .wk6m-z i{color:#D9EBA8}
 @media (prefers-reduced-motion:reduce){
 .wk6m-card--guud .wk6m-media::before,.wk6m-card--guud .wk6m-media::after{animation:none}
 }
+.wk6m-shadow,.wk6m-mem-sh{display:none!important}
+#pg-case-santa-barbara-polo-cafe .wk6-ctitle{max-width:none;white-space:nowrap;font-size:min(clamp(40px,5.4vw,84px),7.4vw)}
+#pg-case-santa-barbara-polo-cafe .wk6-ctitle{max-width:none;white-space:nowrap;font-size:min(clamp(40px,5.4vw,84px),7.4vw)}
 no tag. */
 html body #pg-archive .page-hero.bmx-wk{background:#070810!important;color:#fff;min-height:clamp(460px,54vh,600px);display:flex;flex-direction:column;justify-content:center}
 html body #pg-archive .bmx-wk .page-hero-grid,html body #pg-archive .bmx-wk .page-hero-glow,html body #pg-archive .bmx-wk .page-hero-star{display:none!important}

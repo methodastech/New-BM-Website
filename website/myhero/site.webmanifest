@@ -1,0 +1,1 @@
+{"name":"MyHero","short_name":"MyHero","description":"Your whole health record, in one app, explained in plain language and ready for your doctor.","start_url":"./","display":"browser","background_color":"#FFFFFF","theme_color":"#00A3B8","icons":[{"src":"assets/logo/app-icon.png","sizes":"1024x1024","type":"image/png"}]}

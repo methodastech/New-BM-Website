@@ -1,0 +1,114 @@
+/* ==========================================================================
+   Team page · hero with the car, drivers, season grid
+   ========================================================================== */
+:root { --team: #8d887f; }
+
+/* ---------- hero ---------- */
+.th {
+  position: relative; z-index: 4; min-height: 100vh; min-height: 100svh; overflow: hidden; isolation: isolate;
+  display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto 1fr auto; padding: 0 var(--gutter);
+}
+.th__bg { position: absolute; inset: 0; z-index: -3; pointer-events: none; }
+.th__glow {
+  position: absolute; left: -10%; right: -10%; bottom: -30%; height: 90%;
+  background: radial-gradient(50% 60% at 45% 60%, color-mix(in srgb, var(--team) 45%, transparent), transparent 70%); filter: blur(30px);
+}
+.th__dots {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 60%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--team) 40%, transparent) 1.1px, transparent 1.5px) 0 0 / 8px 8px;
+  -webkit-mask-image: linear-gradient(0deg, #000, transparent 90%); mask-image: linear-gradient(0deg, #000, transparent 90%); opacity: 0.6;
+}
+.th__logo { position: absolute; z-index: -2; right: 6vw; top: 16vh; height: min(42vh, 380px); width: auto; opacity: 0.9; filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.4)); }
+
+.th__head { padding-top: 15vh; position: relative; }
+.th__back { color: var(--muted); display: inline-block; margin-bottom: 1.6rem; transition: color 0.3s; }
+.th__back:hover { color: var(--fg); }
+.th__name { font-weight: 300; font-size: clamp(3.6rem, 10vw, 10.5rem); line-height: 0.9; letter-spacing: -0.05em; max-width: 12ch; }
+.th__name em { letter-spacing: -0.02em; }
+.th__crew { list-style: none; display: flex; flex-wrap: wrap; gap: 0.6rem 2rem; margin-top: 2rem; font-size: 1.05rem; }
+.th__crew li { display: flex; align-items: center; gap: 0.6rem; }
+.th__crew b { font-weight: 600; }
+.th__crew .avatar { width: 34px; height: 34px; box-shadow: 0 0 0 1.5px var(--team); }
+
+.th__ride { position: relative; align-self: end; width: min(1100px, 82vw); margin: 2vh 0 -1vh -1vw; pointer-events: none; }
+.th__car { position: relative; display: block; width: 100%; height: auto; filter: drop-shadow(0 30px 30px rgba(0, 0, 0, 0.55)); }
+.th__ghost { position: absolute; inset: 0; width: 100%; filter: blur(6px); opacity: 0; }
+
+.th__stats {
+  display: flex; flex-wrap: wrap; margin: 0 0 6vh; position: relative; z-index: 2;
+  border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding-left: 1.2rem; box-shadow: inset 2px 0 0 var(--team);
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.04), transparent 70%); backdrop-filter: blur(10px);
+}
+.th__stats > div { padding: 1.05rem 2rem 1.05rem 0; margin-right: 2rem; border-right: 1px solid var(--line); }
+.th__stats > div:last-child { border-right: 0; }
+.th__stats dt { color: var(--muted); font-size: 9px; }
+.th__stats dd { margin: 0.35rem 0 0; font-size: 1.5rem; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.th__stats dd span { color: var(--muted); font-size: 0.8rem; }
+
+/* ---------- drivers ---------- */
+.tdrivers { padding-top: 14vh; }
+.tdrivers__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.6rem; }
+.tdc { border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: var(--bg-2); }
+.tdc__stage {
+  position: relative; height: clamp(320px, 30vw, 440px); overflow: hidden; isolation: isolate;
+  background: radial-gradient(70% 80% at 40% 100%, color-mix(in srgb, var(--team) 40%, transparent), transparent 70%), #121214;
+}
+.tdc__num { position: absolute; z-index: -1; left: 6%; top: 8%; height: 72%; width: auto; max-width: 70%; object-fit: contain; opacity: 0.16; filter: brightness(0) invert(1); }
+.tdc__photo {
+  position: absolute; left: 10%; bottom: -36%; height: 135%; width: auto;
+  -webkit-mask-image: linear-gradient(180deg, #000 60%, transparent 92%); mask-image: linear-gradient(180deg, #000 60%, transparent 92%);
+  filter: drop-shadow(0 30px 40px rgba(0, 0, 0, 0.5)); transition: transform 1s var(--ease);
+}
+.tdc__helmet { position: absolute; right: 6%; bottom: 10%; width: 40%; height: auto; filter: drop-shadow(0 24px 30px rgba(0, 0, 0, 0.55)); transition: transform 1s var(--ease); }
+.tdc:hover .tdc__photo { transform: translateY(-3%); }
+.tdc:hover .tdc__helmet { transform: rotate(-5deg) translateY(-4%); }
+.tdc__info { padding: 1.6rem 1.8rem 1.8rem; }
+.tdc__meta { display: flex; align-items: center; gap: 0.6rem; color: var(--muted); font-size: 10px; }
+.tdc__meta img { width: 20px; height: 20px; border-radius: 50%; object-fit: cover; }
+.tdc h3 { font-weight: 300; font-size: clamp(1.8rem, 3vw, 2.8rem); letter-spacing: -0.04em; line-height: 1; margin-top: 0.8rem; }
+.tdc h3 b { font-weight: 700; }
+.tdc__stats { display: grid; grid-template-columns: repeat(5, 1fr); margin: 1.6rem 0 0; border-top: 1px solid var(--line); }
+.tdc__stats > div { padding: 0.9rem 0.6rem 0 0; }
+.tdc__stats dt { color: var(--muted); font-size: 9px; }
+.tdc__stats dd { margin: 0.35rem 0 0; font-size: 1.3rem; font-variant-numeric: tabular-nums; }
+.tdc__share { display: grid; grid-template-columns: auto 1fr auto; gap: 0.9rem; align-items: center; margin-top: 1.4rem; }
+.tdc__share .mono { color: var(--muted); font-size: 9px; }
+.tdc__share i { height: 3px; background: var(--line); border-radius: 2px; overflow: hidden; }
+.tdc__share b { display: block; height: 100%; background: var(--team); transform-origin: left; transform: scaleX(0); transition: transform 1.6s var(--ease) 0.3s; }
+.tdc__share b.go { transform: scaleX(var(--p)); }
+
+/* ---------- season grid ---------- */
+.tseason__wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: var(--bg-2); }
+.tseason__table { border-collapse: collapse; width: 100%; min-width: 980px; font-family: var(--mono); font-size: 11px; }
+.tseason__table th, .tseason__table td { padding: 0; text-align: center; border-bottom: 1px solid var(--line); }
+.tseason__table thead th { padding: 0.8rem 0.2rem; color: var(--muted); font-weight: 400; }
+.tseason__table thead a { display: grid; gap: 0.2rem; transition: color 0.3s; }
+.tseason__table thead a:hover { color: var(--fg); }
+.tseason__table thead span { font-size: 8px; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.7; }
+.tseason__table tbody th { position: sticky; left: 0; background: var(--bg-2); padding: 0.7rem 1rem; text-align: left; white-space: nowrap; font-weight: 500; z-index: 1; }
+.tseason__table tbody th .avatar { display: inline-grid; vertical-align: middle; margin-right: 0.5rem; }
+.tseason__table td { height: 44px; min-width: 38px; color: var(--muted); }
+.tseason__table td.is-win { background: var(--team); color: #0a0a0b; font-weight: 600; }
+.tseason__table td.is-pod { background: color-mix(in srgb, var(--team) 45%, transparent); color: var(--fg); }
+.tseason__table td.is-pts { background: color-mix(in srgb, var(--team) 14%, transparent); color: var(--fg); }
+.tseason__table td.is-dnf { color: var(--red); }
+.tseason__table td.is-none { opacity: 0.35; }
+.tseason__sum th, .tseason__sum td { border-bottom: 0; }
+.tseason__sum td.is-sum { color: var(--fg); }
+.tseason__key { list-style: none; display: flex; flex-wrap: wrap; gap: 0.6rem 1.6rem; margin-top: 1.2rem; color: var(--muted); font-size: 10px; }
+.tseason__key li { display: flex; align-items: center; gap: 0.5rem; }
+.tseason__key i { width: 14px; height: 10px; border-radius: 2px; border: 1px solid var(--line); }
+.tseason__key .k-win { background: var(--team); }
+.tseason__key .k-pod { background: color-mix(in srgb, var(--team) 45%, transparent); }
+.tseason__key .k-pts { background: color-mix(in srgb, var(--team) 14%, transparent); }
+.tseason__key .k-dnf { border-color: var(--red); }
+
+@media (max-width: 900px) {
+  .th__logo { height: 13vh; top: 11vh; right: var(--gutter); opacity: 0.35; }
+  .th__name { padding-right: 0; }
+  .th__ride { width: 120vw; margin-left: -6vw; }
+  .th__stats > div { padding-right: 1rem; margin-right: 1rem; }
+  .th__stats dd { font-size: 1.2rem; }
+  .tdrivers__grid { grid-template-columns: 1fr; }
+  .tdc__stats { grid-template-columns: repeat(3, 1fr); row-gap: 0.4rem; }
+}

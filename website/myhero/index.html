@@ -1,0 +1,779 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MyHero · Never walk in unsure</title>
+<meta name="description" content="MyHero keeps every report, reading, medicine and visit in one app, explains them in plain language, and turns them into one clear page for your doctor. Built with a doctor, for Malaysia.">
+<link rel="icon" href="assets/logo/app-icon.png?v=w17" type="image/png">
+<link rel="apple-touch-icon" href="assets/logo/app-icon.png?v=w17">
+<link rel="manifest" href="site.webmanifest">
+<meta name="theme-color" content="#00A3B8">
+<link rel="canonical" href="https://myhero.my/">
+<link rel="alternate" hreflang="en" href="index.html"><link rel="alternate" hreflang="ms" href="bm.html">
+<!-- share preview; on the live domain the image needs its full https address -->
+<meta property="og:type" content="website"><meta property="og:site_name" content="MyHero">
+<meta property="og:title" content="MyHero · Never walk in unsure">
+<meta property="og:description" content="Every report, reading and medicine in one app, explained in plain language and ready for your doctor. Built with a doctor in Malaysia.">
+<meta property="og:image" content="assets/web17/share.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add("js")</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","name":"MyHero","url":"https://myhero.my/","logo":"https://myhero.my/assets/logo/app-icon.png","founder":{"@type":"Person","name":"Dr. Amira Abdullah"},"address":{"@type":"PostalAddress","addressLocality":"Kuala Lumpur","addressCountry":"MY"}},{"@type":"MobileApplication","name":"MyHero","applicationCategory":"HealthApplication","operatingSystem":"Android, iOS","description":"A personal health record for Malaysian patients: every report, reading, medicine and visit in one app, explained in plain language and ready for the doctor.","inLanguage":["en","ms"],"offers":{"@type":"Offer","price":"0","priceCurrency":"MYR","description":"Early access is free"}}]}</script>
+<style>
+/* ==========================================================================
+   MyHero website, the public one page (22 Oct 2026).
+   Zieel: "better looking phone, fix the shadow and posture", "the turquoise is too dull", "better animated visual for
+   every part", "a fully functioning website, no admin bar, all on one page", "better than NakGas, structured, works".
+   White page, one grid (1120 wide), Fredoka heads, Nunito words, Duolingo press buttons. Turquoise is now the vivid
+   action colour (#00A3B8, 3:1 on white at button and headline sizes); the deep teal stays for small links only. Every
+   section carries a moving piece built from the app's own screens and the doctor: a CSS phone with live screens, grey, straight, no island,
+   three animated scenes for the three steps, a tabbed showcase, count-ups. Forms post to Netlify Forms on a real
+   host and run as a sample on localhost. Everything shows without script, and all motion stands down under reduced
+   motion. Previous page: .index.pre-allout-20261022.bak.html
+   ========================================================================== */
+:root{
+  --pool:#17CBD9; --act:#00A3B8; --act-d:#008A9C; --deep:#08818C;
+  --mist:#E3F7FA; --wash:#F4FBFC; --mist2:#CDEFF4;
+  --cape:#FF3B5C; --cape-d:#E0213F; --cape-w:#FFF0F3;
+  --ink:#1B2430; --body:#4A5763; --muted:#6B7783; --line:#E7EDF0;
+  --w:1120px; --g:24px;
+  --head:"Fredoka",system-ui,sans-serif; --text:"Nunito",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --ease:cubic-bezier(.2,.8,.2,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:96px;-webkit-text-size-adjust:100%}
+body{background:#fff;color:var(--body);font-family:var(--text);font-size:18px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit}
+.wrap{max-width:calc(var(--w) + var(--g)*2);margin:0 auto;padding:0 var(--g)}
+h1,h2,h3{font-family:var(--head);color:var(--ink);font-weight:600;letter-spacing:-.01em;line-height:1.08}
+h1{font-size:clamp(44px,6.2vw,76px)}
+h2{font-size:clamp(32px,4.2vw,50px)}
+h3{font-size:clamp(24px,2.6vw,32px)}
+h1 em,h2 em{font-style:normal;color:var(--act);white-space:nowrap}
+.lead{font-size:clamp(18px,1.6vw,21px);color:var(--body);max-width:34em}
+.sec{padding:84px 0}
+.sec-h{text-align:center;max-width:760px;margin:0 auto 40px}
+.sec-h .lead{margin:18px auto 0}
+.vh{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+:focus-visible{outline:3px solid var(--pool);outline-offset:4px;border-radius:8px}
+
+/* buttons: the Duolingo press, a darker lip under a flat face */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:56px;padding:0 28px;border-radius:14px;font:800 19px/1 var(--text);cursor:pointer;border:0;transition:transform .08s,box-shadow .08s,background .15s;white-space:nowrap}
+.btn.p{background:var(--act);color:#fff;box-shadow:0 5px 0 var(--act-d)}
+.btn.p:hover{background:#00AFC5}
+.btn.s{background:#fff;color:var(--act);box-shadow:inset 0 0 0 2px var(--line),0 5px 0 var(--line)}
+.btn.s:hover{background:var(--wash)}
+.btn:active{transform:translateY(5px)}
+.btn.p:active{box-shadow:0 0 0 var(--act-d)}
+.btn.s:active{box-shadow:inset 0 0 0 2px var(--line),0 0 0 var(--line)}
+.btn.sm{min-height:44px;padding:0 20px;border-radius:12px;font-size:15px}
+.btn.sm.p{box-shadow:0 4px 0 var(--act-d)}.btn.sm:active{transform:translateY(4px)}
+
+/* header */
+.skip{position:absolute;left:12px;top:-60px;z-index:100;background:var(--ink);color:#fff;font-weight:800;padding:10px 16px;border-radius:12px}
+.skip:focus{top:12px}
+.hd{position:sticky;top:0;z-index:30;margin-bottom:-86px;background:transparent;transition:background .35s,box-shadow .35s,transform .35s var(--ease)}.hd.hide{transform:translateY(-100%)}
+.hd.on{background:rgba(255,255,255,.94);backdrop-filter:saturate(1.4) blur(10px);-webkit-backdrop-filter:saturate(1.4) blur(10px);box-shadow:0 10px 26px -20px rgba(16,36,48,.45)}
+.hd .wrap{height:86px;display:flex;align-items:center;gap:20px}
+.brand{display:flex;align-items:center;gap:10px;margin-right:auto}
+.brand .mk{width:80px;height:auto;position:relative;top:-6px}
+.brand .wm{height:40px;width:auto}
+.lang-dd{position:relative;flex:none}
+.lang-btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 10px 0 12px;border:0;border-radius:12px;background:var(--mist);color:var(--ink);font:800 14px/1 var(--text);cursor:pointer;transition:background .2s}
+.lang-btn:hover,.lang-dd.open .lang-btn{background:var(--mist2)}
+.flag{display:inline-block;width:22px;height:15px;border-radius:3px;overflow:hidden;box-shadow:0 0 0 1px rgba(27,36,48,.12)}
+.flag svg{display:block;width:100%;height:100%}
+.lang-btn .chev{width:16px;height:16px;transition:transform .25s}
+.lang-dd.open .chev{transform:rotate(180deg)}
+.lang-menu{position:absolute;right:0;top:calc(100% + 8px);min-width:200px;display:grid;gap:2px;padding:6px;border-radius:14px;background:#fff;box-shadow:0 3px 0 var(--line),0 24px 48px -20px rgba(16,36,48,.35);opacity:0;transform:translateY(-6px);pointer-events:none;transition:opacity .2s,transform .2s;z-index:40}
+.lang-dd.open .lang-menu{opacity:1;transform:none;pointer-events:auto}
+.lang-menu a{display:flex;align-items:center;gap:10px;min-height:42px;padding:0 12px;border-radius:10px;font:700 15px/1 var(--text);color:var(--ink)}
+.lang-menu a:hover{background:var(--wash)}
+.lang-menu a.on{color:var(--act)}
+.lang-menu a.on::after{content:"";margin-left:auto;width:8px;height:8px;border-radius:50%;background:var(--act)}
+
+/* the device: a CSS phone with the app's real screen inside, so it can tilt, cast a shadow and change screens */
+.dev{--w:280px;position:relative;width:var(--w);padding:calc(var(--w) * .034);border-radius:calc(var(--w) * .19);background:#D5D9DE;box-shadow:inset 0 0 0 1px #F4F6F8,inset 0 0 0 2.5px #B3B9C0,inset 0 0 0 4px #DDE1E5,0 1px 0 #FFF,0 30px 50px -30px rgba(20,40,46,.5),0 8px 16px -10px rgba(20,40,46,.25)}
+.dev::before,.dev::after{content:"";position:absolute;width:3px;border-radius:2px;background:#B3B9C0;box-shadow:inset 0 0 0 .5px #9AA1A9}
+.dev::before{left:-3px;top:21%;height:9%;box-shadow:0 calc(var(--w) * .13) 0 #262F36}
+.dev::after{right:-3px;top:26%;height:14%}
+.dev .scr{position:relative;border-radius:calc(var(--w) * .15);overflow:hidden;aspect-ratio:1020/2214;background:#F6FAFB;box-shadow:0 0 0 calc(var(--w) * .013) #0E1114}
+.dev .scr img{position:absolute;inset:0;width:100%;height:100%}
+.dev .scr::after{content:"";position:absolute;inset:0;z-index:5;pointer-events:none;background:linear-gradient(118deg,rgba(255,255,255,.14) 0%,rgba(255,255,255,.04) 28%,rgba(255,255,255,0) 46%)}
+.dev .scr img+img{opacity:0;transform:translateX(8%);transition:opacity .55s var(--ease),transform .7s var(--ease)}
+.dev .scr img.on{opacity:1;transform:none}
+.dev .scr img.off{opacity:0;transform:translateX(-8%)}
+.dev-sh{position:absolute;height:38px;border-radius:50%;background:rgba(8,64,72,.42);filter:blur(16px);pointer-events:none}
+
+/* hero */
+.hero{background:linear-gradient(180deg,#E6F6F8 0%,#F6FCFD 55%,#fff 100%);padding:110px 0 48px;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.stage{position:relative;height:600px}
+.stage .dots{position:absolute;inset:8% 0 10% 0;background-image:radial-gradient(rgba(0,163,184,.22) 1.2px,transparent 1.4px);background-size:22px 22px;-webkit-mask:radial-gradient(60% 60% at 60% 50%,#000 20%,transparent 72%);mask:radial-gradient(60% 60% at 60% 50%,#000 20%,transparent 72%);pointer-events:none}
+.stage .floor{position:absolute;left:6%;right:4%;bottom:-8px;height:34px;border-radius:50%;background:rgba(8,64,72,.12);filter:blur(10px)}
+.stage .dev{position:absolute;right:3%;bottom:30px;--w:246px}
+.stage .dev-sh{right:8%;bottom:10px;width:200px;height:44px}
+.stage .docw{position:absolute;left:0;bottom:0;height:450px;aspect-ratio:1017/1387;transform-origin:50% 100%;animation:breathe 3.6s ease-in-out infinite;z-index:3;display:block;line-height:0;filter:drop-shadow(0 24px 24px rgba(8,64,72,.18))}
+@keyframes breathe{0%,100%{transform:translateY(0) scaleY(1)}50%{transform:translateY(-2px) scaleY(1.008)}}@keyframes blink{0%,93%,100%{opacity:0}94%,97%{opacity:1}}.docw .dv-bl{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:contain;opacity:0;animation:blink 4.4s infinite}@media(prefers-reduced-motion:reduce){.docw,.docw .dv-bl{animation:none}}.docw .dv,.docw .dv-fb{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:contain}
+.docw .dv{opacity:0}
+.docw.live .dv{opacity:1}
+.docw.live .dv-fb{visibility:hidden}
+.docw .d-hs{position:absolute;width:0;height:0;pointer-events:none}
+.docw .d-hs i{position:absolute;left:-11px;top:-11px;width:22px;height:22px;opacity:0;background:center/contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 22'%3E%3Cpath d='M12 21.2 2.9 12.4A5.6 5.6 0 0 1 12 4.9a5.6 5.6 0 0 1 9.1 7.5Z' fill='%23FF3B5C'/%3E%3C/svg%3E");animation:heart 4s ease-out infinite}
+.docw .d-hs i:nth-child(2){animation-delay:1.35s;--hx:12px}
+.docw .d-hs i:nth-child(3){animation-delay:2.7s;--hx:-10px}
+@keyframes heart{0%{opacity:0;transform:translate(0,0) scale(.4)}12%{opacity:1;transform:translate(0,-8px) scale(1)}70%{opacity:.9}100%{opacity:0;transform:translate(var(--hx,0),-80px) scale(.75) rotate(-12deg)}}
+.hero h1{max-width:9.5em}
+.hero .lead{margin-top:22px}
+.ctas{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px}
+
+
+/* conditions strip */
+.strip{background:#fff}
+.strip .wrap{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:16px 44px;padding-top:10px;padding-bottom:34px}
+.strip b{font:600 17px var(--head);color:var(--ink)}
+.strip span{display:inline-flex;align-items:center;gap:11px;font-weight:700;font-size:20px;color:var(--ink);white-space:nowrap}.strip .li{width:30px;height:30px;color:var(--act);flex:none}
+
+
+/* how it works: three rows, the illustrations with a touch of motion on top */
+.row{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+.row + .row{margin-top:72px}
+.row.flip .pic{order:-1}
+.row .txt{max-width:460px}
+.row.flip .txt{justify-self:start}
+.num{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:12px;background:var(--mist);color:var(--act);font:700 20px var(--head);margin-bottom:20px}
+.row h3{font-size:clamp(28px,3.2vw,40px)}
+.row p{margin-top:16px}
+.il{position:relative;max-width:560px;margin:0 auto}
+.il img{width:100%}
+.il .badge{position:absolute;display:flex;align-items:center;gap:10px;background:#fff;border-radius:14px;padding:10px 14px 10px 10px;box-shadow:0 2px 0 var(--line),0 24px 40px -26px rgba(8,64,72,.45);white-space:nowrap;opacity:0;transform:translateY(10px) scale(.96)}
+.il .badge b{display:block;font:600 15px/1.2 var(--head);color:var(--ink)}
+.il .badge small{display:block;font-size:11.5px;font-weight:800;color:var(--act);margin-top:2px}
+.bl-spot{color:var(--act);display:inline-block}.il .badge .bl-spot{width:30px;height:30px;flex:none}
+.tick{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--act);color:#fff;flex:none}
+.tick svg{width:13px;height:13px}
+.play .badge{animation:badge 6s var(--ease) infinite}
+@keyframes badge{0%,40%{opacity:0;transform:translateY(10px) scale(.96)}50%,92%{opacity:1;transform:none}100%{opacity:0}}
+.il1 .badge{right:1%;bottom:2%}
+.il2 .badge{left:35%;bottom:5%}
+.il3 .badge{left:36%;bottom:7%}
+.il .chip{position:absolute;left:var(--x0);top:var(--y0);background:var(--act);color:#fff;font:800 12px/1 var(--text);padding:7px 10px;border-radius:10px;box-shadow:0 10px 20px -12px rgba(0,163,184,.9);opacity:0;white-space:nowrap}
+.il1 .c1{--x0:38%;--y0:36%;animation-delay:.2s}.il1 .c2{--x0:55%;--y0:26%;animation-delay:.6s}.il1 .c3{--x0:69%;--y0:40%;animation-delay:1s}
+.play.il1 .chip{animation:sink 6s var(--ease) infinite}
+@keyframes sink{0%{opacity:0;left:var(--x0);top:var(--y0);transform:scale(.6)}8%{opacity:1;transform:scale(1)}20%{opacity:1;left:var(--x0);top:var(--y0);transform:scale(1)}38%{opacity:1;left:66%;top:68%;transform:scale(.7)}44%{opacity:0;left:66%;top:68%;transform:scale(.5)}100%{opacity:0;left:66%;top:68%}}
+.il .ping{position:absolute;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;background:var(--cape);opacity:0}
+.il1 .ping{left:72%;top:70%}.il2 .ping{left:77%;top:53%}.il3 .ping{left:47%;top:50%}
+.play .ping{animation:ping 6s ease-out infinite}
+@keyframes ping{0%,38%{opacity:0;box-shadow:0 0 0 0 rgba(255,59,92,.5);transform:scale(.6)}44%{opacity:1;transform:scale(1)}62%{box-shadow:0 0 0 24px rgba(255,59,92,0);opacity:1}72%,100%{opacity:0;box-shadow:0 0 0 24px rgba(255,59,92,0)}}
+
+/* the one minute explainer */
+.watch{padding-top:0;padding-bottom:64px}
+.vwrap{position:relative;max-width:960px;margin:0 auto;border-radius:20px;overflow:hidden;background:#fff;box-shadow:0 3px 0 var(--line),0 40px 70px -40px rgba(8,64,72,.55)}
+.vwrap video{display:block;width:100%;height:auto;aspect-ratio:16/9}
+.vplay{position:absolute;left:50%;top:calc(50% - 30px);transform:translate(-50%,-50%);display:inline-flex;align-items:center;gap:12px;min-height:64px;padding:0 28px 0 20px;border:0;border-radius:999px;background:#fff;color:var(--ink);font:800 18px var(--text);cursor:pointer;box-shadow:0 5px 0 var(--line),0 30px 50px -24px rgba(8,64,72,.6);transition:transform .15s}
+.vplay:hover{transform:translate(-50%,-50%) scale(1.04)}
+.vplay svg{width:34px;height:34px;color:var(--act)}
+.vwrap.playing .vplay{display:none}
+.vbar{display:flex;align-items:center;gap:12px;padding:10px 14px;background:#fff}
+.vb{width:40px;height:40px;border:0;border-radius:10px;background:var(--mist);color:var(--act);display:grid;place-items:center;cursor:pointer;flex:none}
+.vb:hover{background:var(--mist2)}
+.vb svg{width:20px;height:20px}
+.vb .i-pause{display:none}
+.vcc b{font:800 12px var(--text);letter-spacing:.04em}
+.vcc[aria-pressed="true"]{background:var(--act);color:#fff}
+.vwrap video::cue{background:rgba(27,36,48,.86);color:#fff;font:700 18px/1.3 "Nunito",sans-serif}
+.vwrap.playing .i-play{display:none}.vwrap.playing .i-pause{display:block}
+.vtime{font:800 13px var(--text);color:var(--muted);min-width:84px;text-align:center;font-variant-numeric:tabular-nums}
+.vseek{position:relative;flex:1;height:10px;border-radius:5px;background:var(--mist);cursor:pointer}
+.vseek i{position:absolute;left:0;top:0;bottom:0;width:0;border-radius:5px;background:var(--act)}
+.vseek:focus-visible{outline:2px solid var(--pool-b);outline-offset:3px}
+.vwrap video{background:#0E1114}
+/* the app: a tabbed showcase, the phone changes with the tab */
+.app{background:var(--wash)}
+.show{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.tabs{display:grid;gap:12px}
+.tabs button{position:relative;display:flex;align-items:center;gap:16px;text-align:left;width:100%;padding:18px 20px 20px;border:0;border-radius:16px;background:#fff;box-shadow:0 3px 0 var(--line);cursor:pointer;transition:transform .15s,box-shadow .15s;overflow:hidden}
+.tabs button:hover{transform:translateY(-2px)}
+.tabs button.on{box-shadow:0 3px 0 var(--mist2),0 0 0 2px var(--pool) inset}
+.tabs .bl-spot{width:40px;height:40px;padding:9px;border-radius:12px;background:var(--mist);flex:none}
+.tabs b{display:block;font:600 20px/1.2 var(--head);color:var(--ink)}
+.tabs small{display:block;font-size:15px;color:var(--muted);margin-top:3px;line-height:1.4}
+.tabs .bar{position:absolute;left:0;right:0;bottom:0;height:4px;background:var(--mist)}
+.tabs .bar::after{content:"";position:absolute;left:0;top:0;bottom:0;width:100%;background:var(--pool);transform:scaleX(0);transform-origin:left}
+.tabs button.on .bar::after{animation:fill var(--dur,5s) linear forwards}
+.show.paused .tabs button.on .bar::after{animation-play-state:paused}
+@keyframes fill{to{transform:scaleX(1)}}
+.showdev{position:relative;display:grid;place-items:center;min-height:620px}
+.showdev .dev{--w:300px}
+.showdev .dev-sh{left:50%;bottom:-12px;width:220px;margin-left:-100px}
+.showdev .halo{position:absolute;width:420px;height:420px;border-radius:50%;background:var(--mist);z-index:-1}
+
+/* the doctor */
+.doc .wrap{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+.doc .ph{position:relative;border-radius:20px;overflow:hidden;aspect-ratio:4/5;background:var(--mist)}
+.doc .ph img{width:100%;height:116%;margin-top:-8%;object-fit:cover;will-change:transform}
+.ph-note{position:absolute;left:14px;bottom:12px;font-size:12px;font-weight:700;color:#fff;background:rgba(16,36,48,.45);padding:4px 9px;border-radius:999px;backdrop-filter:blur(4px)}
+.doc p{margin-top:20px}
+.stat{display:flex;align-items:center;gap:20px;margin-top:34px;padding:22px 24px;border-radius:16px;background:var(--wash)}
+.stat strong{font:700 64px/1 var(--head);color:var(--act);min-width:1.2em;text-align:center}
+.stat span{font-size:16px;line-height:1.5}
+.stat span b{color:var(--ink)}
+.sig{margin-top:26px;font-size:15.5px}
+.sig b{display:block;color:var(--ink);font-size:17px}
+
+/* clinics */
+.clin{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.clin figure{display:flex;flex-direction:column}
+.clin .im{border-radius:16px;overflow:hidden;aspect-ratio:3/2;background:var(--mist);box-shadow:0 3px 0 var(--line);transition:transform .35s var(--ease),box-shadow .35s}
+.clin figure:hover .im{transform:translateY(-4px);box-shadow:0 3px 0 var(--mist2),0 24px 40px -28px rgba(8,64,72,.4)}
+.clin .im img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+.clin figure:hover .im img{transform:scale(1.04)}
+.clin figcaption{margin-top:18px}
+.clin b{display:block;font:600 21px var(--head);color:var(--ink)}
+.clin span{display:block;font-size:15.5px;color:var(--muted);margin-top:4px}
+.cform{margin-top:44px;display:grid;grid-template-columns:.9fr 1.1fr;gap:48px;align-items:center;background:var(--wash);border-radius:20px;padding:48px}
+.cform h3{font-size:clamp(26px,2.8vw,34px)}
+.cform .lead{font-size:17px;margin-top:14px}
+.cform .bl-spot{width:64px;height:64px;padding:17px;border-radius:18px;background:var(--mist);margin-bottom:18px}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.fields label{display:grid;gap:6px;font-size:14px;font-weight:800;color:var(--ink)}
+.fields label.full{grid-column:1/-1}
+.fields input,.fields textarea{width:100%;min-height:52px;border:2px solid var(--line);border-radius:12px;padding:12px 16px;font:600 16px var(--text);color:var(--ink);background:#fff;outline:none;transition:border-color .15s}
+.fields textarea{min-height:96px;resize:vertical}
+.fields input:focus,.fields textarea:focus{border-color:var(--pool)}
+.fields input:user-invalid{border-color:var(--cape)}
+.fields .btn{grid-column:1/-1;justify-self:start}
+.fwrap .ok,.fwrap .err{display:none;font:600 20px var(--head);color:var(--ink)}
+.fwrap .ok small,.fwrap .err small{display:block;font:600 15px var(--text);color:var(--muted);margin-top:8px}
+.fwrap .err{color:var(--cape-d)}
+.fwrap.done form{display:none}.fwrap.done .ok{display:block}
+.fwrap.fail .err{display:block}
+.fwrap .ok .sample{display:none}.fwrap.local .ok .sample{display:block}
+
+/* privacy */
+.rules{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.rule{background:#fff;border-radius:16px;padding:28px 24px 30px;box-shadow:0 3px 0 var(--line);transition:transform .35s var(--ease),box-shadow .35s}
+.rule:hover{transform:translateY(-3px);box-shadow:0 3px 0 var(--mist2),0 24px 40px -28px rgba(8,64,72,.35)}
+.rule .bl-spot{width:60px;height:60px;padding:16px;border-radius:16px;background:var(--mist);margin-bottom:16px;transform:scale(.6);opacity:0;transition:transform .6s var(--ease),opacity .4s}
+.rule.in .bl-spot{transform:none;opacity:1}
+.rule b{display:block;font:600 22px/1.2 var(--head);color:var(--ink)}
+.rule p{font-size:15.5px;margin-top:10px;line-height:1.55}
+.note{text-align:center;font-size:15px;color:var(--muted);margin-top:40px}
+
+/* questions */
+.faq .wrap{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:48px;align-items:start}
+.faq .sec-h{text-align:left;margin:0}
+.faq .sec-h .lead{margin-left:0}
+.faq .qa{display:grid;gap:8px}
+.faq details{background:#fff;border-radius:14px;box-shadow:0 2px 0 var(--line);padding:0 18px;transition:box-shadow .2s}
+.faq details[open]{box-shadow:0 2px 0 var(--mist2),0 0 0 2px var(--mist) inset}
+.faq summary{list-style:none;display:flex;align-items:center;gap:14px;padding:13px 0;cursor:pointer}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary .bl-spot{width:26px;height:26px;flex:none}
+.faq summary b{font:600 17px/1.3 var(--head);color:var(--ink);flex:1}
+.faq summary i{flex:none;width:28px;height:28px;border-radius:9px;background:var(--mist);position:relative;transition:transform .25s}
+.faq summary i::before,.faq summary i::after{content:"";position:absolute;left:50%;top:50%;width:13px;height:2.5px;border-radius:2px;background:var(--act);transform:translate(-50%,-50%)}
+.faq summary i::after{transform:translate(-50%,-50%) rotate(90deg);transition:transform .25s}
+.faq details[open] summary i::after{transform:translate(-50%,-50%) rotate(0deg)}
+.faq details p{padding:0 0 16px 44px;margin:0;font-size:16px;line-height:1.55;color:var(--body);max-width:62ch}
+.helpc{display:flex;align-items:center;gap:14px;margin:24px 0 0;padding:14px 18px;border-radius:14px;background:var(--wash);color:var(--ink)}
+.helpc .bl-spot{width:44px;height:44px;padding:11px;border-radius:12px;background:#fff;flex:none}
+.helpc b{display:block;font:600 18px var(--head)}
+.helpc small{display:block;font-size:14px;color:var(--muted);margin-top:2px}
+
+/* join */
+.join{padding:16px 0 84px}
+.panel{position:relative;background:var(--act);border-radius:24px;padding:56px 56px;display:grid;grid-template-columns:1.25fr .75fr;gap:40px;align-items:center;overflow:hidden}
+.panel h2{color:#fff}
+.panel p{color:rgba(255,255,255,.9);margin-top:18px;max-width:30em}
+.panel form{display:flex;gap:12px;margin-top:32px;max-width:520px}
+.panel input{flex:1;min-width:0;height:56px;border:0;border-radius:14px;padding:0 20px;font:600 17px var(--text);color:var(--ink);outline:none}
+.panel input:focus-visible{box-shadow:0 0 0 3px var(--ink)}
+.panel .btn.w{background:#fff;color:var(--act);box-shadow:0 5px 0 rgba(0,0,0,.18)}
+.panel .btn.w:active{box-shadow:0 0 0 rgba(0,0,0,.18)}
+.panel small{display:block;margin-top:16px;font-size:14px;color:rgba(255,255,255,.8)}
+.stores{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.store{display:inline-flex;align-items:center;gap:10px;min-height:56px;padding:8px 18px 8px 14px;border:0;border-radius:14px;background:var(--ink);color:#fff;font:inherit;cursor:pointer;transition:transform .35s var(--ease),box-shadow .35s var(--ease)}.store:hover{transform:translateY(-2px);box-shadow:0 14px 24px -16px rgba(0,0,0,.5)}
+.store:active{transform:translateY(0)}
+.store svg{width:26px;height:26px;flex:none}
+.store span{display:grid;line-height:1.1;text-align:left}
+.store small{font-size:12px;font-weight:700;color:rgba(255,255,255,.78)}
+.store b{font:600 18px/1.15 var(--head);letter-spacing:-.01em}
+.panel .stores+small{margin-top:12px}
+.panel .store{background:#fff;color:var(--ink)}
+.panel .store small{color:var(--muted)}
+.hero-stores{align-items:center;margin-top:36px}
+.hero-stores>small{flex-basis:100%;font-size:13px;font-weight:700;color:var(--muted)}
+.panel .fw{position:relative;justify-self:center;height:360px;margin:-24px 0 -96px}
+.panel .fig{height:100%;width:auto}
+.panel .ok,.panel .err{display:none;margin-top:32px;font:600 24px var(--head);color:#fff}
+.panel .ok small,.panel .err small{font:600 15px var(--text);color:rgba(255,255,255,.85);margin-top:8px}
+.panel.done form,.panel.done small.n{display:none}.panel.done .ok{display:block}
+.panel.fail .err{display:block}
+.panel .ok .sample{display:none}.panel.local .ok .sample{display:block}
+.hearts{position:absolute;left:38%;top:30%;width:0;height:0;pointer-events:none}
+.hearts i{position:absolute;left:-12px;top:-12px;width:24px;height:24px;opacity:0;background:center/contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 22'%3E%3Cpath d='M12 21.2 2.9 12.4A5.6 5.6 0 0 1 12 4.9a5.6 5.6 0 0 1 9.1 7.5Z' fill='%23FF3B5C'/%3E%3C/svg%3E")}
+.panel.done .hearts i{animation:heart 2.6s ease-out forwards;animation-delay:calc(var(--i) * .18s);--hx:calc((var(--i) - 3) * 16px)}
+
+/* footer: light, with the clock and the big name */
+.ft{background:var(--wash);padding:56px 0 28px;overflow:hidden}
+.ft-top{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px}
+.ft .brand .wm{height:34px}.ft .brand .mk{width:66px;top:-5px}
+.ft-top p{font-size:15.5px;margin-top:16px;max-width:22em}
+.clock{display:inline-flex;align-items:center;gap:9px;margin-top:18px;font-size:14.5px;font-weight:700;color:var(--muted)}
+.clock i{width:8px;height:8px;border-radius:50%;background:var(--pool);animation:beat 2.4s ease-out infinite}
+.clock b{color:var(--ink);font-variant-numeric:tabular-nums}
+@keyframes beat{0%{box-shadow:0 0 0 0 rgba(23,203,217,.55)}70%,100%{box-shadow:0 0 0 9px rgba(23,203,217,0)}}
+.ft h4{font:600 17px var(--head);color:var(--ink);margin-bottom:14px}
+.ft ul{list-style:none;display:grid;gap:10px;font-size:15.5px;font-weight:600}
+.ft ul a:hover{color:var(--act)}
+.ft-note{font-size:13.5px;color:var(--muted);max-width:62em;margin-top:36px;line-height:1.55}
+.ft-bot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 24px;margin-top:40px;padding-top:8px;font-size:14px;color:var(--muted)}
+.ft-bot a{font-weight:700;color:var(--act)}
+
+/* arrive: rise in once, visible without script */
+.js [data-r]{opacity:0;transform:translateY(26px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.js [data-r].in{opacity:1;transform:none}
+.js [data-r="2"]{transition-delay:.08s}.js [data-r="3"]{transition-delay:.16s}.js [data-r="4"]{transition-delay:.24s}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none !important;transition:none !important}
+  .js [data-r]{opacity:1;transform:none}
+  .rule .bl-spot{transform:none;opacity:1}
+  .il .badge,.il .chip{opacity:1;transform:none}
+}
+
+/* tablet and phone */
+@media (max-width:1000px){
+  .hero .wrap,.row,.doc .wrap,.show,.cform{grid-template-columns:1fr;gap:40px}
+  .hero{padding-top:110px}
+  .stage{height:520px;order:2}
+  .stage .docw{height:370px}
+  .stage .dev{--w:240px;right:2%}
+  .stage .dev-sh{width:170px;right:9%}
+  .row .pic,.row.flip .pic{order:-1}
+  .row .txt,.row.flip .txt{justify-self:start;max-width:none}
+  .row + .row{margin-top:80px}
+  .tabs{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;padding:4px 2px 8px;margin:0 calc(var(--g) * -1);padding-left:var(--g);padding-right:var(--g)}
+  .tabs::-webkit-scrollbar{display:none}
+  .tabs button{flex:0 0 auto;width:auto;padding:12px 16px 14px;border-radius:12px}
+  .tabs small{display:none}
+  .tabs .bl-spot{width:32px;height:32px}
+  .tabs b{font-size:17px}
+  .showdev{min-height:560px}
+  .showdev .dev{--w:260px}
+  .clin{grid-template-columns:1fr 1fr}
+  .rules{grid-template-columns:1fr 1fr}
+  .panel{grid-template-columns:1fr;padding:56px 36px 0}
+  .panel .fw{height:300px;margin:8px 0 0}
+  .ft-top{grid-template-columns:1fr 1fr}
+}
+@media (max-width:640px){
+  :root{--g:16px}
+  body{font-size:17px}
+  .sec{padding:64px 0}
+  .sec-h{margin-bottom:32px}
+  .hd{margin-bottom:-70px}.hd .wrap{height:70px;gap:10px}
+  .hd .btn.sm{padding:0 14px;font-size:14px}
+  .lang-btn .lc{display:none}
+  .brand .mk{width:60px;top:-4px}.brand .wm{height:31px}
+  .hero{padding:88px 0 56px}
+  .stage{height:430px}
+  .stage .docw{height:300px;left:-4%}
+  .stage .dev{--w:178px;right:6%;bottom:36px}
+  .stage .dev-sh{width:120px;right:10%;bottom:18px}
+  .ctas .btn{flex:1 1 100%}
+  .strip .wrap{display:grid;grid-template-columns:1fr 1fr;gap:14px 12px;justify-items:start}
+  .strip b{grid-column:1/-1}
+  .strip span{font-size:17px}.strip .li{width:26px;height:26px}
+  .il .badge{padding:8px 11px 8px 8px}.il .badge b{font-size:13.5px}.il .badge small{font-size:10.5px}
+  .il .chip{font-size:11px;padding:6px 8px}
+  .showdev{min-height:520px}
+  .showdev .dev{--w:230px}
+  .showdev .halo{width:320px;height:320px}
+  .cform{padding:28px 20px}
+  .fields{grid-template-columns:1fr}
+  .fields .btn{width:100%}
+  .clin{grid-template-columns:1fr}
+  .rules{grid-template-columns:1fr}
+  .faq .wrap{grid-template-columns:1fr;gap:24px}.faq details{padding:0 14px}.faq summary b{font-size:16px}.faq details p{padding-left:0}
+  .panel{padding:44px 22px 0;border-radius:20px}
+  .panel form{flex-direction:column}
+  .panel input{flex:none}
+  .ft-top{grid-template-columns:1fr}
+}
+@media(min-width:1700px){html{zoom:1.18}}@media(min-width:2200px){html{zoom:1.5}}@media(min-width:3000px){html{zoom:2.05}}
+</style>
+<style id="bm-ribbon-css">/* "Demo by BrandMethod.co": the cloth ribbon every Brand Method demo ends with (as on NakGas and Lirunex) */.ft-ribbon{display:flex;justify-content:center;padding:clamp(28px,5vh,56px) 0 0}.ft-ribbon a{display:block;line-height:0}.ft-ribbon canvas{display:block;width:min(460px,88vw);height:auto}.ft-ribbon-fb{display:inline-block;font-size:14px;font-weight:600;color:#fff;background:#2536F5;padding:8px 22px;line-height:1.4}.ft-ribbon-fb[hidden]{display:none}</style></head>
+<body>
+<script>if(window.top!==window.self)document.documentElement.classList.add("framed")</script>
+
+<a class="skip" href="#main">Skip to content</a>
+<header class="hd" id="top">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="MyHero home"><img class="wm" src="assets/logo/wordmark-red.svg?v=w17" alt="MyHero" width="97" height="32"></a>
+    <div class="lang-dd" id="langdd"><button type="button" class="lang-btn" aria-haspopup="true" aria-expanded="false" aria-label="Language"><span class="flag uk cur"><svg viewBox="0 0 22 15" aria-hidden="true"><rect width="22" height="15" fill="#1D3F8F"/><path d="M0 0l22 15M22 0L0 15" stroke="#fff" stroke-width="3"/><path d="M0 0l22 15M22 0L0 15" stroke="#D0243C" stroke-width="1.2"/><path d="M11 0v15M0 7.5h22" stroke="#fff" stroke-width="5"/><path d="M11 0v15M0 7.5h22" stroke="#D0243C" stroke-width="3"/></svg></span><span class="lc">EN</span><svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9.5l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="lang-menu" role="menu"><a role="menuitem" href="index.html" class="on" hreflang="en" lang="en" aria-current="true"><span class="flag uk"><svg viewBox="0 0 22 15" aria-hidden="true"><rect width="22" height="15" fill="#1D3F8F"/><path d="M0 0l22 15M22 0L0 15" stroke="#fff" stroke-width="3"/><path d="M0 0l22 15M22 0L0 15" stroke="#D0243C" stroke-width="1.2"/><path d="M11 0v15M0 7.5h22" stroke="#fff" stroke-width="5"/><path d="M11 0v15M0 7.5h22" stroke="#D0243C" stroke-width="3"/></svg></span>English</a><a role="menuitem" href="bm.html" hreflang="ms" lang="ms"><span class="flag my"><svg viewBox="0 0 22 15" aria-hidden="true"><rect width="22" height="15" fill="#fff"/><path d="M0 .54h22M0 2.68h22M0 4.82h22M0 6.96h22M0 9.1h22M0 11.25h22M0 13.39h22" stroke="#D0243C" stroke-width="1.07"/><rect width="11" height="8.04" fill="#1D3F8F"/><circle cx="4.6" cy="4" r="2.6" fill="#F6C945"/><circle cx="5.5" cy="4" r="2.2" fill="#1D3F8F"/><path d="M8.3 2.4l.5 1.1 1.2.1-.9.8.3 1.2-1.1-.6-1.1.6.3-1.2-.9-.8 1.2-.1z" fill="#F6C945"/></svg></span>Bahasa Malaysia</a></div></div>
+    <a class="btn p sm" href="#join">Get early access</a>
+  </div>
+</header>
+
+<main id="main">
+<section class="hero" id="hero">
+  <div class="wrap">
+    <div class="stage" id="stage" aria-hidden="true">
+      
+      <span class="floor"></span>
+      <span class="dev-sh"></span>
+      <div class="dev" id="heroDev"><div class="scr">
+        <img class="on" src="assets/web22/scr-home.webp" alt="" width="1020" height="2214" fetchpriority="high"><img src="assets/web22/scr-trackers.webp" alt="" width="1020" height="2214" loading="lazy"><img src="assets/web22/scr-medications.webp" alt="" width="1020" height="2214" loading="lazy"><img src="assets/web22/scr-summary.webp" alt="" width="1020" height="2214" loading="lazy">
+      </div></div>
+      <span class="docw" id="doc"><img class="dv-fb" src="assets/web22/figure-a.webp" alt="" width="1017" height="1387" fetchpriority="high"><img class="dv-bl" src="assets/web22/figure-a-blink.webp" alt="" width="1017" height="1387"></span>
+    </div>
+    <div>
+      <h1 data-r>Never walk in <em>unsure.</em></h1>
+      <p class="lead" data-r="2">MyHero keeps every report, reading, medicine and visit in one app, explains them in plain language, and turns them into one clear page for your doctor.</p>
+      <div class="stores hero-stores" data-r="3"><button type="button" class="store dk" data-store><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16.4 12.6c0-2.4 2-3.6 2.1-3.7-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-2.9.9-3.7.9-.8 0-1.9-.9-3.2-.8-1.6 0-3.1 1-4 2.4-1.7 3-.4 7.4 1.2 9.8.8 1.2 1.8 2.5 3 2.4 1.2 0 1.7-.8 3.1-.8 1.5 0 1.9.8 3.2.8 1.3 0 2.2-1.2 3-2.4.9-1.4 1.3-2.7 1.3-2.8 0 0-2.5-1-2.5-3.9zM14 5.4c.7-.8 1.1-1.9 1-3-1 0-2.1.6-2.8 1.4-.6.7-1.2 1.8-1 2.9 1.1.1 2.1-.5 2.8-1.3z"/></svg><span><small>Download on the</small><b>App Store</b></span></button><button type="button" class="store dk" data-store><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#34A853" d="M3.6 2.3l10.5 10.4L3.6 23.1c-.4-.2-.6-.7-.6-1.2V3.5c0-.5.2-.9.6-1.2z"/><path fill="#FBBC04" d="M17.6 9.2l-3.5 3.5 3.5 3.5 4-2.3c1.1-.6 1.1-1.8 0-2.4z"/><path fill="#4285F4" d="M14.1 12.7l3.5 3.5-12.4 7.1c-.6.3-1.2.3-1.6-.2z"/><path fill="#EA4335" d="M3.6 2.3c.4-.4 1-.5 1.6-.2l12.4 7.1-3.5 3.5z"/></svg><span><small>Get it on</small><b>Google Play</b></span></button><small>Store links go live on launch day. Early access is open now.</small></div>
+    </div>
+  </div>
+</section>
+
+<div class="strip">
+  <div class="wrap">
+        <span><svg class="li" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5c3.6 4.3 5.5 7.3 5.5 10a5.5 5.5 0 0 1-11 0c0-2.7 1.9-5.7 5.5-10z"/></svg>Diabetes</span>
+    <span><svg class="li" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.3 4.2 12.7a4.5 4.5 0 0 1 6.4-6.4L12 7.6l1.4-1.3a4.5 4.5 0 0 1 6.4 6.4z"/><path d="M6.5 12.5h3l1.3-2.6 1.6 4.4 1.3-2.6h3.3"/></svg>Blood pressure</span>
+    <span><svg class="li" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6"/><path d="M10 3v10.2a2 2 0 1 0 4 0V3"/><path d="M10 10h4"/></svg>Cholesterol</span>
+    <span><svg class="li" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="8.5" width="17" height="7" rx="3.5" transform="rotate(-35 12 12)"/><path d="m8.8 6.8 6.4 10.4"/></svg>Daily medicines</span>
+    <span><svg class="li" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/><path d="m9.5 15.2 1.8 1.8 3.4-3.6"/></svg>Regular follow ups</span>
+  </div>
+</div>
+
+<section class="sec" id="how">
+  <div class="wrap">
+    <div class="sec-h">
+      <h2 data-r>From a plastic bag <em>to one page.</em></h2>
+      <p class="lead" data-r="2">Three steps, and the pile you carry becomes a record your doctor can read in under a minute.</p>
+    </div>
+    <div class="row">
+      <div class="txt" data-r><span class="num">1</span><h3>Snap it once.</h3><p>Point the camera at a lab report, a prescription or a discharge note. MyHero reads the values and shows you each one to check before it saves, then files it where it belongs.</p></div>
+      <div class="pic" data-r="2">
+        <div class="il il1" data-scene aria-label="The doctor sending papers into one folder">
+          <img src="assets/web17/intro-1.webp?v=w17b" alt="" width="1148" height="595" loading="lazy">
+          <span class="chip c1">Haemoglobin 12.9</span><span class="chip c2">HbA1c 6.8 %</span><span class="chip c3">LDL 2.7</span>
+          <span class="ping"></span>
+          <div class="badge"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span><b>Filed under Lab results</b><small>Elite Care Clinic · 12 Sep</small></span></div>
+        </div>
+      </div>
+    </div>
+    <div class="row flip">
+      <div class="txt" data-r><span class="num">2</span><h3>Understand it.</h3><p>Every value comes with what it means and whether it is in range. Readings join their trackers, so you can see what changed since the last visit, in words you can follow.</p></div>
+      <div class="pic" data-r="2">
+        <div class="il il2" data-scene aria-label="The doctor beside a falling reading on a chart">
+          <img src="assets/web17/intro-2.webp?v=w17b" alt="" width="1137" height="614" loading="lazy">
+          <span class="ping"></span>
+          <div class="badge"><i data-spot="heart"></i><span><b>128/82 · In range</b><small>Down 10 in 6 weeks</small></span></div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="txt" data-r><span class="num">3</span><h3>Hand it over.</h3><p>Profile, medicines, readings and recent visits on one page, shared by link, code or print, and only when you choose.</p></div>
+      <div class="pic" data-r="2">
+        <div class="il il3" data-scene aria-label="The doctor handing one page to another doctor">
+          <img src="assets/web17/intro-3.webp?v=w17b" alt="" width="976" height="636" loading="lazy">
+          <span class="ping"></span>
+          <div class="badge"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span><b>Shared, one page</b><small>Ends in 24 hours</small></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec watch" id="watch">
+  <div class="wrap">
+    <div class="sec-h">
+      <h2 data-r>See how <em>it works.</em></h2>
+      <p class="lead" data-r="2">From a plastic bag of paper to one page for your doctor, with sound.</p>
+    </div>
+    <div class="vwrap" data-r>
+      <video id="expl" playsinline preload="metadata" poster="assets/web22/video/explainer-poster.jpg?v=10" width="1920" height="1080"><source src="assets/web22/video/explainer.mp4?v=10" type="video/mp4"><track kind="captions" srclang="en" label="English" src="assets/web22/video/explainer-en.vtt?v=10"></video>
+      <button type="button" class="vplay" id="vplay" aria-label="Play the explainer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg><span>Play, 1:37</span></button>
+      <div class="vbar" id="vbar">
+        <button type="button" class="vb" id="vtoggle" aria-label="Pause"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z" fill="currentColor"/></svg></button>
+        <span class="vtime" id="vtime">0:00 / 1:01</span>
+        <div class="vseek" id="vseek" role="slider" aria-label="Seek" aria-valuemin="0" aria-valuemax="61" aria-valuenow="0" tabindex="0"><i id="vfill"></i></div>
+        <button type="button" class="vb vcc" id="vcc" aria-label="Captions" aria-pressed="false"><b>CC</b></button>
+        <button type="button" class="vb" id="vmute" aria-label="Mute"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5z" fill="currentColor"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+        <button type="button" class="vb" id="vfull" aria-label="Full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec app" id="app">
+  <div class="wrap">
+    <div class="sec-h">
+      <h2 data-r>Everything about your health, <em>explained.</em></h2>
+      <p class="lead" data-r="2">Not a folder of scans. A record that reads what you give it, keeps the picture current and tells you what it means.</p>
+    </div>
+    <div class="show" id="show">
+      <div class="tabs" role="tablist" aria-label="App screens" data-r>
+        <button type="button" role="tab" class="on" aria-selected="true" data-i="0"><i data-spot="home"></i><span><b>Your day</b><small>Doses, readings and the next visit at a glance.</small></span><span class="bar"></span></button>
+        <button type="button" role="tab" aria-selected="false" data-i="1"><i data-spot="track"></i><span><b>Readings</b><small>Each one joins a line, with the range marked.</small></span><span class="bar"></span></button>
+        <button type="button" role="tab" aria-selected="false" data-i="2"><i data-spot="pill"></i><span><b>Medicines</b><small>Dose times, food rules and a warning before you run out.</small></span><span class="bar"></span></button>
+        <button type="button" role="tab" aria-selected="false" data-i="3"><i data-spot="steth"></i><span><b>For the doctor</b><small>What changed since last time, ready to hand over.</small></span><span class="bar"></span></button>
+      </div>
+      <div class="showdev" data-r="2">
+        <span class="halo"></span>
+        <div class="dev" id="showDev"><div class="scr">
+          <img class="on" src="assets/web22/scr-home.webp" alt="Home: the day at a glance" width="1020" height="2214" loading="lazy">
+          <img src="assets/web22/scr-tracker-detail.webp" alt="Trackers with ranges" width="1020" height="2214" loading="lazy">
+          <img src="assets/web22/scr-medications.webp" alt="Medicines with dose times" width="1020" height="2214" loading="lazy">
+          <img src="assets/web22/scr-home-doctor.webp" alt="The view for the doctor" width="1020" height="2214" loading="lazy">
+        </div></div>
+        <span class="dev-sh"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec doc" id="doctor">
+  <div class="wrap">
+    <div class="ph" data-r><img src="assets/v3/ph-consult.webp" alt="A doctor going through a patient’s papers at a follow up visit" width="1200" height="1200" loading="lazy" decoding="async" data-px="36"><small class="ph-note">Photo for illustration</small></div>
+    <div>
+      <h2 data-r>Why a doctor <em>built this.</em></h2>
+      <p data-r="2">Most of a follow up goes to rebuilding what already happened: which medicine, what dose, which reading, which month. The patient carries that history between clinics, and nobody ever gave them a tool for it.</p>
+      <div class="stat" data-r="3"><strong data-count="8">8</strong><span><b>minutes in the room.</b> MyHero gives them back to the conversation, not the paperwork.</span></div>
+      <p class="sig" data-r="4"><b>Dr. Amira Abdullah</b>Founder of MyHero, practising doctor and clinic owner, Malaysia</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="clinics" style="padding-top:24px">
+  <div class="wrap">
+    <div class="sec-h">
+      <h2 data-r>Made for the clinic, <em>too.</em></h2>
+      <p class="lead" data-r="2">Patients join where care already happens: at the counter, in the waiting room, and from the pharmacy bag they take home.</p>
+    </div>
+    <div class="clin">
+      <figure data-r><div class="im"><img src="assets/web22/clinic-counter.webp" width="1200" height="805" decoding="async" alt="A receptionist at a clinic counter helping a patient" loading="lazy"></div><figcaption><b>At the counter</b><span>Join when you register, and the record starts on the first visit.</span></figcaption></figure>
+      <figure data-r="2"><div class="im"><img src="assets/web22/clinic-waiting.webp" width="1200" height="805" decoding="async" alt="Patients in a bright clinic waiting room" loading="lazy"></div><figcaption><b>In the waiting room</b><span>Photograph the papers you were given while you wait.</span></figcaption></figure>
+      <figure data-r="3"><div class="im"><img src="assets/web22/clinic-pharmacy.webp" width="1200" height="805" decoding="async" alt="A pharmacist handing a paper medicine bag across the counter" loading="lazy"></div><figcaption><b>At the pharmacy</b><span>Scan the bag, and the medicine joins your schedule.</span></figcaption></figure>
+    </div>
+    <div class="cform fwrap" id="cwrap" data-r>
+      <div><i data-spot="clinic"></i><h3>Join as a clinic</h3><p class="lead">The first group of clinics gets the counter stand, the poster and a direct line to us. Tell us who you are and we will call back within two working days.</p></div>
+      <div>
+        <form id="cf" name="clinic" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+          <input type="hidden" name="form-name" value="clinic">
+          <p class="vh"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+          <div class="fields">
+            <label>Clinic name<input name="clinic" type="text" required autocomplete="organization"></label>
+            <label>Your name<input name="name" type="text" required autocomplete="name"></label>
+            <label class="full">Phone or email<input name="contact" type="text" required autocomplete="tel"></label>
+            <label class="full">Anything we should know? (optional)<textarea name="note"></textarea></label>
+            <button class="btn p" type="submit">Send</button>
+          </div>
+        </form>
+        <p class="ok" role="status">Thank you. We will call back within two working days.<small class="sample">Preview only: nothing was sent from this page.</small></p>
+        <p class="err" role="alert">Something went wrong.<small>Please try again in a moment.</small></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec app" id="privacy">
+  <div class="wrap">
+    <div class="sec-h">
+      <h2 data-r>Your record, <em>your rules.</em></h2>
+      <p class="lead" data-r="2">A health record is the most personal thing you own. The rules are short, and they are the same here and in the app.</p>
+    </div>
+    <div class="rules">
+      <div class="rule" data-r><i data-spot="shield"></i><b>Yours, not ours.</b><p>The record is yours. We do not sell it, and we do not trade it for advertising.</p></div>
+      <div class="rule" data-r="2"><i data-spot="users"></i><b>Shared only when you say so.</b><p>Every share is one you start, to one person, and you can end it at any time.</p></div>
+      <div class="rule" data-r="3"><i data-spot="doc"></i><b>Leave with everything.</b><p>Export the whole record as files you can keep, or delete it completely.</p></div>
+      <div class="rule" data-r="4"><i data-spot="lock"></i><b>Kept under Malaysian law.</b><p>Stored in Malaysia and handled under the Personal Data Protection Act, as a health record should be.</p></div>
+    </div>
+    <p class="note" data-r>MyHero keeps your record and explains it. It does not diagnose, and it does not replace your doctor.</p>
+  </div>
+</section>
+
+<section class="sec faq" id="faq">
+  <div class="wrap">
+    <div class="sec-h"><h2 data-r>Questions, <em>answered.</em></h2><p class="lead" data-r="2">The things people ask first.</p>
+    </div>
+    <div class="qa">
+      <details data-r><summary><i data-spot="star"></i><b>What does it cost?</b><i aria-hidden="true"></i></summary><p>Early access is free. Plans are set at launch, and whatever you choose, your record stays yours.</p></details>
+      <details data-r><summary><i data-spot="phone"></i><b>Which phones does it work on?</b><i aria-hidden="true"></i></summary><p>MyHero comes to Android first and to iPhone after, once its App Store listing is approved.</p></details>
+      <details data-r><summary><i data-spot="shield"></i><b>Is my health record safe?</b><i aria-hidden="true"></i></summary><p>It is stored in Malaysia and handled under the Personal Data Protection Act 2010. It is never sold. You decide who sees it, and you can download or delete everything at any time.</p></details>
+      <details data-r><summary><i data-spot="users"></i><b>Can I keep my mother’s or father’s record?</b><i aria-hidden="true"></i></summary><p>Yes. Add a family member as a caregiver and choose what they can see and do. You can change that, or end it, whenever you like.</p></details>
+      <details data-r><summary><i data-spot="bm"></i><b>Is it in Bahasa Malaysia?</b><i aria-hidden="true"></i></summary><p>Yes. The app works in English and Bahasa Malaysia, and you can switch at any time in Settings.</p></details>
+      <details data-r><summary><i data-spot="steth"></i><b>Does MyHero give medical advice?</b><i aria-hidden="true"></i></summary><p>No. MyHero keeps your record and explains it in plain words. It does not diagnose and it does not replace your doctor. For anything urgent, call your clinic or 999.</p></details>
+      <details data-r><summary><i data-spot="clinic"></i><b>My clinic does not use MyHero. Can I still use it?</b><i aria-hidden="true"></i></summary><p>Yes. Photograph the papers you are given and MyHero reads and files them. Clinics can also join, so the record starts at the counter.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="join" id="join">
+  <div class="wrap">
+    <div class="panel fwrap" id="jwrap" data-r>
+      <div>
+        <h2>Be ready for the next appointment.</h2>
+        <p>Early access opens with the first group of patients and clinics. Leave an email and we will send the invite when your turn comes.</p>
+        <form id="jf" name="invite" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+          <input type="hidden" name="form-name" value="invite">
+          <p class="vh"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+          <label class="vh" for="em">Email</label><input id="em" name="email" type="email" placeholder="you@email.com" autocomplete="email" required><button class="btn w" type="submit">Request an invite</button>
+        </form>
+        <small class="n">One email about the invite. Nothing else.</small>
+        <div class="stores"><button type="button" class="store" data-store><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16.4 12.6c0-2.4 2-3.6 2.1-3.7-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-2.9.9-3.7.9-.8 0-1.9-.9-3.2-.8-1.6 0-3.1 1-4 2.4-1.7 3-.4 7.4 1.2 9.8.8 1.2 1.8 2.5 3 2.4 1.2 0 1.7-.8 3.1-.8 1.5 0 1.9.8 3.2.8 1.3 0 2.2-1.2 3-2.4.9-1.4 1.3-2.7 1.3-2.8 0 0-2.5-1-2.5-3.9zM14 5.4c.7-.8 1.1-1.9 1-3-1 0-2.1.6-2.8 1.4-.6.7-1.2 1.8-1 2.9 1.1.1 2.1-.5 2.8-1.3z"/></svg><span><small>Download on the</small><b>App Store</b></span></button><button type="button" class="store" data-store><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#34A853" d="M3.6 2.3l10.5 10.4L3.6 23.1c-.4-.2-.6-.7-.6-1.2V3.5c0-.5.2-.9.6-1.2z"/><path fill="#FBBC04" d="M17.6 9.2l-3.5 3.5 3.5 3.5 4-2.3c1.1-.6 1.1-1.8 0-2.4z"/><path fill="#4285F4" d="M14.1 12.7l3.5 3.5-12.4 7.1c-.6.3-1.2.3-1.6-.2z"/><path fill="#EA4335" d="M3.6 2.3c.4-.4 1-.5 1.6-.2l12.4 7.1-3.5 3.5z"/></svg><span><small>Get it on</small><b>Google Play</b></span></button></div>
+        <small class="n">Store links go live on launch day. Until then the invite list is the way in.</small>
+        <p class="ok" role="status">Thank you. Your invite is on its way when your turn comes.<small class="sample">Preview only: nothing was sent from this page.</small></p>
+        <p class="err" role="alert">Something went wrong.<small>Please try again in a moment.</small></p>
+      </div>
+      <div class="fw"><img class="fig" src="assets/web17/figure-wave.webp?v=w17" alt="" loading="lazy"><span class="hearts" aria-hidden="true"><i style="--i:0"></i><i style="--i:1"></i><i style="--i:2"></i><i style="--i:3"></i><i style="--i:4"></i><i style="--i:5"></i><i style="--i:6"></i></span></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="ft" id="ft">
+  <div class="wrap">
+    <div class="ft-top">
+      <div>
+        <a class="brand" href="#top" aria-label="MyHero home"><img class="wm" src="assets/logo/wordmark-red.svg?v=w17" alt="MyHero" width="91" height="30"></a>
+        <p>A personal health record for Malaysian patients and the people who care for them. Founded by Dr. Amira Abdullah, Kuala Lumpur.</p>
+        <div class="clock"><i></i>Kuala Lumpur <b id="clk">00:00:00</b></div>
+      </div>
+      <div><h4>The app</h4><ul><li><a href="#how">How it works</a></li><li><a href="#watch">See how it works</a></li><li><a href="#app">The app</a></li><li><a href="#privacy">Privacy</a></li><li><a href="#faq">Questions</a></li></ul></div>
+      <div><h4>Company</h4><ul><li><a href="#doctor">Why a doctor</a></li><li><a href="#clinics">For clinics</a></li><li><a href="#join">Early access</a></li></ul></div>
+      
+    </div>
+    <p class="ft-note">Names and readings on this page are examples. Photographs are for illustration. MyHero keeps your record and explains it; it does not diagnose, and it does not replace your doctor.</p>
+    <div class="ft-bot"><span>&copy; 2026 MyHero. Prototype site, October 2026.</span><span>MyHero keeps and explains your record. It does not diagnose.</span><a href="#top">Back to top</a></div>
+  </div>
+
+<div class="ft-ribbon"><a href="https://brandmethod.co" target="_blank" rel="noopener" aria-label="Demo by BrandMethod.co"><canvas id="bmRibbon" width="460" height="110" aria-hidden="true"></canvas><span class="ft-ribbon-fb" hidden>Demo by BrandMethod.co</span></a></div>
+</footer>
+
+<script src="assets/web22/icons.js?v=1"></script>
+<script>
+(function(){
+  var D=document,W=window,RM=W.matchMedia&&W.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function $(s,c){return (c||D).querySelector(s)}function $$(s,c){return [].slice.call((c||D).querySelectorAll(s))}
+  var LOCAL=/^(localhost|127\.0\.0\.1|\[::1\]|)$/.test(location.hostname)||location.protocol==='file:';
+
+  /* the Duolingo spots: one flat picture per item */
+  if(W.blSpot){$$('[data-spot]').forEach(function(el){var svg=W.blSpot(el.getAttribute('data-spot'));if(!svg)return;if(el.tagName==='I'){el.outerHTML=svg}else{el.insertAdjacentHTML('afterbegin',svg)}})}
+
+  /* arrive: rise in once; everything shows after 2.5s whatever happens */
+  var els=$$('[data-r]');function reveal(e){e.classList.add('in')}
+  if('IntersectionObserver' in W){var io=new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){reveal(x.target);io.unobserve(x.target)}})},{rootMargin:'0px 0px -8% 0px'});els.forEach(function(e){io.observe(e)})}else els.forEach(reveal);
+  setTimeout(function(){els.forEach(reveal)},2500);
+
+  /* header shadow, and the section link that is open */
+  var hd=$('.hd'),lastY=W.scrollY;function sc(){var y=W.scrollY;hd.classList.toggle('on',y>8);if(y<80||y<lastY-4)hd.classList.remove('hide');else if(y>120&&y>lastY+4)hd.classList.add('hide');lastY=y}sc();W.addEventListener('scroll',sc,{passive:true});
+
+  function cycle(dev,ms){var imgs=$$('.scr img',dev),i=0,t;function next(){var a=imgs[i];i=(i+1)%imgs.length;var b=imgs[i];a.classList.remove('on');a.classList.add('off');b.classList.remove('off');b.classList.add('on');setTimeout(function(){a.classList.remove('off')},800)}function arm(){clearInterval(t);t=setInterval(function(){if(!D.hidden)next()},ms)}arm();return {next:next,go:function(k){if(k===i)return;var a=imgs[i];i=k;var b=imgs[i];a.classList.remove('on');a.classList.add('off');b.classList.remove('off');b.classList.add('on');setTimeout(function(){a.classList.remove('off')},800);arm()},arm:arm,stop:function(){clearInterval(t)}}}
+
+  /* the step pictures move only while on screen */
+  var scenes=$$('[data-scene]');
+  if('IntersectionObserver' in W&&!RM){var sio=new IntersectionObserver(function(es){es.forEach(function(x){x.target.classList.toggle('play',x.isIntersecting)})},{threshold:.25});scenes.forEach(function(s){sio.observe(s)})}
+
+  /* the app showcase: tabs drive the phone, and it moves on by itself */
+  var show=$('#show'),tabs=$$('.tabs button',show),sdev=$('#showDev');
+  if(show&&sdev){var sc2=cycle(sdev,999999),k=0,timer;
+    function pick(n,user){k=n;tabs.forEach(function(b,j){var on=j===n;b.classList.toggle('on',on);b.setAttribute('aria-selected',on);if(on){var bar=$('.bar',b);bar.style.animation='none';void bar.offsetWidth;bar.style.animation=''}});sc2.go(n);arm()}
+    function arm(){clearTimeout(timer);if(RM)return;timer=setTimeout(function(){if(!D.hidden&&!show.classList.contains('paused'))pick((k+1)%tabs.length);else arm()},5000)}
+    tabs.forEach(function(b,j){b.addEventListener('click',function(){pick(j,true)});b.addEventListener('keydown',function(e){if(e.key==='ArrowRight'||e.key==='ArrowDown'){e.preventDefault();tabs[(j+1)%tabs.length].focus();pick((j+1)%tabs.length)}if(e.key==='ArrowLeft'||e.key==='ArrowUp'){e.preventDefault();tabs[(j+tabs.length-1)%tabs.length].focus();pick((j+tabs.length-1)%tabs.length)}})});
+    show.addEventListener('pointerenter',function(){show.classList.add('paused')});show.addEventListener('pointerleave',function(){show.classList.remove('paused')});
+    arm()}
+
+  /* numbers count up as they arrive; the final value is already in the page */
+  var cnt=$$('[data-count]');
+  if('IntersectionObserver' in W&&!RM){var cio=new IntersectionObserver(function(es){es.forEach(function(x){if(!x.isIntersecting)return;cio.unobserve(x.target);var el=x.target,to=+el.getAttribute('data-count'),t0=null;(function step(t){if(!t0)t0=t;var q=Math.min(1,(t-t0)/1400),e=1-Math.pow(1-q,4);el.textContent=Math.round(to*e);if(q<1)requestAnimationFrame(step)})(performance.now())})},{threshold:.6});cnt.forEach(function(c){cio.observe(c)})}
+
+  /* photographs drift a little as the page moves, desktop only */
+  var px=$$('[data-px]');
+  function pxTick(){if(W.innerWidth<1000){px.forEach(function(e){e.style.transform=''});return}px.forEach(function(e){var r=e.parentNode.getBoundingClientRect();if(r.bottom<0||r.top>W.innerHeight)return;var p=(r.top+r.height/2-W.innerHeight/2)/(W.innerHeight/2+r.height/2);e.style.transform='translate3d(0,'+(p*-(+e.getAttribute('data-px'))).toFixed(1)+'px,0)'})}
+  if(px.length&&!RM){pxTick();W.addEventListener('scroll',function(){requestAnimationFrame(pxTick)},{passive:true});W.addEventListener('resize',pxTick)}
+
+  /* the privacy pictures pop in with their card */
+  $$('.rule').forEach(function(r){if('IntersectionObserver' in W){new IntersectionObserver(function(es,o){if(es[0].isIntersecting){r.classList.add('in');o.disconnect()}},{threshold:.4}).observe(r)}else r.classList.add('in')});
+
+  /* forms: Netlify Forms on a real host, a sample on this preview; the page never reloads */
+  function wire(form){var wrap=form.closest('.fwrap');if(LOCAL)wrap.classList.add('local');
+    form.addEventListener('submit',function(e){e.preventDefault();wrap.classList.remove('fail');
+      var bad=$$('input[required],textarea[required]',form).filter(function(i){return !i.value.trim()||(i.type==='email'&&i.value.indexOf('@')<1)});
+      if(bad.length){bad[0].focus();bad[0].style.borderColor='#FF3B5C';bad[0].style.boxShadow='0 0 0 3px rgba(255,59,92,.35)';setTimeout(function(){bad[0].style.borderColor='';bad[0].style.boxShadow=''},1600);return}
+      if(LOCAL){wrap.classList.add('done');return}
+      var body=new URLSearchParams(new FormData(form)).toString();
+      fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:body}).then(function(r){if(!r.ok)throw 0;wrap.classList.add('done')}).catch(function(){wrap.classList.add('fail')})})}
+  $$('form[data-netlify]').forEach(wire);
+
+  /* Kuala Lumpur keeps time */
+  var clk=$('#clk');function tick(){try{clk.textContent=new Date().toLocaleTimeString('en-GB',{timeZone:'Asia/Kuala_Lumpur',hour12:false})}catch(e){clk.textContent=new Date().toTimeString().slice(0,8)}}tick();setInterval(tick,1000);
+
+  /* the explainer: the big button starts it with sound; the native controls take over */
+  var ev=$('#expl'),vp=$('#vplay');if(ev&&vp){var vw=ev.closest('.vwrap'),tg=$('#vtoggle'),tm=$('#vtime'),sk=$('#vseek'),fl=$('#vfill'),mu=$('#vmute'),fs=$('#vfull');
+    function fmt(x){x=Math.max(0,Math.round(x||0));return Math.floor(x/60)+':'+String(x%60).padStart(2,'0')}
+    function state(){vw.classList.toggle('playing',!ev.paused&&!ev.ended);tg.setAttribute('aria-label',ev.paused?'Play':'Pause')}
+    vp.addEventListener('click',function(){ev.muted=false;ev.play().catch(function(){})});
+    tg.addEventListener('click',function(){if(ev.paused){ev.muted=false;ev.play().catch(function(){})}else ev.pause()});
+    ev.addEventListener('click',function(){if(!ev.paused)ev.pause()});
+    ['play','pause','ended'].forEach(function(e){ev.addEventListener(e,state)});
+    ev.addEventListener('loadedmetadata',function(){tm.textContent=fmt(ev.currentTime)+' / '+fmt(ev.duration);sk.setAttribute('aria-valuemax',Math.round(ev.duration))});
+    ev.addEventListener('timeupdate',function(){if(ev.duration){fl.style.width=(ev.currentTime/ev.duration*100)+'%';tm.textContent=fmt(ev.currentTime)+' / '+fmt(ev.duration);sk.setAttribute('aria-valuenow',Math.round(ev.currentTime))}});
+    function seekTo(e){var r=sk.getBoundingClientRect(),p=Math.min(1,Math.max(0,(e.clientX-r.left)/r.width));if(ev.duration)ev.currentTime=p*ev.duration}
+    sk.addEventListener('click',seekTo);var drag=false;sk.addEventListener('pointerdown',function(e){drag=true;seekTo(e)});W.addEventListener('pointermove',function(e){if(drag)seekTo(e)});W.addEventListener('pointerup',function(){drag=false});
+    sk.addEventListener('keydown',function(e){if(e.key==='ArrowRight'){ev.currentTime=Math.min(ev.duration,ev.currentTime+5)}if(e.key==='ArrowLeft'){ev.currentTime=Math.max(0,ev.currentTime-5)}});
+    var cc=$('#vcc');if(cc){cc.addEventListener('click',function(){var tr=ev.textTracks&&ev.textTracks[0];if(!tr)return;var on=tr.mode!=='showing';tr.mode=on?'showing':'hidden';cc.setAttribute('aria-pressed',on)});ev.addEventListener('loadedmetadata',function(){if(ev.textTracks&&ev.textTracks[0])ev.textTracks[0].mode='hidden'})}
+    mu.addEventListener('click',function(){ev.muted=!ev.muted;mu.setAttribute('aria-label',ev.muted?'Unmute':'Mute');mu.style.opacity=ev.muted?.5:1});
+    fs.addEventListener('click',function(){var el=vw;if(D.fullscreenElement){D.exitFullscreen()}else if(el.requestFullscreen){el.requestFullscreen()}else if(ev.webkitEnterFullscreen){ev.webkitEnterFullscreen()}});
+  }
+  /* the language dropdown */
+  var dd=$('#langdd');if(dd){var lb=$('.lang-btn',dd);function setdd(o){dd.classList.toggle('open',o);lb.setAttribute('aria-expanded',o)}
+    lb.addEventListener('click',function(){setdd(!dd.classList.contains('open'))});
+    D.addEventListener('click',function(e){if(!dd.contains(e.target))setdd(false)});D.addEventListener('keydown',function(e){if(e.key==='Escape')setdd(false)})}
+  /* the store buttons point at the invite until launch day */
+  $$('[data-store]').forEach(function(b){b.addEventListener('click',function(){var em=$('#em');if(em){em.focus();em.scrollIntoView({block:'center',behavior:'smooth'})}})});
+})();
+</script>
+<script>
+/* the hero phone: the real screens take turns, a slow slide every few seconds, paused when the tab is hidden */
+(function(){var imgs=document.querySelectorAll('#heroDev .scr img');if(imgs.length<2||matchMedia('(prefers-reduced-motion:reduce)').matches)return;var k=0,T;
+function step(){if(document.hidden)return;var a=imgs[k];k=(k+1)%imgs.length;var b=imgs[k];a.classList.remove('on');a.classList.add('off');b.classList.remove('off');b.classList.add('on');setTimeout(function(){a.classList.remove('off')},800)}
+T=setInterval(step,3800)})();
+</script>
+<script id="bm-ribbon-js">/* "Demo by BrandMethod.co" ribbon, from the NakGas build (website/nakgas/site.js). Runs only while on screen. */
+(function(){var D=document,W=window,$=function(s){return D.querySelector(s)},RM=W.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
+  (function(){
+    var cv=D.getElementById('bmRibbon'),fb=$('.ft-ribbon-fb'),ctx=null;try{ctx=cv&&cv.getContext('2d');}catch(e){}
+    if(!cv)return;if(!ctx){cv.style.display='none';if(fb)fb.hidden=false;return;}
+    var Wd=460,Hd=110,dpr=Math.min(W.devicePixelRatio||1,2);cv.width=Wd*dpr;cv.height=Hd*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
+    var X0=40,X1=420,BH=32,BY=40,running=false,t=0,GL=null,F='600 12px Inter,sans-serif';
+    var SEGS=[{t:'DEMO BY',sp:3.6,a:1,gap:8},{star:true,w:13,gap:9},{t:'BRAND',sp:3.6,a:.98},{t:'METHOD.CO',sp:3.6,a:.98}];
+    function build(){GL=[];SEGS.forEach(function(sg){if(sg.star){GL.push({star:true,w:sg.w});if(sg.gap)GL.push({gap:sg.gap});return;}ctx.font=F;
+      for(var k=0;k<sg.t.length;k++){var ch=sg.t[k];if(ch===' '){GL.push({gap:6.5});continue;}GL.push({ch:ch,a:sg.a,w:ctx.measureText(ch).width+sg.sp});}if(sg.gap)GL.push({gap:sg.gap});});}
+    function wave(x,tt){return 4*Math.sin(x*.0135+tt*.0011)+2.4*Math.sin(x*.029-tt*.00068)+1.2*Math.sin(x*.055+tt*.0016);}
+    function slope(x,tt){return(wave(x+2,tt)-wave(x-2,tt))/4;}
+    function lerp(a,b,p){return a+(b-a)*p;}
+    function shade(p){return 'rgb('+Math.round(lerp(18,86,p))+','+Math.round(lerp(28,116,p))+','+Math.round(lerp(158,255,p))+')';}
+    function tail(xe,dir,tt){var y=BY+wave(xe,tt)*.7+9,x2=xe-dir*40;ctx.beginPath();ctx.moveTo(xe,y);ctx.lineTo(x2,y+7);ctx.lineTo(x2+dir*13,y+7+BH/2);ctx.lineTo(x2,y+7+BH);ctx.lineTo(xe,y+BH);ctx.closePath();ctx.fillStyle='#101C96';ctx.fill();ctx.fillStyle='rgba(0,0,0,.22)';ctx.fill();}
+    function draw(tt){if(!GL)build();ctx.clearRect(0,0,Wd,Hd);tail(X0+6,1,tt);tail(X1-6,-1,tt);var x,y,sl,p;
+      for(x=X0;x<=X1;x+=2){y=BY+wave(x,tt);sl=slope(x,tt);p=Math.max(0,Math.min(1,.52+sl*5.5+.14*Math.sin(x*.006-tt*.00042)));ctx.fillStyle=shade(p);ctx.fillRect(x-1,y,2.4,BH);}
+      ctx.beginPath();for(x=X0;x<=X1;x+=4){y=BY+wave(x,tt);x===X0?ctx.moveTo(x,y+.6):ctx.lineTo(x,y+.6);}ctx.strokeStyle='rgba(255,255,255,.28)';ctx.lineWidth=1.1;ctx.stroke();
+      ctx.beginPath();for(x=X0;x<=X1;x+=4){y=BY+wave(x,tt)+BH;x===X0?ctx.moveTo(x,y-.6):ctx.lineTo(x,y-.6);}ctx.strokeStyle='rgba(0,10,60,.4)';ctx.lineWidth=1.2;ctx.stroke();
+      ctx.textAlign='left';ctx.textBaseline='middle';var tot=0;GL.forEach(function(g){tot+=g.w||g.gap||0;});var xs=(X0+X1)/2-tot/2;
+      GL.forEach(function(g){if(g.gap){xs+=g.gap;return;}var cx=xs+(g.w||0)/2,yy=BY+wave(cx,tt)+BH/2+.5,a=Math.atan(slope(cx,tt));ctx.save();ctx.translate(cx,yy);ctx.rotate(a);
+        if(g.star){ctx.strokeStyle='rgba(255,255,255,.97)';ctx.lineWidth=1.5;ctx.lineCap='round';for(var k=0;k<4;k++){var an=k*Math.PI/4;ctx.beginPath();ctx.moveTo(-Math.cos(an)*4.6,-Math.sin(an)*4.6);ctx.lineTo(Math.cos(an)*4.6,Math.sin(an)*4.6);ctx.stroke();}}
+        else{ctx.font=F;ctx.fillStyle='rgba(2,8,40,.4)';ctx.fillText(g.ch,-(g.w/2)+.7,1.1);ctx.fillStyle='rgba(255,255,255,'+g.a+')';ctx.fillText(g.ch,-(g.w/2),0);}
+        ctx.restore();xs+=g.w||0;});}
+    function frame(){if(!running)return;t+=16;draw(t);requestAnimationFrame(frame);}
+    draw(0);if(D.fonts&&D.fonts.ready)D.fonts.ready.then(function(){GL=null;draw(t);});
+    if(RM)return;
+    if('IntersectionObserver' in W)new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){if(!running){running=true;requestAnimationFrame(frame);}}else running=false;});}).observe(cv);
+  })();
+})();</script></body>
+</html>

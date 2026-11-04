@@ -1,0 +1,59 @@
+/* ==========================================================================
+   Driver page · hero, head-to-head, career (season grid reuses team.css)
+   ========================================================================== */
+.dh {
+  position: relative; z-index: 4; min-height: 100vh; min-height: 100svh; overflow: hidden; isolation: isolate;
+  display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: 1fr auto; padding: 0 var(--gutter);
+}
+.dh__bg { position: absolute; inset: 0; z-index: -3; pointer-events: none; }
+.dh__glow { position: absolute; right: -10%; bottom: -25%; width: 75vw; height: 110%; background: radial-gradient(closest-side, color-mix(in srgb, var(--team) 40%, transparent), transparent 72%); filter: blur(24px); }
+.dh__num { position: absolute; z-index: -2; right: 4vw; top: 12vh; height: 70vh; width: auto; max-width: 56vw; object-fit: contain; opacity: 0.1; filter: brightness(0) invert(1); }
+.dh__photo {
+  position: absolute; z-index: -1; right: 16vw; bottom: -38vh; height: 128vh; width: auto;
+  -webkit-mask-image: linear-gradient(180deg, #000 55%, transparent 80%); mask-image: linear-gradient(180deg, #000 55%, transparent 80%);
+  filter: drop-shadow(0 40px 80px rgba(0, 0, 0, 0.55));
+}
+.dh__helmet { position: absolute; z-index: 0; right: 4vw; bottom: 22vh; width: min(22vw, 300px); height: auto; filter: drop-shadow(0 30px 40px rgba(0, 0, 0, 0.6)); }
+.dh__head { align-self: end; padding-bottom: 4vh; position: relative; z-index: 1; }
+.dh__name { display: flex; flex-direction: column; font-weight: 300; font-size: clamp(3.4rem, 9vw, 9.5rem); line-height: 0.9; letter-spacing: -0.05em; }
+.dh__name b { font-weight: 700; }
+.dh__meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1.6rem; margin-top: 1.8rem; color: rgba(239, 234, 224, 0.75); }
+.dh__meta img { width: 24px; height: 24px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 1.5px rgba(255, 255, 255, 0.8); margin-right: -0.9rem; }
+.dh__meta a { color: var(--fg); border-bottom: 1px solid var(--c); padding-bottom: 2px; }
+.dh__stats { position: relative; z-index: 1; }
+
+/* head to head — two-sided split bars: driver in team colour, teammate in neutral grey */
+.h2h { max-width: 980px; margin: 0 auto; }
+.h2h__who { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; margin-bottom: 1.6rem; font-size: 1.3rem; }
+.h2h__who > span { display: flex; align-items: center; gap: 0.8rem; }
+.h2h__who > span:last-child { justify-content: flex-end; }
+.h2h__who > .mono { color: var(--muted); font-size: 11px; }
+.h2h__who b { font-weight: 500; }
+.h2h__who > span:first-child .avatar { box-shadow: 0 0 0 2px var(--team); }
+.h2h__row { display: grid; grid-template-columns: 3.4rem 1fr 3.4rem; align-items: center; gap: 1rem; padding: 0.85rem 0; border-top: 1px solid var(--line); }
+.h2h__row > b { font-weight: 400; font-size: 1.4rem; font-variant-numeric: tabular-nums; color: var(--muted); }
+.h2h__row > b:last-child { text-align: right; }
+.h2h__row > b.is-ahead { color: var(--fg); }
+.h2h__bar { position: relative; display: flex; gap: 2px; height: 8px; margin-top: 1.3rem; }
+.h2h__bar .mono { position: absolute; left: 50%; top: -1.5rem; transform: translateX(-50%); color: var(--muted); font-size: 9px; white-space: nowrap; }
+.h2h__bar i { display: block; height: 100%; width: 0; transition: width 1.4s var(--ease); }
+.h2h__bar i.go { width: var(--w); }
+.h2h__bar .a { background: var(--team); border-radius: 4px 0 0 4px; margin-left: auto; }
+.h2h__bar .b { background: #8d887f; border-radius: 0 4px 4px 0; margin-right: auto; }
+.h2h__link { display: inline-block; margin-top: 1.6rem; color: var(--muted); float: right; }
+.h2h__link:hover { color: var(--fg); }
+
+/* career tiles */
+.career { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); margin: 0; border-top: 1px solid var(--line); }
+.career > div { padding: 1.6rem 1rem 0 0; }
+.career dt { color: var(--muted); font-size: 10px; }
+.career dd { margin: 0.6rem 0 0; font-weight: 600; font-size: clamp(2.2rem, 4vw, 3.6rem); letter-spacing: -0.03em; line-height: 1; }
+
+@media (max-width: 900px) {
+  .dh__photo { right: -22vw; height: 92vh; bottom: -18vh; opacity: 0.5; }
+  .dh__num { height: 36vh; top: 13vh; right: -4vw; max-width: 90vw; }
+  .dh__helmet { width: 30vw; bottom: auto; top: 14vh; right: auto; left: var(--gutter); }
+  .dh::after { content: ""; position: absolute; inset: 40% 0 0; z-index: 0; pointer-events: none; background: linear-gradient(0deg, var(--bg) 35%, transparent); }
+  .dh__head { padding-top: 50vh; }
+  .career { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 1.6rem; }
+}
