@@ -1,0 +1,364 @@
+{
+    "categories": [
+        {
+            "id": "health",
+            "label": "Health"
+        },
+        {
+            "id": "fb",
+            "label": "Food & Drink"
+        },
+        {
+            "id": "tech",
+            "label": "Technology"
+        },
+        {
+            "id": "engineering",
+            "label": "Engineering"
+        },
+        {
+            "id": "fintech",
+            "label": "Fintech"
+        },
+        {
+            "id": "lifestyle",
+            "label": "Lifestyle"
+        },
+        {
+            "id": "community",
+            "label": "Community"
+        }
+    ],
+    "projects": [
+        {
+            "slug": "tic",
+            "name": "The Imperial Culture",
+            "category": "fb",
+            "sector": "food & drink",
+            "line": "An owl, a songket and a full brand book for a Penang kombucha, carried from the bottle to the backdrop.",
+            "tags": [
+                "Brand Identity",
+                "Packaging",
+                "Brand Book"
+            ],
+            "accent": "#283462",
+            "cover_html": "<span class=\"wk6-cover\" style=\"--g:#283462;--veil:0;--lw:34%\"><img class=\"wk6-cover-bg\" src=\"Image/work6/tic/cover-key.webp\" alt=\"The Imperial Culture, the gold owl over The Imperial Culture wordmark on Imperial Navy, a band of its songket below\" loading=\"lazy\" decoding=\"async\" style=\"object-position:50% 50%\"></span>",
+            "case": "custom"
+        },
+        {
+            "slug": "rubex-pay",
+            "name": "Rubex Pay",
+            "category": "fintech",
+            "sector": "payment gateway",
+            "line": "A logo system, a bilingual name, a family of cube icons and a website for a Canadian payment infrastructure company.",
+            "tags": [
+                "Brand Identity",
+                "Website",
+                "Fintech"
+            ],
+            "accent": "#D40720",
+            "cover_html": "<span class=\"wk6-cover\" style=\"--g:#B4141C;--veil:0;--lw:34%\"><img class=\"wk6-cover-bg\" src=\"Image/work6/rubex-pay/cover-key.webp\" alt=\"Rubex Pay, the white RUBEXPAY lockup on the red panel of a wide display on a red tiled wall\" loading=\"lazy\" decoding=\"async\" style=\"object-position:50% 50%\"></span>",
+            "case": "custom"
+        },
+        {
+            "slug": "the-pause",
+            "name": "The Pause",
+            "category": "lifestyle",
+            "sector": "lifestyle",
+            "line": "A quiet identity, packaging and a brand book for a home fragrance curator.",
+            "tags": [
+                "Brand Identity",
+                "Packaging",
+                "Website"
+            ],
+            "accent": "#866E5F",
+            "cover_html": "<span class=\"wk6-cover\" style=\"--g:#C8C2AF;--veil:0;--lw:34%\"><img class=\"wk6-cover-bg\" src=\"Image/work6/the-pause/cover-key-2.webp\" alt=\"The Pause, The Pause wordmark, larger, on Dust with the linen texture of its own photography and the two pause lines\" loading=\"lazy\" decoding=\"async\" style=\"object-position:50% 50%\"></span>",
+            "case": "custom"
+        },
+        {
+            "slug": "breadly-made",
+            "name": "Breadly Made",
+            "category": "fb",
+            "sector": "food & beverage",
+            "line": "A name, an identity and every object in the room for a premium bakery café in Johor Bahru.",
+            "tags": [
+                "Naming",
+                "Brand Identity",
+                "Packaging"
+            ],
+            "accent": "#6952EB",
+            "cover_html": "<span class=\"wk6-cover\" style=\"--g:#14102E;--veil:0.18;--lw:40%\"><img class=\"wk6-cover-bg\" src=\"Image/work6/breadly-made/thumb-interior.webp\" alt=\"\" loading=\"lazy\" decoding=\"async\" style=\"object-position:50% 50%\"><img class=\"wk6-cover-logo\" src=\"Image/work6/breadly-made/logo.png\" alt=\"Breadly Made logo\" loading=\"lazy\" decoding=\"async\"></span>",
+            "case": "custom"
+        },
+        {
+            "slug": "iaq",
+            "name": "IAQ",
+            "category": "engineering",
+            "sector": "engineering",
+            "line": "A website, identity book and SEMICON stand for the engineers of cleanrooms and controlled environments.",
+            "tags": [
+                "Website",
+                "Brand Identity Book",
+                "Exhibition Stand"
+            ],
+            "accent": "#E4131B",
+            "cover_html": "<span class=\"wk6-cover\" style=\"--g:#0A101F;--veil:0.55;--lw:32%\"><img class=\"wk6-cover-bg\" src=\"Image/work6/iaq/plant-dusk.webp\" alt=\"\" loading=\"lazy\" decoding=\"async\" style=\"object-position:50% 80%\"><img class=\"wk6-cover-logo\" src=\"Image/work6/iaq/logo-red-2.png\" alt=\"IAQ logo\" loading=\"lazy\" decoding=\"async\"></span>",
+            "case": "custom"
+        },
+        {
+            "slug": "eskayvie",
+            "name": "Eskayvie",
+            "category": "health",
+            "sector": "health & wellness",
+            "line": "A brand identity manual, stationery and a marketing system for a halal supplement company.",
+            "tags": [
+                "Brand Identity",
+                "Brand Book",
+                "Marketing Assets"
+            ],
+            "accent": "#6F1DB5",
+            "cover_html": "<span class=\"wk6-cover\" style=\"--g:#503085;--veil:0;--lw:34%\"><img class=\"wk6-cover-bg\" src=\"Image/work6/eskayvie/cover-key-6.webp\" alt=\"Eskayvie, the white Eskayvie logo at the centre of a purple sky, above a woman in purple with a flowing scarf\" loading=\"lazy\" decoding=\"async\" style=\"object-position:50% 50%\"></span>",
+            "case": "custom"
+        },
+        {
+            "slug": "mindtropic",
+            "name": "Mindtropic",
+            "category": "health",
+            "sector": "health & wellness",
+            "line": "Packaging and a launch story for a children's focus supplement, built around calm.",
+            "tags": [
+                "Packaging",
+                "Social Content",
+                "Product Launch"
+            ],
+            "accent": "#0F35A9",
+            "cover_html": "<img src=\"work-images/mindtropic.webp\" alt=\"Mindtropic, project visual\" loading=\"lazy\" decoding=\"async\" style=\"object-position:50% 50%\">",
+            "case": "custom"
+        },
+        {
+            "slug": "tenthpin",
+            "name": "Tenthpin MC",
+            "category": "tech",
+            "sector": "technology",
+            "line": "A website of thirty pages, SEO and a site editor for an SAP partner, built to be found on Google and cited by AI search.",
+            "tags": [
+                "Website",
+                "SEO",
+                "Site Editor"
+            ],
+            "accent": "#0520F5",
+            "cover_html": "<span class=\"wk6-cover\" style=\"--g:#101626;--veil:0;--lw:34%\"><img class=\"wk6-cover-bg\" src=\"Image/work6/tenthpin/cover-key-2.webp\" alt=\"Tenthpin MC, the Tenthpin logo over its service-portfolio wheel in Tenthpin blue\" loading=\"lazy\" decoding=\"async\" style=\"object-position:50% 50%\"></span>",
+            "case": "custom"
+        },
+        {
+            "slug": "altigo",
+            "name": "Altigo",
+            "category": "engineering",
+            "sector": "engineering",
+            "line": "A name, a logo system, a brand book and a 2026 company profile for a Penang lift company.",
+            "tags": [
+                "Naming",
+                "Brand Identity",
+                "Company Profile"
+            ],
+            "accent": "#0344DC",
+            "cover_html": "<span class=\"wk6-cover\" style=\"--g:#0344DC;--veil:0.5;--lw:44%\"><img class=\"wk6-cover-bg\" src=\"Image/work6/altigo/thumb-button.webp\" alt=\"\" loading=\"lazy\" decoding=\"async\" style=\"object-position:50% 50%\"><img class=\"wk6-cover-logo\" src=\"Image/work6/altigo/logo-white.png\" alt=\"Altigo logo\" loading=\"lazy\" decoding=\"async\"></span>",
+            "case": "custom"
+        },
+        {
+            "slug": "jb-cocoa",
+            "name": "JB Cocoa",
+            "category": "health",
+            "sector": "health & wellness",
+            "line": "A cocoa identity built on origin and craft, carried from packaging to trade boards.",
+            "tags": [
+                "Packaging",
+                "Campaign Visuals",
+                "Product Launch"
+            ],
+            "accent": "#7F2C2C",
+            "cover_html": "<span class=\"wk6-cover\" style=\"--g:#7F2C2C;--veil:0;--lw:34%\"><img class=\"wk6-cover-bg\" src=\"work-images/jb-cocoa.webp\" alt=\"JB Cocoa, cocoa pods on the tree, JB Cocoa&#x27;s grid card as before\" loading=\"lazy\" decoding=\"async\" style=\"object-position:50% 50%\"></span>",
+            "case": "custom"
+        },
+        {
+            "slug": "firmus",
+            "name": "Firmus",
+            "category": "tech",
+            "sector": "cybersecurity",
+            "line": "A cybersecurity identity built on one sharp angle, carried from metro screens to the boardroom.",
+            "tags": [
+                "Brand Identity",
+                "Sub-brand",
+                "Campaign Visuals"
+            ],
+            "accent": "#AE091C",
+            "cover_html": "<span class=\"wk6-cover\" style=\"--g:#AE091C;--veil:0;--lw:34%\"><img class=\"wk6-cover-bg\" src=\"work-images/firmus.webp\" alt=\"Firmus, Firmus&#x27;s grid card as before\" loading=\"lazy\" decoding=\"async\" style=\"object-position:50% 50%\"></span>",
+            "case": "custom"
+        },
+        {
+            "slug": "santa-barbara-polo-cafe",
+            "name": "Santa Barbara Polo Cafe",
+            "category": "fb",
+            "sector": "food & beverage",
+            "line": "A polo club cafe in deep forest tones, with a brandbook, photo rules and a mascot.",
+            "tags": [
+                "Cafe Branding",
+                "Interior Visuals",
+                "Launch Assets"
+            ],
+            "accent": "#2C4936",
+            "cover_html": "<span class=\"wk6-cover\" style=\"--g:#2C4936;--veil:0;--lw:34%\"><img class=\"wk6-cover-bg\" src=\"work-images/santa-barbara-2.webp\" alt=\"Santa Barbara Polo Cafe, the Santa Barbara brand world, the grid card as before\" loading=\"lazy\" decoding=\"async\" style=\"object-position:50% 50%\"></span>",
+            "case": "custom"
+        },
+        {
+            "slug": "avisenna",
+            "name": "Avisenna",
+            "category": "health",
+            "sector": "health & wellness",
+            "line": "A brand book, a masterclass funnel and sixty videos a month for a health and learning ecosystem.",
+            "tags": [
+                "Brand Book",
+                "Funnel",
+                "Video"
+            ],
+            "accent": "#068261",
+            "cover_html": "<span class=\"wk6-cover\" style=\"--g:#0F5132;--veil:0;--lw:34%\"><img class=\"wk6-cover-bg\" src=\"Image/work6/avisenna/cover-key-3.webp\" alt=\"Avisenna, The Avisenna logo in white on the brand green gradient\" loading=\"lazy\" decoding=\"async\" style=\"object-position:50% 50%\"></span>",
+            "case": "custom"
+        },
+        {
+            "slug": "waterbay",
+            "name": "Waterbay",
+            "category": "health",
+            "sector": "healthcare",
+            "line": "A logo, a brand book and the launch of STÜHL for a Penang maker of portable dental equipment.",
+            "tags": [
+                "Brand Identity",
+                "Brand Book",
+                "Product Launch"
+            ],
+            "accent": "#B65512",
+            "cover_html": "<span class=\"wk6-cover\" style=\"--g:#2A1208;--veil:0;--lw:34%\"><img class=\"wk6-cover-bg\" src=\"Image/work6/waterbay/cover-key-7.webp\" alt=\"Waterbay, The Waterbay logo centred on a dark wall beside the backlit STÜHL headrest\" loading=\"lazy\" decoding=\"async\" style=\"object-position:50% 50%\"></span>",
+            "case": "custom"
+        },
+        {
+            "slug": "agensia",
+            "name": "Agensia",
+            "category": "tech",
+            "sector": "technology",
+            "line": "A new name, a mark and a brand book for an AI automation company serving regulated enterprises.",
+            "tags": [
+                "Naming",
+                "Brand Identity",
+                "Brand Book"
+            ],
+            "accent": "#547E00",
+            "cover_html": "<span class=\"wk6-cover\" style=\"--g:#0C0C0A;--veil:0;--lw:26.4%\"><img class=\"wk6-cover-logo\" src=\"Image/work6/agensia/icon-green.png\" alt=\"Agensia logo\" loading=\"lazy\" decoding=\"async\"></span>",
+            "case": "custom"
+        },
+        {
+            "slug": "sem-and-co-cafe",
+            "name": "Sem & Co Cafe",
+            "category": "fb",
+            "sector": "food & beverage",
+            "line": "A warm neighbourhood cafe, from the menu system and serviceware to staff and street.",
+            "tags": [
+                "Interior Visuals",
+                "F&B Branding",
+                "Launch Assets"
+            ],
+            "accent": "#8D5A42",
+            "cover_html": "<img src=\"work-images/sem-and-co.webp\" alt=\"Sem &amp; Co Cafe, project visual\" loading=\"lazy\" decoding=\"async\" style=\"object-position:50% 50%\">",
+            "case": "custom"
+        },
+        {
+            "slug": "teask",
+            "name": "Teask",
+            "category": "engineering",
+            "sector": "engineering",
+            "line": "An audit, a brand strategy and a rebuilt website for a portable solar charging station that deploys in under 30 minutes.",
+            "tags": [
+                "Website",
+                "Brand Strategy",
+                "SEO"
+            ],
+            "accent": "#0077C2",
+            "cover_html": "<span class=\"wk6-cover\" style=\"--g:#EEF2F7;--veil:0;--lw:34%\"><img class=\"wk6-cover-bg\" src=\"Image/work6/teask/cover-key-5.webp\" alt=\"Teask, The Teask logo above the T Station with one scooter parked in a bay\" loading=\"lazy\" decoding=\"async\" style=\"object-position:50% 50%\"></span>",
+            "case": "custom"
+        },
+        {
+            "slug": "viewpoint",
+            "name": "ViewPoint",
+            "category": "tech",
+            "sector": "tech & innovation",
+            "line": "A perspective-led identity for digital services, carried across print, outdoor and merchandise.",
+            "tags": [
+                "Editorial",
+                "Digital System",
+                "Brand Visuals"
+            ],
+            "accent": "#302162",
+            "cover_html": "<span class=\"wk6-cover\" style=\"--g:#1F2A44;--veil:0;--lw:34%\"><img class=\"wk6-cover-bg\" src=\"Image/work6/viewpoint/cover-key-3.webp\" alt=\"ViewPoint, the viewpoint logo on the reception wall of an empty office\" loading=\"lazy\" decoding=\"async\" style=\"object-position:50% 50%\"></span>",
+            "case": "custom"
+        },
+        {
+            "slug": "ownd",
+            "name": "OWND",
+            "category": "lifestyle",
+            "sector": "lifestyle",
+            "line": "An identity book and redesign drawings for a modular travel system: one shell, panels that swap.",
+            "tags": [
+                "Brand Identity Book",
+                "Product Redesign"
+            ],
+            "accent": "#D63D00",
+            "cover_html": "<span class=\"wk6-cover\" style=\"--g:#FF6D33;--veil:0;--lw:50%\"><img class=\"wk6-cover-logo\" src=\"Image/work6/ownd/logo-white.png\" alt=\"OWND logo\" loading=\"lazy\" decoding=\"async\"></span>",
+            "case": "custom"
+        },
+        {
+            "slug": "akk",
+            "name": "AKK Alliance",
+            "category": "engineering",
+            "sector": "engineering",
+            "line": "A website for a lift and escalator company running since 2001, with ALTIGO, its growth brand, beside it.",
+            "tags": [
+                "Website",
+                "Growth Brand",
+                "Catalogue"
+            ],
+            "accent": "#986C07",
+            "cover_html": "<span class=\"wk6-cover\" style=\"--g:#0B0C0E;--veil:0.62;--lw:30%\"><img class=\"wk6-cover-bg\" src=\"Image/work6/akk/thumb-lift.webp\" alt=\"\" loading=\"lazy\" decoding=\"async\" style=\"object-position:50% 50%\"><img class=\"wk6-cover-logo\" src=\"Image/work6/akk/logo-gold.png\" alt=\"AKK Alliance logo\" loading=\"lazy\" decoding=\"async\"></span>",
+            "case": "custom"
+        },
+        {
+            "slug": "ikram-malaysia",
+            "name": "Ikram Malaysia",
+            "category": "community",
+            "sector": "community & ngo",
+            "line": "An identity for a national community movement, with Arabic type, badges and everyday assets.",
+            "tags": [
+                "Campaign",
+                "Community",
+                "Brand Assets"
+            ],
+            "accent": "#1B7B7B",
+            "cover_html": "<img src=\"work-images/ikram.webp\" alt=\"Ikram Malaysia, project visual\" loading=\"lazy\" decoding=\"async\" style=\"object-position:50% 50%\">",
+            "case": "custom"
+        },
+        {
+            "slug": "dahmakan",
+            "name": "DahMakan",
+            "category": "fb",
+            "sector": "food & beverage",
+            "line": "A pocket-inspired food delivery identity, from rider uniforms to menus and campaigns.",
+            "tags": [
+                "Campaign Visuals",
+                "F&B",
+                "Content"
+            ],
+            "accent": "#DA2407",
+            "cover_html": "<img src=\"work-images/dahmakan.webp\" alt=\"DahMakan, project visual\" loading=\"lazy\" decoding=\"async\" style=\"object-position:50% 50%\">",
+            "case": "custom"
+        }
+    ],
+    "after_cards": "<div class=\"wk6-more\" id=\"wkMore\" hidden><span class=\"wk6-more-h\">More of the work</span><span class=\"wk6-more-l\"><a class=\"wk6-more-a\" href=\"portfolio.html\"><span class=\"wk6-more-n\">Tech portfolio</span><span class=\"wk6-more-c\">18 live builds</span><span class=\"wk6-more-go\" aria-hidden=\"true\">&rarr;</span></a><a class=\"wk6-more-a\" href=\"logo-gallery.html\"><span class=\"wk6-more-n\">Logo gallery</span><span class=\"wk6-more-c\">50 marks</span><span class=\"wk6-more-go\" aria-hidden=\"true\">&rarr;</span></a><a class=\"wk6-more-a\" href=\"mascot-gallery.html\"><span class=\"wk6-more-n\">Mascot gallery</span><span class=\"wk6-more-c\">Characters</span><span class=\"wk6-more-go\" aria-hidden=\"true\">&rarr;</span></a><a class=\"wk6-more-a\" href=\"archive.html\"><span class=\"wk6-more-n\">Archive</span><span class=\"wk6-more-c\">2 earlier projects</span><span class=\"wk6-more-go\" aria-hidden=\"true\">&rarr;</span></a></span></div>"
+}

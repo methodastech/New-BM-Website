@@ -1,0 +1,108 @@
+{
+    "mascots": [
+        {
+            "key": "wonderspire",
+            "name": "Wonderspire",
+            "line": "Zara, from the hero crew of Wonderspire's K-12 learning world.",
+            "tags": [
+                "Education",
+                "Character Series"
+            ],
+            "accent": "#2F5BFF",
+            "background": "#081634",
+            "search": "wonderspire zara, from the hero crew of wonderspire's k-12 learning world. education character series mascot character",
+            "media_html": "<span class=\"wk6m-media\" style=\"background:radial-gradient(120% 120% at 50% 100%, #0F4AA8 0%, #0A2A66 45%, #050A1E 100%)\" role=\"img\" aria-label=\"Wonderspire mascots\"><video src=\"Image/mascot/wonderspire-zara-3.mp4\" poster=\"Image/mascot/wonderspire-zara-3-poster.webp\" muted loop playsinline autoplay preload=\"metadata\" aria-label=\"Wonderspire: Zara, from the hero crew of Wonderspire&#x27;s K-12 learning world.\"></video></span>"
+        },
+        {
+            "key": "guud",
+            "name": "Guud Gummies",
+            "line": "An easygoing sloth for a gummy supplement brand, making wellness feel simple and fun.",
+            "tags": [
+                "Health",
+                "Supplements"
+            ],
+            "accent": "#8B32E7",
+            "background": "#EEF5D8",
+            "search": "guud gummies an easygoing sloth for a gummy supplement brand, making wellness feel simple and fun. health supplements mascot character",
+            "media_html": "<span class=\"wk6m-media\"><span class=\"wk6m-fig wk6m-fig--big wk6m-fig--cycle wk6m-fig--n4\" style=\"--d:-0.9s;--n:4\"><span class=\"wk6m-pose wk6m-pose--lift\" style=\"--p:0\"><img src=\"Image/mascot/cut/guud-lift-anim-2.webp\" alt=\"Guud Gummies mascot\" loading=\"lazy\" decoding=\"async\"></span><span class=\"wk6m-pose wk6m-pose--run\" style=\"--p:1\"><img src=\"Image/mascot/cut/guud-run-anim-2.webp\" alt=\"\" loading=\"lazy\" decoding=\"async\"></span><span class=\"wk6m-pose wk6m-pose--sit\" style=\"--p:2\"><img src=\"Image/mascot/cut/guud-sit-2.webp\" alt=\"\" loading=\"lazy\" decoding=\"async\"></span><span class=\"wk6m-pose wk6m-pose--sleep\" style=\"--p:3\"><img src=\"Image/mascot/cut/guud-sleep-2.webp\" alt=\"\" loading=\"lazy\" decoding=\"async\"><span class=\"wk6m-z\" aria-hidden=\"true\"><i>z</i><i>z</i><i>z</i></span></span></span><span class=\"wk6m-shadow\" style=\"--d:-0.9s\"></span></span>"
+        },
+        {
+            "key": "andoh",
+            "name": "Andoh",
+            "line": "A humanitarian hero for the Malaysian Red Crescent, in six mission uniforms.",
+            "tags": [
+                "Humanitarian",
+                "Character Series"
+            ],
+            "accent": "#E02018",
+            "background": "#B2BBC7",
+            "search": "andoh a humanitarian hero for the malaysian red crescent, in six mission uniforms. humanitarian character series mascot character",
+            "media_html": "<span class=\"wk6m-media\"><video src=\"Image/mascot/andoh-uniforms-6.mp4\" poster=\"Image/mascot/andoh-uniforms-6-poster.webp\" muted loop playsinline autoplay preload=\"metadata\" aria-label=\"Andoh: A humanitarian hero for the Malaysian Red Crescent, in six mission uniforms.\"></video></span>"
+        },
+        {
+            "key": "cleanpro",
+            "name": "Clean Pro",
+            "line": "A crisp service identity shaped for trust and clarity, for a cleaning company.",
+            "tags": [
+                "Cleaning Services"
+            ],
+            "accent": "#2378AE",
+            "background": "#E6F2FB",
+            "search": "clean pro a crisp service identity shaped for trust and clarity, for a cleaning company. cleaning services mascot character",
+            "media_html": "<span class=\"wk6m-media\"><span class=\"wk6m-fig wk6m-fig--h\" style=\"--d:-2.7s;--h:0.62\"><img src=\"Image/mascot/cut/cleanpro.webp\" alt=\"Clean Pro mascot\" loading=\"lazy\" decoding=\"async\"></span><span class=\"wk6m-shadow\" style=\"--d:-2.7s\"></span></span>"
+        },
+        {
+            "key": "gobunny",
+            "name": "Go Bunny",
+            "line": "A playful mascot-led identity for a bubble tea and dessert brand, built for instant recall.",
+            "tags": [
+                "F&B",
+                "Bubble Tea"
+            ],
+            "accent": "#8A6B00",
+            "background": "#FFF4D6",
+            "search": "go bunny a playful mascot-led identity for a bubble tea and dessert brand, built for instant recall. f&b bubble tea mascot character",
+            "media_html": "<span class=\"wk6m-media\"><span class=\"wk6m-fig wk6m-fig--h\" style=\"--d:-3.6s;--h:0.9\"><img src=\"Image/mascot/cut/gobunny-head.webp\" alt=\"Go Bunny mascot\" loading=\"lazy\" decoding=\"async\"></span><span class=\"wk6m-shadow\" style=\"--d:-3.6s\"></span></span>"
+        },
+        {
+            "key": "spirochi",
+            "name": "Spirochi",
+            "line": "A character-first identity with a strong graphic attitude, for gaming and esports.",
+            "tags": [
+                "Gaming",
+                "Esports"
+            ],
+            "accent": "#4B8218",
+            "background": "#17191E",
+            "search": "spirochi a character-first identity with a strong graphic attitude, for gaming and esports. gaming esports mascot character",
+            "media_html": "<span class=\"wk6m-media\"><span class=\"wk6m-fig wk6m-fig--h\" style=\"--d:-4.5s;--h:0.62\"><img src=\"Image/mascot/cut/spirochi.webp\" alt=\"Spirochi mascot\" loading=\"lazy\" decoding=\"async\"></span><span class=\"wk6m-shadow\" style=\"--d:-4.5s\"></span></span>"
+        },
+        {
+            "key": "polohorse",
+            "name": "Santa Barbara Polo Cafe",
+            "line": "A chilling polo horse drawn as a logo system in four poses, then made into mascot suits.",
+            "tags": [
+                "Mascot Logo",
+                "Mascot Suit"
+            ],
+            "accent": "#2C4936",
+            "background": "#F1EEE4",
+            "search": "santa barbara polo cafe a chilling polo horse drawn as a logo system in four poses, then made into mascot suits. mascot logo mascot suit mascot character",
+            "media_html": "<span class=\"wk6m-media\"><span class=\"wk6m-fig wk6m-fig--h\" style=\"--d:-5.4s;--h:0.62\"><img src=\"Image/mascot/cut/polohorse.webp\" alt=\"Santa Barbara Polo Cafe mascot\" loading=\"lazy\" decoding=\"async\"></span><span class=\"wk6m-shadow\" style=\"--d:-5.4s\"></span></span>",
+            "link": "work/work-santa-barbara-polo-cafe.html"
+        },
+        {
+            "key": "firebear",
+            "name": "Bukit Beruang's Fire Bear",
+            "line": "A fierce emblem built on character, energy and locality, for a community sports side.",
+            "tags": [
+                "Community",
+                "Sports"
+            ],
+            "accent": "#D13F1B",
+            "background": "#111111",
+            "search": "bukit beruang's fire bear a fierce emblem built on character, energy and locality, for a community sports side. community sports mascot character",
+            "media_html": "<span class=\"wk6m-media\"><span class=\"wk6m-fig wk6m-fig--h\" style=\"--d:-6.3s;--h:0.62\"><img src=\"Image/mascot/cut/firebear.webp\" alt=\"Bukit Beruang&#x27;s Fire Bear mascot\" loading=\"lazy\" decoding=\"async\"></span><span class=\"wk6m-shadow\" style=\"--d:-6.3s\"></span></span>"
+        }
+    ]
+}

@@ -1,0 +1,354 @@
+{
+    "logos": [
+        {
+            "name": "Bidshido",
+            "category": "Auction Platform",
+            "image": "Image/logo-gallery-images/bidshido.webp",
+            "alt": "Bidshido branding logo presentation",
+            "search": "bidshido auction platform collectibles marketplace e-commerce"
+        },
+        {
+            "name": "Viewpoint",
+            "category": "SaaS",
+            "image": "Image/logo-gallery-images/viewpoint28597734b1db2232a6268ad278a73e0f.webp",
+            "alt": "Viewpoint symbol set logo exploration",
+            "search": "viewpoint saas regtech corporate software"
+        },
+        {
+            "name": "Okamizu",
+            "category": "Japanese F&B",
+            "image": "Image/logo-gallery-images/okazami.webp",
+            "alt": "Okamizu branding logo artwork",
+            "search": "okamizu japanese f&b beverage restaurant branding"
+        },
+        {
+            "name": "Go Bunny",
+            "category": "F&B",
+            "image": "Image/logo-gallery-images/gobunny.webp",
+            "alt": "Go Bunny mascot branding logo artwork",
+            "search": "go bunny f&b bubble tea dessert brand"
+        },
+        {
+            "name": "Stream Branding & Iconography",
+            "category": "Media",
+            "image": "Image/logo-gallery-images/stream.webp",
+            "alt": "Stream branding and iconography logo artwork",
+            "search": "stream branding & iconography media streaming digital platform"
+        },
+        {
+            "name": "Kampung Gold Branding",
+            "category": "Agriculture",
+            "image": "Image/logo-gallery-images/kampungboy.webp",
+            "alt": "Kampungboy branding logo artwork",
+            "search": "kampung gold branding agriculture food product fmcg"
+        },
+        {
+            "name": "Spirochi",
+            "category": "Gaming",
+            "image": "Image/logo-gallery-images/Spirochi.webp",
+            "alt": "Spirochi logo character branding artwork",
+            "search": "spirochi gaming esports entertainment"
+        },
+        {
+            "name": "IB Netx Symbol Scaffolding",
+            "category": "Technology",
+            "image": "Image/logo-gallery-images/IB%20Netx%20Symbol%20Scaffolding.webp",
+            "alt": "IB Netx symbol scaffolding logo artwork",
+            "search": "ib netx symbol scaffolding technology corporate digital infrastructure"
+        },
+        {
+            "name": "Koji",
+            "category": "Beauty",
+            "image": "Image/logo-gallery-images/koji.webp",
+            "alt": "Koji branding logo artwork",
+            "search": "koji beauty lifestyle fashion"
+        },
+        {
+            "name": "Charge N Go Branding",
+            "category": "Automotive",
+            "image": "Image/logo-gallery-images/charge%20n%20go.webp",
+            "alt": "Charge N Go branding logo artwork",
+            "search": "charge n go branding automotive ev mobility"
+        },
+        {
+            "name": "A Pie Thing",
+            "category": "F&B",
+            "image": "Image/logo-gallery-images/a%20pie%20thing.webp",
+            "alt": "A Pie Thing logo identity artwork",
+            "search": "a pie thing f&b bakery cafe"
+        },
+        {
+            "name": "Ahhh!",
+            "category": "Creative Brand",
+            "image": "Image/logo-gallery-images/ahhh.webp",
+            "alt": "Ahhh branding logo artwork",
+            "search": "ahhh! creative brand entertainment lifestyle"
+        },
+        {
+            "name": "Beyond The Scene BTS",
+            "category": "Media Production",
+            "image": "Image/logo-gallery-images/Beyond%20The%20Scene%20BTS.webp",
+            "alt": "Beyond The Scene BTS logo artwork",
+            "search": "beyond the scene bts media production entertainment"
+        },
+        {
+            "name": "Bukit Beruang's Fire Bear",
+            "category": "Community",
+            "image": "Image/logo-gallery-images/Bukit%20Beruang's%20Fire%20Bear.webp",
+            "alt": "Bukit Beruang's Fire Bear branding artwork",
+            "search": "bukit beruang's fire bear community mascot sports"
+        },
+        {
+            "name": "Clean Pro",
+            "category": "Cleaning Services",
+            "image": "Image/logo-gallery-images/clean%20pro.webp",
+            "alt": "Clean Pro branding logo artwork",
+            "search": "clean pro cleaning services home services"
+        },
+        {
+            "name": "Cofeology Cafe & Restaurant Brand Identity",
+            "category": "Cafe",
+            "image": "Image/logo-gallery-images/cofeology.webp",
+            "alt": "Cofeology cafe and restaurant brand identity artwork",
+            "search": "cofeology cafe & restaurant brand identity cafe restaurant coffee brand"
+        },
+        {
+            "name": "Fruit Point Branding",
+            "category": "Beverage",
+            "image": "Image/logo-gallery-images/Fruit%20Point%20Badges!.webp",
+            "alt": "Fruit Point branding badge artwork",
+            "search": "fruit point branding beverage fmcg juice brand"
+        },
+        {
+            "name": "HealthOne Branding",
+            "category": "Healthcare",
+            "image": "Image/logo-gallery-images/HealthOne%20Branding.webp",
+            "alt": "HealthOne branding logo artwork",
+            "search": "healthone branding healthcare medical"
+        },
+        {
+            "name": "Hidayah Medic",
+            "category": "Healthcare",
+            "image": "Image/logo-gallery-images/Hidayah%20Medic.webp",
+            "alt": "Hidayah Medic logo artwork",
+            "search": "hidayah medic healthcare clinic medical"
+        },
+        {
+            "name": "Mayflower Brand Identity Revamp",
+            "category": "Travel",
+            "image": "Image/logo-gallery-images/mayflower.webp",
+            "alt": "Mayflower brand identity revamp artwork",
+            "search": "mayflower brand identity revamp travel tourism transportation"
+        },
+        {
+            "name": "Pi Industries Logo & Brand Identity",
+            "category": "Industrial",
+            "image": "Image/logo-gallery-images/Pi%20Industries.webp",
+            "alt": "Pi Industries logo and brand identity artwork",
+            "search": "pi industries logo & brand identity industrial engineering manufacturing"
+        },
+        {
+            "name": "Recovr Branding",
+            "category": "Sports Recovery",
+            "image": "Image/logo-gallery-images/recovr.webp",
+            "alt": "Recovr branding logo artwork",
+            "search": "recovr branding sports recovery healthcare fitness"
+        },
+        {
+            "name": "REMAKE DESIGN & BUILD",
+            "category": "Interior Design",
+            "image": "Image/logo-gallery-images/remake.webp",
+            "alt": "Remake Design and Build logo artwork",
+            "search": "remake design & build interior design renovation architecture"
+        },
+        {
+            "name": "Rive",
+            "category": "Construction",
+            "image": "Image/logo-gallery-images/rive.webp",
+            "alt": "Rive branding logo artwork",
+            "search": "rive construction industrial engineering"
+        },
+        {
+            "name": "Armels",
+            "category": "Sports Recovery",
+            "image": "Image/logo-gallery-images/rmels.webp",
+            "alt": "Armels branding logo artwork",
+            "search": "armels sports recovery rehabilitation fitness"
+        },
+        {
+            "name": "S Nation Digital Solution",
+            "category": "Technology",
+            "image": "Image/logo-gallery-images/S%20Nation%20Digital%20Solution.webp",
+            "alt": "S Nation Digital Solution logo artwork",
+            "search": "s nation digital solution technology digital agency software"
+        },
+        {
+            "name": "Spiroball Brand Identity",
+            "category": "Sports",
+            "image": "Image/logo-gallery-images/spiroball.webp",
+            "alt": "Spiroball brand identity artwork",
+            "search": "spiroball brand identity sports gaming recreation"
+        },
+        {
+            "name": "The Pause",
+            "category": "Home Fragrance",
+            "image": "Image/logo-gallery-images/the-pause.webp",
+            "alt": "The Pause wordmark above a candle and an amber bottle",
+            "search": "the pause home fragrance wordmark"
+        },
+        {
+            "name": "Altigo",
+            "category": "Lifts & Escalators",
+            "image": "Image/logo-gallery-images/altigo-2.webp",
+            "alt": "The Altigo logo over two Altigo technicians at work in a lift shaft",
+            "search": "altigo lifts & escalators wordmark"
+        },
+        {
+            "name": "Eskayvie",
+            "category": "Health Supplements",
+            "image": "Image/logo-gallery-images/eskayvie.webp",
+            "alt": "The Eskayvie wordmark over flowing purple silk",
+            "search": "eskayvie health supplements wordmark"
+        },
+        {
+            "name": "Breadly Made",
+            "category": "Bakery Café",
+            "image": "Image/logo-gallery-images/breadly-made-4.webp",
+            "alt": "The Breadly Made logo lit on the drive-thru lightbox at night",
+            "search": "breadly made bakery café logo mark"
+        },
+        {
+            "name": "Waterbay",
+            "category": "Dental Equipment",
+            "image": "Image/logo-gallery-images/waterbay-4.webp",
+            "alt": "The Waterbay logo above a patient at ease in the dental chair, in the brand's orange duotone",
+            "search": "waterbay dental equipment wordmark"
+        },
+        {
+            "name": "Stratiq",
+            "category": "AI Automation",
+            "image": "Image/logo-gallery-images/stratiq-4.webp",
+            "alt": "The Stratiq logo over the brand's circuit-brain photograph",
+            "search": "stratiq ai automation logo system"
+        },
+        {
+            "name": "The Imperial Culture",
+            "category": "Heritage Lifestyle",
+            "image": "Image/logo-gallery-images/tic-6.webp",
+            "alt": "The Imperial Culture gold owl lockup on a soft Imperial Navy ground",
+            "search": "the imperial culture heritage lifestyle logo mark"
+        },
+        {
+            "name": "Rubex Pay",
+            "category": "Fintech",
+            "image": "Image/logo-gallery-images/rubex-glow-7.webp",
+            "alt": "The Rubex Pay lockup centred over its glowing red cube",
+            "search": "rubex pay fintech logo mark"
+        },
+        {
+            "name": "IAQ",
+            "category": "Engineering",
+            "image": "Image/logo-gallery-images/iaq-dusk-7.webp",
+            "alt": "The red IAQ logo centred over the IAQ plant at dusk",
+            "search": "iaq engineering wordmark"
+        },
+        {
+            "name": "Mindtropic",
+            "category": "Mental Health",
+            "image": "Image/logo-gallery-images/mindtropic-5.webp",
+            "alt": "The Mindtropic brain mark and wordmark on a soft Mindtropic blue ground",
+            "search": "mindtropic mental health logo mark"
+        },
+        {
+            "name": "Tenthpin",
+            "category": "Management Consulting",
+            "image": "Image/logo-gallery-images/tenthpin-5.webp",
+            "alt": "The white Tenthpin logo on a deep Tenthpin blue ground",
+            "search": "tenthpin management consulting wordmark"
+        },
+        {
+            "name": "JB Cocoa",
+            "category": "Cocoa Trade",
+            "image": "Image/logo-gallery-images/jb-cocoa-5.webp",
+            "alt": "The JB Cocoa logo on a rich cocoa and burgundy ground",
+            "search": "jb cocoa cocoa trade logo mark"
+        },
+        {
+            "name": "Firmus",
+            "category": "Cybersecurity",
+            "image": "Image/logo-gallery-images/firmus-4.webp",
+            "alt": "The Firmus logo on the reception wall",
+            "search": "firmus cybersecurity logo mark"
+        },
+        {
+            "name": "Santa Barbara Polo Cafe",
+            "category": "Cafe",
+            "image": "Image/logo-gallery-images/santa-barbara-4.webp",
+            "alt": "The Santa Barbara Polo & Racquet Club crest on its roundel in walnut",
+            "search": "santa barbara polo cafe cafe crest"
+        },
+        {
+            "name": "Avisenna",
+            "category": "Health & Wellness",
+            "image": "Image/logo-gallery-images/avisenna-5.webp",
+            "alt": "The white Avisenna logo over an Avisenna masterclass, toned in the brand green",
+            "search": "avisenna health & wellness logo mark"
+        },
+        {
+            "name": "Agensia",
+            "category": "Creative Agency",
+            "image": "Image/logo-gallery-images/agensia-6.webp",
+            "alt": "The Agensia lockup centred on its glowing green ripple artwork",
+            "search": "agensia creative agency logo mark"
+        },
+        {
+            "name": "Teask",
+            "category": "Mobility",
+            "image": "Image/logo-gallery-images/teask-6.webp",
+            "alt": "The Teask logo centred over the T Station in the park with its scooters",
+            "search": "teask mobility wordmark"
+        },
+        {
+            "name": "OWND",
+            "category": "Lifestyle",
+            "image": "Image/logo-gallery-images/ownd-6.webp",
+            "alt": "The white OWND wordmark on a warm orange glow from its suitcase photo",
+            "search": "ownd lifestyle wordmark"
+        },
+        {
+            "name": "AKK Alliance",
+            "category": "Lifts & Escalators",
+            "image": "Image/logo-gallery-images/akk-5.webp",
+            "alt": "The gold AKK Alliance logo centred over a glass lift atrium",
+            "search": "akk alliance lifts & escalators logo mark"
+        },
+        {
+            "name": "MyHero",
+            "category": "Healthcare App",
+            "image": "Image/logo-gallery-images/myhero-7.webp",
+            "alt": "The MyHero logo on a deep Ink glow",
+            "search": "myhero healthcare app logo mark"
+        },
+        {
+            "name": "DahMakan",
+            "category": "Food Delivery",
+            "image": "Image/logo-gallery-images/dahmakan.webp",
+            "alt": "The dahmakan bowl logo with its four ingredients",
+            "search": "dahmakan food delivery logo mark"
+        },
+        {
+            "name": "Sem & Co",
+            "category": "Cafe",
+            "image": "Image/logo-gallery-images/sem-and-co-cafe-9.webp",
+            "alt": "The Sem & Co wordmark over the café's warm interior",
+            "search": "sem & co cafe wordmark"
+        },
+        {
+            "name": "IKRAM",
+            "category": "NGO",
+            "image": "Image/logo-gallery-images/ikram-malaysia-6.webp",
+            "alt": "The white IKRAM mark on IKRAM teal",
+            "search": "ikram ngo logo mark"
+        }
+    ]
+}

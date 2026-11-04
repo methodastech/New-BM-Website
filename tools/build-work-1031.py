@@ -351,7 +351,10 @@ def main():
         a, b = page_section(ex, pid)
         x = relink(ex[a:b], self_url)
         x = x.replace('href="https://brandmethod.co/website/', 'href="website/')
-        return assets.sub(x)
+        x = assets.sub(x)
+        # Go Bunny without its yellow coin, the head as big as Spirochi's (the user's 4 Nov edit)
+        return re.sub(r'(--h:)[\d.]+("><img src=")Image/mascot/cut/gobunny\.webp',
+                      r'\g<1>0.9\2Image/mascot/cut/gobunny-head.webp', x)
 
     # Work: the design's section with our Tech portfolio pane and count
     w = section('work', 'work.html')
@@ -408,6 +411,12 @@ def main():
     open(os.path.join(ROOT, 'css/work6.css'), 'w', encoding='utf-8', newline='\n').write(css)
     open(os.path.join(ROOT, 'js/work6.js'), 'w', encoding='utf-8', newline='\n').write(js)
     print('written')
+    # the cards and "Next project" links come from portfolio/data/*.json (edited through the MCP), not the export
+    import subprocess
+    r = subprocess.run(['php', os.path.join(ROOT, 'portfolio', 'build.php')], cwd=ROOT, capture_output=True, text=True)
+    print('portfolio/build.php:', (r.stdout or r.stderr).strip().splitlines()[-1] if (r.stdout or r.stderr) else r.returncode)
+    if r.returncode:
+        die('portfolio/build.php failed: run it by hand')
 
 
 if __name__ == '__main__':

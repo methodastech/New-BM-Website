@@ -31,3 +31,8 @@ package-lock.json
 *.save
 index-backup-*.html
 /brandmethod-website 18-9/
+
+# Portfolio MCP: the key and GitHub token live only on the server; uploads are temporary
+mcp/config.php
+mcp/uploads/*
+!mcp/uploads/.htaccess
