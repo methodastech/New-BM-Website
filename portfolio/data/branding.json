@@ -267,7 +267,7 @@
                 "Launch Assets"
             ],
             "accent": "#8D5A42",
-            "cover_html": "<img src=\"work-images/sem-and-co.webp\" alt=\"Sem &amp; Co Cafe, project visual\" loading=\"lazy\" decoding=\"async\" style=\"object-position:50% 50%\">",
+            "cover_html": "<img src=\"Image/work6/sem-and-co-cafe/bb-exterior-2.webp\" alt=\"Sem &amp; Co Cafe, project visual\" loading=\"lazy\" decoding=\"async\" style=\"object-position:50% 50%\">",
             "case": "custom"
         },
         {
@@ -290,7 +290,7 @@
             "name": "ViewPoint",
             "category": "tech",
             "sector": "tech & innovation",
-            "line": "A perspective-led identity for digital services, carried across print, outdoor and merchandise.",
+            "line": "A perspective-led identity for digital services, carried across the product, the street and the workplace.",
             "tags": [
                 "Editorial",
                 "Digital System",
@@ -305,7 +305,7 @@
             "name": "OWND",
             "category": "lifestyle",
             "sector": "lifestyle",
-            "line": "An identity book and redesign drawings for a modular travel system: one shell, panels that swap.",
+            "line": "An identity for a modular travel system: one shell, panels that swap, launched under an orange cloth.",
             "tags": [
                 "Brand Identity Book",
                 "Product Redesign"
@@ -322,8 +322,7 @@
             "line": "A website for a lift and escalator company running since 2001, with ALTIGO, its growth brand, beside it.",
             "tags": [
                 "Website",
-                "Growth Brand",
-                "Catalogue"
+                "Company Profile"
             ],
             "accent": "#986C07",
             "cover_html": "<span class=\"wk6-cover\" style=\"--g:#0B0C0E;--veil:0.62;--lw:30%\"><img class=\"wk6-cover-bg\" src=\"Image/work6/akk/thumb-lift.webp\" alt=\"\" loading=\"lazy\" decoding=\"async\" style=\"object-position:50% 50%\"><img class=\"wk6-cover-logo\" src=\"Image/work6/akk/logo-gold.png\" alt=\"AKK Alliance logo\" loading=\"lazy\" decoding=\"async\"></span>",
@@ -341,7 +340,7 @@
                 "Brand Assets"
             ],
             "accent": "#1B7B7B",
-            "cover_html": "<img src=\"work-images/ikram.webp\" alt=\"Ikram Malaysia, project visual\" loading=\"lazy\" decoding=\"async\" style=\"object-position:50% 50%\">",
+            "cover_html": "<span class=\"wk6-cover\" style=\"--g:#1B7B7B;--veil:0;--lw:34%\"><img class=\"wk6-cover-bg\" src=\"work-images/ikram.webp\" alt=\"Ikram Malaysia, the Ikram Malaysia identity\" loading=\"lazy\" decoding=\"async\" style=\"object-position:50% 50%\"></span>",
             "case": "custom"
         },
         {
@@ -349,16 +348,16 @@
             "name": "DahMakan",
             "category": "fb",
             "sector": "food & beverage",
-            "line": "A pocket-inspired food delivery identity, from rider uniforms to menus and campaigns.",
+            "line": "A pocket-inspired food delivery identity, from the rider’s box to the kitchen.",
             "tags": [
                 "Campaign Visuals",
                 "F&B",
                 "Content"
             ],
             "accent": "#DA2407",
-            "cover_html": "<img src=\"work-images/dahmakan.webp\" alt=\"DahMakan, project visual\" loading=\"lazy\" decoding=\"async\" style=\"object-position:50% 50%\">",
+            "cover_html": "<span class=\"wk6-cover\" style=\"--g:#F0F0F0;--veil:0;--lw:34%\"><img class=\"wk6-cover-bg\" src=\"work-images/dahmakan.webp\" alt=\"DahMakan, the DahMakan logo\" loading=\"lazy\" decoding=\"async\" style=\"object-position:50% 50%\"></span>",
             "case": "custom"
         }
     ],
-    "after_cards": "<div class=\"wk6-more\" id=\"wkMore\" hidden><span class=\"wk6-more-h\">More of the work</span><span class=\"wk6-more-l\"><a class=\"wk6-more-a\" href=\"portfolio.html\"><span class=\"wk6-more-n\">Tech portfolio</span><span class=\"wk6-more-c\">18 live builds</span><span class=\"wk6-more-go\" aria-hidden=\"true\">&rarr;</span></a><a class=\"wk6-more-a\" href=\"logo-gallery.html\"><span class=\"wk6-more-n\">Logo gallery</span><span class=\"wk6-more-c\">50 marks</span><span class=\"wk6-more-go\" aria-hidden=\"true\">&rarr;</span></a><a class=\"wk6-more-a\" href=\"mascot-gallery.html\"><span class=\"wk6-more-n\">Mascot gallery</span><span class=\"wk6-more-c\">Characters</span><span class=\"wk6-more-go\" aria-hidden=\"true\">&rarr;</span></a><a class=\"wk6-more-a\" href=\"archive.html\"><span class=\"wk6-more-n\">Archive</span><span class=\"wk6-more-c\">2 earlier projects</span><span class=\"wk6-more-go\" aria-hidden=\"true\">&rarr;</span></a></span></div>"
+    "after_cards": "<div class=\"wk6-more\" id=\"wkMore\" hidden><span class=\"wk6-more-h\">More of the work</span><span class=\"wk6-more-l\"><a class=\"wk6-more-a\" href=\"portfolio.html\"><span class=\"wk6-more-n\">Tech portfolio</span><span class=\"wk6-more-c\">22 live builds</span><span class=\"wk6-more-go\" aria-hidden=\"true\">&rarr;</span></a><a class=\"wk6-more-a\" href=\"logo-gallery.html\"><span class=\"wk6-more-n\">Logo gallery</span><span class=\"wk6-more-c\">50 marks</span><span class=\"wk6-more-go\" aria-hidden=\"true\">&rarr;</span></a><a class=\"wk6-more-a\" href=\"mascot-gallery.html\"><span class=\"wk6-more-n\">Mascot gallery</span><span class=\"wk6-more-c\">Characters</span><span class=\"wk6-more-go\" aria-hidden=\"true\">&rarr;</span></a><a class=\"wk6-more-a\" href=\"archive.html\"><span class=\"wk6-more-n\">Archive</span><span class=\"wk6-more-c\">2 earlier projects</span><span class=\"wk6-more-go\" aria-hidden=\"true\">&rarr;</span></a></span></div>"
 }

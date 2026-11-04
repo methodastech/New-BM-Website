@@ -1,7 +1,7 @@
 """Port the 30 Oct design of the Work section into the site: the Work hub and Branding grid,
 the Archive, the 24 case pages and the Mascot Gallery.
 
-The design export ("brandmethod-website" in Downloads/brand method logo, 3 Nov) is the single-page app every
+The design export ("brandmethod-website" in Downloads, 4 Nov) is the single-page app every
 page here was first built from (tools/build-home-0918.py). Rebuilding these pages from it
 would undo the hand fixes made since, so this script keeps each page's current file as the
 shell (head, nav, footer, router) and swaps in only the page's own <section class="pg">:
@@ -29,7 +29,7 @@ import sys
 from urllib.parse import unquote
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SRC_DIR = os.path.join(os.path.expanduser('~'), 'Downloads', 'brand method logo', 'brandmethod-website')
+SRC_DIR = os.path.join(os.path.expanduser('~'), 'Downloads', 'brandmethod-website')
 WRITE = '--write' in sys.argv
 
 # export asset folder -> repo folder (same file names below them)
@@ -53,7 +53,7 @@ PAGES = {
     'logo-gallery': 'logo-gallery.html', 'mascot-gallery': 'mascot-gallery.html', 'tech-portfolio': 'portfolio.html',
     'archive': 'archive.html',
 }
-BUILDS_LIVE = '18 live builds'  # the Tech portfolio count after the user's 31 Oct edit
+BUILDS_LIVE = '22 live builds'  # the Tech portfolio count after the user's 31 Oct edit
 
 
 def die(msg):
@@ -322,7 +322,7 @@ def into_shell(shell, shell_pid, section, pid, out, title=None, desc=None):
     return s
 
 
-VERSION = '20261103a'
+VERSION = '20261104a'
 
 
 def case_meta(pid, section):
@@ -411,8 +411,14 @@ def main():
     open(os.path.join(ROOT, 'css/work6.css'), 'w', encoding='utf-8', newline='\n').write(css)
     open(os.path.join(ROOT, 'js/work6.js'), 'w', encoding='utf-8', newline='\n').write(js)
     print('written')
-    # the cards and "Next project" links come from portfolio/data/*.json (edited through the MCP), not the export
+    # The Branding cards are taken from the export into portfolio/data/branding.json (projects the team added
+    # through the MCP keep their place); the Logo and Mascot lists stay as the team left them. Then every card,
+    # count and "Next project" link is rebuilt from the lists.
     import subprocess
+    r = subprocess.run(['php', os.path.join(ROOT, 'portfolio', 'extract.php'), '--write', '--only=branding'], cwd=ROOT, capture_output=True, text=True)
+    print('portfolio/extract.php:', ' | '.join((r.stdout + r.stderr).strip().splitlines()))
+    if r.returncode or 'does not come back' in r.stderr:
+        die('portfolio/extract.php failed: run it by hand')
     r = subprocess.run(['php', os.path.join(ROOT, 'portfolio', 'build.php')], cwd=ROOT, capture_output=True, text=True)
     print('portfolio/build.php:', (r.stdout or r.stderr).strip().splitlines()[-1] if (r.stdout or r.stderr) else r.returncode)
     if r.returncode:

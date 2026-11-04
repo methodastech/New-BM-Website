@@ -118,10 +118,32 @@ foreach (bm_children(substr($mg, $a, $b - $a)) as $i => $card) {
 }
 
 $data = ['branding' => ['categories' => $cats, 'projects' => $projects, 'after_cards' => $after], 'logos' => ['logos' => $logos], 'mascots' => ['mascots' => $mascots]];
-printf("branding %d projects (%d categories), logos %d, mascots %d\n", count($projects), count($cats), count($logos), count($mascots));
+
+// --only=branding: after a port from the design export, take the designed Branding cards from the page and
+// leave the Logo and Mascot lists alone (the team may have changed them through the MCP). Projects the team
+// added through the MCP (a template case page) are not in the export, so they keep their place.
+$only = null;
+foreach ($argv as $a) {
+    if (str_starts_with($a, '--only=')) {
+        $only = substr($a, 7);
+    }
+}
+if ($only === 'branding' && is_file("$root/" . BM_DATA['branding'])) {
+    $was = json_decode(file_get_contents("$root/" . BM_DATA['branding']), true);
+    foreach ($was['projects'] as $i => $p) {
+        if (is_array($p['case'] ?? null)) {
+            array_splice($data['branding']['projects'], min($i, count($data['branding']['projects'])), 0, [$p]);
+        }
+    }
+}
+
+printf("branding %d projects (%d categories), logos %d, mascots %d\n", count($data['branding']['projects']), count($cats), count($logos), count($mascots));
 if (in_array('--write', $argv, true)) {
     @mkdir("$root/portfolio/data", 0775, true);
     foreach (BM_DATA as $k => $path) {
+        if ($only !== null && $k !== $only) {
+            continue;
+        }
         file_put_contents("$root/$path", json_encode($data[$k], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . "\n");
     }
     echo "written\n";
