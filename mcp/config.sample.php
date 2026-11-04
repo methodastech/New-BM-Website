@@ -18,22 +18,24 @@ return [
         // for the repository only, with "Contents: Read and write".
         'token' => '',
         'repo' => 'methodastech/New-BM-Website',
-        'branch' => 'main',   // the branch Cloudways pulls (Cloudways > Application > Deployment via Git)
+        'branch' => 'master', // the branch Cloudways pulls (Cloudways > Application > Deployment via Git)
     ],
 
     'site_url' => 'https://brandmethod.co/',
 
     // Optional: let the MCP press Pull in Cloudways itself, so a change is on the site within a minute.
-    // Leave as null to keep pressing Pull by hand. The API key is in Cloudways > Account > API.
+    // Leave as null to keep pressing Pull by hand. Give either 'token' (an access token from
+    // Cloudways > Account > API, limited to the git pull endpoint) or the older 'email' + 'api_key'.
     'cloudways' => null,
     /*
     'cloudways' => [
+        'token' => '',
         'email' => '',
         'api_key' => '',
         'server_id' => '',
         'app_id' => '',
         'git_url' => 'git@github.com:methodastech/New-BM-Website.git',
-        'branch' => 'main',
+        'branch' => 'master',
         'deploy_path' => '',
     ],
     */

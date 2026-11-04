@@ -161,14 +161,18 @@ class ConflictException extends RuntimeException
 {
 }
 
-/** Ask Cloudways to pull the branch, if mcp/config.php has the Cloudways API details. */
+/**
+ * Ask Cloudways to pull the branch, if mcp/config.php has the Cloudways API details:
+ * an access token (Cloudways' newer tokens), or the account email and API key (the older login).
+ */
 function cloudways_pull(?array $cw): ?string
 {
-    if (empty($cw['api_key'])) {
+    if (empty($cw['token']) && empty($cw['api_key'])) {
         return null;
     }
-    $post = function (string $url, array $form, ?string $token = null) {
-        $ch = curl_init("https://api.cloudways.com/api/v1/$url");
+    $base = rtrim($cw['api'] ?? 'https://api.cloudways.com/api/v1', '/');
+    $post = function (string $url, array $form, ?string $token = null) use ($base) {
+        $ch = curl_init("$base/$url");
         curl_setopt_array($ch, [CURLOPT_POST => true, CURLOPT_RETURNTRANSFER => true, CURLOPT_TIMEOUT => 60,
             CURLOPT_POSTFIELDS => http_build_query($form),
             CURLOPT_HTTPHEADER => $token ? ['Authorization: Bearer ' . $token] : []]);
@@ -177,12 +181,19 @@ function cloudways_pull(?array $cw): ?string
         curl_close($ch);
         return [$code, json_decode((string)$res, true)];
     };
-    [$code, $auth] = $post('oauth/access_token', ['email' => $cw['email'], 'api_key' => $cw['api_key']]);
-    if ($code !== 200 || empty($auth['access_token'])) {
-        return 'Cloudways did not accept the API key, so the site was not pulled. Press Pull in Cloudways.';
+    $token = $cw['token'] ?? '';
+    if ($token === '') {
+        [$code, $auth] = $post('oauth/access_token', ['email' => $cw['email'], 'api_key' => $cw['api_key']]);
+        if ($code !== 200 || empty($auth['access_token'])) {
+            return 'Cloudways did not accept the API key, so the site was not pulled. Press Pull in Cloudways.';
+        }
+        $token = $auth['access_token'];
     }
-    [$code] = $post('git/pull', ['server_id' => $cw['server_id'], 'app_id' => $cw['app_id'], 'git_url' => $cw['git_url'],
-        'branch_name' => $cw['branch'], 'deploy_path' => $cw['deploy_path'] ?? ''], $auth['access_token']);
-    return $code === 200 ? 'Cloudways is pulling it now; the site updates in a minute.'
-                         : "Cloudways did not start the pull ($code). Press Pull in Cloudways.";
+    [$code, $res] = $post('git/pull', ['server_id' => $cw['server_id'], 'app_id' => $cw['app_id'], 'git_url' => $cw['git_url'],
+        'branch_name' => $cw['branch'], 'deploy_path' => $cw['deploy_path'] ?? ''], $token);
+    if ($code === 200) {
+        return 'Cloudways is pulling it now; the site updates in a minute.';
+    }
+    error_log('portfolio mcp: cloudways pull ' . $code . ' ' . json_encode($res));
+    return "Cloudways did not start the pull ($code). Press Pull in Cloudways.";
 }
