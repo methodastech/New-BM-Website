@@ -62,7 +62,9 @@ function bm_tools(): array
          'inputSchema' => ['type' => 'object', 'required' => ['gallery'], 'properties' => ['gallery' => $gallery]]],
         ['name' => 'get_project', 'description' => 'Show everything stored for one project.',
          'inputSchema' => ['type' => 'object', 'required' => ['gallery', 'id'], 'properties' => ['gallery' => $gallery, 'id' => $id]]],
-        ['name' => 'get_upload_link', 'description' => 'A link to the upload page, where pictures and films are dropped in. Each file gets a code to give to the other tools. The link works for 24 hours.',
+        ['name' => 'get_upload_link', 'description' => 'A link to the upload page, where pictures and films are dropped in. Each file gets a code to give to the other tools. The link works for 24 hours. Call this whenever a picture is needed: pictures attached in the chat cannot reach the tools.',
+         'inputSchema' => ['type' => 'object', 'properties' => new stdClass()]],
+        ['name' => 'put_live', 'description' => 'Check whether everything saved is on the website yet, and if not, ask Cloudways to pull it again. Use this when a change is not showing; never make an extra edit just to set off an update.',
          'inputSchema' => ['type' => 'object', 'properties' => new stdClass()]],
         ['name' => 'add_branding_project', 'description' => 'Add a project to the Branding grid on the Work page, with its own case page. It goes live straight away.',
          'inputSchema' => ['type' => 'object', 'required' => ['name', 'category', 'sector', 'line', 'tags', 'accent', 'cover_image', 'case'],
@@ -308,8 +310,7 @@ function bm_edit(Store $store, array $cfg, callable $change): string
             $store->refresh();
         }
     }
-    $pull = $cfg['mode'] === 'github' ? (cloudways_pull($cfg['cloudways'] ?? null) ?? 'Press Pull in Cloudways (Deployment via Git) to put it on the site.') : '';
-    return trim("$summary\n\nSaved: $where\n$pull");
+    return trim("$summary\n\nSaved: $where\n" . bm_live_note($cfg));
 }
 
 // ------------------------------------------------------------------ the tools
@@ -351,6 +352,32 @@ function bm_call(string $name, array $a, Store $store, array $cfg): string
             $sig = hash_hmac('sha256', (string)$exp, $cfg['key']);
             return "Upload page (works for 24 hours): {$site}mcp/upload.php?t=$exp.$sig\n"
                  . 'Drop the pictures or films there; each one gets a code like u3f9a0c1d. Give the codes back here.';
+
+        case 'put_live':
+            if ($cfg['mode'] !== 'github') {
+                return 'This MCP saves straight into the folder it runs from, so everything is live.';
+            }
+            // the site's own copy of the project lists, next to this folder, against what is saved on GitHub
+            $behind = [];
+            foreach (BM_DATA as $k => $path) {
+                if (@file_get_contents(dirname(__DIR__) . "/$path") !== $store->read($path)) {
+                    $behind[] = $k;
+                }
+            }
+            $st = bm_pull_status();
+            $ago = fn($t) => $t ? (int)round((time() - $t) / 60) . ' min ago' : 'never';
+            $info = 'Last pull Cloudways took: ' . $ago($st['pulled_at'] ?? 0) . '.'
+                  . (isset($st['last_refusal']) && ($st['last_refusal_at'] ?? 0) > ($st['pulled_at'] ?? 0)
+                     ? ' Last refusal (' . $ago($st['last_refusal_at']) . '): ' . $st['last_refusal'] . '.' : '');
+            if (!$behind) {
+                return "Everything saved is on the website. $info";
+            }
+            if (!bm_cloudways_on($cfg['cloudways'] ?? null)) {
+                return 'Not on the website yet (' . implode(', ', $behind) . '). Press Pull in Cloudways (Deployment via Git).';
+            }
+            bm_want_live($cfg['cloudways']);
+            return 'Not on the website yet (' . implode(', ', $behind) . '). Asked Cloudways to pull again; it keeps trying for a few minutes if Cloudways is busy. '
+                 . "$info Check again with put_live in a few minutes. Do not make extra edits to set off an update, and do not open Cloudways in a browser.";
 
         case 'add_branding_project':
             return bm_edit($store, $cfg, function (array &$data, array &$changes) use ($a, $store, $site) {

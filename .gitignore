@@ -36,3 +36,5 @@ index-backup-*.html
 mcp/config.php
 mcp/uploads/*
 !mcp/uploads/.htaccess
+mcp/state/*
+!mcp/state/.htaccess

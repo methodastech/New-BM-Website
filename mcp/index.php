@@ -13,9 +13,27 @@ const BM_PROTOCOLS = ['2025-06-18', '2025-03-26', '2024-11-05'];
 function bm_reply(int $status, $body = null): void
 {
     http_response_code($status);
+    $out = $body === null ? '' : json_encode($body, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
     if ($body !== null) {
         header('Content-Type: application/json');
-        echo json_encode($body, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+    }
+    header('Content-Length: ' . strlen($out));
+    echo $out;
+    // then the work that waits for nobody, like asking Cloudways to pull (bm_after)
+    if (!empty($GLOBALS['BM_AFTER'])) {
+        if (function_exists('fastcgi_finish_request')) {
+            fastcgi_finish_request();
+        } else {
+            @ob_end_flush();
+            flush();
+        }
+        foreach ($GLOBALS['BM_AFTER'] as $f) {
+            try {
+                $f();
+            } catch (Throwable $e) {
+                error_log('portfolio mcp: after reply: ' . $e->getMessage());
+            }
+        }
     }
     exit;
 }
@@ -59,7 +77,12 @@ function bm_handle(array $msg, Store $store, array $cfg): ?array
                 'instructions' => "This edits the Brand Method website's portfolio: the Branding grid on the Work page (each project with a case page), "
                     . "the Logo Gallery and the Mascot Gallery. Every add, update, move or remove goes live as soon as Cloudways pulls it, so "
                     . "before saving, show the person the text you will publish and get a yes; before remove_project, always confirm. "
-                    . "Pictures: ask the person to drop them on the upload page (get_upload_link) and give you the codes, or a public link. "
+                    . "Pictures: a picture attached in this chat cannot be passed to these tools. Whenever a picture or film is needed, "
+                    . "call get_upload_link straight away and give the person the link: they drop the files there and paste back the codes "
+                    . "(like u3f9a0c1d). A public link, such as a Google Drive share link, also works. If they attach a picture in the chat, "
+                    . "say it has to go through the upload link and give it to them. "
+                    . "Going live: after a save, Cloudways pulls the change by itself within a few minutes. If the person says it is not showing, "
+                    . "call put_live. Never make an extra edit just to set off an update, and never use a browser or any other tool to open Cloudways. "
                     . "Write card lines as one plain sentence, no marketing exclamation; keep tags to two or three. "
                     . "Start with list_projects to see ids, order and the Branding categories.",
             ]);
