@@ -35,6 +35,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $done[] = [$name, $code];
     }
 }
+// Claude uploading a file attached in the chat, from its code sandbox: the codes as JSON
+if (($_GET['format'] ?? '') === 'json') {
+    header('Content-Type: application/json');
+    echo json_encode(['files' => array_map(fn($d) => ['name' => $d[0], 'code' => $d[1]], $done), 'errors' => $errors]);
+    exit;
+}
 $e = fn($s) => htmlspecialchars($s, ENT_QUOTES);
 ?><!doctype html>
 <html lang="en">

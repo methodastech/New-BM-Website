@@ -350,8 +350,13 @@ function bm_call(string $name, array $a, Store $store, array $cfg): string
         case 'get_upload_link':
             $exp = time() + 86400;
             $sig = hash_hmac('sha256', (string)$exp, $cfg['key']);
-            return "Upload page (works for 24 hours): {$site}mcp/upload.php?t=$exp.$sig\n"
-                 . 'Drop the pictures or films there; each one gets a code like u3f9a0c1d. Give the codes back here.';
+            $link = "{$site}mcp/upload.php?t=$exp.$sig";
+            return "Upload page (works for 24 hours): $link\n"
+                 . "Drop the pictures or films there; each one gets a code like u3f9a0c1d. Give the codes back here.\n\n"
+                 . "For Claude: if the person attached the files in this chat and you can run code, upload them yourself instead of sending them the link:\n"
+                 . "  curl -s -F 'files[]=@/path/to/file.png' '$link&format=json'\n"
+                 . "(add one -F per file; attached files are usually in /mnt/user-data/uploads). The reply is JSON: {\"files\":[{\"name\":...,\"code\":...}]}. "
+                 . "Use those codes in the tools. If the upload cannot reach brandmethod.co, give the person the link instead.";
 
         case 'put_live':
             if ($cfg['mode'] !== 'github') {
