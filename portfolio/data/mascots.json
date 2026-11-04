@@ -78,6 +78,19 @@
             "media_html": "<span class=\"wk6m-media\"><span class=\"wk6m-fig wk6m-fig--h\" style=\"--d:-4.5s;--h:0.62\"><img src=\"Image/mascot/cut/spirochi.webp\" alt=\"Spirochi mascot\" loading=\"lazy\" decoding=\"async\"></span><span class=\"wk6m-shadow\" style=\"--d:-4.5s\"></span></span>"
         },
         {
+            "key": "firebear",
+            "name": "Bukit Beruang's Fire Bear",
+            "line": "A fierce emblem built on character, energy and locality, for a community sports side.",
+            "tags": [
+                "Community",
+                "Sports"
+            ],
+            "accent": "#D13F1B",
+            "background": "#111111",
+            "search": "bukit beruang's fire bear a fierce emblem built on character, energy and locality, for a community sports side. community sports mascot character",
+            "media_html": "<span class=\"wk6m-media\"><span class=\"wk6m-fig wk6m-fig--h\" style=\"--d:-6.3s;--h:0.62\"><img src=\"Image/mascot/cut/firebear.webp\" alt=\"Bukit Beruang&#x27;s Fire Bear mascot\" loading=\"lazy\" decoding=\"async\"></span><span class=\"wk6m-shadow\" style=\"--d:-6.3s\"></span></span>"
+        },
+        {
             "key": "polohorse",
             "name": "Santa Barbara Polo Cafe",
             "line": "A chilling polo horse drawn as a logo system in four poses, then made into mascot suits.",
@@ -90,19 +103,6 @@
             "search": "santa barbara polo cafe a chilling polo horse drawn as a logo system in four poses, then made into mascot suits. mascot logo mascot suit mascot character",
             "media_html": "<span class=\"wk6m-media\"><span class=\"wk6m-fig wk6m-fig--h\" style=\"--d:-5.4s;--h:0.62\"><img src=\"Image/mascot/cut/polohorse.webp\" alt=\"Santa Barbara Polo Cafe mascot\" loading=\"lazy\" decoding=\"async\"></span><span class=\"wk6m-shadow\" style=\"--d:-5.4s\"></span></span>",
             "link": "work/work-santa-barbara-polo-cafe.html"
-        },
-        {
-            "key": "firebear",
-            "name": "Bukit Beruang's Fire Bear",
-            "line": "A fierce emblem built on character, energy and locality, for a community sports side.",
-            "tags": [
-                "Community",
-                "Sports"
-            ],
-            "accent": "#D13F1B",
-            "background": "#111111",
-            "search": "bukit beruang's fire bear a fierce emblem built on character, energy and locality, for a community sports side. community sports mascot character",
-            "media_html": "<span class=\"wk6m-media\"><span class=\"wk6m-fig wk6m-fig--h\" style=\"--d:-6.3s;--h:0.62\"><img src=\"Image/mascot/cut/firebear.webp\" alt=\"Bukit Beruang&#x27;s Fire Bear mascot\" loading=\"lazy\" decoding=\"async\"></span><span class=\"wk6m-shadow\" style=\"--d:-6.3s\"></span></span>"
         }
     ]
 }
