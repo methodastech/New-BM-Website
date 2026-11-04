@@ -52,19 +52,6 @@
             "media_html": "<span class=\"wk6m-media\"><span class=\"wk6m-fig wk6m-fig--h\" style=\"--d:-2.7s;--h:0.62\"><img src=\"Image/mascot/cut/cleanpro.webp\" alt=\"Clean Pro mascot\" loading=\"lazy\" decoding=\"async\"></span><span class=\"wk6m-shadow\" style=\"--d:-2.7s\"></span></span>"
         },
         {
-            "key": "gobunny",
-            "name": "Go Bunny",
-            "line": "A playful mascot-led identity for a bubble tea and dessert brand, built for instant recall.",
-            "tags": [
-                "F&B",
-                "Bubble Tea"
-            ],
-            "accent": "#8A6B00",
-            "background": "#FFF4D6",
-            "search": "go bunny a playful mascot-led identity for a bubble tea and dessert brand, built for instant recall. f&b bubble tea mascot character",
-            "media_html": "<span class=\"wk6m-media\"><span class=\"wk6m-fig wk6m-fig--h\" style=\"--d:-3.6s;--h:0.9\"><img src=\"Image/mascot/cut/gobunny-head.webp\" alt=\"Go Bunny mascot\" loading=\"lazy\" decoding=\"async\"></span><span class=\"wk6m-shadow\" style=\"--d:-3.6s\"></span></span>"
-        },
-        {
             "key": "spirochi",
             "name": "Spirochi",
             "line": "A character-first identity with a strong graphic attitude, for gaming and esports.",
@@ -76,6 +63,19 @@
             "background": "#17191E",
             "search": "spirochi a character-first identity with a strong graphic attitude, for gaming and esports. gaming esports mascot character",
             "media_html": "<span class=\"wk6m-media\"><span class=\"wk6m-fig wk6m-fig--h\" style=\"--d:-4.5s;--h:0.62\"><img src=\"Image/mascot/cut/spirochi.webp\" alt=\"Spirochi mascot\" loading=\"lazy\" decoding=\"async\"></span><span class=\"wk6m-shadow\" style=\"--d:-4.5s\"></span></span>"
+        },
+        {
+            "key": "gobunny",
+            "name": "Go Bunny",
+            "line": "A playful mascot-led identity for a bubble tea and dessert brand, built for instant recall.",
+            "tags": [
+                "F&B",
+                "Bubble Tea"
+            ],
+            "accent": "#8A6B00",
+            "background": "#FFF4D6",
+            "search": "go bunny a playful mascot-led identity for a bubble tea and dessert brand, built for instant recall. f&b bubble tea mascot character",
+            "media_html": "<span class=\"wk6m-media\"><span class=\"wk6m-fig wk6m-fig--h\" style=\"--d:-3.6s;--h:0.9\"><img src=\"Image/mascot/cut/gobunny-head.webp\" alt=\"Go Bunny mascot\" loading=\"lazy\" decoding=\"async\"></span><span class=\"wk6m-shadow\" style=\"--d:-3.6s\"></span></span>"
         },
         {
             "key": "polohorse",
