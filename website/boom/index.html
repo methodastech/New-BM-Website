@@ -9,8 +9,41 @@
     <link rel="icon" type="image/png" href="./favicon.png" />
     <script type="module" crossorigin src="./assets/index-CUdBC9Gu.js"></script>
     <link rel="stylesheet" crossorigin href="./assets/index-DI33u6hG.css">
+    <style id="bm-ribbon-css">/* "Demo by BrandMethod.co": the cloth ribbon every Brand Method demo ends with (as on NakGas and Lirunex) */.ft-ribbon{display:flex;justify-content:center;padding:clamp(28px,5vh,56px) 0 0}.ft-ribbon a{display:block;line-height:0}.ft-ribbon canvas{display:block;width:min(460px,88vw);height:auto}.ft-ribbon-fb{display:inline-block;font-size:14px;font-weight:600;color:#fff;background:#2536F5;padding:8px 22px;line-height:1.4}.ft-ribbon-fb[hidden]{display:none}.bm-demo-foot{background:#080B32;padding:0 0 clamp(28px,5vh,48px)}.bm-demo-foot .ft-ribbon{padding-top:clamp(12px,2.5vh,24px)}</style>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root"></div>
+    <div class="bm-demo-foot"><div class="ft-ribbon"><a href="https://brandmethod.co" target="_blank" rel="noopener" aria-label="Demo by BrandMethod.co"><canvas id="bmRibbon" width="460" height="110" aria-hidden="true"></canvas><span class="ft-ribbon-fb" hidden>Demo by BrandMethod.co</span></a></div></div>
+    <script id="bm-ribbon-js">/* "Demo by BrandMethod.co" ribbon, from the NakGas build (website/nakgas/site.js). Runs only while on screen. */
+(function(){var D=document,W=window,$=function(s){return D.querySelector(s)},RM=W.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
+  (function(){
+    var cv=D.getElementById('bmRibbon'),fb=$('.ft-ribbon-fb'),ctx=null;try{ctx=cv&&cv.getContext('2d');}catch(e){}
+    if(!cv)return;if(!ctx){cv.style.display='none';if(fb)fb.hidden=false;return;}
+    var Wd=460,Hd=110,dpr=Math.min(W.devicePixelRatio||1,2);cv.width=Wd*dpr;cv.height=Hd*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
+    var X0=40,X1=420,BH=32,BY=40,running=false,t=0,GL=null,F='600 12px Inter,sans-serif';
+    var SEGS=[{t:'DEMO BY',sp:3.6,a:1,gap:8},{star:true,w:13,gap:9},{t:'BRAND',sp:3.6,a:.98},{t:'METHOD.CO',sp:3.6,a:.98}];
+    function build(){GL=[];SEGS.forEach(function(sg){if(sg.star){GL.push({star:true,w:sg.w});if(sg.gap)GL.push({gap:sg.gap});return;}ctx.font=F;
+      for(var k=0;k<sg.t.length;k++){var ch=sg.t[k];if(ch===' '){GL.push({gap:6.5});continue;}GL.push({ch:ch,a:sg.a,w:ctx.measureText(ch).width+sg.sp});}if(sg.gap)GL.push({gap:sg.gap});});}
+    function wave(x,tt){return 4*Math.sin(x*.0135+tt*.0011)+2.4*Math.sin(x*.029-tt*.00068)+1.2*Math.sin(x*.055+tt*.0016);}
+    function slope(x,tt){return(wave(x+2,tt)-wave(x-2,tt))/4;}
+    function lerp(a,b,p){return a+(b-a)*p;}
+    function shade(p){return 'rgb('+Math.round(lerp(18,86,p))+','+Math.round(lerp(28,116,p))+','+Math.round(lerp(158,255,p))+')';}
+    function tail(xe,dir,tt){var y=BY+wave(xe,tt)*.7+9,x2=xe-dir*40;ctx.beginPath();ctx.moveTo(xe,y);ctx.lineTo(x2,y+7);ctx.lineTo(x2+dir*13,y+7+BH/2);ctx.lineTo(x2,y+7+BH);ctx.lineTo(xe,y+BH);ctx.closePath();ctx.fillStyle='#101C96';ctx.fill();ctx.fillStyle='rgba(0,0,0,.22)';ctx.fill();}
+    function draw(tt){if(!GL)build();ctx.clearRect(0,0,Wd,Hd);tail(X0+6,1,tt);tail(X1-6,-1,tt);var x,y,sl,p;
+      for(x=X0;x<=X1;x+=2){y=BY+wave(x,tt);sl=slope(x,tt);p=Math.max(0,Math.min(1,.52+sl*5.5+.14*Math.sin(x*.006-tt*.00042)));ctx.fillStyle=shade(p);ctx.fillRect(x-1,y,2.4,BH);}
+      ctx.beginPath();for(x=X0;x<=X1;x+=4){y=BY+wave(x,tt);x===X0?ctx.moveTo(x,y+.6):ctx.lineTo(x,y+.6);}ctx.strokeStyle='rgba(255,255,255,.28)';ctx.lineWidth=1.1;ctx.stroke();
+      ctx.beginPath();for(x=X0;x<=X1;x+=4){y=BY+wave(x,tt)+BH;x===X0?ctx.moveTo(x,y-.6):ctx.lineTo(x,y-.6);}ctx.strokeStyle='rgba(0,10,60,.4)';ctx.lineWidth=1.2;ctx.stroke();
+      ctx.textAlign='left';ctx.textBaseline='middle';var tot=0;GL.forEach(function(g){tot+=g.w||g.gap||0;});var xs=(X0+X1)/2-tot/2;
+      GL.forEach(function(g){if(g.gap){xs+=g.gap;return;}var cx=xs+(g.w||0)/2,yy=BY+wave(cx,tt)+BH/2+.5,a=Math.atan(slope(cx,tt));ctx.save();ctx.translate(cx,yy);ctx.rotate(a);
+        if(g.star){ctx.strokeStyle='rgba(255,255,255,.97)';ctx.lineWidth=1.5;ctx.lineCap='round';for(var k=0;k<4;k++){var an=k*Math.PI/4;ctx.beginPath();ctx.moveTo(-Math.cos(an)*4.6,-Math.sin(an)*4.6);ctx.lineTo(Math.cos(an)*4.6,Math.sin(an)*4.6);ctx.stroke();}}
+        else{ctx.font=F;ctx.fillStyle='rgba(2,8,40,.4)';ctx.fillText(g.ch,-(g.w/2)+.7,1.1);ctx.fillStyle='rgba(255,255,255,'+g.a+')';ctx.fillText(g.ch,-(g.w/2),0);}
+        ctx.restore();xs+=g.w||0;});}
+    function frame(){if(!running)return;t+=16;draw(t);requestAnimationFrame(frame);}
+    draw(0);if(D.fonts&&D.fonts.ready)D.fonts.ready.then(function(){GL=null;draw(t);});
+    if(RM)return;
+    if('IntersectionObserver' in W)new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){if(!running){running=true;requestAnimationFrame(frame);}}else running=false;});}).observe(cv);
+  })();
+})();</script>
+
   </body>
 </html>
