@@ -13,6 +13,16 @@
  *   mascots.json   the Mascot Gallery (mascot-gallery.html) and the Mascots pane of work.html
  */
 
+// The live site runs PHP 7.4: the PHP 8 helpers this code uses, where they are missing
+if (!function_exists('str_starts_with')) {
+    function str_starts_with(string $s, string $p): bool { return $p === '' || strncmp($s, $p, strlen($p)) === 0; }
+    function str_ends_with(string $s, string $p): bool { return $p === '' || substr($s, -strlen($p)) === $p; }
+    function str_contains(string $s, string $p): bool { return $p === '' || strpos($s, $p) !== false; }
+}
+if (!function_exists('array_is_list')) {
+    function array_is_list(array $a): bool { return $a === [] || array_keys($a) === range(0, count($a) - 1); }
+}
+
 const BM_DATA = ['branding' => 'portfolio/data/branding.json', 'logos' => 'portfolio/data/logos.json',
                  'mascots' => 'portfolio/data/mascots.json'];
 const BM_CASE_SHELL = 'work/work-firmus.html';   // head, nav, footer and scripts for template-built case pages

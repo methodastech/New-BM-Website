@@ -98,11 +98,10 @@ function bm_list_key(string $gallery): string
 
 function bm_id_of(string $gallery, array $item): string
 {
-    return match ($gallery) {
-        'branding' => $item['slug'],
-        'logos' => bm_slug($item['name']),
-        'mascots' => $item['key'],
-    };
+    if ($gallery === 'branding') {
+        return $item['slug'];
+    }
+    return $gallery === 'logos' ? bm_slug($item['name']) : $item['key'];
 }
 
 function bm_find(array $data, string $gallery, string $id): int
@@ -280,7 +279,10 @@ function bm_edit(Store $store, array $cfg, callable $change): string
         }
         $files = [];
         foreach (bm_base_files() as $path) {
-            $files[$path] = $store->read($path) ?? throw new RuntimeException("$path is missing from the site");
+            $files[$path] = $store->read($path);
+            if ($files[$path] === null) {
+                throw new RuntimeException("$path is missing from the site");
+            }
         }
         $affected = bm_affected_cases($old['branding'], $data['branding']);
         $templated = array_map(fn($p) => "work/work-{$p['slug']}.html", array_filter($data['branding']['projects'], fn($p) => is_array($p['case'] ?? null)));
@@ -321,11 +323,12 @@ function bm_call(string $name, array $a, Store $store, array $cfg): string
             $data = bm_load($store);
             $lines = [];
             foreach ($data[$g][bm_list_key($g)] as $i => $p) {
-                $lines[] = ($i + 1) . '. ' . bm_id_of($g, $p) . ' — ' . $p['name'] . match ($g) {
-                    'branding' => " ({$p['category']}, {$p['sector']})" . (is_array($p['case'] ?? null) ? ' [template case page]' : ' [designed case page]'),
-                    'logos' => " ({$p['category']})",
-                    'mascots' => ' — ' . implode(', ', $p['tags']),
-                };
+                if ($g === 'branding') {
+                    $about = " ({$p['category']}, {$p['sector']})" . (is_array($p['case'] ?? null) ? ' [template case page]' : ' [designed case page]');
+                } else {
+                    $about = $g === 'logos' ? " ({$p['category']})" : ' — ' . implode(', ', $p['tags']);
+                }
+                $lines[] = ($i + 1) . '. ' . bm_id_of($g, $p) . ' — ' . $p['name'] . $about;
             }
             if ($g === 'branding') {
                 $lines[] = "\nCategories: " . implode(', ', array_map(fn($c) => "{$c['id']} ({$c['label']})", $data['branding']['categories']));

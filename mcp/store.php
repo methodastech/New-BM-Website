@@ -19,8 +19,11 @@ interface Store
 
 class LocalStore implements Store
 {
-    public function __construct(private string $root)
+    private string $root;
+
+    public function __construct(string $root)
     {
+        $this->root = $root;
     }
 
     public function read(string $path): ?string
@@ -46,11 +49,17 @@ class LocalStore implements Store
 
 class GitHubStore implements Store
 {
+    private string $token;
+    private string $repo;
+    private string $branch;
     private ?string $base = null;   // the commit this edit started from
     private array $cache = [];
 
-    public function __construct(private string $token, private string $repo, private string $branch)
+    public function __construct(string $token, string $repo, string $branch)
     {
+        $this->token = $token;
+        $this->repo = $repo;
+        $this->branch = $branch;
     }
 
     private function api(string $method, string $url, ?array $body = null, bool $raw = false): array
