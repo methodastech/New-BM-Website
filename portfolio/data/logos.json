@@ -356,6 +356,13 @@
             "image": "Image/resources/brandmethod-os-framework.png",
             "alt": "KitKat placeholder",
             "keywords": "kitkat placeholder"
+        },
+        {
+            "name": "Cadbury",
+            "category": "F&B",
+            "image": "Image/resources/brandmethod-os-framework.png",
+            "alt": "Cadbury placeholder",
+            "keywords": "cadbury chocolate placeholder"
         }
     ]
 }
