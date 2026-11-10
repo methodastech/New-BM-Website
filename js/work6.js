@@ -17,9 +17,10 @@
     if(!more) return;
     var cols=getComputedStyle(g).gridTemplateColumns.split(' ').filter(Boolean).length||1;
     var n=g.querySelectorAll('.wk6:not(.hide)').length, rem=n%cols;
-    more.hidden=!n||!rem||cols<2;
-    more.style.gridColumn=rem?'span '+(cols-rem):'';
-    more.classList.toggle('is-wide',cols-rem>1);
+    // 10 Nov (Zieel could not find the Archive): the tile always shows; it fills the last row's gap, or takes a full row of its own
+    more.hidden=!n;
+    more.style.gridColumn=rem?'span '+(cols-rem):'1 / -1';
+    more.classList.toggle('is-wide',rem?cols-rem>1:cols>1);
   }
   function both(){sync();fill()}
   document.querySelectorAll('#pg-work .wk-chip').forEach(function(c){c.addEventListener('click',function(){setTimeout(both,0)})});
@@ -68,4 +69,19 @@
     else { v._seen=0; if(!v.paused) v.pause() }
   })},{threshold:.5});
   vs.forEach(function(v){io.observe(v)});
+})();
+
+/* 10 Nov: case films that tools/case-films.py marked data-bm-autoplay (preload="none") load and play only when they
+   come near the screen, and pause when they leave it, so a case page no longer downloads every film when it opens. */
+(function(){
+  var vs=document.querySelectorAll('video[data-bm-autoplay]');
+  if(!vs.length) return;
+  function play(v){ v.muted=true; if(!v._bmOn){ v._bmOn=1; v.preload='auto'; } var p=v.play(); if(p&&p.catch) p.catch(function(){}); }
+  if(!('IntersectionObserver' in window)){ vs.forEach(play); return; }
+  var io=new IntersectionObserver(function(es){ es.forEach(function(e){
+    var v=e.target;
+    if(e.isIntersecting){ if(v.paused) play(v); }
+    else if(v._bmOn && !v.paused){ v.pause(); }
+  }); },{rootMargin:'300px 0px'});
+  vs.forEach(function(v){ io.observe(v); });
 })();

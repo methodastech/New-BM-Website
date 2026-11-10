@@ -553,6 +553,55 @@
   }
 }
 
+/* Tablets (10 Nov): two articles a row from 600px, so a tablet is not one huge picture per row (the page was longer
+   than on a phone). The first article still spans the full width. */
+@media (min-width: 600px) and (max-width: 768px) {
+  .blog-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 34px 22px;
+  }
+
+  .blog-card h3 {
+    font-size: 21px;
+  }
+
+  .blog-card-img {
+    margin-bottom: 16px;
+  }
+}
+
+/* "Load more": the list opens with the newest 13 articles (the featured one and 12 more) */
+.blog-more-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 44px;
+}
+
+.blog-more-wrap[hidden] {
+  display: none;
+}
+
+.blog-more {
+  min-height: 48px;
+  padding: 0 30px;
+  border: 1px solid #0f0f0f;
+  background: #fff;
+  color: #0f0f0f;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.25s var(--ease), color 0.25s var(--ease);
+}
+
+.blog-more:hover,
+.blog-more:focus-visible {
+  background: #0f0f0f;
+  color: #fff;
+}
+
 /* Side edges follow the nav: --nav-l / --nav-r are the logo's left and Hire Us's right edge, measured below (the nav
    centres itself on very wide screens); before that runs, the nav's own padding (20px phone, ~32px tablet, 48px desktop) */
 .resources-masthead {
@@ -1026,6 +1075,7 @@
       </a>
             <!-- ZIEEL BLOG TRANSFER END -->
         </div>
+        <div class="blog-more-wrap" id="blogMoreWrap" hidden><button type="button" class="blog-more" id="blogMore">Load more articles</button></div>
         <p class="blog-empty" id="blogEmpty">No resources found for that search.</p>
 
       </div>
@@ -1091,28 +1141,53 @@
 </div>
 
 </div>
-<script src="js/layout.js?v=10"></script>
+<script src="js/layout.js?v=11"></script>
 <script src="js/main.js"></script>
 <script>
 const blogSearch = document.getElementById('blogSearch');
 const blogCards = Array.from(document.querySelectorAll('.blog-card'));
 const blogEmpty = document.getElementById('blogEmpty');
 
-if (blogSearch && blogCards.length) {
-  blogSearch.addEventListener('input', () => {
-    const query = blogSearch.value.trim().toLowerCase();
-    let visibleCount = 0;
+/* The list opens with the first 13 articles; "Load more" adds 12 at a time. A search looks through every article. */
+const blogMoreWrap = document.getElementById('blogMoreWrap');
+const blogMore = document.getElementById('blogMore');
+const BLOG_STEP = 12;
+let blogShown = BLOG_STEP + 1;
 
-    blogCards.forEach(card => {
-      const matches = card.textContent.toLowerCase().includes(query);
-      card.style.display = matches ? '' : 'none';
-      if (matches) visibleCount += 1;
-    });
+function showBlogCards() {
+  const query = blogSearch ? blogSearch.value.trim().toLowerCase() : '';
+  let visibleCount = 0;
+  let waiting = 0;
 
-    if (blogEmpty) {
-      blogEmpty.style.display = visibleCount ? 'none' : 'block';
-    }
+  blogCards.forEach((card, i) => {
+    const matches = !query || card.textContent.toLowerCase().includes(query);
+    const inRange = query || i < blogShown;
+    card.style.display = matches && inRange ? '' : 'none';
+    if (matches && inRange) visibleCount += 1;
+    if (matches && !inRange) waiting += 1;
   });
+
+  if (blogEmpty) {
+    blogEmpty.style.display = visibleCount ? 'none' : 'block';
+  }
+  if (blogMoreWrap && blogMore) {
+    blogMoreWrap.hidden = !waiting;
+    blogMore.textContent = 'Load more articles (' + waiting + ')';
+  }
+}
+
+if (blogCards.length) {
+  showBlogCards();
+  if (blogMore) {
+    blogMore.addEventListener('click', () => {
+      blogShown += BLOG_STEP;
+      showBlogCards();
+    });
+  }
+}
+
+if (blogSearch && blogCards.length) {
+  blogSearch.addEventListener('input', showBlogCards);
 }
 </script>
 </body>

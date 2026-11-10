@@ -73,6 +73,31 @@ def element_end(s, start, tag):
     die('unbalanced <%s> from %d' % (tag, start))
 
 
+MG_BAR = '<div class="searchbar rv"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input id="mgSearch" type="text" placeholder="Search by mascot, industry, or keyword..." aria-label="Search mascot gallery"></div>'
+MG_AFTER = '<p class="bmx-empty" id="mgEmpty" hidden>No mascot matches that search.</p><script>(function(){var q=document.getElementById(\'mgSearch\'),e=document.getElementById(\'mgEmpty\');if(!q)return;q.addEventListener(\'input\',function(){var v=q.value.trim().toLowerCase(),n=0;document.querySelectorAll(\'#pg-mascot-gallery .wk6m-grid .wk6m-card\').forEach(function(c){var ok=!v||(c.getAttribute(\'data-q\')||\'\').indexOf(v)>-1;c.classList.toggle(\'hide\',!ok);if(ok)n++});if(e)e.hidden=n>0;});})();</script>'
+
+
+def mascot_search(s):
+    """The Mascot Gallery's search (the user's 10 Nov ask): a bar above the grid, as on the Logo Gallery, then an empty
+    note and the filter. The cards' data-q holds the search text."""
+    if 'id="mgSearch"' in s:
+        return s
+    a = s.index('<div class="wk6m-grid">')
+    b = element_end(s, a, 'div')
+    return s[:a] + MG_BAR + s[a:b] + MG_AFTER + s[b:]
+
+
+LG_EMPTY = '<p class="bmx-empty" id="lgEmpty" hidden>No logo matches that search.</p>'
+LG_PAGER = '<nav class="lg-pager" id="lgPager" aria-label="Logo gallery pages" hidden></nav><script>(function(){var g=document.getElementById(\'lgGrid\'),nav=document.getElementById(\'lgPager\'),q=document.getElementById(\'lgSearch\');if(!g||!nav)return;var PER=10,page=1,mq=matchMedia(\'(max-width:767px)\');function draw(){var all=[].slice.call(g.querySelectorAll(\'.bmx-lcard\')),on=all.filter(function(c){return !c.classList.contains(\'hide\')});all.forEach(function(c){c.classList.remove(\'lg-off\')});var n=Math.ceil(on.length/PER);if(!mq.matches||n<2){nav.hidden=true;nav.innerHTML=\'\';return}if(page>n)page=n;on.forEach(function(c,i){if(i<(page-1)*PER||i>=page*PER)c.classList.add(\'lg-off\')});var h=\'<button type="button" data-p="\'+(page-1)+\'" aria-label="Previous page"\'+(page<2?\' disabled\':\'\')+\'>&larr;</button>\';for(var i=1;i<=n;i++)h+=\'<button type="button" data-p="\'+i+\'"\'+(i===page?\' aria-current="page" class="on"\':\'\')+\'>\'+i+\'</button>\';h+=\'<button type="button" data-p="\'+(page+1)+\'" aria-label="Next page"\'+(page>=n?\' disabled\':\'\')+\'>&rarr;</button>\';nav.innerHTML=h;nav.hidden=false}nav.addEventListener(\'click\',function(e){var b=e.target.closest(\'button[data-p]\');if(!b||b.disabled)return;page=+b.getAttribute(\'data-p\');draw();var t=(q&&q.closest(\'.searchbar\'))||g;scrollTo({top:t.getBoundingClientRect().top+scrollY-90,behavior:\'smooth\'})});if(q)q.addEventListener(\'input\',function(){page=1;setTimeout(draw,0)});(mq.addEventListener?mq.addEventListener(\'change\',draw):mq.addListener(draw));draw();})();</script>'
+
+
+def logo_pager(s):
+    """Logo Gallery on phones (the user's 10 Nov ask): ten logos a page, with page numbers under the grid."""
+    if 'id="lgPager"' in s or LG_EMPTY not in s:
+        return s
+    return s.replace(LG_EMPTY, LG_EMPTY + LG_PAGER, 1)
+
+
 def page_section(s, pid):
     m = re.search(r'<section class="pg[^"]*" id="pg-%s"' % re.escape(pid), s)
     if not m:
@@ -247,6 +272,28 @@ html body div.bmx-lcard:hover .bmx-lthumb img,html body div.wk6m-card:hover .wk6
 html body div.wk6m-card:hover .wk6-name{color:#0f0f0f!important}
 html body div.bmx-lcard,html body div.wk6m-card{cursor:default!important}
 html body a.bmx-lcard,html body a.wk6m-card{cursor:pointer!important}
+/* Phones (10 Nov): the four collection tiles on Work sit two by two, so their names and counts are not cut off. The
+   four-column rule above is not inside a media query and loads after home.css, so it overrode the phone layout there. */
+@media (max-width:767px){
+html body .bmx-hub .bmx-panels{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important}
+html body .bmx-hub .bmx-pt{padding:12px 12px 14px!important;gap:5px!important}
+html body .bmx-hub .bmx-panel h3{font-size:17px!important;line-height:1.2!important}
+html body .bmx-hub .bmx-panel h3 .arr,html body .bmx-hub .bmx-pd{display:none!important}
+html body .bmx-hub .bmx-pc{margin:0!important;align-self:flex-start!important;font-size:9.5px!important;letter-spacing:.1em!important}
+}
+/* Phones (10 Nov, galleries): the page starts below the 60px nav, so "Back to work" is no longer hidden under it */
+@media (max-width:767px){
+html body #pg-mascot-gallery .page-hero,html body #pg-logo-gallery .page-hero{padding-top:calc(var(--wk6-navb,60px) + 20px)!important}
+}
+/* Logo Gallery on phones (10 Nov): ten logos a page, with page numbers under the grid (the pager script is in the page) */
+html body #pg-logo-gallery .bmx-lcard.lg-off{display:none!important}
+.lg-pager{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:8px 0 10px}
+.lg-pager[hidden]{display:none}
+.lg-pager button{min-width:44px;height:44px;padding:0 10px;border:1px solid rgba(15,15,15,.16);background:#fff;color:#0f0f0f;font-family:var(--font-body);font-size:15px;cursor:pointer;transition:background .25s,color .25s,border-color .25s}
+.lg-pager button.on{background:var(--accent,#1a26de);border-color:var(--accent,#1a26de);color:#fff}
+.lg-pager button:disabled{opacity:.35;cursor:default}
+/* Mascot Gallery search (10 Nov): the same space under the bar as on the Logo Gallery */
+html body #pg-mascot-gallery .bmx-body .searchbar{margin-bottom:clamp(32px,3.4vw,48px)!important}
 '''
 
 
@@ -274,7 +321,26 @@ def build_js():
         parts.append(js[a:call.end()])
     return ('/* The 30 Oct design of the Work section: the Work grid, the case pages\' "About the project" button\n'
             '   and the case films, from the design export\'s assets/bmx-live.js. Generated by tools/build-work-1031.py. */\n'
-            + '\n\n'.join(parts) + '\n')
+            + '\n\n'.join(parts) + '\n' + LOCAL_JS)
+
+
+# the site's own addition: the case films start when they come near the screen (tools/case-films.py marks them)
+LOCAL_JS = r'''
+/* 10 Nov: case films that tools/case-films.py marked data-bm-autoplay (preload="none") load and play only when they
+   come near the screen, and pause when they leave it, so a case page no longer downloads every film when it opens. */
+(function(){
+  var vs=document.querySelectorAll('video[data-bm-autoplay]');
+  if(!vs.length) return;
+  function play(v){ v.muted=true; if(!v._bmOn){ v._bmOn=1; v.preload='auto'; } var p=v.play(); if(p&&p.catch) p.catch(function(){}); }
+  if(!('IntersectionObserver' in window)){ vs.forEach(play); return; }
+  var io=new IntersectionObserver(function(es){ es.forEach(function(e){
+    var v=e.target;
+    if(e.isIntersecting){ if(v.paused) play(v); }
+    else if(v._bmOn && !v.paused){ v.pause(); }
+  }); },{rootMargin:'300px 0px'});
+  vs.forEach(function(v){ io.observe(v); });
+})();
+'''
 
 
 # ---------------------------------------------------------------- pages
@@ -329,7 +395,7 @@ def into_shell(shell, shell_pid, section, pid, out, title=None, desc=None):
     return s
 
 
-VERSION = '20261110a'
+VERSION = '20261110c'
 
 
 def case_meta(pid, section):
@@ -379,10 +445,10 @@ def main():
     w = re.sub(r'<span><img src="Image/portfolio/(?:contenthub|brandstrategy)-ss\.webp"[^>]*></span>', '', w)
     outputs['work.html'] = into_shell(work_shell, 'work', w, 'work', 'work.html')
 
-    outputs['mascot-gallery.html'] = into_shell(mascot_shell, 'mascot-gallery', section('mascot-gallery', 'mascot-gallery.html'),
+    outputs['mascot-gallery.html'] = into_shell(mascot_shell, 'mascot-gallery', mascot_search(section('mascot-gallery', 'mascot-gallery.html')),
                                                 'mascot-gallery', 'mascot-gallery.html')
     logo_shell = read(os.path.join(ROOT, 'logo-gallery.html'))
-    outputs['logo-gallery.html'] = into_shell(logo_shell, 'logo-gallery', section('logo-gallery', 'logo-gallery.html'),
+    outputs['logo-gallery.html'] = into_shell(logo_shell, 'logo-gallery', logo_pager(section('logo-gallery', 'logo-gallery.html')),
                                               'logo-gallery', 'logo-gallery.html')
     outputs['archive.html'] = into_shell(mascot_shell, 'mascot-gallery', section('archive', 'archive.html'), 'archive',
                                          'archive.html', 'Project Archive | Brand Method',
@@ -418,6 +484,12 @@ def main():
     open(os.path.join(ROOT, 'css/work6.css'), 'w', encoding='utf-8', newline='\n').write(css)
     open(os.path.join(ROOT, 'js/work6.js'), 'w', encoding='utf-8', newline='\n').write(js)
     print('written')
+    import subprocess
+    # the case films: a WebM next to each MP4 and start-on-approach instead of autoplay (tools/case-films.py)
+    r = subprocess.run([sys.executable, os.path.join(ROOT, 'tools', 'case-films.py'), '--write'], cwd=ROOT, capture_output=True, text=True)
+    print('tools/case-films.py:', (r.stdout + r.stderr).strip().splitlines()[-1] if (r.stdout + r.stderr).strip() else r.returncode)
+    if r.returncode:
+        die('tools/case-films.py failed: run it by hand')
     # The Branding cards are taken from the export into portfolio/data/branding.json (projects the team added
     # through the MCP keep their place); the Logo and Mascot lists stay as the team left them. Then every card,
     # count and "Next project" link is rebuilt from the lists.
