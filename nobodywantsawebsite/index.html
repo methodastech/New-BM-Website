@@ -4637,6 +4637,7 @@
      This is the ONLY place you need to change.
      ===================================================================== -->
 <script>window.BM_FORM_ENDPOINT="https://formsubmit.co/ajax/bazil@brandmethod.co";window.BM_FORM_CC="amina@brandmethod.co,eyka@brandmethod.co,brian@brandmethod.co";
+window.BM_SHEET="https://script.google.com/macros/s/AKfycbx7ac49TomTlnhSstrvSxGeKBmaqLKwtNF9012m4JulX4OwAmB911pTg8MtdQS2g5Gfvg/exec";
 /* Shared sender for both forms. FormSubmit returns success as the string "true"/"false". */
 window.bmSendLead=function(subject,fields){
   var url=(window.BM_FORM_ENDPOINT||'').trim(); if(!url) return Promise.reject(new Error('no endpoint'));
@@ -4646,8 +4647,14 @@ window.bmSendLead=function(subject,fields){
   if(fields.Email) fd.append('_replyto',fields.Email);
   for(var k in fields) fd.append(k,fields[k]);
   fd.append('Page',location.href);
+  /* Every lead is also added to the "Website enquiries" Google Sheet (an Apps Script web app), so it is kept if
+     FormSubmit is down; a lead the sheet has counts as sent. no-cors: the promise resolves once it reached Google. */
+  var sb=new URLSearchParams(); sb.append('form','Nobody wants a website'); sb.append('subject',subject);
+  for(var s in fields) sb.append(s,fields[s]); sb.append('Page',location.href);
+  var sheet=fetch(window.BM_SHEET,{method:'POST',mode:'no-cors',body:sb,keepalive:true}).then(function(){ return true; },function(){ return false; });
   return fetch(url,{method:'POST',body:fd,headers:{Accept:'application/json'}})
-    .then(function(r){return r.json();}).then(function(j){ if(!j||String(j.success)!=='true') throw new Error('failed'); return j; });
+    .then(function(r){return r.json();}).then(function(j){ if(!j||String(j.success)!=='true') throw new Error('failed'); return j; })
+    .catch(function(err){ return sheet.then(function(ok){ if(!ok) throw err; return {success:'true',sheet:true}; }); });
 };</script>
 <script>
 /* quick lead form: BOTH buttons require details. Book = email+phone+interest; WhatsApp = name+email+interest. Everything lands in a prefilled wa.me message. */

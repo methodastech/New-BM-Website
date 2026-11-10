@@ -449,5 +449,18 @@
   else window.addEventListener('load',init);
 })();
 </script>
+<script id="bm-sheet">
+/* Every brief is also added to the "Website enquiries" Google Sheet (an Apps Script web app), so it is
+   kept even if FormSubmit is down. A beacon still goes out while the page leaves for FormSubmit. */
+(function(){
+  var SHEET='https://script.google.com/macros/s/AKfycbx7ac49TomTlnhSstrvSxGeKBmaqLKwtNF9012m4JulX4OwAmB911pTg8MtdQS2g5Gfvg/exec';
+  var f=document.querySelector('form[action*="formsubmit"]'); if(!f||!navigator.sendBeacon||!window.URLSearchParams) return;
+  f.addEventListener('submit',function(){
+    if(f._honey&&f._honey.value) return;
+    var b=new URLSearchParams(new FormData(f)); b.set('form','Contact'); b.set('page',location.href);
+    try{ navigator.sendBeacon(SHEET,b); }catch(e){}
+  });
+})();
+</script>
 </body>
 </html>

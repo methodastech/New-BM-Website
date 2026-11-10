@@ -1673,6 +1673,8 @@ window.addEventListener('message',function(e){
    refreshes page/UTM fields at send time, then redirects to thank-you.html. */
 (function(){
   var ENDPOINT='https://formsubmit.co/ajax/bazil@brandmethod.co';
+  /* Every enquiry is also added to the "Website enquiries" Google Sheet (an Apps Script web app): the record if FormSubmit is down. */
+  var SHEET='https://script.google.com/macros/s/AKfycbx7ac49TomTlnhSstrvSxGeKBmaqLKwtNF9012m4JulX4OwAmB911pTg8MtdQS2g5Gfvg/exec';
   var f=document.getElementById('bmEnquiry-website'); if(!f) return;
   var t0=Date.now(), btn=f.querySelector('.bmf-submit'), label=f.querySelector('.bmf-submit-label'), status=f.querySelector('.bmf-status');
   var MSG={name:'Please give your name.',company:'Please add your company.',email:'That email does not look right.',
@@ -1709,8 +1711,12 @@ window.addEventListener('message',function(e){
     fd.append('_captcha','false');
     fd.append('_template','table');
     btn.disabled=true; label.textContent='Sending';
+    var sb=new URLSearchParams(); fd.forEach(function(v,k){ if(k.charAt(0)!=='_') sb.append(k,v); }); sb.set('form','VSL');
+    /* no-cors: the reply cannot be read, but the promise only resolves once the enquiry reached Google */
+    var sheet=fetch(SHEET,{method:'POST',mode:'no-cors',body:sb,keepalive:true}).then(function(){ return true; },function(){ return false; });
     fetch(ENDPOINT,{method:'POST',body:fd,headers:{Accept:'application/json'}})
       .then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); })
+      .catch(function(err){ return sheet.then(function(ok){ if(!ok) throw err; }); })   /* FormSubmit failed: fine if the sheet has it */
       .then(function(){
         try{ (window.dataLayer=window.dataLayer||[]).push({event:'generate_lead',form_id:'website-vsl',budget_band:f.budget_band.value}); }catch(x){}
         location.href='thank-you.html';
