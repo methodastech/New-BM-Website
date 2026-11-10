@@ -240,6 +240,13 @@ html body #pg-mascot-gallery .bmx-bnr .bmx-field{height:clamp(220px,24vw,340px)!
    is given, which left the frame's background showing as a band on each side */
 html body #pg-mascot-gallery .wk6-castv{position:absolute;inset:0;overflow:hidden}
 html body #pg-mascot-gallery .wk6-castv video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%;display:block}
+/* Logo and mascot cards that open nothing: no hover, so they do not look like links (10 Nov). A card that is a link
+   (an <a>, like Santa Barbara's mascot) keeps its hover. */
+html body div.bmx-lcard:hover .bmx-lthumb{transform:none!important;box-shadow:none!important}
+html body div.bmx-lcard:hover .bmx-lthumb img,html body div.wk6m-card:hover .wk6m-fig img{transform:none!important}
+html body div.wk6m-card:hover .wk6-name{color:#0f0f0f!important}
+html body div.bmx-lcard,html body div.wk6m-card{cursor:default!important}
+html body a.bmx-lcard,html body a.wk6m-card{cursor:pointer!important}
 '''
 
 
@@ -322,7 +329,7 @@ def into_shell(shell, shell_pid, section, pid, out, title=None, desc=None):
     return s
 
 
-VERSION = '20261104a'
+VERSION = '20261110a'
 
 
 def case_meta(pid, section):
