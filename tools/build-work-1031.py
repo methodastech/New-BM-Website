@@ -53,7 +53,7 @@ PAGES = {
     'logo-gallery': 'logo-gallery.html', 'mascot-gallery': 'mascot-gallery.html', 'tech-portfolio': 'portfolio.html',
     'archive': 'archive.html',
 }
-BUILDS_LIVE = '23 live builds'  # the Tech portfolio count (31 Oct edit; Trinidad Hospitality added 11 Nov)
+BUILDS_LIVE = '24 live builds'  # the Tech portfolio count (31 Oct edit; Trinidad Hospitality and FAR Capital added 11 Nov)
 
 
 def die(msg):
