@@ -1,0 +1,34 @@
+hero.mp4: Mixkit "Time lapse of Kuala Lumpur skyline" (mixkit.co/free-stock-video/time-lapse-of-kuala-lumpur-skyline-30180/), 1280x720, 8 s, Mixkit Stock Video Free License (free for commercial use, no attribution required), downloaded 2 Nov 2026. A placeholder for the demo only: the live site needs the group’s own drone footage of its hotels.
+
+hero.mp4, 4 Nov 2026 daytime cut (replaced the same evening, kept in _removed/6s-actors-20261104): 6 scenes, hard cuts, 1920x1080, 24 s:
+  1. Mixkit "Time lapse of Kuala Lumpur skyline" (as above), 1 to 5 s
+  2. Pexels 14033094 "Woman in Hat in Sea at Sunset" by Arsel, 0 to 4.5 s
+  3. Pexels 32409733 "Breathtaking Sunset Over Langkawi Pier" by Mohammed, 1 to 5 s
+  4. Pexels 5378932 "Receptionist Receiving Guests at Hotel" by cottonbro studio, 8.6 to 12.6 s (cut clear of the receptionist turning)
+  5. Pexels 11437374 "Langkawi Island Pier and Harbor" by Azmi, 2 to 6 s, saturation lowered
+  6. Pexels 6474964 "People Having Drinks while Sitting on the Couch" by cottonbro studio, 1.6 to 5 s (cut before her bored look)
+Pexels License: free to use, attribution not required, credited here. Demo placeholders: the live site needs the group's own footage.
+hero-lite.mp4 is the same film at 960 wide for phones.
+
+hero.mp4, re-cut 4 Nov 2026 evening (Bazil: the 2 cottonbro actor scenes out, places in), 6 scenes, hard cuts, 1920x1080, 24 s:
+  1. Mixkit "Time lapse of Kuala Lumpur skyline" (as above), 1 to 5 s
+  2. Pexels 14033094 "Woman in Hat in Sea at Sunset" by Arsel, 0 to 4.5 s
+  3. Pexels 32409733 "Breathtaking Sunset Over Langkawi Pier" by Mohammed, 1 to 5 s
+  4. Pexels 32498160 "Melaka Straits Mosque" (pexels.com/video/32498160), 1920x1080 25 fps, 10 to 14 s, framed on the upper 1600x900 to lose the beach litter, saturation 1.08
+  5. Pexels 11437374 "Langkawi Island Pier and Harbor" by Azmi, 2 to 6 s, saturation lowered
+  6. Pexels 6474964 "People Having Drinks while Sitting on the Couch" by cottonbro studio, 1.6 to 5 s (still an actor scene; its replacement waits on the next Pexels download)
+Rejected for this cut: Pexels 39550039 "Scenic boat ride along colorful riverside houses" (Melaka river) is a portrait 1080x1920 phone video, a 16:9 crop would keep a thin band and upscale it soft.
+Pexels License: free to use, attribution not required, credited here. Demo placeholders: the live site needs the group's own footage.
+hero-lite.mp4 is the same film at 960 wide for phones.
+
+5 Nov 2026: the same hero.mp4 also plays in the destinations band (the poster previews it under the pointer, a click opens it with controls). One file, one cache entry; when the group's own film arrives it replaces both uses.
+
+hero.mp4, re-cut 11 Nov 2026 (Bazil: "whatever's best" on the last posed scene): no posed scenes left, ordered day to night, 6 scenes, hard cuts, 1920x1080 25 fps, 24.3 s, 14.1 MB (hero-lite.mp4 960 wide, 4.5 MB). The 5 Nov cut is kept in _removed/7s-day-mosque-lounge-20261111.
+  1. Mixkit "Time lapse of Kuala Lumpur skyline" (as above), 1 to 5 s
+  2. Pexels 11437374 "Langkawi Island Pier and Harbor" by Azmi (11437374-uhd_2560_1440_30fps.mp4), 2 to 6 s, saturation lowered
+  3. Pexels 14033094 "Woman in Hat in Sea at Sunset" by Arsel (14033094-hd_1920_1080_30fps.mp4), 0 to 4.5 s
+  4. Pexels 32409733 "Breathtaking Sunset Over Langkawi Pier" by Mohammed (13824927_2560_1440_30fps.mp4), 1 to 5 s
+  5. Pexels 16478425, the Melaka Straits Mosque at dusk from the waterfront, visitors seen from behind (16478425-hd_1920_1080_24fps.mp4), 5.5 to 9.5 s, saturation 1.06. Replaces the overcast day shot of the same mosque (32498160).
+  6. Pexels 20699390, the Melaka river at night from a cruise boat (20699390-hd_1920_1080_50fps.mp4), 3.1 to 7.1 s, framed on 1440x810 from x 300, y 150 to keep the boat's flag out of frame. Replaces the cottonbro lounge scene (6474964).
+Scene starts used by the film in the destinations band: Kuala Lumpur 0 s, Langkawi 12.45 s, Melaka 16.4 s.
+Pexels License: free to use, attribution not required, credited here. Demo placeholders: the live site needs the group's own footage.

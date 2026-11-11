@@ -53,7 +53,7 @@ PAGES = {
     'logo-gallery': 'logo-gallery.html', 'mascot-gallery': 'mascot-gallery.html', 'tech-portfolio': 'portfolio.html',
     'archive': 'archive.html',
 }
-BUILDS_LIVE = '22 live builds'  # the Tech portfolio count after the user's 31 Oct edit
+BUILDS_LIVE = '23 live builds'  # the Tech portfolio count (31 Oct edit; Trinidad Hospitality added 11 Nov)
 
 
 def die(msg):

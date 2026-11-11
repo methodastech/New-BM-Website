@@ -1,6 +1,11 @@
 """Build pricing.html from the designer's standalone Services & Pricing file.
 
     python tools/build-pricing.py "C:/Users/user/Downloads/BrandMethod-Services latest.html"
+    python tools/build-pricing.py "C:/Users/user/Downloads/BM-Pricing-and-Services/Pricing-and-Services.html"
+
+From 11 Nov 2026 the export is a folder: the page plus assets/, data/, fonts/ and a logo beside it.
+Those are copied into pricing-files/ and the page's paths point there (the walkthrough film and its
+thumbnail stay in video/, the other walkthrough films are not published).
 
 The design file is used as-is, except:
   - its loading screen is removed (#bm-preload up to Oct 2026, #bm-topload since);
@@ -15,10 +20,14 @@ The design file is used as-is, except:
 """
 import os
 import re
+import shutil
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, 'pricing.html')
+FILES = 'pricing-files'  # the export's pictures, fonts and phase films, served beside pricing.html
+# what the page loads from beside itself (data/videos/bazil/ goes to video/ instead)
+EXPORT_PARTS = ['assets', 'fonts', os.path.join('data', 'videos', 'phases'), 'methodas-lockup-horizontal-blue.png']
 OLD_PHONE, PHONE = '60122826371', '60162563030'
 HEAD_BEGIN, HEAD_END = '<!-- site head (tools/build-pricing.py) -->', '<!-- /site head -->'
 # The page is ~4.5 MB with style blocks spread through <body> and the site nav added at the
@@ -177,6 +186,27 @@ def main():
     s = cut(s, r",\s*\['long-v5',[^\]]*\],\s*\['explained-v2',[^\]]*\](?=\],\s*TH=\{\})", 'the extra walkthrough films')
     s = s.replace('data/videos/bazil/', 'video/')
 
+    # Folder export (11 Nov 2026): copy what the page loads into pricing-files/ and point its paths there
+    src_dir = os.path.dirname(os.path.abspath(sys.argv[1]))
+    if os.path.isdir(os.path.join(src_dir, 'assets')):
+        dest = os.path.join(ROOT, FILES)
+        for part in EXPORT_PARTS:
+            a, b = os.path.join(src_dir, part), os.path.join(dest, part)
+            if os.path.isdir(a):
+                if os.path.isdir(b):
+                    shutil.rmtree(b)
+                shutil.copytree(a, b)
+            elif os.path.isfile(a):
+                os.makedirs(os.path.dirname(b), exist_ok=True)
+                shutil.copy2(a, b)
+            else:
+                sys.exit('the export has no %s' % part)
+        # only quoted paths: the same words inside the design's comments stay as they are
+        s = re.sub(r'''(["'])(assets/|fonts/|data/videos/phases/|methodas-lockup-horizontal-blue\.png)''',
+                   lambda m: m.group(1) + FILES + '/' + m.group(2), s)
+        if re.search(r'''["'](?:assets|fonts|data)/''', s):
+            sys.exit('a path to the export folder is still unchanged')
+
     # Feedback form: the design only opens WhatsApp or a mailto draft, so most feedback never
     # arrives. "Send feedback" now posts it straight to the inbox through FormSubmit (the
     # service the contact form uses); WhatsApp stays as the second option.
@@ -189,9 +219,11 @@ def main():
 
     # site nav + footer; the main pages carry no floating WhatsApp / scroll-top buttons, and the
     # footer relies on the site's link reset, which the design file does not have
+    # layout.js keeps the version the current page loads (it is bumped site-wide when the menu changes)
+    ver = re.search(r'js/layout\.js\?v=(\d+)', cur)
     tail = ('<style id="bm-site-shell">.wa-float,.scroll-top-float{display:none!important}'
             'footer.bmf a{text-decoration:none}</style>\n'
-            '<script src="js/layout.js?v=3"></script>\n' + TWEAKS)
+            '<script src="js/layout.js?v=%s"></script>\n' % (ver.group(1) if ver else '11') + TWEAKS)
     i = s.rindex('</body>')
     s = s[:i] + tail + s[i:]
 

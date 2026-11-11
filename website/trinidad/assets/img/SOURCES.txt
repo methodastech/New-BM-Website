@@ -1,0 +1,39 @@
+Trinidad Hospitality Web Prototype 1: image sources
+Every photograph below is the group's own, downloaded from trinidadhospitality.com (wp-content uploads) on 1 Nov 2026 and re-encoded to JPEG for this mock-up. No stock, no generated images.
+file	size	weight	quality	source URL
+
+hero-klcc.jpg	1600x900	242 KB	q84	https://trinidadhospitality.com/wp-content/uploads/2025/06/Ramada-Suites-by-Wyndham-KLCC-Facade-New.jpg
+h-ramada-klcc.jpg	1200x720	123 KB	q84	https://trinidadhospitality.com/wp-content/uploads/2026/07/Ramada_Building_2_1.jpg
+h-isola.jpg	1600x900	247 KB	q48	https://trinidadhospitality.com/wp-content/uploads/2025/11/Isola-KLCC-Facade-on-Jalan-Yap-Kwan-Seng.jpg
+h-langkawi.jpg	1600x900	248 KB	q84	https://trinidadhospitality.com/wp-content/uploads/2025/12/Ramada-by-Wyndham-Langkawi-Marina-Facade-with-Yacht.jpg
+h-kuantan.jpg	1360x907	133 KB	q84	https://trinidadhospitality.com/wp-content/uploads/2025/06/Shahzan-Hotel-Kuantan-Facade-with-Awards.png	(cropped to the facade, the award badges on the left of the original are outside the crop)
+h-lisbon.jpg	1600x900	243 KB	q76	https://trinidadhospitality.com/wp-content/uploads/2025/06/The-Lisbon-Melaka-Day-Drone-Sea.jpg
+h-trigo.jpg	1600x900	248 KB	q80	https://trinidadhospitality.com/wp-content/uploads/2025/06/Trigo-Hotel-KL-Facade-Jalan-Raja-Laut.jpg
+h-johor.jpg	1382x921	239 KB	q72	https://trinidadhospitality.com/wp-content/uploads/2025/06/Trinidad-Suites-Johor-Main-Facade-with-Awards-2023-until-2025-Drone-Shot.png	(cropped to the facade, the award badges on the left of the original are outside the crop)
+h-frasers.jpg	960x660	139 KB	q84	https://trinidadhospitality.com/wp-content/uploads/2025/06/1mc0q12000f7l2osxD5D6_R_960_660_R5_D.jpg
+frasers-mist.jpg	720x464	69 KB	q84	https://trinidadhospitality.com/wp-content/uploads/2025/11/Fraser_hill_Background1.jpg
+isola-sign.jpg	960x660	110 KB	q84	https://trinidadhospitality.com/wp-content/uploads/2025/11/1mc5812000s821y7z7F41_R_960_660_R5_D.jpg
+langkawi-marina.jpg	960x660	50 KB	q84	https://trinidadhospitality.com/wp-content/uploads/2025/06/0222i12000app0y6a38BD_R_960_660_R5_D.jpg
+kuantan-room.jpg	1080x1350	138 KB	q84	https://trinidadhospitality.com/wp-content/uploads/2025/12/Shahzan-Hotel-Kuantan-Thumbnail.png
+lisbon-room.jpg	1080x1350	162 KB	q84	https://trinidadhospitality.com/wp-content/uploads/2025/12/The-Lisbon-Melaka-Thumbnail.png
+trigo-room.jpg	1422x800	125 KB	q84	https://trinidadhospitality.com/wp-content/uploads/2025/06/IMG_3594.jpg
+team.jpg	1184x593	76 KB	q84	https://trinidadhospitality.com/wp-content/uploads/2025/12/corporate_photos.jpg
+careers.jpg	1130x1600	247 KB	q84	https://trinidadhospitality.com/wp-content/uploads/2026/03/career_hiring.jpeg
+news-your-stay.jpg	1600x903	236 KB	q80	https://trinidadhospitality.com/wp-content/uploads/2026/08/TH-webpage-your-stay-we-care-image.jpg-1.jpeg
+news-your-world.jpg	1360x618	205 KB	q84	https://trinidadhospitality.com/wp-content/uploads/2026/05/your-world-we-care-banner.jpg
+news-next-gen.jpg	1024x578	98 KB	q84	https://trinidadhospitality.com/wp-content/uploads/2026/10/next-gen-ai-thumbnail.jpg
+rk-pool-sky.jpg	1137x853	235 KB	q84	https://trinidadhospitality.com/wp-content/uploads/2026/07/0205j120009draa632C31_W_1280_853_R5.webp
+rk-pool.jpg	1137x853	175 KB	q84	https://trinidadhospitality.com/wp-content/uploads/2026/07/200e1h000001hpirf4736_W_1280_853_R5.webp
+rk-living.jpg	1280x853	110 KB	q84	https://trinidadhospitality.com/wp-content/uploads/2026/07/200q1h000001hmrqx2783_W_1280_853_R5.webp
+rk-kitchen.jpg	1280x853	102 KB	q84	https://trinidadhospitality.com/wp-content/uploads/2026/07/20011h000001hzouc97E7_W_1280_853_R5.webp
+rk-premier-king.jpg	1000x750	78 KB	q84	https://trinidadhospitality.com/wp-content/uploads/2026/07/Premier_King_1.webp
+rk-bed.jpg	600x400	39 KB	q84	https://trinidadhospitality.com/wp-content/uploads/2026/07/200u1h000001hlgfhF530_R_600_400_R5.webp
+rk-bed-twin.jpg	600x400	33 KB	q84	https://trinidadhospitality.com/wp-content/uploads/2026/07/20071h000001i3g1762F8_R_600_400_R5.webp
+rk-dining.jpg	600x400	40 KB	q84	https://trinidadhospitality.com/wp-content/uploads/2026/07/0585q12000spzqdaj2646_R_600_400_R5.webp
+rk-suite.jpg	1000x750	90 KB	q84	https://trinidadhospitality.com/wp-content/uploads/2026/07/1_2Kz3DUT.webp
+rk-bath.jpg	1000x750	69 KB	q84	https://trinidadhospitality.com/wp-content/uploads/2026/07/5_A5SQgHo.webp
+rk-coffee.jpg	1000x750	59 KB	q84	https://trinidadhospitality.com/wp-content/uploads/2026/07/DSC00127_1_1.webp
+rk-laundry.jpg	600x400	32 KB	q84	https://trinidadhospitality.com/wp-content/uploads/2026/07/200h1h000001hoc0911B2_R_600_400_R5.webp
+
+logo-white.png: https://trinidadhospitality.com/wp-content/uploads/2025/05/logo-1.png (the site header logo, 201x47, read 2 Nov 2026)
+crest-270.jpg, crest-ink.png, crest-white.png: https://trinidadhospitality.com/wp-content/uploads/2025/05/cropped-favicon-1-270x270.jpg (the site icon, read 2 Nov 2026; the two PNGs are cut from it)

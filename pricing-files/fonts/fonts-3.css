@@ -1,0 +1,57 @@
+/* Switzer */
+@font-face {
+  font-family: 'Switzer';
+  src: url(727f98b2f23a.woff2) format('woff2'),
+       url(aaa24dd49eae.woff) format('woff'),
+       url(7ebe81459ccb.ttf) format('truetype');
+  font-weight: 300;
+  font-display: swap;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Switzer';
+  src: url(58295f68043e.woff2) format('woff2'),
+       url(f6635ca5744f.woff) format('woff'),
+       url(b1da2ecbc87b.ttf) format('truetype');
+  font-weight: 400;
+  font-display: swap;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Switzer';
+  src: url(4a1eab2dc233.woff2) format('woff2'),
+       url(deaff3295b1f.woff) format('woff'),
+       url(b9f029b62342.ttf) format('truetype');
+  font-weight: 500;
+  font-display: swap;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Switzer';
+  src: url(fafa72e691cb.woff2) format('woff2'),
+       url(f9075ac391a5.woff) format('woff'),
+       url(aed6dd63db89.ttf) format('truetype');
+  font-weight: 600;
+  font-display: swap;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Switzer';
+  src: url(d3fa27011643.woff2) format('woff2'),
+       url(140bc8fa2514.woff) format('woff'),
+       url(bd29f3ff5ab7.ttf) format('truetype');
+  font-weight: 700;
+  font-display: swap;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Switzer';
+  src: url(8e9e2bfc417d.woff2) format('woff2'),
+       url(cb2afbd71054.woff) format('woff'),
+       url(f3c6fd4c4308.ttf) format('truetype');
+  font-weight: 800;
+  font-display: swap;
+  font-style: normal;
+}
+
+
