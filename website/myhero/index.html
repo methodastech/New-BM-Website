@@ -408,267 +408,42 @@ h1 em,h2 em{font-style:normal;color:var(--act);white-space:nowrap}
 }
 @media(min-width:1700px){html{zoom:1.18}}@media(min-width:2200px){html{zoom:1.5}}@media(min-width:3000px){html{zoom:2.05}}
 </style>
-<style id="bm-ribbon-css">/* "Demo by BrandMethod.co": the cloth ribbon every Brand Method demo ends with (as on NakGas and Lirunex) */.ft-ribbon{display:flex;justify-content:center;padding:clamp(28px,5vh,56px) 0 0}.ft-ribbon a{display:block;line-height:0}.ft-ribbon canvas{display:block;width:min(460px,88vw);height:auto}.ft-ribbon-fb{display:inline-block;font-size:14px;font-weight:600;color:#fff;background:#2536F5;padding:8px 22px;line-height:1.4}.ft-ribbon-fb[hidden]{display:none}</style><style id="v4-css">
-/* ==========================================================================
-   Redesign v4 (10 Nov 2026), direction pass: header, hero, the paper-to-page chapter and the explainer.
-   Editorial launch page: warm white, deep ink teal #12363B, pale mist #E6F9FB, small accents of cape pink.
-   One 12 column grid from the header down; pale and dark full-width chapters. The rest of the page is still v3.
-   ========================================================================== */
-:root{
-  --paper:#FBF8F4; --v-ink:#12363B; --v-ink2:#1B4A50; --v-ink3:#0B2629; --v-mist:#E6F9FB; --v-mist2:#CBEFF3;
-  --v-body:#3E575B; --v-muted:#5A7175; --v-line:rgba(18,54,59,.14);
-  --vg:clamp(16px,4.4vw,64px); --col:clamp(16px,2vw,32px);
-}
-body{background:var(--paper)}
-.v-wrap{max-width:calc(1152px + var(--vg)*2);margin:0 auto;padding:0 var(--vg)}
-.v-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--col)}
-:focus-visible{outline:3px solid var(--v-ink);outline-offset:3px}
-.v-story :focus-visible{outline-color:var(--v-mist)}
-
-/* buttons: rounded, ink on light, keeps a small press lip from the brand */
-.cta{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:56px;padding:0 28px;border:0;border-radius:999px;font:800 18px/1 var(--text);cursor:pointer;white-space:nowrap;transition:background .2s,box-shadow .12s,transform .12s}
-.cta svg{width:20px;height:20px;flex:none}
-.cta.pri{background:var(--v-ink);color:#fff;box-shadow:0 4px 0 var(--v-ink3)}
-.cta.pri:hover{background:var(--v-ink2)}
-.cta.sec{background:transparent;color:var(--v-ink);box-shadow:inset 0 0 0 2px rgba(18,54,59,.24)}
-.cta.sec:hover{background:var(--v-mist);box-shadow:inset 0 0 0 2px rgba(18,54,59,.4)}
-.cta:active{transform:translateY(3px)}.cta.pri:active{box-shadow:0 1px 0 var(--v-ink3)}
-.cta.sm{min-height:44px;padding:0 20px;font-size:15px}.cta.sm.pri{box-shadow:0 3px 0 var(--v-ink3)}
-
-.eyebrow{display:inline-flex;align-items:center;gap:10px;font:800 14px/1.3 var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--v-ink)}
-.eyebrow i{width:8px;height:8px;border-radius:50%;background:var(--cape);flex:none}
-.eyebrow.on-dark{color:var(--v-mist)}
-
-/* header: one line on desktop, a menu below 960 */
-.hd{margin-bottom:-80px}
-.hd.on{background:rgba(251,248,244,.92);box-shadow:0 1px 0 var(--v-line)}
-.hd .hd-in{height:80px;display:flex;align-items:center;gap:8px}
-.hd .brand{margin-right:auto}
-.nav{display:flex;align-items:center;gap:2px;margin-right:10px}
-.nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 14px;border-radius:999px;font:700 16px/1 var(--text);color:var(--v-ink);transition:background .2s}
-.nav a:hover{background:var(--v-mist)}
-.hd .lang-btn{background:transparent;box-shadow:inset 0 0 0 1.5px var(--v-line);color:var(--v-ink);border-radius:999px;padding:0 12px 0 14px}
-.hd .lang-btn:hover,.hd .lang-dd.open .lang-btn{background:var(--v-mist)}
-.hd-cta{margin-left:6px}
-.lang-menu{visibility:hidden;transition:opacity .2s,transform .2s,visibility 0s .2s}
-.lang-dd.open .lang-menu{visibility:visible;transition-delay:0s}
-.menu-btn{display:none;width:48px;height:48px;border:0;border-radius:999px;background:var(--v-mist);color:var(--v-ink);cursor:pointer;place-items:center;flex:none}
-.menu-btn svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round}
-.menu-btn path{transition:transform .25s var(--ease);transform-origin:12px 12px}
-.menu-btn[aria-expanded="true"] .l1{transform:translateY(4px) rotate(45deg)}
-.menu-btn[aria-expanded="true"] .l2{transform:translateY(-4px) rotate(-45deg)}
-.menu{background:var(--paper);box-shadow:0 1px 0 var(--v-line),0 30px 40px -30px rgba(18,54,59,.35)}
-.menu .v-wrap{display:grid;padding-top:8px;padding-bottom:24px}
-.menu a:not(.cta){display:flex;align-items:center;min-height:56px;border-bottom:1px solid var(--v-line);font:600 21px var(--head);color:var(--v-ink)}
-.menu .cta{margin-top:20px}
-
-/* hero */
-.v-hero{background:var(--paper);padding:clamp(112px,11vw,152px) 0 clamp(48px,6vw,88px);overflow:hidden}
-.v-hero .v-grid{align-items:center}
-.v-hero .copy{grid-column:1/span 6;padding-bottom:24px}
-.v-hero h1{margin-top:22px;font-size:clamp(50px,7.4vw,108px);line-height:.96;letter-spacing:-.025em;color:var(--v-ink);max-width:6.4em}
-.v-hero h1 em{font-style:normal;color:var(--cape);white-space:nowrap}
-.v-hero .lead{margin-top:28px;font-size:clamp(18px,1.5vw,22px);line-height:1.55;color:var(--v-body);max-width:27em}
-.v-hero .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:36px}
-.soon{margin-top:44px;padding-top:22px;border-top:1px solid var(--v-line);max-width:30em}
-.soon p{font-size:14.5px;font-weight:600;color:var(--v-muted);line-height:1.5}
-.tag{display:inline-block;margin-right:10px;padding:3px 9px;border-radius:999px;background:var(--v-mist);color:var(--v-ink);font-size:12px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;vertical-align:1px}
-.badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
-.badge-s{display:inline-flex;align-items:center;gap:9px;min-height:48px;padding:6px 16px 6px 12px;border:0;border-radius:12px;background:transparent;box-shadow:inset 0 0 0 1.5px var(--v-line);color:var(--v-ink);font:inherit;cursor:pointer;transition:background .2s}
-.badge-s:hover{background:var(--v-mist)}
-.badge-s svg{width:22px;height:22px;flex:none}
-.badge-s span{display:grid;line-height:1.1;text-align:left}
-.badge-s small{font-size:11px;font-weight:700;color:var(--v-muted)}
-.badge-s b{font:600 16px/1.15 var(--head)}
-
-.art{--pw:clamp(200px,19.5vw,280px);grid-column:7/span 6;position:relative;height:calc(var(--pw) * 2.26 + 24px)}
-.art .arch{position:absolute;right:0;bottom:0;top:8%;left:16%;border-radius:999px 999px 36px 36px;background:var(--v-mist)}
-.art .arch::after{content:"";position:absolute;inset:7%;border-radius:inherit;border:1.5px dashed rgba(18,54,59,.14)}
-.art .dev{--w:var(--pw);position:absolute;right:10%;bottom:24px;z-index:2}
-.art .dev-sh{right:14%;bottom:6px;width:calc(var(--pw) * .75);height:40px;z-index:1}
-.art .docw{position:absolute;left:0;bottom:0;height:calc(var(--pw) * 1.36);aspect-ratio:1017/1387;z-index:3;transform-origin:50% 100%;animation:breathe 3.6s ease-in-out infinite;filter:drop-shadow(0 20px 22px rgba(18,54,59,.2))}
-.art .docw img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
-.art .docw .dv-bl{opacity:0;animation:blink 4.4s infinite}
-
-.v-strip{background:var(--paper)}
-.v-strip .v-wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px 32px;padding-top:26px;padding-bottom:30px;border-top:1px solid var(--v-line)}
-.v-strip span{display:inline-flex;align-items:center;gap:11px;font-weight:700;font-size:18px;color:var(--v-ink);white-space:nowrap}
-.v-strip .li{width:26px;height:26px;color:var(--v-ink);flex:none}
-
-/* the chapter: from paper to one clear page */
-.v-story{background:var(--v-ink);color:rgba(255,255,255,.8);padding:clamp(72px,9vw,128px) 0;overflow:hidden}
-.v-story h2,.v-story h3{color:#fff}
-.story-h{align-items:end}
-.story-h .sh-t{grid-column:1/span 7}
-.story-h h2{margin-top:18px;font-size:clamp(40px,5.4vw,76px);line-height:1;letter-spacing:-.02em}
-.story-h h2 em{font-style:normal;color:var(--v-mist2);white-space:nowrap}
-.story-h .lead{grid-column:9/span 4;color:rgba(255,255,255,.78);font-size:clamp(17px,1.35vw,20px);padding-bottom:8px}
-.steps{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--col);margin-top:clamp(48px,6vw,80px)}
-.vis{position:relative;aspect-ratio:4/5;border-radius:28px;background:var(--v-ink2);overflow:hidden;isolation:isolate}
-.vis::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(80% 60% at 50% 30%,rgba(230,249,251,.1),transparent 70%)}
-.meta{position:relative;margin-top:28px;padding-top:22px;border-top:1px solid rgba(255,255,255,.18)}
-.meta::before{content:"";position:absolute;left:0;right:0;top:-1px;height:2px;background:var(--v-mist);transform-origin:left}
-.k{font:800 13px/1.3 var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--v-mist2)}
-.meta h3{margin-top:12px;font-size:clamp(26px,2.3vw,34px)}
-.meta p:not(.k){margin-top:12px;font-size:17px;line-height:1.6;max-width:30em}
-
-/* step 1: a lab report being read */
-.frame{position:absolute;inset:7% 8% 22%;pointer-events:none}
-.frame i{position:absolute;width:26px;height:26px;border:3px solid var(--v-mist2);border-radius:4px}
-.frame i:nth-child(1){left:0;top:0;border-right:0;border-bottom:0}
-.frame i:nth-child(2){right:0;top:0;border-left:0;border-bottom:0}
-.frame i:nth-child(3){left:0;bottom:0;border-right:0;border-top:0}
-.frame i:nth-child(4){right:0;bottom:0;border-left:0;border-top:0}
-.paper{position:absolute;left:14%;right:14%;top:12%;padding:18px 14px 12px;border-radius:12px;background:#fff;color:var(--v-ink);box-shadow:0 30px 40px -26px rgba(0,0,0,.65);transform:rotate(-2.5deg);overflow:hidden}
-.ph-h{padding:0 6px 10px;margin-bottom:6px;border-bottom:1.5px solid #E4ECEE}
-.ph-h b{display:block;font:600 16px/1.2 var(--head)}
-.ph-h small{display:block;font-size:12px;font-weight:700;color:var(--v-muted);margin-top:2px}
-.r{position:relative;display:flex;justify-content:space-between;gap:8px;padding:8px 6px;font-size:13.5px;line-height:1.3;font-weight:600;color:var(--v-body);isolation:isolate}
-.r b{font-weight:800;color:var(--v-ink);white-space:nowrap}
-.r::before{content:"";position:absolute;inset:2px 0;z-index:-1;border-radius:7px;background:var(--v-mist);transform-origin:left}
-.scanl{position:absolute;left:0;right:0;top:0;height:2px;background:var(--cape);box-shadow:0 0 14px 2px rgba(255,59,92,.55);opacity:0}
-.fc{position:absolute;left:8%;right:8%;bottom:7%;display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:16px;background:#fff;color:var(--v-ink);box-shadow:0 20px 30px -20px rgba(0,0,0,.6)}
-.fc b{display:block;font:600 16px/1.2 var(--head)}
-.fc small{display:block;font-size:12.5px;font-weight:700;color:var(--v-muted);margin-top:2px}
-.fc .tick{background:var(--v-ink)}
-.fc .bl-spot{width:28px;height:28px;color:var(--cape);flex:none}
-/* steps 2 and 3: the phone rises out of the panel */
-.vis-phone .dev{--w:min(62%,240px);position:absolute;left:50%;top:9%;margin-left:calc(var(--w) / -2);width:var(--w);padding:7px;border-radius:34px;box-shadow:inset 0 0 0 1px #F4F6F8,inset 0 0 0 2.5px #B3B9C0,0 30px 50px -24px rgba(0,0,0,.6)}
-.vis-phone .dev .scr{border-radius:28px;box-shadow:0 0 0 3px #0E1114}
-.vis-phone .fc{left:auto;right:7%;bottom:9%;max-width:80%}
-
-/* the signature motion: the report is read, then becomes the trackers, then the one page. Only with script, only once. */
-.js .step .seq{opacity:0;transform:translateY(28px);transition:opacity .7s var(--ease),transform .9s var(--ease);transition-delay:calc(var(--sd,0s) + .1s)}
-.js .step .seq.late{transition-delay:calc(var(--sd,0s) + 1.2s)}
-.js .step .r::before{transform:scaleX(0);transition:transform .5s var(--ease);transition-delay:calc(var(--sd,0s) + .7s + var(--i) * .16s)}
-.js .step .meta::before{transform:scaleX(0);transition:transform 1.1s var(--ease);transition-delay:calc(var(--sd,0s) + .2s)}
-.js .step.in .seq,.js .step.in .r::before,.js .step.in .meta::before{opacity:1;transform:none}
-.js .step.in .paper.seq{transform:rotate(-2.5deg)}
-.js .step.in .scanl{animation:scan 1.1s var(--ease) calc(var(--sd,0s) + .45s) 1 both}
-@keyframes scan{0%{opacity:0;top:0}15%{opacity:1}85%{opacity:1}100%{opacity:0;top:100%}}
-@media (min-width:961px){.step:nth-child(2){--sd:1.1s}.step:nth-child(3){--sd:2s}}
-
-/* the explainer, a clearly optional follow-up */
-.follow{margin-top:clamp(72px,8vw,112px);padding-top:clamp(40px,5vw,64px);border-top:1px solid rgba(255,255,255,.14);align-items:center}
-.f-t{grid-column:1/span 4}
-.f-v{grid-column:6/span 7}
-.guide{display:flex;align-items:flex-end;gap:12px;margin-bottom:26px}
-.guide img{width:84px;height:auto;flex:none}
-.bubble{position:relative;margin-bottom:46px;padding:12px 16px;border-radius:18px 18px 18px 4px;background:#fff;color:var(--v-ink);font:600 16px/1.3 var(--head);max-width:15em}
-.f-t h3{margin-top:10px;font-size:clamp(28px,2.6vw,38px)}
-.f-t p:not(.k):not(.bubble){margin-top:14px;font-size:17px}
-.v-story .vwrap{max-width:none;margin:0;border-radius:24px;background:var(--v-ink3);box-shadow:0 40px 60px -40px rgba(0,0,0,.7)}
-.v-story .vplay{left:20px;top:auto;bottom:calc(var(--vbar,64px) + 20px);transform:none;min-height:60px;font-size:17px;color:var(--v-ink);box-shadow:0 20px 40px -20px rgba(0,0,0,.6)}
-.v-story .vplay:hover{transform:scale(1.04)}
-.v-story .vplay svg{color:var(--cape)}
-.v-story .vbar{background:var(--v-ink3);padding:10px 12px}
-.v-story .vb{width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,.1);color:#fff}
-.v-story .vb:hover{background:rgba(255,255,255,.18)}
-.v-story .vcc[aria-pressed="true"]{background:var(--v-mist);color:var(--v-ink)}
-.v-story .vtime{color:rgba(255,255,255,.75)}
-.v-story .vseek{height:8px;background:rgba(255,255,255,.16)}
-.v-story .vseek i{background:var(--v-mist)}
-.v-story .vseek:focus-visible{outline:3px solid var(--v-mist);outline-offset:4px}
-
-@media (prefers-reduced-motion:reduce){
-  .js .step .seq,.js .step .r::before,.js .step .meta::before{opacity:1;transform:none}
-  .js .step .paper.seq{transform:rotate(-2.5deg)}
-  .scanl{display:none}
-}
-
-/* tablet */
-@media (max-width:960px){
-  .nav,.hd .hd-cta{display:none}
-  .menu-btn{display:grid}
-  .hd .hd-in{gap:10px}
-  .v-hero .copy,.art{grid-column:1/-1}
-  .v-hero .copy{padding-bottom:0}
-  .art{--pw:clamp(190px,44vw,260px);width:100%;max-width:560px;margin:48px auto 0}
-  .story-h .sh-t,.story-h .lead{grid-column:1/-1}
-  .story-h .lead{margin-top:20px;max-width:34em}
-  .steps{grid-template-columns:1fr;gap:56px}
-  .f-t,.f-v{grid-column:1/-1}
-  .f-v{margin-top:32px}
-}
-@media (min-width:641px) and (max-width:960px){
-  .step{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--col);align-items:center}
-  .step .meta{margin-top:0}
-}
-/* phone */
-@media (max-width:640px){
-  .hd{margin-bottom:-68px}.hd .hd-in{height:68px}
-  .v-hero{padding-top:100px}
-  .v-hero .ctas .cta{flex:1 1 100%}
-  .soon{margin-top:32px}
-  .art{--pw:min(54vw,230px);margin-top:40px}
-  .art .arch{left:10%}
-  .art .dev{right:4%}
-  .art .docw{height:calc(var(--pw) * 1.18)}
-  .v-strip .v-wrap{display:grid;grid-template-columns:1fr 1fr;gap:14px 12px}
-  .v-strip span{font-size:16px}
-  .vis{border-radius:22px}
-  .v-story .vbar{gap:8px;padding:8px}
-  .v-story .vwrap{--vbar:104px}
-  .v-story .vplay{left:12px;bottom:calc(var(--vbar) + 12px);min-height:52px;font-size:16px;padding:0 20px 0 14px}
-  .v-story .vbar{flex-wrap:wrap}
-  .v-story .vseek{order:-1;flex:1 1 100%;margin:6px 4px 4px}
-  .v-story .vtime{margin-right:auto;text-align:left}
-}
-</style>
-</head>
+<style id="bm-ribbon-css">/* "Demo by BrandMethod.co": the cloth ribbon every Brand Method demo ends with (as on NakGas and Lirunex) */.ft-ribbon{display:flex;justify-content:center;padding:clamp(28px,5vh,56px) 0 0}.ft-ribbon a{display:block;line-height:0}.ft-ribbon canvas{display:block;width:min(460px,88vw);height:auto}.ft-ribbon-fb{display:inline-block;font-size:14px;font-weight:600;color:#fff;background:#2536F5;padding:8px 22px;line-height:1.4}.ft-ribbon-fb[hidden]{display:none}</style></head>
 <body>
 <script>if(window.top!==window.self)document.documentElement.classList.add("framed")</script>
 
 <a class="skip" href="#main">Skip to content</a>
 <header class="hd" id="top">
-  <div class="v-wrap hd-in">
+  <div class="wrap">
     <a class="brand" href="#top" aria-label="MyHero home"><img class="wm" src="assets/logo/wordmark-red.svg?v=w17" alt="MyHero" width="97" height="32"></a>
-    <nav class="nav" id="nav" aria-label="Main">
-      <a href="#how">How it works</a><a href="#app">The app</a><a href="#privacy">Privacy</a><a href="#clinics">For clinics</a>
-    </nav>
     <div class="lang-dd" id="langdd"><button type="button" class="lang-btn" aria-haspopup="true" aria-expanded="false" aria-label="Language"><span class="flag uk cur"><svg viewBox="0 0 22 15" aria-hidden="true"><rect width="22" height="15" fill="#1D3F8F"/><path d="M0 0l22 15M22 0L0 15" stroke="#fff" stroke-width="3"/><path d="M0 0l22 15M22 0L0 15" stroke="#D0243C" stroke-width="1.2"/><path d="M11 0v15M0 7.5h22" stroke="#fff" stroke-width="5"/><path d="M11 0v15M0 7.5h22" stroke="#D0243C" stroke-width="3"/></svg></span><span class="lc">EN</span><svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9.5l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="lang-menu" role="menu"><a role="menuitem" href="index.html" class="on" hreflang="en" lang="en" aria-current="true"><span class="flag uk"><svg viewBox="0 0 22 15" aria-hidden="true"><rect width="22" height="15" fill="#1D3F8F"/><path d="M0 0l22 15M22 0L0 15" stroke="#fff" stroke-width="3"/><path d="M0 0l22 15M22 0L0 15" stroke="#D0243C" stroke-width="1.2"/><path d="M11 0v15M0 7.5h22" stroke="#fff" stroke-width="5"/><path d="M11 0v15M0 7.5h22" stroke="#D0243C" stroke-width="3"/></svg></span>English</a><a role="menuitem" href="bm.html" hreflang="ms" lang="ms"><span class="flag my"><svg viewBox="0 0 22 15" aria-hidden="true"><rect width="22" height="15" fill="#fff"/><path d="M0 .54h22M0 2.68h22M0 4.82h22M0 6.96h22M0 9.1h22M0 11.25h22M0 13.39h22" stroke="#D0243C" stroke-width="1.07"/><rect width="11" height="8.04" fill="#1D3F8F"/><circle cx="4.6" cy="4" r="2.6" fill="#F6C945"/><circle cx="5.5" cy="4" r="2.2" fill="#1D3F8F"/><path d="M8.3 2.4l.5 1.1 1.2.1-.9.8.3 1.2-1.1-.6-1.1.6.3-1.2-.9-.8 1.2-.1z" fill="#F6C945"/></svg></span>Bahasa Malaysia</a></div></div>
-    <a class="cta pri sm hd-cta" href="#join">Get early access</a>
-    <button type="button" class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menu"><span class="vh">Menu</span><svg viewBox="0 0 24 24" aria-hidden="true"><path class="l1" d="M4 8h16"/><path class="l2" d="M4 16h16"/></svg></button>
-  </div>
-  <div class="menu" id="menu" hidden>
-    <div class="v-wrap">
-      <a href="#how">How it works</a><a href="#app">The app</a><a href="#privacy">Privacy</a><a href="#clinics">For clinics</a><a href="#faq">Questions</a>
-      <a class="cta pri" href="#join">Get early access</a>
-    </div>
+    <a class="btn p sm" href="#join">Get early access</a>
   </div>
 </header>
 
 <main id="main">
-<section class="v-hero" id="hero">
-  <div class="v-wrap v-grid">
-    <div class="copy">
-      <p class="eyebrow" data-r><i></i>Early access is open · Built with a doctor in Malaysia</p>
-      <h1 data-r>Never walk in <em>unsure.</em></h1>
-      <p class="lead" data-r="2">Keep reports, readings, medicines and visits together. Bring one clear summary to your next appointment.</p>
-      <div class="ctas" data-r="3">
-        <a class="cta pri" href="#join">Get early access</a>
-        <a class="cta sec" href="#how">See how it works<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-      </div>
-      <div class="soon" data-r="4">
-        <p><span class="tag">At launch</span>Store links go live on launch day. Early access is open now.</p>
-        <div class="badges">
-          <button type="button" class="badge-s" data-store aria-label="App Store, coming at launch. Takes you to the early access form."><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16.4 12.6c0-2.4 2-3.6 2.1-3.7-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-2.9.9-3.7.9-.8 0-1.9-.9-3.2-.8-1.6 0-3.1 1-4 2.4-1.7 3-.4 7.4 1.2 9.8.8 1.2 1.8 2.5 3 2.4 1.2 0 1.7-.8 3.1-.8 1.5 0 1.9.8 3.2.8 1.3 0 2.2-1.2 3-2.4.9-1.4 1.3-2.7 1.3-2.8 0 0-2.5-1-2.5-3.9zM14 5.4c.7-.8 1.1-1.9 1-3-1 0-2.1.6-2.8 1.4-.6.7-1.2 1.8-1 2.9 1.1.1 2.1-.5 2.8-1.3z"/></svg><span><small>Download on the</small><b>App Store</b></span></button>
-          <button type="button" class="badge-s" data-store aria-label="Google Play, coming at launch. Takes you to the early access form."><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#34A853" d="M3.6 2.3l10.5 10.4L3.6 23.1c-.4-.2-.6-.7-.6-1.2V3.5c0-.5.2-.9.6-1.2z"/><path fill="#FBBC04" d="M17.6 9.2l-3.5 3.5 3.5 3.5 4-2.3c1.1-.6 1.1-1.8 0-2.4z"/><path fill="#4285F4" d="M14.1 12.7l3.5 3.5-12.4 7.1c-.6.3-1.2.3-1.6-.2z"/><path fill="#EA4335" d="M3.6 2.3c.4-.4 1-.5 1.6-.2l12.4 7.1-3.5 3.5z"/></svg><span><small>Get it on</small><b>Google Play</b></span></button>
-        </div>
-      </div>
+<section class="hero" id="hero">
+  <div class="wrap">
+    <div class="stage" id="stage" aria-hidden="true">
+      
+      <span class="floor"></span>
+      <span class="dev-sh"></span>
+      <div class="dev" id="heroDev"><div class="scr">
+        <img class="on" src="assets/web22/scr-home.webp" alt="" width="1020" height="2214" fetchpriority="high"><img src="assets/web22/scr-trackers.webp" alt="" width="1020" height="2214" loading="lazy"><img src="assets/web22/scr-medications.webp" alt="" width="1020" height="2214" loading="lazy"><img src="assets/web22/scr-summary.webp" alt="" width="1020" height="2214" loading="lazy">
+      </div></div>
+      <span class="docw" id="doc"><img class="dv-fb" src="assets/web22/figure-a.webp" alt="" width="1017" height="1387" fetchpriority="high"><img class="dv-bl" src="assets/web22/figure-a-blink.webp" alt="" width="1017" height="1387"></span>
     </div>
-    <div class="art" id="stage">
-      <span class="arch" aria-hidden="true"></span>
-      <span class="dev-sh" aria-hidden="true"></span>
-      <div class="dev" id="heroDev"><div class="scr"><img class="on" src="assets/web22/scr-summary.webp" alt="The MyHero health summary: one page built from your record, with profile, medicines, readings, adherence and visits" width="1020" height="2214" fetchpriority="high"></div></div>
-      <span class="docw" id="doc" aria-hidden="true"><img class="dv-fb" src="assets/web22/figure-a.webp" alt="" width="1017" height="1387" fetchpriority="high"><img class="dv-bl" src="assets/web22/figure-a-blink.webp" alt="" width="1017" height="1387"></span>
+    <div>
+      <h1 data-r>Never walk in <em>unsure.</em></h1>
+      <p class="lead" data-r="2">MyHero keeps every report, reading, medicine and visit in one app, explains them in plain language, and turns them into one clear page for your doctor.</p>
+      <div class="stores hero-stores" data-r="3"><button type="button" class="store dk" data-store><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16.4 12.6c0-2.4 2-3.6 2.1-3.7-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-2.9.9-3.7.9-.8 0-1.9-.9-3.2-.8-1.6 0-3.1 1-4 2.4-1.7 3-.4 7.4 1.2 9.8.8 1.2 1.8 2.5 3 2.4 1.2 0 1.7-.8 3.1-.8 1.5 0 1.9.8 3.2.8 1.3 0 2.2-1.2 3-2.4.9-1.4 1.3-2.7 1.3-2.8 0 0-2.5-1-2.5-3.9zM14 5.4c.7-.8 1.1-1.9 1-3-1 0-2.1.6-2.8 1.4-.6.7-1.2 1.8-1 2.9 1.1.1 2.1-.5 2.8-1.3z"/></svg><span><small>Download on the</small><b>App Store</b></span></button><button type="button" class="store dk" data-store><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#34A853" d="M3.6 2.3l10.5 10.4L3.6 23.1c-.4-.2-.6-.7-.6-1.2V3.5c0-.5.2-.9.6-1.2z"/><path fill="#FBBC04" d="M17.6 9.2l-3.5 3.5 3.5 3.5 4-2.3c1.1-.6 1.1-1.8 0-2.4z"/><path fill="#4285F4" d="M14.1 12.7l3.5 3.5-12.4 7.1c-.6.3-1.2.3-1.6-.2z"/><path fill="#EA4335" d="M3.6 2.3c.4-.4 1-.5 1.6-.2l12.4 7.1-3.5 3.5z"/></svg><span><small>Get it on</small><b>Google Play</b></span></button><small>Store links go live on launch day. Early access is open now.</small></div>
     </div>
   </div>
 </section>
 
-<div class="v-strip">
-  <div class="v-wrap">
-    <span><svg class="li" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5c3.6 4.3 5.5 7.3 5.5 10a5.5 5.5 0 0 1-11 0c0-2.7 1.9-5.7 5.5-10z"/></svg>Diabetes</span>
+<div class="strip">
+  <div class="wrap">
+        <span><svg class="li" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5c3.6 4.3 5.5 7.3 5.5 10a5.5 5.5 0 0 1-11 0c0-2.7 1.9-5.7 5.5-10z"/></svg>Diabetes</span>
     <span><svg class="li" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.3 4.2 12.7a4.5 4.5 0 0 1 6.4-6.4L12 7.6l1.4-1.3a4.5 4.5 0 0 1 6.4 6.4z"/><path d="M6.5 12.5h3l1.3-2.6 1.6 4.4 1.3-2.6h3.3"/></svg>Blood pressure</span>
     <span><svg class="li" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6"/><path d="M10 3v10.2a2 2 0 1 0 4 0V3"/><path d="M10 10h4"/></svg>Cholesterol</span>
     <span><svg class="li" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="8.5" width="17" height="7" rx="3.5" transform="rotate(-35 12 12)"/><path d="m8.8 6.8 6.4 10.4"/></svg>Daily medicines</span>
@@ -676,65 +451,62 @@ body{background:var(--paper)}
   </div>
 </div>
 
-<section class="v-story" id="how" aria-labelledby="how-h">
-  <div class="v-wrap">
-    <div class="v-grid story-h">
-      <div class="sh-t"><p class="eyebrow on-dark" data-r><i></i>How it works</p><h2 id="how-h" data-r>From paper to <em>one clear page.</em></h2></div>
+<section class="sec" id="how">
+  <div class="wrap">
+    <div class="sec-h">
+      <h2 data-r>From a plastic bag <em>to one page.</em></h2>
       <p class="lead" data-r="2">Three steps, and the pile you carry becomes a record your doctor can read in under a minute.</p>
     </div>
-
-    <ol class="steps" id="steps">
-      <li class="step" data-step>
-        <div class="vis vis-paper" aria-hidden="true">
-          <span class="frame"><i></i><i></i><i></i><i></i></span>
-          <div class="paper seq">
-            <div class="ph-h"><b>Elite Care Clinic</b><small>Lab report · 12 Sep</small></div>
-            <div class="r" style="--i:0"><span>HbA1c</span><b>6.8 %</b></div>
-            <div class="r" style="--i:1"><span>Fasting glucose</span><b>6.4 mmol/L</b></div>
-            <div class="r" style="--i:2"><span>LDL cholesterol</span><b>2.9 mmol/L</b></div>
-            <div class="r" style="--i:3"><span>Haemoglobin</span><b>12.9 g/dL</b></div>
-            <span class="scanl"></span>
-          </div>
-          <div class="fc seq late"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span><b>4 values read</b><small>Check each one, then save</small></span></div>
+    <div class="row">
+      <div class="txt" data-r><span class="num">1</span><h3>Snap it once.</h3><p>Point the camera at a lab report, a prescription or a discharge note. MyHero reads the values and shows you each one to check before it saves, then files it where it belongs.</p></div>
+      <div class="pic" data-r="2">
+        <div class="il il1" data-scene aria-label="The doctor sending papers into one folder">
+          <img src="assets/web17/intro-1.webp?v=w17b" alt="" width="1148" height="595" loading="lazy">
+          <span class="chip c1">Haemoglobin 12.9</span><span class="chip c2">HbA1c 6.8 %</span><span class="chip c3">LDL 2.7</span>
+          <span class="ping"></span>
+          <div class="badge"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span><b>Filed under Lab results</b><small>Elite Care Clinic · 12 Sep</small></span></div>
         </div>
-        <div class="meta"><p class="k">01 · Scan</p><h3>Snap it once.</h3><p>Point the camera at a lab report, a prescription or a discharge note. MyHero reads the values and shows you each one to check before it saves, then files it where it belongs.</p></div>
-      </li>
-      <li class="step" data-step>
-        <div class="vis vis-phone">
-          <div class="dev seq"><div class="scr"><img src="assets/web22/scr-trackers.webp" alt="Trackers: blood pressure 128/82 in range, blood sugar 6.4 in range, HbA1c 6.8 near target, cholesterol 2.9 above target" width="1020" height="2214" loading="lazy" decoding="async"></div></div>
-          <div class="fc seq late" aria-hidden="true"><i data-spot="heart"></i><span><b>128/82 · In range</b><small>Down 10 in 6 weeks</small></span></div>
-        </div>
-        <div class="meta"><p class="k">02 · Understand</p><h3>Understand it.</h3><p>Every value comes with what it means and whether it is in range. Readings join their trackers, so you can see what changed since the last visit, in words you can follow.</p></div>
-      </li>
-      <li class="step" data-step>
-        <div class="vis vis-phone">
-          <div class="dev seq"><div class="scr"><img src="assets/web22/scr-home-doctor.webp" alt="For the doctor: one page, ready to hand over, with what changed since the last visit" width="1020" height="2214" loading="lazy" decoding="async"></div></div>
-          <div class="fc seq late" aria-hidden="true"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span><b>Shared, one page</b><small>Ends in 24 hours</small></span></div>
-        </div>
-        <div class="meta"><p class="k">03 · Share</p><h3>Hand it over.</h3><p>Profile, medicines, readings and recent visits on one page, shared by link, code or print, and only when you choose.</p></div>
-      </li>
-    </ol>
-
-    <div class="v-grid follow" id="watch">
-      <div class="f-t" data-r>
-        <div class="guide"><img src="assets/web17/figure-wave.webp?v=w17" alt="" width="973" height="1375" loading="lazy" decoding="async"><p class="bubble">Hi, I’m MyHero. Want the tour with sound?</p></div>
-        <p class="k">Optional · 1 minute 37</p>
-        <h3>See how it works.</h3>
-        <p>The explainer walks through the same three steps, from a plastic bag of paper to one page for your doctor. It plays only when you press play, and English captions are available.</p>
       </div>
-      <div class="f-v" data-r="2">
-        <div class="vwrap">
-          <video id="expl" playsinline preload="none" poster="assets/web22/video/explainer-poster.jpg?v=10" width="1920" height="1080"><source src="assets/web22/video/explainer.mp4?v=10" type="video/mp4"><track kind="captions" srclang="en" label="English" src="assets/web22/video/explainer-en.vtt?v=10"></video>
-          <button type="button" class="vplay" id="vplay" aria-label="Play the explainer, 1 minute 37 seconds, with sound"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg><span>Play, 1:37</span></button>
-          <div class="vbar" id="vbar">
-            <button type="button" class="vb" id="vtoggle" aria-label="Play"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z" fill="currentColor"/></svg></button>
-            <span class="vtime" id="vtime">0:00 / 1:37</span>
-            <div class="vseek" id="vseek" role="slider" aria-label="Seek" aria-valuemin="0" aria-valuemax="97" aria-valuenow="0" aria-valuetext="0:00 of 1:37" tabindex="0"><i id="vfill"></i></div>
-            <button type="button" class="vb vcc" id="vcc" aria-label="Captions" aria-pressed="false"><b>CC</b></button>
-            <button type="button" class="vb" id="vmute" aria-label="Mute"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5z" fill="currentColor"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
-            <button type="button" class="vb" id="vfull" aria-label="Full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-          </div>
+    </div>
+    <div class="row flip">
+      <div class="txt" data-r><span class="num">2</span><h3>Understand it.</h3><p>Every value comes with what it means and whether it is in range. Readings join their trackers, so you can see what changed since the last visit, in words you can follow.</p></div>
+      <div class="pic" data-r="2">
+        <div class="il il2" data-scene aria-label="The doctor beside a falling reading on a chart">
+          <img src="assets/web17/intro-2.webp?v=w17b" alt="" width="1137" height="614" loading="lazy">
+          <span class="ping"></span>
+          <div class="badge"><i data-spot="heart"></i><span><b>128/82 · In range</b><small>Down 10 in 6 weeks</small></span></div>
         </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="txt" data-r><span class="num">3</span><h3>Hand it over.</h3><p>Profile, medicines, readings and recent visits on one page, shared by link, code or print, and only when you choose.</p></div>
+      <div class="pic" data-r="2">
+        <div class="il il3" data-scene aria-label="The doctor handing one page to another doctor">
+          <img src="assets/web17/intro-3.webp?v=w17b" alt="" width="976" height="636" loading="lazy">
+          <span class="ping"></span>
+          <div class="badge"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span><b>Shared, one page</b><small>Ends in 24 hours</small></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec watch" id="watch">
+  <div class="wrap">
+    <div class="sec-h">
+      <h2 data-r>See how <em>it works.</em></h2>
+      <p class="lead" data-r="2">From a plastic bag of paper to one page for your doctor, with sound.</p>
+    </div>
+    <div class="vwrap" data-r>
+      <video id="expl" playsinline preload="metadata" poster="assets/web22/video/explainer-poster.jpg?v=10" width="1920" height="1080"><source src="assets/web22/video/explainer.mp4?v=10" type="video/mp4"><track kind="captions" srclang="en" label="English" src="assets/web22/video/explainer-en.vtt?v=10"></video>
+      <button type="button" class="vplay" id="vplay" aria-label="Play the explainer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg><span>Play, 1:37</span></button>
+      <div class="vbar" id="vbar">
+        <button type="button" class="vb" id="vtoggle" aria-label="Pause"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z" fill="currentColor"/></svg></button>
+        <span class="vtime" id="vtime">0:00 / 1:01</span>
+        <div class="vseek" id="vseek" role="slider" aria-label="Seek" aria-valuemin="0" aria-valuemax="61" aria-valuenow="0" tabindex="0"><i id="vfill"></i></div>
+        <button type="button" class="vb vcc" id="vcc" aria-label="Captions" aria-pressed="false"><b>CC</b></button>
+        <button type="button" class="vb" id="vmute" aria-label="Mute"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5z" fill="currentColor"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+        <button type="button" class="vb" id="vfull" aria-label="Full screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
       </div>
     </div>
   </div>
@@ -952,7 +724,7 @@ body{background:var(--paper)}
     ev.addEventListener('click',function(){if(!ev.paused)ev.pause()});
     ['play','pause','ended'].forEach(function(e){ev.addEventListener(e,state)});
     ev.addEventListener('loadedmetadata',function(){tm.textContent=fmt(ev.currentTime)+' / '+fmt(ev.duration);sk.setAttribute('aria-valuemax',Math.round(ev.duration))});
-    ev.addEventListener('timeupdate',function(){if(ev.duration){fl.style.width=(ev.currentTime/ev.duration*100)+'%';tm.textContent=fmt(ev.currentTime)+' / '+fmt(ev.duration);sk.setAttribute('aria-valuenow',Math.round(ev.currentTime));sk.setAttribute('aria-valuetext',fmt(ev.currentTime)+' of '+fmt(ev.duration))}});
+    ev.addEventListener('timeupdate',function(){if(ev.duration){fl.style.width=(ev.currentTime/ev.duration*100)+'%';tm.textContent=fmt(ev.currentTime)+' / '+fmt(ev.duration);sk.setAttribute('aria-valuenow',Math.round(ev.currentTime))}});
     function seekTo(e){var r=sk.getBoundingClientRect(),p=Math.min(1,Math.max(0,(e.clientX-r.left)/r.width));if(ev.duration)ev.currentTime=p*ev.duration}
     sk.addEventListener('click',seekTo);var drag=false;sk.addEventListener('pointerdown',function(e){drag=true;seekTo(e)});W.addEventListener('pointermove',function(e){if(drag)seekTo(e)});W.addEventListener('pointerup',function(){drag=false});
     sk.addEventListener('keydown',function(e){if(e.key==='ArrowRight'){ev.currentTime=Math.min(ev.duration,ev.currentTime+5)}if(e.key==='ArrowLeft'){ev.currentTime=Math.max(0,ev.currentTime-5)}});
@@ -960,13 +732,6 @@ body{background:var(--paper)}
     mu.addEventListener('click',function(){ev.muted=!ev.muted;mu.setAttribute('aria-label',ev.muted?'Unmute':'Mute');mu.style.opacity=ev.muted?.5:1});
     fs.addEventListener('click',function(){var el=vw;if(D.fullscreenElement){D.exitFullscreen()}else if(el.requestFullscreen){el.requestFullscreen()}else if(ev.webkitEnterFullscreen){ev.webkitEnterFullscreen()}});
   }
-  /* header menu, below 960 */
-  var mb=$('#menuBtn'),mn=$('#menu');if(mb&&mn){function setm(o){mb.setAttribute('aria-expanded',o);mn.hidden=!o;if(o)hd.classList.remove('hide')}
-    mb.addEventListener('click',function(){setm(mn.hidden)});$$('a',mn).forEach(function(a){a.addEventListener('click',function(){setm(false)})});
-    D.addEventListener('keydown',function(e){if(e.key==='Escape'&&!mn.hidden){setm(false);mb.focus()}});W.addEventListener('resize',function(){if(W.innerWidth>960)setm(false)})}
-  /* the paper-to-page steps play once as they arrive */
-  var steps=$$('[data-step]');
-  if('IntersectionObserver' in W&&!RM){var stio=new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');stio.unobserve(x.target)}})},{threshold:.35});steps.forEach(function(s){stio.observe(s)})}else steps.forEach(function(s){s.classList.add('in')});
   /* the language dropdown */
   var dd=$('#langdd');if(dd){var lb=$('.lang-btn',dd);function setdd(o){dd.classList.toggle('open',o);lb.setAttribute('aria-expanded',o)}
     lb.addEventListener('click',function(){setdd(!dd.classList.contains('open'))});

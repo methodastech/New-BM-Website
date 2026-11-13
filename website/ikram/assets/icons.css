@@ -1,0 +1,93 @@
+/* IKRAM icon set v2 (13 Nov 2026). Load AFTER site.css.
+   Free standing duotone line icons on a 64 grid: no tile, no disc, no plate box behind them.
+   Sequence: lines draw in (.s), the soft plate settles (.d), the accent pops (.a), then one calm idle loop (g.m-*).
+   Lines stay hidden until JS adds .on; JS adds .idle 2.4 s later. html.still and reduced motion show the finished icon. */
+
+/* ground tokens: light ground by default, dark ground under .on-dark (and the dark first figure card) */
+.ic{--ic-ln:#0A2427;--ic-ac:url(#ikg-a);--ic-pl:url(#ikg-d);--ic-po:.2;--ic-fo:.55;--ic-w:2.25;
+  display:inline-block;flex:none;vertical-align:middle}
+.on-dark .ic,.ic.on-dark,.num:first-child .ic{--ic-ln:#FFFFFF;--ic-ac:url(#ikg-aL);--ic-pl:url(#ikg-dL);--ic-po:.2;--ic-fo:.6}
+.ic svg{display:block;width:100%;height:100%;overflow:visible}
+
+/* neutralise the old tile and disc looks (site.css .ic.t and .ic.badge) */
+.ic.t,.ic.badge,.val .ic.t,.num .ic.t,.hd-t .ic.t,.stp .ic.t{background:none;padding:0;border-radius:0;box-shadow:none}
+.val:hover .ic.t,.num:hover .ic.t,.hd-card:hover .ic.t,.stp:hover .ic.t{transform:none;box-shadow:none}
+
+/* line colour comes from the ground token; these selectors outrank the old turquoise and white rules */
+.ic,.ic.t,.ic.badge,.on-dark .ic,.on-dark .ic.t,.on-dark .ic.badge,.num:first-child .ic,.num:first-child .ic.t{color:var(--ic-ln)}
+
+/* .s line: one weight across the set, drawn in with stroke-dashoffset 1 to 0 (pathLength=1), staggered by --k */
+.ic .s,.ic.t .s,.val .ic .s,.val .ic.t .s{fill:none;stroke:currentColor;stroke-width:var(--ic-w);stroke-linecap:round;stroke-linejoin:round;
+  stroke-dasharray:1 2;stroke-dashoffset:1.01;transition:none}
+.ic .s.fl{fill:none}
+.ic .s.f,.ic.t .s.f{opacity:var(--ic-fo)}
+.ic.on .s{stroke-dashoffset:0;transition:stroke-dashoffset 1.1s cubic-bezier(.65,0,.35,1) calc(var(--k,0) * 80ms)}
+.ic.on.idle .s{stroke-dasharray:none}
+
+/* .d duotone plate: soft gradient fill, fades and scales in after the lines */
+.ic .d{fill:var(--ic-pl);stroke:none;opacity:0;transform:scale(.86);transform-box:fill-box;transform-origin:center;transition:none}
+.ic.on .d{opacity:var(--ic-po);transform:none;
+  transition:opacity .9s ease calc(.5s + var(--k,0) * 60ms),transform 1.1s cubic-bezier(.16,1,.3,1) calc(.5s + var(--k,0) * 60ms)}
+
+/* .a accent: one small solid element, pops in last */
+.ic .a,.ic.t .a,.ic.badge .a,.on-dark .ic .a,.on-dark .ic.t .a,.num:first-child .ic .a{fill:var(--ic-ac);stroke:none}
+.ic .a{transform:scale(0);transform-box:fill-box;transform-origin:center;transition:none}
+.ic.on .a{transform:scale(1);transition:transform .7s cubic-bezier(.34,1.56,.64,1) calc(.8s + var(--k,0) * 60ms)}
+.ic.on.idle .a{animation:none}
+
+/* idle motion: transform only, small amplitude, 3 to 7 s, only under .ic.on.idle
+   --o sets the pivot (fill-box percentages), --md offsets the phase */
+.ic [class*="m-"]{transform-box:fill-box;transform-origin:var(--o,50% 50%)}
+.ic.on.idle .m-tilt{animation:ic-tilt 6s ease-in-out var(--md,0s) infinite}
+.ic.on.idle .m-swing{animation:ic-swing 4.8s ease-in-out var(--md,0s) infinite}
+.ic.on.idle .m-float{animation:ic-float 5s ease-in-out var(--md,0s) infinite}
+.ic.on.idle .m-twinkle{animation:ic-twinkle 3.2s ease-in-out var(--md,0s) infinite}
+.ic.on.idle .m-drift{animation:ic-drift 6s ease-in-out var(--md,0s) infinite}
+.ic.on.idle .m-bob{animation:ic-bob 5s ease-in-out var(--md,0s) infinite}
+.ic.on.idle .m-hop{animation:ic-hop 3.6s cubic-bezier(.45,0,.55,1) var(--md,0s) infinite}
+.ic.on.idle .m-squash{animation:ic-squash 3.6s cubic-bezier(.45,0,.55,1) var(--md,0s) infinite}
+.ic.on.idle .m-spin{animation:ic-spin 3.5s cubic-bezier(.45,0,.55,1) var(--md,0s) infinite alternate}
+.ic.on.idle .m-pulse{animation:ic-pulse 3.4s ease-in-out var(--md,0s) infinite}
+.ic.on.idle .m-beat{animation:ic-beat 3.6s ease-in-out var(--md,0s) infinite}
+.ic.on.idle .m-wave{animation:ic-wave 4.2s ease-in-out var(--md,0s) infinite}
+.ic.on.idle .m-nudge{animation:ic-nudge 3s ease-in-out var(--md,0s) infinite}
+.ic.on.idle .m-write{animation:ic-write 3.4s ease-in-out var(--md,0s) infinite}
+.ic.on.idle .m-turn{animation:ic-turn 7s ease-in-out var(--md,0s) infinite}
+
+@keyframes ic-tilt{0%,100%{transform:rotate(0)}25%{transform:rotate(-3deg)}75%{transform:rotate(3deg)}}
+@keyframes ic-swing{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
+@keyframes ic-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-1.6px)}}
+@keyframes ic-twinkle{0%,100%{transform:scale(1) rotate(0)}50%{transform:scale(.72) rotate(45deg)}}
+@keyframes ic-drift{0%,100%{transform:translateX(0)}50%{transform:translateX(1.8px)}}
+@keyframes ic-bob{0%,100%{transform:translateY(0) rotate(0)}30%{transform:translateY(-1.4px) rotate(-3deg)}70%{transform:translateY(.6px) rotate(2.5deg)}}
+@keyframes ic-hop{0%,100%{transform:translateY(0)}45%{transform:translateY(-2.6px)}}
+@keyframes ic-squash{0%,100%{transform:scaleX(1)}45%{transform:scaleX(.8)}}
+@keyframes ic-spin{0%{transform:scaleX(1)}100%{transform:scaleX(-1)}}
+@keyframes ic-pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.16)}}
+@keyframes ic-beat{0%,42%,100%{transform:scale(1)}10%{transform:scale(1.1)}20%{transform:scale(1.02)}30%{transform:scale(1.07)}}
+@keyframes ic-wave{0%,64%,100%{transform:translateY(0)}32%{transform:translateY(-1.6px)}}
+@keyframes ic-nudge{0%,100%{transform:translate(0,0)}50%{transform:translate(1.3px,-1.3px)}}
+@keyframes ic-write{0%,100%{transform:translate(0,0) rotate(0)}25%{transform:translate(-.8px,.3px) rotate(-2deg)}50%{transform:translate(.4px,-.2px) rotate(1deg)}75%{transform:translate(-.5px,.4px) rotate(-1.5deg)}}
+@keyframes ic-turn{0%,100%{transform:rotate(0)}50%{transform:rotate(15deg)}}
+
+/* the turning meridian keeps the set's line weight while it scales: non scaling stroke sized from the icon width */
+@supports (width:1cqw){
+  .ic{container-type:inline-size}
+  .ic.on.idle .m-spin .s{vector-effect:non-scaling-stroke;stroke-width:calc(100cqw * var(--ic-w) / 64)}
+}
+
+/* the figure cards clone each icon into a large drifting watermark (.wmk, built in site.js, outside .ic):
+   tint the plate there too, otherwise .d falls back to the SVG default black fill */
+.wmk .d{fill:currentColor;fill-opacity:.35;stroke:none}
+
+/* finished icon, no loops: ?still and reduced motion */
+html.still .ic .s,html.still .ic.on .s{stroke-dasharray:none;stroke-dashoffset:0;transition:none}
+html.still .ic .d,html.still .ic.on .d{opacity:var(--ic-po);transform:none;transition:none}
+html.still .ic .a,html.still .ic.on .a{transform:none;transition:none}
+html.still .ic [class*="m-"],html.still .ic.on.idle [class*="m-"]{animation:none}
+@media (prefers-reduced-motion:reduce){
+  .ic .s,.ic.on .s{stroke-dasharray:none;stroke-dashoffset:0;transition:none}
+  .ic .d,.ic.on .d{opacity:var(--ic-po);transform:none;transition:none}
+  .ic .a,.ic.on .a{transform:none;transition:none}
+  .ic [class*="m-"],.ic.on.idle [class*="m-"]{animation:none}
+}
