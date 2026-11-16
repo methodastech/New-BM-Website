@@ -1,0 +1,481 @@
+{
+ "version": "2026-11-15-draft-4",
+ "company": {
+  "name": "Brand Method",
+  "legalName": "BrandMethod Agency Sdn Bhd",
+  "email": "hello@brandmethod.co",
+  "phone": "+6016-256 3030",
+  "address": "MRANTI Park, Office 25, Level 1, Taman Teknologi MRANTI, Bukit Jalil, 57000 Kuala Lumpur"
+ },
+ "links": {
+  "standard": "/quick-website/",
+  "standardStart": "/quick-website/#start",
+  "premium": "/premium-website/",
+  "premiumStart": "/premium-website/#start"
+ },
+ "actions": {
+  "standard": "Get my website",
+  "premium": "Build a website with us"
+ },
+ "currencies": [
+  "US dollars (USD)",
+  "Malaysian ringgit (MYR)"
+ ],
+ "standard": {
+  "name": "Standard",
+  "about": "A website built by the Brand Method studio from a short brief. The same studio quality in every package. You choose the size.",
+  "packages": [
+   {
+    "id": "launch_managed",
+    "name": "Launch",
+    "pages": "1 page",
+    "for": "For a first website.",
+    "payment": "monthly",
+    "price": {
+     "USD": "US$19 a month",
+     "MYR": "RM79 a month"
+    },
+    "includes": [
+     "1 page website",
+     "Built by our studio from your brief",
+     "Hosting and security while your plan is active",
+     "WhatsApp and contact form",
+     "Up to 3 amendments"
+    ]
+   },
+   {
+    "id": "grow_managed",
+    "name": "Grow",
+    "pages": "Up to 5 pages",
+    "for": "For a business with more to say.",
+    "payment": "monthly",
+    "price": {
+     "USD": "US$99 for the first month, then US$49 a month",
+     "MYR": "RM399 for the first month, then RM199 a month"
+    },
+    "includes": [
+     "Up to 5 pages",
+     "Everything in Launch",
+     "Lead forms and analytics basics",
+     "Up to 3 amendments"
+    ]
+   },
+   {
+    "id": "own_it",
+    "name": "Own It",
+    "pages": "Up to 8 pages",
+    "for": "For owners who want the files.",
+    "payment": "once",
+    "price": {
+     "USD": "US$465 once, no monthly fee",
+     "MYR": "RM1,900 once, no monthly fee"
+    },
+    "was": {
+     "USD": "US$930",
+     "MYR": "RM3,800"
+    },
+    "includes": [
+     "Up to 8 pages",
+     "Code, content and accounts handed over",
+     "Pay once. No monthly fee",
+     "Host it yourself or with your own host",
+     "Up to 3 amendments"
+    ]
+   }
+  ],
+  "inEveryPackage": [
+   "Built by our studio from your brief",
+   "SEO and AIO optimisation",
+   "Free competitor analysis",
+   "Free website conversion plan",
+   "Free Logo Health Check",
+   "WhatsApp and contact form",
+   "Edit your own text and images",
+   "Up to 3 amendments",
+   "Money-back guarantee",
+   "Lifetime tech support, free"
+  ],
+  "differences": [
+   {
+    "label": "Hosting and security included",
+    "values": {
+     "Launch": "yes",
+     "Grow": "yes",
+     "Own It": "Year 1"
+    }
+   },
+   {
+    "label": "Pages",
+    "values": {
+     "Launch": "1",
+     "Grow": "Up to 5",
+     "Own It": "Up to 8"
+    }
+   },
+   {
+    "label": "Cancel any time",
+    "values": {
+     "Launch": "yes",
+     "Grow": "yes",
+     "Own It": "no"
+    }
+   },
+   {
+    "label": "You own the code and files",
+    "values": {
+     "Launch": "no",
+     "Grow": "no",
+     "Own It": "yes"
+    }
+   },
+   {
+    "label": "Pay once, no monthly fee",
+    "values": {
+     "Launch": "no",
+     "Grow": "no",
+     "Own It": "yes"
+    }
+   }
+  ],
+  "amendments": "Up to 3 amendments"
+ },
+ "premium": {
+  "name": "Premium",
+  "about": "Custom designed websites, stores and portals, with strategy and copywriting.",
+  "packages": [
+   {
+    "id": "business_premium",
+    "name": "Business Website",
+    "pages": "Up to 10 pages",
+    "payment": "project",
+    "price": {
+     "USD": "US$1,470 for the project",
+     "MYR": "RM6,000 for the project"
+    },
+    "was": {
+     "USD": "US$2,940",
+     "MYR": "RM12,000"
+    },
+    "delivery": "10 days",
+    "terms": "Money-back guaranteed",
+    "includes": [
+     "Full copywriting from a discovery call",
+     "Responsive custom design",
+     "Enquiry forms and WhatsApp wired in",
+     "SEO foundation",
+     "Analytics configured"
+    ]
+   },
+   {
+    "id": "growth_premium",
+    "name": "Growth Website",
+    "pages": "15+ pages",
+    "payment": "project",
+    "price": {
+     "USD": "US$2,450 for the project",
+     "MYR": "RM10,000 for the project"
+    },
+    "was": {
+     "USD": "US$4,900",
+     "MYR": "RM20,000"
+    },
+    "delivery": "2 weeks",
+    "terms": "Money-back guaranteed",
+    "includes": [
+     "Advanced funnels and lead generation",
+     "Email marketing integration",
+     "Analytics dashboard setup",
+     "Half day photo and video shoot",
+     "Case studies and service pages"
+    ]
+   },
+   {
+    "id": "corporate_premium",
+    "name": "Corporate Website & Portal",
+    "pages": "30+ pages, a store or a portal, as scoped",
+    "payment": "project",
+    "price": {
+     "USD": "US$4,900 for the project",
+     "MYR": "RM20,000 for the project"
+    },
+    "was": {
+     "USD": "US$9,800",
+     "MYR": "RM40,000"
+    },
+    "delivery": "About 3 weeks",
+    "terms": "Milestone payments",
+    "includes": [
+     "Custom design system",
+     "Conversion built pages or checkout flows",
+     "Multi user publishing",
+     "CRM and payment integrations",
+     "Milestone payments"
+    ]
+   }
+  ],
+  "inEveryPackage": [
+   "Custom design",
+   "High quality SEO and AIO optimisation",
+   "A CMS to edit your own content",
+   "Unlimited amendments",
+   "Free competitor analysis",
+   "Free website conversion plan",
+   "Lifetime tech support, free"
+  ],
+  "differences": [
+   {
+    "label": "Pages",
+    "values": {
+     "Business Website": "Up to 10",
+     "Growth Website": "15+",
+     "Corporate Website & Portal": "30+"
+    }
+   },
+   {
+    "label": "Delivery",
+    "values": {
+     "Business Website": "10 days",
+     "Growth Website": "2 weeks",
+     "Corporate Website & Portal": "About 3 weeks"
+    }
+   },
+   {
+    "label": "Lead capture",
+    "values": {
+     "Business Website": "Forms and WhatsApp",
+     "Growth Website": "Funnels and lead generation",
+     "Corporate Website & Portal": "Conversion built pages"
+    }
+   },
+   {
+    "label": "Analytics and tools",
+    "values": {
+     "Business Website": "Analytics configured",
+     "Growth Website": "Dashboard and email marketing",
+     "Corporate Website & Portal": "CRM and integrations"
+    }
+   },
+   {
+    "label": "Extras",
+    "values": {
+     "Business Website": "Full copywriting",
+     "Growth Website": "Half day photo and video shoot",
+     "Corporate Website & Portal": "Design system, multi user CMS"
+    }
+   },
+   {
+    "label": "Payment",
+    "values": {
+     "Business Website": "Money-back guaranteed",
+     "Growth Website": "Money-back guaranteed",
+     "Corporate Website & Portal": "Milestone payments"
+    }
+   }
+  ],
+  "amendments": "Unlimited amendments"
+ },
+ "free": [
+  {
+   "name": "Competitor analysis",
+   "text": "Name up to 3 competitors. We show where your website can beat theirs."
+  },
+  {
+   "name": "Website conversion plan",
+   "text": "1 page on what your site must say and do to turn visitors into enquiries."
+  },
+  {
+   "name": "SEO and AIO optimisation",
+   "text": "Titles, descriptions, speed, structure and structured data, set up so Google and AI search can read your site."
+  },
+  {
+   "name": "Logo Health Check",
+   "text": "We check how your logo holds up on a website and tell you plainly what we see."
+  }
+ ],
+ "promises": [
+  {
+   "name": "100% Money-Back",
+   "text": "If we miss the agreed date or the agreed scope, you get a full refund."
+  },
+  {
+   "name": "Lifetime Tech Support",
+   "text": "Questions answered and small tweaks handled for as long as you use the site."
+  },
+  {
+   "name": "Fixed Price, No Surprises",
+   "text": "You see the full amount before you pay. It is agreed in writing before work starts."
+  },
+  {
+   "name": "15 Years of Studio Work",
+   "text": "The same studio that builds our Premium work builds yours."
+  }
+ ],
+ "guarantee": "If we miss the agreed date or the agreed scope, you get a full refund.",
+ "support": "Questions answered and small tweaks handled for as long as you use the site.",
+ "domain": {
+  "price": {
+   "USD": "US$25 once",
+   "MYR": "RM100 once"
+  },
+  "covers": "A .com or .com.my, registered in your own name and connected to your website.",
+  "have": "We connect the domain you already own. No extra cost.",
+  "later": "Your website starts on a free Brand Method address. Add your own domain any time.",
+  "renewal": {
+   "subscription": "Renewal is included while your plan is active.",
+   "one_time": "The first year is included. After that you renew it yourself, since the domain is yours."
+  }
+ },
+ "funding": {
+  "standard": {
+   "headline": "Our funding covers the other half.",
+   "text": "Brand Method is backed by government technology funding. We pass it straight to our clients, so Own It is half price this quarter."
+  },
+  "premium": {
+   "headline": "Our funding covers the other half.",
+   "text": "Brand Method is backed by government technology funding. We pass it straight to our clients, so every Premium website is half price this quarter."
+  },
+  "earlyBird": "500 early bird slots"
+ },
+ "flow": {
+  "standard": [
+   "Fill in a short brief in 5 steps: package, references, your business, contact, review.",
+   "Pay on a secure Stripe page. Brand Method never sees or stores your card number.",
+   "After payment we contact you by email, WhatsApp or a call to get started.",
+   "Our studio builds your website from your brief and a person checks it. You see a preview first. Nothing goes live until you approve it."
+  ],
+  "premium": [
+   "Send a short enquiry in 5 steps: your project, what you need, budget and timing, a preferred meeting time, your details.",
+   "We aim to contact you within 1 working day to confirm the meeting.",
+   "After the meeting you get a written scope, timeline and price. No work starts before you sign. Nothing is paid online."
+  ],
+  "noFreePlan": "There is no free plan and no free trial. Every package is paid. The 4 free extras come with a paid package."
+ },
+ "faqs": [
+  {
+   "page": "standard",
+   "q": "Do I have to choose a design?",
+   "a": "No. You tell us about your business and show us sites you like. Our studio builds yours from that brief."
+  },
+  {
+   "page": "standard",
+   "q": "Is it really RM79 (US$19)?",
+   "a": "Yes. Launch is RM79 (US$19) for the first month and RM79 (US$19) at each monthly renewal. You see the full amount before you pay."
+  },
+  {
+   "page": "standard",
+   "q": "What does the price cover?",
+   "a": "Your website, built by our studio from your brief, with 4 free extras, a money-back guarantee and lifetime tech support. A domain we register for you is in your own name, so it always stays yours. If tax applies where you are, you see it before you pay."
+  },
+  {
+   "page": "standard",
+   "q": "How does the money-back guarantee work?",
+   "a": "We agree the delivery date and the scope with you first. If we miss either, you get a full refund. If a delay comes from your side, the date simply moves with it."
+  },
+  {
+   "page": "standard",
+   "q": "What is lifetime tech support?",
+   "a": "Questions answered and small tweaks handled for as long as you use the site, at no charge."
+  },
+  {
+   "page": "standard",
+   "q": "Can I pay in ringgit or US dollars?",
+   "a": "Yes. Switch the prices to the currency you prefer. You are charged in the currency shown on your order."
+  },
+  {
+   "page": "standard",
+   "q": "What comes free?",
+   "a": "Every package comes with competitor analysis, website conversion plan, SEO and AIO optimisation and a Logo Health Check. They are part of the package, not an extra to buy later."
+  },
+  {
+   "page": "standard",
+   "q": "Can I use one of your builds as a reference?",
+   "a": "Yes. Pick up to 3 from our portfolio, or paste links to sites you like. References guide the look. A fully custom design is our Premium service."
+  },
+  {
+   "page": "standard",
+   "q": "Do I need my own domain?",
+   "a": "No. If you have a domain, we connect it at no extra cost. If you do not, we register one in your name for RM100 (US$25) once, and renewal is included while your plan is active. You can also start on a free Brand Method address and decide later."
+  },
+  {
+   "page": "standard",
+   "q": "Can I cancel?",
+   "a": "Yes. Cancel from your billing dashboard. Your website stays live through the period you have paid for."
+  },
+  {
+   "page": "standard",
+   "q": "Who owns the website?",
+   "a": "You own your domain and your content. On Launch and Grow the site runs on our platform while your plan is active. Choose Own It if you want the code and the files."
+  },
+  {
+   "page": "standard",
+   "q": "Will it appear on Google and in AI answers?",
+   "a": "We set up SEO and AIO, so search engines and AI answers such as ChatGPT and Google AI Overviews can read your site. They decide if and when to show it. Results are not guaranteed."
+  },
+  {
+   "page": "standard",
+   "q": "I need a store, bookings or a portal.",
+   "a": "That is Premium: custom design, a CMS and high quality SEO."
+  },
+  {
+   "page": "premium",
+   "q": "How long does it take?",
+   "a": "A Business Website in 10 days, a Growth Website in 2 weeks, a Corporate Website & Portal in about 3 weeks. Your launch date is fixed in writing before work starts."
+  },
+  {
+   "page": "premium",
+   "q": "What is the money-back guarantee?",
+   "a": "If we miss the agreed date or the agreed scope, you get a full refund. It covers the Business Website and the Growth Website. The Corporate Website & Portal is paid by milestone."
+  },
+  {
+   "page": "premium",
+   "q": "What comes free?",
+   "a": "Every Premium package comes with high quality SEO and AIO optimisation free, worth RM5,000 (US$2,000), a CMS, a competitor analysis and a website conversion plan."
+  },
+  {
+   "page": "premium",
+   "q": "Will my site show up on Google and in AI answers?",
+   "a": "Every site is built with SEO and AIO optimisation: clean structure, fast pages, structured data and clear answers that Google, ChatGPT and AI Overviews can read. They decide what to show, so we do not promise a position."
+  },
+  {
+   "page": "premium",
+   "q": "Can I edit the site myself?",
+   "a": "Yes. Every package includes a CMS, so you change text, images and posts without a developer."
+  },
+  {
+   "page": "premium",
+   "q": "What support do I get after launch?",
+   "a": "Lifetime tech support, free. Questions answered and small tweaks handled for as long as you use the site."
+  },
+  {
+   "page": "premium",
+   "q": "Can you build more than a website?",
+   "a": "Yes. Scoped projects cover online stores, apps, portals, CRM, AI automation, AI assistants and data crawlers."
+  },
+  {
+   "page": "premium",
+   "q": "Do I own the website?",
+   "a": "Our custom website packages specify the handover of code, domain and content. Your proposal confirms the agreed scope and any third party licences."
+  },
+  {
+   "page": "premium",
+   "q": "Is hosting or a care plan mandatory?",
+   "a": "No. An owned custom build does not require an ongoing Brand Method care contract unless you choose one. Outside hosting and software costs may still apply."
+  },
+  {
+   "page": "premium",
+   "q": "Can I apply for a government grant?",
+   "a": "Eligibility depends on a currently open official scheme and on your business and project. We can discuss your digitalisation scope, but we do not promise funding, official endorsement or eligibility."
+  },
+  {
+   "page": "premium",
+   "q": "I only need a simple website.",
+   "a": "Our Standard packages start at RM79 (US$19) a month, or RM1,900 (US$465) once to own it."
+  }
+ ],
+ "suggestions": [
+  "How much is a website?",
+  "How does it work?",
+  "How long does it take?",
+  "What is included?"
+ ]
+}

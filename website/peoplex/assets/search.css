@@ -1,0 +1,162 @@
+/* PeopleX site search palette. Brand Method, 13 Nov 2026.
+   Every class starts with pxs- so nothing collides with the page. The one shared class is .px-hit (the wash on a result's target).
+   No text under 14 px, sentences 15 px and up, 3 px corners, no shadows, no lines, motion through transform and opacity only. */
+
+.pxs{
+  --pxs-y:var(--y,#FBBA00);--pxs-yt:var(--yt,#FFF4D4);--pxs-ink:var(--ink,#14161B);--pxs-mu:var(--mu,#5A6070);--pxs-bx:var(--bx,#F4F5F7);
+  --pxs-fd:var(--fd,"Montserrat",system-ui,sans-serif);--pxs-fb:var(--fb,"Inter",system-ui,sans-serif);
+  --pxs-ease:cubic-bezier(.2,.7,.1,1);
+  position:fixed;top:var(--bmx-bar,66px);left:0;right:0;bottom:0;z-index:2147482500;
+  display:flex;justify-content:center;align-items:flex-start;
+  padding:clamp(16px,9vh,96px) 24px 24px;
+  font:400 16px/1.5 var(--pxs-fb);color:var(--pxs-ink);text-align:left;
+  -webkit-font-smoothing:antialiased;
+}
+.pxs[hidden]{display:none}
+.pxs *,.pxs *::before,.pxs *::after{box-sizing:border-box}
+/* the lock. Body clips instead of hiding, so it does not become a scroll container that sticky elements would stick to.
+   .pxs-gut (set only when a classic scrollbar takes space): the gutter stays, so neither the page nor the fixed bars move
+   when the scrollbar goes. Nothing fixed can paint in that gutter, so the canvas takes the colour of the scrim over white
+   (#7E7F82) and the strip reads as part of the scrim; body keeps its own white. */
+html.pxs-lock{overflow:hidden}
+html.pxs-lock.pxs-gut{scrollbar-gutter:stable;background-color:#7E7F82}
+html.pxs-lock body{overflow-x:clip}
+
+.pxs-scrim{position:absolute;inset:0;background:rgba(20,22,27,.55);opacity:0;transition:opacity .3s var(--pxs-ease)}
+.pxs-panel{
+  position:relative;width:100%;max-width:760px;max-height:100%;
+  display:flex;flex-direction:column;background:#fff;border-radius:3px;overflow:hidden;
+  opacity:0;transform:translate3d(0,-14px,0) scale(.985);transform-origin:50% 0;
+  transition:opacity .26s var(--pxs-ease),transform .45s var(--pxs-ease);
+}
+.pxs.pxs-on .pxs-scrim{opacity:1}
+.pxs.pxs-on .pxs-panel{opacity:1;transform:none}
+
+.pxs-sr{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+/* ---------- the field ---------- */
+.pxs-head{flex:none;padding:14px 14px 6px}
+.pxs-field{display:flex;align-items:center;gap:14px;height:76px;padding:0 14px 0 22px;background:var(--pxs-bx);border-radius:3px}
+.pxs-gl{flex:none;width:26px;height:26px;color:var(--pxs-ink)}
+.pxs-in{
+  flex:1 1 auto;min-width:0;height:100%;margin:0;padding:0;border:0;border-radius:0;background:transparent;
+  font:600 24px/1.2 var(--pxs-fd);letter-spacing:-.02em;color:var(--pxs-ink);
+  -webkit-appearance:none;appearance:none;caret-color:var(--pxs-y);
+}
+.pxs-in::placeholder{color:#737987;font-weight:500;opacity:1}
+.pxs-in:focus,.pxs-in:focus-visible{outline:none}
+.pxs-x{
+  flex:none;display:grid;place-items:center;width:48px;height:48px;margin:0;padding:0;border:0;border-radius:3px;
+  background:#fff;color:var(--pxs-ink);cursor:pointer;
+}
+.pxs-x svg{width:22px;height:22px}
+
+/* ---------- body ---------- */
+.pxs-body{flex:1 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:4px 14px 14px;scrollbar-width:thin}
+.pxs-body [hidden]{display:none}
+
+.pxs-empty{padding:14px 8px 6px}
+.pxs-empty p,.pxs-none-or{margin:0;font:400 15px/1.55 var(--pxs-fb);color:var(--pxs-mu)}
+.pxs-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.pxs-chip{
+  display:inline-flex;align-items:center;height:42px;margin:0;padding:0 14px;border:0;border-radius:3px;
+  background:var(--pxs-bx);color:var(--pxs-ink);font:500 15px/1 var(--pxs-fb);letter-spacing:-.005em;white-space:nowrap;cursor:pointer;
+}
+
+/* ---------- results ---------- */
+.pxs-grp{padding-top:6px}
+.pxs-grp+.pxs-grp{padding-top:14px}
+.pxs-gh{padding:8px 10px 6px;font:600 14px/1.4 var(--pxs-fb);color:var(--pxs-mu)}
+.pxs-opt{
+  display:grid;grid-template-columns:44px minmax(0,1fr) 24px;align-items:center;column-gap:16px;
+  min-height:64px;padding:10px 12px 10px 10px;border-radius:3px;cursor:pointer;
+}
+.pxs-opt.pxs-act{background:var(--pxs-yt)}
+.pxs-ic{display:grid;place-items:center;width:44px;height:44px;border-radius:3px;background:var(--pxs-bx);color:var(--pxs-ink)}
+.pxs-ic svg{width:21px;height:21px}
+.pxs-opt.pxs-act .pxs-ic{background:#fff}
+.pxs-tx{display:block;min-width:0}
+.pxs-t{display:block;font:600 16px/1.35 var(--pxs-fd);letter-spacing:-.012em;color:var(--pxs-ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pxs-s{display:block;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;margin-top:3px;font:400 15px/1.5 var(--pxs-fb);color:var(--pxs-mu)}
+.pxs-go{display:grid;place-items:center;width:24px;height:24px;color:var(--pxs-ink);opacity:0;transform:translate3d(-4px,0,0);transition:opacity .2s,transform .3s var(--pxs-ease)}
+.pxs-go svg{width:20px;height:20px}
+.pxs-opt.pxs-act .pxs-go{opacity:1;transform:none}
+/* before typing: compact section rows */
+.pxs-jump{padding-top:10px}
+.pxs-jump .pxs-opt{min-height:52px;padding:6px 12px 6px 10px}
+.pxs-jump .pxs-ic{width:38px;height:38px}
+.pxs-jump .pxs-ic svg{width:19px;height:19px}
+.pxs-jump .pxs-opt{grid-template-columns:38px minmax(0,1fr) 24px}
+.pxs mark{
+  color:var(--pxs-ink);padding:0;border-radius:0;
+  background:linear-gradient(0deg,transparent .08em,var(--pxs-y) .08em,var(--pxs-y) .44em,transparent .44em);
+}
+
+/* ---------- no result ---------- */
+.pxs-none{padding:18px 8px 10px}
+.pxs-none-t{margin:0;font:400 17px/1.55 var(--pxs-fb);color:var(--pxs-ink);overflow-wrap:anywhere}
+.pxs-none-q{font-weight:600}
+.pxs-btn{
+  display:inline-flex;align-items:center;gap:12px;height:50px;margin-top:18px;padding:0 22px;border-radius:3px;
+  background:var(--pxs-y);color:var(--pxs-ink);font:600 15px/1 var(--pxs-fb);text-decoration:none;white-space:nowrap;
+}
+.pxs-btn svg{width:19px;height:19px;transition:transform .45s var(--pxs-ease)}
+.pxs-none-or{margin-top:28px}
+
+/* ---------- foot ---------- */
+.pxs-foot{flex:none;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 24px;background:var(--pxs-bx);font:400 14px/1.4 var(--pxs-fb);color:var(--pxs-mu)}
+.pxs-keys{display:flex;flex-wrap:wrap;gap:6px 20px}
+.pxs-keys>span{display:inline-flex;align-items:center;gap:6px}
+.pxs kbd{
+  display:inline-grid;place-items:center;min-width:28px;height:28px;padding:0 7px;border-radius:3px;
+  background:#fff;color:var(--pxs-ink);font:600 14px/1 var(--pxs-fb);
+}
+.pxs-count{white-space:nowrap;font-weight:500;color:var(--pxs-ink)}
+
+/* ---------- hover, only where a pointer can hover (no sticky tint after a tap) ---------- */
+@media (hover:hover){
+  .pxs-x:hover,.pxs-chip:hover{background:var(--pxs-yt)}
+  .pxs-btn:hover svg{transform:translateX(4px)}
+}
+
+/* ---------- focus ---------- */
+.pxs-chip:focus-visible,.pxs-x:focus-visible,.pxs-btn:focus-visible{outline:2px solid var(--pxs-ink);outline-offset:2px}
+
+/* ---------- phone: the panel fills the screen under the admin bar ---------- */
+@media (max-width:759px){
+  .pxs{padding:0}
+  .pxs-panel{max-width:none;height:100%;max-height:none;border-radius:0;transform:translate3d(0,18px,0)}
+  .pxs-head{padding:12px 12px 4px}
+  .pxs-field{height:62px;gap:12px;padding:0 8px 0 16px}
+  .pxs-gl{width:22px;height:22px}
+  .pxs-in{font-size:20px}
+  .pxs-x{width:44px;height:44px}
+  .pxs-body{padding:4px 10px 24px}
+  .pxs-opt{grid-template-columns:40px minmax(0,1fr);column-gap:14px;padding:10px 10px 10px 8px}
+  .pxs-ic{width:40px;height:40px}
+  .pxs-go{display:none}
+  .pxs-jump .pxs-opt{grid-template-columns:38px minmax(0,1fr)}
+  .pxs-t{white-space:normal}
+  .pxs-foot{display:none}
+}
+@media (hover:none){.pxs-foot .pxs-keys{display:none}}
+
+/* ---------- the wash on a result's target ---------- */
+.pxs-rel{position:relative}
+/* a heading focused for the moment after a result (the wash already shows where the visitor is) */
+.pxs-tf:focus,.pxs-tf:focus-visible{outline:none}
+.px-hit:not(.pxs-alt)::after,.pxs-wash{
+  content:"";position:absolute;top:0;right:0;bottom:0;left:0;z-index:4;pointer-events:none;
+  background:var(--y,#FBBA00);mix-blend-mode:multiply;border-radius:inherit;opacity:0;
+  animation:pxsWash 2.2s cubic-bezier(.2,.7,.1,1) var(--pxs-hd,0ms) both;
+}
+@keyframes pxsWash{0%{opacity:0}16%{opacity:.34}55%{opacity:.24}100%{opacity:0}}
+
+/* ---------- reduced motion: nothing moves ---------- */
+@media (prefers-reduced-motion:reduce){
+  .pxs-scrim,.pxs-panel,.pxs-go,.pxs-btn svg{transition:none}
+  .pxs-panel,.pxs-go,.pxs-btn:hover svg{transform:none}
+  .px-hit:not(.pxs-alt)::after,.pxs-wash{animation:none;opacity:.22}
+}
+html.still .pxs-scrim,html.still .pxs-panel,html.still .pxs-go,html.still .pxs-btn svg{transition:none}
+html.still .px-hit:not(.pxs-alt)::after,html.still .pxs-wash{animation:none;opacity:.22}

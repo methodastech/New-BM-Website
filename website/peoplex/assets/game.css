@@ -1,0 +1,177 @@
+/* PeopleX Web Prototype 1: industries tabs, canvas film and the payslip game. Brand Method, 13 Nov 2026.
+   Every class is prefixed pxg-. Same house rules as site.css: no text under 14 px, sentences 15 px and up, the same size on every screen,
+   no lines, no shadows, one tinted box on the white ground (rows inside it are stripes, not boxes), 3 px corners (never on film),
+   motion through transform and opacity only, still under reduced motion and html.still. */
+
+.pxg{padding:var(--sec) 0;background:#fff}
+.pxg [hidden]{display:none!important}
+.pxg-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+html.no-js .pxg-game{display:none}
+
+/* ---------- heading ---------- */
+.pxg-hd{margin-bottom:clamp(28px,3.4vw,52px)}
+.pxg-hd .lede{margin-top:18px}
+
+/* ---------- the industries: 4 equal film tiles; the chosen one is in full colour, plays its film and carries a yellow bar ---------- */
+.pxg-gal{display:grid;grid-template-columns:3fr 1fr;gap:8px;margin-bottom:clamp(24px,2.8vw,40px)}
+.pxg-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.pxg-tab,.pxg-x{position:relative;display:block;min-width:0;aspect-ratio:4/5;max-height:520px;overflow:hidden;border-radius:var(--r);background:var(--ink);color:#fff;text-align:left;isolation:isolate}
+.pxg-tp{position:absolute;left:0;top:0;width:100%;height:100%;max-width:none;object-fit:cover;filter:grayscale(.85) brightness(.82);transform:scale(1.02);transition:transform 1.4s var(--ease),filter .7s}
+.pxg-tab[aria-selected=true] .pxg-tp{filter:none}
+.pxg-tab::after,.pxg-x::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(0deg,rgba(14,15,19,.9) 0%,rgba(14,15,19,.35) 42%,rgba(14,15,19,0) 68%);pointer-events:none}
+.pxg-tab::before{content:"";position:absolute;left:0;right:0;bottom:0;z-index:3;height:4px;background:var(--y);transform:scaleX(0);transform-origin:0 50%;transition:transform .8s var(--ease)}
+.pxg-tab[aria-selected=true]::before{transform:none}
+.pxg-no{position:absolute;left:clamp(14px,1.5vw,22px);top:clamp(12px,1.3vw,18px);z-index:2;font:600 15px/1 var(--fd);letter-spacing:.02em;color:rgba(255,255,255,.72)}
+.pxg-tab[aria-selected=true] .pxg-no{color:var(--y)}
+.pxg-tl{position:absolute;left:0;right:0;bottom:0;z-index:2;display:flex;flex-direction:column;align-items:flex-start;gap:6px;padding:clamp(16px,1.7vw,24px)}
+.pxg-ti{font-size:38px;line-height:1;color:var(--y);margin-bottom:6px;transition:transform .6s var(--ease)}
+.pxg-tl>span{font:600 clamp(20px,1.8vw,28px)/1.1 var(--fd);letter-spacing:-.025em;color:#fff;min-width:0}
+.pxg-td{font:500 15px/1.4 var(--fb);color:rgba(255,255,255,.78);max-width:20em}
+.pxg-x{aspect-ratio:auto;max-height:none}
+.pxg-x .pxg-tl>span{white-space:normal}
+.pxg-x .pxg-tp{filter:grayscale(1) brightness(.6)}
+@media (hover:hover){
+  .pxg-tab:hover .pxg-tp,.pxg-x:hover .pxg-tp{transform:scale(1.07)}
+  .pxg-tab:not([aria-selected=true]):hover .pxg-tp{filter:grayscale(.3) brightness(.9)}
+  .pxg-tab:hover .pxg-ti,.pxg-x:hover .pxg-ti{transform:translateY(-4px)}
+}
+@media (max-width:900px){
+  .pxg-gal{grid-template-columns:1fr 1fr;gap:6px}
+  .pxg-tabs{display:contents}
+  .pxg-tab,.pxg-x{aspect-ratio:1/1;height:auto;max-height:none}
+  .pxg-no{display:none}
+  .pxg-tl{padding:12px;gap:4px}
+  .pxg-ti{font-size:28px;margin-bottom:2px}
+  .pxg-tl>span{font-size:16px}
+  .pxg-tab .pxg-td,.pxg-tab .pxg-no{display:none}
+  .pxg-x .pxg-td{display:none}
+}
+
+/* ---------- panel ---------- */
+.pxg-panel{display:grid;grid-template-columns:minmax(0,1fr);gap:28px}
+.pxg-side,.pxg-game{min-width:0}
+.pxg-film{position:absolute;inset:0;display:block;overflow:hidden;background:var(--bx);--pxg-fy:50%}
+.pxg-film img,.pxg-film canvas{position:absolute;left:0;top:0;width:100%;height:100%;max-width:none}
+.pxg-film img{object-fit:cover;object-position:50% var(--pxg-fy)}
+.pxg-cv{opacity:0;transition:opacity .6s}
+.pxg-cv.pxg-on{opacity:1}
+
+/* the feature card beside the game: what this industry gets, then a way into the app */
+.pxg-side{background:var(--bx);border-radius:var(--r);padding:clamp(20px,2vw,30px)}
+@media (min-width:1024px){.pxg-side{position:sticky;top:calc(var(--bmx-bar,0px) + var(--nav-h,76px) + 20px)}}
+.pxg-feats{list-style:none;margin:0;padding:0;display:grid}
+.pxg-feats::before{content:attr(data-t);display:block;font:600 clamp(20px,1.6vw,24px)/1.2 var(--fd);letter-spacing:-.02em;color:var(--tx);margin-bottom:10px}
+.pxg-feats li+li{border-top:0}
+.pxg-all{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px;padding:16px 18px;border-radius:var(--r);background:var(--ink);color:#fff;font:600 15px/1.3 var(--fb);transition:background-color .3s}
+.pxg-all i{font-size:20px;color:var(--y);transition:transform .45s var(--ease)}
+.pxg-all:hover i{transform:translateX(4px)}
+.pxg-feat{display:flex;align-items:center;gap:16px;width:100%;min-height:72px;padding:10px 0;text-align:left;font:500 16px/1.35 var(--fb);color:var(--tx);cursor:default}
+.pxg-feat .ic3{width:48px;height:48px;flex:none;transition:transform .5s var(--ease)}
+.pxg-feat span{flex:1 1 auto;min-width:0}
+.pxg-feat i{flex:none;font-size:20px;opacity:0;transition:transform .45s var(--ease),opacity .3s}
+.pxg-app .pxg-feat{cursor:pointer}
+.pxg-app .pxg-feat i{opacity:.4}
+@media (hover:hover){
+  .pxg-app .pxg-feat:hover i{opacity:1;transform:translateX(4px)}
+  .pxg-app .pxg-feat:hover .ic3{transform:translateY(-3px)}
+}
+
+/* ---------- the game ---------- */
+.pxg-game{position:relative}
+.pxg-anchor{position:absolute;left:0;top:-24px;width:1px;height:1px;pointer-events:none}
+.pxg-ttl{font-size:clamp(24px,2.3vw,34px);line-height:1.14;letter-spacing:-.03em;margin:0;text-wrap:balance}
+.pxg-how{font-size:16px;line-height:1.5;color:var(--mu);margin:10px 0 20px}
+.pxg-card{background:var(--bx);border-radius:var(--r);overflow:hidden}
+.pxg-body{transition:opacity .45s var(--ease)}
+.pxg-body.pxg-out{opacity:0;transition-duration:.2s;pointer-events:none}
+
+/* the sheet: a printed spreadsheet payslip, stripes in place of grid lines */
+.pxg-sh-hd{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"nm mo" "role tag";column-gap:16px;row-gap:5px;align-items:center;padding:22px 24px 10px}
+.pxg-nm{grid-area:nm;min-width:0;font:600 20px/1.2 var(--fd);letter-spacing:-.02em;color:var(--tx)}
+.pxg-mo{grid-area:mo;font:600 15px/1.2 var(--fb);color:var(--tx);white-space:nowrap;text-align:right}
+.pxg-role{grid-area:role;min-width:0;font-size:15px;line-height:1.4;color:var(--mu)}
+.pxg-tag{grid-area:tag;justify-self:end;display:inline-flex;align-items:center;height:28px;padding:0 10px;border-radius:var(--r);background:var(--bx2);font:600 14px/1 var(--fb);color:var(--sl);white-space:nowrap}
+.pxg-tag-y{background:var(--y);color:var(--ink)}
+
+.pxg-lines{list-style:none;margin:0;padding:0}
+.pxg-grp{display:flex;justify-content:space-between;gap:12px;padding:14px 24px 7px 62px;font:600 14px/1.2 var(--fb);color:var(--mu)}
+.pxg-li{transition:background-color .25s}
+.pxg-li.pxg-z{background-color:var(--bx2)}
+.pxg-li.pxg-flag,.pxg-li.pxg-found,.pxg-li.pxg-fixed{background-color:var(--yt)}
+.pxg-row{display:grid;grid-template-columns:24px minmax(0,1fr) auto;column-gap:14px;align-items:start;width:100%;min-height:60px;padding:11px 24px;text-align:left;color:var(--tx)}
+button.pxg-row{cursor:pointer}
+button.pxg-row:focus-visible{outline:2px solid var(--ink);outline-offset:-3px}
+.pxg-lt{display:block;min-width:0}
+.pxg-lt b{display:block;font:600 16px/1.35 var(--fb)}
+.pxg-lt span{display:block;font-size:15px;line-height:1.4;color:var(--mu)}
+.pxg-am{display:block;text-align:right;white-space:nowrap;font:600 16px/1.35 var(--fb);font-variant-numeric:tabular-nums}
+.pxg-am span{display:block;font-weight:400;font-size:15px;line-height:1.4;color:var(--mu)}
+.pxg-li.pxg-net .pxg-lt b{font-size:18px}
+.pxg-li.pxg-net .pxg-am{font-size:20px;letter-spacing:-.01em}
+.pxg-li.pxg-net .pxg-am span{font-size:15px;letter-spacing:0}
+
+/* row markers: a faint flag to tap, a tick or a cross after the check */
+.pxg-mk{display:flex;align-items:center;justify-content:flex-start;width:24px;height:22px;font-size:22px;line-height:1;color:var(--mu2)}
+button.pxg-row .pxg-mk{opacity:.55;transition:opacity .25s,transform .35s var(--ease)}
+button.pxg-row[aria-pressed=true] .pxg-mk{opacity:1;color:var(--ink);animation:pxg-pop .4s var(--ease)}
+.pxg .pxg-row[aria-pressed=true] .pxg-mk::before,.pxg .pxg-mk.pxg-mk-y::before{opacity:1;color:var(--y)}
+.pxg-mk.pxg-mk-y{color:var(--ink)}
+.pxg-mk.pxg-mk-r{color:#C8452F}
+@media (hover:hover){
+  button.pxg-row{transition:background-color .25s}
+  button.pxg-row:hover{background-color:rgba(20,22,27,.035)}
+  button.pxg-row:hover .pxg-mk{opacity:1}
+  button.pxg-row[aria-pressed=false]:hover .pxg-mk{transform:translateY(-2px)}
+}
+@keyframes pxg-pop{0%{transform:scale(.6)}60%{transform:scale(1.18)}100%{transform:scale(1)}}
+
+/* the reason under a line */
+.pxg-li.pxg-has .pxg-row{min-height:0;padding-bottom:4px}
+.pxg-why{margin:0;padding:0 24px 14px 62px;font-size:15px;line-height:1.5;color:var(--tx);animation:pxg-up .55s var(--ease) both;animation-delay:calc(var(--pxg-i,0)*70ms)}
+.pxg-why b{font-weight:600}
+@keyframes pxg-up{0%{opacity:0;transform:translateY(8px)}100%{opacity:1;transform:none}}
+
+/* foot: the count, then the result and the next step */
+.pxg-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 24px;padding:20px 24px 24px}
+.pxg-status{flex:1 1 240px;min-width:0;margin:0}
+.pxg-status b{display:block;font:600 16px/1.3 var(--fb);color:var(--tx)}
+.pxg-status span{display:block;font-size:15px;line-height:1.5;color:var(--mu);margin-top:4px}
+.pxg-status.pxg-end b{font:600 clamp(20px,1.8vw,26px)/1.2 var(--fd);letter-spacing:-.025em}
+.pxg-status.pxg-end span{color:var(--tx)}
+.pxg-status.pxg-end{animation:pxg-up .55s var(--ease) both}
+.pxg-status.pxg-nudge{animation:pxg-nudge .4s var(--ease)}
+@keyframes pxg-nudge{0%,100%{transform:none}35%{transform:translateX(5px)}70%{transform:translateX(-2px)}}
+.pxg-acts{display:flex;flex-wrap:wrap;gap:8px}
+.pxg-foot.pxg-stack .pxg-status{flex-basis:100%}
+.pxg-btn{transition:transform .5s var(--ease),background-color .3s,color .3s,opacity .3s}
+.pxg-btn[disabled]{opacity:.32;cursor:not-allowed}
+.pxg-btn[disabled]::after{display:none}
+.pxg-btn[disabled]:hover i{transform:none}
+.pxg-btn-w{background:#fff;color:var(--ink)}
+.pxg-btn-w::after{background:rgba(20,22,27,.06)}
+.pxg-note{font-size:15px;line-height:1.5;color:var(--mu);margin:14px 0 0}
+
+/* ---------- desktop: 2 columns, the film stands 4 by 5 ---------- */
+@media (min-width:1024px){
+  .pxg-panel{grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:clamp(32px,4.6vw,72px);align-items:start}
+}
+
+/* ---------- phones: 3 tabs in 1 row, then film, features, game ---------- */
+@media (max-width:760px){
+  .pxg-sh-hd{grid-template-areas:"nm mo" "role role" "tag tag";padding:18px 14px 8px}
+  .pxg-tag{justify-self:start;margin-top:5px}
+  .pxg-grp{padding:14px 14px 7px 48px}
+  .pxg-row{column-gap:10px;padding:11px 14px}
+  .pxg-why{padding:0 14px 14px 48px}
+  .pxg-foot{padding:18px 14px 16px}
+  .pxg-acts{flex:1 1 100%}
+  .pxg-acts .pxg-btn{flex:1 1 100%;justify-content:center}
+}
+
+/* ---------- still and reduced motion: every finished state, no motion ---------- */
+html.still .pxg *,html.still .pxg *::before,html.still .pxg *::after{animation:none!important;transition:none!important}
+html.still .pxg-cv{display:none}
+@media (prefers-reduced-motion:reduce){
+  .pxg *,.pxg *::before,.pxg *::after{animation:none!important;transition:none!important}
+  .pxg-cv{display:none}
+}
