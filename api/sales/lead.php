@@ -1,9 +1,9 @@
 <?php
 // Leads from the 2 sales pages (16 Nov 2026).
 //
-//   POST /api/premium-leads  -> lead.php?kind=premium   the Premium enquiry on /premium-website/ (#start)
-//   POST /api/launch-brief   -> lead.php?kind=launch    the Standard brief on /quick-website/ (#start), sent while card checkout is off
-//   (the 2 addresses are rewritten to this file in the site's .htaccess)
+//   POST /api/sales/lead.php?kind=premium   the Premium enquiry on /premium-website/ (#start)
+//   POST /api/sales/lead.php?kind=launch    the Standard brief on /quick-website/ (#start), sent while card checkout is off
+//   The pages post to this file directly: on this server (Cloudways) the .htaccess rewrite rules do not run for plain addresses.
 //
 // Each lead is checked (the rules of backend-reference/premium-leads/serve.py from the sales page pack), then:
 //   1. kept on this server in api/sales/data/leads.jsonl (not reachable from the web: data/.htaccess, and *.jsonl is denied site wide);

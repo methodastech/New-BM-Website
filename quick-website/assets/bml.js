@@ -297,7 +297,7 @@
       if (!CHECKOUT || !APP) {
         // Card checkout is not open yet (16 Nov 2026): the brief goes to the team, who confirm the package and take payment.
         out.classList.remove('is-bad'); out.textContent = 'Sending your brief.'; pay.disabled = true;
-        fetch('/api/launch-brief', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+        fetch('/api/sales/lead.php?kind=launch', { method: 'POST', headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ plan: b.plan, currency: CUR, brief: b, terms: true, marketing: !!form.elements.marketing.checked, utm: store('sessionStorage', 'bml.utm') }) })
           .then(function (r) { return r.json().then(function (j) { return { status: r.status, body: j }; }); })
           .then(function (res) {
