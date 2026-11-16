@@ -136,7 +136,7 @@ var d = document, w = window;
 var me = d.currentScript;
 if (me && !d.querySelector('.bmc')) {
   var base = me.src ? me.src.replace(/[^/]*(\?.*)?$/, '') : '';
-  var knowledgeUrl = me.getAttribute('data-knowledge') || base + 'chat-knowledge.json';
+  var knowledgeUrl = me.getAttribute('data-knowledge') || base + 'chat-knowledge.json' + ((me.src || '').match(/\?[^#]*$/) || [''])[0];   // same ?v= as this script, so a new list is not held in a cache
   var pageData = {};
   try { pageData = JSON.parse((d.getElementById('bml-data') || {}).textContent || '{}') || {}; } catch (e) {}
   var appOf = function () { return String((w.BML_STAGING && w.BML_STAGING.app) || pageData.app || me.getAttribute('data-app') || '').replace(/\/$/, ''); };
@@ -212,15 +212,25 @@ if (me && !d.querySelector('.bmc')) {
     if (!loading) loading = fetch(knowledgeUrl, { credentials: 'omit' }).then(function (r) { if (!r.ok) throw new Error('knowledge'); return r.json(); }).then(function (k) { K = k; paintMeta(); return k; }).catch(function () { loading = null; return null; });
     return loading;
   };
-  var paintMeta = function () {
-    if (!K) return;
+  // suggested questions (16 Nov 2026: more to pick from, and still there after each answer).
+  // Before the first question: the first 6. After an answer: the ones not asked yet, in 1 row that scrolls sideways.
+  var paintChips = function () {
     chips.textContent = '';
-    if (!turns.length) (K.suggestions || []).slice(0, 4).forEach(function (q) {
+    if (!K) { chips.hidden = true; return; }
+    var asked = turns.filter(function (t) { return t.role === 'user'; }).map(function (t) { return t.text; });
+    var left = (K.suggestions || []).filter(function (q) { return asked.indexOf(q) < 0; });
+    chips.classList.toggle('bmc-chips--row', !!turns.length);
+    (turns.length ? left : left.slice(0, 6)).forEach(function (q) {
       var b = el('button', 'bmc-chip', q); b.type = 'button';
       b.addEventListener('click', function () { ask(q); });
       chips.appendChild(b);
     });
+    chips.scrollLeft = 0;
     chips.hidden = !chips.childNodes.length;
+  };
+  var paintMeta = function () {
+    if (!K) return;
+    paintChips();
     foot.textContent = '';
     // 1 quiet line: the answers themselves give the phone number when the box cannot help
     foot.appendChild(d.createTextNode('Prefer a person? '));
@@ -290,7 +300,7 @@ if (me && !d.querySelector('.bmc')) {
       turns.push({ role: 'assistant', text: a.text, links: a.links, mode: a.mode });
       turns = turns.slice(-20); store('bm.chat.turns', turns);
       bubble('assistant', a.text, a.links, a.mode);
-      busy = false; send.disabled = false;
+      busy = false; send.disabled = false; paintChips();
       if (panel.contains(d.activeElement) || d.activeElement === d.body) input.focus();
     });
   };

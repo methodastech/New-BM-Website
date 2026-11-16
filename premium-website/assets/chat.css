@@ -47,7 +47,10 @@
 .bmc-typing i:nth-child(3){animation-delay:.3s}
 @keyframes bmc-dot{0%,100%{opacity:.25}50%{opacity:1}}
 .bmc-chips{display:flex;flex-wrap:wrap;gap:8px;padding:6px 16px 10px}
-.bmc .bmc-chip{min-height:44px;padding:8px 14px;background:#fff;color:var(--bmc-blue);font-size:15px;font-weight:500;line-height:1.25;text-align:left;box-shadow:inset 0 0 0 1px var(--bmc-line)}
+.bmc .bmc-chips--row{flex-wrap:nowrap;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none;padding-top:8px;padding-bottom:8px;border-top:1px solid var(--bmc-line)}
+.bmc-chips--row::-webkit-scrollbar{display:none}
+.bmc-chips--row .bmc-chip{flex:none;white-space:nowrap;min-height:40px;font-size:14px}
+.bmc-chip{min-height:44px;padding:8px 14px;background:#fff;color:var(--bmc-blue);font-size:15px;font-weight:500;line-height:1.25;text-align:left;box-shadow:inset 0 0 0 1px var(--bmc-line)}
 .bmc .bmc-chip:hover{box-shadow:inset 0 0 0 1.5px var(--bmc-blue)}
 .bmc-form{display:flex;gap:8px;padding:10px 12px 10px 16px;border-top:1px solid var(--bmc-line)}
 .bmc .bmc-input{flex:1;min-width:0;min-height:44px;margin:0;padding:8px 12px;border:0;border-radius:0;background:var(--bmc-soft);color:var(--bmc-ink);font:inherit;font-size:16px;line-height:1.3;box-shadow:none;-webkit-appearance:none;appearance:none}

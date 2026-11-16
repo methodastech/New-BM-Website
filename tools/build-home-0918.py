@@ -150,12 +150,12 @@ BUILDS = {
     'svc-system': {
         'out': 'services/system-playbook.html',
         'title': 'Systems & Playbook | Brand Method',
-        'description': 'Brand guidelines and playbooks that keep every touchpoint on-brand, run by your own team.',
+        'description': 'AI automation, SOPs and operating playbooks so your team can run the brand correctly without you in the room, at any scale.',
     },
     'svc-marketing': {
         'out': 'services/marketing-ads.html',
         'title': 'Marketing & Ads | Brand Method',
-        'description': 'Campaigns and paid media engineered to convert, built on the brand strategy.',
+        'description': 'Performance campaigns and creative that turn attention into measurable growth across the channels that matter for you, built on the brand strategy.',
     },
     'svc-content': {
         'out': 'services/content-creation.html',
@@ -165,7 +165,7 @@ BUILDS = {
     'svc-web': {
         'out': 'services/website-apps.html',
         'title': 'Website, App & E-Commerce | Brand Method',
-        'description': 'Websites, apps and online stores built to sell, designed and developed in house.',
+        'description': 'Websites, apps and online stores designed and built in house to convert, on a foundation that scales with the business.',
     },
     'pricing': {
         'out': 'pricing.html',
@@ -176,7 +176,7 @@ BUILDS = {
     'logo-gallery': {
         'out': 'logo-gallery.html',
         'title': 'Logo Gallery | Brand Method',
-        'description': '27 logo marks by Brand Method, from auction platforms to clinics and cafes.',
+        'description': 'A curated collection of brand marks, symbols and identity explorations by Brand Method, from auction platforms to clinics and cafes.',
     },
     'culture': {
         'out': 'culture.html',
