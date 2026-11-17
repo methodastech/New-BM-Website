@@ -131,16 +131,16 @@ def section_html(s, n):
                 '<p>%s Until it is up, ask us and we will walk you through what we can build for your project.</p>'
                 '<a class="g3-link" href="contact.html"><span>Talk to us %s</span></a></div>') % (e(s['coming']), ARROW)
     return ('<section class="g3-sec" id="%s"><div class="section-inner">'
-            '<div class="g3-head"><div class="g3-num rv">%02d &middot; %s</div>'
+            '<div class="g3-head"><div class="g3-num rv">%s</div>'
             '<h2 class="section-title rv">%s</h2>'
             '<div class="g3-head-row"><p class="g3-what rv">%s</p>'
             '<div class="g3-gets rv"><div class="g3-gets-h">What you get</div><ul>%s</ul></div></div></div>'
-            '%s</div></section>') % (s['id'], n, e(s['name']), s['title'], e(s['what']), gets, body)
+            '%s</div></section>') % (s['id'], e(s['name']), s['title'], e(s['what']), gets, body)
 
 
 def jump_html():
     return ('<nav class="g3-jump rv" aria-label="3D services">%s</nav>'
-            % ''.join('<a href="#%s"><b>%02d</b>%s</a>' % (s['id'], i + 1, e(s['name'])) for i, s in enumerate(SECTIONS)))
+            % ''.join('<a href="#%s">%s</a>' % (s['id'], e(s['name'])) for s in SECTIONS))
 
 
 PLAY = '''<script id="g3-play">
@@ -195,6 +195,10 @@ STYLE = '''<style id="g3-style">
 }
 </style>'''
 
+# the hero film: its own, so the page does not repeat the Mascot Gallery banner (made with Higgsfield, 17 Nov 2026)
+HERO = dict(webm='Image/3d/hero-3d.webm', mp4='Image/3d/hero-3d.mp4', poster='Image/3d/hero-3d-poster.webp',
+            label='A small 3D studio set: a building model, a drink can, a character and a game controller come to life')
+
 LEAD = 'What Brand Method builds in 3D, for construction, interactive websites, animation and games, shown through client work.'
 DESC = 'Brand Method 3D services: construction and property visuals, interactive 3D websites, 3D animation and games.'
 
@@ -212,8 +216,16 @@ def main():
     hero_b = src.index('<section class="bmx-body">')
     b = src.index('<section class="cta-band">')
     hero = src[a:hero_b]
-    hero = hero.replace('aria-label="Brand Method mascots in 3D: a butler bear, a delivery rider bunny, a ninja and a gentleman horse"',
-                        'aria-label="Brand Method mascots in 3D"')
+    if all(os.path.isfile(os.path.join(ROOT, HERO[k])) for k in ('mp4', 'poster')):
+        film = ('<video muted loop playsinline autoplay preload="metadata" poster="%s" aria-label="%s">%s<source src="%s" type="video/mp4"></video>'
+                % (HERO['poster'], e(HERO['label']),
+                   '<source src="%s" type="video/webm">' % HERO['webm'] if os.path.isfile(os.path.join(ROOT, HERO['webm'])) else '', HERO['mp4']))
+        hero, n = re.subn(r'<video src="Image/mascot/cast-refined\.mp4"[^>]*></video>', lambda m: film, hero, count=1)
+        if not n:
+            raise SystemExit('the hero film was not found in the Mascot Gallery banner')
+    else:
+        hero = hero.replace('aria-label="Brand Method mascots in 3D: a butler bear, a delivery rider bunny, a ninja and a gentleman horse"',
+                            'aria-label="Brand Method mascots in 3D"')
     hero = re.sub(r'<h1 class="ph-h1 bmx-h1 rv">.*?</h1>', '<h1 class="ph-h1 bmx-h1 rv">3D <em>services</em></h1>', hero, flags=re.S)
     hero = re.sub(r'<p class="ph-lead rv">.*?</p>', '<p class="ph-lead rv">%s</p>' % LEAD, hero, flags=re.S)
     body = ('<section class="bmx-body g3-body"><div class="section-inner">%s</div></section>%s'
