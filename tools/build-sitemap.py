@@ -23,7 +23,7 @@ MAIN = [
     ('about.html', '0.8', 'monthly'), ('contact.html', '0.8', 'monthly'), ('culture.html', '0.7', 'monthly'),
     ('logo-gallery.html', '0.8', 'monthly'), ('mascot-gallery.html', '0.8', 'monthly'),
     ('resources.html', '0.7', 'weekly'), ('archive.html', '0.5', 'yearly'),
-    ('quick-website/index.html', '0.8', 'monthly'), ('premium-website/index.html', '0.8', 'monthly'),
+    ('quickhook-website/index.html', '0.8', 'monthly'), ('premium-website/index.html', '0.8', 'monthly'),
     ('nobodywantsawebsite/index.html', '0.6', 'monthly'),
     ('privacy-policy.html', '0.3', 'yearly'), ('terms-of-service.html', '0.3', 'yearly'),
 ]

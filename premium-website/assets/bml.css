@@ -524,14 +524,14 @@ html[data-cur="USD"] .bml-c-MYR,html[data-cur="MYR"] .bml-c-USD{display:none}
 
 /* the closing band: our builds, faded, behind the call to act */
 .bml-final{background:#fff;color:var(--bml-ink);text-align:center;position:relative;overflow:hidden;padding:clamp(96px,12vw,170px) 0}
-.bml-final-bg{position:absolute;inset:0;display:grid;gap:12px;align-content:center;opacity:.2;overflow:hidden}
+.bml-final-bg{position:absolute;inset:0;display:grid;gap:12px;align-content:center;opacity:.45;overflow:hidden}   /* 16 Nov 2026: was .2, the builds behind the closing line were too faint */
 .bml-final-row{display:flex;gap:12px;width:max-content;animation:bml-fmarq 90s linear infinite}
 .bml-final-row:nth-child(2){animation-direction:reverse;animation-duration:110s}
 .bml-final-row:nth-child(3){animation-duration:75s}
 .bml-final-row img{width:clamp(220px,22vw,340px);aspect-ratio:16/10;object-fit:cover;object-position:top;flex:none}
 @keyframes bml-fmarq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @media (prefers-reduced-motion:reduce){.bml-final-row{animation:none}}
-.bml-final::after{content:"";position:absolute;inset:0;background:radial-gradient(58% 72% at 50% 50%,rgba(255,255,255,.94) 0,rgba(255,255,255,.5) 100%);pointer-events:none}
+.bml-final::after{content:"";position:absolute;inset:0;background:radial-gradient(58% 72% at 50% 50%,rgba(255,255,255,.9) 0,rgba(255,255,255,.62) 38%,rgba(255,255,255,.12) 100%);pointer-events:none}
 .bml-final-in{justify-items:center;z-index:1}
 .bml-final p{margin:0 auto;font-size:1.15rem;max-width:34em}
 
@@ -2441,3 +2441,5 @@ a.bml-brand{display:inline-flex;align-items:center;min-height:44px}
 .bml-pki .iw{fill:none;stroke:#fff;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
 .bml-pki .is{fill:none;stroke:var(--pk);stroke-width:1.8;stroke-linecap:round}
 .bml-pki .iwf{fill:#fff}
+
+@media (max-width:640px){.bml-final::after{background:radial-gradient(90% 62% at 50% 50%,rgba(255,255,255,.94) 0,rgba(255,255,255,.78) 55%,rgba(255,255,255,.2) 100%)}}   /* phones: keep the closing line readable over the builds */

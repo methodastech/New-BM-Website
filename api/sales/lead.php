@@ -2,7 +2,7 @@
 // Leads from the 2 sales pages (16 Nov 2026).
 //
 //   POST /api/sales/lead.php?kind=premium   the Premium enquiry on /premium-website/ (#start)
-//   POST /api/sales/lead.php?kind=launch    the Standard brief on /quick-website/ (#start), sent while card checkout is off
+//   POST /api/sales/lead.php?kind=launch    the Standard brief on /quickhook-website/ (#start), sent while card checkout is off
 //   The pages post to this file directly: on this server (Cloudways) the .htaccess rewrite rules do not run for plain addresses.
 //
 // Each lead is checked (the rules of backend-reference/premium-leads/serve.py from the sales page pack), then:
@@ -236,7 +236,7 @@ if ($errors) answer(422, ['ok' => false, 'errors' => $errors]);
 $lead['id'] = bin2hex(random_bytes(8));
 $lead['kind'] = $kind;
 $lead['received_at'] = (new DateTime('now', new DateTimeZone('Asia/Kuala_Lumpur')))->format('Y-m-d H:i:s');
-$lead['page'] = $kind === 'premium' ? 'https://brandmethod.co/premium-website/#start' : 'https://brandmethod.co/quick-website/#start';
+$lead['page'] = $kind === 'premium' ? 'https://brandmethod.co/premium-website/#start' : 'https://brandmethod.co/quickhook-website/#start';
 if ($kind === 'premium') $lead['route'] = route_of($lead);
 
 // 1. keep it here first, so nothing is lost if a send fails
