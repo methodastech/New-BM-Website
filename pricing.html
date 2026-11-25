@@ -25286,6 +25286,10 @@ html body .bj2-c.bj2-active .bj2-c-head:not(#x):not(#y) .bpv{transform:translate
 <style id="bm-fit-0211">/* 2 Nov 2026, Bazil: "in 1k 2k 4k 8k it has the same sizes", "u can make it a bit bigger but needs to fit well".
    The page is laid out at 1600 CSS px and zoomed to the window width, never below 1, so every resolution shows the same picture. Change DW below to taste. */
 html{zoom:var(--bm-fit,1)}
+/* 25 Nov 2026: "nav bar big" at 4K. The shared nav (js/layout.js) has its own big-screen zoom ladder (1.86 at 3840), which
+   multiplied with this page zoom (2.4) to 4.46x and clipped the logo and Hire Us. Above 1600 the page is a zoomed 1600 layout,
+   so the nav keeps its 1600 settings; a rule on the host from outside beats the shadow root's :host rules. */
+@media(min-width:1601px){#bm-nav-host{zoom:1.06 !important;--max-w:1440px !important;--bmz:1.06 !important}}
 /* viewport units ignore the zoom, so the one full-bleed rule that uses them is divided by the same factor */
 @media(min-width:1001px){.svc-block .svc-panels.has-four{margin-left:calc(50% - 50vw / var(--bm-fit,1))!important;margin-right:calc(50% - 50vw / var(--bm-fit,1))!important;padding-left:calc(50vw / var(--bm-fit,1) - 50%)!important;padding-right:calc(50vw / var(--bm-fit,1) - 50%)!important}}
 </style>
@@ -25798,9 +25802,10 @@ html body .svc-block .svc-panels>.svc-panel:not(#x)>.panel-pic-top .hero-ico svg
     if(lg&&window.innerWidth<=980){ r.style.setProperty('--bm-ml',Math.round(lg.getBoundingClientRect().left)+'px'); r.classList.add('bm-fit-m'); }
     else r.classList.remove('bm-fit-m');
     if(!lg||!ct||window.innerWidth<=980){ r.classList.remove('bm-fit'); return; }
-    var a=lg.getBoundingClientRect(), b=ct.getBoundingClientRect();
-    r.style.setProperty('--bm-gl',Math.round(a.left)+'px');
-    r.style.setProperty('--bm-gr',Math.round(r.clientWidth-b.right)+'px');
+    /* 25 Nov 2026: rectangles come back in zoomed screen px; the gutters are CSS px that the page zoom scales again, so divide it out */
+    var Z=parseFloat(getComputedStyle(r).zoom)||1, a=lg.getBoundingClientRect(), b=ct.getBoundingClientRect(), W=r.getBoundingClientRect().width;
+    r.style.setProperty('--bm-gl',Math.round(a.left/Z)+'px');
+    r.style.setProperty('--bm-gr',Math.round((W-b.right)/Z)+'px');
     r.classList.add('bm-fit');
   }
   fit(); window.addEventListener('resize',fit); window.addEventListener('load',fit);
@@ -25869,8 +25874,10 @@ html body .svc-block .svc-panels>.svc-panel:not(#x)>.panel-pic-top .hero-ico svg
   /* Card titles on two lines: a title of two or more words that fits on one line is broken at the most even point
      ("UX Redesign / Sprint", "AI Readiness / Audit"); a "·" stays with the word before it; one-word titles and titles
      that already wrap are left alone. Undone and redone on resize, so the break always matches the card's width. */
+  /* 25 Nov 2026: screen rectangles come back multiplied by the page zoom (bm-fit-0211, 2.4 at 4K); computed styles do not, so divide it out */
+  function zoomOf(el){ if(el&&typeof el.currentCSSZoom==='number') return el.currentCSSZoom||1; var z=parseFloat(getComputedStyle(document.documentElement).zoom); return (z&&z>0)?z:1; }
   function lines(t){ var lh=parseFloat(getComputedStyle(t).lineHeight)||parseFloat(getComputedStyle(t).fontSize)*1.15;
-    return Math.round(t.getBoundingClientRect().height/lh); }
+    return Math.round(t.getBoundingClientRect().height/zoomOf(t)/lh); }
   function split(t){
     if(t.hasAttribute('data-bm-html')){ t.innerHTML=t.getAttribute('data-bm-html'); }
     if(!t.getClientRects().length) return;
@@ -25902,7 +25909,7 @@ html body .svc-block .svc-panels>.svc-panel:not(#x)>.panel-pic-top .hero-ico svg
     var r=document.createRange(); r.selectNodeContents(t);
     var used=left; [].forEach.call(r.getClientRects(),function(x){ if(x.width) used=Math.max(used,x.right); });
     if(g&&g.getClientRects().length) used=Math.max(used,g.getBoundingClientRect().right);
-    var w=Math.max(110,Math.min(300,Math.round(right-used-14+parseFloat(getComputedStyle(pic).marginRight||0))));
+    var w=Math.max(110,Math.min(300,Math.round((right-used)/zoomOf(L)-14+parseFloat(getComputedStyle(pic).marginRight||0))));
     pic.style.setProperty('width',w+'px','important'); pic.style.setProperty('max-width','none','important');
   }
   function run(){ document.querySelectorAll('.svc-panel .panel-left-col > .panel-title').forEach(split); document.querySelectorAll('.svc-panel').forEach(room); }

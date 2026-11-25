@@ -21,8 +21,8 @@
    address bar) and you look through it into a tall room: the Eskayvie page fills the back wall, Eskayvie's own products
    stand on plinths under their own pictures, on a table in the middle, on a shelf and at the counter (the Mindtropic and
    Mindtropic Junior tubs are real 3D, wrapped in their own labels), there is a lounge with a sofa and an armchair, and a
-   counter with a cashier under an orange button. 6 real, rigged people: 1 sits in the lounge, 1 stands at the till, and 4
-   walk in through the door, stop at the products, pick one up, queue, pay and leave with a bag, sit down in the lounge,
+   counter with a cashier under an orange button. 4 real, rigged people (6 until 18 Nov): 1 sits in the lounge, 1 stands at the till, and 2
+   walk in through the door, stop at the products, pick one up, pay and leave with a bag, sit down in the lounge,
    and then walk back past the shop on the street, so each is on stage for nearly the whole loop and nobody is there twice.
    Version 2 fills its frame (the shop front spans about 9 tenths of the width), people walk about a sixth faster than real
    pace with their feet still planted, something moves in every second (a pointer clicks the cards and their pictures change,
@@ -32,7 +32,7 @@
    every motion is a whole number of cycles a loop, so nothing visibly resets.
 
    Nothing is generated and nothing comes from another server. Everything loads from ./stage3d/ beside this file, and only
-   when mount() is called: three.js (MIT, vendored) and 6 Microsoft Rocketbox people (MIT, licence beside them).
+   when mount() is called: three.js (MIT, vendored) and 4 Microsoft Rocketbox people (MIT, licence beside them), packed with meshopt.
 
    Use:
      import { mount } from './assets/stage3d.js';
@@ -83,7 +83,9 @@ export async function mount(el, opts = {}) {
 
   try {
     const still = opts.still !== undefined ? !!opts.still : !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-    const [THREE, { GLTFLoader }, BGU] = await Promise.all([import(base + 'three/three.module.min.js'), import(base + 'three/addons/loaders/GLTFLoader.js'), import(base + 'three/addons/utils/BufferGeometryUtils.js')]);
+    const [THREE, { GLTFLoader }, BGU, { MeshoptDecoder }] = await Promise.all([import(base + 'three/three.module.min.js'), import(base + 'three/addons/loaders/GLTFLoader.js'), import(base + 'three/addons/utils/BufferGeometryUtils.js'), import(base + 'three/addons/libs/meshopt_decoder.module.js')]);
+    // the people and the furniture are packed with meshopt (18 Nov: 6.8 MB of people became about 1.1 MB), so every loader needs the decoder
+    const gltfLoader = () => new GLTFLoader().setMeshoptDecoder(MeshoptDecoder);
 
     cv = document.createElement('canvas');
     cv.setAttribute('aria-hidden', 'true');
@@ -519,7 +521,7 @@ export async function mount(el, opts = {}) {
     }
 
     /* ---- the people ---- */
-    const L = new GLTFLoader(), V = new THREE.Vector3();
+    const L = gltfLoader(), V = new THREE.Vector3();
     // The people keep their own colours (owner, 15 Nov: without colour they read as odd). opts.colour === false draws them in 3 flat tones.
     const SAT = opts.colour === false ? 1 : 0;
     const BANDS = new THREE.DataTexture(new Uint8Array([150, 150, 150, 255, 214, 214, 214, 255, 255, 255, 255, 255]), 3, 1, THREE.RGBAFormat);
@@ -619,13 +621,14 @@ export async function mount(el, opts = {}) {
       p.speed = pace * F.planted * size / F.size0;                         // metres a second at this size and pace
       return p;
     }
-    // smart dress, 6 different people (Microsoft Rocketbox). The sizes give real heights from 1.59 m to 1.74 m.
-    const FILES = [opts.woman || 'rb-woman-black-suit', opts.man || 'rb-man-navy-suit', 'rb-woman-pink-blazer', 'rb-man-purple-shirt', 'rb-woman-hijab', 'rb-man-white-shirt'];
-    const [fW1, fM1, fSit, fM2, fW2, fTill] = await Promise.all(FILES.map(load));
+    // smart dress, 4 different people (Microsoft Rocketbox), down from 6 on 18 Nov to lighten the page: the woman in the hijab
+    // shops and pays, the man in the navy suit browses and sits a while, 1 sits in the lounge, 1 stands at the till.
+    const FILES = [opts.woman || 'rb-woman-hijab', opts.man || 'rb-man-navy-suit', 'rb-woman-pink-blazer', 'rb-man-white-shirt'];
+    const [fW1, fM1, fSit, fTill] = await Promise.all(FILES.map(load));
     if (dead) return null;
     shared.sit = fSit.clips.sit; shared.wave = fM1.clips.wave;
-    // 4 walk, each at a pace of their own so no 2 move in step; 2 stay where they are
-    const buyer = body(fW1, .94, 1.24), payer = body(fM2, .94, 1.22), browser = body(fM1, .94, 1.2), looker = body(fW2, .94, 1.25);
+    // 2 walk, each at a pace of their own so they never move in step; 2 stay where they are
+    const buyer = body(fW1, .94, 1.25), browser = body(fM1, .94, 1.2);
     const sitter = body(fSit, .94, 1), cashier = body(fTill, .94, 1);
 
     /* ---- the pose layer, after the clips every frame: a real reach or point, and heads that turn to what they look at.
@@ -744,17 +747,6 @@ export async function mount(el, opts = {}) {
       pay(3.0, 2.3),
       { walk: EXIT },
     ].concat(back(1, 2.62)));
-    // 2. he walks in, tries the tablet on the table, joins the queue behind her on the second mark, steps up, pays, and leaves with his bag
-    const WAIT = pBuyer.segs[5].dur + .45;                                  // he steps up once she is well clear of the counter
-    const pPayer = plan(payer, [
-      { walk: [[OUTL, IN], [-1.2, IN], [-.5, .1], [-.1, -.75], P(ISL_F)] },
-      { hold: 2.3, face: [ISL_F.x, ISL_F.z - 2], look: ISL_LOOKF, point: ISL_LOOKF, from: .4, to: 1.7, reach: .8, take: 1.6, takes: 'mt' },
-      { walk: [P(Q2)] },
-      { hold: WAIT, face: PAYF, look: TILLV },
-      { walk: [P(Q1)] },
-      pay(3.0, 2.2),
-      { walk: EXIT },
-    ].concat(back(1, 2.3)));
     // 3. he comes in from the right, tries a laptop at the table, says hello in the lounge and sits down for a while, then leaves to the left
     const pBrowser = plan(browser, [
       { walk: [[OUTR, IN], [.35, IN], [-.4, .1], [-.62, -1.1], [-.66, -3.1], P(ISL_B1)] },
@@ -763,20 +755,11 @@ export async function mount(el, opts = {}) {
       { hold: 6.6, face: P(FACE2), look: SEATV, wave: [.35, 1.75], sit: { at: P(SEAT2), from: 2.0, to: 5.6 } },
       { walk: [[-.62, -3.15], [-.6, -1.9], [.3, -.85], [.5, .2], [-.4, OUT], [OUTL, OUT]] },
     ].concat(back(-1, 2.62)));
-    // 4. she comes in from the right, walks round to the card in the far corner, tries the other laptop, and leaves to the left
-    const pLooker = plan(looker, [
-      { walk: [[OUTR, IN], [.35, IN], [-.4, .1], [-.62, -1.1], [-.6, -2.95], [.25, -3.3], [1.05, -3.85], [2.0, -3.62], AT_C] },
-      { hold: 2.8, face: lookAt(cardC), look: cardC.look, point: cardC.look, from: .8, to: 2.4 },
-      { walk: [[2.25, -3.55], P(ISL_B2)] },
-      { hold: 2.2, face: [ISL_B2.x, ISL_B2.z + 2], look: ISL_LOOK2, point: ISL_LOOK2, from: .4, to: 1.8, reach: .7 },
-      { walk: [[1.05, -3.82], [.2, -3.3], [-.6, -2.9], [-.58, -1.2], [.3, -.42], [.5, .2], [-.4, OUT], [OUTL, OUT]] },
-    ].concat(back(-1, 2.3)));
-    const plans = [pBuyer, pPayer, pBrowser, pLooker];
+    const plans = [pBuyer, pBrowser];
     const LOOP = Math.max(opts.loop || 36, Math.ceil(Math.max.apply(null, plans.map((q) => q.dur)) + .3));
-    // when each visit starts. The second payer is tied to the first so they queue; the other 2 are set by debug.tune().
-    const OFF = opts.offsets || [0, 0, 18.75, 27.5];
+    // when each visit starts: half a loop apart, so 1 of them is always about
+    const OFF = opts.offsets || [0, 18.75];
     plans.forEach((Q, i) => { Q.off = OFF[i]; });
-    pPayer.off = (pBuyer.off + pBuyer.segs[5].t0 + .9 - pPayer.segs[3].t0 + LOOP * 2) % LOOP;
     // 2 people do not walk: she sits in the lounge the whole time, he stands at the till
     sitter.o.position.set(SEAT.x, 0, SEAT.z); sitter.o.visible = true; sitter.play('sit', .01);
     cashier.o.position.set(TILL.x, 0, TILL.z); cashier.o.rotation.y = -Math.PI / 2; cashier.o.visible = true; cashier.play('idle', .01);
@@ -917,7 +900,7 @@ export async function mount(el, opts = {}) {
     const wanted = (opts.props === false ? [] : Array.isArray(opts.props) ? opts.props : PROPS).filter((n) => FIT[n]);
     let propsLeft = wanted.length;
     wanted.forEach((name) => {
-      new GLTFLoader().loadAsync(base + 'props/' + name + '.glb').then((g) => {
+      gltfLoader().loadAsync(base + 'props/' + name + '.glb').then((g) => {
         if (dead) return;
         const [k, sx, sy, sz, dz] = FIT[name], m = g.scene, p = k.pt(0, 0, dz);
         m.traverse((q) => { if (!q.isMesh) return; q.material.envMap = envTex; q.material.envMapIntensity = .45; [q.material.map, q.material.normalMap, q.material.roughnessMap].forEach((t) => { if (t) t.anisotropy = ANISO; }); });
@@ -954,25 +937,6 @@ export async function mount(el, opts = {}) {
         },
         // how many people are on stage and how many are walking, second by second
         busy: () => { const out = []; for (let t = 0; t < LOOP; t += 1) { let on = 2, moving = 0; plans.forEach((Q) => { const o = at(Q, mod(t - Q.off)); if (o.vis) { on++; if (o.clip === 'walk') moving++; } }); out.push([t, on, moving]); } return out; },
-        // look for the start times of the 2 free visits that keep everybody furthest apart: every pair of times, a quarter second apart
-        tune: () => {
-          const step = .25, N = Math.round(LOOP / step), tab = plans.map((Q) => { const a = []; for (let i = 0; i < N; i++) { const o = at(Q, i * step); a.push(o.vis && Math.abs(o.x) < SEEN ? [o.x, o.z, o.clip === 'walk' ? 1 : 0] : null); } return a; });
-          const fixed = [0, Math.round(mod(pPayer.off - pBuyer.off) / step)];
-          let best = null;
-          for (let a = 0; a < N; a++) for (let b = 0; b < N; b++) {
-            const offs = [fixed[0], fixed[1], a, b]; let min = 9, still = 0, quiet = 0;
-            for (let i = 0; i < N && min > .4; i++) {
-              const pts = STILL.map((q) => [q[0], q[1]]); let moving = 0, inView = 0;
-              for (let k = 0; k < 4; k++) { const o = tab[k][((i - offs[k]) % N + N) % N]; if (o) { pts.push(o); moving += o[2]; if (Math.abs(o[0]) < 4.4) inView++; } }
-              if (!moving) still++;
-              if (inView < 2) quiet++;                                 // fewer than 2 of the 4 walkers in the picture
-              for (let x = 0; x < pts.length; x++) for (let y = x + 1; y < pts.length; y++) { const d = Math.hypot(pts[x][0] - pts[y][0], pts[x][1] - pts[y][1]); if (d < min) min = d; }
-            }
-            const v = Math.min(min, .75) * 4 - still * .02 - quiet * .05;
-            if (min > .4 && (!best || v > best.v)) best = { v, min, still, quiet, offs: offs.map((o) => o * step) };
-          }
-          return best;
-        },
       },
     };
   } catch (e) {

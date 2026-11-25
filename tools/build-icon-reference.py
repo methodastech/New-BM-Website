@@ -1,14 +1,23 @@
 """Build icon-reference.html: one page listing every icon from the FAR Capital build (website/farcapital/) and the
-animated feature illustrations from the Premium sales page (premium-website/), for design reference (17 Nov 2026).
+animated feature illustrations and process step scenes from the Premium sales page (premium-website/), for design
+reference (17 Nov 2026; process scenes added 18 Nov), and the Methodas OS screen and module chip from the home page.
 
-Internal: noindex and linked from nowhere. Everything is read from the 2 source pages at build time, so re-run it
-after either page changes:
+Internal: noindex and linked from nowhere. Everything is read from the source pages at build time, so re-run it
+after any of them changes:
 
     python tools/build-icon-reference.py
+
+To also save a copy that opens on its own outside the repo (stylesheet and poster images built in; the 2 Methodas
+screen recordings shrunk with ffmpeg into <folder>/assets/methodas/, so only the web fonts need a connection):
+
+    python tools/build-icon-reference.py --copy-to "C:\\Users\\user\\Downloads\\BM-52-Frameworks-Module"
 """
+import base64
 import html
 import os
 import re
+import subprocess
+import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, 'icon-reference.html')
@@ -104,10 +113,54 @@ def premium():
     s = read(os.path.join(PRE, 'index.html'))
     cards = re.findall(r'<li class="bml-bxc\b.*?</li>', s, re.S)
     css = read(os.path.join(PRE, 'assets', 'bml.css'))
-    a = css.find('Beyond the website: 12 small scenes')
-    a = css.rfind('/*', 0, a)
+    m = re.search(r'Beyond the website: \d+ small scenes', css)
+    if not m:
+        raise SystemExit('bml.css: the "Beyond the website" scene block was not found')
+    a = css.rfind('/*', 0, m.start())
     nxt = [m.start() for m in re.finditer(r'/\* -{5,}', css) if m.start() > a + 10]
     return cards, css[a:nxt[0] if nxt else len(css)]
+
+
+def process():
+    """The 2 rows of process scenes (bml-pf): 'From first call to live' (set A) and 'What happens after you enquire' (set B)."""
+    s = read(os.path.join(PRE, 'index.html'))
+    rows = []
+    for cls in ('bml-steps--pfa', 'bml-steps--pfb'):
+        i = s.find('<ol class="bml-steps %s"' % cls)
+        if i < 0:
+            raise SystemExit('premium page: the %s steps were not found' % cls)
+        steps = re.findall(r'<li class="bml-step\b.*?</li>(?=\s*<li|\s*</ol>)', s[i:s.find('</ol>', i) + 5], re.S)
+        rows.append((cls, steps))
+    css = read(os.path.join(PRE, 'assets', 'bml.css'))
+    a = css.find('/* Sales page 2: the process')
+    b = css.find('/* ---------- Beyond the website', a)
+    if a < 0 or b < 0:
+        raise SystemExit('bml.css: the process scene block was not found')
+    return rows, css[a:b]
+
+
+def methodas():
+    """The home page's 2 Methodas OS stages (live screen wired to its module chip), its scripts, and nothing else of the section."""
+    s = read(os.path.join(ROOT, 'index.html'))
+    i = s.find('<section class="bmx-lm" id="free-tools">')
+    sec = s[i:s.find('</section>', i)]
+    items = re.findall(r'<div class="bmx-lm-item (bmx-lm-item--\w+)">(<div class="bmx-lm-stage\b.*?<svg class="bmx-lm-bus"[^>]*></svg></div>)', sec, re.S)
+    js = [re.search(r'<script id="%s">.*?</script>' % k, s, re.S) for k in ('bm-methodas-lm', 'bm-preview-videos')]
+    css = re.search(r'<link id="bm-methodas-lm" rel="stylesheet" href="([^"]+)"', s)
+    if i < 0 or len(items) < 2 or not all(js) or not css:
+        raise SystemExit('home page: the Methodas OS section changed (%d stages)' % len(items))
+    stages = [(cls, re.sub(r'(class="bmx-lm-stage) rv"', r'\1"', st)) for cls, st in items]
+    # shapes the stages borrow by <use href="#id"> (the METHODAS OS wordmark): copy the hidden <svg> that holds each one
+    defs = []
+    for ref in sorted(set(re.findall(r'<use[^>]*href="#([\w-]+)"', ''.join(st for _, st in stages)))):
+        m = re.search(r'\sid="%s"' % re.escape(ref), s)
+        a = s.rfind('<svg', 0, m.start()) if m else -1
+        if a < 0:
+            raise SystemExit('home page: the shape #%s was not found' % ref)
+        block = s[a:s.find('</svg>', m.start()) + 6]
+        if block not in defs:
+            defs.append(block)
+    return stages, ''.join(m.group(0) for m in js), css.group(1), ''.join(defs)
 
 
 PAGE = '''<!doctype html>
@@ -157,9 +210,19 @@ body{margin:0;background:#fff;color:#0b0d1a;font:15px/1.5 Inter,system-ui,sans-s
 .bml-bxc h3{display:flex;align-items:flex-start;gap:9px;margin:0;font:400 1.2rem/1.15 Fraunces,Georgia,serif;letter-spacing:-.01em}
 .bml-bxc-ico{flex:none;width:22px;height:22px;color:#1a26de}
 .bml-bxc p{margin:8px 0 0;font-size:14px;line-height:1.5;color:#474b5c}
+.rf-sec--pre ol.bml-steps{--sg:clamp(16px,2vw,30px);list-style:none;margin:0 0 34px;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--sg)}
+.rf-sec--pre ol.bml-steps--pfb{grid-template-columns:repeat(3,minmax(0,1fr))}
+.rf-sub{font:500 11px/1 "JetBrains Mono",monospace;letter-spacing:.12em;text-transform:uppercase;color:#5b6070;margin:0 0 12px}
+.bml-step{position:relative;display:grid;align-content:start;background:#fff;border:1px solid #e2e6f1}
+.bml-step-art{position:relative;background:#eef2fd}
+.bml-step:not(:last-child) .bml-step-art::after{content:"\\2192";position:absolute;right:calc(var(--sg)/-2 - 1px);top:50%;transform:translate(50%,-50%);font:400 24px/1 Inter,sans-serif;color:#1a26de;z-index:2}
+.bml-step-b{padding:clamp(14px,1.6vw,22px)}
+.bml-step-h{display:flex;align-items:baseline;gap:10px;margin:0;font:400 1.2rem/1.15 Fraunces,Georgia,serif;letter-spacing:-.01em}
+.bml-step-h b{font-weight:400;color:#1a26de}
+.bml-step-b p{display:none}
 .rf-file{display:block;margin-top:8px;font:400 11px/1.3 "JetBrains Mono",monospace;color:#8a8fa3}
-@media (max-width:1000px){.rf-sec--pre ul.bml-bxgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:560px){.rf-sec--pre ul.bml-bxgrid{grid-template-columns:1fr}.rf-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.rf-grid--line{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:1000px){.rf-sec--pre ul.bml-bxgrid,.rf-sec--pre ol.bml-steps,.rf-sec--pre ol.bml-steps--pfb{grid-template-columns:repeat(2,minmax(0,1fr))}.rf-sec--pre .bml-step .bml-step-art::after{display:none}}
+@media (max-width:560px){.rf-sec--pre ul.bml-bxgrid{grid-template-columns:1fr}.rf-sec--pre ol.bml-steps,.rf-sec--pre ol.bml-steps--pfb{grid-template-columns:1fr}.rf-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.rf-grid--line{grid-template-columns:repeat(3,minmax(0,1fr))}}
 </style>
 <style id="far-icons">
 /* from website/farcapital/assets/site.css: the icon rules only */
@@ -170,13 +233,28 @@ body{margin:0;background:#fff;color:#0b0d1a;font:15px/1.5 Inter,system-ui,sans-s
 .rf-sec--pre{--bml-accent:#1a26de;--bml-tint:#dde5fb;--bml-ink:#0b0d1a}
 %(pre_css)s
 </style>
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700&amp;display=swap">
+<link rel="stylesheet" href="%(lm_css)s">
+<style id="methodas-base">
+/* from css/home.css and the home page: the screen base and the video fill that css/methodas-lm.css builds on */
+.rf-lm{--accent:#1a26de;--muted:#474747;--font-display:'Fraunces',Georgia,serif;--font-sans:'Inter',sans-serif;--font-body:'Inter',sans-serif;--font-mono:'JetBrains Mono',ui-monospace,monospace;--ease:cubic-bezier(0.25,0.46,0.45,0.94)}
+.rf-lm .bmx-scr-stage{position:relative;aspect-ratio:1280/756;overflow:hidden;background:#0d1226}
+.bmx-scr-stage .bm-scr-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
+html body .rf-lm.bmx-lm{padding:0;background:none}
+.rf-lm .bmx-lm-grid{margin-top:0}
+.rf-lm .rf-file{margin-top:14px}
+</style>
+<style id="premium-process">
+/* from premium-website/assets/bml.css: the process scene block (bml-pf) */
+%(pf_css)s
+</style>
 </head>
 <body>
 <div style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">%(sprite)s</div>
 <header class="rf-top"><div class="rf-wrap">
 <h1>Icon Reference</h1>
-<p>Every icon in the FAR Capital build, and the animated feature illustrations from the Premium website page, for design reference. Hover a FAR Capital icon to see its hover motion; use Replay to run the entrance again.</p>
-<nav class="rf-jump"><a href="#far-duo">FAR Capital duotone (%(n_duo)d)</a><a href="#far-line">FAR Capital line (%(n_line)d)</a><a href="#premium">Premium illustrations (%(n_pre)d)</a></nav>
+<p>Every icon in the FAR Capital build, and the animated feature illustrations and process step scenes from the Premium website page, for design reference. Hover a FAR Capital icon to see its hover motion; use Replay to run the entrance again.</p>
+<nav class="rf-jump"><a href="#far-duo">FAR Capital duotone (%(n_duo)d)</a><a href="#far-line">FAR Capital line (%(n_line)d)</a><a href="#premium">Premium illustrations (%(n_pre)d)</a><a href="#process">Premium process steps (%(n_pf)d)</a><a href="#methodas">Methodas OS (%(n_lm)d)</a></nav>
 </div></header>
 
 <section class="rf-sec rf-sec--far" id="far-duo"><div class="rf-wrap">
@@ -194,8 +272,20 @@ body{margin:0;background:#fff;color:#0b0d1a;font:15px/1.5 Inter,system-ui,sans-s
 
 <section class="rf-sec rf-sec--pre" id="premium"><div class="rf-wrap">
 <div class="rf-head"><div><div class="rf-k">premium-website &middot; class="bml-bx"</div><h2>Premium website feature illustrations</h2>
-<p>The 12 small scenes from "Beyond the website": white floating cards, ink bars for words, blue as the main colour. They loop while on screen.</p></div></div>
+<p>The %(n_pre)d small scenes from "Beyond the website": white floating cards, ink bars for words, blue as the main colour. They loop while on screen.</p></div></div>
 <ul class="bml-bxgrid">%(pre)s</ul>
+</div></section>
+
+<section class="rf-sec rf-sec--pre" id="process"><div class="rf-wrap">
+<div class="rf-head"><div><div class="rf-k">premium-website &middot; class="bml-pf"</div><h2>Premium website process steps</h2>
+<p>The moving interface scenes on the process cards, each in its own step colour. On a wide screen the steps play in turn, left to right, with the line under each one marking its turn; on a narrow screen they all play together.</p></div></div>
+%(pf)s
+</div></section>
+
+<section class="rf-sec" id="methodas"><div class="rf-wrap">
+<div class="rf-head"><div><div class="rf-k" style="color:#1a26de">index.html &middot; #free-tools &middot; class="bmx-lm-stage"</div><h2>Methodas OS screen and module chip</h2>
+<p>From the home page section "Grow sales with the method behind 100+ brands": a Methodas OS screen playing the live module, wired to its module chip. The wires are drawn by script from the live positions, so they follow the layout at any width.</p></div></div>
+%(lm_defs)s<div class="bmx-lm rf-lm"><div class="bmx-lm-grid">%(lm)s</div></div>
 </div></section>
 
 <script>
@@ -205,7 +295,7 @@ body{margin:0;background:#fff;color:#0b0d1a;font:15px/1.5 Inter,system-ui,sans-s
   // FAR Capital icons: the entrance runs when the tile comes on screen ([data-rv].on), like on the source page
   var tiles=[].slice.call(d.querySelectorAll('[data-rv]'));
   // Premium scenes: they move only while on screen (.is-live), like on the source page
-  var arts=[].slice.call(d.querySelectorAll('.bml-bxc-art'));
+  var arts=[].slice.call(d.querySelectorAll('.bml-bxc-art,ol.bml-steps'));
   if('IntersectionObserver' in window){
     var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target);}});},{rootMargin:'0px 0px -8% 0px'});
     tiles.forEach(function(t){io.observe(t);});
@@ -221,6 +311,7 @@ body{margin:0;background:#fff;color:#0b0d1a;font:15px/1.5 Inter,system-ui,sans-s
   });
 })();
 </script>
+%(lm_js)s
 </body>
 </html>
 '''
@@ -229,6 +320,8 @@ body{margin:0;background:#fff;color:#0b0d1a;font:15px/1.5 Inter,system-ui,sans-s
 def main():
     sprite, symbols, duo = far_icons()
     cards, pre_css = premium()
+    pf_rows, pf_css = process()
+    lm_stages, lm_js, lm_css, lm_defs = methodas()
     if not symbols or not duo or len(cards) < 12:
         raise SystemExit('source pages changed: %d line, %d duotone, %d premium' % (len(symbols), len(duo), len(cards)))
     e = lambda x: html.escape(x, quote=True)
@@ -242,12 +335,63 @@ def main():
         m = re.search(r'bml-bx--([\w-]+)', c)
         name = m.group(1) if m else ''
         pre_html += re.sub(r'</p>(\s*</div>\s*</li>)$', lambda k: '</p><span class="rf-file">bml-bx--%s</span>' % e(name) + k.group(1), c, count=1)
+    titles = {'bml-steps--pfa': 'From first call to live (bml-steps--pfa)',
+              'bml-steps--pfb': 'What happens after you enquire (bml-steps--pfb)'}
+    pf_html = ''
+    for cls, steps in pf_rows:
+        lis = ''
+        for st in steps:
+            st = re.sub(r'\sbml-reveal\b', '', st)
+            m = re.search(r'bml-pf--((?:flow|after)-[\w-]+)', st)
+            tag = '<span class="rf-file">bml-pf--%s</span>' % e(m.group(1) if m else '')
+            lis += re.sub(r'</h3>', lambda k: '</h3>' + tag, st, count=1)
+        pf_html += '<p class="rf-sub">%s</p><ol class="bml-steps %s">%s</ol>' % (titles[cls], cls, lis)
+    lm_names = {'bmx-lm-item--pb': 'Brand Growth playbook (#bmx-mc-pb)', 'bmx-lm-item--fw': '52 Conversion framework (#bmx-mc-fw)'}
+    lm_html = ''.join('<div class="bmx-lm-item %s">%s<span class="rf-file">%s</span></div>' % (cls, st, e(lm_names.get(cls, cls)))
+                      for cls, st in lm_stages)
     out = PAGE
     for k, v in dict(far_css=far_css(), pre_css=pre_css, sprite=sprite, duo=duo_html, line=line_html, pre=pre_html,
-                     n_duo=len(duo), n_line=len(symbols), n_pre=len(cards)).items():
+                     n_duo=len(duo), n_line=len(symbols), n_pre=len(cards), pf_css=pf_css, pf=pf_html,
+                     n_pf=sum(len(st) for _, st in pf_rows), lm=lm_html, lm_js=lm_js, lm_defs=lm_defs, lm_css=lm_css, n_lm=len(lm_stages)).items():
         out = out.replace('%%(%s)s' % k, str(v)).replace('%%(%s)d' % k, str(v))
     open(OUT, 'w', encoding='utf-8', newline='').write(out)
-    print('wrote %s: %d duotone, %d line icons, %d premium illustrations' % (os.path.relpath(OUT, ROOT), len(duo), len(symbols), len(cards)))
+    print('wrote %s: %d duotone, %d line icons, %d premium illustrations, %d process steps'
+          % (os.path.relpath(OUT, ROOT), len(duo), len(symbols), len(cards), sum(len(st) for _, st in pf_rows)))
+    if '--copy-to' in sys.argv:
+        standalone(out, sys.argv[sys.argv.index('--copy-to') + 1])
+
+
+def standalone(out, folder):
+    """The same page with nothing left that points into the repo: CSS inlined, posters as data, light videos beside it."""
+    def css(m):
+        return '<style>%s</style>' % read(os.path.join(ROOT, m.group(1).split('?')[0]))
+    out = re.sub(r'<link rel="stylesheet" href="((?!https?:)[^"]+\.css[^"]*)">', css, out)
+
+    def poster(m):
+        data = open(os.path.join(ROOT, m.group(1)), 'rb').read()
+        return 'poster="data:image/webp;base64,%s"' % base64.b64encode(data).decode()
+    out = re.sub(r'poster="((?!https?:|data:)[^"]+\.webp)"', poster, out)
+    vdir = os.path.join(folder, 'assets', 'methodas')
+
+    def video(m):
+        src = os.path.join(ROOT, m.group(2))
+        name = os.path.basename(m.group(2))
+        dest = os.path.join(vdir, name)
+        if not os.path.isfile(dest) or os.path.getmtime(dest) < os.path.getmtime(src):
+            os.makedirs(vdir, exist_ok=True)
+            # 960 wide is twice the size it shows at; 24 fps, no sound, starts playing before it has fully loaded
+            subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', src, '-an', '-vf', 'scale=960:-2:flags=lanczos,fps=24',
+                            '-c:v', 'libx264', '-preset', 'slow', '-crf', '30', '-pix_fmt', 'yuv420p',
+                            '-movflags', '+faststart', dest], check=True)
+            print('  video %s: %d KB -> %d KB' % (name, os.path.getsize(src) // 1024, os.path.getsize(dest) // 1024))
+        return '%s="assets/methodas/%s"' % (m.group(1), name)
+    out = re.sub(r'(data-src|src)="((?!https?:|data:|#)Image/[^"]+\.mp4)"', video, out)
+    left = re.findall(r'(?:src|href|poster)="(?!https?:|data:|#|mailto:|assets/methodas/)([^"]+)"', out)
+    if left:
+        raise SystemExit('the copy would still point into the repo: %s' % ', '.join(sorted(set(left))))
+    dest = os.path.join(folder, 'icon-reference.html')
+    open(dest, 'w', encoding='utf-8', newline='').write(out)
+    print('copied to %s (%d KB, works on its own)' % (dest, len(out.encode('utf-8')) // 1024))
 
 
 if __name__ == '__main__':

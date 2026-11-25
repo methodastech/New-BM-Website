@@ -302,7 +302,9 @@
           .then(function (r) { return r.json().then(function (j) { return { status: r.status, body: j }; }); })
           .then(function (res) {
             if (res.status === 200 && res.body.ok) {
-              out.textContent = 'Thank you, your brief is with our team. Card payment is not open yet, so we will contact you by WhatsApp or email to confirm your package and payment. Nothing was charged.';
+              // the thank-you page is also what counts the brief as a lead in GA4 (page path contains /thank-you)
+              out.textContent = 'Thank you, your brief is with our team.';
+              w.location.href = 'thank-you/';
               return;
             }
             pay.disabled = false; out.classList.add('is-bad');
@@ -542,7 +544,8 @@
     if (card) card.classList.toggle('is-flip');
   });
 
-  // 3D website shop (6 people): about 7 MB, so it loads only on a wide screen, with motion allowed, as the band comes near.
+  // 3D website shop (4 people, packed: about 2.5 MB with three.js), so it loads only on a wide screen, with motion allowed,
+  // and only as the band is about to scroll into view (18 Nov: it used to start 500 px early). Until then the still shows.
   // If anything fails the drawing simply stays.
   var stage = $('[data-stage3d]');
   var calm = w.matchMedia && w.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -552,9 +555,9 @@
       if (!entries[0].isIntersecting) return;
       near.disconnect();
       try {
-        import(new URL('stage3d.js', SELF).href).then(function (mod) { return mod.mount(stage, { onFail: function () {} }); }).catch(function () {});
+        import(new URL('stage3d.js?v=2026-11-18', SELF).href).then(function (mod) { return mod.mount(stage, { onFail: function () {} }); }).catch(function () {});
       } catch (e) {}
-    }, { rootMargin: '500px 0px' });
+    }, { rootMargin: '150px 0px' });
     near.observe(stage);
   }
 
