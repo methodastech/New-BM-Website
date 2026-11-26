@@ -1,1 +1,30 @@
-{"duration": 112.73, "chapters": [{"t": 18.48, "label": "Arrive"}, {"t": 36.17, "label": "Understand"}, {"t": 50.76, "label": "Like"}, {"t": 65.22, "label": "Buy"}, {"t": 80.09, "label": "Refer"}, {"t": 93.21, "label": "What you leave with"}]}
+{
+ "duration": 176.03,
+ "chapters": [
+  {
+   "t": 38.23,
+   "label": "Website"
+  },
+  {
+   "t": 59.98,
+   "label": "Product Assets"
+  },
+  {
+   "t": 79.95,
+   "label": "Funnel Automation"
+  },
+  {
+   "t": 109.28,
+   "label": "PR Coverage Campaign"
+  },
+  {
+   "t": 127.86,
+   "label": "Content Production"
+  },
+  {
+   "t": 150.3,
+   "label": "What you leave with"
+  }
+ ],
+ "subs": "overlay"
+}

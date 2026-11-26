@@ -1,1 +1,30 @@
-{"duration": 121.0, "chapters": [{"t": 18.42, "label": "Gather"}, {"t": 30.39, "label": "Nine audits"}, {"t": 50.02, "label": "Score"}, {"t": 70.77, "label": "Name"}, {"t": 87.88, "label": "Report"}, {"t": 101.01, "label": "What you leave with"}]}
+{
+ "duration": 224.93,
+ "chapters": [
+  {
+   "t": 43.18,
+   "label": "BI Triangle"
+  },
+  {
+   "t": 68.95,
+   "label": "Nine Audits"
+  },
+  {
+   "t": 105.37,
+   "label": "Competition Audit"
+  },
+  {
+   "t": 145.61,
+   "label": "Name Audit"
+  },
+  {
+   "t": 177.99,
+   "label": "Choosing Process"
+  },
+  {
+   "t": 193.22,
+   "label": "What you leave with"
+  }
+ ],
+ "subs": "overlay"
+}

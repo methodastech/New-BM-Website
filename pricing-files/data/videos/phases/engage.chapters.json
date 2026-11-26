@@ -1,1 +1,30 @@
-{"duration": 106.17, "chapters": [{"t": 16.58, "label": "Talk to us"}, {"t": 30.85, "label": "Fixed scope, price and date"}, {"t": 44.72, "label": "We deliver"}, {"t": 60.4, "label": "The guarantee"}, {"t": 71.64, "label": "You own everything"}, {"t": 86.82, "label": "What you get"}]}
+{
+ "duration": 171.3,
+ "chapters": [
+  {
+   "t": 41.0,
+   "label": "Talk to us"
+  },
+  {
+   "t": 60.21,
+   "label": "Fixed scope, price and date"
+  },
+  {
+   "t": 81.61,
+   "label": "We deliver"
+  },
+  {
+   "t": 103.41,
+   "label": "Money-back guarantee"
+  },
+  {
+   "t": 126.69,
+   "label": "You own everything"
+  },
+  {
+   "t": 144.97,
+   "label": "What you get"
+  }
+ ],
+ "subs": "overlay"
+}

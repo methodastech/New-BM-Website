@@ -30,6 +30,17 @@ RedirectMatch 404 /\.git
   </FilesMatch>
 </IfModule>
 
+# --- pages are checked for a new version on every visit (26 Nov 2026) ---
+# The server sent every file with "keep for 1 year", pages included, so a returning visitor could keep
+# seeing an old pricing page. "no-cache" still lets the browser keep its copy, but it asks the server first
+# (a quick "not modified" reply when nothing changed). Images, films, fonts and scripts keep the long cache;
+# the pricing page links its files with ?v=<content hash>, so a changed file gets a new address.
+<IfModule mod_headers.c>
+  <FilesMatch "\.html?$">
+    Header always set Cache-Control "no-cache"
+  </FilesMatch>
+</IfModule>
+
 # --- the homepage lives at https://brandmethod.co/, never /index.html ---
 # THE_REQUEST checks what the browser asked for, so Apache serving index.html
 # for "/" internally does not trigger a redirect loop.
